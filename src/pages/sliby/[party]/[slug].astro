@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import DemoBanner from "../../../components/DemoBanner.astro";
+import StatusBadge from "../../../components/StatusBadge.astro";
+import { getAssessmentHistory, getCurrentPartySummaries, getSource, statusDetails } from "../../../lib/data";
+
+export function getStaticPaths() {
+  return getCurrentPartySummaries().flatMap((summary) => summary.promises.map(({ promise, assessment }) => ({ params: { party: summary.party.slug, slug: promise.slug }, props: { summary, promise, assessment } })));
+}
+const { summary, promise, assessment } = Astro.props;
+const { party, period } = summary;
+const promiseSource = getSource(promise.primarySourceId);
+const evidence = assessment.evidenceSourceIds.map(getSource);
+const history = getAssessmentHistory(promise.id);
+const status = statusDetails[assessment.status];
+---
+<BaseLayout title={`${promise.title} · ${party.shortName}`} description={assessment.explanationShort} socialImage={null}>
+  <DemoBanner />
+  <article class="promise-detail"><a class="back-link" href={`/strany/${party.slug}`}>← Zpět na {party.shortName}</a><header class="promise-detail-header"><p class="eyebrow">{party.shortName} · {promise.category} · {period.label}</p><h1>{promise.title}</h1><StatusBadge status={assessment.status} /></header><div class="detail-grid"><div class="detail-main">
+    <section class="detail-block"><span class="step-number">01</span><p class="eyebrow">CO STRANA SLÍBILA</p><blockquote>„{promise.originalText}“</blockquote><p class="source-caption">{promiseSource.title} · {promiseSource.publisher}</p></section>
+    <section class="detail-block"><span class="step-number">02</span><p class="eyebrow">PROČ MÁ TENTO STAV</p><h2>{status.label}</h2><p class="detail-copy">{assessment.explanationShort}</p></section>
+    <section class="detail-block"><span class="step-number">03</span><p class="eyebrow">POUŽITÉ DŮKAZY</p><ul class="source-list">{evidence.map((source) => <li><span class:list={["source-type", { secondary: !source.primary }]}>{source.primary ? "Primární" : "Kontext"}</span><div><strong>{source.title}</strong><small>{source.publisher} · {new Date(source.publishedAt).toLocaleDateString("cs-CZ")}</small></div></li>)}</ul></section>
+  </div><aside class="history-panel"><p class="eyebrow">HISTORIE HODNOCENÍ</p><ol>{history.map((revision) => { const detail = statusDetails[revision.status]; return <li><span class={`history-symbol status-${detail.className}`}>{detail.symbol}</span><div><strong>{detail.label}</strong><time datetime={revision.publishedAt}>{new Date(revision.publishedAt).toLocaleDateString("cs-CZ")}</time><p>{revision.explanationShort}</p></div></li>; })}</ol></aside></div></article>
+</BaseLayout>

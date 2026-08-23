@@ -1,0 +1,46 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { statusDetails } from "../lib/data";
+
+const scaleGroups = [
+  { title: "Výsledek", statuses: ["fulfilled", "acting-against"] as const },
+  { title: "Směr", statuses: ["moving-towards", "moving-against"] as const },
+  { title: "Bez změny", statuses: ["no-progress"] as const },
+];
+const statusDescriptions = {
+  fulfilled: "Slíbený výsledek skutečně nastal nebo strana provedla přesně ten konkrétní čin, který slíbila — například prosadila opatření nebo hlasovala tak, jak výslovně slíbila.",
+  "moving-towards": "Strana udělala hmatatelný krok správným směrem — například předložila návrh, podpořila potřebný zákon nebo zahájila realizaci. Výsledek ale ještě není hotový.",
+  "no-progress": "Zatím se nestalo nic podstatného. Strana slib neplní, ale ani proti němu prokazatelně nejedná.",
+  "moving-against": "Strana udělala konkrétní krok opačným směrem, ale slib ještě není definitivně porušen.",
+  "acting-against": "Strana hlasovala, rozhodla nebo prosadila něco, co přímo odporuje jejímu vlastnímu slibu.",
+};
+const exampleRows = [
+  { status: "fulfilled", count: 5 },
+  { status: "acting-against", count: 2 },
+  { status: "moving-towards", count: 3 },
+  { status: "moving-against", count: 1 },
+  { status: "no-progress", count: 2 },
+] as const;
+const examplePoints = exampleRows.reduce((sum, row) => sum + row.count * statusDetails[row.status].score, 0);
+const examplePromiseCount = exampleRows.reduce((sum, row) => sum + row.count, 0);
+const exampleMaximum = examplePromiseCount * 2;
+const exampleIndex = Math.round((examplePoints / exampleMaximum) * 100);
+const formatScore = (score: number) => `${score > 0 ? "+" : score < 0 ? "−" : ""}${Math.abs(score)} ${Math.abs(score) === 1 ? "bod" : "body"}`;
+const formatNumber = (value: number) => `${value > 0 ? "+" : value < 0 ? "−" : ""}${Math.abs(value)}`;
+---
+<BaseLayout title="Metodika SLAVA Indexu · SlibyChyby" description="Jak SlibyChyby rozlišuje splněný slib, postup, nečinnost a jednání proti slibu.">
+  <article class="method-page"><a class="back-link" href="/">← Na přehled</a><header><p class="eyebrow">TRANSPARENTNÍ METODIKA</p><h1>SLAVA Index<br />bez dojmologie.</h1><p class="intro">Nehodnotíme, zda je politika dobrá. Hodnotíme pouze, zda jednání strany odpovídá jejím vlastním předvolebním slibům.</p></header>
+  <section class="method-scale" aria-labelledby="scale-title">
+    <h2 id="scale-title">Pět srozumitelných stavů</h2>
+    <p class="scale-intro">Každému slibu přiřadíme jeden z těchto pěti stavů podle toho, co strana skutečně udělala.</p>
+    <div class="scale-columns">
+      {scaleGroups.map((group) => <article class="scale-group"><p class="scale-group-title">{group.title}</p><div class="scale-pair">{group.statuses.map((status) => { const detail = statusDetails[status]; return <div class={`scale-item status-${detail.className}`}><span>{detail.symbol}</span><div><strong>{detail.label}</strong><small>{formatScore(detail.score)}</small><p>{statusDescriptions[status]}</p></div></div>; })}</div></article>)}
+    </div>
+    <p class="negative-score-note"><strong>Pokud strana jedná proti svým slibům, dostává záporné body.</strong> Nečinnost a jednání proti slibu tak nejsou totéž.</p>
+  </section>
+  <section class="calculation-section" aria-labelledby="calculation-title">
+    <div class="calculation-copy"><p class="eyebrow">VÝPOČET</p><h2 id="calculation-title">−100 až +100 bodů</h2><p>Sečteme aktuální hodnocení všech slibů a vydělíme je jejich maximálním možným bodovým ziskem.</p><code>součet bodů ÷ (2 × počet slibů) × 100</code></div>
+    <article class="example-card"><p class="eyebrow">MODELOVÝ PŘÍKLAD</p><h3>Strana má {examplePromiseCount} slibů</h3><div class="example-rows">{exampleRows.map((row) => { const detail = statusDetails[row.status]; const points = row.count * detail.score; return <div class="example-row"><span><b>{row.count}×</b> {detail.label.toLowerCase()}</span><span>{row.count} × {formatNumber(detail.score)}</span><strong>{formatNumber(points)}</strong></div>; })}</div><div class="example-total"><div><span>Součet bodů</span><strong>{formatNumber(examplePoints)}</strong></div><div><span>Maximum</span><strong>{exampleMaximum}</strong></div></div><div class="example-result"><span>SLAVA Index</span><strong>{formatNumber(exampleIndex)}</strong><small>{formatNumber(examplePoints)} ÷ {exampleMaximum} × 100 = {((examplePoints / exampleMaximum) * 100).toFixed(1).replace(".", ",")}</small></div></article>
+  </section>
+  <aside id="demo-data" class="demo-note"><strong>O tomto demu:</strong> aktuální web používá výhradně fiktivní sliby, zdroje a výsledky. Slouží k ověření rozhraní a datového modelu.</aside></article>
+</BaseLayout>

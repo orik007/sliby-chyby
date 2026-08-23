@@ -1,0 +1,8 @@
+---
+import Header from "../components/Header.astro";
+import "../styles/global.css";
+interface Props { title?: string; description?: string; socialImage?: string | null; }
+const { title = "SlibyChyby", description = "Přehled předvolebních slibů politických stran a jejich skutečných kroků.", socialImage = "/og.png" } = Astro.props;
+const socialImageUrl = socialImage ? new URL(socialImage, Astro.site ?? Astro.url).href : null;
+---
+<!doctype html><html lang="cs"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width" /><meta name="description" content={description} /><meta property="og:title" content={title} /><meta property="og:description" content={description} /><meta property="og:type" content="website" />{socialImageUrl && <meta property="og:image" content={socialImageUrl} />}<meta name="twitter:card" content={socialImageUrl ? "summary_large_image" : "summary"} /><meta name="twitter:title" content={title} /><meta name="twitter:description" content={description} />{socialImageUrl && <meta name="twitter:image" content={socialImageUrl} />}<title>{title}</title></head><body><Header /><main><slot /></main><footer class="site-footer"><span>Fiktivní produktové demo</span><a href="/metodika">Metodika SLAVA Indexu</a></footer></body></html>

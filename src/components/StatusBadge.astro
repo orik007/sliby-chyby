@@ -1,0 +1,7 @@
+---
+import { statusDetails } from "../lib/data";
+import type { AssessmentStatus } from "../lib/schema";
+interface Props { status: AssessmentStatus; }
+const detail = statusDetails[Astro.props.status];
+---
+<span class={`status-badge status-${detail.className}`}><b aria-hidden="true">{detail.symbol}</b><span>{detail.label}</span></span>

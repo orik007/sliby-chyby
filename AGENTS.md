@@ -1,0 +1,65 @@
+# Project instructions
+
+## Purpose
+
+SlibyChyby tracks what political parties promised before an election and compares those promises with the parties' subsequent actions and outcomes. The public experience must stay simple, while every assessment remains traceable to evidence.
+
+## Communication and repository language
+
+- Write repository content, code, identifiers, comments, and documentation in English.
+- Communicate with the project owner in Czech unless asked otherwise.
+- Preserve exact Czech quotations from political sources. Do not translate a quotation and present it as original wording.
+
+## Decision discipline
+
+- Treat `docs/decisions.md` as the decision register.
+- Clearly label material as **Confirmed decision**, **Working proposal**, or **Open question**.
+- Do not silently promote a proposal to a decision or resolve an open question.
+- If new evidence conflicts with a recorded decision, document the conflict before changing behavior.
+- Do not infer product requirements from assistant suggestions in historical conversations unless the owner explicitly accepted them.
+
+## Evidence and scoring integrity
+
+- Preserve the exact original wording and source of every promise.
+- Do not turn a vague statement into a more specific promise.
+- Prefer primary sources for both the promise and the party's subsequent action.
+- Use media articles primarily for discovery and context. A strong `+2` or `-2` assessment should normally be verified against a primary source.
+- Keep all relevant evidence, including contradictory votes or actions. Do not average evidence into a score.
+- One promise has one current assessment. Votes, articles, laws, and statements are evidence for that assessment, not independently scored items.
+- Do not invent or implement an unscored public status until a real promise demonstrates the need. Revisit the methodology with that concrete case.
+- Never store a manually edited aggregate SLAVA Index. Derive it from current assessable promise revisions.
+- Display the aggregate as index points without a percent sign, for example `SLAVA Index: +14`.
+- Never overwrite published assessment history silently. Add a new revision and retain prior revisions.
+- Record uncertainty and competing interpretations rather than manufacturing certainty.
+
+## AI workflow
+
+- AI output is a proposal backed by supplied source identifiers and excerpts, not an authority.
+- The intended workflow uses two independent assessors and a third arbiter when they disagree.
+- Models may cite only evidence supplied to them. Reject invented source IDs, quotations, or unsupported claims.
+- Do not publish AI-generated political assessments automatically unless a later confirmed decision explicitly permits it.
+- Keep model, prompt/methodology version, evaluation time, evidence IDs, and confidence available for audit.
+
+## Data and periods
+
+- A promise belongs to exactly one party in exactly one electoral period.
+- Do not carry a promise or its score into a later period. Repeated wording in a later election is a new promise.
+- Retain historical periods and their assessment history.
+- Determine an elected representative's relevant party or parliamentary-group membership at the date of a vote, not from current membership alone.
+
+## Product and implementation
+
+- Optimize the first view for quick comprehension and mobile use; place detailed evidence behind progressive disclosure.
+- Never rely on color alone. Pair color with a symbol and text label.
+- Clearly mark fabricated or placeholder political data as demo data.
+- Do not present unverified real-world political claims as demo content.
+- During the current documentation phase, do not implement the website. Implementation requires a later explicit request.
+- The confirmed initial stack is Astro, TypeScript, plain CSS, and schema-validated versioned files. Do not introduce a database for the initial demo.
+- When implementation begins, validate all data relationships and make invalid data fail the build or validation step.
+- Prefer the simplest architecture that preserves auditability, deterministic builds, and a future database migration path.
+
+## Scope control
+
+- The initial product is a clear public tracker, not a complex political-science analytics suite.
+- Keep research automation separate from the public website runtime.
+- Do not add accounts, a CMS, a live public AI endpoint, a database, or a search engine without a demonstrated need and a confirmed decision.

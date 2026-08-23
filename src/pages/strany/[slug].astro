@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import DemoBanner from "../../components/DemoBanner.astro";
+import ScoreBar from "../../components/ScoreBar.astro";
+import StatusBadge from "../../components/StatusBadge.astro";
+import { getCurrentPartySummaries, statusDetails } from "../../lib/data";
+
+export function getStaticPaths() {
+  return getCurrentPartySummaries().map((summary) => ({ params: { slug: summary.party.slug }, props: { summary } }));
+}
+const { summary } = Astro.props;
+const { party, partyPeriod, period, promises, index } = summary;
+const counts = Object.fromEntries(Object.keys(statusDetails).map((status) => [status, promises.filter(({ assessment }) => assessment.status === status).length]));
+---
+<BaseLayout title={`${party.shortName} · SLAVA Index ${index === null ? "—" : index}`} description={`Ukázkový přehled slibů strany ${party.shortName} v období ${period.label}.`} socialImage={null}>
+  <DemoBanner />
+  <section class="party-hero"><a class="back-link" href="/">← Všechny strany</a><div class="party-hero-grid"><div><p class="eyebrow">{period.name}</p><h1>{party.shortName}</h1><p class="intro">{promises.length} fiktivní ukázkové sliby · data nejsou politickým hodnocením</p></div><div class={`portrait portrait-small portrait-${partyPeriod.tone}`} aria-hidden="true"><span>{partyPeriod.portraitInitials}</span><small>DEMO</small></div></div><div class="party-score-panel"><ScoreBar score={index} /><div class="score-breakdown">{Object.entries(statusDetails).filter(([status]) => counts[status] > 0).map(([status, detail]) => <span><b>{counts[status]}</b> {detail.label.toLowerCase()}</span>)}</div></div></section>
+  <section class="promise-section" aria-labelledby="promise-title"><div class="section-heading"><div><p class="eyebrow">SLEDOVANÉ SLIBY</p><h2 id="promise-title">Co slíbili a co udělali</h2></div><p>Rozbalte řádek pro rychlé vysvětlení.</p></div><div class="promise-list">{promises.map(({ promise, assessment }) => <details class="promise-row"><summary><span class="promise-main"><small>{promise.category}</small><strong>{promise.title}</strong></span><StatusBadge status={assessment.status} /><span class="disclosure" aria-hidden="true">+</span></summary><div class="promise-preview"><blockquote>„{promise.originalText}“</blockquote><p>{assessment.explanationShort}</p><a href={`/sliby/${party.slug}/${promise.slug}`}>Celý detail a historie →</a></div></details>)}</div></section>
+</BaseLayout>
