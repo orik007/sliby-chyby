@@ -5,6 +5,8 @@ import ScoreBar from "../../components/ScoreBar.astro";
 import StatusBadge from "../../components/StatusBadge.astro";
 import { getCurrentPartySummaries, statusDetails } from "../../lib/data";
 
+export const prerender = true;
+
 export function getStaticPaths() {
   return getCurrentPartySummaries().map((summary) => ({ params: { slug: summary.party.slug }, props: { summary } }));
 }

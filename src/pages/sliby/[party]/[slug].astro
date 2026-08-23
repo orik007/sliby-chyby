@@ -4,6 +4,8 @@ import DemoBanner from "../../../components/DemoBanner.astro";
 import StatusBadge from "../../../components/StatusBadge.astro";
 import { getAssessmentHistory, getCurrentPartySummaries, getSource, statusDetails } from "../../../lib/data";
 
+export const prerender = true;
+
 export function getStaticPaths() {
   return getCurrentPartySummaries().flatMap((summary) => summary.promises.map(({ promise, assessment }) => ({ params: { party: summary.party.slug, slug: promise.slug }, props: { summary, promise, assessment } })));
 }
