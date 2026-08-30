@@ -81,6 +81,17 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Do not introduce a database for the first demo.
 - Use GitHub-based validation and automation, with Cloudflare as the planned hosting direction.
 - Begin with a manually triggered, read-only GitHub Actions assessment workflow. It may produce an unpublished audit artifact but must not write public assessment data or deploy it.
+- Keep evidence collectors outside the public website runtime. The first collector workflow is manually triggered, read-only, requires no API secret, and produces an unpublished private artifact.
+- Collect trusted-media feeds as discovery and context sources. Collection itself never assigns a direction or score; articles will normally be supporting evidence rather than the sole basis for `+2` or `-2`.
+- Allow decisive `+2` or `-2` evidence from primary official acts outside the Chamber of Deputies, including regulations, executive decisions, administrative acts, and authoritative outcome data.
+
+### Verified collector registry
+
+- Enable the Czech Chamber of Deputies daily open-data archives for votes, individual choices, parliamentary prints, print history, and time-bounded club membership.
+- Enable official Government Office RSS and the MPSV press-release Atom feed.
+- Enable publisher-provided iROZHLAS, ČT24, and Seznam Zprávy feeds, plus the Novinky.cz news sitemap, for discovery and context.
+- Do not download full news article bodies. Retain feed metadata, URL, publication time, authors when supplied, and at most a short publisher-provided excerpt.
+- Fail collection when a source redirects outside its explicit hostname allowlist or violates its configured media type or size limits.
 
 ## Working proposals
 
@@ -159,6 +170,10 @@ The two-assessor/one-arbiter pattern and the initial OpenAI-only pilot configura
 ### Source requirements
 
 Primary-source preference is confirmed, but precise minimum evidence packages for each score are not. Rules are especially needed for strong `+2` and `-2` assessments, deadlines, and cases where no primary record exists.
+
+### Deferred machine-readable official sources
+
+ODok/eKLEP has no verified stable documented public machine-readable endpoint yet. e-Sbírka requires registration for its public API, and its current official notice recommends production Open Data integration only after 15 January 2027 while identifiers and structures are changing. Both are registered but disabled; the replacement primary sources for government decisions and promulgated laws remain unresolved in the meantime.
 
 ### Images and archives
 

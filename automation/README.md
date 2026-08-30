@@ -2,6 +2,8 @@
 
 This directory contains the offline assessment workflow. It is deliberately separate from the public Astro runtime.
 
+Upstream evidence discovery is documented separately in [collectors/README.md](collectors/README.md). Collectors produce unpublished candidate records; they do not match evidence to promises or assign scores.
+
 ## Pipeline
 
 1. A reviewed promise and a bounded evidence package are prepared.

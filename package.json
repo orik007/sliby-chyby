@@ -10,12 +10,15 @@
     "test": "node --test tests/*.test.mjs",
     "assess:validate": "node scripts/run-assessment.mjs automation/golden-cases/ano-eet-2/evidence-package.json --validate-only",
     "assess:golden": "node scripts/run-assessment.mjs automation/golden-cases/ano-eet-2/evidence-package.json automation/runs/ano-eet-2",
-    "assess:ci": "node scripts/run-assessment-ci.mjs"
+    "assess:ci": "node scripts/run-assessment-ci.mjs",
+    "collect:evidence": "node scripts/run-collectors.mjs --since-days 7"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.2.3",
     "@openai/sites-vite-plugin": "latest",
     "astro": "latest",
+    "fast-xml-parser": "^5.11.1",
+    "fflate": "^0.8.3",
     "zod": "latest"
   },
   "devDependencies": {

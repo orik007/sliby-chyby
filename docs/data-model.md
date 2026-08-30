@@ -304,17 +304,28 @@ data/
 
 Stable IDs and foreign-key-like references must be schema validated. Versioned files are confirmed for the initial demo. The exact directory split shown above remains adjustable during implementation and is intended to map later to relational tables without changing the public domain model.
 
-## Proposed ingestion sources
+## Evidence ingestion
 
-The conversations identified these categories for future connectors:
+### Confirmed implementation boundary
 
-- Czech Chamber of Deputies structured datasets for people, time-bounded memberships, votes, parliamentary prints, and proceedings;
-- ODok/VeKLEP for government proposals, comments, agendas, resolutions, and meeting records;
-- e-Sbírka for final promulgated law text;
-- party and ministry websites for statements and intentions;
-- a managed list of major-news RSS feeds, sections, and sitemaps for discovery and context.
+Collectors create unpublished evidence candidates. They do not match a record to a promise, infer whether it supports or contradicts a promise, assign a SLAVA status, or publish anything. Every run records its cutoff, retrieval time, source identifiers, response hashes, record hashes, warnings, and `publicationApproved: false`.
 
-These integrations are research proposals and must be reverified against current APIs and terms before implementation.
+The verified source registry is stored in `automation/collectors/sources.json`. Hostname, response size, and media-type allowlists are enforced before normalization. Unexpected redirects fail closed. Feed collectors retain metadata and only a short publisher-provided excerpt; they do not download full article bodies.
+
+### Enabled verified collectors
+
+- Czech Chamber of Deputies daily open-data archives: votes, individual choices, time-bounded parliamentary-club membership, parliamentary prints, and print history. Club membership is resolved at the date of each vote.
+- Government Office RSS and MPSV press-release Atom feed as official discovery sources.
+- Publisher-provided iROZHLAS, ČT24, and Seznam Zprávy feeds and the Novinky.cz news sitemap as discovery and context sources.
+
+Media records are non-primary candidates. They may reveal a relevant action or decision, but their collection does not imply a likely `+1` or `-1`, and an article is not automatically decisive evidence.
+
+### Registered but disabled
+
+- ODok/eKLEP remains disabled because no stable documented public machine-readable endpoint was verified.
+- e-Sbírka remains disabled because the current official notice requires API registration and recommends production Open Data integration only after 15 January 2027 while identifiers and structures are changing.
+
+These entries remain explicit in the registry so that absence of a collector cannot be mistaken for a completed integration. Party and ministry coverage beyond the two enabled official feeds remains a working expansion proposal.
 
 ## Open data questions
 
@@ -322,6 +333,7 @@ These integrations are research proposals and must be reverified against current
 - Party-vote aggregation rule.
 - Whether a real unscorable, blocked, or compromised promise eventually requires a new status or a different publication rule.
 - Required source snapshot policy and retention period.
+- Whether feed-response hashes alone are sufficient for official-page evidence, or whether lawful page/PDF snapshots must also be retained after matching.
 - Image licensing and attribution model.
 - Whether candidate AI assessments live in repository files, issues, pull requests, or a later queue database.
 - When the file model should migrate to PostgreSQL or another operational database.

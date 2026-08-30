@@ -1,0 +1,51 @@
+name: Collect evidence candidates
+
+on:
+  workflow_dispatch:
+    inputs:
+      since:
+        description: Earliest publication or event date (YYYY-MM-DD)
+        required: true
+        default: "2026-08-01"
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: evidence-collection
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    name: Collect verified sources
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      COLLECTOR_SINCE: ${{ inputs.since }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run deterministic tests
+        run: npm test
+
+      - name: Collect evidence candidates
+        run: node scripts/run-collectors.mjs --since "$COLLECTOR_SINCE" --output automation/runs/collectors/github-actions
+
+      - name: Upload unpublished collector audit
+        uses: actions/upload-artifact@v4
+        with:
+          name: evidence-candidates-${{ github.run_id }}
+          path: automation/runs/collectors/github-actions/collector-run.json
+          if-no-files-found: error
+          retention-days: 30
