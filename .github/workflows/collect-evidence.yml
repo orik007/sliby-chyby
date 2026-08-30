@@ -25,10 +25,10 @@ jobs:
       COLLECTOR_SINCE: ${{ inputs.since }}
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -43,7 +43,7 @@ jobs:
         run: node scripts/run-collectors.mjs --since "$COLLECTOR_SINCE" --output automation/runs/collectors/github-actions
 
       - name: Upload unpublished collector audit
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: evidence-candidates-${{ github.run_id }}
           path: automation/runs/collectors/github-actions/collector-run.json
