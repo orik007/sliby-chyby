@@ -8,6 +8,8 @@ The initial concept focuses on the current electoral period and the governing pa
 
 This repository contains the first local product demo. All displayed promises, assessments, sources, and portraits are explicitly fictional test data.
 
+Real-source collection for the 2025 election is staged under `research/2025-election`. Nothing in that directory is automatically published or scored: it separates captured sources, exact source occurrences, over-inclusive extraction queues, attribution questions, and coverage gaps. The real programme and campaign material must complete atomic promise, duplication, and attribution review before replacing demo data.
+
 The confirmed initial implementation plan uses Astro, TypeScript, plain CSS, and schema-validated versioned data files. A database is not needed for the first demo.
 
 ## Local development
@@ -22,10 +24,13 @@ Use `npm test` for SLAVA Index unit tests and `npm run build` for the complete v
 ## Documentation
 
 - [Product vision and interface](docs/product.md)
+- [Promise selection methodology](docs/promise-selection.md)
 - [SLAVA Index methodology](docs/scoring.md)
 - [Data model](docs/data-model.md)
 - [Decision register](docs/decisions.md)
 - [Project working rules](AGENTS.md)
+- [2025 promise-source research](research/2025-election/README.md)
+- [2025 campaign coverage ledger](research/2025-election/source-inventory.md)
 
 ## Status vocabulary
 

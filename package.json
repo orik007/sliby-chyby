@@ -7,7 +7,10 @@
     "dev": "astro dev",
     "build": "node --test tests/*.test.mjs && astro check && astro build && node scripts/prepare-sites-build.mjs",
     "check": "astro check",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "assess:validate": "node scripts/run-assessment.mjs automation/golden-cases/ano-eet-2/evidence-package.json --validate-only",
+    "assess:golden": "node scripts/run-assessment.mjs automation/golden-cases/ano-eet-2/evidence-package.json automation/runs/ano-eet-2",
+    "assess:ci": "node scripts/run-assessment-ci.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.2.3",

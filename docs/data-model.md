@@ -89,6 +89,8 @@ Photographs need provenance, license, and attribution metadata; use is unresolve
 
 One attributable commitment made by one party in one period.
 
+Only a candidate that passes the confirmed [promise selection methodology](promise-selection.md) becomes a `Promise`. Rejected, duplicate, composite, or attribution-unresolved source occurrences remain in the research review layer and do not enter the SLAVA Index denominator.
+
 Proposed fields:
 
 - `id`;
@@ -103,9 +105,30 @@ Proposed fields:
 - `institutionIds` and policy keywords used for matching;
 - `primarySourceId` and source locator (page, timestamp, or image region);
 - `relatedPromiseIds` for non-scoring historical relationships;
+- `supersedesPromiseCandidateReviewIds` for retained earlier official wording that the active promise replaced;
 - `createdAt`.
 
 `relatedPromiseIds` must never carry a score into another period.
+
+### `PromiseCandidateReview`
+
+A proposed research-layer record showing how one collected source occurrence was processed under the confirmed promise selection methodology.
+
+Proposed fields:
+
+- `id`;
+- `sourceId` and precise source locator;
+- `originalText` and surrounding source context;
+- `provisionalPartyPeriodId`;
+- pass/fail notes for commitment, specificity, public assessability, assessment test, and atomic scope;
+- `supportingEvidenceTest` and `contradictingEvidenceTest`;
+- `disposition` — accepted, needs-splitting, duplicate-occurrence, attribution-unresolved, or rejected;
+- `rejectionReasonCodes`;
+- `resultingPromiseIds` when accepted or split;
+- `supersededByReviewId` when a later official pre-election version replaced this occurrence;
+- reviewer, review time, and methodology version.
+
+This entity is a **working implementation proposal**. Retaining the review result and rejection rationale is part of the confirmed audit principle; the exact schema is not yet confirmed.
 
 ### `Source`
 

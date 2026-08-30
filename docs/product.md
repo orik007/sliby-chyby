@@ -104,7 +104,17 @@ This order is a **working proposal**, although the requirement for explanation, 
 
 ## Confirmed automation direction
 
-The system should monitor reliable news sources and public institutional data, match events to promises, and propose assessments.
+The system should monitor reliable news sources and public institutional data, match events to promises, and produce evidence-backed candidate assessments. Exhaustive manual research of post-election conduct is not the intended primary workflow.
+
+The confirmed pipeline separates responsibilities:
+
+1. an evidence collector discovers relevant official records and reliable reporting;
+2. a matcher builds a bounded evidence package for a specific promise;
+3. independent assessors evaluate only that supplied package under the versioned methodology;
+4. an arbiter handles assessor disagreement;
+5. validation and the current publication gate run before the result reaches the public site.
+
+The evidence collector must not treat its own discovery ranking as a score. Assessors must cite supplied source identifiers and excerpts rather than silently performing an unrecorded search.
 
 The owner explicitly required more than one AI assessor. The intended pattern is:
 
@@ -139,7 +149,7 @@ The route structure remains a working proposal:
 /methodology
 ```
 
-The proposed first implementation is a clearly labeled local demo with fabricated data, followed by one fully researched real promise as a golden test case.
+The first implementation is a clearly labeled demo with fabricated data. The next phase is a curated set of verified official party promises followed by one complete end-to-end golden case through evidence collection, matching, multi-model assessment, review, and static publication.
 
 ## Out of scope for the first version
 
@@ -157,5 +167,5 @@ The conversations explicitly deprioritized:
 
 - What is the public site name and subtitle? Suggestions such as “Sliby vlády” were not accepted as final.
 - Which distribution summary belongs on the home page versus only on a party page?
-- Should the first public release attempt all concrete promises or begin with a curated important subset? Both comprehensive tracking and a smaller pilot were discussed.
+- What minimum number and policy breadth of fully verified promises is sufficient for the first public real-data release? Numerical completeness is not required.
 - What exact editorial approval is required before publication, and can any high-confidence cases ever be published automatically?

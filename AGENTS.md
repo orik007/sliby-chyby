@@ -21,6 +21,10 @@ SlibyChyby tracks what political parties promised before an election and compare
 ## Evidence and scoring integrity
 
 - Preserve the exact original wording and source of every promise.
+- For the first public version, admit only clearly attributable party commitments from official national party sources. Do not turn a politician's personal promise, a regional commitment, or an allied-party candidate's promise into a national party promise.
+- A candidate from another party running on a party's electoral list does not transfer their own party's promises into the tracked party's SLAVA Index. Include such wording only when the tracked party officially adopts it as its own commitment.
+- When official pre-election wording changes, use the latest official version as the active promise. Retain earlier versions internally for audit, but do not show the change publicly in the first version.
+- Publish a smaller fully verified promise set rather than padding coverage with vague or uncertain statements.
 - Do not turn a vague statement into a more specific promise.
 - Prefer primary sources for both the promise and the party's subsequent action.
 - Use media articles primarily for discovery and context. A strong `+2` or `-2` assessment should normally be verified against a primary source.
@@ -35,6 +39,7 @@ SlibyChyby tracks what political parties promised before an election and compare
 ## AI workflow
 
 - AI output is a proposal backed by supplied source identifiers and excerpts, not an authority.
+- Treat automated evidence collection and candidate scoring as the intended primary workflow. Keep evidence discovery, promise matching, and scoring as distinct auditable stages.
 - The intended workflow uses two independent assessors and a third arbiter when they disagree.
 - Models may cite only evidence supplied to them. Reject invented source IDs, quotations, or unsupported claims.
 - Do not publish AI-generated political assessments automatically unless a later confirmed decision explicitly permits it.

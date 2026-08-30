@@ -6,6 +6,8 @@ The SLAVA Index measures a party's fidelity to its own pre-election promises. It
 
 The name is written **SLAVA Index**, without diacritics.
 
+Promise admission is governed by [promise-selection.md](promise-selection.md). Only statements that pass that confirmed selection methodology enter this scoring system. A rejected candidate is not assigned `0` and is not included in the SLAVA Index denominator.
+
 ## Confirmed promise scale
 
 | Score | Canonical status | Rule |
@@ -128,6 +130,13 @@ The current assessment is the latest published revision. A revision should recor
 Old revisions remain available. Corrections create a new transparent revision rather than silently rewriting history.
 
 ## AI assessment proposal
+
+Automated evidence collection and candidate scoring are the confirmed intended workflow. The scoring system must keep discovery separate from judgment:
+
+- a collection stage records sources and creates deduplicated events;
+- a matching stage selects a bounded evidence package relevant to one promise;
+- scoring assessors may use only the supplied evidence identifiers and excerpts;
+- every output remains a revisioned candidate assessment until it passes the configured publication gate.
 
 Two assessors should independently return structured answers covering:
 
