@@ -12,6 +12,8 @@ This report records the first end-to-end integration pilot run on 2026-08-31. It
 
 The pilot used the then-current `party-vote-strict-majority-v1` attribution rule. That rule was later superseded by the confirmed `party-vote-directional-majority-v2` rule. This historical report is not retroactively rewritten; the pilot should be rerun before its candidate results are considered under the current methodology.
 
+An [EET 2.0 smoke rerun](https://github.com/orik007/sliby-chyby/actions/runs/33443286313) subsequently verified the current chain: `deterministic-matcher-v2`, `slava-v2`, and `party-vote-directional-majority-v2`. The official party summary contained `68 yes` and `0 no`; both assessors again proposed `moving-towards`, and `publicationApproved` remained `false`. The other four promises were not reassessed by models merely to reproduce unchanged pilot outputs.
+
 - Evidence cutoff: `2026-08-31`
 - Parliamentary collection start: `2025-10-01`
 - Source dataset: official Chamber of Deputies records
