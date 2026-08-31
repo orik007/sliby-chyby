@@ -15,7 +15,7 @@ The intermediate deterministic matching stage is documented in [matching/README.
 5. A disagreement is sent to an arbiter, which may select either review or return `cannot-decide`.
 6. Every result remains unpublished until a later publication gate approves it.
 
-The initial runner uses the OpenAI Responses API with [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs). It never gives the scoring assessors web-search tools. Source discovery and promise matching are separate upstream stages. The active assessor prompt is versioned as `assessor-v2`; its content hash is stored in every audit record.
+The initial runner uses the OpenAI Responses API with [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs). It never gives the scoring assessors web-search tools. Source discovery and promise matching are separate upstream stages. The active assessor prompt is versioned as `assessor-v3`; its content hash is stored in every audit record. Earlier prompt files remain immutable for audit reproduction.
 
 Provider-specific HTTP calls are isolated in `scripts/lib/model-provider.mjs`. The rest of the pipeline consumes a normalized response. A future second provider therefore needs a new adapter and credentials, while evidence packages, scoring validation, arbitration, audit records, and the public site remain unchanged.
 

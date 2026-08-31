@@ -28,7 +28,7 @@ This report records the first end-to-end integration pilot run on 2026-08-31. It
 | ANO: abolish public-media fees and fund public media from the state budget | 9 thematic candidates; 9 attributable primary candidates; bounded package created | Both assessors ran and agreed; arbiter was not called | Candidate `moving-towards` (`+1`) |
 | ANO: return the retirement age to 65 | 3 thematic candidates; 3 government-action candidates; bounded package created | Both assessors found the supplied evidence insufficient; arbiter was not called | `human-review-required`; no candidate status |
 | SPD: submit a constitutional act on a binding referendum | No candidate match; no package created | Assessors were not called | No assessment |
-| Motoristé sobě: abolish the ban on sales on selected public holidays | 12 thematic candidates, but none attributable to the party; no package created | Assessors were not called | No assessment |
+| Motoristé sobě: abolish the ban on sales on selected public holidays | 12 thematic candidates, but no collected decisive vote attributable to Motoristé; no package created | Assessors were not called | No assessment |
 
 The workflow runs are retained in GitHub Actions:
 
@@ -44,7 +44,7 @@ Private workflow artifacts contain the collector run, the complete match audit, 
 
 **Pilot observation**
 
-- The matcher did not turn thematic similarity into party attribution. The Motoristé promise matched bills from other parties, but those records did not enter an assessment package.
+- The matcher did not turn thematic similarity into party attribution. The Motoristé promise matched bills introduced by other parties, but the collected records contained no decisive strict-majority Motoristé vote. Authorship by another party was not the reason for exclusion; the missing Motoristé vote was.
 - Absence of relevant evidence did not become `no-progress`. The SPD promise stopped before any model call.
 - A government bill was not silently attributed to ANO. For the retirement-age promise, the assessors identified both missing party attribution and missing bill substance and routed the case to human review without a score.
 - Verified party sponsorship or a strict-majority party vote supplied the attribution needed for the two `+1` candidates.

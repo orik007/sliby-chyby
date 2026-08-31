@@ -127,3 +127,32 @@ test("requires decisive vote context before a party-majority vote enters the pac
   const decisiveMatch = matchRecordToPromise(decisiveVote, eet);
   assert.equal(decisiveMatch.attributionStatus, "verified-party-vote");
 });
+
+test("attributes a decisive party vote even when another party introduced the bill", () => {
+  const vote = record({
+    id: "psp--vote-other-party-bill",
+    kind: "parliamentary-vote",
+    title: "Návrh jiné strany o evidenci tržeb",
+    payload: {
+      externalVoteId: "901",
+      proposerPartyId: "different-party",
+      partyVoteSummaries: [{
+        partyId: "ano",
+        eligibleMemberCount: 80,
+        strictMajorityThreshold: 41,
+        counts: { yes: 60, no: 0, abstained: 0, notVoting: 0, absent: 20, unknown: 0 },
+        majorityChoice: "yes",
+        attributionStatus: "attributed",
+        ruleVersion: "party-vote-strict-majority-v1"
+      }],
+      linkedPrints: [{
+        number: 999,
+        titleCz: "Návrh jiné strany o evidenci tržeb",
+        historyContexts: [{ actionCz: "souhlas", resolutionNumber: 264 }]
+      }]
+    }
+  });
+
+  const match = matchRecordToPromise(vote, eet);
+  assert.equal(match.attributionStatus, "verified-party-vote");
+});

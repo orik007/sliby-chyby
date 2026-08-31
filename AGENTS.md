@@ -52,6 +52,7 @@ SlibyChyby tracks what political parties promised before an election and compare
 - Retain historical periods and their assessment history.
 - Determine an elected representative's relevant party or parliamentary-group membership at the date of a vote, not from current membership alone.
 - Attribute a Chamber vote to a party only when more than half of all members of its parliamentary group at the vote time cast the same `yes` or `no` choice. Abstentions, non-votes, absences, and excuses remain in the denominator but establish neither direction. Do not attribute voided, manual, technically incomplete, or context-unresolved votes.
+- Do not require the tracked party to have authored or sponsored a bill before using its verified vote. A decisive strict-majority party vote is attributable conduct regardless of who introduced the bill.
 
 ## Product and implementation
 

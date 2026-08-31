@@ -91,6 +91,7 @@ A Chamber vote is attributed to a party only when more than half of all members 
 - A vote without a strict `yes` or `no` majority is recorded as mixed/no-majority and is not treated as the party's directional act.
 - Voided votes and manual or technically incomplete votes do not establish a party position from individual-vote data.
 - A numerical majority is not enough when the exact motion or legislative context is unresolved. The official vote must be linked to a documented decisive context before it can enter an assessment package as verified party conduct.
+- The author or sponsor of the bill is irrelevant to vote attribution. A tracked party's verified strict-majority vote is its conduct even when another party, the government, or another authorized proposer introduced the bill.
 
 This rule determines attribution only. Whether a majority `yes` supports or contradicts a promise depends on the exact motion and is decided later from the bounded evidence package.
 
