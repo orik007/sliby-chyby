@@ -13,7 +13,7 @@ Promise admission is governed by [promise-selection.md](promise-selection.md). O
 | Score | Canonical status | Rule |
 |---:|---|---|
 | `-2` | `acting-against` | A documented significant act directly contradicts the promise, the party caused a definitive contrary result, or the promised conduct itself was directly violated. |
-| `-1` | `moving-against` | A concrete intention, proposal, commitment, vote, or other step points against the promise, but the definitive contrary result has not necessarily occurred. |
+| `-1` | `moving-against` | A concrete intention, proposal, commitment, vote, verified failure to support the exact promise at a decisive vote, or other step points against the promise, but the definitive contrary result has not necessarily occurred. |
 | `0` | `no-progress` | The promise is assessable and checked, but no documented significant movement exists in either direction, or it is genuinely too early. |
 | `+1` | `moving-towards` | A concrete, verifiable step supports the promise, but the promised outcome has not yet occurred. |
 | `+2` | `fulfilled` | The verifiable promised outcome occurred, or the party performed the exact conduct it explicitly promised to perform. |
@@ -83,18 +83,28 @@ One article alone is insufficient for a strong final assessment when a relevant 
 
 ### Confirmed party-vote attribution
 
-A Chamber vote is attributed to a party by directly comparing the `yes` and `no` choices cast by members of its parliamentary group at the time of the vote.
+A Chamber vote establishes positive or negative party conduct only when more than half of all members of its parliamentary group at the vote time cast the same `yes` or `no` choice.
 
-- More `yes` than `no` means the party supported the motion.
-- More `no` than `yes` means the party opposed the motion.
-- Equal `yes` and `no` counts, including `0–0`, establish no party direction.
-- Abstentions, registered non-votes, absences, excuses, and members who had not yet taken the oath are retained and displayed but do not determine direction.
-- There is no minimum participation threshold. For example, `3 yes`, `0 no`, and `4 absent` is attributed as support and displayed with the exact counts.
+- The threshold is `floor(eligible group members / 2) + 1`.
+- A strict-majority `yes` establishes party support for the motion.
+- A strict-majority `no` establishes party opposition to the motion.
+- Abstentions, registered non-votes, absences, excuses, and members who had not yet taken the oath remain in the denominator and are retained for display.
+- At a verified decisive vote on a motion that directly and materially advances the party's own promise, failure to provide a strict-majority `yes` is a concrete failure to support the promise and is normally `moving-against` (`-1`). This includes a split vote, abstention, non-voting, or absence that leaves the party below the threshold.
+- For example, a seven-member group needs four `yes` votes. `3 yes`, `0 no`, and `4 absent` does not establish party support and is a `-1` candidate when the motion is a verified direct opportunity to advance its own promise.
 - Voided votes and manual or technically incomplete votes do not establish a party position from individual-vote data.
 - A numerical majority is not enough when the exact motion or legislative context is unresolved. The official vote must be linked to a documented decisive context before it can enter an assessment package as verified party conduct.
 - The author or sponsor of the bill is irrelevant to vote attribution. A tracked party's verified vote is its conduct even when another party, the government, or another authorized proposer introduced the bill.
 
-This rule determines attribution only. Whether a majority `yes` supports or contradicts a promise depends on the exact motion and is decided later from the bounded evidence package.
+This rule does not infer what a motion means. Whether a `yes`, `no`, or failure to provide a majority supports or contradicts a promise depends on the exact motion and is decided later from the bounded evidence package.
+
+### Confirmed pre-vote evidence
+
+`No-progress` does not mean “no roll-call vote has occurred yet.” It means that no significant concrete evidence exists in either direction.
+
+- A verified, attributable announcement that the party will vote for a measure directly advancing its promise can establish `moving-towards` (`+1`) before the vote.
+- A verified, attributable announcement that the party will vote against such a measure can establish `moving-against` (`-1`) before the vote.
+- A news report may surface the announcement, but the quoted position and party attribution must be verifiable. Speculation about likely voting behavior is not enough.
+- The later roll-call vote is stronger evidence. It confirms, contradicts, or supersedes the announced intention while the earlier evidence remains in history.
 
 Examples recorded in the conversations:
 

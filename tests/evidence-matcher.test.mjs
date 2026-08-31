@@ -100,10 +100,11 @@ test("requires decisive vote context before a party direction enters the package
       partyId: "ano",
       eligibleMemberCount: 80,
       directionalVoteCount: 70,
+      strictMajorityThreshold: 41,
       counts: { yes: 70, no: 0, abstained: 0, notVoting: 0, absent: 10, unknown: 0 },
       majorityChoice: "yes",
       attributionStatus: "attributed",
-      ruleVersion: "party-vote-directional-majority-v2"
+      ruleVersion: "party-vote-strict-majority-v3"
     }],
     linkedPrints: [{ number: 189, titleCz: "Vládní návrh zákona o evidenci tržeb", historyContexts: [] }]
   };
@@ -128,6 +129,43 @@ test("requires decisive vote context before a party direction enters the package
   assert.equal(decisiveMatch.attributionStatus, "verified-party-vote");
 });
 
+test("includes a decisive vote without a strict party majority for non-support review", () => {
+  const vote = record({
+    id: "psp--vote-insufficient-party-support",
+    kind: "parliamentary-vote",
+    title: "Vl.n.z. o evidenci tržeb",
+    payload: {
+      externalVoteId: "902",
+      counts: { yes: 80, no: 40 },
+      partyVoteSummaries: [{
+        partyId: "ano",
+        eligibleMemberCount: 7,
+        directionalVoteCount: 3,
+        strictMajorityThreshold: 4,
+        counts: { yes: 3, no: 0, abstained: 0, notVoting: 0, absent: 4, unknown: 0 },
+        majorityChoice: null,
+        attributionStatus: "no-strict-majority",
+        ruleVersion: "party-vote-strict-majority-v3"
+      }],
+      linkedPrints: [{
+        number: 189,
+        titleCz: "Vládní návrh zákona o evidenci tržeb",
+        historyContexts: [{ actionCz: "souhlas", resolutionNumber: 265 }]
+      }]
+    }
+  });
+
+  const match = matchRecordToPromise(vote, eet);
+  assert.equal(match.attributionStatus, "verified-party-no-majority");
+  const evidencePackage = buildEvidencePackage({
+    promise: eet,
+    matches: [match],
+    collectorRun: { schemaVersion: "1.0.0", runId: "collector-no-majority", records: [vote] },
+    asOf: "2026-08-31"
+  });
+  assert.equal(evidencePackage.evidence[1].matchBasis.attributionStatus, "verified-party-no-majority");
+});
+
 test("attributes a decisive party vote even when another party introduced the bill", () => {
   const vote = record({
     id: "psp--vote-other-party-bill",
@@ -140,10 +178,11 @@ test("attributes a decisive party vote even when another party introduced the bi
         partyId: "ano",
         eligibleMemberCount: 80,
         directionalVoteCount: 60,
+        strictMajorityThreshold: 41,
         counts: { yes: 60, no: 0, abstained: 0, notVoting: 0, absent: 20, unknown: 0 },
         majorityChoice: "yes",
         attributionStatus: "attributed",
-        ruleVersion: "party-vote-directional-majority-v2"
+        ruleVersion: "party-vote-strict-majority-v3"
       }],
       linkedPrints: [{
         number: 999,

@@ -137,15 +137,12 @@ export function derivePartyVoteSummaries(individualVotes, { voteTypeCode = "N", 
     for (const choiceCode of members.values()) counts[normalizedVoteChoice(choiceCode)] += 1;
     const eligibleMemberCount = members.size;
     const directionalVoteCount = counts.yes + counts.no;
+    const strictMajorityThreshold = Math.floor(eligibleMemberCount / 2) + 1;
     let majorityChoice = null;
-    if (counts.yes > counts.no) majorityChoice = "yes";
-    else if (counts.no > counts.yes) majorityChoice = "no";
+    if (counts.yes >= strictMajorityThreshold) majorityChoice = "yes";
+    else if (counts.no >= strictMajorityThreshold) majorityChoice = "no";
 
-    let attributionStatus = majorityChoice
-      ? "attributed"
-      : directionalVoteCount === 0
-        ? "no-directional-votes"
-        : "directional-tie";
+    let attributionStatus = majorityChoice ? "attributed" : "no-strict-majority";
     if (voidedByOfficialRecord) attributionStatus = "voided-vote";
     else if (voteTypeCode !== "N") attributionStatus = "unsupported-vote-type";
 
@@ -153,10 +150,11 @@ export function derivePartyVoteSummaries(individualVotes, { voteTypeCode = "N", 
       partyId,
       eligibleMemberCount,
       directionalVoteCount,
+      strictMajorityThreshold,
       counts,
       majorityChoice: attributionStatus === "attributed" ? majorityChoice : null,
       attributionStatus,
-      ruleVersion: "party-vote-directional-majority-v2"
+      ruleVersion: "party-vote-strict-majority-v3"
     };
   });
 }

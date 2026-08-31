@@ -39,8 +39,9 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Prefer official primary records for promises, votes, laws, budgets, and decisions.
 - Use major news sources for discovery, context, and cross-checking.
 - Verify important claims elsewhere; do not trust one article merely because it comes from a large outlet.
-- Attribute a Chamber vote by comparing only the party's `yes` and `no` choices: more `yes` means support, more `no` means opposition, and a tie or no directional votes establishes no party direction. Retain all other choices for transparency, but do not apply a minimum participation threshold. Voided, unsupported vote types, and votes without verified decisive context do not establish party conduct.
+- Require a strict majority of the complete time-resolved parliamentary group to establish positive or negative party voting conduct. At a verified decisive vote on a motion that directly and materially advances the party's own promise, failure to provide a strict-majority `yes` is normally `moving-against` (`-1`), not ordinary inactivity. Retain all individual choices for transparency. Voided, unsupported vote types, and votes without verified decisive context do not establish party conduct.
 - Treat a verified decisive party vote as attributable conduct regardless of who authored or sponsored the bill. A bill does not have to be the tracked party's proposal.
+- Treat a verified, attributable pre-vote commitment as directional evidence: an announced intention to support the exact promise can be `+1`, and an announced intention to oppose it can be `-1`. A later roll-call vote is stronger evidence and may confirm or supersede the intention.
 
 ### Promise admission
 

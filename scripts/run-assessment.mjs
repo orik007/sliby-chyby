@@ -39,7 +39,7 @@ function apiKeyFor(provider) {
   throw new Error(`No API-key mapping is configured for provider: ${provider}`);
 }
 
-const assessorPromptVersion = "assessor-v3";
+const assessorPromptVersion = "assessor-v4";
 const arbiterPromptVersion = "arbiter-v1";
 const assessorInstructions = await readFile(resolve(`automation/prompts/${assessorPromptVersion}.md`), "utf8");
 const arbiterInstructions = await readFile(resolve("automation/prompts/arbiter-v1.md"), "utf8");

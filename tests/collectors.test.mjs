@@ -68,38 +68,39 @@ test("UNL parser respects escaped delimiters and null fields", () => {
   assert.deepEqual(rows, [{ id: "1", text: "escaped|pipe", empty: null }]);
 });
 
-test("attributes the direction with more yes than no votes", () => {
+test("requires a strict majority of all club members for a party direction", () => {
   const vote = (externalMpId, choiceCode) => ({
     externalMpId,
     choiceCode,
     clubMembershipsAtVote: [{ projectPartyId: "ano" }]
   });
   const attributed = derivePartyVoteSummaries([
-    vote("1", "A"), vote("2", "@"), vote("3", "M"), vote("4", "M"), vote("5", "M")
+    vote("1", "A"), vote("2", "A"), vote("3", "A"), vote("4", "@"), vote("5", "M")
   ])[0];
   assert.equal(attributed.eligibleMemberCount, 5);
-  assert.equal(attributed.directionalVoteCount, 1);
+  assert.equal(attributed.directionalVoteCount, 3);
+  assert.equal(attributed.strictMajorityThreshold, 3);
   assert.equal(attributed.majorityChoice, "yes");
   assert.equal(attributed.attributionStatus, "attributed");
-  assert.equal(attributed.ruleVersion, "party-vote-directional-majority-v2");
+  assert.equal(attributed.ruleVersion, "party-vote-strict-majority-v3");
 
-  const opposed = derivePartyVoteSummaries([
-    vote("1", "A"), vote("2", "N"), vote("3", "N"), vote("4", "C"), vote("5", "@")
+  const insufficientSupport = derivePartyVoteSummaries([
+    vote("1", "A"), vote("2", "A"), vote("3", "N"), vote("4", "C"), vote("5", "@")
   ])[0];
-  assert.equal(opposed.majorityChoice, "no");
-  assert.equal(opposed.attributionStatus, "attributed");
+  assert.equal(insufficientSupport.majorityChoice, null);
+  assert.equal(insufficientSupport.attributionStatus, "no-strict-majority");
 
-  const tie = derivePartyVoteSummaries([
-    vote("1", "A"), vote("2", "A"), vote("3", "N"), vote("4", "N"), vote("5", "@")
+  const absentMajority = derivePartyVoteSummaries([
+    vote("1", "A"), vote("2", "@"), vote("3", "@"), vote("4", "M"), vote("5", "M")
   ])[0];
-  assert.equal(tie.majorityChoice, null);
-  assert.equal(tie.attributionStatus, "directional-tie");
+  assert.equal(absentMajority.majorityChoice, null);
+  assert.equal(absentMajority.attributionStatus, "no-strict-majority");
 
   const noDirectionalVotes = derivePartyVoteSummaries([
     vote("1", "C"), vote("2", "F"), vote("3", "@")
   ])[0];
   assert.equal(noDirectionalVotes.majorityChoice, null);
-  assert.equal(noDirectionalVotes.attributionStatus, "no-directional-votes");
+  assert.equal(noDirectionalVotes.attributionStatus, "no-strict-majority");
 
   const voided = derivePartyVoteSummaries([
     vote("1", "A"), vote("2", "A"), vote("3", "A")

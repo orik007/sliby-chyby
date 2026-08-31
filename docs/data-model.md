@@ -251,7 +251,7 @@ Proposed fields:
 - derived classification and rule version;
 - calculation timestamp.
 
-The confirmed current rule compares only `yes` and `no` choices cast by parliamentary-group members at the vote time. More votes in one direction establishes the party direction; a tie or no directional votes does not. Proposed implementation fields include `eligibleMemberCount`, `directionalVoteCount`, normalized choice counts, `majorityChoice`, `attributionStatus`, and `ruleVersion`. Raw individual votes remain authoritative, and every non-directional choice remains available for display. Direction relative to a promise is not stored in this summary.
+The confirmed current rule requires a strict majority of all parliamentary-group members at the vote time to establish positive or negative party voting conduct. Proposed implementation fields include `eligibleMemberCount`, `directionalVoteCount`, `strictMajorityThreshold`, normalized choice counts, `majorityChoice`, `attributionStatus`, and `ruleVersion`. Raw individual votes remain authoritative, and every non-directional choice remains available for display. A `no-strict-majority` summary may enter a bounded assessment package only for a verified decisive vote, where the assessor determines whether it was a direct missed opportunity to support the exact promise. Direction relative to a promise is not stored in the raw summary.
 
 Voided, manual, technically incomplete, mixed, and context-unresolved votes retain their counts but cannot establish party conduct.
 

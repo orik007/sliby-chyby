@@ -35,6 +35,13 @@ function hasVerifiedVoteContext(record) {
   );
 }
 
+const assessableAttributionStatuses = new Set([
+  "verified-party-vote",
+  "verified-party-no-majority",
+  "verified-party-sponsor",
+  "candidate-government-action"
+]);
+
 export function validatePromiseRegistry(registry) {
   invariant(registry?.schemaVersion === "1.0.0", "Unsupported promise-matching registry schemaVersion");
   invariant(Array.isArray(registry.promises) && registry.promises.length > 0, "Promise-matching registry must contain promises");
@@ -91,7 +98,11 @@ export function matchRecordToPromise(record, promise) {
   const partyVoteSummary = (record.payload?.partyVoteSummaries ?? []).find((summary) => summary.partyId === promise.partyId);
   const attributionStatus = partyVoteSummary?.attributionStatus === "attributed" && hasVerifiedVoteContext(record)
     ? "verified-party-vote"
+    : partyVoteSummary?.attributionStatus === "no-strict-majority" && hasVerifiedVoteContext(record)
+      ? "verified-party-no-majority"
     : partyVoteSummary?.attributionStatus === "attributed"
+      ? "candidate-party-vote-without-decisive-context"
+    : partyVoteSummary?.attributionStatus === "no-strict-majority"
       ? "candidate-party-vote-without-decisive-context"
     : matchedExternalReferences.find(({ attributionStatus: status }) => status === "verified-party-sponsor")?.attributionStatus
       ?? matchedExternalReferences.find(({ attributionStatus: status }) => status === "candidate-government-action")?.attributionStatus
@@ -131,7 +142,7 @@ function significantParliamentaryStep(match) {
 }
 
 export function selectBoundedPrimaryMatches(matches, { maxPerGroup = 8, maxTotal = 24 } = {}) {
-  const primaryMatches = matches.filter(({ record, attributionStatus }) => record.primary === true && ["verified-party-vote", "verified-party-sponsor", "candidate-government-action"].includes(attributionStatus));
+  const primaryMatches = matches.filter(({ record, attributionStatus }) => record.primary === true && assessableAttributionStatuses.has(attributionStatus));
   const groups = new Map();
   for (const match of primaryMatches) {
     const list = groups.get(groupKey(match)) ?? [];
@@ -159,7 +170,7 @@ function factSummary(record, partyId) {
   if (record.kind === "parliamentary-vote") {
     const party = partyVoteFacts(record, partyId);
     const partyText = party
-      ? ` Under the directional-vote rule, ${partyId} has status ${party.attributionStatus}${party.majorityChoice ? ` with majority choice ${party.majorityChoice}` : ""} (${party.counts.yes} yes, ${party.counts.no} no, ${party.eligibleMemberCount} eligible members).`
+      ? ` Under the strict-majority rule, ${partyId} has status ${party.attributionStatus}${party.majorityChoice ? ` with majority choice ${party.majorityChoice}` : ""} (${party.counts.yes} yes, ${party.counts.no} no, threshold ${party.strictMajorityThreshold}, ${party.eligibleMemberCount} eligible members).`
       : ` No vote summary for ${partyId} is present.`;
     return `The official roll-call record reports ${record.payload.counts.yes} votes yes and ${record.payload.counts.no} votes no.${partyText}`;
   }
@@ -203,7 +214,7 @@ export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
   if (selectedMatches.length === 0) return null;
   const evidencePackage = {
     schemaVersion: "1.0.0",
-    methodologyVersion: "slava-v2",
+    methodologyVersion: "slava-v3",
     packageId: `${promise.id}--${asOf}--generated`,
     asOf,
     promise: {
@@ -218,13 +229,13 @@ export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
       contradictionTest: promise.contradictionTest
     },
     generation: {
-      matcherVersion: "deterministic-matcher-v2",
+      matcherVersion: "deterministic-matcher-v3",
       collectorRunId: collectorRun.runId,
       collectorRunHash: sha256(collectorRun),
       candidateMatchCount: matches.length,
-      primaryMatchCount: matches.filter(({ record, attributionStatus }) => record.primary && ["verified-party-vote", "verified-party-sponsor", "candidate-government-action"].includes(attributionStatus)).length,
+      primaryMatchCount: matches.filter(({ record, attributionStatus }) => record.primary && assessableAttributionStatuses.has(attributionStatus)).length,
       selectedPrimaryEvidenceCount: selectedMatches.length,
-      omittedPrimaryMatchCount: Math.max(0, matches.filter(({ record, attributionStatus }) => record.primary && ["verified-party-vote", "verified-party-sponsor", "candidate-government-action"].includes(attributionStatus)).length - selectedMatches.length),
+      omittedPrimaryMatchCount: Math.max(0, matches.filter(({ record, attributionStatus }) => record.primary && assessableAttributionStatuses.has(attributionStatus)).length - selectedMatches.length),
       directionAssigned: false,
       publicationApproved: false
     },
