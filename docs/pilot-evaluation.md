@@ -12,7 +12,9 @@ This report records the first end-to-end integration pilot run on 2026-08-31. It
 
 The pilot used the then-current `party-vote-strict-majority-v1` attribution rule. A short-lived `party-vote-directional-majority-v2` rule was then tested and superseded. The current confirmed rule is `party-vote-strict-majority-v3`, which additionally sends a verified decisive no-majority vote for review as a possible `-1` failure to support the party's own promise. This historical report is not retroactively rewritten; the pilot should be rerun before its candidate results are considered under the current methodology.
 
-An [EET 2.0 smoke rerun](https://github.com/orik007/sliby-chyby/actions/runs/33443286313) verified the now-superseded `deterministic-matcher-v2`, `slava-v2`, and `party-vote-directional-majority-v2` chain. The official party summary contained `68 yes` and `0 no`; both assessors again proposed `moving-towards`, and `publicationApproved` remained `false`. A current-methodology smoke run is still required.
+An [EET 2.0 smoke rerun](https://github.com/orik007/sliby-chyby/actions/runs/33443286313) verified the now-superseded `deterministic-matcher-v2`, `slava-v2`, and `party-vote-directional-majority-v2` chain. The official party summary contained `68 yes` and `0 no`; both assessors again proposed `moving-towards`, and `publicationApproved` remained `false`.
+
+The [current-methodology EET 2.0 smoke run](https://github.com/orik007/sliby-chyby/actions/runs/33447542557) verified `deterministic-matcher-v3`, `slava-v3`, `party-vote-strict-majority-v3`, and `assessor-v4`. ANO recorded `68 yes`, `0 no`, against a strict-majority threshold of `41`; both assessors proposed `moving-towards`, and `publicationApproved` remained `false`.
 
 - Evidence cutoff: `2026-08-31`
 - Parliamentary collection start: `2025-10-01`
