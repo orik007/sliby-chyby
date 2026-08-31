@@ -67,7 +67,17 @@ jobs:
       - name: Match evidence to the selected promise
         run: node scripts/run-matcher.mjs --collector-run automation/runs/e2e/collector/collector-run.json --promise "$PILOT_PROMISE_ID" --as-of "$PILOT_AS_OF" --output automation/runs/e2e/matcher
 
+      - name: Check whether an assessable package exists
+        id: package
+        run: |
+          if [ -f "automation/runs/e2e/matcher/evidence-packages/${PILOT_PROMISE_ID}.json" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Run two assessors and an arbiter when needed
+        if: steps.package.outputs.available == 'true'
         run: node scripts/run-assessment.mjs "automation/runs/e2e/matcher/evidence-packages/${PILOT_PROMISE_ID}.json" automation/runs/e2e/assessment
 
       - name: Upload unpublished end-to-end audit
