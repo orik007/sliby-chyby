@@ -28,6 +28,7 @@ Use `npm test` for SLAVA Index unit tests and `npm run build` for the complete v
 - [SLAVA Index methodology](docs/scoring.md)
 - [Data model](docs/data-model.md)
 - [Decision register](docs/decisions.md)
+- [Unpublished end-to-end pilot](docs/pilot-evaluation.md)
 - [Project working rules](AGENTS.md)
 - [2025 promise-source research](research/2025-election/README.md)
 - [2025 campaign coverage ledger](research/2025-election/source-inventory.md)

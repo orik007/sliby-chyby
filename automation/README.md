@@ -63,6 +63,10 @@ A scheduled trigger should be added only after the evidence collector can identi
 
 `.github/workflows/run-e2e-pilot.yml` is a manual integration pilot. It collects official parliamentary records, runs the deterministic matcher for one selected reviewed promise, sends the generated bounded package to both assessors, invokes the arbiter only on disagreement, and uploads the complete unpublished audit chain. It does not commit, publish, or deploy any result.
 
+The concurrency group includes the promise ID. Repeated runs for one promise remain serialized, while pilots for different promises do not replace one another in GitHub's single pending slot for a concurrency group.
+
+The first five-promise integration report is recorded in [docs/pilot-evaluation.md](../docs/pilot-evaluation.md).
+
 ## Golden case
 
 `golden-cases/ano-eet-2` contains the first fully sourced test case. Its benchmark is a working human proposal, not a published assessment and not an input to the assessors.

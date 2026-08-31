@@ -23,7 +23,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: slava-e2e-pilot
+  group: slava-e2e-pilot-${{ inputs.promise_id }}
   cancel-in-progress: false
 
 jobs:
