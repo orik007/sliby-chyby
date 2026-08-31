@@ -83,15 +83,16 @@ One article alone is insufficient for a strong final assessment when a relevant 
 
 ### Confirmed party-vote attribution
 
-A Chamber vote is attributed to a party only when more than half of all members of its parliamentary group at the time of the vote cast the same `yes` or `no` choice.
+A Chamber vote is attributed to a party by directly comparing the `yes` and `no` choices cast by members of its parliamentary group at the time of the vote.
 
-- The denominator is the complete time-resolved group membership, not only members present or voting.
-- Abstentions, registered non-votes, absences, excuses, and members who had not yet taken the oath remain in the denominator but establish neither support nor opposition.
-- The required count is `floor(eligible group members / 2) + 1`.
-- A vote without a strict `yes` or `no` majority is recorded as mixed/no-majority and is not treated as the party's directional act.
+- More `yes` than `no` means the party supported the motion.
+- More `no` than `yes` means the party opposed the motion.
+- Equal `yes` and `no` counts, including `0–0`, establish no party direction.
+- Abstentions, registered non-votes, absences, excuses, and members who had not yet taken the oath are retained and displayed but do not determine direction.
+- There is no minimum participation threshold. For example, `3 yes`, `0 no`, and `4 absent` is attributed as support and displayed with the exact counts.
 - Voided votes and manual or technically incomplete votes do not establish a party position from individual-vote data.
 - A numerical majority is not enough when the exact motion or legislative context is unresolved. The official vote must be linked to a documented decisive context before it can enter an assessment package as verified party conduct.
-- The author or sponsor of the bill is irrelevant to vote attribution. A tracked party's verified strict-majority vote is its conduct even when another party, the government, or another authorized proposer introduced the bill.
+- The author or sponsor of the bill is irrelevant to vote attribution. A tracked party's verified vote is its conduct even when another party, the government, or another authorized proposer introduced the bill.
 
 This rule determines attribution only. Whether a majority `yes` supports or contradicts a promise depends on the exact motion and is decided later from the bounded evidence package.
 

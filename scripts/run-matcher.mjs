@@ -67,7 +67,7 @@ for (const promise of promises) {
 
 const run = {
   schemaVersion: "1.0.0",
-  matcherVersion: "deterministic-matcher-v1",
+  matcherVersion: "deterministic-matcher-v2",
   matchedAt: new Date().toISOString(),
   asOf: args.asOf,
   publicationApproved: false,

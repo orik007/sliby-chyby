@@ -10,6 +10,8 @@ This report records the first end-to-end integration pilot run on 2026-08-31. It
 
 ## Fixed pilot configuration
 
+The pilot used the then-current `party-vote-strict-majority-v1` attribution rule. That rule was later superseded by the confirmed `party-vote-directional-majority-v2` rule. This historical report is not retroactively rewritten; the pilot should be rerun before its candidate results are considered under the current methodology.
+
 - Evidence cutoff: `2026-08-31`
 - Parliamentary collection start: `2025-10-01`
 - Source dataset: official Chamber of Deputies records

@@ -39,7 +39,7 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Prefer official primary records for promises, votes, laws, budgets, and decisions.
 - Use major news sources for discovery, context, and cross-checking.
 - Verify important claims elsewhere; do not trust one article merely because it comes from a large outlet.
-- Attribute a Chamber vote to a party only when a strict majority of all time-resolved parliamentary-group members cast the same `yes` or `no` choice. Non-directional choices remain in the denominator. Voided, unsupported vote types, and votes without verified decisive context do not establish party conduct.
+- Attribute a Chamber vote by comparing only the party's `yes` and `no` choices: more `yes` means support, more `no` means opposition, and a tie or no directional votes establishes no party direction. Retain all other choices for transparency, but do not apply a minimum participation threshold. Voided, unsupported vote types, and votes without verified decisive context do not establish party conduct.
 - Treat a verified decisive party vote as attributable conduct regardless of who authored or sponsored the bill. A bill does not have to be the tracked party's proposal.
 
 ### Promise admission

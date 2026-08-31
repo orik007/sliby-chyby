@@ -159,7 +159,7 @@ function factSummary(record, partyId) {
   if (record.kind === "parliamentary-vote") {
     const party = partyVoteFacts(record, partyId);
     const partyText = party
-      ? ` Under the strict-majority rule, ${partyId} has status ${party.attributionStatus}${party.majorityChoice ? ` with majority choice ${party.majorityChoice}` : ""} (${party.counts.yes} yes, ${party.counts.no} no, ${party.eligibleMemberCount} eligible members).`
+      ? ` Under the directional-vote rule, ${partyId} has status ${party.attributionStatus}${party.majorityChoice ? ` with majority choice ${party.majorityChoice}` : ""} (${party.counts.yes} yes, ${party.counts.no} no, ${party.eligibleMemberCount} eligible members).`
       : ` No vote summary for ${partyId} is present.`;
     return `The official roll-call record reports ${record.payload.counts.yes} votes yes and ${record.payload.counts.no} votes no.${partyText}`;
   }
@@ -203,7 +203,7 @@ export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
   if (selectedMatches.length === 0) return null;
   const evidencePackage = {
     schemaVersion: "1.0.0",
-    methodologyVersion: "slava-v1",
+    methodologyVersion: "slava-v2",
     packageId: `${promise.id}--${asOf}--generated`,
     asOf,
     promise: {
@@ -218,7 +218,7 @@ export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
       contradictionTest: promise.contradictionTest
     },
     generation: {
-      matcherVersion: "deterministic-matcher-v1",
+      matcherVersion: "deterministic-matcher-v2",
       collectorRunId: collectorRun.runId,
       collectorRunHash: sha256(collectorRun),
       candidateMatchCount: matches.length,

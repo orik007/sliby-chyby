@@ -92,18 +92,18 @@ test("creates no assessable package when only media or no records match", () => 
   assert.equal(buildEvidencePackage({ promise: eet, matches, collectorRun, asOf: "2026-08-31" }), null);
 });
 
-test("requires decisive vote context before a party-majority vote enters the package", () => {
+test("requires decisive vote context before a party direction enters the package", () => {
   const votePayload = {
     externalVoteId: "900",
     counts: { yes: 100, no: 20 },
     partyVoteSummaries: [{
       partyId: "ano",
       eligibleMemberCount: 80,
-      strictMajorityThreshold: 41,
+      directionalVoteCount: 70,
       counts: { yes: 70, no: 0, abstained: 0, notVoting: 0, absent: 10, unknown: 0 },
       majorityChoice: "yes",
       attributionStatus: "attributed",
-      ruleVersion: "party-vote-strict-majority-v1"
+      ruleVersion: "party-vote-directional-majority-v2"
     }],
     linkedPrints: [{ number: 189, titleCz: "Vládní návrh zákona o evidenci tržeb", historyContexts: [] }]
   };
@@ -139,11 +139,11 @@ test("attributes a decisive party vote even when another party introduced the bi
       partyVoteSummaries: [{
         partyId: "ano",
         eligibleMemberCount: 80,
-        strictMajorityThreshold: 41,
+        directionalVoteCount: 60,
         counts: { yes: 60, no: 0, abstained: 0, notVoting: 0, absent: 20, unknown: 0 },
         majorityChoice: "yes",
         attributionStatus: "attributed",
-        ruleVersion: "party-vote-strict-majority-v1"
+        ruleVersion: "party-vote-directional-majority-v2"
       }],
       linkedPrints: [{
         number: 999,

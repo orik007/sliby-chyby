@@ -68,25 +68,38 @@ test("UNL parser respects escaped delimiters and null fields", () => {
   assert.deepEqual(rows, [{ id: "1", text: "escaped|pipe", empty: null }]);
 });
 
-test("attributes a vote only to a strict majority of all club members", () => {
+test("attributes the direction with more yes than no votes", () => {
   const vote = (externalMpId, choiceCode) => ({
     externalMpId,
     choiceCode,
     clubMembershipsAtVote: [{ projectPartyId: "ano" }]
   });
   const attributed = derivePartyVoteSummaries([
-    vote("1", "A"), vote("2", "A"), vote("3", "A"), vote("4", "@"), vote("5", "M")
+    vote("1", "A"), vote("2", "@"), vote("3", "M"), vote("4", "M"), vote("5", "M")
   ])[0];
   assert.equal(attributed.eligibleMemberCount, 5);
-  assert.equal(attributed.strictMajorityThreshold, 3);
+  assert.equal(attributed.directionalVoteCount, 1);
   assert.equal(attributed.majorityChoice, "yes");
   assert.equal(attributed.attributionStatus, "attributed");
+  assert.equal(attributed.ruleVersion, "party-vote-directional-majority-v2");
 
-  const mixed = derivePartyVoteSummaries([
-    vote("1", "A"), vote("2", "A"), vote("3", "N"), vote("4", "C"), vote("5", "@")
+  const opposed = derivePartyVoteSummaries([
+    vote("1", "A"), vote("2", "N"), vote("3", "N"), vote("4", "C"), vote("5", "@")
   ])[0];
-  assert.equal(mixed.majorityChoice, null);
-  assert.equal(mixed.attributionStatus, "no-strict-majority");
+  assert.equal(opposed.majorityChoice, "no");
+  assert.equal(opposed.attributionStatus, "attributed");
+
+  const tie = derivePartyVoteSummaries([
+    vote("1", "A"), vote("2", "A"), vote("3", "N"), vote("4", "N"), vote("5", "@")
+  ])[0];
+  assert.equal(tie.majorityChoice, null);
+  assert.equal(tie.attributionStatus, "directional-tie");
+
+  const noDirectionalVotes = derivePartyVoteSummaries([
+    vote("1", "C"), vote("2", "F"), vote("3", "@")
+  ])[0];
+  assert.equal(noDirectionalVotes.majorityChoice, null);
+  assert.equal(noDirectionalVotes.attributionStatus, "no-directional-votes");
 
   const voided = derivePartyVoteSummaries([
     vote("1", "A"), vote("2", "A"), vote("3", "A")
