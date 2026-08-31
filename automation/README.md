@@ -4,6 +4,8 @@ This directory contains the offline assessment workflow. It is deliberately sepa
 
 Upstream evidence discovery is documented separately in [collectors/README.md](collectors/README.md). Collectors produce unpublished candidate records; they do not match evidence to promises or assign scores.
 
+The intermediate deterministic matching stage is documented in [matching/README.md](matching/README.md). It records transparent candidate links and creates a bounded primary-evidence package only when party attribution is available.
+
 ## Pipeline
 
 1. A reviewed promise and a bounded evidence package are prepared.
@@ -13,7 +15,7 @@ Upstream evidence discovery is documented separately in [collectors/README.md](c
 5. A disagreement is sent to an arbiter, which may select either review or return `cannot-decide`.
 6. Every result remains unpublished until a later publication gate approves it.
 
-The initial runner uses the OpenAI Responses API with [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs). It never gives the scoring assessors web-search tools. Source discovery and promise matching are separate upstream stages.
+The initial runner uses the OpenAI Responses API with [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs). It never gives the scoring assessors web-search tools. Source discovery and promise matching are separate upstream stages. The active assessor prompt is versioned as `assessor-v2`; its content hash is stored in every audit record.
 
 Provider-specific HTTP calls are isolated in `scripts/lib/model-provider.mjs`. The rest of the pipeline consumes a normalized response. A future second provider therefore needs a new adapter and credentials, while evidence packages, scoring validation, arbitration, audit records, and the public site remain unchanged.
 
@@ -59,6 +61,10 @@ Create an `assessment` environment in the GitHub repository, add the `OPENAI_API
 
 A scheduled trigger should be added only after the evidence collector can identify a changed evidence package. That avoids paying to reassess unchanged inputs. Publication will remain a separate explicitly gated workflow.
 
+`.github/workflows/run-e2e-pilot.yml` is a manual integration pilot. It collects official parliamentary records, runs the deterministic matcher for one selected reviewed promise, sends the generated bounded package to both assessors, invokes the arbiter only on disagreement, and uploads the complete unpublished audit chain. It does not commit, publish, or deploy any result.
+
 ## Golden case
 
 `golden-cases/ano-eet-2` contains the first fully sourced test case. Its benchmark is a working human proposal, not a published assessment and not an input to the assessors.
+
+`matching/promises.json` contains five reviewed official-programme promises used to evaluate matching behavior. Three currently have attributable primary candidates in the parliamentary dataset. A thematic match without party attribution and a promise with no match both correctly produce no assessable package.

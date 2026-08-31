@@ -1,5 +1,6 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { basename, dirname, join, relative, resolve } from "node:path";
 import { loadEnvFile } from "node:process";
 import {
@@ -38,8 +39,11 @@ function apiKeyFor(provider) {
   throw new Error(`No API-key mapping is configured for provider: ${provider}`);
 }
 
-const assessorInstructions = await readFile(resolve("automation/prompts/assessor-v1.md"), "utf8");
+const assessorPromptVersion = "assessor-v2";
+const arbiterPromptVersion = "arbiter-v1";
+const assessorInstructions = await readFile(resolve(`automation/prompts/${assessorPromptVersion}.md`), "utf8");
 const arbiterInstructions = await readFile(resolve("automation/prompts/arbiter-v1.md"), "utf8");
+const promptHash = (text) => createHash("sha256").update(text).digest("hex");
 
 async function createStructuredResponse({ provider, model, instructions, input, name, schema }) {
   return createStructuredModelResponse({
@@ -92,6 +96,10 @@ const auditRecord = {
   packagePath: relative(process.cwd(), packagePath).replaceAll("\\", "/"),
   packageHash,
   methodologyVersion: evidencePackage.methodologyVersion,
+  prompts: {
+    assessor: { version: assessorPromptVersion, contentHash: promptHash(assessorInstructions) },
+    arbiter: { version: arbiterPromptVersion, contentHash: promptHash(arbiterInstructions) }
+  },
   publicationApproved: false,
   independence: {
     statelessParallelCalls: true,

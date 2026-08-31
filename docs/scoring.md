@@ -81,6 +81,19 @@ One article alone is insufficient for a strong final assessment when a relevant 
 - Contradictory actions remain visible in the evidence and history.
 - The significance of an act matters more than the number of acts.
 
+### Confirmed party-vote attribution
+
+A Chamber vote is attributed to a party only when more than half of all members of its parliamentary group at the time of the vote cast the same `yes` or `no` choice.
+
+- The denominator is the complete time-resolved group membership, not only members present or voting.
+- Abstentions, registered non-votes, absences, excuses, and members who had not yet taken the oath remain in the denominator but establish neither support nor opposition.
+- The required count is `floor(eligible group members / 2) + 1`.
+- A vote without a strict `yes` or `no` majority is recorded as mixed/no-majority and is not treated as the party's directional act.
+- Voided votes and manual or technically incomplete votes do not establish a party position from individual-vote data.
+- A numerical majority is not enough when the exact motion or legislative context is unresolved. The official vote must be linked to a documented decisive context before it can enter an assessment package as verified party conduct.
+
+This rule determines attribution only. Whether a majority `yes` supports or contradicts a promise depends on the exact motion and is decided later from the bounded evidence package.
+
 Examples recorded in the conversations:
 
 - A party announces that it will accept an outcome contrary to its promise: typically `-1`.
@@ -153,7 +166,6 @@ On disagreement, an arbiter receives the same evidence plus anonymized reviews. 
 
 ## Open methodology questions
 
-- What exact rule turns individual members' votes into “the party voted for/against”? The raw counts and membership at the vote date must be retained, but the aggregation threshold is undecided.
 - If a real promise cannot be scored fairly, does the product need a new status, a publication filter, or another treatment?
 - How should blocked-by-others and compromise cases affect the score?
 - What counts as a missed deadline, and when does it become `-1` or `-2`?

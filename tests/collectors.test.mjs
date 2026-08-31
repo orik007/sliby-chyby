@@ -7,7 +7,7 @@ import {
   validateRegistry
 } from "../scripts/lib/collector-core.mjs";
 import { parseNewsSitemap, parseRssOrAtom } from "../scripts/lib/feed-collectors.mjs";
-import { normalizePspData, parseUnl } from "../scripts/lib/psp-collector.mjs";
+import { derivePartyVoteSummaries, normalizePspData, parseUnl } from "../scripts/lib/psp-collector.mjs";
 
 const mediaSource = {
   id: "example-media",
@@ -68,6 +68,33 @@ test("UNL parser respects escaped delimiters and null fields", () => {
   assert.deepEqual(rows, [{ id: "1", text: "escaped|pipe", empty: null }]);
 });
 
+test("attributes a vote only to a strict majority of all club members", () => {
+  const vote = (externalMpId, choiceCode) => ({
+    externalMpId,
+    choiceCode,
+    clubMembershipsAtVote: [{ projectPartyId: "ano" }]
+  });
+  const attributed = derivePartyVoteSummaries([
+    vote("1", "A"), vote("2", "A"), vote("3", "A"), vote("4", "@"), vote("5", "M")
+  ])[0];
+  assert.equal(attributed.eligibleMemberCount, 5);
+  assert.equal(attributed.strictMajorityThreshold, 3);
+  assert.equal(attributed.majorityChoice, "yes");
+  assert.equal(attributed.attributionStatus, "attributed");
+
+  const mixed = derivePartyVoteSummaries([
+    vote("1", "A"), vote("2", "A"), vote("3", "N"), vote("4", "C"), vote("5", "@")
+  ])[0];
+  assert.equal(mixed.majorityChoice, null);
+  assert.equal(mixed.attributionStatus, "no-strict-majority");
+
+  const voided = derivePartyVoteSummaries([
+    vote("1", "A"), vote("2", "A"), vote("3", "A")
+  ], { voidedByOfficialRecord: true })[0];
+  assert.equal(voided.majorityChoice, null);
+  assert.equal(voided.attributionStatus, "voided-vote");
+});
+
 function unl(fields) {
   return `${fields.map((value) => value ?? "").join("|")}|\n`;
 }
@@ -114,6 +141,7 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
   assert.ok(vote);
   assert.ok(step);
   assert.equal(vote.payload.linkedPrints[0].number, 189);
+  assert.equal(vote.payload.linkedPrints[0].historyContexts[0].actionCz, "Chamber approved bill");
   assert.equal(vote.payload.individualVotes[0].clubMembershipsAtVote[0].projectPartyId, "ano");
   assert.equal(step.payload.externalVoteId, "900");
   assert.equal(step.payload.actionCz, "Chamber approved bill");

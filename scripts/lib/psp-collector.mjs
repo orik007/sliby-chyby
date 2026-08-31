@@ -106,6 +106,57 @@ function officialVoteUrl(voteId) {
   return `https://public.psp.cz/sqw/hlasy.sqw?g=${voteId}`;
 }
 
+const voteChoiceGroups = {
+  yes: new Set(["A"]),
+  no: new Set(["B", "N"]),
+  abstained: new Set(["C", "K"]),
+  notVoting: new Set(["F"]),
+  absent: new Set(["@", "M", "W"])
+};
+
+function normalizedVoteChoice(choiceCode) {
+  for (const [choice, codes] of Object.entries(voteChoiceGroups)) {
+    if (codes.has(choiceCode)) return choice;
+  }
+  return "unknown";
+}
+
+export function derivePartyVoteSummaries(individualVotes, { voteTypeCode = "N", voidedByOfficialRecord = false } = {}) {
+  const membersByParty = new Map();
+  for (const individualVote of individualVotes) {
+    for (const membership of individualVote.clubMembershipsAtVote ?? []) {
+      if (!membership.projectPartyId) continue;
+      const members = membersByParty.get(membership.projectPartyId) ?? new Map();
+      members.set(individualVote.externalMpId, individualVote.choiceCode);
+      membersByParty.set(membership.projectPartyId, members);
+    }
+  }
+
+  return [...membersByParty.entries()].sort(([partyA], [partyB]) => partyA.localeCompare(partyB)).map(([partyId, members]) => {
+    const counts = { yes: 0, no: 0, abstained: 0, notVoting: 0, absent: 0, unknown: 0 };
+    for (const choiceCode of members.values()) counts[normalizedVoteChoice(choiceCode)] += 1;
+    const eligibleMemberCount = members.size;
+    const strictMajorityThreshold = Math.floor(eligibleMemberCount / 2) + 1;
+    let majorityChoice = null;
+    if (counts.yes >= strictMajorityThreshold) majorityChoice = "yes";
+    else if (counts.no >= strictMajorityThreshold) majorityChoice = "no";
+
+    let attributionStatus = majorityChoice ? "attributed" : "no-strict-majority";
+    if (voidedByOfficialRecord) attributionStatus = "voided-vote";
+    else if (voteTypeCode !== "N") attributionStatus = "unsupported-vote-type";
+
+    return {
+      partyId,
+      eligibleMemberCount,
+      strictMajorityThreshold,
+      counts,
+      majorityChoice: attributionStatus === "attributed" ? majorityChoice : null,
+      attributionStatus,
+      ruleVersion: "party-vote-strict-majority-v1"
+    };
+  });
+}
+
 export function normalizePspData({ source, since, votesEntries, membersEntries, printsEntries }) {
   const voteRows = parseUnl(decodeEntry(votesEntries, `hl${source.term.year}s.unl`), schemas.vote)
     .filter((row) => row.organId === String(source.term.organId));
@@ -148,12 +199,12 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     individualByVote.set(row.voteId, list);
   }
 
-  const printIdsByVote = new Map();
+  const historyByVote = new Map();
   for (const row of historyRows) {
     if (!row.voteId) continue;
-    const list = printIdsByVote.get(row.voteId) ?? [];
-    list.push(row.printId);
-    printIdsByVote.set(row.voteId, list);
+    const list = historyByVote.get(row.voteId) ?? [];
+    list.push(row);
+    historyByVote.set(row.voteId, list);
   }
 
   const records = [];
@@ -183,15 +234,33 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
         clubMembershipsAtVote: activeMemberships
       };
     });
-    const linkedPrints = [...new Set(printIdsByVote.get(vote.id) ?? [])].map((printId) => {
+    const historiesForVote = historyByVote.get(vote.id) ?? [];
+    const linkedPrintIds = [...new Set(historiesForVote.map(({ printId }) => printId))];
+    const linkedPrints = linkedPrintIds.map((printId) => {
       const print = printById.get(printId);
+      const historyContexts = historiesForVote.filter((history) => history.printId === printId).map((history) => {
+        const transition = transitionById.get(history.transitionId);
+        const action = actionById.get(transition?.actionId);
+        return {
+          externalHistoryId: history.historyId,
+          transitionId: history.transitionId,
+          actionCz: cleanText(action?.description, 500) || null,
+          resolutionNumber: numeric(history.resolutionNumber)
+        };
+      });
       return {
         externalPrintId: printId,
         number: numeric(print?.number),
         partNumber: numeric(print?.partNumber),
         titleCz: cleanText(print?.fullTitle || print?.shortTitle, 1000),
-        url: print ? officialPrintUrl(source.term.number, print.number) : null
+        url: print ? officialPrintUrl(source.term.number, print.number) : null,
+        historyContexts
       };
+    });
+    const voidedByOfficialRecord = voidVoteIds.has(vote.id);
+    const partyVoteSummaries = derivePartyVoteSummaries(individualVotes, {
+      voteTypeCode: vote.voteType,
+      voidedByOfficialRecord
     });
     records.push(createCollectedRecord({
       id: `${source.id}--vote-${vote.id}`,
@@ -220,9 +289,10 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
         },
         voteTypeCode: vote.voteType,
         resultCode: vote.result,
-        voidedByOfficialRecord: voidVoteIds.has(vote.id),
+        voidedByOfficialRecord,
         linkedPrints,
-        individualVotes
+        individualVotes,
+        partyVoteSummaries
       }
     }));
   }

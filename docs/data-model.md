@@ -251,7 +251,9 @@ Proposed fields:
 - derived classification and rule version;
 - calculation timestamp.
 
-The rule that classifies these counts as party support or opposition is unresolved. Raw individual votes remain authoritative.
+The confirmed first rule uses a strict majority of all parliamentary-group members at the vote time. Proposed implementation fields additionally include `eligibleMemberCount`, `strictMajorityThreshold`, normalized choice counts, `majorityChoice`, `attributionStatus`, and `ruleVersion`. Raw individual votes remain authoritative. Direction relative to a promise is not stored in this summary.
+
+Voided, manual, technically incomplete, mixed, and context-unresolved votes retain their counts but cannot establish party conduct.
 
 ### `AssessmentRevision`
 

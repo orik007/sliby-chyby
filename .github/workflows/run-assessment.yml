@@ -35,10 +35,10 @@ jobs:
       SLIBY_ARBITER_MODEL: gpt-5.6-sol
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
@@ -53,7 +53,7 @@ jobs:
         run: npm run assess:ci
 
       - name: Upload unpublished audit record
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: slava-assessment-${{ github.run_id }}
           path: automation/runs/github-actions/

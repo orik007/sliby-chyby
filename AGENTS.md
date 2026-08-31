@@ -51,6 +51,7 @@ SlibyChyby tracks what political parties promised before an election and compare
 - Do not carry a promise or its score into a later period. Repeated wording in a later election is a new promise.
 - Retain historical periods and their assessment history.
 - Determine an elected representative's relevant party or parliamentary-group membership at the date of a vote, not from current membership alone.
+- Attribute a Chamber vote to a party only when more than half of all members of its parliamentary group at the vote time cast the same `yes` or `no` choice. Abstentions, non-votes, absences, and excuses remain in the denominator but establish neither direction. Do not attribute voided, manual, technically incomplete, or context-unresolved votes.
 
 ## Product and implementation
 

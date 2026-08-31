@@ -63,6 +63,7 @@ export function validateEvidencePackage(evidencePackage) {
     invariant(typeof evidence.url === "string" && /^https:\/\//.test(evidence.url), `Evidence ${evidence.id} must use an HTTPS URL`);
     invariant(typeof evidence.factSummary === "string" && evidence.factSummary.length > 0, `Evidence ${evidence.id} is missing factSummary`);
     invariant(typeof evidence.locator === "string" && evidence.locator.length > 0, `Evidence ${evidence.id} is missing a locator`);
+    invariant(/^\d{4}(?:-\d{2})?(?:-\d{2})?$/.test(evidence.publishedAt), `Evidence ${evidence.id} has an invalid publication date`);
     invariant(evidence.primary === true, `Golden evidence ${evidence.id} must be a primary source`);
     invariant(evidence.publishedAt <= evidencePackage.asOf, `Evidence ${evidence.id} is newer than the package cutoff`);
   }

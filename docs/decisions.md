@@ -39,6 +39,7 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Prefer official primary records for promises, votes, laws, budgets, and decisions.
 - Use major news sources for discovery, context, and cross-checking.
 - Verify important claims elsewhere; do not trust one article merely because it comes from a large outlet.
+- Attribute a Chamber vote to a party only when a strict majority of all time-resolved parliamentary-group members cast the same `yes` or `no` choice. Non-directional choices remain in the denominator. Voided, unsupported vote types, and votes without verified decisive context do not establish party conduct.
 
 ### Promise admission
 
@@ -72,6 +73,7 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - For the initial pilot, use two separate stateless `gpt-5.6-terra` calls through the OpenAI Responses API and use `gpt-5.6-sol` as the disagreement arbiter.
 - Keep provider-specific API calls behind an adapter so that assessor B can later move to another provider without changing evidence packages, methodology, arbitration, audit records, or the public website.
 - Run assessment outside the public website. The public browser must never receive an AI provider credential or invoke the scoring API.
+- Keep matching separate from scoring. The initial matcher is deterministic and exposes every matched phrase and external identifier; a thematic match without party attribution cannot enter an assessment package.
 
 ### Initial implementation architecture
 
@@ -146,10 +148,6 @@ The public name is unresolved. “Sliby vlády” and related wording were sugge
 ### Coverage breadth
 
 The first public real-data version should favor a smaller fully verified set over numerical completeness. The exact minimum promise count remains undecided and does not block continued review.
-
-### Party vote attribution
-
-No rule yet determines when individual votes represent a party position. Store the complete vote distribution and membership at the vote date. A threshold or classification rule is needed before real automated scoring, but not before a UI demo.
 
 ### Mixed conduct
 
