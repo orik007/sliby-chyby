@@ -91,7 +91,11 @@ export function parseRssOrAtom(xml, source, { since }) {
     const url = normalizeUrl(rawUrl, source);
     const feedEntryId = cleanText(item.guid ?? item.id ?? url, 1000);
     const excerptCz = cleanText(item.description ?? item.summary ?? item.encoded, source.maxExcerptChars ?? 500);
-    const id = `${source.id}--${sha256(feedEntryId || url).slice(0, 20)}`;
+    // Some official feeds reuse one GUID and URL for a base agenda, its addenda,
+    // and later notices. Include the dated title so distinct feed occurrences
+    // remain auditable without weakening conflicting-record detection.
+    const itemIdentity = [feedEntryId || url, occurredAt, title].join("\n");
+    const id = `${source.id}--${sha256(itemIdentity).slice(0, 20)}`;
     records.push(createCollectedRecord({
       id,
       sourceId: source.id,

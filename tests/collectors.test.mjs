@@ -67,6 +67,17 @@ test("accepts an explicitly allowlisted official linked host", () => {
   assert.equal(result.records[0].primary, true);
 });
 
+test("keeps distinct official feed items that reuse one GUID and URL", () => {
+  const xml = `<?xml version="1.0"?><rss><channel><title>Government</title>
+    <item><guid>https://news.example/agenda/1</guid><title>Cabinet agenda</title><link>https://news.example/agenda/1</link><pubDate>Mon, 31 Aug 2026 12:00:00 +0200</pubDate></item>
+    <item><guid>https://news.example/agenda/1</guid><title>Cabinet agenda addendum</title><link>https://news.example/agenda/1</link><pubDate>Mon, 31 Aug 2026 12:00:00 +0200</pubDate></item>
+  </channel></rss>`;
+  const result = parseRssOrAtom(xml, mediaSource, { since: "2026-08-01" });
+  assert.equal(result.records.length, 2);
+  assert.notEqual(result.records[0].id, result.records[1].id);
+  assert.equal(result.records[0].payload.feedEntryId, result.records[1].payload.feedEntryId);
+});
+
 test("normalizes a publisher news sitemap without inventing an excerpt", () => {
   const source = { ...mediaSource, id: "example-sitemap", collector: "news-sitemap", maxExcerptChars: 0 };
   const xml = `<?xml version="1.0"?><urlset xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"><url>

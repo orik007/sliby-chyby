@@ -21,6 +21,7 @@ Media sources are discovery and context only. Their inclusion in the registry is
 - Every source response and normalized record receives a SHA-256 hash.
 - A source may redirect only to a hostname explicitly allowed in the registry.
 - The Government Office feed legitimately links some cabinet-agenda items to the official `www.odok.cz` portal; both government hostnames are explicitly allowlisted for that source.
+- The same feed may reuse one GUID and URL for an agenda, its addenda, and notices. Feed-record identity therefore also includes the publication time and title so that these distinct official occurrences remain separate.
 
 ## Deferred sources
 
