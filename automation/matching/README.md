@@ -2,6 +2,8 @@
 
 The matcher is an auditable narrowing stage between collectors and assessors. It never determines whether evidence supports or contradicts a promise and never assigns a SLAVA status.
 
+The canonical end-to-end pipeline and source policy are in [`docs/evidence-pipeline.md`](../../docs/evidence-pipeline.md). This file documents matcher-specific behavior.
+
 ## Reviewed promise catalog
 
 `promises.json` contains the first reviewed real-data catalog: 36 atomic promises from the final official national party programmes, with 12 promises each for ANO 2011, SPD, and Motoristé sobě. This is a deliberately bounded first release, not a claim of complete programme or campaign coverage.

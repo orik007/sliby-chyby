@@ -2,6 +2,8 @@
 
 This directory contains the offline assessment workflow. It is deliberately separate from the public Astro runtime.
 
+The complete canonical flow from one shared source collection through full-registry matching, changed-package assessment, arbitration, and the publication gate is documented in [`docs/evidence-pipeline.md`](../docs/evidence-pipeline.md).
+
 Upstream evidence discovery is documented separately in [collectors/README.md](collectors/README.md). Collectors produce unpublished candidate records; they do not match evidence to promises or assign scores.
 
 The intermediate deterministic matching stage is documented in [matching/README.md](matching/README.md). It records transparent candidate links and creates a bounded primary-evidence package only when party attribution is available.
@@ -71,4 +73,4 @@ The first five-promise integration report is recorded in [docs/pilot-evaluation.
 
 `golden-cases/ano-eet-2` contains the first fully sourced test case. Its benchmark is a working human proposal, not a published assessment and not an input to the assessors.
 
-`matching/promises.json` contains five reviewed official-programme promises used to evaluate matching behavior. Three currently have attributable primary candidates in the parliamentary dataset. A thematic match without party attribution and a promise with no match both correctly produce no assessable package.
+`matching/promises.json` contains the first reviewed 36-promise catalog, with 12 official-programme promises for each tracked party. The first successful full-registry collection-and-matching run produced three attributable primary evidence packages. A thematic match without party attribution and a promise with no match both correctly produce no assessable package.

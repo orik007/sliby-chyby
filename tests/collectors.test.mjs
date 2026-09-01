@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { strToU8 } from "fflate";
 import {
@@ -27,6 +28,14 @@ test("validates a unique, explicit collector registry", () => {
   const registry = { schemaVersion: "1.0.0", sources: [mediaSource] };
   assert.equal(validateRegistry(registry), registry);
   assert.throws(() => validateRegistry({ schemaVersion: "1.0.0", sources: [mediaSource, mediaSource] }), /Duplicate collector source id/);
+});
+
+test("documents every configured collector source in the canonical pipeline policy", async () => {
+  const registry = JSON.parse(await readFile(new URL("../automation/collectors/sources.json", import.meta.url), "utf8"));
+  const policy = await readFile(new URL("../docs/evidence-pipeline.md", import.meta.url), "utf8");
+  for (const source of registry.sources) {
+    assert.match(policy, new RegExp(`\\x60${source.id}\\x60`), `Missing ${source.id} from evidence-pipeline.md`);
+  }
 });
 
 test("normalizes RSS metadata without storing a full article", () => {

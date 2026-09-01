@@ -2,6 +2,8 @@
 
 Collectors discover possible evidence. They never assign a SLAVA status or direction and never publish an assessment.
 
+The canonical end-to-end pipeline and the authoritative human-readable source list are in [`docs/evidence-pipeline.md`](../../docs/evidence-pipeline.md). This file documents collector-specific implementation details.
+
 ## Enabled sources
 
 The initial verified registry contains:

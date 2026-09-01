@@ -90,6 +90,8 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Allow decisive `+2` or `-2` evidence from primary official acts outside the Chamber of Deputies, including regulations, executive decisions, administrative acts, and authoritative outcome data.
 - Run collection once per pipeline execution and match the resulting shared record set against every reviewed promise. Do not repeat source downloads separately for each promise.
 - Keep the full-registry collection-and-matching workflow non-AI and unpublished. Send only generated assessable evidence packages to the later assessor stage.
+- Allow one collected record to become a candidate match for zero, one, or several promises. Matching establishes possible relevance only; it never determines direction or score.
+- Reassess only evidence packages whose deterministic content hash is new or changed. Do not spend model calls on unchanged packages.
 
 ### Verified collector registry
 

@@ -12,6 +12,8 @@ Real-source collection for the 2025 election is staged under `research/2025-elec
 
 The confirmed initial implementation plan uses Astro, TypeScript, plain CSS, and schema-validated versioned data files. A database is not needed for the first demo.
 
+The canonical collection, matching, source-list, and assessment flow is documented in [`docs/evidence-pipeline.md`](docs/evidence-pipeline.md).
+
 ## Local development
 
 ```sh
