@@ -46,6 +46,20 @@ The workflow runs are retained in GitHub Actions:
 
 Private workflow artifacts contain the collector run, the complete match audit, any generated evidence package, and any assessment audit. GitHub retains these pilot artifacts for 30 days.
 
+## 2026-09-02 repeatability check
+
+**Pilot observation**
+
+Two current-methodology reruns tested the remaining assessable packages from the first full-registry collection:
+
+- [ANO — public-media fees, disagreement run](https://github.com/orik007/sliby-chyby/actions/runs/33566736553): the assessors proposed `no-progress` and `moving-towards`, while both marked the evidence insufficient. The old resolver stopped at human review before invoking the arbiter. This exposed a routing defect: a status or evidence-sufficiency disagreement must reach arbitration even when the final result may still require human review.
+- [ANO — retirement age 65](https://github.com/orik007/sliby-chyby/actions/runs/33566750392): both assessors proposed `no-progress`, marked the evidence insufficient, and the case correctly remained `human-review-required` without a score candidate.
+- [ANO — public-media fees after the routing fix](https://github.com/orik007/sliby-chyby/actions/runs/33567166092): both assessors independently proposed `no-progress` and marked the evidence insufficient. Because the reviews agreed, no arbitration was necessary and the case remained `human-review-required`.
+
+Commit `e1a5cbc` changed the resolver so that disagreement about either status or evidence sufficiency requires arbitration. The arbiter may select an existing sufficient review, select an insufficient review that still routes to human review, or return `cannot-decide`. Deterministic tests cover these paths. No rerun in this repeatability check produced a live arbiter call after the fix because the repeated assessor pair agreed.
+
+The repeatability check also identified a collection gap. Parliamentary print history supplies titles, procedural steps, sponsors, and linked votes, but the generated package does not yet contain the substantive text or a verified factual extract from the proposal. A title saying that an act is amended does not reveal whether the proposal fulfils or contradicts the precise promise. Until official print-document enrichment is implemented, these cases must remain unscored when the title alone is insufficient.
+
 ## Verified pipeline behavior
 
 **Pilot observation**
@@ -61,7 +75,7 @@ Private workflow artifacts contain the collector run, the complete match audit, 
 **Open validation work**
 
 - No verified real pilot case produced `moving-against`, `acting-against`, or `fulfilled`. Those paths have deterministic tests but still need honest real-source benchmarks.
-- The arbiter was not exercised by these live cases because the assessor pairs did not disagree.
+- A live disagreement exposed and led to a fix of the arbitration-routing defect, but a post-fix live run has not yet exercised the arbiter because its assessor pair agreed.
 - Both assessors used the same model family. A second provider and its acceptance benchmark remain open.
 - The current collector coverage is not sufficient for all official acts outside the Chamber of Deputies.
 - Human publication authority, review screens, and publication thresholds remain unresolved.
