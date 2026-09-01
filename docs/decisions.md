@@ -88,6 +88,8 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Keep evidence collectors outside the public website runtime. The first collector workflow is manually triggered, read-only, requires no API secret, and produces an unpublished private artifact.
 - Collect trusted-media feeds as discovery and context sources. Collection itself never assigns a direction or score; articles will normally be supporting evidence rather than the sole basis for `+2` or `-2`.
 - Allow decisive `+2` or `-2` evidence from primary official acts outside the Chamber of Deputies, including regulations, executive decisions, administrative acts, and authoritative outcome data.
+- Run collection once per pipeline execution and match the resulting shared record set against every reviewed promise. Do not repeat source downloads separately for each promise.
+- Keep the full-registry collection-and-matching workflow non-AI and unpublished. Send only generated assessable evidence packages to the later assessor stage.
 
 ### Verified collector registry
 

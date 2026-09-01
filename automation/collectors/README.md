@@ -46,3 +46,14 @@ node scripts/run-collectors.mjs --source psp-core-2025 --source government-cz-rs
 ```
 
 Collector runs are unpublished audit artifacts. Promise matching and assessment are separate downstream stages.
+
+## GitHub Actions pipeline
+
+The manually triggered `Collect and match evidence candidates` workflow runs the production-shaped non-AI portion of the pipeline:
+
+1. collect all enabled verified sources once;
+2. compare the resulting records with every promise in the reviewed registry;
+3. generate bounded evidence packages only where attributable primary candidate evidence exists;
+4. upload the collector run, complete match audit, and any evidence packages as one unpublished artifact.
+
+The workflow never assigns evidence direction, calls an assessor, changes public data, or deploys the website. Assessment remains a separate stage so that empty, noisy, or clearly irrelevant collection runs do not create unnecessary model calls.

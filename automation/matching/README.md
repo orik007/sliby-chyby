@@ -28,3 +28,7 @@ External identifiers receive a deliberately strong score because they refer to a
 - A promise with no primary match does not receive `no-progress`; it receives no assessable package.
 - Evidence packages are bounded and retain omitted-match counts.
 - Every generated package and match run remains unpublished.
+
+## Full-registry workflow
+
+The `Collect and match evidence candidates` GitHub Actions workflow collects each enabled source once and then runs this matcher across the entire reviewed promise registry. It uploads the complete unpublished audit, including promises with no match, rather than running a separate collector for every promise.

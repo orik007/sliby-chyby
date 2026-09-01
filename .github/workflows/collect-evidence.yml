@@ -1,4 +1,4 @@
-name: Collect evidence candidates
+name: Collect and match evidence candidates
 
 on:
   workflow_dispatch:
@@ -6,7 +6,12 @@ on:
       since:
         description: Earliest publication or event date (YYYY-MM-DD)
         required: true
-        default: "2026-08-01"
+        default: "2025-10-01"
+        type: string
+      as_of:
+        description: Assessment cutoff date; leave empty to use the UTC run date
+        required: false
+        default: ""
         type: string
 
 permissions:
@@ -23,6 +28,7 @@ jobs:
     timeout-minutes: 20
     env:
       COLLECTOR_SINCE: ${{ inputs.since }}
+      MATCHER_AS_OF: ${{ inputs.as_of }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
@@ -40,12 +46,41 @@ jobs:
         run: npm test
 
       - name: Collect evidence candidates
-        run: node scripts/run-collectors.mjs --since "$COLLECTOR_SINCE" --output automation/runs/collectors/github-actions
+        run: node scripts/run-collectors.mjs --since "$COLLECTOR_SINCE" --output automation/runs/pipeline/github-actions/collector
 
-      - name: Upload unpublished collector audit
+      - name: Match candidates to every reviewed promise
+        run: |
+          AS_OF="${MATCHER_AS_OF:-$(date -u +%F)}"
+          node scripts/run-matcher.mjs \
+            --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
+            --as-of "$AS_OF" \
+            --output automation/runs/pipeline/github-actions/matcher
+
+      - name: Write audit summary
+        run: |
+          node --input-type=module -e '
+            import { readFile, appendFile } from "node:fs/promises";
+            const run = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/match-run.json", "utf8"));
+            const packageCount = run.promiseResults.filter((result) => result.evidencePackage).length;
+            const candidateCount = run.promiseResults.reduce((sum, result) => sum + result.candidateMatchCount, 0);
+            const lines = [
+              "## Unpublished evidence pipeline",
+              "",
+              `- Reviewed promises checked: ${run.promiseResults.length}`,
+              `- Candidate matches: ${candidateCount}`,
+              `- Assessable evidence packages: ${packageCount}`,
+              `- Assessment cutoff: ${run.asOf}`,
+              "- Direction assigned: no",
+              "- Publication approved: no",
+              ""
+            ];
+            await appendFile(process.env.GITHUB_STEP_SUMMARY, lines.join("\n"));
+          '
+
+      - name: Upload unpublished collection and matching audit
         uses: actions/upload-artifact@v6
         with:
-          name: evidence-candidates-${{ github.run_id }}
-          path: automation/runs/collectors/github-actions/collector-run.json
+          name: evidence-pipeline-${{ github.run_id }}
+          path: automation/runs/pipeline/github-actions/
           if-no-files-found: error
           retention-days: 30
