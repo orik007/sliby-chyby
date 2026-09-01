@@ -40,8 +40,18 @@ test("requires arbitration when independent assessors disagree", () => {
   assert.equal(result.status, null);
 });
 
-test("requires human review when either assessor finds the package insufficient", () => {
+test("requires arbitration when assessors disagree about evidence sufficiency", () => {
   const result = resolveAssessmentReviews(review("moving-towards"), review("no-progress", { evidenceSufficient: false }), evidencePackage);
+  assert.equal(result.state, "arbitration-required");
+  assert.equal(result.reason, "assessor-disagreement");
+});
+
+test("requires human review when both assessors agree the package is insufficient", () => {
+  const result = resolveAssessmentReviews(
+    review("no-progress", { evidenceSufficient: false }),
+    review("no-progress", { evidenceSufficient: false }),
+    evidencePackage
+  );
   assert.equal(result.state, "human-review-required");
   assert.equal(result.reason, "insufficient-evidence");
 });
@@ -61,4 +71,19 @@ test("an arbiter may select one existing review but cannot invent a third status
     { choice: "assessor-a", citedEvidenceIds: ["psp-print-189-status-2026-08-30"], explanationCz: "Zákon zatím není účinný." }
   );
   assert.deepEqual(result, { state: "candidate", reason: "arbiter-selection", status: "moving-towards", selectedReview: "assessor-a" });
+});
+
+test("an arbiter cannot turn an insufficient selected review into a candidate", () => {
+  const result = resolveAssessmentReviews(
+    review("moving-towards"),
+    review("no-progress", { evidenceSufficient: false }),
+    evidencePackage,
+    { choice: "assessor-b", citedEvidenceIds: ["psp-print-189-status-2026-08-30"], explanationCz: "Dodané důkazy nestačí." }
+  );
+  assert.deepEqual(result, {
+    state: "human-review-required",
+    reason: "arbiter-selected-insufficient-evidence",
+    status: null,
+    selectedReview: "assessor-b"
+  });
 });

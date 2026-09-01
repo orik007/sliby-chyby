@@ -104,11 +104,14 @@ export function resolveAssessmentReviews(reviewA, reviewB, evidencePackage, arbi
   validateAssessmentOutput(reviewA, evidencePackage);
   validateAssessmentOutput(reviewB, evidencePackage);
 
-  if (!reviewA.evidenceSufficient || !reviewB.evidenceSufficient) {
+  const reviewsAgree = reviewA.status === reviewB.status
+    && reviewA.evidenceSufficient === reviewB.evidenceSufficient;
+
+  if (reviewsAgree && !reviewA.evidenceSufficient) {
     return { state: "human-review-required", reason: "insufficient-evidence", status: null, selectedReview: null };
   }
 
-  if (reviewA.status === reviewB.status) {
+  if (reviewsAgree) {
     return { state: "candidate", reason: "assessor-consensus", status: reviewA.status, selectedReview: "consensus" };
   }
 
@@ -116,5 +119,8 @@ export function resolveAssessmentReviews(reviewA, reviewB, evidencePackage, arbi
   validateArbiterOutput(arbiter, evidencePackage);
   if (arbiter.choice === "cannot-decide") return { state: "human-review-required", reason: "arbiter-cannot-decide", status: null, selectedReview: null };
   const selected = arbiter.choice === "assessor-a" ? reviewA : reviewB;
+  if (!selected.evidenceSufficient) {
+    return { state: "human-review-required", reason: "arbiter-selected-insufficient-evidence", status: null, selectedReview: arbiter.choice };
+  }
   return { state: "candidate", reason: "arbiter-selection", status: selected.status, selectedReview: arbiter.choice };
 }

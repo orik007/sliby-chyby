@@ -14,7 +14,7 @@ The intermediate deterministic matching stage is documented in [matching/README.
 2. Two stateless assessors receive the same package independently.
 3. Each assessor returns a strict structured result and may cite only supplied evidence IDs.
 4. Matching sufficient results become a candidate assessment.
-5. A disagreement is sent to an arbiter, which may select either review or return `cannot-decide`.
+5. A disagreement about the status or evidence sufficiency is sent to an arbiter, which may select either review or return `cannot-decide`. Selecting an insufficient review still requires human review and never creates a score candidate.
 6. Every result remains unpublished until a later publication gate approves it.
 
 The initial runner uses the OpenAI Responses API with [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs). It never gives the scoring assessors web-search tools. Source discovery and promise matching are separate upstream stages. The active assessor prompt is versioned as `assessor-v4`; its content hash is stored in every audit record. Earlier prompt files remain immutable for audit reproduction.

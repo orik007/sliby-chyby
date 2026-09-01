@@ -16,7 +16,7 @@ One pipeline execution follows this sequence:
 4. **Treat matches as candidates only.** A deterministic match means “potentially relevant,” never “supports,” “contradicts,” or “changes the score.” Every matched term or official external identifier remains visible in the audit.
 5. **Build bounded evidence packages.** A package is generated only when attributable primary candidate evidence exists. Relevant media records may remain as context, but media alone does not create a strict primary-evidence package.
 6. **Assess only new or changed packages.** Two independent assessors receive the same bounded package. An unchanged package hash must not trigger repeated model calls. This change-detection gate is confirmed but not yet implemented in the full-registry workflow.
-7. **Arbitrate disagreement.** Matching sufficient assessor results become a candidate assessment. Disagreement goes to the configured arbiter; unresolved or insufficient cases require human attention.
+7. **Arbitrate disagreement.** Matching sufficient assessor results become a candidate assessment. Disagreement about the status or evidence sufficiency goes to the configured arbiter. An arbiter cannot turn a selected insufficient review into a score candidate; unresolved or insufficient cases require human attention.
 8. **Publish separately.** Collection, matching, assessment, and publication are distinct stages. No collector, matcher, or model result changes public data or the SLAVA Index automatically under the current rules.
 
 ```text
