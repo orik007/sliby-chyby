@@ -52,6 +52,21 @@ test("rejects a feed item that redirects readers outside the source allowlist", 
   assert.throws(() => parseRssOrAtom(xml, mediaSource, { since: "2026-08-01" }), /outside the source host allowlist/);
 });
 
+test("accepts an explicitly allowlisted official linked host", () => {
+  const governmentSource = {
+    ...mediaSource,
+    id: "government-example",
+    primary: true,
+    evidenceRole: "official-discovery",
+    expectedHosts: ["vlada.gov.cz", "www.odok.cz"]
+  };
+  const xml = `<?xml version="1.0"?><rss><channel><title>Government</title><item><title>Cabinet agenda</title><link>https://www.odok.cz/portal/zvlady/jednani-detail/2026-08-31</link><pubDate>Mon, 31 Aug 2026 12:00:00 +0200</pubDate></item></channel></rss>`;
+  const result = parseRssOrAtom(xml, governmentSource, { since: "2026-08-01" });
+  assert.equal(result.records.length, 1);
+  assert.equal(result.records[0].url, "https://www.odok.cz/portal/zvlady/jednani-detail/2026-08-31");
+  assert.equal(result.records[0].primary, true);
+});
+
 test("normalizes a publisher news sitemap without inventing an excerpt", () => {
   const source = { ...mediaSource, id: "example-sitemap", collector: "news-sitemap", maxExcerptChars: 0 };
   const xml = `<?xml version="1.0"?><urlset xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"><url>
