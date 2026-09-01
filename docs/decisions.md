@@ -125,6 +125,16 @@ Dates are omitted because the imported conversations did not frame decisions as 
 6. Review candidate assessments and publish a verified static real-data subset.
 7. Expand coverage only after the pipeline behaves reliably across varied promise types.
 
+### First reviewed real-data catalog
+
+**Working proposal**
+
+- Catalog v1 contains 36 promises from the final official national election programmes: 12 each for ANO 2011, SPD, and Motoristé sobě.
+- The balanced count is a review tranche, not a quota that forces weak promises into the product and not a claim of exhaustive coverage.
+- Each accepted promise preserves exact Czech source wording, a PDF locator, an atomic tracked claim, fulfillment and contradiction tests, deterministic matching terms, and a link to its extraction candidate.
+- The other 919 final-programme extraction candidates remain unreviewed rather than rejected or counted as zero.
+- Catalog inclusion does not publish an assessment. Candidate matches and AI assessments remain unpublished until the publication-governance question is resolved.
+
 ### Campaign-source collection outside the first-version boundary
 
 **Working proposal**

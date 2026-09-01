@@ -2,7 +2,7 @@
 
 ## Status
 
-**Working proposal.** This directory is a research staging area. Its records are not published promises, assessments, or SLAVA Index inputs.
+**Working proposal.** This directory is primarily a research staging area. Only source candidates explicitly marked `accepted-first-release-catalog-v1` have been promoted into the reviewed matching registry. Every other record remains unpublished research material and is not a promise, assessment, or SLAVA Index input.
 
 The confirmed party scope for the current period is ANO 2011, Svoboda a přímá demokracie (SPD), and Motoristé sobě. The election scope is the 2025 Czech Chamber of Deputies election. Collective post-election coalition and government programmes are evidence of later conduct, not sources of pre-election promises.
 
@@ -75,7 +75,9 @@ Secondary material must point back to a party publication, recording, photograph
 - SPD: 247;
 - Motoristé: 235.
 
-These are extraction candidates, not 955 distinct promises. Repeated programme summaries, combined passages, headings, vague intentions, and false positives remain in the queue so that the first pass does not silently discard a real commitment.
+These are extraction candidates, not 955 distinct promises. The first human-reviewed tranche accepts 36 candidates, evenly split across the three parties, into [`automation/matching/promises.json`](../../automation/matching/promises.json). The other 919 remain unreviewed. Repeated programme summaries, combined passages, headings, vague intentions, and false positives remain in the queue so that the first pass does not silently discard a real commitment.
+
+The accepted set and its limits are recorded in [`reviewed-catalog-v1.md`](reviewed-catalog-v1.md). Acceptance means the source wording passed the current attribution, atomicity, and assessability checks. It does not mean that the promise has been assessed or approved for automatic public publication.
 
 The queue is reproducible with:
 
@@ -112,6 +114,7 @@ The official campaign-finance records establish that Motoristé printed and dist
 
 ## Coverage still required
 
+- review the remaining 919 final-programme extraction candidates and record explicit rejection or deduplication reasons;
 - perform a second visual verification of the ANO newspaper transcriptions;
 - review the captured official-site queues and recover the original content behind ANO external-media and embedded-social records;
 - inventory official Facebook, Instagram, X, YouTube, and TikTok posts and recover the original creatives behind paid-ad leads;
@@ -128,5 +131,5 @@ See `source-inventory.md` for a channel-by-channel coverage ledger. "Captured" i
 ## Open questions exposed by collection
 
 - How should materially different conditions in otherwise duplicate official wording be related?
-- What exact verified subset is sufficient for the first public real-data release?
+- Is the balanced 36-promise reviewed tranche sufficient for the first public real-data release after independent second-person review?
 - What source-retention and copyright policy applies to programme PDFs, campaign newspapers, social posts, and billboard photographs?

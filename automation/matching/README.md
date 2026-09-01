@@ -2,9 +2,11 @@
 
 The matcher is an auditable narrowing stage between collectors and assessors. It never determines whether evidence supports or contradicts a promise and never assigns a SLAVA status.
 
-## Pilot promise set
+## Reviewed promise catalog
 
-`promises.json` contains five manually reviewed, atomic promises from final official national party programmes. This is an evaluation set, not a claim of complete programme coverage.
+`promises.json` contains the first reviewed real-data catalog: 36 atomic promises from the final official national party programmes, with 12 promises each for ANO 2011, SPD, and Motoristé sobě. This is a deliberately bounded first release, not a claim of complete programme or campaign coverage.
+
+Every catalog entry links back to its source record in `research/2025-election/candidate-promises.json`. The source record must be marked `accepted-first-release-catalog-v1`; the remaining extraction candidates are not promises, index inputs, or zero-point items until reviewed.
 
 Each promise defines:
 

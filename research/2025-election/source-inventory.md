@@ -79,7 +79,7 @@ These are discovery leads and classification examples, not accepted promises:
 
 | File | Purpose | Production status |
 |---|---|---|
-| `candidate-promises.json` | 955 over-inclusive passages from the three final programmes | Unreviewed extraction queue |
+| `candidate-promises.json` | 955 over-inclusive passages from the three final programmes | 36 accepted into catalog v1; 919 remain unreviewed |
 | `official-web-candidates.json` | 409 over-inclusive passages from 647 official-index source items | Unreviewed attribution and promise queue |
 | `ano-official-news-index.json` | Complete 405-item ANO campaign-period news index | Discovery and recovery index |
 | `ano-newspaper-candidates.json` | 24 exact Czech occurrences from five ANO campaign newspapers | Manual transcription awaiting second visual check and deduplication |
@@ -93,7 +93,7 @@ These are discovery leads and classification examples, not accepted promises:
 
 ## Remaining work before claiming exhaustive collection
 
-1. Review every final-programme extraction candidate and produce atomic accepted/rejected records with reasons.
+1. Review the remaining 919 final-programme extraction candidates and produce atomic accepted/rejected records with reasons.
 2. Review every captured official-site candidate and recover ANO's externally hosted originals.
 3. Complete the campaign-period social and video inventory for national party and leader accounts; preserve exact posts and transcripts where lawful.
 4. Recover the original Motoristé election newspapers and original paid-ad creatives and billboard photographs for every concrete wording lead.

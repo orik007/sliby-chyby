@@ -12,6 +12,32 @@ import {
 const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8")));
 const eet = registry.promises.find(({ id }) => id === "ano-2025-eet-2");
 
+test("reviewed catalog is balanced and linked to accepted research candidates", async () => {
+  assert.equal(registry.status, "reviewed-first-release-catalog-v1");
+  assert.equal(registry.promises.length, 36);
+  assert.deepEqual(
+    Object.fromEntries(["ano", "spd", "motoriste"].map((partyId) => [
+      partyId,
+      registry.promises.filter((promise) => promise.partyId === partyId).length
+    ])),
+    { ano: 12, spd: 12, motoriste: 12 }
+  );
+
+  const research = JSON.parse(await readFile(new URL("../research/2025-election/candidate-promises.json", import.meta.url), "utf8"));
+  const acceptedCandidates = new Map(
+    research.records
+      .filter(({ reviewStatus }) => reviewStatus === "accepted-first-release-catalog-v1")
+      .map((candidate) => [candidate.id, candidate])
+  );
+  assert.equal(acceptedCandidates.size, registry.promises.length);
+  for (const promise of registry.promises) {
+    const candidate = acceptedCandidates.get(promise.researchSourceCandidateId);
+    assert.ok(candidate, `Missing accepted candidate for ${promise.id}`);
+    assert.equal(candidate.partyId, promise.partyId);
+    assert.equal(candidate.sourceUrl, promise.promiseSource.url);
+  }
+});
+
 function record(overrides = {}) {
   return createCollectedRecord({
     id: overrides.id ?? "psp--step-1",
