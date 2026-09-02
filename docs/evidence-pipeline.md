@@ -80,6 +80,8 @@ News collection retains metadata, URL, publication time, supplied authors, and a
 
 The manual GitHub Actions workflow `Collect and match evidence candidates` implements stages 1 through 6 for the full reviewed registry and uploads one unpublished audit artifact. The first successful full-registry run checked all 36 catalog promises against one shared collection of all enabled sources. The document-enrichment extension retrieves official DOCX files only for parliamentary prints already selected into evidence packages and reuses a fetched print across packages during the same run.
 
+The [first full-registry document-enrichment run](https://github.com/orik007/sliby-chyby/actions/runs/33601733992) processed 3,984 shared records, 36 reviewed promises, and 141 candidate matches. It generated three evidence packages and added four official print documents across them with zero warnings. Original and enriched package hashes differ and are retained separately in the uploaded audit.
+
 The single-promise end-to-end pilot implements the assessor and arbiter calls. The remaining automation work is to connect the full-registry workflow to assessment only for package hashes that are new or changed.
 
 ## Scheduling and persistence
