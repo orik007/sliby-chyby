@@ -98,7 +98,8 @@ function pullRequestBody(summary) {
     const pipelineResult = result.resolutionState === "human-review-required"
       ? "nelze férově rozhodnout bez člověka"
       : dispositionLabels[result.disposition] ?? result.disposition;
-    lines.push(`| ${result.promiseTitleCz} (\`${result.promiseId}\`) | ${pipelineResult} | ${statusLabels[result.candidateStatus] ?? "—"} |`);
+    const promiseLabel = result.reviewUrl ? `[${result.promiseTitleCz}](${result.reviewUrl})` : result.promiseTitleCz;
+    lines.push(`| ${promiseLabel} (\`${result.promiseId}\`) | ${pipelineResult} | ${statusLabels[result.candidateStatus] ?? "—"} |`);
   }
   lines.push(
     "",
@@ -109,6 +110,11 @@ function pullRequestBody(summary) {
     "Všechny návrhy vyžadují lidskou kontrolu a nejsou schválené ke zveřejnění."
   );
   return `${lines.join("\n")}\n`;
+}
+
+function humanReviewUrl(reviewPath) {
+  if (!reviewPath || !process.env.GITHUB_REPOSITORY || !process.env.REVIEW_BRANCH) return null;
+  return `https://github.com/${process.env.GITHUB_REPOSITORY}/blob/${process.env.REVIEW_BRANCH}/${reviewPath}`;
 }
 
 const options = parseArgs(process.argv.slice(2));
@@ -144,13 +150,15 @@ const results = [];
 await mkdir(runRoot, { recursive: true });
 for (const item of plan) {
   if (item.disposition !== "assess") {
+    const existingProposal = item.disposition === "unchanged" ? currentReviewProposal(manifest, item.promiseId) : null;
     results.push({
       promiseId: item.promiseId,
       promiseTitleCz: item.evidencePackage.promise.titleCz,
       assessmentFingerprint: item.assessmentFingerprint,
       disposition: item.disposition,
       resolutionState: null,
-      candidateStatus: null
+      candidateStatus: null,
+      reviewUrl: humanReviewUrl(existingProposal?.humanReviewPath)
     });
     continue;
   }
@@ -178,7 +186,8 @@ for (const item of plan) {
     assessmentFingerprint: item.assessmentFingerprint,
     disposition: "assessed",
     resolutionState: auditRecord.resolution.state,
-    candidateStatus: auditRecord.resolution.status
+    candidateStatus: auditRecord.resolution.status,
+    reviewUrl: humanReviewUrl(proposal.humanReviewPath)
   });
 }
 

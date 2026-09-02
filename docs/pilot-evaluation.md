@@ -93,6 +93,14 @@ All three records have `humanReviewRequired: true` and `publicationApproved: fal
 
 The immediate [unchanged-input rerun](https://github.com/orik007/sliby-chyby/actions/runs/33615561334) repeated collection, matching, and document enrichment but recognized all three assessment fingerprints as unchanged. It created zero new proposals and no assessment audit files, demonstrating that no assessor or arbiter API call was made. The workflow completed successfully without modifying the existing review branch or pull request.
 
+## 2026-09-02 plain-Czech review rerun
+
+**Pilot observation**
+
+Owner review found that technically literal phrases such as “verified sponsorship link”, bare parliamentary-print numbers, and internal state values made the first audit difficult to read. The confirmed product rule now requires plain Czech for both public explanations and human-review summaries. Internal enum values remain only in machine-readable JSON fields, and legislative identifiers must be introduced together with a normal explanation of the proposal and its effect.
+
+The [plain-Czech full-registry rerun](https://github.com/orik007/sliby-chyby/actions/runs/33617692052) used `assessor-v7` and `arbiter-v3`. Deterministic validation rejected internal status names, a bare form such as “tisk 201”, and the observed unnatural sponsorship phrase. All three replacement assessments passed. Each now includes a Czech `review.md` entry point with the proposed score in ordinary words, both independent explanations, any arbitration explanation, uncertainty, and clickable primary sources. The manifest marks the first proposal for each promise as superseded while retaining its immutable audit files.
+
 ## Verified pipeline behavior
 
 **Pilot observation**
