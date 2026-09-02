@@ -109,6 +109,20 @@ test("rejects invented evidence identifiers", () => {
   );
 });
 
+test("rejects internal status names and unexplained parliamentary shorthand in Czech prose", () => {
+  assert.throws(
+    () => validateAssessmentOutput(review("moving-towards", { explanationCz: "Tento krok odpovídá hodnocení moving-towards." }), evidencePackage),
+    /internal or unexplained language/
+  );
+  assert.throws(
+    () => validateAssessmentOutput(review("moving-towards", { explanationCz: "Poslanci předložili tisk 201." }), evidencePackage),
+    /internal or unexplained language/
+  );
+  assert.doesNotThrow(() => validateAssessmentOutput(review("moving-towards", {
+    explanationCz: "Poslanci ANO předložili návrh zákona o evidenci tržeb, vedený ve Sněmovně jako tisk č. 201. Jde o konkrétní krok ke splnění slibu."
+  }), evidencePackage));
+});
+
 test("an arbiter may select one existing review but cannot invent a third status", () => {
   const result = resolveAssessmentReviews(
     review("moving-towards"),

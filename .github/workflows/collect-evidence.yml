@@ -146,10 +146,10 @@ jobs:
         run: |
           PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVIEW_BRANCH" --base main --state open --json number --jq '.[0].number')"
           if [ -n "$PR_NUMBER" ]; then
-            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md
+            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --title "Kontrola automatických návrhů hodnocení SLAVA" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md
             PR_URL="$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json url --jq '.url')"
           else
-            if PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Review automated SLAVA assessment proposals" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md 2>/tmp/slava-pr-error)"; then
+            if PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Kontrola automatických návrhů hodnocení SLAVA" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md 2>/tmp/slava-pr-error)"; then
               :
             else
               COMPARE_URL="https://github.com/$GITHUB_REPOSITORY/compare/main...$REVIEW_BRANCH?expand=1"
