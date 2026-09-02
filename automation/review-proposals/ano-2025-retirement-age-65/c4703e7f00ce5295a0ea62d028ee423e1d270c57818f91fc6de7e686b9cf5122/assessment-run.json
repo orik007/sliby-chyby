@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-02T09-38-48-363Z--eb53c3b80ce5",
+  "evaluatedAt": "2026-09-02T09:38:48.363Z",
+  "packagePath": "automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/ano-2025-retirement-age-65.json",
+  "packageHash": "eb53c3b80ce553101b73a0fe20c593a67ce950a83acef3a59005bdb5e1a8c727",
+  "assessmentContentHash": "f0245035599723d347091e1e473391299705dfc2dfbbfdcabcbe605f808a290e",
+  "assessmentFingerprint": "c4703e7f00ce5295a0ea62d028ee423e1d270c57818f91fc6de7e686b9cf5122",
+  "methodologyVersion": "slava-v4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v6",
+      "contentHash": "de8b33541031c8b18aaba853b51c39617f3fdc874c891e41ecc832d6e8190f14"
+    },
+    "arbiter": {
+      "version": "arbiter-v2",
+      "contentHash": "b04a062e3bc37fadb5a9052882397c6d46367a691679f3d113129f7cc77cf229"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessParallelCalls": true,
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-5.6-terra",
+      "gpt-5.6-terra"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_01b32d9d164739a2016a97ee9f4e4c87d1bec852418ad9eff7",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 7754,
+      "input_tokens_details": {
+        "cache_write_tokens": 6597,
+        "cached_tokens": 1154
+      },
+      "output_tokens": 458,
+      "output_tokens_details": {
+        "reasoning_tokens": 116
+      },
+      "total_tokens": 8212
+    },
+    "output": {
+      "promiseId": "ano-2025-retirement-age-65",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "psp-core-2025--print-step-211955",
+        "psp-core-2025--print-step-212008",
+        "psp-core-2025--print-document-43392"
+      ],
+      "explanationCz": "Sněmovní tisk 270 byl vládou předložen a zařazen do legislativního procesu. Jeho důvodová část zmiňuje zastropování důchodového věku na 65 let jako jinou změnu uvedenou v programovém prohlášení vlády, avšak vybrané úryvky neobsahují normativní ustanovení, které by takový strop navrhovalo. Záznamy jsou navíc označeny pouze jako candidate-government-action, takže samy o sobě neprokazují, že ANO tento krok učinilo nebo podpořilo. V živém hodnocení proto nelze z doložených podkladů připsat ANO významný konkrétní postup ani opačné jednání.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Chybí ověřené stranické sponzorství, hlasování ANO nebo jiný doložený stranický vztah k tisku 270.",
+        "Dodané výňatky z legislativního dokumentu neukazují přesné navržené znění pravidla o standardním důchodovém věku ani jeho účinnost."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_019298978f5d3ad2016a97ee9f52e887d18a985cace6cb5ade",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 7754,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 7751
+      },
+      "output_tokens": 444,
+      "output_tokens_details": {
+        "reasoning_tokens": 83
+      },
+      "total_tokens": 8198
+    },
+    "output": {
+      "promiseId": "ano-2025-retirement-age-65",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "psp-core-2025--print-step-211955",
+        "psp-core-2025--print-step-212008",
+        "psp-core-2025--print-document-43392"
+      ],
+      "explanationCz": "Sněmovní tisk 270 byl vládou předložen a postoupil do stavu po rozeslání poslancům. Vybrané části důvodové zprávy zmiňují, že další změny z vládního programového prohlášení zahrnují i zastropování důchodového věku na 65 let, avšak předložené výňatky neobsahují konkrétní normativní ustanovení, které by takový strop zavedlo. Především jsou všechny parlamentní záznamy označeny pouze jako candidate-government-action, což samo o sobě nedokládá, že ANO tento vládní krok učinilo či podpořilo. V živém hodnocení proto balíček nedokládá významný, ANO prokazatelně přičitatelný krok ani opačné jednání.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z poskytnutých výňatků nelze ověřit přesný normativní obsah tisku 270 ohledně důchodového věku.",
+        "Chybí ověřené přičtení předložení tisku nebo podpory tisku straně ANO (například verified-party-sponsor či verified-party-vote)."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

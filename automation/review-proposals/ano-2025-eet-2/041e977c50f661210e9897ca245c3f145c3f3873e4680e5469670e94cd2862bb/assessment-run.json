@@ -1,0 +1,104 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-02T09-38-39-152Z--093ab37b0041",
+  "evaluatedAt": "2026-09-02T09:38:39.152Z",
+  "packagePath": "automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/ano-2025-eet-2.json",
+  "packageHash": "093ab37b0041c305af1cce212d5d95df9e73cef7f39dfb4c13737e0ab7684271",
+  "assessmentContentHash": "86fba47114b732526b553970bd13435333279b4423abfaba53482080f8bd0f3d",
+  "assessmentFingerprint": "041e977c50f661210e9897ca245c3f145c3f3873e4680e5469670e94cd2862bb",
+  "methodologyVersion": "slava-v4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v6",
+      "contentHash": "de8b33541031c8b18aaba853b51c39617f3fdc874c891e41ecc832d6e8190f14"
+    },
+    "arbiter": {
+      "version": "arbiter-v2",
+      "contentHash": "b04a062e3bc37fadb5a9052882397c6d46367a691679f3d113129f7cc77cf229"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessParallelCalls": true,
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-5.6-terra",
+      "gpt-5.6-terra"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0694164c67988553016a97ee96102887d188e4f4a91a32a169",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 10856,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 10853
+      },
+      "output_tokens": 411,
+      "output_tokens_details": {
+        "reasoning_tokens": 120
+      },
+      "total_tokens": 11267
+    },
+    "output": {
+      "promiseId": "ano-2025-eet-2",
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "psp-core-2025--print-document-43310",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--print-step-212045"
+      ],
+      "explanationCz": "Vládní návrh zákona o evidenci tržeb (tisk 189) představuje konkrétní legislativní cestu k opětovnému zavedení evidence tržeb; jeho dokumentace popisuje zavedení této agendy a související správu Finanční správou. Ve hlasování o tisku 189 hlasovala ověřená většina poslanců ANO pro (68 pro, 0 proti), což je straně přímo přičitatelný krok podporující relevantní část slibu. Návrh však podle doložených parlamentních kroků dosud není doložen jako přijatý a uvedený do provozu; balíček rovněž nedokládá naplnění všech programových vlastností EET 2.0. Slib proto není splněn, ale existuje významný konkrétní posun k jeho realizaci.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0cf00e5fa1c2f808016a97ee960d3487d1b2bc5d867064ee0c",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 10856,
+      "input_tokens_details": {
+        "cache_write_tokens": 9699,
+        "cached_tokens": 1154
+      },
+      "output_tokens": 496,
+      "output_tokens_details": {
+        "reasoning_tokens": 145
+      },
+      "total_tokens": 11352
+    },
+    "output": {
+      "promiseId": "ano-2025-eet-2",
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--print-document-43310",
+        "psp-core-2025--print-step-211390"
+      ],
+      "explanationCz": "ANO prokazatelně většinově hlasovalo pro vládní návrh zákona o evidenci tržeb (68 hlasů pro, žádný proti). Návrh byl předložen jako sněmovní tisk 189 a jeho oficiální dokument upravuje novou evidenci tržeb a její správu Finanční správou. Jde o konkrétní a straně přičitatelný krok po legislativní cestě k reálné části slíbeného zavedení EET 2.0. Z podkladů však neplyne přijetí zákona ani jeho uvedení do provozu a vybrané výňatky dokumentu nedokládají všechny programové parametry; slib proto není splněn.",
+      "confidence": "high",
+      "uncertainties": [
+        "Dodané výňatky návrhu neumožňují ověřit všechny slíbené technické a uživatelské vlastnosti EET 2.0, zejména nepovinný tisk účtenek, absenci nutnosti trvalého on-line připojení a bezplatný software Finanční správy.",
+        "Podklady nedokládají konečné schválení ani právní účinnost návrhu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}
