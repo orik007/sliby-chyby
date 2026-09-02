@@ -9,6 +9,10 @@
       "enabled": true,
       "primary": true,
       "evidenceRole": "primary-record",
+      "coverage": {
+        "mode": "term-snapshot",
+        "note": "Each run downloads the complete official open-data snapshots for the 10th Chamber term and then applies the requested date cutoff."
+      },
       "verifiedAt": "2026-08-31",
       "verificationUrl": "https://www.psp.cz/sqw/hp.sqw?k=1300",
       "expectedHosts": ["www.psp.cz"],
@@ -37,6 +41,10 @@
       "enabled": true,
       "primary": true,
       "evidenceRole": "official-discovery",
+      "coverage": {
+        "mode": "current-window",
+        "note": "The endpoint exposes a publisher-controlled current RSS window. A requested earlier date cannot recover items no longer present in the feed."
+      },
       "endpoint": "https://vlada.gov.cz/cs/urad/RSS/rss.xml",
       "verifiedAt": "2026-08-31",
       "verificationUrl": "https://vlada.gov.cz/cz/urad-vlady/rss/rss-21080/",
@@ -51,10 +59,53 @@
       "enabled": true,
       "primary": true,
       "evidenceRole": "official-discovery",
+      "coverage": {
+        "mode": "current-window",
+        "note": "The endpoint exposes a publisher-controlled current RSS window. A requested earlier date cannot recover items no longer present in the feed."
+      },
       "endpoint": "https://www.mpsv.cz/feed/tiskove-zpravy",
       "verifiedAt": "2026-08-31",
       "verificationUrl": "https://www.mpsv.cz/cms/documents/b6cbf79a-4cae-1b7c-1d6e-b6a37d025a04/%C4%8D.j.%20MPSV%202025-90671%20Ve%C5%99ejn%C3%A9%20komunika%C4%8Dn%C3%AD%20kan%C3%A1ly%20MPSV.pdf",
       "expectedHosts": ["www.mpsv.cz", "mpsv.cz", "mpsv.gov.cz"],
+      "maxExcerptChars": 500
+    },
+    {
+      "id": "mf-press-archive-2025-2026",
+      "name": "Ministry of Finance press-release archive — 2025 and 2026",
+      "publisher": "Ministry of Finance of the Czech Republic",
+      "collector": "official-html-archive",
+      "enabled": true,
+      "primary": true,
+      "evidenceRole": "official-discovery",
+      "coverage": {
+        "mode": "since-filtered-archive",
+        "note": "The collector reads the complete official annual press-release indexes for 2025 and 2026 and applies the requested cutoff. Add the next annual index when a new calendar year starts."
+      },
+      "archiveEndpoints": [
+        "https://mf.gov.cz/cs/ministerstvo/media/tiskove-zpravy/2025",
+        "https://mf.gov.cz/cs/ministerstvo/media/tiskove-zpravy/2026"
+      ],
+      "itemPathPrefix": "/cs/ministerstvo/media/tiskove-zpravy/",
+      "verifiedAt": "2026-09-02",
+      "verificationUrl": "https://mf.gov.cz/cs/ministerstvo/media/tiskove-zpravy/2025",
+      "expectedHosts": ["mf.gov.cz", "www.mfcr.cz"]
+    },
+    {
+      "id": "mzd-press-wordpress",
+      "name": "Ministry of Health press releases — WordPress REST archive",
+      "publisher": "Ministry of Health of the Czech Republic",
+      "collector": "wordpress-rest",
+      "enabled": true,
+      "primary": true,
+      "evidenceRole": "official-discovery",
+      "coverage": {
+        "mode": "since-filtered-archive",
+        "note": "The official paginated REST endpoint is queried from the requested date and all returned pages are collected."
+      },
+      "apiEndpoint": "https://mzd.gov.cz/wp-json/wp/v2/tiskove_centrum",
+      "verifiedAt": "2026-09-02",
+      "verificationUrl": "https://mzd.gov.cz/tiskove-centrum/tiskove-zpravy/",
+      "expectedHosts": ["mzd.gov.cz"],
       "maxExcerptChars": 500
     },
     {
@@ -65,6 +116,10 @@
       "enabled": true,
       "primary": false,
       "evidenceRole": "discovery-context",
+      "coverage": {
+        "mode": "current-window",
+        "note": "The endpoint exposes a publisher-controlled current RSS window. A requested earlier date cannot recover items no longer present in the feed."
+      },
       "endpoint": "https://www.irozhlas.cz/rss/irozhlas/section/zpravy-domov",
       "verifiedAt": "2026-08-31",
       "verificationUrl": "https://www.irozhlas.cz/rss",
@@ -79,6 +134,10 @@
       "enabled": true,
       "primary": false,
       "evidenceRole": "discovery-context",
+      "coverage": {
+        "mode": "current-window",
+        "note": "The endpoint exposes a publisher-controlled current RSS window. A requested earlier date cannot recover items no longer present in the feed."
+      },
       "endpoint": "https://ct24.ceskatelevize.cz/rss",
       "verifiedAt": "2026-08-31",
       "verificationUrl": "https://ct24.ceskatelevize.cz/rss",
@@ -93,6 +152,10 @@
       "enabled": true,
       "primary": false,
       "evidenceRole": "discovery-context",
+      "coverage": {
+        "mode": "current-window",
+        "note": "The endpoint exposes a publisher-controlled current RSS window. A requested earlier date cannot recover items no longer present in the feed."
+      },
       "endpoint": "https://www.seznamzpravy.cz/rss",
       "verifiedAt": "2026-08-31",
       "verificationUrl": "https://www.seznamzpravy.cz/rss",
@@ -107,6 +170,10 @@
       "enabled": true,
       "primary": false,
       "evidenceRole": "discovery-context",
+      "coverage": {
+        "mode": "current-window",
+        "note": "Google News sitemaps expose only a short recent-publication window. A requested earlier date cannot recover older articles."
+      },
       "endpoint": "https://www.novinky.cz/sitemaps/sitemap_news.xml",
       "verifiedAt": "2026-08-31",
       "verificationUrl": "https://www.novinky.cz/robots.txt",
@@ -121,6 +188,10 @@
       "enabled": false,
       "primary": true,
       "evidenceRole": "primary-record",
+      "coverage": {
+        "mode": "deferred",
+        "note": "Coverage is unavailable until a stable documented machine-readable endpoint is verified."
+      },
       "endpoint": "https://apps.odok.cz/veklep",
       "verifiedAt": "2026-08-31",
       "verificationUrl": "https://vlada.gov.cz/cz/jednani-vlady/odok/uvod-22349/",
@@ -134,6 +205,10 @@
       "enabled": false,
       "primary": true,
       "evidenceRole": "primary-record",
+      "coverage": {
+        "mode": "deferred",
+        "note": "Coverage is unavailable until the production open-data interface is stable and usable."
+      },
       "endpoint": "https://www.e-sbirka.cz/",
       "verifiedAt": "2026-08-31",
       "verificationUrl": "https://zakony.gov.cz/gov/otevrena-data-a-verejna-api-systemu-e-sbirka-od-15-ledna/",

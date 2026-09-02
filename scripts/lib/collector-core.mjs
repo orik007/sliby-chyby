@@ -33,6 +33,9 @@ export function cleanText(value, maxLength = Number.POSITIVE_INFINITY) {
     .replace(/&#39;|&apos;/gi, "'")
     .replace(/&lt;/gi, "<")
     .replace(/&gt;/gi, ">")
+    .replace(/&hellip;/gi, "…")
+    .replace(/&#x([0-9a-f]+);/gi, (_, hex) => String.fromCodePoint(Number.parseInt(hex, 16)))
+    .replace(/&#([0-9]+);/g, (_, decimal) => String.fromCodePoint(Number.parseInt(decimal, 10)))
     .replace(/\s+/g, " ")
     .trim();
   if (text.length <= maxLength) return text;
@@ -47,13 +50,16 @@ export function validateRegistry(registry) {
     invariant(typeof source.id === "string" && source.id.length > 0, "Collector source is missing id");
     invariant(!ids.has(source.id), `Duplicate collector source id: ${source.id}`);
     ids.add(source.id);
-    invariant(["psp-open-data", "rss", "news-sitemap", "deferred"].includes(source.collector), `Unknown collector type: ${source.collector}`);
+    invariant(["psp-open-data", "rss", "news-sitemap", "official-html-archive", "wordpress-rest", "deferred"].includes(source.collector), `Unknown collector type: ${source.collector}`);
     invariant(typeof source.enabled === "boolean", `Source ${source.id} is missing enabled`);
     invariant(typeof source.primary === "boolean", `Source ${source.id} is missing primary`);
     invariant(/^\d{4}-\d{2}-\d{2}$/.test(source.verifiedAt), `Source ${source.id} has invalid verifiedAt`);
     invariant(/^https:\/\//.test(source.verificationUrl), `Source ${source.id} needs an HTTPS verificationUrl`);
+    invariant(["term-snapshot", "since-filtered-archive", "current-window", "deferred"].includes(source.coverage?.mode), `Source ${source.id} needs a supported coverage mode`);
+    invariant(typeof source.coverage?.note === "string" && source.coverage.note.length > 0, `Source ${source.id} needs a coverage note`);
     if (source.enabled) {
       invariant(Array.isArray(source.expectedHosts) && source.expectedHosts.length > 0, `Source ${source.id} needs expectedHosts`);
+      invariant(source.coverage.mode !== "deferred", `Enabled source ${source.id} cannot have deferred coverage`);
     }
   }
   return registry;

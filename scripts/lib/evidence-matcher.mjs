@@ -108,6 +108,7 @@ export function matchRecordToPromise(record, promise) {
       ? "candidate-party-vote-without-decisive-context"
     : matchedExternalReferences.find(({ attributionStatus: status }) => status === "verified-party-sponsor")?.attributionStatus
       ?? matchedExternalReferences.find(({ attributionStatus: status }) => status === "candidate-government-action")?.attributionStatus
+      ?? (record.primary === true && record.kind === "official-publication" && record.evidenceRole === "official-discovery" ? "candidate-government-action" : null)
       ?? "unattributed";
   return {
     record,
@@ -235,7 +236,7 @@ export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
       contradictionTest: promise.contradictionTest
     },
     generation: {
-      matcherVersion: "deterministic-matcher-v3",
+      matcherVersion: "deterministic-matcher-v4",
       collectorRunId: collectorRun.runId,
       collectorRunHash: sha256(collectorRun),
       candidateMatchCount: matches.length,

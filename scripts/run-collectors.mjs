@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { collectFeedSource } from "./lib/feed-collectors.mjs";
 import { deduplicateRecords, invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { collectPspSource } from "./lib/psp-collector.mjs";
+import { collectOfficialHtmlArchive, collectWordPressRest } from "./lib/official-archive-collectors.mjs";
 
 function parseArgs(args) {
   const options = { sourceIds: [], since: null, sinceDays: 7, output: null };
@@ -38,7 +39,11 @@ const collectorResults = [];
 for (const source of selected) {
   const result = source.collector === "psp-open-data"
     ? await collectPspSource(source, { since, collectedAt })
-    : await collectFeedSource(source, { since, collectedAt });
+    : source.collector === "official-html-archive"
+      ? await collectOfficialHtmlArchive(source, { since, collectedAt })
+      : source.collector === "wordpress-rest"
+        ? await collectWordPressRest(source, { since, collectedAt })
+        : await collectFeedSource(source, { since, collectedAt });
   collectorResults.push(result);
   console.log(`${source.id}: ${result.records.length} records, ${result.warnings.length} warnings`);
 }
@@ -61,6 +66,11 @@ const output = {
     snapshot: result.snapshot ?? null,
     snapshots: result.snapshots ?? null,
     recordCount: result.records.length,
+    coverage: selected.find((source) => source.id === result.sourceId).coverage,
+    observedRange: {
+      earliest: result.records.map(({ occurredAt }) => occurredAt).filter(Boolean).sort()[0] ?? null,
+      latest: result.records.map(({ occurredAt }) => occurredAt).filter(Boolean).sort().at(-1) ?? null
+    },
     warnings: result.warnings,
     referenceData: result.referenceData
   })),

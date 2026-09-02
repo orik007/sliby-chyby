@@ -324,6 +324,7 @@ The verified source registry is stored in `automation/collectors/sources.json`. 
 
 - Czech Chamber of Deputies daily open-data archives: votes, individual choices, time-bounded parliamentary-club membership, parliamentary prints, and print history. Club membership is resolved at the date of each vote.
 - Government Office RSS and MPSV press-release Atom feed as official discovery sources.
+- Ministry of Finance annual press-release indexes for 2025 and 2026, and the Ministry of Health paginated press-release REST archive, as historical official discovery sources.
 - Publisher-provided iROZHLAS, ČT24, and Seznam Zprávy feeds and the Novinky.cz news sitemap as discovery and context sources.
 
 Media records are non-primary candidates. They may reveal a relevant action or decision, but their collection does not imply a likely `+1` or `-1`, and an article is not automatically decisive evidence.
@@ -333,7 +334,21 @@ Media records are non-primary candidates. They may reveal a relevant action or d
 - ODok/eKLEP remains disabled because no stable documented public machine-readable endpoint was verified.
 - e-Sbírka remains disabled because the current official notice requires API registration and recommends production Open Data integration only after 15 January 2027 while identifiers and structures are changing.
 
-These entries remain explicit in the registry so that absence of a collector cannot be mistaken for a completed integration. Party and ministry coverage beyond the two enabled official feeds remains a working expansion proposal.
+These entries remain explicit in the registry so that absence of a collector cannot be mistaken for a completed integration. Each enabled source also declares whether its coverage is a full term snapshot, a since-filtered historical archive, or only a current publisher window. The collector run stores the observed date range; a requested cutoff does not by itself prove historical completeness.
+
+### `CoverageAudit`
+
+An unpublished derived report for one collector and matcher run.
+
+Fields implemented by `coverage-audit-v1`:
+
+- collector run ID, requested cutoff, matching time, and assessment cutoff;
+- per-source coverage mode, limitation note, record count, observed earliest and latest dates, and warnings;
+- one row for every reviewed promise with candidate count, attributable primary count, package path, and active review proposal;
+- a non-scoring coverage state such as no candidate match, matches without attributable primary evidence, assessable package, assessment candidate, or human review required;
+- `scoreInferred: false` and `publicationApproved: false`.
+
+Coverage states are internal workflow facts, not public SLAVA statuses. In particular, no candidate match must never be converted into `no-progress` or zero points.
 
 ## Open data questions
 

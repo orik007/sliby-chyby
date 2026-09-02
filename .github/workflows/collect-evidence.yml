@@ -99,6 +99,14 @@ jobs:
             --summary automation/runs/pipeline/github-actions/assessment-batch.json \
             --pull-request-body automation/runs/pipeline/github-actions/assessment-review-pr.md
 
+      - name: Audit coverage of every reviewed promise
+        run: |
+          node scripts/run-coverage-audit.mjs \
+            --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
+            --matcher-run automation/runs/pipeline/github-actions/matcher/match-run.json \
+            --output automation/runs/pipeline/github-actions/coverage-audit.json \
+            --markdown automation/runs/pipeline/github-actions/coverage-audit.md
+
       - name: Write audit summary
         run: |
           node --input-type=module -e '
@@ -106,6 +114,7 @@ jobs:
             const run = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/match-run.json", "utf8"));
             const enrichment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json", "utf8"));
             const assessment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/assessment-batch.json", "utf8"));
+            const coverage = JSON.parse(await readFile("automation/runs/pipeline/github-actions/coverage-audit.json", "utf8"));
             const packageCount = run.promiseResults.filter((result) => result.evidencePackage).length;
             const candidateCount = run.promiseResults.reduce((sum, result) => sum + result.candidateMatchCount, 0);
             const documentCount = enrichment.results.reduce((sum, result) => sum + result.documentEvidenceCount, 0);
@@ -121,8 +130,12 @@ jobs:
               `- Unchanged assessments skipped: ${assessment.unchangedCount}`,
               `- Assessments blocked by document warnings: ${assessment.blockedCount}`,
               `- Assessment cutoff: ${run.asOf}`,
+              `- No candidate match (not a score): ${coverage.stateCounts["no-candidate-match"]}`,
+              `- Matches without attributable primary evidence: ${coverage.stateCounts["candidate-matches-without-attributable-primary"]}`,
+              `- Human-review proposals or unresolved reviews: ${coverage.stateCounts["review-candidate"] + coverage.stateCounts["human-review-required"]}`,
               "- Direction assigned: no",
               "- Publication approved: no",
+              "- A missing match never becomes zero points.",
               ""
             ];
             await appendFile(process.env.GITHUB_STEP_SUMMARY, lines.join("\n"));

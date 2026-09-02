@@ -16,7 +16,7 @@ One pipeline execution follows this sequence:
 4. **Treat matches as candidates only.** A deterministic match means “potentially relevant,” never “supports,” “contradicts,” or “changes the score.” Every matched term or official external identifier remains visible in the audit.
 5. **Build bounded evidence packages.** A package is generated only when attributable primary candidate evidence exists. Relevant media records may remain as context, but media alone does not create a strict primary-evidence package.
 6. **Enrich matched parliamentary prints.** For prints already present in a package, retrieve the official PSP DOCX once per print, retain its SHA-256 hash, and mechanically select bounded, numbered paragraphs around the promise and matcher terms. The selection assigns no direction or score. The original package, enriched package, document hashes, exact excerpts, and any warning remain auditable. Assessment workflows retry transient download failures and stop before model calls if a required document remains unavailable.
-7. **Assess only new or changed packages.** Two independent assessors receive the same bounded enriched package. An unchanged package hash must not trigger repeated model calls. This change-detection gate is confirmed but not yet implemented in the full-registry workflow.
+7. **Assess only new or changed packages.** Two independent assessors receive the same bounded enriched package. An unchanged package hash does not trigger repeated model calls; the full-registry workflow enforces this through the assessment fingerprint.
 8. **Arbitrate disagreement.** Matching sufficient assessor results become a candidate assessment. Disagreement about the status or evidence sufficiency goes to the configured arbiter. An arbiter cannot turn a selected insufficient review into a score candidate; unresolved or insufficient cases require human attention.
 9. **Publish separately.** Collection, matching, assessment, and publication are distinct stages. No collector, matcher, enrichment step, or model result changes public data or the SLAVA Index automatically under the current rules.
 
@@ -45,6 +45,21 @@ The enabled list is intentionally small and explicit. “Verified” means that 
 | `psp-core-2025` | Chamber of Deputies of the Parliament of the Czech Republic | Daily open-data archives for votes, individual choices, parliamentary prints, print history, and time-bounded club membership | Primary official records |
 | `government-cz-rss` | Government Office of the Czech Republic | Official RSS, including explicitly allowlisted links to the official ODok portal | Official discovery; an underlying decision or document may still be required |
 | `mpsv-press-rss` | Ministry of Labour and Social Affairs | Official press-release feed | Official discovery; authoritative acts and outcome data remain preferable |
+| `mf-press-archive-2025-2026` | Ministry of Finance | Complete official annual press-release indexes for 2025 and 2026 | Historical official discovery; register the next annual index when the year changes |
+| `mzd-press-wordpress` | Ministry of Health | Paginated official WordPress REST archive from the requested cutoff | Historical official discovery; all returned pages are collected |
+
+### Coverage semantics
+
+Every registry entry declares one coverage mode. The requested `since` date is only a filter; it is not proof that an endpoint returned the entire requested interval.
+
+| Mode | Meaning |
+|---|---|
+| `term-snapshot` | The upstream snapshot contains the complete configured parliamentary term; the collector applies the cutoff locally. |
+| `since-filtered-archive` | The collector traverses an official historical archive from the requested cutoff. |
+| `current-window` | The publisher controls a limited recent window. Older items may be absent even when the requested cutoff is older. |
+| `deferred` | No operational coverage exists. |
+
+Each run records the mode, limitation note, record count, and earliest and latest observed timestamps. An empty or short current-window feed can never establish that no political action occurred.
 
 ### Allowed news sources
 
@@ -88,6 +103,8 @@ The changed-input gate uses `assessment-fingerprint-v1`. Its content identity in
 New assessments are written under `automation/review-proposals/<promise-id>/<assessment-fingerprint>/` on the dedicated `automation/assessment-review` branch. Each directory retains the exact enriched evidence package, complete model audit, and concise proposal record. The workflow creates or updates a human-review pull request when repository Actions permissions allow it. If the token may push but not create pull requests, the workflow succeeds with a compare link for a reviewer instead. Every proposal remains `publicationApproved: false`; merging the pull request makes the audit durable but does not change public assessment data.
 
 An official-document enrichment warning blocks assessment only for the affected promise. Other valid changed packages continue through the batch. The full transient run remains available as a private GitHub artifact for 30 days.
+
+Every full-registry run also creates `coverage-audit.json` and `coverage-audit.md`. The audit has one row per reviewed promise and distinguishes an assessment candidate, a case requiring human review, an assessable package, candidate matches without attributable primary evidence, and no candidate match. These are internal pipeline states, not public SLAVA statuses. The audit always records that it inferred no score and approved no publication.
 
 The period-closing audit is not implemented yet. It must be a separate deterministic run over every reviewed promise, including promises for which normal collection never produced a primary-evidence package. During ordinary live collection, absence of a package must not be converted into a score.
 

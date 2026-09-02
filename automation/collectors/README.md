@@ -10,6 +10,8 @@ The initial verified registry contains:
 
 - daily full PSP open-data snapshots for votes, parliamentary prints, and time-bounded parliamentary-club membership;
 - official RSS from the Government Office and MPSV;
+- complete 2025 and 2026 annual press-release indexes from the Ministry of Finance;
+- the paginated Ministry of Health press-release archive through its official WordPress REST endpoint;
 - publisher-provided feeds from iROZHLAS, ČT24, and Seznam Zprávy;
 - the Novinky.cz Google News sitemap advertised in its `robots.txt` file.
 
@@ -22,6 +24,7 @@ Media sources are discovery and context only. Their inclusion in the registry is
 - Feeds retain publisher, title, URL, time, feed identifier, author names when supplied, and at most the short configured feed excerpt.
 - The collector never downloads or stores full news article bodies.
 - Every source response and normalized record receives a SHA-256 hash.
+- Every source declares whether it is a full term snapshot, a since-filtered historical archive, or only a current publisher window. The run stores both that declaration and the actually observed date range.
 - A source may redirect only to a hostname explicitly allowed in the registry.
 - The Government Office feed legitimately links some cabinet-agenda items to the official `www.odok.cz` portal; both government hostnames are explicitly allowlisted for that source.
 - The same feed may reuse one GUID and URL for an agenda, its addenda, and notices. Feed-record identity therefore also includes the publication time and title so that these distinct official occurrences remain separate.
@@ -52,14 +55,24 @@ node scripts/run-collectors.mjs --source psp-core-2025 --source government-cz-rs
 
 Collector runs are unpublished audit artifacts. Promise matching and assessment are separate downstream stages.
 
+Generate JSON and human-readable coverage reports after collection and matching:
+
+```text
+node scripts/run-coverage-audit.mjs --collector-run <collector-run.json> --matcher-run <match-run.json> --output <coverage-audit.json> --markdown <coverage-audit.md>
+```
+
+The report covers every reviewed promise. `No candidate match` describes one run only and never means zero points or verified inactivity.
+
 ## GitHub Actions pipeline
 
-The manually triggered `Collect and match evidence candidates` workflow runs the production-shaped non-AI portion of the pipeline:
+The manually triggered `Collect, match, and assess evidence candidates` workflow runs the production-shaped pipeline:
 
 1. collect all enabled verified sources once;
 2. compare the resulting records with every promise in the reviewed registry;
 3. generate bounded evidence packages only where attributable primary candidate evidence exists;
 4. retrieve official DOCX files only for parliamentary prints already present in those packages, hash them, and select bounded numbered excerpts without assigning direction;
-5. upload the collector run, complete match audit, original packages, enriched packages, and enrichment audit as one unpublished artifact.
+5. create a coverage audit for every reviewed promise, preserving missing matches as missing evidence rather than scores;
+6. assess only new or changed packages and persist unpublished review proposals;
+7. upload the complete audit as one unpublished artifact.
 
-The workflow never assigns evidence direction, calls an assessor, changes public data, or deploys the website. Assessment remains a separate stage so that empty, noisy, or clearly irrelevant collection runs do not create unnecessary model calls.
+The workflow never changes public data or deploys the website. Collection and matching remain deterministic; assessors receive only bounded eligible packages, and all proposals require human review.

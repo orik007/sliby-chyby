@@ -123,6 +123,27 @@ test("creates no assessable package when only media or no records match", () => 
   assert.equal(buildEvidencePackage({ promise: eet, matches, collectorRun, asOf: "2026-08-31" }), null);
 });
 
+test("treats a matched official ministry publication as a government-action candidate", () => {
+  const promise = registry.promises[0];
+  const record = createCollectedRecord({
+    id: "ministry--eet",
+    sourceId: "ministry",
+    kind: "official-publication",
+    primary: true,
+    evidenceRole: "official-discovery",
+    occurredAt: "2026-06-01T10:00:00.000Z",
+    title: "Ministerstvo představilo EET 2.0",
+    publisher: "Ministerstvo",
+    url: "https://example.gov.cz/eet",
+    payload: { excerptCz: "Ministerstvo připravilo evidenci tržeb." }
+  });
+  const match = matchRecordToPromise(record, promise);
+  assert.equal(match.attributionStatus, "candidate-government-action");
+  const evidencePackage = buildEvidencePackage({ promise, matches: [match], collectorRun: { schemaVersion: "1.0.0", runId: "collector-official", records: [record] }, asOf: "2026-09-02" });
+  assert.ok(evidencePackage);
+  assert.equal(evidencePackage.generation.directionAssigned, false);
+});
+
 test("requires decisive vote context before a party direction enters the package", () => {
   const votePayload = {
     externalVoteId: "900",

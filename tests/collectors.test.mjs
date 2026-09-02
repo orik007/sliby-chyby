@@ -8,6 +8,7 @@ import {
   validateRegistry
 } from "../scripts/lib/collector-core.mjs";
 import { parseNewsSitemap, parseRssOrAtom } from "../scripts/lib/feed-collectors.mjs";
+import { parseOfficialHtmlArchive } from "../scripts/lib/official-archive-collectors.mjs";
 import { derivePartyVoteSummaries, normalizePspData, parseUnl } from "../scripts/lib/psp-collector.mjs";
 
 const mediaSource = {
@@ -17,6 +18,7 @@ const mediaSource = {
   enabled: true,
   primary: false,
   evidenceRole: "discovery-context",
+  coverage: { mode: "current-window", note: "Fixture feed exposes a current window." },
   endpoint: "https://news.example/rss",
   verificationUrl: "https://news.example/rss-help",
   verifiedAt: "2026-08-31",
@@ -96,6 +98,25 @@ test("normalizes a publisher news sitemap without inventing an excerpt", () => {
   assert.equal(result.records.length, 1);
   assert.equal(result.records[0].payload.excerptCz, "");
   assert.equal(result.records[0].url, "https://news.example/article/2");
+});
+
+test("normalizes a bounded official Czech annual archive", () => {
+  const source = {
+    ...mediaSource,
+    id: "official-archive",
+    collector: "official-html-archive",
+    primary: true,
+    evidenceRole: "official-discovery",
+    archiveEndpoints: ["https://news.example/archive/2025"]
+  };
+  const html = `<article class="b-article link-mask"><a href="/release/a" class="b-article__link link-mask__link">Priorita &#x10C;R</a><span class="b-article__date">15. prosince 2025</span></article>`;
+  const records = parseOfficialHtmlArchive(html, source, { since: "2025-10-01" });
+  assert.equal(records.length, 1);
+  assert.equal(records[0].title, "Priorita ČR");
+  assert.equal(records[0].occurredAt, "2025-12-15T00:00:00.000Z");
+  assert.equal(records[0].url, "https://news.example/release/a");
+  assert.equal(records[0].primary, true);
+  assert.deepEqual(parseOfficialHtmlArchive(html, source, { since: "2026-01-01" }), []);
 });
 
 test("UNL parser respects escaped delimiters and null fields", () => {

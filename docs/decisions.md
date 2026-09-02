@@ -112,6 +112,9 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Enable publisher-provided iROZHLAS, ČT24, and Seznam Zprávy feeds, plus the Novinky.cz news sitemap, for discovery and context.
 - Do not download full news article bodies. Retain feed metadata, URL, publication time, authors when supplied, and at most a short publisher-provided excerpt.
 - Fail collection when a source redirects outside its explicit hostname allowlist or violates its configured media type or size limits.
+- Record the historical coverage semantics of every source. A requested cutoff is not evidence of historical completeness when an RSS or news-sitemap endpoint exposes only a current window.
+- Generate an unpublished coverage audit for every reviewed promise after matching. `No candidate match` is a pipeline result, not a political assessment, and must never be converted into zero points.
+- Enable the complete official Ministry of Finance annual press-release indexes for 2025 and 2026 and the official paginated Ministry of Health press-release REST archive as historical discovery sources.
 
 ## Working proposals
 
