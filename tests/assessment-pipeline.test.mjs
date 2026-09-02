@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import {
+  hashAssessmentContent,
+  hashAssessmentFingerprint,
   hashEvidencePackage,
   resolveAssessmentReviews,
   validateAssessmentOutput,
@@ -27,6 +29,40 @@ test("validates and deterministically hashes the golden evidence package", () =>
   assert.equal(validateEvidencePackage(evidencePackage), evidencePackage);
   assert.match(hashEvidencePackage(evidencePackage), /^[a-f0-9]{64}$/);
   assert.equal(hashEvidencePackage(evidencePackage), hashEvidencePackage(structuredClone(evidencePackage)));
+});
+
+test("assessment content hashes ignore volatile run metadata but retain evidence changes", () => {
+  const laterRun = structuredClone(evidencePackage);
+  laterRun.packageId = `${evidencePackage.promise.id}--2026-09-02--generated`;
+  laterRun.asOf = "2026-09-02";
+  laterRun.generation = { collectorRunId: "later-run", collectorRunHash: "different-volatile-audit-hash" };
+  assert.equal(hashAssessmentContent(laterRun), hashAssessmentContent(evidencePackage));
+
+  const changedEvidence = structuredClone(laterRun);
+  changedEvidence.evidence[1].factSummary += " Additional verified fact.";
+  assert.notEqual(hashAssessmentContent(changedEvidence), hashAssessmentContent(evidencePackage));
+});
+
+test("assessment fingerprints include prompts and model configuration", () => {
+  const assessmentContentHash = hashAssessmentContent(evidencePackage);
+  const prompts = {
+    assessor: { version: "assessor-test", contentHash: "a".repeat(64) },
+    arbiter: { version: "arbiter-test", contentHash: "b".repeat(64) }
+  };
+  const runtime = {
+    assessorProviderA: "openai",
+    assessorProviderB: "openai",
+    arbiterProvider: "openai",
+    assessorModelA: "model-a",
+    assessorModelB: "model-a",
+    arbiterModel: "model-b"
+  };
+  const fingerprint = hashAssessmentFingerprint({ assessmentContentHash, prompts, runtime });
+  assert.match(fingerprint, /^[a-f0-9]{64}$/);
+  assert.notEqual(
+    fingerprint,
+    hashAssessmentFingerprint({ assessmentContentHash, prompts, runtime: { ...runtime, assessorModelB: "model-c" } })
+  );
 });
 
 test("requires an explicit supported assessment timing context", () => {

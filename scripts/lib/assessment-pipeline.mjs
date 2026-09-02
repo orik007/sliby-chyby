@@ -44,6 +44,36 @@ export function hashEvidencePackage(evidencePackage) {
   return createHash("sha256").update(canonicalize(evidencePackage)).digest("hex");
 }
 
+export function hashAssessmentContent(evidencePackage) {
+  validateEvidencePackage(evidencePackage);
+  const assessableContent = {
+    schemaVersion: evidencePackage.schemaVersion,
+    methodologyVersion: evidencePackage.methodologyVersion,
+    assessmentContext: evidencePackage.assessmentContext,
+    promise: evidencePackage.promise,
+    evidence: evidencePackage.evidence
+  };
+  return createHash("sha256").update(canonicalize(assessableContent)).digest("hex");
+}
+
+export function hashAssessmentFingerprint({ assessmentContentHash, prompts, runtime }) {
+  invariant(/^[a-f0-9]{64}$/.test(assessmentContentHash), "Invalid assessment content hash");
+  invariant(prompts?.assessor?.version && /^[a-f0-9]{64}$/.test(prompts.assessor.contentHash), "Invalid assessor prompt identity");
+  invariant(prompts?.arbiter?.version && /^[a-f0-9]{64}$/.test(prompts.arbiter.contentHash), "Invalid arbiter prompt identity");
+  for (const field of ["assessorProviderA", "assessorProviderB", "arbiterProvider", "assessorModelA", "assessorModelB", "arbiterModel"]) {
+    invariant(typeof runtime?.[field] === "string" && runtime[field].length > 0, `Missing assessment runtime field: ${field}`);
+  }
+  return createHash("sha256").update(canonicalize({
+    fingerprintVersion: "assessment-fingerprint-v1",
+    assessmentContentHash,
+    prompts: {
+      assessor: { version: prompts.assessor.version, contentHash: prompts.assessor.contentHash },
+      arbiter: { version: prompts.arbiter.version, contentHash: prompts.arbiter.contentHash }
+    },
+    runtime
+  })).digest("hex");
+}
+
 export function validateEvidencePackage(evidencePackage) {
   invariant(evidencePackage && typeof evidencePackage === "object", "Evidence package must be an object");
   invariant(evidencePackage.schemaVersion === "1.0.0", "Unsupported evidence package schemaVersion");

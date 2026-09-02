@@ -276,6 +276,7 @@ Proposed fields:
 - `methodologyVersion`;
 - `promptVersion`;
 - assessor and arbiter metadata;
+- exact package hash, assessable-content hash, and assessment fingerprint;
 - confidence and dissent notes;
 - `supersedesRevisionId`;
 - `correctionOfRevisionId` when applicable.
@@ -342,5 +343,4 @@ These entries remain explicit in the registry so that absence of a collector can
 - Required source snapshot policy and retention period.
 - Whether feed-response hashes alone are sufficient for official-page evidence, or whether lawful page/PDF snapshots must also be retained after matching.
 - Image licensing and attribution model.
-- Whether candidate AI assessments live in repository files, issues, pull requests, or a later queue database.
 - When the file model should migrate to PostgreSQL or another operational database.

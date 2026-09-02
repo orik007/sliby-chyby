@@ -79,16 +79,20 @@ News collection retains metadata, URL, publication time, supplied authors, and a
 
 ## Current automation state
 
-The manual GitHub Actions workflow `Collect and match evidence candidates` implements stages 1 through 6 for the full reviewed registry and uploads one unpublished audit artifact. The first successful full-registry run checked all 36 catalog promises against one shared collection of all enabled sources. The document-enrichment extension retrieves official DOCX files only for parliamentary prints already selected into evidence packages and reuses a fetched print across packages during the same run.
+The manual GitHub Actions workflow `Collect, match, and assess evidence candidates` implements stages 1 through 8 for the full reviewed registry. It checks all 36 catalog promises against one shared collection, enriches only matched parliamentary prints, and sends only new or changed assessable packages to the two assessors and possible arbiter.
 
 The [first full-registry document-enrichment run](https://github.com/orik007/sliby-chyby/actions/runs/33601733992) processed 3,984 shared records, 36 reviewed promises, and 141 candidate matches. It generated three evidence packages and added four official print documents across them with zero warnings. Original and enriched package hashes differ and are retained separately in the uploaded audit.
 
-The single-promise end-to-end pilot implements the assessor and arbiter calls. The remaining automation work is to connect the full-registry workflow to assessment only for package hashes that are new or changed.
+The changed-input gate uses `assessment-fingerprint-v1`. Its content identity includes the evidence and promise seen by assessors, the methodology and period mode, active assessor and arbiter prompt hashes, providers, and model identifiers. It excludes the package cutoff, collection run ID, and other volatile generation metadata. Under the confirmed live-period rule, elapsed time without new evidence does not change a score. A later explicit-deadline workflow must record the deadline closure as assessable content before it can trigger a new assessment.
+
+New assessments are written under `automation/review-proposals/<promise-id>/<assessment-fingerprint>/` on the dedicated `automation/assessment-review` branch. Each directory retains the exact enriched evidence package, complete model audit, and concise proposal record. The workflow creates or updates a human-review pull request. Every proposal remains `publicationApproved: false`; merging the pull request makes the audit durable but does not change public assessment data.
+
+An official-document enrichment warning blocks assessment only for the affected promise. Other valid changed packages continue through the batch. The full transient run remains available as a private GitHub artifact for 30 days.
 
 The period-closing audit is not implemented yet. It must be a separate deterministic run over every reviewed promise, including promises for which normal collection never produced a primary-evidence package. During ordinary live collection, absence of a package must not be converted into a score.
 
 ## Scheduling and persistence
 
-Daily collection is the current **working proposal**, because RSS and news-sitemap windows can be short. Before enabling a schedule, the project needs a durable audit-history design and the changed-package gate. GitHub artifacts currently expire and therefore are suitable for pilot audits, not permanent evidence history.
+Daily collection remains a **working proposal**, because RSS and news-sitemap windows can be short. The durable proposal history and changed-package gate now exist, but scheduling should be enabled only after the first full-registry assessment run verifies GitHub permissions, branch reuse, unchanged-input skipping, and review ergonomics.
 
-The durable location for unpublished candidate records and assessments remains an **open question**. Options include versioned repository data through review pull requests or a later private queue. This does not change the confirmed separation of collection, matching, assessment, and publication.
+The versioned review-proposal directory and pull request are the confirmed initial durable queue. A later private queue or database remains an optional migration, not a prerequisite for the first reviewed real-data release.

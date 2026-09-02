@@ -10,6 +10,7 @@
     "test": "node --test tests/*.test.mjs",
     "assess:validate": "node scripts/run-assessment.mjs automation/golden-cases/ano-eet-2/evidence-package.json --validate-only",
     "assess:golden": "node scripts/run-assessment.mjs automation/golden-cases/ano-eet-2/evidence-package.json automation/runs/ano-eet-2",
+    "assess:batch": "node scripts/run-assessment-batch.mjs --packages automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages --enrichment-run automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json",
     "assess:ci": "node scripts/run-assessment-ci.mjs",
     "collect:evidence": "node scripts/run-collectors.mjs --since-days 7"
   },

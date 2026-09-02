@@ -1,17 +1,19 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { existsSync } from "node:fs";
-import { createHash } from "node:crypto";
 import { basename, dirname, join, relative, resolve } from "node:path";
 import { loadEnvFile } from "node:process";
 import {
   arbiterOutputJsonSchema,
   assessmentOutputJsonSchema,
+  hashAssessmentContent,
+  hashAssessmentFingerprint,
   hashEvidencePackage,
   resolveAssessmentReviews,
   validateAssessmentOutput,
   validateArbiterOutput,
   validateEvidencePackage
 } from "./lib/assessment-pipeline.mjs";
+import { assessmentRuntimeConfig, loadAssessmentPrompts } from "./lib/assessment-config.mjs";
 import { createStructuredModelResponse } from "./lib/model-provider.mjs";
 
 const envPath = resolve(".env");
@@ -21,29 +23,32 @@ const packagePath = resolve(process.argv[2] ?? "automation/golden-cases/ano-eet-
 const validateOnly = process.argv.includes("--validate-only");
 const evidencePackage = validateEvidencePackage(JSON.parse(await readFile(packagePath, "utf8")));
 const packageHash = hashEvidencePackage(evidencePackage);
+const assessmentContentHash = hashAssessmentContent(evidencePackage);
+const runtime = assessmentRuntimeConfig();
+const prompts = await loadAssessmentPrompts();
+const assessmentFingerprint = hashAssessmentFingerprint({ assessmentContentHash, prompts, runtime });
 
 if (validateOnly) {
-  console.log(JSON.stringify({ valid: true, packageId: evidencePackage.packageId, packageHash }, null, 2));
+  console.log(JSON.stringify({ valid: true, packageId: evidencePackage.packageId, packageHash, assessmentContentHash, assessmentFingerprint }, null, 2));
   process.exit(0);
 }
 
-const assessorProviderA = process.env.SLIBY_ASSESSOR_PROVIDER_A ?? "openai";
-const assessorProviderB = process.env.SLIBY_ASSESSOR_PROVIDER_B ?? "openai";
-const arbiterProvider = process.env.SLIBY_ARBITER_PROVIDER ?? "openai";
-const assessorModelA = process.env.SLIBY_ASSESSOR_MODEL_A ?? "gpt-5.6-terra";
-const assessorModelB = process.env.SLIBY_ASSESSOR_MODEL_B ?? "gpt-5.6-terra";
-const arbiterModel = process.env.SLIBY_ARBITER_MODEL ?? "gpt-5.6-sol";
+const {
+  assessorProviderA,
+  assessorProviderB,
+  arbiterProvider,
+  assessorModelA,
+  assessorModelB,
+  arbiterModel
+} = runtime;
 
 function apiKeyFor(provider) {
   if (provider === "openai") return process.env.OPENAI_API_KEY;
   throw new Error(`No API-key mapping is configured for provider: ${provider}`);
 }
 
-const assessorPromptVersion = "assessor-v6";
-const arbiterPromptVersion = "arbiter-v2";
-const assessorInstructions = await readFile(resolve(`automation/prompts/${assessorPromptVersion}.md`), "utf8");
-const arbiterInstructions = await readFile(resolve(`automation/prompts/${arbiterPromptVersion}.md`), "utf8");
-const promptHash = (text) => createHash("sha256").update(text).digest("hex");
+const assessorInstructions = prompts.assessor.instructions;
+const arbiterInstructions = prompts.arbiter.instructions;
 
 async function createStructuredResponse({ provider, model, instructions, input, name, schema }) {
   return createStructuredModelResponse({
@@ -95,10 +100,12 @@ const auditRecord = {
   evaluatedAt: now.toISOString(),
   packagePath: relative(process.cwd(), packagePath).replaceAll("\\", "/"),
   packageHash,
+  assessmentContentHash,
+  assessmentFingerprint,
   methodologyVersion: evidencePackage.methodologyVersion,
   prompts: {
-    assessor: { version: assessorPromptVersion, contentHash: promptHash(assessorInstructions) },
-    arbiter: { version: arbiterPromptVersion, contentHash: promptHash(arbiterInstructions) }
+    assessor: { version: prompts.assessor.version, contentHash: prompts.assessor.contentHash },
+    arbiter: { version: prompts.arbiter.version, contentHash: prompts.arbiter.contentHash }
   },
   publicationApproved: false,
   independence: {
@@ -115,4 +122,4 @@ const auditRecord = {
 };
 
 await writeFile(join(outputDirectory, "assessment-run.json"), `${JSON.stringify(auditRecord, null, 2)}\n`, { flag: "wx" });
-console.log(JSON.stringify({ runId, outputDirectory, resolution, publicationApproved: false }, null, 2));
+console.log(JSON.stringify({ runId, outputDirectory, assessmentContentHash, assessmentFingerprint, resolution, publicationApproved: false }, null, 2));

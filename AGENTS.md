@@ -44,6 +44,8 @@ SlibyChyby tracks what political parties promised before an election and compare
 - Models may cite only evidence supplied to them. Reject invented source IDs, quotations, or unsupported claims.
 - Do not publish AI-generated political assessments automatically unless a later confirmed decision explicitly permits it.
 - Keep model, prompt/methodology version, evaluation time, evidence IDs, and confidence available for audit.
+- Persist automated assessment output only as an unpublished human-review proposal under `automation/review-proposals`. Merging such a proposal preserves its audit and does not authorize publication or a public-data change.
+- Use the stable assessment fingerprint for the changed-input gate. It includes assessable content, methodology, prompt hashes, providers, and model IDs; volatile run timestamps and collection IDs must not cause paid reassessment.
 
 ## Data and periods
 

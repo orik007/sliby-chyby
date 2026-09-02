@@ -49,9 +49,11 @@ npm run assess:golden
 
 Each live run writes a new timestamped directory under `automation/runs`. The runner refuses to overwrite an existing run. Raw model metadata, the exact package hash, reviews, arbitration, and the candidate resolution are retained for audit.
 
+The full-registry batch runner uses a separate stable assessment fingerprint. It hashes the assessable promise and evidence content together with the methodology, active prompt hashes, providers, and model identifiers. It deliberately excludes volatile collection run IDs, timestamps, and package cutoffs, because ordinary elapsed time does not change a live assessment. A changed fingerprint is assessed once and materialized under `automation/review-proposals`; a known fingerprint is skipped without an API call.
+
 ## GitHub Actions
 
-`.github/workflows/run-assessment.yml` exposes a manual `workflow_dispatch` run. It does not run on pull requests, pushes, page loads, or a schedule. The workflow:
+`.github/workflows/run-assessment.yml` exposes a manual single-package `workflow_dispatch` run. It does not run on pull requests, pushes, page loads, or a schedule. The workflow:
 
 1. accepts only a checked-in JSON path below `automation/golden-cases` or `automation/evidence-packages`;
 2. runs deterministic tests before spending API credit;
@@ -66,6 +68,8 @@ A scheduled trigger should be added only after the evidence collector can identi
 `.github/workflows/run-e2e-pilot.yml` is a manual integration pilot. It collects official parliamentary records, runs the deterministic matcher for one selected reviewed promise, enriches matched prints from official PSP documents, sends the bounded enriched package to both assessors, invokes the arbiter only on disagreement, and uploads the complete unpublished audit chain. Transient official-document downloads are retried; if a required document still cannot be obtained, assessment stops and the failed enrichment audit is uploaded instead of asking models to infer substance from a title. The workflow does not commit, publish, or deploy any result.
 
 The concurrency group includes the promise ID. Repeated runs for one promise remain serialized, while pilots for different promises do not replace one another in GitHub's single pending slot for a concurrency group.
+
+`.github/workflows/collect-evidence.yml` is the manually triggered full-registry workflow. It collects once, matches all reviewed promises, enriches official print documents, blocks only packages with enrichment warnings, assesses only new fingerprints, and commits durable unpublished proposals to `automation/assessment-review`. It creates or updates a pull request against `main`. Merging that pull request retains the review audit but cannot publish a status or update the public website.
 
 The first five-promise integration report is recorded in [docs/pilot-evaluation.md](../docs/pilot-evaluation.md).
 

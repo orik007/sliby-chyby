@@ -89,14 +89,17 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Use schema-validated, versioned files as the initial public data store.
 - Do not introduce a database for the first demo.
 - Use GitHub-based validation and automation, with Cloudflare as the planned hosting direction.
-- Begin with a manually triggered, read-only GitHub Actions assessment workflow. It may produce an unpublished audit artifact but must not write public assessment data or deploy it.
-- Keep evidence collectors outside the public website runtime. The first collector workflow is manually triggered, read-only, requires no API secret, and produces an unpublished private artifact.
+- Keep the single-package assessment pilot read-only. The full-registry workflow may write only versioned unpublished review proposals to its dedicated branch; it must never write public assessment data or deploy it.
+- Keep evidence collectors outside the public website runtime. Collection remains source-oriented and non-scoring even when the later stages of the same manually triggered workflow use the assessment API.
 - Collect trusted-media feeds as discovery and context sources. Collection itself never assigns a direction or score; articles will normally be supporting evidence rather than the sole basis for `+2` or `-2`.
 - Allow decisive `+2` or `-2` evidence from primary official acts outside the Chamber of Deputies, including regulations, executive decisions, administrative acts, and authoritative outcome data.
 - Run collection once per pipeline execution and match the resulting shared record set against every reviewed promise. Do not repeat source downloads separately for each promise.
-- Keep the full-registry collection-and-matching workflow non-AI and unpublished. Send only generated assessable evidence packages to the later assessor stage.
+- Keep the full-registry collection and matching stages deterministic, non-AI, and unpublished. Send only generated assessable evidence packages to the later assessor stage.
 - Allow one collected record to become a candidate match for zero, one, or several promises. Matching establishes possible relevance only; it never determines direction or score.
 - Reassess only evidence packages whose deterministic content hash is new or changed. Do not spend model calls on unchanged packages.
+- Persist automated assessment proposals as versioned files on a dedicated GitHub review branch and present them through a pull request. Every proposal remains unpublished and requires human review.
+- Merging an assessment-proposal pull request preserves the audit history only. It does not publish a score, update the SLAVA Index, or deploy political assessment data.
+- Include assessable evidence, methodology, active prompt content, providers, and model identifiers in the assessment fingerprint. Exclude volatile collection timestamps and run identifiers so they do not trigger paid reassessment.
 
 ### Verified collector registry
 
@@ -180,7 +183,7 @@ International examples motivated distinct handling for promises blocked by anoth
 
 ### Publication governance
 
-Human approval was recommended initially, with possible future auto-publication for repeatedly validated high-confidence cases. The owner confirmed multi-model review but did not decide publication authority or thresholds.
+Human review of every automated proposal is confirmed. The exact person or role authorized to turn a reviewed proposal into a published assessment, the approval fields, and any future high-confidence automation threshold remain unresolved.
 
 ### AI independence
 

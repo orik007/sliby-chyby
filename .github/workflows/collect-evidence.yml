@@ -1,4 +1,4 @@
-name: Collect and match evidence candidates
+name: Collect, match, and assess evidence candidates
 
 on:
   workflow_dispatch:
@@ -15,23 +15,50 @@ on:
         type: string
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 concurrency:
-  group: evidence-collection
+  group: evidence-assessment-review
   cancel-in-progress: false
 
 jobs:
   collect:
-    name: Collect verified sources
+    name: Build unpublished review proposals
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 35
+    environment:
+      name: assessment
+      deployment: false
     env:
+      GH_TOKEN: ${{ github.token }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       COLLECTOR_SINCE: ${{ inputs.since }}
       MATCHER_AS_OF: ${{ inputs.as_of }}
+      REVIEW_BRANCH: automation/assessment-review
+      SLIBY_ASSESSOR_PROVIDER_A: openai
+      SLIBY_ASSESSOR_PROVIDER_B: openai
+      SLIBY_ARBITER_PROVIDER: openai
+      SLIBY_ASSESSOR_MODEL_A: gpt-5.6-terra
+      SLIBY_ASSESSOR_MODEL_B: gpt-5.6-terra
+      SLIBY_ARBITER_MODEL: gpt-5.6-sol
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Prepare durable review branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin "$REVIEW_BRANCH" >/dev/null 2>&1; then
+            git fetch origin "refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
+            git switch --create "$REVIEW_BRANCH" --track "origin/$REVIEW_BRANCH"
+            git merge --no-edit "$GITHUB_SHA"
+          else
+            git switch --create "$REVIEW_BRANCH" "$GITHUB_SHA"
+          fi
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
@@ -62,12 +89,23 @@ jobs:
             --input automation/runs/pipeline/github-actions/matcher/evidence-packages \
             --output automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages
 
+      - name: Assess only new or changed packages
+        run: |
+          node scripts/run-assessment-batch.mjs \
+            --packages automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages \
+            --enrichment-run automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json \
+            --proposals automation/review-proposals \
+            --runs automation/runs/pipeline/github-actions/assessments \
+            --summary automation/runs/pipeline/github-actions/assessment-batch.json \
+            --pull-request-body automation/runs/pipeline/github-actions/assessment-review-pr.md
+
       - name: Write audit summary
         run: |
           node --input-type=module -e '
             import { readFile, appendFile } from "node:fs/promises";
             const run = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/match-run.json", "utf8"));
             const enrichment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json", "utf8"));
+            const assessment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/assessment-batch.json", "utf8"));
             const packageCount = run.promiseResults.filter((result) => result.evidencePackage).length;
             const candidateCount = run.promiseResults.reduce((sum, result) => sum + result.candidateMatchCount, 0);
             const documentCount = enrichment.results.reduce((sum, result) => sum + result.documentEvidenceCount, 0);
@@ -79,6 +117,9 @@ jobs:
               `- Assessable evidence packages: ${packageCount}`,
               `- Official print documents added: ${documentCount}`,
               `- Document-enrichment warnings: ${enrichment.warnings.length}`,
+              `- New assessment proposals: ${assessment.newProposalCount}`,
+              `- Unchanged assessments skipped: ${assessment.unchangedCount}`,
+              `- Assessments blocked by document warnings: ${assessment.blockedCount}`,
               `- Assessment cutoff: ${run.asOf}`,
               "- Direction assigned: no",
               "- Publication approved: no",
@@ -87,7 +128,33 @@ jobs:
             await appendFile(process.env.GITHUB_STEP_SUMMARY, lines.join("\n"));
           '
 
-      - name: Upload unpublished collection and matching audit
+      - name: Commit new review proposals
+        id: proposals
+        run: |
+          git add automation/review-proposals
+          if git diff --cached --quiet; then
+            echo "created=false" >> "$GITHUB_OUTPUT"
+            echo "No new assessment proposal was created." >> "$GITHUB_STEP_SUMMARY"
+          else
+            git commit -m "Add automated assessment review proposals"
+            git push --set-upstream origin "$REVIEW_BRANCH"
+            echo "created=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create or update human-review pull request
+        if: steps.proposals.outputs.created == 'true'
+        run: |
+          PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVIEW_BRANCH" --base main --state open --json number --jq '.[0].number')"
+          if [ -n "$PR_NUMBER" ]; then
+            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md
+            PR_URL="$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json url --jq '.url')"
+          else
+            PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Review automated SLAVA assessment proposals" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md)"
+          fi
+          echo "Review pull request: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload complete unpublished pipeline audit
+        if: always()
         uses: actions/upload-artifact@v6
         with:
           name: evidence-pipeline-${{ github.run_id }}
