@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-02T10-07-30-359Z--618984e126f8",
+  "evaluatedAt": "2026-09-02T10:07:30.359Z",
+  "packagePath": "automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/ano-2025-abolish-public-media-fees.json",
+  "packageHash": "618984e126f82c9bd5ca69763963b0ad42c3f7d80fa53311be4f26fc4035a26a",
+  "assessmentContentHash": "ee86fed0442295c30d6abc17a73f67678fbfa08a8f899797a2f780fd030a7d7c",
+  "assessmentFingerprint": "a416a93307f43019506758bf80ff7a8a850ad5892ccbac310d12f76c8372b6d1",
+  "methodologyVersion": "slava-v4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v7",
+      "contentHash": "76f037bb2ea6c6346c84e522c247a67a4bb8538bf993ad4e5cb6a8354523385e"
+    },
+    "arbiter": {
+      "version": "arbiter-v3",
+      "contentHash": "796d3562f0813545830f806259f975d8d7346fe1dadd9d09b0c78ddbd4a4e0db"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessParallelCalls": true,
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-5.6-terra",
+      "gpt-5.6-terra"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_04bcfb80ab16be8d016a97f55750a487d1a7e6f3f06c65041c",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 16538,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 16535
+      },
+      "output_tokens": 524,
+      "output_tokens_details": {
+        "reasoning_tokens": 309
+      },
+      "total_tokens": 17062
+    },
+    "output": {
+      "promiseId": "ano-2025-abolish-public-media-fees",
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "psp-core-2025--print-step-211459",
+        "psp-core-2025--print-document-43323"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh zákona o rozhlasových a televizních poplatcích, vedený ve Sněmovně jako tisk č. 201. Návrh ruší povinnost platit tyto poplatky lidem nad 75 let a části podnikatelů a právnických osob. Jde o konkrétní omezení okruhu plátců, tedy o dílčí krok směrem ke slibu. Návrh ale poplatky neruší pro všechny, zachovává jejich systém a dosud se nestal platným zákonem.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_09b578600ec35056016a97f557282887d19973f1068fb6f7f3",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 16538,
+      "input_tokens_details": {
+        "cache_write_tokens": 16535,
+        "cached_tokens": 0
+      },
+      "output_tokens": 655,
+      "output_tokens_details": {
+        "reasoning_tokens": 438
+      },
+      "total_tokens": 17193
+    },
+    "output": {
+      "promiseId": "ano-2025-abolish-public-media-fees",
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "psp-core-2025--print-step-211459",
+        "psp-core-2025--print-document-43323"
+      ],
+      "explanationCz": "Poslanci ANO se podíleli na předložení návrhu zákona o rozhlasových a televizních poplatcích, vedeného ve Sněmovně jako tisk č. 201. Návrh snižuje okruh lidí a organizací, které musí poplatky platit: osvobozuje například některé seniory a menší podnikatele. Jde tedy o konkrétní dílčí krok ke zrušení poplatků. Návrh ale poplatky neruší pro všechny a dosud nebyl schválen, takže slib není splněn celý.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}
