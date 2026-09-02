@@ -101,6 +101,8 @@ Owner review found that technically literal phrases such as “verified sponsors
 
 The [plain-Czech full-registry rerun](https://github.com/orik007/sliby-chyby/actions/runs/33617692052) used `assessor-v7` and `arbiter-v3`. Deterministic validation rejected internal status names, a bare form such as “tisk 201”, and the observed unnatural sponsorship phrase. All three replacement assessments passed. Each now includes a Czech `review.md` entry point with the proposed score in ordinary words, both independent explanations, any arbitration explanation, uncertainty, and clickable primary sources. The manifest marks the first proposal for each promise as superseded while retaining its immutable audit files.
 
+The owner then clarified the audience boundary: reviewer material may be technical, but the exact candidate for the public website must be clearly isolated and understandable without audit context. The review renderer now labels that public candidate explicitly, adds a concrete reviewer checklist, and moves internal status values and audit paths into a separate technical section. The deterministic plain-Czech validation continues to apply to the model-written public explanation.
+
 ## Verified pipeline behavior
 
 **Pilot observation**

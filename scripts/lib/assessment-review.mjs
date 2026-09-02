@@ -157,31 +157,60 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     ? auditRecord.assessorB.output
     : auditRecord.assessorA.output;
   const proposed = proposal.candidateStatus ? readerStatus[proposal.candidateStatus] : null;
+  const publicExplanation = proposal.resolutionState === "candidate"
+    ? chosen.explanationCz
+    : "Automatické posouzení nemá dostatečné podklady pro návrh veřejného hodnocení.";
+  const resolutionLabel = {
+    "assessor-consensus": "oba automatické posudky se shodly",
+    "arbiter-selection": "o neshodě automatických posudků rozhodl třetí posudek",
+    "insufficient-evidence": "oba automatické posudky označily podklady za nedostatečné",
+    "arbiter-cannot-decide": "třetí posudek nedokázal spor rozhodnout",
+    "arbiter-selected-insufficient-evidence": "třetí posudek vybral posudek s nedostatečnými podklady"
+  }[proposal.resolutionReason] ?? proposal.resolutionReason;
   const lines = [
     `# ${evidencePackage.promise.titleCz}`,
     "",
-    "> Neveřejný návrh k lidské kontrole. Tento dokument sám nic nezveřejňuje a nemění SLAVA Index.",
+    "> Neveřejný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.",
     "",
-    "## Navrhované hodnocení",
+    "## Návrh pro veřejný web",
+    "",
+    "Toto je jediná část dokumentu určená jako kandidát veřejného textu. Musí být srozumitelná bez znalosti projektu, práva nebo fungování Poslanecké sněmovny.",
+    "",
+    "### Hodnocení",
     "",
     proposed ? `**${proposed.label} (${proposed.score})**` : "**Bez automatického návrhu — podklady musí posoudit člověk.**",
+    "",
+    "### Vysvětlení",
+    "",
+    publicExplanation,
+    "",
+    "## Co má zkontrolovat reviewer",
+    "",
+    "- Odpovídá navržené hodnocení metodice SLAVA Indexu?",
+    "- Je jednání správně připsáno sledované straně?",
+    "- Je veřejné vysvětlení pochopitelné samo o sobě a říká, kdo co udělal a jak to souvisí se slibem?",
+    "- Jsou zkratky, právní pojmy a úřední označení při prvním použití vysvětlené?",
+    "- Dokládají uvedené zdroje všechna podstatná tvrzení a nechybí rozporný podklad?",
+    "",
+    "## Technické podklady pro reviewera",
+    "",
+    `- Výsledek automatického procesu: ${resolutionLabel}`,
+    `- Interní stav: ${proposal.candidateStatus ? `\`${proposal.candidateStatus}\`` : "bez kandidátního stavu"}`,
+    `- Důvod výsledku: \`${proposal.resolutionReason}\``,
+    "- Úplný strojový audit: `assessment-run.json`",
+    "- Přesný balíček posuzovaných podkladů: `evidence-package.json`",
     ""
   ];
-  if (proposal.resolutionState === "candidate") {
-    lines.push(chosen.explanationCz, "");
-  } else {
-    lines.push("Oba posudky upozorňují, že dodané podklady nestačí pro férové připsání jednání straně.", "");
-  }
-  lines.push("## Nezávislé posudky", "");
+  lines.push("### Nezávislé posudky", "");
   for (const [name, review] of reviews) {
     const status = readerStatus[review.status];
-    lines.push(`### ${name}: ${status.label} (${status.score})`, "", review.explanationCz, "");
+    lines.push(`#### ${name}: ${status.label} (${status.score})`, "", review.explanationCz, "");
     if (review.uncertainties.length > 0) {
       lines.push("Co zůstává nejisté:", "", ...review.uncertainties.map((item) => `- ${item}`), "");
     }
   }
   if (auditRecord.arbiter) {
-    lines.push("## Proč rozhodoval třetí posudek", "", auditRecord.arbiter.output.explanationCz, "");
+    lines.push("### Proč rozhodoval třetí posudek", "", auditRecord.arbiter.output.explanationCz, "");
   }
   const citedIds = new Set([
     ...evidencePackage.evidence.filter(({ role }) => role === "promise-source").map(({ id }) => id),
@@ -190,7 +219,7 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     ...(auditRecord.arbiter?.output.citedEvidenceIds ?? [])
   ]);
   const citedEvidence = evidencePackage.evidence.filter(({ id }) => citedIds.has(id));
-  lines.push("## Zdroje použité při hodnocení", "", ...citedEvidence.map((evidence) => `- [${evidenceLabel(evidence)}](${evidence.url})`), "");
+  lines.push("### Zdroje použité při hodnocení", "", ...citedEvidence.map((evidence) => `- [${evidenceLabel(evidence)}](${evidence.url})`), "");
   if (proposal.supersedesProposalId) {
     lines.push("Tento návrh nahrazuje starší automatický posudek, který zůstává zachovaný v auditní historii.", "");
   }

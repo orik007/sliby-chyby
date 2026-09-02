@@ -19,7 +19,9 @@ The project is not limited to a government's collective programme. It is party-o
 
 The first version is for ordinary visitors who want a quick, understandable account of a party's record. Complex analysis is not part of the initial scope. Detailed sourcing remains available to visitors who choose to inspect a promise.
 
-Every public explanation and every human-review summary must use plain, natural Czech that an ordinary reader can understand without knowing parliamentary procedure, legal terminology, or the project's data model. Internal state values such as `moving-towards` may exist in machine-readable fields, but they must never appear in Czech prose shown to a reviewer or visitor. Legislative identifiers remain available for traceability, but the first mention must explain what the proposal is and what it changes; a bare reference such as “tisk 201” is not sufficient.
+Every proposed public explanation must use plain, natural Czech that an ordinary reader can understand without knowing parliamentary procedure, legal terminology, or the project's data model. It must make sense without surrounding audit context and say who did what and why that matters to the promise. Legislative identifiers remain available for traceability, but the first mention must explain what the proposal is and what it changes; a bare reference such as “tisk 201” is not sufficient.
+
+A human-review document has two visibly separated audiences. Its public-copy section is the only candidate for later website publication and follows the strict reader-facing language rule. The remaining reviewer material may be more technical and may show internal values such as `moving-towards`, because it is never copied to the public site automatically. Reviewing or merging the document does not itself publish either section.
 
 ## Confirmed initial scope
 

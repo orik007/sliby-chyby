@@ -145,7 +145,7 @@ test("links a replacement proposal without deleting the previous audit record", 
   assert.equal(currentReviewProposal(replacedManifest, evidencePackage.promise.id).proposalId, replacement.proposalId);
 });
 
-test("renders a plain-Czech review without exposing internal status names", () => {
+test("separates the plain public candidate from technical reviewer data", () => {
   const plan = planAssessmentInputs({
     packages: [{ path: "evidence-package.json", evidencePackage }],
     manifest: emptyReviewManifest(),
@@ -177,7 +177,12 @@ test("renders a plain-Czech review without exposing internal status names", () =
     proposalDirectory: `automation/review-proposals/${evidencePackage.promise.id}/${plan.assessmentFingerprint}`
   });
   const markdown = renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal });
+  const publicSection = markdown.match(/## Návrh pro veřejný web([\s\S]*?)## Co má zkontrolovat reviewer/)?.[1];
+  assert.ok(publicSection);
+  assert.match(markdown, /Toto je jediná část dokumentu určená jako kandidát veřejného textu/);
   assert.match(markdown, /Směřuje ke splnění \(\+1\)/);
   assert.match(markdown, /Původní volební slib/);
-  assert.doesNotMatch(markdown, /moving-towards|candidate|verified-party/i);
+  assert.match(markdown, /## Technické podklady pro reviewera/);
+  assert.match(markdown, /Interní stav: `moving-towards`/);
+  assert.doesNotMatch(publicSection, /moving-towards|candidate|verified-party/i);
 });

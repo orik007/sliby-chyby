@@ -22,9 +22,9 @@ The scale describes consistency with the promise, not moral approval.
 
 ### Confirmed reader-facing language
 
-Canonical English status names are internal machine values. They must not appear in Czech explanations for visitors or human reviewers. Reader-facing text states the meaning naturally, for example “strana udělala dílčí krok ke splnění slibu”, “zatím se nic podstatného nestalo”, or “strana jednala proti svému slibu”.
+Canonical English status names are internal values. They must not appear in the proposed public copy. Public text states the meaning naturally, for example “strana udělala dílčí krok ke splnění slibu”, “zatím se nic podstatného nestalo”, or “strana jednala proti svému slibu”. A clearly separated technical reviewer section may show the canonical values for audit and debugging.
 
-Parliamentary and legal references must be explained on first use. Write what the proposal concerns and what it would change, then add the official identifier for traceability if useful. A bare phrase such as “tisk 201” or an implementation phrase such as “ověřené sponzorské propojení” is not acceptable reader-facing Czech.
+Parliamentary and legal references in proposed public copy must be explained on first use. Write what the proposal concerns and what it would change, then add the official identifier for traceability if useful. A bare phrase such as “tisk 201” or an implementation phrase such as “ověřené sponzorské propojení” is not acceptable reader-facing Czech. The explanation must make sense by itself and state who acted, what happened, and how it affects the promise.
 
 ## Confirmed simple period and partial-progress rule
 

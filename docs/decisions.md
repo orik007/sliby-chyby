@@ -18,8 +18,9 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Optimize for a simple public overview rather than complex analysis.
 - Make detailed explanations and sources available after expanding or opening a promise.
 - Design mobile-first and make the first view understandable within seconds.
-- Write public explanations and human-review summaries in plain, natural Czech for ordinary readers. Do not expose internal English status values or data-model labels in Czech prose.
-- Explain parliamentary and legal identifiers on first use. State what the proposal or decision is and what it changes; never rely on a bare reference such as “tisk 201”.
+- In every human-review document, visibly separate the proposed public copy from technical reviewer material. Only the public-copy section can become a candidate for the website, and review or merge alone does not publish it.
+- Write proposed public explanations in plain, natural Czech for ordinary readers. They must make sense without audit context and state who did what and how it affects the promise. Technical reviewer material may use internal English status values and project terms when clearly separated from public copy.
+- Explain parliamentary and legal identifiers on first use in proposed public copy. State what the proposal or decision is and what it changes; never rely on a bare reference such as “tisk 201”.
 - Search official national party sources broadly, but publish only clear and fully verified promises. The first real-data version may contain a smaller curated set and does not need to include every campaign statement.
 
 ### Identity and scoring
