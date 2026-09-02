@@ -9,6 +9,7 @@ import {
   officialPrintDocumentPageUrl,
   parseOfficialPrintDocumentLinks,
   printDocumentEnrichmentVersion,
+  retryTransient,
   selectRelevantDocumentExcerpts
 } from "./lib/psp-print-documents.mjs";
 
@@ -20,13 +21,15 @@ function parseArgs(args) {
   const options = {
     input: null,
     output: null,
-    sourceRegistry: "automation/collectors/sources.json"
+    sourceRegistry: "automation/collectors/sources.json",
+    requireDocuments: false
   };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--input") options.input = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--sources") options.sourceRegistry = args[++index];
+    else if (arg === "--require-documents") options.requireDocuments = true;
     else throw new Error(`Unknown argument: ${arg}`);
   }
   invariant(options.input, "--input is required");
@@ -83,14 +86,14 @@ const warnings = [];
 async function loadPrintDocument(print) {
   if (printCache.has(print.externalPrintId)) return printCache.get(print.externalPrintId);
   const promise = (async () => {
-    const page = await fetchVerified(pspSource, print.pageUrl, { maxBytes: 1_000_000, expectedContentTypes: ["text/html"] });
+    const page = await retryTransient(() => fetchVerified(pspSource, print.pageUrl, { maxBytes: 1_000_000, expectedContentTypes: ["text/html"] }));
     const links = parseOfficialPrintDocumentLinks(new TextDecoder("utf-8").decode(page.bytes), print.pageUrl);
     invariant(links.length > 0, `No official DOCX document found for print ${print.printNumber}/${print.partNumber}`);
     const primaryDocument = links[0];
-    const file = await fetchVerified(pspSource, primaryDocument.url, {
+    const file = await retryTransient(() => fetchVerified(pspSource, primaryDocument.url, {
       maxBytes: 10_000_000,
       expectedContentTypes: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"]
-    });
+    }));
     return {
       filename: primaryDocument.filename,
       url: file.finalUrl,
@@ -150,4 +153,7 @@ const run = {
   warnings
 };
 await writeFile(resolve(outputDirectory, "enrichment-run.json"), `${JSON.stringify(run, null, 2)}\n`, { flag: "wx" });
+if (args.requireDocuments && warnings.length > 0) {
+  throw new Error(`Required official print-document enrichment failed for ${warnings.length} print(s); see enrichment-run.json`);
+}
 console.log(JSON.stringify({ outputDirectory, packageCount: results.length, documentEvidenceCount: results.reduce((sum, result) => sum + result.documentEvidenceCount, 0), warnings: warnings.length, publicationApproved: false }, null, 2));

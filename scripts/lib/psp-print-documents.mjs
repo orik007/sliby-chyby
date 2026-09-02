@@ -29,6 +29,23 @@ function normalize(value) {
     .trim();
 }
 
+export async function retryTransient(operation, { attempts = 3, delayMs = 500 } = {}) {
+  invariant(Number.isInteger(attempts) && attempts > 0, "Retry attempts must be a positive integer");
+  let lastError;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      return await operation(attempt);
+    } catch (error) {
+      lastError = error;
+      const message = String(error?.message ?? error);
+      const transient = /fetch failed|aborted|timed? out|HTTP (?:429|5\d\d)/i.test(message);
+      if (!transient || attempt === attempts) throw error;
+      await new Promise((resolve) => setTimeout(resolve, delayMs * (2 ** (attempt - 1))));
+    }
+  }
+  throw lastError;
+}
+
 export function officialPrintDocumentPageUrl(termNumber, printNumber, partNumber = 0) {
   return `https://www.psp.cz/sqw/text/tiskt.sqw?O=${termNumber}&CT=${printNumber}&CT1=${partNumber}`;
 }

@@ -63,7 +63,7 @@ Create an `assessment` environment in the GitHub repository, add the `OPENAI_API
 
 A scheduled trigger should be added only after the evidence collector can identify a changed evidence package. That avoids paying to reassess unchanged inputs. Publication will remain a separate explicitly gated workflow.
 
-`.github/workflows/run-e2e-pilot.yml` is a manual integration pilot. It collects official parliamentary records, runs the deterministic matcher for one selected reviewed promise, enriches matched prints from official PSP documents, sends the bounded enriched package to both assessors, invokes the arbiter only on disagreement, and uploads the complete unpublished audit chain. It does not commit, publish, or deploy any result.
+`.github/workflows/run-e2e-pilot.yml` is a manual integration pilot. It collects official parliamentary records, runs the deterministic matcher for one selected reviewed promise, enriches matched prints from official PSP documents, sends the bounded enriched package to both assessors, invokes the arbiter only on disagreement, and uploads the complete unpublished audit chain. Transient official-document downloads are retried; if a required document still cannot be obtained, assessment stops and the failed enrichment audit is uploaded instead of asking models to infer substance from a title. The workflow does not commit, publish, or deploy any result.
 
 The concurrency group includes the promise ID. Repeated runs for one promise remain serialized, while pilots for different promises do not replace one another in GitHub's single pending slot for a concurrency group.
 

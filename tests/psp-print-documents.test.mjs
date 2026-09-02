@@ -5,6 +5,7 @@ import {
   deriveDocumentSearchTerms,
   extractDocxParagraphs,
   parseOfficialPrintDocumentLinks,
+  retryTransient,
   selectRelevantDocumentExcerpts
 } from "../scripts/lib/psp-print-documents.mjs";
 
@@ -54,4 +55,22 @@ test("mechanically selects relevant promise paragraphs with adjacent context", (
   ], terms);
   assert.deepEqual(excerpts.map(({ paragraph }) => paragraph), [2, 3, 4]);
   assert.match(excerpts[1].text, /65 let/);
+});
+
+test("retries transient fetch failures but not validation failures", async () => {
+  let attempts = 0;
+  const result = await retryTransient(async () => {
+    attempts += 1;
+    if (attempts < 3) throw new TypeError("fetch failed");
+    return "ok";
+  }, { attempts: 3, delayMs: 0 });
+  assert.equal(result, "ok");
+  assert.equal(attempts, 3);
+
+  attempts = 0;
+  await assert.rejects(() => retryTransient(async () => {
+    attempts += 1;
+    throw new Error("unexpected content type");
+  }, { attempts: 3, delayMs: 0 }), /unexpected content type/);
+  assert.equal(attempts, 1);
 });
