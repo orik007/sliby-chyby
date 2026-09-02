@@ -3,7 +3,13 @@ import { resolve } from "node:path";
 import { collectFeedSource } from "./lib/feed-collectors.mjs";
 import { deduplicateRecords, invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { collectPspSource } from "./lib/psp-collector.mjs";
-import { collectOfficialHtmlArchive, collectWordPressRest } from "./lib/official-archive-collectors.mjs";
+import {
+  collectMkNewsArchive,
+  collectMpsvPressArchive,
+  collectMsmtNewsApi,
+  collectOfficialHtmlArchive,
+  collectWordPressRest
+} from "./lib/official-archive-collectors.mjs";
 
 function parseArgs(args) {
   const options = { sourceIds: [], since: null, sinceDays: 7, output: null };
@@ -43,7 +49,13 @@ for (const source of selected) {
       ? await collectOfficialHtmlArchive(source, { since, collectedAt })
       : source.collector === "wordpress-rest"
         ? await collectWordPressRest(source, { since, collectedAt })
-        : await collectFeedSource(source, { since, collectedAt });
+        : source.collector === "mk-news-archive"
+          ? await collectMkNewsArchive(source, { since, collectedAt })
+          : source.collector === "mpsv-press-archive"
+            ? await collectMpsvPressArchive(source, { since, collectedAt })
+            : source.collector === "msmt-news-api"
+              ? await collectMsmtNewsApi(source, { since, collectedAt })
+              : await collectFeedSource(source, { since, collectedAt });
   collectorResults.push(result);
   console.log(`${source.id}: ${result.records.length} records, ${result.warnings.length} warnings`);
 }

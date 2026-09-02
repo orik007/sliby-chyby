@@ -52,20 +52,25 @@
       "maxExcerptChars": 500
     },
     {
-      "id": "mpsv-press-rss",
-      "name": "Ministry of Labour and Social Affairs press releases",
+      "id": "mpsv-press-archive-2025-2026",
+      "name": "Ministry of Labour and Social Affairs press-release archive — 2025 and 2026",
       "publisher": "Ministry of Labour and Social Affairs of the Czech Republic",
-      "collector": "rss",
+      "collector": "mpsv-press-archive",
       "enabled": true,
       "primary": true,
       "evidenceRole": "official-discovery",
       "coverage": {
-        "mode": "current-window",
-        "note": "The endpoint exposes a publisher-controlled current RSS window. A requested earlier date cannot recover items no longer present in the feed."
+        "mode": "since-filtered-archive",
+        "note": "The collector requests the complete official annual press-release indexes for 2025 and 2026 at up to 100 items per page, follows additional pages when needed, and applies the requested cutoff. Add the next annual index when a new calendar year starts."
       },
-      "endpoint": "https://www.mpsv.cz/feed/tiskove-zpravy",
-      "verifiedAt": "2026-08-31",
-      "verificationUrl": "https://www.mpsv.cz/cms/documents/b6cbf79a-4cae-1b7c-1d6e-b6a37d025a04/%C4%8D.j.%20MPSV%202025-90671%20Ve%C5%99ejn%C3%A9%20komunika%C4%8Dn%C3%AD%20kan%C3%A1ly%20MPSV.pdf",
+      "archiveEndpoints": [
+        "https://mpsv.gov.cz/tiskove-zpravy-mpsv?year=2025",
+        "https://mpsv.gov.cz/tiskove-zpravy-mpsv?year=2026"
+      ],
+      "itemPathPrefix": "/",
+      "maxPagesPerArchive": 20,
+      "verifiedAt": "2026-09-02",
+      "verificationUrl": "https://mpsv.gov.cz/tiskove-zpravy-mpsv?year=2025",
       "expectedHosts": ["www.mpsv.cz", "mpsv.cz", "mpsv.gov.cz"],
       "maxExcerptChars": 500
     },
@@ -106,6 +111,48 @@
       "verifiedAt": "2026-09-02",
       "verificationUrl": "https://mzd.gov.cz/tiskove-centrum/tiskove-zpravy/",
       "expectedHosts": ["mzd.gov.cz"],
+      "maxExcerptChars": 500
+    },
+    {
+      "id": "mk-news-archive",
+      "name": "Ministry of Culture news archive",
+      "publisher": "Ministry of Culture of the Czech Republic",
+      "collector": "mk-news-archive",
+      "enabled": true,
+      "primary": true,
+      "evidenceRole": "official-discovery",
+      "coverage": {
+        "mode": "since-filtered-archive",
+        "note": "The collector follows the official newest-first archive until it passes the requested cutoff. Only items labelled by the publisher as ministry items are retained; notices from subordinate organizations and event previews are excluded."
+      },
+      "archiveEndpoint": "https://www.mk.gov.cz/novinky-a-media-cs-4",
+      "itemPathPrefix": "/novinky-a-media-cs-4/",
+      "allowedPublisherCategories": ["ministerstvo"],
+      "maxPages": 100,
+      "verifiedAt": "2026-09-02",
+      "verificationUrl": "https://www.mk.gov.cz/novinky-a-media-cs-4",
+      "expectedHosts": ["www.mk.gov.cz", "mk.gov.cz"],
+      "maxExcerptChars": 500
+    },
+    {
+      "id": "msmt-news-api",
+      "name": "Ministry of Education news archive",
+      "publisher": "Ministry of Education, Youth and Sports of the Czech Republic",
+      "collector": "msmt-news-api",
+      "enabled": true,
+      "primary": true,
+      "evidenceRole": "official-discovery",
+      "coverage": {
+        "mode": "since-filtered-archive",
+        "note": "The collector follows the cursor-paginated JSON archive used by the ministry's own news page in descending publication order and stops only after passing the requested cutoff."
+      },
+      "apiEndpoint": "https://msmt.gov.cz/api/aktuality",
+      "archiveEndpoint": "https://msmt.gov.cz/aktuality",
+      "itemPathPrefix": "/aktuality/",
+      "maxPages": 100,
+      "verifiedAt": "2026-09-02",
+      "verificationUrl": "https://msmt.gov.cz/aktuality",
+      "expectedHosts": ["msmt.gov.cz"],
       "maxExcerptChars": 500
     },
     {

@@ -11,6 +11,7 @@ import {
 
 const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8")));
 const eet = registry.promises.find(({ id }) => id === "ano-2025-eet-2");
+const freeMuseums = registry.promises.find(({ id }) => id === "ano-2025-free-state-museums-selected-groups");
 
 test("reviewed catalog is balanced and linked to accepted research candidates", async () => {
   assert.equal(registry.status, "reviewed-first-release-catalog-v1");
@@ -74,6 +75,25 @@ test("does not turn an unrelated record into candidate evidence", () => {
     payload: { printNumber: 278, actionCz: "předložen", printTitleCz: "Civilní letectví" }
   });
   assert.equal(matchRecordToPromise(unrelated, eet), null);
+});
+
+test("finds a Culture Ministry free-entry item even when timing words split the promise phrase", () => {
+  const item = createCollectedRecord({
+    id: "mk-news-archive--free-entry",
+    sourceId: "mk-news-archive",
+    kind: "official-publication",
+    primary: true,
+    evidenceRole: "official-discovery",
+    occurredAt: "2026-08-17T12:26:00",
+    timeZone: "Europe/Prague",
+    title: "První neděle v měsíci zdarma. Státní muzea a galerie se otevírají úplně všem.",
+    publisher: "Ministry of Culture of the Czech Republic",
+    url: "https://www.mk.gov.cz/novinky-a-media-cs-4/example",
+    payload: { excerptCz: "Ministerstvo otevírá stálé expozice každou první neděli v měsíci zdarma." }
+  });
+  const match = matchRecordToPromise(item, freeMuseums);
+  assert.ok(match);
+  assert.deepEqual(match.matchedTerms.map(({ phrase }) => phrase), ["státní muzea a galerie"]);
 });
 
 test("builds a bounded unpublished primary-only package", () => {

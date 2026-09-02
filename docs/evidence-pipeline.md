@@ -44,9 +44,11 @@ The enabled list is intentionally small and explicit. “Verified” means that 
 |---|---|---|---|
 | `psp-core-2025` | Chamber of Deputies of the Parliament of the Czech Republic | Daily open-data archives for votes, individual choices, parliamentary prints, print history, and time-bounded club membership | Primary official records |
 | `government-cz-rss` | Government Office of the Czech Republic | Official RSS, including explicitly allowlisted links to the official ODok portal | Official discovery; an underlying decision or document may still be required |
-| `mpsv-press-rss` | Ministry of Labour and Social Affairs | Official press-release feed | Official discovery; authoritative acts and outcome data remain preferable |
+| `mpsv-press-archive-2025-2026` | Ministry of Labour and Social Affairs | Complete, paginated annual press-release indexes for 2025 and 2026 | Historical official discovery; register the next annual index when the year changes |
 | `mf-press-archive-2025-2026` | Ministry of Finance | Complete official annual press-release indexes for 2025 and 2026 | Historical official discovery; register the next annual index when the year changes |
 | `mzd-press-wordpress` | Ministry of Health | Paginated official WordPress REST archive from the requested cutoff | Historical official discovery; all returned pages are collected |
+| `mk-news-archive` | Ministry of Culture | Chronological official news archive followed past the requested cutoff | Historical official discovery; only publisher-labelled ministry items are retained |
+| `msmt-news-api` | Ministry of Education, Youth and Sports | Cursor-paginated JSON archive used by the ministry's own news page | Historical official discovery; collection follows cursors past the requested cutoff |
 
 ### Coverage semantics
 

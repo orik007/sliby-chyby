@@ -8,7 +8,12 @@ import {
   validateRegistry
 } from "../scripts/lib/collector-core.mjs";
 import { parseNewsSitemap, parseRssOrAtom } from "../scripts/lib/feed-collectors.mjs";
-import { parseOfficialHtmlArchive } from "../scripts/lib/official-archive-collectors.mjs";
+import {
+  parseMkNewsArchive,
+  parseMpsvPressArchive,
+  parseMsmtNewsApiPage,
+  parseOfficialHtmlArchive
+} from "../scripts/lib/official-archive-collectors.mjs";
 import { derivePartyVoteSummaries, normalizePspData, parseUnl } from "../scripts/lib/psp-collector.mjs";
 
 const mediaSource = {
@@ -117,6 +122,127 @@ test("normalizes a bounded official Czech annual archive", () => {
   assert.equal(records[0].url, "https://news.example/release/a");
   assert.equal(records[0].primary, true);
   assert.deepEqual(parseOfficialHtmlArchive(html, source, { since: "2026-01-01" }), []);
+});
+
+test("normalizes only ministry-labelled items from the Culture Ministry archive", () => {
+  const source = {
+    ...mediaSource,
+    id: "mk-news-archive",
+    collector: "mk-news-archive",
+    primary: true,
+    evidenceRole: "official-discovery",
+    archiveEndpoint: "https://www.mk.gov.cz/novinky-a-media-cs-4",
+    itemPathPrefix: "/novinky-a-media-cs-4/",
+    allowedPublisherCategories: ["ministerstvo"],
+    expectedHosts: ["www.mk.gov.cz"]
+  };
+  const html = `
+    <a href="/novinky-a-media-cs-4/1cs-ministry-item" class="malaNovinka novinka">
+      <div class="novinkaTexty"><div class="novinkaNadpis">Hmatatelné opatření</div>
+      <div class="novinkaInfo"><span class="novinkaDatum">17.08.2026 12:26</span><div><span></span><span class="novinkaDruh">ministerstvo</span></div></div>
+      <div class="novinkaText"><p>Oficiální stručný popis &amp; souvislosti.</p></div></div>
+    </a>
+    <a href="/novinky-a-media-cs-4/2cs-institution-item" class="malaNovinka novinka">
+      <div class="novinkaTexty"><div class="novinkaNadpis">Program muzea</div>
+      <div class="novinkaInfo"><span class="novinkaDatum">16.08.2026 10:00</span><div><span></span><span class="novinkaDruh">příspěvkové organizace</span></div></div>
+      <div class="novinkaText"><p>Program podřízené organizace.</p></div></div>
+    </a>`;
+  const records = parseMkNewsArchive(html, source, { since: "2025-10-01" });
+  assert.equal(records.length, 1);
+  assert.equal(records[0].title, "Hmatatelné opatření");
+  assert.equal(records[0].occurredAt, "2026-08-17T12:26:00");
+  assert.equal(records[0].payload.publisherCategory, "ministerstvo");
+  assert.equal(records[0].payload.excerptCz, "Oficiální stručný popis & souvislosti.");
+});
+
+test("normalizes a complete page from the MPSV annual archive", () => {
+  const source = {
+    ...mediaSource,
+    id: "mpsv-press-archive-2025-2026",
+    collector: "mpsv-press-archive",
+    primary: true,
+    evidenceRole: "official-discovery",
+    archiveEndpoints: ["https://mpsv.gov.cz/tiskove-zpravy-mpsv?year=2025"],
+    expectedHosts: ["mpsv.gov.cz"]
+  };
+  const html = `<span>Nalezen <b>1</b> výsledek</span><ul><li>
+    <a href="https://mpsv.gov.cz/zmena-podpory" class="card__basic card__horizontal" type="horizontal">
+      <div class="card__basic-content"><h3><span class="one-line-heading">Změna podpory</span></h3>
+      <span class="card__basic-date">30. prosince 2025</span>
+      <div class="card__basic-text">Ministerstvo zveřejnilo konkrétní opatření.</div></div>
+    </a></li></ul>`;
+  const records = parseMpsvPressArchive(html, source, { since: "2025-10-01" });
+  assert.equal(records.length, 1);
+  assert.equal(records[0].occurredAt, "2025-12-30T00:00:00.000Z");
+  assert.equal(records[0].url, "https://mpsv.gov.cz/zmena-podpory");
+  assert.equal(records[0].payload.excerptCz, "Ministerstvo zveřejnilo konkrétní opatření.");
+});
+
+test("normalizes a cursor-paginated MŠMT API page without trusting redirects", () => {
+  const source = {
+    ...mediaSource,
+    id: "msmt-news-api",
+    collector: "msmt-news-api",
+    primary: true,
+    evidenceRole: "official-discovery",
+    apiEndpoint: "https://msmt.gov.cz/api/aktuality",
+    archiveEndpoint: "https://msmt.gov.cz/aktuality",
+    itemPathPrefix: "/aktuality/",
+    expectedHosts: ["msmt.gov.cz"]
+  };
+  const page = {
+    success: true,
+    data: {
+      aktuality: {
+        pageInfo: { hasNextPage: true, endCursor: "next", total: 2 },
+        edges: [{ node: {
+          id: "post-1",
+          title: "Nové opatření ve školství",
+          date: "2026-08-20T09:15:00",
+          excerpt: "<p>Ministerstvo zveřejnilo <strong>konkrétní</strong> opatření.</p>",
+          slug: "nove-opatreni-ve-skolstvi",
+          tagsmain: { nodes: [{ name: "Ministerstvo" }] },
+          redirectacf: { redirect: true, redirecturl: "https://outside.example/ignored" }
+        } }]
+      }
+    }
+  };
+  const parsed = parseMsmtNewsApiPage(page, source, { since: "2025-10-01" });
+  assert.equal(parsed.records.length, 1);
+  assert.equal(parsed.records[0].url, "https://msmt.gov.cz/aktuality/nove-opatreni-ve-skolstvi");
+  assert.equal(parsed.records[0].payload.excerptCz, "Ministerstvo zveřejnilo konkrétní opatření.");
+  assert.deepEqual(parsed.records[0].payload.tags, ["Ministerstvo"]);
+  assert.equal(parsed.pageInfo.endCursor, "next");
+});
+
+test("safely encodes an unusual MŠMT slug returned by the official API", () => {
+  const source = {
+    ...mediaSource,
+    id: "msmt-news-api",
+    collector: "msmt-news-api",
+    primary: true,
+    evidenceRole: "official-discovery",
+    apiEndpoint: "https://msmt.gov.cz/api/aktuality",
+    archiveEndpoint: "https://msmt.gov.cz/aktuality",
+    itemPathPrefix: "/aktuality/",
+    expectedHosts: ["msmt.gov.cz"]
+  };
+  const page = {
+    success: true,
+    data: { aktuality: {
+      pageInfo: { hasNextPage: false, endCursor: null, total: 1 },
+      edges: [{ node: {
+        id: "post-2",
+        title: "Průvodce pro studenty",
+        date: "2026-02-03T10:06:09",
+        excerpt: "",
+        slug: "titulní-stránka-⁄-aktuality",
+        tagsmain: { nodes: [] }
+      } }]
+    } }
+  };
+  const parsed = parseMsmtNewsApiPage(page, source, { since: "2025-10-01" });
+  assert.equal(parsed.records[0].url, "https://msmt.gov.cz/aktuality/tituln%C3%AD-str%C3%A1nka-%E2%81%84-aktuality");
 });
 
 test("UNL parser respects escaped delimiters and null fields", () => {

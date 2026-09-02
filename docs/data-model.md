@@ -323,8 +323,9 @@ The verified source registry is stored in `automation/collectors/sources.json`. 
 ### Enabled verified collectors
 
 - Czech Chamber of Deputies daily open-data archives: votes, individual choices, time-bounded parliamentary-club membership, parliamentary prints, and print history. Club membership is resolved at the date of each vote.
-- Government Office RSS and MPSV press-release Atom feed as official discovery sources.
-- Ministry of Finance annual press-release indexes for 2025 and 2026, and the Ministry of Health paginated press-release REST archive, as historical official discovery sources.
+- Government Office RSS as a current-window official discovery source.
+- Ministry of Finance and Ministry of Labour and Social Affairs annual press-release indexes for 2025 and 2026, the Ministry of Health paginated WordPress REST archive, the Ministry of Culture chronological news archive, and the Ministry of Education cursor-paginated news API as historical official discovery sources.
+- The Ministry of Culture collector retains only items that the official archive labels as ministry publications. Items from subordinate organizations and event previews are not treated as ministry-action candidates.
 - Publisher-provided iROZHLAS, ČT24, and Seznam Zprávy feeds and the Novinky.cz news sitemap as discovery and context sources.
 
 Media records are non-primary candidates. They may reveal a relevant action or decision, but their collection does not imply a likely `+1` or `-1`, and an article is not automatically decisive evidence.

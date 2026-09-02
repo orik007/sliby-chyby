@@ -50,7 +50,17 @@ export function validateRegistry(registry) {
     invariant(typeof source.id === "string" && source.id.length > 0, "Collector source is missing id");
     invariant(!ids.has(source.id), `Duplicate collector source id: ${source.id}`);
     ids.add(source.id);
-    invariant(["psp-open-data", "rss", "news-sitemap", "official-html-archive", "wordpress-rest", "deferred"].includes(source.collector), `Unknown collector type: ${source.collector}`);
+    invariant([
+      "psp-open-data",
+      "rss",
+      "news-sitemap",
+      "official-html-archive",
+      "wordpress-rest",
+      "mk-news-archive",
+      "mpsv-press-archive",
+      "msmt-news-api",
+      "deferred"
+    ].includes(source.collector), `Unknown collector type: ${source.collector}`);
     invariant(typeof source.enabled === "boolean", `Source ${source.id} is missing enabled`);
     invariant(typeof source.primary === "boolean", `Source ${source.id} is missing primary`);
     invariant(/^\d{4}-\d{2}-\d{2}$/.test(source.verifiedAt), `Source ${source.id} has invalid verifiedAt`);
