@@ -29,6 +29,16 @@ test("validates and deterministically hashes the golden evidence package", () =>
   assert.equal(hashEvidencePackage(evidencePackage), hashEvidencePackage(structuredClone(evidencePackage)));
 });
 
+test("requires an explicit supported assessment timing context", () => {
+  const missingContext = structuredClone(evidencePackage);
+  delete missingContext.assessmentContext;
+  assert.throws(() => validateEvidencePackage(missingContext), /assessmentContext mode/);
+
+  const unsupportedRule = structuredClone(evidencePackage);
+  unsupportedRule.assessmentContext.ruleVersion = "period-timing-unknown";
+  assert.throws(() => validateEvidencePackage(unsupportedRule), /period timing rule/);
+});
+
 test("accepts matching sufficient assessor results as a candidate, never as published", () => {
   const result = resolveAssessmentReviews(review("moving-towards"), review("moving-towards"), evidencePackage);
   assert.deepEqual(result, { state: "candidate", reason: "assessor-consensus", status: "moving-towards", selectedReview: "consensus" });

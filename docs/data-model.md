@@ -48,6 +48,7 @@ Proposed fields:
 - `jurisdiction`;
 - `electionDate`;
 - `startsAt` and `endsAt` when known;
+- `closingAuditAt` once the one-time period-end audit boundary is verified;
 - `status` — upcoming, current, closed;
 - `notes`.
 
@@ -101,6 +102,8 @@ Proposed fields:
 - `categoryIds`;
 - `promiseType` — outcome, process, behavior, or undecided;
 - `target` and `deadline` where explicitly present;
+- `progressTest` — a short predeclared boundary for a meaningful partial step when the global rule is not specific enough;
+- `fulfillmentTest` and `contradictionTest`;
 - `expectedDirection`;
 - `institutionIds` and policy keywords used for matching;
 - `primarySourceId` and source locator (page, timestamp, or image region);
@@ -265,6 +268,8 @@ Proposed fields:
 - `promiseId`;
 - `revision`;
 - `status` — one of the canonical SLAVA statuses;
+- `assessmentMode` — `live` or `closing-audit`, supplied by the period workflow rather than selected by an assessor;
+- `periodTimingRuleVersion`;
 - `explanationShort`;
 - `explanationDetailed`;
 - `publishedAt` or candidate state;

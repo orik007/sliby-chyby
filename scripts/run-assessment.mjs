@@ -39,10 +39,10 @@ function apiKeyFor(provider) {
   throw new Error(`No API-key mapping is configured for provider: ${provider}`);
 }
 
-const assessorPromptVersion = "assessor-v5";
-const arbiterPromptVersion = "arbiter-v1";
+const assessorPromptVersion = "assessor-v6";
+const arbiterPromptVersion = "arbiter-v2";
 const assessorInstructions = await readFile(resolve(`automation/prompts/${assessorPromptVersion}.md`), "utf8");
-const arbiterInstructions = await readFile(resolve("automation/prompts/arbiter-v1.md"), "utf8");
+const arbiterInstructions = await readFile(resolve(`automation/prompts/${arbiterPromptVersion}.md`), "utf8");
 const promptHash = (text) => createHash("sha256").update(text).digest("hex");
 
 async function createStructuredResponse({ provider, model, instructions, input, name, schema }) {

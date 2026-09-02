@@ -75,6 +75,7 @@ News collection retains metadata, URL, publication time, supplied authors, and a
 - Official print-document excerpts establish proposal substance, not party attribution, adoption, or legal effect. Paragraphs are selected mechanically and may support, contradict, or merely contextualize the promise.
 - A promise with no primary match receives no package. It does not receive `no-progress`, zero points, or any other assessment merely because collection found nothing.
 - Contradictory evidence is retained. Evidence items are not scored independently and are not averaged.
+- Every package declares whether it is a `live` assessment or the one-time `closing-audit`; assessors never infer this from elapsed time. Current matching emits only `live` packages.
 
 ## Current automation state
 
@@ -83,6 +84,8 @@ The manual GitHub Actions workflow `Collect and match evidence candidates` imple
 The [first full-registry document-enrichment run](https://github.com/orik007/sliby-chyby/actions/runs/33601733992) processed 3,984 shared records, 36 reviewed promises, and 141 candidate matches. It generated three evidence packages and added four official print documents across them with zero warnings. Original and enriched package hashes differ and are retained separately in the uploaded audit.
 
 The single-promise end-to-end pilot implements the assessor and arbiter calls. The remaining automation work is to connect the full-registry workflow to assessment only for package hashes that are new or changed.
+
+The period-closing audit is not implemented yet. It must be a separate deterministic run over every reviewed promise, including promises for which normal collection never produced a primary-evidence package. During ordinary live collection, absence of a package must not be converted into a score.
 
 ## Scheduling and persistence
 

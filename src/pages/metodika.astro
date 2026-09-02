@@ -10,7 +10,7 @@ const scaleGroups = [
 const statusDescriptions = {
   fulfilled: "Slíbený výsledek skutečně nastal nebo strana provedla přesně ten konkrétní čin, který slíbila — například prosadila opatření nebo hlasovala tak, jak výslovně slíbila.",
   "moving-towards": "Strana udělala hmatatelný krok správným směrem — například předložila návrh, podpořila potřebný zákon nebo zahájila realizaci. Výsledek ale ještě není hotový.",
-  "no-progress": "Zatím se nestalo nic podstatného. Strana slib neplní, ale ani proti němu prokazatelně nejedná.",
+  "no-progress": "Během probíhajícího volebního období se zatím nestalo nic podstatného. Strana slib neplní, ale ani proti němu prokazatelně nejedná.",
   "moving-against": "Strana udělala konkrétní krok opačným směrem, ale slib ještě není definitivně porušen.",
   "acting-against": "Strana hlasovala, rozhodla nebo prosadila něco, co přímo odporuje jejímu vlastnímu slibu.",
 };
@@ -37,6 +37,7 @@ const formatNumber = (value: number) => `${value > 0 ? "+" : value < 0 ? "−" :
       {scaleGroups.map((group) => <article class="scale-group"><p class="scale-group-title">{group.title}</p><div class="scale-pair">{group.statuses.map((status) => { const detail = statusDetails[status]; return <div class={`scale-item status-${detail.className}`}><span>{detail.symbol}</span><div><strong>{detail.label}</strong><small>{formatScore(detail.score)}</small><p>{statusDescriptions[status]}</p></div></div>; })}</div></article>)}
     </div>
     <p class="negative-score-note"><strong>Pokud strana jedná proti svým slibům, dostává záporné body.</strong> Nečinnost a jednání proti slibu tak nejsou totéž.</p>
+    <p class="negative-score-note"><strong>Částečný skutečný krok znamená +1, celý splněný slib +2.</strong> Během období zůstává úplná nečinnost na nule. Až při závěrečném auditu dostane slib, na který strana za celé období vůbec nesáhla, −1.</p>
   </section>
   <section class="calculation-section" aria-labelledby="calculation-title">
     <div class="calculation-copy"><p class="eyebrow">VÝPOČET</p><h2 id="calculation-title">−100 až +100 bodů</h2><p>Sečteme aktuální hodnocení všech slibů a vydělíme je jejich maximálním možným bodovým ziskem.</p><code>součet bodů ÷ (2 × počet slibů) × 100</code></div>

@@ -94,6 +94,11 @@ test("builds a bounded unpublished primary-only package", () => {
   };
   const matches = matchCollectorRecords(collectorRun.records, eet, { asOf: "2026-08-31" });
   const evidencePackage = buildEvidencePackage({ promise: eet, matches, collectorRun, asOf: "2026-08-31" });
+  assert.equal(evidencePackage.methodologyVersion, "slava-v4");
+  assert.deepEqual(evidencePackage.assessmentContext, {
+    mode: "live",
+    ruleVersion: "period-timing-v1"
+  });
   assert.equal(evidencePackage.evidence.length, 2);
   assert.equal(evidencePackage.evidence[0].role, "promise-source");
   assert.equal(evidencePackage.evidence[1].id, primary.id);

@@ -20,6 +20,34 @@ Promise admission is governed by [promise-selection.md](promise-selection.md). O
 
 The scale describes consistency with the promise, not moral approval.
 
+## Confirmed simple period and partial-progress rule
+
+The project uses two clearly separated assessment moments. It does not gradually penalize a promise because several weeks or months have passed.
+
+### During an active electoral period
+
+- A promise with no meaningful documented action remains `no-progress` (`0`).
+- A meaningful, concrete, attributable step that advances a real part of the promise is `moving-towards` (`+1`), even when the whole promise is not yet complete.
+- Partial delivery never qualifies as `fulfilled`; the whole promised result or exact promised conduct is required for `+2`.
+- Incompleteness, silence after a first step, or preservation of part of an existing system does not by itself make the step negative.
+- A partial measure is negative only when evidence documents an affirmative contrary step, prevention or reversal of the promise, or explicit abandonment of the remainder.
+- Do not infer that a partial measure is a final replacement merely because no later step has yet appeared.
+
+A meaningful step changes the promised amount, scope, rights, obligations, implementation, or formal legislative path in the promised direction. General rhetoric, speculation, unrelated preparation, or a cosmetic reference is not enough. Where a promise needs a promise-specific boundary, record a short `progressTest` before assessing evidence rather than inventing the boundary afterward.
+
+### One-time closing audit
+
+At the end of the electoral period, the project performs one closing audit rather than applying monthly waiting rules:
+
+- a promise untouched for the entire period changes from `no-progress` (`0`) to `moving-against` (`-1`);
+- a meaningful but incomplete partial step remains `moving-towards` (`+1`);
+- a completely achieved promise remains `fulfilled` (`+2`);
+- documented contrary or definitive contrary conduct remains `-1` or `-2` under the ordinary rules.
+
+An earlier closing point exists only when the original promise itself contains an explicit deadline or one-time event and the evidence package documents that it has closed. Assessors must never invent an implicit deadline or decide that the project has simply waited long enough.
+
+Every evidence package declares `assessmentContext.mode` as either `live` or `closing-audit`. Models do not choose the mode.
+
 ## Confirmed aggregate calculation
 
 Each promise contributes only its current published assessment. Let `N` be the number of tracked promises and `s_i` each current score:
@@ -180,6 +208,6 @@ On disagreement, an arbiter receives the same evidence plus anonymized reviews. 
 
 - If a real promise cannot be scored fairly, does the product need a new status, a publication filter, or another treatment?
 - How should blocked-by-others and compromise cases affect the score?
-- What counts as a missed deadline, and when does it become `-1` or `-2`?
+- How should unusual explicit-deadline promises be represented when the source wording leaves the closing event ambiguous?
 - When mixed actions exist, what precise rule determines when the worse interim assessment applies?
 - What minimum evidence package is required for each status, especially `+2` and `-2`?

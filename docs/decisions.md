@@ -31,6 +31,11 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Use one current assessment per promise; do not average multiple votes.
 - Preserve contradictory evidence instead of allowing positive and negative votes to cancel mechanically.
 - Prefer an arrow for directional states and one check mark for fulfilled in the simple UI.
+- During an active electoral period, an untouched promise remains `0`; elapsed months alone never create a penalty.
+- A meaningful concrete step advancing a real part of the promise is `+1`, even when incomplete. Only the whole promised result can receive `+2`.
+- Do not infer that a partial step is final or negative merely because part of the old system remains or no later step has appeared. Negative treatment requires documented contrary conduct, prevention, reversal, or explicit abandonment.
+- Perform one closing audit at the end of the electoral period. A promise untouched for the entire period changes from `0` to `-1`; meaningful partial progress remains `+1`.
+- An earlier closing point exists only when the original promise contains an explicit deadline or one-time event. Do not invent implicit waiting periods.
 
 ### Evidence
 
@@ -168,10 +173,6 @@ The first public real-data version should favor a smaller fully verified set ove
 ### Mixed conduct
 
 The owner rejected an absolute averaging rule and preferred the worse result in inconsistent cases, while also saying this is not an absolute rule. The working exception for final outcomes and behavior promises needs real-case tests before becoming canonical.
-
-### Partial measures toward a categorical promise
-
-The official-document pilot produced a concrete unresolved case. ANO promised to abolish public-media fees. ANO-linked print 201 preserves the general fee system but removes the obligation for additional groups, while a separate government print 231 proposes complete abolition but is not yet attributable to ANO under the confirmed party-attribution rule. Both AI assessors proposed `moving-against` for print 201; this is not a confirmed assessment. The project owner must decide whether a partial reduction that does not make the categorical goal harder is normally `moving-towards`, `no-progress`, or `moving-against` when the proposal also explicitly preserves the underlying system. Any rule must distinguish partial progress from explicit abandonment and avoid inferring abandonment merely because a first step is incomplete.
 
 ### Blocked and compromised promises
 

@@ -49,6 +49,8 @@ export function validateEvidencePackage(evidencePackage) {
   invariant(evidencePackage.schemaVersion === "1.0.0", "Unsupported evidence package schemaVersion");
   invariant(typeof evidencePackage.packageId === "string" && evidencePackage.packageId.length > 0, "Missing packageId");
   invariant(/^\d{4}-\d{2}-\d{2}$/.test(evidencePackage.asOf), "Invalid asOf date");
+  invariant(["live", "closing-audit"].includes(evidencePackage.assessmentContext?.mode), "Evidence package is missing a valid assessmentContext mode");
+  invariant(evidencePackage.assessmentContext?.ruleVersion === "period-timing-v1", "Evidence package has an unsupported period timing rule");
   invariant(evidencePackage.promise && typeof evidencePackage.promise.id === "string", "Missing promise");
   invariant(typeof evidencePackage.promise.originalTextCz === "string" && evidencePackage.promise.originalTextCz.length > 0, "Missing original promise text");
   invariant(typeof evidencePackage.promise.fulfillmentTest === "string" && evidencePackage.promise.fulfillmentTest.length > 0, "Missing fulfillment test");
