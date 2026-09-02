@@ -85,6 +85,7 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Run assessment outside the public website. The public browser must never receive an AI provider credential or invoke the scoring API.
 - Keep matching separate from scoring. The initial matcher is deterministic and exposes every matched phrase and external identifier; a thematic match without party attribution cannot enter an assessment package.
 - Require assessors and arbiters to produce reader-facing Czech explanations without internal enum names, attribution labels, unexplained parliamentary shorthand, or unnatural translations of implementation terms.
+- Remove a parliamentary print number from the public candidate when it adds only an internal identifier. Keep the number, exact source, and original assessor wording in the technical reviewer audit.
 
 ### Initial implementation architecture
 

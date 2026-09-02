@@ -9,6 +9,7 @@ import {
   emptyReviewManifest,
   planAssessmentInputs,
   renderHumanReviewMarkdown,
+  simplifyPublicExplanation,
   validateReviewManifest
 } from "../scripts/lib/assessment-review.mjs";
 
@@ -185,4 +186,9 @@ test("separates the plain public candidate from technical reviewer data", () => 
   assert.match(markdown, /## Technické podklady pro reviewera/);
   assert.match(markdown, /Interní stav: `moving-towards`/);
   assert.doesNotMatch(publicSection, /moving-towards|candidate|verified-party/i);
+});
+
+test("removes unexplained parliamentary print numbers from the public candidate only", () => {
+  const original = "Poslanci podpořili návrh zákona, vedený ve Sněmovně jako tisk č. 189. Návrh pokračuje do Senátu.";
+  assert.equal(simplifyPublicExplanation(original), "Poslanci podpořili návrh zákona. Návrh pokračuje do Senátu.");
 });

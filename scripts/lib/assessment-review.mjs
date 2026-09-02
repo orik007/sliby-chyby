@@ -147,6 +147,13 @@ function evidenceLabel(evidence) {
   return evidence.publisher;
 }
 
+export function simplifyPublicExplanation(explanation) {
+  return String(explanation)
+    .replace(/,\s*veden(?:ý|á|é)\s+ve\s+Sněmovně\s+jako\s+tisk\s+č\.\s*\d+/giu, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal }) {
   validateEvidencePackage(evidencePackage);
   const reviews = [
@@ -158,7 +165,7 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     : auditRecord.assessorA.output;
   const proposed = proposal.candidateStatus ? readerStatus[proposal.candidateStatus] : null;
   const publicExplanation = proposal.resolutionState === "candidate"
-    ? chosen.explanationCz
+    ? simplifyPublicExplanation(chosen.explanationCz)
     : "Automatické posouzení nemá dostatečné podklady pro návrh veřejného hodnocení.";
   const resolutionLabel = {
     "assessor-consensus": "oba automatické posudky se shodly",
