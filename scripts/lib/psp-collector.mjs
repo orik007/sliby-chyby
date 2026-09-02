@@ -256,6 +256,7 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
         partNumber: numeric(print?.partNumber),
         titleCz: cleanText(print?.fullTitle || print?.shortTitle, 1000),
         url: print ? officialPrintUrl(source.term.number, print.number) : null,
+        documentPublishedAt: pspDateTime(print?.publishedAt),
         historyContexts
       };
     });
@@ -326,6 +327,7 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
         printNumber: numeric(print.number),
         partNumber: numeric(print.partNumber),
         printTitleCz: printTitle,
+        documentPublishedAt: pspDateTime(print.publishedAt),
         transitionId: history.transitionId,
         actionCz: actionTitle,
         fromStateCz: cleanText(fromState?.description, 500) || null,

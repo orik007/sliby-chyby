@@ -58,7 +58,7 @@ Two current-methodology reruns tested the remaining assessable packages from the
 
 Commit `e1a5cbc` changed the resolver so that disagreement about either status or evidence sufficiency requires arbitration. The arbiter may select an existing sufficient review, select an insufficient review that still routes to human review, or return `cannot-decide`. Deterministic tests cover these paths. No rerun in this repeatability check produced a live arbiter call after the fix because the repeated assessor pair agreed.
 
-The repeatability check also identified a collection gap. Parliamentary print history supplies titles, procedural steps, sponsors, and linked votes, but the generated package does not yet contain the substantive text or a verified factual extract from the proposal. A title saying that an act is amended does not reveal whether the proposal fulfils or contradicts the precise promise. Until official print-document enrichment is implemented, these cases must remain unscored when the title alone is insufficient.
+The repeatability check also identified a collection gap. Parliamentary print history supplied titles, procedural steps, sponsors, and linked votes, but the generated package did not contain the substantive text or a verified factual extract from the proposal. A title saying that an act is amended does not reveal whether the proposal fulfils or contradicts the precise promise. The subsequent `psp-print-document-v1` enrichment stage addresses this gap by hashing the official proposal DOCX and supplying bounded, mechanically selected, numbered excerpts. The affected pilots still require a new end-to-end run before any candidate result can be considered.
 
 ## Verified pipeline behavior
 

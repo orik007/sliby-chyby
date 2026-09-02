@@ -34,3 +34,5 @@ External identifiers receive a deliberately strong score because they refer to a
 ## Full-registry workflow
 
 The `Collect and match evidence candidates` GitHub Actions workflow collects each enabled source once and then runs this matcher across the entire reviewed promise registry. It uploads the complete unpublished audit, including promises with no match, rather than running a separate collector for every promise.
+
+After deterministic matching, `scripts/run-print-enrichment.mjs` follows only the official parliamentary prints already present in generated packages. It downloads the first official proposal DOCX, records the content hash, extracts readable paragraphs, and mechanically selects a bounded set around the exact promise and visible matcher terms. Original and enriched packages remain separate. Document excerpts reveal proposal substance but do not establish party attribution, passage, effectiveness, or scoring direction.

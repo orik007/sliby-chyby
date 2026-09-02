@@ -76,9 +76,16 @@ jobs:
             echo "available=false" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Enrich matched parliamentary prints with official documents
+        if: steps.package.outputs.available == 'true'
+        run: |
+          node scripts/run-print-enrichment.mjs \
+            --input "automation/runs/e2e/matcher/evidence-packages/${PILOT_PROMISE_ID}.json" \
+            --output automation/runs/e2e/matcher/enriched-evidence-packages
+
       - name: Run two assessors and an arbiter when needed
         if: steps.package.outputs.available == 'true'
-        run: node scripts/run-assessment.mjs "automation/runs/e2e/matcher/evidence-packages/${PILOT_PROMISE_ID}.json" automation/runs/e2e/assessment
+        run: node scripts/run-assessment.mjs "automation/runs/e2e/matcher/enriched-evidence-packages/${PILOT_PROMISE_ID}.json" automation/runs/e2e/assessment
 
       - name: Upload unpublished end-to-end audit
         uses: actions/upload-artifact@v6

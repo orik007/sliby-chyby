@@ -173,7 +173,7 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
     "organy.unl": entry(unl(["1750", "174", "1", "ANO2011", "Poslanecky klub ANO 2011", "ANO club", "08.10.2025", null, null, "0"]))
   };
   const printFields = Array(24).fill(null);
-  Object.assign(printFields, { 0: "700", 1: "1", 2: "20", 3: "189", 4: "0", 7: "174", 10: "Short bill", 15: "Full bill title" });
+  Object.assign(printFields, { 0: "700", 1: "1", 2: "20", 3: "189", 4: "0", 7: "174", 10: "Short bill", 15: "Full bill title", 21: "2026-08-29 09:15" });
   const historyFields = Array(15).fill(null);
   Object.assign(historyFields, { 0: "800", 1: "700", 2: "2026-08-30 12:34", 3: "900", 4: "10", 6: "12", 7: "55" });
   const printsEntries = {
@@ -194,6 +194,7 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
   assert.equal(vote.payload.individualVotes[0].clubMembershipsAtVote[0].projectPartyId, "ano");
   assert.equal(step.payload.externalVoteId, "900");
   assert.equal(step.payload.actionCz, "Chamber approved bill");
+  assert.equal(step.payload.documentPublishedAt, "2026-08-29T09:15:00");
   assert.equal(vote.primary, true);
 });
 

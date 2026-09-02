@@ -17,7 +17,7 @@ The intermediate deterministic matching stage is documented in [matching/README.
 5. A disagreement about the status or evidence sufficiency is sent to an arbiter, which may select either review or return `cannot-decide`. Selecting an insufficient review still requires human review and never creates a score candidate.
 6. Every result remains unpublished until a later publication gate approves it.
 
-The initial runner uses the OpenAI Responses API with [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs). It never gives the scoring assessors web-search tools. Source discovery and promise matching are separate upstream stages. The active assessor prompt is versioned as `assessor-v4`; its content hash is stored in every audit record. Earlier prompt files remain immutable for audit reproduction.
+The initial runner uses the OpenAI Responses API with [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs). It never gives the scoring assessors web-search tools. Source discovery, promise matching, and official-document enrichment are separate upstream stages. The active assessor prompt is versioned as `assessor-v5`; its content hash is stored in every audit record. Earlier prompt files remain immutable for audit reproduction. Version 5 explicitly requires assessors to read mechanically selected official print excerpts and to distinguish proposal wording, explanatory text, procedural progress, adoption, and legal effect.
 
 Provider-specific HTTP calls are isolated in `scripts/lib/model-provider.mjs`. The rest of the pipeline consumes a normalized response. A future second provider therefore needs a new adapter and credentials, while evidence packages, scoring validation, arbitration, audit records, and the public site remain unchanged.
 
@@ -63,7 +63,7 @@ Create an `assessment` environment in the GitHub repository, add the `OPENAI_API
 
 A scheduled trigger should be added only after the evidence collector can identify a changed evidence package. That avoids paying to reassess unchanged inputs. Publication will remain a separate explicitly gated workflow.
 
-`.github/workflows/run-e2e-pilot.yml` is a manual integration pilot. It collects official parliamentary records, runs the deterministic matcher for one selected reviewed promise, sends the generated bounded package to both assessors, invokes the arbiter only on disagreement, and uploads the complete unpublished audit chain. It does not commit, publish, or deploy any result.
+`.github/workflows/run-e2e-pilot.yml` is a manual integration pilot. It collects official parliamentary records, runs the deterministic matcher for one selected reviewed promise, enriches matched prints from official PSP documents, sends the bounded enriched package to both assessors, invokes the arbiter only on disagreement, and uploads the complete unpublished audit chain. It does not commit, publish, or deploy any result.
 
 The concurrency group includes the promise ID. Repeated runs for one promise remain serialized, while pilots for different promises do not replace one another in GitHub's single pending slot for a concurrency group.
 

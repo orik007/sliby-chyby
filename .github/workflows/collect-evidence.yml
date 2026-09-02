@@ -56,19 +56,29 @@ jobs:
             --as-of "$AS_OF" \
             --output automation/runs/pipeline/github-actions/matcher
 
+      - name: Enrich matched parliamentary prints with official documents
+        run: |
+          node scripts/run-print-enrichment.mjs \
+            --input automation/runs/pipeline/github-actions/matcher/evidence-packages \
+            --output automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages
+
       - name: Write audit summary
         run: |
           node --input-type=module -e '
             import { readFile, appendFile } from "node:fs/promises";
             const run = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/match-run.json", "utf8"));
+            const enrichment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json", "utf8"));
             const packageCount = run.promiseResults.filter((result) => result.evidencePackage).length;
             const candidateCount = run.promiseResults.reduce((sum, result) => sum + result.candidateMatchCount, 0);
+            const documentCount = enrichment.results.reduce((sum, result) => sum + result.documentEvidenceCount, 0);
             const lines = [
               "## Unpublished evidence pipeline",
               "",
               `- Reviewed promises checked: ${run.promiseResults.length}`,
               `- Candidate matches: ${candidateCount}`,
               `- Assessable evidence packages: ${packageCount}`,
+              `- Official print documents added: ${documentCount}`,
+              `- Document-enrichment warnings: ${enrichment.warnings.length}`,
               `- Assessment cutoff: ${run.asOf}`,
               "- Direction assigned: no",
               "- Publication approved: no",

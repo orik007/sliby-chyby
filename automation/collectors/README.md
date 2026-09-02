@@ -18,6 +18,7 @@ Media sources are discovery and context only. Their inclusion in the registry is
 ## Stored content
 
 - PSP records retain structured facts and official identifiers needed to reproduce vote and legislative history.
+- The collector records the official publication timestamp needed by the later print-document enrichment stage. It does not download every parliamentary document during broad collection.
 - Feeds retain publisher, title, URL, time, feed identifier, author names when supplied, and at most the short configured feed excerpt.
 - The collector never downloads or stores full news article bodies.
 - Every source response and normalized record receives a SHA-256 hash.
@@ -58,6 +59,7 @@ The manually triggered `Collect and match evidence candidates` workflow runs the
 1. collect all enabled verified sources once;
 2. compare the resulting records with every promise in the reviewed registry;
 3. generate bounded evidence packages only where attributable primary candidate evidence exists;
-4. upload the collector run, complete match audit, and any evidence packages as one unpublished artifact.
+4. retrieve official DOCX files only for parliamentary prints already present in those packages, hash them, and select bounded numbered excerpts without assigning direction;
+5. upload the collector run, complete match audit, original packages, enriched packages, and enrichment audit as one unpublished artifact.
 
 The workflow never assigns evidence direction, calls an assessor, changes public data, or deploys the website. Assessment remains a separate stage so that empty, noisy, or clearly irrelevant collection runs do not create unnecessary model calls.

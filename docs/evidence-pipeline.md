@@ -15,9 +15,10 @@ One pipeline execution follows this sequence:
 3. **Match against every reviewed promise.** The shared record set is compared with the complete reviewed promise registry. One record may match zero, one, or several promises, including similar promises belonging to different parties.
 4. **Treat matches as candidates only.** A deterministic match means “potentially relevant,” never “supports,” “contradicts,” or “changes the score.” Every matched term or official external identifier remains visible in the audit.
 5. **Build bounded evidence packages.** A package is generated only when attributable primary candidate evidence exists. Relevant media records may remain as context, but media alone does not create a strict primary-evidence package.
-6. **Assess only new or changed packages.** Two independent assessors receive the same bounded package. An unchanged package hash must not trigger repeated model calls. This change-detection gate is confirmed but not yet implemented in the full-registry workflow.
-7. **Arbitrate disagreement.** Matching sufficient assessor results become a candidate assessment. Disagreement about the status or evidence sufficiency goes to the configured arbiter. An arbiter cannot turn a selected insufficient review into a score candidate; unresolved or insufficient cases require human attention.
-8. **Publish separately.** Collection, matching, assessment, and publication are distinct stages. No collector, matcher, or model result changes public data or the SLAVA Index automatically under the current rules.
+6. **Enrich matched parliamentary prints.** For prints already present in a package, retrieve the official PSP DOCX once per print, retain its SHA-256 hash, and mechanically select bounded, numbered paragraphs around the promise and matcher terms. The selection assigns no direction or score. The original package, enriched package, document hashes, exact excerpts, and any warning remain auditable.
+7. **Assess only new or changed packages.** Two independent assessors receive the same bounded enriched package. An unchanged package hash must not trigger repeated model calls. This change-detection gate is confirmed but not yet implemented in the full-registry workflow.
+8. **Arbitrate disagreement.** Matching sufficient assessor results become a candidate assessment. Disagreement about the status or evidence sufficiency goes to the configured arbiter. An arbiter cannot turn a selected insufficient review into a score candidate; unresolved or insufficient cases require human attention.
+9. **Publish separately.** Collection, matching, assessment, and publication are distinct stages. No collector, matcher, enrichment step, or model result changes public data or the SLAVA Index automatically under the current rules.
 
 ```text
 allowlisted sources
@@ -25,6 +26,7 @@ allowlisted sources
   -> normalized and deduplicated records
   -> match against all reviewed promises
   -> bounded evidence packages
+  -> official documents for matched parliamentary prints
   -> changed packages only
   -> assessor A + assessor B
   -> arbiter when needed
@@ -70,12 +72,13 @@ News collection retains metadata, URL, publication time, supplied authors, and a
 - A parliamentary vote enters a party's package only when party membership at the vote date and the configured party-attribution rule are resolved.
 - Bill authorship is not required. A party's verified vote can be relevant regardless of who introduced the bill.
 - A government act is an attribution candidate until the assessor can fairly connect it to the tracked party.
+- Official print-document excerpts establish proposal substance, not party attribution, adoption, or legal effect. Paragraphs are selected mechanically and may support, contradict, or merely contextualize the promise.
 - A promise with no primary match receives no package. It does not receive `no-progress`, zero points, or any other assessment merely because collection found nothing.
 - Contradictory evidence is retained. Evidence items are not scored independently and are not averaged.
 
 ## Current automation state
 
-The manual GitHub Actions workflow `Collect and match evidence candidates` already implements stages 1 through 5 for the full reviewed registry and uploads one unpublished audit artifact. The first successful full-registry run checked all 36 catalog promises against one shared collection of all enabled sources.
+The manual GitHub Actions workflow `Collect and match evidence candidates` implements stages 1 through 6 for the full reviewed registry and uploads one unpublished audit artifact. The first successful full-registry run checked all 36 catalog promises against one shared collection of all enabled sources. The document-enrichment extension retrieves official DOCX files only for parliamentary prints already selected into evidence packages and reuses a fetched print across packages during the same run.
 
 The single-promise end-to-end pilot implements the assessor and arbiter calls. The remaining automation work is to connect the full-registry workflow to assessment only for package hashes that are new or changed.
 
