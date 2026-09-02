@@ -69,6 +69,16 @@ The repeatability check also identified a collection gap. Parliamentary print hi
 
 An earlier retirement-age attempt encountered one transient PSP download failure and continued without document evidence. Commits `0c2924d` and `a255757` added bounded official-document enrichment, transient retry, and a hard assessment gate: when a required print document remains unavailable, model calls do not run and the failed enrichment audit is uploaded. The clean retirement-age rerun above verified that corrected path.
 
+## 2026-09-02 partial-progress rule regression
+
+**Pilot observation**
+
+The owner resolved the partial-measure question with the simple period rule recorded in [scoring.md](scoring.md): during a live electoral period, a meaningful concrete step advancing a real part of a promise is `moving-towards` (`+1`); incompleteness alone is not contrary conduct, and only the whole promised result can receive `fulfilled` (`+2`). Untouched promises remain `0` until the one-time closing audit, when an untouched full-period promise becomes `-1`.
+
+The [public-media-fees regression run](https://github.com/orik007/sliby-chyby/actions/runs/33611903239) verified `slava-v4`, `assessor-v6`, `arbiter-v2`, and an explicit `live` assessment context. Both independent assessors proposed `moving-towards` with high confidence. They found that ANO-linked print 201 concretely narrows the groups required to pay public-media fees, while retaining the fee system and therefore falling short of complete fulfillment. Neither assessor attributed the separate government print 231 to ANO. The assessors agreed, no arbiter call was needed, and `publicationApproved` remained `false`.
+
+This rerun supersedes the earlier model interpretation of the same supplied evidence as `moving-against`. It validates prompt compliance with the confirmed rule; it still does not publish the political assessment or bypass human review.
+
 ## Verified pipeline behavior
 
 **Pilot observation**
