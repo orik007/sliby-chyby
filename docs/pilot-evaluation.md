@@ -91,6 +91,8 @@ The [first full-registry assessment run](https://github.com/orik007/sliby-chyby/
 
 All three records have `humanReviewRequired: true` and `publicationApproved: false`. They are presented in [review pull request 1](https://github.com/orik007/sliby-chyby/pull/1). The workflow successfully pushed the review branch, but GitHub's repository setting initially prevented the Actions token from creating the pull request; the owner-authenticated CLI created this first PR without rerunning any model. The workflow now treats this permission boundary as a successful ready-to-review branch and emits a compare link when automatic PR creation is unavailable.
 
+The immediate [unchanged-input rerun](https://github.com/orik007/sliby-chyby/actions/runs/33615561334) repeated collection, matching, and document enrichment but recognized all three assessment fingerprints as unchanged. It created zero new proposals and no assessment audit files, demonstrating that no assessor or arbiter API call was made. The workflow completed successfully without modifying the existing review branch or pull request.
+
 ## Verified pipeline behavior
 
 **Pilot observation**
