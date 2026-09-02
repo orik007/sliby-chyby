@@ -19,6 +19,8 @@ The project is not limited to a government's collective programme. It is party-o
 
 The first version is for ordinary visitors who want a quick, understandable account of a party's record. Complex analysis is not part of the initial scope. Detailed sourcing remains available to visitors who choose to inspect a promise.
 
+Every public explanation and every human-review summary must use plain, natural Czech that an ordinary reader can understand without knowing parliamentary procedure, legal terminology, or the project's data model. Internal state values such as `moving-towards` may exist in machine-readable fields, but they must never appear in Czech prose shown to a reviewer or visitor. Legislative identifiers remain available for traceability, but the first mention must explain what the proposal is and what it changes; a bare reference such as “tisk 201” is not sufficient.
+
 ## Confirmed initial scope
 
 - Start with the current electoral period.
@@ -94,7 +96,7 @@ The current product deliberately has no public “not assessable” status. If a
 The working content order is:
 
 1. exact original promise wording and its primary source;
-2. a short plain-language explanation of what the party did;
+2. a short plain-language Czech explanation of who did what, what changed, and why it affects the promise;
 3. decisive primary evidence such as a vote, law, budget, or official decision;
 4. contextual reporting from news sources;
 5. the last assessment date;

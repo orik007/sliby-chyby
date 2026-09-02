@@ -42,8 +42,31 @@ export function validateReviewManifest(manifest) {
     invariant(proposal.humanReviewRequired === true, `Review proposal ${proposal.proposalId} must require human review`);
     invariant(proposal.publicationApproved === false, `Review proposal ${proposal.proposalId} must remain unpublished`);
     invariant(typeof proposal.path === "string" && proposal.path.startsWith("automation/review-proposals/"), `Review proposal ${proposal.proposalId} has an invalid path`);
+    invariant(proposal.humanReviewPath == null || proposal.humanReviewPath === `${proposal.path}/review.md`, `Review proposal ${proposal.proposalId} has an invalid humanReviewPath`);
+    invariant(proposal.supersedesProposalId == null || typeof proposal.supersedesProposalId === "string", `Review proposal ${proposal.proposalId} has an invalid supersedesProposalId`);
+    invariant(proposal.supersededByProposalId == null || typeof proposal.supersededByProposalId === "string", `Review proposal ${proposal.proposalId} has an invalid supersededByProposalId`);
+  }
+  const proposalsById = new Map(manifest.proposals.map((proposal) => [proposal.proposalId, proposal]));
+  for (const proposal of manifest.proposals) {
+    if (proposal.supersedesProposalId) {
+      const previous = proposalsById.get(proposal.supersedesProposalId);
+      invariant(previous?.promiseId === proposal.promiseId, `Review proposal ${proposal.proposalId} supersedes an invalid proposal`);
+      invariant(previous.supersededByProposalId === proposal.proposalId, `Review proposal ${proposal.proposalId} has an incomplete supersession link`);
+    }
+    if (proposal.supersededByProposalId) {
+      const replacement = proposalsById.get(proposal.supersededByProposalId);
+      invariant(replacement?.promiseId === proposal.promiseId, `Review proposal ${proposal.proposalId} has an invalid replacement`);
+      invariant(replacement.supersedesProposalId === proposal.proposalId, `Review proposal ${proposal.proposalId} has an incomplete replacement link`);
+    }
   }
   return manifest;
+}
+
+export function currentReviewProposal(manifest, promiseId) {
+  validateReviewManifest(manifest);
+  const active = manifest.proposals.filter((proposal) => proposal.promiseId === promiseId && !proposal.supersededByProposalId);
+  invariant(active.length <= 1, `Promise ${promiseId} has multiple current review proposals`);
+  return active[0] ?? null;
 }
 
 export function describeAssessmentInput(evidencePackage, prompts, runtime) {
@@ -76,7 +99,7 @@ export function planAssessmentInputs({ packages, manifest, blockedPromiseIds = n
     .sort((left, right) => left.promiseId.localeCompare(right.promiseId));
 }
 
-export function createReviewProposal({ auditRecord, proposalDirectory }) {
+export function createReviewProposal({ auditRecord, proposalDirectory, supersedesProposalId = null }) {
   invariant(auditRecord?.publicationApproved === false, "Assessment audit must remain unpublished");
   invariant(["candidate", "human-review-required"].includes(auditRecord?.resolution?.state), "Assessment audit has no reviewable resolution");
   invariant(/^[a-f0-9]{64}$/.test(auditRecord.assessmentFingerprint), "Assessment audit has an invalid fingerprint");
@@ -99,16 +122,94 @@ export function createReviewProposal({ auditRecord, proposalDirectory }) {
     confidence: auditRecord.resolution.state === "candidate"
       ? [auditRecord.assessorA.output.confidence, auditRecord.assessorB.output.confidence]
       : null,
+    supersedesProposalId,
+    supersededByProposalId: null,
     humanReviewRequired: true,
     publicationApproved: false,
-    path: proposalDirectory.replaceAll("\\", "/")
+    path: proposalDirectory.replaceAll("\\", "/"),
+    humanReviewPath: `${proposalDirectory.replaceAll("\\", "/")}/review.md`
   };
+}
+
+const readerStatus = {
+  fulfilled: { label: "Splněno", score: "+2" },
+  "moving-towards": { label: "Směřuje ke splnění", score: "+1" },
+  "no-progress": { label: "Bez podstatného posunu", score: "0" },
+  "moving-against": { label: "Směřuje proti slibu", score: "−1" },
+  "acting-against": { label: "Jedná proti slibu", score: "−2" }
+};
+
+function evidenceLabel(evidence) {
+  if (evidence.role === "promise-source") return "Původní volební slib";
+  if (evidence.type === "legislative-document") return "Úplné znění návrhu zákona na webu Poslanecké sněmovny";
+  if (evidence.type === "parliamentary-vote") return "Výsledek hlasování Poslanecké sněmovny";
+  if (evidence.type === "legislative-step") return "Průběh projednávání návrhu ve Sněmovně";
+  return evidence.publisher;
+}
+
+export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal }) {
+  validateEvidencePackage(evidencePackage);
+  const reviews = [
+    ["První posudek", auditRecord.assessorA.output],
+    ["Druhý posudek", auditRecord.assessorB.output]
+  ];
+  const chosen = auditRecord.resolution.selectedReview === "assessor-b"
+    ? auditRecord.assessorB.output
+    : auditRecord.assessorA.output;
+  const proposed = proposal.candidateStatus ? readerStatus[proposal.candidateStatus] : null;
+  const lines = [
+    `# ${evidencePackage.promise.titleCz}`,
+    "",
+    "> Neveřejný návrh k lidské kontrole. Tento dokument sám nic nezveřejňuje a nemění SLAVA Index.",
+    "",
+    "## Navrhované hodnocení",
+    "",
+    proposed ? `**${proposed.label} (${proposed.score})**` : "**Bez automatického návrhu — podklady musí posoudit člověk.**",
+    ""
+  ];
+  if (proposal.resolutionState === "candidate") {
+    lines.push(chosen.explanationCz, "");
+  } else {
+    lines.push("Oba posudky upozorňují, že dodané podklady nestačí pro férové připsání jednání straně.", "");
+  }
+  lines.push("## Nezávislé posudky", "");
+  for (const [name, review] of reviews) {
+    const status = readerStatus[review.status];
+    lines.push(`### ${name}: ${status.label} (${status.score})`, "", review.explanationCz, "");
+    if (review.uncertainties.length > 0) {
+      lines.push("Co zůstává nejisté:", "", ...review.uncertainties.map((item) => `- ${item}`), "");
+    }
+  }
+  if (auditRecord.arbiter) {
+    lines.push("## Proč rozhodoval třetí posudek", "", auditRecord.arbiter.output.explanationCz, "");
+  }
+  const citedIds = new Set([
+    ...evidencePackage.evidence.filter(({ role }) => role === "promise-source").map(({ id }) => id),
+    ...auditRecord.assessorA.output.citedEvidenceIds,
+    ...auditRecord.assessorB.output.citedEvidenceIds,
+    ...(auditRecord.arbiter?.output.citedEvidenceIds ?? [])
+  ]);
+  const citedEvidence = evidencePackage.evidence.filter(({ id }) => citedIds.has(id));
+  lines.push("## Zdroje použité při hodnocení", "", ...citedEvidence.map((evidence) => `- [${evidenceLabel(evidence)}](${evidence.url})`), "");
+  if (proposal.supersedesProposalId) {
+    lines.push("Tento návrh nahrazuje starší automatický posudek, který zůstává zachovaný v auditní historii.", "");
+  }
+  return `${lines.join("\n")}\n`;
 }
 
 export function addReviewProposals(manifest, proposals) {
   validateReviewManifest(manifest);
   const merged = structuredClone(manifest);
-  merged.proposals.push(...proposals);
+  for (const proposal of proposals) {
+    const previous = currentReviewProposal(merged, proposal.promiseId);
+    if (previous) {
+      invariant(proposal.supersedesProposalId === previous.proposalId, `Review proposal ${proposal.proposalId} must supersede the current proposal`);
+      previous.supersededByProposalId = proposal.proposalId;
+    } else {
+      invariant(proposal.supersedesProposalId == null, `Review proposal ${proposal.proposalId} cannot supersede a missing proposal`);
+    }
+    merged.proposals.push(proposal);
+  }
   merged.proposals.sort((left, right) => left.promiseId.localeCompare(right.promiseId) || left.evaluatedAt.localeCompare(right.evaluatedAt));
   return validateReviewManifest(merged);
 }

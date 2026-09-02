@@ -32,6 +32,22 @@ function invariant(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+const forbiddenReaderFacingPatterns = [
+  /\b(?:fulfilled|moving-towards|no-progress|moving-against|acting-against)\b/i,
+  /\b(?:verified-party-sponsor|verified-party-vote|candidate-government-action|assessmentContext|matchBasis)\b/i,
+  /\bevidence package\b/i,
+  /sponzorsk\p{L}*\s+propojen\p{L}*/iu,
+  /\btisk\s+\d+\b/iu
+];
+
+export function validateReaderFacingCzech(text, fieldName = "Reader-facing Czech text") {
+  invariant(typeof text === "string" && text.trim().length > 0, `${fieldName} is missing`);
+  for (const pattern of forbiddenReaderFacingPatterns) {
+    invariant(!pattern.test(text), `${fieldName} contains internal or unexplained language: ${pattern.source}`);
+  }
+  return text;
+}
+
 function canonicalize(value) {
   if (Array.isArray(value)) return `[${value.map(canonicalize).join(",")}]`;
   if (value && typeof value === "object") {
@@ -112,8 +128,9 @@ export function validateAssessmentOutput(output, evidencePackage) {
   invariant(assessmentStatuses.includes(output.status), `Unknown assessment status: ${output.status}`);
   invariant(typeof output.evidenceSufficient === "boolean", "Assessment is missing evidenceSufficient");
   invariant(["low", "medium", "high"].includes(output.confidence), "Assessment confidence is invalid");
-  invariant(typeof output.explanationCz === "string" && output.explanationCz.length > 0, "Assessment explanation is missing");
+  validateReaderFacingCzech(output.explanationCz, "Assessment explanation");
   invariant(Array.isArray(output.uncertainties), "Assessment uncertainties must be an array");
+  for (const uncertainty of output.uncertainties) validateReaderFacingCzech(uncertainty, "Assessment uncertainty");
   invariant(Array.isArray(output.citedEvidenceIds) && output.citedEvidenceIds.length > 0, "Assessment must cite evidence");
 
   const allowedIds = new Set(evidencePackage.evidence.map(({ id }) => id));
@@ -125,7 +142,7 @@ export function validateAssessmentOutput(output, evidencePackage) {
 export function validateArbiterOutput(output, evidencePackage) {
   invariant(output && typeof output === "object", "Arbiter output must be an object");
   invariant(["assessor-a", "assessor-b", "cannot-decide"].includes(output.choice), "Arbiter choice is invalid");
-  invariant(typeof output.explanationCz === "string" && output.explanationCz.length > 0, "Arbiter explanation is missing");
+  validateReaderFacingCzech(output.explanationCz, "Arbiter explanation");
   invariant(Array.isArray(output.citedEvidenceIds), "Arbiter citedEvidenceIds must be an array");
   const allowedIds = new Set(evidencePackage.evidence.map(({ id }) => id));
   for (const evidenceId of output.citedEvidenceIds) invariant(allowedIds.has(evidenceId), `Arbiter invented evidence ID: ${evidenceId}`);

@@ -79,6 +79,20 @@ The [public-media-fees regression run](https://github.com/orik007/sliby-chyby/ac
 
 This rerun supersedes the earlier model interpretation of the same supplied evidence as `moving-against`. It validates prompt compliance with the confirmed rule; it still does not publish the political assessment or bypass human review.
 
+## 2026-09-02 full-registry assessment review run
+
+**Pilot observation**
+
+The [first full-registry assessment run](https://github.com/orik007/sliby-chyby/actions/runs/33615104174) collected every enabled source once, checked all 36 reviewed promises, enriched three assessable packages with official documents, and evaluated all three previously unseen assessment fingerprints. It produced no enrichment warning and retained three unpublished proposals on the dedicated review branch:
+
+- ANO public-media fees: assessor A proposed `moving-against`; assessor B proposed `moving-towards`; the arbiter selected assessor B because incomplete partial progress is not contrary conduct under the confirmed live-period rule. The review candidate is `moving-towards`.
+- ANO EET 2.0: both assessors proposed `moving-towards` with sufficient evidence. No arbiter was needed.
+- ANO retirement age 65: both assessors proposed `no-progress` but marked the evidence insufficient for fair party attribution. The case remains `human-review-required` without a candidate status.
+
+All three records have `humanReviewRequired: true` and `publicationApproved: false`. They are presented in [review pull request 1](https://github.com/orik007/sliby-chyby/pull/1). The workflow successfully pushed the review branch, but GitHub's repository setting initially prevented the Actions token from creating the pull request; the owner-authenticated CLI created this first PR without rerunning any model. The workflow now treats this permission boundary as a successful ready-to-review branch and emits a compare link when automatic PR creation is unavailable.
+
+The immediate [unchanged-input rerun](https://github.com/orik007/sliby-chyby/actions/runs/33615561334) repeated collection, matching, and document enrichment but recognized all three assessment fingerprints as unchanged. It created zero new proposals and no assessment audit files, demonstrating that no assessor or arbiter API call was made. The workflow completed successfully without modifying the existing review branch or pull request.
+
 ## Verified pipeline behavior
 
 **Pilot observation**

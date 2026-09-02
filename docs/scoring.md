@@ -20,6 +20,12 @@ Promise admission is governed by [promise-selection.md](promise-selection.md). O
 
 The scale describes consistency with the promise, not moral approval.
 
+### Confirmed reader-facing language
+
+Canonical English status names are internal machine values. They must not appear in Czech explanations for visitors or human reviewers. Reader-facing text states the meaning naturally, for example “strana udělala dílčí krok ke splnění slibu”, “zatím se nic podstatného nestalo”, or “strana jednala proti svému slibu”.
+
+Parliamentary and legal references must be explained on first use. Write what the proposal concerns and what it would change, then add the official identifier for traceability if useful. A bare phrase such as “tisk 201” or an implementation phrase such as “ověřené sponzorské propojení” is not acceptable reader-facing Czech.
+
 ## Confirmed simple period and partial-progress rule
 
 The project uses two clearly separated assessment moments. It does not gradually penalize a promise because several weeks or months have passed.

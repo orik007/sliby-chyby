@@ -5,7 +5,9 @@ import { assessmentRuntimeConfig, loadAssessmentPrompts } from "./lib/assessment
 import {
   addReviewProposals,
   createReviewProposal,
+  currentReviewProposal,
   planAssessmentInputs,
+  renderHumanReviewMarkdown,
   validateReviewManifest
 } from "./lib/assessment-review.mjs";
 import { validateEvidencePackage } from "./lib/assessment-pipeline.mjs";
@@ -72,25 +74,39 @@ function validateAssessmentAudit(audit, result) {
 }
 
 function pullRequestBody(summary) {
+  const statusLabels = {
+    fulfilled: "splněno",
+    "moving-towards": "směřuje ke splnění",
+    "no-progress": "bez podstatného posunu",
+    "moving-against": "směřuje proti slibu",
+    "acting-against": "jedná proti slibu"
+  };
+  const dispositionLabels = {
+    assessed: "nový návrh připraven ke kontrole",
+    unchanged: "beze změny",
+    "blocked-enrichment-warning": "čeká na úplný úřední dokument"
+  };
   const lines = [
-    "## Unpublished SLAVA assessment proposals",
+    "## Neveřejné návrhy hodnocení SLAVA",
     "",
-    "This pull request preserves automated assessment proposals for human review. Merging it does **not** publish a score or change the public website.",
+    "Tento pull request ukládá automaticky připravené návrhy k lidské kontrole. Jeho sloučení **nezveřejní hodnocení ani nezmění veřejný web**.",
     "",
-    "| Promise | Pipeline result | Candidate status |",
+    "| Slib | Výsledek zpracování | Navržené hodnocení |",
     "| --- | --- | --- |"
   ];
   for (const result of summary.results) {
-    const pipelineResult = result.disposition === "assessed" ? result.resolutionState : result.disposition;
-    lines.push(`| \`${result.promiseId}\` | \`${pipelineResult}\` | ${result.candidateStatus ? `\`${result.candidateStatus}\`` : "—"} |`);
+    const pipelineResult = result.resolutionState === "human-review-required"
+      ? "nelze férově rozhodnout bez člověka"
+      : dispositionLabels[result.disposition] ?? result.disposition;
+    lines.push(`| ${result.promiseTitleCz} (\`${result.promiseId}\`) | ${pipelineResult} | ${statusLabels[result.candidateStatus] ?? "—"} |`);
   }
   lines.push(
     "",
-    `New review proposals: **${summary.newProposalCount}**`,
-    `Unchanged inputs skipped: **${summary.unchangedCount}**`,
-    `Blocked by enrichment warnings: **${summary.blockedCount}**`,
+    `Nové návrhy ke kontrole: **${summary.newProposalCount}**`,
+    `Nezměněné podklady bez nového volání modelů: **${summary.unchangedCount}**`,
+    `Případy čekající na úplný úřední dokument: **${summary.blockedCount}**`,
     "",
-    "Every retained proposal has `humanReviewRequired: true` and `publicationApproved: false`."
+    "Všechny návrhy vyžadují lidskou kontrolu a nejsou schválené ke zveřejnění."
   );
   return `${lines.join("\n")}\n`;
 }
@@ -130,6 +146,7 @@ for (const item of plan) {
   if (item.disposition !== "assess") {
     results.push({
       promiseId: item.promiseId,
+      promiseTitleCz: item.evidencePackage.promise.titleCz,
       assessmentFingerprint: item.assessmentFingerprint,
       disposition: item.disposition,
       resolutionState: null,
@@ -146,11 +163,18 @@ for (const item of plan) {
   await mkdir(proposalDirectory, { recursive: false });
   await writeFile(resolve(proposalDirectory, "evidence-package.json"), `${JSON.stringify(item.evidencePackage, null, 2)}\n`, { flag: "wx" });
   await writeFile(resolve(proposalDirectory, "assessment-run.json"), `${JSON.stringify(auditRecord, null, 2)}\n`, { flag: "wx" });
-  const proposal = createReviewProposal({ auditRecord, proposalDirectory: relativeProposalDirectory });
+  const previousProposal = currentReviewProposal(manifest, item.promiseId);
+  const proposal = createReviewProposal({
+    auditRecord,
+    proposalDirectory: relativeProposalDirectory,
+    supersedesProposalId: previousProposal?.proposalId ?? null
+  });
   await writeFile(resolve(proposalDirectory, "proposal.json"), `${JSON.stringify(proposal, null, 2)}\n`, { flag: "wx" });
+  await writeFile(resolve(proposalDirectory, "review.md"), renderHumanReviewMarkdown({ evidencePackage: item.evidencePackage, auditRecord, proposal }), { flag: "wx" });
   newProposals.push(proposal);
   results.push({
     promiseId: item.promiseId,
+    promiseTitleCz: item.evidencePackage.promise.titleCz,
     assessmentFingerprint: item.assessmentFingerprint,
     disposition: "assessed",
     resolutionState: auditRecord.resolution.state,

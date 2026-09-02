@@ -59,6 +59,8 @@ SlibyChyby tracks what political parties promised before an election and compare
 ## Product and implementation
 
 - Optimize the first view for quick comprehension and mobile use; place detailed evidence behind progressive disclosure.
+- Write every public explanation and human-review summary in plain, natural Czech for an ordinary reader. Internal English enum values and data-model labels may appear only in machine-readable fields, never in Czech prose.
+- Explain parliamentary and legal references on first use. Never write a bare identifier such as “tisk 201”; identify the proposal and its practical meaning before or alongside the traceable number.
 - Never rely on color alone. Pair color with a symbol and text label.
 - Clearly mark fabricated or placeholder political data as demo data.
 - Do not present unverified real-world political claims as demo content.

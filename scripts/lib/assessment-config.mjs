@@ -2,8 +2,8 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-export const assessorPromptVersion = "assessor-v6";
-export const arbiterPromptVersion = "arbiter-v2";
+export const assessorPromptVersion = "assessor-v7";
+export const arbiterPromptVersion = "arbiter-v3";
 
 export function hashText(text) {
   return createHash("sha256").update(text).digest("hex");

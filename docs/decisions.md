@@ -18,6 +18,8 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Optimize for a simple public overview rather than complex analysis.
 - Make detailed explanations and sources available after expanding or opening a promise.
 - Design mobile-first and make the first view understandable within seconds.
+- Write public explanations and human-review summaries in plain, natural Czech for ordinary readers. Do not expose internal English status values or data-model labels in Czech prose.
+- Explain parliamentary and legal identifiers on first use. State what the proposal or decision is and what it changes; never rely on a bare reference such as “tisk 201”.
 - Search official national party sources broadly, but publish only clear and fully verified promises. The first real-data version may contain a smaller curated set and does not need to include every campaign statement.
 
 ### Identity and scoring
@@ -81,6 +83,7 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Keep provider-specific API calls behind an adapter so that assessor B can later move to another provider without changing evidence packages, methodology, arbitration, audit records, or the public website.
 - Run assessment outside the public website. The public browser must never receive an AI provider credential or invoke the scoring API.
 - Keep matching separate from scoring. The initial matcher is deterministic and exposes every matched phrase and external identifier; a thematic match without party attribution cannot enter an assessment package.
+- Require assessors and arbiters to produce reader-facing Czech explanations without internal enum names, attribution labels, unexplained parliamentary shorthand, or unnatural translations of implementation terms.
 
 ### Initial implementation architecture
 
