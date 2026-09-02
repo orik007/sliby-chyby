@@ -60,6 +60,15 @@ Commit `e1a5cbc` changed the resolver so that disagreement about either status o
 
 The repeatability check also identified a collection gap. Parliamentary print history supplied titles, procedural steps, sponsors, and linked votes, but the generated package did not contain the substantive text or a verified factual extract from the proposal. A title saying that an act is amended does not reveal whether the proposal fulfils or contradicts the precise promise. The subsequent `psp-print-document-v1` enrichment stage addresses this gap by hashing the official proposal DOCX and supplying bounded, mechanically selected, numbered excerpts. The affected pilots still require a new end-to-end run before any candidate result can be considered.
 
+## 2026-09-02 official-document reruns
+
+**Pilot observation**
+
+- [ANO — public-media fees with official documents](https://github.com/orik007/sliby-chyby/actions/runs/33601067475) added the official proposal documents for prints 201 and 231 with no enrichment warning. Both assessors proposed `moving-against`: they treated ANO-linked print 201, which preserves the general fee system while widening exemptions, as a concrete step against categorical abolition. They did not attribute government print 231, which proposes full abolition and state-budget financing, to ANO. This consensus is an unpublished model candidate, not an accepted assessment. The case exposed the unresolved treatment of a partial reduction that coexists with a categorical promise and a separate unattributed full-repeal proposal.
+- [ANO — retirement age 65 with official document](https://github.com/orik007/sliby-chyby/actions/runs/33601443481) added the official document for print 270 with no warning. Both assessors found that the explanatory text mentions a 65-year cap only as another planned change and that the supplied proposal excerpts do not enact that cap. Because the print is also only a `candidate-government-action`, both marked the evidence insufficient. The result remained `human-review-required` with no score candidate.
+
+An earlier retirement-age attempt encountered one transient PSP download failure and continued without document evidence. Commits `0c2924d` and `a255757` added bounded official-document enrichment, transient retry, and a hard assessment gate: when a required print document remains unavailable, model calls do not run and the failed enrichment audit is uploaded. The clean retirement-age rerun above verified that corrected path.
+
 ## Verified pipeline behavior
 
 **Pilot observation**

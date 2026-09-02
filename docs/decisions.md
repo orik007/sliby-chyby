@@ -169,6 +169,10 @@ The first public real-data version should favor a smaller fully verified set ove
 
 The owner rejected an absolute averaging rule and preferred the worse result in inconsistent cases, while also saying this is not an absolute rule. The working exception for final outcomes and behavior promises needs real-case tests before becoming canonical.
 
+### Partial measures toward a categorical promise
+
+The official-document pilot produced a concrete unresolved case. ANO promised to abolish public-media fees. ANO-linked print 201 preserves the general fee system but removes the obligation for additional groups, while a separate government print 231 proposes complete abolition but is not yet attributable to ANO under the confirmed party-attribution rule. Both AI assessors proposed `moving-against` for print 201; this is not a confirmed assessment. The project owner must decide whether a partial reduction that does not make the categorical goal harder is normally `moving-towards`, `no-progress`, or `moving-against` when the proposal also explicitly preserves the underlying system. Any rule must distinguish partial progress from explicit abandonment and avoid inferring abandonment merely because a first step is incomplete.
+
 ### Blocked and compromised promises
 
 International examples motivated distinct handling for promises blocked by another actor and promises changed by compromise. No special state will be implemented until a real project case demonstrates the need.
