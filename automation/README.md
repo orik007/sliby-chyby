@@ -69,7 +69,7 @@ A scheduled trigger should be added only after the evidence collector can identi
 
 The concurrency group includes the promise ID. Repeated runs for one promise remain serialized, while pilots for different promises do not replace one another in GitHub's single pending slot for a concurrency group.
 
-`.github/workflows/collect-evidence.yml` is the manually triggered full-registry workflow. It collects once, matches all reviewed promises, enriches official print documents, blocks only packages with enrichment warnings, assesses only new fingerprints, and commits durable unpublished proposals to `automation/assessment-review`. It creates or updates a pull request against `main`. Merging that pull request retains the review audit but cannot publish a status or update the public website.
+`.github/workflows/collect-evidence.yml` is the manually triggered full-registry workflow. It collects once, matches all reviewed promises, enriches official print documents, blocks only packages with enrichment warnings, assesses only new fingerprints, and commits durable unpublished proposals to `automation/assessment-review`. It creates or updates a pull request against `main` when repository Actions permissions allow this. If GitHub permits the token to push the branch but forbids pull-request creation, the successful workflow emits a ready-to-open compare link instead of repeating model calls or discarding the proposals. Merging the pull request retains the review audit but cannot publish a status or update the public website.
 
 The first five-promise integration report is recorded in [docs/pilot-evaluation.md](../docs/pilot-evaluation.md).
 

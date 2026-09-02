@@ -149,7 +149,14 @@ jobs:
             gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md
             PR_URL="$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json url --jq '.url')"
           else
-            PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Review automated SLAVA assessment proposals" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md)"
+            if PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Review automated SLAVA assessment proposals" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md 2>/tmp/slava-pr-error)"; then
+              :
+            else
+              COMPARE_URL="https://github.com/$GITHUB_REPOSITORY/compare/main...$REVIEW_BRANCH?expand=1"
+              echo "::warning::GitHub Actions may push the review branch but repository settings prevent it from creating pull requests. Open $COMPARE_URL"
+              echo "Review branch is ready. Create the pull request at: $COMPARE_URL" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
           fi
           echo "Review pull request: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
 
