@@ -37,8 +37,10 @@ test("reviewed catalog expands through bounded batches and links every promise t
 
   const research = JSON.parse(await readFile(new URL("../research/2025-election/candidate-promises.json", import.meta.url), "utf8"));
   for (const candidate of research.records) {
+    const normalizedExcerpt = candidate.originalExcerpt.replace(/\s+/g, " ").trim();
+    assert.equal(candidate.originalExcerpt, normalizedExcerpt, `Candidate ${candidate.id} excerpt is not generator-normalized`);
     const digest = createHash("sha256")
-      .update(`${candidate.sourceId}|${candidate.page}|${candidate.originalExcerpt}`)
+      .update(`${candidate.sourceId}|${candidate.page}|${normalizedExcerpt}`)
       .digest("hex")
       .slice(0, 12);
     assert.equal(candidate.id, `candidate-${digest}`, `Candidate ${candidate.id} is not reproducible from its source occurrence`);
