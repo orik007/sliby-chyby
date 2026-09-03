@@ -27,12 +27,20 @@ const runtime = {
   arbiterModel: "model-b"
 };
 
-test("active prompts require plain Czech without internal labels", async () => {
-  assert.equal(assessorPromptVersion, "assessor-v7");
+test("active prompts use the consolidated decision order and plain Czech", async () => {
+  assert.equal(assessorPromptVersion, "assessor-v10");
   assert.equal(arbiterPromptVersion, "arbiter-v3");
   const active = await loadAssessmentPrompts();
-  assert.match(active.assessor.instructions, /Never put internal English status names/);
-  assert.match(active.assessor.instructions, /Never refer to a parliamentary print by number alone/);
+  assert.match(active.assessor.instructions, /Follow these five steps in order/);
+  assert.equal(active.assessor.instructions.match(/^## [1-5]\./gm)?.length, 5);
+  assert.match(active.assessor.instructions, /never use a bare identifier such as “tisk 201”/);
+  assert.match(active.assessor.instructions, /strict-majority `yes` on a measure that would deliver the whole legislative promise: `fulfilled`/);
+  assert.match(active.assessor.instructions, /A later vote counts regardless of who introduced the bill/);
+  assert.match(active.assessor.instructions, /An official party publication proves that the party published the words/);
+  assert.match(active.assessor.instructions, /A government action is only an attribution candidate/);
+  assert.match(active.assessor.instructions, /neither strict-majority `yes` nor strict-majority `no` at that same direct opportunity/);
+  assert.match(active.assessor.instructions, /During `live` mode, elapsed time, inactivity, or incomplete progress is not negative/);
+  assert.match(active.assessor.instructions, /do not score or average individual evidence items/);
   assert.match(active.arbiter.instructions, /ordinary reader/);
 });
 

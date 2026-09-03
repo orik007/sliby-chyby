@@ -8,16 +8,11 @@ Upstream evidence discovery is documented separately in [collectors/README.md](c
 
 The intermediate deterministic matching stage is documented in [matching/README.md](matching/README.md). It records transparent candidate links and creates a bounded primary-evidence package only when party attribution is available.
 
-## Pipeline
+## Assessment boundary
 
-1. A reviewed promise and a bounded evidence package are prepared.
-2. Two stateless assessors receive the same package independently.
-3. Each assessor returns a strict structured result and may cite only supplied evidence IDs.
-4. Matching sufficient results become a candidate assessment.
-5. A disagreement about the status or evidence sufficiency is sent to an arbiter, which may select either review or return `cannot-decide`. Selecting an insufficient review still requires human review and never creates a score candidate.
-6. Every result remains unpublished until a later publication gate approves it.
+Two stateless assessors independently receive the same bounded package and may cite only supplied evidence IDs. Matching sufficient results become an unpublished candidate; a disagreement goes to an arbiter that may select one review or return `cannot-decide`. No result becomes public without the separate human publication gate. The complete stage sequence is maintained only in [`docs/evidence-pipeline.md`](../docs/evidence-pipeline.md).
 
-The initial runner uses the OpenAI Responses API with [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs). It never gives the scoring assessors web-search tools. Source discovery, promise matching, and official-document enrichment are separate upstream stages. The active assessor prompt is versioned as `assessor-v7` and the arbiter prompt as `arbiter-v3`; their content hashes are stored in every audit record. Earlier prompt files remain immutable for audit reproduction. The active prompts require assessors to read mechanically selected official print excerpts, distinguish proposal wording from legal effect, treat meaningful partial progress as `+1` during a live period, apply the untouched-promise penalty only in an explicit closing audit, and write reader-facing Czech without internal state names or unexplained legislative shorthand.
+The initial runner uses the OpenAI Responses API with [Structured Outputs](https://developers.openai.com/api/docs/guides/structured-outputs). It never gives the scoring assessors web-search tools. Source discovery, promise matching, and official-document enrichment are separate upstream stages. The active assessor prompt is versioned as `assessor-v10` and the arbiter prompt as `arbiter-v3`; their content hashes are stored in every audit record. Earlier prompt files remain immutable for audit reproduction. The active prompt follows the canonical decision order in [`docs/scoring.md`](../docs/scoring.md); collection and attribution boundaries live in [`docs/evidence-pipeline.md`](../docs/evidence-pipeline.md).
 
 Provider-specific HTTP calls are isolated in `scripts/lib/model-provider.mjs`. The rest of the pipeline consumes a normalized response. A future second provider therefore needs a new adapter and credentials, while evidence packages, scoring validation, arbitration, audit records, and the public site remain unchanged.
 

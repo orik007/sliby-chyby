@@ -6,14 +6,7 @@ The canonical end-to-end pipeline and the authoritative human-readable source li
 
 ## Enabled sources
 
-The initial verified registry contains:
-
-- daily full PSP open-data snapshots for votes, parliamentary prints, and time-bounded parliamentary-club membership;
-- official RSS from the Government Office and MPSV;
-- complete 2025 and 2026 annual press-release indexes from the Ministry of Finance;
-- the paginated Ministry of Health press-release archive through its official WordPress REST endpoint;
-- publisher-provided feeds from iROZHLAS, ČT24, and Seznam Zprávy;
-- the Novinky.cz Google News sitemap advertised in its `robots.txt` file.
+The authoritative allowlist and source roles are maintained once in [`docs/evidence-pipeline.md`](../../docs/evidence-pipeline.md) and machine-read from [`sources.json`](sources.json). This README does not duplicate that registry.
 
 Media sources are discovery and context only. Their inclusion in the registry is not a general endorsement and does not make an article decisive evidence. A strong `+2` or `-2` assessment should normally cite the underlying primary decision, enacted measure, authoritative outcome, or official record.
 
@@ -65,14 +58,4 @@ The report covers every reviewed promise. `No candidate match` describes one run
 
 ## GitHub Actions pipeline
 
-The manually triggered `Collect, match, and assess evidence candidates` workflow runs the production-shaped pipeline:
-
-1. collect all enabled verified sources once;
-2. compare the resulting records with every promise in the reviewed registry;
-3. generate bounded evidence packages only where attributable primary candidate evidence exists;
-4. retrieve official DOCX files only for parliamentary prints already present in those packages, hash them, and select bounded numbered excerpts without assigning direction;
-5. create a coverage audit for every reviewed promise, preserving missing matches as missing evidence rather than scores;
-6. assess only new or changed packages and persist unpublished review proposals;
-7. upload the complete audit as one unpublished artifact.
-
-The workflow never changes public data or deploys the website. Collection and matching remain deterministic; assessors receive only bounded eligible packages, and all proposals require human review.
+The manually triggered `Collect, match, and assess evidence candidates` workflow runs the canonical sequence from [`docs/evidence-pipeline.md`](../../docs/evidence-pipeline.md). It collects each enabled source once, checks the full reviewed registry, assesses only changed bounded packages, and retains a complete unpublished audit. It never changes public data or deploys the website.

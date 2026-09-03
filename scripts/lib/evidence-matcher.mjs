@@ -39,6 +39,7 @@ const assessableAttributionStatuses = new Set([
   "verified-party-vote",
   "verified-party-no-majority",
   "verified-party-sponsor",
+  "verified-party-publication",
   "candidate-government-action"
 ]);
 
@@ -107,6 +108,7 @@ export function matchRecordToPromise(record, promise) {
     : partyVoteSummary?.attributionStatus === "no-strict-majority"
       ? "candidate-party-vote-without-decisive-context"
     : matchedExternalReferences.find(({ attributionStatus: status }) => status === "verified-party-sponsor")?.attributionStatus
+      ?? (record.primary === true && record.kind === "official-publication" && record.evidenceRole === "official-party-publication" && record.payload?.sourcePartyId === promise.partyId ? "verified-party-publication" : null)
       ?? matchedExternalReferences.find(({ attributionStatus: status }) => status === "candidate-government-action")?.attributionStatus
       ?? (record.primary === true && record.kind === "official-publication" && record.evidenceRole === "official-discovery" ? "candidate-government-action" : null)
       ?? "unattributed";
@@ -217,7 +219,7 @@ export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
   if (selectedMatches.length === 0) return null;
   const evidencePackage = {
     schemaVersion: "1.0.0",
-    methodologyVersion: "slava-v4",
+    methodologyVersion: "slava-v5",
     packageId: `${promise.id}--${asOf}--generated`,
     asOf,
     assessmentContext: {
@@ -236,7 +238,7 @@ export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
       contradictionTest: promise.contradictionTest
     },
     generation: {
-      matcherVersion: "deterministic-matcher-v4",
+      matcherVersion: "deterministic-matcher-v5",
       collectorRunId: collectorRun.runId,
       collectorRunHash: sha256(collectorRun),
       candidateMatchCount: matches.length,

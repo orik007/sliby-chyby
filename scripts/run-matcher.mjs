@@ -57,7 +57,7 @@ for (const promise of promises) {
   promiseResults.push({
     promiseId: promise.id,
     candidateMatchCount: matches.length,
-    attributablePrimaryMatchCount: matches.filter(({ record, attributionStatus }) => record.primary && ["verified-party-vote", "verified-party-no-majority", "verified-party-sponsor", "candidate-government-action"].includes(attributionStatus)).length,
+    attributablePrimaryMatchCount: matches.filter(({ record, attributionStatus }) => record.primary && ["verified-party-vote", "verified-party-no-majority", "verified-party-sponsor", "verified-party-publication", "candidate-government-action"].includes(attributionStatus)).length,
     evidencePackage: packagePath ? `evidence-packages/${basename(packagePath)}` : null,
     noPackageReason: packagePath ? null : "no-primary-candidate-match",
     matches: matches.map(summarizeMatch)
@@ -67,7 +67,7 @@ for (const promise of promises) {
 
 const run = {
   schemaVersion: "1.0.0",
-  matcherVersion: "deterministic-matcher-v4",
+  matcherVersion: "deterministic-matcher-v5",
   assessmentContext: { mode: "live", ruleVersion: "period-timing-v1" },
   matchedAt: new Date().toISOString(),
   asOf: args.asOf,

@@ -110,7 +110,8 @@ export function parseRssOrAtom(xml, source, { since }) {
         feedEntryId,
         feedTitle: feed.title,
         authorNames: normalizeAuthors(item),
-        excerptCz
+        excerptCz,
+        ...(source.partyId ? { sourcePartyId: source.partyId } : {})
       }
     }));
   }
