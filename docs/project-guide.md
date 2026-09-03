@@ -105,7 +105,7 @@ The registry currently covers:
 
 Official records are preferred for decisive facts. News sources help discover and explain an event, but collection from a familiar publisher does not establish that the event occurred as described or determine a score. Full news article bodies are not stored.
 
-Collectors enforce configured hosts, media types, size limits, hashes, provenance, and coverage semantics. A failed run does not change published assessments or advance the public last-successful-collection date.
+Collectors enforce configured hosts, media types, and size limits. They record response and record hashes, provenance, and coverage metadata for audit. A failed run does not change published assessments or advance the public last-successful-collection date.
 
 ## How evidence is matched and checked
 
@@ -144,7 +144,7 @@ Each public promise has one current assessment:
 
 | Score | Meaning |
 | ---: | --- |
-| `+2` | The whole promised result or exact promised conduct occurred. |
+| `+2` | The whole promised result or exact promised conduct occurred. For a legislative promise, this also includes the party's strict-majority `yes` on a verified full measure, even if another actor introduced it or other parties caused it to fail. |
 | `+1` | A meaningful concrete step advances a real part of the promise. |
 | `0` | No documented meaningful movement during the live period. |
 | `-1` | Documented conduct moves against the promise, or a verified direct decisive opportunity to support the exact promise was missed under the strict vote rule. |
