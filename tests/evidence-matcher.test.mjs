@@ -48,6 +48,11 @@ test("reviewed catalog expands through bounded batches and links every promise t
       .filter(({ reviewStatus }) => reviewStatus.startsWith("accepted-"))
       .map((candidate) => [candidate.id, candidate])
   );
+  assert.deepEqual(
+    [...new Set(registry.promises.map(({ researchSourceCandidateId }) => researchSourceCandidateId))].sort(),
+    [...acceptedCandidates.keys()].sort(),
+    "Every accepted source occurrence must produce at least one registry promise"
+  );
   for (const promise of registry.promises) {
     const candidate = acceptedCandidates.get(promise.researchSourceCandidateId);
     assert.ok(candidate, `Missing accepted candidate for ${promise.id}`);
