@@ -58,4 +58,4 @@ The report covers every reviewed promise. `No candidate match` describes one run
 
 ## GitHub Actions pipeline
 
-The manually triggered `Collect, match, and assess evidence candidates` workflow runs the canonical sequence from [`docs/evidence-pipeline.md`](../../docs/evidence-pipeline.md). It collects each enabled source once, checks the full reviewed registry, assesses only changed bounded packages, and retains a complete unpublished audit. It never changes public data or deploys the website.
+The `Collect, match, and assess evidence candidates` workflow runs the canonical sequence from [`docs/evidence-pipeline.md`](../../docs/evidence-pipeline.md) daily at 09:37 Prague time and may also be started manually. It collects each enabled source once, checks the full reviewed registry, assesses only changed bounded packages, and retains a complete unpublished audit. It never changes public data or deploys the website.

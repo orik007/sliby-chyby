@@ -127,7 +127,9 @@ The owner explicitly required more than one AI assessor. The intended pattern is
 3. if they disagree, a third AI acts as arbiter;
 4. unresolved cases go to a human.
 
-The details of model providers, confidence thresholds, and publication permissions remain proposals.
+The details of future model providers and confidence thresholds remain proposals. Publication always requires the confirmed owner approval described below.
+
+An unambiguous Codex message from the owner that identifies the approved promise proposals is the confirmed editorial approval mechanism. The publication change must preserve that approval and still pass deterministic validation. A merge of an automated review proposal alone is not approval, and no AI-generated assessment is published automatically.
 
 ## Confirmed technical direction
 
@@ -141,6 +143,8 @@ The owner confirmed the following initial architecture. It may be revisited late
 - Cloudflare R2 for lawful archival copies of programmes, public documents, and campaign images;
 - a database only when an editorial UI, concurrent writes, or a large automated event queue creates a real need;
 - no live AI or database request during a normal public page view.
+
+The one narrow runtime exception is source freshness: the site may read public GitHub Actions metadata and display the date of the latest successful complete collection. It uses a build-verified fallback if that metadata is temporarily unavailable. This endpoint does not collect evidence, score promises, or change published political data.
 
 The route structure remains a working proposal:
 
@@ -171,4 +175,3 @@ The conversations explicitly deprioritized:
 
 - What is the public site name and subtitle? Suggestions such as “Sliby vlády” were not accepted as final.
 - Which distribution summary belongs on the home page versus only on a party page?
-- What exact editorial approval is required before publication, and can any high-confidence cases ever be published automatically?

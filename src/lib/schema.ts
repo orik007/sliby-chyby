@@ -11,6 +11,7 @@ export const sourceSchema = z.object({ id: z.string().min(1), type: z.enum(["pro
 export const assessmentRevisionSchema = z.object({ id: z.string().min(1), promiseId: z.string().min(1), revision: z.number().int().positive(), status: assessmentStatusSchema, explanationShort: z.string().min(1), publishedAt: z.iso.date(), evidenceSourceIds: z.array(z.string().min(1)).min(1), reviewProposalId: z.string().min(1).optional(), isDemo: z.boolean() }).superRefine((revision, context) => {
   if (!revision.isDemo && !revision.reviewProposalId) context.addIssue({ code: "custom", path: ["reviewProposalId"], message: "Published real assessments require a review proposal ID" });
 });
+export const systemStatusSchema = z.object({ lastSuccessfulCollectionAt: z.iso.datetime() });
 
 export type PartyPeriod = z.infer<typeof partyPeriodSchema>;
 export type PromiseRecord = z.infer<typeof promiseSchema>;

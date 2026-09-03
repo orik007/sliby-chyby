@@ -50,6 +50,7 @@ SlibyChyby tracks what political parties promised before an election and compare
 - Do not publish AI-generated political assessments automatically unless a later confirmed decision explicitly permits it.
 - Keep model, prompt/methodology version, evaluation time, evidence IDs, and confidence available for audit.
 - Persist automated assessment output only as an unpublished human-review proposal under `automation/review-proposals`. Merging such a proposal preserves its audit and does not authorize publication or a public-data change.
+- An unambiguous owner message in Codex that identifies the approved promise proposals is valid editorial approval. Preserve that approval in the publication change; a general acknowledgement such as `ok` is not sufficient.
 - Use the stable assessment fingerprint for the changed-input gate. It includes assessable content, methodology, prompt hashes, providers, and model IDs; volatile run timestamps and collection IDs must not cause paid reassessment.
 
 ## Data and periods
@@ -70,6 +71,7 @@ SlibyChyby tracks what political parties promised before an election and compare
 - The confirmed initial stack is Astro, TypeScript, plain CSS, and schema-validated versioned files. Do not introduce a database without a demonstrated need and a confirmed decision.
 - Validate all data relationships and make invalid data fail the build or validation step.
 - Prefer the simplest architecture that preserves auditability, deterministic builds, and a future database migration path.
+- Run the complete evidence pipeline once daily at 09:37 in `Europe/Prague`, while retaining the manual trigger. The public freshness date represents the last successful complete run and must never advance after a failed run.
 
 ## Scope control
 

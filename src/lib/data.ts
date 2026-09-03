@@ -1,4 +1,5 @@
-import { assessmentRevisionSchema, partyPeriodSchema, partySchema, periodSchema, promiseSchema, sourceSchema, type AssessmentRevision, type AssessmentStatus, type PartyPeriod, type PromiseRecord } from "./schema";
+import systemStatusData from "../../data/system-status.json";
+import { assessmentRevisionSchema, partyPeriodSchema, partySchema, periodSchema, promiseSchema, sourceSchema, systemStatusSchema, type AssessmentRevision, type AssessmentStatus, type PartyPeriod, type PromiseRecord } from "./schema";
 import { calculateSlavaIndex } from "./scoring";
 
 function parseCollection<T>(modules: Record<string, unknown>, schema: { parse: (value: unknown) => T }): T[] {
@@ -14,6 +15,7 @@ const allAssessmentRevisions = parseCollection(import.meta.glob("../../data/asse
 export const promises = allPromises.filter(({ isDemo }) => !isDemo);
 const visiblePromiseIds = new Set(promises.map(({ id }) => id));
 export const assessmentRevisions = allAssessmentRevisions.filter(({ promiseId }) => visiblePromiseIds.has(promiseId));
+export const systemStatus = systemStatusSchema.parse(systemStatusData);
 
 export const statusDetails: Record<AssessmentStatus, { score: number; symbol: string; label: string; className: string }> = {
   fulfilled: { score: 2, symbol: "✓", label: "Splněno", className: "positive-strong" },
