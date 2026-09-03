@@ -36,6 +36,7 @@ SlibyChyby tracks what political parties promised before an election and compare
 - One promise has one current assessment. Keep contradictory evidence, judge significance, and never average evidence items into a score.
 - Do not invent or implement an unscored public status until a real promise demonstrates the need. Revisit the methodology with that concrete case.
 - Never store a manually edited aggregate SLAVA Index. Derive it from current assessable promise revisions.
+- Calculate the public SLAVA Index from every currently published promise for the party and recalculate it whenever published data changes. If the party has no published promises, show the index as unavailable rather than zero.
 - Display the aggregate as index points without a percent sign, for example `SLAVA Index: +14`.
 - Never overwrite published assessment history silently. Add a new revision and retain prior revisions.
 - Record uncertainty and competing interpretations rather than manufacturing certainty.
@@ -65,11 +66,9 @@ SlibyChyby tracks what political parties promised before an election and compare
 - Write every proposed public explanation in plain, natural Czech for an ordinary reader. It must make sense on its own and state who did what and how that affects the promise. Technical reviewer notes may use internal English enum values and project terminology when they are clearly separated from the public copy.
 - Explain parliamentary and legal references on first use in proposed public copy. Never write a bare identifier such as “tisk 201”; identify the proposal and its practical meaning before or alongside the traceable number.
 - Never rely on color alone. Pair color with a symbol and text label.
-- Clearly mark fabricated or placeholder political data as demo data.
-- Do not present unverified real-world political claims as demo content.
-- During the current documentation phase, do not implement the website. Implementation requires a later explicit request.
-- The confirmed initial stack is Astro, TypeScript, plain CSS, and schema-validated versioned files. Do not introduce a database for the initial demo.
-- When implementation begins, validate all data relationships and make invalid data fail the build or validation step.
+- Keep fictional fixtures out of the production data directories and never publish unverified real-world political claims.
+- The confirmed initial stack is Astro, TypeScript, plain CSS, and schema-validated versioned files. Do not introduce a database without a demonstrated need and a confirmed decision.
+- Validate all data relationships and make invalid data fail the build or validation step.
 - Prefer the simplest architecture that preserves auditability, deterministic builds, and a future database migration path.
 
 ## Scope control

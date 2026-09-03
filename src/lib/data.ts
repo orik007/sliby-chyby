@@ -11,8 +11,7 @@ export const partyPeriods = parseCollection(import.meta.glob("../../data/party-p
 const allPromises = parseCollection(import.meta.glob("../../data/promises/*.json", { eager: true, import: "default" }), promiseSchema);
 export const sources = parseCollection(import.meta.glob("../../data/sources/*.json", { eager: true, import: "default" }), sourceSchema);
 const allAssessmentRevisions = parseCollection(import.meta.glob("../../data/assessment-revisions/*.json", { eager: true, import: "default" }), assessmentRevisionSchema);
-const usePublishedData = allPromises.some(({ isDemo }) => !isDemo);
-export const promises = usePublishedData ? allPromises.filter(({ isDemo }) => !isDemo) : allPromises;
+export const promises = allPromises.filter(({ isDemo }) => !isDemo);
 const visiblePromiseIds = new Set(promises.map(({ id }) => id));
 export const assessmentRevisions = allAssessmentRevisions.filter(({ promiseId }) => visiblePromiseIds.has(promiseId));
 
@@ -59,7 +58,7 @@ export function getPartySummary(partyPeriod: PartyPeriod) {
   const period = periods.find(({ id }) => id === partyPeriod.periodId);
   if (!party || !period) throw new Error(`Missing party or period for ${partyPeriod.id}`);
   const partyPromises = promises.filter(({ partyPeriodId }) => partyPeriodId === partyPeriod.id).map((promise) => ({ promise, assessment: getLatestAssessment(promise.id) }));
-  const index = partyPeriod.indexPublished ? calculateIndex(partyPromises.map(({ promise }) => promise)) : null;
+  const index = calculateIndex(partyPromises.map(({ promise }) => promise));
   return { party, period, partyPeriod, promises: partyPromises, index };
 }
 export function getCurrentPartySummaries() {

@@ -1,14 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-import DataNotice from "../components/DataNotice.astro";
 import ScoreBar from "../components/ScoreBar.astro";
 import { getCurrentPartySummaries, getCurrentPeriod } from "../lib/data";
 const period = getCurrentPeriod();
 const summaries = getCurrentPartySummaries();
 ---
 <BaseLayout title="SlibyChyby · Kdo plní, co slíbil?" description="Jednoduchý přehled předvolebních slibů a skutečných kroků politických stran.">
-  <DataNotice />
   <section class="hero" aria-labelledby="page-title"><p class="eyebrow">VEŘEJNÝ ÚČET POLITICKÝCH SLIBŮ</p><h1 id="page-title">Kdo plní,<br /><em>co slíbil?</em></h1><p class="intro">Jednoduchý přehled předvolebních slibů a skutečných kroků stran. Každé hodnocení má vysvětlení a dohledatelné důkazy.</p><div class="period-row"><span>Volební období</span><strong>{period.label}</strong><span class="live-dot">Aktuální</span></div></section>
   <section class="party-section" aria-labelledby="party-title"><div class="section-heading"><div><p class="eyebrow">RYCHLÝ PŘEHLED</p><h2 id="party-title">Vládní strany</h2></div><p>Vyberte stranu a projděte zveřejněná hodnocení.</p></div><div class="party-grid">{summaries.map(({ party, partyPeriod, promises, index }) => <a class="party-card" href={`/strany/${party.slug}`}><ScoreBar score={index} compact /><div class={`portrait portrait-${partyPeriod.tone}`} aria-hidden="true"><span>{partyPeriod.portraitInitials}</span><small>2025</small></div><h3>{party.shortName}</h3><p class="promise-count">{promises.length === 0 ? "Zatím bez zveřejněného hodnocení" : `${promises.length} zveřejněná hodnocení`}</p><span class="card-action">Zobrazit sliby <b aria-hidden="true">→</b></span></a>)}</div></section>
-  <section class="methodology"><p class="eyebrow">SLAVA INDEX</p><h2>Od slibu až k výsledku.</h2><p>Index ukazuje, jestli strana na svých slibech pracuje, nebo jde proti nim. Pohybuje se od −100 bodů, kdy strana jde úplně proti svým slibům, až po +100 bodů, kdy splnila všechny své sliby. Souhrnná čísla zveřejníme, až bude prověřený dostatečně široký soubor slibů.</p><a class="button-light" href="/metodika">Prohlédnout metodiku →</a></section>
+  <section class="methodology"><p class="eyebrow">SLAVA INDEX</p><h2>Od slibu až k výsledku.</h2><p>Index ukazuje, jestli strana na svých slibech pracuje, nebo jde proti nim. Pohybuje se od −100 bodů, kdy strana jde úplně proti svým slibům, až po +100 bodů, kdy splnila všechny své sliby. Počítá se ze všech dosud zveřejněných slibů a s každým novým hodnocením se automaticky přepočítá.</p><a class="button-light" href="/metodika">Prohlédnout metodiku →</a></section>
 </BaseLayout>

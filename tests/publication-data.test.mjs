@@ -8,25 +8,26 @@ async function readJsonDirectory(relativePath) {
   return Promise.all(files.map(async (file) => JSON.parse(await readFile(new URL(file, directory), "utf8"))));
 }
 
-test("published real assessments retain their approved audit and sources", async () => {
+test("production assessments retain their approved audit and sources", async () => {
   const [promises, revisions, sources, partyPeriods] = await Promise.all([
     readJsonDirectory("data/promises"),
     readJsonDirectory("data/assessment-revisions"),
     readJsonDirectory("data/sources"),
     readJsonDirectory("data/party-periods")
   ]);
-  const realPromises = promises.filter(({ isDemo }) => !isDemo);
-  const realPromiseIds = new Set(realPromises.map(({ id }) => id));
-  const realRevisions = revisions.filter(({ promiseId }) => realPromiseIds.has(promiseId));
+  assert.ok(promises.length > 0);
+  assert.ok(promises.every(({ isDemo }) => isDemo === false));
+  assert.ok(revisions.every(({ isDemo }) => isDemo === false));
+  assert.ok(sources.every(({ isDemo }) => isDemo === false));
+  assert.ok(partyPeriods.every(({ isDemo }) => isDemo === false));
+
+  const promiseIds = new Set(promises.map(({ id }) => id));
   const sourceById = new Map(sources.map((source) => [source.id, source]));
 
-  assert.deepEqual(realPromises.map(({ id }) => id).sort(), [
-    "ano-2025-abolish-public-media-fees",
-    "ano-2025-eet-2"
-  ]);
-  assert.equal(realRevisions.length, 2);
+  assert.ok(promiseIds.has("ano-2025-abolish-public-media-fees"));
+  assert.ok(promiseIds.has("ano-2025-eet-2"));
 
-  for (const promise of realPromises) {
+  for (const promise of promises) {
     const source = sourceById.get(promise.primarySourceId);
     assert.ok(source, `Missing promise source ${promise.primarySourceId}`);
     assert.equal(source.isDemo, false);
@@ -34,8 +35,8 @@ test("published real assessments retain their approved audit and sources", async
     assert.ok(source.url);
   }
 
-  for (const revision of realRevisions) {
-    assert.equal(revision.status, "moving-towards");
+  for (const revision of revisions) {
+    assert.ok(promiseIds.has(revision.promiseId));
     assert.ok(revision.reviewProposalId);
     for (const sourceId of revision.evidenceSourceIds) {
       const source = sourceById.get(sourceId);
@@ -46,5 +47,5 @@ test("published real assessments retain their approved audit and sources", async
     }
   }
 
-  assert.ok(partyPeriods.every(({ indexPublished }) => indexPublished === false));
+  assert.ok(partyPeriods.every((partyPeriod) => !("indexPublished" in partyPeriod)));
 });

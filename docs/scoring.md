@@ -88,13 +88,13 @@ Public-facing Czech must make sense without audit context. It states who acted, 
 
 ## Aggregate calculation
 
-Each tracked promise contributes only its current published score. Let `N` be the number of tracked promises and `s_i` each current score:
+Each published promise contributes only its current published score. Let `N` be the number of currently published promises for the party and `s_i` each current score:
 
 ```text
 SLAVA Index = (sum(s_i) / (2 * N)) * 100
 ```
 
-The range is `-100` to `+100`; the aggregate is derived and never manually stored. If `N = 0`, the index is unavailable rather than `0`. The UI omits the percent sign because the number is an index, not a completion percentage.
+The range is `-100` to `+100`; the aggregate is derived and never manually stored. It is recalculated whenever a promise or its current assessment is published. If `N = 0`, the index is unavailable rather than `0`. The UI omits the percent sign because the number is an index, not a completion percentage.
 
 ### Worked example
 
