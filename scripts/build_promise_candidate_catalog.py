@@ -6,6 +6,7 @@ published promise or assessment.
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -14,6 +15,20 @@ import re
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT = ROOT / "research" / "2025-election" / "candidate-promises.json"
+
+# PDF text layout merged this heading with the following section while splitting
+# the actual commitment after its introductory sentence. The replacement is the
+# visually verified passage from printed page 4 of the same official programme.
+MANUAL_EXCERPT_REPLACEMENTS = {
+    (
+        "ano-2025-election-program",
+        4,
+        "Nepřijmeme euro Cesta k prosperitě a zdravým veřejným financím nevede přes zvyšování daní ani dušení ekonomiky.",
+    ): (
+        "ČESKÁ KORUNA, NE EURO Česká koruna je klíčem k naší ekonomické suverenitě. "
+        "Zavazujeme se, že naše vláda nepřijme euro ani nepodnikne žádné kroky směrem k jeho zavedení."
+    ),
+}
 
 SOURCES = [
     {
@@ -131,6 +146,10 @@ for source in SOURCES:
         extracted = [("bullet-block", item) for item in bullet_blocks(page_text)]
         extracted.extend(("commitment-sentence", item) for item in sentence_candidates(page_text))
         for method, excerpt in extracted:
+            replacement = MANUAL_EXCERPT_REPLACEMENTS.get((source["sourceId"], page, excerpt))
+            if replacement is not None:
+                method = "manual-verified-passage"
+                excerpt = replacement
             key = (source["sourceId"], page, excerpt.casefold())
             if key in seen:
                 continue
@@ -150,8 +169,13 @@ for source in SOURCES:
                 }
             )
 
-OUTPUT.parent.mkdir(parents=True, exist_ok=True)
-OUTPUT.write_text(
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("--output", type=Path, default=OUTPUT, help="Write the generated review queue to this path.")
+args = parser.parse_args()
+output = args.output.resolve()
+
+output.parent.mkdir(parents=True, exist_ok=True)
+output.write_text(
     json.dumps(
         {
             "status": "Working proposal",

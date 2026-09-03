@@ -69,7 +69,7 @@ Secondary material must point back to a party publication, recording, photograph
 
 ## Current extraction queue
 
-`candidate-promises.json` is an intentionally over-inclusive machine-assisted queue generated from the three final official programmes. It currently contains 955 candidates:
+`candidate-promises.json` is an intentionally over-inclusive machine-assisted queue generated from the three final official programmes. One known cross-section PDF extraction artifact is replaced in the generator with its visually verified programme passage and marked `manual-verified-passage`. The queue currently contains 955 candidates:
 
 - ANO: 473;
 - SPD: 247;

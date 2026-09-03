@@ -65,6 +65,7 @@ test("reviewed catalog expands through bounded batches and links every promise t
       const normalizedPromiseText = promise.originalTextCz.replace(/\s+/g, " ").trim();
       assert.ok(normalizedCandidateText.includes(normalizedPromiseText), `Candidate ${candidate.id} does not contain the exact source passage for ${promise.id}`);
     }
+    if (promise.id === "ano-2025-not-adopt-euro") assert.equal(candidate.extractionMethod, "manual-verified-passage");
   }
 
   const batch = JSON.parse(await readFile(new URL("../research/2025-election/reviewed-batches/ano-finance-1.json", import.meta.url), "utf8"));
