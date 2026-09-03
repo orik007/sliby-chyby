@@ -112,6 +112,9 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Merge only after the project's explicitly defined server-side verification succeeds for the approved revision.
 - Treat a successful merge into `main` as the release boundary and follow it with deployment.
 - Report merge and deployment success or failure in the approval conversation.
+- Use Cloudflare Workers as the production deployment target before the final domain is selected; this preserves the site's server-rendered collection-status endpoint.
+- Deploy only the `main` branch to production. Do not configure a non-production build trigger, so unpublished review proposals do not receive public preview URLs.
+- Keep the current ChatGPT Sites address as a temporary demo during the hosting transition.
 
 ### Initial implementation architecture
 
@@ -119,7 +122,7 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Keep the public website predominantly static with minimal client-side JavaScript.
 - Use schema-validated, versioned files as the initial public data store.
 - Do not introduce a database for the initial production site.
-- Use GitHub-based validation and automation, with Cloudflare as the planned hosting direction.
+- Use GitHub-based validation and automation, with Cloudflare Workers Builds as the confirmed production deployment target.
 - Keep the single-package assessment pilot read-only. The full-registry workflow may write only versioned unpublished review proposals to its dedicated branch; it must never write public assessment data or deploy it.
 - Keep evidence collectors outside the public website runtime. Collection remains source-oriented and non-scoring even when later stages of the same scheduled or manually triggered workflow use the assessment API.
 - Collect trusted-media feeds as discovery and context sources. Collection itself never assigns a direction or score; articles will normally be supporting evidence rather than the sole basis for `+2` or `-2`.
