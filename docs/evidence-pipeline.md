@@ -109,7 +109,7 @@ News collection retains metadata, URL, publication time, supplied authors, and a
 
 ## Current automation state
 
-The GitHub Actions workflow `Collect, match, and assess evidence candidates` implements stages 1 through 8 for the full reviewed registry. It checks all 36 catalog promises against one shared collection, enriches only matched parliamentary prints, and sends only new or changed assessable packages to the two assessors and possible arbiter. It runs automatically once daily and remains available as a manual workflow.
+The GitHub Actions workflow `Collect, match, and assess evidence candidates` implements stages 1 through 8 for the full reviewed registry. It checks all 42 current catalog promises against one shared collection, enriches only matched parliamentary prints, and sends only new or changed assessable packages to the two assessors and possible arbiter. It runs automatically once daily and remains available as a manual workflow.
 
 The [first full-registry document-enrichment run](https://github.com/orik007/sliby-chyby/actions/runs/33601733992) processed 3,984 shared records, 36 reviewed promises, and 141 candidate matches. It generated three evidence packages and added four official print documents across them with zero warnings. Original and enriched package hashes differ and are retained separately in the uploaded audit.
 

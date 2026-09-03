@@ -189,7 +189,9 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Catalog v1 contains 36 promises from the final official national election programmes: 12 each for ANO 2011, SPD, and Motoristé sobě.
 - The balanced count is a review tranche, not a quota that forces weak promises into the product and not a claim of exhaustive coverage.
 - Each accepted promise preserves exact Czech source wording, a PDF locator, an atomic tracked claim, fulfillment and contradiction tests, deterministic matching terms, and a link to its extraction candidate.
-- The other 919 final-programme extraction candidates remain unreviewed rather than rejected or counted as zero.
+- At the time catalog v1 was recorded, the other 919 final-programme extraction candidates remained unreviewed rather than rejected or counted as zero.
+
+**Working proposal — incremental catalog v2:** The first ANO finance batch adds six atomic promises from printed page 4 of the final programme to the matching registry, bringing the current registry to 42 promises (ANO 18, SPD 12, Motoristé 12). The batch is not public production data and does not authorize assessment publication. Its accepted, rejected, and split dispositions are retained in `research/2025-election/reviewed-batches/ano-finance-1.json`.
 - Catalog inclusion does not publish an assessment. Candidate matches and AI assessments remain unpublished until the owner explicitly approves identified proposals and a separate validated publication change is made.
 
 ### Campaign-source collection outside the first-version boundary

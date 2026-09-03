@@ -16,6 +16,7 @@ test("production assessments retain their approved audit and sources", async () 
     readJsonDirectory("data/party-periods")
   ]);
   assert.ok(promises.length > 0);
+  assert.equal(promises.length, 2, "Unassessed reviewed promises must stay outside the public production directory");
   assert.ok(promises.every(({ isDemo }) => isDemo === false));
   assert.ok(revisions.every(({ isDemo }) => isDemo === false));
   assert.ok(sources.every(({ isDemo }) => isDemo === false));

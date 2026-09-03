@@ -4,6 +4,8 @@
 
 **Working proposal.** This is the first bounded real-data catalog for matching and assessment-pipeline evaluation. It is not an exhaustive inventory of the parties' programmes or campaigns, and it does not authorize automatic public assessment publication.
 
+This file is the historical v1 tranche. The current expanded registry is documented in [`reviewed-catalog-v2.md`](reviewed-catalog-v2.md).
+
 ## Review result
 
 | Party | Accepted | Source |
@@ -13,9 +15,9 @@
 | Motoristé sobě | 12 | Final official 2025 national election programme |
 | **Total** | **36** | |
 
-All 36 accepted entries are stored in [`automation/matching/promises.json`](../../automation/matching/promises.json). Each entry links to one source candidate in [`candidate-promises.json`](candidate-promises.json), where it is marked `accepted-first-release-catalog-v1`.
+All 36 accepted entries remain stored in [`automation/matching/promises.json`](../../automation/matching/promises.json). Each entry links to one source candidate in [`candidate-promises.json`](candidate-promises.json), where it is marked `accepted-first-release-catalog-v1`.
 
-The remaining 919 extraction candidates are still unreviewed. They have not been rejected, admitted, assessed, or counted as zero-point promises.
+At the time this tranche was created, the remaining 919 extraction candidates were unreviewed. Subsequent bounded reviews and the current counts are recorded in [`reviewed-catalog-v2.md`](reviewed-catalog-v2.md) and the research README.
 
 ## Acceptance checks applied
 

@@ -72,4 +72,4 @@ The first five-promise integration report is recorded in [docs/pilot-evaluation.
 
 `golden-cases/ano-eet-2` contains the first fully sourced test case. Its benchmark is a working human proposal, not a published assessment and not an input to the assessors.
 
-`matching/promises.json` contains the first reviewed 36-promise catalog, with 12 official-programme promises for each tracked party. The first successful full-registry collection-and-matching run produced three attributable primary evidence packages. A thematic match without party attribution and a promise with no match both correctly produce no assessable package.
+`matching/promises.json` contains the current reviewed 42-promise catalog: 18 official-programme promises for ANO and 12 each for SPD and Motoristé. The first successful full-registry collection-and-matching run used the historical 36-promise tranche and produced three attributable primary evidence packages. A thematic match without party attribution and a promise with no match both correctly produce no assessable package.
