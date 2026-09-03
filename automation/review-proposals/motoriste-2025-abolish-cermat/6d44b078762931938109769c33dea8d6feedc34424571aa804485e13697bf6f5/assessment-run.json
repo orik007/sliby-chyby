@@ -1,0 +1,129 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-03T10-16-27-919Z--96e417946b9e",
+  "evaluatedAt": "2026-09-03T10:16:27.919Z",
+  "packagePath": "automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/motoriste-2025-abolish-cermat.json",
+  "packageHash": "96e417946b9e665ceed78a627ade6120a5ed499e0f0fa9f94c055d613d8d95da",
+  "assessmentContentHash": "6d50e7cbf99c7312cb92656d19d9fd88ef3ac283def78085cd4f7bda3ec26c8e",
+  "assessmentFingerprint": "6d44b078762931938109769c33dea8d6feedc34424571aa804485e13697bf6f5",
+  "methodologyVersion": "slava-v5",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v10",
+      "contentHash": "eb1eeef8757d8eefd64432ee00c9c90c76ebadb56197857f76d5121acf235491"
+    },
+    "arbiter": {
+      "version": "arbiter-v3",
+      "contentHash": "796d3562f0813545830f806259f975d8d7346fe1dadd9d09b0c78ddbd4a4e0db"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessParallelCalls": true,
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-5.6-terra",
+      "gpt-5.6-terra"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_07ace6194afbf786016a9948efd9d887d1be12cf7abdab9c3d",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 3942,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 3939
+      },
+      "output_tokens": 248,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 4190
+    },
+    "output": {
+      "promiseId": "motoriste-2025-abolish-cermat",
+      "status": "no-progress",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-abolish-cermat-source",
+        "motoriste-party-news-wordpress--post-9403",
+        "motoriste-party-news-wordpress--post-8851"
+      ],
+      "explanationCz": "Motoristé ve volebním programu slíbili zrušit CERMAT a nahradit jeho přijímací a maturitní roli průběžným ověřováním znalostí a kompetencí. Jejich pozdější příspěvky pouze informují o rozhovorech a debatách o přijímacích zkouškách a roli CERMATu. Z dodaných podkladů nevyplývá konkrétní stranický návrh, hlasování ani jiné opatření, které by CERMAT rušilo nebo zavádělo slíbenou náhradu. V průběžném hodnocení proto není doložen významný posun ani opačný krok.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0cf78be7cb945ca2016a9948efd7a887d1b3620faa40fbab65",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 3942,
+      "input_tokens_details": {
+        "cache_write_tokens": 2715,
+        "cached_tokens": 1224
+      },
+      "output_tokens": 459,
+      "output_tokens_details": {
+        "reasoning_tokens": 171
+      },
+      "total_tokens": 4401
+    },
+    "output": {
+      "promiseId": "motoriste-2025-abolish-cermat",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-abolish-cermat-source",
+        "motoriste-party-news-wordpress--post-9403",
+        "motoriste-party-news-wordpress--post-8851"
+      ],
+      "explanationCz": "Motoristé ve volebním programu slíbili zrušit CERMAT a nahradit jeho přijímací a maturitní roli průběžným ověřováním. Stranické články následně jen referují o televizních debatách poslanců o přijímacích zkouškách a možných změnách systému. Nedokládají však, že strana přijala konkrétní stanovisko, předložila návrh nebo ve Sněmovně podnikla krok ke zrušení CERMATu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují úplný obsah televizních rozhovorů ani ověřený záznam konkrétního stranického či poslaneckého postoje k zrušení CERMATu.",
+        "Zmínky ministerstva o pokračujících přijímacích zkouškách nelze bez dalšího spojit s jednáním Motoristů."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0bb627b139f65445016a9948f777f487d18c608f1afeaf5b81",
+    "model": "gpt-5.6-sol",
+    "usage": {
+      "input_tokens": 3783,
+      "input_tokens_details": {
+        "cache_write_tokens": 3780,
+        "cached_tokens": 0
+      },
+      "output_tokens": 284,
+      "output_tokens_details": {
+        "reasoning_tokens": 113
+      },
+      "total_tokens": 4067
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "motoriste-2025-abolish-cermat-source",
+        "motoriste-party-news-wordpress--post-9403",
+        "motoriste-party-news-wordpress--post-8851"
+      ],
+      "explanationCz": "Oba posudky správně uzavírají, že zatím není doložen konkrétní krok ke zrušení CERMATu. Liší se hlavně v tom, zda jsou dostupné informace dostatečné pro jistý závěr. Druhý posudek lépe upozorňuje, že stranické články jen shrnují televizní debaty a neobsahují celé výroky poslanců. Proto je jeho opatrnější hodnocení přesnější."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}
