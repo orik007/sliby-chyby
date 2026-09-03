@@ -176,7 +176,7 @@ The initial implementation uses Astro, TypeScript, plain CSS, schema-validated v
 
 ## Pull requests, approval, and deployment
 
-Every proposed repository change is checked by `.github/workflows/verify-pr.yml`, which runs tests, validation, the production Astro build, and a Cloudflare deployment dry run.
+Every pull request targeting `main` is checked by `.github/workflows/verify-pr.yml`, which runs tests, validation, the production Astro build, and a Cloudflare deployment dry run.
 
 Every pull request also receives two advisory AI reviews. GitHub Copilot is requested as a pull-request reviewer, which is the supported code-review mechanism; a plain mention is not treated as a review request. Codex reviews pull requests automatically and can be asked to review a new revision with `@codex review`. Both must finish against the exact current head commit. Their findings are read and valid issues are addressed or a non-applicable finding is explained. A new commit makes both earlier reviews stale and requires fresh reviews.
 
