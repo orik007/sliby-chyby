@@ -82,6 +82,9 @@ SlibyChyby tracks what political parties promised before an election and compare
 ## Release discipline
 
 - Use a pull request for repository changes intended for `main` and require the `Verify pull request` workflow to succeed for the exact current head commit.
+- Request GitHub Copilot code review and Codex review for every pull request. Use the reviewer request for Copilot rather than relying on a plain `@copilot` comment; request Codex with `@codex review` when an automatic review is not already running.
+- Wait for both AI reviews of the exact current head commit before presenting the pull request for owner approval. Read every finding, fix valid issues or document why a finding does not apply, and request both reviews again after any new commit.
+- Treat the AI reviews as advisory quality gates, not as owner approval. A Copilot `COMMENT` review, a Codex review, or the absence of findings never replaces the owner's decision.
 - Do not merge on a generic acknowledgement. The owner must approve the exact presented revision with an unambiguous `schvaluji`; any new commit invalidates that approval.
 - Treat merge to `main` as the production release boundary. Cloudflare Workers Builds deploys `main`; do not manually deploy an unmerged branch or enable public branch previews.
 - Automated assessment-review pull requests are a durable unpublished audit queue. Their merge is not editorial publication approval and must not change public assessment data.

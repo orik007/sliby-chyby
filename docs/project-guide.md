@@ -50,6 +50,8 @@ allowlisted official records and news discovery feeds
 DELIVERY
 proposed repository change
   -> Verify pull request for the exact head commit
+  -> GitHub Copilot review + Codex review of that exact commit
+  -> valid findings addressed and reviews repeated after changes
   -> owner says `schvaluji` for that exact revision
   -> merge to `main`
   -> Cloudflare Workers build and deployment
@@ -176,7 +178,9 @@ The initial implementation uses Astro, TypeScript, plain CSS, schema-validated v
 
 Every proposed repository change is checked by `.github/workflows/verify-pr.yml`, which runs tests, validation, the production Astro build, and a Cloudflare deployment dry run.
 
-A cloud ChatGPT approval conversation presents the pull request, its exact head commit, its summary, and the result of `Verify pull request`. The owner must reply `schvaluji` for that exact revision. A new commit invalidates the approval. Only an unchanged revision with a successful verification workflow may be merged.
+Every pull request also receives two advisory AI reviews. GitHub Copilot is requested as a pull-request reviewer, which is the supported code-review mechanism; a plain mention is not treated as a review request. Codex reviews pull requests automatically and can be asked to review a new revision with `@codex review`. Both must finish against the exact current head commit. Their findings are read and valid issues are addressed or a non-applicable finding is explained. A new commit makes both earlier reviews stale and requires fresh reviews.
+
+A cloud ChatGPT approval conversation presents the pull request only after `Verify pull request`, Copilot review, and Codex review cover the exact current head commit. It includes the commit, summary, and outstanding review information. The owner must reply `schvaluji` for that exact revision. A new commit invalidates the approval. AI reviews are quality advice and never substitute for this owner decision.
 
 Cloudflare Workers Builds watches only `main`. A merge triggers `npm run build` followed by `npx wrangler deploy --config wrangler.deploy.jsonc`. Preview branch deployments are disabled so unpublished political proposals cannot receive public URLs. The current public Worker is `sliby-chyby` at `https://sliby-chyby.orik007-apps.workers.dev/`.
 
@@ -210,7 +214,7 @@ Cloudflare deployment itself is operational and the first repository-triggered p
 5. Keep research candidates, matching-catalogue promises, automated proposals, and public data visibly distinct.
 6. Do not publish or merge a political assessment without the required explicit owner approval.
 7. Record a newly accepted product or methodology decision in `docs/decisions.md` and its canonical document in the same change.
-8. Run relevant tests and `npm run build`, open a pull request, and use the exact-revision approval process.
+8. Run relevant tests and `npm run build`, open a pull request, wait for Copilot and Codex review of the current revision, and use the exact-revision approval process.
 
 ## Current open questions
 
@@ -223,4 +227,3 @@ The complete register remains [decisions.md](decisions.md). The largest unresolv
 - source snapshot retention, copyright, and image licensing rules;
 - the coverage threshold required before describing a party's promise catalogue as substantially complete;
 - automatic reporting of Cloudflare deployment success or failure in the mobile approval conversation.
-

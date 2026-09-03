@@ -146,7 +146,7 @@ The owner confirmed the following initial architecture. It may be revisited late
 
 The one narrow runtime exception is source freshness: the site may read public GitHub Actions metadata and display the date of the latest successful complete collection. It uses a build-verified fallback if that metadata is temporarily unavailable. This endpoint does not collect evidence, score promises, or change published political data.
 
-The earlier route structure remained a working proposal. The current implemented public routes use Czech path names:
+The earlier route structure was a working proposal. The current implementation uses Czech path names:
 
 ```text
 /
@@ -155,7 +155,7 @@ The earlier route structure remained a working proposal. The current implemented
 /metodika
 ```
 
-Changing this implemented structure remains possible, but links must stay permanent or receive redirects once the public domain is established.
+The suggestion that every party and promise route should remain permanent and shareable is still a **working proposal**. The implemented paths are an observed current state, not a newly confirmed permanence requirement.
 
 The site runs on production data and grows incrementally. Two ANO promises with primary sources and human-approved `+1` revisions form the initial published set. The SLAVA Index is calculated from all currently published promises and updates automatically as more reviewed records are added. Fictional fixtures do not belong in the production data directories.
 

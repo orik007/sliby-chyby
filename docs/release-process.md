@@ -10,6 +10,8 @@ This document describes the confirmed release policy and its server-side impleme
 - The owner's approval applies only to the revision presented for review.
 - If the pull request changes after approval, the approval is invalid and a new review is required.
 - A pull request may be merged only after the `Verify pull request` workflow succeeds for its exact current head revision.
+- Every pull request must receive both GitHub Copilot code review and Codex review for its exact current head revision before it is presented for owner approval. A new commit requires fresh reviews.
+- AI review findings must be read and either addressed or explicitly documented as not applicable. These reviews are advisory quality gates and do not replace owner approval.
 - A successful merge into `main` is the release boundary and must be followed by deployment.
 - The approval conversation must report whether merge and deployment succeeded or failed.
 - Reviewer-facing technical detail may be precise, but any text proposed for the public website must use plain Czech and explain unfamiliar references.
@@ -21,6 +23,8 @@ This document describes the confirmed release policy and its server-side impleme
 ## Implemented approval flow
 
 - GitHub pull-request activity wakes a cloud ChatGPT approval conversation available on mobile.
+- The process requests GitHub Copilot as a reviewer; a plain `@copilot` comment is not used as a substitute for the code-review request. Codex review is automatic on pull-request opening and can be requested again with `@codex review` after a new commit.
+- The approval conversation waits for both AI reviews of the current head revision and the successful verification workflow before presenting the revision as ready for approval.
 - The conversation presents a plain-language summary, links to the pull request, records the exact head revision, and asks for either `schvaluji` or specific feedback.
 - After `schvaluji`, the connected GitHub app verifies the unchanged revision and required checks before merging.
 - Cloudflare Workers Builds automatically builds and deploys the merged `main` revision.
