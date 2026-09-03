@@ -64,7 +64,7 @@ The confirmed concept contains:
 2. the selected electoral period;
 3. three prominent, fully clickable party circles for ANO, SPD, and Motoristé;
 4. the party leader's photograph within each circle;
-5. the party's SLAVA Index shown prominently with a red-to-green scale.
+5. the party's SLAVA Index shown prominently with a red-to-green scale, labelled `-100` on the left and `+100` on the right so the range is immediately visible.
 
 The exact public site name remains unresolved.
 
@@ -146,16 +146,16 @@ The owner confirmed the following initial architecture. It may be revisited late
 
 The one narrow runtime exception is source freshness: the site may read public GitHub Actions metadata and display the date of the latest successful complete collection. It uses a build-verified fallback if that metadata is temporarily unavailable. This endpoint does not collect evidence, score promises, or change published political data.
 
-The route structure remains a working proposal:
+The earlier route structure was a working proposal. The current implementation uses Czech path names:
 
 ```text
 /
-/parties/ano
-/parties/spd
-/parties/motoriste
-/promises/{party}/{promise-slug}
-/methodology
+/strany/{party-slug}
+/sliby/{party-slug}/{promise-slug}
+/metodika
 ```
+
+The suggestion that every party and promise route should remain permanent and shareable is still a **working proposal**. The implemented paths are an observed current state, not a newly confirmed permanence requirement.
 
 The site runs on production data and grows incrementally. Two ANO promises with primary sources and human-approved `+1` revisions form the initial published set. The SLAVA Index is calculated from all currently published promises and updates automatically as more reviewed records are added. Fictional fixtures do not belong in the production data directories.
 
