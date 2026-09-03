@@ -4,6 +4,8 @@
 
 The period boundaries and non-carryover rule are confirmed. Schema-validated versioned files are the confirmed initial storage approach. The relational entity structure below remains a working proposal designed for a future database migration.
 
+The first real public release adds two implementation safeguards: `PartyPeriod.indexPublished` explicitly gates the aggregate, and every non-demo `AssessmentRevision` requires the identifier of its approved review proposal. Fictional fixture records are excluded from rendering whenever real published promises exist.
+
 ## Confirmed invariants
 
 - A party is a long-lived identity.
