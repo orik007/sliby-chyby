@@ -1,0 +1,42 @@
+---
+import { systemStatus } from "../lib/data";
+
+const dateFormatter = new Intl.DateTimeFormat("cs-CZ", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "Europe/Prague",
+});
+const initialDate = dateFormatter.format(new Date(systemStatus.lastSuccessfulCollectionAt));
+---
+<p class="collection-status" data-collection-status>
+  Zdroje naposledy zkontrolovány:
+  <time datetime={systemStatus.lastSuccessfulCollectionAt}>{initialDate}</time>
+</p>
+
+<script>
+  const status = document.querySelector<HTMLElement>("[data-collection-status]");
+  const time = status?.querySelector<HTMLTimeElement>("time");
+
+  if (time) {
+    fetch("/api/collection-status.json")
+      .then((response) => {
+        if (!response.ok) throw new Error("Collection status request failed");
+        return response.json();
+      })
+      .then(({ lastSuccessfulCollectionAt }) => {
+        const parsed = new Date(lastSuccessfulCollectionAt);
+        if (Number.isNaN(parsed.getTime())) return;
+        time.dateTime = parsed.toISOString();
+        time.textContent = new Intl.DateTimeFormat("cs-CZ", {
+          day: "numeric",
+          month: "long",
+          year: "numeric",
+          timeZone: "Europe/Prague",
+        }).format(parsed);
+      })
+      .catch(() => {
+        // The build-verified date remains visible if live status cannot be loaded.
+      });
+  }
+</script>

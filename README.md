@@ -6,13 +6,15 @@ The core measure is the **SLAVA Index**, a normalized point score from `-100` to
 
 The initial concept focuses on the current electoral period and the governing parties ANO, SPD, and Motoristé. Promises remain scoped to their electoral period; later periods receive new promise sets and historical periods remain available.
 
-The public site now contains its first two verified, human-approved assessments. The earlier fictional records remain in the repository as test fixtures but are automatically excluded whenever real published records exist.
+The public site now contains its first two verified, human-approved assessments. Fictional fixtures are kept outside the production data directories.
 
 Real-source collection for the 2025 election is staged under `research/2025-election`. Nothing in that directory is automatically published or scored: it separates captured sources, exact source occurrences, over-inclusive extraction queues, attribution questions, and coverage gaps. Only reviewed public records under `data` are rendered by the site.
 
 The confirmed initial implementation uses Astro, TypeScript, plain CSS, and schema-validated versioned data files. A database is not needed for the first public release.
 
 The canonical collection, matching, source-list, and assessment flow is documented in [`docs/evidence-pipeline.md`](docs/evidence-pipeline.md).
+
+The complete unpublished evidence pipeline runs daily at 09:37 Prague time and can also be started manually. Public pages show the date of its latest successful run. A failed run does not advance that date and never changes a published assessment.
 
 ## Local development
 

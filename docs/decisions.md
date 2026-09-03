@@ -25,6 +25,9 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Explain parliamentary and legal identifiers on first use in proposed public copy. State what the proposal or decision is and what it changes; never rely on a bare reference such as “tisk 201”.
 - Search official national party sources broadly, but publish only clear and fully verified promises. The first real-data version may contain a smaller curated set and does not need to include every campaign statement.
 - Publish the two human-approved 2026-09-03 revisions for ANO's EET 2.0 and public-media-fee promises as the first real public records. Preserve their exact programme wording, primary evidence links, and review-proposal identifiers.
+- Run one complete evidence pipeline every day at 09:37 in `Europe/Prague`; keep the manual workflow trigger for recovery and backfills.
+- Display the latest successful complete collection date on every public page. A failed run leaves the previous successful date visible and does not alter public assessments.
+- Prefer this single daily schedule over near-real-time collection until observed missed evidence demonstrates a need for more complexity.
 
 ### Live public aggregate
 
@@ -98,6 +101,7 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Require assessors and arbiters to produce reader-facing Czech explanations without internal enum names, attribution labels, unexplained parliamentary shorthand, or unnatural translations of implementation terms.
 - Remove a parliamentary print number from the public candidate when it adds only an internal identifier. Keep the number, exact source, and original assessor wording in the technical reviewer audit.
 - When both independent assessors agree, show their shared result only once in `review.md`; retain both complete outputs in `assessment-run.json`. Show both opinions in `review.md` only when they disagreed and a third assessor had to arbitrate.
+- Accept an unambiguous Codex message from the owner that identifies specific proposals as editorial approval. Preserve the approval in the publication change. A generic acknowledgement and a review-proposal merge are not publication approval.
 
 ### Initial implementation architecture
 
@@ -107,7 +111,7 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Do not introduce a database for the initial production site.
 - Use GitHub-based validation and automation, with Cloudflare as the planned hosting direction.
 - Keep the single-package assessment pilot read-only. The full-registry workflow may write only versioned unpublished review proposals to its dedicated branch; it must never write public assessment data or deploy it.
-- Keep evidence collectors outside the public website runtime. Collection remains source-oriented and non-scoring even when the later stages of the same manually triggered workflow use the assessment API.
+- Keep evidence collectors outside the public website runtime. Collection remains source-oriented and non-scoring even when later stages of the same scheduled or manually triggered workflow use the assessment API.
 - Collect trusted-media feeds as discovery and context sources. Collection itself never assigns a direction or score; articles will normally be supporting evidence rather than the sole basis for `+2` or `-2`.
 - Allow decisive `+2` or `-2` evidence from primary official acts outside the Chamber of Deputies, including regulations, executive decisions, administrative acts, and authoritative outcome data.
 - Run collection once per pipeline execution and match the resulting shared record set against every reviewed promise. Do not repeat source downloads separately for each promise.
@@ -141,7 +145,7 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Home page: site title, period selector, three large circular party portraits, and a red-to-green index scale.
 - Party page: index, distribution, simple promise rows, symbol plus label, expandable evidence.
 - Promise page: original wording, plain-language explanation, decisive primary evidence, articles, update date, and revision timeline.
-- Candidate symbol set: `✓`, `↗`, `—`, `↘`, `×`, and `?`.
+- Candidate symbol set: `✓`, `↗`, `—`, `↘`, and `×`.
 - Give each party and promise a permanent, shareable route.
 
 ### Methodology
@@ -170,7 +174,7 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - The balanced count is a review tranche, not a quota that forces weak promises into the product and not a claim of exhaustive coverage.
 - Each accepted promise preserves exact Czech source wording, a PDF locator, an atomic tracked claim, fulfillment and contradiction tests, deterministic matching terms, and a link to its extraction candidate.
 - The other 919 final-programme extraction candidates remain unreviewed rather than rejected or counted as zero.
-- Catalog inclusion does not publish an assessment. Candidate matches and AI assessments remain unpublished until the publication-governance question is resolved.
+- Catalog inclusion does not publish an assessment. Candidate matches and AI assessments remain unpublished until the owner explicitly approves identified proposals and a separate validated publication change is made.
 
 ### Campaign-source collection outside the first-version boundary
 
@@ -204,7 +208,7 @@ International examples motivated distinct handling for promises blocked by anoth
 
 ### Publication governance
 
-Human review of every automated proposal is confirmed. The exact person or role authorized to turn a reviewed proposal into a published assessment, the approval fields, and any future high-confidence automation threshold remain unresolved.
+Human review of every automated proposal is confirmed. The project owner authorizes publication through an unambiguous Codex message that identifies the approved proposals. That approval must be preserved in the publication change; a generic acknowledgement or review-proposal merge is insufficient. The exact machine-readable approval fields and implementation of the separate publication workflow remain unresolved. Automatic publication is outside the current rules.
 
 ### AI independence
 

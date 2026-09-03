@@ -1,6 +1,9 @@
 name: Collect, match, and assess evidence candidates
 
 on:
+  schedule:
+    - cron: "37 9 * * *"
+      timezone: "Europe/Prague"
   workflow_dispatch:
     inputs:
       since:
@@ -33,8 +36,8 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      COLLECTOR_SINCE: ${{ inputs.since }}
-      MATCHER_AS_OF: ${{ inputs.as_of }}
+      COLLECTOR_SINCE: ${{ inputs.since || '2025-10-01' }}
+      MATCHER_AS_OF: ${{ inputs.as_of || '' }}
       REVIEW_BRANCH: automation/assessment-review
       SLIBY_ASSESSOR_PROVIDER_A: openai
       SLIBY_ASSESSOR_PROVIDER_B: openai
