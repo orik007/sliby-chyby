@@ -99,6 +99,9 @@ jobs:
             --summary automation/runs/pipeline/github-actions/assessment-batch.json \
             --pull-request-body automation/runs/pipeline/github-actions/assessment-review-pr.md
 
+      - name: Refresh human review pages
+        run: npm run reviews:refresh
+
       - name: Audit coverage of every reviewed promise
         run: |
           node scripts/run-coverage-audit.mjs \

@@ -30,19 +30,15 @@ Poslanci ANO podpořili návrh zákona o evidenci tržeb. Pro návrh hlasovalo 6
 - Úplný strojový audit: `assessment-run.json`
 - Přesný balíček posuzovaných podkladů: `evidence-package.json`
 
-### Nezávislé posudky
+### Shoda hodnotitelů
 
-#### První posudek: Směřuje ke splnění (+1)
-
-Poslanci ANO podpořili návrh zákona o evidenci tržeb, vedený ve Sněmovně jako tisk č. 189. Pro návrh hlasovalo 68 z 80 poslanců ANO a Sněmovna jej schválila k dalšímu projednání v Senátu. Návrh znovu zavádí evidenci tržeb a svěřuje její správu Finanční správě, takže jde o konkrétní krok k zavedení EET 2.0. Zákon ale zatím není dokončen ani uveden do provozu a doložené podklady nepotvrzují všechny slíbené vlastnosti systému.
+Oba nezávislí hodnotitelé dospěli ke stejnému výsledku: **Směřuje ke splnění (+1)**.
 
 Co zůstává nejisté:
 
 - Z dostupných částí návrhu není jasné, zda konečná podoba zajistí všechny slíbené prvky, například bezplatný software, žádný povinný tisk účtenek a možnost fungování bez stálého připojení k internetu.
 
-#### Druhý posudek: Směřuje ke splnění (+1)
-
-ANO slíbilo zavést novou verzi EET 2.0. Vládní návrh zákona o evidenci tržeb, vedený ve Sněmovně jako tisk č. 189, znovu zavádí pravidla pro evidenci tržeb a svěřuje jejich správu finančním úřadům. Poslanci ANO tento návrh 15. července 2026 podpořili: pro hlasovalo 68 z 80 členů klubu ANO. Jde o konkrétní krok k zavedení EET 2.0, zákon ale zatím nebyl dokončen ani spuštěn v praxi, takže slib není celý splněn.
+Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.
 
 ### Zdroje použité při hodnocení
 
