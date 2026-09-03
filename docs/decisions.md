@@ -103,6 +103,16 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - When both independent assessors agree, show their shared result only once in `review.md`; retain both complete outputs in `assessment-run.json`. Show both opinions in `review.md` only when they disagreed and a third assessor had to arbitrate.
 - Accept an unambiguous Codex message from the owner that identifies specific proposals as editorial approval. Preserve the approval in the publication change. A generic acknowledgement and a review-proposal merge are not publication approval.
 
+### Release approval and delivery
+
+- Run the review, approval, merge, and deployment process on server-side services. It must not depend on the owner's computer or an active local or Remote session.
+- Present each pull request requiring owner approval in a cloud ChatGPT conversation available on mobile.
+- Treat the owner's unambiguous `schvaluji` reply as approval only for the pull request and exact head revision presented in that conversation.
+- Invalidate approval when the pull request head changes and require a new review.
+- Merge only after the project's explicitly defined server-side verification succeeds for the approved revision.
+- Treat a successful merge into `main` as the release boundary and follow it with deployment.
+- Report merge and deployment success or failure in the approval conversation.
+
 ### Initial implementation architecture
 
 - Use Astro, TypeScript, and plain CSS for the initial production site.
