@@ -185,7 +185,58 @@ test("separates the plain public candidate from technical reviewer data", () => 
   assert.match(markdown, /Původní volební slib/);
   assert.match(markdown, /## Technické podklady pro reviewera/);
   assert.match(markdown, /Interní stav: `moving-towards`/);
+  assert.match(markdown, /### Shoda hodnotitelů/);
+  assert.match(markdown, /Oba nezávislí hodnotitelé dospěli ke stejnému výsledku/);
+  assert.doesNotMatch(markdown, /První posudek|Druhý posudek/);
   assert.doesNotMatch(publicSection, /moving-towards|candidate|verified-party/i);
+});
+
+test("shows both opinions only when a third assessor arbitrated a disagreement", () => {
+  const plan = planAssessmentInputs({
+    packages: [{ path: "evidence-package.json", evidencePackage }],
+    manifest: emptyReviewManifest(),
+    prompts,
+    runtime
+  })[0];
+  const outputA = {
+    promiseId: evidencePackage.promise.id,
+    status: "moving-towards",
+    evidenceSufficient: true,
+    citedEvidenceIds: [evidencePackage.evidence[1].id],
+    explanationCz: "První hodnotitel vidí konkrétní krok ke splnění slibu.",
+    confidence: "medium",
+    uncertainties: []
+  };
+  const outputB = {
+    ...structuredClone(outputA),
+    status: "no-progress",
+    explanationCz: "Druhý hodnotitel považuje zjištěný krok za příliš slabý."
+  };
+  const auditRecord = {
+    evaluatedAt: "2026-09-02T00:00:00.000Z",
+    packageHash: plan.packageHash,
+    assessmentContentHash: plan.assessmentContentHash,
+    assessmentFingerprint: plan.assessmentFingerprint,
+    publicationApproved: false,
+    assessorA: { output: outputA },
+    assessorB: { output: outputB },
+    arbiter: { output: {
+      choice: "assessor-a",
+      explanationCz: "Třetí hodnotitel vybral první posudek, protože popsaný krok je konkrétní.",
+      citedEvidenceIds: [evidencePackage.evidence[1].id]
+    } },
+    resolution: { state: "candidate", reason: "arbiter-selection", status: "moving-towards", selectedReview: "assessor-a" }
+  };
+  const proposal = createReviewProposal({
+    auditRecord,
+    proposalDirectory: `automation/review-proposals/${evidencePackage.promise.id}/${plan.assessmentFingerprint}`
+  });
+  const markdown = renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal });
+  assert.match(markdown, /### Odlišné posudky/);
+  assert.match(markdown, /První posudek: Směřuje ke splnění \(\+1\)/);
+  assert.match(markdown, /Druhý posudek: Bez podstatného posunu \(0\)/);
+  assert.match(markdown, /### Rozhodnutí třetího hodnotitele/);
+  assert.doesNotMatch(markdown, /### Shoda hodnotitelů/);
 });
 
 test("removes unexplained parliamentary print numbers from the public candidate only", () => {

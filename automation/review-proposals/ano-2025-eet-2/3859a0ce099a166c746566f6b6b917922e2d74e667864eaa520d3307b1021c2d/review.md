@@ -1,24 +1,42 @@
 # Zavedení EET 2.0
 
-> Neveřejný návrh k lidské kontrole. Tento dokument sám nic nezveřejňuje a nemění SLAVA Index.
+> Neveřejný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
 
-## Navrhované hodnocení
+## Návrh pro veřejný web
+
+Toto je jediná část dokumentu určená jako kandidát veřejného textu. Musí být srozumitelná bez znalosti projektu, práva nebo fungování Poslanecké sněmovny.
+
+### Hodnocení
 
 **Směřuje ke splnění (+1)**
 
-Poslanci ANO 15. července 2026 většinově hlasovali pro vládní návrh zákona o evidenci tržeb, vedený ve Sněmovně jako tisk č. 189. Návrh má znovu zavést evidenci tržeb; jeho podklady výslovně počítají s EET 2.0 a s přípravou systému pro její spuštění. Jde o konkrétní krok k zavedení slíbené EET 2.0, ale zákon zatím nebyl přijat ani uveden do provozu. Strana tedy udělala dílčí krok ke splnění slibu.
+### Vysvětlení
 
-## Nezávislé posudky
+Poslanci ANO 15. července 2026 většinově hlasovali pro vládní návrh zákona o evidenci tržeb. Návrh má znovu zavést evidenci tržeb; jeho podklady výslovně počítají s EET 2.0 a s přípravou systému pro její spuštění. Jde o konkrétní krok k zavedení slíbené EET 2.0, ale zákon zatím nebyl přijat ani uveden do provozu. Strana tedy udělala dílčí krok ke splnění slibu.
 
-### První posudek: Směřuje ke splnění (+1)
+## Co má zkontrolovat reviewer
 
-Poslanci ANO 15. července 2026 většinově hlasovali pro vládní návrh zákona o evidenci tržeb, vedený ve Sněmovně jako tisk č. 189. Návrh má znovu zavést evidenci tržeb; jeho podklady výslovně počítají s EET 2.0 a s přípravou systému pro její spuštění. Jde o konkrétní krok k zavedení slíbené EET 2.0, ale zákon zatím nebyl přijat ani uveden do provozu. Strana tedy udělala dílčí krok ke splnění slibu.
+- Odpovídá navržené hodnocení metodice SLAVA Indexu?
+- Je jednání správně připsáno sledované straně?
+- Je veřejné vysvětlení pochopitelné samo o sobě a říká, kdo co udělal a jak to souvisí se slibem?
+- Jsou zkratky, právní pojmy a úřední označení při prvním použití vysvětlené?
+- Dokládají uvedené zdroje všechna podstatná tvrzení a nechybí rozporný podklad?
 
-### Druhý posudek: Směřuje ke splnění (+1)
+## Technické podklady pro reviewera
 
-ANO slíbilo zavést novou verzi EET 2.0. Vláda předložila Sněmovně návrh zákona o evidenci tržeb, vedený jako tisk č. 189, který má evidenci tržeb znovu upravit; dokument návrhu počítá i s řešením EET 2.0. Poslanci ANO pak při hlasování o tomto návrhu hlasovali výraznou většinou pro. Jde o konkrétní krok ke splnění slibu, ale zákon zatím není doložen jako přijatý a spuštěný a dostupné části návrhu nepotvrzují všechny slíbené vlastnosti EET 2.0.
+- Výsledek automatického procesu: oba automatické posudky se shodly
+- Interní stav: `moving-towards`
+- Důvod výsledku: `assessor-consensus`
+- Úplný strojový audit: `assessment-run.json`
+- Přesný balíček posuzovaných podkladů: `evidence-package.json`
 
-## Zdroje použité při hodnocení
+### Shoda hodnotitelů
+
+Oba nezávislí hodnotitelé dospěli ke stejnému výsledku: **Směřuje ke splnění (+1)**.
+
+Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.
+
+### Zdroje použité při hodnocení
 
 - [Původní volební slib](https://www.anobudelip.cz/file/edee/ke-stazeni/volebni-program-2025.pdf)
 - [Průběh projednávání návrhu ve Sněmovně](https://public.psp.cz/sqw/historie.sqw?o=10&t=189)

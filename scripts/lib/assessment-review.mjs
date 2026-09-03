@@ -169,10 +169,10 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     : "Automatické posouzení nemá dostatečné podklady pro návrh veřejného hodnocení.";
   const resolutionLabel = {
     "assessor-consensus": "oba automatické posudky se shodly",
-    "arbiter-selection": "o neshodě automatických posudků rozhodl třetí posudek",
+    "arbiter-selection": "o neshodě automatických posudků rozhodl třetí hodnotitel",
     "insufficient-evidence": "oba automatické posudky označily podklady za nedostatečné",
-    "arbiter-cannot-decide": "třetí posudek nedokázal spor rozhodnout",
-    "arbiter-selected-insufficient-evidence": "třetí posudek vybral posudek s nedostatečnými podklady"
+    "arbiter-cannot-decide": "třetí hodnotitel nedokázal spor rozhodnout",
+    "arbiter-selected-insufficient-evidence": "třetí hodnotitel vybral posudek s nedostatečnými podklady"
   }[proposal.resolutionReason] ?? proposal.resolutionReason;
   const lines = [
     `# ${evidencePackage.promise.titleCz}`,
@@ -208,16 +208,31 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     "- Přesný balíček posuzovaných podkladů: `evidence-package.json`",
     ""
   ];
-  lines.push("### Nezávislé posudky", "");
-  for (const [name, review] of reviews) {
-    const status = readerStatus[review.status];
-    lines.push(`#### ${name}: ${status.label} (${status.score})`, "", review.explanationCz, "");
-    if (review.uncertainties.length > 0) {
-      lines.push("Co zůstává nejisté:", "", ...review.uncertainties.map((item) => `- ${item}`), "");
+  if (!auditRecord.arbiter) {
+    const consensusResult = proposed
+      ? `${proposed.label} (${proposed.score})`
+      : "podklady nestačí pro automatický návrh hodnocení";
+    lines.push(
+      "### Shoda hodnotitelů",
+      "",
+      `Oba nezávislí hodnotitelé dospěli ke stejnému výsledku: **${consensusResult}**.`,
+      ""
+    );
+    if (!proposed) lines.push(simplifyPublicExplanation(chosen.explanationCz), "");
+    if (chosen.uncertainties.length > 0) {
+      lines.push("Co zůstává nejisté:", "", ...chosen.uncertainties.map((item) => `- ${item}`), "");
     }
-  }
-  if (auditRecord.arbiter) {
-    lines.push("### Proč rozhodoval třetí posudek", "", auditRecord.arbiter.output.explanationCz, "");
+    lines.push("Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.", "");
+  } else {
+    lines.push("### Odlišné posudky", "");
+    for (const [name, review] of reviews) {
+      const status = readerStatus[review.status];
+      lines.push(`#### ${name}: ${status.label} (${status.score})`, "", review.explanationCz, "");
+      if (review.uncertainties.length > 0) {
+        lines.push("Co zůstává nejisté:", "", ...review.uncertainties.map((item) => `- ${item}`), "");
+      }
+    }
+    lines.push("### Rozhodnutí třetího hodnotitele", "", auditRecord.arbiter.output.explanationCz, "");
   }
   const citedIds = new Set([
     ...evidencePackage.evidence.filter(({ role }) => role === "promise-source").map(({ id }) => id),
