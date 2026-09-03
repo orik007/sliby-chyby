@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-03T10-16-15-643Z--3be99842fea7",
+  "evaluatedAt": "2026-09-03T10:16:15.643Z",
+  "packagePath": "automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/ano-2025-retirement-age-65.json",
+  "packageHash": "3be99842fea71f7178dce8363a8cce1a6b0305fd405baa95b85748759194d44e",
+  "assessmentContentHash": "94d6252abb233380d16eae8ad447e08eb5436b09ebb14302f9cacd169249b9db",
+  "assessmentFingerprint": "6a31c1331ea0ec18dcd0af56b84df63b126b5bf936ba9a06693e0743807a2f74",
+  "methodologyVersion": "slava-v5",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v10",
+      "contentHash": "eb1eeef8757d8eefd64432ee00c9c90c76ebadb56197857f76d5121acf235491"
+    },
+    "arbiter": {
+      "version": "arbiter-v3",
+      "contentHash": "796d3562f0813545830f806259f975d8d7346fe1dadd9d09b0c78ddbd4a4e0db"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessParallelCalls": true,
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-5.6-terra",
+      "gpt-5.6-terra"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0ad78bb2efbe0743016a9948e584e487d1816b763441c9be50",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 7819,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 7816
+      },
+      "output_tokens": 491,
+      "output_tokens_details": {
+        "reasoning_tokens": 149
+      },
+      "total_tokens": 8310
+    },
+    "output": {
+      "promiseId": "ano-2025-retirement-age-65",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-program-2025-retirement-age-65",
+        "psp-core-2025--print-document-43392",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Hnutí ANO ve svém volebním programu slíbilo vrátit důchodový věk na 65 let. Vládní návrh změny důchodového pojištění byl Poslanecké sněmovně předložen, ale dostupné části dokumentu neobsahují ustanovení, které by tento věk právně zastropovalo. Text sice v odůvodnění zmiňuje vládní záměr zastropování, samotný návrh ani jeho předložení však podklady spolehlivě nepřipisují hnutí ANO. Není proto doložen významný krok hnutí k uskutečnění slibu ani jeho porušení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Chybí úplné znění rozhodných ustanovení návrhu, takže z poskytnutých výňatků nelze ověřit, zda návrh skutečně mění důchodový věk na 65 let.",
+        "Podklady neprokazují, že vládní návrh předložený Poslanecké sněmovně byl krokem, za který lze spravedlivě přičíst odpovědnost hnutí ANO."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_09c6e62fb8f6d30d016a9948e58e1887d1af6efedf0236bd4d",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 7819,
+      "input_tokens_details": {
+        "cache_write_tokens": 6592,
+        "cached_tokens": 1224
+      },
+      "output_tokens": 543,
+      "output_tokens_details": {
+        "reasoning_tokens": 238
+      },
+      "total_tokens": 8362
+    },
+    "output": {
+      "promiseId": "ano-2025-retirement-age-65",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-program-2025-retirement-age-65",
+        "psp-core-2025--print-step-211955",
+        "psp-core-2025--print-document-43392"
+      ],
+      "explanationCz": "ANO ve volebním programu slíbilo vrátit důchodový věk na 65 let. Poslanecká sněmovna eviduje vládní návrh změn důchodového pojištění, který byl předložen a rozeslán poslancům. Dodané části návrhu ale neprokazují, že jeho závazná ustanovení skutečně stanovují strop 65 let, ani dostatečně nespojují tento vládní krok přímo s hnutím ANO. Nelze proto doložit významný krok k naplnění ani porušení slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Chybí úplné znění ustanovení vládního návrhu, z něhož by bylo možné ověřit, zda důchodový věk závazně zastropovává na 65 letech.",
+        "Dodané podklady neprokazují, jakou roli mělo hnutí ANO při předložení vládního návrhu nebo zda jej podporuje."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

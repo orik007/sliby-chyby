@@ -1,0 +1,102 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-03T10-16-35-440Z--cd86c77a5258",
+  "evaluatedAt": "2026-09-03T10:16:35.440Z",
+  "packagePath": "automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/spd-2025-retirement-age-65.json",
+  "packageHash": "cd86c77a5258eb4837ee8553f03543b5fbf519b015edf05cdb8747d48e3ee2e0",
+  "assessmentContentHash": "03b8c0c7c509be694b64658b85ae9ca3bfe87ef46a890523689385fb622e9cd6",
+  "assessmentFingerprint": "9b50262431d09d4b12584ed0b8a33edde1aba8d88523bec1c6994c0c3a4c0bda",
+  "methodologyVersion": "slava-v5",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v10",
+      "contentHash": "eb1eeef8757d8eefd64432ee00c9c90c76ebadb56197857f76d5121acf235491"
+    },
+    "arbiter": {
+      "version": "arbiter-v3",
+      "contentHash": "796d3562f0813545830f806259f975d8d7346fe1dadd9d09b0c78ddbd4a4e0db"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessParallelCalls": true,
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-5.6-terra",
+      "gpt-5.6-terra"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0d3c27971c39fc93016a9948fc1cb087d187b04a29f8a09c64",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 2192,
+      "input_tokens_details": {
+        "cache_write_tokens": 965,
+        "cached_tokens": 1224
+      },
+      "output_tokens": 228,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 2420
+    },
+    "output": {
+      "promiseId": "spd-2025-retirement-age-65",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-retirement-age-65-source"
+      ],
+      "explanationCz": "SPD ve svém volebním programu slíbila obnovit právo na starobní důchod v 65 letech. Dodaný podklad ale nedokládá žádný návrh zákona, hlasování ani přijatou právní změnu, která by tento věk stanovila. Zveřejněná analýza Ministerstva práce se týká odchodu z trhu práce a neprokazuje krok SPD ani změnu důchodového věku. V průběžném hodnocení proto není doložen významný posun ani proti tomuto slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "V podkladech chybí oficiální doklad o případném návrhu, parlamentním hlasování nebo účinné právní úpravě důchodového věku."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b9bc0e30c734f88016a9948fe3cdc87d1a8c62f9c3c11e307",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 2192,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 2189
+      },
+      "output_tokens": 284,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 2476
+    },
+    "output": {
+      "promiseId": "spd-2025-retirement-age-65",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-retirement-age-65-source"
+      ],
+      "explanationCz": "SPD ve volebním programu slíbila obnovit standardní právo na starobní důchod v 65 letech. Dodaný podklad ale nedokládá, že by SPD po volbách předložila návrh zákona, podpořila konkrétní změnu, nebo že by taková změna byla přijata a nabyla účinnosti. Zveřejněná analýza ministerstva se týká odchodu lidí z trhu práce, nikoli změny důchodového věku, a nelze ji připsat SPD. V živém hodnocení proto zatím není doložen významný posun ani opačným směrem.",
+      "confidence": "high",
+      "uncertainties": [
+        "Chybí ověřený parlamentní, vládní nebo právní záznam o konkrétním kroku SPD ke snížení standardního důchodového věku na 65 let.",
+        "Chybí doklad o přijetí a účinnosti závazné právní změny, která by tento věk obnovila."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}
