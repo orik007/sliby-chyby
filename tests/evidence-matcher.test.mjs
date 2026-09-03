@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
@@ -35,6 +36,13 @@ test("reviewed catalog expands through bounded batches and links every promise t
   );
 
   const research = JSON.parse(await readFile(new URL("../research/2025-election/candidate-promises.json", import.meta.url), "utf8"));
+  for (const candidate of research.records) {
+    const digest = createHash("sha256")
+      .update(`${candidate.sourceId}|${candidate.page}|${candidate.originalExcerpt}`)
+      .digest("hex")
+      .slice(0, 12);
+    assert.equal(candidate.id, `candidate-${digest}`, `Candidate ${candidate.id} is not reproducible from its source occurrence`);
+  }
   const acceptedCandidates = new Map(
     research.records
       .filter(({ reviewStatus }) => reviewStatus.startsWith("accepted-"))
@@ -60,15 +68,17 @@ test("reviewed catalog expands through bounded batches and links every promise t
   const promisesById = new Map(registry.promises.map((promise) => [promise.id, promise]));
   const expectedStatusPrefix = {
     accepted: "accepted-",
-    "duplicate-occurrence": "accepted-",
+    "duplicate-occurrence": "duplicate-occurrence-",
     rejected: "rejected-",
     "needs-splitting": "needs-splitting-"
   };
   for (const review of batch.reviews) {
     const candidate = researchById.get(review.candidateId);
     assert.ok(candidate, `Unknown reviewed candidate ${review.candidateId}`);
+    const statusPrefix = expectedStatusPrefix[review.disposition];
+    assert.ok(statusPrefix, `Unknown review disposition ${review.disposition}`);
     assert.ok(
-      candidate.reviewStatus.startsWith(expectedStatusPrefix[review.disposition]),
+      candidate.reviewStatus.startsWith(statusPrefix),
       `Candidate ${review.candidateId} status does not match ${review.disposition}`
     );
 
