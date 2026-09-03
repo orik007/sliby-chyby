@@ -1,6 +1,6 @@
 # Release process
 
-This document separates the confirmed release policy from the automation that is still being tested.
+This document describes the confirmed release policy and its server-side implementation.
 
 ## Confirmed decisions
 
@@ -13,15 +13,20 @@ This document separates the confirmed release policy from the automation that is
 - A successful merge into `main` is the release boundary and must be followed by deployment.
 - The approval conversation must report whether merge and deployment succeeded or failed.
 - Reviewer-facing technical detail may be precise, but any text proposed for the public website must use plain Czech and explain unfamiliar references.
+- Cloudflare Workers is the production deployment target before a final domain is selected. The server runtime preserves the live collection-status endpoint used by the site.
+- Cloudflare watches only `main` for production deployments. No non-production trigger is configured, so unpublished review proposals cannot become public through a branch preview.
+- Cloudflare runs `npm run build` and then `npx wrangler deploy --config wrangler.deploy.jsonc`. A failed test, validation, build, or deployment keeps the previous production version live.
+- The existing ChatGPT Sites URL remains a temporary demo during the hosting transition.
 
-## Working proposal under test
+## Implemented approval flow
 
 - GitHub pull-request activity wakes a cloud ChatGPT approval conversation available on mobile.
 - The conversation presents a plain-language summary, links to the pull request, records the exact head revision, and asks for either `schvaluji` or specific feedback.
 - After `schvaluji`, the connected GitHub app verifies the unchanged revision and required checks before merging.
-- The deployment mechanism publishes the merged `main` revision and returns the public URL to the same conversation.
+- Cloudflare Workers Builds automatically builds and deploys the merged `main` revision.
+- The approval conversation reports the merge result. Deployment confirmation in that conversation remains to be connected to the Cloudflare result.
 
 ## Open questions
 
-- Whether the current Sites hosting can provide the permanent server-side deployment step directly after every GitHub merge.
-- Which hosting and domain will be used for the final public production release.
+- Which public product name and custom domain will replace the temporary hosting addresses.
+- How the approval conversation should receive and report the final Cloudflare Workers deployment result automatically.

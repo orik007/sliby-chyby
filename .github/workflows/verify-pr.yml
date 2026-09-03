@@ -34,3 +34,6 @@ jobs:
 
       - name: Run tests and production build
         run: npm run build
+
+      - name: Validate Cloudflare deployment package
+        run: npx wrangler deploy --dry-run --config wrangler.deploy.jsonc --outdir /tmp/sliby-chyby-worker

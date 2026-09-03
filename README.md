@@ -32,6 +32,8 @@ Use `npm test` for SLAVA Index unit tests and `npm run build` for the complete v
 - [SLAVA Index methodology](docs/scoring.md)
 - [Data model](docs/data-model.md)
 - [Decision register](docs/decisions.md)
+- [Cloudflare infrastructure](docs/cloudflare.md)
+- [Release and approval process](docs/release-process.md)
 - [Unpublished end-to-end pilot](docs/pilot-evaluation.md)
 - [Project working rules](AGENTS.md)
 - [2025 promise-source research](research/2025-election/README.md)
