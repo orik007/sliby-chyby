@@ -8,6 +8,8 @@
 
 Dates are omitted because the imported conversations did not frame decisions as a formal dated log.
 
+The documentation hierarchy is a **confirmed decision**: [promise-selection.md](promise-selection.md) controls admission, [evidence-pipeline.md](evidence-pipeline.md) controls collection and matching boundaries, and [scoring.md](scoring.md) contains the single assessment decision order. This register preserves accepted choices and open questions but is not a parallel checklist for assessors.
+
 ## Confirmed decisions
 
 ### Product focus

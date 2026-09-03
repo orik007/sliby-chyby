@@ -1,224 +1,125 @@
 # SLAVA Index methodology
 
-## Confirmed purpose
+## Status and authority
 
-The SLAVA Index measures a party's fidelity to its own pre-election promises. It does not judge whether the promised policy is good or bad, and it is not simply the percentage of promises already completed.
+The five-state scale, aggregate formula, live-period rule, closing audit, and party-vote rule in this document are **confirmed decisions**. This is the canonical operational scoring reference. [`docs/decisions.md`](decisions.md) records why decisions were made; it is not a second scoring checklist. The active assessor prompt must implement the decision order below without adding policy.
 
-The name is written **SLAVA Index**, without diacritics.
+Promise admission is governed separately by [promise-selection.md](promise-selection.md). A rejected or unreviewed candidate is not assigned `0` and does not enter the index denominator.
 
-Promise admission is governed by [promise-selection.md](promise-selection.md). Only statements that pass that confirmed selection methodology enter this scoring system. A rejected candidate is not assigned `0` and is not included in the SLAVA Index denominator.
+## Purpose
 
-## Confirmed promise scale
+The **SLAVA Index** measures whether a party's conduct matches its own pre-election promises. It does not judge whether a policy is good, and it is not the percentage of a programme already completed. The name is written without diacritics and the result is displayed as index points, for example `SLAVA Index: +14`.
 
-| Score | Canonical status | Rule |
+## The five states
+
+| Score | Internal status | Meaning |
 |---:|---|---|
-| `-2` | `acting-against` | A documented significant act directly contradicts the promise, the party caused a definitive contrary result, or the promised conduct itself was directly violated. |
-| `-1` | `moving-against` | A concrete intention, proposal, commitment, vote, verified failure to support the exact promise at a decisive vote, or other step points against the promise, but the definitive contrary result has not necessarily occurred. |
-| `0` | `no-progress` | The promise is assessable and checked, but no documented significant movement exists in either direction, or it is genuinely too early. |
-| `+1` | `moving-towards` | A concrete, verifiable step supports the promise, but the promised outcome has not yet occurred. |
-| `+2` | `fulfilled` | The verifiable promised outcome occurred, the party performed the exact conduct it explicitly promised, or the party gave strict-majority support at a verified decisive substantive vote to a measure that itself would deliver the whole legislative promise. |
+| `-2` | `acting-against` | The party performed a significant act that directly violated the promise, caused a definitive contrary result, or performed the exact conduct it promised not to perform. |
+| `-1` | `moving-against` | A concrete intention, proposal, vote, missed direct voting opportunity, abandonment, or other step points against the promise, without necessarily creating the definitive contrary result. |
+| `0` | `no-progress` | During a live period, no significant documented movement exists in either direction. |
+| `+1` | `moving-towards` | A concrete, attributable, verifiable step advances all or a real part of the promise, but the whole result or exact promised conduct has not yet been completed. |
+| `+2` | `fulfilled` | The whole promised result occurred, the party performed the exact promised conduct, or the full-measure legislative vote rule below applies. |
 
-The scale describes consistency with the promise, not moral approval.
+The English names are internal values. Public copy must express the meaning in natural Czech and must never expose these values or other project labels.
 
-### Confirmed reader-facing language
+## Canonical decision order
 
-Canonical English status names are internal values. They must not appear in the proposed public copy. Public text states the meaning naturally, for example “strana udělala dílčí krok ke splnění slibu”, “zatím se nic podstatného nestalo”, or “strana jednala proti svému slibu”. A clearly separated technical reviewer section may show the canonical values for audit and debugging.
+Every assessment follows these five steps. Later sections clarify a step but do not create a second decision path.
 
-Parliamentary and legal references in proposed public copy must be explained on first use. Write what the proposal concerns and what it would change, then add the official identifier for traceability if useful. A bare phrase such as “tisk 201” or an implementation phrase such as “ověřené sponzorské propojení” is not acceptable reader-facing Czech. The explanation must make sense by itself and state who acted, what happened, and how it affects the promise.
+### 1. Use the supplied assessment moment
 
-## Confirmed simple period and partial-progress rule
+Read `assessmentContext.mode`; an assessor never chooses it from elapsed time.
 
-The project uses two clearly separated assessment moments. It does not gradually penalize a promise because several weeks or months have passed.
+- In `live` mode, inactivity stays `0`. Silence, elapsed months, incomplete progress, or the absence of a later step is not negative by itself.
+- In `closing-audit` mode, a promise untouched throughout the electoral period becomes `-1`. Meaningful incomplete progress remains `+1`.
+- Close earlier only when the original promise contains an explicit deadline or one-time event and supplied evidence shows that it has closed. Never invent a waiting period.
 
-### During an active electoral period
+The ordinary pipeline currently emits only `live` packages. The one-time period-closing audit is a separate future workflow.
 
-- A promise with no meaningful documented action remains `no-progress` (`0`).
-- A meaningful, concrete, attributable step that advances a real part of the promise is `moving-towards` (`+1`), even when the whole promise is not yet complete.
-- Partial delivery never qualifies as `fulfilled`; the whole promised result or exact promised conduct is required for `+2`.
-- For a legislative promise, formally proposing a relevant measure is `+1`. A verified decisive substantive vote can raise the assessment to `+2` only when the voted measure would deliver the whole promise; voting for a partial measure remains `+1`.
-- Incompleteness, silence after a first step, or preservation of part of an existing system does not by itself make the step negative.
-- A partial measure is negative only when evidence documents an affirmative contrary step, prevention or reversal of the promise, or explicit abandonment of the remainder.
-- Do not infer that a partial measure is a final replacement merely because no later step has yet appeared.
+### 2. Verify relevance, attribution, and proof
 
-A meaningful step changes the promised amount, scope, rights, obligations, implementation, or formal legislative path in the promised direction. General rhetoric, speculation, unrelated preparation, or a cosmetic reference is not enough. Where a promise needs a promise-specific boundary, record a short `progressTest` before assessing evidence rather than inventing the boundary afterward.
+Use evidence only when it is materially relevant to the exact promise and fairly attributable:
 
-### One-time closing audit
+- a verified party proposal or vote is party conduct; a vote counts regardless of who introduced the bill;
+- a government action is only an attribution candidate until other evidence connects it to the party;
+- an official party publication proves publication, not automatically an adopted position or the truth of a claimed event; only explicit party or parliamentary-group wording can establish a directional intention;
+- an interview or third-party statement does not become a party position merely because a party site republishes it;
+- official print excerpts show proposal content, not authorship, passage, legal effect, or real-world outcome.
 
-At the end of the electoral period, the project performs one closing audit rather than applying monthly waiting rules:
+Prefer the underlying official record for votes, bills, laws, budgets, government resolutions, ministerial decisions, and outcomes. News sources are primarily for discovery and context. A strong `+2` or `-2` should normally have primary evidence; several articles repeating one report do not become independent proof.
 
-- a promise untouched for the entire period changes from `no-progress` (`0`) to `moving-against` (`-1`);
-- a meaningful but incomplete partial step remains `moving-towards` (`+1`);
-- a completely achieved promise remains `fulfilled` (`+2`);
-- documented contrary or definitive contrary conduct remains `-1` or `-2` under the ordinary rules.
+If a material fact, exact proposal effect, or party link is unresolved, mark the evidence insufficient instead of filling the gap.
 
-An earlier closing point exists only when the original promise itself contains an explicit deadline or one-time event and the evidence package documents that it has closed. Assessors must never invent an implicit deadline or decide that the project has simply waited long enough.
+### 3. Identify phase, direction, and completeness
 
-Every evidence package declares `assessmentContext.mode` as either `live` or `closing-audit`. Models do not choose the mode.
+Distinguish intention, formal proposal, vote, adopted measure, and real-world outcome. Then decide whether the event advances or contradicts the whole promise, a real part of it, or neither.
 
-## Confirmed aggregate calculation
+A meaningful step changes the promised amount, scope, rights, obligations, implementation, or formal legislative path. General rhetoric, speculation, unrelated preparation, or a cosmetic reference is not enough. When a promise needs a special boundary, record its short `progressTest` before assessing evidence.
 
-Each promise contributes only its current published assessment. Let `N` be the number of tracked promises and `s_i` each current score:
+- A verified concrete intention or formal proposal in the promised direction can be `+1`; an intention or step in the opposite direction can be `-1`.
+- A partial measure can be `+1` but never `+2`.
+- Incompleteness is not negative. A partial step becomes negative only when evidence shows contrary conduct, prevention, reversal, or explicit abandonment of the remainder.
+- Do not assume that a partial measure is the final solution merely because no later action is documented.
+- A later roll-call vote is stronger than an earlier voting intention and may confirm or supersede it; the earlier evidence remains in history.
+
+### 4. Apply the party-vote rule when relevant
+
+A Chamber vote establishes a party position only when more than half of all members of its parliamentary group at the vote time cast the same `yes` or `no` choice. The threshold is `floor(group members / 2) + 1`. Abstentions, registered non-votes, absences, excuses, and members who had not taken the oath remain in the denominator and audit.
+
+Apply the following results only when official evidence resolves the exact, valid, decisive substantive motion and its material effect on the promise:
+
+| Party conduct | Full measure that would deliver the legislative promise | Partial measure |
+|---|---:|---:|
+| Strict-majority `yes` | `+2` | `+1` |
+| Strict-majority `no` | normally `-2` | assess its actual direction under step 3 |
+| Neither strict majority | normally `-1` for failing to support the party's own promise at that direct opportunity | assess under step 3; do not apply the automatic penalty |
+
+The full-measure `+2` assesses whether the party performed its part. It applies even when another actor introduced the measure or other parties caused the overall motion to fail.
+
+For example, a seven-member group needs four matching votes. `3 yes`, `0 no`, and `4 absent` does not establish support and is a `-1` candidate only at a verified direct full-promise opportunity.
+
+Do not attribute a position from merely similar, procedural, ambiguous, materially mixed, voided, manual, technically incomplete, or context-unresolved votes.
+
+### 5. Select one current state and explain it
+
+One promise has one current assessment. Votes, articles, laws, and statements are evidence for that assessment, not separate scores. Do not average them or mechanically cancel positive and negative items. Preserve contradictory evidence and judge its significance rather than its count.
+
+Public-facing Czech must make sense without audit context. It states who acted, what happened, what it changed, and why that affects the promise. Explain parliamentary and legal references on first use; never write an unexplained label such as “tisk 201” or an internal phrase such as “verified-party-vote”.
+
+## Aggregate calculation
+
+Each tracked promise contributes only its current published score. Let `N` be the number of tracked promises and `s_i` each current score:
 
 ```text
 SLAVA Index = (sum(s_i) / (2 * N)) * 100
 ```
 
-Properties:
-
-- all assessable promises at `+2` produce `+100`;
-- all at `-2` produce `-100`;
-- all at `0` produce `0`;
-- the aggregate is derived, never manually stored.
-
-If `N = 0`, the index is unavailable; division by zero must not be represented as `0`.
-
-The mathematical range is confirmed. The UI displays the result as index points without a percent sign, for example `SLAVA Index: +14`. This is intentionally not presented as “14% of the programme fulfilled.”
+The range is `-100` to `+100`; the aggregate is derived and never manually stored. If `N = 0`, the index is unavailable rather than `0`. The UI omits the percent sign because the number is an index, not a completion percentage.
 
 ### Worked example
 
-A party has 13 promises: five fulfilled (`5 × +2 = +10`), two acted against (`2 × -2 = -4`), three moving towards fulfillment (`3 × +1 = +3`), one moving against (`1 × -1 = -1`), and two with no progress (`2 × 0 = 0`). The point sum is `+8`, the maximum is `26`, and the resulting SLAVA Index is `round(8 / 26 × 100) = +31`.
+A party has 13 promises: five at `+2`, two at `-2`, three at `+1`, one at `-1`, and two at `0`. The sum is `+8`, the maximum is `26`, and `round(8 / 26 × 100)` produces a SLAVA Index of `+31`.
 
-## Confirmed evidence rules
+## Revisions and automation
 
-### Promise evidence
+The current assessment is the latest published revision. Never overwrite history silently. A revision retains the promise ID, status, plain-language explanation, evidence IDs, publication time, methodology and prompt version, assessor audit data, and material uncertainty or dissent.
 
-Keep the exact original wording and an attributable source, preferably:
+Automated collection, matching, and assessment are separate stages described in [evidence-pipeline.md](evidence-pipeline.md). Two assessors use only supplied evidence. When they disagree, an arbiter may select either review or return `cannot-decide`; it may not browse or invent a third interpretation. Every model result remains an unpublished proposal until the human publication gate approves a later public revision.
 
-- an official election programme;
-- a party campaign website;
-- a poster or leaflet;
-- a direct video, debate transcript, or official statement.
+## Deferred real-case rules
 
-Do not infer a precise commitment from vague rhetoric. For example, “we will manage responsibly” is not automatically a promise never to support a deficit over a particular number.
+The five public states are the complete current scale. If a real promise cannot be assessed fairly, pause that case and revise the methodology from the concrete evidence rather than inventing a result or a new status.
 
-### Action and outcome evidence
+The following are **working proposals**, not scoring rules:
 
-Prefer primary evidence:
+- classify promises as outcome, process, or behavior promises when that helps identify what completion means;
+- while an outcome is unresolved, significant mixed conduct may justify the worse applicable interim state rather than an average;
+- a definitive outcome may supersede earlier signals, while one contrary act may irreversibly break a one-time behavior promise.
 
-- roll-call votes;
-- bills and amendments;
-- enacted laws;
-- state budgets;
-- government resolutions;
-- ministerial decisions;
-- authoritative outcome data.
+## Open questions
 
-News articles are primarily discovery and explanatory context. A report can support a preliminary direction, but a strong final `+2` or `-2` should normally be verified against the underlying primary source.
-
-One article alone is insufficient for a strong final assessment when a relevant primary source should exist. Independent context should not be counted twice when multiple articles merely repeat the same agency report.
-
-## Confirmed relationship between evidence and score
-
-- One promise has one current score.
-- Votes, statements, articles, laws, and outcomes are evidence, not separate scores.
-- Do not average multiple votes.
-- A positive vote does not automatically cancel a negative vote and produce `0`.
-- Contradictory actions remain visible in the evidence and history.
-- The significance of an act matters more than the number of acts.
-
-### Confirmed party-vote attribution
-
-A Chamber vote establishes positive or negative party conduct only when more than half of all members of its parliamentary group at the vote time cast the same `yes` or `no` choice.
-
-- The threshold is `floor(eligible group members / 2) + 1`.
-- A strict-majority `yes` establishes party support for the motion.
-- A strict-majority `no` establishes party opposition to the motion.
-- Abstentions, registered non-votes, absences, excuses, and members who had not yet taken the oath remain in the denominator and are retained for display.
-- At a verified decisive vote on a motion that directly and materially advances the party's own promise, failure to provide a strict-majority `yes` is a concrete failure to support the promise and is normally `moving-against` (`-1`). This includes a split vote, abstention, non-voting, or absence that leaves the party below the threshold.
-- For example, a seven-member group needs four `yes` votes. `3 yes`, `0 no`, and `4 absent` does not establish party support and is a `-1` candidate when the motion is a verified direct opportunity to advance its own promise.
-- Voided votes and manual or technically incomplete votes do not establish a party position from individual-vote data.
-- A numerical majority is not enough when the exact motion or legislative context is unresolved. The official vote must be linked to a documented decisive context before it can enter an assessment package as verified party conduct.
-- The author or sponsor of the bill is irrelevant to vote attribution. A tracked party's verified vote is its conduct even when another party, the government, or another authorized proposer introduced the bill.
-- A strict-majority `yes` at a verified decisive substantive vote is `+2` when the motion itself would fully deliver the legislative promise. This measures whether the party performed its part; the motion does not have to receive enough votes from other parties to pass.
-- A strict-majority `no` at that same kind of direct opportunity is an `acting-against` (`-2`) candidate. Failure to reach either strict majority remains the confirmed `-1` candidate described above.
-
-This rule does not infer what a motion means. Whether a `yes`, `no`, or failure to provide a majority supports or contradicts a promise depends on the exact motion and is decided later from the bounded evidence package.
-
-### Confirmed pre-vote evidence
-
-`No-progress` does not mean “no roll-call vote has occurred yet.” It means that no significant concrete evidence exists in either direction.
-
-- A verified, attributable announcement that the party will vote for a measure directly advancing its promise can establish `moving-towards` (`+1`) before the vote.
-- Formally submitting a measure that materially advances the promise can likewise establish `moving-towards` (`+1`). The tracked party does not have to be the author for its later vote to count.
-- A verified, attributable announcement that the party will vote against such a measure can establish `moving-against` (`-1`) before the vote.
-- A news report may surface the announcement, but the quoted position and party attribution must be verifiable. Speculation about likely voting behavior is not enough.
-- The later roll-call vote is stronger evidence. It confirms, contradicts, or supersedes the announced intention while the earlier evidence remains in history.
-
-Examples recorded in the conversations:
-
-- A party announces that it will accept an outcome contrary to its promise: typically `-1`.
-- It then votes for a definitive contrary budget or measure: potentially `-2`.
-- It proposes a concrete measure supporting the promised result: `+1`.
-- It gives strict-majority support at the decisive substantive vote on a measure that would deliver the whole legislative promise: `+2`, even if the measure was introduced elsewhere or ultimately lacks enough votes from other parties.
-- For a non-legislative outcome promise, the promised measurable result actually occurs: `+2`.
-- “We will never vote for this law,” followed by a vote for it: `-2`, because the promised behavior itself was violated.
-
-## Working classification of promise types
-
-Classifying a promise helps determine whether a vote is merely progress or the promised result itself:
-
-- **Outcome promise** — promises a measurable final state. Outside a legislative path, the final state is required for `+2`. When the promise is to secure a legal change, the party's verified decisive support for a measure that would fully deliver it can itself be `+2` under the confirmed party-fidelity rule.
-- **Process promise** — promises a change in rules or procedure. Completion depends on the exact promised process.
-- **Behavior promise** — promises that the party will or will not take a defined action. The relevant vote or act can itself be `+2` or `-2`.
-
-This classification is a **working proposal** and needs validation against real cases.
-
-## Working rule for contradictory actions
-
-The conversations converged on the following proposed rule, but did not fully formalize every edge case:
-
-- While the outcome remains unresolved, meaningful contradictory actions generally lead to the worse applicable current assessment rather than an average.
-- Repetition increases confidence but does not automatically convert `-1` to `-2`; significance decides.
-- A definitive final outcome can supersede earlier directional signals for an outcome promise, while those signals remain in history.
-- A one-time behavior promise such as “we will never support X” may be irreversibly broken by one contrary act; later compliant action does not erase the breach.
-
-## Deferred handling of unscorable promises
-
-The current methodology intentionally contains only the five scored states. A hypothetical “not assessable” state was removed because no concrete project case yet requires it.
-
-If a real promise later proves too vague, materially contradictory, impossible to attribute, or otherwise impossible to score fairly, do not invent a result. Pause that case and update this methodology based on the actual evidence before adding a new public status or denominator rule.
-
-## Assessment revisions
-
-The current assessment is the latest published revision. A revision should record at least:
-
-- promise identifier;
-- canonical status;
-- plain-language explanation;
-- evidence identifiers;
-- publication time;
-- methodology/prompt version;
-- assessor information needed for audit;
-- any uncertainty or dissent.
-
-Old revisions remain available. Corrections create a new transparent revision rather than silently rewriting history.
-
-## AI assessment proposal
-
-Automated evidence collection and candidate scoring are the confirmed intended workflow. The scoring system must keep discovery separate from judgment:
-
-- a collection stage records sources and creates deduplicated events;
-- a matching stage selects a bounded evidence package relevant to one promise;
-- scoring assessors may use only the supplied evidence identifiers and excerpts;
-- every output remains a revisioned candidate assessment until it passes the configured publication gate.
-
-Two assessors should independently return structured answers covering:
-
-- relevance of the event to the promise;
-- attribution to the party;
-- sufficiency of evidence;
-- process phase: intention, proposal, vote, law, or outcome;
-- direction: supports, contradicts, or neutral;
-- proposed canonical status;
-- cited evidence IDs and exact excerpts;
-- short explanation and confidence.
-
-On disagreement, an arbiter receives the same evidence plus anonymized reviews. The proposed arbiter rule is to select A, select B, or return `cannot-decide`; it should not invent a third unsupported interpretation or search for new evidence. Human review handles unresolved cases.
-
-## Open methodology questions
-
-- If a real promise cannot be scored fairly, does the product need a new status, a publication filter, or another treatment?
+- If a real promise cannot be scored fairly, should it receive a new status, be withheld from publication, or use another treatment?
 - How should blocked-by-others and compromise cases affect the score?
 - How should unusual explicit-deadline promises be represented when the source wording leaves the closing event ambiguous?
-- When mixed actions exist, what precise rule determines when the worse interim assessment applies?
-- What minimum evidence package is required for each status, especially `+2` and `-2`?
+- What exact rule should resolve materially mixed conduct?
+- What minimum evidence package should be mandatory for each state, especially `+2` and `-2`?

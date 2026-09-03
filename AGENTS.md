@@ -18,18 +18,22 @@ SlibyChyby tracks what political parties promised before an election and compare
 - If new evidence conflicts with a recorded decision, document the conflict before changing behavior.
 - Do not infer product requirements from assistant suggestions in historical conversations unless the owner explicitly accepted them.
 
+## Operational authorities
+
+- Use `docs/promise-selection.md` to decide what enters the promise catalog.
+- Use `docs/evidence-pipeline.md` for collection, matching, attribution boundaries, and publication separation.
+- Use the five-step decision order in `docs/scoring.md` for every assessment. Do not create a parallel scoring checklist in implementation notes or prompts.
+- Use `docs/decisions.md` as the historical decision register, not as an additional operational algorithm.
+
 ## Evidence and scoring integrity
 
 - Preserve the exact original wording and source of every promise.
-- For the first public version, admit only clearly attributable party commitments from official national party sources. Do not turn a politician's personal promise, a regional commitment, or an allied-party candidate's promise into a national party promise.
-- A candidate from another party running on a party's electoral list does not transfer their own party's promises into the tracked party's SLAVA Index. Include such wording only when the tracked party officially adopts it as its own commitment.
+- For the first public version, admit only clear party commitments from official national party sources. Personal, regional, allied-party, and unadopted third-party commitments do not transfer into the party's index.
 - When official pre-election wording changes, use the latest official version as the active promise. Retain earlier versions internally for audit, but do not show the change publicly in the first version.
 - Publish a smaller fully verified promise set rather than padding coverage with vague or uncertain statements.
 - Do not turn a vague statement into a more specific promise.
-- Prefer primary sources for both the promise and the party's subsequent action.
-- Use media articles primarily for discovery and context. A strong `+2` or `-2` assessment should normally be verified against a primary source.
-- Keep all relevant evidence, including contradictory votes or actions. Do not average evidence into a score.
-- One promise has one current assessment. Votes, articles, laws, and statements are evidence for that assessment, not independently scored items.
+- Prefer primary sources. Media are primarily for discovery and context; a strong `+2` or `-2` should normally be verified against the underlying primary record.
+- One promise has one current assessment. Keep contradictory evidence, judge significance, and never average evidence items into a score.
 - Do not invent or implement an unscored public status until a real promise demonstrates the need. Revisit the methodology with that concrete case.
 - Never store a manually edited aggregate SLAVA Index. Derive it from current assessable promise revisions.
 - Display the aggregate as index points without a percent sign, for example `SLAVA Index: +14`.
@@ -52,10 +56,7 @@ SlibyChyby tracks what political parties promised before an election and compare
 - A promise belongs to exactly one party in exactly one electoral period.
 - Do not carry a promise or its score into a later period. Repeated wording in a later election is a new promise.
 - Retain historical periods and their assessment history.
-- Determine an elected representative's relevant party or parliamentary-group membership at the date of a vote, not from current membership alone.
-- Attribute positive or negative Chamber conduct only when more than half of all time-resolved parliamentary-group members cast the same `yes` or `no` choice. Retain abstentions, non-votes, absences, and excuses in the denominator and audit. At a verified decisive vote on a motion that directly and materially advances the party's own promise, failure to provide a strict-majority `yes` is a `moving-against` candidate rather than ordinary inactivity. Do not apply that penalty to merely similar, procedural, ambiguous, or materially mixed motions. Do not attribute voided, manual, technically incomplete, or context-unresolved votes.
-- Do not require the tracked party to have authored or sponsored a bill before using its verified vote. Decisive party voting conduct is relevant regardless of who introduced the bill.
-- For a legislative promise, an attributable formal proposal that materially advances the promise is `moving-towards` (`+1`). A strict-majority `yes` by the party at a verified decisive substantive vote is `fulfilled` (`+2`) when the voted measure itself would deliver the whole legislative promise, even if another actor introduced it or the overall motion fails. A vote on a merely partial measure remains `+1`.
+- Resolve parliamentary-group membership at the vote date. Follow the exact strict-majority and decisive-motion rules in `docs/scoring.md`; do not infer party conduct from current membership, an unresolved vote, or bill authorship.
 
 ## Product and implementation
 

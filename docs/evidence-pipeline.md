@@ -4,7 +4,9 @@
 
 The collection, matching, and assessment separation described in this document is a **confirmed decision**.
 
-This document is the canonical human-readable description of the evidence pipeline. [`automation/collectors/sources.json`](../automation/collectors/sources.json) is the machine-readable authority for enabled sources, endpoints, host allowlists, evidence roles, and deferred integrations. A source-list change must update both files in the same pull request.
+This document is the canonical human-readable description of collection, matching, and publication boundaries. Scoring decisions belong only in [`docs/scoring.md`](scoring.md). [`automation/collectors/sources.json`](../automation/collectors/sources.json) is the machine-readable authority for enabled sources, endpoints, host allowlists, evidence roles, and deferred integrations. A source-list change must update both files in the same pull request.
+
+The operational rule is short: **collect broadly from the allowlist, match cautiously, assess only bounded attributable evidence, and publish only after human approval**. A collector never scores, a match never proves direction, and an assessment proposal never publishes itself.
 
 ## Confirmed pipeline
 
