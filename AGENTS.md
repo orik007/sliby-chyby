@@ -4,6 +4,12 @@
 
 SlibyChyby tracks what political parties promised before an election and compares those promises with the parties' subsequent actions and outcomes. The public experience must stay simple, while every assessment remains traceable to evidence.
 
+## Cold start
+
+- Read `docs/project-guide.md` and `docs/decisions.md` completely before making a material product, methodology, data, automation, or release change.
+- Then read the canonical document named by the guide for the area being changed.
+- Derive current counts and workflow status from the repository and connected server-side systems; do not treat a historical conversation summary as current state.
+
 ## Communication and repository language
 
 - Write repository content, code, identifiers, comments, and documentation in English.
@@ -72,6 +78,13 @@ SlibyChyby tracks what political parties promised before an election and compare
 - Validate all data relationships and make invalid data fail the build or validation step.
 - Prefer the simplest architecture that preserves auditability, deterministic builds, and a future database migration path.
 - Run the complete evidence pipeline once daily at 09:37 in `Europe/Prague`, while retaining the manual trigger. The public freshness date represents the last successful complete run and must never advance after a failed run.
+
+## Release discipline
+
+- Use a pull request for repository changes intended for `main` and require the `Verify pull request` workflow to succeed for the exact current head commit.
+- Do not merge on a generic acknowledgement. The owner must approve the exact presented revision with an unambiguous `schvaluji`; any new commit invalidates that approval.
+- Treat merge to `main` as the production release boundary. Cloudflare Workers Builds deploys `main`; do not manually deploy an unmerged branch or enable public branch previews.
+- Automated assessment-review pull requests are a durable unpublished audit queue. Their merge is not editorial publication approval and must not change public assessment data.
 
 ## Scope control
 

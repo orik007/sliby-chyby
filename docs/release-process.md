@@ -26,6 +26,10 @@ This document describes the confirmed release policy and its server-side impleme
 - Cloudflare Workers Builds automatically builds and deploys the merged `main` revision.
 - The approval conversation reports the merge result. Deployment confirmation in that conversation remains to be connected to the Cloudflare result.
 
+## Current operational state
+
+The first repository-triggered production deployment completed successfully on 2026-09-03 after pull request 11 was approved and merged. Cloudflare built the exact `main` merge commit and the public Worker responded successfully, including the server-rendered collection-status endpoint. This verifies the merge-to-deployment path. It does not resolve the open callback from Cloudflare into the mobile approval conversation.
+
 ## Open questions
 
 - Which public product name and custom domain will replace the temporary hosting addresses.

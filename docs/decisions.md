@@ -155,7 +155,7 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 
 ### Public interface
 
-- Home page: site title, period selector, three large circular party portraits, and a red-to-green index scale.
+- Home page: site title, period selector, three large circular party portraits, and a red-to-green index scale with `-100` labelled at the left and `+100` at the right.
 - Party page: index, distribution, simple promise rows, symbol plus label, expandable evidence.
 - Promise page: original wording, plain-language explanation, decisive primary evidence, articles, update date, and revision timeline.
 - Candidate symbol set: `✓`, `↗`, `—`, `↘`, and `×`.
@@ -242,3 +242,7 @@ Leader portraits, posters, programmes, and source snapshots require a licensing,
 ### Future coverage of individuals
 
 The first-version boundary is resolved: only official national party commitments enter a party's SLAVA Index. A future section may separately track the positions and conduct of individual politicians. Its scope, methodology, and relationship to party scoring remain open and do not block the first version.
+
+### Future opposition-party coverage
+
+The owner raised extending the tracker to opposition parties represented in the Chamber because they also vote and may introduce legislation. No expansion order, completeness threshold, or relationship to the current governing-party presentation was confirmed. The initial scope therefore remains ANO, SPD, and Motoristé until a later explicit decision.
