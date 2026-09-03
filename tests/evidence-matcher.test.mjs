@@ -12,6 +12,7 @@ import {
 const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8")));
 const eet = registry.promises.find(({ id }) => id === "ano-2025-eet-2");
 const freeMuseums = registry.promises.find(({ id }) => id === "ano-2025-free-state-museums-selected-groups");
+const selfEmployedContributionIncrease = registry.promises.find(({ id }) => id === "ano-2025-stop-2026-self-employed-contribution-increase");
 const anoFinanceBatchIds = [
   "ano-2025-not-adopt-euro",
   "ano-2025-digital-tax-cobra",
@@ -107,6 +108,13 @@ test("every ANO finance-batch promise matches a source repeating its exact quote
     assert.ok(match, `Exact quote does not satisfy matching threshold for ${promiseId}`);
     assert.equal(match.attributionStatus, "verified-party-publication");
   }
+});
+
+test("time-bounded contribution promise distinguishes prevention from a later reversal", () => {
+  assert.match(selfEmployedContributionIncrease.fulfillmentTest, /prevent .* from taking effect on its planned effective date in 2026/);
+  assert.doesNotMatch(selfEmployedContributionIncrease.fulfillmentTest, /revers/i);
+  assert.match(selfEmployedContributionIncrease.contradictionTest, /scheduled 2026 increase takes effect/);
+  assert.match(selfEmployedContributionIncrease.contradictionTest, /does not retroactively fulfill/);
 });
 
 function record(overrides = {}) {
