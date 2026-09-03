@@ -18,7 +18,7 @@ This document describes the confirmed release policy and its server-side impleme
 - Cloudflare Workers is the production deployment target before a final domain is selected. The server runtime preserves the live collection-status endpoint used by the site.
 - Cloudflare watches only `main` for production deployments. No non-production trigger is configured, so unpublished review proposals cannot become public through a branch preview.
 - Cloudflare runs `npm run build` and then `npx wrangler deploy --config wrangler.deploy.jsonc`. A failed test, validation, build, or deployment keeps the previous production version live.
-- The existing ChatGPT Sites URL remains a temporary demo during the hosting transition.
+- The ChatGPT Sites URL was kept as a temporary demo during the hosting transition. That transition is complete; the old address is currently still available, and its removal timing remains open.
 
 ## Implemented approval flow
 
@@ -37,4 +37,5 @@ The first repository-triggered production deployment completed successfully on 2
 ## Open questions
 
 - Which public product name and custom domain will replace the temporary hosting addresses.
+- When the earlier ChatGPT Sites demo should be removed.
 - How the approval conversation should receive and report the final Cloudflare Workers deployment result automatically.
