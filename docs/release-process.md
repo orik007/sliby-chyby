@@ -9,7 +9,7 @@ This document separates the confirmed release policy from the automation that is
 - A review request must identify the pull request and its exact current head revision.
 - The owner's approval applies only to the revision presented for review.
 - If the pull request changes after approval, the approval is invalid and a new review is required.
-- A pull request may be merged only after all required checks succeed.
+- A pull request may be merged only after the `Verify pull request` workflow succeeds for its exact current head revision.
 - A successful merge into `main` is the release boundary and must be followed by deployment.
 - The approval conversation must report whether merge and deployment succeeded or failed.
 - Reviewer-facing technical detail may be precise, but any text proposed for the public website must use plain Czech and explain unfamiliar references.
