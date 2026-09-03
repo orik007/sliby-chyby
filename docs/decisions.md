@@ -214,6 +214,10 @@ First-person commitments also appeared under the `Filip Turek` Meta advertiser w
 
 The public name is unresolved. “Sliby vlády” and related wording were suggested, but the owner explicitly said the name was not yet known. The repository name and scoring brand can be used temporarily, so this does not block the production rollout.
 
+### Temporary demo removal
+
+Keeping the ChatGPT Sites address as a temporary demo during the hosting transition is confirmed. The exact point at which it should be removed was not decided; successful Cloudflare deployment alone does not resolve that timing.
+
 ### Mixed conduct
 
 The owner rejected an absolute averaging rule and preferred the worse result in inconsistent cases, while also saying this is not an absolute rule. The working exception for final outcomes and behavior promises needs real-case tests before becoming canonical.

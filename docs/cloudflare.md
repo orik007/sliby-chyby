@@ -20,7 +20,7 @@ This document records how SlibyChyby resources are separated within the shared C
 - Keep deployment configuration in the repository through `wrangler.deploy.jsonc`. The non-default filename prevents the generated server entry point from being treated as a source entry point during the Astro build. Do not store Cloudflare credentials or build tokens in the repository.
 - Configure one Workers Builds production trigger for `main`. Do not configure a non-production trigger; unpublished review branches must not receive public preview URLs.
 - Run `npm run build` before `npx wrangler deploy --config wrangler.deploy.jsonc`. The Worker name in Cloudflare and `wrangler.deploy.jsonc` must remain identical.
-- Keep the existing ChatGPT Sites deployment recorded as the temporary fallback during the name and domain transition. Removing it requires an explicit cleanup decision.
+- Keep the existing ChatGPT Sites address as a temporary demo during the hosting transition.
 
 ## Current resources
 
@@ -30,7 +30,7 @@ This document records how SlibyChyby resources are separated within the shared C
 | Production Worker | `sliby-chyby` | Public SlibyChyby website |
 | Temporary fallback | `sliby-chyby-demo.sorastars.chatgpt.site` | Earlier public deployment retained during migration |
 
-The first repository-triggered Workers Build from `main` completed successfully on 2026-09-03. The production Worker now serves the Astro application directly. The fallback remains available until the final name and domain migration is complete.
+The first repository-triggered Workers Build from `main` completed successfully on 2026-09-03. The production Worker now serves the Astro application directly. The temporary demo is currently still available; its exact removal point has not been decided.
 
 ## Resource-creation rules
 
@@ -42,5 +42,6 @@ The first repository-triggered Workers Build from `main` completed successfully 
 ## Open questions
 
 - The final public product name and custom domain.
+- When the temporary ChatGPT Sites demo should be removed.
 - Whether a dedicated staging Worker becomes useful after the real publication workflow is complete.
 - How Cloudflare deployment success or failure will be reported automatically in the mobile approval conversation.
