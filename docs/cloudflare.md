@@ -20,7 +20,6 @@ This document records how SlibyChyby resources are separated within the shared C
 - Keep deployment configuration in the repository through `wrangler.deploy.jsonc`. The non-default filename prevents the generated server entry point from being treated as a source entry point during the Astro build. Do not store Cloudflare credentials or build tokens in the repository.
 - Configure one Workers Builds production trigger for `main`. Do not configure a non-production trigger; unpublished review branches must not receive public preview URLs.
 - Run `npm run build` before `npx wrangler deploy --config wrangler.deploy.jsonc`. The Worker name in Cloudflare and `wrangler.deploy.jsonc` must remain identical.
-- Keep the existing ChatGPT Sites address as a temporary demo during the hosting transition.
 
 ## Current resources
 
@@ -30,7 +29,7 @@ This document records how SlibyChyby resources are separated within the shared C
 | Production Worker | `sliby-chyby` | Public SlibyChyby website |
 | Temporary fallback | `sliby-chyby-demo.sorastars.chatgpt.site` | Earlier public deployment retained during migration |
 
-The first repository-triggered Workers Build from `main` completed successfully on 2026-09-03. The production Worker now serves the Astro application directly. The temporary demo is currently still available; its exact removal point has not been decided.
+The first repository-triggered Workers Build from `main` completed successfully on 2026-09-03. The production Worker now serves the Astro application directly. The earlier ChatGPT Sites demo is currently still available, but this is current state rather than a retention rule; its removal timing remains open.
 
 ## Resource-creation rules
 

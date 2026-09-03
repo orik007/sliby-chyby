@@ -117,7 +117,7 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Treat both AI reviews as advisory quality gates. Neither one substitutes for the owner's exact-revision approval.
 - Use Cloudflare Workers as the production deployment target before the final domain is selected; this preserves the site's server-rendered collection-status endpoint.
 - Deploy only the `main` branch to production. Do not configure a non-production build trigger, so unpublished review proposals do not receive public preview URLs.
-- Keep the current ChatGPT Sites address as a temporary demo during the hosting transition.
+- The ChatGPT Sites address was kept as a temporary demo during the hosting transition. That transition is now complete; this historical decision does not set a future retention deadline.
 
 ### Initial implementation architecture
 

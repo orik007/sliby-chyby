@@ -144,11 +144,11 @@ Each public promise has one current assessment:
 
 | Score | Meaning |
 | ---: | --- |
-| `+2` | The whole promised result or exact promised conduct occurred. For a legislative promise, this also includes the party's strict-majority `yes` on a verified full measure, even if another actor introduced it or other parties caused it to fail. |
+| `+2` | The whole promised result or exact promised conduct occurred. For a legislative promise, this also includes the party's strict-majority `yes` on a verified, valid, decisive substantive motion covering the full measure, even if another actor introduced it or other parties caused it to fail. |
 | `+1` | A meaningful concrete step advances a real part of the promise. |
 | `0` | No documented meaningful movement during the live period. |
 | `-1` | Documented conduct moves against the promise, or a verified direct decisive opportunity to support the exact promise was missed under the strict vote rule. |
-| `-2` | Concrete attributable conduct directly contradicts the promise. |
+| `-2` | A significant direct violation, definitive contrary result, or the exact conduct that the party promised not to perform occurred. |
 
 Negative points mean that the party acted against its own promise; they are not a general judgment of the policy. During the live period, elapsed time alone does not change `0`. At the one-time closing audit, a promise untouched for the entire period becomes `-1`. The closing audit is not implemented yet.
 
