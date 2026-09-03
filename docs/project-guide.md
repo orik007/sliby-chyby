@@ -212,9 +212,10 @@ Cloudflare deployment itself is operational and the first repository-triggered p
 3. Inspect the current branch, `origin/main`, open pull requests, and working tree before editing. Preserve unrelated work and attachments.
 4. Derive current counts and operational status from files and server-side systems. Do not trust a copied historical number in a conversation.
 5. Keep research candidates, matching-catalogue promises, automated proposals, and public data visibly distinct.
-6. Do not publish or merge a political assessment without the required explicit owner approval.
-7. Record a newly accepted product or methodology decision in `docs/decisions.md` and its canonical document in the same change.
-8. Run relevant tests and `npm run build`, open a pull request, wait for Copilot and Codex review of the current revision, and use the exact-revision approval process.
+6. Do not publish a political assessment without proposal-specific editorial approval from the owner. Merging an assessment-review pull request preserves an unpublished audit record and is not publication approval.
+7. Do not merge any pull request without the owner's unambiguous `schvaluji` for the exact presented head revision; a new commit invalidates that merge approval.
+8. Record a newly accepted product or methodology decision in `docs/decisions.md` and its canonical document in the same change.
+9. Run relevant tests and `npm run build`, open a pull request, wait for Copilot and Codex review of the current revision, and use the exact-revision approval process.
 
 ## Current open questions
 
