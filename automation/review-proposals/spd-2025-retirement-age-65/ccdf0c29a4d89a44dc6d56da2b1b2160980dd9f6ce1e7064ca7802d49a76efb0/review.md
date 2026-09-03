@@ -30,9 +30,9 @@ Automatické posouzení nemá dostatečné podklady pro návrh veřejného hodno
 - Úplný strojový audit: `assessment-run.json`
 - Přesný balíček posuzovaných podkladů: `evidence-package.json`
 
-### Nezávislé posudky
+### Shoda hodnotitelů
 
-#### První posudek: Bez podstatného posunu (0)
+Oba nezávislí hodnotitelé dospěli ke stejnému výsledku: **podklady nestačí pro automatický návrh hodnocení**.
 
 SPD ve svém programu slíbila vrátit běžný důchodový věk na 65 let. Dodaný podklad popisuje pouze analýzu Ministerstva práce a sociálních věcí o odchodu lidí z práce před penzí. Neuvádí, že by SPD předložila, podpořila nebo prosadila změnu zákona o důchodovém věku. Zatím tedy nejsou doloženy významné kroky ani opačné kroky SPD.
 
@@ -40,14 +40,7 @@ Co zůstává nejisté:
 
 - Není doložen žádný krok SPD v hlasování, při předložení zákona ani v jednání vlády. Samotná analýza ministerstva neukazuje, zda ji SPD podpořila nebo zda vedla ke změně důchodového věku.
 
-#### Druhý posudek: Bez podstatného posunu (0)
-
-SPD slíbila vrátit běžný důchodový věk na 65 let. Dodaný podklad uvádí jen analýzu Ministerstva práce a sociálních věcí o odchodu lidí z práce před penzí. Neprokazuje, že SPD předložila zákon, hlasovala pro takovou změnu nebo ji jinak podpořila. Zatím proto nemáme doložený významný krok ani opačný krok SPD.
-
-Co zůstává nejisté:
-
-- Není doložen žádný krok SPD v Parlamentu ani ve vládě, který by se přímo týkal návratu důchodového věku na 65 let.
-- Zpráva ministerstva se důchodového věku týká, ale neříká, zda ji SPD podpořila nebo zda vedla ke změně zákona.
+Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.
 
 ### Zdroje použité při hodnocení
 

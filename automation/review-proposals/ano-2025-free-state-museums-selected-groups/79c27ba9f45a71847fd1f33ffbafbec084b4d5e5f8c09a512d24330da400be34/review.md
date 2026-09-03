@@ -30,9 +30,9 @@ Automatické posouzení nemá dostatečné podklady pro návrh veřejného hodno
 - Úplný strojový audit: `assessment-run.json`
 - Přesný balíček posuzovaných podkladů: `evidence-package.json`
 
-### Nezávislé posudky
+### Shoda hodnotitelů
 
-#### První posudek: Bez podstatného posunu (0)
+Oba nezávislí hodnotitelé dospěli ke stejnému výsledku: **podklady nestačí pro automatický návrh hodnocení**.
 
 ANO slíbilo bezplatný vstup do státních muzeí a galerií pro mládež, seniory a hendikepované občany. Ministerstvo kultury oznámilo, že zapojená státní muzea a galerie budou od září zdarma pro všechny vždy první neděli v měsíci. Tento krok ale nezajišťuje slíbený bezplatný vstup pro uvedené skupiny obecně. Podklady také neukazují, že tento krok prosadilo nebo podpořilo hnutí ANO, proto zatím nelze doložit významný postup hnutí ke splnění slibu.
 
@@ -41,14 +41,7 @@ Co zůstává nejisté:
 - Není doloženo, zda a jak se hnutí ANO na rozhodnutí Ministerstva kultury podílelo.
 - Není doloženo pravidlo, které by mládeži, seniorům a hendikepovaným občanům zaručovalo bezplatný vstup i mimo první neděli v měsíci.
 
-#### Druhý posudek: Bez podstatného posunu (0)
-
-ANO slíbilo bezplatný vstup do státních muzeí a galerií pro mládež, seniory a hendikepované občany. Ministerstvo kultury oznámilo vstup zdarma první neděli v měsíci do stálých expozic zapojených institucí, a to pro všechny návštěvníky. Z podkladů ale neplyne, že tento krok prosadilo nebo podpořilo hnutí ANO. Opatření navíc nezajišťuje bezplatný vstup pro uvedené skupiny kdykoli, proto zatím nemáme dost důkazů o skutečném posunu ve plnění slibu.
-
-Co zůstává nejisté:
-
-- Není doloženo, zda hnutí ANO tento krok ministerstva navrhlo, podpořilo nebo za něj politicky odpovídá.
-- Není doloženo, zda existuje širší pravidlo bezplatného vstupu pro mládež, seniory a hendikepované občany.
+Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.
 
 ### Zdroje použité při hodnocení
 

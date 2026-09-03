@@ -30,9 +30,9 @@ Automatické posouzení nemá dostatečné podklady pro návrh veřejného hodno
 - Úplný strojový audit: `assessment-run.json`
 - Přesný balíček posuzovaných podkladů: `evidence-package.json`
 
-### Nezávislé posudky
+### Shoda hodnotitelů
 
-#### První posudek: Bez podstatného posunu (0)
+Oba nezávislí hodnotitelé dospěli ke stejnému výsledku: **podklady nestačí pro automatický návrh hodnocení**.
 
 Motoristé sobě slíbili zrušit CERMAT a nahradit jednotné přijímací zkoušky i státní část maturity průběžným ověřováním. Ministerstvo školství v roce 2026 dál informovalo o přijímacím řízení a o výsledcích druhého kola, v němž fungoval systém DiPSy a informace CERMATu. Tyto zprávy ale neukazují, že Motoristé sobě tento postup prosadili, podpořili nebo že zrušení CERMATu odmítli. Z dostupných podkladů proto nelze doložit významný krok strany ani ve prospěch, ani proti jejímu slibu.
 
@@ -41,14 +41,7 @@ Co zůstává nejisté:
 - Zprávy ministerstva popisují fungování přijímaček, ale neuvádějí postoj ani konkrétní jednání Motoristů sobě.
 - Chybí doklad o návrhu zákona, hlasování nebo rozhodnutí, které by přímo řešilo zrušení CERMATu a jeho náhradu slíbeným systémem.
 
-#### Druhý posudek: Bez podstatného posunu (0)
-
-Motoristé sobě ve svém programu slíbili zrušit CERMAT a nahradit jednotné zkoušky průběžným ověřováním. Ministerstvo školství v roce 2026 stále informovalo o přijímacích zkouškách a o službách CERMATu. Tyto zprávy ale neukazují, že Motoristé sobě zachování tohoto systému prosadili nebo podpořili. Nemáme ani doklad, že strana podnikla konkrétní krok ke zrušení CERMATu, proto zatím nelze její postup férově hodnotit jako posun ke splnění ani proti splnění slibu.
-
-Co zůstává nejisté:
-
-- Chybí doklad o hlasování, návrhu zákona nebo jiném konkrétním kroku Motoristů sobě k této věci.
-- Zprávy ministerstva potvrzují fungování přijímaček, ale samy o sobě neříkají, jaký postoj k nim Motoristé sobě zaujali.
+Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.
 
 ### Zdroje použité při hodnocení
 
