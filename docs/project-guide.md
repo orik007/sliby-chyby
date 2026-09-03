@@ -113,7 +113,7 @@ Collectors enforce configured hosts, media types, and size limits. They record r
 
 The matcher compares the shared collected record set with every reviewed promise. One record may match several promises. It exposes the phrases and official identifiers that caused each candidate match. It does not decide whether the record supports or contradicts the promise.
 
-A bounded evidence package is created only when the attribution and primary-evidence boundary is satisfied. Media-only or merely thematic matches remain visible in the audit but do not silently become assessable evidence. A promise with no match receives no assessment; absence of a match is not proof of inactivity and is never converted into zero points.
+A bounded evidence package is created only when the attribution and primary-evidence boundary is satisfied. Media-only or merely thematic matches remain visible in the audit but do not silently become assessable evidence. A run with no match creates no new automated assessment; any existing published assessment revision remains current. Absence of a match is not proof of inactivity and is never converted into zero points.
 
 For matched parliamentary prints, deterministic enrichment retrieves the official document, records its content hash, and selects bounded numbered passages. This reveals proposal substance but does not establish party authorship, support, passage, or legal effect.
 
