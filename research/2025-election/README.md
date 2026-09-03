@@ -2,7 +2,7 @@
 
 ## Status
 
-**Working proposal.** This directory is primarily a research staging area. Only source candidates explicitly marked `accepted-first-release-catalog-v1` have been promoted into the reviewed matching registry. Every other record remains unpublished research material and is not a promise, assessment, or SLAVA Index input.
+**Working proposal.** This directory is primarily a research staging area. Only source candidates explicitly marked with an `accepted-*` review status have been promoted into the reviewed matching registry through a documented catalog tranche or bounded batch. Every other record remains unpublished research material and is not a promise, assessment, or SLAVA Index input.
 
 The confirmed party scope for the current period is ANO 2011, Svoboda a přímá demokracie (SPD), and Motoristé sobě. The election scope is the 2025 Czech Chamber of Deputies election. Collective post-election coalition and government programmes are evidence of later conduct, not sources of pre-election promises.
 

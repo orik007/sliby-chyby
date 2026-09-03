@@ -44,16 +44,44 @@ test("reviewed catalog expands through bounded batches and links every promise t
     assert.ok(candidate, `Missing accepted candidate for ${promise.id}`);
     assert.equal(candidate.partyId, promise.partyId);
     assert.equal(candidate.sourceUrl, promise.promiseSource.url);
+    if (anoFinanceBatchIds.includes(promise.id)) {
+      const normalizedCandidateText = candidate.originalExcerpt.replace(/\s+/g, " ").trim();
+      const normalizedPromiseText = promise.originalTextCz.replace(/\s+/g, " ").trim();
+      assert.ok(normalizedCandidateText.includes(normalizedPromiseText), `Candidate ${candidate.id} does not contain the exact source passage for ${promise.id}`);
+    }
   }
 
   const batch = JSON.parse(await readFile(new URL("../research/2025-election/reviewed-batches/ano-finance-1.json", import.meta.url), "utf8"));
   assert.equal(batch.status, "Working proposal");
   assert.equal(batch.summary.acceptedNewPromises, 7);
   assert.equal(batch.source.url, "https://www.anobudelip.cz/file/edee/ke-stazeni/volebni-program-2025.pdf");
-  const promiseIds = new Set(registry.promises.map(({ id }) => id));
+  const researchById = new Map(research.records.map((candidate) => [candidate.id, candidate]));
+  const promisesById = new Map(registry.promises.map((promise) => [promise.id, promise]));
+  const expectedStatusPrefix = {
+    accepted: "accepted-",
+    "duplicate-occurrence": "accepted-",
+    rejected: "rejected-",
+    "needs-splitting": "needs-splitting-"
+  };
   for (const review of batch.reviews) {
-    assert.ok(research.records.some(({ id }) => id === review.candidateId), `Unknown reviewed candidate ${review.candidateId}`);
-    for (const promiseId of review.resultingPromiseIds ?? []) assert.ok(promiseIds.has(promiseId), `Unknown resulting promise ${promiseId}`);
+    const candidate = researchById.get(review.candidateId);
+    assert.ok(candidate, `Unknown reviewed candidate ${review.candidateId}`);
+    assert.ok(
+      candidate.reviewStatus.startsWith(expectedStatusPrefix[review.disposition]),
+      `Candidate ${review.candidateId} status does not match ${review.disposition}`
+    );
+
+    const resultingPromiseIds = review.resultingPromiseIds ?? [];
+    const linkedPromiseIds = registry.promises
+      .filter(({ researchSourceCandidateId }) => researchSourceCandidateId === review.candidateId)
+      .map(({ id }) => id)
+      .sort();
+    assert.deepEqual(linkedPromiseIds, [...resultingPromiseIds].sort(), `Candidate ${review.candidateId} has inconsistent promise links`);
+    for (const promiseId of resultingPromiseIds) {
+      const promise = promisesById.get(promiseId);
+      assert.ok(promise, `Unknown resulting promise ${promiseId}`);
+      assert.equal(promise.researchSourceCandidateId, review.candidateId);
+    }
     if (review.disposition === "rejected") assert.ok(review.rejectionReasonCodes?.length > 0);
   }
 });
