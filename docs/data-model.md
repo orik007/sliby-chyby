@@ -357,7 +357,6 @@ Coverage states are internal workflow facts, not public SLAVA statuses. In parti
 ## Open data questions
 
 - Exact period definition and boundary dates.
-- Party-vote aggregation rule.
 - Whether a real unscorable, blocked, or compromised promise eventually requires a new status or a different publication rule.
 - Required source snapshot policy and retention period.
 - Whether feed-response hashes alone are sufficient for official-page evidence, or whether lawful page/PDF snapshots must also be retained after matching.

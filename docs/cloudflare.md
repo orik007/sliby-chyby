@@ -20,7 +20,6 @@ This document records how SlibyChyby resources are separated within the shared C
 - Keep deployment configuration in the repository through `wrangler.deploy.jsonc`. The non-default filename prevents the generated server entry point from being treated as a source entry point during the Astro build. Do not store Cloudflare credentials or build tokens in the repository.
 - Configure one Workers Builds production trigger for `main`. Do not configure a non-production trigger; unpublished review branches must not receive public preview URLs.
 - Run `npm run build` before `npx wrangler deploy --config wrangler.deploy.jsonc`. The Worker name in Cloudflare and `wrangler.deploy.jsonc` must remain identical.
-- Keep the existing ChatGPT Sites deployment available as a fallback until the Cloudflare deployment has completed successfully and been verified.
 
 ## Current resources
 
@@ -28,9 +27,9 @@ This document records how SlibyChyby resources are separated within the shared C
 | --- | --- | --- |
 | Workers account subdomain | `orik007-apps.workers.dev` | Shared neutral namespace for present and future Workers |
 | Production Worker | `sliby-chyby` | Public SlibyChyby website |
-| Temporary fallback | `sliby-chyby-demo.sorastars.chatgpt.site` | Existing public deployment retained during migration |
+| Earlier demo | `sliby-chyby-demo.sorastars.chatgpt.site` | Previous public deployment, currently still available; removal timing is open |
 
-Until the first repository build succeeds, the production Worker redirects requests to the temporary fallback.
+The first repository-triggered Workers Build from `main` completed successfully on 2026-09-03. The production Worker now serves the Astro application directly. The earlier ChatGPT Sites demo is currently still available, but this is current state rather than a retention rule; its removal timing remains open.
 
 ## Resource-creation rules
 
@@ -42,5 +41,6 @@ Until the first repository build succeeds, the production Worker redirects reque
 ## Open questions
 
 - The final public product name and custom domain.
+- When the temporary ChatGPT Sites demo should be removed.
 - Whether a dedicated staging Worker becomes useful after the real publication workflow is complete.
 - How Cloudflare deployment success or failure will be reported automatically in the mobile approval conversation.

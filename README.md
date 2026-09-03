@@ -14,6 +14,8 @@ The confirmed initial implementation uses Astro, TypeScript, plain CSS, and sche
 
 The canonical collection, matching, source-list, and assessment flow is documented in [`docs/evidence-pipeline.md`](docs/evidence-pipeline.md).
 
+For a complete cold-start explanation of why the project exists and how promise research, evidence collection, AI assessment, human approval, publication, and deployment fit together, start with [`docs/project-guide.md`](docs/project-guide.md).
+
 The complete unpublished evidence pipeline runs daily at 09:37 Prague time and can also be started manually. Public pages show the date of its latest successful run. A failed run does not advance that date and never changes a published assessment.
 
 ## Local development
@@ -27,6 +29,7 @@ Use `npm test` for SLAVA Index unit tests and `npm run build` for the complete v
 
 ## Documentation
 
+- [Start here: complete project guide](docs/project-guide.md)
 - [Product vision and interface](docs/product.md)
 - [Promise selection methodology](docs/promise-selection.md)
 - [SLAVA Index methodology](docs/scoring.md)

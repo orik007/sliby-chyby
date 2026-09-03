@@ -43,6 +43,7 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Distinguish inaction (`0`) from active conduct against a promise (negative values).
 - Normalize the aggregate to a range from `-100` to `+100`.
 - Display the aggregate as index points without a percent sign, for example `SLAVA Index: +14`. This is a reversible presentation decision.
+- Label the home-page index scale with `-100` at the left and `+100` at the right so its range is visible immediately.
 - Do not include a public “not assessable” state yet. Add special handling only after a real promise demonstrates the need.
 - Use one current assessment per promise; do not average multiple votes.
 - Preserve contradictory evidence instead of allowing positive and negative votes to cancel mechanically.
@@ -112,9 +113,11 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Merge only after the project's explicitly defined server-side verification succeeds for the approved revision.
 - Treat a successful merge into `main` as the release boundary and follow it with deployment.
 - Report merge and deployment success or failure in the approval conversation.
+- Request both GitHub Copilot code review and Codex review for every pull request and wait for both to review the exact current head commit before asking the owner for approval. Evaluate every finding rather than accepting it automatically. Fix valid findings; give an evidence-based reason for non-applicable findings; then reply to and resolve every addressable review thread. Record the disposition of summary-only or suppressed findings in the pull-request conversation. A new commit requires fresh reviews.
+- Treat both AI reviews as advisory quality gates. Neither one substitutes for the owner's exact-revision approval.
 - Use Cloudflare Workers as the production deployment target before the final domain is selected; this preserves the site's server-rendered collection-status endpoint.
 - Deploy only the `main` branch to production. Do not configure a non-production build trigger, so unpublished review proposals do not receive public preview URLs.
-- Keep the current ChatGPT Sites address as a temporary demo during the hosting transition.
+- The ChatGPT Sites address was kept as a temporary demo during the hosting transition. That transition is now complete; this historical decision does not set a future retention deadline.
 
 ### Initial implementation architecture
 
@@ -155,7 +158,7 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 
 ### Public interface
 
-- Home page: site title, period selector, three large circular party portraits, and a red-to-green index scale.
+- Home page: site title, period selector, three large circular party portraits, and a red-to-green index scale. The endpoint labels are a separately confirmed decision recorded above.
 - Party page: index, distribution, simple promise rows, symbol plus label, expandable evidence.
 - Promise page: original wording, plain-language explanation, decisive primary evidence, articles, update date, and revision timeline.
 - Candidate symbol set: `✓`, `↗`, `—`, `↘`, and `×`.
@@ -211,6 +214,10 @@ First-person commitments also appeared under the `Filip Turek` Meta advertiser w
 
 The public name is unresolved. “Sliby vlády” and related wording were suggested, but the owner explicitly said the name was not yet known. The repository name and scoring brand can be used temporarily, so this does not block the production rollout.
 
+### Temporary demo removal
+
+Keeping the ChatGPT Sites address as a temporary demo during the hosting transition is confirmed. The exact point at which it should be removed was not decided; successful Cloudflare deployment alone does not resolve that timing.
+
 ### Mixed conduct
 
 The owner rejected an absolute averaging rule and preferred the worse result in inconsistent cases, while also saying this is not an absolute rule. The working exception for final outcomes and behavior promises needs real-case tests before becoming canonical.
@@ -242,3 +249,7 @@ Leader portraits, posters, programmes, and source snapshots require a licensing,
 ### Future coverage of individuals
 
 The first-version boundary is resolved: only official national party commitments enter a party's SLAVA Index. A future section may separately track the positions and conduct of individual politicians. Its scope, methodology, and relationship to party scoring remain open and do not block the first version.
+
+### Future opposition-party coverage
+
+The owner raised extending the tracker to opposition parties represented in the Chamber because they also vote and may introduce legislation. No expansion order, completeness threshold, or relationship to the current governing-party presentation was confirmed. The initial scope therefore remains ANO, SPD, and Motoristé until a later explicit decision.
