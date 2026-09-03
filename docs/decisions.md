@@ -24,6 +24,14 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Write proposed public explanations in plain, natural Czech for ordinary readers. They must make sense without audit context and state who did what and how it affects the promise. Technical reviewer material may use internal English status values and project terms when clearly separated from public copy.
 - Explain parliamentary and legal identifiers on first use in proposed public copy. State what the proposal or decision is and what it changes; never rely on a bare reference such as “tisk 201”.
 - Search official national party sources broadly, but publish only clear and fully verified promises. The first real-data version may contain a smaller curated set and does not need to include every campaign statement.
+- Publish the two human-approved 2026-09-03 revisions for ANO's EET 2.0 and public-media-fee promises as the first real public records. Preserve their exact programme wording, primary evidence links, and review-proposal identifiers.
+
+### First public aggregate
+
+**Working proposal applied to the first two-record release**
+
+- Keep the party-level SLAVA Index unavailable while the public dataset contains only two evidence-selected promises. Displaying `+50` from this subset could be mistaken for an assessment of ANO's broader programme.
+- State plainly that unpublished promises are not zero-point promises. Confirm the minimum breadth or denominator policy before publishing the first aggregate.
 
 ### Identity and scoring
 

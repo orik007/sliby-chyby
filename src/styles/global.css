@@ -332,7 +332,8 @@ h1 em {
   line-height: 1.6;
 }
 
-.demo-banner {
+.demo-banner,
+.data-notice {
   width: min(1180px, calc(100% - 40px));
   margin: 18px auto 0;
   padding: 11px 16px;
@@ -347,9 +348,32 @@ h1 em {
   font-size: 13px;
 }
 
-.demo-banner strong {
+.demo-banner strong,
+.data-notice strong {
   text-transform: uppercase;
   letter-spacing: 0.08em;
+}
+
+.data-notice {
+  border-color: #b7d6c2;
+  color: #155b39;
+  background: #e1f1e6;
+}
+
+.index-note,
+.empty-state {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.score-breakdown:not(:first-child) {
+  margin-top: 14px;
+}
+
+.source-caption a,
+.source-list a {
+  text-underline-offset: 4px;
 }
 
 .promise-count {
@@ -972,6 +996,7 @@ h1 em {
   .party-section,
   .methodology,
   .demo-banner,
+  .data-notice,
   .site-footer,
   .party-hero,
   .promise-section,
@@ -1011,7 +1036,8 @@ h1 em {
     margin-bottom: 14px;
   }
 
-  .demo-banner {
+  .demo-banner,
+  .data-notice {
     align-items: flex-start;
     flex-direction: column;
     gap: 3px;

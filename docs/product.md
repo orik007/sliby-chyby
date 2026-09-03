@@ -153,7 +153,7 @@ The route structure remains a working proposal:
 /methodology
 ```
 
-The first implementation is a clearly labeled demo with fabricated data. The next phase is a curated set of verified official party promises followed by one complete end-to-end golden case through evidence collection, matching, multi-model assessment, review, and static publication.
+The fabricated interface demo has been superseded by a deliberately small first public dataset. Two ANO promises with primary sources and human-approved `+1` revisions are published; fictional fixtures remain in the repository but are excluded from the public build whenever real records exist. Further promises remain unpublished until their evidence and assessment pass human review.
 
 ## Out of scope for the first version
 
