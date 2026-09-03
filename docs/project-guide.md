@@ -121,7 +121,7 @@ For matched parliamentary prints, deterministic enrichment retrieves the officia
 
 Two stateless AI assessors independently receive the same bounded package. They cannot browse and may cite only source identifiers and excerpts in that package. Each produces a structured proposed state, evidence references, confidence, and plain Czech public copy.
 
-The current pilot configuration uses two separate `gpt-5.6-terra` calls. If their sufficient results disagree, `gpt-5.6-sol` acts as arbiter. The arbiter may select one supplied review or return that it cannot decide; it cannot invent a third assessment or add evidence. Provider calls are behind an adapter so the second assessor can later move to another provider without changing the rest of the system.
+The current pilot configuration uses two separate `gpt-5.6-terra` calls. If the assessors disagree on the state or on whether the evidence is sufficient, `gpt-5.6-sol` acts as arbiter. The arbiter may select one supplied review or return that it cannot decide; it cannot invent a third assessment or add evidence. Provider calls are behind an adapter so the second assessor can later move to another provider without changing the rest of the system.
 
 Models, prompts, evidence-package content, hashes, timestamps, and arbitration are retained for audit. Credentials exist only in the GitHub `assessment` environment or another server-side secret store. The public browser never receives an AI key and never runs assessment.
 
