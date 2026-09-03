@@ -113,7 +113,7 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Merge only after the project's explicitly defined server-side verification succeeds for the approved revision.
 - Treat a successful merge into `main` as the release boundary and follow it with deployment.
 - Report merge and deployment success or failure in the approval conversation.
-- Request both GitHub Copilot code review and Codex review for every pull request and wait for both to review the exact current head commit before asking the owner for approval. Review their findings; fix valid issues or record why a finding does not apply. A new commit requires fresh reviews.
+- Request both GitHub Copilot code review and Codex review for every pull request and wait for both to review the exact current head commit before asking the owner for approval. Evaluate every finding rather than accepting it automatically. Fix valid findings; give an evidence-based reason for non-applicable findings; then reply to and resolve every addressable review thread. Record the disposition of summary-only or suppressed findings in the pull-request conversation. A new commit requires fresh reviews.
 - Treat both AI reviews as advisory quality gates. Neither one substitutes for the owner's exact-revision approval.
 - Use Cloudflare Workers as the production deployment target before the final domain is selected; this preserves the site's server-rendered collection-status endpoint.
 - Deploy only the `main` branch to production. Do not configure a non-production build trigger, so unpublished review proposals do not receive public preview URLs.

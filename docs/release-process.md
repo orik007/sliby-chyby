@@ -11,7 +11,7 @@ This document describes the confirmed release policy and its server-side impleme
 - If the pull request changes after approval, the approval is invalid and a new review is required.
 - A pull request may be merged only after the `Verify pull request` workflow succeeds for its exact current head revision.
 - Every pull request must receive both GitHub Copilot code review and Codex review for its exact current head revision before it is presented for owner approval. A new commit requires fresh reviews.
-- AI review findings must be read and either addressed or explicitly documented as not applicable. These reviews are advisory quality gates and do not replace owner approval.
+- Every AI finding must be evaluated against the code and canonical documentation rather than accepted automatically. Fix valid findings; answer non-applicable findings with a concise evidence-based reason. Reply to and resolve each addressable review thread after handling it. Record the disposition of summary-only or suppressed findings in the pull-request conversation. These reviews are advisory quality gates and do not replace owner approval.
 - A successful merge into `main` is the release boundary and must be followed by deployment.
 - The approval conversation must report whether merge and deployment succeeded or failed.
 - Reviewer-facing technical detail may be precise, but any text proposed for the public website must use plain Czech and explain unfamiliar references.
