@@ -17,7 +17,6 @@ const selfEmployedContributionIncrease = registry.promises.find(({ id }) => id =
 const anoFinanceBatchIds = [
   "ano-2025-not-adopt-euro",
   "ano-2025-digital-tax-cobra",
-  "ano-2025-cross-border-illicit-assets-freeze",
   "ano-2025-restore-working-student-tax-credit",
   "ano-2025-stop-2026-self-employed-contribution-increase",
   "ano-2025-remove-leisure-benefit-cap",
@@ -26,13 +25,13 @@ const anoFinanceBatchIds = [
 
 test("reviewed catalog expands through bounded batches and links every promise to an accepted source occurrence", async () => {
   assert.equal(registry.status, "reviewed-promise-catalog-v2");
-  assert.equal(registry.promises.length, 43);
+  assert.equal(registry.promises.length, 42);
   assert.deepEqual(
     Object.fromEntries(["ano", "spd", "motoriste"].map((partyId) => [
       partyId,
       registry.promises.filter((promise) => promise.partyId === partyId).length
     ])),
-    { ano: 19, spd: 12, motoriste: 12 }
+    { ano: 18, spd: 12, motoriste: 12 }
   );
 
   const research = JSON.parse(await readFile(new URL("../research/2025-election/candidate-promises.json", import.meta.url), "utf8"));
@@ -70,7 +69,7 @@ test("reviewed catalog expands through bounded batches and links every promise t
 
   const batch = JSON.parse(await readFile(new URL("../research/2025-election/reviewed-batches/ano-finance-1.json", import.meta.url), "utf8"));
   assert.equal(batch.status, "Working proposal");
-  assert.equal(batch.summary.acceptedNewPromises, 7);
+  assert.equal(batch.summary.acceptedNewPromises, 6);
   assert.equal(batch.source.url, "https://www.anobudelip.cz/file/edee/ke-stazeni/volebni-program-2025.pdf");
   const researchById = new Map(research.records.map((candidate) => [candidate.id, candidate]));
   const promisesById = new Map(registry.promises.map((promise) => [promise.id, promise]));

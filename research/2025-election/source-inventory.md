@@ -79,8 +79,8 @@ These are discovery leads and classification examples, not accepted promises:
 
 | File | Purpose | Production status |
 |---|---|---|
-| `candidate-promises.json` | 955 over-inclusive passages from the three final programmes | 41 accepted source occurrences produce 43 reviewed promises; 5 rejected and 1 needs splitting in the first incremental batch; 908 remain unreviewed |
-| `reviewed-batches/ano-finance-1.json` | Bounded review of ANO's printed programme page 4 | 7 new matching promises plus explicit rejection and split reasons; unpublished working proposal |
+| `candidate-promises.json` | 955 over-inclusive passages from the three final programmes | 40 accepted source occurrences produce 42 reviewed promises; 6 rejected and 1 needs splitting in the first incremental batch; 908 remain unreviewed |
+| `reviewed-batches/ano-finance-1.json` | Bounded review of ANO's printed programme page 4 | 6 new matching promises plus explicit rejection and split reasons; unpublished working proposal |
 | `official-web-candidates.json` | 409 over-inclusive passages from 647 official-index source items | Unreviewed attribution and promise queue |
 | `ano-official-news-index.json` | Complete 405-item ANO campaign-period news index | Discovery and recovery index |
 | `ano-newspaper-candidates.json` | 26 exact Czech occurrences from five ANO campaign newspapers | Selected August/September occurrences have a second visual check; the remainder await second review and deduplication |

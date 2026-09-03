@@ -8,12 +8,12 @@
 
 | Party | Reviewed matching promises | Change from v1 |
 | --- | ---: | ---: |
-| ANO 2011 | 19 | +7 |
+| ANO 2011 | 18 | +6 |
 | SPD | 12 | 0 |
 | Motoristé sobě | 12 | 0 |
-| **Total** | **43** | **+7** |
+| **Total** | **42** | **+6** |
 
-The seven added promises come from printed page 4 of ANO's final official national election programme. Selected related passages in the earlier August/September *Lepší Česko* campaign newspaper were also visually checked and retained as Tier B occurrences; the later final programme remains the active source. The source occurrences, wording differences, rejected candidates, split decisions, and reasons are retained in [`reviewed-batches/ano-finance-1.json`](reviewed-batches/ano-finance-1.json).
+The six added promises come from printed page 4 of ANO's final official national election programme. Selected related passages in the earlier August/September *Lepší Česko* campaign newspaper were also visually checked and retained as Tier B occurrences; the later final programme remains the active source. The source occurrences, wording differences, rejected candidates, split decisions, and reasons are retained in [`reviewed-batches/ano-finance-1.json`](reviewed-batches/ano-finance-1.json).
 
 ## Added ANO promises
 
@@ -21,7 +21,6 @@ The seven added promises come from printed page 4 of ANO's final official nation
 | --- | --- |
 | `ano-2025-not-adopt-euro` | Do not adopt the euro under an ANO-led government |
 | `ano-2025-digital-tax-cobra` | Introduce the Digital Tax Cobra with the stated analytical function |
-| `ano-2025-cross-border-illicit-assets-freeze` | Enact the stated power to freeze unlawfully acquired cross-border assets |
 | `ano-2025-restore-working-student-tax-credit` | Restore the tax credit for working students |
 | `ano-2025-stop-2026-self-employed-contribution-increase` | Stop the self-employed contribution increase scheduled for 2026 |
 | `ano-2025-remove-leisure-benefit-cap` | Remove the cap on employee leisure benefits |
@@ -31,4 +30,4 @@ Each entry preserves the complete source passage, an exact Czech quote, a page l
 
 ## Publication boundary
 
-The seven entries are reviewed promises only for collection and matching. They remain outside `data/promises/` because they do not yet have owner-approved assessment revisions. The live website therefore continues to publish only the two previously approved ANO promises. Evidence collection, two-assessor review, possible arbitration, owner approval, and a separate publication change remain mandatory.
+The six entries are reviewed promises only for collection and matching. They remain outside `data/promises/` because they do not yet have owner-approved assessment revisions. The live website therefore continues to publish only the two previously approved ANO promises. Evidence collection, two-assessor review, possible arbitration, owner approval, and a separate publication change remain mandatory.

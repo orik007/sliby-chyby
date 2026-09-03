@@ -75,7 +75,7 @@ Secondary material must point back to a party publication, recording, photograph
 - SPD: 247;
 - Motoristé: 235.
 
-These are extraction candidates, not 955 distinct promises. The first human-reviewed tranche accepted 36 source occurrences, evenly split across the three parties. The first incremental ANO finance batch reviewed another 11 occurrences: five produced new promises, five were rejected with reasons, and one still needs splitting. Two already accepted composite occurrences produced two additional atomic promises. The matching registry therefore contains 43 promises linked to 41 accepted source occurrences; 908 extraction candidates remain unreviewed.
+These are extraction candidates, not 955 distinct promises. The first human-reviewed tranche accepted 36 source occurrences, evenly split across the three parties. The first incremental ANO finance batch reviewed another 11 occurrences: four produced new promises, six were rejected with reasons, and one still needs splitting. Two already accepted composite occurrences produced two additional atomic promises. The matching registry therefore contains 42 promises linked to 40 accepted source occurrences; 908 extraction candidates remain unreviewed.
 
 The original tranche and current expanded set are recorded in [`reviewed-catalog-v1.md`](reviewed-catalog-v1.md) and [`reviewed-catalog-v2.md`](reviewed-catalog-v2.md). Acceptance means the source wording passed the current attribution, atomicity, and assessability checks. It does not mean that the promise has been assessed or approved for automatic public publication.
 
