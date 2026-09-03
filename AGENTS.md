@@ -55,6 +55,7 @@ SlibyChyby tracks what political parties promised before an election and compare
 - Determine an elected representative's relevant party or parliamentary-group membership at the date of a vote, not from current membership alone.
 - Attribute positive or negative Chamber conduct only when more than half of all time-resolved parliamentary-group members cast the same `yes` or `no` choice. Retain abstentions, non-votes, absences, and excuses in the denominator and audit. At a verified decisive vote on a motion that directly and materially advances the party's own promise, failure to provide a strict-majority `yes` is a `moving-against` candidate rather than ordinary inactivity. Do not apply that penalty to merely similar, procedural, ambiguous, or materially mixed motions. Do not attribute voided, manual, technically incomplete, or context-unresolved votes.
 - Do not require the tracked party to have authored or sponsored a bill before using its verified vote. Decisive party voting conduct is relevant regardless of who introduced the bill.
+- For a legislative promise, an attributable formal proposal that materially advances the promise is `moving-towards` (`+1`). A strict-majority `yes` by the party at a verified decisive substantive vote is `fulfilled` (`+2`) when the voted measure itself would deliver the whole legislative promise, even if another actor introduced it or the overall motion fails. A vote on a merely partial measure remains `+1`.
 
 ## Product and implementation
 

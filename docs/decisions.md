@@ -35,7 +35,7 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Preserve contradictory evidence instead of allowing positive and negative votes to cancel mechanically.
 - Prefer an arrow for directional states and one check mark for fulfilled in the simple UI.
 - During an active electoral period, an untouched promise remains `0`; elapsed months alone never create a penalty.
-- A meaningful concrete step advancing a real part of the promise is `+1`, even when incomplete. Only the whole promised result can receive `+2`.
+- A meaningful concrete step advancing a real part of the promise is `+1`, even when incomplete. Only the whole promised result, exact promised conduct, or the confirmed decisive-vote completion of a full legislative promise can receive `+2`.
 - Do not infer that a partial step is final or negative merely because part of the old system remains or no later step has appeared. Negative treatment requires documented contrary conduct, prevention, reversal, or explicit abandonment.
 - Perform one closing audit at the end of the electoral period. A promise untouched for the entire period changes from `0` to `-1`; meaningful partial progress remains `+1`.
 - An earlier closing point exists only when the original promise contains an explicit deadline or one-time event. Do not invent implicit waiting periods.
@@ -49,6 +49,7 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Verify important claims elsewhere; do not trust one article merely because it comes from a large outlet.
 - Require a strict majority of the complete time-resolved parliamentary group to establish positive or negative party voting conduct. At a verified decisive vote on a motion that directly and materially advances the party's own promise, failure to provide a strict-majority `yes` is normally `moving-against` (`-1`), not ordinary inactivity. Retain all individual choices for transparency. Voided, unsupported vote types, and votes without verified decisive context do not establish party conduct.
 - Treat a verified decisive party vote as attributable conduct regardless of who authored or sponsored the bill. A bill does not have to be the tracked party's proposal.
+- For a legislative promise, treat an attributable formal proposal that materially advances the promise as `+1`. Treat the party's strict-majority `yes` at a verified decisive substantive vote as `+2` when the voted measure itself would deliver the whole legislative promise, regardless of who introduced it and regardless of whether other parties provide enough votes for the motion to pass. A vote on a partial measure remains `+1`.
 - Treat a verified, attributable pre-vote commitment as directional evidence: an announced intention to support the exact promise can be `+1`, and an announced intention to oppose it can be `-1`. A later roll-call vote is stronger evidence and may confirm or supersede the intention.
 
 ### Promise admission

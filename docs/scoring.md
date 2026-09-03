@@ -16,7 +16,7 @@ Promise admission is governed by [promise-selection.md](promise-selection.md). O
 | `-1` | `moving-against` | A concrete intention, proposal, commitment, vote, verified failure to support the exact promise at a decisive vote, or other step points against the promise, but the definitive contrary result has not necessarily occurred. |
 | `0` | `no-progress` | The promise is assessable and checked, but no documented significant movement exists in either direction, or it is genuinely too early. |
 | `+1` | `moving-towards` | A concrete, verifiable step supports the promise, but the promised outcome has not yet occurred. |
-| `+2` | `fulfilled` | The verifiable promised outcome occurred, or the party performed the exact conduct it explicitly promised to perform. |
+| `+2` | `fulfilled` | The verifiable promised outcome occurred, the party performed the exact conduct it explicitly promised, or the party gave strict-majority support at a verified decisive substantive vote to a measure that itself would deliver the whole legislative promise. |
 
 The scale describes consistency with the promise, not moral approval.
 
@@ -35,6 +35,7 @@ The project uses two clearly separated assessment moments. It does not gradually
 - A promise with no meaningful documented action remains `no-progress` (`0`).
 - A meaningful, concrete, attributable step that advances a real part of the promise is `moving-towards` (`+1`), even when the whole promise is not yet complete.
 - Partial delivery never qualifies as `fulfilled`; the whole promised result or exact promised conduct is required for `+2`.
+- For a legislative promise, formally proposing a relevant measure is `+1`. A verified decisive substantive vote can raise the assessment to `+2` only when the voted measure would deliver the whole promise; voting for a partial measure remains `+1`.
 - Incompleteness, silence after a first step, or preservation of part of an existing system does not by itself make the step negative.
 - A partial measure is negative only when evidence documents an affirmative contrary step, prevention or reversal of the promise, or explicit abandonment of the remainder.
 - Do not infer that a partial measure is a final replacement merely because no later step has yet appeared.
@@ -128,6 +129,8 @@ A Chamber vote establishes positive or negative party conduct only when more tha
 - Voided votes and manual or technically incomplete votes do not establish a party position from individual-vote data.
 - A numerical majority is not enough when the exact motion or legislative context is unresolved. The official vote must be linked to a documented decisive context before it can enter an assessment package as verified party conduct.
 - The author or sponsor of the bill is irrelevant to vote attribution. A tracked party's verified vote is its conduct even when another party, the government, or another authorized proposer introduced the bill.
+- A strict-majority `yes` at a verified decisive substantive vote is `+2` when the motion itself would fully deliver the legislative promise. This measures whether the party performed its part; the motion does not have to receive enough votes from other parties to pass.
+- A strict-majority `no` at that same kind of direct opportunity is an `acting-against` (`-2`) candidate. Failure to reach either strict majority remains the confirmed `-1` candidate described above.
 
 This rule does not infer what a motion means. Whether a `yes`, `no`, or failure to provide a majority supports or contradicts a promise depends on the exact motion and is decided later from the bounded evidence package.
 
@@ -136,6 +139,7 @@ This rule does not infer what a motion means. Whether a `yes`, `no`, or failure 
 `No-progress` does not mean “no roll-call vote has occurred yet.” It means that no significant concrete evidence exists in either direction.
 
 - A verified, attributable announcement that the party will vote for a measure directly advancing its promise can establish `moving-towards` (`+1`) before the vote.
+- Formally submitting a measure that materially advances the promise can likewise establish `moving-towards` (`+1`). The tracked party does not have to be the author for its later vote to count.
 - A verified, attributable announcement that the party will vote against such a measure can establish `moving-against` (`-1`) before the vote.
 - A news report may surface the announcement, but the quoted position and party attribution must be verifiable. Speculation about likely voting behavior is not enough.
 - The later roll-call vote is stronger evidence. It confirms, contradicts, or supersedes the announced intention while the earlier evidence remains in history.
@@ -145,14 +149,15 @@ Examples recorded in the conversations:
 - A party announces that it will accept an outcome contrary to its promise: typically `-1`.
 - It then votes for a definitive contrary budget or measure: potentially `-2`.
 - It proposes a concrete measure supporting the promised result: `+1`.
-- The promised measurable result actually occurs: `+2`.
+- It gives strict-majority support at the decisive substantive vote on a measure that would deliver the whole legislative promise: `+2`, even if the measure was introduced elsewhere or ultimately lacks enough votes from other parties.
+- For a non-legislative outcome promise, the promised measurable result actually occurs: `+2`.
 - “We will never vote for this law,” followed by a vote for it: `-2`, because the promised behavior itself was violated.
 
 ## Working classification of promise types
 
 Classifying a promise helps determine whether a vote is merely progress or the promised result itself:
 
-- **Outcome promise** — promises a measurable final state. A supporting vote may be `+1`; the final state is required for `+2`.
+- **Outcome promise** — promises a measurable final state. Outside a legislative path, the final state is required for `+2`. When the promise is to secure a legal change, the party's verified decisive support for a measure that would fully deliver it can itself be `+2` under the confirmed party-fidelity rule.
 - **Process promise** — promises a change in rules or procedure. Completion depends on the exact promised process.
 - **Behavior promise** — promises that the party will or will not take a defined action. The relevant vote or act can itself be `+2` or `-2`.
 

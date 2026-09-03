@@ -28,11 +28,12 @@ const runtime = {
 };
 
 test("active prompts require plain Czech without internal labels", async () => {
-  assert.equal(assessorPromptVersion, "assessor-v8");
+  assert.equal(assessorPromptVersion, "assessor-v9");
   assert.equal(arbiterPromptVersion, "arbiter-v3");
   const active = await loadAssessmentPrompts();
   assert.match(active.assessor.instructions, /Never put internal English status names/);
   assert.match(active.assessor.instructions, /Never refer to a parliamentary print by number alone/);
+  assert.match(active.assessor.instructions, /strict-majority `yes` by the tracked party at a verified decisive substantive vote is `fulfilled`/);
   assert.match(active.arbiter.instructions, /ordinary reader/);
 });
 
