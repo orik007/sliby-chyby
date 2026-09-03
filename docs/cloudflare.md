@@ -27,7 +27,7 @@ This document records how SlibyChyby resources are separated within the shared C
 | --- | --- | --- |
 | Workers account subdomain | `orik007-apps.workers.dev` | Shared neutral namespace for present and future Workers |
 | Production Worker | `sliby-chyby` | Public SlibyChyby website |
-| Temporary fallback | `sliby-chyby-demo.sorastars.chatgpt.site` | Earlier public deployment retained during migration |
+| Earlier demo | `sliby-chyby-demo.sorastars.chatgpt.site` | Previous public deployment, currently still available; removal timing is open |
 
 The first repository-triggered Workers Build from `main` completed successfully on 2026-09-03. The production Worker now serves the Astro application directly. The earlier ChatGPT Sites demo is currently still available, but this is current state rather than a retention rule; its removal timing remains open.
 
