@@ -1,0 +1,107 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-02T21-36-44-987Z--d6a2f975d5d8",
+  "evaluatedAt": "2026-09-02T21:36:44.987Z",
+  "packagePath": "automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/motoriste-2025-abolish-cermat.json",
+  "packageHash": "d6a2f975d5d8457c2940d1a0aeffa37e7dca5a7d7bd683365adf94125cbd8789",
+  "assessmentContentHash": "f5f4fcc92a3a670d518aa4a6991602f8d32430dc3d637fa86f6f269284a98298",
+  "assessmentFingerprint": "6b8b232ca03406cba040ba6c45f9a69fc8f8cfb7585971c0aa1f60c82ea0a731",
+  "methodologyVersion": "slava-v4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v7",
+      "contentHash": "76f037bb2ea6c6346c84e522c247a67a4bb8538bf993ad4e5cb6a8354523385e"
+    },
+    "arbiter": {
+      "version": "arbiter-v3",
+      "contentHash": "796d3562f0813545830f806259f975d8d7346fe1dadd9d09b0c78ddbd4a4e0db"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessParallelCalls": true,
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-5.6-terra",
+      "gpt-5.6-terra"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_07cff4445e5ba1b1016a9896e5c4f887d2a2aa48f9b1c27d04",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 3188,
+      "input_tokens_details": {
+        "cache_write_tokens": 1681,
+        "cached_tokens": 1504
+      },
+      "output_tokens": 397,
+      "output_tokens_details": {
+        "reasoning_tokens": 56
+      },
+      "total_tokens": 3585
+    },
+    "output": {
+      "promiseId": "motoriste-2025-abolish-cermat",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-abolish-cermat-source",
+        "msmt-news-api--news-ad4d4d49316cf78729e6",
+        "msmt-news-api--news-a68e989625bc201998d0"
+      ],
+      "explanationCz": "Motoristé sobě slíbili zrušit CERMAT a nahradit jednotné přijímací zkoušky i státní část maturity průběžným ověřováním. Ministerstvo školství v roce 2026 dál informovalo o přijímacím řízení a o výsledcích druhého kola, v němž fungoval systém DiPSy a informace CERMATu. Tyto zprávy ale neukazují, že Motoristé sobě tento postup prosadili, podpořili nebo že zrušení CERMATu odmítli. Z dostupných podkladů proto nelze doložit významný krok strany ani ve prospěch, ani proti jejímu slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Zprávy ministerstva popisují fungování přijímaček, ale neuvádějí postoj ani konkrétní jednání Motoristů sobě.",
+        "Chybí doklad o návrhu zákona, hlasování nebo rozhodnutí, které by přímo řešilo zrušení CERMATu a jeho náhradu slíbeným systémem."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0aa3e9d3f20fb6cc016a9896e59e7c87d28f28f9f7f1ee84e7",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 3188,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 3185
+      },
+      "output_tokens": 410,
+      "output_tokens_details": {
+        "reasoning_tokens": 82
+      },
+      "total_tokens": 3598
+    },
+    "output": {
+      "promiseId": "motoriste-2025-abolish-cermat",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-abolish-cermat-source",
+        "msmt-news-api--news-ad4d4d49316cf78729e6",
+        "msmt-news-api--news-a68e989625bc201998d0"
+      ],
+      "explanationCz": "Motoristé sobě ve svém programu slíbili zrušit CERMAT a nahradit jednotné zkoušky průběžným ověřováním. Ministerstvo školství v roce 2026 stále informovalo o přijímacích zkouškách a o službách CERMATu. Tyto zprávy ale neukazují, že Motoristé sobě zachování tohoto systému prosadili nebo podpořili. Nemáme ani doklad, že strana podnikla konkrétní krok ke zrušení CERMATu, proto zatím nelze její postup férově hodnotit jako posun ke splnění ani proti splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Chybí doklad o hlasování, návrhu zákona nebo jiném konkrétním kroku Motoristů sobě k této věci.",
+        "Zprávy ministerstva potvrzují fungování přijímaček, ale samy o sobě neříkají, jaký postoj k nim Motoristé sobě zaujali."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}
