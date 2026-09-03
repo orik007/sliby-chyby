@@ -26,12 +26,12 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Search official national party sources broadly, but publish only clear and fully verified promises. The first real-data version may contain a smaller curated set and does not need to include every campaign statement.
 - Publish the two human-approved 2026-09-03 revisions for ANO's EET 2.0 and public-media-fee promises as the first real public records. Preserve their exact programme wording, primary evidence links, and review-proposal identifiers.
 
-### First public aggregate
+### Live public aggregate
 
-**Working proposal applied to the first two-record release**
-
-- Keep the party-level SLAVA Index unavailable while the public dataset contains only two evidence-selected promises. Displaying `+50` from this subset could be mistaken for an assessment of ANO's broader programme.
-- State plainly that unpublished promises are not zero-point promises. Confirm the minimum breadth or denominator policy before publishing the first aggregate.
+- Calculate and display the SLAVA Index from every currently published promise for a party, even while the promise set is still growing.
+- Recalculate the index automatically whenever another verified promise or a new current assessment is published.
+- If a party has no published promises, show the index as unavailable rather than zero.
+- Treat the site and its calculations as production data. Do not keep fictional demo records in the production data directories.
 
 ### Identity and scoring
 
@@ -101,10 +101,10 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 
 ### Initial implementation architecture
 
-- Use Astro, TypeScript, and plain CSS for the first demo.
+- Use Astro, TypeScript, and plain CSS for the initial production site.
 - Keep the public website predominantly static with minimal client-side JavaScript.
 - Use schema-validated, versioned files as the initial public data store.
-- Do not introduce a database for the first demo.
+- Do not introduce a database for the initial production site.
 - Use GitHub-based validation and automation, with Cloudflare as the planned hosting direction.
 - Keep the single-package assessment pilot read-only. The full-registry workflow may write only versioned unpublished review proposals to its dedicated branch; it must never write public assessment data or deploy it.
 - Keep evidence collectors outside the public website runtime. Collection remains source-oriented and non-scoring even when the later stages of the same manually triggered workflow use the assessment API.
@@ -192,11 +192,7 @@ First-person commitments also appeared under the `Filip Turek` Meta advertiser w
 
 ### Public site name
 
-The public name is unresolved. “Sliby vlády” and related wording were suggested, but the owner explicitly said the name was not yet known. The repository codename and scoring brand can be used temporarily, so this does not have to block a technical demo.
-
-### Coverage breadth
-
-The first public real-data version should favor a smaller fully verified set over numerical completeness. The exact minimum promise count remains undecided and does not block continued review.
+The public name is unresolved. “Sliby vlády” and related wording were suggested, but the owner explicitly said the name was not yet known. The repository name and scoring brand can be used temporarily, so this does not block the production rollout.
 
 ### Mixed conduct
 

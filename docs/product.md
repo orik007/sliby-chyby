@@ -153,7 +153,7 @@ The route structure remains a working proposal:
 /methodology
 ```
 
-The fabricated interface demo has been superseded by a deliberately small first public dataset. Two ANO promises with primary sources and human-approved `+1` revisions are published; fictional fixtures remain in the repository but are excluded from the public build whenever real records exist. Further promises remain unpublished until their evidence and assessment pass human review.
+The site runs on production data and grows incrementally. Two ANO promises with primary sources and human-approved `+1` revisions form the initial published set. The SLAVA Index is calculated from all currently published promises and updates automatically as more reviewed records are added. Fictional fixtures do not belong in the production data directories.
 
 ## Out of scope for the first version
 
@@ -171,5 +171,4 @@ The conversations explicitly deprioritized:
 
 - What is the public site name and subtitle? Suggestions such as “Sliby vlády” were not accepted as final.
 - Which distribution summary belongs on the home page versus only on a party page?
-- What minimum number and policy breadth of fully verified promises is sufficient for the first public real-data release? Numerical completeness is not required.
 - What exact editorial approval is required before publication, and can any high-confidence cases ever be published automatically?

@@ -4,7 +4,7 @@
 
 The period boundaries and non-carryover rule are confirmed. Schema-validated versioned files are the confirmed initial storage approach. The relational entity structure below remains a working proposal designed for a future database migration.
 
-The first real public release adds two implementation safeguards: `PartyPeriod.indexPublished` explicitly gates the aggregate, and every non-demo `AssessmentRevision` requires the identifier of its approved review proposal. Fictional fixture records are excluded from rendering whenever real published promises exist.
+The production data directories contain only reviewed real records. Every published `AssessmentRevision` requires the identifier of its approved review proposal. The SLAVA Index has no separate publication flag: it is derived automatically from all current published assessments for a party and is unavailable only when that party has no published promises.
 
 ## Confirmed invariants
 
@@ -313,7 +313,7 @@ data/
   assessment-revisions/
 ```
 
-Stable IDs and foreign-key-like references must be schema validated. Versioned files are confirmed for the initial demo. The exact directory split shown above remains adjustable during implementation and is intended to map later to relational tables without changing the public domain model.
+Stable IDs and foreign-key-like references must be schema validated. Versioned files are confirmed for the initial production site. The exact directory split shown above remains adjustable during implementation and is intended to map later to relational tables without changing the public domain model.
 
 ## Evidence ingestion
 
