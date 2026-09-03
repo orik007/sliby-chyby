@@ -127,6 +127,27 @@ test("every ANO finance-batch promise matches a source repeating its exact quote
   }
 });
 
+test("common inflected VAT wording reaches the matching threshold", () => {
+  const promise = registry.promises.find(({ id }) => id === "ano-2025-restaurant-nonalcoholic-vat-12");
+  assert.ok(promise);
+  const occurrence = createCollectedRecord({
+    id: "party-source--restaurant-vat-natural-wording",
+    sourceId: "ano-party-news",
+    kind: "official-publication",
+    primary: true,
+    evidenceRole: "official-party-publication",
+    occurredAt: "2026-01-01T00:00:00.000Z",
+    timeZone: "Europe/Prague",
+    title: "DPH u stravovacích služeb se sníží na 12 %",
+    publisher: "ANO 2011",
+    url: "https://www.anobudelip.cz/example/restaurant-vat",
+    payload: { sourcePartyId: "ano" }
+  });
+  const match = matchRecordToPromise(occurrence, promise);
+  assert.ok(match);
+  assert.ok(match.score >= promise.matching.minimumScore);
+});
+
 test("time-bounded contribution promise distinguishes prevention from a later reversal", () => {
   assert.match(selfEmployedContributionIncrease.fulfillmentTest, /prevent .* from taking effect on its planned effective date in 2026/);
   assert.doesNotMatch(selfEmployedContributionIncrease.fulfillmentTest, /revers/i);
