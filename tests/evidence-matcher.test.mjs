@@ -12,30 +12,72 @@ import {
 const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8")));
 const eet = registry.promises.find(({ id }) => id === "ano-2025-eet-2");
 const freeMuseums = registry.promises.find(({ id }) => id === "ano-2025-free-state-museums-selected-groups");
+const anoFinanceBatchIds = [
+  "ano-2025-not-adopt-euro",
+  "ano-2025-digital-tax-cobra",
+  "ano-2025-cross-border-illicit-assets-freeze",
+  "ano-2025-restore-working-student-tax-credit",
+  "ano-2025-stop-2026-self-employed-contribution-increase",
+  "ano-2025-remove-leisure-benefit-cap",
+  "ano-2025-restaurant-nonalcoholic-vat-12"
+];
 
-test("reviewed catalog is balanced and linked to accepted research candidates", async () => {
-  assert.equal(registry.status, "reviewed-first-release-catalog-v1");
-  assert.equal(registry.promises.length, 36);
+test("reviewed catalog expands through bounded batches and links every promise to an accepted source occurrence", async () => {
+  assert.equal(registry.status, "reviewed-promise-catalog-v2");
+  assert.equal(registry.promises.length, 43);
   assert.deepEqual(
     Object.fromEntries(["ano", "spd", "motoriste"].map((partyId) => [
       partyId,
       registry.promises.filter((promise) => promise.partyId === partyId).length
     ])),
-    { ano: 12, spd: 12, motoriste: 12 }
+    { ano: 19, spd: 12, motoriste: 12 }
   );
 
   const research = JSON.parse(await readFile(new URL("../research/2025-election/candidate-promises.json", import.meta.url), "utf8"));
   const acceptedCandidates = new Map(
     research.records
-      .filter(({ reviewStatus }) => reviewStatus === "accepted-first-release-catalog-v1")
+      .filter(({ reviewStatus }) => reviewStatus.startsWith("accepted-"))
       .map((candidate) => [candidate.id, candidate])
   );
-  assert.equal(acceptedCandidates.size, registry.promises.length);
   for (const promise of registry.promises) {
     const candidate = acceptedCandidates.get(promise.researchSourceCandidateId);
     assert.ok(candidate, `Missing accepted candidate for ${promise.id}`);
     assert.equal(candidate.partyId, promise.partyId);
     assert.equal(candidate.sourceUrl, promise.promiseSource.url);
+  }
+
+  const batch = JSON.parse(await readFile(new URL("../research/2025-election/reviewed-batches/ano-finance-1.json", import.meta.url), "utf8"));
+  assert.equal(batch.status, "Working proposal");
+  assert.equal(batch.summary.acceptedNewPromises, 7);
+  assert.equal(batch.source.url, "https://www.anobudelip.cz/file/edee/ke-stazeni/volebni-program-2025.pdf");
+  const promiseIds = new Set(registry.promises.map(({ id }) => id));
+  for (const review of batch.reviews) {
+    assert.ok(research.records.some(({ id }) => id === review.candidateId), `Unknown reviewed candidate ${review.candidateId}`);
+    for (const promiseId of review.resultingPromiseIds ?? []) assert.ok(promiseIds.has(promiseId), `Unknown resulting promise ${promiseId}`);
+    if (review.disposition === "rejected") assert.ok(review.rejectionReasonCodes?.length > 0);
+  }
+});
+
+test("every ANO finance-batch promise matches a source repeating its exact quoted wording", () => {
+  for (const promiseId of anoFinanceBatchIds) {
+    const promise = registry.promises.find(({ id }) => id === promiseId);
+    assert.ok(promise, `Missing finance-batch promise ${promiseId}`);
+    const exactOccurrence = createCollectedRecord({
+      id: `party-source--${promiseId}`,
+      sourceId: "ano-party-news",
+      kind: "official-publication",
+      primary: true,
+      evidenceRole: "official-party-publication",
+      occurredAt: "2026-01-01T00:00:00.000Z",
+      timeZone: "Europe/Prague",
+      title: promise.promiseSource.exactQuoteCz,
+      publisher: "ANO 2011",
+      url: `https://www.anobudelip.cz/example/${promiseId}`,
+      payload: { sourcePartyId: "ano" }
+    });
+    const match = matchRecordToPromise(exactOccurrence, promise);
+    assert.ok(match, `Exact quote does not satisfy matching threshold for ${promiseId}`);
+    assert.equal(match.attributionStatus, "verified-party-publication");
   }
 });
 

@@ -6,9 +6,9 @@ The canonical end-to-end pipeline and source policy are in [`docs/evidence-pipel
 
 ## Reviewed promise catalog
 
-`promises.json` contains the first reviewed real-data catalog: 36 atomic promises from the final official national party programmes, with 12 promises each for ANO 2011, SPD, and Motoristé sobě. This is a deliberately bounded first release, not a claim of complete programme or campaign coverage.
+`promises.json` contains the current reviewed matching catalog: 43 atomic promises from the final official national party programmes, with 19 for ANO 2011 and 12 each for SPD and Motoristé sobě. The original balanced 36-promise tranche and each later bounded batch remain auditable; the current count is not a quota or a claim of complete programme or campaign coverage.
 
-Every catalog entry links back to its source record in `research/2025-election/candidate-promises.json`. The source record must be marked `accepted-first-release-catalog-v1`; the remaining extraction candidates are not promises, index inputs, or zero-point items until reviewed.
+Every catalog entry links back to its source record in `research/2025-election/candidate-promises.json`. The source record must have an `accepted-*` review status. Bounded batch decisions are retained under `research/2025-election/reviewed-batches/`; the remaining extraction candidates are not promises, index inputs, or zero-point items until reviewed.
 
 Each promise defines:
 

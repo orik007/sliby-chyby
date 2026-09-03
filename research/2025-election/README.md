@@ -39,7 +39,7 @@ Every occurrence must pass the confirmed [promise selection methodology](../../d
 |---|---|---|---|---|
 | ANO | *Program pro váš lepší život* | final 2025 election programme, 38 PDF pages | text extracted with page locators | https://www.anobudelip.cz/file/edee/ke-stazeni/volebni-program-2025.pdf |
 | ANO | programme web rendering | current official rendering of the same programme | indexed as a duplicate presentation, not a second promise source | https://www.anobudelip.cz/program/ |
-| ANO | *Lepší Česko* campaign newspapers | January, February, March, April, and August/September 2025 | all 23 image-only pages visually inspected; 24 exact promise-candidate occurrences transcribed with issue and page locators | https://www.anobudelip.cz/cs/ke-stazeni |
+| ANO | *Lepší Česko* campaign newspapers | January, February, March, April, and August/September 2025 | all 23 image-only pages visually inspected; 26 exact promise-candidate occurrences transcribed with issue and page locators; selected August/September pages received a second visual check | https://www.anobudelip.cz/cs/ke-stazeni |
 | ANO | letter to Czech citizens abroad | August 2025 | text extracted; attribution and promise review pending | https://www.anobudelip.cz/file/edee/2025/08/dopis-krajane-20250827-141653.pdf |
 | ANO | official campaign-period news index | 1 January through 4 October 2025 | all 405 indexed items captured: 381 external-media links, 17 embedded social posts, 6 press releases, and 1 blog post | https://www.anobudelip.cz/cs/aktuality |
 | SPD | *Česko, jaké chcete* | final 2025 election programme, 28 PDF pages | text extracted with page locators | https://spd.cz/wp-content/uploads/2025/09/Program-SPD-pro-volby-do-Poslanecke-snemovny-2025.pdf |
@@ -75,9 +75,9 @@ Secondary material must point back to a party publication, recording, photograph
 - SPD: 247;
 - Motoristé: 235.
 
-These are extraction candidates, not 955 distinct promises. The first human-reviewed tranche accepts 36 candidates, evenly split across the three parties, into [`automation/matching/promises.json`](../../automation/matching/promises.json). The other 919 remain unreviewed. Repeated programme summaries, combined passages, headings, vague intentions, and false positives remain in the queue so that the first pass does not silently discard a real commitment.
+These are extraction candidates, not 955 distinct promises. The first human-reviewed tranche accepted 36 source occurrences, evenly split across the three parties. The first incremental ANO finance batch reviewed another 11 occurrences: five produced new promises, five were rejected with reasons, and one still needs splitting. Two already accepted composite occurrences produced two additional atomic promises. The matching registry therefore contains 43 promises linked to 41 accepted source occurrences; 908 extraction candidates remain unreviewed.
 
-The accepted set and its limits are recorded in [`reviewed-catalog-v1.md`](reviewed-catalog-v1.md). Acceptance means the source wording passed the current attribution, atomicity, and assessability checks. It does not mean that the promise has been assessed or approved for automatic public publication.
+The original tranche and current expanded set are recorded in [`reviewed-catalog-v1.md`](reviewed-catalog-v1.md) and [`reviewed-catalog-v2.md`](reviewed-catalog-v2.md). Acceptance means the source wording passed the current attribution, atomicity, and assessability checks. It does not mean that the promise has been assessed or approved for automatic public publication.
 
 The queue is reproducible with:
 
@@ -94,7 +94,7 @@ scripts/build_promise_candidate_catalog.py
 
 Most ANO archive items point to external media and are discovery records, not party-authored statements. An official host also does not prove that every sentence is a party commitment: some posts republish interviews or media reports. The queue therefore retains source provenance, title, date, URL, exact excerpt, and provisional attribution without assigning a production promise.
 
-`ano-newspaper-candidates.json` contains 24 exact Czech source occurrences manually transcribed from all 23 pages of five official national ANO campaign newspapers. These still require a second visual check, atomic splitting, final-programme comparison, and attribution review.
+`ano-newspaper-candidates.json` contains 26 exact Czech source occurrences manually transcribed from all 23 pages of five official national ANO campaign newspapers. Selected August/September occurrences now have a recorded second visual check and final-programme relationship; the rest still require a second visual check, atomic splitting, final-programme comparison, and attribution review.
 
 `ano-official-news-index.json` preserves the complete 405-item ANO campaign-period archive index for discovery and later source recovery.
 
@@ -114,7 +114,7 @@ The official campaign-finance records establish that Motoristé printed and dist
 
 ## Coverage still required
 
-- review the remaining 919 final-programme extraction candidates and record explicit rejection or deduplication reasons;
+- review the remaining 908 final-programme extraction candidates and record explicit rejection or deduplication reasons;
 - perform a second visual verification of the ANO newspaper transcriptions;
 - review the captured official-site queues and recover the original content behind ANO external-media and embedded-social records;
 - inventory official Facebook, Instagram, X, YouTube, and TikTok posts and recover the original creatives behind paid-ad leads;
@@ -131,5 +131,5 @@ See `source-inventory.md` for a channel-by-channel coverage ledger. "Captured" i
 ## Open questions exposed by collection
 
 - How should materially different conditions in otherwise duplicate official wording be related?
-- Is the balanced 36-promise reviewed tranche sufficient for the first public real-data release after independent second-person review?
+- What minimum reviewed coverage and approved-assessment coverage should be required before the site describes a party catalog as substantially complete?
 - What source-retention and copyright policy applies to programme PDFs, campaign newspapers, social posts, and billboard photographs?

@@ -20,7 +20,7 @@ Coverage terms:
 | Final national election programme | Captured, 38 pages | Captured, 28 pages | Captured, 38 pages | Page-located text and over-inclusive extraction queue exist. |
 | Programme HTML presentation | Captured as duplicate rendering | Not separately identified | Discovered | Never count a duplicate presentation as another promise. |
 | Earlier programme theses or launch platform | Campaign launch and newspaper material captured; systematic pre-final comparison pending | Earlier theses captured; comparison pending | *Opravíme stát* launch captured | Earlier wording may be superseded or contradictory; the rule remains open. |
-| National campaign newspaper or direct mail | Five *Lepší Česko* issues captured; 23 pages inspected and 24 occurrences transcribed | Official one-page election-ten-priority leaflet captured and visually verified; no complete newspaper inventory | Official finance records prove production and distribution of election newspapers, but the original issues have not been recovered | Exact quotation requires the original page. Finance records prove a format existed, not what it said. |
+| National campaign newspaper or direct mail | Five *Lepší Česko* issues captured; 23 pages inspected and 26 occurrences transcribed; selected August/September pages received a second visual check | Official one-page election-ten-priority leaflet captured and visually verified; no complete newspaper inventory | Official finance records prove production and distribution of election newspapers, but the original issues have not been recovered | Exact quotation requires the original page. Finance records prove a format existed, not what it said. |
 | Official campaign-site posts | 405-item official news index captured | 115 posts captured | 127 posts captured | ANO's index mostly links to external media; host and author must remain distinct. |
 | Official priorities or manifesto summary | Final programme summary captured | Official ten priorities and *Pevnost Česko* captured | Programme and launch summary captured | Summary wording can be more absolute than the detailed programme and must be retained separately. |
 
@@ -79,10 +79,11 @@ These are discovery leads and classification examples, not accepted promises:
 
 | File | Purpose | Production status |
 |---|---|---|
-| `candidate-promises.json` | 955 over-inclusive passages from the three final programmes | 36 accepted into catalog v1; 919 remain unreviewed |
+| `candidate-promises.json` | 955 over-inclusive passages from the three final programmes | 41 accepted source occurrences produce 43 reviewed promises; 5 rejected and 1 needs splitting in the first incremental batch; 908 remain unreviewed |
+| `reviewed-batches/ano-finance-1.json` | Bounded review of ANO's printed programme page 4 | 7 new matching promises plus explicit rejection and split reasons; unpublished working proposal |
 | `official-web-candidates.json` | 409 over-inclusive passages from 647 official-index source items | Unreviewed attribution and promise queue |
 | `ano-official-news-index.json` | Complete 405-item ANO campaign-period news index | Discovery and recovery index |
-| `ano-newspaper-candidates.json` | 24 exact Czech occurrences from five ANO campaign newspapers | Manual transcription awaiting second visual check and deduplication |
+| `ano-newspaper-candidates.json` | 26 exact Czech occurrences from five ANO campaign newspapers | Selected August/September occurrences have a second visual check; the remainder await second review and deduplication |
 | `ano-meta-ad-leads.json` | 46 selected ANO sponsored-ad leads | Discovery only; descriptions are not ad quotations |
 | `paid-advertiser-map.json` | Meta advertiser-page coverage map from public aggregate Trends data | Discovery only; no ad text or creative |
 | `meta-ad-candidates.json` | 23 exact commitment-bearing source occurrences recovered from the public Meta archive | Manual candidates awaiting atomic, duplicate, and attribution review |
@@ -93,7 +94,7 @@ These are discovery leads and classification examples, not accepted promises:
 
 ## Remaining work before claiming exhaustive collection
 
-1. Review the remaining 919 final-programme extraction candidates and produce atomic accepted/rejected records with reasons.
+1. Review the remaining 908 final-programme extraction candidates and produce atomic accepted/rejected records with reasons.
 2. Review every captured official-site candidate and recover ANO's externally hosted originals.
 3. Complete the campaign-period social and video inventory for national party and leader accounts; preserve exact posts and transcripts where lawful.
 4. Recover the original Motoristé election newspapers and original paid-ad creatives and billboard photographs for every concrete wording lead.
