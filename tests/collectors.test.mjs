@@ -12,7 +12,8 @@ import {
   parseMkNewsArchive,
   parseMpsvPressArchive,
   parseMsmtNewsApiPage,
-  parseOfficialHtmlArchive
+  parseOfficialHtmlArchive,
+  parseWordPressRestPage
 } from "../scripts/lib/official-archive-collectors.mjs";
 import { derivePartyVoteSummaries, normalizePspData, parseUnl } from "../scripts/lib/psp-collector.mjs";
 
@@ -35,6 +36,48 @@ test("validates a unique, explicit collector registry", () => {
   const registry = { schemaVersion: "1.0.0", sources: [mediaSource] };
   assert.equal(validateRegistry(registry), registry);
   assert.throws(() => validateRegistry({ schemaVersion: "1.0.0", sources: [mediaSource, mediaSource] }), /Duplicate collector source id/);
+  assert.throws(() => validateRegistry({
+    schemaVersion: "1.0.0",
+    sources: [{ ...mediaSource, evidenceRole: "official-party-publication", primary: true }]
+  }), /needs partyId/);
+});
+
+test("normalizes an official party WordPress item with explicit party attribution", () => {
+  const source = {
+    ...mediaSource,
+    id: "party-news",
+    collector: "wordpress-rest",
+    primary: true,
+    evidenceRole: "official-party-publication",
+    partyId: "motoriste",
+    apiEndpoint: "https://party.example/wp-json/wp/v2/posts",
+    wordpressCategoryId: 5,
+    wordpressCategorySlug: "tiskova-zprava",
+    expectedHosts: ["party.example"]
+  };
+  const records = parseWordPressRestPage([{
+    id: 42,
+    date_gmt: "2026-08-31T10:56:54",
+    link: "https://party.example/concrete-step-42",
+    title: { rendered: "Strana představila konkrétní krok" },
+    excerpt: { rendered: "<p>Oficiální vyjádření strany.</p>" },
+    categories: [5]
+  }], source, { since: "2025-10-01" });
+  assert.equal(records.length, 1);
+  assert.equal(records[0].kind, "official-publication");
+  assert.equal(records[0].evidenceRole, "official-party-publication");
+  assert.equal(records[0].payload.sourcePartyId, "motoriste");
+  assert.deepEqual(records[0].payload.wordpressCategoryIds, [5]);
+  assert.equal(records[0].payload.wordpressCategorySlug, "tiskova-zprava");
+  assert.equal(records[0].payload.excerptCz, "Oficiální vyjádření strany.");
+  assert.throws(() => parseWordPressRestPage([{
+    id: 43,
+    date_gmt: "2026-08-31T11:00:00",
+    link: "https://party.example/interview-43",
+    title: { rendered: "Interview" },
+    excerpt: { rendered: "Interview jednotlivce." },
+    categories: [1]
+  }], source, { since: "2025-10-01" }), /outside its configured category/);
 });
 
 test("documents every configured collector source in the canonical pipeline policy", async () => {

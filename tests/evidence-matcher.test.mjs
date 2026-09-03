@@ -164,6 +164,39 @@ test("treats a matched official ministry publication as a government-action cand
   assert.equal(evidencePackage.generation.directionAssigned, false);
 });
 
+test("attributes an official party publication only to the party that published it", () => {
+  const statement = createCollectedRecord({
+    id: "party--eet",
+    sourceId: "ano-party-news",
+    kind: "official-publication",
+    primary: true,
+    evidenceRole: "official-party-publication",
+    occurredAt: "2026-06-01T10:00:00.000Z",
+    title: "ANO představilo další krok k EET 2.0",
+    publisher: "ANO 2011",
+    url: "https://party.example/eet",
+    payload: { excerptCz: "Hnutí oznámilo konkrétní další krok.", sourcePartyId: "ano" }
+  });
+  const ownMatch = matchRecordToPromise(statement, eet);
+  assert.equal(ownMatch.attributionStatus, "verified-party-publication");
+  const evidencePackage = buildEvidencePackage({
+    promise: eet,
+    matches: [ownMatch],
+    collectorRun: { schemaVersion: "1.0.0", runId: "collector-party", records: [statement] },
+    asOf: "2026-09-03"
+  });
+  assert.equal(evidencePackage.evidence[1].matchBasis.attributionStatus, "verified-party-publication");
+
+  const otherPartyStatement = createCollectedRecord({
+    ...statement,
+    id: "party--eet-other",
+    sourceId: "other-party-news",
+    publisher: "Other party",
+    payload: { ...statement.payload, sourcePartyId: "spd" }
+  });
+  assert.equal(matchRecordToPromise(otherPartyStatement, eet).attributionStatus, "unattributed");
+});
+
 test("requires decisive vote context before a party direction enters the package", () => {
   const votePayload = {
     externalVoteId: "900",

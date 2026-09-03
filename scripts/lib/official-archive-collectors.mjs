@@ -285,6 +285,41 @@ export async function collectOfficialHtmlArchive(source, { since, collectedAt })
   return { sourceId: source.id, collector: source.collector, retrievedAt: collectedAt, snapshots, records, warnings: [], referenceData: null };
 }
 
+export function parseWordPressRestPage(items, source, { since }) {
+  invariant(Array.isArray(items), `WordPress source ${source.id} returned a non-array response`);
+  const records = [];
+  for (const item of items) {
+    invariant(Number.isInteger(item.id), `WordPress source ${source.id} returned an item without an integer id`);
+    if (source.wordpressCategoryId !== undefined) {
+      invariant(Array.isArray(item.categories) && item.categories.includes(source.wordpressCategoryId), `WordPress source ${source.id} returned an item outside its configured category`);
+    }
+    const occurredAt = new Date(`${item.date_gmt}Z`).toISOString();
+    if (occurredAt.slice(0, 10) < since) continue;
+    const url = new URL(item.link);
+    invariant(url.protocol === "https:" && source.expectedHosts.includes(url.hostname), `WordPress item from ${source.id} is outside the source host allowlist`);
+    records.push(createCollectedRecord({
+      id: `${source.id}--post-${item.id}`,
+      sourceId: source.id,
+      kind: "official-publication",
+      primary: source.primary,
+      evidenceRole: source.evidenceRole,
+      occurredAt,
+      timeZone: "UTC",
+      title: cleanText(item.title?.rendered),
+      publisher: source.publisher,
+      url: url.href,
+      payload: {
+        excerptCz: cleanText(item.excerpt?.rendered, source.maxExcerptChars ?? 500),
+        wordpressPostId: item.id,
+        wordpressCategoryIds: Array.isArray(item.categories) ? item.categories : [],
+        ...(source.wordpressCategorySlug ? { wordpressCategorySlug: source.wordpressCategorySlug } : {}),
+        ...(source.partyId ? { sourcePartyId: source.partyId } : {})
+      }
+    }));
+  }
+  return records;
+}
+
 export async function collectWordPressRest(source, { since, collectedAt }) {
   invariant(/^https:\/\//.test(source.apiEndpoint), `Source ${source.id} needs an HTTPS apiEndpoint`);
   const records = [];
@@ -295,31 +330,12 @@ export async function collectWordPressRest(source, { since, collectedAt }) {
     endpoint.searchParams.set("after", after);
     endpoint.searchParams.set("per_page", "100");
     endpoint.searchParams.set("page", String(page));
-    endpoint.searchParams.set("_fields", "id,date_gmt,link,title,excerpt");
+    if (source.wordpressCategoryId !== undefined) endpoint.searchParams.set("categories", String(source.wordpressCategoryId));
+    endpoint.searchParams.set("_fields", "id,date_gmt,link,title,excerpt,categories");
     const fetched = await fetchVerified(source, endpoint.href, { maxBytes: 5_000_000, expectedContentTypes: ["application/json"] });
     const items = JSON.parse(new TextDecoder().decode(fetched.bytes));
-    invariant(Array.isArray(items), `WordPress source ${source.id} returned a non-array response`);
+    records.push(...parseWordPressRestPage(items, source, { since }));
     snapshots.push({ url: fetched.finalUrl, contentType: fetched.contentType, lastModified: fetched.lastModified, etag: fetched.etag, contentHash: fetched.contentHash });
-    for (const item of items) {
-      invariant(Number.isInteger(item.id), `WordPress source ${source.id} returned an item without an integer id`);
-      const occurredAt = new Date(`${item.date_gmt}Z`).toISOString();
-      if (occurredAt.slice(0, 10) < since) continue;
-      const url = new URL(item.link);
-      invariant(url.protocol === "https:" && source.expectedHosts.includes(url.hostname), `WordPress item from ${source.id} is outside the source host allowlist`);
-      records.push(createCollectedRecord({
-        id: `${source.id}--post-${item.id}`,
-        sourceId: source.id,
-        kind: "official-publication",
-        primary: source.primary,
-        evidenceRole: source.evidenceRole,
-        occurredAt,
-        timeZone: "UTC",
-        title: cleanText(item.title?.rendered),
-        publisher: source.publisher,
-        url: url.href,
-        payload: { excerptCz: cleanText(item.excerpt?.rendered, source.maxExcerptChars ?? 500), wordpressPostId: item.id }
-      }));
-    }
     if (items.length < 100) break;
     invariant(page < 100, `WordPress source ${source.id} exceeded the 100-page safety limit`);
   }

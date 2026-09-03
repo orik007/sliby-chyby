@@ -28,7 +28,7 @@ const runtime = {
 };
 
 test("active prompts require plain Czech without internal labels", async () => {
-  assert.equal(assessorPromptVersion, "assessor-v7");
+  assert.equal(assessorPromptVersion, "assessor-v8");
   assert.equal(arbiterPromptVersion, "arbiter-v3");
   const active = await loadAssessmentPrompts();
   assert.match(active.assessor.instructions, /Never put internal English status names/);

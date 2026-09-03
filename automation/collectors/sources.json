@@ -156,6 +156,25 @@
       "maxExcerptChars": 500
     },
     {
+      "id": "motoriste-party-news-wordpress",
+      "name": "Motoristé sobě official news archive",
+      "publisher": "Motoristé sobě",
+      "collector": "wordpress-rest",
+      "enabled": true,
+      "primary": true,
+      "evidenceRole": "official-party-publication",
+      "partyId": "motoriste",
+      "coverage": {
+        "mode": "since-filtered-archive",
+        "note": "The complete official paginated WordPress REST archive is queried from the requested cutoff. It includes party releases, parliamentary-group material, individual interviews, and republished appearances; every record proves publication only and still requires content-level attribution review."
+      },
+      "apiEndpoint": "https://motoristesobe.cz/wp-json/wp/v2/posts",
+      "verifiedAt": "2026-09-03",
+      "verificationUrl": "https://motoristesobe.cz/",
+      "expectedHosts": ["motoristesobe.cz"],
+      "maxExcerptChars": 500
+    },
+    {
       "id": "irozhlas-domestic-rss",
       "name": "iROZHLAS domestic news",
       "publisher": "Czech Radio — iROZHLAS",
@@ -226,6 +245,42 @@
       "verificationUrl": "https://www.novinky.cz/robots.txt",
       "expectedHosts": ["www.novinky.cz"],
       "maxExcerptChars": 0
+    },
+    {
+      "id": "ano-party-news",
+      "name": "ANO 2011 official news archive",
+      "publisher": "ANO 2011",
+      "collector": "deferred",
+      "enabled": false,
+      "primary": true,
+      "evidenceRole": "official-party-publication",
+      "partyId": "ano",
+      "coverage": {
+        "mode": "deferred",
+        "note": "The public archive exists, but automated requests currently receive a Cloudflare browser challenge. No stable machine-readable channel has been verified."
+      },
+      "endpoint": "https://www.anobudelip.cz/cs/zpravy",
+      "verifiedAt": "2026-09-03",
+      "verificationUrl": "https://www.anobudelip.cz/cs/zpravy",
+      "reasonDisabled": "Automated collection cannot reliably pass the publisher's browser challenge. Do not bypass the protection or treat search-engine snippets as complete archive coverage."
+    },
+    {
+      "id": "spd-party-news",
+      "name": "SPD official news archive",
+      "publisher": "Svoboda a přímá demokracie (SPD)",
+      "collector": "deferred",
+      "enabled": false,
+      "primary": true,
+      "evidenceRole": "official-party-publication",
+      "partyId": "spd",
+      "coverage": {
+        "mode": "deferred",
+        "note": "The public archive exists, but automated RSS, sitemap, and WordPress requests currently receive a WEDOS security challenge. No stable machine-readable channel has been verified."
+      },
+      "endpoint": "https://spd.cz/aktuality/",
+      "verifiedAt": "2026-09-03",
+      "verificationUrl": "https://spd.cz/aktuality/",
+      "reasonDisabled": "Automated collection cannot reliably pass the publisher's security challenge. Do not bypass the protection or treat search-engine snippets as complete archive coverage."
     },
     {
       "id": "odok-veklep",

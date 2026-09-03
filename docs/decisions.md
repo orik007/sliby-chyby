@@ -120,6 +120,8 @@ Dates are omitted because the imported conversations did not frame decisions as 
 - Replace the limited MPSV current feed with its complete paginated annual press-release indexes for 2025 and 2026.
 - Enable the Ministry of Culture chronological news archive and retain only entries labelled by the publisher as ministry items; exclude subordinate-organization items and event previews from this source.
 - Enable the cursor-paginated JSON archive used by the Ministry of Education's own news page.
+- Collect technically stable official national party news channels as primary evidence of what the party published. Count wording as a party or parliamentary-group position only when the content explicitly adopts it; an individual's interview or third-party wording is not automatically a party position. An asserted law, decision, vote, or outcome still requires the corresponding independent official record.
+- Enable the official paginated Motoristé sobě WordPress news archive. Keep the ANO and SPD news archives registered but disabled while their browser security challenges prevent reliable unattended collection.
 
 ## Working proposals
 

@@ -50,6 +50,14 @@ The enabled list is intentionally small and explicit. “Verified” means that 
 | `mk-news-archive` | Ministry of Culture | Chronological official news archive followed past the requested cutoff | Historical official discovery; only publisher-labelled ministry items are retained |
 | `msmt-news-api` | Ministry of Education, Youth and Sports | Cursor-paginated JSON archive used by the ministry's own news page | Historical official discovery; collection follows cursors past the requested cutoff |
 
+### Official party sources
+
+| Registry ID | Party | Machine-readable channel | Role |
+|---|---|---|---|
+| `motoriste-party-news-wordpress` | Motoristé sobě | Complete official paginated WordPress REST archive from the requested cutoff | Primary evidence of what the party published; each item still requires content-level review because the archive also contains individual interviews and republished appearances |
+
+An official party publication is attributable only to the party identified by the source registry as a publication. It may provide directional evidence only when its wording explicitly adopts a concrete party or parliamentary-group position or intention. An individual's interview or third-party wording does not become a party position merely because the party site republishes it. A party's own claim that a law, administrative act, or outcome already occurred must still be checked against the corresponding independent official record.
+
 ### Coverage semantics
 
 Every registry entry declares one coverage mode. The requested `since` date is only a filter; it is not proof that an endpoint returned the entire requested interval.
@@ -82,6 +90,8 @@ News collection retains metadata, URL, publication time, supplied authors, and a
 |---|---|---|
 | `odok-veklep` | ODok/eKLEP public interface | Registered but disabled as a standalone collector until a stable documented machine-readable endpoint is verified. ODok links supplied by the Government Office RSS remain allowed as official discovery records. |
 | `e-sbirka-open-data` | e-Sbírka open data and public API | Registered but disabled under the current integration warning and registration requirements. |
+| `ano-party-news` | ANO 2011 official news archive | Registered but disabled because automated requests receive a Cloudflare browser challenge and no stable machine-readable archive has been verified. Search-engine excerpts are not accepted as complete coverage. |
+| `spd-party-news` | SPD official news archive | Registered but disabled because RSS, sitemap, and WordPress requests receive a WEDOS security challenge and no stable machine-readable archive has been verified. Search-engine excerpts are not accepted as complete coverage. |
 
 ## Matching and attribution boundary
 
@@ -89,6 +99,7 @@ News collection retains metadata, URL, publication time, supplied authors, and a
 - A parliamentary vote enters a party's package only when party membership at the vote date and the configured party-attribution rule are resolved.
 - Bill authorship is not required. A party's verified vote can be relevant regardless of who introduced the bill.
 - A government act is an attribution candidate until the assessor can fairly connect it to the tracked party.
+- An official party publication is directly attributable to that party as a publication, not automatically as an adopted position and not as proof that the underlying act or outcome occurred.
 - Official print-document excerpts establish proposal substance, not party attribution, adoption, or legal effect. Paragraphs are selected mechanically and may support, contradict, or merely contextualize the promise.
 - A promise with no primary match receives no package. It does not receive `no-progress`, zero points, or any other assessment merely because collection found nothing.
 - Contradictory evidence is retained. Evidence items are not scored independently and are not averaged.

@@ -202,6 +202,7 @@ Proposed fields:
 - `direction` — supports, contradicts, neutral, unclear;
 - `significance`;
 - `attributionStatus`;
+- `sourcePartyId` for records from an official national party channel;
 - `excerptOrLocator`;
 - `createdAt`;
 - `createdBy`;
