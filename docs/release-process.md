@@ -12,6 +12,7 @@ This document separates the confirmed release policy from the automation that is
 - A pull request may be merged only after all required checks succeed.
 - A successful merge into `main` is the release boundary and must be followed by deployment.
 - The approval conversation must report whether merge and deployment succeeded or failed.
+- Reviewer-facing technical detail may be precise, but any text proposed for the public website must use plain Czech and explain unfamiliar references.
 
 ## Working proposal under test
 
