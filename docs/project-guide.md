@@ -41,6 +41,8 @@ allowlisted official records and news discovery feeds
   -> deterministic matching against every reviewed promise
   -> bounded evidence packages and official-document enrichment
   -> assessor A + assessor B
+  -> planned bounded official-source expansion for a documented evidence gap
+  -> assessment or reassessment only when assessable content changed
   -> arbiter only when they disagree
   -> unpublished human-review proposal
   -> explicit owner publication approval
@@ -116,6 +118,8 @@ The matcher compares the shared collected record set with every reviewed promise
 A bounded evidence package is created only when the attribution and primary-evidence boundary is satisfied. Media-only or merely thematic matches remain visible in the audit but do not silently become assessable evidence. A run with no match creates no new automated assessment; any existing published assessment revision remains current. Absence of a match is not proof of inactivity and is never converted into zero points.
 
 For matched parliamentary prints, deterministic enrichment retrieves the official document, records its content hash, and selects bounded numbered passages. This reveals proposal substance but does not establish party authorship, support, passage, or legal effect.
+
+The planned deterministic evidence-gap resolver will retrieve bounded deeper records only from configured official source scopes. It will start when inventory matching produces no attributable primary candidate evidence, or when both assessors identify a package as insufficient. It cannot score, publish, browse the general web, or run indefinitely; an unchanged or exhausted expansion remains an unpublished human-review case.
 
 ### Two assessors and one arbiter
 
