@@ -20,7 +20,7 @@ One pipeline execution follows this sequence:
 6. **Enrich matched parliamentary prints.** For prints already present in a package, retrieve the official PSP DOCX once per print, retain its SHA-256 hash, and mechanically select bounded, numbered paragraphs around the promise and matcher terms. The selection assigns no direction or score. The original package, enriched package, document hashes, exact excerpts, and any warning remain auditable. Assessment workflows retry transient download failures and stop before model calls if a required document remains unavailable.
 7. **Assess only new or changed packages.** Two independent assessors receive the same bounded enriched package. An unchanged package hash does not trigger repeated model calls; the full-registry workflow enforces this through the assessment fingerprint.
 8. **Expand an evidence gap once, when needed.** A promise with no primary candidate, or a pair of insufficient assessor reviews, enters a deterministic, bounded resolver. It may retrieve deeper records only from configured official sources, such as a full official page, a parliamentary print, linked decisive votes, a promulgated law, or an authoritative outcome record. The resolver records its trigger, searched source scopes, retrieved records, hashes, and unresolved gaps. It never assigns a direction or score and never uses a model.
-9. **Reassess only materially expanded evidence.** The expanded package is assessed only when its stable assessment content has changed. A resolver may not loop indefinitely: an exhausted or unchanged expansion remains an unpublished human-review case.
+9. **Assess or reassess only materially expanded evidence.** The expanded package is assessed only when its assessable content has changed. A resolver may not loop indefinitely: an exhausted or unchanged expansion remains an unpublished human-review case.
 10. **Arbitrate disagreement.** Matching sufficient assessor results become a candidate assessment. Disagreement about the status or evidence sufficiency goes to the configured arbiter. An arbiter cannot turn a selected insufficient review into a score candidate; unresolved or insufficient cases require human attention.
 11. **Publish separately.** Collection, matching, assessment, and publication are distinct stages. No collector, matcher, enrichment step, resolver, or model result changes public data or the SLAVA Index automatically under the current rules.
 
@@ -34,7 +34,7 @@ allowlisted sources
   -> changed packages only
   -> assessor A + assessor B
   -> bounded official-source expansion for a documented evidence gap
-  -> reassessment only when the evidence changed
+  -> assessment or reassessment only when assessable content changed
   -> arbiter when needed
   -> human publication gate
   -> versioned public data
@@ -117,7 +117,7 @@ News collection retains metadata, URL, publication time, supplied authors, and a
 
 ## Current automation state
 
-The GitHub Actions workflow `Collect, match, and assess evidence candidates` implements stages 1 through 8 for the full reviewed registry. It checks all 42 current catalog promises against one shared collection, enriches only matched parliamentary prints, and sends only new or changed assessable packages to the two assessors and possible arbiter. It runs automatically once daily and remains available as a manual workflow.
+The GitHub Actions workflow `Collect, match, and assess evidence candidates` currently implements collection, matching, matched-print enrichment, assessment, and arbitration for the full reviewed registry. It does not yet implement the planned evidence-gap resolver stages. It checks all 42 current catalog promises against one shared collection, enriches only matched parliamentary prints, and sends only new or changed assessable packages to the two assessors and possible arbiter. It runs automatically once daily and remains available as a manual workflow.
 
 The [first full-registry document-enrichment run](https://github.com/orik007/sliby-chyby/actions/runs/33601733992) processed 3,984 shared records, 36 reviewed promises, and 141 candidate matches. It generated three evidence packages and added four official print documents across them with zero warnings. Original and enriched package hashes differ and are retained separately in the uploaded audit.
 

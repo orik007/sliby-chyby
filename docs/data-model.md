@@ -353,6 +353,9 @@ Fields implemented by `coverage-audit-v1`:
 - one row for every reviewed promise with candidate count, attributable primary count, package path, and active review proposal;
 - a non-scoring coverage state such as no candidate match, matches without attributable primary evidence, assessable package, assessment candidate, or human review required;
 - `scoreInferred: false` and `publicationApproved: false`.
+
+Planned resolver extension, not yet implemented by `coverage-audit-v1`:
+
 - resolver trigger, attempted source scopes, missing-fact categories, expansion record count, and whether expansion changed assessable content when an evidence-gap resolution was attempted.
 
 Coverage states are internal workflow facts, not public SLAVA statuses. In particular, no candidate match must never be converted into `no-progress` or zero points.
