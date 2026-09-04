@@ -12,7 +12,7 @@ Toto je jediná část dokumentu určená jako kandidát veřejného textu. Mus�
 
 ### Vysvětlení
 
-Vládní návrh zákona o evidenci tržeb vytváří novou právní úpravu evidence tržeb a svěřuje její správu Finanční správě. Poslanecká sněmovna tento návrh 15. července 2026 schválila; pro hlasovalo 68 z 80 tehdejších poslanců ANO. Jde o významný legislativní krok k zavedení EET 2.0, ale zákon zatím podle doložených podkladů není přijat v celém procesu ani uveden do provozu.
+Vládní návrh zákona o evidenci tržeb vytváří novou právní úpravu evidence tržeb a svěřuje její správu Finanční správě. Poslanecká sněmovna tento návrh 15. července 2026 schválila; pro hlasovalo 68 z 80 tehdejších poslanců ANO. Jde o významný legislativní krok k zavedení elektronické evidence tržeb (EET 2.0), ale zákon zatím podle doložených podkladů není přijat v celém procesu ani uveden do provozu.
 
 ## Co má zkontrolovat reviewer
 
@@ -49,4 +49,3 @@ Co zůstává nejisté:
 - [Úplné znění návrhu zákona na webu Poslanecké sněmovny](https://www.psp.cz/sqw/text/orig2.sqw?idd=270142)
 
 Tento návrh nahrazuje starší automatický posudek, který zůstává zachovaný v auditní historii.
-
