@@ -150,6 +150,7 @@ function evidenceLabel(evidence) {
 export function simplifyPublicExplanation(explanation) {
   return String(explanation)
     .replace(/,\s*veden(?:ý|á|é)\s+ve\s+Sněmovně\s+jako\s+tisk\s+č\.\s*\d+/giu, "")
+    .replace(/(?<!elektronické evidence tržeb \()\bEET 2\.0\b/u, "elektronické evidence tržeb (EET 2.0)")
     .replace(/\s+/g, " ")
     .trim();
 }
@@ -164,9 +165,10 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     ? auditRecord.assessorB.output
     : auditRecord.assessorA.output;
   const proposed = proposal.candidateStatus ? readerStatus[proposal.candidateStatus] : null;
-  const publicExplanation = proposal.resolutionState === "candidate"
+  const hasPublicCandidate = proposal.resolutionState === "candidate";
+  const publicExplanation = hasPublicCandidate
     ? simplifyPublicExplanation(chosen.explanationCz)
-    : "Automatické posouzení nemá dostatečné podklady pro návrh veřejného hodnocení.";
+    : null;
   const resolutionLabel = {
     "assessor-consensus": "oba automatické posudky se shodly",
     "arbiter-selection": "o neshodě automatických posudků rozhodl třetí hodnotitel",
@@ -181,16 +183,20 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     "",
     "## Návrh pro veřejný web",
     "",
-    "Toto je jediná část dokumentu určená jako kandidát veřejného textu. Musí být srozumitelná bez znalosti projektu, práva nebo fungování Poslanecké sněmovny.",
-    "",
-    "### Hodnocení",
-    "",
-    proposed ? `**${proposed.label} (${proposed.score})**` : "**Bez automatického návrhu — podklady musí posoudit člověk.**",
-    "",
-    "### Vysvětlení",
-    "",
-    publicExplanation,
-    "",
+    ...(hasPublicCandidate
+      ? [
+          "Toto je jediná část dokumentu určená jako kandidát veřejného textu. Musí být srozumitelná bez znalosti projektu, práva nebo fungování Poslanecké sněmovny.",
+          "",
+          "### Hodnocení",
+          "",
+          `**${proposed.label} (${proposed.score})**`,
+          "",
+          "### Vysvětlení",
+          "",
+          publicExplanation,
+          ""
+        ]
+      : ["*Nevznikl žádný návrh veřejného hodnocení ani vysvětlení.*", ""]),
     "## Co má zkontrolovat reviewer",
     "",
     "- Odpovídá navržené hodnocení metodice SLAVA Indexu?",
