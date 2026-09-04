@@ -19,8 +19,10 @@ One pipeline execution follows this sequence:
 5. **Build bounded evidence packages.** A package is generated only when attributable primary candidate evidence exists. Relevant media records may remain as context, but media alone does not create a strict primary-evidence package.
 6. **Enrich matched parliamentary prints.** For prints already present in a package, retrieve the official PSP DOCX once per print, retain its SHA-256 hash, and mechanically select bounded, numbered paragraphs around the promise and matcher terms. The selection assigns no direction or score. The original package, enriched package, document hashes, exact excerpts, and any warning remain auditable. Assessment workflows retry transient download failures and stop before model calls if a required document remains unavailable.
 7. **Assess only new or changed packages.** Two independent assessors receive the same bounded enriched package. An unchanged package hash does not trigger repeated model calls; the full-registry workflow enforces this through the assessment fingerprint.
-8. **Arbitrate disagreement.** Matching sufficient assessor results become a candidate assessment. Disagreement about the status or evidence sufficiency goes to the configured arbiter. An arbiter cannot turn a selected insufficient review into a score candidate; unresolved or insufficient cases require human attention.
-9. **Publish separately.** Collection, matching, assessment, and publication are distinct stages. No collector, matcher, enrichment step, or model result changes public data or the SLAVA Index automatically under the current rules.
+8. **Expand an evidence gap once, when needed.** A promise with no primary candidate, or a pair of insufficient assessor reviews, enters a deterministic, bounded resolver. It may retrieve deeper records only from configured official sources, such as a full official page, a parliamentary print, linked decisive votes, a promulgated law, or an authoritative outcome record. The resolver records its trigger, searched source scopes, retrieved records, hashes, and unresolved gaps. It never assigns a direction or score and never uses a model.
+9. **Reassess only materially expanded evidence.** The expanded package is assessed only when its stable assessment content has changed. A resolver may not loop indefinitely: an exhausted or unchanged expansion remains an unpublished human-review case.
+10. **Arbitrate disagreement.** Matching sufficient assessor results become a candidate assessment. Disagreement about the status or evidence sufficiency goes to the configured arbiter. An arbiter cannot turn a selected insufficient review into a score candidate; unresolved or insufficient cases require human attention.
+11. **Publish separately.** Collection, matching, assessment, and publication are distinct stages. No collector, matcher, enrichment step, resolver, or model result changes public data or the SLAVA Index automatically under the current rules.
 
 ```text
 allowlisted sources
@@ -31,6 +33,8 @@ allowlisted sources
   -> official documents for matched parliamentary prints
   -> changed packages only
   -> assessor A + assessor B
+  -> bounded official-source expansion for a documented evidence gap
+  -> reassessment only when the evidence changed
   -> arbiter when needed
   -> human publication gate
   -> versioned public data
@@ -103,6 +107,10 @@ News collection retains metadata, URL, publication time, supplied authors, and a
 - A government act is an attribution candidate until the assessor can fairly connect it to the tracked party.
 - An official party publication is directly attributable to that party as a publication, not automatically as an adopted position and not as proof that the underlying act or outcome occurred.
 - Official print-document excerpts establish proposal substance, not party attribution, adoption, or legal effect. Paragraphs are selected mechanically and may support, contradict, or merely contextualize the promise.
+- Insufficient evidence is an internal research outcome, not a final political assessment. It must retain the supplied evidence and name the missing factual category, such as proposal content, decisive vote, legal effect, observed outcome, or attribution.
+- An evidence-gap resolver may use only configured official source scopes and deterministic retrieval rules. It may not use general web search, media as decisive evidence, an assessor's memory, or an unrecorded human inference.
+- The resolver is targeted rather than exhaustive: full official inventories are collected first, and deeper pages or documents are retrieved only for the affected promise and documented gap.
+- An exhausted resolver does not manufacture a score. It creates or preserves an unpublished human-review proposal.
 - A promise with no primary match receives no package. It does not receive `no-progress`, zero points, or any other assessment merely because collection found nothing.
 - Contradictory evidence is retained. Evidence items are not scored independently and are not averaged.
 - Every package declares whether it is a `live` assessment or the one-time `closing-audit`; assessors never infer this from elapsed time. Current matching emits only `live` packages.

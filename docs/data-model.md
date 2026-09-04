@@ -321,6 +321,8 @@ Stable IDs and foreign-key-like references must be schema validated. Versioned f
 
 Collectors create unpublished evidence candidates. They do not match a record to a promise, infer whether it supports or contradicts a promise, assign a SLAVA status, or publish anything. Every run records its cutoff, retrieval time, source identifiers, response hashes, record hashes, warnings, and `publicationApproved: false`.
 
+Collection has two auditable depths. The first depth inventories every configured source once using its declared coverage semantics and makes no model call. A later evidence-gap resolver may retrieve bounded deeper official records for one promise only after the inventory found no primary candidate or both assessors identified insufficient evidence. Its audit retains the trigger, missing-fact categories, source scopes searched, retrieved record hashes, and whether the resulting evidence package materially changed. An unchanged or exhausted expansion cannot trigger another paid assessment.
+
 The verified source registry is stored in `automation/collectors/sources.json`. Hostname, response size, and media-type allowlists are enforced before normalization. Unexpected redirects fail closed. Feed collectors retain metadata and only a short publisher-provided excerpt; they do not download full article bodies.
 
 ### Enabled verified collectors
@@ -351,6 +353,7 @@ Fields implemented by `coverage-audit-v1`:
 - one row for every reviewed promise with candidate count, attributable primary count, package path, and active review proposal;
 - a non-scoring coverage state such as no candidate match, matches without attributable primary evidence, assessable package, assessment candidate, or human review required;
 - `scoreInferred: false` and `publicationApproved: false`.
+- resolver trigger, attempted source scopes, missing-fact categories, expansion record count, and whether expansion changed assessable content when an evidence-gap resolution was attempted.
 
 Coverage states are internal workflow facts, not public SLAVA statuses. In particular, no candidate match must never be converted into `no-progress` or zero points.
 
