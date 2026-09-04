@@ -39,9 +39,10 @@ POST-ELECTION EVIDENCE PIPELINE
 allowlisted official records and news discovery feeds
   -> one shared daily collection
   -> deterministic matching against every reviewed promise
+  -> if no attributable primary candidate evidence: planned bounded official-source expansion
   -> bounded evidence packages and official-document enrichment
   -> assessor A + assessor B
-  -> planned bounded official-source expansion for a documented evidence gap
+  -> if both are insufficient: planned bounded official-source expansion
   -> assessment or reassessment only when assessable content changed
   -> arbiter only when they disagree
   -> unpublished human-review proposal
@@ -119,7 +120,7 @@ A bounded evidence package is created only when the attribution and primary-evid
 
 For matched parliamentary prints, deterministic enrichment retrieves the official document, records its content hash, and selects bounded numbered passages. This reveals proposal substance but does not establish party authorship, support, passage, or legal effect.
 
-The planned deterministic evidence-gap resolver will retrieve bounded deeper records only from configured official source scopes. It will start when inventory matching produces no attributable primary candidate evidence, or when both assessors identify a package as insufficient. It cannot score, publish, browse the general web, or run indefinitely; an unchanged or exhausted expansion remains an unpublished human-review case.
+The planned deterministic evidence-gap resolver will retrieve bounded deeper records only from enabled configured official source scopes. It will start when inventory matching produces no attributable primary candidate evidence, or when both assessors identify a package as insufficient. It cannot score, publish, browse the general web, or run indefinitely; an unchanged or exhausted expansion remains an unpublished human-review case.
 
 ### Two assessors and one arbiter
 
