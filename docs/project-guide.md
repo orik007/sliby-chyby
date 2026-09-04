@@ -40,8 +40,9 @@ allowlisted official records and news discovery feeds
   -> one shared daily collection
   -> deterministic matching against every reviewed promise
   -> bounded evidence packages and official-document enrichment
+  -> planned bounded official-source expansion before assessment when no attributable primary evidence exists
   -> assessor A + assessor B
-  -> planned bounded official-source expansion for a documented evidence gap
+  -> planned bounded official-source expansion after assessment when both assessors find the package insufficient
   -> assessment or reassessment only when assessable content changed
   -> arbiter only when they disagree
   -> unpublished human-review proposal
