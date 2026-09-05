@@ -252,14 +252,44 @@ test("removes unexplained parliamentary print numbers from the public candidate 
   assert.equal(simplifyPublicExplanation(original), "Poslanci podpořili návrh zákona. Návrh pokračuje do Senátu.");
 });
 
-test("expands EET on first use in regenerated public copy", () => {
+test("explains EET on first use without changing Czech grammatical case", () => {
   assert.equal(
     simplifyPublicExplanation("Návrh je významný krok k zavedení EET 2.0."),
-    "Návrh je významný krok k zavedení elektronické evidence tržeb (EET 2.0)."
+    "Návrh je významný krok k zavedení EET 2.0 (elektronická evidence tržeb)."
   );
   assert.equal(
     simplifyPublicExplanation("Návrh zavádí elektronické evidence tržeb (EET 2.0)."),
     "Návrh zavádí elektronické evidence tržeb (EET 2.0)."
+  );
+  assert.equal(
+    simplifyPublicExplanation("Podklady počítají s EET 2.0."),
+    "Podklady počítají s EET 2.0 (elektronická evidence tržeb)."
+  );
+  assert.equal(
+    simplifyPublicExplanation("ANO slíbilo novou elektronickou evidenci tržeb EET 2.0."),
+    "ANO slíbilo novou elektronickou evidenci tržeb (EET 2.0)."
+  );
+  assert.equal(
+    simplifyPublicExplanation("Elektronická evidence tržeb (EET 2.0) je plánovaná. EET 2.0 zatím neběží."),
+    "Elektronická evidence tržeb (EET 2.0) je plánovaná. EET 2.0 zatím neběží."
+  );
+});
+
+test("rejects a candidate review proposal without a supported public status", () => {
+  const auditRecord = {
+    assessorA: { output: { explanationCz: "Vysvětlení.", uncertainties: [], citedEvidenceIds: [] } },
+    assessorB: { output: { explanationCz: "Vysvětlení.", uncertainties: [], citedEvidenceIds: [] } },
+    resolution: { selectedReview: "assessor-a" }
+  };
+  const proposal = {
+    proposalId: "invalid-candidate",
+    resolutionState: "candidate",
+    resolutionReason: "assessor-consensus",
+    candidateStatus: "unsupported-status"
+  };
+  assert.throws(
+    () => renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal }),
+    /Candidate review proposal invalid-candidate must use a supported candidateStatus/
   );
 });
 

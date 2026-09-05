@@ -148,11 +148,14 @@ function evidenceLabel(evidence) {
 }
 
 export function simplifyPublicExplanation(explanation) {
-  return String(explanation)
+  const simplified = String(explanation)
     .replace(/,\s*veden(?:ý|á|é)\s+ve\s+Sněmovně\s+jako\s+tisk\s+č\.\s*\d+/giu, "")
-    .replace(/(?<!elektronické evidence tržeb \()\bEET 2\.0\b/u, "elektronické evidence tržeb (EET 2.0)")
     .replace(/\s+/g, " ")
     .trim();
+  const alreadyExplained = /elektronick\p{L}*\s+evidenc\p{L}*\s+tržeb/iu.test(simplified);
+  return alreadyExplained
+    ? simplified.replace(/(elektronick\p{L}*\s+evidenc\p{L}*\s+tržeb)\s+EET 2\.0\b/iu, "$1 (EET 2.0)")
+    : simplified.replace(/\bEET 2\.0\b/u, "EET 2.0 (elektronická evidence tržeb)");
 }
 
 export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal }) {
@@ -166,6 +169,9 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     : auditRecord.assessorA.output;
   const proposed = proposal.candidateStatus ? readerStatus[proposal.candidateStatus] : null;
   const hasPublicCandidate = proposal.resolutionState === "candidate";
+  if (hasPublicCandidate && !proposed) {
+    throw new Error(`Candidate review proposal ${proposal.proposalId} must use a supported candidateStatus.`);
+  }
   const publicExplanation = hasPublicCandidate
     ? simplifyPublicExplanation(chosen.explanationCz)
     : null;
