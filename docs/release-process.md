@@ -24,7 +24,7 @@ This document describes the confirmed release policy and its server-side impleme
 
 - GitHub pull-request activity wakes a cloud ChatGPT approval conversation available on mobile.
 - The process requests GitHub Copilot as a reviewer; a plain `@copilot` comment is not used as a substitute for the code-review request. Codex review is automatic on pull-request opening and can be requested again with `@codex review` for the second wave when the first wave produced findings.
-- The approval conversation waits for the applicable completed review wave, no unresolved addressable review threads, and successful verification for the exact current head: the first-wave head with no findings, the second-wave head with no findings, or the unreviewed final remediation head after second-wave fixes.
+- The approval conversation waits for the applicable completed review wave for the last reviewed head, no unresolved addressable review threads, and successful verification for the exact current head. That current head is the first-wave head with no findings, the second-wave head with no findings, or the unreviewed final remediation head after second-wave fixes.
 - The conversation presents a plain-language summary, links to the pull request, records the exact head revision, and asks for either `schvaluji` or specific feedback.
 - After `schvaluji`, the connected GitHub app verifies the unchanged revision and required checks before merging.
 - Cloudflare Workers Builds automatically builds and deploys the merged `main` revision.
