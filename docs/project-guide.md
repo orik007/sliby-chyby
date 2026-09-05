@@ -55,8 +55,9 @@ proposed repository change
   -> Verify pull request for the exact head commit
   -> first GitHub Copilot + Codex review wave
   -> one consolidated remediation commit when material findings exist
-  -> final second Copilot + Codex review wave
-  -> no third review wave; material final-wave findings move to a new PR
+  -> second Copilot + Codex review wave
+  -> one final remediation commit for its cited findings
+  -> no third review wave; verify the final remediation head
   -> owner says `schvaluji` for that exact revision
   -> merge to `main`
   -> Cloudflare Workers build and deployment
@@ -185,9 +186,9 @@ The initial implementation uses Astro, TypeScript, plain CSS, schema-validated v
 
 Every pull request targeting `main` is checked by `.github/workflows/verify-pr.yml`, which runs tests, validation, the production Astro build, and a Cloudflare deployment dry run.
 
-Every pull request has at most two advisory AI review waves. GitHub Copilot is requested as a pull-request reviewer, which is the supported code-review mechanism; a plain mention is not treated as a review request. Codex reviews pull requests automatically and can be asked to review the exact head for a review wave with `@codex review`. The first wave covers a locally validated ready head. Material valid findings are fixed together in one consolidated remediation commit, which receives the final second wave; if the first wave has no material remediation, its head is final. A material valid finding from that final wave blocks the pull request and moves to a new pull request; it does not start a third review wave. Non-applicable or non-material final-wave findings receive a concise evidence-based disposition. Addressable review threads are replied to and resolved after handling, while the disposition of summary-only or suppressed findings is recorded in the pull-request conversation.
+Every pull request has at most two advisory AI review waves. GitHub Copilot is requested as a pull-request reviewer, which is the supported code-review mechanism; a plain mention is not treated as a review request. Codex reviews pull requests automatically and can be asked to review the exact head for a review wave with `@codex review`. The first wave covers a locally validated ready head. Valid findings are fixed together in one consolidated first-wave remediation commit, which receives the second wave. Valid second-wave findings are fixed in one final remediation commit without a third AI review. That final commit may contain only direct resolutions of cited second-wave findings and must pass `Verify pull request`; a scope expansion or newly discovered material issue moves to a new pull request. Addressable review threads are replied to and resolved after handling, while the disposition of summary-only or suppressed findings is recorded in the pull-request conversation.
 
-A cloud ChatGPT approval conversation presents the pull request only after `Verify pull request` and both reviews cover the exact final review-wave head. It includes the commit, summary, and outstanding review information. The owner must reply `schvaluji` for that exact revision. A new commit invalidates the approval. AI reviews are quality advice and never substitute for this owner decision.
+A cloud ChatGPT approval conversation presents the pull request only after both second-wave reviews and `Verify pull request` cover the exact final remediation head. It includes the commit, summary, and outstanding review information. The owner must reply `schvaluji` for that exact revision. A new commit invalidates the approval. AI reviews are quality advice and never substitute for this owner decision.
 
 Cloudflare Workers Builds watches only `main`. A merge triggers `npm run build` followed by `npx wrangler deploy --config wrangler.deploy.jsonc`. Preview branch deployments are disabled so unpublished political proposals cannot receive public URLs. The current public Worker is `sliby-chyby` at `https://sliby-chyby.orik007-apps.workers.dev/`.
 
