@@ -49,3 +49,4 @@ Co zůstává nejisté:
 - [Úplné znění návrhu zákona na webu Poslanecké sněmovny](https://www.psp.cz/sqw/text/orig2.sqw?idd=270142)
 
 Tento návrh nahrazuje starší automatický posudek, který zůstává zachovaný v auditní historii.
+

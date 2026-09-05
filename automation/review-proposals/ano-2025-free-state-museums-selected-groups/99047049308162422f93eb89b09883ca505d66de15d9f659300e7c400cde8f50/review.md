@@ -4,15 +4,7 @@
 
 ## Návrh pro veřejný web
 
-Toto je jediná část dokumentu určená jako kandidát veřejného textu. Musí být srozumitelná bez znalosti projektu, práva nebo fungování Poslanecké sněmovny.
-
-### Hodnocení
-
-**Bez automatického návrhu — podklady musí posoudit člověk.**
-
-### Vysvětlení
-
-Automatické posouzení nemá dostatečné podklady pro návrh veřejného hodnocení.
+*Nevznikl žádný návrh veřejného hodnocení ani vysvětlení.*
 
 ## Co má zkontrolovat reviewer
 

@@ -12,7 +12,7 @@ Toto je jediná část dokumentu určená jako kandidát veřejného textu. Mus�
 
 ### Vysvětlení
 
-ANO ve svém programu slíbilo zavést novou elektronickou evidenci tržeb EET 2.0. Poslanci ANO podpořili poměrem 68 z 80 členů vládní návrh zákona o evidenci tržeb, který Poslanecká sněmovna schválila. Návrh znovu upravuje evidenci tržeb pod správou Finanční správy a obsahuje i výjimky pro některé technicky obtížně evidovatelné tržby. Jde o konkrétní krok k zavedení EET 2.0, zákon však podle doložených podkladů ještě nebyl dokončen ani uveden do provozu.
+ANO ve svém programu slíbilo zavést novou elektronickou evidenci tržeb elektronické evidence tržeb (EET 2.0). Poslanci ANO podpořili poměrem 68 z 80 členů vládní návrh zákona o evidenci tržeb, který Poslanecká sněmovna schválila. Návrh znovu upravuje evidenci tržeb pod správou Finanční správy a obsahuje i výjimky pro některé technicky obtížně evidovatelné tržby. Jde o konkrétní krok k zavedení EET 2.0, zákon však podle doložených podkladů ještě nebyl dokončen ani uveden do provozu.
 
 ## Co má zkontrolovat reviewer
 
