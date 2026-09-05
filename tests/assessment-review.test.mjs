@@ -258,8 +258,8 @@ test("explains EET on first use without changing Czech grammatical case", () => 
     "Návrh je významný krok k zavedení EET 2.0 (elektronická evidence tržeb)."
   );
   assert.equal(
-    simplifyPublicExplanation("Návrh zavádí elektronické evidence tržeb (EET 2.0)."),
-    "Návrh zavádí elektronické evidence tržeb (EET 2.0)."
+    simplifyPublicExplanation("Návrh zavádí elektronickou evidenci tržeb (EET 2.0)."),
+    "Návrh zavádí elektronickou evidenci tržeb (EET 2.0)."
   );
   assert.equal(
     simplifyPublicExplanation("Podklady počítají s EET 2.0."),
