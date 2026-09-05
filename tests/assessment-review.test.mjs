@@ -273,6 +273,10 @@ test("explains EET on first use without changing Czech grammatical case", () => 
     simplifyPublicExplanation("Elektronická evidence tržeb (EET 2.0) je plánovaná. EET 2.0 zatím neběží."),
     "Elektronická evidence tržeb (EET 2.0) je plánovaná. EET 2.0 zatím neběží."
   );
+  assert.equal(
+    simplifyPublicExplanation("EET 2.0 se připravuje; jde o elektronickou evidenci tržeb."),
+    "EET 2.0 (elektronická evidence tržeb) se připravuje; jde o elektronickou evidenci tržeb."
+  );
 });
 
 test("rejects a candidate review proposal without a supported public status", () => {

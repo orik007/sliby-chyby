@@ -152,10 +152,16 @@ export function simplifyPublicExplanation(explanation) {
     .replace(/,\s*veden(?:ý|á|é)\s+ve\s+Sněmovně\s+jako\s+tisk\s+č\.\s*\d+/giu, "")
     .replace(/\s+/g, " ")
     .trim();
-  const alreadyExplained = /elektronick\p{L}*\s+evidenc\p{L}*\s+tržeb/iu.test(simplified);
-  return alreadyExplained
-    ? simplified.replace(/(elektronick\p{L}*\s+evidenc\p{L}*\s+tržeb)\s+EET 2\.0\b/iu, "$1 (EET 2.0)")
-    : simplified.replace(/\bEET 2\.0\b/u, "EET 2.0 (elektronická evidence tržeb)");
+  const longForm = /elektronick\p{L}*\s+evidenc\p{L}*\s+tržeb/iu;
+  const abbreviation = /\bEET 2\.0\b/u;
+  const longFormIndex = simplified.search(longForm);
+  const abbreviationIndex = simplified.search(abbreviation);
+
+  if (abbreviationIndex === -1) return simplified;
+  if (longFormIndex === -1 || abbreviationIndex < longFormIndex) {
+    return simplified.replace(abbreviation, "EET 2.0 (elektronická evidence tržeb)");
+  }
+  return simplified.replace(/(elektronick\p{L}*\s+evidenc\p{L}*\s+tržeb)\s+EET 2\.0\b/iu, "$1 (EET 2.0)");
 }
 
 export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal }) {
