@@ -12,7 +12,7 @@ Toto je jediná část dokumentu určená jako kandidát veřejného textu. Mus�
 
 ### Vysvětlení
 
-Poslanci ANO podpořili návrh zákona o evidenci tržeb. Pro návrh hlasovalo 68 z 80 poslanců ANO a Sněmovna jej schválila k dalšímu projednání v Senátu. Návrh znovu zavádí evidenci tržeb a svěřuje její správu Finanční správě, takže jde o konkrétní krok k zavedení EET 2.0. Zákon ale zatím není dokončen ani uveden do provozu a doložené podklady nepotvrzují všechny slíbené vlastnosti systému.
+Poslanci ANO podpořili návrh zákona o evidenci tržeb. Pro návrh hlasovalo 68 z 80 poslanců ANO a Sněmovna jej schválila k dalšímu projednání v Senátu. Návrh znovu zavádí evidenci tržeb a svěřuje její správu Finanční správě, takže jde o konkrétní krok k zavedení EET 2.0 (elektronická evidence tržeb). Zákon ale zatím není dokončen ani uveden do provozu a doložené podklady nepotvrzují všechny slíbené vlastnosti systému.
 
 ## Co má zkontrolovat reviewer
 

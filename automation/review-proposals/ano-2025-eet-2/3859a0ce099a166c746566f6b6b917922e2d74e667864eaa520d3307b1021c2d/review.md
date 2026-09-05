@@ -12,7 +12,7 @@ Toto je jediná část dokumentu určená jako kandidát veřejného textu. Mus�
 
 ### Vysvětlení
 
-Poslanci ANO 15. července 2026 většinově hlasovali pro vládní návrh zákona o evidenci tržeb. Návrh má znovu zavést evidenci tržeb; jeho podklady výslovně počítají s EET 2.0 a s přípravou systému pro její spuštění. Jde o konkrétní krok k zavedení slíbené EET 2.0, ale zákon zatím nebyl přijat ani uveden do provozu. Strana tedy udělala dílčí krok ke splnění slibu.
+Poslanci ANO 15. července 2026 většinově hlasovali pro vládní návrh zákona o evidenci tržeb. Návrh má znovu zavést evidenci tržeb; jeho podklady výslovně počítají s EET 2.0 (elektronická evidence tržeb) a s přípravou systému pro její spuštění. Jde o konkrétní krok k zavedení slíbené EET 2.0, ale zákon zatím nebyl přijat ani uveden do provozu. Strana tedy udělala dílčí krok ke splnění slibu.
 
 ## Co má zkontrolovat reviewer
 

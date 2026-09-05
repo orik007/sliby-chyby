@@ -251,3 +251,86 @@ test("removes unexplained parliamentary print numbers from the public candidate 
   const original = "Poslanci podpořili návrh zákona, vedený ve Sněmovně jako tisk č. 189. Návrh pokračuje do Senátu.";
   assert.equal(simplifyPublicExplanation(original), "Poslanci podpořili návrh zákona. Návrh pokračuje do Senátu.");
 });
+
+test("explains EET on first use without changing Czech grammatical case", () => {
+  assert.equal(
+    simplifyPublicExplanation("Návrh je významný krok k zavedení EET 2.0."),
+    "Návrh je významný krok k zavedení EET 2.0 (elektronická evidence tržeb)."
+  );
+  assert.equal(
+    simplifyPublicExplanation("Návrh zavádí elektronickou evidenci tržeb (EET 2.0)."),
+    "Návrh zavádí elektronickou evidenci tržeb (EET 2.0)."
+  );
+  assert.equal(
+    simplifyPublicExplanation("Podklady počítají s EET 2.0."),
+    "Podklady počítají s EET 2.0 (elektronická evidence tržeb)."
+  );
+  assert.equal(
+    simplifyPublicExplanation("ANO slíbilo novou elektronickou evidenci tržeb EET 2.0."),
+    "ANO slíbilo novou elektronickou evidenci tržeb (EET 2.0)."
+  );
+  assert.equal(
+    simplifyPublicExplanation("Elektronická evidence tržeb (EET 2.0) je plánovaná. EET 2.0 zatím neběží."),
+    "Elektronická evidence tržeb (EET 2.0) je plánovaná. EET 2.0 zatím neběží."
+  );
+  assert.equal(
+    simplifyPublicExplanation("EET 2.0 se připravuje; jde o elektronickou evidenci tržeb."),
+    "EET 2.0 (elektronická evidence tržeb) se připravuje; jde o elektronickou evidenci tržeb."
+  );
+});
+
+test("rejects a candidate review proposal without a supported public status", () => {
+  const auditRecord = {
+    assessorA: { output: { explanationCz: "Vysvětlení.", uncertainties: [], citedEvidenceIds: [] } },
+    assessorB: { output: { explanationCz: "Vysvětlení.", uncertainties: [], citedEvidenceIds: [] } },
+    resolution: { selectedReview: "assessor-a" }
+  };
+  const proposal = {
+    proposalId: "invalid-candidate",
+    resolutionState: "candidate",
+    resolutionReason: "assessor-consensus",
+    candidateStatus: "unsupported-status"
+  };
+  assert.throws(
+    () => renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal }),
+    /Candidate review proposal invalid-candidate must use a supported candidateStatus/
+  );
+});
+
+test("renders no public candidate for insufficient evidence", () => {
+  const plan = planAssessmentInputs({
+    packages: [{ path: "evidence-package.json", evidencePackage }],
+    manifest: emptyReviewManifest(),
+    prompts,
+    runtime
+  })[0];
+  const output = {
+    promiseId: evidencePackage.promise.id,
+    status: "no-progress",
+    evidenceSufficient: false,
+    citedEvidenceIds: [evidencePackage.evidence[1].id],
+    explanationCz: "Automatické posouzení nemá dostatečné podklady.",
+    confidence: "medium",
+    uncertainties: []
+  };
+  const auditRecord = {
+    evaluatedAt: "2026-09-02T00:00:00.000Z",
+    packageHash: plan.packageHash,
+    assessmentContentHash: plan.assessmentContentHash,
+    assessmentFingerprint: plan.assessmentFingerprint,
+    publicationApproved: false,
+    assessorA: { output },
+    assessorB: { output: structuredClone(output) },
+    arbiter: null,
+    resolution: { state: "human-review-required", reason: "insufficient-evidence", status: null, selectedReview: null }
+  };
+  const proposal = createReviewProposal({
+    auditRecord,
+    proposalDirectory: `automation/review-proposals/${evidencePackage.promise.id}/${plan.assessmentFingerprint}`
+  });
+  const markdown = renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal });
+  const publicSection = markdown.match(/## Návrh pro veřejný web([\s\S]*?)## Co má zkontrolovat reviewer/)?.[1];
+  assert.match(publicSection, /Nevznikl žádný návrh veřejného hodnocení ani vysvětlení/);
+  assert.doesNotMatch(publicSection, /Bez automatického návrhu|Automatické posouzení nemá dostatečné podklady/);
+  assert.match(markdown, /## Technické podklady pro reviewera/);
+});
