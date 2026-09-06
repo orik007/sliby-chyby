@@ -54,7 +54,7 @@ Generate JSON and human-readable coverage reports after collection and matching:
 node scripts/run-coverage-audit.mjs --collector-run <collector-run.json> --matcher-run <match-run.json> --output <coverage-audit.json> --markdown <coverage-audit.md>
 ```
 
-The report covers every reviewed promise. `No candidate match` describes one run only and never means zero points or verified inactivity.
+The report covers every reviewed promise. `No candidate match` describes one run only and never proves inactivity or creates a directional score. A published promise retains the default `0` defined in [`docs/scoring.md`](../../docs/scoring.md).
 
 ## GitHub Actions pipeline
 

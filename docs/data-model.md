@@ -358,7 +358,7 @@ Planned resolver extension, not yet implemented by `coverage-audit-v1`:
 
 - resolver trigger, attempted source scopes, missing-fact categories, target count, retrieved-document count and hashes, and whether expansion changed assessable content when an evidence-gap resolution was attempted.
 
-Coverage states are internal workflow facts, not public SLAVA statuses. In particular, no candidate match must never be converted into `no-progress` or zero points.
+Coverage states are internal workflow facts, not public SLAVA statuses. In particular, a `no candidate match` state never proves inactivity or creates a directional assessment; it leaves a published promise's default `0` unchanged under [`scoring.md`](scoring.md).
 
 ## Open data questions
 
