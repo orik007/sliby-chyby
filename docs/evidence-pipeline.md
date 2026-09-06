@@ -22,7 +22,7 @@ The following names are the canonical names for pipeline roles. A role may be im
 | Assessor A and assessor B | Independently judge the same bounded package using only its supplied evidence. | Browse, retrieve evidence, invent sources, or publish. |
 | Arbiter | Selects an existing assessor result or returns `cannot-decide` when the assessors disagree. | Invent a third assessment, fill an evidence gap, or publish. |
 | Review-proposal builder | Preserves the package and model audit as an unpublished human-review proposal. | Treat a proposal as publication approval or change public data. |
-| Human editor | Reviews the political proposal and explicitly approves publication. | Be replaced by an automated assessment or pull-request merge. |
+| Owner | Reviews an unpublished political proposal and may explicitly approve publication only by identifying the exact proposal or proposals. | Delegate publication approval implicitly to an automated assessment or pull-request merge. |
 
 Release-quality reviewers, the approval coordinator, CI verification, and deployment are operational roles defined in [`release-process.md`](release-process.md); they review and release repository changes, not political evidence.
 
