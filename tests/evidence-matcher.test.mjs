@@ -152,6 +152,43 @@ test("every ANO finance-batch promise matches a source repeating its exact quote
   }
 });
 
+test("common inflected wording reaches the matching threshold for new finance promises", () => {
+  const cases = [
+    ["ano-2025-tax-exempt-voluntary-tips", "Osvobození dobrovolného spropitného od daně a pojistného"],
+    ["ano-2025-customs-entry-salary-50000", "Nástupní plat celníků 50 tisíc korun"]
+  ];
+  for (const [promiseId, title] of cases) {
+    const promise = registry.promises.find(({ id }) => id === promiseId);
+    assert.ok(promise);
+    const occurrence = createCollectedRecord({
+      id: `party-source--${promiseId}-natural-wording`,
+      sourceId: "ano-party-news",
+      kind: "official-publication",
+      primary: true,
+      evidenceRole: "official-party-publication",
+      occurredAt: "2026-01-01T00:00:00.000Z",
+      timeZone: "Europe/Prague",
+      title,
+      publisher: "ANO 2011",
+      url: `https://www.anobudelip.cz/example/${promiseId}`,
+      payload: { sourcePartyId: "ano" }
+    });
+    const match = matchRecordToPromise(occurrence, promise);
+    assert.ok(match, `Common inflected wording does not match ${promiseId}`);
+    assert.ok(match.score >= promise.matching.minimumScore);
+  }
+});
+
+test("retail state-bond completion test preserves every defining product condition", () => {
+  const promise = registry.promises.find(({ id }) => id === "ano-2025-retail-state-bonds");
+  assert.ok(promise);
+  assert.match(promise.fulfillmentTest, /1,000/);
+  assert.match(promise.fulfillmentTest, /3,000,000/);
+  assert.match(promise.fulfillmentTest, /premium coupon/);
+  assert.match(promise.fulfillmentTest, /six-year holding/);
+  assert.match(promise.fulfillmentTest, /withholding tax/);
+});
+
 test("common inflected VAT wording reaches the matching threshold", () => {
   const promise = registry.promises.find(({ id }) => id === "ano-2025-restaurant-nonalcoholic-vat-12");
   assert.ok(promise);

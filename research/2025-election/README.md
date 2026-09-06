@@ -114,7 +114,7 @@ The official campaign-finance records establish that Motoristé printed and dist
 
 ## Coverage still required
 
-- review the remaining 908 final-programme extraction candidates and record explicit rejection or deduplication reasons;
+- review the remaining 901 final-programme extraction candidates and record explicit rejection or deduplication reasons;
 - perform a second visual verification of the ANO newspaper transcriptions;
 - review the captured official-site queues and recover the original content behind ANO external-media and embedded-social records;
 - inventory official Facebook, Instagram, X, YouTube, and TikTok posts and recover the original creatives behind paid-ad leads;
