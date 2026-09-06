@@ -22,16 +22,22 @@ const anoFinanceBatchIds = [
   "ano-2025-remove-leisure-benefit-cap",
   "ano-2025-restaurant-nonalcoholic-vat-12"
 ];
+const anoFinanceBatchTwoIds = [
+  "ano-2025-tax-exempt-voluntary-tips",
+  "ano-2025-online-tax-office",
+  "ano-2025-retail-state-bonds",
+  "ano-2025-customs-entry-salary-50000"
+];
 
 test("reviewed catalog expands through bounded batches and links every promise to an accepted source occurrence", async () => {
   assert.equal(registry.status, "reviewed-promise-catalog-v2");
-  assert.equal(registry.promises.length, 42);
+  assert.equal(registry.promises.length, 46);
   assert.deepEqual(
     Object.fromEntries(["ano", "spd", "motoriste"].map((partyId) => [
       partyId,
       registry.promises.filter((promise) => promise.partyId === partyId).length
     ])),
-    { ano: 18, spd: 12, motoriste: 12 }
+    { ano: 22, spd: 12, motoriste: 12 }
   );
 
   const research = JSON.parse(await readFile(new URL("../research/2025-election/candidate-promises.json", import.meta.url), "utf8"));
@@ -59,7 +65,7 @@ test("reviewed catalog expands through bounded batches and links every promise t
     assert.ok(candidate, `Missing accepted candidate for ${promise.id}`);
     assert.equal(candidate.partyId, promise.partyId);
     assert.equal(candidate.sourceUrl, promise.promiseSource.url);
-    if (anoFinanceBatchIds.includes(promise.id)) {
+    if ([...anoFinanceBatchIds, ...anoFinanceBatchTwoIds].includes(promise.id)) {
       const normalizedCandidateText = candidate.originalExcerpt.replace(/\s+/g, " ").trim();
       const normalizedPromiseText = promise.originalTextCz.replace(/\s+/g, " ").trim();
       assert.ok(normalizedCandidateText.includes(normalizedPromiseText), `Candidate ${candidate.id} does not contain the exact source passage for ${promise.id}`);
@@ -102,10 +108,29 @@ test("reviewed catalog expands through bounded batches and links every promise t
     }
     if (review.disposition === "rejected") assert.ok(review.rejectionReasonCodes?.length > 0);
   }
+
+  const secondBatch = JSON.parse(await readFile(new URL("../research/2025-election/reviewed-batches/ano-finance-2.json", import.meta.url), "utf8"));
+  assert.equal(secondBatch.status, "Working proposal");
+  assert.equal(secondBatch.summary.acceptedNewPromises, 4);
+  assert.equal(secondBatch.source.sha256, "62e87d136ff8ed780a0a48ca09e0fdf0be80b38e8af61fa5bd55eacdb72f46ea");
+  for (const review of secondBatch.reviews) {
+    const candidate = researchById.get(review.candidateId);
+    assert.ok(candidate, `Unknown second-batch candidate ${review.candidateId}`);
+    const statusPrefix = expectedStatusPrefix[review.disposition];
+    assert.ok(statusPrefix, `Unknown second-batch review disposition ${review.disposition}`);
+    assert.ok(candidate.reviewStatus.startsWith(statusPrefix), `Candidate ${candidate.id} status does not match second-batch disposition`);
+    const resultingPromiseIds = review.resultingPromiseIds ?? [];
+    const linkedPromiseIds = registry.promises
+      .filter(({ researchSourceCandidateId }) => researchSourceCandidateId === review.candidateId)
+      .map(({ id }) => id)
+      .sort();
+    assert.deepEqual(linkedPromiseIds, [...resultingPromiseIds].sort(), `Candidate ${review.candidateId} has inconsistent second-batch promise links`);
+    if (review.disposition === "rejected") assert.ok(review.rejectionReasonCodes?.length > 0);
+  }
 });
 
 test("every ANO finance-batch promise matches a source repeating its exact quoted wording", () => {
-  for (const promiseId of anoFinanceBatchIds) {
+  for (const promiseId of [...anoFinanceBatchIds, ...anoFinanceBatchTwoIds]) {
     const promise = registry.promises.find(({ id }) => id === promiseId);
     assert.ok(promise, `Missing finance-batch promise ${promiseId}`);
     const exactOccurrence = createCollectedRecord({
@@ -125,6 +150,66 @@ test("every ANO finance-batch promise matches a source repeating its exact quote
     assert.ok(match, `Exact quote does not satisfy matching threshold for ${promiseId}`);
     assert.equal(match.attributionStatus, "verified-party-publication");
   }
+});
+
+test("common inflected wording reaches the matching threshold for new finance promises", () => {
+  const cases = [
+    ["ano-2025-tax-exempt-voluntary-tips", "Osvobození dobrovolného spropitného od daně a pojistného"],
+    ["ano-2025-customs-entry-salary-50000", "Nástupní plat celníků 50 tisíc korun"]
+  ];
+  for (const [promiseId, title] of cases) {
+    const promise = registry.promises.find(({ id }) => id === promiseId);
+    assert.ok(promise);
+    const occurrence = createCollectedRecord({
+      id: `party-source--${promiseId}-natural-wording`,
+      sourceId: "ano-party-news",
+      kind: "official-publication",
+      primary: true,
+      evidenceRole: "official-party-publication",
+      occurredAt: "2026-01-01T00:00:00.000Z",
+      timeZone: "Europe/Prague",
+      title,
+      publisher: "ANO 2011",
+      url: `https://www.anobudelip.cz/example/${promiseId}`,
+      payload: { sourcePartyId: "ano" }
+    });
+    const match = matchRecordToPromise(occurrence, promise);
+    assert.ok(match, `Common inflected wording does not match ${promiseId}`);
+    assert.ok(match.score >= promise.matching.minimumScore);
+  }
+});
+
+test("common Dluhopis Republiky name variants reach the matching threshold", () => {
+  const promise = registry.promises.find(({ id }) => id === "ano-2025-retail-state-bonds");
+  assert.ok(promise);
+  for (const [index, title] of ["Ministerstvo financí vydalo Dluhopis Republiky", "Ministerstvo financí vydalo Dluhopisy Republiky"].entries()) {
+    const occurrence = createCollectedRecord({
+      id: `ministry-source--retail-bond-name-${index}`,
+      sourceId: "finance-ministry",
+      kind: "official-publication",
+      primary: true,
+      evidenceRole: "official-discovery",
+      occurredAt: "2026-01-01T00:00:00.000Z",
+      timeZone: "Europe/Prague",
+      title,
+      publisher: "Ministry of Finance of the Czech Republic",
+      url: `https://mf.gov.cz/example/retail-bond-${index}`,
+      payload: {}
+    });
+    const match = matchRecordToPromise(occurrence, promise);
+    assert.ok(match, `Common product name does not match: ${title}`);
+    assert.ok(match.score >= promise.matching.minimumScore);
+  }
+});
+
+test("retail state-bond completion test preserves every defining product condition", () => {
+  const promise = registry.promises.find(({ id }) => id === "ano-2025-retail-state-bonds");
+  assert.ok(promise);
+  assert.match(promise.fulfillmentTest, /1,000/);
+  assert.match(promise.fulfillmentTest, /3,000,000/);
+  assert.match(promise.fulfillmentTest, /premium coupon/);
+  assert.match(promise.fulfillmentTest, /six-year holding/);
+  assert.match(promise.fulfillmentTest, /withholding tax/);
 });
 
 test("common inflected VAT wording reaches the matching threshold", () => {

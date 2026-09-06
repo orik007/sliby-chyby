@@ -30,6 +30,39 @@ MANUAL_EXCERPT_REPLACEMENTS = {
     ),
 }
 
+# The broad PDF extraction omitted two complete commitments and split two more
+# away from the context required to identify their subject. These passages were
+# visually verified in the official programme and are retained in the queue so
+# later bounded review does not depend on an untracked manual insertion.
+MANUAL_VERIFIED_PASSAGES = [
+    {
+        "sourceId": "ano-2025-election-program",
+        "page": 5,
+        "excerpt": "OSVOBODÍME SPROPITNÉ V GASTRONOMII OD DANĚ A POJISTNÝCH "
+        "Osvobodíme dobrovolné spropitné v gastronomii od odvodů na sociální a zdravotní pojištění a daně z příjmů.",
+    },
+    {
+        "sourceId": "ano-2025-election-program",
+        "page": 5,
+        "excerpt": "STÁTNÍ DLUHOPISY PRO OBČANY Nabídneme státní dluhopisy i drobným střadatelům, "
+        "čímž snížíme závislost na velkých investorech a rozložíme rizika. Českým domácnostem umožníme "
+        "zhodnotit úspory od 1 000 Kč až do 3 000 000 Kč prostřednictvím oblíbených Dluhopisů Republiky "
+        "s prémiovým kupónem za dobu držení po dobu 6 let a osvobozením výnosů od srážkové daně.",
+    },
+    {
+        "sourceId": "ano-2025-election-program",
+        "page": 5,
+        "excerpt": "OCENĚNÍ PRÁCE CELNÍKŮ Celníkům zvýšíme platy a budeme je pravidelně valorizovat. "
+        "Zajistíme nástupní plat 50 tisíc korun.",
+    },
+    {
+        "sourceId": "ano-2025-election-program",
+        "page": 5,
+        "excerpt": "ZMRAZENÍ PLATŮ POLITIKŮ Dokud se ekonomika pořádně nerozběhne a českým domácnostem "
+        "se nezačne opět dařit, platy politiků budou zmrazeny.",
+    },
+]
+
 SOURCES = [
     {
         "sourceId": "ano-2025-election-program",
@@ -168,6 +201,28 @@ for source in SOURCES:
                     "notes": "May contain multiple promises, a policy position, or non-promissory context. Human review required.",
                 }
             )
+
+for passage in MANUAL_VERIFIED_PASSAGES:
+    source = next(source for source in SOURCES if source["sourceId"] == passage["sourceId"])
+    excerpt = passage["excerpt"]
+    key = (passage["sourceId"], passage["page"], excerpt.casefold())
+    if key in seen:
+        continue
+    seen.add(key)
+    records.append(
+        {
+            "id": record_id(passage["sourceId"], passage["page"], excerpt),
+            "partyId": source["partyId"],
+            "periodId": "cz-ps-2025",
+            "sourceId": passage["sourceId"],
+            "sourceUrl": source["url"],
+            "page": passage["page"],
+            "originalExcerpt": excerpt,
+            "extractionMethod": "manual-verified-passage",
+            "reviewStatus": "unreviewed-candidate",
+            "notes": "Manually retained from the official PDF because broad extraction omitted or split the passage; human review required.",
+        }
+    )
 
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--output", type=Path, default=OUTPUT, help="Write the generated review queue to this path.")

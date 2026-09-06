@@ -69,13 +69,13 @@ Secondary material must point back to a party publication, recording, photograph
 
 ## Current extraction queue
 
-`candidate-promises.json` is an intentionally over-inclusive machine-assisted queue generated from the three final official programmes. One known cross-section PDF extraction artifact is replaced in the generator with its visually verified programme passage and marked `manual-verified-passage`. The queue currently contains 955 candidates:
+`candidate-promises.json` is an intentionally over-inclusive machine-assisted queue generated from the three final official programmes. One known cross-section PDF extraction artifact is replaced in the generator with its visually verified programme passage and marked `manual-verified-passage`; bounded reviews may also retain a manually verified passage when the broad extraction omitted or split it. The queue currently contains 959 candidates:
 
-- ANO: 473;
+- ANO: 477;
 - SPD: 247;
 - Motoristé: 235.
 
-These are extraction candidates, not 955 distinct promises. The first human-reviewed tranche accepted 36 source occurrences, evenly split across the three parties. The first incremental ANO finance batch reviewed another 11 occurrences: four produced new promises, six were rejected with reasons, and one still needs splitting. Two already accepted composite occurrences produced two additional atomic promises. The matching registry therefore contains 42 promises linked to 40 accepted source occurrences; 908 extraction candidates remain unreviewed.
+These are extraction candidates, not 959 distinct promises. The first human-reviewed tranche accepted 36 source occurrences, evenly split across the three parties. The first incremental ANO finance batch reviewed another 11 occurrences: four produced new promises, six were rejected with reasons, and one still needs splitting. Two already accepted composite occurrences produced two additional atomic promises. The second ANO finance batch reviewed 11 page-5 occurrences: four produced new promises, three were duplicate occurrences, and four were rejected with reasons. The matching registry therefore contains 46 promises linked to 44 accepted source occurrences; 901 extraction candidates remain unreviewed.
 
 The original tranche and current expanded set are recorded in [`reviewed-catalog-v1.md`](reviewed-catalog-v1.md) and [`reviewed-catalog-v2.md`](reviewed-catalog-v2.md). Acceptance means the source wording passed the current attribution, atomicity, and assessability checks. It does not mean that the promise has been assessed or approved for automatic public publication.
 
@@ -114,7 +114,7 @@ The official campaign-finance records establish that Motoristé printed and dist
 
 ## Coverage still required
 
-- review the remaining 908 final-programme extraction candidates and record explicit rejection or deduplication reasons;
+- review the remaining 901 final-programme extraction candidates and record explicit rejection or deduplication reasons;
 - perform a second visual verification of the ANO newspaper transcriptions;
 - review the captured official-site queues and recover the original content behind ANO external-media and embedded-social records;
 - inventory official Facebook, Instagram, X, YouTube, and TikTok posts and recover the original creatives behind paid-ad leads;
