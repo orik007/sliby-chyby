@@ -118,13 +118,13 @@ Collectors enforce configured hosts, media types, and size limits. They record r
 
 ### Deterministic matcher
 
-The matcher compares the shared collected record set with every reviewed promise. One record may match several promises. It exposes the phrases and official identifiers that caused each candidate match. It does not decide whether the record supports or contradicts the promise.
+The matcher compares the shared collected record set with every reviewed promise. In the target daily operation, this means every new or changed record version; a newly admitted promise receives one initial comparison against the retained archive. One record may match several promises. The matcher exposes the phrases and official identifiers that caused each candidate match. It does not retrieve upstream data or decide whether a record supports or contradicts a promise.
 
 A bounded evidence package is created only when the attribution and primary-evidence boundary is satisfied. Media-only or merely thematic matches remain visible in the audit but do not silently become assessable evidence. A run with no match creates no new automated assessment; any existing published assessment revision remains current. Absence of a match is not proof of inactivity and is never converted into zero points.
 
-For matched parliamentary prints, deterministic enrichment retrieves the official document, records its content hash, and selects bounded numbered passages. This reveals proposal substance but does not establish party authorship, support, passage, or legal effect.
+For known parliamentary-print targets, deterministic enrichment retrieves the official document, records its content hash, and selects bounded numbered passages. This reveals proposal substance but does not establish party authorship, support, passage, or legal effect.
 
-The planned deterministic evidence-gap resolver will retrieve bounded deeper records only from enabled configured official source scopes. It will start when inventory matching produces no attributable primary candidate evidence, or when both assessors identify a package as insufficient. It cannot score, publish, browse the general web, or run indefinitely; an unchanged or exhausted expansion remains an unpublished human-review case.
+The planned deterministic evidence-gap resolver identifies bounded deeper official document targets only from enabled configured source scopes. It starts when inventory matching produces no attributable primary candidate evidence, or when both assessors identify a package as insufficient. The enricher retrieves and extracts the known targets. The resolver cannot score, publish, browse the general web, or run indefinitely; an unchanged or exhausted expansion remains an unpublished human-review case.
 
 ### Two assessors and one arbiter
 

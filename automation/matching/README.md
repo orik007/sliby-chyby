@@ -1,6 +1,6 @@
 # Evidence matching
 
-The matcher is an auditable narrowing stage between collectors and assessors. It never determines whether evidence supports or contradicts a promise and never assigns a SLAVA status.
+The matcher is an auditable narrowing stage between collectors and assessors. It receives normalized records from the collector; it does not retrieve upstream data itself. It never determines whether evidence supports or contradicts a promise and never assigns a SLAVA status.
 
 The canonical end-to-end pipeline and source policy are in [`docs/evidence-pipeline.md`](../../docs/evidence-pipeline.md). This file documents matcher-specific behavior.
 
@@ -33,6 +33,6 @@ External identifiers receive a deliberately strong score because they refer to a
 
 ## Full-registry workflow
 
-The `Collect and match evidence candidates` GitHub Actions workflow collects each enabled source once and then runs this matcher across the entire reviewed promise registry. It uploads the complete unpublished audit, including promises with no match, rather than running a separate collector for every promise.
+After the initial historical backfill, the `Collect and match evidence candidates` GitHub Actions workflow runs this matcher for each new or changed collector record against the entire reviewed promise registry. A newly admitted promise is compared once with the complete retained archive. It uploads the complete unpublished audit, including promises with no match, rather than running a separate collector for every promise.
 
-After deterministic matching, `scripts/run-print-enrichment.mjs` follows only the official parliamentary prints already present in generated packages. It downloads the first official proposal DOCX, records the content hash, extracts readable paragraphs, and mechanically selects a bounded set around the exact promise and visible matcher terms. Original and enriched packages remain separate. Document excerpts reveal proposal substance but do not establish party attribution, passage, effectiveness, or scoring direction.
+After deterministic matching, the resolver may identify exact further official document targets for one recorded evidence gap. The enricher follows only such known targets and the official parliamentary prints already present in generated packages. The current implementation downloads the first official PSP proposal DOCX, records the content hash, extracts readable paragraphs, and mechanically selects a bounded set around the exact promise and visible matcher terms. Original and enriched packages remain separate. Document excerpts reveal proposal substance but do not establish party attribution, passage, effectiveness, or scoring direction.

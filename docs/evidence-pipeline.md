@@ -6,36 +6,54 @@ The collection, matching, and assessment separation described in this document i
 
 This document is the canonical human-readable description of collection, matching, and publication boundaries. Scoring decisions belong only in [`docs/scoring.md`](scoring.md). [`automation/collectors/sources.json`](../automation/collectors/sources.json) is the machine-readable authority for enabled sources, endpoints, host allowlists, evidence roles, and deferred integrations. A source-list change must update both files in the same pull request.
 
-The operational rule is short: **collect broadly from the allowlist, match cautiously, assess only bounded attributable evidence, and publish only after human approval**. A collector never scores, a match never proves direction, and an assessment proposal never publishes itself.
+The operational rule is short: **collect broadly from the allowlist, match cautiously, resolve only documented evidence gaps, assess only bounded attributable evidence, and publish only after human approval**. A collector never scores, a match never proves direction, and an assessment proposal never publishes itself.
+
+## Role boundaries
+
+The following names are the canonical names for pipeline roles. A role may be implemented by a script or by a human review, but its boundary must remain the same.
+
+| Role | Owns | Must not do |
+|---|---|---|
+| Cataloguer | Reviews official campaign-source candidates and admits atomic promises with exact wording and assessment tests. | Score post-election conduct or publish an assessment. |
+| Collector | Retrieves and versions normalized records from the enabled source registry. | Compare records with promises, fetch documents per promise, or call a model. |
+| Matcher | Compares a record set with every reviewed promise and records transparent candidate links. | Retrieve upstream source data, infer support or contradiction, or assign a score. |
+| Resolver | For one affected promise and a recorded evidence gap, identifies the exact permitted official record targets that could fill that gap. | Browse the general web, inspect every daily record, select a score, or repeat an unchanged search. |
+| Enricher | Retrieves a known official document target and extracts bounded, reproducible passages with URL and content hash. | Search for additional targets, infer attribution or legal effect, or assign a score. |
+| Assessor A and assessor B | Independently judge the same bounded package using only its supplied evidence. | Browse, retrieve evidence, invent sources, or publish. |
+| Arbiter | Selects an existing assessor result or returns `cannot-decide` when the assessors disagree. | Invent a third assessment, fill an evidence gap, or publish. |
+| Review-proposal builder | Preserves the package and model audit as an unpublished human-review proposal. | Treat a proposal as publication approval or change public data. |
+| Human editor | Reviews the political proposal and explicitly approves publication. | Be replaced by an automated assessment or pull-request merge. |
+
+Release-quality reviewers, the approval coordinator, CI verification, and deployment are operational roles defined in [`release-process.md`](release-process.md); they review and release repository changes, not political evidence.
 
 ## Confirmed pipeline
 
 One pipeline execution follows this sequence:
 
-1. **Collect once.** Every enabled source adapter retrieves its source once. Collection is source-oriented, not promise-oriented; no source is downloaded separately for each promise.
-2. **Normalize and deduplicate.** Records receive stable provenance, timestamps, source roles, structured facts where available, and deterministic hashes. Exact duplicate records collapse; conflicting records with one identity fail validation unless the upstream source has a documented identity exception.
-3. **Match against every reviewed promise.** The shared record set is compared with the complete reviewed promise registry. One record may match zero, one, or several promises, including similar promises belonging to different parties.
+1. **Collect incrementally.** During the initial historical backfill, every enabled source adapter retrieves the configured historical scope once. Thereafter, the collector obtains only new or changed record versions and persists them in a durable server-side archive. Collection is source-oriented, not promise-oriented; no source is downloaded separately for each promise. A current-window feed is still read as a whole window, but only new or changed normalized records enter the archive.
+2. **Normalize, version, and deduplicate.** Records receive stable provenance, timestamps, source roles, structured facts where available, and deterministic hashes. Exact duplicate versions collapse; a changed version is retained as a change. Conflicting records with one identity fail validation unless the upstream source has a documented identity exception.
+3. **Match every increment against every reviewed promise.** Each new or changed record is compared with the complete reviewed promise registry. One record may match zero, one, or several promises, including similar promises belonging to different parties. When a new promise is admitted, it receives one backfill comparison against the complete retained archive before later comparisons return to increments only.
 4. **Treat matches as candidates only.** A deterministic match means “potentially relevant,” never “supports,” “contradicts,” or “changes the score.” Every matched term or official external identifier remains visible in the audit.
-5. **Expand a pre-assessment evidence gap once, when needed.** When inventory matching produced no attributable primary candidate evidence, a promise enters a deterministic, bounded resolver before any model call. It may retrieve deeper records only from enabled configured official sources, such as a full official page, a parliamentary print, linked decisive votes, a promulgated law, or an authoritative outcome record. The resolver records its trigger, searched source scopes, retrieved records, hashes, and unresolved gaps. It never assigns a direction or score and never uses a model.
+5. **Resolve a pre-assessment evidence gap once, when needed.** When matching produced no attributable primary candidate evidence, the affected promise enters a deterministic, bounded resolver before any model call. The resolver records the trigger and missing factual category, then identifies only exact record targets within enabled configured official source scopes, such as a full official page, a parliamentary print, a linked decisive vote, a promulgated law, or an authoritative outcome record. It records searched scopes, target-selection rules, target URLs or identifiers, and unresolved gaps. It never assigns a direction or score and never uses a model.
 6. **Build bounded evidence packages.** A package is generated only when attributable primary candidate evidence exists. Relevant media records may remain as context, but media alone does not create a strict primary-evidence package.
-7. **Enrich matched parliamentary prints.** For prints already present in a package, retrieve the official PSP DOCX once per print, retain its SHA-256 hash, and mechanically select bounded, numbered paragraphs around the promise and matcher terms. The selection assigns no direction or score. The original package, enriched package, document hashes, exact excerpts, and any warning remain auditable. Assessment workflows retry transient download failures and stop before model calls if a required document remains unavailable.
+7. **Enrich known official document targets.** For a parliamentary print already present in a package or a target identified by the resolver, the enricher retrieves the exact document once, retains its SHA-256 hash, and mechanically selects bounded passages around the promise and visible matcher terms. The current implementation is limited to official PSP proposal DOCX files. The selection assigns no direction or score. The original and enriched packages, document hashes, exact excerpts, and any warning remain auditable. Assessment workflows retry transient download failures and stop before model calls if a required document remains unavailable.
 8. **Assess only new or changed packages.** Two independent assessors receive the same bounded enriched package. An unchanged package hash does not trigger repeated model calls; the full-registry workflow enforces this through the assessment fingerprint.
-9. **Expand a post-assessment evidence gap once, when needed.** When both independent assessors identify a bounded package as insufficient, the same deterministic, bounded resolver may retrieve deeper records only from enabled configured official sources. It records the trigger, searched source scopes, retrieved records, hashes, and unresolved gaps; it never assigns a direction or score and never uses a model.
+9. **Resolve a post-assessment evidence gap once, when needed.** When both independent assessors identify a bounded package as insufficient, the same deterministic, bounded resolver may identify further exact targets within enabled configured official source scopes. The enricher retrieves any resulting targets. The resolver records the trigger, missing factual category, searched scopes, target-selection rules, and unresolved gaps; it never assigns a direction or score and never uses a model.
 10. **Assess or reassess only materially expanded evidence.** The expanded package is assessed only when its assessable content has changed. A resolver may not loop indefinitely: an exhausted or unchanged expansion remains an unpublished human-review case.
 11. **Arbitrate disagreement.** Matching sufficient assessor results become a candidate assessment. Disagreement about the status or evidence sufficiency goes to the configured arbiter. An arbiter cannot turn a selected insufficient review into a score candidate; unresolved or insufficient cases require human attention.
 12. **Publish separately.** Collection, matching, assessment, and publication are distinct stages. No collector, matcher, enrichment step, resolver, or model result changes public data or the SLAVA Index automatically under the current rules.
 
 ```text
 allowlisted sources
-  -> one shared collection run
-  -> normalized and deduplicated records
-  -> match against all reviewed promises
-  -> if no attributable primary candidate evidence: bounded official-source expansion
+  -> durable normalized record archive
+  -> new or changed records only
+  -> match each increment against all reviewed promises
+  -> if no attributable primary candidate evidence: bounded resolver targets
   -> bounded evidence packages
-  -> official documents for matched parliamentary prints
+  -> enricher fetches known official document targets
   -> changed packages only
   -> assessor A + assessor B
-  -> if both are insufficient: bounded official-source expansion
+  -> if both are insufficient: bounded resolver targets -> enricher
   -> assessment or reassessment only when assessable content changed
   -> arbiter when needed
   -> human publication gate
@@ -110,8 +128,8 @@ News collection retains metadata, URL, publication time, supplied authors, and a
 - An official party publication is directly attributable to that party as a publication, not automatically as an adopted position and not as proof that the underlying act or outcome occurred.
 - Official print-document excerpts establish proposal substance, not party attribution, adoption, or legal effect. Paragraphs are selected mechanically and may support, contradict, or merely contextualize the promise.
 - Insufficient evidence is an internal research outcome, not a final political assessment. It must retain the supplied evidence and name the missing factual category, such as proposal content, decisive vote, legal effect, observed outcome, or attribution.
-- An evidence-gap resolver may use only enabled configured official source scopes and deterministic retrieval rules. It may not use general web search, media as decisive evidence, an assessor's memory, or an unrecorded human inference.
-- The resolver is targeted rather than exhaustive: full official inventories are collected first, and deeper pages or documents are retrieved only for the affected promise and documented gap.
+- An evidence-gap resolver may use only enabled configured official source scopes and deterministic target-selection rules. It may not use general web search, media as decisive evidence, an assessor's memory, or an unrecorded human inference.
+- The resolver is targeted rather than exhaustive: it identifies deeper pages or documents only for the affected promise and documented gap. The enricher, not the resolver, downloads and extracts a known target document.
 - An exhausted resolver does not manufacture a score. It creates or preserves an unpublished human-review proposal.
 - A promise with no primary match receives no package. It does not receive `no-progress`, zero points, or any other assessment merely because collection found nothing.
 - Contradictory evidence is retained. Evidence items are not scored independently and are not averaged.
@@ -119,7 +137,7 @@ News collection retains metadata, URL, publication time, supplied authors, and a
 
 ## Current automation state
 
-The GitHub Actions workflow `Collect, match, and assess evidence candidates` currently implements collection, matching, matched-print enrichment, assessment, and arbitration for the full reviewed registry. It does not yet implement the planned evidence-gap resolver stages. It checks all 46 current catalog promises against one shared collection, enriches only matched parliamentary prints, and sends only new or changed assessable packages to the two assessors and possible arbiter. It runs automatically once daily and remains available as a manual workflow.
+The GitHub Actions workflow `Collect, match, and assess evidence candidates` currently implements collection, matching, matched-print enrichment, assessment, and arbitration for the full reviewed registry. It does not yet implement incremental persistent collection or either evidence-gap resolver stage. It currently re-collects the configured historical scope, checks all 46 current catalog promises against one shared collection, enriches only matched parliamentary prints, and sends only new or changed assessable packages to the two assessors and possible arbiter. This full replay is a transitional implementation, not the confirmed target operating model.
 
 The [first full-registry document-enrichment run](https://github.com/orik007/sliby-chyby/actions/runs/33601733992) processed 3,984 shared records, 36 reviewed promises, and 141 candidate matches. It generated three evidence packages and added four official print documents across them with zero warnings. Original and enriched package hashes differ and are retained separately in the uploaded audit.
 
@@ -144,5 +162,7 @@ The scheduling policy is a **confirmed decision**:
 - do not publish assessment proposals or public data automatically.
 
 Once-daily collection deliberately favors a simple, understandable operating model over near-real-time updates. Short RSS and news-sitemap windows remain a known coverage limitation, while official primary sources remain the decisive evidence layer. Revisit frequency only after observed missed evidence demonstrates a need.
+
+The target daily run retrieves and processes only new or changed record versions after the historical backfill. Its durable archive, incremental cursor or overlap rule, and resolver cache must live on server-side infrastructure. Re-reading a publisher-controlled current window is allowed when necessary to discover changes, but unchanged normalized content must not cause resolver work or assessment API calls. The exact storage technology remains an implementation decision and must preserve the project's no-local-dependency and auditability requirements.
 
 The versioned review-proposal directory and pull request are the confirmed initial durable queue. A later private queue or database remains an optional migration, not a prerequisite for the first reviewed real-data release.

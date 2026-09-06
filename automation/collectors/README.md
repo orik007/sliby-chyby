@@ -46,7 +46,7 @@ Choose one or more sources:
 node scripts/run-collectors.mjs --source psp-core-2025 --source government-cz-rss
 ```
 
-Collector runs are unpublished audit artifacts. Promise matching and assessment are separate downstream stages.
+Collector runs are unpublished audit artifacts. Promise matching and assessment are separate downstream stages. The current implementation replays the configured historical source scope. The confirmed target is a durable server-side archive of normalized record versions: after the initial backfill, a routine run persists and forwards only new or changed records. Reading an entire publisher-controlled current window remains allowed, but unchanged normalized content must not flow downstream as a new record.
 
 Generate JSON and human-readable coverage reports after collection and matching:
 
@@ -58,4 +58,4 @@ The report covers every reviewed promise. `No candidate match` describes one run
 
 ## GitHub Actions pipeline
 
-The `Collect, match, and assess evidence candidates` workflow runs the canonical sequence from [`docs/evidence-pipeline.md`](../../docs/evidence-pipeline.md) daily at 09:37 Prague time and may also be started manually. It collects each enabled source once, checks the full reviewed registry, assesses only changed bounded packages, and retains a complete unpublished audit. It never changes public data or deploys the website.
+The `Collect, match, and assess evidence candidates` workflow runs the canonical sequence from [`docs/evidence-pipeline.md`](../../docs/evidence-pipeline.md) daily at 09:37 Prague time and may also be started manually. Its target operation persists only new or changed source-record versions, then checks every such increment against the full reviewed registry. It assesses only changed bounded packages and retains a complete unpublished audit. It never changes public data or deploys the website.

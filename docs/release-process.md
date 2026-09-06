@@ -20,6 +20,18 @@ This document describes the confirmed release policy and its server-side impleme
 - Cloudflare watches only `main` for production deployments. No non-production trigger is configured, so unpublished review proposals cannot become public through a branch preview.
 - Cloudflare runs `npm run build` and then `npx wrangler deploy --config wrangler.deploy.jsonc`. A failed test, validation, build, or deployment keeps the previous production version live.
 
+## Operational role boundaries
+
+These roles handle repository quality and release only. They do not collect evidence, assess a political promise, or approve publication of a political assessment.
+
+| Role | Owns | Must not do |
+|---|---|---|
+| PR quality reviewers | GitHub Copilot and Codex inspect the exact pull-request head and report technical findings. | Merge, replace owner approval, or determine a political score. |
+| Approval coordinator | The cloud ChatGPT approval conversation enforces review-wave state, verifies the exact head and checks, and presents it to the owner. | Start an unbounded new review wave, treat a generic acknowledgement as approval, or merge without the owner's explicit approval for the presented head. |
+| CI verifier | Runs the required tests, build, and deployment-package validation for the exact head. | Approve, merge, or deploy a non-`main` revision to production. |
+| Deployer | Builds and deploys a successful `main` revision to Cloudflare Workers. | Deploy an unpublished review branch or treat deployment as editorial approval. |
+| Owner | Gives or withholds explicit approval for the exact reviewed pull-request head. | Delegate that approval implicitly to an automated reviewer or merge. |
+
 ## Implemented approval flow
 
 - GitHub pull-request activity wakes a cloud ChatGPT approval conversation available on mobile.
