@@ -179,6 +179,29 @@ test("common inflected wording reaches the matching threshold for new finance pr
   }
 });
 
+test("common Dluhopis Republiky name variants reach the matching threshold", () => {
+  const promise = registry.promises.find(({ id }) => id === "ano-2025-retail-state-bonds");
+  assert.ok(promise);
+  for (const [index, title] of ["Ministerstvo financí vydalo Dluhopis Republiky", "Ministerstvo financí vydalo Dluhopisy Republiky"].entries()) {
+    const occurrence = createCollectedRecord({
+      id: `ministry-source--retail-bond-name-${index}`,
+      sourceId: "finance-ministry",
+      kind: "official-publication",
+      primary: true,
+      evidenceRole: "official-discovery",
+      occurredAt: "2026-01-01T00:00:00.000Z",
+      timeZone: "Europe/Prague",
+      title,
+      publisher: "Ministry of Finance of the Czech Republic",
+      url: `https://mf.gov.cz/example/retail-bond-${index}`,
+      payload: {}
+    });
+    const match = matchRecordToPromise(occurrence, promise);
+    assert.ok(match, `Common product name does not match: ${title}`);
+    assert.ok(match.score >= promise.matching.minimumScore);
+  }
+});
+
 test("retail state-bond completion test preserves every defining product condition", () => {
   const promise = registry.promises.find(({ id }) => id === "ano-2025-retail-state-bonds");
   assert.ok(promise);

@@ -2,7 +2,7 @@
 
 ## Status
 
-**Working proposal.** This is the current bounded registry for deterministic evidence matching. It contains the original balanced v1 tranche plus the first incremental ANO finance batch. It is not an exhaustive promise inventory, a public-data release, or authority to publish an assessment.
+**Working proposal.** This is the current bounded registry for deterministic evidence matching. It contains the original balanced v1 tranche plus the first and second incremental ANO finance batches. It is not an exhaustive promise inventory, a public-data release, or authority to publish an assessment.
 
 ## Current review result
 
@@ -34,4 +34,4 @@ Each entry preserves the complete source passage, an exact Czech quote, a page l
 
 ## Publication boundary
 
-The six entries are reviewed promises only for collection and matching. They remain outside `data/promises/` because they do not yet have owner-approved assessment revisions. The live website therefore continues to publish only the two previously approved ANO promises. Evidence collection, two-assessor review, possible arbitration, owner approval, and a separate publication change remain mandatory.
+The ten entries are reviewed promises only for collection and matching. They remain outside `data/promises/` because they do not yet have owner-approved assessment revisions. The live website therefore continues to publish only the two previously approved ANO promises. Evidence collection, two-assessor review, possible arbitration, owner approval, and a separate publication change remain mandatory.
