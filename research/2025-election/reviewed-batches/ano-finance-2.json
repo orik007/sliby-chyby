@@ -1,0 +1,89 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "ano-finance-2",
+  "status": "Working proposal",
+  "partyPeriodId": "cz-ps-2025--ano",
+  "scope": "A bounded review of the remaining finance and public-administration commitments on printed page 5 of ANO's final 2025 national election programme.",
+  "reviewedAt": "2026-09-06",
+  "methodology": "docs/promise-selection.md",
+  "source": {
+    "id": "ano-2025-election-program",
+    "publisher": "ANO 2011",
+    "title": "Program pro váš lepší život — program hnutí ANO do parlamentních voleb 2025",
+    "publishedAt": "2025-09-04",
+    "url": "https://www.anobudelip.cz/file/edee/ke-stazeni/volebni-program-2025.pdf",
+    "locator": "printed page 5",
+    "retrievedAt": "2026-09-06",
+    "sha256": "62e87d136ff8ed780a0a48ca09e0fdf0be80b38e8af61fa5bd55eacdb72f46ea",
+    "verification": "The current official PDF was downloaded again and matched the retained SHA-256. The reviewed wording and page locator were checked against the official PDF text. Four source passages missing or split in the broad extraction were retained as manual verified candidates with reproducible occurrence IDs."
+  },
+  "summary": {
+    "acceptedNewPromises": 4,
+    "duplicateOccurrences": 4,
+    "rejected": 3
+  },
+  "reviews": [
+    {
+      "candidateId": "candidate-e56eabc1bc8c",
+      "disposition": "accepted",
+      "reason": "The affected payment types, voluntary hospitality tips, and the promised exemption are explicit. A binding tax and insurance rule can verify both progress and the completed measure.",
+      "resultingPromiseIds": ["ano-2025-tax-exempt-voluntary-tips"]
+    },
+    {
+      "candidateId": "candidate-2c908e8514f0",
+      "disposition": "accepted",
+      "reason": "Completing the named online tax-office project and making its tax agenda available through a mobile application are observable administrative outcomes. The subjective adjectives in the source are retained in the quotation but do not add an unmeasurable scoring condition.",
+      "resultingPromiseIds": ["ano-2025-online-tax-office"]
+    },
+    {
+      "candidateId": "candidate-7e6a4823166a",
+      "disposition": "accepted",
+      "reason": "Offering state bonds to retail savers is a concrete, externally verifiable action. The combined source passage preserves the adjacent product detail without turning each feature into a separate promise.",
+      "resultingPromiseIds": ["ano-2025-retail-state-bonds"]
+    },
+    {
+      "candidateId": "candidate-d59fc1608256",
+      "disposition": "duplicate-occurrence",
+      "reason": "This extracted sentence is contained in the manually verified combined state-bonds passage and produces no additional atomic promise."
+    },
+    {
+      "candidateId": "candidate-da52128ce182",
+      "disposition": "duplicate-occurrence",
+      "reason": "This adjacent sentence describes the same retail state-bonds product retained in the manually verified combined source passage; it does not create an independently assessable promise."
+    },
+    {
+      "candidateId": "candidate-b14125ff3bb5",
+      "disposition": "accepted",
+      "reason": "The manually verified passage gives a specific group and a 50,000-crown entry-salary target. A binding customs-service pay rule can verify it without adding a missing timeframe or pay component.",
+      "resultingPromiseIds": ["ano-2025-customs-entry-salary-50000"]
+    },
+    {
+      "candidateId": "candidate-d77be9e3ee02",
+      "disposition": "duplicate-occurrence",
+      "reason": "The general salary-increase sentence is retained as context in the accepted manually verified passage. It has no separate amount or defined indexation cadence, so it does not create another atomic promise."
+    },
+    {
+      "candidateId": "candidate-ac1b8a8865a6",
+      "disposition": "duplicate-occurrence",
+      "reason": "The extracted sentence lacks its subject because of PDF layout. The accepted manually verified passage retains the same exact salary target with the preceding customs-officer context."
+    },
+    {
+      "candidateId": "candidate-1a8dd51ecf03",
+      "disposition": "rejected",
+      "rejectionReasonCodes": ["too-vague", "not-publicly-assessable"],
+      "reason": "Improving financial-literacy teaching names no observable standard, scope, baseline, or target. A completion test would require adding precision absent from the programme."
+    },
+    {
+      "candidateId": "candidate-b578b39cca0c",
+      "disposition": "rejected",
+      "rejectionReasonCodes": ["too-vague", "not-publicly-assessable"],
+      "reason": "The statement is an unquantified causal prediction about exekutions, loans, fraud, and financial health rather than a defined party action or outcome that can be assessed without inventing a baseline and causal test."
+    },
+    {
+      "candidateId": "candidate-519aeb3462c9",
+      "disposition": "rejected",
+      "rejectionReasonCodes": ["not-publicly-assessable"],
+      "reason": "The salary freeze is conditional on undefined economic recovery and households doing well. The condition is material to the source wording but has no source-defined, fair observable threshold."
+    }
+  ]
+}
