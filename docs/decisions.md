@@ -44,7 +44,7 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Normalize the aggregate to a range from `-100` to `+100`.
 - Display the aggregate as index points without a percent sign, for example `SLAVA Index: +14`. This is a reversible presentation decision.
 - Label the home-page index scale with `-100` at the left and `+100` at the right so its range is visible immediately.
-- Do not include a public “not assessable” state. Every published qualified promise starts at `0` and remains there until verified evidence establishes a meaningful directional step. `0` means no verified significant movement has been established; it does not assert that the party did nothing or that no undiscovered record exists.
+- Do not include a public “not assessable” state. Every published promise starts at `0` and remains there until verified evidence establishes a meaningful directional step. `0` means no verified significant movement has been established; it does not assert that the party did nothing or that no undiscovered record exists.
 - Use one current assessment per promise; do not average multiple votes.
 - Preserve contradictory evidence instead of allowing positive and negative votes to cancel mechanically.
 - Prefer an arrow for directional states and one check mark for fulfilled in the simple UI.

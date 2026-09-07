@@ -28,7 +28,7 @@ const runtime = {
 };
 
 test("active prompts use the consolidated decision order and plain Czech", async () => {
-  assert.equal(assessorPromptVersion, "assessor-v10");
+  assert.equal(assessorPromptVersion, "assessor-v11");
   assert.equal(arbiterPromptVersion, "arbiter-v3");
   const active = await loadAssessmentPrompts();
   assert.match(active.assessor.instructions, /Follow these five steps in order/);
@@ -242,7 +242,7 @@ test("shows both opinions only when a third assessor arbitrated a disagreement",
   const markdown = renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal });
   assert.match(markdown, /### Odlišné posudky/);
   assert.match(markdown, /První posudek: Směřuje ke splnění \(\+1\)/);
-  assert.match(markdown, /Druhý posudek: Bez podstatného posunu \(0\)/);
+  assert.match(markdown, /Druhý posudek: Zatím bez ověřeného podstatného posunu \(0\)/);
   assert.match(markdown, /### Rozhodnutí třetího hodnotitele/);
   assert.doesNotMatch(markdown, /### Shoda hodnotitelů/);
 });

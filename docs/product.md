@@ -91,7 +91,7 @@ The owner preferred directional arrows for in-progress states and a single check
 
 Every symbol must also have a text label, and color must never be the only carrier of meaning.
 
-The current product deliberately has no public “not assessable” status. Every published qualified promise uses the default `0` until verified evidence establishes a meaningful directional step. Its exact meaning and the distinction from internal research coverage are defined only in [`scoring.md`](scoring.md).
+The current product deliberately has no public “not assessable” status. Every published promise uses the default `0` until verified evidence establishes a meaningful directional step. Its exact meaning and the distinction from internal research coverage are defined only in [`scoring.md`](scoring.md).
 
 ### Promise detail
 
