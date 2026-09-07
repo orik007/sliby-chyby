@@ -4,7 +4,7 @@
 
 The period boundaries and non-carryover rule are confirmed. Schema-validated versioned files are the confirmed initial storage approach. The relational entity structure below remains a working proposal designed for a future database migration.
 
-The production data directories contain only reviewed real records. Every published `AssessmentRevision` requires the identifier of its approved review proposal. The SLAVA Index has no separate publication flag: it is derived automatically from all current published assessments for a party and is unavailable only when that party has no published promises.
+The production data directories contain only reviewed real records. Every published `AssessmentRevision` requires the identifier of its approved review proposal, except an initial `no-progress` baseline revision whose provenance points to the promise's primary source. A baseline is not conduct evidence or an AI proposal. The SLAVA Index has no separate publication flag: it is derived automatically from all current published assessments for a party and is unavailable only when that party has no published promises.
 
 ## Confirmed invariants
 
@@ -276,6 +276,7 @@ Proposed fields:
 - `explanationShort`;
 - `explanationDetailed`;
 - `publishedAt` or candidate state;
+- `baselinePromiseSourceId` — only for the initial `no-progress` baseline; it must equal the promise's `primarySourceId`, which must be the sole linked source, and is displayed as baseline provenance rather than conduct evidence;
 - `methodologyVersion`;
 - `promptVersion`;
 - assessor and arbiter metadata;
@@ -358,7 +359,7 @@ Planned resolver extension, not yet implemented by `coverage-audit-v1`:
 
 - resolver trigger, attempted source scopes, missing-fact categories, target count, retrieved-document count and hashes, and whether expansion changed assessable content when an evidence-gap resolution was attempted.
 
-Coverage states are internal workflow facts, not public SLAVA statuses. In particular, no candidate match must never be converted into `no-progress` or zero points.
+Coverage states are internal workflow facts, not public SLAVA statuses. In particular, a `no candidate match` state never proves inactivity or creates a directional assessment; it leaves a published promise's default `0` unchanged under [`scoring.md`](scoring.md).
 
 ## Open data questions
 

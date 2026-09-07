@@ -85,13 +85,13 @@ The owner preferred directional arrows for in-progress states and a single check
 |---:|:---:|---|
 | `+2` | `✓` | Fulfilled |
 | `+1` | `↗` | Moving towards fulfillment |
-| `0` | `—` | No documented movement |
+| `0` | `—` | No verified significant movement yet |
 | `-1` | `↘` | Moving against the promise |
 | `-2` | `×` | Acting against the promise |
 
 Every symbol must also have a text label, and color must never be the only carrier of meaning.
 
-The current product deliberately has no public “not assessable” status. If a real promise later cannot be placed on the five-point scale, the methodology will be reconsidered using that concrete case.
+The current product deliberately has no public “not assessable” status. Every published promise uses the default `0` until verified evidence establishes a meaningful directional step. Its exact meaning and the distinction from internal research coverage are defined only in [`scoring.md`](scoring.md).
 
 ### Promise detail
 

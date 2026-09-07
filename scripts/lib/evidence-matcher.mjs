@@ -219,7 +219,7 @@ export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
   if (selectedMatches.length === 0) return null;
   const evidencePackage = {
     schemaVersion: "1.0.0",
-    methodologyVersion: "slava-v5",
+    methodologyVersion: "slava-v6",
     packageId: `${promise.id}--${asOf}--generated`,
     asOf,
     assessmentContext: {

@@ -27,7 +27,7 @@ External identifiers receive a deliberately strong score because they refer to a
 - Bill authorship is not required for vote evidence. A verified decisive vote can enter the package even when another party introduced the bill.
 - A decisive `no-strict-majority` party summary enters the package as `verified-party-no-majority`. It becomes a `-1` candidate only if assessment verifies that the exact motion directly and materially advanced the party's own promise.
 - A government action is explicitly marked as an attribution candidate, not silently converted into party conduct.
-- A promise with no primary match does not receive `no-progress`; it receives no assessable package.
+- A promise with no primary match receives no assessable package and no directional assessment. If it is published, it retains the default `0` defined in [`docs/scoring.md`](../../docs/scoring.md); the missing match does not prove inactivity.
 - Evidence packages are bounded and retain omitted-match counts.
 - Every generated package and match run remains unpublished.
 

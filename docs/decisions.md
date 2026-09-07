@@ -44,7 +44,7 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Normalize the aggregate to a range from `-100` to `+100`.
 - Display the aggregate as index points without a percent sign, for example `SLAVA Index: +14`. This is a reversible presentation decision.
 - Label the home-page index scale with `-100` at the left and `+100` at the right so its range is visible immediately.
-- Do not include a public “not assessable” state yet. Add special handling only after a real promise demonstrates the need.
+- Do not include a public “not assessable” state. Every published promise starts at `0` and remains there until verified evidence establishes a meaningful directional step. `0` means no verified significant movement has been established; it does not assert that the party did nothing or that no undiscovered record exists.
 - Use one current assessment per promise; do not average multiple votes.
 - Preserve contradictory evidence instead of allowing positive and negative votes to cancel mechanically.
 - Prefer an arrow for directional states and one check mark for fulfilled in the simple UI.
@@ -151,7 +151,7 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - Do not download full news article bodies. Retain feed metadata, URL, publication time, authors when supplied, and at most a short publisher-provided excerpt.
 - Fail collection when a source redirects outside its explicit hostname allowlist or violates its configured media type or size limits.
 - Record the historical coverage semantics of every source. A requested cutoff is not evidence of historical completeness when an RSS or news-sitemap endpoint exposes only a current window.
-- Generate an unpublished coverage audit for every reviewed promise after matching. `No candidate match` is a pipeline result, not a political assessment, and must never be converted into zero points.
+- Generate an unpublished coverage audit for every reviewed promise after matching. `No candidate match` is a pipeline result, not proof of inactivity or a directional assessment; it leaves a published promise's default `0` unchanged under [`scoring.md`](scoring.md).
 - Enable the complete official Ministry of Finance annual press-release indexes for 2025 and 2026 and the official paginated Ministry of Health press-release REST archive as historical discovery sources.
 - Replace the limited MPSV current feed with its complete paginated annual press-release indexes for 2025 and 2026.
 - Enable the Ministry of Culture chronological news archive and retain only entries labelled by the publisher as ministry items; exclude subordinate-organization items and event previews from this source.

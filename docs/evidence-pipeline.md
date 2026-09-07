@@ -131,8 +131,8 @@ News collection retains metadata, URL, publication time, supplied authors, and a
 - Insufficient evidence is an internal research outcome, not a final political assessment. It must retain the supplied evidence and name the missing factual category, such as proposal content, decisive vote, legal effect, observed outcome, or attribution.
 - An evidence-gap resolver may use only enabled configured official source scopes and deterministic target-selection rules. It may not use general web search, media as decisive evidence, an assessor's memory, or an unrecorded human inference.
 - The resolver is targeted rather than exhaustive: it identifies deeper pages or documents only for the affected promise and documented gap. The enricher, not the resolver, downloads and extracts a known target document.
-- An exhausted resolver does not manufacture a score. It creates or preserves an unpublished human-review proposal.
-- A promise with no primary match receives no package. It does not receive `no-progress`, zero points, or any other assessment merely because collection found nothing.
+- An exhausted resolver does not manufacture a directional score. It creates or preserves an unpublished human-review proposal and leaves the current score unchanged.
+- A promise with no primary match receives no package. It does not prove inactivity or create a directional assessment; a published promise retains the default `0` defined only in [`scoring.md`](scoring.md).
 - Contradictory evidence is retained. Evidence items are not scored independently and are not averaged.
 - Every package declares whether it is a `live` assessment or the one-time `closing-audit`; assessors never infer this from elapsed time. Current matching emits only `live` packages.
 
@@ -148,9 +148,9 @@ New assessments are written under `automation/review-proposals/<promise-id>/<ass
 
 An official-document enrichment warning blocks assessment only for the affected promise. Other valid changed packages continue through the batch. The full transient run remains available as a private GitHub artifact for 30 days.
 
-Every full-registry run also creates `coverage-audit.json` and `coverage-audit.md`. The audit has one row per reviewed promise and distinguishes an assessment candidate, a case requiring human review, an assessable package, candidate matches without attributable primary evidence, and no candidate match. These are internal pipeline states, not public SLAVA statuses. The audit always records that it inferred no score and approved no publication.
+Every full-registry run also creates `coverage-audit.json` and `coverage-audit.md`. The audit has one row per reviewed promise and distinguishes an assessment candidate, a case requiring human review, an assessable package, candidate matches without attributable primary evidence, and no candidate match. These are internal pipeline states, not public SLAVA statuses. The audit never infers a directional score or approves publication; it may leave a published promise's default `0` unchanged under [`scoring.md`](scoring.md).
 
-The period-closing audit is not implemented yet. It must be a separate deterministic run over every reviewed promise, including promises for which normal collection never produced a primary-evidence package. During ordinary live collection, absence of a package must not be converted into a score.
+The period-closing audit is not implemented yet. It must be a separate deterministic run over every reviewed promise, including promises for which normal collection never produced a primary-evidence package. During ordinary live collection, absence of a package must not create a directional score; the default `0` is governed by [`scoring.md`](scoring.md).
 
 ## Scheduling and persistence
 

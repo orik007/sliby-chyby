@@ -134,7 +134,7 @@ export function createReviewProposal({ auditRecord, proposalDirectory, supersede
 const readerStatus = {
   fulfilled: { label: "Splněno", score: "+2" },
   "moving-towards": { label: "Směřuje ke splnění", score: "+1" },
-  "no-progress": { label: "Bez podstatného posunu", score: "0" },
+  "no-progress": { label: "Zatím bez ověřeného podstatného posunu", score: "0" },
   "moving-against": { label: "Směřuje proti slibu", score: "−1" },
   "acting-against": { label: "Jedná proti slibu", score: "−2" }
 };

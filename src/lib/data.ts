@@ -20,7 +20,7 @@ export const systemStatus = systemStatusSchema.parse(systemStatusData);
 export const statusDetails: Record<AssessmentStatus, { score: number; symbol: string; label: string; className: string }> = {
   fulfilled: { score: 2, symbol: "✓", label: "Splněno", className: "positive-strong" },
   "moving-towards": { score: 1, symbol: "↗", label: "Směřuje ke splnění", className: "positive" },
-  "no-progress": { score: 0, symbol: "—", label: "Bez posunu", className: "neutral" },
+  "no-progress": { score: 0, symbol: "—", label: "Zatím bez ověřeného podstatného posunu", className: "neutral" },
   "moving-against": { score: -1, symbol: "↘", label: "Směřuje proti slibu", className: "negative" },
   "acting-against": { score: -2, symbol: "×", label: "Jedná proti slibu", className: "negative-strong" },
 };
@@ -29,13 +29,19 @@ function assertRelationships() {
   const periodIds = new Set(periods.map(({ id }) => id));
   const partyIds = new Set(parties.map(({ id }) => id));
   const partyPeriodIds = new Set(partyPeriods.map(({ id }) => id));
-  const promiseIds = new Set(promises.map(({ id }) => id));
+  const promiseById = new Map(promises.map((promise) => [promise.id, promise]));
+  const promiseIds = new Set(promiseById.keys());
   const sourceIds = new Set(sources.map(({ id }) => id));
   for (const item of partyPeriods) if (!periodIds.has(item.periodId) || !partyIds.has(item.partyId)) throw new Error(`Invalid PartyPeriod relationship: ${item.id}`);
   for (const promise of promises) if (!partyPeriodIds.has(promise.partyPeriodId) || !sourceIds.has(promise.primarySourceId)) throw new Error(`Invalid Promise relationship: ${promise.id}`);
   for (const revision of assessmentRevisions) {
     if (!promiseIds.has(revision.promiseId)) throw new Error(`Unknown promise in assessment: ${revision.id}`);
     for (const sourceId of revision.evidenceSourceIds) if (!sourceIds.has(sourceId)) throw new Error(`Unknown evidence source ${sourceId} in ${revision.id}`);
+    if (revision.baselinePromiseSourceId) {
+      const promise = promiseById.get(revision.promiseId);
+      if (!promise || revision.baselinePromiseSourceId !== promise.primarySourceId) throw new Error(`Invalid baseline source in ${revision.id}`);
+      if (revision.evidenceSourceIds.length !== 1 || revision.evidenceSourceIds[0] !== revision.baselinePromiseSourceId) throw new Error(`Baseline revisions must list only their baseline source in ${revision.id}`);
+    }
   }
 }
 assertRelationships();

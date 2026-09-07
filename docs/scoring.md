@@ -4,7 +4,7 @@
 
 The five-state scale, aggregate formula, live-period rule, closing audit, and party-vote rule in this document are **confirmed decisions**. This is the canonical operational scoring reference. [`docs/decisions.md`](decisions.md) records why decisions were made; it is not a second scoring checklist. The active assessor prompt must implement the decision order below without adding policy.
 
-Promise admission is governed separately by [promise-selection.md](promise-selection.md). A rejected or unreviewed candidate is not assigned `0` and does not enter the index denominator.
+Promise admission is governed separately by [promise-selection.md](promise-selection.md). A rejected or unreviewed candidate is not published, assigned `0`, or included in the index denominator. Every published promise starts at `0`.
 
 ## Purpose
 
@@ -16,11 +16,13 @@ The **SLAVA Index** measures whether a party's conduct matches its own pre-elect
 |---:|---|---|
 | `-2` | `acting-against` | The party performed a significant act that directly violated the promise, caused a definitive contrary result, or performed the exact conduct it promised not to perform. |
 | `-1` | `moving-against` | A concrete intention, proposal, vote, missed direct voting opportunity, abandonment, or other step points against the promise, without necessarily creating the definitive contrary result. |
-| `0` | `no-progress` | During a live period, no significant documented movement exists in either direction. |
+| `0` | `no-progress` | The default live score. No verified significant movement in either direction has been established for the promise. |
 | `+1` | `moving-towards` | A concrete, attributable, verifiable step advances all or a real part of the promise, but the whole result or exact promised conduct has not yet been completed. |
 | `+2` | `fulfilled` | The whole promised result occurred, the party performed the exact promised conduct, or the full-measure legislative vote rule below applies. |
 
 The English names are internal values. Public copy must express the meaning in natural Czech and must never expose these values or other project labels.
+
+`0` is both the initial score of every published promise and its continuing score until verified evidence establishes a meaningful directional step. It remains `0` when collection has not found relevant evidence, when available activity is only general rhetoric or preparation, or when the activity does not materially advance or contradict the promise. It does not assert that the party did nothing or that no undiscovered record exists; research coverage remains an internal audit fact, not a second public score. Public Czech copy for the default state must say **“Zatím bez ověřeného podstatného posunu”** or an equally precise formulation.
 
 ## Canonical decision order
 
@@ -30,7 +32,7 @@ Every assessment follows these five steps. Later sections clarify a step but do 
 
 Read `assessmentContext.mode`; an assessor never chooses it from elapsed time.
 
-- In `live` mode, inactivity stays `0`. Silence, elapsed months, incomplete progress, or the absence of a later step is not negative by itself.
+- In `live` mode, every published promise starts at and remains `0` until a verified meaningful directional step changes it. Silence, elapsed months, incomplete progress, or the absence of a later step is not negative by itself.
 - In `closing-audit` mode, a promise untouched throughout the electoral period becomes `-1`. Meaningful incomplete progress remains `+1`.
 - Close earlier only when the original promise contains an explicit deadline or one-time event and supplied evidence shows that it has closed. Never invent a waiting period.
 
@@ -48,7 +50,7 @@ Use evidence only when it is materially relevant to the exact promise and fairly
 
 Prefer the underlying official record for votes, bills, laws, budgets, government resolutions, ministerial decisions, and outcomes. News sources are primarily for discovery and context. A strong `+2` or `-2` should normally have primary evidence; several articles repeating one report do not become independent proof.
 
-If a material fact, exact proposal effect, or party link is unresolved, mark the evidence insufficient instead of filling the gap.
+If a material fact, exact proposal effect, or party link is unresolved, mark the evidence insufficient instead of filling the gap or inferring a directional score. The promise retains its current score, which is `0` when no prior directional assessment exists.
 
 ### 3. Identify phase, direction, and completeness
 
@@ -102,13 +104,13 @@ A party has 13 promises: five at `+2`, two at `-2`, three at `+1`, one at `-1`, 
 
 ## Revisions and automation
 
-The current assessment is the latest published revision. Never overwrite history silently. A revision retains the promise ID, status, plain-language explanation, evidence IDs, publication time, methodology and prompt version, assessor audit data, and material uncertainty or dissent.
+The current assessment is the latest published revision. Never overwrite history silently. A published promise receives an initial `0` revision under this methodology even when no model package exists; its baseline provenance points to the promise's primary source rather than inventing conduct evidence or a model proposal. Its explanation states that no verified significant movement has been established. A later revision retains the promise ID, status, plain-language explanation, evidence IDs, publication time, methodology and prompt version, assessor audit data when applicable, and material uncertainty or dissent.
 
 Automated collection, matching, and assessment are separate stages described in [evidence-pipeline.md](evidence-pipeline.md). Two assessors use only supplied evidence. When they disagree, an arbiter may select either review or return `cannot-decide`; it may not browse or invent a third interpretation. Every model result remains an unpublished proposal until the human publication gate approves a later public revision.
 
 ## Deferred real-case rules
 
-The five public states are the complete current scale. If a real promise cannot be assessed fairly, pause that case and revise the methodology from the concrete evidence rather than inventing a result or a new status.
+The five public states are the complete current scale. A real promise with no sufficient directional evidence stays at the default `0`; do not invent a separate public status. Revisit the methodology only if a concrete case cannot fairly retain that default or be placed on the five-point scale.
 
 The following are **working proposals**, not scoring rules:
 
