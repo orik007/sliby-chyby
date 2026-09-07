@@ -16,7 +16,6 @@ test("production assessments retain their approved audit and sources", async () 
     readJsonDirectory("data/party-periods")
   ]);
   assert.ok(promises.length > 0);
-  assert.equal(promises.length, 2, "Unassessed reviewed promises must stay outside the public production directory");
   assert.ok(promises.every(({ isDemo }) => isDemo === false));
   assert.ok(revisions.every(({ isDemo }) => isDemo === false));
   assert.ok(sources.every(({ isDemo }) => isDemo === false));
@@ -27,6 +26,7 @@ test("production assessments retain their approved audit and sources", async () 
 
   assert.ok(promiseIds.has("ano-2025-abolish-public-media-fees"));
   assert.ok(promiseIds.has("ano-2025-eet-2"));
+  assert.equal(promises.filter(({ partyPeriodId }) => partyPeriodId === "cz-ps-2025--ano").length, 22, "The reviewed ANO batch must publish every catalogued ANO promise");
 
   for (const promise of promises) {
     const source = sourceById.get(promise.primarySourceId);
