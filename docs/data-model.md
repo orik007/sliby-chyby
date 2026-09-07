@@ -276,7 +276,7 @@ Proposed fields:
 - `explanationShort`;
 - `explanationDetailed`;
 - `publishedAt` or candidate state;
-- `baselinePromiseSourceId` — only for the initial `no-progress` baseline; it must equal the promise's `primarySourceId` and is displayed as baseline provenance rather than conduct evidence;
+- `baselinePromiseSourceId` — only for the initial `no-progress` baseline; it must equal the promise's `primarySourceId`, which must be the sole linked source, and is displayed as baseline provenance rather than conduct evidence;
 - `methodologyVersion`;
 - `promptVersion`;
 - assessor and arbiter metadata;

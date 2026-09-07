@@ -43,7 +43,7 @@ test("production assessments retain their approved audit and sources", async () 
       const promise = promises.find(({ id }) => id === revision.promiseId);
       assert.equal(revision.status, "no-progress");
       assert.equal(revision.baselinePromiseSourceId, promise.primarySourceId);
-      assert.ok(revision.evidenceSourceIds.includes(revision.baselinePromiseSourceId));
+      assert.deepEqual(revision.evidenceSourceIds, [revision.baselinePromiseSourceId]);
     }
     for (const sourceId of revision.evidenceSourceIds) {
       const source = sourceById.get(sourceId);

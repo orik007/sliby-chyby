@@ -13,6 +13,7 @@ export const assessmentRevisionSchema = z.object({ id: z.string().min(1), promis
   if (revision.reviewProposalId && revision.baselinePromiseSourceId) context.addIssue({ code: "custom", path: ["baselinePromiseSourceId"], message: "A revision cannot be both review-proposal and baseline sourced" });
   if (revision.baselinePromiseSourceId && revision.status !== "no-progress") context.addIssue({ code: "custom", path: ["status"], message: "Baseline revisions must use no-progress" });
   if (revision.baselinePromiseSourceId && revision.revision !== 1) context.addIssue({ code: "custom", path: ["revision"], message: "Baseline revisions must be the initial revision" });
+  if (revision.baselinePromiseSourceId && (revision.evidenceSourceIds.length !== 1 || revision.evidenceSourceIds[0] !== revision.baselinePromiseSourceId)) context.addIssue({ code: "custom", path: ["evidenceSourceIds"], message: "Baseline revisions must list only their baseline promise source" });
 });
 export const systemStatusSchema = z.object({ lastSuccessfulCollectionAt: z.iso.datetime() });
 

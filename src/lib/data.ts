@@ -40,7 +40,7 @@ function assertRelationships() {
     if (revision.baselinePromiseSourceId) {
       const promise = promiseById.get(revision.promiseId);
       if (!promise || revision.baselinePromiseSourceId !== promise.primarySourceId) throw new Error(`Invalid baseline source in ${revision.id}`);
-      if (!revision.evidenceSourceIds.includes(revision.baselinePromiseSourceId)) throw new Error(`Baseline source must be listed in evidence sources for ${revision.id}`);
+      if (revision.evidenceSourceIds.length !== 1 || revision.evidenceSourceIds[0] !== revision.baselinePromiseSourceId) throw new Error(`Baseline revisions must list only their baseline source in ${revision.id}`);
     }
   }
 }
