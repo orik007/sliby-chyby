@@ -53,14 +53,14 @@ allowlisted official records and news discovery feeds
 DELIVERY
 proposed repository change
   -> Verify pull request for the exact head commit
-  -> dispatcher creates or reuses one dedicated mobile task for this PR
-  -> review coordinator starts the first shared GitHub Copilot + Codex review wave
+  -> release controller starts the first shared GitHub Copilot + Codex review wave
   -> no findings: verify that head and ask the owner
   -> findings: resolve all threads and make one consolidated remediation commit for valid fixes
-  -> review coordinator starts the second and final shared Copilot + Codex review wave
+  -> release controller starts the second and final shared Copilot + Codex review wave
   -> no findings: verify that head and ask the owner
   -> findings: resolve all threads and make one final remediation commit for valid fixes
-  -> no third review wave; verify the current head and ask the owner
+  -> no third review wave; verify the current head and mention the owner in this PR
+  -> owner replies `schvaluji` or writes feedback in this individual PR
   -> merge to `main`
   -> Cloudflare Workers build and deployment
 ```
@@ -188,13 +188,13 @@ The initial implementation uses Astro, TypeScript, plain CSS, schema-validated v
 
 Every pull request targeting `main` is checked by `.github/workflows/verify-pr.yml`, which runs tests, validation, the production Astro build, and a Cloudflare deployment dry run.
 
-Every pull request has at most two **shared** advisory AI review waves across both reviewers, never two waves per reviewer. Automatic Codex review is disabled. The server-side review coordinator is the only role that requests GitHub Copilot as a pull-request reviewer and posts `@codex review`; a plain `@copilot` mention is not a review request. Before review, the dispatcher creates or reuses one dedicated mobile task for the PR; the shared dispatcher does not carry PR-specific status or approval. The first wave covers a locally validated ready head. If it has no findings, that verified head goes to the owner. If it has findings, the feedback resolver evaluates every finding, replies to and resolves every addressable thread, and makes valid fixes together in one consolidated remediation commit before the second wave. The second wave runs even when the first-wave disposition did not change the head. If it has no findings, its verified head goes to the owner. Otherwise, every second-wave finding is handled and a final remediation commit contains only direct fixes for cited valid findings; it receives no third AI review. Before the owner sees any revision, `Verify pull request` must pass for its exact current head and no addressable review thread may remain unresolved. A scope expansion or newly discovered material issue moves to a new pull request. The disposition of summary-only or suppressed findings is recorded in the dedicated PR task and in the pull-request conversation.
+Every pull request has at most two **shared** advisory AI review waves across both reviewers, never two waves per reviewer. Automatic Codex review is disabled. `slibychyby-release-control[bot]` is the only release controller and the only role that requests GitHub Copilot as a pull-request reviewer and posts `@codex review`; a plain `@copilot` mention is not a review request. The first wave covers a locally validated ready head. If it has findings, one feedback-resolver task for that PR evaluates every finding, replies to and resolves every addressable thread, and makes valid fixes together in one consolidated remediation commit before the second wave. The second wave runs even when the first-wave disposition did not change the head. If it has findings, the same resolver handles every second-wave finding and a final remediation commit contains only direct fixes for cited valid findings; it receives no third AI review. Before the owner sees any revision, `Verify pull request` must pass for its exact current head and no addressable review thread may remain unresolved. A scope expansion or newly discovered material issue moves to a new pull request. The release controller never edits the implementation or interprets findings; the resolver never requests reviewers or merges.
 
-A dedicated cloud mobile approval task presents the pull request only after the applicable review path is complete: the first wave found no findings, or the second wave is complete after first-wave findings. It requires no unresolved addressable review thread and a successful `Verify pull request` for the exact current head, including an unreviewed final remediation head after second-wave fixes. It includes the commit, summary, and outstanding review information. The owner must reply `schvaluji` for that exact revision. A new commit invalidates the approval. AI reviews are quality advice and never substitute for this owner decision.
+The GitHub pull request itself is the mobile approval conversation. When the applicable review path is complete, the release controller posts one ready-for-owner-approval comment that mentions the owner. GitHub Mobile opens that individual PR. The owner replies `schvaluji` directly to the active comment; the controller binds this short reply to the stored exact head, revalidates it, and only then merges. A new commit invalidates the ready comment. Any other owner comment is feedback: it is sent to the one resolver task for that PR, the PR is not merged, and no third AI review is started. AI reviews are quality advice and never substitute for this owner decision.
 
 Cloudflare Workers Builds watches only `main`. A merge triggers `npm run build` followed by `npx wrangler deploy --config wrangler.deploy.jsonc`. Preview branch deployments are disabled so unpublished political proposals cannot receive public URLs. The current public Worker is `sliby-chyby` at `https://sliby-chyby.orik007-apps.workers.dev/`.
 
-Cloudflare deployment itself is operational and the first repository-triggered production build succeeded. Automatic delivery of the final Cloudflare result back into the mobile approval conversation remains an open integration question.
+Cloudflare deployment itself is operational and the first repository-triggered production build succeeded. The target release controller reports the final Cloudflare result in the same pull-request conversation; its webhook and GitHub App implementation remain to be deployed.
 
 ## Repository map
 
