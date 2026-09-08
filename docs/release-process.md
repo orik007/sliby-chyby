@@ -18,7 +18,7 @@ This document describes the confirmed release policy and its server-side impleme
 - Reviewer-facing technical detail may be precise, but any text proposed for the public website must use plain Czech and explain unfamiliar references.
 - Cloudflare Workers is the production deployment target before a final domain is selected. The server runtime preserves the live collection-status endpoint used by the site.
 - Cloudflare watches only `main` for production deployments. No non-production trigger is configured, so unpublished review proposals cannot become public through a branch preview.
-- Cloudflare runs `npm run build` and then `npx wrangler deploy --config wrangler.deploy.jsonc`. A failed test, validation, build, or deployment keeps the previous production version live.
+- Cloudflare runs `npm run build` and then `npm run deploy:cloudflare`, which deploys the public Worker and release controller from their separate Wrangler configurations. A failed test, validation, build, or deployment keeps the previous production version live.
 
 ## Operational role boundaries
 
@@ -46,7 +46,7 @@ These roles handle repository quality and release only. They do not collect evid
 
 ## Automated resolver boundary
 
-The resolver is a GitHub Actions job with its own bot commit identity. It starts only from a controller `repository_dispatch` event after a reviewer finding or owner feedback. It sends the exact changed-file diff and this release-process document to the configured OpenAI API project. Its response is either a concise disposition or one minimal unified patch. The job rejects patches outside files already changed by the pull request, and always rejects `.github/`, environment files, `AGENTS.md`, `docs/decisions.md`, and this document. It runs `git apply --check`, the complete tests, and the production build before it commits. The controller never starts a second resolver for the same PR while the GitHub Actions concurrency group is active.
+The resolver is a GitHub Actions job with its own bot commit identity. It starts only from a controller `repository_dispatch` event after a reviewer finding or owner feedback. It sends the exact changed-file diff and this release-process document to the configured OpenAI API project. Its response is either a concise disposition or one minimal unified patch. The job rejects patches outside files already changed by the pull request, and always rejects `.github/`, environment files, `AGENTS.md`, `docs/decisions.md`, and this document. It validates the actual post-apply changed, deleted, and renamed paths, then runs `git apply --check`, the complete tests, and the production build with API and GitHub credentials absent from those child processes. Its trusted post-validation step commits and pushes only to the current verified same-repository PR head branch, then explicitly dispatches `Verify pull request` for that new head because a `GITHUB_TOKEN` push does not trigger the ordinary pull-request workflow. The controller never starts a second resolver for the same PR while the GitHub Actions concurrency group is active.
 
 ## Current operational state
 
@@ -56,7 +56,7 @@ The earlier ChatGPT Sites demo is currently still available. This is operational
 
 Codex automatic review was disabled on 2026-09-07 after duplicate trigger activity consumed review credits. The earlier shared ChatGPT approval conversation and experimental per-PR cloud task record are not part of the required release path.
 
-The GitHub App, signed webhook receiver, durable per-PR controller state, resolver dispatch, GitHub Mobile ready comment, and deployment-result reporting specified here are required target infrastructure. They are not yet deployed; until then, no agent may claim that owner feedback is automatically being read or handled.
+The GitHub App, signed webhook receiver, durable per-PR controller state, resolver dispatch, GitHub Mobile ready comment, and deployment-result reporting specified here are required target infrastructure. The App must subscribe to pull request, pull-request review, issue-comment, and check-run events so a completed exact-head verification can retry owner presentation. They are not yet deployed; until then, no agent may claim that owner feedback is automatically being read or handled.
 
 ## Open questions
 

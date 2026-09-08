@@ -11,8 +11,27 @@ export function createPullRequestState({ number, headSha }) {
     waves: [],
     activeApproval: null,
     resolver: null,
+    pendingCommands: [],
     processedDeliveryIds: []
   };
+}
+
+function enqueue(state, command) {
+  if (!state.pendingCommands.some((candidate) => candidate.id === command.id)) {
+    state.pendingCommands.push(command);
+  }
+}
+
+function takeCommand(state, commandId) {
+  const command = state.pendingCommands.find((candidate) => candidate.id === commandId);
+  if (!command) throw new Error("The completed command is not pending.");
+  state.pendingCommands = state.pendingCommands.filter((candidate) => candidate.id !== commandId);
+  return command;
+}
+
+function enqueueReviewRequests(state, wave) {
+  enqueue(state, { id: `review-${wave.number}-copilot-${wave.headSha}`, type: "request-copilot", wave: wave.number, headSha: wave.headSha });
+  enqueue(state, { id: `review-${wave.number}-codex-${wave.headSha}`, type: "request-codex", wave: wave.number, headSha: wave.headSha });
 }
 
 function clone(value) {
@@ -42,6 +61,7 @@ export function observeHead(state, headSha) {
 
   next.headSha = headSha;
   next.activeApproval = null;
+  next.pendingCommands = next.pendingCommands.filter((command) => command.headSha === headSha || command.type === "merge");
 
   if (next.phase === "resolving") {
     return next;
@@ -78,6 +98,7 @@ export function startReviewWave(state, { headSha, now }) {
   };
   next.waves.push(wave);
   next.phase = "reviewing";
+  enqueueReviewRequests(next, wave);
   return { state: next, wave };
 }
 
@@ -95,11 +116,15 @@ export function markReviewerRequested(state, { waveNumber, reviewer }) {
   return next;
 }
 
-export function recordReviewerResult(state, { waveNumber, reviewer, hasFindings }) {
+export function recordReviewerResult(state, { waveNumber, reviewer, hasFindings, headSha }) {
   const next = clone(state);
   const wave = next.waves.find((candidate) => candidate.number === waveNumber);
   if (!wave || next.phase !== "reviewing") {
     throw new Error("There is no active review wave.");
+  }
+  requireCurrentHead(next, headSha);
+  if (wave.headSha !== headSha) {
+    throw new Error("The review result does not cover the active review-wave head.");
   }
   const responseKey = reviewer === "copilot" ? "copilotResponded" : "codexResponded";
   wave[responseKey] = true;
@@ -120,8 +145,10 @@ export function finishReviewWave(state, { waveNumber }) {
   if (wave.hasFindings) {
     next.phase = "resolving";
     next.resolver = { source: `wave-${wave.number}`, headSha: wave.headSha, started: false };
+    enqueue(next, { id: `resolver-${next.resolver.source}-${wave.headSha}`, type: "dispatch-resolver", headSha: wave.headSha, reviewWave: wave.number, feedback: "Address the completed AI review findings." });
   } else {
     next.phase = "awaiting-owner";
+    enqueue(next, { id: `present-owner-${wave.headSha}`, type: "present-owner", headSha: wave.headSha });
   }
   return next;
 }
@@ -148,6 +175,7 @@ export function finishResolver(state, { headSha }) {
     next.phase = "awaiting-ready";
   } else {
     next.phase = "awaiting-owner";
+    enqueue(next, { id: `present-owner-${headSha}`, type: "present-owner", headSha });
   }
   return next;
 }
@@ -162,17 +190,21 @@ export function presentForOwnerApproval(state, { headSha, commentId, now }) {
   return next;
 }
 
-export function acceptOwnerApproval(state, { headSha }) {
+export function acceptOwnerApproval(state, { headSha, commentId, createdAt }) {
   requireCurrentHead(state, headSha);
   const next = clone(state);
   if (next.phase !== "awaiting-owner" || !next.activeApproval || next.activeApproval.headSha !== headSha) {
     throw new Error("There is no active approval for this pull-request head.");
   }
+  if (!commentId || commentId === next.activeApproval.commentId || !createdAt || createdAt <= next.activeApproval.presentedAt) {
+    throw new Error("The approval comment is not a newly created response to the active notice.");
+  }
   next.phase = "merging";
+  enqueue(next, { id: `merge-${headSha}`, type: "merge", headSha });
   return next;
 }
 
-export function recordOwnerFeedback(state, { headSha }) {
+export function recordOwnerFeedback(state, { headSha, feedback }) {
   requireCurrentHead(state, headSha);
   const next = clone(state);
   if (next.phase !== "awaiting-owner" || !next.activeApproval) {
@@ -181,5 +213,25 @@ export function recordOwnerFeedback(state, { headSha }) {
   next.activeApproval = null;
   next.phase = "resolving";
   next.resolver = { source: "owner-feedback", headSha, started: false };
+  enqueue(next, { id: `resolver-owner-feedback-${headSha}`, type: "dispatch-resolver", headSha, feedback, commentId: undefined });
   return next;
+}
+
+export function completeCommand(state, { commandId }) {
+  const next = clone(state);
+  const command = takeCommand(next, commandId);
+  requireCurrentHead(next, command.headSha);
+  if (command.type === "request-copilot") return markReviewerRequested(next, { waveNumber: command.wave, reviewer: "copilot" });
+  if (command.type === "request-codex") return markReviewerRequested(next, { waveNumber: command.wave, reviewer: "codex" });
+  if (command.type === "dispatch-resolver") return startResolver(next);
+  if (command.type === "present-owner") return next;
+  if (command.type === "merge") {
+    next.phase = "merged";
+    return next;
+  }
+  throw new Error("Unknown completed command type.");
+}
+
+export function pendingCommands(state) {
+  return structuredClone(state.pendingCommands);
 }

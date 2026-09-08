@@ -19,16 +19,13 @@ jobs:
     name: Resolve one pull-request feedback package
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    env:
-      GH_TOKEN: ${{ github.token }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      SLIBY_RESOLVER_MODEL: gpt-5.6-terra
     steps:
       - name: Check out the exact pull-request revision
         uses: actions/checkout@v5
         with:
           ref: ${{ github.event.client_payload.head_sha }}
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
@@ -41,3 +38,7 @@ jobs:
 
       - name: Resolve bounded feedback
         run: node scripts/run-release-resolver.mjs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          SLIBY_RESOLVER_MODEL: gpt-5.6-terra

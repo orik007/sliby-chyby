@@ -19,8 +19,8 @@ const head = "a".repeat(40);
 function completedWave(state, waveNumber, hasFindings) {
   let next = markReviewerRequested(state, { waveNumber, reviewer: "copilot" });
   next = markReviewerRequested(next, { waveNumber, reviewer: "codex" });
-  next = recordReviewerResult(next, { waveNumber, reviewer: "copilot", hasFindings });
-  next = recordReviewerResult(next, { waveNumber, reviewer: "codex", hasFindings: false });
+  next = recordReviewerResult(next, { waveNumber, reviewer: "copilot", hasFindings, headSha: next.headSha });
+  next = recordReviewerResult(next, { waveNumber, reviewer: "codex", hasFindings: false, headSha: next.headSha });
   return finishReviewWave(next, { waveNumber });
 }
 
@@ -57,19 +57,26 @@ test("owner feedback after wave two cannot create a third review", () => {
     headSha: head,
     now: "2026-09-08T10:00:00Z"
   });
-  const afterFirst = completedWave(first.state, 1, false);
-  const approvedHead = presentForOwnerApproval(afterFirst, {
-    headSha: head,
-    commentId: 100,
+  const firstResolver = startResolver(completedWave(first.state, 1, true));
+  const secondReady = finishResolver(firstResolver, { headSha: "b".repeat(40) });
+  const second = startReviewWave(secondReady, {
+    headSha: "b".repeat(40),
     now: "2026-09-08T10:05:00Z"
   });
-  const resolverWaiting = recordOwnerFeedback(approvedHead, { headSha: head });
+  const secondResolver = startResolver(completedWave(second.state, 2, true));
+  const approvedHead = finishResolver(secondResolver, { headSha: "c".repeat(40) });
+  const presented = presentForOwnerApproval(approvedHead, {
+    headSha: "c".repeat(40),
+    commentId: 100,
+    now: "2026-09-08T10:10:00Z"
+  });
+  const resolverWaiting = recordOwnerFeedback(presented, { headSha: "c".repeat(40), feedback: "Clarify the final change." });
   const resolverActive = startResolver(resolverWaiting);
-  const afterFeedback = finishResolver(resolverActive, { headSha: "b".repeat(40) });
+  const afterFeedback = finishResolver(resolverActive, { headSha: "d".repeat(40) });
   assert.equal(afterFeedback.phase, "awaiting-owner");
   assert.throws(() => startReviewWave(afterFeedback, {
-    headSha: "b".repeat(40),
-    now: "2026-09-08T10:10:00Z"
+    headSha: "d".repeat(40),
+    now: "2026-09-08T10:11:00Z"
   }), /not waiting/);
 });
 
@@ -86,5 +93,19 @@ test("approval is bound to the stored current head", () => {
   });
   const changed = observeHead(presented, "b".repeat(40));
   assert.equal(changed.activeApproval, null);
-  assert.throws(() => acceptOwnerApproval(changed, { headSha: head }), /current pull-request head/);
+  assert.throws(() => acceptOwnerApproval(changed, { headSha: head, commentId: 101, createdAt: "2026-09-08T10:06:00Z" }), /current pull-request head/);
+});
+
+test("a reviewer result for an older commit cannot complete the current wave", () => {
+  const started = startReviewWave(createPullRequestState({ number: 21, headSha: head }), {
+    headSha: head,
+    now: "2026-09-08T10:00:00Z"
+  });
+  const requested = markReviewerRequested(started.state, { waveNumber: 1, reviewer: "copilot" });
+  assert.throws(() => recordReviewerResult(requested, {
+    waveNumber: 1,
+    reviewer: "copilot",
+    hasFindings: false,
+    headSha: "b".repeat(40)
+  }), /current pull-request head/);
 });

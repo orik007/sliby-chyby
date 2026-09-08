@@ -2,17 +2,17 @@ import {
   OWNER_APPROVAL,
   READY_COMMAND,
   acceptOwnerApproval,
+  completeCommand,
   createPullRequestState,
   finishResolver,
   finishReviewWave,
-  markReviewerRequested,
   observeHead,
   recordDelivery,
   recordOwnerFeedback,
   recordReviewerResult,
   presentForOwnerApproval,
-  startResolver,
-  startReviewWave
+  startReviewWave,
+  pendingCommands
 } from "./state.mjs";
 
 const GITHUB_API = "https://api.github.com";
@@ -75,6 +75,26 @@ async function githubJson(token, path, init = {}) {
   return body;
 }
 
+async function githubGraphql(token, query, variables) {
+  const response = await fetch(`${GITHUB_API}/graphql`, {
+    method: "POST",
+    headers: { ...githubHeaders(token), "Content-Type": "application/json" },
+    body: JSON.stringify({ query, variables })
+  });
+  const body = await response.json();
+  if (!response.ok || body.errors) throw new Error(`GitHub GraphQL request failed: ${body.errors?.[0]?.message ?? response.status}`);
+  return body.data;
+}
+
+async function githubPages(token, path) {
+  const items = [];
+  for (let page = 1; ; page += 1) {
+    const response = await githubJson(token, `${path}${path.includes("?") ? "&" : "?"}per_page=100&page=${page}`);
+    items.push(...response);
+    if (response.length < 100) return items;
+  }
+}
+
 async function validWebhook(request, env, body) {
   const signature = request.headers.get("X-Hub-Signature-256");
   if (!signature?.startsWith("sha256=") || !env.GITHUB_WEBHOOK_SECRET) return false;
@@ -95,18 +115,23 @@ function isPullRequestComment(payload) {
   return Boolean(payload.issue?.pull_request?.url);
 }
 
+function pullRequestNumber(payload) {
+  return payload.pull_request?.number ?? payload.issue?.number ?? payload.check_run?.pull_requests?.[0]?.number;
+}
+
 function commandForComment(payload, pullRequest, ownerLogin) {
   const body = payload.comment.body.trim();
   const sender = payload.sender.login;
   if (sender === "github-actions[bot]" && /^<!-- sliby-release-resolver: complete head [0-9a-f]{40} -->/i.test(body)) {
     return { type: "resolver-complete" };
   }
-  if (body.toLowerCase() === READY_COMMAND && sender === pullRequest.user.login) {
+  if (body === READY_COMMAND && sender === pullRequest.user.login) {
     return { type: "ready" };
   }
   if (sender !== ownerLogin) return { type: "ignore" };
-  if (body.toLowerCase() === OWNER_APPROVAL) return { type: "approve" };
-  return { type: "feedback", comment: body, commentId: payload.comment.id };
+  if (payload.action !== "created") return { type: "ignore" };
+  if (body === OWNER_APPROVAL) return { type: "approve", commentId: payload.comment.id, createdAt: payload.comment.created_at };
+  return { type: "feedback", comment: body, commentId: payload.comment.id, createdAt: payload.comment.created_at };
 }
 
 export class PullRequestState {
@@ -125,48 +150,30 @@ export class PullRequestState {
     if (delivered.duplicate) return Response.json({ duplicate: true, commands: [] });
     state = delivered.state;
     state = observeHead(state, event.headSha);
-    const commands = [];
-
     if (event.kind === "comment") {
       if (event.command.type === "ready") {
-        const started = startReviewWave(state, { headSha: event.headSha, now: event.now });
-        state = markReviewerRequested(started.state, { waveNumber: started.wave.number, reviewer: "copilot" });
-        state = markReviewerRequested(state, { waveNumber: started.wave.number, reviewer: "codex" });
-        commands.push({ type: "request-reviewers", wave: started.wave.number, headSha: event.headSha });
+        state = startReviewWave(state, { headSha: event.headSha, now: event.now }).state;
       } else if (event.command.type === "approve") {
-        state = acceptOwnerApproval(state, { headSha: event.headSha });
-        commands.push({ type: "merge", headSha: event.headSha });
+        state = acceptOwnerApproval(state, { headSha: event.headSha, commentId: event.command.commentId, createdAt: event.command.createdAt });
       } else if (event.command.type === "feedback" && state.phase === "awaiting-owner") {
-        state = recordOwnerFeedback(state, { headSha: event.headSha });
-        state = startResolver(state);
-        commands.push({ type: "dispatch-resolver", headSha: event.headSha, feedback: event.command.comment, commentId: event.command.commentId });
+        state = recordOwnerFeedback(state, { headSha: event.headSha, feedback: event.command.comment });
       } else if (event.command.type === "resolver-complete" && state.phase === "resolving" && state.resolver?.started) {
         const source = state.resolver.source;
         state = finishResolver(state, { headSha: event.headSha });
         if (source === "wave-1") {
-          const started = startReviewWave(state, { headSha: event.headSha, now: event.now });
-          state = markReviewerRequested(started.state, { waveNumber: started.wave.number, reviewer: "copilot" });
-          state = markReviewerRequested(state, { waveNumber: started.wave.number, reviewer: "codex" });
-          commands.push({ type: "request-reviewers", wave: started.wave.number, headSha: event.headSha });
-        } else {
-          commands.push({ type: "present-owner", headSha: event.headSha });
+          state = startReviewWave(state, { headSha: event.headSha, now: event.now }).state;
         }
       }
     } else if (event.kind === "review-result" && state.phase === "reviewing" && state.waves.length > 0) {
       state = recordReviewerResult(state, {
         waveNumber: state.waves.at(-1)?.number,
         reviewer: event.reviewer,
-        hasFindings: event.hasFindings
+        hasFindings: event.hasFindings,
+        headSha: event.reviewHeadSha
       });
       const wave = state.waves.at(-1);
       if (wave.copilotResponded && wave.codexResponded) {
         state = finishReviewWave(state, { waveNumber: wave.number });
-        if (state.phase === "resolving") {
-          state = startResolver(state);
-          commands.push({ type: "dispatch-resolver", headSha: event.headSha, feedback: "Address the completed AI review findings.", reviewWave: wave.number });
-        } else {
-          commands.push({ type: "present-owner", headSha: event.headSha });
-        }
       }
     } else if (event.kind === "register-owner-notice") {
       state = presentForOwnerApproval(state, {
@@ -174,31 +181,49 @@ export class PullRequestState {
         commentId: event.commentId,
         now: event.now
       });
+    } else if (event.kind === "command-succeeded") {
+      state = completeCommand(state, { commandId: event.commandId });
     }
 
     await this.ctx.storage.put("state", state);
-    return Response.json({ duplicate: false, commands, state });
+    return Response.json({ duplicate: false, commands: pendingCommands(state), state });
   }
 }
 
-async function unresolvedReviewThreads(token, owner, repo, number) {
-  const response = await fetch(`${GITHUB_API}/graphql`, {
-    method: "POST",
-    headers: { ...githubHeaders(token), "Content-Type": "application/json" },
-    body: JSON.stringify({
-      query: `query($owner: String!, $repo: String!, $number: Int!) {
-        repository(owner: $owner, name: $repo) {
-          pullRequest(number: $number) {
-            reviewThreads(first: 100) { nodes { isResolved } }
+async function reviewThreads(token, owner, repo, number) {
+  const threads = [];
+  let after = null;
+  do {
+    const data = await githubGraphql(token, `query($owner: String!, $repo: String!, $number: Int!, $after: String) {
+      repository(owner: $owner, name: $repo) {
+        pullRequest(number: $number) {
+          reviewThreads(first: 100, after: $after) {
+            pageInfo { hasNextPage endCursor }
+            nodes { id isResolved comments(first: 100) { nodes { databaseId body url author { login } } } }
           }
         }
-      }`,
-      variables: { owner, repo, number }
-    })
-  });
-  const body = await response.json();
-  if (!response.ok || body.errors) throw new Error(`GitHub GraphQL review-thread query failed: ${body.errors?.[0]?.message ?? response.status}`);
-  return body.data.repository.pullRequest.reviewThreads.nodes.filter((thread) => !thread.isResolved).length;
+      }
+    }`, { owner, repo, number, after });
+    const connection = data.repository.pullRequest.reviewThreads;
+    threads.push(...connection.nodes);
+    after = connection.pageInfo.hasNextPage ? connection.pageInfo.endCursor : null;
+  } while (after);
+  return threads;
+}
+
+async function unresolvedReviewThreads(token, owner, repo, number) {
+  return (await reviewThreads(token, owner, repo, number)).filter((thread) => !thread.isResolved).length;
+}
+
+function materialReviewBody(body) {
+  const normalized = body.trim().toLowerCase();
+  return normalized.length > 0 && !/^(no findings|no issues found|looks good|lgtm)[.!\s]*$/.test(normalized);
+}
+
+async function reviewerHasFindings(token, owner, repo, number, reviewerLogin, review) {
+  const threads = await reviewThreads(token, owner, repo, number);
+  if (threads.some((thread) => !thread.isResolved && thread.comments.nodes.some((comment) => comment.author?.login === reviewerLogin))) return true;
+  return review?.state?.toLowerCase() !== "approved" && materialReviewBody(review?.body ?? "");
 }
 
 async function pullRequestForEvent(env, payload) {
@@ -207,7 +232,8 @@ async function pullRequestForEvent(env, payload) {
   const token = await installationToken(env, installationId);
   const owner = payload.repository.owner.login;
   const repo = payload.repository.name;
-  const number = payload.pull_request?.number ?? payload.issue?.number;
+  const number = pullRequestNumber(payload);
+  if (!number) throw new Error("The webhook does not identify a pull request.");
   const pullRequest = await githubJson(token, `/repos/${owner}/${repo}/pulls/${number}`);
   if (pullRequest.head.repo?.full_name !== payload.repository.full_name) {
     throw new Error("The release controller does not write to pull requests from forks.");
@@ -223,18 +249,28 @@ async function checksPass(token, owner, repo, headSha) {
 
 async function executeCommand(env, context, command) {
   const { token, owner, repo, number } = context;
-  if (command.type === "request-reviewers") {
+  if (command.type === "request-copilot") {
+    const requested = await githubJson(token, `/repos/${owner}/${repo}/pulls/${number}/requested_reviewers`);
+    const login = env.COPILOT_REVIEWER_LOGIN ?? "copilot-pull-request-reviewer[bot]";
+    if (requested.users.some((user) => user.login === login)) return true;
     await githubJson(token, `/repos/${owner}/${repo}/pulls/${number}/requested_reviewers`, {
       method: "POST",
-      body: JSON.stringify({ reviewers: [env.COPILOT_REVIEWER_LOGIN ?? "copilot-pull-request-reviewer[bot]"] }),
+      body: JSON.stringify({ reviewers: [login] }),
       headers: { "Content-Type": "application/json" }
     });
+    return true;
+  }
+
+  if (command.type === "request-codex") {
+    const marker = `<!-- sliby-release-control: wave ${command.wave}, head ${command.headSha} -->`;
+    const comments = await githubPages(token, `/repos/${owner}/${repo}/issues/${number}/comments`);
+    if (comments.some((comment) => comment.body.includes(marker))) return true;
     await githubJson(token, `/repos/${owner}/${repo}/issues/${number}/comments`, {
       method: "POST",
-      body: JSON.stringify({ body: `@codex review\n\n<!-- sliby-release-control: wave ${command.wave}, head ${command.headSha} -->` }),
+      body: JSON.stringify({ body: `@codex review\n\n${marker}` }),
       headers: { "Content-Type": "application/json" }
     });
-    return;
+    return true;
   }
 
   if (command.type === "dispatch-resolver") {
@@ -252,7 +288,7 @@ async function executeCommand(env, context, command) {
       }),
       headers: { "Content-Type": "application/json" }
     });
-    return;
+    return true;
   }
 
   if (command.type === "merge") {
@@ -265,11 +301,11 @@ async function executeCommand(env, context, command) {
       body: JSON.stringify({ sha: command.headSha, merge_method: "squash" }),
       headers: { "Content-Type": "application/json" }
     });
-    return;
+    return true;
   }
 
   if (command.type === "present-owner") {
-    if (!(await checksPass(token, owner, repo, command.headSha)) || (await unresolvedReviewThreads(token, owner, repo, number)) > 0) return;
+    if (!(await checksPass(token, owner, repo, command.headSha)) || (await unresolvedReviewThreads(token, owner, repo, number)) > 0) return false;
     const notice = await githubJson(token, `/repos/${owner}/${repo}/issues/${number}/comments`, {
       method: "POST",
       body: JSON.stringify({ body: `@${env.OWNER_LOGIN ?? "orik007"} PR is ready for owner approval. Post exactly \`schvaluji\` as a new comment to approve the current verified revision.\n\n<!-- sliby-release-control: ready head ${command.headSha} -->` }),
@@ -287,7 +323,23 @@ async function executeCommand(env, context, command) {
         now: new Date().toISOString()
       })
     });
+    return true;
   }
+}
+
+async function acknowledgeCommand(env, context, command) {
+  const stub = env.PULL_REQUEST_STATE.getByName(`${context.owner}/${context.repo}#${context.number}`);
+  await stub.fetch("https://state/event", {
+    method: "POST",
+    body: JSON.stringify({
+      deliveryId: `command-succeeded-${command.id}`,
+      kind: "command-succeeded",
+      commandId: command.id,
+      number: context.number,
+      headSha: command.headSha,
+      now: new Date().toISOString()
+    })
+  });
 }
 
 async function handleWebhook(request, env, ctx) {
@@ -298,17 +350,17 @@ async function handleWebhook(request, env, ctx) {
   const deliveryId = request.headers.get("X-GitHub-Delivery");
   if (!deliveryId || !payload.repository?.full_name) return new Response("Unsupported webhook", { status: 202 });
 
-  if (eventName !== "pull_request" && eventName !== "pull_request_review" && !(eventName === "issue_comment" && isPullRequestComment(payload))) {
+  if (eventName !== "pull_request" && eventName !== "pull_request_review" && eventName !== "check_run" && !(eventName === "issue_comment" && isPullRequestComment(payload))) {
     return new Response(null, { status: 202 });
   }
 
   const context = await pullRequestForEvent(env, payload);
   const reviewer = payload.sender?.login === (env.COPILOT_REVIEWER_LOGIN ?? "copilot-pull-request-reviewer[bot]")
     ? "copilot"
-    : payload.sender?.login === (env.CODEX_REVIEWER_LOGIN ?? "codex")
+    : payload.sender?.login === (env.CODEX_REVIEWER_LOGIN ?? "chatgpt-codex-connector")
       ? "codex"
       : null;
-  const kind = eventName === "issue_comment" ? "comment" : eventName === "pull_request_review" && reviewer ? "review-result" : "head";
+  const kind = reviewer && (eventName === "pull_request_review" || eventName === "issue_comment") ? "review-result" : eventName === "issue_comment" ? "comment" : "head";
   const command = kind === "comment" ? commandForComment(payload, context.pullRequest, env.OWNER_LOGIN ?? "orik007") : { type: "ignore" };
   const stub = env.PULL_REQUEST_STATE.getByName(`${payload.repository.full_name}#${context.number}`);
   const result = await stub.fetch("https://state/event", {
@@ -318,15 +370,18 @@ async function handleWebhook(request, env, ctx) {
       kind,
       command,
       reviewer,
-      hasFindings: payload.review?.state?.toLowerCase() === "changes_requested",
+      hasFindings: reviewer ? await reviewerHasFindings(context.token, context.owner, context.repo, context.number, payload.sender.login, payload.review ?? { body: payload.comment?.body, state: "commented" }) : false,
       number: context.number,
       headSha: context.pullRequest.head.sha,
+      reviewHeadSha: payload.review?.commit_id ?? context.pullRequest.head.sha,
       now: new Date().toISOString()
     })
   });
   const outcome = await result.json();
   if (!outcome.duplicate && outcome.commands.length) {
-    ctx.waitUntil(Promise.all(outcome.commands.map((item) => executeCommand(env, context, item))));
+    ctx.waitUntil(Promise.all(outcome.commands.map(async (item) => {
+      if (await executeCommand(env, context, item)) await acknowledgeCommand(env, context, item);
+    })));
   }
   return Response.json({ accepted: true, duplicate: outcome.duplicate });
 }

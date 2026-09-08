@@ -20,10 +20,6 @@ function parseProposal(text) {
   return value;
 }
 
-function changedPaths(patch) {
-  return [...patch.matchAll(/^\+\+\+ b\/(.+)$/gm)].map((match) => match[1]);
-}
-
 function isForbiddenPath(path) {
   return path.startsWith(".github/")
     || path.startsWith(".codex")
@@ -35,14 +31,37 @@ async function gh(args) {
   return execFileAsync("gh", args, { encoding: "utf8" });
 }
 
+async function ghPages(path) {
+  const output = (await gh(["api", "--paginate", "--slurp", path])).stdout.trim();
+  return output ? JSON.parse(output).flat() : [];
+}
+
+function safeTestEnvironment() {
+  const allowed = ["PATH", "HOME", "TMPDIR", "RUNNER_TEMP", "CI", "NODE_OPTIONS", "npm_config_cache"];
+  return Object.fromEntries(allowed.flatMap((key) => {
+    return process.env[key] === undefined ? [] : [[key, process.env[key]]];
+  }));
+}
+
+function actualChangedPaths(output) {
+  return output.trim().split("\n").filter(Boolean).flatMap((line) => {
+    const [status, ...paths] = line.split("\t");
+    if (/^[RC]/.test(status)) return paths.slice(-2);
+    return paths.slice(0, 1);
+  });
+}
+
 const event = JSON.parse(await readFile(process.env.GITHUB_EVENT_PATH, "utf8"));
 const payload = event.client_payload;
 const repository = process.env.GITHUB_REPOSITORY;
 const pullNumber = String(payload.pull_number);
-const currentHead = (await gh(["api", `repos/${repository}/pulls/${pullNumber}`, "--jq", ".head.sha"])) .stdout.trim();
-if (currentHead !== payload.head_sha) throw new Error("Resolver payload does not target the current pull-request head.");
+const pullRequest = JSON.parse((await gh(["api", `repos/${repository}/pulls/${pullNumber}`])).stdout);
+if (pullRequest.head.sha !== payload.head_sha || pullRequest.head.repo?.full_name !== repository || !pullRequest.head.ref) {
+  throw new Error("Resolver payload does not target the current same-repository pull-request head.");
+}
+const headRef = pullRequest.head.ref;
 
-const files = JSON.parse((await gh(["api", `repos/${repository}/pulls/${pullNumber}/files?per_page=100`])).stdout);
+const files = await ghPages(`repos/${repository}/pulls/${pullNumber}/files?per_page=100`);
 const allowedPaths = new Set(files.map((file) => file.filename));
 const diff = files.map((file) => `FILE: ${file.filename}\n${file.patch ?? "[diff omitted by GitHub]"}`).join("\n\n");
 const releaseRules = await readFile("docs/release-process.md", "utf8");
@@ -56,21 +75,29 @@ if (!response.ok) throw new Error(`Resolver model request failed: ${response.sta
 const proposal = parseProposal(outputText(await response.json()));
 
 if (proposal.action === "patch") {
-  const paths = changedPaths(proposal.patch);
-  if (!proposal.patch || paths.length === 0 || paths.some((path) => !allowedPaths.has(path) || isForbiddenPath(path))) {
+  if (!proposal.patch) {
     throw new Error("Resolver patch is empty or exceeds the existing pull-request file scope.");
   }
   await writeFile("/tmp/sliby-release-resolver.patch", proposal.patch);
   await execFileAsync("git", ["apply", "--check", "/tmp/sliby-release-resolver.patch"]);
   await execFileAsync("git", ["apply", "/tmp/sliby-release-resolver.patch"]);
-  await execFileAsync("npm", ["test"], { env: process.env });
-  await execFileAsync("npm", ["run", "build"], { env: process.env });
+  await execFileAsync("git", ["diff", "--check"]);
+  const paths = actualChangedPaths((await execFileAsync("git", ["diff", "--name-status", "HEAD"])).stdout);
+  if (paths.length === 0 || paths.some((path) => !allowedPaths.has(path) || isForbiddenPath(path))) {
+    throw new Error("Resolver patch changes a forbidden path, creates a file, or deletes or renames a file outside the pull-request scope.");
+  }
+  const safeEnv = safeTestEnvironment();
+  await execFileAsync("npm", ["test"], { env: safeEnv });
+  await execFileAsync("npm", ["run", "build"], { env: safeEnv });
   await execFileAsync("git", ["config", "user.name", "slibychyby-feedback-resolver[bot]"]);
   await execFileAsync("git", ["config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com"]);
   await execFileAsync("git", ["add", "--update"]);
   await execFileAsync("git", ["commit", "-m", "Address release feedback"]);
-  await execFileAsync("git", ["push", "origin", `HEAD:refs/heads/${payload.head_ref}`]);
+  await execFileAsync("git", ["push", "origin", `HEAD:refs/heads/${headRef}`]);
+  const verifiedHead = (await gh(["api", `repos/${repository}/pulls/${pullNumber}`, "--jq", ".head.sha"])).stdout.trim();
+  await gh(["api", "--method", "POST", `repos/${repository}/dispatches`, "-f", "event_type=sliby-verify-pr-head", "-f", `client_payload[pull_number]=${pullNumber}`, "-f", `client_payload[head_sha]=${verifiedHead}`]);
 }
 
-const marker = `<!-- sliby-release-resolver: complete head ${payload.head_sha} -->`;
+const completedHead = (await gh(["api", `repos/${repository}/pulls/${pullNumber}`, "--jq", ".head.sha"])).stdout.trim();
+const marker = `<!-- sliby-release-resolver: complete head ${completedHead} -->`;
 await gh(["pr", "comment", pullNumber, "--repo", repository, "--body", `${marker}\n\nResolver disposition: ${proposal.comment}`]);
