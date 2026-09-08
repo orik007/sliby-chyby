@@ -20,7 +20,7 @@ This document records how SlibyChyby resources are separated within the shared C
 
 - Keep deployment configuration in the repository through `wrangler.deploy.jsonc`. The non-default filename prevents the generated server entry point from being treated as a source entry point during the Astro build. Do not store Cloudflare credentials or build tokens in the repository.
 - Configure one Workers Builds production trigger for `main`. Do not configure a non-production trigger; unpublished review branches must not receive public preview URLs.
-- Run `npm run build` before `npx wrangler deploy --config wrangler.deploy.jsonc`. The Worker name in Cloudflare and `wrangler.deploy.jsonc` must remain identical.
+- Run `npm run build` before `npm run deploy:cloudflare`. That deploy script deploys the public Worker from `wrangler.deploy.jsonc` and then the separate release controller from `wrangler.release-control.jsonc`. Workers Builds keeps one production trigger for `main`; it must use this deploy script instead of a second independent build trigger.
 
 ## Current resources
 
