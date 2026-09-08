@@ -9,6 +9,7 @@ This document records how SlibyChyby resources are separated within the shared C
 - Use `sliby-chyby` as the project prefix. Future resources for this product must use `sliby-chyby-*` unless a provider-controlled identifier prevents it.
 - Use a neutral account-wide Workers subdomain, `orik007-apps.workers.dev`, because the namespace can host future unrelated Workers as well.
 - Use one production Worker named `sliby-chyby` for the public web application. A separate staging Worker may be added only after a concrete need appears.
+- Use a separate production Worker named `sliby-chyby-release-control` for signed GitHub release webhooks. It owns one SQLite-backed Durable Object per pull request and has no public-site data or runtime responsibility.
 - Apply these tags to the production Worker:
 
   - `project=sliby-chyby`
@@ -27,6 +28,7 @@ This document records how SlibyChyby resources are separated within the shared C
 | --- | --- | --- |
 | Workers account subdomain | `orik007-apps.workers.dev` | Shared neutral namespace for present and future Workers |
 | Production Worker | `sliby-chyby` | Public SlibyChyby website |
+| Release controller Worker | `sliby-chyby-release-control` | Planned signed GitHub webhook receiver and durable per-PR coordination; not deployed yet |
 | Earlier demo | `sliby-chyby-demo.sorastars.chatgpt.site` | Previous public deployment, currently still available; removal timing is open |
 
 The first repository-triggered Workers Build from `main` completed successfully on 2026-09-03. The production Worker now serves the Astro application directly. The earlier ChatGPT Sites demo is currently still available, but this is current state rather than a retention rule; its removal timing remains open.

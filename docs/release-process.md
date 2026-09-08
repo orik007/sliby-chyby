@@ -36,13 +36,17 @@ These roles handle repository quality and release only. They do not collect evid
 
 ## Required approval flow
 
-1. The PR author explicitly marks a locally validated head ready. The release controller records the head and starts shared wave one. Opening a PR, marking a draft ready, pushing a commit, or an owner comment does not independently start AI review.
+1. The PR author explicitly marks a locally validated head ready by posting `@slibychyby-release-control ready`. The release controller records the head and starts shared wave one. Opening a PR, marking a draft ready, pushing a commit, or an owner comment does not independently start AI review.
 2. Automatic Codex review is disabled. The release controller, not the PR author or feedback resolver, requests GitHub Copilot as a reviewer and posts one `@codex review` comment for each permitted shared wave.
 3. If a wave has findings, the controller starts one feedback-resolver task for that PR and waits for it to dispose of every addressable thread. The resolver's consolidated remediation is the only permitted implementation change between waves. The controller starts wave two only after the first resolver task is complete. After wave two, it never starts another AI review.
 4. When the applicable review path is complete, the current head has successful verification, and no addressable review thread remains unresolved, the controller stores that head and posts one ready-for-owner-approval comment mentioning `@orik007`. GitHub Mobile sends the owner a notification that opens this individual PR.
-5. The owner replies exactly `schvaluji` to that active comment to approve. Any other owner comment is feedback. The controller returns feedback to the single resolver task, does not merge, and posts a new ready comment only after resolver work and deterministic verification finish. Owner feedback after wave two does not restart AI review.
+5. The owner posts exactly `schvaluji` as a standalone comment while that notice is active to approve. Ordinary pull-request conversation comments do not expose a reliable parent-comment reference, so the controller binds this short approval to its one active notice and stored head. Any other owner comment is feedback. The controller returns feedback to the single resolver task, does not merge, and posts a new ready comment only after resolver work and deterministic verification finish. Owner feedback after wave two does not restart AI review.
 6. Before merging, the controller verifies the stored head is still current, verification still succeeds, and no addressable review thread is open. It rejects stale approval rather than merging.
 7. Cloudflare Workers Builds automatically builds and deploys merged `main`. The controller reports merge and deployment success or failure in the same PR.
+
+## Automated resolver boundary
+
+The resolver is a GitHub Actions job with its own bot commit identity. It starts only from a controller `repository_dispatch` event after a reviewer finding or owner feedback. It sends the exact changed-file diff and this release-process document to the configured OpenAI API project. Its response is either a concise disposition or one minimal unified patch. The job rejects patches outside files already changed by the pull request, and always rejects `.github/`, environment files, `AGENTS.md`, `docs/decisions.md`, and this document. It runs `git apply --check`, the complete tests, and the production build before it commits. The controller never starts a second resolver for the same PR while the GitHub Actions concurrency group is active.
 
 ## Current operational state
 
