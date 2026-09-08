@@ -156,7 +156,7 @@ export class PullRequestState {
       } else if (event.command.type === "approve") {
         state = acceptOwnerApproval(state, { headSha: event.headSha, commentId: event.command.commentId, createdAt: event.command.createdAt });
       } else if (event.command.type === "feedback" && state.phase === "awaiting-owner") {
-        state = recordOwnerFeedback(state, { headSha: event.headSha, feedback: event.command.comment });
+        state = recordOwnerFeedback(state, { headSha: event.headSha, feedback: event.command.comment, commentId: event.command.commentId });
       } else if (event.command.type === "resolver-complete" && state.phase === "resolving" && state.resolver?.started) {
         const source = state.resolver.source;
         state = finishResolver(state, { headSha: event.headSha });

@@ -7,6 +7,7 @@ import {
   finishReviewWave,
   markReviewerRequested,
   observeHead,
+  pendingCommands,
   presentForOwnerApproval,
   recordOwnerFeedback,
   recordReviewerResult,
@@ -108,4 +109,18 @@ test("a reviewer result for an older commit cannot complete the current wave", (
     hasFindings: false,
     headSha: "b".repeat(40)
   }), /current pull-request head/);
+});
+
+test("owner feedback preserves its triggering comment identifier for the resolver", () => {
+  const started = startReviewWave(createPullRequestState({ number: 21, headSha: head }), {
+    headSha: head,
+    now: "2026-09-08T10:00:00Z"
+  });
+  const ready = presentForOwnerApproval(completedWave(started.state, 1, false), {
+    headSha: head,
+    commentId: 100,
+    now: "2026-09-08T10:05:00Z"
+  });
+  const feedback = recordOwnerFeedback(ready, { headSha: head, feedback: "Please explain this.", commentId: 101 });
+  assert.equal(pendingCommands(feedback).at(-1)?.commentId, 101);
 });

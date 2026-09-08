@@ -204,7 +204,7 @@ export function acceptOwnerApproval(state, { headSha, commentId, createdAt }) {
   return next;
 }
 
-export function recordOwnerFeedback(state, { headSha, feedback }) {
+export function recordOwnerFeedback(state, { headSha, feedback, commentId }) {
   requireCurrentHead(state, headSha);
   const next = clone(state);
   if (next.phase !== "awaiting-owner" || !next.activeApproval) {
@@ -213,7 +213,7 @@ export function recordOwnerFeedback(state, { headSha, feedback }) {
   next.activeApproval = null;
   next.phase = "resolving";
   next.resolver = { source: "owner-feedback", headSha, started: false };
-  enqueue(next, { id: `resolver-owner-feedback-${headSha}`, type: "dispatch-resolver", headSha, feedback, commentId: undefined });
+  enqueue(next, { id: `resolver-owner-feedback-${headSha}`, type: "dispatch-resolver", headSha, feedback, commentId });
   return next;
 }
 
