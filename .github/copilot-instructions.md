@@ -1,6 +1,6 @@
-# Copilot review instructions
+# Optional Copilot review instructions
 
-Review this repository against `AGENTS.md` and `docs/project-guide.md` before evaluating a pull request.
+Use these instructions only after the owner explicitly authorizes a Copilot review for a specific pull request and revision. They do not authorize or trigger a review.
 
 Pay particular attention to:
 
