@@ -83,7 +83,7 @@ SlibyChyby tracks what political parties promised before an election and compare
 
 - Use a pull request for repository changes intended for `main` and require the `Verify pull request` workflow to succeed for the exact current head commit.
 - Never automatically initiate, request, repeat, or wait for a GitHub Copilot or Codex review. No pull-request event, workflow, agent, release role, commit, draft-state change, or owner-feedback event may trigger either review.
-- A GitHub Copilot or Codex review may be requested only after the owner gives an explicit instruction for the specific pull request. It is advisory only and is never a required release gate or a substitute for the owner's decision.
+- A GitHub Copilot or Codex review may be requested only after the owner gives an explicit instruction for the specific pull request and its exact current head revision. It is advisory only and is never a required release gate or a substitute for the owner's decision.
 - Use the GitHub pull request as the mobile approval conversation. The owner must approve the exact presented revision with `schvaluji`; any other owner comment is feedback, never approval.
 - Do not merge on a generic acknowledgement. The owner must approve the exact presented revision with an unambiguous `schvaluji`; any new commit invalidates that approval.
 - Treat merge to `main` as the production release boundary. Cloudflare Workers Builds deploys `main`; do not manually deploy an unmerged branch or enable public branch previews.
