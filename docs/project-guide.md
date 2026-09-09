@@ -53,13 +53,7 @@ allowlisted official records and news discovery feeds
 DELIVERY
 proposed repository change
   -> Verify pull request for the exact head commit
-  -> release controller starts the first shared GitHub Copilot + Codex review wave
-  -> no findings: verify that head and ask the owner
-  -> findings: resolve all threads and make one consolidated remediation commit for valid fixes
-  -> release controller starts the second and final shared Copilot + Codex review wave
-  -> no findings: verify that head and ask the owner
-  -> findings: resolve all threads and make one final remediation commit for valid fixes
-  -> no third review wave; verify the current head and mention the owner in this PR
+  -> exact-revision owner approval
   -> owner replies `schvaluji` or writes feedback in this individual PR
   -> merge to `main`
   -> Cloudflare Workers build and deployment
@@ -188,9 +182,9 @@ The initial implementation uses Astro, TypeScript, plain CSS, schema-validated v
 
 Every pull request targeting `main` is checked by `.github/workflows/verify-pr.yml`, which runs tests, validation, the production Astro build, and a Cloudflare deployment dry run.
 
-Every pull request has at most two **shared** advisory AI review waves across both reviewers, never two waves per reviewer. Automatic Codex review is disabled. `slibychyby-release-control[bot]` is the only release controller and the only role that requests GitHub Copilot as a pull-request reviewer and posts `@codex review`; a plain `@copilot` mention is not a review request. The first wave covers a locally validated ready head. If it has findings, one feedback-resolver task for that PR evaluates every finding, replies to and resolves every addressable thread, and makes valid fixes together in one consolidated remediation commit before the second wave. The second wave runs even when the first-wave disposition did not change the head. If it has findings, the same resolver handles every second-wave finding and a final remediation commit contains only direct fixes for cited valid findings; it receives no third AI review. Before the owner sees any revision, `Verify pull request` must pass for its exact current head and no addressable review thread may remain unresolved. A scope expansion or newly discovered material issue moves to a new pull request. The release controller never edits the implementation or interprets findings; the resolver never requests reviewers or merges.
+GitHub Copilot and Codex reviews are not initiated, requested, repeated, or awaited automatically. No pull-request event, workflow, agent, release role, commit, draft-state change, or owner-feedback event may trigger either review. The owner may explicitly authorize one review for an identified pull request and revision; it remains advisory and never delays owner approval or becomes a release gate. Before the owner sees any revision, `Verify pull request` must pass for its exact current head. A scope expansion or newly discovered material issue moves to a new pull request.
 
-The GitHub pull request itself is the mobile approval conversation. When the applicable review path is complete, the release controller posts one ready-for-owner-approval comment that mentions the owner. GitHub Mobile opens that individual PR. The owner replies `schvaluji` directly to the active comment; the controller binds this short reply to the stored exact head, revalidates it, and only then merges. A new commit invalidates the ready comment. Any other owner comment is feedback: it is sent to the one resolver task for that PR, the PR is not merged, and no third AI review is started. AI reviews are quality advice and never substitute for this owner decision.
+The GitHub pull request itself is the mobile approval conversation. The release controller posts one ready-for-owner-approval comment that mentions the owner after deterministic verification. GitHub Mobile opens that individual PR. The owner replies `schvaluji` directly to the active comment; the controller binds this short reply to the stored exact head, revalidates it, and only then merges. A new commit invalidates the ready comment. Any other owner comment is feedback: it is sent to the one resolver task for that PR and the PR is not merged. An owner-authorized AI review is only advice and never substitutes for this owner decision.
 
 Cloudflare Workers Builds watches only `main`. A merge triggers `npm run build` followed by `npx wrangler deploy --config wrangler.deploy.jsonc`. Preview branch deployments are disabled so unpublished political proposals cannot receive public URLs. The current public Worker is `sliby-chyby` at `https://sliby-chyby.orik007-apps.workers.dev/`.
 
@@ -225,7 +219,7 @@ Cloudflare deployment itself is operational and the first repository-triggered p
 6. Do not publish a political assessment without proposal-specific editorial approval from the owner. Merging an assessment-review pull request preserves an unpublished audit record and is not publication approval.
 7. Do not merge any pull request without the owner's unambiguous `schvaluji` for the exact presented head revision; a new commit invalidates that merge approval.
 8. Record a newly accepted product or methodology decision in `docs/decisions.md` and its canonical document in the same change.
-9. Run relevant tests and `npm run build`, open a pull request, wait for Copilot and Codex review of the current revision, and use the exact-revision approval process.
+9. Run relevant tests and `npm run build`, open a pull request, and use the exact-revision approval process. Do not initiate Copilot or Codex review unless the owner explicitly requests it for that pull request and revision.
 
 ## Current open questions
 
