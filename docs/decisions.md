@@ -109,6 +109,11 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - When both independent assessors agree, show their shared result only once in `review.md`; retain both complete outputs in `assessment-run.json`. Show both opinions in `review.md` only when they disagreed and a third assessor had to arbitrate.
 - Accept an unambiguous Codex message from the owner that identifies specific proposals as editorial approval. Preserve the approval in the publication change. A generic acknowledgement and a review-proposal merge are not publication approval.
 
+### Superseded release-review decision
+
+- **Superseded decision:** Every pull request received up to two shared GitHub Copilot and Codex review waves. The release controller requested both reviewers for each wave, the first wave covered the ready initial head, and a consolidated remediation commit could receive a second wave. Before owner approval, the exact current head had to pass deterministic verification and have no unresolved addressable review threads.
+- **Reason for supersession:** The owner ended this policy after overlapping review runs consumed excessive credits and made the release process needlessly complex. It is replaced by the active release rule below: no GitHub Copilot or Codex review starts automatically, and an owner may request one only for a specified pull request and exact current head revision.
+
 ### Release approval and delivery
 
 - Run the review, approval, merge, and deployment process on server-side services. It must not depend on the owner's computer or an active local or Remote session.
