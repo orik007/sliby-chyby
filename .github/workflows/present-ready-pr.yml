@@ -1,0 +1,143 @@
+name: Present ready pull request
+
+on:
+  pull_request:
+    types: [labeled, ready_for_review, synchronize]
+  pull_request_review:
+    types: [submitted]
+  check_run:
+    types: [completed]
+
+permissions:
+  actions: read
+  checks: read
+  issues: write
+  pull-requests: read
+
+jobs:
+  present:
+    name: Verify review gates and notify owner
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Post one exact-head ready notice
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const pullNumber = context.payload.pull_request?.number
+              ?? context.payload.check_run?.pull_requests?.find((pull) => pull.base.ref === "main")?.number;
+            if (!pullNumber) {
+              core.info("The event is not associated with a pull request to main.");
+              return;
+            }
+
+            const pull = await github.rest.pulls.get({ owner, repo, pull_number: pullNumber });
+            if (pull.data.state !== "open" || pull.data.draft || pull.data.base.ref !== "main") return;
+            const readyLabel = "sliby-ready-for-owner-approval";
+            const hasReadyLabel = pull.data.labels.some((label) => label.name === readyLabel);
+            if (!hasReadyLabel) {
+              core.info("The Codex PR coordinator has not marked this pull request ready for owner approval.");
+              return;
+            }
+            if (context.eventName === "pull_request" && context.payload.action === "synchronize") {
+              await github.rest.issues.removeLabel({
+                owner,
+                repo,
+                issue_number: pullNumber,
+                name: readyLabel
+              });
+              core.info("Removed the stale ready label after a pull-request head change.");
+              return;
+            }
+            const headSha = pull.data.head.sha;
+
+            const requiredReviewers = new Set([
+              "copilot-pull-request-reviewer",
+              "chatgpt-codex-connector"
+            ]);
+            const reviews = await github.paginate(github.rest.pulls.listReviews, {
+              owner,
+              repo,
+              pull_number: pullNumber,
+              per_page: 100
+            });
+            const reviewersByHead = new Map();
+            for (const review of reviews) {
+              if (!review.submitted_at || !requiredReviewers.has(review.user.login)) continue;
+              const reviewers = reviewersByHead.get(review.commit_id) ?? new Set();
+              reviewers.add(review.user.login);
+              reviewersByHead.set(review.commit_id, reviewers);
+            }
+            const sharedReviewHeads = [...reviewersByHead]
+              .filter(([, reviewers]) => reviewers.size === requiredReviewers.size)
+              .map(([sha]) => sha);
+            const currentHeadHasBothReviews = sharedReviewHeads.includes(headSha);
+            const commits = await github.paginate(github.rest.pulls.listCommits, {
+              owner,
+              repo,
+              pull_number: pullNumber,
+              per_page: 100
+            });
+            const commitIndex = new Map(commits.map((commit, index) => [commit.sha, index]));
+            const latestReviewIndex = Math.max(...sharedReviewHeads.map((sha) => commitIndex.get(sha) ?? -1));
+            const currentIndex = commitIndex.get(headSha);
+            const finalSecondWaveRemediation =
+              sharedReviewHeads.length === 2 &&
+              currentIndex === latestReviewIndex + 1;
+            if (!currentHeadHasBothReviews && !finalSecondWaveRemediation) {
+              core.info("The current head is neither a reviewed head nor the one permitted final second-wave remediation commit.");
+              return;
+            }
+
+            const runs = await github.paginate(github.rest.actions.listWorkflowRuns, {
+              owner,
+              repo,
+              workflow_id: "verify-pr.yml",
+              head_sha: headSha,
+              status: "completed",
+              per_page: 100
+            });
+            if (!runs.some((run) => run.conclusion === "success")) {
+              core.info("Verify pull request has not succeeded for the current head.");
+              return;
+            }
+
+            let cursor = null;
+            do {
+              const result = await github.graphql(
+                `query($owner: String!, $repo: String!, $number: Int!, $cursor: String) {
+                  repository(owner: $owner, name: $repo) {
+                    pullRequest(number: $number) {
+                      reviewThreads(first: 100, after: $cursor) {
+                        nodes { isResolved }
+                        pageInfo { hasNextPage endCursor }
+                      }
+                    }
+                  }
+                }`,
+                { owner, repo, number: pullNumber, cursor }
+              );
+              const threads = result.repository.pullRequest.reviewThreads;
+              if (threads.nodes.some((thread) => !thread.isResolved)) {
+                core.info("The current pull request still has an unresolved review thread.");
+                return;
+              }
+              cursor = threads.pageInfo.hasNextPage ? threads.pageInfo.endCursor : null;
+            } while (cursor);
+
+            const marker = `<!-- sliby-chyby: ready-for-owner-approval head ${headSha} -->`;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number: pullNumber,
+              per_page: 100
+            });
+            if (comments.some((comment) => comment.user.login === "github-actions[bot]" && comment.body.includes(marker))) return;
+
+            await github.rest.issues.createComment({
+              owner,
+              repo,
+              issue_number: pullNumber,
+              body: `@${owner} This pull request has both AI reviews for its current head, a successful Verify pull request run, and no unresolved review threads. Reply with exactly \`schvaluji\` as a new comment to merge it.\n\n${marker}`
+            });

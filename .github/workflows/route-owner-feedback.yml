@@ -1,0 +1,28 @@
+name: Route owner pull-request feedback to Codex
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+
+jobs:
+  route:
+    name: Request Codex feedback handling
+    if: >-
+      github.event.issue.pull_request &&
+      github.event.comment.user.login == github.repository_owner &&
+      github.event.comment.body != 'schvaluji'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Start one Codex feedback task
+        uses: actions/github-script@v8
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              ...context.repo,
+              issue_number: context.issue.number,
+              body: "@codex address the owner's feedback in this pull request. Evaluate it against the current head and project documentation; make only in-scope changes, run the required validation, and reply to or resolve every addressable thread. Do not request a new review yourself."
+            });

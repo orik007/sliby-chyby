@@ -9,7 +9,6 @@ This document records how SlibyChyby resources are separated within the shared C
 - Use `sliby-chyby` as the project prefix. Future resources for this product must use `sliby-chyby-*` unless a provider-controlled identifier prevents it.
 - Use a neutral account-wide Workers subdomain, `orik007-apps.workers.dev`, because the namespace can host future unrelated Workers as well.
 - Use one production Worker named `sliby-chyby` for the public web application. A separate staging Worker may be added only after a concrete need appears.
-- Use a separate production Worker named `sliby-chyby-release-control` for signed GitHub release webhooks. It owns one SQLite-backed Durable Object per pull request and has no public-site data or runtime responsibility.
 - Apply these tags to the production Worker:
 
   - `project=sliby-chyby`
@@ -20,7 +19,8 @@ This document records how SlibyChyby resources are separated within the shared C
 
 - Keep deployment configuration in the repository through `wrangler.deploy.jsonc`. The non-default filename prevents the generated server entry point from being treated as a source entry point during the Astro build. Do not store Cloudflare credentials or build tokens in the repository.
 - Configure one Workers Builds production trigger for `main`. Do not configure a non-production trigger; unpublished review branches must not receive public preview URLs.
-- Run `npm run build` before `npm run deploy:cloudflare`. That deploy script deploys the public Worker from `wrangler.deploy.jsonc` and then the separate release controller from `wrangler.release-control.jsonc`. Workers Builds keeps one production trigger for `main`; it must use this deploy script instead of a second independent build trigger.
+- Run `npm run build` before `npm run deploy:cloudflare`. That deploy script deploys only the public Worker from `wrangler.deploy.jsonc`. Workers Builds keeps one production trigger for `main`; it must use this deploy script instead of a second independent build trigger.
+- Do not use Cloudflare for pull-request webhooks, review coordination, owner approval, feedback handling, or merge automation. Those responsibilities belong to GitHub and Codex under `docs/release-process.md`.
 
 ## Current resources
 
@@ -28,7 +28,6 @@ This document records how SlibyChyby resources are separated within the shared C
 | --- | --- | --- |
 | Workers account subdomain | `orik007-apps.workers.dev` | Shared neutral namespace for present and future Workers |
 | Production Worker | `sliby-chyby` | Public SlibyChyby website |
-| Release controller Worker | `sliby-chyby-release-control` | Planned signed GitHub webhook receiver and durable per-PR coordination; not deployed yet |
 | Earlier demo | `sliby-chyby-demo.sorastars.chatgpt.site` | Previous public deployment, currently still available; removal timing is open |
 
 The first repository-triggered Workers Build from `main` completed successfully on 2026-09-03. The production Worker now serves the Astro application directly. The earlier ChatGPT Sites demo is currently still available, but this is current state rather than a retention rule; its removal timing remains open.
@@ -45,4 +44,3 @@ The first repository-triggered Workers Build from `main` completed successfully 
 - The final public product name and custom domain.
 - When the temporary ChatGPT Sites demo should be removed.
 - Whether a dedicated staging Worker becomes useful after the real publication workflow is complete.
-- How Cloudflare deployment success or failure will be reported automatically in the mobile approval conversation.

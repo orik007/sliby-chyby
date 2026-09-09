@@ -53,14 +53,13 @@ allowlisted official records and news discovery feeds
 DELIVERY
 proposed repository change
   -> Verify pull request for the exact head commit
-  -> release controller starts the first shared GitHub Copilot + Codex review wave
-  -> no findings: verify that head and ask the owner
-  -> findings: resolve all threads and make one consolidated remediation commit for valid fixes
-  -> release controller starts the second and final shared Copilot + Codex review wave
-  -> no findings: verify that head and ask the owner
-  -> findings: resolve all threads and make one final remediation commit for valid fixes
-  -> no third review wave; verify the current head and mention the owner in this PR
+  -> Codex coordinator requests GitHub Copilot + Codex review for that exact head
+  -> findings: evaluate, resolve threads, and make one consolidated remediation commit for valid fixes
+  -> if wave one found findings: one second shared review wave for the remediation head
+  -> if wave two found findings: one final direct remediation commit, with no third review
+  -> Codex applies the ready label after resolving findings; GitHub Actions independently verifies the applicable reviewed head or final remediation, then posts a signed ready notice
   -> owner replies `schvaluji` or writes feedback in this individual PR
+  -> GitHub Actions rechecks the signed ready head and merges only a valid approval
   -> merge to `main`
   -> Cloudflare Workers build and deployment
 ```
@@ -188,13 +187,11 @@ The initial implementation uses Astro, TypeScript, plain CSS, schema-validated v
 
 Every pull request targeting `main` is checked by `.github/workflows/verify-pr.yml`, which runs tests, validation, the production Astro build, and a Cloudflare deployment dry run.
 
-Every pull request has at most two **shared** advisory AI review waves across both reviewers, never two waves per reviewer. Automatic Codex review is disabled. `slibychyby-release-control[bot]` is the only release controller and the only role that requests GitHub Copilot as a pull-request reviewer and posts `@codex review`; a plain `@copilot` mention is not a review request. The first wave covers a locally validated ready head. If it has findings, one feedback-resolver task for that PR evaluates every finding, replies to and resolves every addressable thread, and makes valid fixes together in one consolidated remediation commit before the second wave. The second wave runs even when the first-wave disposition did not change the head. If it has findings, the same resolver handles every second-wave finding and a final remediation commit contains only direct fixes for cited valid findings; it receives no third AI review. Before the owner sees any revision, `Verify pull request` must pass for its exact current head and no addressable review thread may remain unresolved. A scope expansion or newly discovered material issue moves to a new pull request. The release controller never edits the implementation or interprets findings; the resolver never requests reviewers or merges.
+Automatic Codex review is disabled. Each pull request has at most two **shared** advisory AI review waves across Copilot and Codex, never two waves per reviewer. The Codex PR coordinator explicitly requests GitHub Copilot as a reviewer and posts `@codex review`; a plain `@copilot` mention is not a review request. Both reviewers inspect the same exact head in each wave. The coordinator evaluates all findings, fixes valid issues in one consolidated remediation commit, explains non-applicable findings, and resolves every addressable thread. A first-wave remediation receives the second wave. If that wave finds issues, the resulting final direct remediation commit receives no third review. Credits are conserved by consolidating changes and never requesting either reviewer twice for the same wave and head.
 
-The GitHub pull request itself is the mobile approval conversation. When the applicable review path is complete, the release controller posts one ready-for-owner-approval comment that mentions the owner. GitHub Mobile opens that individual PR. The owner posts `schvaluji` as a standalone exact comment while that one notice is active; the controller binds this short comment to the stored exact head, revalidates it, and only then merges. A new commit invalidates the ready notice. Any other owner comment is feedback: it is sent to the one resolver task for that PR, the PR is not merged, and no third AI review is started. AI reviews are quality advice and never substitute for this owner decision.
+The GitHub pull request is the mobile approval conversation. After Codex has disposed of the applicable findings, it applies the `sliby-ready-for-owner-approval` label. GitHub Actions then independently checks the permitted review path, a passing verification workflow, and no unresolved review thread before posting one signed `@orik007` ready notice. The owner replies with exactly `schvaluji`, without a hash. The GitHub merge gate binds that comment to the signed notice and current head, verifies all deterministic gates again, and merges only if nothing changed. Any other owner comment asks Codex to address the feedback; neither Codex nor Copilot can approve or merge.
 
-Cloudflare Workers Builds watches only `main`. A merge triggers `npm run build` followed by `npm run deploy:cloudflare`, which deploys the public Worker and the separate release controller. Preview branch deployments are disabled so unpublished political proposals cannot receive public URLs. The current public Worker is `sliby-chyby` at `https://sliby-chyby.orik007-apps.workers.dev/`.
-
-Cloudflare deployment itself is operational and the first repository-triggered production build succeeded. The target release controller reports the final Cloudflare result in the same pull-request conversation; its webhook and GitHub App implementation remain to be deployed.
+Cloudflare Workers Builds watches only `main`. A merge triggers `npm run build` followed by `npm run deploy:cloudflare`, which deploys only the public Worker. Preview branch deployments are disabled so unpublished political proposals cannot receive public URLs. The current public Worker is `sliby-chyby` at `https://sliby-chyby.orik007-apps.workers.dev/`. Cloudflare has no pull-request controller, webhook, approval, or feedback role.
 
 ## Repository map
 

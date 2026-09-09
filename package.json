@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "node --test tests/*.test.mjs && astro check && astro build && node scripts/prepare-sites-build.mjs",
-    "deploy:cloudflare": "npx wrangler deploy --config wrangler.deploy.jsonc && npx wrangler deploy --config wrangler.release-control.jsonc",
+    "deploy:cloudflare": "npx wrangler deploy --config wrangler.deploy.jsonc",
     "check": "astro check",
     "test": "node --test tests/*.test.mjs",
     "assess:validate": "node scripts/run-assessment.mjs automation/golden-cases/ano-eet-2/evidence-package.json --validate-only",

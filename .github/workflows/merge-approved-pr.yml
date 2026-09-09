@@ -1,0 +1,92 @@
+name: Merge approved pull request
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  actions: read
+  contents: write
+  issues: read
+  pull-requests: write
+
+jobs:
+  merge:
+    name: Verify approval and merge
+    if: >-
+      github.event.issue.pull_request &&
+      github.event.comment.user.login == github.repository_owner &&
+      github.event.comment.body == 'schvaluji'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Merge only the presented current head
+        uses: actions/github-script@v8
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const pullNumber = context.issue.number;
+            const pull = await github.rest.pulls.get({ owner, repo, pull_number: pullNumber });
+            if (pull.data.state !== "open" || pull.data.draft || pull.data.base.ref !== "main") {
+              core.setFailed("The pull request is not an open, ready pull request to main.");
+              return;
+            }
+            const headSha = pull.data.head.sha;
+            const marker = `<!-- sliby-chyby: ready-for-owner-approval head ${headSha} -->`;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner,
+              repo,
+              issue_number: pullNumber,
+              per_page: 100
+            });
+            const notice = [...comments].reverse().find((comment) =>
+              comment.user.login === "github-actions[bot]" && comment.body.includes(marker));
+            if (!notice || new Date(notice.created_at) >= new Date(context.payload.comment.created_at)) {
+              core.setFailed("No current exact-head ready notice predates this approval.");
+              return;
+            }
+
+            const runs = await github.paginate(github.rest.actions.listWorkflowRuns, {
+              owner,
+              repo,
+              workflow_id: "verify-pr.yml",
+              head_sha: headSha,
+              status: "completed",
+              per_page: 100
+            });
+            if (!runs.some((run) => run.conclusion === "success")) {
+              core.setFailed("Verify pull request has not succeeded for the current head.");
+              return;
+            }
+
+            let cursor = null;
+            do {
+              const result = await github.graphql(
+                `query($owner: String!, $repo: String!, $number: Int!, $cursor: String) {
+                  repository(owner: $owner, name: $repo) {
+                    pullRequest(number: $number) {
+                      reviewThreads(first: 100, after: $cursor) {
+                        nodes { isResolved }
+                        pageInfo { hasNextPage endCursor }
+                      }
+                    }
+                  }
+                }`,
+                { owner, repo, number: pullNumber, cursor }
+              );
+              const threads = result.repository.pullRequest.reviewThreads;
+              if (threads.nodes.some((thread) => !thread.isResolved)) {
+                core.setFailed("The pull request still has an unresolved review thread.");
+                return;
+              }
+              cursor = threads.pageInfo.hasNextPage ? threads.pageInfo.endCursor : null;
+            } while (cursor);
+
+            const result = await github.rest.pulls.merge({
+              owner,
+              repo,
+              pull_number: pullNumber,
+              sha: headSha,
+              merge_method: "merge"
+            });
+            if (!result.data.merged) core.setFailed(result.data.message || "GitHub did not merge the pull request.");
