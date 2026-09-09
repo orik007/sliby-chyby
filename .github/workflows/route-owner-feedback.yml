@@ -13,7 +13,8 @@ jobs:
     if: >-
       github.event.issue.pull_request &&
       github.event.comment.user.login == github.repository_owner &&
-      github.event.comment.body != 'schvaluji'
+      github.event.comment.body != 'schvaluji' &&
+      github.event.comment.body != '@codex review'
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
@@ -21,6 +22,36 @@ jobs:
         uses: actions/github-script@v8
         with:
           script: |
+            const pull = await github.rest.pulls.get({
+              ...context.repo,
+              pull_number: context.issue.number
+            });
+            if (pull.data.head.repo?.full_name !== context.payload.repository.full_name) {
+              core.info("The feedback router does not act on a pull request from a fork.");
+              return;
+            }
+            const readyLabel = "sliby-ready-for-owner-approval";
+            if (pull.data.labels.some((label) => label.name === readyLabel)) {
+              await github.rest.issues.removeLabel({
+                ...context.repo,
+                issue_number: context.issue.number,
+                name: readyLabel
+              });
+            }
+            const marker = `<!-- sliby-chyby: ready-for-owner-approval head ${pull.data.head.sha} -->`;
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              ...context.repo,
+              issue_number: context.issue.number,
+              per_page: 100
+            });
+            for (const comment of comments) {
+              if (comment.user.login === "github-actions[bot]" && comment.body.includes(marker)) {
+                await github.rest.issues.deleteComment({
+                  ...context.repo,
+                  comment_id: comment.id
+                });
+              }
+            }
             await github.rest.issues.createComment({
               ...context.repo,
               issue_number: context.issue.number,

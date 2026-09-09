@@ -5,7 +5,8 @@ on:
     types: [labeled, ready_for_review, synchronize]
   pull_request_review:
     types: [submitted]
-  check_run:
+  workflow_run:
+    workflows: [Verify pull request]
     types: [completed]
 
 permissions:
@@ -25,8 +26,17 @@ jobs:
         with:
           script: |
             const { owner, repo } = context.repo;
-            const pullNumber = context.payload.pull_request?.number
-              ?? context.payload.check_run?.pull_requests?.find((pull) => pull.base.ref === "main")?.number;
+            let pullNumber = context.payload.pull_request?.number;
+            if (!pullNumber && context.payload.workflow_run) {
+              const pulls = await github.rest.pulls.list({
+                owner,
+                repo,
+                state: "open",
+                base: "main",
+                head: `${owner}:${context.payload.workflow_run.head_branch}`
+              });
+              pullNumber = pulls.data.find((pull) => pull.head.sha === context.payload.workflow_run.head_sha)?.number;
+            }
             if (!pullNumber) {
               core.info("The event is not associated with a pull request to main.");
               return;
@@ -34,6 +44,10 @@ jobs:
 
             const pull = await github.rest.pulls.get({ owner, repo, pull_number: pullNumber });
             if (pull.data.state !== "open" || pull.data.draft || pull.data.base.ref !== "main") return;
+            if (pull.data.head.repo?.full_name !== `${owner}/${repo}`) {
+              core.info("The ready notifier does not act on a pull request from a fork.");
+              return;
+            }
             const readyLabel = "sliby-ready-for-owner-approval";
             const hasReadyLabel = pull.data.labels.some((label) => label.name === readyLabel);
             if (!hasReadyLabel) {
@@ -62,16 +76,21 @@ jobs:
               pull_number: pullNumber,
               per_page: 100
             });
-            const reviewersByHead = new Map();
+            const reviewCountsByHead = new Map();
             for (const review of reviews) {
-              if (!review.submitted_at || !requiredReviewers.has(review.user.login)) continue;
-              const reviewers = reviewersByHead.get(review.commit_id) ?? new Set();
-              reviewers.add(review.user.login);
-              reviewersByHead.set(review.commit_id, reviewers);
+              const reviewerLogin = review.user.login.replace(/\[bot\]$/, "");
+              if (!review.submitted_at || !requiredReviewers.has(reviewerLogin)) continue;
+              const counts = reviewCountsByHead.get(review.commit_id) ?? new Map();
+              counts.set(reviewerLogin, (counts.get(reviewerLogin) ?? 0) + 1);
+              reviewCountsByHead.set(review.commit_id, counts);
             }
-            const sharedReviewHeads = [...reviewersByHead]
-              .filter(([, reviewers]) => reviewers.size === requiredReviewers.size)
+            const sharedReviewHeads = [...reviewCountsByHead]
+              .filter(([, counts]) => [...requiredReviewers].every((reviewer) => counts.has(reviewer)))
               .map(([sha]) => sha);
+            const sharedReviewWaveCount = [...reviewCountsByHead.values()].reduce(
+              (total, counts) => total + Math.min(...[...requiredReviewers].map((reviewer) => counts.get(reviewer) ?? 0)),
+              0
+            );
             const currentHeadHasBothReviews = sharedReviewHeads.includes(headSha);
             const commits = await github.paginate(github.rest.pulls.listCommits, {
               owner,
@@ -83,7 +102,7 @@ jobs:
             const latestReviewIndex = Math.max(...sharedReviewHeads.map((sha) => commitIndex.get(sha) ?? -1));
             const currentIndex = commitIndex.get(headSha);
             const finalSecondWaveRemediation =
-              sharedReviewHeads.length === 2 &&
+              sharedReviewWaveCount === 2 &&
               currentIndex === latestReviewIndex + 1;
             if (!currentHeadHasBothReviews && !finalSecondWaveRemediation) {
               core.info("The current head is neither a reviewed head nor the one permitted final second-wave remediation commit.");

@@ -31,6 +31,10 @@ jobs:
               core.setFailed("The pull request is not an open, ready pull request to main.");
               return;
             }
+            if (pull.data.head.repo?.full_name !== `${owner}/${repo}`) {
+              core.setFailed("The approval gate does not merge a pull request from a fork.");
+              return;
+            }
             const headSha = pull.data.head.sha;
             const marker = `<!-- sliby-chyby: ready-for-owner-approval head ${headSha} -->`;
             const comments = await github.paginate(github.rest.issues.listComments, {
@@ -43,6 +47,17 @@ jobs:
               comment.user.login === "github-actions[bot]" && comment.body.includes(marker));
             if (!notice || new Date(notice.created_at) >= new Date(context.payload.comment.created_at)) {
               core.setFailed("No current exact-head ready notice predates this approval.");
+              return;
+            }
+            const ownerFeedbackAfterNotice = comments.some((comment) =>
+              comment.user.login === owner &&
+              comment.id !== context.payload.comment.id &&
+              new Date(comment.created_at) > new Date(notice.created_at) &&
+              comment.body.trim() !== "schvaluji" &&
+              comment.body.trim() !== "@codex review"
+            );
+            if (ownerFeedbackAfterNotice) {
+              core.setFailed("Owner feedback after the ready notice requires a fresh ready notice.");
               return;
             }
 

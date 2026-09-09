@@ -42,7 +42,7 @@ These roles handle repository quality and release only. They do not collect evid
 ## Implementation boundaries
 
 - `present-ready-pr.yml`, `merge-approved-pr.yml`, and `route-owner-feedback.yml` contain only deterministic GitHub API operations and an explicit Codex mention. They make no OpenAI API call, receive no AI credential, store no pull-request state outside GitHub, and run no untrusted branch code.
-- The required reviewer identities are `copilot-pull-request-reviewer` and `chatgpt-codex-connector`, as verified from the repository's actual PR review records. The ready notifier accepts a head reviewed by both identities, or exactly one commit following the second shared reviewed head.
+- The required reviewer identities are `copilot-pull-request-reviewer` and `chatgpt-codex-connector`, as verified from the repository's actual PR review records. GitHub may append `[bot]` to its REST API login values; the notifier normalizes only that suffix before matching. It accepts a head reviewed by both identities, or exactly one commit following the second shared reviewed head.
 - Create the repository label `sliby-ready-for-owner-approval` once, with any clearly distinct color. It is an operational handoff marker, not an owner approval. The notifier removes it when the PR head changes, so Codex must deliberately apply it again after completing the applicable two-wave path.
 - GitHub's `issue_comment` workflows run from the default branch. The repository must allow **Read and write permissions** for GitHub Actions so the approval gate can merge. The workflows do not act on forks.
 - This process is separate from assessment automation. A merged assessment-review proposal remains unpublished until the owner separately approves identified political proposals.

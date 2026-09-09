@@ -12,9 +12,12 @@ test("GitHub-only release gates retain exact-head approval safeguards", () => {
   assert.match(ready, /sliby-ready-for-owner-approval/);
   assert.match(ready, /copilot-pull-request-reviewer/);
   assert.match(ready, /chatgpt-codex-connector/);
-  assert.match(ready, /sharedReviewHeads\.length === 2/);
+  assert.match(ready, /replace\(\/\\\[bot\\\]\$\//);
+  assert.match(ready, /sharedReviewWaveCount === 2/);
+  assert.match(ready, /workflow_run/);
   assert.match(ready, /ready-for-owner-approval head \$\{headSha\}/);
   assert.match(ready, /removeLabel/);
+  assert.match(ready, /does not act on a pull request from a fork/);
 
   assert.match(merge, /github\.event\.comment\.body == 'schvaluji'/);
   assert.match(merge, /github\.event\.comment\.user\.login == github\.repository_owner/);
@@ -22,8 +25,13 @@ test("GitHub-only release gates retain exact-head approval safeguards", () => {
   assert.match(merge, /workflow_id: "verify-pr\.yml"/);
   assert.match(merge, /reviewThreads/);
   assert.match(merge, /sha: headSha/);
+  assert.match(merge, /Owner feedback after the ready notice/);
 
   assert.match(feedback, /@codex address the owner's feedback/);
+  assert.match(feedback, /github\.rest\.pulls\.get/);
+  assert.match(feedback, /does not act on a pull request from a fork/);
+  assert.match(feedback, /comment\.body != '@codex review'/);
+  assert.match(feedback, /deleteComment/);
   assert.doesNotMatch(feedback, /OPENAI_API_KEY|api\.openai\.com/);
 });
 
