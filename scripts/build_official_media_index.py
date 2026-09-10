@@ -81,7 +81,7 @@ for party_id, paths in INPUTS.items():
                     "width": item.get("media_details", {}).get("width"),
                     "height": item.get("media_details", {}).get("height"),
                     "parentPostId": item.get("post", 0),
-                    "reviewStatus": "unreviewed-media-source",
+                    "sourceReview": "unreviewed",
                 }
             )
 
@@ -94,7 +94,7 @@ counts = {
 OUTPUT.write_text(
     json.dumps(
         {
-            "status": "Working proposal",
+            "status": "Research catalogue",
             "scope": (
                 "Official WordPress media uploaded from 2025-01-01 through "
                 "2025-10-04. An upload is a recovery lead, not necessarily a "

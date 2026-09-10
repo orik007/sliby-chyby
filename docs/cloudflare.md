@@ -27,20 +27,9 @@ This document records how SlibyChyby resources are separated within the shared C
 | --- | --- | --- |
 | Workers account subdomain | `orik007-apps.workers.dev` | Shared neutral namespace for present and future Workers |
 | Production Worker | `sliby-chyby` | Public SlibyChyby website |
-| Earlier demo | `sliby-chyby-demo.sorastars.chatgpt.site` | Previous public deployment, currently still available; removal timing is open |
-
-The first repository-triggered Workers Build from `main` completed successfully on 2026-09-03. The production Worker now serves the Astro application directly. The earlier ChatGPT Sites demo is currently still available, but this is current state rather than a retention rule; its removal timing remains open.
-
 ## Resource-creation rules
 
 - Create a dedicated resource only when the application needs it; do not pre-create databases, buckets, queues, or staging services.
 - Give every new resource the `project`, `component`, `environment`, `managed_by`, and `repository` tags where the resource type supports tagging.
 - Separate production and staging with distinct resource names and `environment` tags. Do not use one production binding as an implicit staging resource.
 - Prefer provider-managed build credentials. If a manual token becomes necessary, store it only in the relevant hosted secret store with the narrowest practical scope.
-
-## Open questions
-
-- The final public product name and custom domain.
-- When the temporary ChatGPT Sites demo should be removed.
-- Whether a dedicated staging Worker becomes useful after the real publication workflow is complete.
-- How Cloudflare deployment success or failure will be reported automatically in the mobile approval conversation.

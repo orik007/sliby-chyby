@@ -1,15 +1,12 @@
-# Unpublished assessment review proposals
+# Unpublished assessment proposals
 
-This directory is a durable human-review queue for automated SLAVA assessment proposals.
+This is the current human-review queue for proposed assessments of confirmed promises.
 
-- Every proposal is created from one bounded evidence package and retains the complete assessment audit.
-- `manifest.json` records the assessment fingerprint used by the changed-input gate.
-- `manifest.json` is also the authority for proposal supersession. A replacement points to the previous proposal, which points back to its replacement; old audit files are never deleted or rewritten.
-- A fingerprint covers assessable evidence, methodology, active prompt content, providers, and model identifiers. Volatile collection timestamps and run identifiers do not trigger repeated model calls.
-- Every proposal has `humanReviewRequired: true` and `publicationApproved: false`.
-- Merging a review-proposal pull request preserves the audit. It does not publish a score or change public website data.
-- Published assessment revisions require a separate, explicitly approved publication workflow.
+- A proposal is created from one bounded evidence package.
+- Two independent assessors evaluate it; an arbiter is used only when they disagree.
+- Models may cite only evidence supplied in that package.
+- Every proposal remains unpublished and requires human review.
+- Creating, reviewing, or merging a proposal never changes public data or publishes a score.
+- The assessment fingerprint prevents another model call when the assessable input, active prompts, providers, and models are unchanged.
 
-Files are grouped as `promise-id/assessment-fingerprint/`. Each group contains `review.md` as the human entry point, the exact enriched evidence package, the complete assessor and arbiter audit, and a concise machine-readable proposal record.
-
-Every `review.md` visibly separates `Návrh pro veřejný web` from `Technické podklady pro reviewera`. The first section is the only candidate for later publication and must use self-contained, plain Czech without internal labels or unexplained identifiers. The technical section may expose canonical status values and other project terms for audit and debugging. Neither section is published by creating, reviewing, or merging the proposal.
+Only the active prompts are stored: `assessor-v11` and `arbiter-v3`.

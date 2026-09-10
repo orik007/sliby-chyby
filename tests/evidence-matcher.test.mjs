@@ -1,5 +1,4 @@
 import assert from "node:assert/strict";
-import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
@@ -13,231 +12,10 @@ import {
 const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8")));
 const eet = registry.promises.find(({ id }) => id === "ano-2025-eet-2");
 const freeMuseums = registry.promises.find(({ id }) => id === "ano-2025-free-state-museums-selected-groups");
-const selfEmployedContributionIncrease = registry.promises.find(({ id }) => id === "ano-2025-stop-2026-self-employed-contribution-increase");
-const anoFinanceBatchIds = [
-  "ano-2025-not-adopt-euro",
-  "ano-2025-digital-tax-cobra",
-  "ano-2025-restore-working-student-tax-credit",
-  "ano-2025-stop-2026-self-employed-contribution-increase",
-  "ano-2025-remove-leisure-benefit-cap",
-  "ano-2025-restaurant-nonalcoholic-vat-12"
-];
-const anoFinanceBatchTwoIds = [
-  "ano-2025-tax-exempt-voluntary-tips",
-  "ano-2025-online-tax-office",
-  "ano-2025-retail-state-bonds",
-  "ano-2025-customs-entry-salary-50000"
-];
-
-test("reviewed catalog expands through bounded batches and links every promise to an accepted source occurrence", async () => {
-  assert.equal(registry.status, "reviewed-promise-catalog-v2");
-  assert.equal(registry.promises.length, 46);
-  assert.deepEqual(
-    Object.fromEntries(["ano", "spd", "motoriste"].map((partyId) => [
-      partyId,
-      registry.promises.filter((promise) => promise.partyId === partyId).length
-    ])),
-    { ano: 22, spd: 12, motoriste: 12 }
-  );
-
-  const research = JSON.parse(await readFile(new URL("../research/2025-election/candidate-promises.json", import.meta.url), "utf8"));
-  for (const candidate of research.records) {
-    const normalizedExcerpt = candidate.originalExcerpt.replace(/\s+/g, " ").trim();
-    assert.equal(candidate.originalExcerpt, normalizedExcerpt, `Candidate ${candidate.id} excerpt is not generator-normalized`);
-    const digest = createHash("sha256")
-      .update(`${candidate.sourceId}|${candidate.page}|${normalizedExcerpt}`)
-      .digest("hex")
-      .slice(0, 12);
-    assert.equal(candidate.id, `candidate-${digest}`, `Candidate ${candidate.id} is not reproducible from its source occurrence`);
-  }
-  const acceptedCandidates = new Map(
-    research.records
-      .filter(({ reviewStatus }) => reviewStatus.startsWith("accepted-"))
-      .map((candidate) => [candidate.id, candidate])
-  );
-  assert.deepEqual(
-    [...new Set(registry.promises.map(({ researchSourceCandidateId }) => researchSourceCandidateId))].sort(),
-    [...acceptedCandidates.keys()].sort(),
-    "Every accepted source occurrence must produce at least one registry promise"
-  );
-  for (const promise of registry.promises) {
-    const candidate = acceptedCandidates.get(promise.researchSourceCandidateId);
-    assert.ok(candidate, `Missing accepted candidate for ${promise.id}`);
-    assert.equal(candidate.partyId, promise.partyId);
-    assert.equal(candidate.sourceUrl, promise.promiseSource.url);
-    if ([...anoFinanceBatchIds, ...anoFinanceBatchTwoIds].includes(promise.id)) {
-      const normalizedCandidateText = candidate.originalExcerpt.replace(/\s+/g, " ").trim();
-      const normalizedPromiseText = promise.originalTextCz.replace(/\s+/g, " ").trim();
-      assert.ok(normalizedCandidateText.includes(normalizedPromiseText), `Candidate ${candidate.id} does not contain the exact source passage for ${promise.id}`);
-    }
-    if (promise.id === "ano-2025-not-adopt-euro") assert.equal(candidate.extractionMethod, "manual-verified-passage");
-  }
-
-  const batch = JSON.parse(await readFile(new URL("../research/2025-election/reviewed-batches/ano-finance-1.json", import.meta.url), "utf8"));
-  assert.equal(batch.status, "Working proposal");
-  assert.equal(batch.summary.acceptedNewPromises, 6);
-  assert.equal(batch.source.url, "https://www.anobudelip.cz/file/edee/ke-stazeni/volebni-program-2025.pdf");
-  const researchById = new Map(research.records.map((candidate) => [candidate.id, candidate]));
-  const promisesById = new Map(registry.promises.map((promise) => [promise.id, promise]));
-  const expectedStatusPrefix = {
-    accepted: "accepted-",
-    "duplicate-occurrence": "duplicate-occurrence-",
-    rejected: "rejected-",
-    "needs-splitting": "needs-splitting-"
-  };
-  for (const review of batch.reviews) {
-    const candidate = researchById.get(review.candidateId);
-    assert.ok(candidate, `Unknown reviewed candidate ${review.candidateId}`);
-    const statusPrefix = expectedStatusPrefix[review.disposition];
-    assert.ok(statusPrefix, `Unknown review disposition ${review.disposition}`);
-    assert.ok(
-      candidate.reviewStatus.startsWith(statusPrefix),
-      `Candidate ${review.candidateId} status does not match ${review.disposition}`
-    );
-
-    const resultingPromiseIds = review.resultingPromiseIds ?? [];
-    const linkedPromiseIds = registry.promises
-      .filter(({ researchSourceCandidateId }) => researchSourceCandidateId === review.candidateId)
-      .map(({ id }) => id)
-      .sort();
-    assert.deepEqual(linkedPromiseIds, [...resultingPromiseIds].sort(), `Candidate ${review.candidateId} has inconsistent promise links`);
-    for (const promiseId of resultingPromiseIds) {
-      const promise = promisesById.get(promiseId);
-      assert.ok(promise, `Unknown resulting promise ${promiseId}`);
-      assert.equal(promise.researchSourceCandidateId, review.candidateId);
-    }
-    if (review.disposition === "rejected") assert.ok(review.rejectionReasonCodes?.length > 0);
-  }
-
-  const secondBatch = JSON.parse(await readFile(new URL("../research/2025-election/reviewed-batches/ano-finance-2.json", import.meta.url), "utf8"));
-  assert.equal(secondBatch.status, "Working proposal");
-  assert.equal(secondBatch.summary.acceptedNewPromises, 4);
-  assert.equal(secondBatch.source.sha256, "62e87d136ff8ed780a0a48ca09e0fdf0be80b38e8af61fa5bd55eacdb72f46ea");
-  for (const review of secondBatch.reviews) {
-    const candidate = researchById.get(review.candidateId);
-    assert.ok(candidate, `Unknown second-batch candidate ${review.candidateId}`);
-    const statusPrefix = expectedStatusPrefix[review.disposition];
-    assert.ok(statusPrefix, `Unknown second-batch review disposition ${review.disposition}`);
-    assert.ok(candidate.reviewStatus.startsWith(statusPrefix), `Candidate ${candidate.id} status does not match second-batch disposition`);
-    const resultingPromiseIds = review.resultingPromiseIds ?? [];
-    const linkedPromiseIds = registry.promises
-      .filter(({ researchSourceCandidateId }) => researchSourceCandidateId === review.candidateId)
-      .map(({ id }) => id)
-      .sort();
-    assert.deepEqual(linkedPromiseIds, [...resultingPromiseIds].sort(), `Candidate ${review.candidateId} has inconsistent second-batch promise links`);
-    if (review.disposition === "rejected") assert.ok(review.rejectionReasonCodes?.length > 0);
-  }
-});
-
-test("every ANO finance-batch promise matches a source repeating its exact quoted wording", () => {
-  for (const promiseId of [...anoFinanceBatchIds, ...anoFinanceBatchTwoIds]) {
-    const promise = registry.promises.find(({ id }) => id === promiseId);
-    assert.ok(promise, `Missing finance-batch promise ${promiseId}`);
-    const exactOccurrence = createCollectedRecord({
-      id: `party-source--${promiseId}`,
-      sourceId: "ano-party-news",
-      kind: "official-publication",
-      primary: true,
-      evidenceRole: "official-party-publication",
-      occurredAt: "2026-01-01T00:00:00.000Z",
-      timeZone: "Europe/Prague",
-      title: promise.promiseSource.exactQuoteCz,
-      publisher: "ANO 2011",
-      url: `https://www.anobudelip.cz/example/${promiseId}`,
-      payload: { sourcePartyId: "ano" }
-    });
-    const match = matchRecordToPromise(exactOccurrence, promise);
-    assert.ok(match, `Exact quote does not satisfy matching threshold for ${promiseId}`);
-    assert.equal(match.attributionStatus, "verified-party-publication");
-  }
-});
-
-test("common inflected wording reaches the matching threshold for new finance promises", () => {
-  const cases = [
-    ["ano-2025-tax-exempt-voluntary-tips", "Osvobození dobrovolného spropitného od daně a pojistného"],
-    ["ano-2025-customs-entry-salary-50000", "Nástupní plat celníků 50 tisíc korun"]
-  ];
-  for (const [promiseId, title] of cases) {
-    const promise = registry.promises.find(({ id }) => id === promiseId);
-    assert.ok(promise);
-    const occurrence = createCollectedRecord({
-      id: `party-source--${promiseId}-natural-wording`,
-      sourceId: "ano-party-news",
-      kind: "official-publication",
-      primary: true,
-      evidenceRole: "official-party-publication",
-      occurredAt: "2026-01-01T00:00:00.000Z",
-      timeZone: "Europe/Prague",
-      title,
-      publisher: "ANO 2011",
-      url: `https://www.anobudelip.cz/example/${promiseId}`,
-      payload: { sourcePartyId: "ano" }
-    });
-    const match = matchRecordToPromise(occurrence, promise);
-    assert.ok(match, `Common inflected wording does not match ${promiseId}`);
-    assert.ok(match.score >= promise.matching.minimumScore);
-  }
-});
-
-test("common Dluhopis Republiky name variants reach the matching threshold", () => {
-  const promise = registry.promises.find(({ id }) => id === "ano-2025-retail-state-bonds");
-  assert.ok(promise);
-  for (const [index, title] of ["Ministerstvo financí vydalo Dluhopis Republiky", "Ministerstvo financí vydalo Dluhopisy Republiky"].entries()) {
-    const occurrence = createCollectedRecord({
-      id: `ministry-source--retail-bond-name-${index}`,
-      sourceId: "finance-ministry",
-      kind: "official-publication",
-      primary: true,
-      evidenceRole: "official-discovery",
-      occurredAt: "2026-01-01T00:00:00.000Z",
-      timeZone: "Europe/Prague",
-      title,
-      publisher: "Ministry of Finance of the Czech Republic",
-      url: `https://mf.gov.cz/example/retail-bond-${index}`,
-      payload: {}
-    });
-    const match = matchRecordToPromise(occurrence, promise);
-    assert.ok(match, `Common product name does not match: ${title}`);
-    assert.ok(match.score >= promise.matching.minimumScore);
-  }
-});
-
-test("retail state-bond completion test preserves every defining product condition", () => {
-  const promise = registry.promises.find(({ id }) => id === "ano-2025-retail-state-bonds");
-  assert.ok(promise);
-  assert.match(promise.fulfillmentTest, /1,000/);
-  assert.match(promise.fulfillmentTest, /3,000,000/);
-  assert.match(promise.fulfillmentTest, /premium coupon/);
-  assert.match(promise.fulfillmentTest, /six-year holding/);
-  assert.match(promise.fulfillmentTest, /withholding tax/);
-});
-
-test("common inflected VAT wording reaches the matching threshold", () => {
-  const promise = registry.promises.find(({ id }) => id === "ano-2025-restaurant-nonalcoholic-vat-12");
-  assert.ok(promise);
-  const occurrence = createCollectedRecord({
-    id: "party-source--restaurant-vat-natural-wording",
-    sourceId: "ano-party-news",
-    kind: "official-publication",
-    primary: true,
-    evidenceRole: "official-party-publication",
-    occurredAt: "2026-01-01T00:00:00.000Z",
-    timeZone: "Europe/Prague",
-    title: "DPH u stravovacích služeb se sníží na 12 %",
-    publisher: "ANO 2011",
-    url: "https://www.anobudelip.cz/example/restaurant-vat",
-    payload: { sourcePartyId: "ano" }
-  });
-  const match = matchRecordToPromise(occurrence, promise);
-  assert.ok(match);
-  assert.ok(match.score >= promise.matching.minimumScore);
-});
-
-test("time-bounded contribution promise distinguishes prevention from a later reversal", () => {
-  assert.match(selfEmployedContributionIncrease.fulfillmentTest, /prevent .* from taking effect on its planned effective date in 2026/);
-  assert.doesNotMatch(selfEmployedContributionIncrease.fulfillmentTest, /revers/i);
-  assert.match(selfEmployedContributionIncrease.contradictionTest, /scheduled 2026 increase takes effect/);
-  assert.match(selfEmployedContributionIncrease.contradictionTest, /does not retroactively fulfill/);
+test("matching configuration contains exactly the confirmed public promises", async () => {
+  assert.equal(registry.status, "confirmed-promise-matching-v1");
+  assert.equal(registry.promises.length, 22);
+  assert.ok(registry.promises.every((promise) => promise.promiseSource.primary));
 });
 
 function record(overrides = {}) {
@@ -297,7 +75,7 @@ test("finds a Culture Ministry free-entry item even when timing words split the 
   assert.deepEqual(match.matchedTerms.map(({ phrase }) => phrase), ["státní muzea a galerie"]);
 });
 
-test("builds a bounded unpublished primary-only package", () => {
+test("builds a bounded primary-only evidence package", () => {
   const primary = record();
   const article = record({
     id: "media--1",
@@ -316,16 +94,14 @@ test("builds a bounded unpublished primary-only package", () => {
   const matches = matchCollectorRecords(collectorRun.records, eet, { asOf: "2026-08-31" });
   const evidencePackage = buildEvidencePackage({ promise: eet, matches, collectorRun, asOf: "2026-08-31" });
   assert.equal(evidencePackage.methodologyVersion, "slava-v6");
-  assert.deepEqual(evidencePackage.assessmentContext, {
-    mode: "live",
-    ruleVersion: "period-timing-v1"
-  });
+  assert.deepEqual(evidencePackage.assessmentContext, { mode: "live", ruleVersion: "period-timing-v1" });
   assert.equal(evidencePackage.evidence.length, 2);
   assert.equal(evidencePackage.evidence[0].role, "promise-source");
   assert.equal(evidencePackage.evidence[1].id, primary.id);
   assert.equal(evidencePackage.generation.candidateMatchCount, 2);
   assert.equal(evidencePackage.generation.selectedPrimaryEvidenceCount, 1);
   assert.equal(evidencePackage.generation.directionAssigned, false);
+  assert.equal(evidencePackage.generation.publicationApproved, false);
   assert.equal("status" in evidencePackage, false);
 });
 

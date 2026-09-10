@@ -19,7 +19,11 @@ import { createStructuredModelResponse } from "./lib/model-provider.mjs";
 const envPath = resolve(".env");
 if (existsSync(envPath)) loadEnvFile(envPath);
 
-const packagePath = resolve(process.argv[2] ?? "automation/golden-cases/ano-eet-2/evidence-package.json");
+const requestedPackagePath = process.argv[2];
+if (!requestedPackagePath || requestedPackagePath.startsWith("--")) {
+  throw new Error("An evidence-package path is required");
+}
+const packagePath = resolve(requestedPackagePath);
 const validateOnly = process.argv.includes("--validate-only");
 const evidencePackage = validateEvidencePackage(JSON.parse(await readFile(packagePath, "utf8")));
 const packageHash = hashEvidencePackage(evidencePackage);

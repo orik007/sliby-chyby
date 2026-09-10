@@ -2,7 +2,7 @@
 
 ## Status
 
-**Working proposal.** This register identifies recordings that may contain pre-election party commitments. A recording or caption lead is not an accepted promise. Speaker identity, exact audio, context, party attribution, and duplication with written material must all be reviewed.
+This register identifies source recordings that may contain pre-election party commitments. A recording or caption lead is not a confirmed public promise. Speaker identity, exact audio, context, party attribution, and duplication with written material must all be reviewed.
 
 ## National leader debates and interviews
 

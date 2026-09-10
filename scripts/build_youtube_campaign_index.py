@@ -96,7 +96,7 @@ def record_from_info(
         "url": info.get("webpage_url") or f"https://www.youtube.com/watch?v={info.get('id')}",
         "discoveryKind": discovery_kind,
         "discoveredFrom": discovered_from or [],
-        "reviewStatus": "unreviewed-audiovisual-source",
+        "sourceReview": "unreviewed",
     }
 
 
@@ -231,14 +231,14 @@ def main() -> None:
     OUTPUT.write_text(
         json.dumps(
             {
-                "status": "Working proposal",
+                "status": "Research catalogue",
                 "scope": (
                     "Public YouTube metadata for official ANO and SPD channel uploads "
                     "published from 2025-01-01 through election day, plus videos embedded "
                     "in captured Motoristé sobě campaign-period posts."
                 ),
                 "warning": (
-                    "A video is a discovery source, not an accepted promise. Titles and "
+                    "A video is a discovery source, not a confirmed public promise. Titles and "
                     "descriptions are insufficient where the commitment occurs only in audio."
                 ),
                 "counts": counts,

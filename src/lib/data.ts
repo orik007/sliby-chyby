@@ -31,9 +31,11 @@ function assertRelationships() {
   const partyPeriodIds = new Set(partyPeriods.map(({ id }) => id));
   const promiseById = new Map(promises.map((promise) => [promise.id, promise]));
   const promiseIds = new Set(promiseById.keys());
+  const assessedPromiseIds = new Set(assessmentRevisions.map(({ promiseId }) => promiseId));
   const sourceIds = new Set(sources.map(({ id }) => id));
   for (const item of partyPeriods) if (!periodIds.has(item.periodId) || !partyIds.has(item.partyId)) throw new Error(`Invalid PartyPeriod relationship: ${item.id}`);
   for (const promise of promises) if (!partyPeriodIds.has(promise.partyPeriodId) || !sourceIds.has(promise.primarySourceId)) throw new Error(`Invalid Promise relationship: ${promise.id}`);
+  for (const promise of promises) if (!assessedPromiseIds.has(promise.id)) throw new Error(`Published promise is missing its current score: ${promise.id}`);
   for (const revision of assessmentRevisions) {
     if (!promiseIds.has(revision.promiseId)) throw new Error(`Unknown promise in assessment: ${revision.id}`);
     for (const sourceId of revision.evidenceSourceIds) if (!sourceIds.has(sourceId)) throw new Error(`Unknown evidence source ${sourceId} in ${revision.id}`);

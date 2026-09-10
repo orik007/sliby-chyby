@@ -1,6 +1,6 @@
 # Official media visual review
 
-**Status: Working proposal**
+**Status: Research catalogue**
 
 This review covers image and file records exposed by the official WordPress media APIs for SPD and Motoristé sobě between 1 January and 4 October 2025. It is a discovery pass, not a promise-acceptance decision. The normalized source list is in `official-media-index.json`.
 
@@ -10,7 +10,7 @@ This review covers image and file records exposed by the official WordPress medi
 - Motoristé sobě: all 321 downloadable image thumbnails were visually reviewed in 17 contact sheets. Eighteen image records had no WordPress review thumbnail; known campaign files among them were inspected from their original file or PDF where available. Non-image files are tracked separately.
 - Contact sheets and downloaded thumbnails are reproducible temporary review artifacts and are intentionally excluded from version control.
 
-## Findings retained as source occurrences
+## Source records with promise leads
 
 The following visual records contain a concrete commitment, a measurable magnitude, or a clear lead to a detailed accompanying source. Exact transcriptions are stored in `campaign-creative-candidates.json`.
 

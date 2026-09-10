@@ -2,7 +2,7 @@ import { invariant } from "./collector-core.mjs";
 
 const STATE_LABELS = {
   "review-candidate": "Assessment candidate awaiting human review",
-  "human-review-required": "Human review required; no candidate score",
+  "human-review-required": "Human review required; no proposed public score",
   "assessable-package": "Assessable primary-evidence package; not yet proposed",
   "candidate-matches-without-attributable-primary": "Candidate matches found, but no attributable primary evidence",
   "no-candidate-match": "No candidate match found in this run"

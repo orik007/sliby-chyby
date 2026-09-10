@@ -110,7 +110,7 @@ for (party_id, _), post in sorted(posts.items(), key=lambda item: item[1]["date"
                 "sourceUrl": post["link"],
                 "sourceKind": "official-party-post",
                 "originalExcerpt": excerpt,
-                "reviewStatus": "unreviewed-candidate",
+                "sourceReview": "unreviewed",
                 "attributionTier": "unreviewed-official-host",
                 "notes": "Official-site post may be party-authored, an interview, or a republication. Verify speaker, context, and whether the statement was made on behalf of the party.",
             }
@@ -135,7 +135,7 @@ for source in sorted(ano_sources, key=lambda item: item["date"]):
                 "sourceUrl": source["url"],
                 "sourceKind": "official-party-post" if is_party_owned else "media-item-indexed-by-party",
                 "originalExcerpt": excerpt,
-                "reviewStatus": "unreviewed-candidate",
+                "sourceReview": "unreviewed",
                 "attributionTier": "unreviewed-official-host" if is_party_owned else "unreviewed-media-discovery",
                 "notes": (
                     "Party-owned campaign item. Verify whether the statement is an explicit national party commitment and recover the full original context."
@@ -148,7 +148,7 @@ for source in sorted(ano_sources, key=lambda item: item["date"]):
 OUTPUT.write_text(
     json.dumps(
         {
-            "status": "Working proposal",
+            "status": "Research catalogue",
             "scope": "Over-inclusive campaign-statement queue from official party websites and the ANO campaign-period news index, 2025-01-01 through 2025-10-04.",
             "sourcePostCount": len(posts) + len(ano_sources),
             "sourcePostCounts": {
