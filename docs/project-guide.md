@@ -230,5 +230,4 @@ The complete register remains [decisions.md](decisions.md). The largest unresolv
 - treatment of real blocked, compromised, materially mixed, or otherwise unscorable cases;
 - implementation of the one-time period-closing audit;
 - source snapshot retention, copyright, and image licensing rules;
-- the coverage threshold required before describing a party's promise catalogue as substantially complete;
-- automatic reporting of Cloudflare deployment success or failure in the mobile approval conversation.
+- the coverage threshold required before describing a party's promise catalogue as substantially complete.
