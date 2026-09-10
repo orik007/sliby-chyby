@@ -2,7 +2,7 @@
 
 SlibyChyby is a public tracker of Czech political parties' pre-election promises and their subsequent actions. It is intended to let a visitor understand within seconds what a party promised, how it is currently acting, and which evidence supports that assessment.
 
-The core measure is the **SLAVA Index**, the sum of current scores of confirmed promises. It is displayed as index points without a percent sign. Each promise has a score from acting against the promise (`-2`) to fulfilled (`+2`).
+The core measure is the **SLAVA Index**, a normalized point score from `-100` to `+100` derived from confirmed promises. It is displayed without a percent sign. Each promise has a score from acting against the promise (`-2`) to fulfilled (`+2`).
 
 The initial concept focuses on the current electoral period and the governing parties ANO, SPD, and Motoristé. Promises remain scoped to their electoral period; later periods receive new promise sets and historical periods remain available.
 

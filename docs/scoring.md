@@ -39,11 +39,11 @@ For a Chamber vote, attribute party conduct only when the vote is a verified dec
 Only `confirmed` promises enter the index. For a party with current scores `s₁ … sₙ`:
 
 ```text
-SLAVA Index = sum(sᵢ)
+SLAVA Index = round(sum(sᵢ) / (2 × n) × 100)
 ```
 
-It is shown as index points, for example `SLAVA Index: +14`, never as a percent. Recalculate it from every confirmed promise whenever public promise data or a current score revision changes. If a party has no confirmed promises, the index is unavailable.
+It ranges from `−100` to `+100` and is shown as index points without a percent sign. Recalculate it from every confirmed promise whenever public promise data or a current score revision changes. If a party has no confirmed promises, the index is unavailable.
 
 ## Audit
 
-Assessment revisions are append-only. Each automated revision retains the evidence identifiers, methodology and prompt versions, model identifiers, fingerprint, time, confidence, and both assessor outputs plus arbitration where used. No separate “candidate score”, “unassessed score”, or public human-review state exists.
+Assessment revisions are append-only. Each automated revision retains the evidence identifiers, methodology and model identifiers, fingerprint, time, confidence, and assessment output. No separate “candidate score”, “unassessed score”, or public human-review state exists.
