@@ -13,7 +13,7 @@ This document contains only the current confirmed rules. When a rule changes, re
 
 ## Scores and index
 
-- Every confirmed promise has one current numerical score from `-2` to `+2`. Its initial score is `0`.
+- Every confirmed promise has one current numerical score from `-2` to `+2`. The default is `0` when no documented assessment conclusion sets another score.
 - A score is separate from the promise lifecycle and may change whenever traceable evidence justifies a new current assessment.
 - The SLAVA Index includes every confirmed promise of the party and is `round(sum(scores) / (2 × promise count) × 100)`. It ranges from `-100` to `+100`.
 - No manual aggregate is stored.

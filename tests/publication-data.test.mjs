@@ -38,6 +38,8 @@ test("production assessments retain their sources", async () => {
     assert.equal(source.isDemo, false);
     assert.equal(source.type, "programme");
     assert.ok(source.url);
+    assert.ok(promise.sourceLocator, `Missing source locator for ${promise.id}`);
+    assert.ok(Object.values(promise.sourceLocator).some(Boolean), `Empty source locator for ${promise.id}`);
   }
 
   for (const revision of revisions) {

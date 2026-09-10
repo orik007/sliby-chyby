@@ -4,11 +4,13 @@ import test from "node:test";
 
 test("research promises use one source catalog and three promise statuses", async () => {
   const catalog = JSON.parse(await readFile(new URL("../research/2025-election/promises.json", import.meta.url), "utf8"));
-  const publicPromiseIds = new Set(await Promise.all(
+  const publicPromises = await Promise.all(
     (await readdir(new URL("../data/promises/", import.meta.url)))
       .filter((name) => name.endsWith(".json"))
-      .map(async (name) => JSON.parse(await readFile(new URL(`../data/promises/${name}`, import.meta.url), "utf8")).id)
-  ));
+      .map(async (name) => JSON.parse(await readFile(new URL(`../data/promises/${name}`, import.meta.url), "utf8")))
+  );
+  const publicPromiseIds = new Set(publicPromises.map(({ id }) => id));
+  const publicPromiseById = new Map(publicPromises.map((promise) => [promise.id, promise]));
   const sourceIds = new Set(catalog.sources.map(({ id }) => id));
   const promiseIds = new Set();
   assert.equal(catalog.sources.length, 3);
@@ -27,7 +29,10 @@ test("research promises use one source catalog and three promise statuses", asyn
     assert.ok(promise.originalTextCz);
     assert.ok(Number.isInteger(promise.locator?.page));
     if (promise.status === "rejected") assert.ok(promise.rejectionReason);
-    if (promise.status === "confirmed") assert.ok(publicPromiseIds.has(promise.id), `Confirmed promise ${promise.id} is not public`);
+    if (promise.status === "confirmed") {
+      assert.ok(publicPromiseIds.has(promise.id), `Confirmed promise ${promise.id} is not public`);
+      assert.deepEqual(publicPromiseById.get(promise.id).sourceLocator, promise.locator, `Public locator differs for ${promise.id}`);
+    }
   }
   assert.equal(catalog.promises.filter(({ status }) => status === "confirmed").length, 22);
 });
