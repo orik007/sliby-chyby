@@ -1,5 +1,7 @@
 # Unpublished end-to-end pilot
 
+> Historical pilot record. It describes the superseded review-proposal implementation and does not define current promise lifecycle, scoring, evidence, or release rules. Use the canonical documents named in [project-guide.md](project-guide.md).
+
 ## Status and purpose
 
 **Confirmed decision**

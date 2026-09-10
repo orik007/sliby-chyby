@@ -34,6 +34,6 @@ Each entry preserves the complete source passage, an exact Czech quote, a page l
 
 ## Publication boundary
 
-The registry records internal candidate matching configuration. No individual entry is made public by this document, and candidates are never scored. Under the confirmed publication rule, a candidate becomes public only when it is confirmed; that same validated change publishes its primary source and initial `no-progress` baseline at `0`. No owner-approved assessment revision, AI proposal, or later-conduct evidence is required for that baseline. Evidence collection, two-assessor review, possible arbitration, and owner approval are required only before a later directional assessment revision is published.
+The registry records internal matching configuration. No individual entry is made public by this document. Under the canonical lifecycle rule, a candidate becomes public only when it is confirmed; that same validated change publishes its primary source and initial score of `0`. No later-conduct evidence is required for that baseline. See `docs/promise-selection.md`, `docs/scoring.md`, and `docs/evidence-pipeline.md` for the active rules; this research note does not define a second workflow.
 
 **Current state.** The working registry contains 46 reviewed matcher candidates. Public data currently contains 22 confirmed ANO promises. The remaining registry entries need individual confirmation review; they are not blocked on evidence collection or directional assessment.

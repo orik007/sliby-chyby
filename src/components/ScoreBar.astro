@@ -1,11 +1,12 @@
 ---
-interface Props { score: number | null; compact?: boolean; }
-const { score, compact = false } = Astro.props;
-const markerPosition = score === null ? 50 : Math.max(3, Math.min(97, (score + 100) / 2));
+interface Props { score: number | null; scale: number; compact?: boolean; }
+const { score, scale, compact = false } = Astro.props;
+const safeScale = Math.max(2, scale);
+const markerPosition = score === null ? 50 : Math.max(3, Math.min(97, ((score + safeScale) / (2 * safeScale)) * 100));
 const label = score === null ? "SLAVA Index není dostupný" : `SLAVA Index ${score} bodů`;
 ---
 <div class:list={["score-bar", { "score-bar-compact": compact }]}>
   <div class="score-row"><span>SLAVA Index</span><strong>{score === null ? "—" : `${score > 0 ? "+" : ""}${score}`}</strong></div>
   <div class="score-track" aria-label={label} role="img"><span class="track-zero"></span>{score !== null && <span class="track-marker" style={`left: ${markerPosition}%`}></span>}</div>
-  {compact ? <div class="score-legend score-legend-compact" aria-hidden="true"><span>−100</span><span>+100</span></div> : <div class="score-legend" aria-hidden="true"><span>−100</span><span>0</span><span>+100</span></div>}
+  {compact ? <div class="score-legend score-legend-compact" aria-hidden="true"><span>−{safeScale}</span><span>+{safeScale}</span></div> : <div class="score-legend" aria-hidden="true"><span>−{safeScale}</span><span>0</span><span>+{safeScale}</span></div>}
 </div>
