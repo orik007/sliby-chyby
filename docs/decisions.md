@@ -114,19 +114,21 @@ The documentation hierarchy is a **confirmed decision**: [promise-selection.md](
 - **Superseded decision:** Every pull request received up to two shared GitHub Copilot and Codex review waves. The release controller requested both reviewers for each wave, the first wave covered the ready initial head, and a consolidated remediation commit could receive a second wave. Before owner approval, the exact current head had to pass deterministic verification and have no unresolved addressable review threads.
 - **Reason for supersession:** The owner ended this policy after overlapping review runs consumed excessive credits and made the release process needlessly complex. It is replaced by the active release rule below: no GitHub Copilot or Codex review starts automatically, and an owner may request one only for a specified pull request and exact current head revision.
 
+### Superseded release-controller decision
+
+- **Superseded decision:** A server-side release controller and feedback resolver would store pull-request state, post a ready-for-owner-approval comment, interpret owner feedback, verify the approved head, merge the pull request, and report deployment status.
+- **Reason for supersession:** The owner chose a deliberately simple manual release process while the product and daily evidence pipeline are completed. The controller, feedback resolver, GitHub App, webhook receiver, durable controller state, and automated PR status reporting are not to be implemented.
+
 ### Release approval and delivery
 
-- Run the review, approval, merge, and deployment process on server-side services. It must not depend on the owner's computer or an active local or Remote session.
-- Use the GitHub pull request itself as the mobile approval conversation. When a PR is ready, the release controller posts one ready-for-owner-approval comment mentioning `@orik007`; GitHub Mobile delivers that mention and opens the individual PR rather than a shared inbox.
-- Use one independently acting GitHub App, `slibychyby-release-control[bot]`, for release state transitions. It is a coordinator only: it records state, recognizes owner approval or feedback, verifies gates, and performs the permitted merge. It never edits the change, evaluates the substance of a finding or owner feedback, or requests reviews.
-- Treat the owner's exact `schvaluji` reply to the active ready-for-owner-approval comment as approval for the pull request and the exact head revision stored with that comment. The owner does not type a commit hash. Before merge, the release controller must verify that this stored head is still current and that all required gates still pass.
-- Treat any other owner comment as feedback. The controller must return the PR to one server-side feedback-resolver task for that PR, without merging. The resolver reads and addresses the comment, then the controller revalidates and posts a new ready-for-owner-approval comment.
-- Invalidate approval when the pull request head changes. A new ready-for-owner-approval comment is required after deterministic verification.
-- Merge only after the project's explicitly defined server-side verification succeeds for the approved revision.
+- Use the GitHub pull request as the manual approval conversation. The owner reviews the current pull-request head and merges manually after the required verification succeeds.
+- Treat the owner's unambiguous `schvaluji` on the pull request as approval only for its exact current head revision. A new commit invalidates that approval.
+- Treat any other owner comment as feedback. The PR author addresses it manually in the same pull request or in a new pull request when the scope expands.
+- Merge only after the `Verify pull request` workflow succeeds for the exact current head revision and the owner has approved that revision.
 - Treat a successful merge into `main` as the release boundary and follow it with deployment.
-- Report merge and deployment success or failure in the same pull-request conversation.
+- The owner checks merge and deployment status manually; no controller reports them in the pull-request conversation.
 - Do not automatically initiate, request, repeat, or wait for GitHub Copilot or Codex reviews. No pull-request event, workflow, agent, release role, commit, draft-state change, or owner-feedback event may trigger either review. The owner may explicitly authorize a review for one identified pull request and its exact current head revision; that optional review is advisory and never a release gate or a substitute for exact-revision owner approval.
-- Keep release responsibilities separate: the PR author delivers a scoped validated head; the release controller owns state transitions and gate verification; one feedback-resolver task evaluates owner feedback and makes only permitted remediation commits; CI verifies; and Cloudflare deploys `main`. The release controller never edits or interprets feedback, and the resolver never merges. No role may silently take over another role's authority.
+- Keep release responsibilities simple: the PR author delivers a scoped validated head and addresses feedback manually; CI verifies; the owner approves and merges manually; and Cloudflare deploys `main`.
 - Use Cloudflare Workers as the production deployment target before the final domain is selected; this preserves the site's server-rendered collection-status endpoint.
 - Deploy only the `main` branch to production. Do not configure a non-production build trigger, so unpublished review proposals do not receive public preview URLs.
 - The ChatGPT Sites address was kept as a temporary demo during the hosting transition. That transition is now complete; this historical decision does not set a future retention deadline.

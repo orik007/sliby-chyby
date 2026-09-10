@@ -184,11 +184,11 @@ Every pull request targeting `main` is checked by `.github/workflows/verify-pr.y
 
 GitHub Copilot and Codex reviews are not initiated, requested, repeated, or awaited automatically. No pull-request event, workflow, agent, release role, commit, draft-state change, or owner-feedback event may trigger either review. The owner may explicitly authorize one review for an identified pull request and its exact current head revision; it remains advisory and never delays owner approval or becomes a release gate. Before the owner sees any revision, `Verify pull request` must pass for its exact current head. A scope expansion or newly discovered material issue moves to a new pull request.
 
-The GitHub pull request itself is the mobile approval conversation. The release controller posts one ready-for-owner-approval comment that mentions the owner after deterministic verification. GitHub Mobile opens that individual PR. The owner replies `schvaluji` directly to the active comment; the controller binds this short reply to the stored exact head, revalidates it, and only then merges. A new commit invalidates the ready comment. Any other owner comment is feedback: it is sent to the one resolver task for that PR and the PR is not merged. An owner-authorized AI review is only advice and never substitutes for this owner decision.
+The GitHub pull request itself is the manual approval conversation. After `Verify pull request` succeeds for the exact current head, the owner reviews that head and replies `schvaluji` to approve it or leaves feedback. A new commit invalidates approval. The PR author addresses feedback manually; the owner merges the approved verified head manually. An owner-authorized AI review is only advice and never substitutes for this owner decision.
 
 Cloudflare Workers Builds watches only `main`. A merge triggers `npm run build` followed by `npx wrangler deploy --config wrangler.deploy.jsonc`. Preview branch deployments are disabled so unpublished political proposals cannot receive public URLs. The current public Worker is `sliby-chyby` at `https://sliby-chyby.orik007-apps.workers.dev/`.
 
-Cloudflare deployment itself is operational and the first repository-triggered production build succeeded. The target release controller reports the final Cloudflare result in the same pull-request conversation; its webhook and GitHub App implementation remain to be deployed.
+Cloudflare deployment itself is operational and the first repository-triggered production build succeeded. The owner checks the final deployment result manually; no release controller, webhook, or GitHub App reports it in the pull-request conversation.
 
 ## Repository map
 
@@ -230,5 +230,4 @@ The complete register remains [decisions.md](decisions.md). The largest unresolv
 - treatment of real blocked, compromised, materially mixed, or otherwise unscorable cases;
 - implementation of the one-time period-closing audit;
 - source snapshot retention, copyright, and image licensing rules;
-- the coverage threshold required before describing a party's promise catalogue as substantially complete;
-- automatic reporting of Cloudflare deployment success or failure in the mobile approval conversation.
+- the coverage threshold required before describing a party's promise catalogue as substantially complete.
