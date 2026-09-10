@@ -4,7 +4,16 @@ import { buildCoverageAudit, renderCoverageAuditMarkdown } from "./lib/coverage-
 import { loadPublishedPromiseIds, publishedMatchingRegistry } from "./lib/published-promises.mjs";
 
 function parseArgs(args) {
-  const options = { collectorRun: null, matcherRun: null, promises: "automation/matching/promises.json", publishedPromises: "data/promises", sources: "automation/collectors/sources.json", output: null, markdown: null };
+  const options = {
+    collectorRun: null,
+    matcherRun: null,
+    promises: "automation/matching/promises.json",
+    publishedPromises: "data/promises",
+    sources: "automation/collectors/sources.json",
+    proposals: "automation/review-proposals/manifest.json",
+    output: null,
+    markdown: null
+  };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];
@@ -12,6 +21,7 @@ function parseArgs(args) {
     else if (arg === "--promises") options.promises = args[++index];
     else if (arg === "--published-promises") options.publishedPromises = args[++index];
     else if (arg === "--sources") options.sources = args[++index];
+    else if (arg === "--proposals") options.proposals = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--markdown") options.markdown = args[++index];
     else throw new Error(`Unknown argument: ${arg}`);
@@ -23,8 +33,14 @@ function parseArgs(args) {
 const args = parseArgs(process.argv.slice(2));
 const readJson = async (path) => JSON.parse(await readFile(resolve(path), "utf8"));
 const promiseRegistry = publishedMatchingRegistry(await readJson(args.promises), await loadPublishedPromiseIds(args.publishedPromises));
-const audit = buildCoverageAudit({ collectorRun: await readJson(args.collectorRun), matcherRun: await readJson(args.matcherRun), promiseRegistry, sourceRegistry: await readJson(args.sources) });
+const audit = buildCoverageAudit({
+  collectorRun: await readJson(args.collectorRun),
+  matcherRun: await readJson(args.matcherRun),
+  promiseRegistry,
+  sourceRegistry: await readJson(args.sources),
+  proposalManifest: await readJson(args.proposals)
+});
 await mkdir(dirname(resolve(args.output)), { recursive: true });
 await writeFile(resolve(args.output), `${JSON.stringify(audit, null, 2)}\n`, { flag: "wx" });
 await writeFile(resolve(args.markdown), renderCoverageAuditMarkdown(audit), { flag: "wx" });
-console.log(JSON.stringify({ promiseCount: audit.promiseCount, stateCounts: audit.stateCounts }, null, 2));
+console.log(JSON.stringify({ promiseCount: audit.promiseCount, stateCounts: audit.stateCounts, publicationApproved: false }, null, 2));

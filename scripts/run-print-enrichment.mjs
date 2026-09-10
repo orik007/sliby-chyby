@@ -1,7 +1,7 @@
 import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
+import { validateEvidencePackage } from "./lib/assessment-pipeline.mjs";
 import { fetchVerified, sha256, validateRegistry } from "./lib/collector-core.mjs";
-import { validateEvidencePackage } from "./lib/evidence-matcher.mjs";
 import {
   buildPrintDocumentEvidence,
   deriveDocumentSearchTerms,
@@ -130,6 +130,7 @@ for (const entry of packages) {
   evidencePackage.evidence.push(...additions);
   evidencePackage.generation.documentEnrichmentVersion = printDocumentEnrichmentVersion;
   evidencePackage.generation.documentEvidenceCount = additions.length;
+  evidencePackage.generation.publicationApproved = false;
   validateEvidencePackage(evidencePackage);
   const outputPath = resolve(outputDirectory, basename(entry.path));
   await writeFile(outputPath, `${JSON.stringify(evidencePackage, null, 2)}\n`, { flag: "wx" });
@@ -147,6 +148,7 @@ const run = {
   enrichmentVersion: printDocumentEnrichmentVersion,
   enrichedAt: new Date().toISOString(),
   sourceId: pspSource.id,
+  publicationApproved: false,
   results,
   warnings
 };
@@ -154,4 +156,4 @@ await writeFile(resolve(outputDirectory, "enrichment-run.json"), `${JSON.stringi
 if (args.requireDocuments && warnings.length > 0) {
   throw new Error(`Required official print-document enrichment failed for ${warnings.length} print(s); see enrichment-run.json`);
 }
-console.log(JSON.stringify({ outputDirectory, packageCount: results.length, documentEvidenceCount: results.reduce((sum, result) => sum + result.documentEvidenceCount, 0), warnings: warnings.length }, null, 2));
+console.log(JSON.stringify({ outputDirectory, packageCount: results.length, documentEvidenceCount: results.reduce((sum, result) => sum + result.documentEvidenceCount, 0), warnings: warnings.length, publicationApproved: false }, null, 2));

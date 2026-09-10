@@ -12,6 +12,6 @@ SlibyChyby is a public tracker of Czech parties' election promises and later, tr
 
 Campaign sources and non-public promises are in `research/2025-election/promises.json`. Public promises, sources, and score revisions are in `data/`.
 
-The daily 09:37 Prague workflow collects evidence, matches it to confirmed promises, enriches known official documents, and writes a coverage audit. It does not call AI, score promises, or publish data.
+The daily 09:37 Prague workflow collects evidence, matches it to confirmed promises, enriches known official documents, and prepares unpublished AI assessment proposals for human review. It never changes a public score or publishes data.
 
 Read [docs/project-guide.md](docs/project-guide.md) for the current rules. Use `npm test` for tests and `npm run build` for the local validation and build.

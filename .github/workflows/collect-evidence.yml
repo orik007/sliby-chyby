@@ -1,4 +1,4 @@
-name: Collect and match evidence
+name: Collect, match, and assess confirmed promises
 
 on:
   schedule:
@@ -12,45 +12,174 @@ on:
         default: "2025-10-01"
         type: string
       as_of:
-        description: Matching cutoff date; leave empty to use the UTC run date
+        description: Assessment cutoff date; leave empty to use the UTC run date
         required: false
         default: ""
         type: string
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 concurrency:
-  group: daily-evidence-collection
+  group: evidence-assessment-review
   cancel-in-progress: false
 
 jobs:
   collect:
-    name: Collect and match confirmed promises
+    name: Build unpublished review proposals
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 35
+    environment:
+      name: assessment
+      deployment: false
     env:
+      GH_TOKEN: ${{ github.token }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       COLLECTOR_SINCE: ${{ inputs.since || '2025-10-01' }}
       MATCHER_AS_OF: ${{ inputs.as_of || '' }}
+      REVIEW_BRANCH: automation/assessment-review
+      SLIBY_ASSESSOR_PROVIDER_A: openai
+      SLIBY_ASSESSOR_PROVIDER_B: openai
+      SLIBY_ARBITER_PROVIDER: openai
+      SLIBY_ASSESSOR_MODEL_A: gpt-5.6-terra
+      SLIBY_ASSESSOR_MODEL_B: gpt-5.6-terra
+      SLIBY_ARBITER_MODEL: gpt-5.6-sol
     steps:
-      - uses: actions/checkout@v5
-      - uses: actions/setup-node@v5
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Prepare durable review branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code --heads origin "$REVIEW_BRANCH" >/dev/null 2>&1; then
+            git fetch origin "refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
+            git switch --create "$REVIEW_BRANCH" --track "origin/$REVIEW_BRANCH"
+            git merge --no-edit "$GITHUB_SHA"
+          else
+            git switch --create "$REVIEW_BRANCH" "$GITHUB_SHA"
+          fi
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
-      - run: npm ci
-      - run: npm test
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run deterministic tests
+        run: npm test
+
       - name: Collect source records
         run: node scripts/run-collectors.mjs --since "$COLLECTOR_SINCE" --output automation/runs/pipeline/github-actions/collector
+
       - name: Match records to every confirmed promise
         run: |
           AS_OF="${MATCHER_AS_OF:-$(date -u +%F)}"
-          node scripts/run-matcher.mjs --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json --as-of "$AS_OF" --output automation/runs/pipeline/github-actions/matcher
-      - name: Enrich matched parliamentary documents
-        run: node scripts/run-print-enrichment.mjs --input automation/runs/pipeline/github-actions/matcher/evidence-packages --output automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages
-      - name: Audit coverage
-        run: node scripts/run-coverage-audit.mjs --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json --matcher-run automation/runs/pipeline/github-actions/matcher/match-run.json --output automation/runs/pipeline/github-actions/coverage-audit.json --markdown automation/runs/pipeline/github-actions/coverage-audit.md
-      - name: Upload pipeline audit
+          node scripts/run-matcher.mjs \
+            --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
+            --as-of "$AS_OF" \
+            --output automation/runs/pipeline/github-actions/matcher
+
+      - name: Enrich matched parliamentary prints with official documents
+        run: |
+          node scripts/run-print-enrichment.mjs \
+            --input automation/runs/pipeline/github-actions/matcher/evidence-packages \
+            --output automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages
+
+      - name: Assess only new or changed packages
+        run: |
+          node scripts/run-assessment-batch.mjs \
+            --packages automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages \
+            --enrichment-run automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json \
+            --proposals automation/review-proposals \
+            --runs automation/runs/pipeline/github-actions/assessments \
+            --summary automation/runs/pipeline/github-actions/assessment-batch.json \
+            --pull-request-body automation/runs/pipeline/github-actions/assessment-review-pr.md
+
+      - name: Refresh human review pages
+        run: npm run reviews:refresh
+
+      - name: Audit coverage of every published promise
+        run: |
+          node scripts/run-coverage-audit.mjs \
+            --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
+            --matcher-run automation/runs/pipeline/github-actions/matcher/match-run.json \
+            --output automation/runs/pipeline/github-actions/coverage-audit.json \
+            --markdown automation/runs/pipeline/github-actions/coverage-audit.md
+
+      - name: Write audit summary
+        run: |
+          node --input-type=module -e '
+            import { readFile, appendFile } from "node:fs/promises";
+            const run = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/match-run.json", "utf8"));
+            const enrichment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json", "utf8"));
+            const assessment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/assessment-batch.json", "utf8"));
+            const coverage = JSON.parse(await readFile("automation/runs/pipeline/github-actions/coverage-audit.json", "utf8"));
+            const packageCount = run.promiseResults.filter((result) => result.evidencePackage).length;
+            const candidateCount = run.promiseResults.reduce((sum, result) => sum + result.candidateMatchCount, 0);
+            const documentCount = enrichment.results.reduce((sum, result) => sum + result.documentEvidenceCount, 0);
+            const lines = [
+              "## Unpublished evidence pipeline",
+              "",
+              `- Published promises checked: ${run.promiseResults.length}`,
+              `- Potential matches: ${candidateCount}`,
+              `- Assessable evidence packages: ${packageCount}`,
+              `- Official print documents added: ${documentCount}`,
+              `- Document-enrichment warnings: ${enrichment.warnings.length}`,
+              `- New assessment proposals: ${assessment.newProposalCount}`,
+              `- Unchanged assessments skipped: ${assessment.unchangedCount}`,
+              `- Assessments blocked by document warnings: ${assessment.blockedCount}`,
+              `- Assessment cutoff: ${run.asOf}`,
+              `- No candidate match (not a score): ${coverage.stateCounts["no-candidate-match"]}`,
+              `- Matches without attributable primary evidence: ${coverage.stateCounts["candidate-matches-without-attributable-primary"]}`,
+              `- Human-review proposals or unresolved reviews: ${coverage.stateCounts["review-candidate"] + coverage.stateCounts["human-review-required"]}`,
+              "- Direction assigned: no",
+              "- Publication approved: no",
+              "- A missing match never becomes zero points.",
+              ""
+            ];
+            await appendFile(process.env.GITHUB_STEP_SUMMARY, lines.join("\n"));
+          '
+
+      - name: Commit new review proposals
+        id: proposals
+        run: |
+          git add automation/review-proposals
+          if git diff --cached --quiet; then
+            echo "created=false" >> "$GITHUB_OUTPUT"
+            echo "No new assessment proposal was created." >> "$GITHUB_STEP_SUMMARY"
+          else
+            git commit -m "Add automated assessment review proposals"
+            git push --set-upstream origin "$REVIEW_BRANCH"
+            echo "created=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create or update human-review pull request
+        if: steps.proposals.outputs.created == 'true'
+        run: |
+          PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVIEW_BRANCH" --base main --state open --json number --jq '.[0].number')"
+          if [ -n "$PR_NUMBER" ]; then
+            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --title "Kontrola automatických návrhů hodnocení SLAVA" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md
+            PR_URL="$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json url --jq '.url')"
+          else
+            if PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Kontrola automatických návrhů hodnocení SLAVA" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md 2>/tmp/slava-pr-error)"; then
+              :
+            else
+              COMPARE_URL="https://github.com/$GITHUB_REPOSITORY/compare/main...$REVIEW_BRANCH?expand=1"
+              echo "::warning::GitHub Actions may push the review branch but repository settings prevent it from creating pull requests. Open $COMPARE_URL"
+              echo "Review branch is ready. Create the pull request at: $COMPARE_URL" >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            fi
+          fi
+          echo "Review pull request: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload complete unpublished pipeline audit
         if: always()
         uses: actions/upload-artifact@v6
         with:

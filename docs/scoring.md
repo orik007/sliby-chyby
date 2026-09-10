@@ -44,6 +44,6 @@ SLAVA Index = round(sum(sᵢ) / (2 × n) × 100)
 
 It ranges from `−100` to `+100` and is shown as index points without a percent sign. Recalculate it from every confirmed promise whenever public promise data or a current score revision changes. If a party has no confirmed promises, the index is unavailable.
 
-## Record
+## Audit
 
-Assessment revisions are append-only and list their cited evidence source IDs. No separate candidate score, unassessed score, or human-review state exists.
+Assessment revisions are append-only and list their cited evidence source IDs. An automated assessment is only an unpublished human-review proposal; it is not a score state and cannot change public data. Its audit retains active prompt and model identifiers, evidence identifiers, confidence, and the changed-input fingerprint.

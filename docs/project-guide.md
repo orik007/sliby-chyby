@@ -26,10 +26,11 @@ allowlisted evidence sources
   -> daily collection at 09:37 Europe/Prague
   -> deterministic matching to confirmed promises
   -> official-document enrichment when a known target exists
-  -> coverage audit
+  -> two independent assessments; arbiter only on disagreement
+  -> unpublished human-review proposal and coverage audit
 ```
 
-The daily workflow does not call an AI model, assign a score, or publish data. The public site makes no live AI call.
+The daily workflow may use AI only for the bounded assessment stage. It never assigns a public score or publishes data; every output remains an unpublished human-review proposal. The public site makes no live AI call.
 
 ## Repository map
 
@@ -39,8 +40,8 @@ The daily workflow does not call an AI model, assign a score, or publish data. T
 | `data/` | Public confirmed promises, sources, current-score revisions, and system status. |
 | `automation/collectors/` | Allowlisted evidence-source registry. |
 | `automation/matching/` | Deterministic matching configuration for public promises. |
-| `scripts/` | Validation, collection, matching, enrichment, and coverage-audit scripts. |
-| `.github/workflows/` | Verification and daily evidence collection. |
+| `scripts/` | Validation, collection, matching, enrichment, assessment, and coverage-audit scripts. |
+| `.github/workflows/` | Verification and the daily evidence-assessment workflow. |
 
 ## Before changing the project
 

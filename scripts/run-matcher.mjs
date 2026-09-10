@@ -71,12 +71,15 @@ for (const promise of promises) {
 const run = {
   schemaVersion: "1.0.0",
   matcherVersion: "deterministic-matcher-v5",
+  assessmentContext: { mode: "live", ruleVersion: "period-timing-v1" },
   matchedAt: new Date().toISOString(),
   asOf: args.asOf,
+  publicationApproved: false,
+  directionAssigned: false,
   collectorRunId: collectorRun.runId,
   collectorRunHash: sha256(collectorRun),
   promiseRegistryHash: sha256(publishedRegistry),
   promiseResults
 };
 await writeFile(resolve(outputDirectory, "match-run.json"), `${JSON.stringify(run, null, 2)}\n`, { flag: "wx" });
-console.log(JSON.stringify({ outputDirectory, promiseCount: promises.length, packageCount: promiseResults.filter((result) => result.evidencePackage).length }, null, 2));
+console.log(JSON.stringify({ outputDirectory, promiseCount: promises.length, packageCount: promiseResults.filter((result) => result.evidencePackage).length, publicationApproved: false }, null, 2));

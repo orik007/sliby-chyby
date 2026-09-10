@@ -22,7 +22,10 @@ This document contains only the current confirmed rules. When a rule changes, re
 
 - The daily workflow runs at 09:37 Europe/Prague and retains a manual trigger.
 - It collects allowlisted sources, matches evidence to confirmed promises, enriches known official documents, and writes a coverage audit.
-- It does not call an AI model, score promises, change public data, create a pull request, or publish data.
+- It sends each new or changed bounded evidence package to two independent assessors. If they disagree, an arbiter selects one assessment or returns no conclusion.
+- It writes only unpublished human-review proposals. A proposal may be kept in its dedicated proposal pull request, but it never changes public data, a public score, or publication status.
+- The assessors and arbiter may cite only supplied evidence IDs. Their active prompt versions, providers, model IDs, confidence, evidence IDs, and input fingerprint remain auditable.
+- The fingerprint prevents paid reassessment when assessable input, active prompts, providers, and models are unchanged.
 - A failed complete run does not advance public freshness.
 
 ## Delivery
