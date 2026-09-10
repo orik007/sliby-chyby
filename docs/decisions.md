@@ -4,9 +4,11 @@ This document contains only the current confirmed rules. When a rule changes, re
 
 ## Promise catalogue
 
-- A source occurrence is exactly `candidate`, `confirmed`, or `rejected`.
+- A source is one verifiable item: one PDF, page, post, video, article, vote, or official record. It has an ID, type, title, publisher, URL, and any known date.
+- A source can support many promises. A promise records its source ID and an exact locator, such as a PDF page, paragraph, or video timestamp.
+- Every promise is exactly `candidate`, `confirmed`, or `rejected`.
 - `confirmed` means public immediately. There is no confirmed-but-unpublished state.
-- A rejected occurrence records its reason. Candidates and rejected occurrences are not public.
+- A rejected promise records its reason. Candidates and rejected promises are not public.
 - The initial catalogue covers ANO 2011, SPD, and Motoristé sobě in the 2025 Czech Chamber of Deputies election, from official national party sources.
 
 ## Scores and index

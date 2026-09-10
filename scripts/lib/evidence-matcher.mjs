@@ -66,7 +66,6 @@ export function validatePromiseRegistry(registry) {
     ids.add(promise.id);
     invariant(typeof promise.partyId === "string" && promise.partyId.length > 0, `Promise ${promise.id} is missing partyId`);
     invariant(typeof promise.originalTextCz === "string" && promise.originalTextCz.length > 0, `Promise ${promise.id} is missing original text`);
-    invariant(typeof promise.researchSourceCandidateId === "string" && promise.researchSourceCandidateId.length > 0, `Promise ${promise.id} is missing its research source candidate`);
     invariant(promise.promiseSource?.primary === true, `Promise ${promise.id} must have a primary promise source`);
     invariant(typeof promise.promiseSource.exactQuoteCz === "string" && promise.originalTextCz.includes(promise.promiseSource.exactQuoteCz), `Promise ${promise.id} exact quote is not present verbatim in its original text`);
     invariant(/^https:\/\//.test(promise.promiseSource.url), `Promise ${promise.id} source must use HTTPS`);

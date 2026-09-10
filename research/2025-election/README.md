@@ -1,13 +1,15 @@
 # 2025 election research
 
-This directory stores non-public source occurrences for ANO 2011, SPD, and Motoristé sobě in the 2025 Czech Chamber of Deputies election.
+This directory stores campaign sources and non-public promise research for ANO 2011, SPD, and Motoristé sobě in the 2025 Czech Chamber of Deputies election.
 
-Every promise occurrence is one of three states:
+A source is one concrete item, such as one PDF, page, post, video, or article. A source may support many promises. Every promise has one source ID and an exact locator within that source.
+
+Every promise is one of three states:
 
 - `candidate`: found but not confirmed;
-- `confirmed`: represented by the linked public promise or promises in `data/promises`;
+- `confirmed`: represented by the public promise with the same ID in `data/promises`;
 - `rejected`: not admitted to the catalogue, with a reason.
 
-`candidate-promises.json` is the main programme-occurrence catalogue. The other files are source and discovery catalogues; they are not promise catalogues and cannot publish a promise. Exact wording and the original source stay attached to each occurrence.
+`promises.json` is the campaign-source and promise catalogue. The other files are discovery catalogues; they are not promise catalogues and cannot publish a promise. Exact wording and the original source stay attached to every promise.
 
-Confirming an occurrence follows [promise-selection.md](../../docs/promise-selection.md): it creates the public promise, source, and initial score revision together. No candidate or rejected occurrence is public or enters the SLAVA Index.
+Confirmation follows [promise-selection.md](../../docs/promise-selection.md): it creates the public promise, source, and initial score revision together. No candidate or rejected promise is public or enters the SLAVA Index.

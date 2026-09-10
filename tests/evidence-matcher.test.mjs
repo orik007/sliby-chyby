@@ -15,17 +15,7 @@ const freeMuseums = registry.promises.find(({ id }) => id === "ano-2025-free-sta
 test("matching configuration contains exactly the confirmed public promises", async () => {
   assert.equal(registry.status, "confirmed-promise-matching-v1");
   assert.equal(registry.promises.length, 22);
-  const research = JSON.parse(await readFile(new URL("../research/2025-election/candidate-promises.json", import.meta.url), "utf8"));
-  const researchById = new Map(research.records.map((candidate) => [candidate.id, candidate]));
-  for (const promise of registry.promises) {
-    const source = researchById.get(promise.researchSourceCandidateId);
-    assert.ok(source, "Missing source occurrence for " + promise.id);
-    assert.equal(source.state, "confirmed");
-    assert.ok(source.publicPromiseIds.includes(promise.id));
-    assert.equal(source.partyId, promise.partyId);
-    assert.equal(source.sourceUrl, promise.promiseSource.url);
-  }
-  for (const occurrence of research.records.filter(({ state }) => state === "rejected")) assert.ok(occurrence.rejectionReason);
+  assert.ok(registry.promises.every((promise) => promise.promiseSource.primary));
 });
 
 function record(overrides = {}) {

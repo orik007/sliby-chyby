@@ -96,7 +96,7 @@ def record_from_info(
         "url": info.get("webpage_url") or f"https://www.youtube.com/watch?v={info.get('id')}",
         "discoveryKind": discovery_kind,
         "discoveredFrom": discovered_from or [],
-        "reviewStatus": "unreviewed-audiovisual-source",
+        "sourceReview": "unreviewed",
     }
 
 

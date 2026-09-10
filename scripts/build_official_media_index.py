@@ -81,7 +81,7 @@ for party_id, paths in INPUTS.items():
                     "width": item.get("media_details", {}).get("width"),
                     "height": item.get("media_details", {}).get("height"),
                     "parentPostId": item.get("post", 0),
-                    "reviewStatus": "unreviewed-media-source",
+                    "sourceReview": "unreviewed",
                 }
             )
 

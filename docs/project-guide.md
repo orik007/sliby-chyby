@@ -19,8 +19,8 @@ SlibyChyby shows political parties' confirmed election promises, their current s
 
 ```text
 official party source
-  -> candidate
-  -> confirmed public promise or rejected occurrence
+  -> promise
+  -> candidate, confirmed public promise, or rejected promise
 
 allowlisted evidence sources
   -> daily collection at 09:37 Europe/Prague
@@ -35,7 +35,7 @@ The daily workflow does not call an AI model, assign a score, or publish data. T
 
 | Path | Purpose |
 | --- | --- |
-| `research/2025-election/` | Non-public campaign-source occurrences and rejection reasons. |
+| `research/2025-election/promises.json` | Campaign sources and non-public candidate or rejected promises. |
 | `data/` | Public confirmed promises, sources, current-score revisions, and system status. |
 | `automation/collectors/` | Allowlisted evidence-source registry. |
 | `automation/matching/` | Deterministic matching configuration for public promises. |

@@ -25,7 +25,7 @@
 - A confirmed promise is public immediately; candidates and rejected occurrences are not. Do not add a fourth promise state.
 - A score is always a number from `-2` to `+2`, defaulting to `0`; it is separate from lifecycle.
 - Keep public assessment history append-only and derive, never manually edit, the SLAVA Index.
-- Do not introduce an AI assessment, prompt, model call, or review proposal without a new explicit owner decision.
+- Do not introduce an AI assessment, prompt, or model call without a new explicit owner decision.
 - The daily pipeline runs at 09:37 Europe/Prague and keeps the manual trigger. A failed complete run must not advance public freshness.
 - No GitHub Copilot or Codex review may be started, requested, repeated, or awaited without the owner's explicit instruction for the exact pull request and head. Such a review is advisory only.
 - Repository changes for `main` use a PR, a successful exact-head `Verify pull request` run, and the owner's explicit `schvaluji`. The owner merges manually; only `main` deploys.

@@ -7,7 +7,8 @@
 - Every confirmed promise has one current score revision; its first score is `0`.
 - Score revisions are append-only. The latest revision is current.
 - Every revision lists traceable source records. The SLAVA Index is derived, never stored as an editable value.
-- Campaign-source occurrences outside the public catalogue are `candidate` or `rejected` and remain in `research/` with source locators; a rejection also has a reason.
+- A source is one document or record. A promise references one source and an exact locator.
+- Candidate and rejected promises remain in `research/`; a rejected promise has a reason.
 
 ## Files
 
@@ -22,4 +23,6 @@ data/
   system-status.json
 ```
 
-`Promise` stores its exact original wording, party period, and primary source. `AssessmentRevision` stores its score, public Czech explanation, date, and cited source IDs. An initial zero revision cites the promise source; a later revision cites the relevant evidence.
+`Promise` stores its exact original wording, party period, primary source, and source locator. `AssessmentRevision` stores its score, public Czech explanation, date, and cited source IDs. An initial zero revision cites the promise source; a later revision cites the relevant evidence.
+
+`research/2025-election/promises.json` contains the campaign-source catalogue and non-public promises. Its `sources` list contains one record per source document. Every research promise has a `sourceId`, a locator, exact wording, and one status: `candidate`, `confirmed`, or `rejected`.

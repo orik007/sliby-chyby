@@ -6,13 +6,13 @@ This is the only operational definition of a promise's lifecycle. It is a **conf
 
 ## The three states
 
-Every source occurrence has exactly one state:
+Every promise has exactly one state:
 
 | State | Meaning | Public? |
 | --- | --- | --- |
-| `candidate` | A possible promise found during research. It has not yet passed the rules below. | No |
+| `candidate` | A possible promise found in a source. It has not yet passed the rules below. | No |
 | `confirmed` | A verified promise of one tracked party in one electoral period. Confirmation publishes it immediately. | Yes |
-| `rejected` | The occurrence is not a promise for this catalogue. Its rejection reason is retained. | No |
+| `rejected` | The item is not a promise for this catalogue. Its rejection reason is retained. | No |
 
 There is no `confirmed-but-unpublished` state. “Published promise” always means `confirmed` promise. Scores belong to confirmed public promises only and never determine lifecycle.
 
@@ -34,7 +34,7 @@ Reject a candidate with a short reason when it is, for example:
 
 - a slogan, value, aspiration, or vague intention rather than a commitment;
 - a personal, regional, allied-party, or third-party statement not clearly adopted by the tracked national party;
-- a duplicate source occurrence;
+- a duplicate promise;
 - an unresolvable attribution problem; or
 - an unusable, non-atomic statement that cannot be split faithfully.
 
@@ -46,4 +46,4 @@ Only clear commitments from official national party sources may be confirmed for
 
 ## Publication boundary
 
-Confirmation is a normal validated data change: create the public promise, its primary source, and its first score revision with value `0` together. Confirmation does not require later conduct evidence or an AI assessment. Rejection and candidates remain under `research/` with their audit trail.
+Confirmation is a normal validated data change: create the public promise, its primary source, and its first score revision with value `0` together. Confirmation does not require later conduct evidence or an AI assessment. Candidates and rejected promises remain under `research/` with their source and rejection reason.
