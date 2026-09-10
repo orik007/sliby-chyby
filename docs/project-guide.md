@@ -38,7 +38,7 @@ official national party sources
 POST-ELECTION EVIDENCE PIPELINE
 allowlisted official records and news discovery feeds
   -> one shared daily collection
-  -> deterministic matching against every reviewed promise
+  -> deterministic matching against every published promise
   -> if no attributable primary candidate evidence: planned bounded official-source expansion
   -> bounded evidence packages and official-document enrichment
   -> assessor A + assessor B
@@ -69,9 +69,9 @@ Research searches official national party programmes, official campaign sites an
 
 Research material belongs under `research/`. It is intentionally over-inclusive and unpublished.
 
-### 2. Admit narrowly
+### 2. Confirm narrowly
 
-A statement enters the reviewed promise catalogue only when it passes every confirmed rule in [promise-selection.md](promise-selection.md). In brief, it must:
+A candidate becomes a confirmed public promise only when it passes every confirmed rule in [promise-selection.md](promise-selection.md). Confirmation publishes it in the same validated change with its initial `0` baseline. In brief, it must:
 
 - be an official national commitment of the tracked party;
 - promise a concrete future action, decision, or assessable outcome;
@@ -87,8 +87,8 @@ When official pre-election wording changes, the latest official version is activ
 ### 3. Keep review, matching, and public data separate
 
 - `research/2025-election/` contains captured sources, candidates, review decisions, duplicates, rejections, and coverage gaps.
-- `automation/matching/promises.json` contains reviewed promises used by the matcher. Inclusion here does not publish or score a promise.
-- `data/` contains the smaller human-approved public dataset rendered by the website.
+- `automation/matching/promises.json` contains candidate matching configuration. Inclusion in that working registry does not establish confirmation. A confirmed promise is published in the same validated change to `data/` with its primary source and initial `no-progress` baseline at `0`. No directional assessment is required for that publication.
+- `data/` contains the public dataset rendered by the website. Later evidence may replace the baseline with a new assessment revision.
 
 Do not infer public coverage from the size of the research queue or matching catalogue. The current authoritative counts are derived from those files and validation, not copied manually into this guide.
 
@@ -113,7 +113,7 @@ Collectors enforce configured hosts, media types, and size limits. They record r
 
 ### Deterministic matcher
 
-The matcher compares the shared collected record set with every reviewed promise. In the target daily operation, this means every new or changed record version; a newly admitted promise, or one whose active wording, matching configuration, or matcher rules version changed, receives one comparison against the retained archive. One record may match several promises. The matcher exposes the phrases and official identifiers that caused each candidate match, maintains the current candidate-match set for each promise, and does not retrieve upstream data or decide whether a record supports or contradicts a promise.
+The matcher compares the shared collected record set with every published promise. In the target daily operation, this means every new or changed record version; a newly published promise, or one whose active wording, matching configuration, or matcher rules version changed, receives one comparison against the retained archive. One record may match several promises. The matcher exposes the phrases and official identifiers that caused each candidate match, maintains the current candidate-match set for each promise, and does not retrieve upstream data or decide whether a record supports or contradicts a promise.
 
 A bounded evidence package is created from the complete current candidate-match set for an affected promise, not only the record increment that affected it, and only when the attribution and primary-evidence boundary is satisfied. Media-only or merely thematic matches remain visible in the audit but do not silently become assessable evidence. A run with no match creates no directional automated assessment and is not proof of inactivity; a published promise retains the default `0` defined in [`scoring.md`](scoring.md).
 

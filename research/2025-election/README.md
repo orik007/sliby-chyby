@@ -2,7 +2,7 @@
 
 ## Status
 
-**Working proposal.** This directory is primarily a research staging area. Only source candidates explicitly marked with an `accepted-*` review status have been promoted into the reviewed matching registry through a documented catalog tranche or bounded batch. Every other record remains unpublished research material and is not a promise, assessment, or SLAVA Index input.
+**Working proposal.** This directory is primarily a research staging area. Only source candidates explicitly marked with a `reviewed-*` status have been added to the candidate matching registry through a documented catalog tranche or bounded batch. Every record here remains an internal candidate until it is separately confirmed and published as a promise.
 
 The confirmed party scope for the current period is ANO 2011, Svoboda a přímá demokracie (SPD), and Motoristé sobě. The election scope is the 2025 Czech Chamber of Deputies election. Collective post-election coalition and government programmes are evidence of later conduct, not sources of pre-election promises.
 
@@ -75,9 +75,9 @@ Secondary material must point back to a party publication, recording, photograph
 - SPD: 247;
 - Motoristé: 235.
 
-These are extraction candidates, not 959 distinct promises. The first human-reviewed tranche accepted 36 source occurrences, evenly split across the three parties. The first incremental ANO finance batch reviewed another 11 occurrences: four produced new promises, six were rejected with reasons, and one still needs splitting. Two already accepted composite occurrences produced two additional atomic promises. The second ANO finance batch reviewed 11 page-5 occurrences: four produced new promises, three were duplicate occurrences, and four were rejected with reasons. The matching registry therefore contains 46 promises linked to 44 accepted source occurrences; 901 extraction candidates remain unreviewed.
+These are extraction candidates, not 959 distinct promises. The first human-reviewed tranche added 36 reviewed source occurrences, evenly split across the three parties, to the candidate matching registry. The first incremental ANO finance batch reviewed another 11 occurrences: four added matcher entries, six were rejected with reasons, and one still needs splitting. Two previously reviewed composite occurrences produced two additional atomic matcher entries. The second ANO finance batch reviewed 11 page-5 occurrences: four added matcher entries, three were duplicate occurrences, and four were rejected with reasons. The candidate matching registry therefore contains 46 entries linked to 44 reviewed source occurrences; 901 extraction candidates remain unreviewed.
 
-The original tranche and current expanded set are recorded in [`reviewed-catalog-v1.md`](reviewed-catalog-v1.md) and [`reviewed-catalog-v2.md`](reviewed-catalog-v2.md). Acceptance means the source wording passed the current attribution, atomicity, and assessability checks. It does not mean that the promise has been assessed or approved for automatic public publication.
+The original tranche and current expanded set are recorded in [`reviewed-catalog-v1.md`](reviewed-catalog-v1.md) and [`reviewed-catalog-v2.md`](reviewed-catalog-v2.md). Their `reviewed-*` research records support internal matching only; they do not confirm a public promise. Once a candidate is confirmed, the same validated change publishes it with its primary source and an initial `no-progress` score of `0`; it does not wait for a directional assessment. Later evidence may change that score through a new assessment revision.
 
 The queue is reproducible with:
 
@@ -131,5 +131,5 @@ See `source-inventory.md` for a channel-by-channel coverage ledger. "Captured" i
 ## Open questions exposed by collection
 
 - How should materially different conditions in otherwise duplicate official wording be related?
-- What minimum reviewed coverage and approved-assessment coverage should be required before the site describes a party catalog as substantially complete?
+- What minimum reviewed source coverage should be required before the site describes a party catalog as substantially complete?
 - What source-retention and copyright policy applies to programme PDFs, campaign newspapers, social posts, and billboard photographs?

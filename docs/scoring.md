@@ -4,7 +4,7 @@
 
 The five-state scale, aggregate formula, live-period rule, closing audit, and party-vote rule in this document are **confirmed decisions**. This is the canonical operational scoring reference. [`docs/decisions.md`](decisions.md) records why decisions were made; it is not a second scoring checklist. The active assessor prompt must implement the decision order below without adding policy.
 
-Promise admission is governed separately by [promise-selection.md](promise-selection.md). A rejected or unreviewed candidate is not published, assigned `0`, or included in the index denominator. Every published promise starts at `0`.
+Promise confirmation is governed separately by [promise-selection.md](promise-selection.md). A candidate is not published, assigned `0`, or included in the index denominator. Every confirmed public promise starts at `0`.
 
 ## Purpose
 
@@ -104,7 +104,7 @@ A party has 13 promises: five at `+2`, two at `-2`, three at `+1`, one at `-1`, 
 
 ## Revisions and automation
 
-The current assessment is the latest published revision. Never overwrite history silently. A published promise receives an initial `0` revision under this methodology even when no model package exists; its baseline provenance points to the promise's primary source rather than inventing conduct evidence or a model proposal. Its explanation states that no verified significant movement has been established. A later revision retains the promise ID, status, plain-language explanation, evidence IDs, publication time, methodology and prompt version, assessor audit data when applicable, and material uncertainty or dissent.
+The current assessment is the latest published revision. Never overwrite history silently. Confirmation of a promise creates its initial `0` revision even when no model package exists; its baseline provenance points to the promise's primary source rather than inventing conduct evidence or a model proposal. Its explanation states that no verified significant movement has been established. A later revision retains the promise ID, status, plain-language explanation, evidence IDs, publication time, methodology and prompt version, assessor audit data when applicable, and material uncertainty or dissent.
 
 Automated collection, matching, and assessment are separate stages described in [evidence-pipeline.md](evidence-pipeline.md). Two assessors use only supplied evidence. When they disagree, an arbiter may select either review or return `cannot-decide`; it may not browse or invent a third interpretation. Every model result remains an unpublished proposal until the human publication gate approves a later public revision.
 

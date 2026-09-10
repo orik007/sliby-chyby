@@ -6,9 +6,9 @@ The core measure is the **SLAVA Index**, a normalized point score from `-100` to
 
 The initial concept focuses on the current electoral period and the governing parties ANO, SPD, and Motoristé. Promises remain scoped to their electoral period; later periods receive new promise sets and historical periods remain available.
 
-The public site now contains its first two verified, human-approved assessments. Fictional fixtures are kept outside the production data directories.
+The public site renders confirmed promises from versioned production data. A source occurrence is either an internal candidate or a confirmed public promise. Every confirmed promise starts with a `0` baseline; later evidence can create a new directional assessment revision. Fictional fixtures are kept outside the production data directories.
 
-Real-source collection for the 2025 election is staged under `research/2025-election`. Nothing in that directory is automatically published or scored: it separates captured sources, exact source occurrences, over-inclusive extraction queues, attribution questions, and coverage gaps. Only reviewed public records under `data` are rendered by the site.
+Real-source collection for the 2025 election is staged under `research/2025-election`. Nothing there is automatically published: it separates captured sources, exact source occurrences, over-inclusive extraction queues, attribution questions, and coverage gaps. Once a candidate is confirmed as a promise, it is published in the same validated change to `data` with its initial `0` baseline. Only confirmed public records under `data` are rendered by the site.
 
 The confirmed initial implementation uses Astro, TypeScript, plain CSS, and schema-validated versioned data files. A database is not needed for the first public release.
 

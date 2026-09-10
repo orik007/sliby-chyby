@@ -2,7 +2,7 @@
 
 ## Status and meaning
 
-**Working proposal.** This ledger records where pre-election promises may have appeared and how far collection has progressed. It is a coverage and provenance aid, not a list of accepted promises.
+**Working proposal.** This ledger records where pre-election promises may have appeared and how far collection has progressed. It is a coverage and provenance aid, not a list of confirmed public promises.
 
 The collection window ends at the close of voting on 4 October 2025. Later coalition agreements, the government programme, ministerial statements, and implementation acts are post-election evidence and cannot create a pre-election promise retroactively.
 
@@ -59,7 +59,7 @@ Authoritative filing entry points:
 
 ### Located billboard and slogan leads
 
-These are discovery leads and classification examples, not accepted promises:
+These are discovery leads and classification examples, not confirmed public promises:
 
 - ANO: photographs verify the exact billboard texts `VOLTE LEVNĚJŠÍ ENERGIE`, `VOLTE LEVNĚJŠÍ HYPOTÉKY`, `VOLTE KRATŠÍ LHŮTY U LÉKAŘE`, and `VOLTE NIŽŠÍ DANĚ`. `VOLTE LEPŠÍ ŽIVOT` is verified but non-specific. `Volte důchod už v 65 letech`, `Volte slevy na jízdné`, and wording about cancelling Czech Television and Czech Radio fees remain reported or video-title leads requiring the original visual occurrence before exact creative classification.
 - SPD: `Pevnost Česko` is a campaign frame, while the official explanation supplies more concrete wording, including `Přes naše hranice nepronikne ani jeden migrant.`
@@ -79,7 +79,7 @@ These are discovery leads and classification examples, not accepted promises:
 
 | File | Purpose | Production status |
 |---|---|---|
-| `candidate-promises.json` | 959 over-inclusive passages from the three final programmes | 44 accepted source occurrences produce 46 reviewed promises; the two incremental batches also record 10 rejected, 3 duplicate, and 1 needs-splitting occurrence; 901 remain unreviewed |
+| `candidate-promises.json` | 959 over-inclusive passages from the three final programmes | 44 reviewed source occurrences produce 46 candidate-matching entries; the two incremental batches also record 10 rejected, 3 duplicate, and 1 needs-splitting occurrence; 901 remain unreviewed |
 | `reviewed-batches/ano-finance-1.json` | Bounded review of ANO's printed programme page 4 | 6 new matching promises plus explicit rejection and split reasons; unpublished working proposal |
 | `reviewed-batches/ano-finance-2.json` | Bounded review of ANO's printed programme page 5 | 4 new matching promises, 3 duplicate occurrences, and 4 rejections; unpublished working proposal |
 | `official-web-candidates.json` | 409 over-inclusive passages from 647 official-index source items | Unreviewed attribution and promise queue |
@@ -95,11 +95,11 @@ These are discovery leads and classification examples, not accepted promises:
 
 ## Remaining work before claiming exhaustive collection
 
-1. Review the remaining 901 final-programme extraction candidates and produce atomic accepted/rejected records with reasons.
+1. Review the remaining 901 final-programme extraction candidates and record whether each remains a candidate or is rejected, with reasons.
 2. Review every captured official-site candidate and recover ANO's externally hosted originals.
 3. Complete the campaign-period social and video inventory for national party and leader accounts; preserve exact posts and transcripts where lawful.
 4. Recover the original Motoristé election newspapers and original paid-ad creatives and billboard photographs for every concrete wording lead.
 5. Systematically review the indexed public-service debates, party questionnaires, launch speeches, and election specials.
 6. Inventory regional and allied-candidate sources without promoting them to national promises.
 7. Compare earlier, final, and late-campaign wording; record duplicates, narrowing, expansion, omission, and contradiction.
-8. Run a second-person source and transcription check before any promise is published.
+8. Run a second-person source and transcription check before confirming and publishing any promise.

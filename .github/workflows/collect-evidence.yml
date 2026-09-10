@@ -78,7 +78,7 @@ jobs:
       - name: Collect evidence candidates
         run: node scripts/run-collectors.mjs --since "$COLLECTOR_SINCE" --output automation/runs/pipeline/github-actions/collector
 
-      - name: Match candidates to every reviewed promise
+      - name: Match candidates to every published promise
         run: |
           AS_OF="${MATCHER_AS_OF:-$(date -u +%F)}"
           node scripts/run-matcher.mjs \
@@ -105,7 +105,7 @@ jobs:
       - name: Refresh human review pages
         run: npm run reviews:refresh
 
-      - name: Audit coverage of every reviewed promise
+      - name: Audit coverage of every published promise
         run: |
           node scripts/run-coverage-audit.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
@@ -127,7 +127,7 @@ jobs:
             const lines = [
               "## Unpublished evidence pipeline",
               "",
-              `- Reviewed promises checked: ${run.promiseResults.length}`,
+              `- Published promises checked: ${run.promiseResults.length}`,
               `- Candidate matches: ${candidateCount}`,
               `- Assessable evidence packages: ${packageCount}`,
               `- Official print documents added: ${documentCount}`,

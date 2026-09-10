@@ -29,8 +29,8 @@ const anoFinanceBatchTwoIds = [
   "ano-2025-customs-entry-salary-50000"
 ];
 
-test("reviewed catalog expands through bounded batches and links every promise to an accepted source occurrence", async () => {
-  assert.equal(registry.status, "reviewed-promise-catalog-v2");
+test("candidate registry expands through bounded batches and links every entry to a reviewed source occurrence", async () => {
+  assert.equal(registry.status, "candidate-matching-registry-v3");
   assert.equal(registry.promises.length, 46);
   assert.deepEqual(
     Object.fromEntries(["ano", "spd", "motoriste"].map((partyId) => [
@@ -50,19 +50,19 @@ test("reviewed catalog expands through bounded batches and links every promise t
       .slice(0, 12);
     assert.equal(candidate.id, `candidate-${digest}`, `Candidate ${candidate.id} is not reproducible from its source occurrence`);
   }
-  const acceptedCandidates = new Map(
+  const reviewedCandidates = new Map(
     research.records
-      .filter(({ reviewStatus }) => reviewStatus.startsWith("accepted-"))
+      .filter(({ reviewStatus }) => reviewStatus.startsWith("reviewed-"))
       .map((candidate) => [candidate.id, candidate])
   );
   assert.deepEqual(
     [...new Set(registry.promises.map(({ researchSourceCandidateId }) => researchSourceCandidateId))].sort(),
-    [...acceptedCandidates.keys()].sort(),
-    "Every accepted source occurrence must produce at least one registry promise"
+    [...reviewedCandidates.keys()].sort(),
+    "Every reviewed source occurrence must produce at least one registry entry"
   );
   for (const promise of registry.promises) {
-    const candidate = acceptedCandidates.get(promise.researchSourceCandidateId);
-    assert.ok(candidate, `Missing accepted candidate for ${promise.id}`);
+    const candidate = reviewedCandidates.get(promise.researchSourceCandidateId);
+    assert.ok(candidate, `Missing reviewed candidate for ${promise.id}`);
     assert.equal(candidate.partyId, promise.partyId);
     assert.equal(candidate.sourceUrl, promise.promiseSource.url);
     if ([...anoFinanceBatchIds, ...anoFinanceBatchTwoIds].includes(promise.id)) {
@@ -75,12 +75,12 @@ test("reviewed catalog expands through bounded batches and links every promise t
 
   const batch = JSON.parse(await readFile(new URL("../research/2025-election/reviewed-batches/ano-finance-1.json", import.meta.url), "utf8"));
   assert.equal(batch.status, "Working proposal");
-  assert.equal(batch.summary.acceptedNewPromises, 6);
+  assert.equal(batch.summary.reviewedNewMatcherEntries, 6);
   assert.equal(batch.source.url, "https://www.anobudelip.cz/file/edee/ke-stazeni/volebni-program-2025.pdf");
   const researchById = new Map(research.records.map((candidate) => [candidate.id, candidate]));
   const promisesById = new Map(registry.promises.map((promise) => [promise.id, promise]));
   const expectedStatusPrefix = {
-    accepted: "accepted-",
+    "reviewed-candidate": "reviewed-",
     "duplicate-occurrence": "duplicate-occurrence-",
     rejected: "rejected-",
     "needs-splitting": "needs-splitting-"
@@ -111,7 +111,7 @@ test("reviewed catalog expands through bounded batches and links every promise t
 
   const secondBatch = JSON.parse(await readFile(new URL("../research/2025-election/reviewed-batches/ano-finance-2.json", import.meta.url), "utf8"));
   assert.equal(secondBatch.status, "Working proposal");
-  assert.equal(secondBatch.summary.acceptedNewPromises, 4);
+  assert.equal(secondBatch.summary.reviewedNewMatcherEntries, 4);
   assert.equal(secondBatch.source.sha256, "62e87d136ff8ed780a0a48ca09e0fdf0be80b38e8af61fa5bd55eacdb72f46ea");
   for (const review of secondBatch.reviews) {
     const candidate = researchById.get(review.candidateId);

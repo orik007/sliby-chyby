@@ -2,26 +2,28 @@
 
 ## Status
 
-**Working proposal.** This is the first bounded real-data catalog for matching and assessment-pipeline evaluation. It is not an exhaustive inventory of the parties' programmes or campaigns, and it does not authorize automatic public assessment publication.
+**Working proposal.** This is the first bounded candidate registry for matching and assessment-pipeline evaluation. It is not an exhaustive inventory of the parties' programmes or campaigns, and it does not confirm or publish public promises.
+
+Catalog review is an internal research step; it does not confirm a public promise or assign a directional assessment. Under the confirmed publication rule, a confirmed promise is published with its primary source and an initial `no-progress` baseline at `0`, without waiting for later-conduct evidence or an AI proposal.
 
 This file is the historical v1 tranche. The current expanded registry is documented in [`reviewed-catalog-v2.md`](reviewed-catalog-v2.md).
 
 ## Review result
 
-| Party | Accepted | Source |
+| Party | Reviewed candidates | Source |
 |---|---:|---|
 | ANO 2011 | 12 | Final official 2025 national election programme |
 | SPD | 12 | Final official 2025 national election programme |
 | Motoristé sobě | 12 | Final official 2025 national election programme |
 | **Total** | **36** | |
 
-All 36 accepted entries remain stored in [`automation/matching/promises.json`](../../automation/matching/promises.json). Each entry links to one source candidate in [`candidate-promises.json`](candidate-promises.json), where it is marked `accepted-first-release-catalog-v1`.
+All 36 reviewed entries remain stored in [`automation/matching/promises.json`](../../automation/matching/promises.json). Each entry links to one source candidate in [`candidate-promises.json`](candidate-promises.json), where it is marked `reviewed-first-release-catalog-v1`.
 
 At the time this tranche was created, the remaining 919 extraction candidates were unreviewed. Subsequent bounded reviews and the current counts are recorded in [`reviewed-catalog-v2.md`](reviewed-catalog-v2.md) and the research README.
 
 ## Acceptance checks applied
 
-Every accepted entry passed these checks:
+Every reviewed candidate passed these checks:
 
 1. The wording appears in the party's final official national election programme.
 2. The wording is attributable to the tracked party, not merely to an individual, region, or allied party.
@@ -31,9 +33,9 @@ Every accepted entry passed these checks:
 6. The original Czech wording, exact quoted fragment, source URL, and page or section locator are retained.
 7. Matching terms narrow evidence discovery but do not determine direction or score.
 
-ANO and Motoristé programme passages were checked against extracted text and rendered source pages. SPD passages were checked against the text and page locations served from the official SPD PDF. A second-person review remains advisable before the catalog is presented as public production data.
+ANO and Motoristé programme passages were checked against extracted text and rendered source pages. SPD passages were checked against the text and page locations served from the official SPD PDF. A second-person review remains advisable before any individual candidate is confirmed and published as public production data.
 
-## Accepted ANO 2011 promises
+## Reviewed ANO 2011 candidates
 
 | Registry ID | Tracked commitment |
 |---|---|
@@ -50,7 +52,7 @@ ANO and Motoristé programme passages were checked against extracted text and re
 | `ano-2025-abolish-science-minister-post` | Abolish the standalone science-minister post |
 | `ano-2025-three-month-fintech-licensing` | Set a three-month decision deadline for fintech and crypto licences |
 
-## Accepted SPD promises
+## Reviewed SPD candidates
 
 | Registry ID | Tracked commitment |
 |---|---|
@@ -67,7 +69,7 @@ ANO and Motoristé programme passages were checked against extracted text and re
 | `spd-2025-vat-paid-invoices-only` | Make VAT payable only on paid invoices |
 | `spd-2025-abolish-public-media-fees` | Abolish Czech Radio and Czech Television fees |
 
-## Accepted Motoristé sobě promises
+## Reviewed Motoristé sobě candidates
 
 | Registry ID | Tracked commitment |
 |---|---|

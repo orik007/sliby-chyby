@@ -238,7 +238,7 @@ def main() -> None:
                     "in captured Motoristé sobě campaign-period posts."
                 ),
                 "warning": (
-                    "A video is a discovery source, not an accepted promise. Titles and "
+                    "A video is a discovery source, not a confirmed public promise. Titles and "
                     "descriptions are insufficient where the commitment occurs only in audio."
                 ),
                 "counts": counts,

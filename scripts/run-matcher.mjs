@@ -7,6 +7,7 @@ import {
   summarizeMatch,
   validatePromiseRegistry
 } from "./lib/evidence-matcher.mjs";
+import { loadPublishedPromiseIds, publishedMatchingRegistry } from "./lib/published-promises.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -16,6 +17,7 @@ function parseArgs(args) {
   const options = {
     collectorRun: null,
     promiseRegistry: "automation/matching/promises.json",
+    publishedPromises: "data/promises",
     promiseIds: [],
     asOf: null,
     output: null
@@ -24,6 +26,7 @@ function parseArgs(args) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];
     else if (arg === "--promises") options.promiseRegistry = args[++index];
+    else if (arg === "--published-promises") options.publishedPromises = args[++index];
     else if (arg === "--promise") options.promiseIds.push(args[++index]);
     else if (arg === "--as-of") options.asOf = args[++index];
     else if (arg === "--output") options.output = args[++index];
@@ -40,8 +43,8 @@ const args = parseArgs(process.argv.slice(2));
 const collectorRun = JSON.parse(await readFile(resolve(args.collectorRun), "utf8"));
 invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
 const registry = validatePromiseRegistry(JSON.parse(await readFile(resolve(args.promiseRegistry), "utf8")));
-const promises = registry.promises.filter((promise) => args.promiseIds.length === 0 || args.promiseIds.includes(promise.id));
-invariant(promises.length > 0, "No matching promises selected");
+const publishedRegistry = publishedMatchingRegistry(registry, await loadPublishedPromiseIds(args.publishedPromises));
+const promises = publishedRegistry.promises.filter((promise) => args.promiseIds.length === 0 || args.promiseIds.includes(promise.id));
 for (const requested of args.promiseIds) invariant(promises.some(({ id }) => id === requested), `Unknown promise id: ${requested}`);
 
 const outputDirectory = resolve(args.output);
@@ -75,7 +78,7 @@ const run = {
   directionAssigned: false,
   collectorRunId: collectorRun.runId,
   collectorRunHash: sha256(collectorRun),
-  promiseRegistryHash: sha256(registry),
+  promiseRegistryHash: sha256(publishedRegistry),
   promiseResults
 };
 await writeFile(resolve(outputDirectory, "match-run.json"), `${JSON.stringify(run, null, 2)}\n`, { flag: "wx" });

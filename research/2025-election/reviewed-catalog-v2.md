@@ -2,7 +2,7 @@
 
 ## Status
 
-**Working proposal.** This is the current bounded registry for deterministic evidence matching. It contains the original balanced v1 tranche plus the first and second incremental ANO finance batches. It is not an exhaustive promise inventory, a public-data release, or authority to publish an assessment.
+**Working proposal.** This is the current bounded candidate registry for deterministic evidence matching. It contains the original balanced v1 tranche plus the first and second incremental ANO finance batches. It is not an exhaustive promise inventory and does not itself confirm public promises or authorize automatic publication of a directional assessment.
 
 ## Current review result
 
@@ -34,4 +34,6 @@ Each entry preserves the complete source passage, an exact Czech quote, a page l
 
 ## Publication boundary
 
-The ten entries are reviewed promises only for collection and matching. They remain outside `data/promises/` because they do not yet have owner-approved assessment revisions. The live website therefore continues to publish only the two previously approved ANO promises. Evidence collection, two-assessor review, possible arbitration, owner approval, and a separate publication change remain mandatory.
+The registry records internal candidate matching configuration. No individual entry is made public by this document, and candidates are never scored. Under the confirmed publication rule, a candidate becomes public only when it is confirmed; that same validated change publishes its primary source and initial `no-progress` baseline at `0`. No owner-approved assessment revision, AI proposal, or later-conduct evidence is required for that baseline. Evidence collection, two-assessor review, possible arbitration, and owner approval are required only before a later directional assessment revision is published.
+
+**Current state.** The working registry contains 46 reviewed matcher candidates. Public data currently contains 22 confirmed ANO promises. The remaining registry entries need individual confirmation review; they are not blocked on evidence collection or directional assessment.

@@ -54,8 +54,8 @@ Generate JSON and human-readable coverage reports after collection and matching:
 node scripts/run-coverage-audit.mjs --collector-run <collector-run.json> --matcher-run <match-run.json> --output <coverage-audit.json> --markdown <coverage-audit.md>
 ```
 
-The report covers every reviewed promise. `No candidate match` describes one run only and never proves inactivity or creates a directional score. A published promise retains the default `0` defined in [`docs/scoring.md`](../../docs/scoring.md).
+The report covers every published promise. `No candidate match` describes one run only and never proves inactivity or creates a directional score. A published promise retains the default `0` defined in [`docs/scoring.md`](../../docs/scoring.md).
 
 ## GitHub Actions pipeline
 
-The `Collect, match, and assess evidence candidates` workflow runs the canonical sequence from [`docs/evidence-pipeline.md`](../../docs/evidence-pipeline.md) daily at 09:37 Prague time and may also be started manually. Its target operation persists only new or changed source-record versions, then checks every such increment against the full reviewed registry. It assesses only changed bounded packages and retains a complete unpublished audit. It never changes public data or deploys the website.
+The `Collect, match, and assess evidence candidates` workflow runs the canonical sequence from [`docs/evidence-pipeline.md`](../../docs/evidence-pipeline.md) daily at 09:37 Prague time and may also be started manually. Its target operation persists only new or changed source-record versions, then checks every such increment against the full published promise set. It assesses only changed bounded packages and retains a complete unpublished audit. It never changes public data or deploys the website.

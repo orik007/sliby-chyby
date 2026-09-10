@@ -92,7 +92,7 @@ Photographs need provenance, license, and attribution metadata; use is unresolve
 
 One attributable commitment made by one party in one period.
 
-Only a candidate that passes the confirmed [promise selection methodology](promise-selection.md) becomes a `Promise`. Rejected, duplicate, composite, or attribution-unresolved source occurrences remain in the research review layer and do not enter the SLAVA Index denominator.
+Only a candidate that passes the confirmed [promise selection methodology](promise-selection.md) becomes a `Promise`. Confirmation publishes it with its primary source and an initial `no-progress` baseline revision at `0`; there is no confirmed-but-unpublished state and a directional assessment is not a prerequisite. Rejected, duplicate, composite, or attribution-unresolved source occurrences remain in the research review layer and do not enter the SLAVA Index denominator.
 
 Proposed fields:
 
@@ -351,7 +351,7 @@ Fields implemented by `coverage-audit-v1`:
 
 - collector run ID, requested cutoff, matching time, and assessment cutoff;
 - per-source coverage mode, limitation note, record count, observed earliest and latest dates, and warnings;
-- one row for every reviewed promise with candidate count, attributable primary count, package path, and active review proposal;
+- one row for every published promise with candidate count, attributable primary count, package path, and active review proposal;
 - a non-scoring coverage state such as no candidate match, matches without attributable primary evidence, assessable package, assessment candidate, or human review required;
 - `scoreInferred: false` and `publicationApproved: false`.
 
