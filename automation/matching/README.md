@@ -1,38 +1,9 @@
 # Evidence matching
 
-The matcher is an auditable narrowing stage between collectors and assessors. It receives normalized records from the collector; it does not retrieve upstream data itself. It never determines whether evidence supports or contradicts a promise and never assigns a SLAVA status.
+The matcher receives normalized collector records and compares them with the matching configuration for confirmed public promises. It does not retrieve source data, decide political direction, assign a score, or publish data.
 
-The canonical end-to-end pipeline and source policy are in [`docs/evidence-pipeline.md`](../../docs/evidence-pipeline.md). This file documents matcher-specific behavior.
+`promises.json` holds exact source wording, locators, matching terms, optional official identifiers, and a minimum match threshold. The scheduled workflow selects only IDs present in `data/promises`.
 
-## Reviewed promise catalog
+A match means only potentially relevant evidence. Media or unattributed records remain in the audit but do not form an attributable-primary evidence package. A missing match does not change the promise's current score.
 
-`promises.json` contains the current reviewed matching catalog: 46 atomic promises from the final official national party programmes, with 22 for ANO 2011 and 12 each for SPD and Motoristé sobě. The original balanced 36-promise tranche and each later bounded batch remain auditable; the current count is not a quota or a claim of complete programme or campaign coverage.
-
-Every candidate-matching entry links back to its source record in `research/2025-election/candidate-promises.json`. The source record must have a `reviewed-*` status. Bounded batch decisions are retained under `research/2025-election/reviewed-batches/`; candidate configuration is not a promise, an index input, or a zero-point item. The scheduled pipeline selects only confirmed public promises from `data/promises`.
-
-Each promise defines:
-
-- the exact source wording and locator;
-- a fulfillment and contradiction test;
-- explicit matching phrases and optional official external identifiers;
-- a minimum candidate score.
-
-External identifiers receive a deliberately strong score because they refer to a manually verified parliamentary print. Text phrases remain visible in each match result. There is no opaque embedding or model decision in this first matcher.
-
-## Safety boundary
-
-- A match means only “potentially relevant.”
-- Media candidates remain visible in the match audit but are not put into the strict primary-evidence package.
-- A thematic match without party attribution remains visible in the audit but is excluded from the assessment package.
-- Bill authorship is not required for vote evidence. A verified decisive vote can enter the package even when another party introduced the bill.
-- A decisive `no-strict-majority` party summary enters the package as `verified-party-no-majority`. It becomes a `-1` candidate only if assessment verifies that the exact motion directly and materially advanced the party's own promise.
-- A government action is explicitly marked as an attribution candidate, not silently converted into party conduct.
-- A promise with no primary match receives no assessable package and no directional assessment. If it is published, it retains the default `0` defined in [`docs/scoring.md`](../../docs/scoring.md); the missing match does not prove inactivity.
-- Evidence packages are bounded and retain omitted-match counts.
-- Every generated package and match run remains unpublished.
-
-## Full-registry workflow
-
-The confirmed target operation after the initial historical backfill is that the `Collect, match, and assess evidence candidates` workflow runs this matcher for each new or changed collector record against every published promise. A newly published promise, or a promise whose active wording, matching configuration, or matcher rules version changed, is compared once with the complete retained archive. It maintains the cumulative current candidate-match set for each affected promise, from which the package builder creates a package. The current workflow still replays the configured historical source scope and has no persistent archive or candidate-match index. Both modes upload the complete unpublished audit, including promises with no match, rather than running a separate collector for every promise.
-
-After deterministic matching, the resolver may identify exact further official document targets for one recorded evidence gap. The enricher follows only such known targets and the official parliamentary prints already present in generated packages. The current implementation downloads the first official PSP proposal DOCX, records the content hash, extracts readable paragraphs, and mechanically selects a bounded set around the exact promise and visible matcher terms. Original and enriched packages remain separate. Document excerpts reveal proposal substance but do not establish party attribution, passage, effectiveness, or scoring direction.
+The matcher keeps its evidence packages bounded and records omitted-match counts. The canonical process is [docs/evidence-pipeline.md](../../docs/evidence-pipeline.md).

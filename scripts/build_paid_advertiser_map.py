@@ -81,7 +81,7 @@ def main() -> None:
         }
 
     payload = {
-        "status": "Working proposal",
+        "status": "Research catalogue",
         "scope": {
             "report": "Who Targets Me Trends — 2025 Czechia Election",
             "reportId": REPORT_ID,

@@ -231,7 +231,7 @@ def main() -> None:
     OUTPUT.write_text(
         json.dumps(
             {
-                "status": "Working proposal",
+                "status": "Research catalogue",
                 "scope": (
                     "Public YouTube metadata for official ANO and SPD channel uploads "
                     "published from 2025-01-01 through election day, plus videos embedded "

@@ -14,7 +14,7 @@ Every source occurrence has exactly one state:
 | `confirmed` | A verified promise of one tracked party in one electoral period. Confirmation publishes it immediately. | Yes |
 | `rejected` | The occurrence is not a promise for this catalogue. Its rejection reason is retained. | No |
 
-There is no `confirmed-but-unpublished` state. “Published promise” always means `confirmed` promise. A candidate or rejected occurrence may have a stored default score of `0` for technical consistency, but it is not public and never enters the SLAVA Index.
+There is no `confirmed-but-unpublished` state. “Published promise” always means `confirmed` promise. Scores belong to confirmed public promises only and never determine lifecycle.
 
 ## Confirming a candidate
 
@@ -26,7 +26,7 @@ Confirm a candidate only when all of these are true:
 4. It can be checked later against both supporting and contradicting evidence.
 5. It is one independently assessable commitment. Split a composite statement into separate candidates before confirmation.
 
-The confirmed promise preserves the exact Czech wording, the official URL, and a precise locator such as a page, timestamp, or image region. If official pre-election wording changes, the latest official wording is the active promise; earlier wording remains in the research audit.
+The confirmed promise preserves the exact Czech wording, the official URL, and a precise locator such as a page, timestamp, or image region. If official pre-election wording changes, update the active promise faithfully.
 
 ## Rejecting a candidate
 
@@ -38,7 +38,7 @@ Reject a candidate with a short reason when it is, for example:
 - an unresolvable attribution problem; or
 - an unusable, non-atomic statement that cannot be split faithfully.
 
-These are rejection reasons, not additional lifecycle states. A later source can create a new candidate; it does not retroactively change a rejected occurrence without a recorded correction.
+These are rejection reasons, not additional lifecycle states. A later source can create a new candidate.
 
 ## First-version attribution boundary
 
@@ -47,7 +47,3 @@ Only clear commitments from official national party sources may be confirmed for
 ## Publication boundary
 
 Confirmation is a normal validated data change: create the public promise, its primary source, and its first score revision with value `0` together. Confirmation does not require later conduct evidence or an AI assessment. Rejection and candidates remain under `research/` with their audit trail.
-
-## Open question
-
-The eventual closing state after an electoral period ends is not defined or implemented. Do not add one before a separate confirmed decision.

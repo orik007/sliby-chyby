@@ -1,52 +1,30 @@
-# Decision register
+# Current project rules
 
-This is the historical register of accepted decisions, working proposals, and open questions. Operational rules live only in the canonical documents named by [project-guide.md](project-guide.md).
+This document contains only the current confirmed rules. When a rule changes, replace this document and every implementation of the prior rule; do not keep superseded models, procedures, prompts, or decision records.
 
-## Confirmed decisions
+## Promise catalogue
 
-### Promise lifecycle and score — 2026-09-10
+- A source occurrence is exactly `candidate`, `confirmed`, or `rejected`.
+- `confirmed` means public immediately. There is no confirmed-but-unpublished state.
+- A rejected occurrence records its reason. Candidates and rejected occurrences are not public.
+- The initial catalogue covers ANO 2011, SPD, and Motoristé sobě in the 2025 Czech Chamber of Deputies election, from official national party sources.
 
-- A source occurrence is exactly one of `candidate`, `confirmed`, or `rejected`.
-- Confirmation and publication are the same event. There is no confirmed-but-unpublished state.
-- A score is independent of lifecycle, always numerical from `-2` to `+2`, and defaults to `0`.
-- Every confirmed promise contributes its current score to the derived SLAVA Index.
-- During the live period, the daily evidence pipeline may revise a confirmed promise's current score when traceable evidence justifies it. Insufficient evidence leaves the current score unchanged.
-- A period-closing state or final-score process is future work, not current behavior.
+## Scores and index
 
-### Daily evidence workflow
+- Every confirmed promise has one current numerical score from `-2` to `+2`. Its initial score is `0`.
+- A score is separate from the promise lifecycle and may change whenever traceable evidence justifies a new current assessment.
+- The SLAVA Index includes every confirmed promise of the party and is `round(sum(scores) / (2 × promise count) × 100)`. It ranges from `-100` to `+100`.
+- No manual aggregate is stored.
 
-- Run one complete evidence pipeline daily at 09:37 Europe/Prague and retain a manual trigger.
-- Keep collection, matching, evidence packaging, and scoring distinct and auditable.
-- Use two independent assessors and an arbiter for disagreement. Models may cite only supplied evidence.
-- Do not repeat paid assessment for an unchanged assessment fingerprint.
+## Evidence automation
+
+- The daily workflow runs at 09:37 Europe/Prague and retains a manual trigger.
+- It collects allowlisted sources, matches evidence to confirmed promises, enriches known official documents, and writes a coverage audit.
+- It does not call an AI model, score promises, change public data, create a pull request, or publish data.
 - A failed complete run does not advance public freshness.
 
-### Release and code review
+## Delivery
 
-- Repository changes for `main` use a PR, exact-head verification, owner `schvaluji`, and a manual merge.
-- Cloudflare deploys only `main`.
-- Copilot and Codex reviews never start automatically. The owner may request a single advisory review for a specified PR and exact head.
-- No release controller, resolver, GitHub App, webhook receiver, or automated PR/deployment reporter is used.
-
-### Initial scope and stack
-
-- The initial catalogue tracks ANO 2011, SPD, and Motoristé sobě in the 2025 Czech Chamber of Deputies period.
-- Use Astro, TypeScript, plain CSS, and schema-validated versioned files. Do not introduce a database without a later confirmed need.
-
-## Superseded decisions
-
-- **Automatic Copilot/Codex review waves and their controller** were superseded because they consumed credits and complicated the release process.
-- **Unpublished human-review score proposals as an active publication gate** were superseded by the 2026-09-10 lifecycle-and-score decision. Existing proposal files remain historical audit records until migrated.
-- **Cloudflare connector-based agent work** was superseded; no Cloudflare connector is used.
-
-## Working proposals
-
-- Expand the promise catalogue from official national party sources until the catalogue is complete, not a quota-based sample.
-- Add another assessment provider only after a deliberate evaluation; the current two-assessor pattern may initially use separate stateless calls to one provider.
-
-## Open questions
-
-- Exact period boundaries and a future closing assessment.
-- Minimum primary evidence for each strong score.
-- Source snapshot and retention policy.
-- Final public name and custom domain.
+- Changes for `main` use a pull request, exact-head verification, explicit owner approval (`schvaluji`), and a manual merge.
+- Copilot and Codex reviews never start automatically. They run only after an explicit owner request for a specified pull request and head, and are advisory.
+- Only `main` deploys. The stack is Astro, TypeScript, plain CSS, and schema-validated versioned files.

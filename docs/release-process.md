@@ -19,7 +19,6 @@ GitHub Copilot and Codex reviews are never initiated, requested, repeated, or aw
 
 ## Boundaries
 
-- No release controller, feedback resolver, GitHub App, webhook receiver, automatic ready comment, or deployment-result reporter is part of this process.
 - Only `main` is deployed. Do not manually deploy an unmerged branch or enable public branch previews.
 - CI verifies repository changes; it does not approve or merge them.
 - The daily evidence workflow is operational automation, not a code-review trigger.

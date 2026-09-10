@@ -1,6 +1,6 @@
 # Official media visual review
 
-**Status: Working proposal**
+**Status: Research catalogue**
 
 This review covers image and file records exposed by the official WordPress media APIs for SPD and Motoristé sobě between 1 January and 4 October 2025. It is a discovery pass, not a promise-acceptance decision. The normalized source list is in `official-media-index.json`.
 

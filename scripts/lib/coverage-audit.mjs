@@ -1,39 +1,23 @@
 import { invariant } from "./collector-core.mjs";
 
 const STATE_LABELS = {
-  "review-candidate": "Assessment candidate awaiting human review",
-  "human-review-required": "Human review required; no candidate score",
-  "assessable-package": "Assessable primary-evidence package; not yet proposed",
-  "candidate-matches-without-attributable-primary": "Candidate matches found, but no attributable primary evidence",
-  "no-candidate-match": "No candidate match found in this run"
+  "evidence-package-ready": "Traceable evidence package ready",
+  "potential-match": "Potential matches found; no attributable primary evidence package",
+  "no-potential-match": "No potential match found in this run"
 };
 
-function activeProposals(manifest) {
-  const active = new Map();
-  for (const proposal of manifest.proposals ?? []) {
-    if (proposal.supersededByProposalId === null || proposal.supersededByProposalId === undefined) {
-      invariant(!active.has(proposal.promiseId), `Multiple active proposals for ${proposal.promiseId}`);
-      active.set(proposal.promiseId, proposal);
-    }
-  }
-  return active;
+function stateFor(result) {
+  if (result.evidencePackage) return "evidence-package-ready";
+  if (result.candidateMatchCount > 0) return "potential-match";
+  return "no-potential-match";
 }
 
-function stateFor(result, proposal) {
-  if (proposal?.resolutionState === "candidate") return "review-candidate";
-  if (proposal?.resolutionState === "human-review-required") return "human-review-required";
-  if (result.evidencePackage) return "assessable-package";
-  if (result.candidateMatchCount > 0) return "candidate-matches-without-attributable-primary";
-  return "no-candidate-match";
-}
-
-export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, sourceRegistry, proposalManifest }) {
+export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, sourceRegistry }) {
   invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
   invariant(matcherRun?.schemaVersion === "1.0.0" && Array.isArray(matcherRun.promiseResults), "Invalid matcher run");
   invariant(Array.isArray(promiseRegistry?.promises), "Invalid promise registry");
   invariant(Array.isArray(sourceRegistry?.sources), "Invalid source registry");
   const results = new Map(matcherRun.promiseResults.map((result) => [result.promiseId, result]));
-  const proposals = activeProposals(proposalManifest);
   const sources = new Map(sourceRegistry.sources.map((source) => [source.id, source]));
   const recordsBySource = new Map();
   for (const record of collectorRun.records) recordsBySource.set(record.sourceId, (recordsBySource.get(record.sourceId) ?? 0) + 1);
@@ -60,8 +44,7 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
   const promises = promiseRegistry.promises.map((promise) => {
     const result = results.get(promise.id);
     invariant(result, `Matcher run is missing promise ${promise.id}`);
-    const proposal = proposals.get(promise.id) ?? null;
-    const state = stateFor(result, proposal);
+    const state = stateFor(result);
     return {
       promiseId: promise.id,
       partyId: promise.partyId,
@@ -69,31 +52,16 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
       titleCz: promise.titleCz,
       state,
       stateLabel: STATE_LABELS[state],
-      candidateMatchCount: result.candidateMatchCount,
+      potentialMatchCount: result.candidateMatchCount,
       attributablePrimaryMatchCount: result.attributablePrimaryMatchCount,
-      evidencePackage: result.evidencePackage,
-      activeProposal: proposal ? {
-        proposalId: proposal.proposalId,
-        resolutionState: proposal.resolutionState,
-        candidateStatus: proposal.candidateStatus,
-        publicationApproved: proposal.publicationApproved
-      } : null,
-      scoreInferred: false,
-      publicationApproved: false
+      evidencePackage: result.evidencePackage
     };
   });
 
   const stateCounts = Object.fromEntries(Object.keys(STATE_LABELS).map((state) => [state, promises.filter((promise) => promise.state === state).length]));
-  const parties = [...new Set(promises.map(({ partyId }) => partyId))].map((partyId) => ({
-    partyId,
-    partyName: promises.find((promise) => promise.partyId === partyId).partyName,
-    promiseCount: promises.filter((promise) => promise.partyId === partyId).length,
-    states: Object.fromEntries(Object.keys(STATE_LABELS).map((state) => [state, promises.filter((promise) => promise.partyId === partyId && promise.state === state).length]))
-  }));
-
   return {
     schemaVersion: "1.0.0",
-    auditVersion: "coverage-audit-v1",
+    auditVersion: "coverage-audit-v2",
     generatedAt: new Date().toISOString(),
     collectorRunId: collectorRun.runId,
     matchedAt: matcherRun.matchedAt,
@@ -101,15 +69,12 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
     assessmentCutoff: matcherRun.asOf,
     promiseCount: promises.length,
     stateCounts,
-    parties,
     sourceCoverage,
     promises,
-    scoreInferred: false,
-    publicationApproved: false,
     warnings: [
-      "No candidate match does not mean no action and must never be converted into zero points.",
+      "No potential match does not mean no action and must not change a score.",
       "A current-window source cannot provide historical completeness merely because the run requested an earlier date.",
-      "This audit reports pipeline coverage and review state; it does not assess political promises."
+      "This audit reports collection and matching coverage, not political scores."
     ]
   };
 }
@@ -118,13 +83,13 @@ export function renderCoverageAuditMarkdown(audit) {
   const lines = [
     "# Evidence coverage audit",
     "",
-    `Generated for ${audit.promiseCount} reviewed promises; assessment cutoff ${audit.assessmentCutoff}.`,
+    `Generated for ${audit.promiseCount} confirmed promises; cutoff ${audit.assessmentCutoff}.`,
     "",
-    "> This is a pipeline-coverage report, not a political assessment. No match is not zero points.",
+    "> This is a collection-and-matching report. A missing match does not change a promise score.",
     "",
     "## Summary",
     "",
-    "| State | Count |",
+    "| Coverage result | Count |",
     "|---|---:|",
     ...Object.entries(audit.stateCounts).map(([state, count]) => `| ${STATE_LABELS[state]} | ${count} |`),
     "",
@@ -136,9 +101,9 @@ export function renderCoverageAuditMarkdown(audit) {
     "",
     "## Promise coverage",
     "",
-    "| Party | Promise | State | Matches | Attributable primary |",
+    "| Party | Promise | Result | Potential matches | Attributable primary |",
     "|---|---|---|---:|---:|",
-    ...audit.promises.map((promise) => `| ${promise.partyName} | ${promise.titleCz} | ${promise.stateLabel} | ${promise.candidateMatchCount} | ${promise.attributablePrimaryMatchCount} |`),
+    ...audit.promises.map((promise) => `| ${promise.partyName} | ${promise.titleCz} | ${promise.stateLabel} | ${promise.potentialMatchCount} | ${promise.attributablePrimaryMatchCount} |`),
     ""
   ];
   return lines.join("\n");

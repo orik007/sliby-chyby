@@ -10,7 +10,7 @@ async function readJsonDirectory(relativePath) {
   return Promise.all(files.map(async (file) => JSON.parse(await readFile(new URL(file, directory), "utf8"))));
 }
 
-test("production assessments retain their approved audit and sources", async () => {
+test("production assessments retain their sources", async () => {
   const [promises, revisions, sources, partyPeriods] = await Promise.all([
     readJsonDirectory("data/promises"),
     readJsonDirectory("data/assessment-revisions"),
@@ -42,7 +42,6 @@ test("production assessments retain their approved audit and sources", async () 
 
   for (const revision of revisions) {
     assert.ok(promiseIds.has(revision.promiseId));
-    assert.ok(revision.reviewProposalId || revision.baselinePromiseSourceId);
     if (revision.baselinePromiseSourceId) {
       const promise = promises.find(({ id }) => id === revision.promiseId);
       assert.equal(revision.status, "no-progress");

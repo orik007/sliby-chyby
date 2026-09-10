@@ -16,7 +16,7 @@ Every promise has one current numerical score. The default is `0`. The score may
 | `-1` | Směřuje proti slibu | Documented conduct moves against the promise, or a verified direct decisive opportunity to support the exact promise was missed under the vote rule. |
 | `-2` | Jedná proti slibu | A significant direct violation, definitive contrary result, or exact opposite conduct occurred. |
 
-During a live electoral period, elapsed time alone does not change `0`. The one-time closing assessment is a future open question and is not implemented.
+During a live electoral period, elapsed time alone does not change `0`.
 
 ## Decision order
 
@@ -44,6 +44,6 @@ SLAVA Index = round(sum(sᵢ) / (2 × n) × 100)
 
 It ranges from `−100` to `+100` and is shown as index points without a percent sign. Recalculate it from every confirmed promise whenever public promise data or a current score revision changes. If a party has no confirmed promises, the index is unavailable.
 
-## Audit
+## Record
 
-Assessment revisions are append-only. Each automated revision retains the evidence identifiers, methodology and model identifiers, fingerprint, time, confidence, and assessment output. No separate “candidate score”, “unassessed score”, or public human-review state exists.
+Assessment revisions are append-only and list their cited evidence source IDs. No separate candidate score, unassessed score, or human-review state exists.

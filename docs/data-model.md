@@ -1,19 +1,15 @@
 # Data model
 
-## Authority
-
-This document defines storage relationships and validation boundaries. It does not define promise lifecycle, scores, or evidence decisions; use the canonical documents linked from [project-guide.md](project-guide.md).
-
 ## Confirmed invariants
 
 - A promise belongs to one party in one electoral period. Repeated wording in a later period is a new promise.
-- Only confirmed promises exist in `data/` and are rendered publicly.
-- Every confirmed promise has a current score revision, initially `0`.
+- Only confirmed promises are in `data/` and visible publicly.
+- Every confirmed promise has one current score revision; its first score is `0`.
 - Score revisions are append-only. The latest revision is current.
-- Every revision references traceable source records. The SLAVA Index is derived, not stored as an editable value.
-- Candidate and rejected campaign occurrences remain in `research/`, including their reasons and source locators.
+- Every revision lists traceable source records. The SLAVA Index is derived, never stored as an editable value.
+- Campaign-source occurrences outside the public catalogue are `candidate` or `rejected` and remain in `research/` with source locators; a rejection also has a reason.
 
-## File model
+## Files
 
 ```text
 data/
@@ -26,12 +22,4 @@ data/
   system-status.json
 ```
 
-`Promise` contains exact original wording, party-period, primary source, locator, and matching information. `AssessmentRevision` contains one score, public Czech explanation, date, cited source IDs, methodology identity, and audit identity. Initial `0` revisions cite the promise source; later revisions cite conduct evidence.
-
-## Research audit
-
-The research record for an occurrence stores its `candidate`, `confirmed`, or `rejected` outcome, the reason where rejected, and resulting promise IDs where confirmed. The exact JSON layout remains an implementation detail so long as that audit remains traceable.
-
-## Automation audit
-
-Automated assessment artifacts retain raw model outputs separately from public data. They are audit records, not promise or score states. A successful score update must have both a public revision in `data/assessment-revisions/` and a corresponding immutable audit record.
+`Promise` stores its exact original wording, party period, and primary source. `AssessmentRevision` stores its score, public Czech explanation, date, and cited source IDs. An initial zero revision cites the promise source; a later revision cites the relevant evidence.

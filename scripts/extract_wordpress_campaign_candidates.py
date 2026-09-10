@@ -148,7 +148,7 @@ for source in sorted(ano_sources, key=lambda item: item["date"]):
 OUTPUT.write_text(
     json.dumps(
         {
-            "status": "Working proposal",
+            "status": "Research catalogue",
             "scope": "Over-inclusive campaign-statement queue from official party websites and the ANO campaign-period news index, 2025-01-01 through 2025-10-04.",
             "sourcePostCount": len(posts) + len(ano_sources),
             "sourcePostCounts": {

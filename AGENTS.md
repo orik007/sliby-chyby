@@ -10,7 +10,7 @@
 
 - Write repository content, code, identifiers, comments, and documentation in English. Communicate with the owner in Czech unless asked otherwise.
 - Preserve exact Czech political quotations; do not translate them and present them as original.
-- `docs/decisions.md` is the decision register. Label new material **Confirmed decision**, **Working proposal**, or **Open question**. Record a conflict before changing a confirmed decision.
+- `docs/decisions.md` contains the only current project rules. When a confirmed rule changes, replace or delete every superseded rule, implementation, test, workflow, prompt, and artifact. Do not preserve prior models, procedures, or decision records in the repository.
 
 ## Canonical rules
 
@@ -25,7 +25,7 @@
 - A confirmed promise is public immediately; candidates and rejected occurrences are not. Do not add a fourth promise state.
 - A score is always a number from `-2` to `+2`, defaulting to `0`; it is separate from lifecycle.
 - Keep public assessment history append-only and derive, never manually edit, the SLAVA Index.
-- Models may cite only supplied evidence. Keep their prompts, models, evidence identifiers, confidence, and fingerprints auditable.
+- Do not introduce an AI assessment, prompt, model call, or review proposal without a new explicit owner decision.
 - The daily pipeline runs at 09:37 Europe/Prague and keeps the manual trigger. A failed complete run must not advance public freshness.
 - No GitHub Copilot or Codex review may be started, requested, repeated, or awaited without the owner's explicit instruction for the exact pull request and head. Such a review is advisory only.
 - Repository changes for `main` use a PR, a successful exact-head `Verify pull request` run, and the owner's explicit `schvaluji`. The owner merges manually; only `main` deploys.

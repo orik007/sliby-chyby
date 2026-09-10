@@ -14,11 +14,4 @@ Use Astro, TypeScript, plain CSS, and schema-validated versioned files. Keep the
 
 ## Out of scope
 
-Accounts, a CMS, a search engine, a public AI endpoint, a release controller, and complex political-science analytics are out of scope unless a later confirmed decision changes that.
-
-## Open questions
-
-- Final public name and custom domain.
-- Exact electoral-period boundaries.
-- A future period-closing score rule.
-- Licensing and retention of campaign images and archival copies.
+Accounts, a CMS, a search engine, a public AI endpoint, and complex political-science analytics are out of scope unless a later confirmed decision changes that.

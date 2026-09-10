@@ -2,61 +2,50 @@
 
 ## Purpose
 
-SlibyChyby tracks what political parties promised before an election and compares those promises with later, traceable evidence. The public experience stays simple: show the original promise, its current numerical score, a plain Czech explanation, and the sources.
+SlibyChyby shows political parties' confirmed election promises, their current score, a plain Czech explanation, and traceable sources. The current period is the 2025 Czech Chamber of Deputies election; the initial parties are ANO 2011, SPD, and Motoristé sobě.
 
-The current period is the 2025 Czech Chamber of Deputies election. The initial party scope is ANO 2011, SPD, and Motoristé sobě.
+## Canonical rules
 
-## Where rules live
-
-Read the one document that owns the work being changed:
-
-| Area | Canonical document |
+| Area | Document |
 | --- | --- |
-| Decisions and their history | [decisions.md](decisions.md) |
-| Promise lifecycle and selection | [promise-selection.md](promise-selection.md) |
+| Current project rules | [decisions.md](decisions.md) |
+| Promise lifecycle | [promise-selection.md](promise-selection.md) |
 | Scores and SLAVA Index | [scoring.md](scoring.md) |
-| Evidence collection and assessment | [evidence-pipeline.md](evidence-pipeline.md) |
-| Storage entities and validation | [data-model.md](data-model.md) |
-| Product presentation | [product.md](product.md) |
-| Pull requests and deployment | [release-process.md](release-process.md) |
+| Evidence automation | [evidence-pipeline.md](evidence-pipeline.md) |
+| Storage and validation | [data-model.md](data-model.md) |
+| Release | [release-process.md](release-process.md) |
 
-This guide only routes a reader. It does not define a second version of those rules.
-
-## Operating model
+## Current operating model
 
 ```text
-official campaign material
-  -> research candidate
+official party source
+  -> candidate
   -> confirmed public promise or rejected occurrence
 
 allowlisted evidence sources
   -> daily collection at 09:37 Europe/Prague
   -> deterministic matching to confirmed promises
-  -> bounded evidence package
-  -> independent assessment and arbitration when needed
-  -> append-only current-score revision when justified
-  -> derived SLAVA Index
+  -> official-document enrichment when a known target exists
+  -> coverage audit
 ```
 
-The evidence workflow also has a manual trigger. A failed complete run never advances the public freshness date. The public browser has no AI key and makes no live AI assessment.
+The daily workflow does not call an AI model, assign a score, or publish data. The public site makes no live AI call.
 
 ## Repository map
 
 | Path | Purpose |
 | --- | --- |
-| `research/2025-election/` | Unpublished campaign-source research, candidates, and rejections. |
-| `data/` | Confirmed public promises, sources, score revisions, and system status. |
-| `automation/collectors/` | Allowlisted evidence source registry. |
-| `automation/matching/` | Matching configuration for confirmed promises. |
-| `automation/prompts/` | Versioned assessment prompts. |
-| `automation/review-proposals/` | Historical unpublished assessment-proposal audit; not an active lifecycle or score state. |
-| `scripts/` | Validation, collection, matching, enrichment, and assessment scripts. |
-| `.github/workflows/` | Server-side verification and daily evidence workflow. |
+| `research/2025-election/` | Non-public campaign-source occurrences and rejection reasons. |
+| `data/` | Public confirmed promises, sources, current-score revisions, and system status. |
+| `automation/collectors/` | Allowlisted evidence-source registry. |
+| `automation/matching/` | Deterministic matching configuration for public promises. |
+| `scripts/` | Validation, collection, matching, enrichment, and coverage-audit scripts. |
+| `.github/workflows/` | Verification and daily evidence collection. |
 
-## Cold-start checklist
+## Before changing the project
 
 1. Read `AGENTS.md`, this guide, and [decisions.md](decisions.md).
-2. Read the one canonical document for the requested change.
-3. Inspect `origin/main`, the current working tree, and relevant server-side state.
-4. Keep promise lifecycle, score, evidence, and release concerns separate.
-5. Do not start a Copilot or Codex review unless the owner explicitly asks for that exact PR and head.
+2. Read the canonical document for the affected area.
+3. Inspect the current branch, `origin/main`, and relevant server-side state.
+4. Replace or remove rules and implementation that a confirmed rule invalidates; never preserve a previous model beside the current one.
+5. Do not start Copilot or Codex review unless the owner explicitly asks for that exact pull request and head.

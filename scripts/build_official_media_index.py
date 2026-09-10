@@ -94,7 +94,7 @@ counts = {
 OUTPUT.write_text(
     json.dumps(
         {
-            "status": "Working proposal",
+            "status": "Research catalogue",
             "scope": (
                 "Official WordPress media uploaded from 2025-01-01 through "
                 "2025-10-04. An upload is a recovery lead, not necessarily a "

@@ -1,8 +1,21 @@
 import { sha256 } from "./collector-core.mjs";
-import { validateEvidencePackage } from "./assessment-pipeline.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
+}
+
+export function validateEvidencePackage(evidencePackage) {
+  invariant(evidencePackage?.schemaVersion === "1.0.0", "Unsupported evidence-package schemaVersion");
+  invariant(typeof evidencePackage.packageId === "string" && evidencePackage.packageId.length > 0, "Evidence package is missing packageId");
+  invariant(/^\d{4}-\d{2}-\d{2}$/.test(evidencePackage.asOf ?? ""), "Evidence package has invalid asOf date");
+  invariant(typeof evidencePackage.promise?.id === "string" && evidencePackage.promise.id.length > 0, "Evidence package is missing promise id");
+  invariant(Array.isArray(evidencePackage.evidence) && evidencePackage.evidence.length > 0, "Evidence package must include evidence");
+  invariant(evidencePackage.evidence[0]?.role === "promise-source", "Evidence package must start with its promise source");
+  for (const evidence of evidencePackage.evidence) {
+    invariant(typeof evidence.id === "string" && evidence.id.length > 0, "Evidence is missing id");
+    invariant(typeof evidence.url === "string" && evidence.url.startsWith("https://"), `Evidence ${evidence.id} must use HTTPS`);
+  }
+  return evidencePackage;
 }
 
 function normalizeSearchText(value) {
@@ -219,13 +232,9 @@ export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
   if (selectedMatches.length === 0) return null;
   const evidencePackage = {
     schemaVersion: "1.0.0",
-    methodologyVersion: "slava-v6",
+    methodologyVersion: "evidence-collection-v1",
     packageId: `${promise.id}--${asOf}--generated`,
     asOf,
-    assessmentContext: {
-      mode: "live",
-      ruleVersion: "period-timing-v1"
-    },
     promise: {
       id: promise.id,
       partyPeriodId: promise.partyPeriodId,
@@ -245,8 +254,7 @@ export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
       primaryMatchCount: matches.filter(({ record, attributionStatus }) => record.primary && assessableAttributionStatuses.has(attributionStatus)).length,
       selectedPrimaryEvidenceCount: selectedMatches.length,
       omittedPrimaryMatchCount: Math.max(0, matches.filter(({ record, attributionStatus }) => record.primary && assessableAttributionStatuses.has(attributionStatus)).length - selectedMatches.length),
-      directionAssigned: false,
-      publicationApproved: false
+      directionAssigned: false
     },
     evidence: [promise.promiseSource, ...selectedMatches.map((match) => evidenceFromMatch(match, promise))]
   };

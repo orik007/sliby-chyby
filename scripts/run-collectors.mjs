@@ -69,7 +69,6 @@ const output = {
   runId,
   collectedAt,
   since,
-  publicationApproved: false,
   sourceIds: selected.map((source) => source.id),
   collectors: collectorResults.map((result) => ({
     sourceId: result.sourceId,
@@ -89,4 +88,4 @@ const output = {
   records
 };
 await writeFile(resolve(outputDirectory, "collector-run.json"), `${JSON.stringify(output, null, 2)}\n`, { flag: "wx" });
-console.log(JSON.stringify({ runId, since, outputDirectory, sourceCount: selected.length, recordCount: records.length, publicationApproved: false }, null, 2));
+console.log(JSON.stringify({ runId, since, outputDirectory, sourceCount: selected.length, recordCount: records.length }, null, 2));

@@ -233,7 +233,7 @@ output.parent.mkdir(parents=True, exist_ok=True)
 output.write_text(
     json.dumps(
         {
-            "status": "Working proposal",
+            "status": "Research catalogue",
             "scope": "Over-inclusive extraction queue from official 2025 election programmes; not production promises.",
             "records": records,
         },
