@@ -34,5 +34,6 @@ test("research promises use one source catalog and three promise statuses", asyn
       assert.deepEqual(publicPromiseById.get(promise.id).sourceLocator, promise.locator, `Public locator differs for ${promise.id}`);
     }
   }
-  assert.equal(catalog.promises.filter(({ status }) => status === "confirmed").length, 22);
+  const confirmedPromiseIds = new Set(catalog.promises.filter(({ status }) => status === "confirmed").map(({ id }) => id));
+  assert.deepEqual([...confirmedPromiseIds].sort(), [...publicPromiseIds].sort(), "Every and only confirmed campaign promise must be public");
 });
