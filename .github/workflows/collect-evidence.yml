@@ -58,7 +58,21 @@ jobs:
           if git ls-remote --exit-code --heads origin "$REVIEW_BRANCH" >/dev/null 2>&1; then
             git fetch origin "refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
             git switch --create "$REVIEW_BRANCH" --track "origin/$REVIEW_BRANCH"
-            git merge --no-edit "$GITHUB_SHA"
+            if git merge-base --is-ancestor "$GITHUB_SHA" HEAD; then
+              echo "Durable review branch already contains the current main revision."
+            elif git merge --no-ff --no-commit "$GITHUB_SHA"; then
+              git commit --no-edit
+            else
+              unresolved="$(git diff --name-only --diff-filter=U)"
+              if [ -z "$unresolved" ] || printf '%s\n' "$unresolved" | grep -qv '^automation/review-proposals/'; then
+                git merge --abort
+                echo "::error::A non-audit conflict prevents synchronizing the durable review branch with main."
+                exit 1
+              fi
+              git checkout --ours -- automation/review-proposals
+              git add automation/review-proposals
+              git commit --no-edit
+            fi
           else
             git switch --create "$REVIEW_BRANCH" "$GITHUB_SHA"
           fi
@@ -156,9 +170,9 @@ jobs:
             echo "No new assessment proposal was created." >> "$GITHUB_STEP_SUMMARY"
           else
             git commit -m "Add automated assessment review proposals"
-            git push --set-upstream origin "$REVIEW_BRANCH"
             echo "created=true" >> "$GITHUB_OUTPUT"
           fi
+          git push --set-upstream origin "$REVIEW_BRANCH"
 
       - name: Create or update human-review pull request
         if: steps.proposals.outputs.created == 'true'
