@@ -29,7 +29,11 @@ test("production assessments retain their sources", async () => {
 
   assert.ok(promiseIds.has("ano-2025-abolish-public-media-fees"));
   assert.ok(promiseIds.has("ano-2025-eet-2"));
-  assert.equal(promises.filter(({ partyPeriodId }) => partyPeriodId === "cz-ps-2025--ano").length, 22, "The current confirmed ANO catalog must be public");
+  assert.deepEqual(
+    new Set(promises.map(({ partyPeriodId }) => partyPeriodId)),
+    new Set(["cz-ps-2025--ano", "cz-ps-2025--spd", "cz-ps-2025--motoriste"]),
+    "The completed catalogue must include public promises for every tracked party"
+  );
   assert.deepEqual([...revisedPromiseIds].sort(), [...promiseIds].sort(), "Every published promise must have a current score");
 
   for (const promise of promises) {

@@ -59,6 +59,13 @@ export function validatePromiseRegistry(registry) {
     invariant(/^\d{4}(?:-\d{2})?(?:-\d{2})?$/.test(promise.promiseSource.publishedAt), `Promise ${promise.id} source has an invalid publication date`);
     invariant(Number.isFinite(promise.matching?.minimumScore) && promise.matching.minimumScore > 0, `Promise ${promise.id} needs a positive minimumScore`);
     invariant(Array.isArray(promise.matching.terms), `Promise ${promise.id} matching terms must be an array`);
+    if (promise.matching.requireMultiwordTerms === true) {
+      invariant(promise.matching.terms.length > 0, `Promise ${promise.id} requires at least one multiword matching phrase`);
+      invariant(
+        promise.matching.terms.every(({ phrase }) => normalizeSearchText(phrase).split(" ").length >= 2),
+        `Promise ${promise.id} has a one-word matching phrase despite requiring multiword terms`
+      );
+    }
     invariant(Array.isArray(promise.matching.externalReferences), `Promise ${promise.id} externalReferences must be an array`);
     for (const term of promise.matching.terms) {
       invariant(typeof term.phrase === "string" && term.phrase.length >= 3, `Promise ${promise.id} has an invalid matching phrase`);

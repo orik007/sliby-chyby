@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import {
   buildEvidencePackage,
@@ -8,13 +9,19 @@ import {
   matchRecordToPromise,
   validatePromiseRegistry
 } from "../scripts/lib/evidence-matcher.mjs";
+import { loadPublishedPromiseIds } from "../scripts/lib/published-promises.mjs";
 
 const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8")));
 const eet = registry.promises.find(({ id }) => id === "ano-2025-eet-2");
 const freeMuseums = registry.promises.find(({ id }) => id === "ano-2025-free-state-museums-selected-groups");
 test("matching configuration contains exactly the confirmed public promises", async () => {
   assert.equal(registry.status, "confirmed-promise-matching-v1");
-  assert.equal(registry.promises.length, 22);
+  const publishedPromiseIds = await loadPublishedPromiseIds(fileURLToPath(new URL("../data/promises/", import.meta.url)));
+  assert.deepEqual(
+    new Set(registry.promises.map(({ id }) => id)),
+    publishedPromiseIds,
+    "Matching configuration must cover every and only confirmed public promise"
+  );
   assert.ok(registry.promises.every((promise) => promise.promiseSource.primary));
 });
 
@@ -54,6 +61,20 @@ test("does not turn an unrelated record into candidate evidence", () => {
     payload: { printNumber: 278, actionCz: "předložen", printTitleCz: "Civilní letectví" }
   });
   assert.equal(matchRecordToPromise(unrelated, eet), null);
+});
+
+test("generated catalogue matching does not match a generic pledge verb alone", () => {
+  const startups = registry.promises.find(({ id }) => id === "candidate-01b0b2fdd73f");
+  const unrelated = record({
+    id: "party--sport",
+    kind: "official-publication",
+    evidenceRole: "official-party-publication",
+    title: "Podpoříme domácí sport.",
+    publisher: "Motoristé sobě",
+    payload: { sourcePartyId: "motoriste" }
+  });
+  assert.equal(startups.matching.requireMultiwordTerms, true);
+  assert.equal(matchRecordToPromise(unrelated, startups), null);
 });
 
 test("finds a Culture Ministry free-entry item even when timing words split the promise phrase", () => {
@@ -121,7 +142,7 @@ test("creates no assessable package when only media or no records match", () => 
 });
 
 test("treats a matched official ministry publication as a government-action candidate", () => {
-  const promise = registry.promises[0];
+  const promise = eet;
   const record = createCollectedRecord({
     id: "ministry--eet",
     sourceId: "ministry",
