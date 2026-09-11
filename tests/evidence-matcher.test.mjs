@@ -63,6 +63,20 @@ test("does not turn an unrelated record into candidate evidence", () => {
   assert.equal(matchRecordToPromise(unrelated, eet), null);
 });
 
+test("generated catalogue matching does not match a generic pledge verb alone", () => {
+  const startups = registry.promises.find(({ id }) => id === "candidate-01b0b2fdd73f");
+  const unrelated = record({
+    id: "party--sport",
+    kind: "official-publication",
+    evidenceRole: "official-party-publication",
+    title: "Podpoříme domácí sport.",
+    publisher: "Motoristé sobě",
+    payload: { sourcePartyId: "motoriste" }
+  });
+  assert.equal(startups.matching.requireMultiwordTerms, true);
+  assert.equal(matchRecordToPromise(unrelated, startups), null);
+});
+
 test("finds a Culture Ministry free-entry item even when timing words split the promise phrase", () => {
   const item = createCollectedRecord({
     id: "mk-news-archive--free-entry",
