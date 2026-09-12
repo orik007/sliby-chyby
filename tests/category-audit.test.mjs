@@ -32,6 +32,7 @@ test("category audit records the NÚKIB heading issue without changing the promi
     proposedPolicyCategoryId: "security-defence-and-migration",
     possibleHeadingPrefix: "Kyberbezpečnost a moderní hrozby",
     requiresItemReview: true,
+    sourceMetadataReview: { status: "verified", note: "Verified against the official Motoristé programme, page 31." },
     reviewerDecision: { status: "pending", note: null },
     originalTextCz: "Kyberbezpečnost a moderní hrozby Posílíme kapacity NÚKIB a dalších složek kybernetické bezpečnosti.",
   });
@@ -41,6 +42,7 @@ test("category audit keeps every unreviewed row open and detects the pension-hea
   const record = audit.rows.find(({ promiseId }) => promiseId === "candidate-815ab3193662");
   assert.equal(record.possibleHeadingPrefix, "DŮSTOJNÉ DŮCHODY A OCHRANA SENIORŮ PŘED CHUDOBOU");
   assert.equal(record.requiresItemReview, true);
+  assert.deepEqual(record.sourceMetadataReview, { status: "pending", note: null });
   assert.deepEqual(record.reviewerDecision, { status: "pending", note: null });
 });
 

@@ -21,8 +21,9 @@ Every promise should eventually have both fields below. The common category supp
 | `sourceSection` | Exact relevant heading in the original party programme | `Kyberbezpečnost a moderní hrozby` |
 | `sourceSectionOrder` | Position of the source section in the programme | programme order |
 | `sourceOrder` | Position of the promise within that section | source order |
+| `sourceMetadataReview` | Whether the source section and ordering were independently verified | `verified` |
 
-The later public list should group by `policyCategoryId`, show the source section as context, and order promises by source order. It must not claim an unverified editorial ranking of the individual promises. `sourceSection`, `sourceSectionOrder`, and `sourceOrder` remain `null` in an audit row until a reviewer records the corresponding source-level decision.
+The later public list should group by `policyCategoryId`, show the source section as context, and order promises by source order. It must not claim an unverified editorial ranking of the individual promises. `sourceSection`, `sourceSectionOrder`, and `sourceOrder` remain `null` until `sourceMetadataReview` is `verified`. Source-metadata verification is independent from the still-pending full reviewer decision about categorisation.
 
 ## Proposed common categories
 

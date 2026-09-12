@@ -6,11 +6,20 @@ export const policyCategoryIds = [
 
 const policyCategoryIdSchema = z.enum(policyCategoryIds);
 const positiveIntegerSchema = z.number().int().positive();
+const sourceMetadataReviewSchema = z.discriminatedUnion("status", [
+  z.object({ status: z.literal("pending"), note: z.null() }),
+  z.object({ status: z.literal("verified"), note: z.string().min(1) }),
+]);
 const auditRowSchema = z.object({
   promiseId: z.string().min(1), partyId: z.enum(["ano", "spd", "motoriste"]), sourceId: z.string().min(1), sourcePage: positiveIntegerSchema.nullable(),
   programmeChapter: z.string().min(1).nullable(), programmeChapterOrder: positiveIntegerSchema.nullable(), programmeChapterPages: z.object({ firstPage: positiveIntegerSchema, lastPage: positiveIntegerSchema }).nullable(),
   sourceSection: z.string().min(1).nullable(), sourceSectionOrder: positiveIntegerSchema.nullable(), sourceOrder: positiveIntegerSchema.nullable(), proposedPolicyCategoryId: policyCategoryIdSchema.nullable(), possibleHeadingPrefix: z.string().min(1).nullable(), requiresItemReview: z.literal(true),
+  sourceMetadataReview: sourceMetadataReviewSchema,
   reviewerDecision: z.object({ status: z.literal("pending"), note: z.null() }), originalTextCz: z.string().min(1),
+}).superRefine((row, context) => {
+  const sourceMetadataIsPresent = row.sourceSection !== null || row.sourceSectionOrder !== null || row.sourceOrder !== null;
+  if (row.sourceMetadataReview.status === "pending" && sourceMetadataIsPresent) context.addIssue({ code: z.ZodIssueCode.custom, path: ["sourceMetadataReview"], message: "Pending source metadata must remain empty." });
+  if (row.sourceMetadataReview.status === "verified" && (row.sourceSection === null || row.sourceSectionOrder === null || row.sourceOrder === null)) context.addIssue({ code: z.ZodIssueCode.custom, path: ["sourceMetadataReview"], message: "Verified source metadata requires a section and both ordering values." });
 });
 
 export const categoryAuditSchema = z.object({
@@ -33,7 +42,7 @@ const programmeMaps = {
   motoriste: [[2, 2, "Recept na levnější život", null], [3, 5, "Stojíme na straně podnikatelů", "economy-business-and-innovation"], [6, 8, "Konsolidace veřejných financí: do čtyř let vyrovnaný rozpočet", "public-finance-and-taxes"], [9, 10, "Geopolitické ukotvení České republiky", "eu-and-foreign-policy"], [11, 12, "Školství: návrat vzdělanosti, kvality a řemesla", "education-science-and-sport"], [13, 14, "Podpora bydlení a rozvoj stavebnictví", "housing-and-regional-development"], [15, 16, "Český průmysl jako základ prosperity a stability", "economy-business-and-innovation"], [17, 18, "Levné energie? Budoucnost je v jádru, ale fosilní zdroje jsou zatím nenahraditelné", "energy-climate-and-environment"], [19, 21, "Motorismus, svoboda pohybu a doprava", "transport-and-infrastructure"], [22, 23, "Pragmatická ochrana přírody místo zeleného extremismu", "energy-climate-and-environment"], [24, 25, "Stabilní a špičkové zdravotnictví pro všechny generace", "health-and-care"], [26, 27, "Úcta k seniorům a spravedlnost v sociální péči", "work-social-affairs-and-pensions"], [28, 29, "Zemědělství: zdravý rozum místo ideologie", "agriculture-and-food"], [30, 31, "Spravedlnost a bezpečnost: stát, který chrání, ne šikanuje", "security-defence-and-migration"], [32, 34, "Digitální stát, který šetří čas i peníze občanů", "state-and-digital-public-services"], [35, 36, "Bohatá kultura bez politických filtrů", "culture-and-media"], [37, 38, "Armáda pro obranu, ne pro útok", "security-defence-and-migration"]],
 };
 
-const knownSourceSections = { "candidate-aafc1d1e345b": { sourceSection: "Kyberbezpečnost a moderní hrozby", sourceSectionOrder: 6, sourceOrder: 1 } };
+const knownSourceSections = { "candidate-aafc1d1e345b": { sourceSection: "Kyberbezpečnost a moderní hrozby", sourceSectionOrder: 6, sourceOrder: 1, sourceMetadataReview: { status: "verified", note: "Verified against the official Motoristé programme, page 31." } } };
 const commitmentVerbs = ["Budeme", "Dokončíme", "Nabídneme", "Navrhneme", "Nechceme", "Odmítneme", "Podpoříme", "Posílíme", "Prosadíme", "Snížíme", "Umožníme", "Vrátíme", "Vytvoříme", "Zajistíme", "Zastropujeme", "Zavedeme", "Zvýšíme", "Zrušíme"];
 
 function getProgrammeChapter(promise) {
@@ -53,7 +62,7 @@ function getPossibleHeadingPrefix(text) {
 export function createCategoryAudit(catalogue) {
   const rows = catalogue.promises.filter(({ status }) => status === "confirmed").map((promise) => {
     const chapter = getProgrammeChapter(promise) ?? { programmeChapter: null, programmeChapterOrder: null, programmeChapterPages: null, proposedPolicyCategoryId: null };
-    const knownSection = knownSourceSections[promise.id] ?? { sourceSection: null, sourceSectionOrder: null, sourceOrder: null };
+    const knownSection = knownSourceSections[promise.id] ?? { sourceSection: null, sourceSectionOrder: null, sourceOrder: null, sourceMetadataReview: { status: "pending", note: null } };
     return { promiseId: promise.id, partyId: promise.partyId, sourceId: promise.sourceId, sourcePage: promise.locator?.page ?? null, ...chapter, ...knownSection, possibleHeadingPrefix: getPossibleHeadingPrefix(promise.originalTextCz), requiresItemReview: true, reviewerDecision: { status: "pending", note: null }, originalTextCz: promise.originalTextCz };
   }).sort((a, b) => a.partyId.localeCompare(b.partyId) || (a.sourcePage ?? 0) - (b.sourcePage ?? 0) || a.promiseId.localeCompare(b.promiseId));
   return categoryAuditSchema.parse({ schemaVersion: 1, purpose: "Non-public research audit. Proposed categories and source sections require item-level review before public data changes.", sourceCatalogue: "research/2025-election/promises.json", counts: { confirmedPromises: rows.length, requiringItemReview: rows.length, withoutProposedCategory: rows.filter(({ proposedPolicyCategoryId }) => proposedPolicyCategoryId === null).length, possibleHeadingPrefixes: rows.filter(({ possibleHeadingPrefix }) => possibleHeadingPrefix !== null).length }, rows });
