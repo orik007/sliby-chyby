@@ -29,6 +29,7 @@
 - Models may cite only evidence supplied in their bounded package. Keep active prompt, model, evidence-ID, confidence, and fingerprint records auditable.
 - The daily pipeline runs at 09:37 Europe/Prague and keeps the manual trigger. A failed complete run must not advance public freshness.
 - No GitHub Copilot or Codex review may be started, requested, repeated, or awaited without the owner's explicit instruction for the exact pull request and head. Such a review is advisory only.
+- Follow the pull-request feedback-response protocol in [release-process.md](docs/release-process.md): post the visible item-by-item resolution before resolving its line-review thread.
 - Repository changes for `main` use a PR, a successful exact-head `Verify pull request` run, and the owner's explicit `schvaluji`. The owner merges manually; only `main` deploys.
 
 ## Scope

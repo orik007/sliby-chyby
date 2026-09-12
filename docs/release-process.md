@@ -13,6 +13,12 @@ This is the only release rule. Evidence and political scoring are governed by [e
 5. The owner merges the approved verified head manually.
 6. Cloudflare Workers Builds deploys `main`; the owner checks the result manually.
 
+## Review feedback
+
+For every addressed review item, the author posts or updates one visible Markdown response in the pull request. The response quotes the feedback title in a blockquote and immediately follows it with `Resolution:` explaining either the concrete change or the specific reason no change is made. It uses real Markdown paragraphs, not literal `\\n` text.
+
+Resolve a line-review thread only after its response is present. When GitHub supports it, mark an addressed aggregate review comment as outdated.
+
 ## Optional AI code reviews
 
 GitHub Copilot and Codex reviews are never initiated, requested, repeated, or awaited automatically. No pull-request event, workflow, agent, commit, draft-state change, or feedback event may trigger them. The owner may explicitly request one review for one identified pull request and exact head; it is advisory and never a release gate or owner approval.
