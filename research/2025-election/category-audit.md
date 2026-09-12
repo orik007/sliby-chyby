@@ -2,7 +2,7 @@
 
 ## Status
 
-This is a research proposal. It does not change public promise records, the public site, or the promise-selection rule. It records the source structures that must be retained while preparing a separately reviewed, promise-level categorisation.
+This is a research proposal. It does not change public promise records, the public site, or the promise-selection rule. Every row in the generated audit is explicitly pending item-level review; a chapter-level proposal is not a completed category decision.
 
 ## Finding
 
@@ -17,11 +17,12 @@ Every promise should eventually have both fields below. The common category supp
 | Field | Purpose | Example for the NÚKIB promise |
 | --- | --- | --- |
 | `policyCategoryId` | Controlled common category for every party | `security-defence-and-migration` |
+| `programmeChapter` | Major chapter in the original party programme, retained as source context | `Spravedlnost a bezpečnost: stát, který chrání, ne šikanuje` |
 | `sourceSection` | Exact relevant heading in the original party programme | `Kyberbezpečnost a moderní hrozby` |
 | `sourceSectionOrder` | Position of the source section in the programme | programme order |
 | `sourceOrder` | Position of the promise within that section | source order |
 
-The later public list should group by `policyCategoryId`, show the source section as context, and order promises by source order. It must not claim an unverified editorial ranking of the individual promises.
+The later public list should group by `policyCategoryId`, show the source section as context, and order promises by source order. It must not claim an unverified editorial ranking of the individual promises. `sourceSection`, `sourceSectionOrder`, and `sourceOrder` remain `null` in an audit row until a reviewer records the corresponding source-level decision.
 
 ## Proposed common categories
 
@@ -121,11 +122,12 @@ The Motoristé programme has major chapters and smaller headings. Both must be r
 
 ## Required promise-level audit
 
-Chapter mapping cannot be copied to every promise without review. The confirmed catalogue contains mixed-subject chapters and introductory pages. Examples include ANO's economy-and-energy chapter, SPD's housing-and-social-policy chapter, and Motoristé promises whose extracted text contains a smaller heading. The next research artifact must therefore list every confirmed promise with:
+Chapter mapping cannot be copied to every promise without review. The confirmed catalogue contains mixed-subject chapters and introductory pages. Examples include ANO's economy-and-energy chapter, SPD's housing-and-social-policy chapter, and Motoristé promises whose extracted text contains a smaller heading. The generated research artifact lists every confirmed promise with:
 
 1. its proposed common category;
 2. its exact source section and section order;
-3. whether the stored text begins with a source heading that must be separated from the commitment; and
-4. a reviewer decision field.
+3. a possible heading-prefix hint, which is not treated as exhaustive;
+4. an explicit pending reviewer-decision field; and
+5. `requiresItemReview: true`.
 
 No public promise record should be changed until that list is complete and reviewed.
