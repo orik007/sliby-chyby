@@ -32,4 +32,5 @@ This document contains only the current confirmed rules. When a rule changes, re
 
 - Changes for `main` use a pull request, exact-head verification, explicit owner approval (`schvaluji`), and a manual merge.
 - Copilot and Codex reviews never start automatically. They run only after an explicit owner request for a specified pull request and head, and are advisory.
+- Addressed review feedback receives a visible, item-by-item resolution before its corresponding line-review thread is resolved. The response protocol is defined in `release-process.md`.
 - Only `main` deploys. The stack is Astro, TypeScript, plain CSS, and schema-validated versioned files.
