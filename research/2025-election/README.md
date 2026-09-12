@@ -12,4 +12,6 @@ Every promise is one of three states:
 
 `promises.json` is the campaign-source and promise catalogue. The other files are discovery catalogues; they are not promise catalogues and cannot publish a promise. Exact wording and the original source stay attached to every promise.
 
+`category-audit.md` and `promise-category-audit.json` are non-public research artifacts for the proposed promise-category work. They do not change published promise records or the public site.
+
 Confirmation follows [promise-selection.md](../../docs/promise-selection.md): it creates the public promise, source, and initial score revision together. No candidate or rejected promise is public or enters the SLAVA Index.
