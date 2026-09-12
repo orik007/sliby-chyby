@@ -69,7 +69,7 @@ jobs:
                 echo "::error::A non-audit conflict prevents synchronizing the durable review branch with main."
                 exit 1
               fi
-              git checkout --ours -- automation/review-proposals
+              git restore --source=HEAD --staged --worktree -- automation/review-proposals
               git add automation/review-proposals
               git commit --no-edit
             fi
