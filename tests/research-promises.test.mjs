@@ -62,7 +62,20 @@ test("research promises use one source catalog and three promise statuses", asyn
     assert.equal(mapping.sourceOrder, auditRow.sourceOrder, `Source item order changed for ${mapping.promiseId}`);
   }
 
-  assert.equal(policyCategoryByPromiseId.get("candidate-f58e6ecc2c77"), "energy-climate-and-environment", "Nuclear construction belongs to energy, not the mixed economy chapter");
-  assert.equal(policyCategoryByPromiseId.get("candidate-f4285b7d1411"), "education-science-and-sport", "Inclusion belongs to education, not the mixed finance chapter");
-  assert.equal(policyCategoryByPromiseId.get("candidate-8eb814515f6f"), "justice-democracy-and-rights", "Anti-corruption penalties belong to justice, not the mixed security chapter");
+  const reviewedAssignments = {
+    "candidate-f58e6ecc2c77": "energy-climate-and-environment",
+    "candidate-02de5dc826fe": "energy-climate-and-environment",
+    "candidate-f4285b7d1411": "education-science-and-sport",
+    "candidate-196684d1adcb": "education-science-and-sport",
+    "candidate-2031ad036844": "education-science-and-sport",
+    "candidate-7e91cc854899": "education-science-and-sport",
+    "candidate-3461f6d65292": "education-science-and-sport",
+    "candidate-443578b0139c": "education-science-and-sport",
+    "candidate-95b1127bb4ae": "education-science-and-sport",
+    "candidate-8eb814515f6f": "justice-democracy-and-rights",
+    "candidate-2298c888a473": "justice-democracy-and-rights",
+    "candidate-8d1f3ce81a7b": "justice-democracy-and-rights",
+    "candidate-9394dcf307d6": "justice-democracy-and-rights"
+  };
+  for (const [promiseId, categoryId] of Object.entries(reviewedAssignments)) assert.equal(policyCategoryByPromiseId.get(promiseId), categoryId, `Incorrect reviewed category for ${promiseId}`);
 });
