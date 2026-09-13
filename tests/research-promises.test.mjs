@@ -9,6 +9,8 @@ test("research promises use one source catalog and three promise statuses", asyn
       .filter((name) => name.endsWith(".json"))
       .map(async (name) => JSON.parse(await readFile(new URL(`../data/promises/${name}`, import.meta.url), "utf8")))
   );
+  const policyCategoryData = JSON.parse(await readFile(new URL("../data/promise-categories.json", import.meta.url), "utf8"));
+  const categoryAudit = JSON.parse(await readFile(new URL("../research/2025-election/promise-category-audit.json", import.meta.url), "utf8"));
   const publicPromiseIds = new Set(publicPromises.map(({ id }) => id));
   const publicPromiseById = new Map(publicPromises.map((promise) => [promise.id, promise]));
   const sourceIds = new Set(catalog.sources.map(({ id }) => id));
@@ -36,4 +38,44 @@ test("research promises use one source catalog and three promise statuses", asyn
   }
   const confirmedPromiseIds = new Set(catalog.promises.filter(({ status }) => status === "confirmed").map(({ id }) => id));
   assert.deepEqual([...confirmedPromiseIds].sort(), [...publicPromiseIds].sort(), "Every and only confirmed campaign promise must be public");
+
+  assert.equal(policyCategoryData.schemaVersion, 1);
+  assert.equal(policyCategoryData.categories.length, 14);
+  assert.equal(new Set(policyCategoryData.categories.map(({ id }) => id)).size, policyCategoryData.categories.length, "Policy category IDs must be unique");
+  assert.equal(new Set(policyCategoryData.categories.map(({ order }) => order)).size, policyCategoryData.categories.length, "Policy category ordering must be unique");
+  const policyCategoryIds = new Set(policyCategoryData.categories.map(({ id }) => id));
+  const mappedPromiseIds = new Set(policyCategoryData.mappings.map(({ promiseId }) => promiseId));
+  const policyCategoryByPromiseId = new Map(policyCategoryData.mappings.map((mapping) => [mapping.promiseId, mapping.policyCategoryId]));
+  const auditByPromiseId = new Map(categoryAudit.rows.map((row) => [row.promiseId, row]));
+  assert.equal(mappedPromiseIds.size, policyCategoryData.mappings.length, "Every promise has at most one common category mapping");
+  assert.deepEqual([...mappedPromiseIds].sort(), [...publicPromiseIds].sort(), "Every public promise has one common category mapping");
+  for (const mapping of policyCategoryData.mappings) {
+    assert.ok(policyCategoryIds.has(mapping.policyCategoryId), `Unknown common category for ${mapping.promiseId}`);
+    assert.ok(mapping.sourceProgrammeChapter, `Missing source programme chapter for ${mapping.promiseId}`);
+    assert.ok(Number.isInteger(mapping.sourceProgrammeChapterOrder), `Missing source programme chapter order for ${mapping.promiseId}`);
+    const auditRow = auditByPromiseId.get(mapping.promiseId);
+    assert.ok(auditRow, `Missing source-review audit row for ${mapping.promiseId}`);
+    assert.equal(mapping.sourceProgrammeChapter, auditRow.programmeChapter, `Source chapter changed for ${mapping.promiseId}`);
+    assert.equal(mapping.sourceProgrammeChapterOrder, auditRow.programmeChapterOrder, `Source chapter order changed for ${mapping.promiseId}`);
+    assert.equal(mapping.sourceSection, auditRow.sourceSection, `Source section changed for ${mapping.promiseId}`);
+    assert.equal(mapping.sourceSectionOrder, auditRow.sourceSectionOrder, `Source section order changed for ${mapping.promiseId}`);
+    assert.equal(mapping.sourceOrder, auditRow.sourceOrder, `Source item order changed for ${mapping.promiseId}`);
+  }
+
+  const reviewedAssignments = {
+    "candidate-f58e6ecc2c77": "energy-climate-and-environment",
+    "candidate-02de5dc826fe": "energy-climate-and-environment",
+    "candidate-f4285b7d1411": "education-science-and-sport",
+    "candidate-196684d1adcb": "education-science-and-sport",
+    "candidate-2031ad036844": "education-science-and-sport",
+    "candidate-7e91cc854899": "education-science-and-sport",
+    "candidate-3461f6d65292": "education-science-and-sport",
+    "candidate-443578b0139c": "education-science-and-sport",
+    "candidate-95b1127bb4ae": "education-science-and-sport",
+    "candidate-8eb814515f6f": "justice-democracy-and-rights",
+    "candidate-2298c888a473": "justice-democracy-and-rights",
+    "candidate-8d1f3ce81a7b": "justice-democracy-and-rights",
+    "candidate-9394dcf307d6": "justice-democracy-and-rights"
+  };
+  for (const [promiseId, categoryId] of Object.entries(reviewedAssignments)) assert.equal(policyCategoryByPromiseId.get(promiseId), categoryId, `Incorrect reviewed category for ${promiseId}`);
 });

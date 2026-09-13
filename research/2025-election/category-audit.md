@@ -2,7 +2,7 @@
 
 ## Status
 
-This is a research proposal. It does not change public promise records, the public site, or the promise-selection rule. Every row in the generated audit is explicitly pending item-level review; a chapter-level proposal is not a completed category decision.
+This is the source-review audit behind the common-category mapping. The public mapping is stored in `data/promise-categories.json`; it does not change the promise-selection rule. Every row here remains available for item-level source-section and heading review, which is separate from the public common-category decision.
 
 ## Finding
 
@@ -10,9 +10,9 @@ The current `category` field is a source label rather than a policy category. It
 
 The current record text also sometimes contains a source heading followed by a commitment. For example, the Motoristé programme has the heading `Kyberbezpečnost a moderní hrozby` followed by the sentence `Posílíme kapacity NÚKIB a dalších složek kybernetické bezpečnosti.` These are distinct source elements and must not be displayed as one promise title.
 
-## Proposed two-layer model
+## Adopted two-layer model
 
-Every promise should eventually have both fields below. The common category supports comparison across parties. The source section preserves the party's own programme organisation. Neither field changes the original source, party, locator, lifecycle, or assessment.
+Every public promise has a common category below. The source section preserves the party's own programme organisation for traceability. Neither field changes the original source, party, locator, lifecycle, or assessment.
 
 | Field | Purpose | Example for the NÚKIB promise |
 | --- | --- | --- |
@@ -23,9 +23,9 @@ Every promise should eventually have both fields below. The common category supp
 | `sourceOrder` | Position of the promise within that section | source order |
 | `sourceMetadataReview` | Whether the source section and ordering were independently verified | `verified` |
 
-The later public list should group by `policyCategoryId`, show the source section as context, and order promises by source order. It must not claim an unverified editorial ranking of the individual promises. `sourceSection`, `sourceSectionOrder`, and `sourceOrder` remain `null` until `sourceMetadataReview` is `verified`. Source-metadata verification is independent from the still-pending full reviewer decision about categorisation.
+The public list groups by `policyCategoryId` and does not display party-specific source sections as categories. It must not claim an editorial ranking of the individual promises. `sourceSection`, `sourceSectionOrder`, and `sourceOrder` remain `null` until `sourceMetadataReview` is `verified`; that source review is independent from the public category decision.
 
-## Proposed common categories
+## Common categories
 
 The IDs are stable English identifiers; labels shown to readers can remain Czech.
 
@@ -121,14 +121,14 @@ The Motoristé programme has major chapters and smaller headings. Both must be r
 | Bohatá kultura bez politických filtrů | `culture-and-media` |
 | Armáda pro obranu, ne pro útok | `security-defence-and-migration` |
 
-## Required promise-level audit
+## Remaining source-level audit
 
-Chapter mapping cannot be copied to every promise without review. The confirmed catalogue contains mixed-subject chapters and introductory pages. Examples include ANO's economy-and-energy chapter, SPD's housing-and-social-policy chapter, and Motoristé promises whose extracted text contains a smaller heading. The generated research artifact lists every confirmed promise with:
+Chapter mapping is not copied into public category data. The confirmed catalogue contains mixed-subject chapters and introductory pages. Examples include ANO's economy-and-energy chapter, SPD's housing-and-social-policy chapter, and Motoristé promises whose extracted text contains a smaller heading. The generated research artifact retains every confirmed promise with:
 
-1. its proposed common category;
+1. its chapter-level category hint, which is not a public decision;
 2. its exact source section and section order;
 3. a possible heading-prefix hint, which is not treated as exhaustive;
-4. an explicit pending reviewer-decision field; and
+4. an explicit pending source-review field; and
 5. `requiresItemReview: true`.
 
-No public promise record should be changed until that list is complete and reviewed.
+The public category mapping keeps a reviewed common category and programme chapter for every confirmed promise. This audit remains the queue for resolving narrower source-section metadata and heading-prefix findings without exposing party-specific programme categories on the site.

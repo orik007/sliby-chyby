@@ -37,7 +37,7 @@ The daily workflow may use AI only for the bounded assessment stage. It never as
 | Path | Purpose |
 | --- | --- |
 | `research/2025-election/promises.json` | Campaign sources and non-public candidate or rejected promises. |
-| `data/` | Public confirmed promises, sources, current-score revisions, and system status. |
+| `data/` | Public confirmed promises, common policy-category mappings, sources, current-score revisions, and system status. |
 | `automation/collectors/` | Allowlisted evidence-source registry. |
 | `automation/matching/` | Deterministic matching configuration for public promises. |
 | `scripts/` | Validation, collection, matching, enrichment, assessment, and coverage-audit scripts. |

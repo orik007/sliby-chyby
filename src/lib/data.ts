@@ -1,5 +1,6 @@
 import systemStatusData from "../../data/system-status.json";
-import { assessmentRevisionSchema, partyPeriodSchema, partySchema, periodSchema, promiseSchema, sourceSchema, systemStatusSchema, type AssessmentRevision, type AssessmentStatus, type PartyPeriod, type PromiseRecord } from "./schema";
+import policyCategoryData from "../../data/promise-categories.json";
+import { assessmentRevisionSchema, partyPeriodSchema, partySchema, periodSchema, policyCategoryDataSchema, promiseSchema, sourceSchema, systemStatusSchema, type AssessmentRevision, type AssessmentStatus, type PartyPeriod, type PolicyCategory, type PromisePolicyCategory, type PromiseRecord } from "./schema";
 import { calculateSlavaIndex } from "./scoring";
 
 function parseCollection<T>(modules: Record<string, unknown>, schema: { parse: (value: unknown) => T }): T[] {
@@ -16,6 +17,10 @@ export const promises = allPromises.filter(({ isDemo }) => !isDemo);
 const visiblePromiseIds = new Set(promises.map(({ id }) => id));
 export const assessmentRevisions = allAssessmentRevisions.filter(({ promiseId }) => visiblePromiseIds.has(promiseId));
 export const systemStatus = systemStatusSchema.parse(systemStatusData);
+const policyCategoryDataParsed = policyCategoryDataSchema.parse(policyCategoryData);
+export const policyCategories = [...policyCategoryDataParsed.categories].sort((a, b) => a.order - b.order);
+const policyCategoryById = new Map(policyCategories.map((category) => [category.id, category]));
+const policyCategoryMappingByPromiseId = new Map(policyCategoryDataParsed.mappings.map((mapping) => [mapping.promiseId, mapping]));
 
 export const statusDetails: Record<AssessmentStatus, { score: number; symbol: string; label: string; className: string }> = {
   fulfilled: { score: 2, symbol: "✓", label: "Splněno", className: "positive-strong" },
@@ -35,6 +40,11 @@ function assertRelationships() {
   const sourceIds = new Set(sources.map(({ id }) => id));
   for (const item of partyPeriods) if (!periodIds.has(item.periodId) || !partyIds.has(item.partyId)) throw new Error(`Invalid PartyPeriod relationship: ${item.id}`);
   for (const promise of promises) if (!partyPeriodIds.has(promise.partyPeriodId) || !sourceIds.has(promise.primarySourceId)) throw new Error(`Invalid Promise relationship: ${promise.id}`);
+  if (policyCategoryMappingByPromiseId.size !== promises.length) throw new Error("Every published promise must have one common policy category.");
+  for (const promise of promises) {
+    const mapping = policyCategoryMappingByPromiseId.get(promise.id);
+    if (!mapping || !policyCategoryById.has(mapping.policyCategoryId)) throw new Error(`Invalid policy category mapping: ${promise.id}`);
+  }
   for (const promise of promises) if (!assessedPromiseIds.has(promise.id)) throw new Error(`Published promise is missing its current score: ${promise.id}`);
   for (const revision of assessmentRevisions) {
     if (!promiseIds.has(revision.promiseId)) throw new Error(`Unknown promise in assessment: ${revision.id}`);
@@ -67,13 +77,45 @@ export function getPartySummary(partyPeriod: PartyPeriod) {
   const party = parties.find(({ id }) => id === partyPeriod.partyId);
   const period = periods.find(({ id }) => id === partyPeriod.periodId);
   if (!party || !period) throw new Error(`Missing party or period for ${partyPeriod.id}`);
-  const partyPromises = promises.filter(({ partyPeriodId }) => partyPeriodId === partyPeriod.id).map((promise) => ({ promise, assessment: getLatestAssessment(promise.id) }));
+  const partyPromises = promises
+    .filter(({ partyPeriodId }) => partyPeriodId === partyPeriod.id)
+    .map((promise) => ({ promise, assessment: getLatestAssessment(promise.id), policyCategory: getPolicyCategory(promise.id), policyCategoryMapping: getPromisePolicyCategoryMapping(promise.id) }))
+    .sort((a, b) => a.policyCategory.order - b.policyCategory.order || comparePromiseSourceOrder(a, b));
   const index = calculateIndex(partyPromises.map(({ promise }) => promise));
   return { party, period, partyPeriod, promises: partyPromises, index };
+}
+function comparePromiseSourceOrder(
+  a: { promise: PromiseRecord; policyCategoryMapping: PromisePolicyCategory },
+  b: { promise: PromiseRecord; policyCategoryMapping: PromisePolicyCategory }
+) {
+  const chapterOrder = a.policyCategoryMapping.sourceProgrammeChapterOrder - b.policyCategoryMapping.sourceProgrammeChapterOrder;
+  if (chapterOrder) return chapterOrder;
+  const aHasVerifiedSectionOrder = a.policyCategoryMapping.sourceSectionOrder !== null && a.policyCategoryMapping.sourceOrder !== null;
+  const bHasVerifiedSectionOrder = b.policyCategoryMapping.sourceSectionOrder !== null && b.policyCategoryMapping.sourceOrder !== null;
+  if (aHasVerifiedSectionOrder && bHasVerifiedSectionOrder) {
+    const sectionOrder = a.policyCategoryMapping.sourceSectionOrder! - b.policyCategoryMapping.sourceSectionOrder!;
+    if (sectionOrder) return sectionOrder;
+    const sourceOrder = a.policyCategoryMapping.sourceOrder! - b.policyCategoryMapping.sourceOrder!;
+    if (sourceOrder) return sourceOrder;
+  }
+  const pageOrder = (a.promise.sourceLocator.page ?? Number.MAX_SAFE_INTEGER) - (b.promise.sourceLocator.page ?? Number.MAX_SAFE_INTEGER);
+  return pageOrder || a.promise.title.localeCompare(b.promise.title, "cs");
 }
 export function getCurrentPartySummaries() {
   const period = getCurrentPeriod();
   return partyPeriods.filter(({ periodId }) => periodId === period.id).sort((a, b) => a.order - b.order).map(getPartySummary);
+}
+export function getPolicyCategory(promiseId: string): PolicyCategory {
+  const mapping = policyCategoryMappingByPromiseId.get(promiseId);
+  if (!mapping) throw new Error(`Missing policy category mapping for ${promiseId}`);
+  const category = policyCategoryById.get(mapping.policyCategoryId);
+  if (!category) throw new Error(`Unknown policy category for ${promiseId}`);
+  return category;
+}
+export function getPromisePolicyCategoryMapping(promiseId: string): PromisePolicyCategory {
+  const mapping = policyCategoryMappingByPromiseId.get(promiseId);
+  if (!mapping) throw new Error(`Missing policy category mapping for ${promiseId}`);
+  return mapping;
 }
 export function getSource(sourceId: string) {
   const source = sources.find(({ id }) => id === sourceId);
