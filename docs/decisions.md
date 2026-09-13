@@ -14,6 +14,8 @@ This document contains only the current confirmed rules. When a rule changes, re
 ## Policy categories
 
 - Every confirmed promise has exactly one common policy category from the controlled 2025 category list.
+- The common category is decided for each promise from its exact commitment and source context. A party programme chapter is traceability metadata and never decides a category by itself.
+- When one already-confirmed promise mentions several subjects, its category follows the principal action to be assessed; its exact wording remains unchanged.
 - The public site groups and orders promises only by that common category. It does not display party-specific programme chapters as categories.
 - The category mapping retains the original programme chapter, its order, and any verified narrower source section solely for source traceability and later maintenance.
 - A category is a navigational subject label, not an editorial measure of importance. Within a category, promises follow their programme context and source order where available.

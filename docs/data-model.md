@@ -26,6 +26,6 @@ data/
 
 `Promise` stores its exact original wording, party period, primary source, and source locator. `AssessmentRevision` stores its score, public Czech explanation, date, and cited source IDs. A zero-default revision cites the promise source; when a documented assessment already establishes another score, its first revision cites that evidence directly.
 
-`promise-categories.json` contains the controlled common policy categories and exactly one mapping for every confirmed promise. A mapping includes the original programme chapter and optional verified source-section metadata for traceability. The public interface uses only the common category label.
+`promise-categories.json` contains the controlled common policy categories and exactly one explicit, promise-level mapping for every confirmed promise. A mapping is decided from the exact commitment and source context; it includes the original programme chapter and optional verified source-section metadata for traceability. The public interface uses only the common category label.
 
 `research/2025-election/promises.json` contains the campaign-source catalogue and non-public promises. Its `sources` list contains one record per source document. Every research promise has a `sourceId`, a locator, exact wording, and one status: `candidate`, `confirmed`, or `rejected`.

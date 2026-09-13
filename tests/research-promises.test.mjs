@@ -45,6 +45,7 @@ test("research promises use one source catalog and three promise statuses", asyn
   assert.equal(new Set(policyCategoryData.categories.map(({ order }) => order)).size, policyCategoryData.categories.length, "Policy category ordering must be unique");
   const policyCategoryIds = new Set(policyCategoryData.categories.map(({ id }) => id));
   const mappedPromiseIds = new Set(policyCategoryData.mappings.map(({ promiseId }) => promiseId));
+  const policyCategoryByPromiseId = new Map(policyCategoryData.mappings.map((mapping) => [mapping.promiseId, mapping.policyCategoryId]));
   const auditByPromiseId = new Map(categoryAudit.rows.map((row) => [row.promiseId, row]));
   assert.equal(mappedPromiseIds.size, policyCategoryData.mappings.length, "Every promise has at most one common category mapping");
   assert.deepEqual([...mappedPromiseIds].sort(), [...publicPromiseIds].sort(), "Every public promise has one common category mapping");
@@ -59,6 +60,9 @@ test("research promises use one source catalog and three promise statuses", asyn
     assert.equal(mapping.sourceSection, auditRow.sourceSection, `Source section changed for ${mapping.promiseId}`);
     assert.equal(mapping.sourceSectionOrder, auditRow.sourceSectionOrder, `Source section order changed for ${mapping.promiseId}`);
     assert.equal(mapping.sourceOrder, auditRow.sourceOrder, `Source item order changed for ${mapping.promiseId}`);
-    if (auditRow.proposedPolicyCategoryId) assert.equal(mapping.policyCategoryId, auditRow.proposedPolicyCategoryId, `Reviewed chapter mapping changed for ${mapping.promiseId}`);
   }
+
+  assert.equal(policyCategoryByPromiseId.get("candidate-f58e6ecc2c77"), "energy-climate-and-environment", "Nuclear construction belongs to energy, not the mixed economy chapter");
+  assert.equal(policyCategoryByPromiseId.get("candidate-f4285b7d1411"), "education-science-and-sport", "Inclusion belongs to education, not the mixed finance chapter");
+  assert.equal(policyCategoryByPromiseId.get("candidate-8eb814515f6f"), "justice-democracy-and-rights", "Anti-corruption penalties belong to justice, not the mixed security chapter");
 });

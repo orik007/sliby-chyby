@@ -80,9 +80,26 @@ export function getPartySummary(partyPeriod: PartyPeriod) {
   const partyPromises = promises
     .filter(({ partyPeriodId }) => partyPeriodId === partyPeriod.id)
     .map((promise) => ({ promise, assessment: getLatestAssessment(promise.id), policyCategory: getPolicyCategory(promise.id), policyCategoryMapping: getPromisePolicyCategoryMapping(promise.id) }))
-    .sort((a, b) => a.policyCategory.order - b.policyCategory.order || a.policyCategoryMapping.sourceProgrammeChapterOrder - b.policyCategoryMapping.sourceProgrammeChapterOrder || (a.policyCategoryMapping.sourceOrder ?? Number.MAX_SAFE_INTEGER) - (b.policyCategoryMapping.sourceOrder ?? Number.MAX_SAFE_INTEGER) || (a.promise.sourceLocator.page ?? Number.MAX_SAFE_INTEGER) - (b.promise.sourceLocator.page ?? Number.MAX_SAFE_INTEGER) || a.promise.title.localeCompare(b.promise.title, "cs"));
+    .sort((a, b) => a.policyCategory.order - b.policyCategory.order || comparePromiseSourceOrder(a, b));
   const index = calculateIndex(partyPromises.map(({ promise }) => promise));
   return { party, period, partyPeriod, promises: partyPromises, index };
+}
+function comparePromiseSourceOrder(
+  a: { promise: PromiseRecord; policyCategoryMapping: PromisePolicyCategory },
+  b: { promise: PromiseRecord; policyCategoryMapping: PromisePolicyCategory }
+) {
+  const chapterOrder = a.policyCategoryMapping.sourceProgrammeChapterOrder - b.policyCategoryMapping.sourceProgrammeChapterOrder;
+  if (chapterOrder) return chapterOrder;
+  const aHasVerifiedSectionOrder = a.policyCategoryMapping.sourceSectionOrder !== null && a.policyCategoryMapping.sourceOrder !== null;
+  const bHasVerifiedSectionOrder = b.policyCategoryMapping.sourceSectionOrder !== null && b.policyCategoryMapping.sourceOrder !== null;
+  if (aHasVerifiedSectionOrder && bHasVerifiedSectionOrder) {
+    const sectionOrder = a.policyCategoryMapping.sourceSectionOrder! - b.policyCategoryMapping.sourceSectionOrder!;
+    if (sectionOrder) return sectionOrder;
+    const sourceOrder = a.policyCategoryMapping.sourceOrder! - b.policyCategoryMapping.sourceOrder!;
+    if (sourceOrder) return sourceOrder;
+  }
+  const pageOrder = (a.promise.sourceLocator.page ?? Number.MAX_SAFE_INTEGER) - (b.promise.sourceLocator.page ?? Number.MAX_SAFE_INTEGER);
+  return pageOrder || a.promise.title.localeCompare(b.promise.title, "cs");
 }
 export function getCurrentPartySummaries() {
   const period = getCurrentPeriod();
