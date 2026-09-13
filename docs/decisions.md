@@ -37,9 +37,12 @@ This document contains only the current confirmed rules. When a rule changes, re
 ## Evidence automation
 
 - The daily workflow runs at 09:37 Europe/Prague and retains a manual trigger.
-- It collects allowlisted sources, matches evidence to confirmed promises, enriches known official documents, and writes a coverage audit.
+- It collects each allowlisted source from its own durable checkpoint. A source without a checkpoint performs a bootstrap from its registry-defined `bootstrapFrom` date; a manual run may explicitly override that start for every selected source.
+- After a complete successful collection stage, each selected source records its own collection time, requested start, newest observed record, record count, run ID, and available snapshot hash. A failed run writes no new checkpoint.
+- It matches evidence to confirmed promises, enriches known official documents, and writes a coverage audit.
 - It sends each new or changed bounded evidence package to two independent assessors. If they disagree, an arbiter selects one assessment or returns no conclusion.
-- It writes only unpublished human-review proposals. A proposal may be kept in its dedicated proposal pull request, but it never changes public data, a public score, or publication status.
+- It writes only unpublished human-review proposals and source checkpoints to one dedicated audit pull request, which may grow until it is reviewed. That audit pull request never changes public data, a public score, or publication status.
+- A human-approved score change uses a separate scoped pull request based on current `main`. It adds an append-only public assessment revision with its cited sources; its approval and merge are governed by the release process.
 - The assessors and arbiter may cite only supplied evidence IDs. Their active prompt versions, providers, model IDs, confidence, evidence IDs, and input fingerprint remain auditable.
 - The fingerprint prevents paid reassessment when assessable input, active prompts, providers, and models are unchanged.
 - A failed complete run does not advance public freshness.

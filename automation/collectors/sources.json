@@ -9,6 +9,7 @@
       "enabled": true,
       "primary": true,
       "evidenceRole": "primary-record",
+      "bootstrapFrom": "2025-10-01",
       "coverage": {
         "mode": "term-snapshot",
         "note": "Each run downloads the complete official open-data snapshots for the 10th Chamber term and then applies the requested date cutoff."
@@ -41,6 +42,7 @@
       "enabled": true,
       "primary": true,
       "evidenceRole": "official-discovery",
+      "bootstrapFrom": "2025-10-01",
       "coverage": {
         "mode": "current-window",
         "note": "The endpoint exposes a publisher-controlled current RSS window. A requested earlier date cannot recover items no longer present in the feed."
@@ -59,6 +61,7 @@
       "enabled": true,
       "primary": true,
       "evidenceRole": "official-discovery",
+      "bootstrapFrom": "2025-10-01",
       "coverage": {
         "mode": "since-filtered-archive",
         "note": "The collector requests the complete official annual press-release indexes for 2025 and 2026 at up to 100 items per page, follows additional pages when needed, and applies the requested cutoff. Add the next annual index when a new calendar year starts."
@@ -82,6 +85,7 @@
       "enabled": true,
       "primary": true,
       "evidenceRole": "official-discovery",
+      "bootstrapFrom": "2025-10-01",
       "coverage": {
         "mode": "since-filtered-archive",
         "note": "The collector reads the complete official annual press-release indexes for 2025 and 2026 and applies the requested cutoff. Add the next annual index when a new calendar year starts."
@@ -103,6 +107,7 @@
       "enabled": true,
       "primary": true,
       "evidenceRole": "official-discovery",
+      "bootstrapFrom": "2025-10-01",
       "coverage": {
         "mode": "since-filtered-archive",
         "note": "The official paginated REST endpoint is queried from the requested date and all returned pages are collected."
@@ -121,6 +126,7 @@
       "enabled": true,
       "primary": true,
       "evidenceRole": "official-discovery",
+      "bootstrapFrom": "2025-10-01",
       "coverage": {
         "mode": "since-filtered-archive",
         "note": "The collector follows the official newest-first archive until it passes the requested cutoff. Only items labelled by the publisher as ministry items are retained; notices from subordinate organizations and event previews are excluded."
@@ -142,6 +148,7 @@
       "enabled": true,
       "primary": true,
       "evidenceRole": "official-discovery",
+      "bootstrapFrom": "2025-10-01",
       "coverage": {
         "mode": "since-filtered-archive",
         "note": "The collector follows the cursor-paginated JSON archive used by the ministry's own news page in descending publication order and stops only after passing the requested cutoff."
@@ -163,6 +170,7 @@
       "enabled": true,
       "primary": true,
       "evidenceRole": "official-party-publication",
+      "bootstrapFrom": "2025-10-01",
       "partyId": "motoriste",
       "coverage": {
         "mode": "since-filtered-archive",
@@ -182,6 +190,7 @@
       "enabled": true,
       "primary": false,
       "evidenceRole": "discovery-context",
+      "bootstrapFrom": "2025-10-01",
       "coverage": {
         "mode": "current-window",
         "note": "The endpoint exposes a publisher-controlled current RSS window. A requested earlier date cannot recover items no longer present in the feed."
@@ -200,6 +209,7 @@
       "enabled": true,
       "primary": false,
       "evidenceRole": "discovery-context",
+      "bootstrapFrom": "2025-10-01",
       "coverage": {
         "mode": "current-window",
         "note": "The endpoint exposes a publisher-controlled current RSS window. A requested earlier date cannot recover items no longer present in the feed."
@@ -218,6 +228,7 @@
       "enabled": true,
       "primary": false,
       "evidenceRole": "discovery-context",
+      "bootstrapFrom": "2025-10-01",
       "coverage": {
         "mode": "current-window",
         "note": "The endpoint exposes a publisher-controlled current RSS window. A requested earlier date cannot recover items no longer present in the feed."
@@ -236,6 +247,7 @@
       "enabled": true,
       "primary": false,
       "evidenceRole": "discovery-context",
+      "bootstrapFrom": "2025-10-01",
       "coverage": {
         "mode": "current-window",
         "note": "Google News sitemaps expose only a short recent-publication window. A requested earlier date cannot recover older articles."
@@ -254,6 +266,7 @@
       "enabled": false,
       "primary": true,
       "evidenceRole": "official-party-publication",
+      "bootstrapFrom": "2025-10-01",
       "partyId": "ano",
       "coverage": {
         "mode": "deferred",
@@ -272,6 +285,7 @@
       "enabled": false,
       "primary": true,
       "evidenceRole": "official-party-publication",
+      "bootstrapFrom": "2025-10-01",
       "partyId": "spd",
       "coverage": {
         "mode": "deferred",
@@ -290,6 +304,7 @@
       "enabled": false,
       "primary": true,
       "evidenceRole": "primary-record",
+      "bootstrapFrom": "2025-10-01",
       "coverage": {
         "mode": "deferred",
         "note": "Coverage is unavailable until a stable documented machine-readable endpoint is verified."
@@ -307,6 +322,7 @@
       "enabled": false,
       "primary": true,
       "evidenceRole": "primary-record",
+      "bootstrapFrom": "2025-10-01",
       "coverage": {
         "mode": "deferred",
         "note": "Coverage is unavailable until the production open-data interface is stable and usable."

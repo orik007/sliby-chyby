@@ -23,11 +23,12 @@ official party source
   -> candidate, confirmed public promise, or rejected promise
 
 allowlisted evidence sources
-  -> daily collection at 09:37 Europe/Prague
+  -> per-source bootstrap or incremental collection at 09:37 Europe/Prague
   -> deterministic matching to confirmed promises
   -> official-document enrichment when a known target exists
   -> two independent assessments; arbiter only on disagreement
-  -> unpublished human-review proposal and coverage audit
+  -> unpublished audit pull request with proposals, coverage, and checkpoints
+  -> separate approved public-assessment pull request when a score changes
 ```
 
 The daily workflow may use AI only for the bounded assessment stage. It never assigns a public score or publishes data; every output remains an unpublished human-review proposal. The public site makes no live AI call.

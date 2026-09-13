@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       since:
-        description: Earliest publication or event date (YYYY-MM-DD)
-        required: true
-        default: "2025-10-01"
+        description: Optional YYYY-MM-DD override for a manual backfill; leave empty for per-source checkpoints
+        required: false
+        default: ""
         type: string
       as_of:
         description: Assessment cutoff date; leave empty to use the UTC run date
@@ -36,7 +36,7 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      COLLECTOR_SINCE: ${{ inputs.since || '2025-10-01' }}
+      COLLECTOR_SINCE: ${{ inputs.since || '' }}
       MATCHER_AS_OF: ${{ inputs.as_of || '' }}
       REVIEW_BRANCH: automation/assessment-review
       SLIBY_ASSESSOR_PROVIDER_A: openai
@@ -90,7 +90,16 @@ jobs:
         run: npm test
 
       - name: Collect source records
-        run: node scripts/run-collectors.mjs --since "$COLLECTOR_SINCE" --output automation/runs/pipeline/github-actions/collector
+        run: |
+          collector_args=(
+            --checkpoints automation/collectors/checkpoints.json
+            --write-checkpoints automation/collectors/checkpoints.json
+            --output automation/runs/pipeline/github-actions/collector
+          )
+          if [ -n "$COLLECTOR_SINCE" ]; then
+            collector_args+=(--since "$COLLECTOR_SINCE")
+          fi
+          node scripts/run-collectors.mjs "${collector_args[@]}"
 
       - name: Match records to every confirmed promise
         run: |
@@ -135,6 +144,7 @@ jobs:
             const enrichment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json", "utf8"));
             const assessment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/assessment-batch.json", "utf8"));
             const coverage = JSON.parse(await readFile("automation/runs/pipeline/github-actions/coverage-audit.json", "utf8"));
+            const checkpoints = JSON.parse(await readFile("automation/collectors/checkpoints.json", "utf8"));
             const packageCount = run.promiseResults.filter((result) => result.evidencePackage).length;
             const candidateCount = run.promiseResults.reduce((sum, result) => sum + result.candidateMatchCount, 0);
             const documentCount = enrichment.results.reduce((sum, result) => sum + result.documentEvidenceCount, 0);
@@ -159,17 +169,33 @@ jobs:
               ""
             ];
             await appendFile(process.env.GITHUB_STEP_SUMMARY, lines.join("\n"));
+            const sourceRows = run.collectors.map((collector) => {
+              const checkpoint = checkpoints.sourceCheckpoints[collector.sourceId];
+              return `| \`${collector.sourceId}\` | ${collector.collection.mode} | ${collector.collection.since} | ${collector.recordCount} | ${checkpoint?.lastObservedRecordAt?.slice(0, 10) ?? "—"} |`;
+            });
+            const reviewLines = [
+              "",
+              "## Sběr dat a checkpointy zdrojů",
+              "",
+              "Tento pull request je auditní fronta. Uložení checkpointu pouze potvrzuje úspěšné technické získání zdroje; samo nemění veřejné hodnocení.",
+              "",
+              "| Zdroj | Režim | Od | Záznamů | Nejnovější záznam |",
+              "| --- | --- | --- | ---: | --- |",
+              ...sourceRows,
+              ""
+            ];
+            await appendFile("automation/runs/pipeline/github-actions/assessment-review-pr.md", reviewLines.join("\n"));
           '
 
       - name: Commit new review proposals
         id: proposals
         run: |
-          git add automation/review-proposals
+          git add automation/collectors/checkpoints.json automation/review-proposals
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
-            echo "No new assessment proposal was created." >> "$GITHUB_STEP_SUMMARY"
+            echo "No new audit data or assessment proposal was created." >> "$GITHUB_STEP_SUMMARY"
           else
-            git commit -m "Add automated assessment review proposals"
+            git commit -m "Update evidence collection audit"
             echo "created=true" >> "$GITHUB_OUTPUT"
           fi
           git push --set-upstream origin "$REVIEW_BRANCH"
@@ -179,16 +205,15 @@ jobs:
         run: |
           PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVIEW_BRANCH" --base main --state open --json number --jq '.[0].number')"
           if [ -n "$PR_NUMBER" ]; then
-            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --title "Kontrola automatických návrhů hodnocení SLAVA" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md
+            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md
             PR_URL="$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json url --jq '.url')"
           else
-            if PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Kontrola automatických návrhů hodnocení SLAVA" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md 2>/tmp/slava-pr-error)"; then
+            if PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md 2>/tmp/slava-pr-error)"; then
               :
             else
-              COMPARE_URL="https://github.com/$GITHUB_REPOSITORY/compare/main...$REVIEW_BRANCH?expand=1"
-              echo "::warning::GitHub Actions may push the review branch but repository settings prevent it from creating pull requests. Open $COMPARE_URL"
-              echo "Review branch is ready. Create the pull request at: $COMPARE_URL" >> "$GITHUB_STEP_SUMMARY"
-              exit 0
+              echo "::error::The audit branch was updated but GitHub Actions could not create the required review pull request."
+              cat /tmp/slava-pr-error
+              exit 1
             fi
           fi
           echo "Review pull request: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
