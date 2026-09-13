@@ -70,6 +70,12 @@ export function emptySemanticIndex({
   };
 }
 
+export function semanticIndexRequiresRebuild(index, runtime) {
+  return index?.provider !== runtime.provider
+    || index?.model !== runtime.model
+    || index?.dimensions !== runtime.dimensions;
+}
+
 export function validateSemanticIndex(index, promises, runtime) {
   invariant(index && typeof index === "object", "Semantic index must be an object");
   invariant(index.schemaVersion === semanticIndexSchemaVersion, "Unsupported semantic index schemaVersion");
@@ -132,8 +138,16 @@ export function cosineSimilarity(left, right) {
   return dot / (Math.sqrt(leftMagnitude) * Math.sqrt(rightMagnitude));
 }
 
-export function rankSemanticCandidates({ records, recordEmbeddings, promises, index, limit = defaultSemanticCandidateLimit }) {
+export function rankSemanticCandidates({
+  records,
+  recordEmbeddings,
+  promises,
+  index,
+  limit = defaultSemanticCandidateLimit,
+  minimumSimilarity = 0
+}) {
   invariant(Number.isInteger(limit) && limit > 0, "Semantic candidate limit must be a positive integer");
+  invariant(Number.isFinite(minimumSimilarity) && minimumSimilarity >= -1 && minimumSimilarity <= 1, "Minimum semantic similarity must be between -1 and 1");
   const resultsByPromise = new Map(promises.map(({ id }) => [id, new Map()]));
   for (const record of records) {
     const embedding = recordEmbeddings.get(record.id);
@@ -144,6 +158,7 @@ export function rankSemanticCandidates({ records, recordEmbeddings, promises, in
         similarity: cosineSimilarity(embedding, index.promiseEmbeddings[promise.id].embedding)
       }))
       .sort((a, b) => b.similarity - a.similarity || a.promise.id.localeCompare(b.promise.id))
+      .filter(({ similarity }) => similarity >= minimumSimilarity)
       .slice(0, limit);
     ranked.forEach(({ promise, similarity }, rank) => {
       resultsByPromise.get(promise.id).set(record.id, {

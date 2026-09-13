@@ -49,6 +49,8 @@ jobs:
       SLIBY_SEMANTIC_MODEL: text-embedding-3-small
       SLIBY_SEMANTIC_DIMENSIONS: 256
       SLIBY_SEMANTIC_CANDIDATE_LIMIT: 8
+      SLIBY_SEMANTIC_MIN_SIMILARITY: 0.5
+      SLIBY_ASSESSMENT_CONCURRENCY: 4
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
@@ -162,6 +164,8 @@ jobs:
               `- Potential matches: ${candidateCount}`,
               `- Semantic record embeddings: ${semantic.recordEmbeddingsCreated}`,
               `- Semantic candidate relationships: ${semantic.candidateRelationships}`,
+              `- Semantic minimum similarity: ${semantic.minimumSimilarity}`,
+              `- Semantic index rebuilt: ${semantic.indexRebuilt}`,
               `- Assessable evidence packages: ${packageCount}`,
               `- Official print documents added: ${documentCount}`,
               `- Document-enrichment warnings: ${enrichment.warnings.length}`,
@@ -187,7 +191,7 @@ jobs:
               "## Sběr dat a checkpointy zdrojů",
               "",
               "Tento pull request je auditní fronta. Uložení checkpointu pouze potvrzuje úspěšné technické získání zdroje; samo nemění veřejné hodnocení.",
-              `Sémantické vyhledání použilo ${semantic.model} a pro každý primární záznam předalo nejvýše ${semantic.candidateLimit} kandidátních slibů ke kontrole; podobnost sama o sobě nepotvrzuje souvislost ani hodnocení.`,
+              `Sémantické vyhledání použilo ${semantic.model} a pro každý primární záznam předalo ke kontrole jen kandidáty s podobností alespoň ${semantic.minimumSimilarity}, nejvýše ${semantic.candidateLimit}; podobnost sama o sobě nepotvrzuje souvislost ani hodnocení.`,
               "",
               "| Zdroj | Režim | Od | Záznamů | Nejnovější záznam |",
               "| --- | --- | --- | ---: | --- |",

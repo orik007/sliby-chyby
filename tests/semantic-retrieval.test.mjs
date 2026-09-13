@@ -5,6 +5,7 @@ import {
   planPromiseEmbeddings,
   pruneSemanticIndex,
   rankSemanticCandidates,
+  semanticIndexRequiresRebuild,
   updateSemanticIndex,
   validateSemanticIndex
 } from "../scripts/lib/semantic-retrieval.mjs";
@@ -41,6 +42,8 @@ test("semantic retrieval ranks every promise locally and keeps only the top cand
     embeddings: [[1, 0], [0, 1]]
   }), promises, runtime);
   assert.equal(planPromiseEmbeddings({ index, promises }).length, 0);
+  assert.equal(semanticIndexRequiresRebuild(index, runtime), false);
+  assert.equal(semanticIndexRequiresRebuild(index, { ...runtime, model: "replacement-embedding" }), true);
   assert.deepEqual(
     Object.keys(pruneSemanticIndex({ ...index, promiseEmbeddings: { ...index.promiseEmbeddings, retired: index.promiseEmbeddings["road-tax"] } }, promises).promiseEmbeddings),
     ["teacher-pay", "road-tax"]
@@ -56,4 +59,14 @@ test("semantic retrieval ranks every promise locally and keeps only the top cand
   });
   assert.equal(candidates.get("teacher-pay").get("official-teacher-pay").rank, 1);
   assert.equal(candidates.get("road-tax").size, 0);
+
+  const thresholded = rankSemanticCandidates({
+    records,
+    recordEmbeddings: new Map([["official-teacher-pay", [0.9, 0.1]]]),
+    promises,
+    index,
+    limit: 8,
+    minimumSimilarity: 0.999
+  });
+  assert.equal(thresholded.get("teacher-pay").size, 0);
 });
