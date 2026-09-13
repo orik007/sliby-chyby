@@ -4,6 +4,8 @@ The scheduled workflow runs at 09:37 Europe/Prague. It collects allowlisted sour
 
 Two independent assessors receive the same package. When they disagree, an arbiter selects one assessment or returns no conclusion. Models can cite only supplied evidence IDs.
 
-`review-proposals/` is the human-review queue. Its proposals remain unpublished and never change public data or a public score. The workflow may update its dedicated proposal pull request; it never starts Copilot or Codex review.
+`collectors/checkpoints.json` records each source's successful collection checkpoint on the durable audit branch. A source without a checkpoint starts from its registry `bootstrapFrom`; later runs start from that source's own checkpoint.
+
+`review-proposals/` is the human-review queue. Its proposals and collector checkpoints share one durable audit pull request. They remain unpublished and never change public data or a public score. A human-approved score change is prepared separately as a normal current-`main` pull request. The workflow never starts Copilot or Codex review.
 
 The changed-input fingerprint includes assessable content, active prompt content, providers, and model IDs, so a run timestamp alone does not cause another model call. The active prompts are `assessor-v12` and `arbiter-v4`. The canonical process is [docs/evidence-pipeline.md](../docs/evidence-pipeline.md).

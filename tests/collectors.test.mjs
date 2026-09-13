@@ -24,6 +24,7 @@ const mediaSource = {
   enabled: true,
   primary: false,
   evidenceRole: "discovery-context",
+  bootstrapFrom: "2025-10-01",
   coverage: { mode: "current-window", note: "Fixture feed exposes a current window." },
   endpoint: "https://news.example/rss",
   verificationUrl: "https://news.example/rss-help",

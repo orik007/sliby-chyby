@@ -63,6 +63,7 @@ export function validateRegistry(registry) {
     ].includes(source.collector), `Unknown collector type: ${source.collector}`);
     invariant(typeof source.enabled === "boolean", `Source ${source.id} is missing enabled`);
     invariant(typeof source.primary === "boolean", `Source ${source.id} is missing primary`);
+    invariant(/^\d{4}-\d{2}-\d{2}$/.test(source.bootstrapFrom), `Source ${source.id} needs bootstrapFrom in YYYY-MM-DD format`);
     invariant(/^\d{4}-\d{2}-\d{2}$/.test(source.verifiedAt), `Source ${source.id} has invalid verifiedAt`);
     invariant(/^https:\/\//.test(source.verificationUrl), `Source ${source.id} needs an HTTPS verificationUrl`);
     invariant(["term-snapshot", "since-filtered-archive", "current-window", "deferred"].includes(source.coverage?.mode), `Source ${source.id} needs a supported coverage mode`);
