@@ -71,7 +71,7 @@ for (const promise of promises) {
 const run = {
   schemaVersion: "1.0.0",
   matcherVersion: "deterministic-matcher-v5",
-  assessmentContext: { mode: "live", ruleVersion: "period-timing-v1" },
+  assessmentContext: { mode: "live", ruleVersion: "period-timing-v2", maintenanceBaseline: "per-evidence-package" },
   matchedAt: new Date().toISOString(),
   asOf: args.asOf,
   publicationApproved: false,

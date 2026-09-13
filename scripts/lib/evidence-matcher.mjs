@@ -57,6 +57,17 @@ export function validatePromiseRegistry(registry) {
     invariant(typeof promise.promiseSource.exactQuoteCz === "string" && promise.originalTextCz.includes(promise.promiseSource.exactQuoteCz), `Promise ${promise.id} exact quote is not present verbatim in its original text`);
     invariant(/^https:\/\//.test(promise.promiseSource.url), `Promise ${promise.id} source must use HTTPS`);
     invariant(/^\d{4}(?:-\d{2})?(?:-\d{2})?$/.test(promise.promiseSource.publishedAt), `Promise ${promise.id} source has an invalid publication date`);
+    if (promise.maintenanceBaseline !== undefined) {
+      const baseline = promise.maintenanceBaseline;
+      invariant(baseline && typeof baseline === "object", `Promise ${promise.id} has an invalid maintenance baseline`);
+      invariant(typeof baseline.preservedStateCz === "string" && baseline.preservedStateCz.length > 0, `Promise ${promise.id} maintenance baseline is missing the preserved state`);
+      invariant(baseline.source?.primary === true, `Promise ${promise.id} maintenance baseline must have a primary source`);
+      invariant(typeof baseline.source.id === "string" && baseline.source.id.length > 0, `Promise ${promise.id} maintenance baseline source is missing an ID`);
+      invariant(/^https:\/\//.test(baseline.source.url), `Promise ${promise.id} maintenance baseline source must use HTTPS`);
+      invariant(typeof baseline.source.factSummary === "string" && baseline.source.factSummary.length > 0, `Promise ${promise.id} maintenance baseline source is missing factSummary`);
+      invariant(typeof baseline.source.locator === "string" && baseline.source.locator.length > 0, `Promise ${promise.id} maintenance baseline source is missing a locator`);
+      invariant(/^\d{4}(?:-\d{2})?(?:-\d{2})?$/.test(baseline.source.publishedAt), `Promise ${promise.id} maintenance baseline source has an invalid publication date`);
+    }
     invariant(Number.isFinite(promise.matching?.minimumScore) && promise.matching.minimumScore > 0, `Promise ${promise.id} needs a positive minimumScore`);
     invariant(Array.isArray(promise.matching.terms), `Promise ${promise.id} matching terms must be an array`);
     if (promise.matching.requireMultiwordTerms === true) {
@@ -220,9 +231,19 @@ function evidenceFromMatch(match, promise) {
   };
 }
 
+function evidenceFromMaintenanceBaseline(baseline) {
+  return { ...baseline.source, role: "maintenance-baseline" };
+}
+
 export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
   const selectedMatches = selectBoundedPrimaryMatches(matches);
   if (selectedMatches.length === 0) return null;
+  const maintenanceBaseline = promise.maintenanceBaseline
+    ? {
+        preservedStateCz: promise.maintenanceBaseline.preservedStateCz,
+        evidenceId: promise.maintenanceBaseline.source.id
+      }
+    : null;
   const evidencePackage = {
     schemaVersion: "1.0.0",
     methodologyVersion: "slava-v6",
@@ -230,7 +251,8 @@ export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
     asOf,
     assessmentContext: {
       mode: "live",
-      ruleVersion: "period-timing-v1"
+      ruleVersion: "period-timing-v2",
+      maintenanceBaseline
     },
     promise: {
       id: promise.id,
@@ -254,7 +276,11 @@ export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
       directionAssigned: false,
       publicationApproved: false
     },
-    evidence: [promise.promiseSource, ...selectedMatches.map((match) => evidenceFromMatch(match, promise))]
+    evidence: [
+      promise.promiseSource,
+      ...(promise.maintenanceBaseline ? [evidenceFromMaintenanceBaseline(promise.maintenanceBaseline)] : []),
+      ...selectedMatches.map((match) => evidenceFromMatch(match, promise))
+    ]
   };
   return validateEvidencePackage(evidencePackage);
 }
