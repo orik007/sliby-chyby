@@ -30,6 +30,11 @@ export const statusDetails: Record<AssessmentStatus, { score: number; symbol: st
   "acting-against": { score: -2, symbol: "×", label: "Jedná proti slibu", className: "negative-strong" },
 };
 
+export function getPublicAssessmentExplanation(explanation: string) {
+  const publicExplanation = explanation.startsWith("Výchozí stav: ") ? explanation.slice("Výchozí stav: ".length) : explanation;
+  return publicExplanation ? `${publicExplanation.charAt(0).toLocaleUpperCase("cs-CZ")}${publicExplanation.slice(1)}` : publicExplanation;
+}
+
 function assertRelationships() {
   const periodIds = new Set(periods.map(({ id }) => id));
   const partyIds = new Set(parties.map(({ id }) => id));
