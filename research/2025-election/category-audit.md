@@ -2,7 +2,7 @@
 
 ## Status
 
-This is a research proposal. It does not change public promise records, the public site, or the promise-selection rule. Every row in the generated audit is explicitly pending item-level review; a chapter-level proposal is not a completed category decision.
+This is the source-review audit behind the common-category mapping. The owner-approved public mapping is stored in `data/promise-categories.json`; it does not change the promise-selection rule. Every row here remains available for item-level source-section and heading review, which is separate from the public common-category decision.
 
 ## Finding
 
@@ -131,4 +131,4 @@ Chapter mapping cannot be copied to every promise without review. The confirmed 
 4. an explicit pending reviewer-decision field; and
 5. `requiresItemReview: true`.
 
-No public promise record should be changed until that list is complete and reviewed.
+The public category mapping keeps the common category and programme chapter for every confirmed promise. This audit remains the queue for resolving narrower source-section metadata and heading-prefix findings without exposing party-specific programme categories on the site.
