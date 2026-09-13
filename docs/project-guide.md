@@ -2,7 +2,7 @@
 
 ## Purpose
 
-SlibyChyby shows political parties' confirmed election promises, their current score, a plain Czech explanation, and traceable sources. The current period is the 2025 Czech Chamber of Deputies election; the initial parties are ANO 2011, SPD, and Motoristé sobě.
+Sliboměr shows political parties' confirmed election promises, their current score, a plain Czech explanation, and traceable sources. Its public canonical origin is `https://slibomer.cz`. The current period is the 2025 Czech Chamber of Deputies election; the initial parties are ANO 2011, SPD, and Motoristé sobě.
 
 ## Canonical rules
 

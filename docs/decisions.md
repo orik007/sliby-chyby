@@ -2,6 +2,12 @@
 
 This document contains only the current confirmed rules. When a rule changes, replace this document and every implementation of the prior rule; do not keep superseded models, procedures, prompts, or decision records.
 
+## Public identity
+
+- The public brand is Sliboměr.
+- The canonical public origin is `https://slibomer.cz`.
+- Existing repository, Worker, and automation identifiers retain `sliby-chyby` until a separate infrastructure decision changes them.
+
 ## Promise catalogue
 
 - A source is one verifiable item: one PDF, page, post, video, article, vote, or official record. It has an ID, type, title, publisher, URL, and any known date.

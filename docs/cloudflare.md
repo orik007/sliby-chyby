@@ -1,6 +1,6 @@
 # Cloudflare infrastructure
 
-This document records how SlibyChyby resources are separated within the shared Cloudflare account.
+This document records how Sliboměr resources are separated within the shared Cloudflare account. Existing internal Cloudflare resource identifiers retain the `sliby-chyby` prefix.
 
 ## Confirmed decisions
 
@@ -26,7 +26,7 @@ This document records how SlibyChyby resources are separated within the shared C
 | Resource | Identifier | Purpose |
 | --- | --- | --- |
 | Workers account subdomain | `orik007-apps.workers.dev` | Shared neutral namespace for present and future Workers |
-| Production Worker | `sliby-chyby` | Public SlibyChyby website |
+| Production Worker | `sliby-chyby` | Public Sliboměr website |
 ## Resource-creation rules
 
 - Create a dedicated resource only when the application needs it; do not pre-create databases, buckets, queues, or staging services.

@@ -3,6 +3,7 @@ import cloudflare from "@astrojs/cloudflare";
 import { sites } from "@openai/sites-vite-plugin";
 
 export default defineConfig({
+  site: "https://slibomer.cz",
   output: "server",
   adapter: cloudflare(),
   vite: {

@@ -1,6 +1,6 @@
-# SlibyChyby
+# Sliboměr
 
-SlibyChyby is a public tracker of Czech parties' election promises and later, traceable evidence.
+Sliboměr is a public tracker of Czech parties' election promises and later, traceable evidence. Its public canonical origin is `https://slibomer.cz`.
 
 ## Core model
 
