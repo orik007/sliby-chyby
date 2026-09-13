@@ -18,7 +18,7 @@ const status = statusDetails[assessment.status];
 const assessmentExplanation = getPublicAssessmentExplanation(assessment.explanationShort);
 const evidenceHeading = assessment.baselinePromiseSourceId ? "ZDROJ VÝCHOZÍHO STAVU" : "POUŽITÉ DŮKAZY";
 ---
-<BaseLayout title={`${promise.title} · ${party.shortName} · Sliboměr`} description={assessmentExplanation} socialImage={null}>
+<BaseLayout title={`${promise.title} · ${party.shortName} · Sliboměr`} description={assessmentExplanation}>
   <article class="promise-detail"><a class="back-link" href={`/strany/${party.slug}`}>← Zpět na {party.shortName}</a><header class="promise-detail-header"><p class="eyebrow">{party.shortName} · {policyCategory.labelCz} · {period.label}</p><h1>{promise.title}</h1><StatusBadge status={assessment.status} /></header><div class="detail-grid"><div class="detail-main">
     <section class="detail-block"><span class="step-number">01</span><p class="eyebrow">CO STRANA SLÍBILA</p><blockquote>„{promise.originalText}“</blockquote><p class="source-caption">{promiseSource.url ? <a href={promiseSource.url} target="_blank" rel="noreferrer">{promiseSource.title} · {promiseSource.publisher} · {sourceLocatorLabel} ↗</a> : `${promiseSource.title} · ${promiseSource.publisher} · ${sourceLocatorLabel}`}</p></section>
     <section class="detail-block"><span class="step-number">02</span><p class="eyebrow">PROČ MÁ TENTO STAV</p><h2>{status.label}</h2><p class="detail-copy">{assessmentExplanation}</p></section>
