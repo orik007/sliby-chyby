@@ -51,3 +51,25 @@ test("a checkpoint advances only after its collector succeeded", () => {
   assert.equal(updated.sourceCheckpoints.archive.lastObservedRecordAt, "2026-09-12T10:00:00.000Z");
   assert.equal(updated.sourceCheckpoints["new-source"], undefined);
 });
+
+test("a PSP snapshot map contributes an available checkpoint hash", () => {
+  const checkpoints = emptyCollectorCheckpoints();
+  const collectionPlan = planSourceCollections({ registry, checkpoints, sourceIds: ["archive"] });
+  const updated = updateCollectorCheckpoints({
+    checkpoints,
+    registry,
+    runId: "run-psp",
+    collectedAt: "2026-09-13T09:37:00.000Z",
+    collectionPlan,
+    collectorResults: [{
+      sourceId: "archive",
+      records: [],
+      snapshots: {
+        votes: { contentHash: "a".repeat(64) },
+        members: { contentHash: "b".repeat(64) },
+        prints: { contentHash: "c".repeat(64) }
+      }
+    }]
+  });
+  assert.equal(updated.sourceCheckpoints.archive.snapshotHash, "c".repeat(64));
+});

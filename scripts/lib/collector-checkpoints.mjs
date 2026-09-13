@@ -42,6 +42,16 @@ function checkpointSince(checkpoint) {
   return checkpoint.lastSuccessfulCollectionAt.slice(0, 10);
 }
 
+function snapshotHash(result) {
+  if (result.snapshot?.contentHash) return result.snapshot.contentHash;
+  const snapshots = Array.isArray(result.snapshots)
+    ? result.snapshots
+    : result.snapshots && typeof result.snapshots === "object"
+      ? Object.values(result.snapshots)
+      : [];
+  return snapshots.map((snapshot) => snapshot?.contentHash).filter(Boolean).at(-1) ?? null;
+}
+
 export function planSourceCollections({ registry, checkpoints, sourceIds, requestedSince = null }) {
   if (requestedSince !== null) invariant(isIsoDate(requestedSince), "Requested collection start must use YYYY-MM-DD");
   validateCollectorCheckpoints(checkpoints, registry);
@@ -76,7 +86,7 @@ export function updateCollectorCheckpoints({ checkpoints, registry, runId, colle
       lastObservedRecordAt: observed.at(-1) ?? null,
       lastRunId: runId,
       recordCount: result.records.length,
-      snapshotHash: result.snapshot?.contentHash ?? result.snapshots?.at(-1)?.contentHash ?? null
+      snapshotHash: snapshotHash(result)
     };
   }
   return validateCollectorCheckpoints(updated, registry);

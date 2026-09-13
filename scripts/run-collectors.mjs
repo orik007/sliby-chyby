@@ -1,5 +1,6 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
+import { basename, dirname, resolve } from "node:path";
+import { randomUUID } from "node:crypto";
 import { planSourceCollections, updateCollectorCheckpoints, validateCollectorCheckpoints } from "./lib/collector-checkpoints.mjs";
 import { collectFeedSource } from "./lib/feed-collectors.mjs";
 import { deduplicateRecords, invariant, validateRegistry } from "./lib/collector-core.mjs";
@@ -79,6 +80,18 @@ for (const source of selected) {
   console.log(`${source.id}: ${plan.mode} from ${since}, ${result.records.length} records, ${result.warnings.length} warnings`);
 }
 
+async function writeCheckpointsAtomically(filePath, checkpoints) {
+  const destination = resolve(filePath);
+  const temporary = resolve(dirname(destination), `.${basename(destination)}.${randomUUID()}.tmp`);
+  try {
+    await writeFile(temporary, `${JSON.stringify(checkpoints, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
+    await rename(temporary, destination);
+  } catch (error) {
+    await rm(temporary, { force: true });
+    throw error;
+  }
+}
+
 const records = deduplicateRecords(collectorResults.flatMap((result) => result.records));
 const runId = `${collectedAt.replaceAll(":", "-").replace(".", "-")}--per-source`;
 const outputDirectory = resolve(args.output ?? `automation/runs/collectors/${runId}`);
@@ -119,6 +132,6 @@ if (args.writeCheckpoints) {
     collectorResults,
     collectionPlan
   });
-  await writeFile(resolve(args.writeCheckpoints), `${JSON.stringify(updatedCheckpoints, null, 2)}\n`);
+  await writeCheckpointsAtomically(args.writeCheckpoints, updatedCheckpoints);
 }
 console.log(JSON.stringify({ runId, outputDirectory, sourceCount: selected.length, recordCount: records.length, collectionPlan, checkpointUpdated: Boolean(args.writeCheckpoints), publicationApproved: false }, null, 2));
