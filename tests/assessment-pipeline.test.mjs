@@ -13,7 +13,7 @@ const evidencePackage = {
   methodologyVersion: "slava-v6",
   packageId: "test-promise--2026-09-10--generated",
   asOf: "2026-09-10",
-  assessmentContext: { mode: "live", ruleVersion: "period-timing-v1" },
+  assessmentContext: { mode: "live", ruleVersion: "period-timing-v2", maintenanceBaseline: null },
   promise: {
     id: "test-promise",
     originalTextCz: "Testovací slib.",
@@ -50,6 +50,18 @@ test("requires the active assessment context", () => {
   const incomplete = structuredClone(evidencePackage);
   delete incomplete.assessmentContext;
   assert.throws(() => validateEvidencePackage(incomplete), /assessmentContext/);
+});
+
+test("requires an auditable evidence item for a maintenance baseline", () => {
+  const maintenance = structuredClone(evidencePackage);
+  maintenance.assessmentContext.maintenanceBaseline = {
+    preservedStateCz: "Zachovávaný stav trvá.",
+    evidenceId: "baseline"
+  };
+  assert.throws(() => validateEvidencePackage(maintenance), /Maintenance baseline evidence/);
+  maintenance.evidence.push({ id: "baseline", url: "https://example.test/baseline", factSummary: "Ověřený výchozí stav.", locator: "záznam", publishedAt: "2026-09-10", primary: true, role: "maintenance-baseline" });
+  assert.equal(validateEvidencePackage(maintenance), maintenance);
+  assert.notEqual(hashAssessmentContent(maintenance), hashAssessmentContent(evidencePackage));
 });
 
 test("keeps a consensus assessment as an unpublished candidate", () => {

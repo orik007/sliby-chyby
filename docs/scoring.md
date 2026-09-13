@@ -6,17 +6,33 @@ This is the only operational definition of score values and the SLAVA Index. It 
 
 ## Current score
 
-Every promise has one current numerical score. The default is `0`. The score may change whenever new attributable evidence justifies it; it is not a lifecycle state and it does not decide whether a promise is public.
+Every promise has one current numerical score. The default is `0`, except for a documented maintenance baseline as defined below. The score may change whenever new attributable evidence justifies it; it is not a lifecycle state and it does not decide whether a promise is public.
 
 | Score | Public label | Meaning |
 | ---: | --- | --- |
 | `+2` | Splněno | The whole promised result or exact promised conduct occurred. |
-| `+1` | Směřuje ke splnění | A meaningful concrete step advances a real part of the promise. |
+| `+1` | Směřuje ke splnění | A meaningful concrete step advances a real part of the promise, or a documented maintenance baseline remains in force under the responsible party or government. |
 | `0` | Zatím bez ověřeného podstatného posunu | No documented meaningful movement in either direction. |
 | `-1` | Směřuje proti slibu | Documented conduct moves against the promise, or a verified direct decisive opportunity to support the exact promise was missed under the vote rule. |
 | `-2` | Jedná proti slibu | A significant direct violation, definitive contrary result, or exact opposite conduct occurred. |
 
 During a live electoral period, elapsed time alone does not change `0`.
+
+## Maintenance commitments
+
+A maintenance commitment is a promise that the party or its government will not itself make one clearly identified change. Its fulfillment consists of preserving an already observable state.
+
+Classify a promise as a maintenance commitment only when all of these are true:
+
+1. the exact wording is a commitment to refrain from a specific change, not a commitment to stop, abolish, prevent, or otherwise actively change something;
+2. the state to be preserved exists when the party or its government assumes responsibility; and
+3. the responsible party or government has the power to make the identified change.
+
+A documented maintenance baseline is `+1` when the preserved state holds at the point of responsibility. Its public explanation states that the state promised to be preserved currently remains in force. It is not `+2`: full fulfillment requires the end of the relevant electoral period with that state preserved, or another complete and attributable fulfillment of the exact promise.
+
+Do not infer a maintenance commitment merely from a negative word, and do not award `+1` for elapsed time alone. Commitments such as “we will stop”, “we will abolish”, or “we will prevent” require a documented active step and otherwise remain at `0`.
+
+Example: “Zavazujeme se, že naše vláda nepřijme euro ani nepodnikne žádné kroky směrem k jeho zavedení.” is a maintenance commitment. If the Czech Republic has not adopted the euro when the responsible government takes office and it does not take an adoption step, the current state may be recorded as `+1` with the explanation: “Stav, který slib zachovává, zatím trvá.” It becomes `+2` only after the relevant period ends with that state preserved.
 
 ## Decision order
 

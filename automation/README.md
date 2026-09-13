@@ -6,4 +6,4 @@ Two independent assessors receive the same package. When they disagree, an arbit
 
 `review-proposals/` is the human-review queue. Its proposals remain unpublished and never change public data or a public score. The workflow may update its dedicated proposal pull request; it never starts Copilot or Codex review.
 
-The changed-input fingerprint includes assessable content, active prompt content, providers, and model IDs, so a run timestamp alone does not cause another model call. The active prompts are `assessor-v11` and `arbiter-v3`. The canonical process is [docs/evidence-pipeline.md](../docs/evidence-pipeline.md).
+The changed-input fingerprint includes assessable content, active prompt content, providers, and model IDs, so a run timestamp alone does not cause another model call. The active prompts are `assessor-v12` and `arbiter-v4`. The canonical process is [docs/evidence-pipeline.md](../docs/evidence-pipeline.md).

@@ -23,7 +23,7 @@
 
 - Preserve exact promise wording and source. Use only clear official national party commitments in the initial catalogue.
 - A confirmed promise is public immediately; candidates and rejected occurrences are not. Do not add a fourth promise state.
-- A score is always a number from `-2` to `+2`, defaulting to `0`; it is separate from lifecycle.
+- A score is always a number from `-2` to `+2`, defaulting to `0` except for a documented maintenance baseline defined in the canonical scoring rule; it is separate from lifecycle.
 - Keep public assessment history append-only and derive, never manually edit, the SLAVA Index.
 - The daily post-confirmed pipeline uses two independent AI assessors and, on disagreement, one arbiter. Their output is an unpublished human-review proposal, never a public score or publication decision.
 - Models may cite only evidence supplied in their bounded package. Keep active prompt, model, evidence-ID, confidence, and fingerprint records auditable.

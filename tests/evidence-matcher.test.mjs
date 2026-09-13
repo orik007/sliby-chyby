@@ -115,7 +115,7 @@ test("builds a bounded primary-only evidence package", () => {
   const matches = matchCollectorRecords(collectorRun.records, eet, { asOf: "2026-08-31" });
   const evidencePackage = buildEvidencePackage({ promise: eet, matches, collectorRun, asOf: "2026-08-31" });
   assert.equal(evidencePackage.methodologyVersion, "slava-v6");
-  assert.deepEqual(evidencePackage.assessmentContext, { mode: "live", ruleVersion: "period-timing-v1" });
+  assert.deepEqual(evidencePackage.assessmentContext, { mode: "live", ruleVersion: "period-timing-v2", maintenanceBaseline: null });
   assert.equal(evidencePackage.evidence.length, 2);
   assert.equal(evidencePackage.evidence[0].role, "promise-source");
   assert.equal(evidencePackage.evidence[1].id, primary.id);
@@ -124,6 +124,30 @@ test("builds a bounded primary-only evidence package", () => {
   assert.equal(evidencePackage.generation.directionAssigned, false);
   assert.equal(evidencePackage.generation.publicationApproved, false);
   assert.equal("status" in evidencePackage, false);
+});
+
+test("adds an explicitly documented maintenance baseline to the bounded package", () => {
+  const primary = record();
+  const collectorRun = { schemaVersion: "1.0.0", runId: "collector-maintenance", records: [primary] };
+  const promise = structuredClone(eet);
+  promise.maintenanceBaseline = {
+    preservedStateCz: "Zachovávaný stav při převzetí odpovědnosti trvá.",
+    source: {
+      id: "maintenance-baseline",
+      url: "https://example.test/baseline",
+      factSummary: "Primární záznam ověřuje zachovávaný stav.",
+      locator: "záznam",
+      publishedAt: "2026-08-31",
+      primary: true
+    }
+  };
+  const matches = matchCollectorRecords(collectorRun.records, promise, { asOf: "2026-08-31" });
+  const evidencePackage = buildEvidencePackage({ promise, matches, collectorRun, asOf: "2026-08-31" });
+  assert.deepEqual(evidencePackage.assessmentContext.maintenanceBaseline, {
+    preservedStateCz: "Zachovávaný stav při převzetí odpovědnosti trvá.",
+    evidenceId: "maintenance-baseline"
+  });
+  assert.equal(evidencePackage.evidence.find(({ id }) => id === "maintenance-baseline").role, "maintenance-baseline");
 });
 
 test("creates no assessable package when only media or no records match", () => {
