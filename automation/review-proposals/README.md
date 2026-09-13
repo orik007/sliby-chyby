@@ -9,4 +9,4 @@ This is the current human-review queue for proposed assessments of confirmed pro
 - Creating, reviewing, or merging a proposal never changes public data or publishes a score.
 - The assessment fingerprint prevents another model call when the assessable input, active prompts, providers, and models are unchanged.
 
-Only the active prompts are stored: `assessor-v11` and `arbiter-v3`.
+The active prompts are `assessor-v12` and `arbiter-v4`.

@@ -22,7 +22,8 @@ This document contains only the current confirmed rules. When a rule changes, re
 
 ## Scores and index
 
-- Every confirmed promise has one current numerical score from `-2` to `+2`. The default is `0` when no documented assessment conclusion sets another score.
+- Every confirmed promise has one current numerical score from `-2` to `+2`. The default is `0` when no documented assessment conclusion sets another score, except for a verified maintenance baseline defined in `scoring.md`.
+- A maintenance commitment promises not to make one identified change. When the existing state is documented and remains under the responsible party or government's control, it may receive `+1`; elapsed time and merely negative wording never suffice.
 - A score is separate from the promise lifecycle and may change whenever traceable evidence justifies a new current assessment.
 - The SLAVA Index includes every confirmed promise of the party and is `round(sum(scores) / (2 × promise count) × 100)`. It ranges from `-100` to `+100`.
 - No manual aggregate is stored.

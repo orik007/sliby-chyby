@@ -96,7 +96,13 @@ export function validateEvidencePackage(evidencePackage) {
   invariant(typeof evidencePackage.packageId === "string" && evidencePackage.packageId.length > 0, "Missing packageId");
   invariant(/^\d{4}-\d{2}-\d{2}$/.test(evidencePackage.asOf), "Invalid asOf date");
   invariant(["live", "closing-audit"].includes(evidencePackage.assessmentContext?.mode), "Evidence package is missing a valid assessmentContext mode");
-  invariant(evidencePackage.assessmentContext?.ruleVersion === "period-timing-v1", "Evidence package has an unsupported period timing rule");
+  invariant(evidencePackage.assessmentContext?.ruleVersion === "period-timing-v2", "Evidence package has an unsupported period timing rule");
+  const maintenanceBaseline = evidencePackage.assessmentContext?.maintenanceBaseline;
+  invariant(maintenanceBaseline === null || (maintenanceBaseline && typeof maintenanceBaseline === "object"), "Evidence package has an invalid maintenance baseline");
+  if (maintenanceBaseline) {
+    invariant(typeof maintenanceBaseline.preservedStateCz === "string" && maintenanceBaseline.preservedStateCz.length > 0, "Maintenance baseline is missing the preserved state");
+    invariant(typeof maintenanceBaseline.evidenceId === "string" && maintenanceBaseline.evidenceId.length > 0, "Maintenance baseline is missing evidence ID");
+  }
   invariant(evidencePackage.promise && typeof evidencePackage.promise.id === "string", "Missing promise");
   invariant(typeof evidencePackage.promise.originalTextCz === "string" && evidencePackage.promise.originalTextCz.length > 0, "Missing original promise text");
   invariant(typeof evidencePackage.promise.fulfillmentTest === "string" && evidencePackage.promise.fulfillmentTest.length > 0, "Missing fulfillment test");
@@ -118,6 +124,9 @@ export function validateEvidencePackage(evidencePackage) {
 
   invariant(evidencePackage.evidence.some(({ role }) => role === "promise-source"), "Missing promise source");
   invariant(evidencePackage.evidence.some(({ role }) => role === "conduct-evidence"), "Missing conduct evidence");
+  if (maintenanceBaseline) {
+    invariant(evidencePackage.evidence.some(({ id, role }) => id === maintenanceBaseline.evidenceId && role === "maintenance-baseline"), "Maintenance baseline evidence is missing");
+  }
   return evidencePackage;
 }
 
