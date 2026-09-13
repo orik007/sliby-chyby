@@ -45,6 +45,12 @@ jobs:
       SLIBY_ASSESSOR_MODEL_A: gpt-5.6-terra
       SLIBY_ASSESSOR_MODEL_B: gpt-5.6-terra
       SLIBY_ARBITER_MODEL: gpt-5.6-sol
+      SLIBY_SEMANTIC_PROVIDER: openai
+      SLIBY_SEMANTIC_MODEL: text-embedding-3-small
+      SLIBY_SEMANTIC_DIMENSIONS: 256
+      SLIBY_SEMANTIC_CANDIDATE_LIMIT: 8
+      SLIBY_SEMANTIC_MIN_SIMILARITY: 0.5
+      SLIBY_ASSESSMENT_CONCURRENCY: 4
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
@@ -64,13 +70,13 @@ jobs:
               git commit --no-edit
             else
               unresolved="$(git diff --name-only --diff-filter=U)"
-              if [ -z "$unresolved" ] || printf '%s\n' "$unresolved" | grep -qv '^automation/review-proposals/'; then
+              if [ -z "$unresolved" ] || printf '%s\n' "$unresolved" | grep -qv -E '^automation/(review-proposals/|collectors/checkpoints\.json$|semantic-index/)'; then
                 git merge --abort
                 echo "::error::A non-audit conflict prevents synchronizing the durable review branch with main."
                 exit 1
               fi
-              git restore --source=HEAD --staged --worktree -- automation/review-proposals
-              git add automation/review-proposals
+              git restore --source=HEAD --staged --worktree -- automation/review-proposals automation/collectors/checkpoints.json automation/semantic-index
+              git add automation/review-proposals automation/collectors/checkpoints.json automation/semantic-index
               git commit --no-edit
             fi
           else
@@ -106,6 +112,8 @@ jobs:
           AS_OF="${MATCHER_AS_OF:-$(date -u +%F)}"
           node scripts/run-matcher.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
+            --semantic-index automation/semantic-index/promise-index.json \
+            --write-semantic-index automation/semantic-index/promise-index.json \
             --as-of "$AS_OF" \
             --output automation/runs/pipeline/github-actions/matcher
 
@@ -141,6 +149,7 @@ jobs:
           node --input-type=module -e '
             import { readFile, appendFile } from "node:fs/promises";
             const run = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/match-run.json", "utf8"));
+            const semantic = run.semanticRetrieval;
             const enrichment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json", "utf8"));
             const assessment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/assessment-batch.json", "utf8"));
             const coverage = JSON.parse(await readFile("automation/runs/pipeline/github-actions/coverage-audit.json", "utf8"));
@@ -153,6 +162,10 @@ jobs:
               "",
               `- Published promises checked: ${run.promiseResults.length}`,
               `- Potential matches: ${candidateCount}`,
+              `- Semantic record embeddings: ${semantic.recordEmbeddingsCreated}`,
+              `- Semantic candidate relationships: ${semantic.candidateRelationships}`,
+              `- Semantic minimum similarity: ${semantic.minimumSimilarity}`,
+              `- Semantic index rebuilt: ${semantic.indexRebuilt}`,
               `- Assessable evidence packages: ${packageCount}`,
               `- Official print documents added: ${documentCount}`,
               `- Document-enrichment warnings: ${enrichment.warnings.length}`,
@@ -178,6 +191,7 @@ jobs:
               "## Sběr dat a checkpointy zdrojů",
               "",
               "Tento pull request je auditní fronta. Uložení checkpointu pouze potvrzuje úspěšné technické získání zdroje; samo nemění veřejné hodnocení.",
+              `Sémantické vyhledání použilo ${semantic.model} a pro každý primární záznam předalo ke kontrole jen kandidáty s podobností alespoň ${semantic.minimumSimilarity}, nejvýše ${semantic.candidateLimit}; podobnost sama o sobě nepotvrzuje souvislost ani hodnocení.`,
               "",
               "| Zdroj | Režim | Od | Záznamů | Nejnovější záznam |",
               "| --- | --- | --- | ---: | --- |",
@@ -190,7 +204,7 @@ jobs:
       - name: Commit new review proposals
         id: proposals
         run: |
-          git add automation/collectors/checkpoints.json automation/review-proposals
+          git add automation/collectors/checkpoints.json automation/review-proposals automation/semantic-index
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
             echo "No new audit data or assessment proposal was created." >> "$GITHUB_STEP_SUMMARY"

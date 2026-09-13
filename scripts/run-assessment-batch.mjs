@@ -117,6 +117,20 @@ function humanReviewUrl(reviewPath) {
   return `https://github.com/${process.env.GITHUB_REPOSITORY}/blob/${process.env.REVIEW_BRANCH}/${reviewPath}`;
 }
 
+async function mapWithConcurrency(items, concurrency, worker) {
+  const results = new Array(items.length);
+  let nextIndex = 0;
+  async function runWorker() {
+    while (nextIndex < items.length) {
+      const index = nextIndex;
+      nextIndex += 1;
+      results[index] = await worker(items[index]);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, runWorker));
+  return results;
+}
+
 const options = parseArgs(process.argv.slice(2));
 const packageDirectory = resolve(options.packages);
 const proposalRoot = resolve(options.proposals);
@@ -143,11 +157,14 @@ for (const path of packageFiles) {
 
 const prompts = await loadAssessmentPrompts();
 const runtime = assessmentRuntimeConfig();
-const plan = planAssessmentInputs({ packages, manifest, blockedPromiseIds, prompts, runtime });
+invariant(Number.isInteger(runtime.concurrency) && runtime.concurrency > 0 && runtime.concurrency <= 8, "SLIBY_ASSESSMENT_CONCURRENCY must be an integer from 1 to 8");
+const { concurrency, ...assessmentRuntime } = runtime;
+const plan = planAssessmentInputs({ packages, manifest, blockedPromiseIds, prompts, runtime: assessmentRuntime });
 const newProposals = [];
 const results = [];
 
 await mkdir(runRoot, { recursive: true });
+const assessmentItems = [];
 for (const item of plan) {
   if (item.disposition !== "assess") {
     const existingProposal = item.disposition === "unchanged" ? currentReviewProposal(manifest, item.promiseId) : null;
@@ -162,7 +179,10 @@ for (const item of plan) {
     });
     continue;
   }
+  assessmentItems.push(item);
+}
 
+const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (item) => {
   const auditRecord = await runAssessment(item.path, runRoot);
   invariant(auditRecord.assessmentFingerprint === item.assessmentFingerprint, `Fingerprint changed while assessing ${item.promiseId}`);
   const relativeProposalDirectory = `automation/review-proposals/${item.promiseId}/${item.assessmentFingerprint}`;
@@ -179,16 +199,22 @@ for (const item of plan) {
   });
   await writeFile(resolve(proposalDirectory, "proposal.json"), `${JSON.stringify(proposal, null, 2)}\n`, { flag: "wx" });
   await writeFile(resolve(proposalDirectory, "review.md"), renderHumanReviewMarkdown({ evidencePackage: item.evidencePackage, auditRecord, proposal }), { flag: "wx" });
+  return {
+    proposal,
+    result: {
+      promiseId: item.promiseId,
+      promiseTitleCz: item.evidencePackage.promise.titleCz,
+      assessmentFingerprint: item.assessmentFingerprint,
+      disposition: "assessed",
+      resolutionState: auditRecord.resolution.state,
+      candidateStatus: auditRecord.resolution.status,
+      reviewUrl: humanReviewUrl(proposal.humanReviewPath)
+    }
+  };
+});
+for (const { proposal, result } of assessed) {
   newProposals.push(proposal);
-  results.push({
-    promiseId: item.promiseId,
-    promiseTitleCz: item.evidencePackage.promise.titleCz,
-    assessmentFingerprint: item.assessmentFingerprint,
-    disposition: "assessed",
-    resolutionState: auditRecord.resolution.state,
-    candidateStatus: auditRecord.resolution.status,
-    reviewUrl: humanReviewUrl(proposal.humanReviewPath)
-  });
+  results.push(result);
 }
 
 const updatedManifest = addReviewProposals(manifest, newProposals);
@@ -202,6 +228,7 @@ const summary = {
   newProposalCount: newProposals.length,
   unchangedCount: results.filter(({ disposition }) => disposition === "unchanged").length,
   blockedCount: results.filter(({ disposition }) => disposition === "blocked-enrichment-warning").length,
+  assessmentConcurrency: concurrency,
   proposalRoot: relativeProposalRoot,
   results
 };

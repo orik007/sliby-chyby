@@ -3,6 +3,7 @@
 This is the current human-review queue for proposed assessments of confirmed promises.
 
 - A proposal is created from one bounded evidence package.
+- Exact and semantic candidate retrieval may place evidence in a package, but neither establishes that the evidence is relevant to the promise.
 - Two independent assessors evaluate it; an arbiter is used only when they disagree.
 - Models may cite only evidence supplied in that package.
 - Every proposal remains unpublished and requires human review.

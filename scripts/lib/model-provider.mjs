@@ -54,3 +54,35 @@ export async function createStructuredModelResponse({
     output: JSON.parse(outputText)
   };
 }
+
+export async function createEmbeddings({ provider, apiKey, model, dimensions, inputs }) {
+  if (provider !== "openai") throw new Error(`Unsupported embedding provider: ${provider}`);
+  if (!apiKey) throw new Error("OPENAI_API_KEY is required for the OpenAI provider");
+  if (!Array.isArray(inputs) || inputs.length === 0) throw new Error("Embedding input must be a non-empty array");
+  if (!inputs.every((input) => typeof input === "string" && input.trim())) {
+    throw new Error("Every embedding input must be a non-empty string");
+  }
+
+  const response = await fetch("https://api.openai.com/v1/embeddings", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ model, dimensions, input: inputs, encoding_format: "float" })
+  });
+  const body = await response.json();
+  if (!response.ok) throw new Error(`OpenAI Embeddings API failed (${response.status}): ${body?.error?.message ?? "unknown error"}`);
+  if (!Array.isArray(body.data) || body.data.length !== inputs.length) throw new Error("OpenAI Embeddings API returned an unexpected result count");
+
+  const embeddings = body.data
+    .sort((left, right) => left.index - right.index)
+    .map(({ embedding }) => embedding);
+  if (!embeddings.every((embedding) => Array.isArray(embedding) && embedding.every(Number.isFinite))) {
+    throw new Error("OpenAI Embeddings API returned an invalid embedding");
+  }
+
+  return {
+    provider,
+    model: body.model ?? model,
+    usage: body.usage ?? null,
+    embeddings
+  };
+}

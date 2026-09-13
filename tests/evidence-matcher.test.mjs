@@ -114,7 +114,7 @@ test("builds a bounded primary-only evidence package", () => {
   };
   const matches = matchCollectorRecords(collectorRun.records, eet, { asOf: "2026-08-31" });
   const evidencePackage = buildEvidencePackage({ promise: eet, matches, collectorRun, asOf: "2026-08-31" });
-  assert.equal(evidencePackage.methodologyVersion, "slava-v6");
+  assert.equal(evidencePackage.methodologyVersion, "slava-v7");
   assert.deepEqual(evidencePackage.assessmentContext, { mode: "live", ruleVersion: "period-timing-v2", maintenanceBaseline: null });
   assert.equal(evidencePackage.evidence.length, 2);
   assert.equal(evidencePackage.evidence[0].role, "promise-source");
@@ -163,6 +163,28 @@ test("creates no assessable package when only media or no records match", () => 
   const collectorRun = { schemaVersion: "1.0.0", runId: "collector-test", records: [article] };
   const matches = matchCollectorRecords(collectorRun.records, eet, { asOf: "2026-08-31" });
   assert.equal(buildEvidencePackage({ promise: eet, matches, collectorRun, asOf: "2026-08-31" }), null);
+});
+
+test("keeps a semantic candidate for assessor relevance review without treating it as an exact signal", () => {
+  const semanticOnly = record({
+    id: "semantic-only",
+    title: "Tarifní odměňování pedagogických pracovníků se má změnit.",
+    payload: { printNumber: 278, actionCz: "předložen", printTitleCz: "Rozpočtové opatření" }
+  });
+  const match = matchRecordToPromise(semanticOnly, eet, {
+    semanticCandidate: {
+      candidateSource: "semantic-retrieval",
+      rank: 1,
+      similarity: 0.91,
+      profileHash: "a".repeat(64),
+      indexVersion: "promise-semantic-v1",
+      model: "text-embedding-3-small"
+    }
+  });
+  assert.ok(match);
+  assert.equal(match.exactSignal, false);
+  assert.deepEqual(match.candidateSources, ["semantic-retrieval"]);
+  assert.equal(match.semanticCandidate.rank, 1);
 });
 
 test("treats a matched official ministry publication as a government-action candidate", () => {

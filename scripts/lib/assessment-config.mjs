@@ -5,6 +5,16 @@ import { resolve } from "node:path";
 export const assessorPromptVersion = "assessor-v12";
 export const arbiterPromptVersion = "arbiter-v4";
 
+export function semanticRetrievalRuntimeConfig(env = process.env) {
+  return {
+    provider: env.SLIBY_SEMANTIC_PROVIDER ?? "openai",
+    model: env.SLIBY_SEMANTIC_MODEL ?? "text-embedding-3-small",
+    dimensions: Number(env.SLIBY_SEMANTIC_DIMENSIONS ?? "256"),
+    candidateLimit: Number(env.SLIBY_SEMANTIC_CANDIDATE_LIMIT ?? "8"),
+    minimumSimilarity: Number(env.SLIBY_SEMANTIC_MIN_SIMILARITY ?? "0.5")
+  };
+}
+
 export function hashText(text) {
   return createHash("sha256").update(text).digest("hex");
 }
@@ -16,7 +26,8 @@ export function assessmentRuntimeConfig(env = process.env) {
     arbiterProvider: env.SLIBY_ARBITER_PROVIDER ?? "openai",
     assessorModelA: env.SLIBY_ASSESSOR_MODEL_A ?? "gpt-5.6-terra",
     assessorModelB: env.SLIBY_ASSESSOR_MODEL_B ?? "gpt-5.6-terra",
-    arbiterModel: env.SLIBY_ARBITER_MODEL ?? "gpt-5.6-sol"
+    arbiterModel: env.SLIBY_ARBITER_MODEL ?? "gpt-5.6-sol",
+    concurrency: Number(env.SLIBY_ASSESSMENT_CONCURRENCY ?? "4")
   };
 }
 
