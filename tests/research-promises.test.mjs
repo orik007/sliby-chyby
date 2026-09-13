@@ -34,10 +34,24 @@ test("research promises use one source catalog and three promise statuses", asyn
     if (promise.status === "confirmed") {
       assert.ok(publicPromiseIds.has(promise.id), `Confirmed promise ${promise.id} is not public`);
       assert.deepEqual(publicPromiseById.get(promise.id).sourceLocator, promise.locator, `Public locator differs for ${promise.id}`);
+      assert.equal(publicPromiseById.get(promise.id).originalText, promise.originalTextCz, `Public wording differs for ${promise.id}`);
     }
   }
   const confirmedPromiseIds = new Set(catalog.promises.filter(({ status }) => status === "confirmed").map(({ id }) => id));
   assert.deepEqual([...confirmedPromiseIds].sort(), [...publicPromiseIds].sort(), "Every and only confirmed campaign promise must be public");
+
+  const numericSentenceEndingExceptions = new Set([
+    "candidate-10983bd9b9ff", // Stork 2
+    "candidate-8f5e458aad72", // year 2035
+    "candidate-f58e6ecc2c77", // reactor unit numbers
+    "candidate-fd61cfd63a87", // year 2001
+    "ano-2025-stop-2026-self-employed-contribution-increase" // year 2026
+  ]);
+  for (const promise of publicPromises) {
+    assert.doesNotMatch(promise.title, /^\d+[).]\s/, `Unexpected leading list number in title: ${promise.id}`);
+    assert.doesNotMatch(promise.originalText, /^\d+[).]\s/, `Unexpected leading list number in wording: ${promise.id}`);
+    if (!numericSentenceEndingExceptions.has(promise.id)) assert.doesNotMatch(promise.originalText, /\s\d+\.$/, `Unexpected trailing reference number in wording: ${promise.id}`);
+  }
 
   assert.equal(policyCategoryData.schemaVersion, 1);
   assert.equal(policyCategoryData.categories.length, 14);
