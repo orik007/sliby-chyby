@@ -92,7 +92,7 @@ export function validatePromiseRegistry(registry) {
   return registry;
 }
 
-export function matchRecordToPromise(record, promise) {
+export function matchRecordToPromise(record, promise, { semanticCandidate = null } = {}) {
   const searchable = searchableRecordText(record);
   const matchedTerms = [];
   const matchedExternalReferences = [];
@@ -114,7 +114,8 @@ export function matchRecordToPromise(record, promise) {
     });
   }
 
-  if (score < promise.matching.minimumScore) return null;
+  const exactSignal = score >= promise.matching.minimumScore;
+  if (!exactSignal && !semanticCandidate) return null;
   const partyVoteSummary = (record.payload?.partyVoteSummaries ?? []).find((summary) => summary.partyId === promise.partyId);
   const attributionStatus = partyVoteSummary?.attributionStatus === "attributed" && hasVerifiedVoteContext(record)
     ? "verified-party-vote"
@@ -132,6 +133,12 @@ export function matchRecordToPromise(record, promise) {
   return {
     record,
     score,
+    exactSignal,
+    semanticCandidate,
+    candidateSources: [
+      ...(exactSignal ? ["exact-signal"] : []),
+      ...(semanticCandidate ? ["semantic-retrieval"] : [])
+    ],
     attributionStatus,
     matchedTerms,
     matchedExternalReferences
@@ -139,14 +146,18 @@ export function matchRecordToPromise(record, promise) {
 }
 
 function compareMatches(a, b) {
-  return b.score - a.score || String(b.record.occurredAt).localeCompare(String(a.record.occurredAt)) || a.record.id.localeCompare(b.record.id);
+  return Number(b.exactSignal) - Number(a.exactSignal)
+    || b.score - a.score
+    || (b.semanticCandidate?.similarity ?? -Infinity) - (a.semanticCandidate?.similarity ?? -Infinity)
+    || String(b.record.occurredAt).localeCompare(String(a.record.occurredAt))
+    || a.record.id.localeCompare(b.record.id);
 }
 
-export function matchCollectorRecords(records, promise, { asOf }) {
+export function matchCollectorRecords(records, promise, { asOf, semanticCandidates = new Map() }) {
   const cutoff = `${asOf}T23:59:59.999Z`;
   return records
     .filter((record) => !record.occurredAt || record.occurredAt <= cutoff)
-    .map((record) => matchRecordToPromise(record, promise))
+    .map((record) => matchRecordToPromise(record, promise, { semanticCandidate: semanticCandidates.get(record.id) ?? null }))
     .filter(Boolean)
     .sort(compareMatches);
 }
@@ -224,6 +235,9 @@ function evidenceFromMatch(match, promise) {
     sourceRecordHash: record.contentHash,
     matchBasis: {
       score: match.score,
+      candidateSources: match.candidateSources,
+      exactSignal: match.exactSignal,
+      semanticCandidate: match.semanticCandidate,
       attributionStatus: match.attributionStatus,
       matchedTerms: match.matchedTerms,
       matchedExternalReferences: match.matchedExternalReferences
@@ -246,7 +260,7 @@ export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
     : null;
   const evidencePackage = {
     schemaVersion: "1.0.0",
-    methodologyVersion: "slava-v6",
+    methodologyVersion: "slava-v7",
     packageId: `${promise.id}--${asOf}--generated`,
     asOf,
     assessmentContext: {
@@ -266,10 +280,11 @@ export function buildEvidencePackage({ promise, matches, collectorRun, asOf }) {
       contradictionTest: promise.contradictionTest
     },
     generation: {
-      matcherVersion: "deterministic-matcher-v5",
+      matcherVersion: "hybrid-semantic-matcher-v1",
       collectorRunId: collectorRun.runId,
       collectorRunHash: sha256(collectorRun),
       candidateMatchCount: matches.length,
+      semanticCandidateMatchCount: matches.filter(({ semanticCandidate }) => semanticCandidate !== null).length,
       primaryMatchCount: matches.filter(({ record, attributionStatus }) => record.primary && assessableAttributionStatuses.has(attributionStatus)).length,
       selectedPrimaryEvidenceCount: selectedMatches.length,
       omittedPrimaryMatchCount: Math.max(0, matches.filter(({ record, attributionStatus }) => record.primary && assessableAttributionStatuses.has(attributionStatus)).length - selectedMatches.length),
@@ -295,6 +310,9 @@ export function summarizeMatch(match) {
     url: match.record.url,
     contentHash: match.record.contentHash,
     score: match.score,
+    candidateSources: match.candidateSources,
+    exactSignal: match.exactSignal,
+    semanticCandidate: match.semanticCandidate,
     attributionStatus: match.attributionStatus,
     matchedTerms: match.matchedTerms,
     matchedExternalReferences: match.matchedExternalReferences

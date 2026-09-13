@@ -5,6 +5,15 @@ import { resolve } from "node:path";
 export const assessorPromptVersion = "assessor-v12";
 export const arbiterPromptVersion = "arbiter-v4";
 
+export function semanticRetrievalRuntimeConfig(env = process.env) {
+  return {
+    provider: env.SLIBY_SEMANTIC_PROVIDER ?? "openai",
+    model: env.SLIBY_SEMANTIC_MODEL ?? "text-embedding-3-small",
+    dimensions: Number(env.SLIBY_SEMANTIC_DIMENSIONS ?? "256"),
+    candidateLimit: Number(env.SLIBY_SEMANTIC_CANDIDATE_LIMIT ?? "8")
+  };
+}
+
 export function hashText(text) {
   return createHash("sha256").update(text).digest("hex");
 }

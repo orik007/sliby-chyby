@@ -11,17 +11,19 @@ test("full evidence collection is scheduled daily at 09:37 Prague time", async (
   assert.match(workflow, /timezone: "Europe\/Prague"/);
   assert.match(workflow, /--checkpoints automation\/collectors\/checkpoints\.json/);
   assert.match(workflow, /--write-checkpoints automation\/collectors\/checkpoints\.json/);
+  assert.match(workflow, /--semantic-index automation\/semantic-index\/promise-index\.json/);
+  assert.match(workflow, /--write-semantic-index automation\/semantic-index\/promise-index\.json/);
 });
 
-test("the durable audit branch restores its complete proposal tree when syncing main", async () => {
+test("the durable audit branch retains every operational audit tree when syncing main", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
   assert.match(workflow, /git merge-base --is-ancestor "\$GITHUB_SHA" HEAD/);
   assert.match(workflow, /git merge --no-ff --no-commit/);
-  assert.match(workflow, /grep -qv '\^automation\/review-proposals\/'/);
-  assert.match(workflow, /git restore --source=HEAD --staged --worktree -- automation\/review-proposals/);
+  assert.match(workflow, /semantic-index/);
+  assert.match(workflow, /git restore --source=HEAD --staged --worktree -- automation\/review-proposals automation\/collectors\/checkpoints\.json automation\/semantic-index/);
   assert.match(workflow, /git merge --abort/);
   assert.match(workflow, /git push --set-upstream origin "\$REVIEW_BRANCH"/);
-  assert.match(workflow, /git add automation\/collectors\/checkpoints\.json automation\/review-proposals/);
+  assert.match(workflow, /git add automation\/collectors\/checkpoints\.json automation\/review-proposals automation\/semantic-index/);
   assert.match(workflow, /could not create the required review pull request/);
 });
 

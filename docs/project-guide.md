@@ -24,14 +24,14 @@ official party source
 
 allowlisted evidence sources
   -> per-source bootstrap or incremental collection at 09:37 Europe/Prague
-  -> deterministic matching to confirmed promises
+  -> exact signals plus semantic candidate retrieval across confirmed promises
   -> official-document enrichment when a known target exists
   -> two independent assessments; arbiter only on disagreement
   -> unpublished audit pull request with proposals, coverage, and checkpoints
   -> separate approved public-assessment pull request when a score changes
 ```
 
-The daily workflow may use AI only for the bounded assessment stage. It never assigns a public score or publishes data; every output remains an unpublished human-review proposal. The public site makes no live AI call.
+The daily workflow uses embeddings only to retrieve a bounded set of candidate promise relationships. Two independent assessors determine relevance and propose a score from bounded evidence; it never assigns a public score or publishes data. The public site makes no live AI call.
 
 ## Repository map
 
@@ -40,7 +40,8 @@ The daily workflow may use AI only for the bounded assessment stage. It never as
 | `research/2025-election/promises.json` | Campaign sources and non-public candidate or rejected promises. |
 | `data/` | Public confirmed promises, common policy-category mappings, sources, current-score revisions, and system status. |
 | `automation/collectors/` | Allowlisted evidence-source registry. |
-| `automation/matching/` | Deterministic matching configuration for public promises. |
+| `automation/matching/` | Exact-signal configuration and semantic promise profiles for public promises. |
+| `automation/semantic-index/` | Versioned embedding index used only to retrieve candidate promise relationships. |
 | `scripts/` | Validation, collection, matching, enrichment, assessment, and coverage-audit scripts. |
 | `.github/workflows/` | Verification and the daily evidence-assessment workflow. |
 

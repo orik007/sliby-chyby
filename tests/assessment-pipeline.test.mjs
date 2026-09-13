@@ -10,7 +10,7 @@ import {
 
 const evidencePackage = {
   schemaVersion: "1.0.0",
-  methodologyVersion: "slava-v6",
+  methodologyVersion: "slava-v7",
   packageId: "test-promise--2026-09-10--generated",
   asOf: "2026-09-10",
   assessmentContext: { mode: "live", ruleVersion: "period-timing-v2", maintenanceBaseline: null },
