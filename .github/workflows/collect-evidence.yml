@@ -75,8 +75,18 @@ jobs:
                 echo "::error::A non-audit conflict prevents synchronizing the durable review branch with main."
                 exit 1
               fi
-              git restore --source=HEAD --staged --worktree -- automation/review-proposals automation/collectors/checkpoints.json automation/semantic-index
-              git add automation/review-proposals automation/collectors/checkpoints.json automation/semantic-index
+              while IFS= read -r -d '' path; do
+                if git cat-file -e "HEAD:$path" 2>/dev/null; then
+                  git restore --source=HEAD --staged --worktree -- "$path"
+                else
+                  if git cat-file -e ":2:$path" 2>/dev/null || ! git cat-file -e ":1:$path" 2>/dev/null; then
+                    git merge --abort
+                    echo "::error::An audit path relocation requires manual conflict resolution."
+                    exit 1
+                  fi
+                  git rm -- "$path"
+                fi
+              done < <(git diff --name-only --diff-filter=U -z)
               git commit --no-edit
             fi
           else
