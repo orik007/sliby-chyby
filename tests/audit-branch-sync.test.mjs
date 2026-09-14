@@ -14,7 +14,7 @@ const readme = "automation/review-proposals/README.md";
 const checkpoint = "automation/collectors/checkpoints.json";
 const index = "automation/semantic-index/promise-index.json";
 
-for (const scenario of ["bootstrap", "existing audit", "audit deletion", "non-audit conflict"]) {
+for (const scenario of ["bootstrap", "existing audit", "audit deletion", "non-audit conflict", "audit file to directory", "audit directory to file"]) {
   test(`durable branch synchronization: ${scenario}`, () => {
     const root = mkdtempSync(join(tmpdir(), "audit-sync-"));
     const cwd = join(root, "work");
@@ -38,6 +38,9 @@ for (const scenario of ["bootstrap", "existing audit", "audit deletion", "non-au
       git("remote", "add", "origin", join(root, "remote.git"));
       put(readme, "base\n");
       put("src/example.txt", "base\n");
+      const collision = "automation/review-proposals/collision";
+      if (scenario === "audit file to directory") put(collision, "base\n");
+      if (scenario === "audit directory to file") put(`${collision}/child.json`, "base\n");
       if (scenario !== "bootstrap") {
         put(checkpoint, "base\n");
         put(index, "base\n");
@@ -46,6 +49,8 @@ for (const scenario of ["bootstrap", "existing audit", "audit deletion", "non-au
       git("switch", "-c", "automation/assessment-review");
       put(readme, "durable\n");
       put("automation/review-proposals/history/proposal.json", "retained\n");
+      if (scenario === "audit file to directory") put(collision, "durable\n");
+      if (scenario === "audit directory to file") put(`${collision}/child.json`, "durable\n");
       if (scenario === "audit deletion") git("rm", checkpoint, index);
       if (scenario === "existing audit") {
         put(checkpoint, "durable checkpoint\n");
@@ -60,6 +65,14 @@ for (const scenario of ["bootstrap", "existing audit", "audit deletion", "non-au
       put(readme, "main\n");
       put("automation/semantic-index/README.md", "new index documentation\n");
       put("src/example.txt", "main\n");
+      if (scenario === "audit file to directory") {
+        git("rm", collision);
+        put(`${collision}/child.json`, "main\n");
+      }
+      if (scenario === "audit directory to file") {
+        git("rm", "-r", collision);
+        put(collision, "main\n");
+      }
       if (scenario !== "bootstrap") {
         put(checkpoint, "main checkpoint\n");
         put(index, "main index\n");
@@ -69,10 +82,13 @@ for (const scenario of ["bootstrap", "existing audit", "audit deletion", "non-au
       const result = spawnSync(bash, ["-e", "-c", preparation], {
         cwd, encoding: "utf8", env: { ...process.env, REVIEW_BRANCH: "automation/assessment-review", GITHUB_SHA: mainHead },
       });
-      if (scenario === "non-audit conflict") {
+      if (["non-audit conflict", "audit file to directory", "audit directory to file"].includes(scenario)) {
         assert.equal(result.status, 1, result.stderr);
-        assert.match(result.stdout, /non-audit conflict/);
+        assert.match(result.stdout, /non-audit conflict|audit path relocation/);
         assert.equal(git("rev-parse", "HEAD"), auditHead);
+        assert.equal(git("show", "HEAD:automation/review-proposals/history/proposal.json"), "retained");
+        if (scenario === "audit file to directory") assert.equal(git("show", `HEAD:${collision}`), "durable");
+        if (scenario === "audit directory to file") assert.equal(git("show", `HEAD:${collision}/child.json`), "durable");
       } else {
         assert.equal(result.status, 0, result.stderr || result.stdout);
         assert.equal(git("show", `HEAD:${readme}`), "durable");
