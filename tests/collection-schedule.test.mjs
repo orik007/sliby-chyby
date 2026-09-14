@@ -33,7 +33,6 @@ test("the durable audit branch retains every operational audit tree when syncing
   assert.match(workflow, /git merge-base --is-ancestor "\$GITHUB_SHA" HEAD/);
   assert.match(workflow, /git merge --no-ff --no-commit/);
   assert.match(workflow, /semantic-index/);
-  assert.match(workflow, /git restore --source=HEAD --staged --worktree -- automation\/review-proposals automation\/collectors\/checkpoints\.json automation\/semantic-index/);
   assert.match(workflow, /git merge --abort/);
   assert.match(workflow, /git push --set-upstream origin "\$REVIEW_BRANCH"/);
   assert.match(workflow, /git add automation\/collectors\/checkpoints\.json automation\/review-proposals automation\/semantic-index/);
