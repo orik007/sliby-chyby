@@ -17,6 +17,13 @@ This document contains only the current confirmed rules. When a rule changes, re
 - A rejected promise records its reason. Candidates and rejected promises are not public.
 - The initial catalogue covers ANO 2011, SPD, and Motoristé sobě in the 2025 Czech Chamber of Deputies election, from official national party sources.
 
+## Promise source archive
+
+- Preserve the original files supporting catalogue promises in a versioned repository archive, independent of the automation audit branch. This includes the source catalogue for candidate and rejected promises.
+- Record each copy's source ID, original URL, retrieval URL and time, byte length, and SHA-256 hash. Preserve downloaded bytes unchanged; changed source content receives a new copy rather than replacing an archived file.
+- Public source links continue to point to the original publisher. An archived copy can be used as an explicitly labelled fallback if the original disappears, through the normal release process.
+- This archive covers promise sources; archiving daily assessment evidence is outside its current scope.
+
 ## Policy categories
 
 - Every confirmed promise has exactly one common policy category from the controlled 2025 category list.

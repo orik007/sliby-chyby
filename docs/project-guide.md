@@ -39,6 +39,7 @@ The daily workflow uses embeddings only to retrieve a bounded set of candidate p
 | --- | --- |
 | `research/2025-election/promises.json` | Campaign sources and non-public candidate or rejected promises. |
 | `data/` | Public confirmed promises, common policy-category mappings, sources, current-score revisions, and system status. |
+| `archive/promise-sources/` | Original promise-source files and their verified retrieval manifest; storage format is defined in `data-model.md`. |
 | `automation/collectors/` | Allowlisted evidence-source registry. |
 | `automation/matching/` | Exact-signal configuration and semantic promise profiles for public promises. |
 | `automation/semantic-index/` | Versioned embedding index used only to retrieve candidate promise relationships. |
