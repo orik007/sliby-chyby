@@ -4,6 +4,7 @@ import {
   hashAssessmentContent,
   hashAssessmentFingerprint,
   resolveAssessmentReviews,
+  resolveAvailableAssessmentReviews,
   validateAssessmentOutput,
   validateEvidencePackage
 } from "../scripts/lib/assessment-pipeline.mjs";
@@ -37,6 +38,19 @@ function review(status) {
     uncertainties: []
   };
 }
+
+const prompts = {
+  assessor: { version: "test", contentHash: "a".repeat(64) },
+  arbiter: { version: "test", contentHash: "b".repeat(64) }
+};
+const assessmentRuntime = {
+  assessorProviderA: "openai",
+  assessorProviderB: "openai",
+  arbiterProvider: "openai",
+  assessorModelA: "a",
+  assessorModelB: "b",
+  arbiterModel: "c"
+};
 
 test("validates a bounded assessment package and hashes assessable content", () => {
   assert.equal(validateEvidencePackage(evidencePackage), evidencePackage);
@@ -75,12 +89,38 @@ test("keeps a consensus assessment as an unpublished candidate", () => {
   });
 });
 
+test("uses the valid assessor when the peer output is invalid", () => {
+  const invalid = review("moving-towards");
+  invalid.citedEvidenceIds = [];
+  const resolved = resolveAvailableAssessmentReviews(invalid, review("moving-towards"), evidencePackage);
+  assert.equal(resolved.reviewA, null);
+  assert.equal(resolved.reviewB.status, "moving-towards");
+  assert.match(resolved.validationErrors["assessor-a"], /cite evidence/);
+  assert.deepEqual(resolved.resolution, {
+    state: "candidate",
+    reason: "single-valid-assessor",
+    status: "moving-towards",
+    selectedReview: "assessor-b"
+  });
+});
+
+test("rejects an assessment only when both assessor outputs are invalid", () => {
+  const invalidA = review("moving-towards");
+  const invalidB = review("moving-towards");
+  invalidA.citedEvidenceIds = [];
+  invalidB.citedEvidenceIds = [];
+  assert.throws(() => resolveAvailableAssessmentReviews(invalidA, invalidB, evidencePackage), /Both assessment outputs are invalid/);
+});
+
 test("includes prompt and model identity in an assessment fingerprint", () => {
   const content = hashAssessmentContent(evidencePackage);
-  const fingerprint = hashAssessmentFingerprint({
-    assessmentContentHash: content,
-    prompts: { assessor: { version: "test", contentHash: "a".repeat(64) }, arbiter: { version: "test", contentHash: "b".repeat(64) } },
-    runtime: { assessorProviderA: "openai", assessorProviderB: "openai", arbiterProvider: "openai", assessorModelA: "a", assessorModelB: "b", arbiterModel: "c" }
-  });
+  const fingerprint = hashAssessmentFingerprint({ assessmentContentHash: content, prompts, runtime: assessmentRuntime });
   assert.match(fingerprint, /^[a-f0-9]{64}$/);
+});
+
+test("ignores concurrency when hashing assessment identity", () => {
+  const content = hashAssessmentContent(evidencePackage);
+  const first = hashAssessmentFingerprint({ assessmentContentHash: content, prompts, runtime: { ...assessmentRuntime, concurrency: 1 } });
+  const second = hashAssessmentFingerprint({ assessmentContentHash: content, prompts, runtime: { ...assessmentRuntime, concurrency: 8 } });
+  assert.equal(first, second);
 });
