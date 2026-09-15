@@ -107,6 +107,7 @@ const auditRecord = {
   assessmentContentHash,
   assessmentFingerprint,
   methodologyVersion: evidencePackage.methodologyVersion,
+  promiseId: evidencePackage.promise.id,
   prompts: {
     assessor: { version: prompts.assessor.version, contentHash: prompts.assessor.contentHash },
     arbiter: { version: prompts.arbiter.version, contentHash: prompts.arbiter.contentHash }
@@ -120,6 +121,7 @@ const auditRecord = {
     sameModelId: rawA.model === rawB.model
   },
   assessorValidationErrors: validationErrors,
+  validatedAssessments: { "assessor-a": reviewA, "assessor-b": reviewB },
   assessorA: rawA,
   assessorB: rawB,
   arbiter: rawArbiter,
