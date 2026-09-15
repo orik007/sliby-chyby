@@ -26,7 +26,7 @@ allowlisted evidence sources
   -> per-source bootstrap or incremental collection at 09:37 Europe/Prague
   -> exact signals plus semantic candidate retrieval across confirmed promises
   -> official-document enrichment when a known target exists
-  -> two independent assessments; arbiter only on disagreement
+  -> two independent assessments; arbiter on disagreement or one invalid assessor output
   -> unpublished audit pull request with proposals, coverage, and checkpoints
   -> separate approved public-assessment pull request when a score changes
 ```
