@@ -100,6 +100,13 @@ test("requires the arbiter when one assessor output is invalid", () => {
   assert.deepEqual(resolveAssessmentReviews(resolved.reviewA, resolved.reviewB, evidencePackage, {
     choice: "assessor-b", citedEvidenceIds: ["conduct"], explanationCz: "Druhý posudek odpovídá předloženým podkladům."
   }), { state: "candidate", reason: "arbiter-confirmed-single-assessor", status: "moving-towards", selectedReview: "assessor-b" });
+  assert.deepEqual(resolveAssessmentReviews(resolved.reviewA, resolved.reviewB, evidencePackage, {
+    choice: "assessor-a", citedEvidenceIds: ["conduct"], explanationCz: "Druhý posudek odpovídá předloženým podkladům."
+  }), { state: "human-review-required", reason: "arbiter-cannot-decide", status: null, selectedReview: null });
+
+  const malformed = structuredClone(review("moving-towards"));
+  malformed.promiseId = "other-promise";
+  assert.throws(() => resolveAssessmentReviews(null, malformed, evidencePackage), /promiseId/);
 });
 
 test("records a failed assessment only when both assessor outputs are invalid", () => {
