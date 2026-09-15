@@ -191,7 +191,8 @@ const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (i
     return { proposal: null, result: {
       promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz,
       assessmentFingerprint: item.assessmentFingerprint, disposition: "assessment-failed",
-      resolutionState: null, candidateStatus: null, reviewUrl: null, error: auditRecord.resolution.reason
+      resolutionState: null, candidateStatus: null, reviewUrl: null, error: auditRecord.resolution.reason,
+      validationErrors: auditRecord.assessorValidationErrors
     } };
   }
   const relativeProposalDirectory = `automation/review-proposals/${item.promiseId}/${item.assessmentFingerprint}`;
