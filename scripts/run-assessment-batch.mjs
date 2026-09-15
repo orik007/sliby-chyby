@@ -1,4 +1,5 @@
 import { spawn } from "node:child_process";
+import { existsSync } from "node:fs";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { relative, resolve } from "node:path";
 import { assessmentRuntimeConfig, loadAssessmentPrompts } from "./lib/assessment-config.mjs";
@@ -19,6 +20,7 @@ function invariant(condition, message) {
 function parseArgs(args) {
   const options = {
     packages: null,
+    retryPackages: "automation/review-proposals/failures",
     enrichmentRun: null,
     proposals: "automation/review-proposals",
     runs: "automation/runs/pipeline/github-actions/assessments",
@@ -28,6 +30,7 @@ function parseArgs(args) {
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--packages") options.packages = args[++index];
+    else if (arg === "--retry-packages") options.retryPackages = args[++index];
     else if (arg === "--enrichment-run") options.enrichmentRun = args[++index];
     else if (arg === "--proposals") options.proposals = args[++index];
     else if (arg === "--runs") options.runs = args[++index];
@@ -153,9 +156,37 @@ const packageFiles = (await readdir(packageDirectory, { withFileTypes: true }))
   .map((entry) => resolve(packageDirectory, entry.name))
   .sort();
 const packages = [];
+const currentPackagePromiseIds = new Set();
 for (const path of packageFiles) {
-  packages.push({ path, evidencePackage: validateEvidencePackage(JSON.parse(await readFile(path, "utf8"))) });
+  const evidencePackage = validateEvidencePackage(JSON.parse(await readFile(path, "utf8")));
+  currentPackagePromiseIds.add(evidencePackage.promise.id);
+  packages.push({ path, evidencePackage });
 }
+
+async function failurePackageFiles(directory) {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const nested = await Promise.all(entries.map(async (entry) => {
+    const path = resolve(directory, entry.name);
+    if (entry.isDirectory()) return failurePackageFiles(path);
+    return entry.isFile() && entry.name === "evidence-package.json" ? [path] : [];
+  }));
+  return nested.flat();
+}
+
+const retryDirectory = resolve(options.retryPackages);
+const retryCandidates = new Map();
+if (existsSync(retryDirectory)) {
+  for (const path of await failurePackageFiles(retryDirectory)) {
+    const evidencePackage = validateEvidencePackage(JSON.parse(await readFile(path, "utf8")));
+    const promiseId = evidencePackage.promise.id;
+    if (currentPackagePromiseIds.has(promiseId)) continue;
+    const previous = retryCandidates.get(promiseId);
+    if (!previous || evidencePackage.asOf > previous.evidencePackage.asOf || (evidencePackage.asOf === previous.evidencePackage.asOf && path > previous.path)) {
+      retryCandidates.set(promiseId, { path, evidencePackage });
+    }
+  }
+}
+packages.push(...retryCandidates.values());
 
 const prompts = await loadAssessmentPrompts();
 const runtime = assessmentRuntimeConfig();
