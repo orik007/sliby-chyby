@@ -1,7 +1,7 @@
 import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
-import { relative, resolve } from "node:path";
+import { dirname, relative, resolve } from "node:path";
 import { assessmentRuntimeConfig, loadAssessmentPrompts } from "./lib/assessment-config.mjs";
 import {
   addReviewProposals,
@@ -44,7 +44,8 @@ function parseArgs(args) {
 }
 
 async function runAssessment(packagePath, outputRoot) {
-  const child = spawn(process.execPath, ["scripts/run-assessment.mjs", packagePath, outputRoot], {
+  const runner = process.env.SLIBY_ASSESSMENT_RUNNER ?? "scripts/run-assessment.mjs";
+  const child = spawn(process.execPath, [runner, packagePath, outputRoot], {
     cwd: process.cwd(),
     env: process.env,
     stdio: ["ignore", "pipe", "inherit"]
@@ -174,15 +175,55 @@ async function failurePackageFiles(directory) {
 }
 
 const retryDirectory = resolve(options.retryPackages);
-const retryCandidates = new Map();
+const activeFailuresByPromise = new Map();
+async function retireFailure(failure, { proposal, reason }) {
+  const retirementPath = resolve(failure.directory, "retired.json");
+  if (existsSync(retirementPath)) return;
+  await writeFile(retirementPath, `${JSON.stringify({
+    schemaVersion: "1.0.0",
+    retiredAt: new Date().toISOString(),
+    reason,
+    replacedByProposalId: proposal.proposalId,
+    replacedByAssessmentFingerprint: proposal.assessmentFingerprint
+  }, null, 2)}\n`, { flag: "wx" });
+}
+
 if (existsSync(retryDirectory)) {
   for (const path of await failurePackageFiles(retryDirectory)) {
+    const directory = dirname(path);
+    if (existsSync(resolve(directory, "retired.json"))) continue;
     const evidencePackage = validateEvidencePackage(JSON.parse(await readFile(path, "utf8")));
+    const auditRecord = JSON.parse(await readFile(resolve(directory, "assessment-run.json"), "utf8"));
     const promiseId = evidencePackage.promise.id;
-    if (currentPackagePromiseIds.has(promiseId)) continue;
+    invariant(auditRecord?.promiseId === promiseId, `Failure audit does not match ${promiseId}`);
+    invariant(auditRecord?.resolution?.state === "assessment-failed", `Failure audit for ${promiseId} is not an assessment failure`);
+    invariant(typeof auditRecord.evaluatedAt === "string" && !Number.isNaN(Date.parse(auditRecord.evaluatedAt)), `Failure audit for ${promiseId} has an invalid evaluatedAt`);
+    const failures = activeFailuresByPromise.get(promiseId) ?? [];
+    failures.push({ path, directory, evidencePackage, auditRecord });
+    activeFailuresByPromise.set(promiseId, failures);
+  }
+}
+
+for (const [promiseId, failures] of activeFailuresByPromise) {
+  const currentProposal = currentReviewProposal(manifest, promiseId);
+  if (!currentProposal) continue;
+  for (const failure of failures) {
+    if (Date.parse(currentProposal.evaluatedAt) > Date.parse(failure.auditRecord.evaluatedAt)) {
+      await retireFailure(failure, { proposal: currentProposal, reason: "superseded-by-newer-review-proposal" });
+    }
+  }
+}
+
+const retryCandidates = new Map();
+for (const [promiseId, failures] of activeFailuresByPromise) {
+  if (currentPackagePromiseIds.has(promiseId)) continue;
+  for (const failure of failures) {
+    if (existsSync(resolve(failure.directory, "retired.json"))) continue;
     const previous = retryCandidates.get(promiseId);
-    if (!previous || evidencePackage.asOf > previous.evidencePackage.asOf || (evidencePackage.asOf === previous.evidencePackage.asOf && path > previous.path)) {
-      retryCandidates.set(promiseId, { path, evidencePackage });
+    if (!previous || failure.auditRecord.evaluatedAt > previous.auditRecord.evaluatedAt || (
+      failure.auditRecord.evaluatedAt === previous.auditRecord.evaluatedAt && failure.auditRecord.runId > previous.auditRecord.runId
+    )) {
+      retryCandidates.set(promiseId, failure);
     }
   }
 }
@@ -241,6 +282,10 @@ const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (i
   const proposal = createReviewProposal({ auditRecord, proposalDirectory: relativeProposalDirectory, supersedesProposalId: previousProposal?.proposalId ?? null });
   await writeFile(resolve(proposalDirectory, "proposal.json"), `${JSON.stringify(proposal, null, 2)}\n`, { flag: "wx" });
   await writeFile(resolve(proposalDirectory, "review.md"), renderHumanReviewMarkdown({ evidencePackage: item.evidencePackage, auditRecord, proposal }), { flag: "wx" });
+  await Promise.all((activeFailuresByPromise.get(item.promiseId) ?? []).map((failure) => retireFailure(failure, {
+    proposal,
+    reason: "replaced-by-successful-assessment"
+  })));
   return { proposal, result: {
     promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz, assessmentFingerprint: item.assessmentFingerprint,
     disposition: "assessed", resolutionState: auditRecord.resolution.state, candidateStatus: auditRecord.resolution.status, reviewUrl: humanReviewUrl(proposal.humanReviewPath)
