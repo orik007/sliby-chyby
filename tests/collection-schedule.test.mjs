@@ -17,7 +17,7 @@ test("full evidence collection is scheduled daily at 09:37 Prague time", async (
   assert.match(workflow, /--write-semantic-index automation\/semantic-index\/promise-index\.json/);
   assert.match(workflow, /SLIBY_SEMANTIC_MIN_SIMILARITY: 0\.5/);
   assert.match(workflow, /SLIBY_ASSESSMENT_CONCURRENCY: 4/);
-  assert.match(workflow, /timeout-minutes: 60/);
+  assert.match(workflow, /timeout-minutes: 90/);
 });
 
 test("semantic retrieval ranks the whole public catalogue and limits paid assessment fan-out", async () => {
