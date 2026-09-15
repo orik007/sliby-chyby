@@ -76,8 +76,10 @@ export function hashAssessmentFingerprint({ assessmentContentHash, prompts, runt
   invariant(/^[a-f0-9]{64}$/.test(assessmentContentHash), "Invalid assessment content hash");
   invariant(prompts?.assessor?.version && /^[a-f0-9]{64}$/.test(prompts.assessor.contentHash), "Invalid assessor prompt identity");
   invariant(prompts?.arbiter?.version && /^[a-f0-9]{64}$/.test(prompts.arbiter.contentHash), "Invalid arbiter prompt identity");
+  const runtimeIdentity = {};
   for (const field of ["assessorProviderA", "assessorProviderB", "arbiterProvider", "assessorModelA", "assessorModelB", "arbiterModel"]) {
     invariant(typeof runtime?.[field] === "string" && runtime[field].length > 0, `Missing assessment runtime field: ${field}`);
+    runtimeIdentity[field] = runtime[field];
   }
   return createHash("sha256").update(canonicalize({
     fingerprintVersion: "assessment-fingerprint-v1",
@@ -86,7 +88,7 @@ export function hashAssessmentFingerprint({ assessmentContentHash, prompts, runt
       assessor: { version: prompts.assessor.version, contentHash: prompts.assessor.contentHash },
       arbiter: { version: prompts.arbiter.version, contentHash: prompts.arbiter.contentHash }
     },
-    runtime
+    runtime: runtimeIdentity
   })).digest("hex");
 }
 
@@ -156,6 +158,47 @@ export function validateArbiterOutput(output, evidencePackage) {
   const allowedIds = new Set(evidencePackage.evidence.map(({ id }) => id));
   for (const evidenceId of output.citedEvidenceIds) invariant(allowedIds.has(evidenceId), `Arbiter invented evidence ID: ${evidenceId}`);
   return output;
+}
+
+function validateAssessmentAttempt(output, evidencePackage) {
+  try {
+    return { review: validateAssessmentOutput(output, evidencePackage), error: null };
+  } catch (error) {
+    return { review: null, error: error instanceof Error ? error.message : String(error) };
+  }
+}
+
+export function resolveAvailableAssessmentReviews(outputA, outputB, evidencePackage) {
+  const attemptA = validateAssessmentAttempt(outputA, evidencePackage);
+  const attemptB = validateAssessmentAttempt(outputB, evidencePackage);
+  const validationErrors = {
+    "assessor-a": attemptA.error,
+    "assessor-b": attemptB.error
+  };
+
+  if (!attemptA.review && !attemptB.review) {
+    throw new Error(`Both assessment outputs are invalid: assessor-a: ${attemptA.error}; assessor-b: ${attemptB.error}`);
+  }
+
+  if (attemptA.review && attemptB.review) {
+    return {
+      reviewA: attemptA.review,
+      reviewB: attemptB.review,
+      validationErrors,
+      resolution: resolveAssessmentReviews(attemptA.review, attemptB.review, evidencePackage)
+    };
+  }
+
+  const selectedReview = attemptA.review ? "assessor-a" : "assessor-b";
+  const selected = attemptA.review ?? attemptB.review;
+  return {
+    reviewA: attemptA.review,
+    reviewB: attemptB.review,
+    validationErrors,
+    resolution: selected.evidenceSufficient
+      ? { state: "candidate", reason: "single-valid-assessor", status: selected.status, selectedReview }
+      : { state: "human-review-required", reason: "single-valid-assessor-insufficient-evidence", status: null, selectedReview }
+  };
 }
 
 export function resolveAssessmentReviews(reviewA, reviewB, evidencePackage, arbiter = null) {
