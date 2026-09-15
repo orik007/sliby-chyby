@@ -9,7 +9,7 @@ import {
   hashAssessmentFingerprint,
   hashEvidencePackage,
   resolveAssessmentReviews,
-  validateAssessmentOutput,
+  resolveAvailableAssessmentReviews,
   validateArbiterOutput,
   validateEvidencePackage
 } from "./lib/assessment-pipeline.mjs";
@@ -73,9 +73,9 @@ const [rawA, rawB] = await Promise.all([
   createStructuredResponse({ provider: assessorProviderB, model: assessorModelB, instructions: assessorInstructions, input: assessorInput, name: "slava_assessment", schema: assessmentOutputJsonSchema })
 ]);
 
-const reviewA = validateAssessmentOutput(rawA.output, evidencePackage);
-const reviewB = validateAssessmentOutput(rawB.output, evidencePackage);
-let resolution = resolveAssessmentReviews(reviewA, reviewB, evidencePackage);
+const assessmentPair = resolveAvailableAssessmentReviews(rawA.output, rawB.output, evidencePackage);
+const { reviewA, reviewB, validationErrors } = assessmentPair;
+let resolution = assessmentPair.resolution;
 let rawArbiter = null;
 
 if (resolution.state === "arbitration-required") {
@@ -119,6 +119,7 @@ const auditRecord = {
     sameProvider: rawA.provider === rawB.provider,
     sameModelId: rawA.model === rawB.model
   },
+  assessorValidationErrors: validationErrors,
   assessorA: rawA,
   assessorB: rawB,
   arbiter: rawArbiter,
