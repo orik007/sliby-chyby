@@ -2,7 +2,7 @@
 
 The scheduled workflow runs at 09:37 Europe/Prague. It collects allowlisted source records, retrieves candidates with exact signals and semantic similarity to confirmed public promises, enriches known official documents, and prepares an unpublished assessment proposal for each new or changed bounded evidence package.
 
-Two independent assessors receive the same package in small bounded-concurrency batches. When both valid assessments differ, or exactly one assessor output is invalid, an arbiter selects a usable assessment or returns no conclusion. Two invalid outputs fail only that package and are retried later. Models can cite only supplied evidence IDs.
+Two independent assessors receive the same package in small bounded-concurrency batches. When both valid assessments differ, or exactly one assessor output is invalid, an arbiter selects a usable assessment or returns no conclusion. Two invalid outputs write a private failure audit in `review-proposals/failures/`, fail only that package, and are retried later. Models can cite only supplied evidence IDs.
 
 `collectors/checkpoints.json` records each source's successful collection checkpoint on the durable audit branch. A source without a checkpoint starts from its registry `bootstrapFrom`; later runs start from that source's own checkpoint.
 
