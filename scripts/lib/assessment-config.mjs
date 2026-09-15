@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 export const assessorPromptVersion = "assessor-v12";
-export const arbiterPromptVersion = "arbiter-v4";
+export const arbiterPromptVersion = "arbiter-v5";
 
 export function semanticRetrievalRuntimeConfig(env = process.env) {
   return {
