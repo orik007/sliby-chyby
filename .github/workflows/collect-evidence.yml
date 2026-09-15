@@ -215,6 +215,9 @@ jobs:
         id: proposals
         run: |
           git add automation/collectors/checkpoints.json automation/review-proposals automation/semantic-index
+          if [ "$(node -p 'JSON.parse(require("fs").readFileSync("automation/runs/pipeline/github-actions/assessment-batch.json", "utf8")).failedCount')" -gt 0 ]; then
+            git add automation/runs/pipeline/github-actions/assessment-batch.json
+          fi
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
             echo "No new audit data or assessment proposal was created." >> "$GITHUB_STEP_SUMMARY"
