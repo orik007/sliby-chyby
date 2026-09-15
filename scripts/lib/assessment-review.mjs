@@ -105,7 +105,7 @@ export function createReviewProposal({ auditRecord, proposalDirectory, supersede
   invariant(/^[a-f0-9]{64}$/.test(auditRecord.assessmentFingerprint), "Assessment audit has an invalid fingerprint");
   invariant(/^[a-f0-9]{64}$/.test(auditRecord.assessmentContentHash), "Assessment audit has an invalid content hash");
   invariant(/^[a-f0-9]{64}$/.test(auditRecord.packageHash), "Assessment audit has an invalid package hash");
-  const promiseId = auditRecord.assessorA?.output?.promiseId;
+  const promiseId = auditRecord.promiseId;
   invariant(typeof promiseId === "string" && promiseId.length > 0, "Assessment audit is missing promiseId");
   const proposalId = `${promiseId}--${auditRecord.assessmentFingerprint.slice(0, 12)}`;
   return {
@@ -120,7 +120,7 @@ export function createReviewProposal({ auditRecord, proposalDirectory, supersede
     resolutionReason: auditRecord.resolution.reason,
     candidateStatus: auditRecord.resolution.status,
     confidence: auditRecord.resolution.state === "candidate"
-      ? [auditRecord.assessorA.output.confidence, auditRecord.assessorB.output.confidence]
+      ? Object.values(auditRecord.validatedAssessments ?? {}).filter(Boolean).map((review) => review.confidence)
       : null,
     supersedesProposalId,
     supersededByProposalId: null,
@@ -166,13 +166,14 @@ export function simplifyPublicExplanation(explanation) {
 
 export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal }) {
   validateEvidencePackage(evidencePackage);
+  const reviewsByAssessor = auditRecord.validatedAssessments ?? {};
   const reviews = [
-    ["První posudek", auditRecord.assessorA.output],
-    ["Druhý posudek", auditRecord.assessorB.output]
-  ];
+    ["První posudek", reviewsByAssessor["assessor-a"]],
+    ["Druhý posudek", reviewsByAssessor["assessor-b"]]
+  ].filter(([, review]) => review);
   const chosen = auditRecord.resolution.selectedReview === "assessor-b"
-    ? auditRecord.assessorB.output
-    : auditRecord.assessorA.output;
+    ? reviewsByAssessor["assessor-b"]
+    : reviewsByAssessor["assessor-a"] ?? reviewsByAssessor["assessor-b"];
   const proposed = proposal.candidateStatus ? readerStatus[proposal.candidateStatus] : null;
   const hasPublicCandidate = proposal.resolutionState === "candidate";
   if (hasPublicCandidate && !proposed) {
@@ -184,6 +185,7 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
   const resolutionLabel = {
     "assessor-consensus": "oba automatické posudky se shodly",
     "arbiter-selection": "o neshodě automatických posudků rozhodl třetí hodnotitel",
+    "arbiter-confirmed-single-assessor": "třetí hodnotitel ověřil jediný použitelný automatický posudek",
     "insufficient-evidence": "oba automatické posudky označily podklady za nedostatečné",
     "arbiter-cannot-decide": "třetí hodnotitel nedokázal spor rozhodnout",
     "arbiter-selected-insufficient-evidence": "třetí hodnotitel vybral posudek s nedostatečnými podklady"
@@ -242,7 +244,7 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     }
     lines.push("Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.", "");
   } else {
-    lines.push("### Odlišné posudky", "");
+    lines.push(reviews.length === 1 ? "### Jediný použitelný posudek" : "### Odlišné posudky", "");
     for (const [name, review] of reviews) {
       const status = readerStatus[review.status];
       lines.push(`#### ${name}: ${status.label} (${status.score})`, "", review.explanationCz, "");
@@ -254,8 +256,7 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
   }
   const citedIds = new Set([
     ...evidencePackage.evidence.filter(({ role }) => role === "promise-source").map(({ id }) => id),
-    ...auditRecord.assessorA.output.citedEvidenceIds,
-    ...auditRecord.assessorB.output.citedEvidenceIds,
+    ...reviews.flatMap(([, review]) => review.citedEvidenceIds),
     ...(auditRecord.arbiter?.output.citedEvidenceIds ?? [])
   ]);
   const citedEvidence = evidencePackage.evidence.filter(({ id }) => citedIds.has(id));
