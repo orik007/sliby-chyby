@@ -89,29 +89,30 @@ test("keeps a consensus assessment as an unpublished candidate", () => {
   });
 });
 
-test("uses the valid assessor when the peer output is invalid", () => {
+test("requires the arbiter when one assessor output is invalid", () => {
   const invalid = review("moving-towards");
   invalid.citedEvidenceIds = [];
   const resolved = resolveAvailableAssessmentReviews(invalid, review("moving-towards"), evidencePackage);
   assert.equal(resolved.reviewA, null);
   assert.equal(resolved.reviewB.status, "moving-towards");
   assert.match(resolved.validationErrors["assessor-a"], /cite evidence/);
-  assert.deepEqual(resolved.resolution, {
-    state: "candidate",
-    reason: "single-valid-assessor",
-    status: "moving-towards",
-    selectedReview: "assessor-b"
-  });
+  assert.deepEqual(resolved.resolution, { state: "arbitration-required", reason: "single-valid-assessor", status: null, selectedReview: null });
+  assert.deepEqual(resolveAssessmentReviews(resolved.reviewA, resolved.reviewB, evidencePackage, {
+    choice: "assessor-b", citedEvidenceIds: ["conduct"], explanationCz: "Druhý posudek odpovídá předloženým podkladům."
+  }), { state: "candidate", reason: "arbiter-confirmed-single-assessor", status: "moving-towards", selectedReview: "assessor-b" });
 });
 
-test("rejects an assessment only when both assessor outputs are invalid", () => {
+test("records a failed assessment only when both assessor outputs are invalid", () => {
   const invalidA = review("moving-towards");
   const invalidB = review("moving-towards");
   invalidA.citedEvidenceIds = [];
   invalidB.citedEvidenceIds = [];
-  assert.throws(() => resolveAvailableAssessmentReviews(invalidA, invalidB, evidencePackage), /Both assessment outputs are invalid/);
+  const resolved = resolveAvailableAssessmentReviews(invalidA, invalidB, evidencePackage);
+  assert.equal(resolved.reviewA, null);
+  assert.equal(resolved.reviewB, null);
+  assert.equal(resolved.resolution.state, "assessment-failed");
+  assert.equal(resolved.resolution.reason, "both-assessors-invalid");
 });
-
 test("includes prompt and model identity in an assessment fingerprint", () => {
   const content = hashAssessmentContent(evidencePackage);
   const fingerprint = hashAssessmentFingerprint({ assessmentContentHash: content, prompts, runtime: assessmentRuntime });
