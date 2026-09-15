@@ -171,57 +171,42 @@ function validateAssessmentAttempt(output, evidencePackage) {
 export function resolveAvailableAssessmentReviews(outputA, outputB, evidencePackage) {
   const attemptA = validateAssessmentAttempt(outputA, evidencePackage);
   const attemptB = validateAssessmentAttempt(outputB, evidencePackage);
-  const validationErrors = {
-    "assessor-a": attemptA.error,
-    "assessor-b": attemptB.error
-  };
+  const validationErrors = { "assessor-a": attemptA.error, "assessor-b": attemptB.error };
 
   if (!attemptA.review && !attemptB.review) {
-    throw new Error(`Both assessment outputs are invalid: assessor-a: ${attemptA.error}; assessor-b: ${attemptB.error}`);
+    return { reviewA: null, reviewB: null, validationErrors, resolution: { state: "assessment-failed", reason: "both-assessors-invalid", status: null, selectedReview: null } };
   }
 
-  if (attemptA.review && attemptB.review) {
-    return {
-      reviewA: attemptA.review,
-      reviewB: attemptB.review,
-      validationErrors,
-      resolution: resolveAssessmentReviews(attemptA.review, attemptB.review, evidencePackage)
-    };
-  }
-
-  const selectedReview = attemptA.review ? "assessor-a" : "assessor-b";
-  const selected = attemptA.review ?? attemptB.review;
   return {
     reviewA: attemptA.review,
     reviewB: attemptB.review,
     validationErrors,
-    resolution: selected.evidenceSufficient
-      ? { state: "candidate", reason: "single-valid-assessor", status: selected.status, selectedReview }
-      : { state: "human-review-required", reason: "single-valid-assessor-insufficient-evidence", status: null, selectedReview }
+    resolution: resolveAssessmentReviews(attemptA.review, attemptB.review, evidencePackage)
   };
 }
 
 export function resolveAssessmentReviews(reviewA, reviewB, evidencePackage, arbiter = null) {
+  if (!reviewA || !reviewB) {
+    invariant(reviewA || reviewB, "At least one assessment review is required");
+    const availableReview = reviewA ? "assessor-a" : "assessor-b";
+    const selected = reviewA ?? reviewB;
+    if (!arbiter) return { state: "arbitration-required", reason: "single-valid-assessor", status: null, selectedReview: null };
+    validateArbiterOutput(arbiter, evidencePackage);
+    if (arbiter.choice === "cannot-decide") return { state: "human-review-required", reason: "arbiter-cannot-decide", status: null, selectedReview: null };
+    invariant(arbiter.choice === availableReview, "Arbiter selected an invalid assessor output");
+    if (!selected.evidenceSufficient) return { state: "human-review-required", reason: "arbiter-selected-insufficient-evidence", status: null, selectedReview: arbiter.choice };
+    return { state: "candidate", reason: "arbiter-confirmed-single-assessor", status: selected.status, selectedReview: arbiter.choice };
+  }
+
   validateAssessmentOutput(reviewA, evidencePackage);
   validateAssessmentOutput(reviewB, evidencePackage);
-
-  const reviewsAgree = reviewA.status === reviewB.status
-    && reviewA.evidenceSufficient === reviewB.evidenceSufficient;
-
-  if (reviewsAgree && !reviewA.evidenceSufficient) {
-    return { state: "human-review-required", reason: "insufficient-evidence", status: null, selectedReview: null };
-  }
-
-  if (reviewsAgree) {
-    return { state: "candidate", reason: "assessor-consensus", status: reviewA.status, selectedReview: "consensus" };
-  }
-
+  const reviewsAgree = reviewA.status === reviewB.status && reviewA.evidenceSufficient === reviewB.evidenceSufficient;
+  if (reviewsAgree && !reviewA.evidenceSufficient) return { state: "human-review-required", reason: "insufficient-evidence", status: null, selectedReview: null };
+  if (reviewsAgree) return { state: "candidate", reason: "assessor-consensus", status: reviewA.status, selectedReview: "consensus" };
   if (!arbiter) return { state: "arbitration-required", reason: "assessor-disagreement", status: null, selectedReview: null };
   validateArbiterOutput(arbiter, evidencePackage);
   if (arbiter.choice === "cannot-decide") return { state: "human-review-required", reason: "arbiter-cannot-decide", status: null, selectedReview: null };
   const selected = arbiter.choice === "assessor-a" ? reviewA : reviewB;
-  if (!selected.evidenceSufficient) {
-    return { state: "human-review-required", reason: "arbiter-selected-insufficient-evidence", status: null, selectedReview: arbiter.choice };
-  }
+  if (!selected.evidenceSufficient) return { state: "human-review-required", reason: "arbiter-selected-insufficient-evidence", status: null, selectedReview: arbiter.choice };
   return { state: "candidate", reason: "arbiter-selection", status: selected.status, selectedReview: arbiter.choice };
 }
