@@ -188,6 +188,11 @@ const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (i
   const auditRecord = await runAssessment(item.path, runRoot);
   invariant(auditRecord.assessmentFingerprint === item.assessmentFingerprint, `Fingerprint changed while assessing ${item.promiseId}`);
   if (auditRecord.resolution.state === "assessment-failed") {
+    const relativeFailureDirectory = `automation/review-proposals/failures/${item.promiseId}/${item.assessmentFingerprint}`;
+    const failureDirectory = resolve(relativeFailureDirectory);
+    await mkdir(failureDirectory, { recursive: true });
+    await writeFile(resolve(failureDirectory, "evidence-package.json"), `${JSON.stringify(item.evidencePackage, null, 2)}\n`);
+    await writeFile(resolve(failureDirectory, "assessment-run.json"), `${JSON.stringify(auditRecord, null, 2)}\n`);
     return { proposal: null, result: {
       promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz,
       assessmentFingerprint: item.assessmentFingerprint, disposition: "assessment-failed",
