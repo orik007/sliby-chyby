@@ -69,7 +69,7 @@ function validateAssessmentAudit(audit, result) {
   invariant(audit?.publicationApproved === false, "Assessment audit must remain unpublished");
   invariant(audit.assessmentFingerprint === result.assessmentFingerprint, "Assessment runner fingerprint mismatch");
   invariant(audit.assessmentContentHash === result.assessmentContentHash, "Assessment runner content hash mismatch");
-  invariant(["candidate", "human-review-required"].includes(audit.resolution?.state), "Assessment runner did not produce a reviewable resolution");
+  invariant(["candidate", "human-review-required", "assessment-failed"].includes(audit.resolution?.state), "Assessment runner returned an invalid resolution");
   return audit;
 }
 
@@ -185,50 +185,29 @@ for (const item of plan) {
 }
 
 const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (item) => {
-  try {
-    const auditRecord = await runAssessment(item.path, runRoot);
-    invariant(auditRecord.assessmentFingerprint === item.assessmentFingerprint, `Fingerprint changed while assessing ${item.promiseId}`);
-    const relativeProposalDirectory = `automation/review-proposals/${item.promiseId}/${item.assessmentFingerprint}`;
-    const proposalDirectory = resolve(relativeProposalDirectory);
-    await mkdir(resolve(proposalRoot, item.promiseId), { recursive: true });
-    await mkdir(proposalDirectory, { recursive: false });
-    await writeFile(resolve(proposalDirectory, "evidence-package.json"), `${JSON.stringify(item.evidencePackage, null, 2)}\n`, { flag: "wx" });
-    await writeFile(resolve(proposalDirectory, "assessment-run.json"), `${JSON.stringify(auditRecord, null, 2)}\n`, { flag: "wx" });
-    const previousProposal = currentReviewProposal(manifest, item.promiseId);
-    const proposal = createReviewProposal({
-      auditRecord,
-      proposalDirectory: relativeProposalDirectory,
-      supersedesProposalId: previousProposal?.proposalId ?? null
-    });
-    await writeFile(resolve(proposalDirectory, "proposal.json"), `${JSON.stringify(proposal, null, 2)}\n`, { flag: "wx" });
-    await writeFile(resolve(proposalDirectory, "review.md"), renderHumanReviewMarkdown({ evidencePackage: item.evidencePackage, auditRecord, proposal }), { flag: "wx" });
-    return {
-      proposal,
-      result: {
-        promiseId: item.promiseId,
-        promiseTitleCz: item.evidencePackage.promise.titleCz,
-        assessmentFingerprint: item.assessmentFingerprint,
-        disposition: "assessed",
-        resolutionState: auditRecord.resolution.state,
-        candidateStatus: auditRecord.resolution.status,
-        reviewUrl: humanReviewUrl(proposal.humanReviewPath)
-      }
-    };
-  } catch (error) {
-    return {
-      proposal: null,
-      result: {
-        promiseId: item.promiseId,
-        promiseTitleCz: item.evidencePackage.promise.titleCz,
-        assessmentFingerprint: item.assessmentFingerprint,
-        disposition: "assessment-failed",
-        resolutionState: null,
-        candidateStatus: null,
-        reviewUrl: null,
-        error: error instanceof Error ? error.message : String(error)
-      }
-    };
+  const auditRecord = await runAssessment(item.path, runRoot);
+  invariant(auditRecord.assessmentFingerprint === item.assessmentFingerprint, `Fingerprint changed while assessing ${item.promiseId}`);
+  if (auditRecord.resolution.state === "assessment-failed") {
+    return { proposal: null, result: {
+      promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz,
+      assessmentFingerprint: item.assessmentFingerprint, disposition: "assessment-failed",
+      resolutionState: null, candidateStatus: null, reviewUrl: null, error: auditRecord.resolution.reason
+    } };
   }
+  const relativeProposalDirectory = `automation/review-proposals/${item.promiseId}/${item.assessmentFingerprint}`;
+  const proposalDirectory = resolve(relativeProposalDirectory);
+  await mkdir(resolve(proposalRoot, item.promiseId), { recursive: true });
+  await mkdir(proposalDirectory, { recursive: false });
+  await writeFile(resolve(proposalDirectory, "evidence-package.json"), `${JSON.stringify(item.evidencePackage, null, 2)}\n`, { flag: "wx" });
+  await writeFile(resolve(proposalDirectory, "assessment-run.json"), `${JSON.stringify(auditRecord, null, 2)}\n`, { flag: "wx" });
+  const previousProposal = currentReviewProposal(manifest, item.promiseId);
+  const proposal = createReviewProposal({ auditRecord, proposalDirectory: relativeProposalDirectory, supersedesProposalId: previousProposal?.proposalId ?? null });
+  await writeFile(resolve(proposalDirectory, "proposal.json"), `${JSON.stringify(proposal, null, 2)}\n`, { flag: "wx" });
+  await writeFile(resolve(proposalDirectory, "review.md"), renderHumanReviewMarkdown({ evidencePackage: item.evidencePackage, auditRecord, proposal }), { flag: "wx" });
+  return { proposal, result: {
+    promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz, assessmentFingerprint: item.assessmentFingerprint,
+    disposition: "assessed", resolutionState: auditRecord.resolution.state, candidateStatus: auditRecord.resolution.status, reviewUrl: humanReviewUrl(proposal.humanReviewPath)
+  } };
 });
 for (const { proposal, result } of assessed) {
   if (proposal) newProposals.push(proposal);
