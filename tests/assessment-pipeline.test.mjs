@@ -112,6 +112,8 @@ test("records a failed assessment only when both assessor outputs are invalid", 
   assert.equal(resolved.reviewB, null);
   assert.equal(resolved.resolution.state, "assessment-failed");
   assert.equal(resolved.resolution.reason, "both-assessors-invalid");
+  assert.match(resolved.validationErrors["assessor-a"], /cite evidence/);
+  assert.match(resolved.validationErrors["assessor-b"], /cite evidence/);
 });
 test("includes prompt and model identity in an assessment fingerprint", () => {
   const content = hashAssessmentContent(evidencePackage);
