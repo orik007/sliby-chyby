@@ -190,10 +190,11 @@ export function resolveAssessmentReviews(reviewA, reviewB, evidencePackage, arbi
     invariant(reviewA || reviewB, "At least one assessment review is required");
     const availableReview = reviewA ? "assessor-a" : "assessor-b";
     const selected = reviewA ?? reviewB;
+    validateAssessmentOutput(selected, evidencePackage);
     if (!arbiter) return { state: "arbitration-required", reason: "single-valid-assessor", status: null, selectedReview: null };
     validateArbiterOutput(arbiter, evidencePackage);
     if (arbiter.choice === "cannot-decide") return { state: "human-review-required", reason: "arbiter-cannot-decide", status: null, selectedReview: null };
-    invariant(arbiter.choice === availableReview, "Arbiter selected an invalid assessor output");
+    if (arbiter.choice !== availableReview) return { state: "human-review-required", reason: "arbiter-cannot-decide", status: null, selectedReview: null };
     if (!selected.evidenceSufficient) return { state: "human-review-required", reason: "arbiter-selected-insufficient-evidence", status: null, selectedReview: arbiter.choice };
     return { state: "candidate", reason: "arbiter-confirmed-single-assessor", status: selected.status, selectedReview: arbiter.choice };
   }
