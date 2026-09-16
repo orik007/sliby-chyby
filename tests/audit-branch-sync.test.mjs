@@ -13,6 +13,7 @@ const bash = process.platform === "win32" ? "C:/Program Files/Git/bin/bash.exe" 
 const readme = "automation/review-proposals/README.md";
 const checkpoint = "automation/collectors/checkpoints.json";
 const index = "automation/semantic-index/promise-index.json";
+const evidenceQueue = "automation/evidence-packages/manifest.json";
 
 for (const scenario of ["bootstrap", "existing audit", "audit deletion", "non-audit conflict", "audit file to directory", "audit directory to file"]) {
   test(`durable branch synchronization: ${scenario}`, () => {
@@ -44,6 +45,7 @@ for (const scenario of ["bootstrap", "existing audit", "audit deletion", "non-au
       if (scenario !== "bootstrap") {
         put(checkpoint, "base\n");
         put(index, "base\n");
+        put(evidenceQueue, "base\n");
       }
       commit();
       git("switch", "-c", "automation/assessment-review");
@@ -51,10 +53,11 @@ for (const scenario of ["bootstrap", "existing audit", "audit deletion", "non-au
       put("automation/review-proposals/history/proposal.json", "retained\n");
       if (scenario === "audit file to directory") put(collision, "durable\n");
       if (scenario === "audit directory to file") put(`${collision}/child.json`, "durable\n");
-      if (scenario === "audit deletion") git("rm", checkpoint, index);
+      if (scenario === "audit deletion") git("rm", checkpoint, index, evidenceQueue);
       if (scenario === "existing audit") {
         put(checkpoint, "durable checkpoint\n");
         put(index, "durable index\n");
+        put(evidenceQueue, "durable queue\n");
       }
       if (scenario === "non-audit conflict") put("src/example.txt", "durable\n");
       commit();
@@ -76,6 +79,7 @@ for (const scenario of ["bootstrap", "existing audit", "audit deletion", "non-au
       if (scenario !== "bootstrap") {
         put(checkpoint, "main checkpoint\n");
         put(index, "main index\n");
+        put(evidenceQueue, "main queue\n");
       }
       commit();
       const mainHead = git("rev-parse", "HEAD");
@@ -100,9 +104,11 @@ for (const scenario of ["bootstrap", "existing audit", "audit deletion", "non-au
         if (scenario === "existing audit") {
           assert.equal(git("show", `HEAD:${checkpoint}`), "durable checkpoint");
           assert.equal(git("show", `HEAD:${index}`), "durable index");
+          assert.equal(git("show", `HEAD:${evidenceQueue}`), "durable queue");
         } else {
           assert.equal(existsSync(join(cwd, checkpoint)), false);
           assert.equal(existsSync(join(cwd, index)), false);
+          assert.equal(existsSync(join(cwd, evidenceQueue)), false);
         }
       }
       assert.equal(git("status", "--porcelain"), "");

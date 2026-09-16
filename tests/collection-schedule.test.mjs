@@ -18,6 +18,10 @@ test("full evidence collection is scheduled daily at 09:37 Prague time", async (
   assert.match(workflow, /SLIBY_SEMANTIC_MIN_SIMILARITY: 0\.5/);
   assert.match(workflow, /SLIBY_ASSESSMENT_CONCURRENCY: 4/);
   assert.match(workflow, /timeout-minutes: 90/);
+  assert.match(workflow, /Persist successful source checkpoints/);
+  assert.match(workflow, /Queue enriched evidence packages/);
+  assert.match(workflow, /--retry-blocked-queue automation\/evidence-packages/);
+  assert.match(workflow, /--packages automation\/evidence-packages/);
 });
 
 test("semantic retrieval ranks the whole public catalogue and limits paid assessment fan-out", async () => {
@@ -34,10 +38,23 @@ test("the durable audit branch retains every operational audit tree when syncing
   assert.match(workflow, /git merge-base --is-ancestor "\$GITHUB_SHA" HEAD/);
   assert.match(workflow, /git merge --no-ff --no-commit/);
   assert.match(workflow, /semantic-index/);
+  assert.match(workflow, /evidence-packages/);
   assert.match(workflow, /git merge --abort/);
   assert.match(workflow, /git push --set-upstream origin "\$REVIEW_BRANCH"/);
-  assert.match(workflow, /git add automation\/collectors\/checkpoints\.json automation\/review-proposals automation\/semantic-index/);
+  assert.match(workflow, /git add automation\/collectors\/checkpoints\.json/);
+  assert.match(workflow, /git add automation\/evidence-packages automation\/semantic-index/);
   assert.match(workflow, /could not create the required review pull request/);
+});
+
+test("early audit persistence creates a missing pull request without overwriting its review body", async () => {
+  const workflow = await readFile(workflowUrl, "utf8");
+  const collectionStep = workflow.split("      - name: Create audit pull request for collection when needed")[1].split("      - name: Match records")[0];
+  const packagesStep = workflow.split("      - name: Create audit pull request for evidence packages when needed")[1].split("      - name: Assess only new or changed packages")[0];
+  for (const step of [collectionStep, packagesStep]) {
+    assert.match(step, /if \[ -z "\$PR_NUMBER" \]; then/);
+    assert.match(step, /gh pr create/);
+    assert.doesNotMatch(step, /gh pr edit/);
+  }
 });
 
 test("the public fallback records a valid successful collection time", async () => {

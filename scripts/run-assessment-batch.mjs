@@ -12,6 +12,7 @@ import {
   validateReviewManifest
 } from "./lib/assessment-review.mjs";
 import { validateEvidencePackage } from "./lib/assessment-pipeline.mjs";
+import { loadCurrentEvidencePackages } from "./lib/evidence-package-queue.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -152,16 +153,12 @@ const enrichmentRun = JSON.parse(await readFile(resolve(options.enrichmentRun), 
 invariant(Array.isArray(enrichmentRun?.warnings), "Invalid enrichment run warnings");
 const blockedPromiseIds = new Set(enrichmentRun.warnings.map(({ promiseId }) => promiseId));
 
-const packageFiles = (await readdir(packageDirectory, { withFileTypes: true }))
-  .filter((entry) => entry.isFile() && entry.name.endsWith(".json") && entry.name !== "enrichment-run.json")
-  .map((entry) => resolve(packageDirectory, entry.name))
-  .sort();
 const packages = [];
 const currentPackagePromiseIds = new Set();
-for (const path of packageFiles) {
-  const evidencePackage = validateEvidencePackage(JSON.parse(await readFile(path, "utf8")));
+for (const { path, evidencePackage, blockedByEnrichment } of await loadCurrentEvidencePackages(packageDirectory)) {
   currentPackagePromiseIds.add(evidencePackage.promise.id);
   packages.push({ path, evidencePackage });
+  if (blockedByEnrichment) blockedPromiseIds.add(evidencePackage.promise.id);
 }
 
 async function failurePackageFiles(directory) {
