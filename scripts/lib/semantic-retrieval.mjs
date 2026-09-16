@@ -5,7 +5,8 @@ export const semanticIndexVersion = "promise-semantic-v1";
 export const defaultSemanticProvider = "openai";
 export const defaultSemanticModel = "text-embedding-3-small";
 export const defaultSemanticDimensions = 256;
-export const defaultSemanticCandidateLimit = 8;
+export const defaultSemanticCandidateLimit = 3;
+export const defaultSemanticMinimumSimilarity = 0.55;
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -144,7 +145,7 @@ export function rankSemanticCandidates({
   promises,
   index,
   limit = defaultSemanticCandidateLimit,
-  minimumSimilarity = 0
+  minimumSimilarity = defaultSemanticMinimumSimilarity
 }) {
   invariant(Number.isInteger(limit) && limit > 0, "Semantic candidate limit must be a positive integer");
   invariant(Number.isFinite(minimumSimilarity) && minimumSimilarity >= -1 && minimumSimilarity <= 1, "Minimum semantic similarity must be between -1 and 1");

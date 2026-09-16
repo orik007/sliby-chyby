@@ -168,6 +168,9 @@ jobs:
             --queue automation/evidence-packages \
             --enrichment-run automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json
 
+      - name: Retire packages outside the active semantic policy
+        run: node scripts/reconcile-evidence-package-queue.mjs --queue automation/evidence-packages
+
       - name: Persist queued evidence packages
         id: packages
         run: |

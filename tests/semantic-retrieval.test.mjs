@@ -95,12 +95,28 @@ test("semantic retrieval can exclude a weak lower-ranked relationship before ass
     records,
     recordEmbeddings: new Map([["broad-eu-policy", [1, 0]]]),
     promises: indexedPromises,
-    index,
-    limit: 3,
-    minimumSimilarity: 0.55
+    index
   });
 
   assert.equal(candidates.get("promise-1").get("broad-eu-policy").rank, 1);
   assert.equal(candidates.get("promise-3").get("broad-eu-policy").rank, 3);
   assert.equal(candidates.get("promise-4").size, 0);
+
+  const weakPromise = { ...promises[0], id: "weak-relationship" };
+  const weakIndex = {
+    ...emptySemanticIndex(runtime),
+    promiseEmbeddings: {
+      "weak-relationship": {
+        profileHash: "f".repeat(64),
+        embedding: [0.535, Math.sqrt(1 - 0.535 ** 2)]
+      }
+    }
+  };
+  const belowThreshold = rankSemanticCandidates({
+    records,
+    recordEmbeddings: new Map([["broad-eu-policy", [1, 0]]]),
+    promises: [weakPromise],
+    index: weakIndex
+  });
+  assert.equal(belowThreshold.get("weak-relationship").size, 0);
 });
