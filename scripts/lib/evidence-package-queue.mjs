@@ -43,7 +43,7 @@ export function validateEvidencePackageQueue(queue) {
     }
   }
   for (const promiseId of new Set(queue.packages.map((entry) => entry.promiseId))) {
-    invariant(queue.packages.filter((entry) => entry.promiseId === promiseId && !entry.supersededByPackageHash).length <= 1, `Queued evidence package ${promiseId} has multiple current versions`);
+    invariant(queue.packages.filter((entry) => entry.promiseId === promiseId && !entry.supersededByPackageHash).length === 1, `Queued evidence package ${promiseId} must have exactly one current version`);
   }
   return queue;
 }
@@ -133,4 +133,8 @@ export async function loadCurrentEvidencePackages(queueDirectory) {
     packages.push({ path, evidencePackage, blockedByEnrichment: entry.blockedByEnrichment });
   }
   return packages;
+}
+
+export async function loadBlockedEvidencePackages(queueDirectory) {
+  return (await loadCurrentEvidencePackages(queueDirectory)).filter(({ blockedByEnrichment }) => blockedByEnrichment);
 }

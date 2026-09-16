@@ -20,6 +20,7 @@ test("full evidence collection is scheduled daily at 09:37 Prague time", async (
   assert.match(workflow, /timeout-minutes: 90/);
   assert.match(workflow, /Persist successful source checkpoints/);
   assert.match(workflow, /Queue enriched evidence packages/);
+  assert.match(workflow, /--retry-blocked-queue automation\/evidence-packages/);
   assert.match(workflow, /--packages automation\/evidence-packages/);
 });
 
@@ -43,6 +44,17 @@ test("the durable audit branch retains every operational audit tree when syncing
   assert.match(workflow, /git add automation\/collectors\/checkpoints\.json/);
   assert.match(workflow, /git add automation\/evidence-packages automation\/semantic-index/);
   assert.match(workflow, /could not create the required review pull request/);
+});
+
+test("early audit persistence creates a missing pull request without overwriting its review body", async () => {
+  const workflow = await readFile(workflowUrl, "utf8");
+  const collectionStep = workflow.split("      - name: Create audit pull request for collection when needed")[1].split("      - name: Match records")[0];
+  const packagesStep = workflow.split("      - name: Create audit pull request for evidence packages when needed")[1].split("      - name: Assess only new or changed packages")[0];
+  for (const step of [collectionStep, packagesStep]) {
+    assert.match(step, /if \[ -z "\$PR_NUMBER" \]; then/);
+    assert.match(step, /gh pr create/);
+    assert.doesNotMatch(step, /gh pr edit/);
+  }
 });
 
 test("the public fallback records a valid successful collection time", async () => {

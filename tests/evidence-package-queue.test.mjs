@@ -3,7 +3,7 @@ import { mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { currentEvidencePackageEntries, loadCurrentEvidencePackages, queueEvidencePackages, validateEvidencePackageQueue } from "../scripts/lib/evidence-package-queue.mjs";
+import { currentEvidencePackageEntries, loadBlockedEvidencePackages, loadCurrentEvidencePackages, queueEvidencePackages, validateEvidencePackageQueue } from "../scripts/lib/evidence-package-queue.mjs";
 
 function evidencePackage(asOf, factSummary) {
   return {
@@ -43,4 +43,18 @@ test("keeps a current enriched package across assessment failures and preserves 
   const current = await loadCurrentEvidencePackages(queue);
   assert.equal(current[0].evidencePackage.asOf, "2026-09-11");
   assert.equal(current[0].blockedByEnrichment, true);
+  assert.equal((await loadBlockedEvidencePackages(queue))[0].evidencePackage.asOf, "2026-09-11");
+});
+
+test("rejects a queue whose supersession cycle has no current package", () => {
+  const firstHash = "a".repeat(64);
+  const secondHash = "b".repeat(64);
+  assert.throws(() => validateEvidencePackageQueue({
+    schemaVersion: "1.0.0",
+    publicationApproved: false,
+    packages: [
+      { promiseId: "test-promise", packageHash: firstHash, asOf: "2026-09-10", queuedAt: "2026-09-10T00:00:00.000Z", path: `packages/test-promise/${firstHash}.json`, blockedByEnrichment: false, supersedesPackageHash: secondHash, supersededByPackageHash: secondHash },
+      { promiseId: "test-promise", packageHash: secondHash, asOf: "2026-09-11", queuedAt: "2026-09-11T00:00:00.000Z", path: `packages/test-promise/${secondHash}.json`, blockedByEnrichment: false, supersedesPackageHash: firstHash, supersededByPackageHash: firstHash }
+    ]
+  }), /must have exactly one current version/);
 });

@@ -129,7 +129,7 @@ jobs:
             echo "created=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Create or update audit pull request for collection
+      - name: Create audit pull request for collection when needed
         if: steps.checkpoints.outputs.created == 'true'
         run: |
           cat > "$RUNNER_TEMP/collection-audit-pr.md" <<'EOF'
@@ -140,9 +140,7 @@ jobs:
           Další fáze může vytvořit neveřejné návrhy k lidské kontrole. Selhání nebo přerušení této fáze nesmí ztratit úspěšně uložený sběr.
           EOF
           PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVIEW_BRANCH" --base main --state open --json number --jq '.[0].number')"
-          if [ -n "$PR_NUMBER" ]; then
-            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file "$RUNNER_TEMP/collection-audit-pr.md"
-          else
+          if [ -z "$PR_NUMBER" ]; then
             gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file "$RUNNER_TEMP/collection-audit-pr.md"
           fi
 
@@ -160,6 +158,7 @@ jobs:
         run: |
           node scripts/run-print-enrichment.mjs \
             --input automation/runs/pipeline/github-actions/matcher/evidence-packages \
+            --retry-blocked-queue automation/evidence-packages \
             --output automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages
 
       - name: Queue enriched evidence packages
@@ -181,7 +180,7 @@ jobs:
             echo "created=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Create or update audit pull request for evidence packages
+      - name: Create audit pull request for evidence packages when needed
         if: steps.packages.outputs.created == 'true'
         run: |
           cat > "$RUNNER_TEMP/evidence-package-audit-pr.md" <<'EOF'
@@ -192,9 +191,7 @@ jobs:
           Pokud hodnocení selže nebo je přerušeno, uložené balíčky zůstanou v této auditní větvi pro další běh.
           EOF
           PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVIEW_BRANCH" --base main --state open --json number --jq '.[0].number')"
-          if [ -n "$PR_NUMBER" ]; then
-            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file "$RUNNER_TEMP/evidence-package-audit-pr.md"
-          else
+          if [ -z "$PR_NUMBER" ]; then
             gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file "$RUNNER_TEMP/evidence-package-audit-pr.md"
           fi
 

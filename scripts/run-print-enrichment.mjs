@@ -12,6 +12,7 @@ import {
   retryTransient,
   selectRelevantDocumentExcerpts
 } from "./lib/psp-print-documents.mjs";
+import { loadBlockedEvidencePackages } from "./lib/evidence-package-queue.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -22,6 +23,7 @@ function parseArgs(args) {
     input: null,
     output: null,
     sourceRegistry: "automation/collectors/sources.json",
+    retryBlockedQueue: null,
     requireDocuments: false
   };
   for (let index = 0; index < args.length; index += 1) {
@@ -29,6 +31,7 @@ function parseArgs(args) {
     if (arg === "--input") options.input = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--sources") options.sourceRegistry = args[++index];
+    else if (arg === "--retry-blocked-queue") options.retryBlockedQueue = args[++index];
     else if (arg === "--require-documents") options.requireDocuments = true;
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -77,10 +80,19 @@ const registry = validateRegistry(JSON.parse(await readFile(resolve(args.sourceR
 const pspSource = registry.sources.find(({ id }) => id === "psp-core-2025");
 invariant(pspSource?.enabled, "Enabled psp-core-2025 source is required");
 
-const packages = [];
+const packagesByPromiseId = new Map();
 for (const path of await inputFiles(args.input)) {
-  packages.push({ path, value: validateEvidencePackage(JSON.parse(await readFile(path, "utf8"))) });
+  const value = validateEvidencePackage(JSON.parse(await readFile(path, "utf8")));
+  packagesByPromiseId.set(value.promise.id, { path, value });
 }
+if (args.retryBlockedQueue) {
+  for (const { path, evidencePackage } of await loadBlockedEvidencePackages(args.retryBlockedQueue)) {
+    if (!packagesByPromiseId.has(evidencePackage.promise.id)) {
+      packagesByPromiseId.set(evidencePackage.promise.id, { path, value: evidencePackage });
+    }
+  }
+}
+const packages = [...packagesByPromiseId.values()].sort((left, right) => left.value.promise.id.localeCompare(right.value.promise.id));
 const printCache = new Map();
 const warnings = [];
 async function loadPrintDocument(print) {
@@ -112,6 +124,7 @@ const results = [];
 for (const entry of packages) {
   const evidencePackage = structuredClone(entry.value);
   const additions = [];
+  const existingEvidenceIds = new Set(evidencePackage.evidence.map(({ id }) => id));
   for (const print of printReferences(evidencePackage, pspSource.term.number)) {
     try {
       const document = await loadPrintDocument(print);
@@ -122,14 +135,15 @@ for (const entry of packages) {
         warnings.push({ promiseId: evidencePackage.promise.id, printNumber: print.printNumber, reason: "no-relevant-excerpt" });
         continue;
       }
-      additions.push(buildPrintDocumentEvidence({ evidencePackage, print, document, paragraphs, excerpts }));
+      const addition = buildPrintDocumentEvidence({ evidencePackage, print, document, paragraphs, excerpts });
+      if (!existingEvidenceIds.has(addition.id)) additions.push(addition);
     } catch (error) {
       warnings.push({ promiseId: evidencePackage.promise.id, printNumber: print.printNumber, reason: error.message });
     }
   }
   evidencePackage.evidence.push(...additions);
   evidencePackage.generation.documentEnrichmentVersion = printDocumentEnrichmentVersion;
-  evidencePackage.generation.documentEvidenceCount = additions.length;
+  evidencePackage.generation.documentEvidenceCount = evidencePackage.evidence.filter(({ type }) => type === "legislative-document").length;
   evidencePackage.generation.publicationApproved = false;
   validateEvidencePackage(evidencePackage);
   const outputPath = resolve(outputDirectory, basename(entry.path));
