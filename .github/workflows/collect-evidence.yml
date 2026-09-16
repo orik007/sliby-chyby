@@ -121,6 +121,12 @@ jobs:
           if [ -n "$COLLECTOR_SOURCES" ]; then
             IFS=',' read -ra source_ids <<< "$COLLECTOR_SOURCES"
             for source_id in "${source_ids[@]}"; do
+              source_id="${source_id#"${source_id%%[![:space:]]*}"}"
+              source_id="${source_id%"${source_id##*[![:space:]]}"}"
+              if [ -z "$source_id" ]; then
+                echo "::error::COLLECTOR_SOURCES must contain comma-separated source IDs."
+                exit 1
+              fi
               collector_args+=(--source "$source_id")
             done
           fi

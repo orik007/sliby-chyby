@@ -33,6 +33,9 @@ test("full evidence collection is scheduled daily at 09:37 Prague time", async (
   assert.match(workflow, /- name: Restore current audit state[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   assert.match(workflow, /- name: Persist source collection and queued evidence packages[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   assert.match(workflow, /COLLECTOR_SOURCES: \$\{\{ inputs\.sources \|\| '' \}\}/);
+  assert.match(workflow, /source_id="\$\{source_id#"\$\{source_id%%\[!\[:space:\]\]\*\}"\}"/);
+  assert.match(workflow, /source_id="\$\{source_id%"\$\{source_id##\*\[!\[:space:\]\]\}"\}"/);
+  assert.match(workflow, /COLLECTOR_SOURCES must contain comma-separated source IDs/);
   assert.match(workflow, /collector_args\+=\(--source "\$source_id"\)/);
   assert.match(workflow, /git push --force-with-lease="refs\/heads\/\$REVIEW_BRANCH:\$AUDIT_BRANCH_TIP" "https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git" "HEAD:refs\/heads\/\$REVIEW_BRANCH"/);
 });
