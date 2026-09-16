@@ -9,7 +9,6 @@ import {
   officialPrintDocumentPageUrl,
   parseOfficialPrintDocumentLinks,
   printDocumentEnrichmentVersion,
-  retryTransient,
   selectRelevantDocumentExcerpts
 } from "./lib/psp-print-documents.mjs";
 import { loadBlockedEvidencePackages } from "./lib/evidence-package-queue.mjs";
@@ -98,14 +97,14 @@ const warnings = [];
 async function loadPrintDocument(print) {
   if (printCache.has(print.externalPrintId)) return printCache.get(print.externalPrintId);
   const promise = (async () => {
-    const page = await retryTransient(() => fetchVerified(pspSource, print.pageUrl, { maxBytes: 1_000_000, expectedContentTypes: ["text/html"] }));
+    const page = await fetchVerified(pspSource, print.pageUrl, { maxBytes: 1_000_000, expectedContentTypes: ["text/html"] });
     const links = parseOfficialPrintDocumentLinks(new TextDecoder("utf-8").decode(page.bytes), print.pageUrl);
     invariant(links.length > 0, `No official DOCX document found for print ${print.printNumber}/${print.partNumber}`);
     const primaryDocument = links[0];
-    const file = await retryTransient(() => fetchVerified(pspSource, primaryDocument.url, {
+    const file = await fetchVerified(pspSource, primaryDocument.url, {
       maxBytes: 10_000_000,
       expectedContentTypes: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"]
-    }));
+    });
     return {
       filename: primaryDocument.filename,
       url: file.finalUrl,

@@ -129,22 +129,43 @@ function allowedHostname(hostname, expectedHosts) {
   return expectedHosts.some((expected) => hostname === expected);
 }
 
-export async function fetchVerified(source, endpoint, { maxBytes, expectedContentTypes }) {
+function isTransientResponse(response) {
+  return response.status === 408 || response.status === 429 || response.status >= 500;
+}
+
+function delay(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
+}
+
+export async function fetchVerified(source, endpoint, { maxBytes, expectedContentTypes, retryAttempts = 4, retryDelayMs = 1_000 }) {
   const requested = new URL(endpoint);
   invariant(requested.protocol === "https:", `Source ${source.id} endpoint must use HTTPS`);
   invariant(allowedHostname(requested.hostname, source.expectedHosts), `Source ${source.id} endpoint host is not allowlisted`);
 
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 45_000);
   let response;
-  try {
-    response = await fetch(endpoint, {
-      headers: { "User-Agent": "SlibyChyby/0.1 (+https://github.com/orik007/sliby-chyby)" },
-      redirect: "follow",
-      signal: controller.signal
-    });
-  } finally {
-    clearTimeout(timeout);
+  let bytes;
+  invariant(Number.isInteger(retryAttempts) && retryAttempts > 0, "retryAttempts must be a positive integer");
+  invariant(Number.isInteger(retryDelayMs) && retryDelayMs >= 0, "retryDelayMs must be a non-negative integer");
+  for (let attempt = 1; attempt <= retryAttempts; attempt += 1) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 45_000);
+    try {
+      response = await fetch(endpoint, {
+        headers: { "User-Agent": "SlibyChyby/0.1 (+https://github.com/orik007/sliby-chyby)" },
+        redirect: "follow",
+        signal: controller.signal
+      });
+      if (response.ok) bytes = new Uint8Array(await response.arrayBuffer());
+    } catch (error) {
+      if (attempt === retryAttempts) throw error;
+      await delay(retryDelayMs * 2 ** (attempt - 1));
+      continue;
+    } finally {
+      clearTimeout(timeout);
+    }
+    if (response.ok || !isTransientResponse(response) || attempt === retryAttempts) break;
+    await response.body?.cancel();
+    await delay(retryDelayMs * 2 ** (attempt - 1));
   }
 
   invariant(response.ok, `Source ${source.id} returned HTTP ${response.status}`);
@@ -156,7 +177,6 @@ export async function fetchVerified(source, endpoint, { maxBytes, expectedConten
   const declaredLength = Number(response.headers.get("content-length") ?? 0);
   if (declaredLength) invariant(declaredLength <= maxBytes, `Source ${source.id} exceeds the declared size limit`);
 
-  const bytes = new Uint8Array(await response.arrayBuffer());
   invariant(bytes.byteLength <= maxBytes, `Source ${source.id} exceeds the downloaded size limit`);
   return {
     bytes,
