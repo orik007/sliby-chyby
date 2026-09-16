@@ -14,8 +14,11 @@ function normalizeSearchText(value) {
     .trim();
 }
 
-function valueAtPath(value, path) {
-  return path.split(".").reduce((current, segment) => current?.[segment], value);
+function valuesAtPath(value, segments) {
+  if (segments.length === 0) return Array.isArray(value) ? value : [value];
+  if (Array.isArray(value)) return value.flatMap((item) => valuesAtPath(item, segments));
+  if (!value || typeof value !== "object") return [];
+  return valuesAtPath(value[segments[0]], segments.slice(1));
 }
 
 function searchableRecordText(record) {
@@ -104,7 +107,7 @@ export function matchRecordToPromise(record, promise, { semanticCandidate = null
     matchedTerms.push({ phrase: term.phrase, weight: term.weight });
   }
   for (const reference of promise.matching.externalReferences) {
-    if (valueAtPath(record, reference.path) !== reference.equals) continue;
+    if (!valuesAtPath(record, reference.path.split(".")).some((value) => value === reference.equals)) continue;
     score += reference.weight;
     matchedExternalReferences.push({
       path: reference.path,

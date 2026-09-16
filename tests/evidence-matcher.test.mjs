@@ -14,6 +14,8 @@ import { loadPublishedPromiseIds } from "../scripts/lib/published-promises.mjs";
 const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8")));
 const eet = registry.promises.find(({ id }) => id === "ano-2025-eet-2");
 const freeMuseums = registry.promises.find(({ id }) => id === "ano-2025-free-state-museums-selected-groups");
+const balancedBudget = registry.promises.find(({ id }) => id === "candidate-d5359e35a4c4");
+const stopIndebtedness = registry.promises.find(({ id }) => id === "candidate-226d131047ef");
 test("matching configuration contains exactly the confirmed public promises", async () => {
   assert.equal(registry.status, "confirmed-promise-matching-v1");
   const publishedPromiseIds = await loadPublishedPromiseIds(fileURLToPath(new URL("../data/promises/", import.meta.url)));
@@ -343,4 +345,39 @@ test("attributes a decisive party vote even when another party introduced the bi
 
   const match = matchRecordToPromise(vote, eet);
   assert.equal(match.attributionStatus, "verified-party-vote");
+});
+
+test("matches every linked official vote for a directly relevant fiscal print", () => {
+  const vote = record({
+    id: "psp--vote-fiscal-rules",
+    kind: "parliamentary-vote",
+    title: "Vládní návrh zákona, kterým se mění některé zákony v oblasti veřejných rozpočtů",
+    payload: {
+      externalVoteId: "87430",
+      counts: { yes: 91, no: 68 },
+      partyVoteSummaries: [{
+        partyId: "motoriste",
+        eligibleMemberCount: 13,
+        directionalVoteCount: 10,
+        strictMajorityThreshold: 7,
+        counts: { yes: 10, no: 0, abstained: 0, notVoting: 0, absent: 3, unknown: 0 },
+        majorityChoice: "yes",
+        attributionStatus: "attributed",
+        ruleVersion: "party-vote-strict-majority-v3"
+      }],
+      linkedPrints: [{
+        number: 90,
+        titleCz: "Vládní návrh zákona, kterým se mění některé zákony v oblasti veřejných rozpočtů",
+        historyContexts: [{ actionCz: "schválen", resolutionNumber: 179 }]
+      }]
+    }
+  });
+
+  for (const promise of [balancedBudget, stopIndebtedness]) {
+    const match = matchRecordToPromise(vote, promise);
+    assert.ok(match, `${promise.id} must match the linked print`);
+    assert.equal(match.exactSignal, true);
+    assert.equal(match.attributionStatus, "verified-party-vote");
+    assert.deepEqual(match.matchedExternalReferences.map(({ path }) => path), ["payload.linkedPrints.number"]);
+  }
 });
