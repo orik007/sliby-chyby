@@ -70,7 +70,7 @@ jobs:
               git commit --no-edit
             else
               unresolved="$(git diff --name-only --diff-filter=U)"
-              if [ -z "$unresolved" ] || printf '%s\n' "$unresolved" | grep -qv -E '^automation/(review-proposals/|collectors/checkpoints\.json$|semantic-index/)'; then
+              if [ -z "$unresolved" ] || printf '%s\n' "$unresolved" | grep -qv -E '^automation/(evidence-packages/|review-proposals/|collectors/checkpoints\.json$|semantic-index/)'; then
                 git merge --abort
                 echo "::error::A non-audit conflict prevents synchronizing the durable review branch with main."
                 exit 1
@@ -117,6 +117,35 @@ jobs:
           fi
           node scripts/run-collectors.mjs "${collector_args[@]}"
 
+      - name: Persist successful source checkpoints
+        id: checkpoints
+        run: |
+          git add automation/collectors/checkpoints.json
+          if git diff --cached --quiet; then
+            echo "created=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Record successful source collection"
+            git push --set-upstream origin "$REVIEW_BRANCH"
+            echo "created=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create or update audit pull request for collection
+        if: steps.checkpoints.outputs.created == 'true'
+        run: |
+          cat > "$RUNNER_TEMP/collection-audit-pr.md" <<'EOF'
+          ## Neveřejný audit sběru podkladů
+
+          Tento pull request ukládá úspěšný technický sběr zdrojů a následně i balíčky podkladů pro hodnocení. Sám nemění veřejná data, skóre ani stav zveřejnění.
+
+          Další fáze může vytvořit neveřejné návrhy k lidské kontrole. Selhání nebo přerušení této fáze nesmí ztratit úspěšně uložený sběr.
+          EOF
+          PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVIEW_BRANCH" --base main --state open --json number --jq '.[0].number')"
+          if [ -n "$PR_NUMBER" ]; then
+            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file "$RUNNER_TEMP/collection-audit-pr.md"
+          else
+            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file "$RUNNER_TEMP/collection-audit-pr.md"
+          fi
+
       - name: Match records to every confirmed promise
         run: |
           AS_OF="${MATCHER_AS_OF:-$(date -u +%F)}"
@@ -133,10 +162,46 @@ jobs:
             --input automation/runs/pipeline/github-actions/matcher/evidence-packages \
             --output automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages
 
+      - name: Queue enriched evidence packages
+        run: |
+          node scripts/queue-evidence-packages.mjs \
+            --input automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages \
+            --queue automation/evidence-packages \
+            --enrichment-run automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json
+
+      - name: Persist queued evidence packages
+        id: packages
+        run: |
+          git add automation/evidence-packages automation/semantic-index
+          if git diff --cached --quiet; then
+            echo "created=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Queue collected evidence packages"
+            git push --set-upstream origin "$REVIEW_BRANCH"
+            echo "created=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create or update audit pull request for evidence packages
+        if: steps.packages.outputs.created == 'true'
+        run: |
+          cat > "$RUNNER_TEMP/evidence-package-audit-pr.md" <<'EOF'
+          ## Neveřejné balíčky podkladů
+
+          Tento pull request uchovává ověřené, omezené balíčky podkladů po úspěšném sběru a enrichmentu. Balíčky čekají na dva nezávislé posudky; samy nemění veřejná data, skóre ani stav zveřejnění.
+
+          Pokud hodnocení selže nebo je přerušeno, uložené balíčky zůstanou v této auditní větvi pro další běh.
+          EOF
+          PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVIEW_BRANCH" --base main --state open --json number --jq '.[0].number')"
+          if [ -n "$PR_NUMBER" ]; then
+            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file "$RUNNER_TEMP/evidence-package-audit-pr.md"
+          else
+            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file "$RUNNER_TEMP/evidence-package-audit-pr.md"
+          fi
+
       - name: Assess only new or changed packages
         run: |
           node scripts/run-assessment-batch.mjs \
-            --packages automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages \
+            --packages automation/evidence-packages \
             --enrichment-run automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json \
             --proposals automation/review-proposals \
             --runs automation/runs/pipeline/github-actions/assessments \
@@ -214,7 +279,7 @@ jobs:
       - name: Commit new review proposals
         id: proposals
         run: |
-          git add automation/collectors/checkpoints.json automation/review-proposals automation/semantic-index
+          git add automation/review-proposals
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
             echo "No new audit data or assessment proposal was created." >> "$GITHUB_STEP_SUMMARY"

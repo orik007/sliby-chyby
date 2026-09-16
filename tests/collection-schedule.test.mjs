@@ -18,6 +18,9 @@ test("full evidence collection is scheduled daily at 09:37 Prague time", async (
   assert.match(workflow, /SLIBY_SEMANTIC_MIN_SIMILARITY: 0\.5/);
   assert.match(workflow, /SLIBY_ASSESSMENT_CONCURRENCY: 4/);
   assert.match(workflow, /timeout-minutes: 90/);
+  assert.match(workflow, /Persist successful source checkpoints/);
+  assert.match(workflow, /Queue enriched evidence packages/);
+  assert.match(workflow, /--packages automation\/evidence-packages/);
 });
 
 test("semantic retrieval ranks the whole public catalogue and limits paid assessment fan-out", async () => {
@@ -34,9 +37,11 @@ test("the durable audit branch retains every operational audit tree when syncing
   assert.match(workflow, /git merge-base --is-ancestor "\$GITHUB_SHA" HEAD/);
   assert.match(workflow, /git merge --no-ff --no-commit/);
   assert.match(workflow, /semantic-index/);
+  assert.match(workflow, /evidence-packages/);
   assert.match(workflow, /git merge --abort/);
   assert.match(workflow, /git push --set-upstream origin "\$REVIEW_BRANCH"/);
-  assert.match(workflow, /git add automation\/collectors\/checkpoints\.json automation\/review-proposals automation\/semantic-index/);
+  assert.match(workflow, /git add automation\/collectors\/checkpoints\.json/);
+  assert.match(workflow, /git add automation\/evidence-packages automation\/semantic-index/);
   assert.match(workflow, /could not create the required review pull request/);
 });
 

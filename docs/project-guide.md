@@ -27,7 +27,7 @@ allowlisted evidence sources
   -> exact signals plus semantic candidate retrieval across confirmed promises
   -> official-document enrichment when a known target exists
   -> two independent assessments; arbiter on disagreement or one invalid assessor output
-  -> unpublished audit pull request with proposals, coverage, and checkpoints
+  -> unpublished audit pull request with queued evidence packages, proposals, coverage, and checkpoints
   -> separate approved public-assessment pull request when a score changes
 ```
 
@@ -43,6 +43,7 @@ The daily workflow uses embeddings only to retrieve a bounded set of candidate p
 | `automation/collectors/` | Allowlisted evidence-source registry. |
 | `automation/matching/` | Exact-signal configuration and semantic promise profiles for public promises. |
 | `automation/semantic-index/` | Versioned embedding index used only to retrieve candidate promise relationships. |
+| `automation/evidence-packages/` | Durable unpublished queue of enriched evidence packages awaiting assessment. |
 | `scripts/` | Validation, collection, matching, enrichment, assessment, and coverage-audit scripts. |
 | `.github/workflows/` | Verification and the daily evidence-assessment workflow. |
 
