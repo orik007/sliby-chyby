@@ -28,6 +28,7 @@ test("full evidence collection is scheduled daily at 09:37 Prague time", async (
   assert.match(workflow, /collectorRun\.collectors\.map/);
   assert.doesNotMatch(workflow, /^      GH_TOKEN:/m);
   assert.match(workflow, /persist-credentials: false/);
+  assert.match(workflow, /uses: actions\/checkout@v5\n        with:\n          ref: main/);
   assert.equal([...workflow.matchAll(/GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/g)].length, 7);
   assert.match(workflow, /- name: Restore current audit state[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   assert.match(workflow, /- name: Persist successful source checkpoints[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
@@ -49,6 +50,7 @@ test("the audit branch is a current operational snapshot restored into main", as
   assert.match(workflow, /authenticated_remote="https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git"/);
   assert.match(workflow, /git fetch "\$authenticated_remote" "\+refs\/heads\/\$REVIEW_BRANCH:refs\/remotes\/origin\/\$REVIEW_BRANCH"/);
   assert.match(workflow, /git restore --source="origin\/\$REVIEW_BRANCH" --staged --worktree/);
+  assert.match(workflow, /\*\/README\.md\) ;;/);
   assert.match(workflow, /AUDIT_BRANCH_TIP=\$audit_branch_tip/);
   assert.match(workflow, /semantic-index/);
   assert.match(workflow, /evidence-packages/);

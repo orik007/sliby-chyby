@@ -21,6 +21,7 @@ const bash = process.platform === "win32" ? "C:/Program Files/Git/bin/bash.exe" 
 const auditBranch = "automation/assessment-review";
 const checkpoint = "automation/collectors/checkpoints.json";
 const packageManifest = "automation/evidence-packages/manifest.json";
+const packageReadme = "automation/evidence-packages/README.md";
 
 function createFixture() {
   const root = mkdtempSync(join(tmpdir(), "audit-snapshot-"));
@@ -43,6 +44,7 @@ function createFixture() {
   git("config", "core.autocrlf", "false");
   git("remote", "add", "origin", join(root, "remote.git"));
   put(checkpoint, "main checkpoint\n");
+  put(packageReadme, "current main documentation\n");
   put("src/example.txt", "base\n");
   commit("base");
   git("push", "origin", "main");
@@ -82,11 +84,13 @@ test("a run restores current audit data into main and replaces the audit snapsho
     fixture.git("switch", "-c", auditBranch);
     fixture.put(checkpoint, "audit checkpoint\n");
     fixture.put(packageManifest, "retained package\n");
+    fixture.put(packageReadme, "outdated audit documentation\n");
     fixture.commit("audit state");
     const auditTip = fixture.git("rev-parse", "HEAD");
     fixture.git("push", "origin", auditBranch);
     fixture.git("switch", "main");
     fixture.put("src/example.txt", "current main\n");
+    fixture.put(packageReadme, "updated main documentation\n");
     fixture.commit("current main");
     const mainTip = fixture.git("rev-parse", "HEAD");
 
@@ -96,6 +100,7 @@ test("a run restores current audit data into main and replaces the audit snapsho
     assert.equal(fixture.git("branch", "--show-current"), "main");
     assert.equal(fixture.git("show", `:${checkpoint}`), "audit checkpoint");
     assert.equal(fixture.git("show", `:${packageManifest}`), "retained package");
+    assert.equal(fixture.git("show", `:${packageReadme}`), "updated main documentation");
     assert.match(readFileSync(join(fixture.cwd, restoreOutput), "utf8"), new RegExp(`AUDIT_BRANCH_TIP=${auditTip}`));
 
     fixture.put(checkpoint, "new checkpoint\n");
@@ -116,4 +121,5 @@ test("audit snapshot pushes use a lease instead of merging histories", () => {
   assert.match(workflow, /git push --force-with-lease="refs\/heads\/\$REVIEW_BRANCH:\$AUDIT_BRANCH_TIP"/);
   assert.doesNotMatch(workflow, /git merge --no-ff --no-commit/);
   assert.doesNotMatch(workflow, /git switch --force-create "\$REVIEW_BRANCH"/);
+  assert.match(workflow, /case "\$path" in[\s\S]*?\*\/README\.md\) ;;/);
 });

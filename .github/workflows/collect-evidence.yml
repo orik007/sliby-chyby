@@ -54,6 +54,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v5
         with:
+          ref: main
           fetch-depth: 0
           persist-credentials: false
 
@@ -67,11 +68,23 @@ jobs:
           if git ls-remote --exit-code --heads "$authenticated_remote" "$REVIEW_BRANCH" >/dev/null 2>&1; then
             git fetch "$authenticated_remote" "+refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
             audit_branch_tip="$(git rev-parse "origin/$REVIEW_BRANCH")"
-            for path in automation/collectors/checkpoints.json automation/semantic-index automation/evidence-packages automation/review-proposals; do
+            restore_paths=()
+            for path in automation/collectors/checkpoints.json automation/semantic-index/promise-index.json; do
               if git cat-file -e "origin/$REVIEW_BRANCH:$path" 2>/dev/null; then
-                git restore --source="origin/$REVIEW_BRANCH" --staged --worktree -- "$path"
+                restore_paths+=("$path")
               fi
             done
+            for directory in automation/evidence-packages automation/review-proposals; do
+              while IFS= read -r path; do
+                case "$path" in
+                  */README.md) ;;
+                  *) restore_paths+=("$path") ;;
+                esac
+              done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- "$directory")
+            done
+            if [ "${#restore_paths[@]}" -gt 0 ]; then
+              git restore --source="origin/$REVIEW_BRANCH" --staged --worktree -- "${restore_paths[@]}"
+            fi
           else
             audit_branch_tip=""
           fi
