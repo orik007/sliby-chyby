@@ -6,13 +6,15 @@ import { dirname, join } from "node:path";
 import test from "node:test";
 
 const workflow = readFileSync(new URL("../.github/workflows/collect-evidence.yml", import.meta.url), "utf8").replace(/\r\n/g, "\n");
-const preparation = workflow.split("      - name: Prepare durable review branch\n")[1]
+const localizeAuthenticatedRemote = (script) => script
+  .replace('authenticated_remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"', 'authenticated_remote="origin"');
+const preparation = localizeAuthenticatedRemote(workflow.split("      - name: Prepare durable review branch\n")[1]
   .split("        run: |\n")[1].split("\n      - name:")[0]
-  .split("\n").map((line) => line.replace(/^          /, "")).join("\n");
-const checkpointPersistence = workflow.split("      - name: Persist successful source checkpoints\n")[1]
+  .split("\n").map((line) => line.replace(/^          /, "")).join("\n"));
+const checkpointPersistence = localizeAuthenticatedRemote(workflow.split("      - name: Persist successful source checkpoints\n")[1]
   .split("        run: |\n")[1].split("\n      - name:")[0]
   .split("\n").map((line) => line.replace(/^          /, "")).join("\n")
-  .replace('git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"', 'git push origin "HEAD:refs/heads/$REVIEW_BRANCH"');
+  .replace('git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"', 'git push origin "HEAD:refs/heads/$REVIEW_BRANCH"'));
 const bash = process.platform === "win32" ? "C:/Program Files/Git/bin/bash.exe" : "bash";
 const readme = "automation/review-proposals/README.md";
 const checkpoint = "automation/collectors/checkpoints.json";

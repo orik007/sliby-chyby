@@ -28,7 +28,8 @@ test("full evidence collection is scheduled daily at 09:37 Prague time", async (
   assert.match(workflow, /collectorRun\.collectors\.map/);
   assert.doesNotMatch(workflow, /^      GH_TOKEN:/m);
   assert.match(workflow, /persist-credentials: false/);
-  assert.equal([...workflow.matchAll(/GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/g)].length, 6);
+  assert.equal([...workflow.matchAll(/GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/g)].length, 7);
+  assert.match(workflow, /- name: Prepare durable review branch[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   assert.match(workflow, /- name: Persist successful source checkpoints[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   assert.match(workflow, /- name: Create audit pull request for collection when needed[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   assert.match(workflow, /git push "https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git" "HEAD:refs\/heads\/\$REVIEW_BRANCH"/);
@@ -46,7 +47,8 @@ test("semantic retrieval ranks the whole public catalogue and limits paid assess
 test("the durable audit branch retains every operational audit tree when syncing main", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
   assert.match(workflow, /git merge-base --is-ancestor "\$GITHUB_SHA" HEAD/);
-  assert.match(workflow, /git fetch origin "\+refs\/heads\/\$REVIEW_BRANCH:refs\/remotes\/origin\/\$REVIEW_BRANCH"/);
+  assert.match(workflow, /authenticated_remote="https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git"/);
+  assert.match(workflow, /git fetch "\$authenticated_remote" "\+refs\/heads\/\$REVIEW_BRANCH:refs\/remotes\/origin\/\$REVIEW_BRANCH"/);
   assert.match(workflow, /git switch --force-create "\$REVIEW_BRANCH" "origin\/\$REVIEW_BRANCH"/);
   assert.match(workflow, /The durable review branch was not initialized from its fetched remote tip/);
   assert.match(workflow, /git merge --no-ff --no-commit/);

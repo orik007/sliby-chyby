@@ -58,11 +58,14 @@ jobs:
           persist-credentials: false
 
       - name: Prepare durable review branch
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git ls-remote --exit-code --heads origin "$REVIEW_BRANCH" >/dev/null 2>&1; then
-            git fetch origin "+refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
+          authenticated_remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git ls-remote --exit-code --heads "$authenticated_remote" "$REVIEW_BRANCH" >/dev/null 2>&1; then
+            git fetch "$authenticated_remote" "+refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
             git switch --force-create "$REVIEW_BRANCH" "origin/$REVIEW_BRANCH"
             git branch --set-upstream-to="origin/$REVIEW_BRANCH" "$REVIEW_BRANCH"
             if [ "$(git rev-parse HEAD)" != "$(git rev-parse "origin/$REVIEW_BRANCH")" ]; then
@@ -132,7 +135,8 @@ jobs:
             echo "created=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "Record successful source collection"
-            git fetch origin "+refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
+            authenticated_remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+            git fetch "$authenticated_remote" "+refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
             if ! git merge-base --is-ancestor "origin/$REVIEW_BRANCH" HEAD; then
               if ! git merge --no-ff --no-commit "origin/$REVIEW_BRANCH"; then
                 unresolved="$(git diff --name-only --diff-filter=U)"
