@@ -14,7 +14,7 @@ const localizeRemote = (script) => script
 const restoreAuditState = localizeRemote(workflow.split("      - name: Restore current audit state\n")[1]
   .split("        run: |\n")[1].split("\n      - name:")[0]
   .split("\n").map((line) => line.replace(/^          /, "")).join("\n"));
-const checkpointPersistence = localizeRemote(workflow.split("      - name: Persist successful source checkpoints\n")[1]
+const collectionPersistence = localizeRemote(workflow.split("      - name: Persist source collection and queued evidence packages\n")[1]
   .split("        run: |\n")[1].split("\n      - name:")[0]
   .split("\n").map((line) => line.replace(/^          /, "")).join("\n"));
 const bash = process.platform === "win32" ? "C:/Program Files/Git/bin/bash.exe" : "bash";
@@ -22,6 +22,7 @@ const auditBranch = "automation/assessment-review";
 const checkpoint = "automation/collectors/checkpoints.json";
 const packageManifest = "automation/evidence-packages/manifest.json";
 const packageReadme = "automation/evidence-packages/README.md";
+const semanticIndex = "automation/semantic-index/promise-index.json";
 
 function createFixture() {
   const root = mkdtempSync(join(tmpdir(), "audit-snapshot-"));
@@ -45,6 +46,7 @@ function createFixture() {
   git("remote", "add", "origin", join(root, "remote.git"));
   put(checkpoint, "main checkpoint\n");
   put(packageReadme, "current main documentation\n");
+  put(semanticIndex, "main semantic index\n");
   put("src/example.txt", "base\n");
   commit("base");
   git("push", "origin", "main");
@@ -59,7 +61,7 @@ function run(script, cwd, environment) {
   });
 }
 
-test("a missing audit branch leaves the current main checkout intact", () => {
+test("a missing audit branch leaves the current main checkout intact until collection and packages persist together", () => {
   const fixture = createFixture();
   try {
     const output = "github-env";
@@ -69,7 +71,7 @@ test("a missing audit branch leaves the current main checkout intact", () => {
     assert.equal(fixture.git("show", `HEAD:${checkpoint}`), "main checkpoint");
     assert.match(readFileSync(join(fixture.cwd, output), "utf8"), /AUDIT_BRANCH_TIP=\n/);
     fixture.put(checkpoint, "first checkpoint\n");
-    const persisted = run(checkpointPersistence, fixture.cwd, { GITHUB_ENV: output, AUDIT_BRANCH_TIP: "" });
+    const persisted = run(collectionPersistence, fixture.cwd, { GITHUB_ENV: output, AUDIT_BRANCH_TIP: "" });
     assert.equal(persisted.status, 0, persisted.stderr || persisted.stdout);
     fixture.git("fetch", "origin", `refs/heads/${auditBranch}:refs/remotes/origin/${auditBranch}`);
     assert.equal(fixture.git("show", `origin/${auditBranch}:${checkpoint}`), "first checkpoint");
@@ -105,7 +107,7 @@ test("a run restores current audit data into main and replaces the audit snapsho
 
     fixture.put(checkpoint, "new checkpoint\n");
     const persistOutput = "github-env";
-    const persisted = run(checkpointPersistence, fixture.cwd, { GITHUB_ENV: persistOutput, AUDIT_BRANCH_TIP: auditTip });
+    const persisted = run(collectionPersistence, fixture.cwd, { GITHUB_ENV: persistOutput, AUDIT_BRANCH_TIP: auditTip });
     assert.equal(persisted.status, 0, persisted.stderr || persisted.stdout);
     fixture.git("fetch", "origin", `refs/heads/${auditBranch}:refs/remotes/origin/${auditBranch}`);
     assert.equal(fixture.git("show", `origin/${auditBranch}:${checkpoint}`), "new checkpoint");

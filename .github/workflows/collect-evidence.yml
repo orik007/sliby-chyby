@@ -16,6 +16,11 @@ on:
         required: false
         default: ""
         type: string
+      sources:
+        description: Optional comma-separated collector source IDs for a targeted replay
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: write
@@ -36,6 +41,7 @@ jobs:
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       COLLECTOR_SINCE: ${{ inputs.since || '' }}
+      COLLECTOR_SOURCES: ${{ inputs.sources || '' }}
       MATCHER_AS_OF: ${{ inputs.as_of || '' }}
       REVIEW_BRANCH: automation/assessment-review
       SLIBY_ASSESSOR_PROVIDER_A: openai
@@ -112,39 +118,19 @@ jobs:
           if [ -n "$COLLECTOR_SINCE" ]; then
             collector_args+=(--since "$COLLECTOR_SINCE")
           fi
+          if [ -n "$COLLECTOR_SOURCES" ]; then
+            IFS=',' read -ra source_ids <<< "$COLLECTOR_SOURCES"
+            for source_id in "${source_ids[@]}"; do
+              source_id="${source_id#"${source_id%%[![:space:]]*}"}"
+              source_id="${source_id%"${source_id##*[![:space:]]}"}"
+              if [ -z "$source_id" ]; then
+                echo "::error::COLLECTOR_SOURCES must contain comma-separated source IDs."
+                exit 1
+              fi
+              collector_args+=(--source "$source_id")
+            done
+          fi
           node scripts/run-collectors.mjs "${collector_args[@]}"
-
-      - name: Persist successful source checkpoints
-        id: checkpoints
-        env:
-          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
-        run: |
-          git add automation/collectors/checkpoints.json
-          if git diff --cached --quiet; then
-            echo "created=false" >> "$GITHUB_OUTPUT"
-          else
-            git commit -m "Record successful source collection"
-            git push --force-with-lease="refs/heads/$REVIEW_BRANCH:$AUDIT_BRANCH_TIP" "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
-            echo "AUDIT_BRANCH_TIP=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
-            echo "created=true" >> "$GITHUB_OUTPUT"
-          fi
-
-      - name: Create audit pull request for collection when needed
-        if: steps.checkpoints.outputs.created == 'true'
-        env:
-          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
-        run: |
-          cat > "$RUNNER_TEMP/collection-audit-pr.md" <<'EOF'
-          ## Neveřejný audit sběru podkladů
-
-          Tento pull request ukládá úspěšný technický sběr zdrojů a následně i balíčky podkladů pro hodnocení. Sám nemění veřejná data, skóre ani stav zveřejnění.
-
-          Další fáze může vytvořit neveřejné návrhy k lidské kontrole. Selhání nebo přerušení této fáze nesmí ztratit úspěšně uložený sběr.
-          EOF
-          PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVIEW_BRANCH" --base main --state open --json number --jq '.[0].number')"
-          if [ -z "$PR_NUMBER" ]; then
-            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file "$RUNNER_TEMP/collection-audit-pr.md"
-          fi
 
       - name: Match records to every confirmed promise
         run: |
@@ -173,30 +159,30 @@ jobs:
       - name: Retire packages outside the active semantic policy
         run: node scripts/reconcile-evidence-package-queue.mjs --queue automation/evidence-packages
 
-      - name: Persist queued evidence packages
+      - name: Persist source collection and queued evidence packages
         id: packages
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
-          git add automation/evidence-packages automation/semantic-index
+          git add automation/collectors/checkpoints.json automation/evidence-packages automation/semantic-index
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
           else
-            git commit -m "Queue collected evidence packages"
+            git commit -m "Record source collection and queue evidence packages"
             git push --force-with-lease="refs/heads/$REVIEW_BRANCH:$AUDIT_BRANCH_TIP" "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
             echo "AUDIT_BRANCH_TIP=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
             echo "created=true" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Create audit pull request for evidence packages when needed
+      - name: Create audit pull request for saved collection and packages when needed
         if: steps.packages.outputs.created == 'true'
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
           cat > "$RUNNER_TEMP/evidence-package-audit-pr.md" <<'EOF'
-          ## Neveřejné balíčky podkladů
+          ## Neveřejný audit sběru a balíčků podkladů
 
-          Tento pull request uchovává ověřené, omezené balíčky podkladů po úspěšném sběru a enrichmentu. Balíčky čekají na dva nezávislé posudky; samy nemění veřejná data, skóre ani stav zveřejnění.
+          Tento pull request uchovává úspěšný technický sběr i ověřené, omezené balíčky podkladů po enrichmentu. Balíčky čekají na dva nezávislé posudky; samy nemění veřejná data, skóre ani stav zveřejnění.
 
           Pokud hodnocení selže nebo je přerušeno, uložené balíčky zůstanou v této auditní větvi pro další běh.
           EOF
