@@ -62,7 +62,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git ls-remote --exit-code --heads origin "$REVIEW_BRANCH" >/dev/null 2>&1; then
-            git fetch origin "refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
+            git fetch origin "+refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
             git switch --create "$REVIEW_BRANCH" --track "origin/$REVIEW_BRANCH"
             if git merge-base --is-ancestor "$GITHUB_SHA" HEAD; then
               echo "Durable review branch already contains the current main revision."
