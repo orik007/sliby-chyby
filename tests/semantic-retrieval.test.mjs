@@ -9,6 +9,7 @@ import {
   updateSemanticIndex,
   validateSemanticIndex
 } from "../scripts/lib/semantic-retrieval.mjs";
+import { semanticRetrievalRuntimeConfig } from "../scripts/lib/assessment-config.mjs";
 
 const runtime = { provider: "openai", model: "test-embedding", dimensions: 2 };
 const promises = [
@@ -31,6 +32,12 @@ const promises = [
     matching: { terms: [{ phrase: "silniční daň" }] }
   }
 ];
+
+test("semantic retrieval defaults favor a small, stronger candidate set", () => {
+  const runtime = semanticRetrievalRuntimeConfig({});
+  assert.equal(runtime.candidateLimit, 3);
+  assert.equal(runtime.minimumSimilarity, 0.55);
+});
 
 test("semantic retrieval ranks every promise locally and keeps only the top candidates", () => {
   const empty = emptySemanticIndex(runtime);
@@ -69,4 +76,47 @@ test("semantic retrieval ranks every promise locally and keeps only the top cand
     minimumSimilarity: 0.999
   });
   assert.equal(thresholded.get("teacher-pay").size, 0);
+});
+
+test("semantic retrieval can exclude a weak lower-ranked relationship before assessment", () => {
+  const indexedPromises = Array.from({ length: 8 }, (_, index) => ({
+    ...promises[0],
+    id: `promise-${index + 1}`
+  }));
+  const index = {
+    ...emptySemanticIndex(runtime),
+    promiseEmbeddings: Object.fromEntries(indexedPromises.map((promise, offset) => [promise.id, {
+      profileHash: `${String(offset).padStart(64, "0")}`,
+      embedding: [1, offset * 0.2]
+    }]))
+  };
+  const records = [{ id: "broad-eu-policy", primary: true, title: "Broad EU policy", publisher: "Ministry", kind: "official-publication", payload: {} }];
+  const candidates = rankSemanticCandidates({
+    records,
+    recordEmbeddings: new Map([["broad-eu-policy", [1, 0]]]),
+    promises: indexedPromises,
+    index
+  });
+
+  assert.equal(candidates.get("promise-1").get("broad-eu-policy").rank, 1);
+  assert.equal(candidates.get("promise-3").get("broad-eu-policy").rank, 3);
+  assert.equal(candidates.get("promise-4").size, 0);
+
+  const weakPromise = { ...promises[0], id: "weak-relationship" };
+  const weakIndex = {
+    ...emptySemanticIndex(runtime),
+    promiseEmbeddings: {
+      "weak-relationship": {
+        profileHash: "f".repeat(64),
+        embedding: [0.535, Math.sqrt(1 - 0.535 ** 2)]
+      }
+    }
+  };
+  const belowThreshold = rankSemanticCandidates({
+    records,
+    recordEmbeddings: new Map([["broad-eu-policy", [1, 0]]]),
+    promises: [weakPromise],
+    index: weakIndex
+  });
+  assert.equal(belowThreshold.get("weak-relationship").size, 0);
 });

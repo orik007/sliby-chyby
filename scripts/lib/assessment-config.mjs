@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { defaultSemanticCandidateLimit, defaultSemanticMinimumSimilarity } from "./semantic-retrieval.mjs";
 
 export const assessorPromptVersion = "assessor-v13";
 export const arbiterPromptVersion = "arbiter-v5";
@@ -10,8 +11,8 @@ export function semanticRetrievalRuntimeConfig(env = process.env) {
     provider: env.SLIBY_SEMANTIC_PROVIDER ?? "openai",
     model: env.SLIBY_SEMANTIC_MODEL ?? "text-embedding-3-small",
     dimensions: Number(env.SLIBY_SEMANTIC_DIMENSIONS ?? "256"),
-    candidateLimit: Number(env.SLIBY_SEMANTIC_CANDIDATE_LIMIT ?? "8"),
-    minimumSimilarity: Number(env.SLIBY_SEMANTIC_MIN_SIMILARITY ?? "0.5")
+    candidateLimit: Number(env.SLIBY_SEMANTIC_CANDIDATE_LIMIT ?? defaultSemanticCandidateLimit),
+    minimumSimilarity: Number(env.SLIBY_SEMANTIC_MIN_SIMILARITY ?? defaultSemanticMinimumSimilarity)
   };
 }
 

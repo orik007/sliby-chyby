@@ -28,6 +28,9 @@ export function validateEvidencePackageQueue(queue) {
     invariant(typeof entry.queuedAt === "string" && !Number.isNaN(Date.parse(entry.queuedAt)), `Queued evidence package ${entry.promiseId} has an invalid queuedAt`);
     invariant(typeof entry.path === "string" && entry.path.startsWith("packages/"), `Queued evidence package ${entry.promiseId} has an invalid path`);
     invariant(typeof entry.blockedByEnrichment === "boolean", `Queued evidence package ${entry.promiseId} must record enrichment state`);
+    invariant(entry.retiredAt === undefined || entry.retiredAt === null || (typeof entry.retiredAt === "string" && !Number.isNaN(Date.parse(entry.retiredAt))), `Queued evidence package ${entry.promiseId} has an invalid retirement time`);
+    invariant(entry.retirementReason === undefined || entry.retirementReason === null || typeof entry.retirementReason === "string", `Queued evidence package ${entry.promiseId} has an invalid retirement reason`);
+    invariant(entry.retiredAt == null || typeof entry.retirementReason === "string", `Retired evidence package ${entry.promiseId} needs a retirement reason`);
     invariant(entry.supersedesPackageHash == null || /^[a-f0-9]{64}$/.test(entry.supersedesPackageHash), `Queued evidence package ${entry.promiseId} has an invalid supersedesPackageHash`);
     invariant(entry.supersededByPackageHash == null || /^[a-f0-9]{64}$/.test(entry.supersededByPackageHash), `Queued evidence package ${entry.promiseId} has an invalid supersededByPackageHash`);
   }
@@ -50,7 +53,21 @@ export function validateEvidencePackageQueue(queue) {
 
 export function currentEvidencePackageEntries(queue) {
   validateEvidencePackageQueue(queue);
-  return queue.packages.filter((entry) => !entry.supersededByPackageHash).sort((left, right) => left.promiseId.localeCompare(right.promiseId));
+  return queue.packages.filter((entry) => !entry.supersededByPackageHash && entry.retiredAt == null).sort((left, right) => left.promiseId.localeCompare(right.promiseId));
+}
+
+function latestUnreplacedPackageEntry(queue, promiseId) {
+  return queue.packages.find((entry) => entry.promiseId === promiseId && !entry.supersededByPackageHash) ?? null;
+}
+
+function eligibleUnderSemanticPolicy(evidencePackage, { candidateLimit, minimumSimilarity }) {
+  return evidencePackage.evidence
+    .filter((evidence) => evidence.role === "conduct-evidence")
+    .some((evidence) => evidence.matchBasis?.exactSignal === true || (
+      evidence.matchBasis?.semanticCandidate
+      && evidence.matchBasis.semanticCandidate.rank <= candidateLimit
+      && evidence.matchBasis.semanticCandidate.similarity >= minimumSimilarity
+    ));
 }
 
 async function loadQueue(queueDirectory) {
@@ -83,6 +100,12 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
     const blockedByEnrichment = blockedPromiseIds.has(evidencePackage.promise.id);
     const matching = queue.packages.find((entry) => entry.packageHash === packageHash);
     if (matching) {
+      if (!matching.supersededByPackageHash && matching.retiredAt != null) {
+        matching.retiredAt = null;
+        matching.retirementReason = null;
+        changed = true;
+        updated += 1;
+      }
       if (matching.blockedByEnrichment !== blockedByEnrichment) {
         matching.blockedByEnrichment = blockedByEnrichment;
         changed = true;
@@ -90,7 +113,7 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
       }
       continue;
     }
-    const current = currentEvidencePackageEntries(queue).find((entry) => entry.promiseId === evidencePackage.promise.id);
+    const current = latestUnreplacedPackageEntry(queue, evidencePackage.promise.id);
     if (current) current.supersededByPackageHash = packageHash;
     const packagePath = `packages/${evidencePackage.promise.id}/${packageHash}.json`;
     const destination = resolve(queuePath, packagePath);
@@ -103,6 +126,8 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
       queuedAt: now,
       path: packagePath,
       blockedByEnrichment,
+      retiredAt: null,
+      retirementReason: null,
       supersedesPackageHash: current?.packageHash ?? null,
       supersededByPackageHash: null
     });
@@ -115,6 +140,29 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
     await writeFile(resolve(queuePath, "manifest.json"), `${JSON.stringify(validateEvidencePackageQueue(queue), null, 2)}\n`);
   }
   return { added, updated, activeCount: currentEvidencePackageEntries(queue).length, changed };
+}
+
+export async function reconcileEvidencePackageQueue({ queueDirectory, candidateLimit, minimumSimilarity }) {
+  invariant(Number.isInteger(candidateLimit) && candidateLimit > 0, "Semantic candidate limit must be a positive integer");
+  invariant(Number.isFinite(minimumSimilarity) && minimumSimilarity >= -1 && minimumSimilarity <= 1, "Semantic minimum similarity must be between -1 and 1");
+  const queuePath = resolve(queueDirectory);
+  const manifestPath = resolve(queuePath, "manifest.json");
+  if (!existsSync(manifestPath)) return { retired: 0, activeCount: 0, changed: false };
+  const queue = await loadQueue(queuePath);
+  const now = new Date().toISOString();
+  let retired = 0;
+  for (const entry of currentEvidencePackageEntries(queue)) {
+    const evidencePackage = validateEvidencePackage(JSON.parse(await readFile(resolve(queuePath, entry.path), "utf8")));
+    invariant(hashEvidencePackage(evidencePackage) === entry.packageHash, `Queued package ${entry.packageHash} has changed`);
+    if (eligibleUnderSemanticPolicy(evidencePackage, { candidateLimit, minimumSimilarity })) continue;
+    entry.retiredAt = now;
+    entry.retirementReason = "outside-active-semantic-policy";
+    retired += 1;
+  }
+  if (retired > 0) {
+    await writeFile(manifestPath, `${JSON.stringify(validateEvidencePackageQueue(queue), null, 2)}\n`);
+  }
+  return { retired, activeCount: currentEvidencePackageEntries(queue).length, changed: retired > 0 };
 }
 
 export async function loadCurrentEvidencePackages(queueDirectory) {

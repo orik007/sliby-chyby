@@ -15,7 +15,9 @@ test("full evidence collection is scheduled daily at 09:37 Prague time", async (
   assert.match(workflow, /--write-checkpoints automation\/collectors\/checkpoints\.json/);
   assert.match(workflow, /--semantic-index automation\/semantic-index\/promise-index\.json/);
   assert.match(workflow, /--write-semantic-index automation\/semantic-index\/promise-index\.json/);
-  assert.match(workflow, /SLIBY_SEMANTIC_MIN_SIMILARITY: 0\.5/);
+  assert.match(workflow, /SLIBY_SEMANTIC_CANDIDATE_LIMIT: 3/);
+  assert.match(workflow, /SLIBY_SEMANTIC_MIN_SIMILARITY: 0\.55/);
+  assert.match(workflow, /reconcile-evidence-package-queue\.mjs --queue automation\/evidence-packages/);
   assert.match(workflow, /SLIBY_ASSESSMENT_CONCURRENCY: 4/);
   assert.match(workflow, /timeout-minutes: 90/);
   assert.match(workflow, /Persist successful source checkpoints/);
