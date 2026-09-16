@@ -15,7 +15,7 @@ const checkpoint = "automation/collectors/checkpoints.json";
 const index = "automation/semantic-index/promise-index.json";
 const evidenceQueue = "automation/evidence-packages/manifest.json";
 
-for (const scenario of ["bootstrap", "existing audit", "rewritten remote audit", "audit deletion", "non-audit conflict", "audit file to directory", "audit directory to file"]) {
+for (const scenario of ["bootstrap", "existing audit", "rewritten remote audit", "stale local audit", "audit deletion", "non-audit conflict", "audit file to directory", "audit directory to file"]) {
   test(`durable branch synchronization: ${scenario}`, () => {
     const root = mkdtempSync(join(tmpdir(), "audit-sync-"));
     const cwd = join(root, "work");
@@ -65,7 +65,7 @@ for (const scenario of ["bootstrap", "existing audit", "rewritten remote audit",
       git("push", "origin", "automation/assessment-review");
       git("fetch", "origin", "refs/heads/automation/assessment-review:refs/remotes/origin/automation/assessment-review");
       git("switch", "main");
-      git("branch", "-D", "automation/assessment-review");
+      if (scenario !== "stale local audit") git("branch", "-D", "automation/assessment-review");
       put(readme, "main\n");
       put("automation/semantic-index/README.md", "new index documentation\n");
       put("src/example.txt", "main\n");
@@ -84,7 +84,8 @@ for (const scenario of ["bootstrap", "existing audit", "rewritten remote audit",
       }
       commit();
       const mainHead = git("rev-parse", "HEAD");
-      if (scenario === "rewritten remote audit") {
+      const remoteAuditWasRewritten = ["rewritten remote audit", "stale local audit"].includes(scenario);
+      if (remoteAuditWasRewritten) {
         git("switch", "-c", "rewritten-audit", mainHead);
         put(readme, "rewritten durable\n");
         put("automation/review-proposals/history/proposal.json", "rewritten retained\n");
@@ -105,17 +106,17 @@ for (const scenario of ["bootstrap", "existing audit", "rewritten remote audit",
         if (scenario === "audit directory to file") assert.equal(git("show", `HEAD:${collision}/child.json`), "durable");
       } else {
         assert.equal(result.status, 0, result.stderr || result.stdout);
-        assert.equal(git("show", `HEAD:${readme}`), scenario === "rewritten remote audit" ? "rewritten durable" : "durable");
-        assert.equal(git("show", "HEAD:automation/review-proposals/history/proposal.json"), scenario === "rewritten remote audit" ? "rewritten retained" : "retained");
+        assert.equal(git("show", `HEAD:${readme}`), remoteAuditWasRewritten ? "rewritten durable" : "durable");
+        assert.equal(git("show", "HEAD:automation/review-proposals/history/proposal.json"), remoteAuditWasRewritten ? "rewritten retained" : "retained");
         assert.equal(git("show", "HEAD:automation/semantic-index/README.md"), "new index documentation");
         assert.equal(git("show", "HEAD:src/example.txt"), "main");
         git("merge-base", "--is-ancestor", mainHead, "HEAD");
-        if (scenario !== "rewritten remote audit") git("merge-base", "--is-ancestor", auditHead, "HEAD");
+        if (!remoteAuditWasRewritten) git("merge-base", "--is-ancestor", auditHead, "HEAD");
         if (scenario === "existing audit") {
           assert.equal(git("show", `HEAD:${checkpoint}`), "durable checkpoint");
           assert.equal(git("show", `HEAD:${index}`), "durable index");
           assert.equal(git("show", `HEAD:${evidenceQueue}`), "durable queue");
-        } else if (scenario === "rewritten remote audit") {
+        } else if (remoteAuditWasRewritten) {
           assert.equal(git("show", `HEAD:${checkpoint}`), "main checkpoint");
           assert.equal(git("show", `HEAD:${index}`), "main index");
           assert.equal(git("show", `HEAD:${evidenceQueue}`), "main queue");

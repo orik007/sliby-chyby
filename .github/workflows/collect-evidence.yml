@@ -63,7 +63,12 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if git ls-remote --exit-code --heads origin "$REVIEW_BRANCH" >/dev/null 2>&1; then
             git fetch origin "+refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
-            git switch --create "$REVIEW_BRANCH" --track "origin/$REVIEW_BRANCH"
+            git switch --force-create "$REVIEW_BRANCH" "origin/$REVIEW_BRANCH"
+            git branch --set-upstream-to="origin/$REVIEW_BRANCH" "$REVIEW_BRANCH"
+            if [ "$(git rev-parse HEAD)" != "$(git rev-parse "origin/$REVIEW_BRANCH")" ]; then
+              echo "::error::The durable review branch was not initialized from its fetched remote tip."
+              exit 1
+            fi
             if git merge-base --is-ancestor "$GITHUB_SHA" HEAD; then
               echo "Durable review branch already contains the current main revision."
             elif git merge --no-ff --no-commit "$GITHUB_SHA"; then

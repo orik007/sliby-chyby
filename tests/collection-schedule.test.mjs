@@ -47,6 +47,8 @@ test("the durable audit branch retains every operational audit tree when syncing
   const workflow = await readFile(workflowUrl, "utf8");
   assert.match(workflow, /git merge-base --is-ancestor "\$GITHUB_SHA" HEAD/);
   assert.match(workflow, /git fetch origin "\+refs\/heads\/\$REVIEW_BRANCH:refs\/remotes\/origin\/\$REVIEW_BRANCH"/);
+  assert.match(workflow, /git switch --force-create "\$REVIEW_BRANCH" "origin\/\$REVIEW_BRANCH"/);
+  assert.match(workflow, /The durable review branch was not initialized from its fetched remote tip/);
   assert.match(workflow, /git merge --no-ff --no-commit/);
   assert.match(workflow, /semantic-index/);
   assert.match(workflow, /evidence-packages/);
