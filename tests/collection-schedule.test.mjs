@@ -46,6 +46,7 @@ test("semantic retrieval ranks the whole public catalogue and limits paid assess
 test("the durable audit branch retains every operational audit tree when syncing main", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
   assert.match(workflow, /git merge-base --is-ancestor "\$GITHUB_SHA" HEAD/);
+  assert.match(workflow, /git fetch origin "\+refs\/heads\/\$REVIEW_BRANCH:refs\/remotes\/origin\/\$REVIEW_BRANCH"/);
   assert.match(workflow, /git merge --no-ff --no-commit/);
   assert.match(workflow, /semantic-index/);
   assert.match(workflow, /evidence-packages/);
