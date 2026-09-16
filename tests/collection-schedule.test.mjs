@@ -24,6 +24,14 @@ test("full evidence collection is scheduled daily at 09:37 Prague time", async (
   assert.match(workflow, /Queue enriched evidence packages/);
   assert.match(workflow, /--retry-blocked-queue automation\/evidence-packages/);
   assert.match(workflow, /--packages automation\/evidence-packages/);
+  assert.match(workflow, /const collectorRun = JSON\.parse\(await readFile\("automation\/runs\/pipeline\/github-actions\/collector\/collector-run\.json", "utf8"\)\);/);
+  assert.match(workflow, /collectorRun\.collectors\.map/);
+  assert.doesNotMatch(workflow, /^      GH_TOKEN:/m);
+  assert.match(workflow, /persist-credentials: false/);
+  assert.equal([...workflow.matchAll(/GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/g)].length, 6);
+  assert.match(workflow, /- name: Persist successful source checkpoints[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
+  assert.match(workflow, /- name: Create audit pull request for collection when needed[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
+  assert.match(workflow, /git push "https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git" "HEAD:refs\/heads\/\$REVIEW_BRANCH"/);
 });
 
 test("semantic retrieval ranks the whole public catalogue and limits paid assessment fan-out", async () => {
@@ -42,7 +50,7 @@ test("the durable audit branch retains every operational audit tree when syncing
   assert.match(workflow, /semantic-index/);
   assert.match(workflow, /evidence-packages/);
   assert.match(workflow, /git merge --abort/);
-  assert.match(workflow, /git push --set-upstream origin "\$REVIEW_BRANCH"/);
+  assert.match(workflow, /git push "https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git" "HEAD:refs\/heads\/\$REVIEW_BRANCH"/);
   assert.match(workflow, /git add automation\/collectors\/checkpoints\.json/);
   assert.match(workflow, /git add automation\/evidence-packages automation\/semantic-index/);
   assert.match(workflow, /could not create the required review pull request/);

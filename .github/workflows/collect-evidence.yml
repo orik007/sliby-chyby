@@ -34,7 +34,6 @@ jobs:
       name: assessment
       deployment: false
     env:
-      GH_TOKEN: ${{ github.token }}
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       COLLECTOR_SINCE: ${{ inputs.since || '' }}
       MATCHER_AS_OF: ${{ inputs.as_of || '' }}
@@ -56,6 +55,7 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
+          persist-credentials: false
 
       - name: Prepare durable review branch
         run: |
@@ -119,18 +119,22 @@ jobs:
 
       - name: Persist successful source checkpoints
         id: checkpoints
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
           git add automation/collectors/checkpoints.json
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "Record successful source collection"
-            git push --set-upstream origin "$REVIEW_BRANCH"
+            git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
             echo "created=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Create audit pull request for collection when needed
         if: steps.checkpoints.outputs.created == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
           cat > "$RUNNER_TEMP/collection-audit-pr.md" <<'EOF'
           ## Neveřejný audit sběru podkladů
@@ -173,18 +177,22 @@ jobs:
 
       - name: Persist queued evidence packages
         id: packages
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
           git add automation/evidence-packages automation/semantic-index
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "Queue collected evidence packages"
-            git push --set-upstream origin "$REVIEW_BRANCH"
+            git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
             echo "created=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Create audit pull request for evidence packages when needed
         if: steps.packages.outputs.created == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
           cat > "$RUNNER_TEMP/evidence-package-audit-pr.md" <<'EOF'
           ## Neveřejné balíčky podkladů
@@ -224,6 +232,7 @@ jobs:
           node --input-type=module -e '
             import { readFile, appendFile } from "node:fs/promises";
             const run = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/match-run.json", "utf8"));
+            const collectorRun = JSON.parse(await readFile("automation/runs/pipeline/github-actions/collector/collector-run.json", "utf8"));
             const semantic = run.semanticRetrieval;
             const enrichment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json", "utf8"));
             const assessment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/assessment-batch.json", "utf8"));
@@ -257,7 +266,7 @@ jobs:
               ""
             ];
             await appendFile(process.env.GITHUB_STEP_SUMMARY, lines.join("\n"));
-            const sourceRows = run.collectors.map((collector) => {
+            const sourceRows = collectorRun.collectors.map((collector) => {
               const checkpoint = checkpoints.sourceCheckpoints[collector.sourceId];
               return `| \`${collector.sourceId}\` | ${collector.collection.mode} | ${collector.collection.since} | ${collector.recordCount} | ${checkpoint?.lastObservedRecordAt?.slice(0, 10) ?? "—"} |`;
             });
@@ -278,6 +287,8 @@ jobs:
 
       - name: Commit new review proposals
         id: proposals
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
           git add automation/review-proposals
           if git diff --cached --quiet; then
@@ -287,10 +298,12 @@ jobs:
             git commit -m "Update evidence collection audit"
             echo "created=true" >> "$GITHUB_OUTPUT"
           fi
-          git push --set-upstream origin "$REVIEW_BRANCH"
+          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
 
       - name: Create or update human-review pull request
         if: steps.proposals.outputs.created == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
           PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVIEW_BRANCH" --base main --state open --json number --jq '.[0].number')"
           if [ -n "$PR_NUMBER" ]; then
