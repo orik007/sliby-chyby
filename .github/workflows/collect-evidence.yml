@@ -57,46 +57,25 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Prepare durable review branch
+      - name: Restore current audit state
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git ls-remote --exit-code --heads origin "$REVIEW_BRANCH" >/dev/null 2>&1; then
-            git fetch origin "+refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
-            git switch --force-create "$REVIEW_BRANCH" "origin/$REVIEW_BRANCH"
-            git branch --set-upstream-to="origin/$REVIEW_BRANCH" "$REVIEW_BRANCH"
-            if [ "$(git rev-parse HEAD)" != "$(git rev-parse "origin/$REVIEW_BRANCH")" ]; then
-              echo "::error::The durable review branch was not initialized from its fetched remote tip."
-              exit 1
-            fi
-            if git merge-base --is-ancestor "$GITHUB_SHA" HEAD; then
-              echo "Durable review branch already contains the current main revision."
-            elif git merge --no-ff --no-commit "$GITHUB_SHA"; then
-              git commit --no-edit
-            else
-              unresolved="$(git diff --name-only --diff-filter=U)"
-              if [ -z "$unresolved" ] || printf '%s\n' "$unresolved" | grep -qv -E '^automation/(evidence-packages/|review-proposals/|collectors/checkpoints\.json$|semantic-index/)'; then
-                git merge --abort
-                echo "::error::A non-audit conflict prevents synchronizing the durable review branch with main."
-                exit 1
+          authenticated_remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git ls-remote --exit-code --heads "$authenticated_remote" "$REVIEW_BRANCH" >/dev/null 2>&1; then
+            git fetch "$authenticated_remote" "+refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
+            audit_branch_tip="$(git rev-parse "origin/$REVIEW_BRANCH")"
+            for path in automation/collectors/checkpoints.json automation/semantic-index automation/evidence-packages automation/review-proposals; do
+              if git cat-file -e "origin/$REVIEW_BRANCH:$path" 2>/dev/null; then
+                git restore --source="origin/$REVIEW_BRANCH" --staged --worktree -- "$path"
               fi
-              while IFS= read -r -d '' path; do
-                if git cat-file -e "HEAD:$path" 2>/dev/null; then
-                  git restore --source=HEAD --staged --worktree -- "$path"
-                else
-                  if git cat-file -e ":2:$path" 2>/dev/null || ! git cat-file -e ":1:$path" 2>/dev/null; then
-                    git merge --abort
-                    echo "::error::An audit path relocation requires manual conflict resolution."
-                    exit 1
-                  fi
-                  git rm -- "$path"
-                fi
-              done < <(git diff --name-only --diff-filter=U -z)
-              git commit --no-edit
-            fi
+            done
           else
-            git switch --create "$REVIEW_BRANCH" "$GITHUB_SHA"
+            audit_branch_tip=""
           fi
+          echo "AUDIT_BRANCH_TIP=$audit_branch_tip" >> "$GITHUB_ENV"
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
@@ -132,20 +111,8 @@ jobs:
             echo "created=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "Record successful source collection"
-            git fetch origin "+refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
-            if ! git merge-base --is-ancestor "origin/$REVIEW_BRANCH" HEAD; then
-              if ! git merge --no-ff --no-commit "origin/$REVIEW_BRANCH"; then
-                unresolved="$(git diff --name-only --diff-filter=U)"
-                if [ "$unresolved" != "automation/collectors/checkpoints.json" ]; then
-                  git merge --abort
-                  echo "::error::The checkpoint commit diverged from the audit branch outside the checkpoint file."
-                  exit 1
-                fi
-                git restore --source=HEAD --staged --worktree -- automation/collectors/checkpoints.json
-              fi
-              git commit --no-edit
-            fi
-            git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
+            git push --force-with-lease="refs/heads/$REVIEW_BRANCH:$AUDIT_BRANCH_TIP" "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
+            echo "AUDIT_BRANCH_TIP=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
             echo "created=true" >> "$GITHUB_OUTPUT"
           fi
 
@@ -203,7 +170,8 @@ jobs:
             echo "created=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "Queue collected evidence packages"
-            git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
+            git push --force-with-lease="refs/heads/$REVIEW_BRANCH:$AUDIT_BRANCH_TIP" "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
+            echo "AUDIT_BRANCH_TIP=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
             echo "created=true" >> "$GITHUB_OUTPUT"
           fi
 
@@ -316,7 +284,8 @@ jobs:
             git commit -m "Update evidence collection audit"
             echo "created=true" >> "$GITHUB_OUTPUT"
           fi
-          git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
+          git push --force-with-lease="refs/heads/$REVIEW_BRANCH:$AUDIT_BRANCH_TIP" "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
+          echo "AUDIT_BRANCH_TIP=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
 
       - name: Create or update human-review pull request
         if: steps.proposals.outputs.created == 'true'

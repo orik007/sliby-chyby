@@ -28,10 +28,11 @@ test("full evidence collection is scheduled daily at 09:37 Prague time", async (
   assert.match(workflow, /collectorRun\.collectors\.map/);
   assert.doesNotMatch(workflow, /^      GH_TOKEN:/m);
   assert.match(workflow, /persist-credentials: false/);
-  assert.equal([...workflow.matchAll(/GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/g)].length, 6);
+  assert.equal([...workflow.matchAll(/GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/g)].length, 7);
+  assert.match(workflow, /- name: Restore current audit state[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   assert.match(workflow, /- name: Persist successful source checkpoints[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   assert.match(workflow, /- name: Create audit pull request for collection when needed[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
-  assert.match(workflow, /git push "https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git" "HEAD:refs\/heads\/\$REVIEW_BRANCH"/);
+  assert.match(workflow, /git push --force-with-lease="refs\/heads\/\$REVIEW_BRANCH:\$AUDIT_BRANCH_TIP" "https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git" "HEAD:refs\/heads\/\$REVIEW_BRANCH"/);
 });
 
 test("semantic retrieval ranks the whole public catalogue and limits paid assessment fan-out", async () => {
@@ -43,22 +44,19 @@ test("semantic retrieval ranks the whole public catalogue and limits paid assess
   assert.match(assessmentBatch, /SLIBY_ASSESSMENT_CONCURRENCY must be an integer from 1 to 8/);
 });
 
-test("the durable audit branch retains every operational audit tree when syncing main", async () => {
+test("the audit branch is a current operational snapshot restored into main", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
-  assert.match(workflow, /git merge-base --is-ancestor "\$GITHUB_SHA" HEAD/);
-  assert.match(workflow, /git fetch origin "\+refs\/heads\/\$REVIEW_BRANCH:refs\/remotes\/origin\/\$REVIEW_BRANCH"/);
-  assert.match(workflow, /git switch --force-create "\$REVIEW_BRANCH" "origin\/\$REVIEW_BRANCH"/);
-  assert.match(workflow, /The durable review branch was not initialized from its fetched remote tip/);
-  assert.match(workflow, /git merge --no-ff --no-commit/);
+  assert.match(workflow, /authenticated_remote="https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git"/);
+  assert.match(workflow, /git fetch "\$authenticated_remote" "\+refs\/heads\/\$REVIEW_BRANCH:refs\/remotes\/origin\/\$REVIEW_BRANCH"/);
+  assert.match(workflow, /git restore --source="origin\/\$REVIEW_BRANCH" --staged --worktree/);
+  assert.match(workflow, /AUDIT_BRANCH_TIP=\$audit_branch_tip/);
   assert.match(workflow, /semantic-index/);
   assert.match(workflow, /evidence-packages/);
-  assert.match(workflow, /git merge --abort/);
-  assert.match(workflow, /git push "https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git" "HEAD:refs\/heads\/\$REVIEW_BRANCH"/);
+  assert.match(workflow, /git push --force-with-lease="refs\/heads\/\$REVIEW_BRANCH:\$AUDIT_BRANCH_TIP"/);
   assert.match(workflow, /git add automation\/collectors\/checkpoints\.json/);
-  assert.match(workflow, /git merge-base --is-ancestor "origin\/\$REVIEW_BRANCH" HEAD/);
-  assert.match(workflow, /The checkpoint commit diverged from the audit branch outside the checkpoint file/);
-  assert.match(workflow, /git restore --source=HEAD --staged --worktree -- automation\/collectors\/checkpoints\.json/);
   assert.match(workflow, /git add automation\/evidence-packages automation\/semantic-index/);
+  assert.doesNotMatch(workflow, /git merge --no-ff --no-commit/);
+  assert.doesNotMatch(workflow, /git switch --force-create "\$REVIEW_BRANCH"/);
   assert.match(workflow, /could not create the required review pull request/);
 });
 
