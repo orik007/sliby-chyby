@@ -10,8 +10,8 @@ export function semanticRetrievalRuntimeConfig(env = process.env) {
     provider: env.SLIBY_SEMANTIC_PROVIDER ?? "openai",
     model: env.SLIBY_SEMANTIC_MODEL ?? "text-embedding-3-small",
     dimensions: Number(env.SLIBY_SEMANTIC_DIMENSIONS ?? "256"),
-    candidateLimit: Number(env.SLIBY_SEMANTIC_CANDIDATE_LIMIT ?? "8"),
-    minimumSimilarity: Number(env.SLIBY_SEMANTIC_MIN_SIMILARITY ?? "0.5")
+    candidateLimit: Number(env.SLIBY_SEMANTIC_CANDIDATE_LIMIT ?? "3"),
+    minimumSimilarity: Number(env.SLIBY_SEMANTIC_MIN_SIMILARITY ?? "0.55")
   };
 }
 
