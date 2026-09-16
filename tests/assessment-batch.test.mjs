@@ -64,7 +64,7 @@ test("persists an isolated double-invalid failure, then retires it after a newer
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-batch-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v12.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v13.md"), "assessor test prompt\n");
   await writeFile(join(root, "automation/prompts/arbiter-v5.md"), "arbiter test prompt\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
 

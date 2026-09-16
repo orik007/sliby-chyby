@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
+import { readdir } from "node:fs/promises";
+import { resolve } from "node:path";
 import test from "node:test";
-import { loadAssessmentPrompts } from "../scripts/lib/assessment-config.mjs";
+import { arbiterPromptVersion, assessorPromptVersion, loadAssessmentPrompts } from "../scripts/lib/assessment-config.mjs";
 import { emptyReviewManifest, planAssessmentInputs, validateReviewManifest } from "../scripts/lib/assessment-review.mjs";
 
 const evidencePackage = {
@@ -20,12 +22,18 @@ const runtime = { assessorProviderA: "openai", assessorProviderB: "openai", arbi
 
 test("loads only the active assessor and arbiter prompts", async () => {
   const prompts = await loadAssessmentPrompts();
-  assert.equal(prompts.assessor.version, "assessor-v12");
+  assert.equal(prompts.assessor.version, "assessor-v13");
   assert.equal(prompts.arbiter.version, "arbiter-v5");
   assert.match(prompts.assessor.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.arbiter.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.assessor.instructions, /maintenanceBaseline/);
+  assert.match(prompts.assessor.instructions, /Never return an empty citation array/);
   assert.match(prompts.arbiter.instructions, /maintenanceBaseline/);
+});
+
+test("retains only the active prompt files", async () => {
+  const promptFiles = await readdir(resolve(import.meta.dirname, "../automation/prompts"));
+  assert.deepEqual(promptFiles.sort(), [`${arbiterPromptVersion}.md`, `${assessorPromptVersion}.md`].sort());
 });
 
 test("plans an unseen package for human review without publication", () => {
