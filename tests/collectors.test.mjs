@@ -5,6 +5,7 @@ import { strToU8 } from "fflate";
 import {
   createCollectedRecord,
   deduplicateRecords,
+  fetchVerified,
   validateRegistry
 } from "../scripts/lib/collector-core.mjs";
 import { parseNewsSitemap, parseRssOrAtom } from "../scripts/lib/feed-collectors.mjs";
@@ -41,6 +42,67 @@ test("validates a unique, explicit collector registry", () => {
     schemaVersion: "1.0.0",
     sources: [{ ...mediaSource, evidenceRole: "official-party-publication", primary: true }]
   }), /needs partyId/);
+});
+
+test("retries transient source responses before accepting verified bytes", async () => {
+  const originalFetch = globalThis.fetch;
+  let attempts = 0;
+  const response = (status, body, contentType = "text/plain") => ({
+    ok: status >= 200 && status < 300,
+    status,
+    url: "https://news.example/api",
+    headers: new Headers({ "content-type": contentType }),
+    body: null,
+    arrayBuffer: async () => new TextEncoder().encode(body).buffer
+  });
+  globalThis.fetch = async () => {
+    attempts += 1;
+    if (attempts < 3) return response(503, "temporarily unavailable");
+    return response(200, '{"items":[]}', "application/json");
+  };
+  try {
+    const result = await fetchVerified(mediaSource, "https://news.example/api", {
+      maxBytes: 1_000,
+      expectedContentTypes: ["application/json"],
+      retryAttempts: 3,
+      retryDelayMs: 0
+    });
+    assert.equal(attempts, 3);
+    assert.equal(new TextDecoder().decode(result.bytes), '{"items":[]}');
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("retries transport failures while fetching and reading source bytes", async () => {
+  const originalFetch = globalThis.fetch;
+  let attempts = 0;
+  const response = (readBytes) => ({
+    ok: true,
+    status: 200,
+    url: "https://news.example/api",
+    headers: new Headers({ "content-type": "application/json" }),
+    body: null,
+    arrayBuffer: readBytes
+  });
+  globalThis.fetch = async () => {
+    attempts += 1;
+    if (attempts === 1) throw new TypeError("connection reset before response");
+    if (attempts === 2) return response(async () => { throw new TypeError("connection reset while reading body"); });
+    return response(async () => new TextEncoder().encode('{"items":[]}').buffer);
+  };
+  try {
+    const result = await fetchVerified(mediaSource, "https://news.example/api", {
+      maxBytes: 1_000,
+      expectedContentTypes: ["application/json"],
+      retryAttempts: 3,
+      retryDelayMs: 0
+    });
+    assert.equal(attempts, 3);
+    assert.equal(new TextDecoder().decode(result.bytes), '{"items":[]}');
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
 
 test("normalizes an official party WordPress item with explicit party attribution", () => {
