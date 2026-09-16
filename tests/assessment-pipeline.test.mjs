@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  assessmentOutputJsonSchema,
   hashAssessmentContent,
   hashAssessmentFingerprint,
   resolveAssessmentReviews,
@@ -90,12 +91,17 @@ test("keeps a consensus assessment as an unpublished candidate", () => {
 });
 
 test("requires the arbiter when one assessor output is invalid", () => {
+  assert.equal(assessmentOutputJsonSchema.properties.citedEvidenceIds.minItems, 1);
   const invalid = review("moving-towards");
   invalid.citedEvidenceIds = [];
   const resolved = resolveAvailableAssessmentReviews(invalid, review("moving-towards"), evidencePackage);
   assert.equal(resolved.reviewA, null);
   assert.equal(resolved.reviewB.status, "moving-towards");
   assert.match(resolved.validationErrors["assessor-a"], /cite evidence/);
+
+  const duplicateCitation = review("moving-towards");
+  duplicateCitation.citedEvidenceIds = ["conduct", "conduct"];
+  assert.throws(() => validateAssessmentOutput(duplicateCitation, evidencePackage), /duplicate evidence/);
   assert.deepEqual(resolved.resolution, { state: "arbitration-required", reason: "single-valid-assessor", status: null, selectedReview: null });
   assert.deepEqual(resolveAssessmentReviews(resolved.reviewA, resolved.reviewB, evidencePackage, {
     choice: "assessor-b", citedEvidenceIds: ["conduct"], explanationCz: "Druhý posudek odpovídá předloženým podkladům."

@@ -10,7 +10,7 @@ export const assessmentOutputJsonSchema = {
     promiseId: { type: "string" },
     status: { type: "string", enum: assessmentStatuses },
     evidenceSufficient: { type: "boolean" },
-    citedEvidenceIds: { type: "array", items: { type: "string" } },
+    citedEvidenceIds: { type: "array", minItems: 1, items: { type: "string" } },
     explanationCz: { type: "string" },
     confidence: { type: "string", enum: ["low", "medium", "high"] },
     uncertainties: { type: "array", items: { type: "string" } }
