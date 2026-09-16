@@ -9,6 +9,10 @@ const workflow = readFileSync(new URL("../.github/workflows/collect-evidence.yml
 const preparation = workflow.split("      - name: Prepare durable review branch\n")[1]
   .split("        run: |\n")[1].split("\n      - name:")[0]
   .split("\n").map((line) => line.replace(/^          /, "")).join("\n");
+const checkpointPersistence = workflow.split("      - name: Persist successful source checkpoints\n")[1]
+  .split("        run: |\n")[1].split("\n      - name:")[0]
+  .split("\n").map((line) => line.replace(/^          /, "")).join("\n")
+  .replace('git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"', 'git push origin "HEAD:refs/heads/$REVIEW_BRANCH"');
 const bash = process.platform === "win32" ? "C:/Program Files/Git/bin/bash.exe" : "bash";
 const readme = "automation/review-proposals/README.md";
 const checkpoint = "automation/collectors/checkpoints.json";
@@ -133,3 +137,110 @@ for (const scenario of ["bootstrap", "existing audit", "rewritten remote audit",
     }
   });
 }
+
+test("checkpoint persistence merges a divergent durable branch without losing stored audit data", () => {
+  const root = mkdtempSync(join(tmpdir(), "checkpoint-push-"));
+  const cwd = join(root, "work");
+  mkdirSync(cwd);
+  const git = (...args) => {
+    const result = spawnSync("git", args, { cwd, encoding: "utf8" });
+    assert.equal(result.status, 0, result.stderr || result.stdout);
+    return result.stdout.trim();
+  };
+  const put = (path, content) => {
+    mkdirSync(dirname(join(cwd, path)), { recursive: true });
+    writeFileSync(join(cwd, path), content);
+  };
+  const commit = (message) => { git("add", "."); git("commit", "-m", message); };
+  try {
+    git("init", "--bare", join(root, "remote.git"));
+    git("init", "-b", "main");
+    git("config", "user.name", "Test");
+    git("config", "user.email", "test@example.invalid");
+    git("config", "core.autocrlf", "false");
+    git("remote", "add", "origin", join(root, "remote.git"));
+    put(checkpoint, "base\n");
+    commit("base");
+    git("push", "origin", "main");
+    git("switch", "-c", "automation/assessment-review");
+    put(checkpoint, "remote checkpoint\n");
+    put("automation/review-proposals/history/proposal.json", "retained\n");
+    commit("remote audit");
+    const remoteAuditHead = git("rev-parse", "HEAD");
+    git("push", "origin", "automation/assessment-review");
+    git("switch", "main");
+    put("src/main.txt", "main\n");
+    commit("main change");
+    git("switch", "-C", "automation/assessment-review");
+    put(checkpoint, "collected checkpoint\n");
+    const output = join(root, "github-output");
+    const result = spawnSync(bash, ["-e", "-c", checkpointPersistence], {
+      cwd,
+      encoding: "utf8",
+      env: { ...process.env, REVIEW_BRANCH: "automation/assessment-review", GITHUB_OUTPUT: output }
+    });
+    assert.equal(result.status, 0, result.stderr || result.stdout);
+    git("fetch", "origin", "refs/heads/automation/assessment-review:refs/remotes/origin/automation/assessment-review");
+    assert.equal(git("show", `origin/automation/assessment-review:${checkpoint}`), "collected checkpoint");
+    assert.equal(git("show", "origin/automation/assessment-review:automation/review-proposals/history/proposal.json"), "retained");
+    git("merge-base", "--is-ancestor", remoteAuditHead, "origin/automation/assessment-review");
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test("checkpoint persistence aborts on a mixed audit conflict without pushing", () => {
+  const root = mkdtempSync(join(tmpdir(), "checkpoint-push-conflict-"));
+  const cwd = join(root, "work");
+  mkdirSync(cwd);
+  const git = (...args) => {
+    const result = spawnSync("git", args, { cwd, encoding: "utf8" });
+    assert.equal(result.status, 0, result.stderr || result.stdout);
+    return result.stdout.trim();
+  };
+  const put = (path, content) => {
+    mkdirSync(dirname(join(cwd, path)), { recursive: true });
+    writeFileSync(join(cwd, path), content);
+  };
+  const commit = (message) => { git("add", "."); git("commit", "-m", message); };
+  try {
+    git("init", "--bare", join(root, "remote.git"));
+    git("init", "-b", "main");
+    git("config", "user.name", "Test");
+    git("config", "user.email", "test@example.invalid");
+    git("config", "core.autocrlf", "false");
+    git("remote", "add", "origin", join(root, "remote.git"));
+    put(checkpoint, "base\n");
+    put("automation/review-proposals/history/proposal.json", "base\n");
+    commit("base");
+    git("push", "origin", "main");
+    git("switch", "-c", "automation/assessment-review");
+    put(checkpoint, "remote checkpoint\n");
+    put("automation/review-proposals/history/proposal.json", "remote proposal\n");
+    commit("remote audit");
+    const remoteAuditHead = git("rev-parse", "HEAD");
+    git("push", "origin", "automation/assessment-review");
+    git("switch", "main");
+    put("src/main.txt", "main\n");
+    commit("main change");
+    git("switch", "-C", "automation/assessment-review");
+    put("automation/review-proposals/history/proposal.json", "local proposal\n");
+    commit("local audit conflict");
+    put(checkpoint, "collected checkpoint\n");
+    const output = join(root, "github-output");
+    const result = spawnSync(bash, ["-e", "-c", checkpointPersistence], {
+      cwd,
+      encoding: "utf8",
+      env: { ...process.env, REVIEW_BRANCH: "automation/assessment-review", GITHUB_OUTPUT: output }
+    });
+    assert.equal(result.status, 1, result.stderr || result.stdout);
+    assert.match(result.stdout, /checkpoint commit diverged from the audit branch outside the checkpoint file/);
+    git("fetch", "origin", "refs/heads/automation/assessment-review:refs/remotes/origin/automation/assessment-review");
+    assert.equal(git("rev-parse", "origin/automation/assessment-review"), remoteAuditHead);
+    assert.equal(git("show", `origin/automation/assessment-review:${checkpoint}`), "remote checkpoint");
+    assert.equal(git("show", "origin/automation/assessment-review:automation/review-proposals/history/proposal.json"), "remote proposal");
+    assert.equal(git("show", `HEAD:${checkpoint}`), "collected checkpoint");
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});

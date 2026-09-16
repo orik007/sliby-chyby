@@ -132,6 +132,19 @@ jobs:
             echo "created=false" >> "$GITHUB_OUTPUT"
           else
             git commit -m "Record successful source collection"
+            git fetch origin "+refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
+            if ! git merge-base --is-ancestor "origin/$REVIEW_BRANCH" HEAD; then
+              if ! git merge --no-ff --no-commit "origin/$REVIEW_BRANCH"; then
+                unresolved="$(git diff --name-only --diff-filter=U)"
+                if [ "$unresolved" != "automation/collectors/checkpoints.json" ]; then
+                  git merge --abort
+                  echo "::error::The checkpoint commit diverged from the audit branch outside the checkpoint file."
+                  exit 1
+                fi
+                git restore --source=HEAD --staged --worktree -- automation/collectors/checkpoints.json
+              fi
+              git commit --no-edit
+            fi
             git push "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
             echo "created=true" >> "$GITHUB_OUTPUT"
           fi
