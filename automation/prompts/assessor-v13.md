@@ -18,6 +18,8 @@ Distinguish an intention, formal proposal, vote, adopted law or decision, and re
 
 A meaningful step changes the promised amount, scope, rights, obligations, implementation, or formal legislative path. Rhetoric, speculation, unrelated preparation, and cosmetic references do not count.
 
+Do not infer a maintenance commitment from wording. When `assessmentContext.maintenanceBaseline` is present, it is the supplied audit determination that the promise qualifies and its named evidence documents the preserved state at the start of responsibility. Use no maintenance baseline that is absent from this field.
+
 ## 3. Apply the special vote rule
 
 A Chamber position exists only when more than half of the entire time-resolved parliamentary group cast the same `yes` or `no` choice. Abstentions, non-votes, absences, excuses, and members who had not taken the oath remain in the denominator.
@@ -36,8 +38,8 @@ Do not apply the missed-opportunity rule to a merely similar, procedural, ambigu
 Read `assessmentContext.mode`; never choose or infer the mode yourself.
 
 - `fulfilled`: the whole promised result occurred, the exact promised conduct was performed, or the full-measure vote rule above applies.
-- `moving-towards`: a concrete attributable intention, formal proposal, partial measure, or other meaningful step advances all or a real part of the promise.
-- `no-progress`: in `live` mode, no verified significant movement in either direction has been established. This is the default score; it does not assert that the party did nothing or that no undiscovered record exists.
+- `moving-towards`: a concrete attributable intention, formal proposal, partial measure, or other meaningful step advances all or a real part of the promise. In `live` mode, choose this status for a supplied maintenance baseline while its documented preserved state holds and the package shows no contrary step toward the identified change; cite the named baseline evidence.
+- `no-progress`: in `live` mode, no verified significant movement in either direction has been established for an ordinary promise without a supplied maintenance baseline. This does not assert that the party did nothing or that no undiscovered record exists.
 - `moving-against`: a concrete contrary intention or step, explicit abandonment, the verified missed vote opportunity above, or a promise untouched throughout a `closing-audit`.
 - `acting-against`: a significant act directly violated the promise, a definitive contrary result occurred, or the full-measure `no` vote rule above applies.
 
@@ -51,4 +53,13 @@ Prefer the underlying official record for a proposal, vote, law, decision, or ou
 
 Write `explanationCz` in 3–6 short, natural Czech sentences for an ordinary reader. State who did what, what it changed, and why that affects the promise. Explain a legal or parliamentary reference on first use; never use a bare identifier such as “tisk 201”. Never put internal English status names, evidence labels, package fields, or project jargon into Czech prose. Write every `uncertainties` item with the same clarity.
 
-Return only the requested structured output. Cite only evidence IDs present in the package.
+## Required citation check before returning the structured output
+
+`citedEvidenceIds` is mandatory and must contain at least one ID. Never return an empty citation array.
+
+- Select the IDs only from the supplied package and copy each ID exactly as written there.
+- Cite the promise source and every evidence item that materially supports the status, attribution, or an identified gap. If `evidenceSufficient` is false, still cite the supplied evidence that establishes the gap or uncertainty.
+- Do not put evidence IDs into `explanationCz`; place them only in `citedEvidenceIds`.
+- Before returning, verify that the array is non-empty, has no duplicate IDs, and every entry appears in the supplied package.
+
+Return only the requested structured output.

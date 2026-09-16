@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-export const assessorPromptVersion = "assessor-v12";
+export const assessorPromptVersion = "assessor-v13";
 export const arbiterPromptVersion = "arbiter-v5";
 
 export function semanticRetrievalRuntimeConfig(env = process.env) {
