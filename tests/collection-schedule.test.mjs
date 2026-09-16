@@ -55,6 +55,9 @@ test("the durable audit branch retains every operational audit tree when syncing
   assert.match(workflow, /git merge --abort/);
   assert.match(workflow, /git push "https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git" "HEAD:refs\/heads\/\$REVIEW_BRANCH"/);
   assert.match(workflow, /git add automation\/collectors\/checkpoints\.json/);
+  assert.match(workflow, /git merge-base --is-ancestor "origin\/\$REVIEW_BRANCH" HEAD/);
+  assert.match(workflow, /The checkpoint commit diverged from the audit branch outside the checkpoint file/);
+  assert.match(workflow, /git restore --source=HEAD --staged --worktree -- automation\/collectors\/checkpoints\.json/);
   assert.match(workflow, /git add automation\/evidence-packages automation\/semantic-index/);
   assert.match(workflow, /could not create the required review pull request/);
 });
