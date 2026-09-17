@@ -129,3 +129,68 @@ test("a direct structural link always creates an auto-candidate, independent of 
   assert.ok(route.candidatePromiseIds.includes(fiscalPromise.id));
   assert.ok(route.routeBasis.includes("direct-structural-link"));
 });
+
+test("agreement on a specific tag with zero confidence or no excerpts is weak support, not auto-candidate", () => {
+  const zeroConfidence = combineTaggerResults(
+    taxonomy,
+    taggerOutput(["deficit-and-debt"], { confidence: 0 }),
+    taggerOutput(["deficit-and-debt"], { confidence: 0 })
+  );
+  assert.equal(zeroConfidence.state, "routing-review");
+
+  const noExcerpts = combineTaggerResults(
+    taxonomy,
+    taggerOutput(["deficit-and-debt"], { supportingExcerpts: [] }),
+    taggerOutput(["deficit-and-debt"], { supportingExcerpts: [] })
+  );
+  assert.equal(noExcerpts.state, "routing-review");
+});
+
+test("a one-sided tag proposal never auto-creates a relationship, even when the pair also agrees on a specific tag", () => {
+  const invertedIndex = buildInvertedIndex(taxonomy, [
+    { promiseId: fiscalPromise.id, tagAssignment: taggerOutput(["deficit-and-debt"]) },
+    { promiseId: "fixture-vat-promise", tagAssignment: taggerOutput(["vat-policy"]) }
+  ]);
+  const record = voteRecord({ id: "psp--mixed-agreement" });
+  // Both taggers agree on deficit-and-debt (specific -> auto-candidate), but
+  // tagger A alone also proposes vat-policy. That one-sided tag must not
+  // pull the unrelated fixture-vat-promise into the auto-created candidate set.
+  const taggerA = taggerOutput(["deficit-and-debt", "vat-policy"]);
+  const taggerB = taggerOutput(["deficit-and-debt"]);
+  const route = routeSourceRecord({ taxonomy, record, taggerA, taggerB, invertedIndex });
+  assert.equal(route.disposition, "candidate-created");
+  assert.deepEqual(route.candidatePromiseIds, [fiscalPromise.id]);
+  assert.ok(!route.candidatePromiseIds.includes("fixture-vat-promise"));
+});
+
+test("a promise-topic assignment still pending human review is excluded from the auto-candidate index", () => {
+  const invertedIndex = buildInvertedIndex(taxonomy, [
+    { promiseId: fiscalPromise.id, tagAssignment: taggerOutput(["deficit-and-debt"]), needsReview: true }
+  ]);
+  const record = voteRecord({ id: "psp--pending-review-promise" });
+  const route = routeSourceRecord({
+    taxonomy,
+    record,
+    taggerA: taggerOutput(["deficit-and-debt"]),
+    taggerB: taggerOutput(["deficit-and-debt"]),
+    invertedIndex
+  });
+  assert.notEqual(route.disposition, "candidate-created");
+  assert.ok(!route.candidatePromiseIds.includes(fiscalPromise.id));
+});
+
+test("a semantic-discovery hit alone never upgrades an unknown/unknown pair past orphan-review", () => {
+  const invertedIndex = buildInvertedIndex(taxonomy, [
+    { promiseId: fiscalPromise.id, tagAssignment: taggerOutput(["deficit-and-debt"]) }
+  ]);
+  const record = voteRecord({ id: "psp--unknown-with-semantic-hint" });
+  const route = routeSourceRecord({
+    taxonomy,
+    record,
+    taggerA: taggerOutput(["unknown"]),
+    taggerB: taggerOutput(["unknown"]),
+    invertedIndex,
+    semanticDiscoveryPromiseIds: [fiscalPromise.id]
+  });
+  assert.equal(route.disposition, "orphan-review");
+});

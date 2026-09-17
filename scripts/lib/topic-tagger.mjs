@@ -54,9 +54,40 @@ export function buildPromiseTaggingBrief(promise, taxonomy) {
   };
 }
 
+/**
+ * Extracts whatever substantive text a collected record already carries in
+ * its own structured payload (an official-publication excerpt, a
+ * parliamentary print's title and recorded action, or a vote's roll-call
+ * result). This is real, already-collected content, distinct from the
+ * enriched official-document excerpts an enrichment stage may add later; a
+ * source record with only a generic title should still give the tagger
+ * something decisive to classify from.
+ */
+export function deriveRecordContentExcerpts(record) {
+  const payload = record.payload ?? {};
+  const excerpts = [];
+  if (typeof payload.excerptCz === "string" && payload.excerptCz.length > 0) {
+    excerpts.push(payload.excerptCz);
+  }
+  if (typeof payload.printTitleCz === "string" && payload.printTitleCz.length > 0) {
+    excerpts.push(`Parliamentary print title: ${payload.printTitleCz}`);
+  }
+  if (typeof payload.actionCz === "string" && payload.actionCz.length > 0) {
+    excerpts.push(`Recorded official action: ${payload.actionCz}`);
+  }
+  if (typeof payload.currentStateCz === "string" && payload.currentStateCz.length > 0) {
+    excerpts.push(`Current recorded state: ${payload.currentStateCz}`);
+  }
+  if (record.kind === "parliamentary-vote" && payload.counts) {
+    excerpts.push(`Roll-call result: ${payload.counts.yes ?? 0} yes, ${payload.counts.no ?? 0} no.`);
+  }
+  return excerpts;
+}
+
 export function buildSourceTaggingBrief(record, officialDocumentExcerpts, taxonomy) {
   invariant(typeof record.id === "string" && record.id.length > 0, "Source brief requires a record id");
   invariant(typeof record.title === "string" && record.title.length > 0, "Source brief requires a record title");
+  const excerpts = [...deriveRecordContentExcerpts(record), ...(officialDocumentExcerpts ?? [])];
   return {
     subjectType: "source",
     subjectId: record.id,
@@ -64,7 +95,7 @@ export function buildSourceTaggingBrief(record, officialDocumentExcerpts, taxono
       `Source title: ${record.title}`,
       `Publisher: ${record.publisher}`,
       `Kind: ${record.kind}`,
-      ...(officialDocumentExcerpts ?? []).map((excerpt, index) => `Official document excerpt ${index + 1}: ${excerpt}`)
+      ...excerpts.map((excerpt, index) => `Excerpt ${index + 1}: ${excerpt}`)
     ].join("\n"),
     taxonomyDefinitions: taxonomyDefinitionsText(taxonomy)
   };

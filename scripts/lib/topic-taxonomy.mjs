@@ -26,6 +26,16 @@ export function validateTaxonomy(taxonomy) {
     invariant(tag.parent === null || ids.has(tag.parent), `Tag ${tag.id} has an unknown parent: ${tag.parent}`);
     invariant(tag.parent !== tag.id, `Tag ${tag.id} cannot be its own parent`);
   }
+  const byId = new Map(taxonomy.tags.map((tag) => [tag.id, tag]));
+  for (const tag of taxonomy.tags) {
+    const visited = new Set([tag.id]);
+    let current = tag;
+    while (current.parent) {
+      invariant(!visited.has(current.parent), `Tag ${tag.id} has a cyclic parent chain through ${current.parent}`);
+      visited.add(current.parent);
+      current = byId.get(current.parent);
+    }
+  }
   return taxonomy;
 }
 
@@ -41,8 +51,11 @@ export function hasTag(taxonomy, tagId) {
 
 export function ancestorChain(taxonomy, tagId) {
   const chain = [];
+  const visited = new Set([tagId]);
   let current = resolveTag(taxonomy, tagId);
   while (current.parent) {
+    invariant(!visited.has(current.parent), `Tag ${tagId} has a cyclic parent chain through ${current.parent}`);
+    visited.add(current.parent);
     current = resolveTag(taxonomy, current.parent);
     chain.push(current.id);
   }

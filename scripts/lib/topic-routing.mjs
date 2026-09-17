@@ -4,55 +4,72 @@ function invariant(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+const minimumGroundedConfidence = 0.5;
+
 function selectedTags(taggerOutput) {
-  return taggerOutput.tags.filter((tagId) => tagId !== "unknown");
+  return (taggerOutput?.tags ?? []).filter((tagId) => tagId !== "unknown");
 }
 
 function isUnknown(taggerOutput) {
-  return taggerOutput.tags.length === 1 && taggerOutput.tags[0] === "unknown";
+  return !taggerOutput || (taggerOutput.tags.length === 1 && taggerOutput.tags[0] === "unknown");
 }
 
-function hasSufficientlySpecificOverlap(taxonomy, tagsA, tagsB) {
-  const shared = tagsA.filter((tagId) => tagsB.includes(tagId));
-  return shared.some((tagId) => isAssessmentEligible(taxonomy, tagId));
+/**
+ * A tagger's tag selection only counts as agreement support when it is
+ * grounded: a plausible confidence and at least one cited excerpt. A tag
+ * returned with zero confidence or no supporting excerpt is weak support and
+ * must not by itself clear the auto-candidate bar, even if the peer tagger
+ * proposes the same tag.
+ */
+function isGrounded(taggerOutput) {
+  return Number.isFinite(taggerOutput?.confidence)
+    && taggerOutput.confidence >= minimumGroundedConfidence
+    && Array.isArray(taggerOutput?.supportingExcerpts)
+    && taggerOutput.supportingExcerpts.length > 0;
 }
 
-function hasAnyOverlap(tagsA, tagsB) {
-  return tagsA.some((tagId) => tagsB.includes(tagId));
+function groundedSelectedTags(taggerOutput) {
+  return isGrounded(taggerOutput) ? selectedTags(taggerOutput) : [];
 }
 
 /**
  * Combines two independent tagger outputs into one routing state, per the
- * doc's table: direct structural link, or both taggers agreeing on a
- * sufficiently specific (assessmentEligible) tag, is auto-candidate; a
- * single tagger, disagreement, or only a broad shared tag is routing-review;
- * both unknown (or no controlled tag at all) is orphan-review.
+ * doc's table. `agreedTags` carries only the tags that both taggers
+ * independently and groundedly agreed are sufficiently specific — the set
+ * that may drive an auto-created relationship. A one-sided or ungrounded
+ * proposal never appears in `agreedTags`; it still reaches routing-review
+ * review through the broader union `routeSourceRecord` builds below.
  */
 export function combineTaggerResults(taxonomy, taggerA, taggerB, { directLink = null } = {}) {
   if (directLink) {
-    return { state: "auto-candidate", reason: "direct-structural-link", directLink };
+    return { state: "auto-candidate", reason: "direct-structural-link", directLink, agreedTags: [] };
   }
 
-  const aUnknown = taggerA ? isUnknown(taggerA) : true;
-  const bUnknown = taggerB ? isUnknown(taggerB) : true;
+  const aUnknown = isUnknown(taggerA);
+  const bUnknown = isUnknown(taggerB);
 
   if (aUnknown && bUnknown) {
-    return { state: "orphan-review", reason: "both-taggers-unknown" };
+    return { state: "orphan-review", reason: "both-taggers-unknown", agreedTags: [] };
   }
   if (aUnknown || bUnknown) {
-    return { state: "routing-review", reason: "only-one-tagger-classified" };
+    return { state: "routing-review", reason: "only-one-tagger-classified", agreedTags: [] };
   }
 
-  const tagsA = selectedTags(taggerA);
-  const tagsB = selectedTags(taggerB);
+  const groundedA = groundedSelectedTags(taggerA);
+  const groundedB = groundedSelectedTags(taggerB);
+  const agreedGroundedSpecific = groundedA.filter(
+    (tagId) => groundedB.includes(tagId) && isAssessmentEligible(taxonomy, tagId)
+  );
+  if (agreedGroundedSpecific.length > 0) {
+    return { state: "auto-candidate", reason: "taggers-agree-on-specific-tag", agreedTags: agreedGroundedSpecific };
+  }
 
-  if (hasSufficientlySpecificOverlap(taxonomy, tagsA, tagsB)) {
-    return { state: "auto-candidate", reason: "taggers-agree-on-specific-tag" };
+  const rawA = selectedTags(taggerA);
+  const rawB = selectedTags(taggerB);
+  if (rawA.some((tagId) => rawB.includes(tagId))) {
+    return { state: "routing-review", reason: "taggers-agree-only-on-broad-or-ungrounded-tag", agreedTags: [] };
   }
-  if (hasAnyOverlap(tagsA, tagsB)) {
-    return { state: "routing-review", reason: "taggers-agree-only-on-broad-tag" };
-  }
-  return { state: "routing-review", reason: "taggers-disagree" };
+  return { state: "routing-review", reason: "taggers-disagree", agreedTags: [] };
 }
 
 /**
@@ -60,24 +77,28 @@ export function combineTaggerResults(taxonomy, taggerA, taggerB, { directLink = 
  * proposals, for pilot measurement purposes. The union of proposed tags is
  * always retained (per the doc: "The union of all proposed relationships is
  * retained in audit data"); `needsReview` flags a promise-topic assignment
- * that a human still needs to confirm before it should be treated as final.
+ * that a human still needs to confirm before it should be treated as final
+ * and eligible to drive an auto-created relationship.
  */
 export function derivePromiseTopicTags(taxonomy, taggerA, taggerB) {
   const combined = combineTaggerResults(taxonomy, taggerA, taggerB);
   if (combined.state === "orphan-review") return { tags: [], state: combined.state, needsReview: true };
-  const proposedTags = [...new Set([...selectedTags(taggerA ?? { tags: [] }), ...selectedTags(taggerB ?? { tags: [] })])];
+  const proposedTags = [...new Set([...selectedTags(taggerA), ...selectedTags(taggerB)])];
   return { tags: proposedTags, state: combined.state, needsReview: combined.state !== "auto-candidate" };
 }
 
 /**
- * Builds an inverted index from an assessment-eligible tag id to the set of
- * promise ids whose promise-topic assignment includes that tag (directly, or
- * through a configured parent-child rule where the promise's own tag is an
- * ancestor of the record's specific tag).
+ * Builds an inverted index from a tag id to the set of promise ids whose
+ * *accepted* promise-topic assignment includes that tag. An assignment
+ * flagged `needsReview` (disagreement, weak support, or unresolved) is
+ * deliberately excluded: it stays in the audit trail, but it must not by
+ * itself let a source record auto-route to that promise before a human has
+ * confirmed the promise's own topic.
  */
 export function buildInvertedIndex(taxonomy, promiseTopicAssignments) {
   const index = new Map();
   for (const assignment of promiseTopicAssignments) {
+    if (assignment.needsReview) continue;
     for (const tagId of selectedTags(assignment.tagAssignment)) {
       const promiseIds = index.get(tagId) ?? new Set();
       promiseIds.add(assignment.promiseId);
@@ -99,10 +120,13 @@ function promiseIdsForTags(taxonomy, invertedIndex, tagIds) {
 
 /**
  * Routes one source record to zero or more promises. Semantic-discovery
- * candidates (`semanticDiscoveryPromiseIds`) are unioned into the result and
- * are never used to filter or retire a tag- or direct-routed relationship —
- * this is the property the design doc requires (lines 106-107) that the
- * legacy top-N/0.55 semantic policy violated.
+ * candidates (`semanticDiscoveryPromiseIds`) are unioned into an already
+ * tag- or direct-routed result and are never used to filter or retire it
+ * (the property the design doc requires, lines 106-107, that the legacy
+ * top-N/0.55 semantic policy violated). Semantic discovery also never
+ * *creates* a relationship on its own when both taggers returned `unknown`:
+ * that stays `orphan-review` for human routing review, not an
+ * auto-published candidate purely on an embedding hint.
  */
 export function routeSourceRecord({
   taxonomy,
@@ -121,7 +145,7 @@ export function routeSourceRecord({
   if (combined.state === "orphan-review") {
     return {
       recordId: record.id,
-      disposition: semanticSet.size > 0 ? "candidate-created" : "orphan-review",
+      disposition: "orphan-review",
       routingState: combined.state,
       reason: combined.reason,
       candidatePromiseIds: [...semanticSet],
@@ -129,12 +153,15 @@ export function routeSourceRecord({
     };
   }
 
-  const tagIds = [
-    ...selectedTags(taggerA ?? { tags: [] }),
-    ...selectedTags(taggerB ?? { tags: [] })
-  ];
-  const tagRoutedPromiseIds = promiseIdsForTags(taxonomy, invertedIndex, tagIds);
-  const directPromiseIds = directLink ? new Set([directLink.promiseId]) : new Set();
+  const directPromiseIds = new Set(directLink?.promiseIds ?? (directLink?.promiseId ? [directLink.promiseId] : []));
+  // Auto-candidate uses only the tags both taggers groundedly agreed were
+  // sufficiently specific. Routing-review uses the broader union of every
+  // proposed tag (including one-sided or ungrounded ones) so the record
+  // still surfaces for human routing review rather than being lost.
+  const routingTagIds = combined.state === "auto-candidate"
+    ? combined.agreedTags
+    : [...selectedTags(taggerA), ...selectedTags(taggerB)];
+  const tagRoutedPromiseIds = promiseIdsForTags(taxonomy, invertedIndex, routingTagIds);
 
   const candidatePromiseIds = new Set([...tagRoutedPromiseIds, ...directPromiseIds, ...semanticSet]);
   const routeBasis = [
