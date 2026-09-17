@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "1.0.0",
+  "taxonomyVersion": "topic-routing-v1",
+  "tags": [
+    {
+      "id": "public-finance",
+      "parent": null,
+      "labelEn": "Public finance",
+      "assessmentEligible": false,
+      "czechAliases": ["veřejné finance", "státní rozpočet", "rozpočtová politika"],
+      "inclusionExamples": [
+        "Any promise or record about the state budget, taxation, or public debt in general terms."
+      ],
+      "exclusionExamples": [
+        "A record about a specific ministry's non-financial policy that merely mentions its budget line in passing."
+      ]
+    },
+    {
+      "id": "fiscal-responsibility",
+      "parent": "public-finance",
+      "labelEn": "Fiscal responsibility",
+      "assessmentEligible": false,
+      "czechAliases": ["fiskální odpovědnost", "rozpočtová odpovědnost", "vyrovnané hospodaření"],
+      "inclusionExamples": [
+        "A commitment to a balanced budget, reduced deficit, or lower public debt as a general fiscal-discipline goal."
+      ],
+      "exclusionExamples": [
+        "A single spending or revenue measure that does not itself commit to a deficit, debt, or fiscal-rule outcome (route it under `taxation` or a sector tag instead)."
+      ]
+    },
+    {
+      "id": "deficit-and-debt",
+      "parent": "fiscal-responsibility",
+      "labelEn": "Budget deficit and public debt level",
+      "assessmentEligible": true,
+      "czechAliases": ["schodek", "deficit", "veřejný dluh", "státní dluh", "vyrovnaný rozpočet", "zadluženost"],
+      "directLegalIdentifiers": ["cz-act-23-2017"],
+      "inclusionExamples": [
+        "A promise or record about the size of the annual budget deficit or the level of public debt.",
+        "A vote on a state budget act's deficit ceiling."
+      ],
+      "exclusionExamples": [
+        "A promise about a specific tax rate that does not itself set a deficit or debt target."
+      ]
+    },
+    {
+      "id": "fiscal-rules",
+      "parent": "fiscal-responsibility",
+      "labelEn": "Budget process and fiscal rules",
+      "assessmentEligible": true,
+      "czechAliases": ["rozpočtová pravidla", "rozpočtové provizorium", "pravidla schvalování rozpočtu"],
+      "directLegalIdentifiers": ["cz-act-23-2017"],
+      "inclusionExamples": [
+        "A promise to change how the state budget is proposed, negotiated, or approved between the government and the Chamber of Deputies."
+      ],
+      "exclusionExamples": [
+        "A promise about the deficit or debt target itself rather than the approval procedure (route under `deficit-and-debt`)."
+      ]
+    },
+    {
+      "id": "debt-brake",
+      "parent": "fiscal-responsibility",
+      "labelEn": "Constitutional and statutory debt brake",
+      "assessmentEligible": true,
+      "czechAliases": ["dluhová brzda", "ústavní dluhová brzda"],
+      "directLegalIdentifiers": ["cz-act-23-2017"],
+      "inclusionExamples": [
+        "A promise or record specifically about the statutory or constitutional debt-brake mechanism and its thresholds."
+      ],
+      "exclusionExamples": [
+        "A general deficit or debt reduction promise that does not name the debt-brake mechanism (route under `deficit-and-debt`)."
+      ]
+    },
+    {
+      "id": "taxation",
+      "parent": "public-finance",
+      "labelEn": "Taxation",
+      "assessmentEligible": false,
+      "czechAliases": ["daně", "daňová politika", "zdanění"],
+      "inclusionExamples": [
+        "Any promise or record about a specific tax, tax rate, tax exemption, or tax-collection mechanism."
+      ],
+      "exclusionExamples": [
+        "A general fiscal-responsibility promise about the deficit or debt that does not name a specific tax (route under `fiscal-responsibility`)."
+      ]
+    },
+    {
+      "id": "vat-policy",
+      "parent": "taxation",
+      "labelEn": "Value-added tax policy",
+      "assessmentEligible": true,
+      "czechAliases": ["DPH", "daň z přidané hodnoty", "sazba DPH"],
+      "inclusionExamples": [
+        "A promise or record about a value-added tax rate, rate band, or VAT exemption."
+      ],
+      "exclusionExamples": [
+        "A promise about income tax or corporate tax (route under a sibling taxation tag, not `vat-policy`)."
+      ]
+    },
+    {
+      "id": "tax-administration",
+      "parent": "taxation",
+      "labelEn": "Tax administration and reporting",
+      "assessmentEligible": true,
+      "czechAliases": ["evidence tržeb", "EET", "daňová správa", "daňové přiznání"],
+      "inclusionExamples": [
+        "A promise or record about how taxes are reported, collected, or audited, such as sales-record reporting obligations."
+      ],
+      "exclusionExamples": [
+        "A promise about the tax rate itself rather than how it is administered or reported."
+      ]
+    },
+    {
+      "id": "health-and-care",
+      "parent": null,
+      "labelEn": "Health and care",
+      "assessmentEligible": false,
+      "czechAliases": ["zdravotnictví", "zdravotní péče"],
+      "inclusionExamples": [
+        "Any promise or record about healthcare access, financing, or the organization of medical care."
+      ],
+      "exclusionExamples": [
+        "A record about a ministry's general administrative budget with no health-policy content."
+      ]
+    },
+    {
+      "id": "healthcare-access",
+      "parent": "health-and-care",
+      "labelEn": "Access to healthcare services",
+      "assessmentEligible": true,
+      "czechAliases": ["dostupnost zdravotní péče", "čekací doby", "ordinace"],
+      "inclusionExamples": [
+        "A promise or record about waiting times, the availability of general practitioners, or regional access to care."
+      ],
+      "exclusionExamples": [
+        "A promise about how healthcare is paid for rather than how it is accessed (route under `healthcare-financing`)."
+      ]
+    },
+    {
+      "id": "healthcare-financing",
+      "parent": "health-and-care",
+      "labelEn": "Healthcare financing",
+      "assessmentEligible": true,
+      "czechAliases": ["zdravotní pojištění", "úhrady zdravotní péče", "platba za pojištěnce"],
+      "inclusionExamples": [
+        "A promise or record about health-insurance contributions, state payments for state-insured persons, or provider reimbursement."
+      ],
+      "exclusionExamples": [
+        "A promise about the availability of care itself rather than how it is financed (route under `healthcare-access`)."
+      ]
+    }
+  ]
+}

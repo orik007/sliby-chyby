@@ -11,7 +11,8 @@
     "assess:batch": "node scripts/run-assessment-batch.mjs --packages automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages --enrichment-run automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json",
     "collect:evidence": "node scripts/run-collectors.mjs --since-days 7",
     "audit:coverage": "node scripts/run-coverage-audit.mjs",
-    "reviews:refresh": "node scripts/refresh-review-markdown.mjs"
+    "reviews:refresh": "node scripts/refresh-review-markdown.mjs",
+    "topic-routing:pilot": "node scripts/run-topic-routing-pilot.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.2.3",
