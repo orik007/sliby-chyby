@@ -44,6 +44,29 @@ jobs:
           ref: main
           persist-credentials: false
 
+      - name: Restore per-source collector checkpoints (read-only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          authenticated_remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git ls-remote --exit-code --heads "$authenticated_remote" automation/assessment-review >/dev/null 2>&1; then
+            git fetch "$authenticated_remote" "+refs/heads/automation/assessment-review:refs/remotes/origin/automation/assessment-review"
+            if git cat-file -e origin/automation/assessment-review:automation/collectors/checkpoints.json 2>/dev/null; then
+              git show origin/automation/assessment-review:automation/collectors/checkpoints.json > automation/collectors/checkpoints.json
+              echo "Restored per-source checkpoints from automation/assessment-review. This workflow has contents:read only and never writes them back."
+            fi
+          else
+            echo "No automation/assessment-review branch found yet; the collector will bootstrap from scratch this run."
+          fi
+
+      - name: Restore tag-assignment audit cache
+        uses: actions/cache@v4
+        with:
+          path: automation/topic-routing/pilot-cache
+          key: topic-routing-pilot-cache-${{ hashFiles('automation/topic-routing/taxonomy-v1.json', 'automation/prompts/tagger-v1.md') }}
+          restore-keys: |
+            topic-routing-pilot-cache-
+
       - name: Set up Node.js
         uses: actions/setup-node@v5
         with:
