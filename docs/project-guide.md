@@ -15,6 +15,8 @@ Sliboměr shows political parties' confirmed election promises, their current sc
 | Storage and validation | [data-model.md](data-model.md) |
 | Release | [release-process.md](release-process.md) |
 
+The agreed migration design for topic-based evidence routing is recorded in [topic-routing-design.md](topic-routing-design.md). It is not an active canonical rule until its implementation replaces the current evidence pipeline.
+
 ## Current operating model
 
 ```text
