@@ -60,11 +60,18 @@ jobs:
           fi
 
       - name: Restore tag-assignment audit cache
+        # GitHub Actions caches are immutable: a restore that hits the exact
+        # `key` skips saving at the end of the job entirely, so a stable key
+        # here would freeze the cache at whatever it held after the first
+        # successful run and never pick up tags for newly collected records.
+        # `key` is therefore always unique per run; `restore-keys` still
+        # finds the most recent cache for the same taxonomy/prompt fingerprint.
         uses: actions/cache@v4
         with:
           path: automation/topic-routing/pilot-cache
-          key: topic-routing-pilot-cache-${{ hashFiles('automation/topic-routing/taxonomy-v1.json', 'automation/prompts/tagger-v1.md') }}
+          key: topic-routing-pilot-cache-${{ hashFiles('automation/topic-routing/taxonomy-v1.json', 'automation/prompts/tagger-v1.md') }}-${{ github.run_id }}
           restore-keys: |
+            topic-routing-pilot-cache-${{ hashFiles('automation/topic-routing/taxonomy-v1.json', 'automation/prompts/tagger-v1.md') }}-
             topic-routing-pilot-cache-
 
       - name: Set up Node.js

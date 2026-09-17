@@ -110,7 +110,7 @@ function cacheFingerprintMatches(cached, { inputHash, taxonomy, prompt, runtime 
 async function taggedTwice({ subjectId, inputHash, brief, taxonomy, prompt, runtime, cache }) {
   const cached = cache.assignments[subjectId];
   if (cacheFingerprintMatches(cached, { inputHash, taxonomy, prompt, runtime })) {
-    return { taggerA: cached.taggerA, taggerB: cached.taggerB, usageByModel: [], reused: true };
+    return { taggerA: cached.taggerA, taggerB: cached.taggerB, provider: cached.provider, modelA: cached.modelA, modelB: cached.modelB, usageByModel: [], reused: true };
   }
   const [taggerA, taggerB] = await Promise.all([
     requestTagAssignment({ provider: runtime.provider, apiKey: apiKeyFor(runtime.provider), model: runtime.modelA, brief, taxonomy, prompt }),
@@ -129,22 +129,42 @@ async function taggedTwice({ subjectId, inputHash, brief, taxonomy, prompt, runt
   return {
     taggerA: taggerA.output,
     taggerB: taggerB.output,
+    provider: runtime.provider,
+    modelA: taggerA.model,
+    modelB: taggerB.model,
     usageByModel: [{ model: taggerA.model, usage: taggerA.usage }, { model: taggerB.model, usage: taggerB.usage }].filter((entry) => entry.usage),
     reused: false
   };
 }
 
+function collectStringValues(value, out = []) {
+  if (typeof value === "string") {
+    out.push(value);
+  } else if (Array.isArray(value)) {
+    for (const item of value) collectStringValues(item, out);
+  } else if (value && typeof value === "object") {
+    for (const nested of Object.values(value)) collectStringValues(nested, out);
+  }
+  return out;
+}
+
 /**
- * Finds a direct structural link for a source record: any string value in
- * its own structured payload that exactly matches a taxonomy tag's
- * configured legal identifier, resolved to promises that already hold that
- * tag as an *accepted* (not needsReview) promise-topic assignment. Real
- * collected records rarely carry such an identifier yet, so this commonly
- * returns null -- but the path is genuinely exercised whenever the data
- * supports it, rather than being permanently disabled.
+ * Finds a direct structural link for a source record: any string value
+ * anywhere in its own structured payload (including nested structures such
+ * as a parliamentary vote's `linkedPrints`) that exactly matches a taxonomy
+ * tag's configured legal identifier, resolved to promises that already hold
+ * that tag as an *accepted* (not needsReview) promise-topic assignment.
+ *
+ * No collector currently normalizes a print or vote's own numbering into
+ * the canonical `directLegalIdentifiers` scheme the taxonomy uses (e.g.
+ * "cz-act-23-2017"), so this path does not yet fire against real collected
+ * records -- that normalization is separate, collector-side follow-up work,
+ * not something this pilot script can fabricate. It is exercised today only
+ * by fixtures that already carry a matching identifier, and by any future
+ * record a collector emits with one.
  */
 function deriveDirectLink(taxonomy, record, directIdIndex, invertedIndex) {
-  const payloadValues = Object.values(record.payload ?? {}).filter((value) => typeof value === "string");
+  const payloadValues = collectStringValues(record.payload ?? {});
   for (const value of payloadValues) {
     const tagIds = directIdIndex.get(value);
     if (!tagIds) continue;
@@ -196,6 +216,9 @@ const promiseTopicAssignments = await mapWithConcurrency(publishedRegistry.promi
     needsReview: derived.needsReview,
     taggerA: tagged.taggerA,
     taggerB: tagged.taggerB,
+    provider: tagged.provider,
+    modelA: tagged.modelA,
+    modelB: tagged.modelB,
     inputHash
   };
 });
@@ -275,6 +298,10 @@ const report = {
   taxonomyVersion: taxonomy.taxonomyVersion,
   promptVersion: prompt.version,
   promptContentHash: prompt.contentHash,
+  // Kept alongside the per-subject provider/model fields below so the
+  // active runtime configuration is auditable from this artifact alone
+  // even on a fully-cached run, where tokenUsageByPass is empty.
+  runtime: { provider: runtime.provider, modelA: runtime.modelA, modelB: runtime.modelB, concurrency: runtime.concurrency },
   asOf: args.asOf,
   publicationApproved: false,
   sentToAssessors: false,
@@ -310,6 +337,9 @@ const report = {
     inputHash,
     taggerA: tagged.taggerA,
     taggerB: tagged.taggerB,
+    provider: tagged.provider,
+    modelA: tagged.modelA,
+    modelB: tagged.modelB,
     route
   })),
   predictedPackages

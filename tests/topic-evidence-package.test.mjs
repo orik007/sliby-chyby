@@ -58,6 +58,15 @@ test("estimatedAssessorInputTokens includes fixed package overhead and both asse
   assert.equal(result.estimatedAssessorInputTokens % 2, 0, "must scale for exactly two assessor calls");
 });
 
+test("a single oversized item alone still predicts a package requiring partition review", () => {
+  const oversizedFactSummary = "x".repeat(30_000);
+  const result = predictBoundedPackage({ promiseId: "p1", routedEvidenceItems: [item({ recordId: "oversized-only", factSummary: oversizedFactSummary })], maxTokenBudget: 100 });
+  assert.equal(result.predicted, true, "a promise with routed evidence must still count toward predictedPackageCount even if that evidence needs partitioning");
+  assert.deepEqual(result.included, []);
+  assert.deepEqual(result.omitted, [{ recordId: "oversized-only", reason: "exceeds-token-budget" }]);
+  assert.equal(result.requiresPartitionReview, true);
+});
+
 test("a package within budget requires no partition review", () => {
   const result = predictBoundedPackage({ promiseId: "p1", routedEvidenceItems: [item()] });
   assert.equal(result.requiresPartitionReview, false);

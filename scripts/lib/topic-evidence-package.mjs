@@ -28,6 +28,12 @@ const assessorCallsPerPackage = 2;
  * recorded with its omission reason, per the design doc's §6. The reported
  * `estimatedAssessorInputTokens` includes the fixed per-package overhead and
  * both assessor calls, so it is comparable to the doc's token-budget table.
+ * `predicted` is true whenever there is any routed evidence at all, even if
+ * every item is individually oversized and ends up in `omitted` with
+ * `included` empty -- that promise still needs an eventual (partitioned)
+ * assessor package, so it must not silently drop out of
+ * `predictedPackageCount` alongside promises that were never routed a
+ * source in the first place.
  */
 export function predictBoundedPackage({ promiseId, routedEvidenceItems, maxItems = 24, maxTokenBudget = 6_000 }) {
   invariant(typeof promiseId === "string" && promiseId.length > 0, "predictBoundedPackage requires a promiseId");
@@ -61,7 +67,7 @@ export function predictBoundedPackage({ promiseId, routedEvidenceItems, maxItems
   const packageTokens = runningTokens + basePackageOverheadTokens;
   return {
     promiseId,
-    predicted: included.length > 0,
+    predicted: true,
     included: included.map((item) => item.recordId),
     omitted,
     requiresPartitionReview: omitted.length > 0,

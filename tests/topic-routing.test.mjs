@@ -6,6 +6,7 @@ import { validatePromiseRegistry } from "../scripts/lib/evidence-matcher.mjs";
 import {
   buildInvertedIndex,
   combineTaggerResults,
+  derivePromiseTopicTags,
   routeSourceRecord
 } from "../scripts/lib/topic-routing.mjs";
 import { validateTaxonomy } from "../scripts/lib/topic-taxonomy.mjs";
@@ -177,6 +178,29 @@ test("a promise-topic assignment still pending human review is excluded from the
   });
   assert.notEqual(route.disposition, "candidate-created");
   assert.ok(!route.candidatePromiseIds.includes(fiscalPromise.id));
+});
+
+test("a promise-topic assignment's accepted tags exclude a one-sided tag even when the pair also agrees on a specific tag", () => {
+  // Tagger A proposes both deficit-and-debt and vat-policy; tagger B only
+  // agrees on deficit-and-debt. combineTaggerResults correctly reaches
+  // auto-candidate with agreedTags: ["deficit-and-debt"] alone -- the
+  // accepted `tags` (which gates entry into buildInvertedIndex once
+  // needsReview is false) must match that, not the raw two-tag union.
+  const derived = derivePromiseTopicTags(taxonomy, taggerOutput(["deficit-and-debt", "vat-policy"]), taggerOutput(["deficit-and-debt"]));
+  assert.equal(derived.needsReview, false);
+  assert.deepEqual(derived.tags, ["deficit-and-debt"]);
+
+  const invertedIndex = buildInvertedIndex(taxonomy, [
+    { promiseId: fiscalPromise.id, tagAssignment: { tags: derived.tags }, needsReview: derived.needsReview }
+  ]);
+  assert.ok(invertedIndex.get("deficit-and-debt")?.has(fiscalPromise.id));
+  assert.ok(!invertedIndex.get("vat-policy")?.has(fiscalPromise.id));
+});
+
+test("a promise-topic assignment pending review still retains the full proposed union for audit", () => {
+  const derived = derivePromiseTopicTags(taxonomy, taggerOutput(["deficit-and-debt"]), taggerOutput(["vat-policy"]));
+  assert.equal(derived.needsReview, true);
+  assert.deepEqual(new Set(derived.tags), new Set(["deficit-and-debt", "vat-policy"]));
 });
 
 test("a semantic-discovery hit alone never upgrades an unknown/unknown pair past orphan-review", () => {

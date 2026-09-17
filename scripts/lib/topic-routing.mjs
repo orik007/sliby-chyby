@@ -74,16 +74,23 @@ export function combineTaggerResults(taxonomy, taggerA, taggerB, { directLink = 
 
 /**
  * Derives one promise's accepted routing tags from two independent tagger
- * proposals, for pilot measurement purposes. The union of proposed tags is
- * always retained (per the doc: "The union of all proposed relationships is
- * retained in audit data"); `needsReview` flags a promise-topic assignment
- * that a human still needs to confirm before it should be treated as final
- * and eligible to drive an auto-created relationship.
+ * proposals, for pilot measurement purposes. When the taggers groundedly
+ * agree on a specific tag (`auto-candidate`), only that agreed set becomes
+ * the accepted `tags` -- a tag proposed by just one tagger must not ride
+ * along into an assignment marked `needsReview: false`, since that flag is
+ * what gates entry into `buildInvertedIndex`. The raw union of both
+ * taggers' full proposals is not lost: it stays inspectable via the
+ * `taggerA`/`taggerB` fields the caller retains alongside this result,
+ * which is what the doc's "union of all proposed relationships is retained
+ * in audit data" refers to. For every other state, `tags` is that broader
+ * union so a human reviewing `needsReview: true` sees everything proposed.
  */
 export function derivePromiseTopicTags(taxonomy, taggerA, taggerB) {
   const combined = combineTaggerResults(taxonomy, taggerA, taggerB);
   if (combined.state === "orphan-review") return { tags: [], state: combined.state, needsReview: true };
-  const proposedTags = [...new Set([...selectedTags(taggerA), ...selectedTags(taggerB)])];
+  const proposedTags = combined.state === "auto-candidate"
+    ? combined.agreedTags
+    : [...new Set([...selectedTags(taggerA), ...selectedTags(taggerB)])];
   return { tags: proposedTags, state: combined.state, needsReview: combined.state !== "auto-candidate" };
 }
 

@@ -4,6 +4,7 @@ import test from "node:test";
 import {
   buildPromiseTaggingBrief,
   buildSourceTaggingBrief,
+  deriveRecordContentExcerpts,
   loadTaggingPrompt,
   requestTagAssignment,
   validateTagAssignmentOutput
@@ -48,6 +49,35 @@ test("buildSourceTaggingBrief includes only supplied source metadata, excerpts, 
   assert.equal(brief.subjectType, "source");
   assert.ok(brief.text.includes("official excerpt about the deficit rule"));
   assert.ok(brief.taxonomyDefinitions.includes("fiscal-rules"));
+});
+
+test("deriveRecordContentExcerpts surfaces a parliamentary vote's linked print titles and recorded actions", () => {
+  const record = createCollectedRecord({
+    id: "psp--fiscal-vote-fixture",
+    sourceId: "psp-core-2025",
+    kind: "parliamentary-vote",
+    primary: true,
+    evidenceRole: "primary-record",
+    occurredAt: "2026-06-01T00:00:00",
+    title: "Hlasování 123",
+    publisher: "Chamber of Deputies",
+    url: "https://public.psp.cz/sqw/hlasy.sqw?g=123",
+    payload: {
+      externalVoteId: "123",
+      counts: { yes: 100, no: 50 },
+      linkedPrints: [
+        {
+          externalPrintId: "1",
+          titleCz: "Novela zákona o pravidlech rozpočtové odpovědnosti",
+          historyContexts: [{ externalHistoryId: "1", actionCz: "3. čtení, hlasování o pozměňovacích návrzích" }]
+        }
+      ]
+    }
+  });
+  const excerpts = deriveRecordContentExcerpts(record);
+  assert.ok(excerpts.some((excerpt) => excerpt.includes("Novela zákona o pravidlech rozpočtové odpovědnosti")), "must surface the linked print's own title, not just the vote's generic title");
+  assert.ok(excerpts.some((excerpt) => excerpt.includes("3. čtení")), "must surface the linked print's recorded action");
+  assert.ok(excerpts.some((excerpt) => excerpt.includes("100 yes, 50 no")));
 });
 
 test("validateTagAssignmentOutput rejects an invented tag id", () => {
