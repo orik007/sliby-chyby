@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-16T19-30-07-509Z--ee627a08e026",
+  "evaluatedAt": "2026-09-16T19:30:07.509Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-0ea588eda55f/ee627a08e0263c10dce2a0cd9ea2d5df1e94e023420ddcc96d0cb6aff932fe91.json",
+  "packageHash": "ee627a08e0263c10dce2a0cd9ea2d5df1e94e023420ddcc96d0cb6aff932fe91",
+  "assessmentContentHash": "80e464d3db51f0e9440f488e5e88129e30a1a70ceead832ae91e0b82183086fb",
+  "assessmentFingerprint": "499ee9af1b890082c4232df2177f49584fc3d01b3f28534c820b23ef5b915406",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-0ea588eda55f",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v13",
+      "contentHash": "131f5cb530bdc6024cc6652335dc359e5ae4860b9cf4dcfda7fb35df34f063b2"
+    },
+    "arbiter": {
+      "version": "arbiter-v5",
+      "contentHash": "5d3c226d631557f53d328d3450edf9c3560fb30e41bc7825902244bebdd6ea7b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessParallelCalls": true,
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-5.6-terra",
+      "gpt-5.6-terra"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-0ea588eda55f",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-0ea588eda55f-source",
+        "psp-core-2025--vote-87503",
+        "psp-core-2025--print-document-43120"
+      ],
+      "explanationCz": "Motoristé sobě slíbili zavést příspěvek obcím na infrastrukturu podle nově zkolaudované obytné plochy. Doložené hlasování poslanců strany se týkalo novely zákona o investičních společnostech a investičních fondech, nikoli tohoto příspěvku. Z dostupných podkladů proto nelze ověřit žádný významný krok strany ani směrem ke splnění, ani proti tomuto konkrétnímu slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady neobsahují věcně související návrh, rozhodnutí ani hlasování o příspěvku obcím na školky, vodovody, městskou hromadnou dopravu či jinou obecní infrastrukturu.",
+        "Nelze z nich zjistit, zda mimo doložené podklady strana takové opatření navrhla nebo podpořila."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-0ea588eda55f",
+      "status": "no-progress",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-0ea588eda55f-source",
+        "psp-core-2025--vote-87503",
+        "psp-core-2025--print-document-43120"
+      ],
+      "explanationCz": "Motoristé sobě slíbili zavést příspěvek obcím za nově zkolaudovanou obytnou plochu, určený na konkrétní infrastrukturu. Poslanci strany podpořili vládní novelu zákona o investičních společnostech a investičních fondech. Tento zákon se však příspěvku na obecní infrastrukturu netýká, a proto nedokládá posun k plnění ani jednání proti tomuto slibu. V předložených podkladech není doložen žádný další významný krok k zavedení slíbeného příspěvku.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_01bab573df676d2e016aaaee3293bc87d29c38503de7b57239",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 8098,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8095
+      },
+      "output_tokens": 404,
+      "output_tokens_details": {
+        "reasoning_tokens": 114
+      },
+      "total_tokens": 8502
+    },
+    "output": {
+      "promiseId": "candidate-0ea588eda55f",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-0ea588eda55f-source",
+        "psp-core-2025--vote-87503",
+        "psp-core-2025--print-document-43120"
+      ],
+      "explanationCz": "Motoristé sobě slíbili zavést příspěvek obcím na infrastrukturu podle nově zkolaudované obytné plochy. Doložené hlasování poslanců strany se týkalo novely zákona o investičních společnostech a investičních fondech, nikoli tohoto příspěvku. Z dostupných podkladů proto nelze ověřit žádný významný krok strany ani směrem ke splnění, ani proti tomuto konkrétnímu slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady neobsahují věcně související návrh, rozhodnutí ani hlasování o příspěvku obcím na školky, vodovody, městskou hromadnou dopravu či jinou obecní infrastrukturu.",
+        "Nelze z nich zjistit, zda mimo doložené podklady strana takové opatření navrhla nebo podpořila."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_02ca6cde2ebd94e7016aaaee3293d087d286852fcd30dab504",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 8098,
+      "input_tokens_details": {
+        "cache_write_tokens": 6615,
+        "cached_tokens": 1480
+      },
+      "output_tokens": 381,
+      "output_tokens_details": {
+        "reasoning_tokens": 149
+      },
+      "total_tokens": 8479
+    },
+    "output": {
+      "promiseId": "candidate-0ea588eda55f",
+      "status": "no-progress",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-0ea588eda55f-source",
+        "psp-core-2025--vote-87503",
+        "psp-core-2025--print-document-43120"
+      ],
+      "explanationCz": "Motoristé sobě slíbili zavést příspěvek obcím za nově zkolaudovanou obytnou plochu, určený na konkrétní infrastrukturu. Poslanci strany podpořili vládní novelu zákona o investičních společnostech a investičních fondech. Tento zákon se však příspěvku na obecní infrastrukturu netýká, a proto nedokládá posun k plnění ani jednání proti tomuto slibu. V předložených podkladech není doložen žádný další významný krok k zavedení slíbeného příspěvku.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0f9950e32021a545016aaaee39933087d2a42557b63cf2550f",
+    "model": "gpt-5.6-sol",
+    "usage": {
+      "input_tokens": 7777,
+      "input_tokens_details": {
+        "cache_write_tokens": 7774,
+        "cached_tokens": 0
+      },
+      "output_tokens": 305,
+      "output_tokens_details": {
+        "reasoning_tokens": 120
+      },
+      "total_tokens": 8082
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "candidate-0ea588eda55f-source",
+        "psp-core-2025--vote-87503",
+        "psp-core-2025--print-document-43120"
+      ],
+      "explanationCz": "Oba hodnotitelé správně uvádějí, že není doložen posun ke splnění slibu. Poslanci Motoristů podpořili novelu zákona o investičních společnostech a investičních fondech, která se slíbeného příspěvku obcím netýká. Hodnotitel A je přesnější, protože zároveň přiznává, že z těchto podkladů nelze zjistit, zda strana neudělala související krok jinde. Proto volím hodnotitele A."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}
