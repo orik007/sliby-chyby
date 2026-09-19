@@ -58,14 +58,24 @@ const collectionPlan = checkpoints
     }));
 const plansBySourceId = new Map(collectionPlan.map((plan) => [plan.sourceId, plan]));
 
+// The date a failed source will actually resume from on a later default
+// run: the unchanged checkpoint's own date (or bootstrapFrom if it never
+// had one) when checkpoints are tracked at all, never `plan.since` --
+// `plan.since` is what THIS run requested, which for a manual `--since`
+// override is not persisted anywhere and so is not what "next run" means.
+function nextRetryFrom(plan, source, checkpointsInUse) {
+  if (!checkpointsInUse) return null;
+  return plan.checkpointBefore ? plan.checkpointBefore.lastSuccessfulCollectionAt.slice(0, 10) : source.bootstrapFrom;
+}
+
 const collectorResults = [];
 // One source's failure (a dead endpoint, a host now returning 403, a
 // transient network error) must not discard every other source's already-
 // collected records or block matching/enrichment/assessment from running
 // on them. A failed source simply contributes nothing to `collectorResults`,
 // so `updateCollectorCheckpoints` below leaves its checkpoint untouched --
-// the next run retries it from that same last-known-good date, exactly
-// like a source that has never run yet.
+// the next default run retries it from that same last-known-good date,
+// exactly like a source that has never run yet.
 const failures = [];
 for (const source of selected) {
   const plan = plansBySourceId.get(source.id);
@@ -94,8 +104,12 @@ for (const source of selected) {
     // the property (JSON.stringify omits an undefined value) or printing
     // the literal string "undefined".
     const message = error instanceof Error ? error.message : String(error);
-    failures.push({ sourceId: source.id, message });
-    console.error(`${source.id}: collection failed, checkpoint left unchanged for retry from ${since} -- ${message}`);
+    const retryFrom = nextRetryFrom(plan, source, Boolean(checkpoints));
+    const retryNote = retryFrom
+      ? `checkpoint unchanged; next default run retries from ${retryFrom} (a manual --since override, if this run used one, is never persisted)`
+      : "no checkpoint is tracked this run, so nothing resumes automatically from a fixed date";
+    failures.push({ sourceId: source.id, message, retryFrom });
+    console.error(`${source.id}: collection failed -- ${message}. ${retryNote}`);
   }
 }
 

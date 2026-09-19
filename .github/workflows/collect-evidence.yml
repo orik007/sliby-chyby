@@ -272,7 +272,7 @@ jobs:
                   "",
                   `**${failures.length} zdroj(e) dnes selhaly a jejich checkpoint se nezměnil** — příští běh je zkusí znovu od stejného data, ostatní zdroje pokračovaly beze změny:`,
                   "",
-                  ...failures.map(({ sourceId, message }) => `- \`${sourceId}\`: ${renderFailureMessage(message)}`)
+                  ...failures.map(({ sourceId, message, retryFrom }) => `- \`${sourceId}\`: ${renderFailureMessage(message)}${retryFrom ? ` (další běh naváže od ${retryFrom})` : ""}`)
                 ]
               : [];
             const reviewLines = [
