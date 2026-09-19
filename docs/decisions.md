@@ -43,7 +43,7 @@ This document contains only the current confirmed rules. When a rule changes, re
 
 ## Evidence automation
 
-- The daily workflow runs at 09:37 Europe/Prague and retains a manual trigger.
+- The daily workflow runs at 09:37 Europe/Prague and retains a manual trigger. (Paused since 2026-09-19 while the promise-evidence matching mechanism is reworked — see `.github/workflows/collect-evidence.yml`; the schedule resumes once its replacement is in place.)
 - It collects each allowlisted source from its own durable checkpoint. A source without a checkpoint performs a bootstrap from its registry-defined `bootstrapFrom` date; a manual run may select specific sources and explicitly override their start.
 - After successful matching, enrichment, and package persistence, each selected source records its own collection time, requested start, newest observed record, record count, run ID, and available snapshot hash. A failed collection, matching, enrichment, or persistence stage writes no new checkpoint.
 - It retrieves evidence candidates for every confirmed promise by combining precise identifiers and phrases with semantic similarity against versioned promise profiles. Semantic retrieval retains only candidates at or above `0.55` similarity, then at most the top three per primary record. A candidate relationship never establishes relevance, attribution, a score, or publication.

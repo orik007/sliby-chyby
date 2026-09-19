@@ -88,8 +88,14 @@ for (const source of selected) {
     collectorResults.push(result);
     console.log(`${source.id}: ${plan.mode} from ${since}, ${result.records.length} records, ${result.warnings.length} warnings`);
   } catch (error) {
-    failures.push({ sourceId: source.id, message: error.message });
-    console.error(`${source.id}: collection failed, checkpoint left unchanged for retry from ${since} -- ${error.message}`);
+    // A collector can throw something other than an Error (a rejected
+    // fetch body, a plain string, undefined) -- normalize so `failures`
+    // always carries a real, present message instead of silently dropping
+    // the property (JSON.stringify omits an undefined value) or printing
+    // the literal string "undefined".
+    const message = error instanceof Error ? error.message : String(error);
+    failures.push({ sourceId: source.id, message });
+    console.error(`${source.id}: collection failed, checkpoint left unchanged for retry from ${since} -- ${message}`);
   }
 }
 

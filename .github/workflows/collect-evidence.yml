@@ -262,12 +262,17 @@ jobs:
               return `| \`${collector.sourceId}\` | ${collector.collection.mode} | ${collector.collection.since} | ${collector.recordCount} | ${checkpoint?.lastObservedRecordAt?.slice(0, 10) ?? "—"} |`;
             });
             const failures = collectorRun.failures ?? [];
+            // A thrown error message is arbitrary text: normalize it to a
+            // single line so it cannot break the Markdown list it renders
+            // into (a newline would end the bullet early; a missing message
+            // would render the literal string "undefined").
+            const renderFailureMessage = (message) => String(message ?? "(no message)").replace(/\s+/g, " ").trim() || "(no message)";
             const failureLines = failures.length > 0
               ? [
                   "",
                   `**${failures.length} zdroj(e) dnes selhaly a jejich checkpoint se nezměnil** — příští běh je zkusí znovu od stejného data, ostatní zdroje pokračovaly beze změny:`,
                   "",
-                  ...failures.map(({ sourceId, message }) => `- \`${sourceId}\`: ${message}`)
+                  ...failures.map(({ sourceId, message }) => `- \`${sourceId}\`: ${renderFailureMessage(message)}`)
                 ]
               : [];
             const reviewLines = [

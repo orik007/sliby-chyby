@@ -6,7 +6,7 @@ The workflow checks confirmed public promises against records from allowlisted s
 
 ## Daily workflow
 
-It runs once daily at `09:37` in `Europe/Prague` and keeps a manual trigger.
+It runs once daily at `09:37` in `Europe/Prague` and keeps a manual trigger. (Paused since 2026-09-19 while the promise-evidence matching mechanism is reworked — see `.github/workflows/collect-evidence.yml`; the schedule resumes once its replacement is in place.)
 
 1. For each enabled source, select its own collection start. A source without a checkpoint performs a bootstrap from `bootstrapFrom`; an existing source starts from its own last successful collection date. A manual run may explicitly override that start.
 2. Collect and normalize the records and retain provenance and content hashes. A manual run may target selected collector source IDs for a bounded replay.
