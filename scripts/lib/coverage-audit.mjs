@@ -38,9 +38,22 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
   const recordsBySource = new Map();
   for (const record of collectorRun.records) recordsBySource.set(record.sourceId, (recordsBySource.get(record.sourceId) ?? 0) + 1);
 
-  const sourceCoverage = collectorRun.collectors.map((collector) => {
-    const source = sources.get(collector.sourceId);
-    invariant(source, `Collector run references unknown source ${collector.sourceId}`);
+  const collectorsBySourceId = new Map();
+  for (const collector of collectorRun.collectors) {
+    invariant(sources.has(collector.sourceId), `Collector run references unknown source ${collector.sourceId}`);
+    collectorsBySourceId.set(collector.sourceId, collector);
+  }
+  const failuresBySourceId = new Map((collectorRun.failures ?? []).map((failure) => [failure.sourceId, failure]));
+
+  // Every *enabled* source gets a row, per the evidence-pipeline rule ("write
+  // a coverage audit for every confirmed promise and enabled source") --
+  // not just the ones `run-collectors.mjs` actually collected this run. A
+  // source whose own collection failed (or one excluded from a targeted
+  // manual replay) must still be visible here as a gap, rather than
+  // silently disappearing as if it were never enabled at all.
+  const sourceCoverage = sourceRegistry.sources.filter((source) => source.enabled).map((source) => {
+    const collector = collectorsBySourceId.get(source.id);
+    const failure = failuresBySourceId.get(source.id);
     const occurred = collectorRun.records.filter(({ sourceId, occurredAt }) => sourceId === source.id && occurredAt).map(({ occurredAt }) => occurredAt).sort();
     return {
       sourceId: source.id,
@@ -49,11 +62,14 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
       evidenceRole: source.evidenceRole,
       coverageMode: source.coverage.mode,
       coverageNote: source.coverage.note,
-      requestedSince: collector.collection?.since ?? collectorRun.since,
+      requestedSince: collector?.collection?.since ?? collectorRun.since,
       recordCount: recordsBySource.get(source.id) ?? 0,
       observedEarliest: occurred[0] ?? null,
       observedLatest: occurred.at(-1) ?? null,
-      warnings: collector.warnings ?? []
+      collected: Boolean(collector),
+      warnings: collector
+        ? (collector.warnings ?? [])
+        : [failure ? `Not collected this run -- collection failed: ${failure.message}` : "Not collected this run."]
     };
   });
 
@@ -130,9 +146,9 @@ export function renderCoverageAuditMarkdown(audit) {
     "",
     "## Source coverage",
     "",
-    "| Source | Mode | Records | Observed range | Limitation |",
-    "|---|---|---:|---|---|",
-    ...audit.sourceCoverage.map((source) => `| ${source.name} | \`${source.coverageMode}\` | ${source.recordCount} | ${source.observedEarliest?.slice(0, 10) ?? "—"} to ${source.observedLatest?.slice(0, 10) ?? "—"} | ${source.coverageNote} |`),
+    "| Source | Collected | Mode | Records | Observed range | Limitation |",
+    "|---|---|---|---:|---|---|",
+    ...audit.sourceCoverage.map((source) => `| ${source.name} | ${source.collected ? "yes" : `**no** — ${source.warnings[0]}`} | \`${source.coverageMode}\` | ${source.recordCount} | ${source.observedEarliest?.slice(0, 10) ?? "—"} to ${source.observedLatest?.slice(0, 10) ?? "—"} | ${source.coverageNote} |`),
     "",
     "## Promise coverage",
     "",

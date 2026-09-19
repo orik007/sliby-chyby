@@ -14,13 +14,45 @@ test("coverage audit never converts missing evidence into a score", () => {
       promiseResults: [{ promiseId: "p1", candidateMatchCount: 0, attributablePrimaryMatchCount: 0, evidencePackage: null }]
     },
     promiseRegistry: { promises: [{ id: "p1", partyId: "ano", partyName: "ANO", titleCz: "Slib" }] },
-    sourceRegistry: { sources: [{ id: "feed", name: "Feed", primary: false, evidenceRole: "discovery-context", coverage: { mode: "current-window", note: "Only current items." } }] },
+    sourceRegistry: { sources: [{ id: "feed", name: "Feed", primary: false, evidenceRole: "discovery-context", enabled: true, coverage: { mode: "current-window", note: "Only current items." } }] },
     proposalManifest: { proposals: [] }
   });
   assert.equal(audit.promises[0].state, "no-candidate-match");
   assert.equal(audit.promises[0].scoreInferred, false);
   assert.equal(audit.publicationApproved, false);
   assert.match(renderCoverageAuditMarkdown(audit), /No match is not zero points/);
+});
+
+test("a source whose own collection failed still appears in sourceCoverage, marked as not collected", () => {
+  const audit = buildCoverageAudit({
+    collectorRun: {
+      schemaVersion: "1.0.0", runId: "run-2", since: "2025-10-01",
+      // The failed source is entirely absent from `collectors` (per-source
+      // failure isolation in run-collectors.mjs), same as a real degraded run.
+      collectors: [],
+      failures: [{ sourceId: "msmt-news-api", message: "Source msmt-news-api returned HTTP 403" }],
+      records: []
+    },
+    matcherRun: {
+      schemaVersion: "1.0.0", matchedAt: "2026-09-19T00:00:00Z", asOf: "2026-09-19",
+      promiseResults: [{ promiseId: "p1", candidateMatchCount: 0, attributablePrimaryMatchCount: 0, evidencePackage: null }]
+    },
+    promiseRegistry: { promises: [{ id: "p1", partyId: "ano", partyName: "ANO", titleCz: "Slib" }] },
+    sourceRegistry: {
+      sources: [
+        { id: "msmt-news-api", name: "Ministry of Education news archive", primary: true, evidenceRole: "official-discovery", enabled: true, coverage: { mode: "since-filtered-archive", note: "Cursor-paginated archive." } },
+        { id: "disabled-source", name: "Disabled source", primary: false, evidenceRole: "discovery-context", enabled: false, coverage: { mode: "current-window", note: "n/a" } }
+      ]
+    },
+    proposalManifest: { proposals: [] }
+  });
+  assert.equal(audit.sourceCoverage.length, 1, "a disabled source must not appear, but an enabled failed source must");
+  const [row] = audit.sourceCoverage;
+  assert.equal(row.sourceId, "msmt-news-api");
+  assert.equal(row.collected, false);
+  assert.match(row.warnings[0], /HTTP 403/);
+  const markdown = renderCoverageAuditMarkdown(audit);
+  assert.match(markdown, /\*\*no\*\* — Not collected this run -- collection failed: Source msmt-news-api returned HTTP 403/);
 });
 
 test("coverage audit prefers the active human review proposal over raw match state", () => {
