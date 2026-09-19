@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import test from "node:test";
 import { arbiterPromptVersion, assessorPromptVersion, loadAssessmentPrompts } from "../scripts/lib/assessment-config.mjs";
 import { emptyReviewManifest, planAssessmentInputs, validateReviewManifest } from "../scripts/lib/assessment-review.mjs";
+import { taggingPromptVersion } from "../scripts/lib/topic-tagger.mjs";
 
 const evidencePackage = {
   schemaVersion: "1.0.0",
@@ -33,7 +34,7 @@ test("loads only the active assessor and arbiter prompts", async () => {
 
 test("retains only the active prompt files", async () => {
   const promptFiles = await readdir(resolve(import.meta.dirname, "../automation/prompts"));
-  assert.deepEqual(promptFiles.sort(), [`${arbiterPromptVersion}.md`, `${assessorPromptVersion}.md`].sort());
+  assert.deepEqual(promptFiles.sort(), [`${arbiterPromptVersion}.md`, `${assessorPromptVersion}.md`, `${taggingPromptVersion}.md`].sort());
 });
 
 test("plans an unseen package for human review without publication", () => {

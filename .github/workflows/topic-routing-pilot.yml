@@ -1,0 +1,114 @@
+name: Topic-routing pilot (unpublished report)
+
+on:
+  workflow_dispatch:
+    inputs:
+      since:
+        description: Optional YYYY-MM-DD override for collection; leave empty for per-source checkpoints
+        required: false
+        default: ""
+        type: string
+      as_of:
+        description: Pilot cutoff date; leave empty to use the UTC run date
+        required: false
+        default: ""
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: topic-routing-pilot
+  cancel-in-progress: false
+
+jobs:
+  pilot:
+    name: Run the topic-routing pilot and upload its report
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    environment:
+      name: assessment
+      deployment: false
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      COLLECTOR_SINCE: ${{ inputs.since || '' }}
+      PILOT_AS_OF: ${{ inputs.as_of || '' }}
+      SLIBY_TAGGING_PROVIDER: openai
+      SLIBY_TAGGING_MODEL_A: gpt-5.6-terra
+      SLIBY_TAGGING_MODEL_B: gpt-5.6-terra
+      SLIBY_TAGGING_CONCURRENCY: 4
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          persist-credentials: false
+
+      - name: Restore per-source collector checkpoints (read-only)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          authenticated_remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          if git ls-remote --exit-code --heads "$authenticated_remote" automation/assessment-review >/dev/null 2>&1; then
+            git fetch "$authenticated_remote" "+refs/heads/automation/assessment-review:refs/remotes/origin/automation/assessment-review"
+            if git cat-file -e origin/automation/assessment-review:automation/collectors/checkpoints.json 2>/dev/null; then
+              git show origin/automation/assessment-review:automation/collectors/checkpoints.json > automation/collectors/checkpoints.json
+              echo "Restored per-source checkpoints from automation/assessment-review. This workflow has contents:read only and never writes them back."
+            fi
+          else
+            echo "No automation/assessment-review branch found yet; the collector will bootstrap from scratch this run."
+          fi
+
+      - name: Restore tag-assignment audit cache
+        # GitHub Actions caches are immutable: a restore that hits the exact
+        # `key` skips saving at the end of the job entirely, so a stable key
+        # here would freeze the cache at whatever it held after the first
+        # successful run and never pick up tags for newly collected records.
+        # `key` is therefore always unique per run; `restore-keys` still
+        # finds the most recent cache for the same taxonomy/prompt fingerprint.
+        uses: actions/cache@v4
+        with:
+          path: automation/topic-routing/pilot-cache
+          key: topic-routing-pilot-cache-${{ hashFiles('automation/topic-routing/taxonomy-v1.json', 'automation/prompts/tagger-v1.md') }}-${{ github.run_id }}
+          restore-keys: |
+            topic-routing-pilot-cache-${{ hashFiles('automation/topic-routing/taxonomy-v1.json', 'automation/prompts/tagger-v1.md') }}-
+            topic-routing-pilot-cache-
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run deterministic tests
+        run: npm test
+
+      - name: Collect source records
+        run: |
+          collector_args=(
+            --checkpoints automation/collectors/checkpoints.json
+            --output automation/runs/pipeline/topic-routing-pilot-collector
+          )
+          if [ -n "$COLLECTOR_SINCE" ]; then
+            collector_args+=(--since "$COLLECTOR_SINCE")
+          fi
+          node scripts/run-collectors.mjs "${collector_args[@]}"
+
+      - name: Run the topic-routing pilot
+        run: |
+          AS_OF="${PILOT_AS_OF:-$(date -u +%F)}"
+          node scripts/run-topic-routing-pilot.mjs \
+            --collector-run automation/runs/pipeline/topic-routing-pilot-collector/collector-run.json \
+            --as-of "$AS_OF" \
+            --output automation/runs/pipeline/topic-routing-pilot
+
+      - name: Upload the unpublished pilot report
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: topic-routing-pilot-report
+          path: automation/runs/pipeline/topic-routing-pilot
+          retention-days: 30
