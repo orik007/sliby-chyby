@@ -108,11 +108,28 @@ test("a tag-routed relationship survives regardless of semantic-discovery rank/s
   assert.equal(routeWithoutSemantic.disposition, "candidate-created");
   assert.ok(routeWithoutSemantic.candidatePromiseIds.includes(fiscalPromise.id));
 
-  // A semantic-discovery candidate for an unrelated promise only adds to the
-  // set -- it never removes the tag-routed relationship.
+  // A semantic-discovery candidate for an unrelated promise never removes
+  // the tag-routed relationship -- but it also never rides along as an
+  // automatically created one of its own; it stays review-only.
   const routeWithUnrelatedSemantic = routeSourceRecord({ taxonomy, record, taggerA, taggerB, invertedIndex, semanticDiscoveryPromiseIds: ["some-other-promise"] });
   assert.ok(routeWithUnrelatedSemantic.candidatePromiseIds.includes(fiscalPromise.id));
-  assert.ok(routeWithUnrelatedSemantic.candidatePromiseIds.includes("some-other-promise"));
+  assert.ok(!routeWithUnrelatedSemantic.candidatePromiseIds.includes("some-other-promise"), "a semantic-only hit must never be auto-created alongside a genuinely tag-routed promise");
+  assert.ok(routeWithUnrelatedSemantic.semanticOnlyPromiseIds.includes("some-other-promise"));
+});
+
+test("a semantic-only hit is never auto-created even when the agreed tag itself indexes no promise", () => {
+  // The taggers agree on a specific, assessment-eligible tag, so combined
+  // state is auto-candidate -- but no promise currently holds that tag in
+  // the inverted index, so there is no eligible (tag/direct) promise at
+  // all. A semantic-discovery hit must not exploit that to slip into
+  // candidate-created.
+  const invertedIndex = buildInvertedIndex(taxonomy, []);
+  const record = voteRecord({ id: "psp--agreed-tag-with-no-indexed-promise" });
+  const taggerA = taggerOutput(["deficit-and-debt"]);
+  const taggerB = taggerOutput(["deficit-and-debt"]);
+  const route = routeSourceRecord({ taxonomy, record, taggerA, taggerB, invertedIndex, semanticDiscoveryPromiseIds: [fiscalPromise.id] });
+  assert.notEqual(route.disposition, "candidate-created", "nothing is eligible here, so this record must not be reported as having auto-created a relationship");
+  assert.ok(route.semanticOnlyPromiseIds.includes(fiscalPromise.id), "the semantic hit stays visible for human routing review");
 });
 
 test("a direct structural link always creates an auto-candidate, independent of tagger agreement", () => {
@@ -124,11 +141,22 @@ test("a direct structural link always creates an auto-candidate, independent of 
     taggerA: taggerOutput(["unknown"]),
     taggerB: taggerOutput(["unknown"]),
     invertedIndex,
-    directLink: { promiseId: fiscalPromise.id, reason: "matched-legal-identifier" }
+    directLink: { promiseId: fiscalPromise.id, reason: "matched-legal-identifier:cz-act-23-2017" }
   });
   assert.equal(route.disposition, "candidate-created");
   assert.ok(route.candidatePromiseIds.includes(fiscalPromise.id));
   assert.ok(route.routeBasis.includes("direct-structural-link"));
+  assert.equal(route.directLinkReason, "matched-legal-identifier:cz-act-23-2017", "the concrete matched identifier must be reported, not just the generic 'direct-structural-link' basis label");
+});
+
+test("the route audit records the concrete agreed tag id, not just the generic 'controlled-tag' basis label", () => {
+  const invertedIndex = buildInvertedIndex(taxonomy, [
+    { promiseId: fiscalPromise.id, tagAssignment: taggerOutput(["deficit-and-debt"]) }
+  ]);
+  const record = voteRecord({ id: "psp--matched-tag-audit" });
+  const route = routeSourceRecord({ taxonomy, record, taggerA: taggerOutput(["deficit-and-debt"]), taggerB: taggerOutput(["deficit-and-debt"]), invertedIndex });
+  assert.deepEqual(route.matchedTagIds, ["deficit-and-debt"]);
+  assert.equal(route.directLinkReason, null);
 });
 
 test("agreement on a specific tag with zero confidence or no excerpts is weak support, not auto-candidate", () => {

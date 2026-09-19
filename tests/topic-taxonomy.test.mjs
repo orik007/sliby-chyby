@@ -8,6 +8,7 @@ import {
   isAssessmentEligible,
   isDescendant,
   resolveTag,
+  taxonomyHash,
   validateTaxonomy
 } from "../scripts/lib/topic-taxonomy.mjs";
 
@@ -49,6 +50,23 @@ test("aliasIndex resolves a Czech alias to its tag id and rejects a duplicate al
   assert.equal(index.get("dph"), "vat-policy");
   const broken = { ...taxonomy, tags: [...taxonomy.tags, { id: "duplicate-alias-tag", parent: null, labelEn: "x", assessmentEligible: true, inclusionExamples: ["x"], exclusionExamples: ["x"], czechAliases: ["DPH"] }] };
   assert.throws(() => aliasIndex(broken), /assigned to more than one tag/);
+});
+
+test("taxonomyHash changes when a tag's Czech aliases or examples change, not just its id/parent/eligibility", () => {
+  const baseline = taxonomyHash(taxonomy);
+  assert.equal(taxonomyHash(taxonomy), baseline, "hashing the same content twice must be stable");
+
+  const aliasChanged = {
+    ...taxonomy,
+    tags: taxonomy.tags.map((tag) => (tag.id === "deficit-and-debt" ? { ...tag, czechAliases: [...tag.czechAliases, "nový alias"] } : tag))
+  };
+  assert.notEqual(taxonomyHash(aliasChanged), baseline, "a changed alias must invalidate a cache entry fingerprinted against this hash");
+
+  const exampleChanged = {
+    ...taxonomy,
+    tags: taxonomy.tags.map((tag) => (tag.id === "deficit-and-debt" ? { ...tag, inclusionExamples: [...tag.inclusionExamples, "a new inclusion example"] } : tag))
+  };
+  assert.notEqual(taxonomyHash(exampleChanged), baseline, "a changed inclusion example must invalidate a cache entry fingerprinted against this hash");
 });
 
 test("directLegalIdentifierIndex groups tags sharing a legal identifier", () => {

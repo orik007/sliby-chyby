@@ -1,3 +1,5 @@
+import { sha256 } from "./collector-core.mjs";
+
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
 }
@@ -94,11 +96,26 @@ export function directLegalIdentifierIndex(taxonomy) {
   return index;
 }
 
+/**
+ * A content fingerprint of everything a tagging brief actually derives from
+ * the taxonomy -- not just `taxonomyVersion`. `taxonomyDefinitionsText`
+ * (scripts/lib/topic-tagger.mjs) renders each tag's id, parent, label,
+ * eligibility, Czech aliases, and inclusion/exclusion examples; editing any
+ * of those without bumping the version must invalidate a cached assignment
+ * fingerprinted against this hash, not silently reuse it.
+ */
 export function taxonomyHash(taxonomy) {
-  const content = JSON.stringify(taxonomy.tags.map(({ id, parent, assessmentEligible }) => ({ id, parent, assessmentEligible })).sort((a, b) => a.id.localeCompare(b.id)));
-  let hash = 0;
-  for (let index = 0; index < content.length; index += 1) {
-    hash = (hash * 31 + content.charCodeAt(index)) >>> 0;
-  }
-  return hash.toString(16);
+  const content = taxonomy.tags
+    .map(({ id, parent, labelEn, assessmentEligible, czechAliases, inclusionExamples, exclusionExamples, directLegalIdentifiers }) => ({
+      id,
+      parent,
+      labelEn,
+      assessmentEligible,
+      czechAliases: [...czechAliases].sort(),
+      inclusionExamples: [...inclusionExamples].sort(),
+      exclusionExamples: [...exclusionExamples].sort(),
+      directLegalIdentifiers: [...(directLegalIdentifiers ?? [])].sort()
+    }))
+    .sort((a, b) => a.id.localeCompare(b.id));
+  return sha256({ taxonomyVersion: taxonomy.taxonomyVersion, tags: content });
 }

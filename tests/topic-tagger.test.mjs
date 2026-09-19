@@ -32,6 +32,16 @@ test("buildPromiseTaggingBrief includes only the promise's own supplied fields a
   assert.ok(brief.taxonomyDefinitions.includes("deficit-and-debt"));
 });
 
+test("buildPromiseTaggingBrief includes the promise's own source context, per the design doc's step 3", () => {
+  const brief = buildPromiseTaggingBrief(fiscalPromise, taxonomy);
+  const source = fiscalPromise.promiseSource;
+  assert.ok(brief.text.includes(source.title), "source title must inform classification, not just the derived promise text");
+  assert.ok(brief.text.includes(source.publisher));
+  assert.ok(brief.text.includes(source.url));
+  if (source.locator) assert.ok(brief.text.includes(source.locator));
+  if (source.exactQuoteCz) assert.ok(brief.text.includes(source.exactQuoteCz));
+});
+
 test("buildSourceTaggingBrief includes only supplied source metadata, excerpts, and the taxonomy definitions", () => {
   const record = createCollectedRecord({
     id: "psp--fixture",
@@ -49,6 +59,25 @@ test("buildSourceTaggingBrief includes only supplied source metadata, excerpts, 
   assert.equal(brief.subjectType, "source");
   assert.ok(brief.text.includes("official excerpt about the deficit rule"));
   assert.ok(brief.taxonomyDefinitions.includes("fiscal-rules"));
+});
+
+test("buildSourceTaggingBrief formats an official-document excerpt object ({paragraph, text}) instead of stringifying it", () => {
+  const record = createCollectedRecord({
+    id: "psp--fixture-object-excerpt",
+    sourceId: "psp-core-2025",
+    kind: "legislative-step",
+    primary: true,
+    evidenceRole: "primary-record",
+    occurredAt: "2026-06-01T00:00:00",
+    title: "Novela zákona o pravidlech rozpočtové odpovědnosti",
+    publisher: "Chamber of Deputies",
+    url: "https://public.psp.cz/sqw/historie.sqw?o=10&t=1",
+    payload: { externalPrintId: "1" }
+  });
+  const brief = buildSourceTaggingBrief(record, [{ paragraph: 12, text: "official excerpt about the deficit rule" }], taxonomy);
+  assert.ok(brief.text.includes("official excerpt about the deficit rule"));
+  assert.ok(brief.text.includes("paragraph 12"));
+  assert.ok(!brief.text.includes("[object Object]"));
 });
 
 test("deriveRecordContentExcerpts surfaces a parliamentary vote's linked print titles and recorded actions", () => {
@@ -93,6 +122,21 @@ test("validateTagAssignmentOutput accepts a valid real-tag result", () => {
   assert.deepEqual(output.tags, ["deficit-and-debt"]);
 });
 
+test("validateTagAssignmentOutput accepts a supportingExcerpt present verbatim in the supplied brief", () => {
+  const brief = buildPromiseTaggingBrief(fiscalPromise, taxonomy);
+  const verbatimExcerpt = fiscalPromise.originalTextCz;
+  const output = validateTagAssignmentOutput({ tags: ["deficit-and-debt"], confidence: 0.9, supportingExcerpts: [verbatimExcerpt] }, taxonomy, brief.text);
+  assert.deepEqual(output.supportingExcerpts, [verbatimExcerpt]);
+});
+
+test("validateTagAssignmentOutput rejects a fabricated supportingExcerpt not present in the supplied brief", () => {
+  const brief = buildPromiseTaggingBrief(fiscalPromise, taxonomy);
+  assert.throws(
+    () => validateTagAssignmentOutput({ tags: ["deficit-and-debt"], confidence: 0.9, supportingExcerpts: ["text the model invented, never supplied to it"] }, taxonomy, brief.text),
+    /not present verbatim/
+  );
+});
+
 test("requestTagAssignment calls the shared OpenAI structured-response endpoint and validates its output", async () => {
   const originalFetch = globalThis.fetch;
   let capturedBody = null;
@@ -104,7 +148,7 @@ test("requestTagAssignment calls the shared OpenAI structured-response endpoint 
         id: "resp_fixture",
         model: "gpt-5.6-terra",
         usage: { input_tokens: 42, output_tokens: 7 },
-        output: [{ content: [{ type: "output_text", text: JSON.stringify({ tags: ["deficit-and-debt"], confidence: 0.95, supportingExcerpts: ["fixture excerpt"] }) }] }]
+        output: [{ content: [{ type: "output_text", text: JSON.stringify({ tags: ["deficit-and-debt"], confidence: 0.95, supportingExcerpts: [fiscalPromise.originalTextCz] }) }] }]
       })
     };
   };

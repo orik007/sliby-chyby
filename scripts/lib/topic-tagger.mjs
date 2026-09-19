@@ -41,14 +41,22 @@ function taxonomyDefinitionsText(taxonomy) {
 export function buildPromiseTaggingBrief(promise, taxonomy) {
   invariant(typeof promise.id === "string" && promise.id.length > 0, "Promise brief requires an id");
   invariant(typeof promise.originalTextCz === "string" && promise.originalTextCz.length > 0, "Promise brief requires originalTextCz");
+  const source = promise.promiseSource;
   return {
     subjectType: "promise",
     subjectId: promise.id,
+    // Promise tagging is specified to classify from "its exact wording and
+    // source context" (docs/topic-routing-design.md step 3) -- the promise
+    // source's own title/publisher/locator/quote, not just the derived
+    // promise text, since that context can itself be topically decisive.
     text: [
       `Promise (Czech, exact wording): ${promise.originalTextCz}`,
       promise.atomicClaimCz ? `Atomic claim: ${promise.atomicClaimCz}` : null,
       promise.fulfillmentTest ? `Fulfillment test: ${promise.fulfillmentTest}` : null,
-      promise.contradictionTest ? `Contradiction test: ${promise.contradictionTest}` : null
+      promise.contradictionTest ? `Contradiction test: ${promise.contradictionTest}` : null,
+      source ? `Promise source: ${source.title} (${source.publisher}, ${source.publishedAt}), ${source.url}` : null,
+      source?.locator ? `Source locator: ${source.locator}` : null,
+      source?.exactQuoteCz ? `Source exact quote (Czech): ${source.exactQuoteCz}` : null
     ].filter(Boolean).join("\n"),
     taxonomyDefinitions: taxonomyDefinitionsText(taxonomy)
   };
@@ -100,6 +108,19 @@ export function deriveRecordContentExcerpts(record) {
   return excerpts;
 }
 
+// An official-document excerpt (scripts/lib/psp-print-documents.mjs's
+// selectRelevantDocumentExcerpts) is `{ paragraph, text }`, not a plain
+// string; a fixture or a record's own derived excerpt is a plain string.
+// Stringifying the object form directly would render "[object Object]" and
+// silently drop the actual quoted text from the brief.
+function formatExcerpt(excerpt) {
+  if (typeof excerpt === "string") return excerpt;
+  if (excerpt && typeof excerpt.text === "string") {
+    return Number.isFinite(excerpt.paragraph) ? `(paragraph ${excerpt.paragraph}) ${excerpt.text}` : excerpt.text;
+  }
+  return String(excerpt);
+}
+
 export function buildSourceTaggingBrief(record, officialDocumentExcerpts, taxonomy) {
   invariant(typeof record.id === "string" && record.id.length > 0, "Source brief requires a record id");
   invariant(typeof record.title === "string" && record.title.length > 0, "Source brief requires a record title");
@@ -111,7 +132,7 @@ export function buildSourceTaggingBrief(record, officialDocumentExcerpts, taxono
       `Source title: ${record.title}`,
       `Publisher: ${record.publisher}`,
       `Kind: ${record.kind}`,
-      ...excerpts.map((excerpt, index) => `Excerpt ${index + 1}: ${excerpt}`)
+      ...excerpts.map((excerpt, index) => `Excerpt ${index + 1}: ${formatExcerpt(excerpt)}`)
     ].join("\n"),
     taxonomyDefinitions: taxonomyDefinitionsText(taxonomy)
   };
@@ -131,7 +152,18 @@ function tagAssignmentSchema(taxonomy) {
   };
 }
 
-export function validateTagAssignmentOutput(output, taxonomy) {
+/**
+ * `briefText`, when supplied, grounds `supportingExcerpts`: `isGrounded`
+ * (scripts/lib/topic-routing.mjs) treats any non-empty excerpt array as
+ * sufficient support for an auto-candidate, so an unvalidated excerpt would
+ * let fabricated model text clear that gate. Each excerpt must therefore
+ * appear verbatim in the exact material the tagger was actually given,
+ * mirroring how citedEvidenceIds are checked against the supplied package
+ * in scripts/lib/assessment-pipeline.mjs. Optional so callers that only
+ * exercise the structural checks (tests, malformed-output fixtures) are not
+ * forced to construct a matching brief.
+ */
+export function validateTagAssignmentOutput(output, taxonomy, briefText) {
   invariant(Array.isArray(output?.tags) && output.tags.length > 0, "Tag assignment must return at least one tag or \"unknown\"");
   for (const tagId of output.tags) {
     invariant(tagId === "unknown" || hasTag(taxonomy, tagId), `Tag assignment referenced an unknown tag id: ${tagId}`);
@@ -141,6 +173,11 @@ export function validateTagAssignmentOutput(output, taxonomy) {
   }
   invariant(Number.isFinite(output.confidence) && output.confidence >= 0 && output.confidence <= 1, "Tag assignment confidence must be between 0 and 1");
   invariant(Array.isArray(output.supportingExcerpts), "Tag assignment must return supportingExcerpts");
+  if (typeof briefText === "string") {
+    for (const excerpt of output.supportingExcerpts) {
+      invariant(typeof excerpt === "string" && excerpt.length > 0 && briefText.includes(excerpt), `Tag assignment cites a supporting excerpt not present verbatim in the supplied brief: ${JSON.stringify(excerpt)}`);
+    }
+  }
   return output;
 }
 
@@ -162,6 +199,6 @@ export async function requestTagAssignment({ provider, apiKey, model, brief, tax
     promptVersion: prompt.version,
     promptContentHash: prompt.contentHash,
     usage: response.usage,
-    output: validateTagAssignmentOutput(response.output, taxonomy)
+    output: validateTagAssignmentOutput(response.output, taxonomy, brief.text)
   };
 }

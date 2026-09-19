@@ -5,8 +5,8 @@ import { basename, dirname, resolve } from "node:path";
 import { loadEnvFile } from "node:process";
 import { sha256 } from "./lib/collector-core.mjs";
 import { loadPublishedPromiseIds, publishedMatchingRegistry } from "./lib/published-promises.mjs";
-import { buildPromiseTaggingBrief, buildSourceTaggingBrief, loadTaggingPrompt, requestTagAssignment, taggingRuntimeConfig } from "./lib/topic-tagger.mjs";
-import { directLegalIdentifierIndex, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
+import { buildPromiseTaggingBrief, buildSourceTaggingBrief, loadTaggingPrompt, requestTagAssignment, taggingRuntimeConfig, validateTagAssignmentOutput } from "./lib/topic-tagger.mjs";
+import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
 import { validatePromiseRegistry } from "./lib/evidence-matcher.mjs";
 import { buildInvertedIndex, derivePromiseTopicTags, routeSourceRecord } from "./lib/topic-routing.mjs";
 import { predictBoundedPackage } from "./lib/topic-evidence-package.mjs";
@@ -69,8 +69,8 @@ async function writeJsonAtomically(filePath, value) {
   }
 }
 
-function emptyTagCache(taxonomyVersion, promptContentHash) {
-  return { schemaVersion: "1.0.0", taxonomyVersion, promptContentHash, assignments: {} };
+function emptyTagCache(taxonomyVersion, taxonomyContentHash, promptContentHash) {
+  return { schemaVersion: "1.0.0", taxonomyVersion, taxonomyContentHash, promptContentHash, assignments: {} };
 }
 
 // Mirrors scripts/run-assessment-batch.mjs's worker pool: process a bounded
@@ -92,25 +92,39 @@ async function mapWithConcurrency(items, concurrency, worker) {
 
 /**
  * The cache hit predicate must cover everything that could change a
- * response: the exact brief content, the taxonomy version, the prompt
- * content (not just its version filename), the provider, and both
- * configured models. Any change invalidates the cache entry rather than
- * silently reusing a stale assignment.
+ * response: the exact brief content, the full taxonomy content (not just
+ * its version string -- a tag's aliases, examples, or eligibility flag can
+ * change without a version bump), the prompt content (not just its version
+ * filename), the provider, and both configured models. Any change
+ * invalidates the cache entry rather than silently reusing a stale
+ * assignment.
  */
-function cacheFingerprintMatches(cached, { inputHash, taxonomy, prompt, runtime }) {
+function cacheFingerprintMatches(cached, { inputHash, taxonomyContentHash, prompt, runtime }) {
   return Boolean(cached)
     && cached.inputHash === inputHash
-    && cached.taxonomyVersion === taxonomy.taxonomyVersion
+    && cached.taxonomyContentHash === taxonomyContentHash
     && cached.promptContentHash === prompt.contentHash
     && cached.provider === runtime.provider
     && cached.modelA === runtime.modelA
     && cached.modelB === runtime.modelB;
 }
 
-async function taggedTwice({ subjectId, inputHash, brief, taxonomy, prompt, runtime, cache }) {
+async function taggedTwice({ subjectId, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache }) {
   const cached = cache.assignments[subjectId];
-  if (cacheFingerprintMatches(cached, { inputHash, taxonomy, prompt, runtime })) {
-    return { taggerA: cached.taggerA, taggerB: cached.taggerB, provider: cached.provider, modelA: cached.modelA, modelB: cached.modelB, usageByModel: [], reused: true };
+  if (cacheFingerprintMatches(cached, { inputHash, taxonomyContentHash, prompt, runtime })) {
+    // Re-validate even a cache hit: the fingerprint guarantees the same
+    // brief and taxonomy produced this assignment originally, but a
+    // grounded `supportingExcerpts` claim must still be checked against
+    // this exact brief text rather than trusted on faith from disk.
+    return {
+      taggerA: validateTagAssignmentOutput(cached.taggerA, taxonomy, brief.text),
+      taggerB: validateTagAssignmentOutput(cached.taggerB, taxonomy, brief.text),
+      provider: cached.provider,
+      modelA: cached.modelA,
+      modelB: cached.modelB,
+      usageByModel: [],
+      reused: true
+    };
   }
   const [taggerA, taggerB] = await Promise.all([
     requestTagAssignment({ provider: runtime.provider, apiKey: apiKeyFor(runtime.provider), model: runtime.modelA, brief, taxonomy, prompt }),
@@ -118,7 +132,7 @@ async function taggedTwice({ subjectId, inputHash, brief, taxonomy, prompt, runt
   ]);
   cache.assignments[subjectId] = {
     inputHash,
-    taxonomyVersion: taxonomy.taxonomyVersion,
+    taxonomyContentHash,
     promptContentHash: prompt.contentHash,
     provider: runtime.provider,
     modelA: runtime.modelA,
@@ -165,18 +179,26 @@ function collectStringValues(value, out = []) {
  */
 function deriveDirectLink(taxonomy, record, directIdIndex, invertedIndex) {
   const payloadValues = collectStringValues(record.payload ?? {});
+  const promiseIds = new Set();
+  const matchedIdentifiers = [];
   for (const value of payloadValues) {
     const tagIds = directIdIndex.get(value);
     if (!tagIds) continue;
-    const promiseIds = new Set();
+    let matchedAny = false;
     for (const tagId of tagIds) {
-      for (const promiseId of invertedIndex.get(tagId) ?? []) promiseIds.add(promiseId);
+      for (const promiseId of invertedIndex.get(tagId) ?? []) {
+        promiseIds.add(promiseId);
+        matchedAny = true;
+      }
     }
-    if (promiseIds.size > 0) {
-      return { promiseIds: [...promiseIds], reason: `matched-legal-identifier:${value}` };
-    }
+    if (matchedAny) matchedIdentifiers.push(value);
   }
-  return null;
+  if (promiseIds.size === 0) return null;
+  // Accumulates every matching identifier's promises rather than returning
+  // on the first hit, so a record referencing more than one direct legal
+  // identifier does not silently lose the relationships the later ones
+  // would have added.
+  return { promiseIds: [...promiseIds], reason: `matched-legal-identifiers:${matchedIdentifiers.join(", ")}` };
 }
 
 const args = parseArgs(process.argv.slice(2));
@@ -184,6 +206,7 @@ const runtime = taggingRuntimeConfig();
 invariant(Number.isInteger(runtime.concurrency) && runtime.concurrency > 0 && runtime.concurrency <= 16, "SLIBY_TAGGING_CONCURRENCY must be an integer from 1 to 16");
 const prompt = await loadTaggingPrompt();
 const taxonomy = validateTaxonomy(JSON.parse(await readFile(resolve(args.taxonomy), "utf8")));
+const taxonomyContentHash = taxonomyHash(taxonomy);
 const directIdIndex = directLegalIdentifierIndex(taxonomy);
 
 const registry = validatePromiseRegistry(JSON.parse(await readFile(resolve(args.promiseRegistry), "utf8")));
@@ -198,16 +221,16 @@ const enrichedExcerptsByRecordId = args.enrichedExcerpts ? await readJsonIfExist
 
 const promiseTagCachePath = resolve(args.tagCache, "promise-tags.json");
 const sourceTagCachePath = resolve(args.tagCache, "source-tags.json");
-const promiseTagCache = await readJsonIfExists(promiseTagCachePath, emptyTagCache(taxonomy.taxonomyVersion, prompt.contentHash));
-const sourceTagCache = await readJsonIfExists(sourceTagCachePath, emptyTagCache(taxonomy.taxonomyVersion, prompt.contentHash));
+const promiseTagCache = await readJsonIfExists(promiseTagCachePath, emptyTagCache(taxonomy.taxonomyVersion, taxonomyContentHash, prompt.contentHash));
+const sourceTagCache = await readJsonIfExists(sourceTagCachePath, emptyTagCache(taxonomy.taxonomyVersion, taxonomyContentHash, prompt.contentHash));
 
 const promiseTaggingUsageByModel = [];
 let agreedPromiseAssignmentCount = 0;
 
 const promiseTopicAssignments = await mapWithConcurrency(publishedRegistry.promises, runtime.concurrency, async (promise) => {
-  const inputHash = sha256({ id: promise.id, originalTextCz: promise.originalTextCz, atomicClaimCz: promise.atomicClaimCz, fulfillmentTest: promise.fulfillmentTest, contradictionTest: promise.contradictionTest });
+  const inputHash = sha256({ id: promise.id, originalTextCz: promise.originalTextCz, atomicClaimCz: promise.atomicClaimCz, fulfillmentTest: promise.fulfillmentTest, contradictionTest: promise.contradictionTest, promiseSource: promise.promiseSource });
   const brief = buildPromiseTaggingBrief(promise, taxonomy);
-  const tagged = await taggedTwice({ subjectId: promise.id, inputHash, brief, taxonomy, prompt, runtime, cache: promiseTagCache });
+  const tagged = await taggedTwice({ subjectId: promise.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: promiseTagCache });
   promiseTaggingUsageByModel.push(...tagged.usageByModel);
   const derived = derivePromiseTopicTags(taxonomy, tagged.taggerA, tagged.taggerB);
   return {
@@ -219,6 +242,10 @@ const promiseTopicAssignments = await mapWithConcurrency(publishedRegistry.promi
     provider: tagged.provider,
     modelA: tagged.modelA,
     modelB: tagged.modelB,
+    // The full brief, not just IDs and hashes, so an acceptance reviewer
+    // can verify a cited excerpt or reproduce a cache hit's classification
+    // from this uploaded artifact alone.
+    briefText: brief.text,
     inputHash
   };
 });
@@ -241,20 +268,33 @@ const sourceRouting = await mapWithConcurrency(materialPrimaryRecords, runtime.c
   const enrichedExcerpts = enrichedExcerptsByRecordId[record.id] ?? [];
   const inputHash = sha256({ id: record.id, title: record.title, publisher: record.publisher, kind: record.kind, payload: record.payload, enrichedExcerpts });
   const brief = buildSourceTaggingBrief(record, enrichedExcerpts, taxonomy);
-  const tagged = await taggedTwice({ subjectId: record.id, inputHash, brief, taxonomy, prompt, runtime, cache: sourceTagCache });
+  const directLink = deriveDirectLink(taxonomy, record, directIdIndex, invertedIndex);
+
+  if (directLink) {
+    // Design doc step 4: "The robot first applies direct structural
+    // mappings ... where deterministic signals do not make the assignment
+    // safe, two independent taggers receive a bounded routing brief."
+    // combineTaggerResults (scripts/lib/topic-routing.mjs) returns
+    // auto-candidate unconditionally once a directLink is present, without
+    // ever looking at taggerA/taggerB -- so there is nothing for either
+    // paid tagger to add, and skipping them here saves two calls per hit.
+    const route = routeSourceRecord({ taxonomy, record, taggerA: null, taggerB: null, invertedIndex, directLink, semanticDiscoveryPromiseIds: [] });
+    return { route, tagged: { taggerA: null, taggerB: null, provider: null, modelA: null, modelB: null }, inputHash, briefText: brief.text };
+  }
+
+  const tagged = await taggedTwice({ subjectId: record.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: sourceTagCache });
   sourceTaggingUsageByModel.push(...tagged.usageByModel);
 
-  const directLink = deriveDirectLink(taxonomy, record, directIdIndex, invertedIndex);
   const route = routeSourceRecord({
     taxonomy,
     record,
     taggerA: tagged.taggerA,
     taggerB: tagged.taggerB,
     invertedIndex,
-    directLink,
+    directLink: null,
     semanticDiscoveryPromiseIds: []
   });
-  return { route, tagged, inputHash };
+  return { route, tagged, inputHash, briefText: brief.text };
 });
 
 for (const { route, tagged, inputHash } of sourceRouting) {
@@ -268,7 +308,16 @@ for (const { route, tagged, inputHash } of sourceRouting) {
     const record = materialPrimaryRecords.find(({ id }) => id === route.recordId);
     for (const promiseId of route.candidatePromiseIds) {
       const items = evidenceItemsByPromise.get(promiseId) ?? [];
-      items.push({ recordId: record.id, primary: record.primary === true, factSummary: record.title, structuredFacts: record.payload });
+      // Official-document excerpts are part of what the tagger actually
+      // saw and what an eventual assessor package would carry; omitting
+      // them here would understate predictBoundedPackage's token estimate.
+      const officialDocumentExcerpts = enrichedExcerptsByRecordId[record.id] ?? [];
+      items.push({
+        recordId: record.id,
+        primary: record.primary === true,
+        factSummary: record.title,
+        structuredFacts: officialDocumentExcerpts.length > 0 ? { ...record.payload, officialDocumentExcerpts } : record.payload
+      });
       evidenceItemsByPromise.set(promiseId, items);
     }
   }
@@ -296,6 +345,7 @@ const report = {
   schemaVersion: "1.0.0",
   pilotVersion: "topic-routing-pilot-v1",
   taxonomyVersion: taxonomy.taxonomyVersion,
+  taxonomyContentHash,
   promptVersion: prompt.version,
   promptContentHash: prompt.contentHash,
   // Kept alongside the per-subject provider/model fields below so the
@@ -332,9 +382,10 @@ const report = {
   // documented acceptance review from the artifact alone, including why a
   // relationship was or was not created.
   promiseTopicAssignments,
-  sourceTagAssignments: sourceRouting.map(({ route, tagged, inputHash }) => ({
+  sourceTagAssignments: sourceRouting.map(({ route, tagged, inputHash, briefText }) => ({
     recordId: route.recordId,
     inputHash,
+    briefText,
     taggerA: tagged.taggerA,
     taggerB: tagged.taggerB,
     provider: tagged.provider,
