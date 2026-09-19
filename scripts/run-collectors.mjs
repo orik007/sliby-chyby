@@ -59,25 +59,38 @@ const collectionPlan = checkpoints
 const plansBySourceId = new Map(collectionPlan.map((plan) => [plan.sourceId, plan]));
 
 const collectorResults = [];
+// One source's failure (a dead endpoint, a host now returning 403, a
+// transient network error) must not discard every other source's already-
+// collected records or block matching/enrichment/assessment from running
+// on them. A failed source simply contributes nothing to `collectorResults`,
+// so `updateCollectorCheckpoints` below leaves its checkpoint untouched --
+// the next run retries it from that same last-known-good date, exactly
+// like a source that has never run yet.
+const failures = [];
 for (const source of selected) {
   const plan = plansBySourceId.get(source.id);
   invariant(plan, `Collector source ${source.id} is missing a collection plan`);
   const since = plan.since;
-  const result = source.collector === "psp-open-data"
-    ? await collectPspSource(source, { since, collectedAt })
-    : source.collector === "official-html-archive"
-      ? await collectOfficialHtmlArchive(source, { since, collectedAt })
-      : source.collector === "wordpress-rest"
-        ? await collectWordPressRest(source, { since, collectedAt })
-        : source.collector === "mk-news-archive"
-          ? await collectMkNewsArchive(source, { since, collectedAt })
-          : source.collector === "mpsv-press-archive"
-            ? await collectMpsvPressArchive(source, { since, collectedAt })
-            : source.collector === "msmt-news-api"
-              ? await collectMsmtNewsApi(source, { since, collectedAt })
-              : await collectFeedSource(source, { since, collectedAt });
-  collectorResults.push(result);
-  console.log(`${source.id}: ${plan.mode} from ${since}, ${result.records.length} records, ${result.warnings.length} warnings`);
+  try {
+    const result = source.collector === "psp-open-data"
+      ? await collectPspSource(source, { since, collectedAt })
+      : source.collector === "official-html-archive"
+        ? await collectOfficialHtmlArchive(source, { since, collectedAt })
+        : source.collector === "wordpress-rest"
+          ? await collectWordPressRest(source, { since, collectedAt })
+          : source.collector === "mk-news-archive"
+            ? await collectMkNewsArchive(source, { since, collectedAt })
+            : source.collector === "mpsv-press-archive"
+              ? await collectMpsvPressArchive(source, { since, collectedAt })
+              : source.collector === "msmt-news-api"
+                ? await collectMsmtNewsApi(source, { since, collectedAt })
+                : await collectFeedSource(source, { since, collectedAt });
+    collectorResults.push(result);
+    console.log(`${source.id}: ${plan.mode} from ${since}, ${result.records.length} records, ${result.warnings.length} warnings`);
+  } catch (error) {
+    failures.push({ sourceId: source.id, message: error.message });
+    console.error(`${source.id}: collection failed, checkpoint left unchanged for retry from ${since} -- ${error.message}`);
+  }
 }
 
 async function writeCheckpointsAtomically(filePath, checkpoints) {
@@ -104,6 +117,7 @@ const output = {
   collectionPlan,
   publicationApproved: false,
   sourceIds: selected.map((source) => source.id),
+  failures,
   collectors: collectorResults.map((result) => ({
     sourceId: result.sourceId,
     collector: result.collector,
@@ -134,4 +148,4 @@ if (args.writeCheckpoints) {
   });
   await writeCheckpointsAtomically(args.writeCheckpoints, updatedCheckpoints);
 }
-console.log(JSON.stringify({ runId, outputDirectory, sourceCount: selected.length, recordCount: records.length, collectionPlan, checkpointUpdated: Boolean(args.writeCheckpoints), publicationApproved: false }, null, 2));
+console.log(JSON.stringify({ runId, outputDirectory, sourceCount: selected.length, recordCount: records.length, collectionPlan, failures, checkpointUpdated: Boolean(args.writeCheckpoints), publicationApproved: false }, null, 2));

@@ -1,9 +1,15 @@
 name: Collect, match, and assess confirmed promises
 
 on:
-  schedule:
-    - cron: "37 9 * * *"
-      timezone: "Europe/Prague"
+  # Scheduled daily run paused 2026-09-19 while the promise-evidence
+  # matching mechanism is reworked (the exact-signal/semantic matcher is
+  # being replaced by the tag-based routing design in
+  # docs/topic-routing-design.md). Re-enable this schedule block only once
+  # that replacement is in place; until then, run manually via
+  # workflow_dispatch when deliberately testing.
+  # schedule:
+  #   - cron: "37 9 * * *"
+  #     timezone: "Europe/Prague"
   workflow_dispatch:
     inputs:
       since:
@@ -255,6 +261,15 @@ jobs:
               const checkpoint = checkpoints.sourceCheckpoints[collector.sourceId];
               return `| \`${collector.sourceId}\` | ${collector.collection.mode} | ${collector.collection.since} | ${collector.recordCount} | ${checkpoint?.lastObservedRecordAt?.slice(0, 10) ?? "—"} |`;
             });
+            const failures = collectorRun.failures ?? [];
+            const failureLines = failures.length > 0
+              ? [
+                  "",
+                  `**${failures.length} zdroj(e) dnes selhaly a jejich checkpoint se nezměnil** — příští běh je zkusí znovu od stejného data, ostatní zdroje pokračovaly beze změny:`,
+                  "",
+                  ...failures.map(({ sourceId, message }) => `- \`${sourceId}\`: ${message}`)
+                ]
+              : [];
             const reviewLines = [
               "",
               "## Sběr dat a checkpointy zdrojů",
@@ -265,6 +280,7 @@ jobs:
               "| Zdroj | Režim | Od | Záznamů | Nejnovější záznam |",
               "| --- | --- | --- | ---: | --- |",
               ...sourceRows,
+              ...failureLines,
               ""
             ];
             await appendFile("automation/runs/pipeline/github-actions/assessment-review-pr.md", reviewLines.join("\n"));
