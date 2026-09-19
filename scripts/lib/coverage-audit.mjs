@@ -36,7 +36,17 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
   const proposals = activeProposals(proposalManifest);
   const sources = new Map(sourceRegistry.sources.map((source) => [source.id, source]));
   const recordsBySource = new Map();
-  for (const record of collectorRun.records) recordsBySource.set(record.sourceId, (recordsBySource.get(record.sourceId) ?? 0) + 1);
+  const observedRangeBySource = new Map();
+  for (const record of collectorRun.records) {
+    recordsBySource.set(record.sourceId, (recordsBySource.get(record.sourceId) ?? 0) + 1);
+    if (!record.occurredAt) continue;
+    const range = observedRangeBySource.get(record.sourceId);
+    if (!range) observedRangeBySource.set(record.sourceId, { earliest: record.occurredAt, latest: record.occurredAt });
+    else {
+      if (record.occurredAt < range.earliest) range.earliest = record.occurredAt;
+      if (record.occurredAt > range.latest) range.latest = record.occurredAt;
+    }
+  }
 
   const collectorsBySourceId = new Map();
   for (const collector of collectorRun.collectors) {
@@ -54,7 +64,7 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
   const sourceCoverage = sourceRegistry.sources.filter((source) => source.enabled).map((source) => {
     const collector = collectorsBySourceId.get(source.id);
     const failure = failuresBySourceId.get(source.id);
-    const occurred = collectorRun.records.filter(({ sourceId, occurredAt }) => sourceId === source.id && occurredAt).map(({ occurredAt }) => occurredAt).sort();
+    const range = observedRangeBySource.get(source.id);
     return {
       sourceId: source.id,
       name: source.name,
@@ -64,8 +74,8 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
       coverageNote: source.coverage.note,
       requestedSince: collector?.collection?.since ?? collectorRun.since,
       recordCount: recordsBySource.get(source.id) ?? 0,
-      observedEarliest: occurred[0] ?? null,
-      observedLatest: occurred.at(-1) ?? null,
+      observedEarliest: range?.earliest ?? null,
+      observedLatest: range?.latest ?? null,
       collected: Boolean(collector),
       warnings: collector
         ? (collector.warnings ?? [])
@@ -130,6 +140,14 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
   };
 }
 
+// A warning or failure message is arbitrary runtime text (a thrown error's
+// own message, or a collector's parsed-content warning) -- never assume it
+// is safe to drop straight into a Markdown table cell. A newline would
+// break out of the row; an unescaped `|` would split it into extra columns.
+function renderMarkdownCell(text) {
+  return String(text ?? "").replace(/\s+/g, " ").trim().replace(/\|/g, "\\|");
+}
+
 export function renderCoverageAuditMarkdown(audit) {
   const lines = [
     "# Evidence coverage audit",
@@ -148,7 +166,7 @@ export function renderCoverageAuditMarkdown(audit) {
     "",
     "| Source | Collected | Mode | Records | Observed range | Limitation |",
     "|---|---|---|---:|---|---|",
-    ...audit.sourceCoverage.map((source) => `| ${source.name} | ${source.collected ? "yes" : `**no** — ${source.warnings[0]}`} | \`${source.coverageMode}\` | ${source.recordCount} | ${source.observedEarliest?.slice(0, 10) ?? "—"} to ${source.observedLatest?.slice(0, 10) ?? "—"} | ${source.coverageNote} |`),
+    ...audit.sourceCoverage.map((source) => `| ${source.name} | ${source.collected ? "yes" : `**no** — ${renderMarkdownCell(source.warnings[0])}`} | \`${source.coverageMode}\` | ${source.recordCount} | ${source.observedEarliest?.slice(0, 10) ?? "—"} to ${source.observedLatest?.slice(0, 10) ?? "—"} | ${source.coverageNote} |`),
     "",
     "## Promise coverage",
     "",

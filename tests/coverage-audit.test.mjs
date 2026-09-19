@@ -55,6 +55,26 @@ test("a source whose own collection failed still appears in sourceCoverage, mark
   assert.match(markdown, /\*\*no\*\* — Not collected this run -- collection failed: Source msmt-news-api returned HTTP 403/);
 });
 
+test("a failure message with a newline or a pipe cannot break the source coverage Markdown table", () => {
+  const audit = buildCoverageAudit({
+    collectorRun: {
+      schemaVersion: "1.0.0", runId: "run-3", since: "2025-10-01",
+      collectors: [],
+      failures: [{ sourceId: "feed", message: "Request failed\nwith a | pipe and   extra   spaces" }],
+      records: []
+    },
+    matcherRun: { schemaVersion: "1.0.0", matchedAt: "now", asOf: "2026-09-19", promiseResults: [{ promiseId: "p1", candidateMatchCount: 0, attributablePrimaryMatchCount: 0, evidencePackage: null }] },
+    promiseRegistry: { promises: [{ id: "p1", partyId: "ano", partyName: "ANO", titleCz: "Slib" }] },
+    sourceRegistry: { sources: [{ id: "feed", name: "Feed", primary: false, evidenceRole: "discovery-context", enabled: true, coverage: { mode: "current-window", note: "n/a" } }] },
+    proposalManifest: { proposals: [] }
+  });
+  const markdown = renderCoverageAuditMarkdown(audit);
+  const tableLines = markdown.split("\n").filter((line) => line.startsWith("| Feed"));
+  assert.equal(tableLines.length, 1, "a newline in the failure message must not create an extra table row");
+  assert.ok(!tableLines[0].includes("\n"), "the rendered row must not contain a literal newline");
+  assert.ok(tableLines[0].includes("a \\| pipe"), "a literal pipe in the message must be escaped, not left to split the table into an extra column");
+});
+
 test("coverage audit prefers the active human review proposal over raw match state", () => {
   const base = {
     collectorRun: { schemaVersion: "1.0.0", runId: "run", since: "2025-10-01", collectors: [], records: [] },
