@@ -132,6 +132,7 @@ export function buildSourceTaggingBrief(record, officialDocumentExcerpts, taxono
       `Source title: ${record.title}`,
       `Publisher: ${record.publisher}`,
       `Kind: ${record.kind}`,
+      `Source URL: ${record.url}`,
       ...excerpts.map((excerpt, index) => `Excerpt ${index + 1}: ${formatExcerpt(excerpt)}`)
     ].join("\n"),
     taxonomyDefinitions: taxonomyDefinitionsText(taxonomy)

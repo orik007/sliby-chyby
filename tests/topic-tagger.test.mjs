@@ -22,6 +22,8 @@ test("loadTaggingPrompt hashes the versioned prompt file", async () => {
   assert.equal(prompt.version, "tagger-v1");
   assert.match(prompt.contentHash, /^[a-f0-9]{64}$/);
   assert.ok(prompt.instructions.includes("Never invent a tag identifier"));
+  assert.ok(prompt.instructions.includes("Never return an empty tag list"), "the prompt's tag contract must match validateTagAssignmentOutput's non-empty requirement, or a compliant zero-tag response would crash the pilot");
+  assert.ok(prompt.instructions.includes("empty excerpt-citation list"), "an unknown result must never be told to explain itself in a citation, since only verbatim brief material can pass validateTagAssignmentOutput's grounding check");
 });
 
 test("buildPromiseTaggingBrief includes only the promise's own supplied fields and the taxonomy definitions", () => {
@@ -57,6 +59,7 @@ test("buildSourceTaggingBrief includes only supplied source metadata, excerpts, 
   });
   const brief = buildSourceTaggingBrief(record, ["official excerpt about the deficit rule"], taxonomy);
   assert.equal(brief.subjectType, "source");
+  assert.ok(brief.text.includes(record.url), "the record's own URL must reach the tagger as official source provenance, and a reviewer must be able to trace the classified record from the report alone");
   assert.ok(brief.text.includes("official excerpt about the deficit rule"));
   assert.ok(brief.taxonomyDefinitions.includes("fiscal-rules"));
 });

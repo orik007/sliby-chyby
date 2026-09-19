@@ -195,6 +195,24 @@ function partyVoteFacts(record, partyId) {
   return (record.payload?.partyVoteSummaries ?? []).find((summary) => summary.partyId === partyId) ?? null;
 }
 
+/**
+ * The evidence shape an assessor package actually sends, not the raw
+ * collector payload: a parliamentary vote's `individualVotes` (one entry
+ * per MP, routinely hundreds) is dropped and replaced with the one
+ * `relevantPartyVoteSummary` for this promise's party. Exported so any
+ * other estimate of a package's size or content -- such as the
+ * topic-routing pilot's token-budget prediction -- uses this same
+ * normalization instead of drifting from what actually gets sent.
+ */
+export function normalizedStructuredFacts(record, partyId) {
+  const structuredFacts = { ...record.payload };
+  delete structuredFacts.individualVotes;
+  if (record.kind === "parliamentary-vote") {
+    structuredFacts.relevantPartyVoteSummary = partyVoteFacts(record, partyId);
+  }
+  return structuredFacts;
+}
+
 function factSummary(record, partyId) {
   if (record.kind === "legislative-step") {
     const payload = record.payload;
@@ -215,11 +233,7 @@ function factSummary(record, partyId) {
 
 function evidenceFromMatch(match, promise) {
   const record = match.record;
-  const structuredFacts = { ...record.payload };
-  delete structuredFacts.individualVotes;
-  if (record.kind === "parliamentary-vote") {
-    structuredFacts.relevantPartyVoteSummary = partyVoteFacts(record, promise.partyId);
-  }
+  const structuredFacts = normalizedStructuredFacts(record, promise.partyId);
   return {
     id: record.id,
     role: "conduct-evidence",

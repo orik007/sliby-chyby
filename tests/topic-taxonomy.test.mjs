@@ -69,6 +69,23 @@ test("taxonomyHash changes when a tag's Czech aliases or examples change, not ju
   assert.notEqual(taxonomyHash(exampleChanged), baseline, "a changed inclusion example must invalidate a cache entry fingerprinted against this hash");
 });
 
+test("taxonomyHash changes when aliases are merely reordered, not just when their content changes", () => {
+  const baseline = taxonomyHash(taxonomy);
+  const target = taxonomy.tags.find((tag) => tag.id === "deficit-and-debt");
+  assert.ok(target.czechAliases.length >= 2, "fixture must have enough aliases to meaningfully reorder");
+  const aliasesReordered = {
+    ...taxonomy,
+    tags: taxonomy.tags.map((tag) => (tag.id === "deficit-and-debt" ? { ...tag, czechAliases: [...tag.czechAliases].reverse() } : tag))
+  };
+  assert.notEqual(taxonomyHash(aliasesReordered), baseline, "taxonomyDefinitionsText renders aliases in their given order, so reordering them changes the exact model input");
+});
+
+test("taxonomyHash changes when the tags array itself is merely reordered", () => {
+  const baseline = taxonomyHash(taxonomy);
+  const tagsReordered = { ...taxonomy, tags: [...taxonomy.tags].reverse() };
+  assert.notEqual(taxonomyHash(tagsReordered), baseline, "taxonomyDefinitionsText renders tags in taxonomy.tags order, so reordering them changes the exact model input");
+});
+
 test("directLegalIdentifierIndex groups tags sharing a legal identifier", () => {
   const index = directLegalIdentifierIndex(taxonomy);
   const fiscalTags = index.get("cz-act-23-2017");

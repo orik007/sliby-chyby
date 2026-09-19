@@ -7,7 +7,7 @@ import { sha256 } from "./lib/collector-core.mjs";
 import { loadPublishedPromiseIds, publishedMatchingRegistry } from "./lib/published-promises.mjs";
 import { buildPromiseTaggingBrief, buildSourceTaggingBrief, loadTaggingPrompt, requestTagAssignment, taggingRuntimeConfig, validateTagAssignmentOutput } from "./lib/topic-tagger.mjs";
 import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
-import { validatePromiseRegistry } from "./lib/evidence-matcher.mjs";
+import { normalizedStructuredFacts, validatePromiseRegistry } from "./lib/evidence-matcher.mjs";
 import { buildInvertedIndex, derivePromiseTopicTags, routeSourceRecord } from "./lib/topic-routing.mjs";
 import { predictBoundedPackage } from "./lib/topic-evidence-package.mjs";
 
@@ -211,6 +211,7 @@ const directIdIndex = directLegalIdentifierIndex(taxonomy);
 
 const registry = validatePromiseRegistry(JSON.parse(await readFile(resolve(args.promiseRegistry), "utf8")));
 const publishedRegistry = publishedMatchingRegistry(registry, await loadPublishedPromiseIds(args.publishedPromises));
+const promiseById = new Map(publishedRegistry.promises.map((promise) => [promise.id, promise]));
 
 const collectorRun = JSON.parse(await readFile(resolve(args.collectorRun), "utf8"));
 invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
@@ -224,195 +225,210 @@ const sourceTagCachePath = resolve(args.tagCache, "source-tags.json");
 const promiseTagCache = await readJsonIfExists(promiseTagCachePath, emptyTagCache(taxonomy.taxonomyVersion, taxonomyContentHash, prompt.contentHash));
 const sourceTagCache = await readJsonIfExists(sourceTagCachePath, emptyTagCache(taxonomy.taxonomyVersion, taxonomyContentHash, prompt.contentHash));
 
-const promiseTaggingUsageByModel = [];
-let agreedPromiseAssignmentCount = 0;
+// Everything from here through the report write is wrapped so that any
+// later failure -- a bad model response failing excerpt-grounding
+// validation, a network error, a report-write IO error -- still persists
+// whatever tagging work already completed, in the finally block below.
+// Without this, a single failure near the end of a long run would discard
+// every prior, already-paid-for model call held only in memory.
+try {
+  const promiseTaggingUsageByModel = [];
+  let agreedPromiseAssignmentCount = 0;
 
-const promiseTopicAssignments = await mapWithConcurrency(publishedRegistry.promises, runtime.concurrency, async (promise) => {
-  const inputHash = sha256({ id: promise.id, originalTextCz: promise.originalTextCz, atomicClaimCz: promise.atomicClaimCz, fulfillmentTest: promise.fulfillmentTest, contradictionTest: promise.contradictionTest, promiseSource: promise.promiseSource });
-  const brief = buildPromiseTaggingBrief(promise, taxonomy);
-  const tagged = await taggedTwice({ subjectId: promise.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: promiseTagCache });
-  promiseTaggingUsageByModel.push(...tagged.usageByModel);
-  const derived = derivePromiseTopicTags(taxonomy, tagged.taggerA, tagged.taggerB);
-  return {
-    promiseId: promise.id,
-    tagAssignment: { tags: derived.tags.length > 0 ? derived.tags : ["unknown"] },
-    needsReview: derived.needsReview,
-    taggerA: tagged.taggerA,
-    taggerB: tagged.taggerB,
-    provider: tagged.provider,
-    modelA: tagged.modelA,
-    modelB: tagged.modelB,
-    // The full brief, not just IDs and hashes, so an acceptance reviewer
-    // can verify a cited excerpt or reproduce a cache hit's classification
-    // from this uploaded artifact alone.
-    briefText: brief.text,
-    inputHash
-  };
-});
-for (const assignment of promiseTopicAssignments) {
-  if (!assignment.needsReview) agreedPromiseAssignmentCount += 1;
-}
-
-const invertedIndex = buildInvertedIndex(taxonomy, promiseTopicAssignments);
-
-const sourceTaggingUsageByModel = [];
-let directAssignmentCount = 0;
-let agreedSourceAssignmentCount = 0;
-let routingReviewCount = 0;
-let orphanReviewCount = 0;
-let candidateCreatedCount = 0;
-let candidateRelationshipCount = 0;
-const evidenceItemsByPromise = new Map();
-
-const sourceRouting = await mapWithConcurrency(materialPrimaryRecords, runtime.concurrency, async (record) => {
-  const enrichedExcerpts = enrichedExcerptsByRecordId[record.id] ?? [];
-  const inputHash = sha256({ id: record.id, title: record.title, publisher: record.publisher, kind: record.kind, payload: record.payload, enrichedExcerpts });
-  const brief = buildSourceTaggingBrief(record, enrichedExcerpts, taxonomy);
-  const directLink = deriveDirectLink(taxonomy, record, directIdIndex, invertedIndex);
-
-  if (directLink) {
-    // Design doc step 4: "The robot first applies direct structural
-    // mappings ... where deterministic signals do not make the assignment
-    // safe, two independent taggers receive a bounded routing brief."
-    // combineTaggerResults (scripts/lib/topic-routing.mjs) returns
-    // auto-candidate unconditionally once a directLink is present, without
-    // ever looking at taggerA/taggerB -- so there is nothing for either
-    // paid tagger to add, and skipping them here saves two calls per hit.
-    const route = routeSourceRecord({ taxonomy, record, taggerA: null, taggerB: null, invertedIndex, directLink, semanticDiscoveryPromiseIds: [] });
-    return { route, tagged: { taggerA: null, taggerB: null, provider: null, modelA: null, modelB: null }, inputHash, briefText: brief.text };
+  const promiseTopicAssignments = await mapWithConcurrency(publishedRegistry.promises, runtime.concurrency, async (promise) => {
+    const inputHash = sha256({ id: promise.id, originalTextCz: promise.originalTextCz, atomicClaimCz: promise.atomicClaimCz, fulfillmentTest: promise.fulfillmentTest, contradictionTest: promise.contradictionTest, promiseSource: promise.promiseSource });
+    const brief = buildPromiseTaggingBrief(promise, taxonomy);
+    const tagged = await taggedTwice({ subjectId: promise.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: promiseTagCache });
+    promiseTaggingUsageByModel.push(...tagged.usageByModel);
+    const derived = derivePromiseTopicTags(taxonomy, tagged.taggerA, tagged.taggerB);
+    return {
+      promiseId: promise.id,
+      tagAssignment: { tags: derived.tags.length > 0 ? derived.tags : ["unknown"] },
+      needsReview: derived.needsReview,
+      taggerA: tagged.taggerA,
+      taggerB: tagged.taggerB,
+      provider: tagged.provider,
+      modelA: tagged.modelA,
+      modelB: tagged.modelB,
+      // The full brief, not just IDs and hashes, so an acceptance reviewer
+      // can verify a cited excerpt or reproduce a cache hit's classification
+      // from this uploaded artifact alone.
+      briefText: brief.text,
+      inputHash
+    };
+  });
+  for (const assignment of promiseTopicAssignments) {
+    if (!assignment.needsReview) agreedPromiseAssignmentCount += 1;
   }
 
-  const tagged = await taggedTwice({ subjectId: record.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: sourceTagCache });
-  sourceTaggingUsageByModel.push(...tagged.usageByModel);
+  const invertedIndex = buildInvertedIndex(taxonomy, promiseTopicAssignments);
 
-  const route = routeSourceRecord({
-    taxonomy,
-    record,
-    taggerA: tagged.taggerA,
-    taggerB: tagged.taggerB,
-    invertedIndex,
-    directLink: null,
-    semanticDiscoveryPromiseIds: []
+  const sourceTaggingUsageByModel = [];
+  let directAssignmentCount = 0;
+  let agreedSourceAssignmentCount = 0;
+  let routingReviewCount = 0;
+  let orphanReviewCount = 0;
+  let candidateCreatedCount = 0;
+  let candidateRelationshipCount = 0;
+  const evidenceItemsByPromise = new Map();
+
+  const sourceRouting = await mapWithConcurrency(materialPrimaryRecords, runtime.concurrency, async (record) => {
+    const enrichedExcerpts = enrichedExcerptsByRecordId[record.id] ?? [];
+    const inputHash = sha256({ id: record.id, title: record.title, publisher: record.publisher, kind: record.kind, url: record.url, payload: record.payload, enrichedExcerpts });
+    const brief = buildSourceTaggingBrief(record, enrichedExcerpts, taxonomy);
+    const directLink = deriveDirectLink(taxonomy, record, directIdIndex, invertedIndex);
+
+    if (directLink) {
+      // Design doc step 4: "The robot first applies direct structural
+      // mappings ... where deterministic signals do not make the assignment
+      // safe, two independent taggers receive a bounded routing brief."
+      // combineTaggerResults (scripts/lib/topic-routing.mjs) returns
+      // auto-candidate unconditionally once a directLink is present, without
+      // ever looking at taggerA/taggerB -- so there is nothing for either
+      // paid tagger to add, and skipping them here saves two calls per hit.
+      const route = routeSourceRecord({ taxonomy, record, taggerA: null, taggerB: null, invertedIndex, directLink, semanticDiscoveryPromiseIds: [] });
+      return { route, tagged: { taggerA: null, taggerB: null, provider: null, modelA: null, modelB: null }, inputHash, briefText: brief.text };
+    }
+
+    const tagged = await taggedTwice({ subjectId: record.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: sourceTagCache });
+    sourceTaggingUsageByModel.push(...tagged.usageByModel);
+
+    const route = routeSourceRecord({
+      taxonomy,
+      record,
+      taggerA: tagged.taggerA,
+      taggerB: tagged.taggerB,
+      invertedIndex,
+      directLink: null,
+      semanticDiscoveryPromiseIds: []
+    });
+    return { route, tagged, inputHash, briefText: brief.text };
   });
-  return { route, tagged, inputHash, briefText: brief.text };
-});
 
-for (const { route, tagged, inputHash } of sourceRouting) {
-  if (route.routeBasis.includes("direct-structural-link")) directAssignmentCount += 1;
-  if (route.reason === "taggers-agree-on-specific-tag") agreedSourceAssignmentCount += 1;
-  if (route.disposition === "routing-review") routingReviewCount += 1;
-  if (route.disposition === "orphan-review") orphanReviewCount += 1;
-  if (route.disposition === "candidate-created") {
-    candidateCreatedCount += 1;
-    candidateRelationshipCount += route.candidatePromiseIds.length;
-    const record = materialPrimaryRecords.find(({ id }) => id === route.recordId);
-    for (const promiseId of route.candidatePromiseIds) {
-      const items = evidenceItemsByPromise.get(promiseId) ?? [];
-      // Official-document excerpts are part of what the tagger actually
-      // saw and what an eventual assessor package would carry; omitting
-      // them here would understate predictBoundedPackage's token estimate.
-      const officialDocumentExcerpts = enrichedExcerptsByRecordId[record.id] ?? [];
-      items.push({
-        recordId: record.id,
-        primary: record.primary === true,
-        factSummary: record.title,
-        structuredFacts: officialDocumentExcerpts.length > 0 ? { ...record.payload, officialDocumentExcerpts } : record.payload
-      });
-      evidenceItemsByPromise.set(promiseId, items);
+  for (const { route, tagged, inputHash } of sourceRouting) {
+    if (route.routeBasis.includes("direct-structural-link")) directAssignmentCount += 1;
+    if (route.reason === "taggers-agree-on-specific-tag") agreedSourceAssignmentCount += 1;
+    if (route.disposition === "routing-review") routingReviewCount += 1;
+    if (route.disposition === "orphan-review") orphanReviewCount += 1;
+    if (route.disposition === "candidate-created") {
+      candidateCreatedCount += 1;
+      candidateRelationshipCount += route.candidatePromiseIds.length;
+      const record = materialPrimaryRecords.find(({ id }) => id === route.recordId);
+      for (const promiseId of route.candidatePromiseIds) {
+        const items = evidenceItemsByPromise.get(promiseId) ?? [];
+        // Official-document excerpts are part of what the tagger actually
+        // saw and what an eventual assessor package would carry; omitting
+        // them here would understate predictBoundedPackage's token estimate.
+        const officialDocumentExcerpts = enrichedExcerptsByRecordId[record.id] ?? [];
+        // Mirrors the real package builder's evidence shape
+        // (evidenceFromMatch in scripts/lib/evidence-matcher.mjs), which
+        // drops a parliamentary vote's per-MP individualVotes and keeps only
+        // this promise's party summary -- estimating from the raw collector
+        // payload instead would systematically overstate the token budget.
+        const structuredFacts = normalizedStructuredFacts(record, promiseById.get(promiseId)?.partyId);
+        items.push({
+          recordId: record.id,
+          primary: record.primary === true,
+          factSummary: record.title,
+          structuredFacts: officialDocumentExcerpts.length > 0 ? { ...structuredFacts, officialDocumentExcerpts } : structuredFacts
+        });
+        evidenceItemsByPromise.set(promiseId, items);
+      }
     }
   }
-}
 
-const predictedPackages = [...evidenceItemsByPromise.entries()].map(([promiseId, items]) => predictBoundedPackage({ promiseId, routedEvidenceItems: items }));
-const estimatedAssessorInputTokensTotal = predictedPackages.reduce((total, pkg) => total + pkg.estimatedAssessorInputTokens, 0);
+  const predictedPackages = [...evidenceItemsByPromise.entries()].map(([promiseId, items]) => predictBoundedPackage({ promiseId, routedEvidenceItems: items }));
+  const estimatedAssessorInputTokensTotal = predictedPackages.reduce((total, pkg) => total + pkg.estimatedAssessorInputTokens, 0);
 
-function usageTotalsByModel(usageEntries) {
-  const totals = new Map();
-  for (const { model, usage } of usageEntries) {
-    const current = totals.get(model) ?? { model, inputTokens: 0, outputTokens: 0 };
-    current.inputTokens += usage?.input_tokens ?? 0;
-    current.outputTokens += usage?.output_tokens ?? 0;
-    totals.set(model, current);
+  function usageTotalsByModel(usageEntries) {
+    const totals = new Map();
+    for (const { model, usage } of usageEntries) {
+      const current = totals.get(model) ?? { model, inputTokens: 0, outputTokens: 0 };
+      current.inputTokens += usage?.input_tokens ?? 0;
+      current.outputTokens += usage?.output_tokens ?? 0;
+      totals.set(model, current);
+    }
+    return [...totals.values()];
   }
-  return [...totals.values()];
+
+  const runId = new Date().toISOString().replace(/[:.]/g, "-");
+  const outputDirectory = resolve(args.output, runId);
+  await mkdir(outputDirectory, { recursive: true });
+
+  const report = {
+    schemaVersion: "1.0.0",
+    pilotVersion: "topic-routing-pilot-v1",
+    taxonomyVersion: taxonomy.taxonomyVersion,
+    taxonomyContentHash,
+    promptVersion: prompt.version,
+    promptContentHash: prompt.contentHash,
+    // Kept alongside the per-subject provider/model fields below so the
+    // active runtime configuration is auditable from this artifact alone
+    // even on a fully-cached run, where tokenUsageByPass is empty.
+    runtime: { provider: runtime.provider, modelA: runtime.modelA, modelB: runtime.modelB, concurrency: runtime.concurrency },
+    asOf: args.asOf,
+    publicationApproved: false,
+    sentToAssessors: false,
+    counts: {
+      sourceRecordCount: collectorRun.records.length,
+      materialPrimaryRecordCount: materialPrimaryRecords.length,
+      promiseCount: publishedRegistry.promises.length,
+      directAssignmentCount,
+      agreedPromiseAssignmentCount,
+      agreedSourceAssignmentCount,
+      routingReviewCount,
+      orphanReviewCount,
+      candidateCreatedCount,
+      candidateRelationshipCount,
+      predictedPackageCount: predictedPackages.filter((pkg) => pkg.predicted).length
+    },
+    tokenUsageByPass: {
+      promiseTagging: usageTotalsByModel(promiseTaggingUsageByModel),
+      sourceTagging: usageTotalsByModel(sourceTaggingUsageByModel)
+    },
+    expectedAssessorBudget: {
+      predictedPackageCount: predictedPackages.filter((pkg) => pkg.predicted).length,
+      assessorCallsPerPackage: 2,
+      estimatedAssessorInputTokensTotal,
+      note: "Planning estimate only, per docs/topic-routing-design.md's token budget model. Does not include arbitration calls, which occur only on assessor disagreement."
+    },
+    // Full per-subject assignment audit: this is what lets a human perform the
+    // documented acceptance review from the artifact alone, including why a
+    // relationship was or was not created.
+    promiseTopicAssignments,
+    sourceTagAssignments: sourceRouting.map(({ route, tagged, inputHash, briefText }) => ({
+      recordId: route.recordId,
+      inputHash,
+      briefText,
+      taggerA: tagged.taggerA,
+      taggerB: tagged.taggerB,
+      provider: tagged.provider,
+      modelA: tagged.modelA,
+      modelB: tagged.modelB,
+      route
+    })),
+    predictedPackages
+  };
+
+  await writeFile(resolve(outputDirectory, "topic-routing-pilot-report.json"), `${JSON.stringify(report, null, 2)}\n`);
+  const markdown = [
+    `# Topic-routing pilot report (unpublished)`,
+    ``,
+    `As of ${args.asOf}. Taxonomy ${taxonomy.taxonomyVersion}, prompt ${prompt.version} (${prompt.contentHash.slice(0, 12)}).`,
+    ``,
+    `| Metric | Count |`,
+    `| --- | --- |`,
+    ...Object.entries(report.counts).map(([key, value]) => `| ${key} | ${value} |`),
+    ``,
+    `Expected assessor budget (planning estimate): ${report.expectedAssessorBudget.predictedPackageCount} package(s) x ${report.expectedAssessorBudget.assessorCallsPerPackage} assessor calls, ~${report.expectedAssessorBudget.estimatedAssessorInputTokensTotal} input tokens total.`,
+    ``,
+    `This report is unpublished operational audit data. It was not sent to any assessor or arbiter, and it does not change public data.`
+  ].join("\n");
+  await writeFile(resolve(outputDirectory, "topic-routing-pilot-report.md"), `${markdown}\n`);
+
+  console.log(JSON.stringify({ outputDirectory, ...report.counts }, null, 2));
+
+} finally {
+  await writeJsonAtomically(promiseTagCachePath, promiseTagCache);
+  await writeJsonAtomically(sourceTagCachePath, sourceTagCache);
 }
-
-const runId = new Date().toISOString().replace(/[:.]/g, "-");
-const outputDirectory = resolve(args.output, runId);
-await mkdir(outputDirectory, { recursive: true });
-
-const report = {
-  schemaVersion: "1.0.0",
-  pilotVersion: "topic-routing-pilot-v1",
-  taxonomyVersion: taxonomy.taxonomyVersion,
-  taxonomyContentHash,
-  promptVersion: prompt.version,
-  promptContentHash: prompt.contentHash,
-  // Kept alongside the per-subject provider/model fields below so the
-  // active runtime configuration is auditable from this artifact alone
-  // even on a fully-cached run, where tokenUsageByPass is empty.
-  runtime: { provider: runtime.provider, modelA: runtime.modelA, modelB: runtime.modelB, concurrency: runtime.concurrency },
-  asOf: args.asOf,
-  publicationApproved: false,
-  sentToAssessors: false,
-  counts: {
-    sourceRecordCount: collectorRun.records.length,
-    materialPrimaryRecordCount: materialPrimaryRecords.length,
-    promiseCount: publishedRegistry.promises.length,
-    directAssignmentCount,
-    agreedPromiseAssignmentCount,
-    agreedSourceAssignmentCount,
-    routingReviewCount,
-    orphanReviewCount,
-    candidateCreatedCount,
-    candidateRelationshipCount,
-    predictedPackageCount: predictedPackages.filter((pkg) => pkg.predicted).length
-  },
-  tokenUsageByPass: {
-    promiseTagging: usageTotalsByModel(promiseTaggingUsageByModel),
-    sourceTagging: usageTotalsByModel(sourceTaggingUsageByModel)
-  },
-  expectedAssessorBudget: {
-    predictedPackageCount: predictedPackages.filter((pkg) => pkg.predicted).length,
-    assessorCallsPerPackage: 2,
-    estimatedAssessorInputTokensTotal,
-    note: "Planning estimate only, per docs/topic-routing-design.md's token budget model. Does not include arbitration calls, which occur only on assessor disagreement."
-  },
-  // Full per-subject assignment audit: this is what lets a human perform the
-  // documented acceptance review from the artifact alone, including why a
-  // relationship was or was not created.
-  promiseTopicAssignments,
-  sourceTagAssignments: sourceRouting.map(({ route, tagged, inputHash, briefText }) => ({
-    recordId: route.recordId,
-    inputHash,
-    briefText,
-    taggerA: tagged.taggerA,
-    taggerB: tagged.taggerB,
-    provider: tagged.provider,
-    modelA: tagged.modelA,
-    modelB: tagged.modelB,
-    route
-  })),
-  predictedPackages
-};
-
-await writeFile(resolve(outputDirectory, "topic-routing-pilot-report.json"), `${JSON.stringify(report, null, 2)}\n`);
-const markdown = [
-  `# Topic-routing pilot report (unpublished)`,
-  ``,
-  `As of ${args.asOf}. Taxonomy ${taxonomy.taxonomyVersion}, prompt ${prompt.version} (${prompt.contentHash.slice(0, 12)}).`,
-  ``,
-  `| Metric | Count |`,
-  `| --- | --- |`,
-  ...Object.entries(report.counts).map(([key, value]) => `| ${key} | ${value} |`),
-  ``,
-  `Expected assessor budget (planning estimate): ${report.expectedAssessorBudget.predictedPackageCount} package(s) x ${report.expectedAssessorBudget.assessorCallsPerPackage} assessor calls, ~${report.expectedAssessorBudget.estimatedAssessorInputTokensTotal} input tokens total.`,
-  ``,
-  `This report is unpublished operational audit data. It was not sent to any assessor or arbiter, and it does not change public data.`
-].join("\n");
-await writeFile(resolve(outputDirectory, "topic-routing-pilot-report.md"), `${markdown}\n`);
-
-await writeJsonAtomically(promiseTagCachePath, promiseTagCache);
-await writeJsonAtomically(sourceTagCachePath, sourceTagCache);
-
-console.log(JSON.stringify({ outputDirectory, ...report.counts }, null, 2));

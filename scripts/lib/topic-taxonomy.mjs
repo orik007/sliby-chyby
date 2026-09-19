@@ -99,23 +99,23 @@ export function directLegalIdentifierIndex(taxonomy) {
 /**
  * A content fingerprint of everything a tagging brief actually derives from
  * the taxonomy -- not just `taxonomyVersion`. `taxonomyDefinitionsText`
- * (scripts/lib/topic-tagger.mjs) renders each tag's id, parent, label,
- * eligibility, Czech aliases, and inclusion/exclusion examples; editing any
- * of those without bumping the version must invalidate a cached assignment
- * fingerprinted against this hash, not silently reuse it.
+ * (scripts/lib/topic-tagger.mjs) renders `taxonomy.tags` and each tag's
+ * `czechAliases`/`inclusionExamples`/`exclusionExamples` in their exact
+ * given order, so this must hash that same exact order rather than a sorted
+ * one: reordering a tag definition or its aliases changes the precise text
+ * the model is shown just as much as editing their content does, and must
+ * invalidate a cached assignment fingerprinted against this hash too.
  */
 export function taxonomyHash(taxonomy) {
-  const content = taxonomy.tags
-    .map(({ id, parent, labelEn, assessmentEligible, czechAliases, inclusionExamples, exclusionExamples, directLegalIdentifiers }) => ({
-      id,
-      parent,
-      labelEn,
-      assessmentEligible,
-      czechAliases: [...czechAliases].sort(),
-      inclusionExamples: [...inclusionExamples].sort(),
-      exclusionExamples: [...exclusionExamples].sort(),
-      directLegalIdentifiers: [...(directLegalIdentifiers ?? [])].sort()
-    }))
-    .sort((a, b) => a.id.localeCompare(b.id));
+  const content = taxonomy.tags.map(({ id, parent, labelEn, assessmentEligible, czechAliases, inclusionExamples, exclusionExamples, directLegalIdentifiers }) => ({
+    id,
+    parent,
+    labelEn,
+    assessmentEligible,
+    czechAliases: [...czechAliases],
+    inclusionExamples: [...inclusionExamples],
+    exclusionExamples: [...exclusionExamples],
+    directLegalIdentifiers: [...(directLegalIdentifiers ?? [])]
+  }));
   return sha256({ taxonomyVersion: taxonomy.taxonomyVersion, tags: content });
 }
