@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createStructuredModelResponse } from "../scripts/lib/model-provider.mjs";
+import { createEmbeddings, createStructuredModelResponse } from "../scripts/lib/model-provider.mjs";
 
 function fixtureHeaders(map) {
   return { get: (key) => map[key.toLowerCase()] ?? null };
@@ -103,6 +103,162 @@ test("createStructuredModelResponse gives up after repeated 429s and reports the
       /OpenAI Responses API failed \(429\)/
     );
     assert.equal(callCount, 6, "must retry up to the fixed attempt cap, not forever");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("createStructuredModelResponse retries a transient 5xx response and succeeds on the next attempt", async () => {
+  const originalFetch = globalThis.fetch;
+  let callCount = 0;
+  globalThis.fetch = async () => {
+    callCount += 1;
+    if (callCount === 1) {
+      return {
+        ok: false,
+        status: 503,
+        headers: fixtureHeaders({ "retry-after": "0" }),
+        json: async () => ({ error: { message: "Service unavailable" } })
+      };
+    }
+    return {
+      ok: true,
+      json: async () => ({
+        id: "resp_fixture",
+        model: "gpt-5.6-terra",
+        usage: { input_tokens: 10, output_tokens: 2 },
+        output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }]
+      })
+    };
+  };
+  try {
+    const result = await createStructuredModelResponse({
+      provider: "openai",
+      apiKey: "fixture-key",
+      model: "gpt-5.6-terra",
+      instructions: "fixture",
+      input: {},
+      name: "fixture_schema",
+      schema: { type: "object" }
+    });
+    assert.equal(callCount, 2, "a transient 5xx must be retried, not treated as final");
+    assert.deepEqual(result.output, { ok: true });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("createStructuredModelResponse retries a 5xx with a non-JSON body instead of crashing before classification", async () => {
+  // A retryable 5xx can come back from an intermediate gateway with an
+  // empty or HTML error page, not the provider's own JSON error shape.
+  // response.json() would reject on that body -- this must not bypass
+  // retry entirely, per the review finding.
+  const originalFetch = globalThis.fetch;
+  let callCount = 0;
+  globalThis.fetch = async () => {
+    callCount += 1;
+    if (callCount === 1) {
+      return {
+        ok: false,
+        status: 502,
+        headers: fixtureHeaders({ "retry-after": "0" }),
+        json: async () => { throw new SyntaxError("Unexpected token < in JSON"); }
+      };
+    }
+    return {
+      ok: true,
+      json: async () => ({
+        id: "resp_fixture",
+        model: "gpt-5.6-terra",
+        usage: { input_tokens: 10, output_tokens: 2 },
+        output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }]
+      })
+    };
+  };
+  try {
+    const result = await createStructuredModelResponse({
+      provider: "openai",
+      apiKey: "fixture-key",
+      model: "gpt-5.6-terra",
+      instructions: "fixture",
+      input: {},
+      name: "fixture_schema",
+      schema: { type: "object" }
+    });
+    assert.equal(callCount, 2, "an unparseable body on a retryable status must not skip the retry");
+    assert.deepEqual(result.output, { ok: true });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("createStructuredModelResponse honors an HTTP-date Retry-After, not just delta-seconds", async () => {
+  const originalFetch = globalThis.fetch;
+  let callCount = 0;
+  const retryAt = new Date(Date.now() + 5).toUTCString();
+  globalThis.fetch = async () => {
+    callCount += 1;
+    if (callCount === 1) {
+      return {
+        ok: false,
+        status: 429,
+        headers: fixtureHeaders({ "retry-after": retryAt }),
+        json: async () => ({ error: { message: "Rate limit reached" } })
+      };
+    }
+    return {
+      ok: true,
+      json: async () => ({
+        id: "resp_fixture",
+        model: "gpt-5.6-terra",
+        usage: { input_tokens: 10, output_tokens: 2 },
+        output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }]
+      })
+    };
+  };
+  try {
+    const result = await createStructuredModelResponse({
+      provider: "openai",
+      apiKey: "fixture-key",
+      model: "gpt-5.6-terra",
+      instructions: "fixture",
+      input: {},
+      name: "fixture_schema",
+      schema: { type: "object" }
+    });
+    assert.equal(callCount, 2);
+    assert.deepEqual(result.output, { ok: true });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("createEmbeddings retries a 429 rate-limit response and succeeds on the next attempt", async () => {
+  const originalFetch = globalThis.fetch;
+  let callCount = 0;
+  globalThis.fetch = async () => {
+    callCount += 1;
+    if (callCount === 1) {
+      return {
+        ok: false,
+        status: 429,
+        headers: fixtureHeaders({ "retry-after": "0" }),
+        json: async () => ({ error: { message: "Rate limit reached" } })
+      };
+    }
+    return {
+      ok: true,
+      json: async () => ({
+        model: "text-embedding-3-small",
+        usage: { input_tokens: 5 },
+        data: [{ index: 0, embedding: [0.1, 0.2, 0.3] }]
+      })
+    };
+  };
+  try {
+    const result = await createEmbeddings({ provider: "openai", apiKey: "fixture-key", model: "text-embedding-3-small", dimensions: 3, inputs: ["fixture text"] });
+    assert.equal(callCount, 2, "the retried embedding request must actually be attempted a second time");
+    assert.deepEqual(result.embeddings, [[0.1, 0.2, 0.3]]);
   } finally {
     globalThis.fetch = originalFetch;
   }

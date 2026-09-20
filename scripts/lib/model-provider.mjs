@@ -5,6 +5,31 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// A retryable 5xx can come back with an empty, HTML, or otherwise
+// non-JSON body (an intermediate gateway's own error page, not the
+// provider's), which must not itself crash the request before its status
+// is even classified -- that would defeat the retry entirely.
+async function parseJsonBodyOrNull(response) {
+  try {
+    return await response.json();
+  } catch {
+    return null;
+  }
+}
+
+// `Retry-After` (RFC 9110 §10.2.3) is either delta-seconds (a plain
+// non-negative integer) or an HTTP-date. Treating the date form as invalid
+// and silently falling back to the fixed exponential schedule can retry far
+// earlier than the provider actually asked for and trigger another rate
+// limit; a date already in the past means retry immediately (zero delay).
+function parseRetryAfterMs(headerValue) {
+  if (typeof headerValue !== "string" || headerValue.trim() === "") return null;
+  const trimmed = headerValue.trim();
+  if (/^\d+$/.test(trimmed)) return Number(trimmed) * 1000;
+  const dateMs = Date.parse(trimmed);
+  return Number.isFinite(dateMs) ? Math.max(0, dateMs - Date.now()) : null;
+}
+
 /**
  * A 429 (rate limit) or 5xx (transient provider-side failure) is expected
  * and recoverable during a large batch -- especially a full historical
@@ -18,16 +43,17 @@ async function fetchJsonWithRetry(url, init) {
   let last = null;
   for (let attempt = 1; attempt <= maxProviderAttempts; attempt += 1) {
     const response = await fetch(url, init);
-    const body = await response.json();
-    if (response.ok) return { response, body };
+    const body = await parseJsonBodyOrNull(response);
+    if (response.ok) {
+      if (body === null) throw new Error(`Provider request to ${url} returned a successful response with an unparseable body`);
+      return { response, body };
+    }
     last = { response, body };
     const retryable = response.status === 429 || (response.status >= 500 && response.status < 600);
     if (!retryable || attempt === maxProviderAttempts) return last;
     const retryAfterHeader = typeof response.headers?.get === "function" ? response.headers.get("retry-after") : null;
-    const retryAfterSeconds = retryAfterHeader === null ? NaN : Number(retryAfterHeader);
-    const delayMs = Number.isFinite(retryAfterSeconds) && retryAfterSeconds >= 0
-      ? retryAfterSeconds * 1000
-      : baseRetryDelayMs * 2 ** (attempt - 1);
+    const retryAfterMs = parseRetryAfterMs(retryAfterHeader);
+    const delayMs = retryAfterMs !== null ? retryAfterMs : baseRetryDelayMs * 2 ** (attempt - 1);
     console.warn(`Provider request to ${url} failed with ${response.status} (attempt ${attempt}/${maxProviderAttempts}); retrying in ${delayMs}ms.`);
     await sleep(delayMs);
   }
