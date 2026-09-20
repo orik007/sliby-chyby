@@ -82,17 +82,39 @@ function emptyTagCache(taxonomyVersion, taxonomyContentHash, promptContentHash) 
 // Mirrors scripts/run-assessment-batch.mjs's worker pool: process a bounded
 // number of subjects at once instead of one at a time, so the configured
 // SLIBY_TAGGING_CONCURRENCY actually bounds network fan-out.
+//
+// A transport/quota failure (not a TagValidationError -- see
+// safeRequestTagAssignment) stops the whole pool rather than just that one
+// subject, since it usually means every subsequent call would fail
+// identically (an exhausted account has no credits for the next call
+// either). But the subjects that already completed before that point are
+// real, paid-for results -- discarding them, as a plain Promise.all would,
+// is exactly what left a run with nothing to show after it failed partway
+// through. The thrown error's `partialResults` carries them so the caller
+// can still build an accurate report from whatever finished.
 async function mapWithConcurrency(items, concurrency, worker) {
   const results = new Array(items.length);
   let nextIndex = 0;
+  let firstError = null;
   async function runWorker() {
-    while (nextIndex < items.length) {
+    while (nextIndex < items.length && !firstError) {
       const index = nextIndex;
       nextIndex += 1;
-      results[index] = await worker(items[index]);
+      try {
+        results[index] = await worker(items[index]);
+      } catch (error) {
+        firstError = error;
+      }
     }
   }
   await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, runWorker));
+  if (firstError) {
+    const completedCount = results.filter((result) => result !== undefined).length;
+    const aborted = new Error(`Aborted after ${completedCount}/${items.length} item(s): ${firstError.message}`);
+    aborted.cause = firstError;
+    aborted.partialResults = results.filter((result) => result !== undefined);
+    throw aborted;
+  }
   return results;
 }
 
@@ -290,39 +312,55 @@ const sourceTagCache = await readJsonIfExists(sourceTagCachePath, emptyTagCache(
 // whatever tagging work already completed, in the finally block below.
 // Without this, a single failure near the end of a long run would discard
 // every prior, already-paid-for model call held only in memory.
+//
+// A transport/quota failure inside either mapWithConcurrency call (a run out
+// of API credits, a network outage -- anything that is not a per-subject
+// TagValidationError) is caught here rather than left to abort the whole
+// try block, specifically so the report built below still reflects however
+// many subjects actually got tagged before the failure, instead of the run
+// producing no report and no reusable cache at all.
+let promiseTopicAssignments = [];
+let sourceRouting = [];
+let runFailure = null;
+
 try {
   const promiseTaggingUsageByModel = [];
   let agreedPromiseAssignmentCount = 0;
   let invalidPromiseTaggerCount = 0;
 
-  const promiseTopicAssignments = await mapWithConcurrency(publishedRegistry.promises, runtime.concurrency, async (promise) => {
-    const inputHash = sha256({ id: promise.id, originalTextCz: promise.originalTextCz, atomicClaimCz: promise.atomicClaimCz, fulfillmentTest: promise.fulfillmentTest, contradictionTest: promise.contradictionTest, promiseSource: promise.promiseSource });
-    const brief = buildPromiseTaggingBrief(promise, taxonomy);
-    const tagged = await taggedTwice({ subjectId: promise.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: promiseTagCache });
-    promiseTaggingUsageByModel.push(...tagged.usageByModel);
-    invalidPromiseTaggerCount += tagged.invalidCount;
-    const derived = derivePromiseTopicTags(taxonomy, tagged.taggerA, tagged.taggerB);
-    return {
-      promiseId: promise.id,
-      tagAssignment: { tags: derived.tags.length > 0 ? derived.tags : ["unknown"] },
-      needsReview: derived.needsReview,
-      taggerA: tagged.taggerA,
-      taggerB: tagged.taggerB,
-      provider: tagged.provider,
-      modelA: tagged.modelA,
-      modelB: tagged.modelB,
-      // Per-subject, not just an aggregate count: a reviewer needs to know
-      // which promise's tagger call was invalid and why, not just that
-      // invalidPromiseTaggerCount is non-zero somewhere in the run.
-      taggerAError: tagged.taggerAError,
-      taggerBError: tagged.taggerBError,
-      // The full brief, not just IDs and hashes, so an acceptance reviewer
-      // can verify a cited excerpt or reproduce a cache hit's classification
-      // from this uploaded artifact alone.
-      briefText: brief.text,
-      inputHash
-    };
-  });
+  try {
+    promiseTopicAssignments = await mapWithConcurrency(publishedRegistry.promises, runtime.concurrency, async (promise) => {
+      const inputHash = sha256({ id: promise.id, originalTextCz: promise.originalTextCz, atomicClaimCz: promise.atomicClaimCz, fulfillmentTest: promise.fulfillmentTest, contradictionTest: promise.contradictionTest, promiseSource: promise.promiseSource });
+      const brief = buildPromiseTaggingBrief(promise, taxonomy);
+      const tagged = await taggedTwice({ subjectId: promise.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: promiseTagCache });
+      promiseTaggingUsageByModel.push(...tagged.usageByModel);
+      invalidPromiseTaggerCount += tagged.invalidCount;
+      const derived = derivePromiseTopicTags(taxonomy, tagged.taggerA, tagged.taggerB);
+      return {
+        promiseId: promise.id,
+        tagAssignment: { tags: derived.tags.length > 0 ? derived.tags : ["unknown"] },
+        needsReview: derived.needsReview,
+        taggerA: tagged.taggerA,
+        taggerB: tagged.taggerB,
+        provider: tagged.provider,
+        modelA: tagged.modelA,
+        modelB: tagged.modelB,
+        // Per-subject, not just an aggregate count: a reviewer needs to know
+        // which promise's tagger call was invalid and why, not just that
+        // invalidPromiseTaggerCount is non-zero somewhere in the run.
+        taggerAError: tagged.taggerAError,
+        taggerBError: tagged.taggerBError,
+        // The full brief, not just IDs and hashes, so an acceptance reviewer
+        // can verify a cited excerpt or reproduce a cache hit's classification
+        // from this uploaded artifact alone.
+        briefText: brief.text,
+        inputHash
+      };
+    });
+  } catch (error) {
+    promiseTopicAssignments = error.partialResults ?? [];
+    runFailure = { stage: "promise-tagging", message: error.message };
+  }
   for (const assignment of promiseTopicAssignments) {
     if (!assignment.needsReview) agreedPromiseAssignmentCount += 1;
   }
@@ -339,39 +377,51 @@ try {
   let invalidSourceTaggerCount = 0;
   const evidenceItemsByPromise = new Map();
 
-  const sourceRouting = await mapWithConcurrency(materialPrimaryRecords, runtime.concurrency, async (record) => {
-    const enrichedExcerpts = enrichedExcerptsByRecordId[record.id] ?? [];
-    const inputHash = sha256({ id: record.id, title: record.title, publisher: record.publisher, kind: record.kind, url: record.url, payload: record.payload, enrichedExcerpts });
-    const brief = buildSourceTaggingBrief(record, enrichedExcerpts, taxonomy);
-    const directLink = deriveDirectLink(taxonomy, record, directIdIndex, invertedIndex);
+  // Promise tagging feeds invertedIndex, which source routing depends on --
+  // if promise tagging already failed, source tagging would just fail
+  // identically on its first call (the same exhausted account, the same
+  // outage), so skip straight to the report instead of spending another
+  // round of retries to learn that again.
+  if (!runFailure) {
+    try {
+      sourceRouting = await mapWithConcurrency(materialPrimaryRecords, runtime.concurrency, async (record) => {
+        const enrichedExcerpts = enrichedExcerptsByRecordId[record.id] ?? [];
+        const inputHash = sha256({ id: record.id, title: record.title, publisher: record.publisher, kind: record.kind, url: record.url, payload: record.payload, enrichedExcerpts });
+        const brief = buildSourceTaggingBrief(record, enrichedExcerpts, taxonomy);
+        const directLink = deriveDirectLink(taxonomy, record, directIdIndex, invertedIndex);
 
-    if (directLink) {
-      // Design doc step 4: "The robot first applies direct structural
-      // mappings ... where deterministic signals do not make the assignment
-      // safe, two independent taggers receive a bounded routing brief."
-      // combineTaggerResults (scripts/lib/topic-routing.mjs) returns
-      // auto-candidate unconditionally once a directLink is present, without
-      // ever looking at taggerA/taggerB -- so there is nothing for either
-      // paid tagger to add, and skipping them here saves two calls per hit.
-      const route = routeSourceRecord({ taxonomy, record, taggerA: null, taggerB: null, invertedIndex, directLink, semanticDiscoveryPromiseIds: [] });
-      return { route, tagged: { taggerA: null, taggerB: null, provider: null, modelA: null, modelB: null, taggerAError: null, taggerBError: null }, inputHash, briefText: brief.text };
+        if (directLink) {
+          // Design doc step 4: "The robot first applies direct structural
+          // mappings ... where deterministic signals do not make the assignment
+          // safe, two independent taggers receive a bounded routing brief."
+          // combineTaggerResults (scripts/lib/topic-routing.mjs) returns
+          // auto-candidate unconditionally once a directLink is present, without
+          // ever looking at taggerA/taggerB -- so there is nothing for either
+          // paid tagger to add, and skipping them here saves two calls per hit.
+          const route = routeSourceRecord({ taxonomy, record, taggerA: null, taggerB: null, invertedIndex, directLink, semanticDiscoveryPromiseIds: [] });
+          return { route, tagged: { taggerA: null, taggerB: null, provider: null, modelA: null, modelB: null, taggerAError: null, taggerBError: null }, inputHash, briefText: brief.text };
+        }
+
+        const tagged = await taggedTwice({ subjectId: record.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: sourceTagCache });
+        sourceTaggingUsageByModel.push(...tagged.usageByModel);
+        invalidSourceTaggerCount += tagged.invalidCount;
+
+        const route = routeSourceRecord({
+          taxonomy,
+          record,
+          taggerA: tagged.taggerA,
+          taggerB: tagged.taggerB,
+          invertedIndex,
+          directLink: null,
+          semanticDiscoveryPromiseIds: []
+        });
+        return { route, tagged, inputHash, briefText: brief.text };
+      });
+    } catch (error) {
+      sourceRouting = error.partialResults ?? [];
+      runFailure = { stage: "source-tagging", message: error.message };
     }
-
-    const tagged = await taggedTwice({ subjectId: record.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: sourceTagCache });
-    sourceTaggingUsageByModel.push(...tagged.usageByModel);
-    invalidSourceTaggerCount += tagged.invalidCount;
-
-    const route = routeSourceRecord({
-      taxonomy,
-      record,
-      taggerA: tagged.taggerA,
-      taggerB: tagged.taggerB,
-      invertedIndex,
-      directLink: null,
-      semanticDiscoveryPromiseIds: []
-    });
-    return { route, tagged, inputHash, briefText: brief.text };
-  });
+  }
 
   for (const { route, tagged, inputHash } of sourceRouting) {
     if (route.routeBasis.includes("direct-structural-link")) directAssignmentCount += 1;
@@ -437,6 +487,13 @@ try {
     asOf: args.asOf,
     publicationApproved: false,
     sentToAssessors: false,
+    // false whenever a tagging stage aborted partway through (see
+    // runFailure above) -- every count and array below still reflects
+    // exactly the subjects that finished before that happened, not the full
+    // catalogue, so a reader must check this before treating counts as
+    // complete coverage.
+    completed: runFailure === null,
+    failure: runFailure,
     // null on a full run; set whenever --sample-promises/--sample-records
     // trimmed the input, so a reader of this report alone can tell it is
     // not the complete catalogue without cross-checking the invocation.
@@ -498,6 +555,7 @@ try {
     ``,
     `As of ${args.asOf}. Taxonomy ${taxonomy.taxonomyVersion}, prompt ${prompt.version} (${prompt.contentHash.slice(0, 12)}).`,
     ``,
+    ...(runFailure ? [`**RUN FAILED at stage "${runFailure.stage}"**: ${runFailure.message}`, ``, `Every count and array below reflects only the subjects that finished tagging before the failure, not the full catalogue.`, ``] : []),
     ...(report.sample ? [`**Sample run** -- promises limited to ${report.sample.samplePromises ?? "all"}, records limited to ${report.sample.sampleRecords ?? "all"}. Not the full catalogue.`, ``] : []),
     `| Metric | Count |`,
     `| --- | --- |`,
@@ -509,9 +567,18 @@ try {
   ].join("\n");
   await writeFile(resolve(outputDirectory, "topic-routing-pilot-report.md"), `${markdown}\n`);
 
-  console.log(JSON.stringify({ outputDirectory, ...report.counts }, null, 2));
+  console.log(JSON.stringify({ outputDirectory, ...report.counts, completed: report.completed }, null, 2));
 
 } finally {
   await writeJsonAtomically(promiseTagCachePath, promiseTagCache);
   await writeJsonAtomically(sourceTagCachePath, sourceTagCache);
+}
+
+if (runFailure) {
+  // The report above and the caches persisted in the finally block already
+  // captured everything this run got done -- but a stage failure is still a
+  // real failure (an exhausted account, an outage), and must still exit
+  // non-zero so the workflow step and CI report it loudly instead of a
+  // partial run looking like a clean success.
+  throw new Error(`Topic-routing pilot failed at stage "${runFailure.stage}": ${runFailure.message}`);
 }
