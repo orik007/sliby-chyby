@@ -36,12 +36,40 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
   const proposals = activeProposals(proposalManifest);
   const sources = new Map(sourceRegistry.sources.map((source) => [source.id, source]));
   const recordsBySource = new Map();
-  for (const record of collectorRun.records) recordsBySource.set(record.sourceId, (recordsBySource.get(record.sourceId) ?? 0) + 1);
+  const observedRangeBySource = new Map();
+  for (const record of collectorRun.records) {
+    recordsBySource.set(record.sourceId, (recordsBySource.get(record.sourceId) ?? 0) + 1);
+    if (!record.occurredAt) continue;
+    const range = observedRangeBySource.get(record.sourceId);
+    if (!range) observedRangeBySource.set(record.sourceId, { earliest: record.occurredAt, latest: record.occurredAt });
+    else {
+      if (record.occurredAt < range.earliest) range.earliest = record.occurredAt;
+      if (record.occurredAt > range.latest) range.latest = record.occurredAt;
+    }
+  }
 
-  const sourceCoverage = collectorRun.collectors.map((collector) => {
-    const source = sources.get(collector.sourceId);
-    invariant(source, `Collector run references unknown source ${collector.sourceId}`);
-    const occurred = collectorRun.records.filter(({ sourceId, occurredAt }) => sourceId === source.id && occurredAt).map(({ occurredAt }) => occurredAt).sort();
+  const collectorsBySourceId = new Map();
+  for (const collector of collectorRun.collectors) {
+    invariant(sources.has(collector.sourceId), `Collector run references unknown source ${collector.sourceId}`);
+    collectorsBySourceId.set(collector.sourceId, collector);
+  }
+  const failuresBySourceId = new Map((collectorRun.failures ?? []).map((failure) => [failure.sourceId, failure]));
+  // `collectorRun.since` is the run-wide override (null on an ordinary
+  // checkpoint-driven run); a source with no `collector` entry still has
+  // its own planned start in `collectionPlan`, which must be preferred so
+  // a failed or manually-excluded source doesn't misreport `null`.
+  const collectionPlanBySourceId = new Map((collectorRun.collectionPlan ?? []).map((plan) => [plan.sourceId, plan]));
+
+  // Every *enabled* source gets a row, per the evidence-pipeline rule ("write
+  // a coverage audit for every confirmed promise and enabled source") --
+  // not just the ones `run-collectors.mjs` actually collected this run. A
+  // source whose own collection failed (or one excluded from a targeted
+  // manual replay) must still be visible here as a gap, rather than
+  // silently disappearing as if it were never enabled at all.
+  const sourceCoverage = sourceRegistry.sources.filter((source) => source.enabled).map((source) => {
+    const collector = collectorsBySourceId.get(source.id);
+    const failure = failuresBySourceId.get(source.id);
+    const range = observedRangeBySource.get(source.id);
     return {
       sourceId: source.id,
       name: source.name,
@@ -49,11 +77,14 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
       evidenceRole: source.evidenceRole,
       coverageMode: source.coverage.mode,
       coverageNote: source.coverage.note,
-      requestedSince: collector.collection?.since ?? collectorRun.since,
+      requestedSince: collector?.collection?.since ?? collectionPlanBySourceId.get(source.id)?.since ?? collectorRun.since,
       recordCount: recordsBySource.get(source.id) ?? 0,
-      observedEarliest: occurred[0] ?? null,
-      observedLatest: occurred.at(-1) ?? null,
-      warnings: collector.warnings ?? []
+      observedEarliest: range?.earliest ?? null,
+      observedLatest: range?.latest ?? null,
+      collected: Boolean(collector),
+      warnings: collector
+        ? (collector.warnings ?? [])
+        : [failure ? `Not collected this run -- collection failed: ${failure.message}` : "Not collected this run."]
     };
   });
 
@@ -114,6 +145,14 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
   };
 }
 
+// A warning or failure message is arbitrary runtime text (a thrown error's
+// own message, or a collector's parsed-content warning) -- never assume it
+// is safe to drop straight into a Markdown table cell. A newline would
+// break out of the row; an unescaped `|` would split it into extra columns.
+function renderMarkdownCell(text) {
+  return String(text ?? "").replace(/\s+/g, " ").trim().replace(/\|/g, "\\|");
+}
+
 export function renderCoverageAuditMarkdown(audit) {
   const lines = [
     "# Evidence coverage audit",
@@ -130,9 +169,9 @@ export function renderCoverageAuditMarkdown(audit) {
     "",
     "## Source coverage",
     "",
-    "| Source | Mode | Records | Observed range | Limitation |",
-    "|---|---|---:|---|---|",
-    ...audit.sourceCoverage.map((source) => `| ${source.name} | \`${source.coverageMode}\` | ${source.recordCount} | ${source.observedEarliest?.slice(0, 10) ?? "—"} to ${source.observedLatest?.slice(0, 10) ?? "—"} | ${source.coverageNote} |`),
+    "| Source | Collected | Mode | Records | Observed range | Limitation |",
+    "|---|---|---|---:|---|---|",
+    ...audit.sourceCoverage.map((source) => `| ${source.name} | ${source.collected ? "yes" : `**no** — ${renderMarkdownCell(source.warnings[0])}`} | \`${source.coverageMode}\` | ${source.recordCount} | ${source.observedEarliest?.slice(0, 10) ?? "—"} to ${source.observedLatest?.slice(0, 10) ?? "—"} | ${source.coverageNote} |`),
     "",
     "## Promise coverage",
     "",

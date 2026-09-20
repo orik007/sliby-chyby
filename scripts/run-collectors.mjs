@@ -58,26 +58,56 @@ const collectionPlan = checkpoints
     }));
 const plansBySourceId = new Map(collectionPlan.map((plan) => [plan.sourceId, plan]));
 
+// The date a failed source will actually resume from on a later default
+// run: the unchanged checkpoint's own date (or bootstrapFrom if it never
+// had one) when checkpoints are tracked at all, never `plan.since` --
+// `plan.since` is what THIS run requested, which for a manual `--since`
+// override is not persisted anywhere and so is not what "next run" means.
+function nextRetryFrom(plan, source, checkpointsInUse) {
+  if (!checkpointsInUse) return null;
+  return plan.checkpointBefore ? plan.checkpointBefore.lastSuccessfulCollectionAt.slice(0, 10) : source.bootstrapFrom;
+}
+
 const collectorResults = [];
+// Per-source failure isolation: see docs/evidence-pipeline.md step 2.
+// A failed source is simply omitted from `collectorResults`, so
+// `updateCollectorCheckpoints` below never sees it and leaves its
+// checkpoint untouched.
+const failures = [];
 for (const source of selected) {
   const plan = plansBySourceId.get(source.id);
   invariant(plan, `Collector source ${source.id} is missing a collection plan`);
   const since = plan.since;
-  const result = source.collector === "psp-open-data"
-    ? await collectPspSource(source, { since, collectedAt })
-    : source.collector === "official-html-archive"
-      ? await collectOfficialHtmlArchive(source, { since, collectedAt })
-      : source.collector === "wordpress-rest"
-        ? await collectWordPressRest(source, { since, collectedAt })
-        : source.collector === "mk-news-archive"
-          ? await collectMkNewsArchive(source, { since, collectedAt })
-          : source.collector === "mpsv-press-archive"
-            ? await collectMpsvPressArchive(source, { since, collectedAt })
-            : source.collector === "msmt-news-api"
-              ? await collectMsmtNewsApi(source, { since, collectedAt })
-              : await collectFeedSource(source, { since, collectedAt });
-  collectorResults.push(result);
-  console.log(`${source.id}: ${plan.mode} from ${since}, ${result.records.length} records, ${result.warnings.length} warnings`);
+  try {
+    const result = source.collector === "psp-open-data"
+      ? await collectPspSource(source, { since, collectedAt })
+      : source.collector === "official-html-archive"
+        ? await collectOfficialHtmlArchive(source, { since, collectedAt })
+        : source.collector === "wordpress-rest"
+          ? await collectWordPressRest(source, { since, collectedAt })
+          : source.collector === "mk-news-archive"
+            ? await collectMkNewsArchive(source, { since, collectedAt })
+            : source.collector === "mpsv-press-archive"
+              ? await collectMpsvPressArchive(source, { since, collectedAt })
+              : source.collector === "msmt-news-api"
+                ? await collectMsmtNewsApi(source, { since, collectedAt })
+                : await collectFeedSource(source, { since, collectedAt });
+    collectorResults.push(result);
+    console.log(`${source.id}: ${plan.mode} from ${since}, ${result.records.length} records, ${result.warnings.length} warnings`);
+  } catch (error) {
+    // A collector can throw something other than an Error (a rejected
+    // fetch body, a plain string, undefined) -- normalize so `failures`
+    // always carries a real, present message instead of silently dropping
+    // the property (JSON.stringify omits an undefined value) or printing
+    // the literal string "undefined".
+    const message = error instanceof Error ? error.message : String(error);
+    const retryFrom = nextRetryFrom(plan, source, Boolean(checkpoints));
+    const retryNote = retryFrom
+      ? `checkpoint unchanged; next default run retries from ${retryFrom} (a manual --since override, if this run used one, is never persisted)`
+      : "no checkpoint is tracked this run, so nothing resumes automatically from a fixed date";
+    failures.push({ sourceId: source.id, message, retryFrom });
+    console.error(`${source.id}: collection failed -- ${message}. ${retryNote}`);
+  }
 }
 
 async function writeCheckpointsAtomically(filePath, checkpoints) {
@@ -104,6 +134,7 @@ const output = {
   collectionPlan,
   publicationApproved: false,
   sourceIds: selected.map((source) => source.id),
+  failures,
   collectors: collectorResults.map((result) => ({
     sourceId: result.sourceId,
     collector: result.collector,
@@ -134,4 +165,4 @@ if (args.writeCheckpoints) {
   });
   await writeCheckpointsAtomically(args.writeCheckpoints, updatedCheckpoints);
 }
-console.log(JSON.stringify({ runId, outputDirectory, sourceCount: selected.length, recordCount: records.length, collectionPlan, checkpointUpdated: Boolean(args.writeCheckpoints), publicationApproved: false }, null, 2));
+console.log(JSON.stringify({ runId, outputDirectory, sourceCount: selected.length, recordCount: records.length, collectionPlan, failures, checkpointUpdated: Boolean(args.writeCheckpoints), publicationApproved: false }, null, 2));
