@@ -8,6 +8,18 @@ function invariant(condition, message) {
   if (!condition) throw new Error(message);
 }
 
+// Thrown only by validateTagAssignmentOutput, so a caller can isolate a
+// single invalid model *output* (an invented tag id, a fabricated excerpt)
+// from a transport, authentication, or provider failure inside
+// requestTagAssignment -- those must never be silently swallowed the same
+// way, or a missing API key or a full outage would look like a run that
+// legitimately found nothing.
+export class TagValidationError extends Error {}
+
+function invariantValidTag(condition, message) {
+  if (!condition) throw new TagValidationError(message);
+}
+
 export const taggingPromptVersion = "tagger-v1";
 
 export function taggingRuntimeConfig(env = process.env) {
@@ -165,18 +177,18 @@ function tagAssignmentSchema(taxonomy) {
  * forced to construct a matching brief.
  */
 export function validateTagAssignmentOutput(output, taxonomy, briefText) {
-  invariant(Array.isArray(output?.tags) && output.tags.length > 0, "Tag assignment must return at least one tag or \"unknown\"");
+  invariantValidTag(Array.isArray(output?.tags) && output.tags.length > 0, "Tag assignment must return at least one tag or \"unknown\"");
   for (const tagId of output.tags) {
-    invariant(tagId === "unknown" || hasTag(taxonomy, tagId), `Tag assignment referenced an unknown tag id: ${tagId}`);
+    invariantValidTag(tagId === "unknown" || hasTag(taxonomy, tagId), `Tag assignment referenced an unknown tag id: ${tagId}`);
   }
   if (output.tags.length > 1) {
-    invariant(!output.tags.includes("unknown"), "\"unknown\" cannot be combined with other tags");
+    invariantValidTag(!output.tags.includes("unknown"), "\"unknown\" cannot be combined with other tags");
   }
-  invariant(Number.isFinite(output.confidence) && output.confidence >= 0 && output.confidence <= 1, "Tag assignment confidence must be between 0 and 1");
-  invariant(Array.isArray(output.supportingExcerpts), "Tag assignment must return supportingExcerpts");
+  invariantValidTag(Number.isFinite(output.confidence) && output.confidence >= 0 && output.confidence <= 1, "Tag assignment confidence must be between 0 and 1");
+  invariantValidTag(Array.isArray(output.supportingExcerpts), "Tag assignment must return supportingExcerpts");
   if (typeof briefText === "string") {
     for (const excerpt of output.supportingExcerpts) {
-      invariant(typeof excerpt === "string" && excerpt.length > 0 && briefText.includes(excerpt), `Tag assignment cites a supporting excerpt not present verbatim in the supplied brief: ${JSON.stringify(excerpt)}`);
+      invariantValidTag(typeof excerpt === "string" && excerpt.length > 0 && briefText.includes(excerpt), `Tag assignment cites a supporting excerpt not present verbatim in the supplied brief: ${JSON.stringify(excerpt)}`);
     }
   }
   return output;
@@ -193,13 +205,27 @@ export async function requestTagAssignment({ provider, apiKey, model, brief, tax
     schema: tagAssignmentSchema(taxonomy),
     metadata: { subjectId: brief.subjectId, promptVersion: prompt.version }
   });
-  return {
-    subjectId: brief.subjectId,
-    provider: response.provider,
-    model: response.model,
-    promptVersion: prompt.version,
-    promptContentHash: prompt.contentHash,
-    usage: response.usage,
-    output: validateTagAssignmentOutput(response.output, taxonomy, brief.text)
-  };
+  try {
+    return {
+      subjectId: brief.subjectId,
+      provider: response.provider,
+      model: response.model,
+      promptVersion: prompt.version,
+      promptContentHash: prompt.contentHash,
+      usage: response.usage,
+      output: validateTagAssignmentOutput(response.output, taxonomy, brief.text)
+    };
+  } catch (error) {
+    // The API call already happened and already cost real tokens even
+    // though its output failed validation -- attach the response metadata
+    // to the thrown error so a caller isolating this failure (per subject)
+    // can still account for it in a token-usage/spend total instead of the
+    // paid call silently vanishing from every usage report.
+    if (error instanceof TagValidationError) {
+      error.provider = response.provider;
+      error.model = response.model;
+      error.usage = response.usage;
+    }
+    throw error;
+  }
 }

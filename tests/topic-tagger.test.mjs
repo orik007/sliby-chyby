@@ -7,6 +7,7 @@ import {
   deriveRecordContentExcerpts,
   loadTaggingPrompt,
   requestTagAssignment,
+  TagValidationError,
   validateTagAssignmentOutput
 } from "../scripts/lib/topic-tagger.mjs";
 import { validatePromiseRegistry } from "../scripts/lib/evidence-matcher.mjs";
@@ -116,6 +117,15 @@ test("validateTagAssignmentOutput rejects an invented tag id", () => {
   assert.throws(() => validateTagAssignmentOutput({ tags: ["not-a-real-tag"], confidence: 0.8, supportingExcerpts: [] }, taxonomy), /unknown tag id/);
 });
 
+test("validateTagAssignmentOutput throws specifically TagValidationError, distinguishable from a transport/provider failure", () => {
+  // A caller (scripts/run-topic-routing-pilot.mjs) must be able to isolate
+  // an invalid model *output* from a network, auth, or quota failure inside
+  // requestTagAssignment -- catching by class, not just by "it threw",
+  // keeps that distinction reliable rather than accidentally silencing an
+  // outage as if it were an ordinary invalid answer.
+  assert.throws(() => validateTagAssignmentOutput({ tags: ["not-a-real-tag"], confidence: 0.8, supportingExcerpts: [] }, taxonomy), TagValidationError);
+});
+
 test("validateTagAssignmentOutput rejects unknown combined with a real tag", () => {
   assert.throws(() => validateTagAssignmentOutput({ tags: ["deficit-and-debt", "unknown"], confidence: 0.8, supportingExcerpts: [] }, taxonomy), /cannot be combined/);
 });
@@ -164,6 +174,40 @@ test("requestTagAssignment calls the shared OpenAI structured-response endpoint 
     assert.equal(result.subjectId, fiscalPromise.id);
     assert.deepEqual(result.output.tags, ["deficit-and-debt"]);
     assert.equal(result.usage.input_tokens, 42);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("requestTagAssignment attaches the already-spent usage/model/provider to a TagValidationError instead of losing them", async () => {
+  // The paid call happens before validation ever runs, so a caller
+  // isolating this one invalid attempt (scripts/run-topic-routing-pilot.mjs)
+  // must still be able to fold its cost into a token-usage total -- losing
+  // it here would make every reported spend estimate an undercount whenever
+  // a tagger call is invalid.
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => ({
+    ok: true,
+    json: async () => ({
+      id: "resp_fixture",
+      model: "gpt-5.6-terra",
+      usage: { input_tokens: 11, output_tokens: 3 },
+      output: [{ content: [{ type: "output_text", text: JSON.stringify({ tags: ["not-a-real-tag"], confidence: 0.9, supportingExcerpts: [] }) }] }]
+    })
+  });
+  try {
+    const prompt = { version: "tagger-v1", contentHash: "fixture-hash", instructions: "fixture instructions" };
+    const brief = buildPromiseTaggingBrief(fiscalPromise, taxonomy);
+    await assert.rejects(
+      () => requestTagAssignment({ provider: "openai", apiKey: "fixture-key", model: "gpt-5.6-terra", brief, taxonomy, prompt }),
+      (error) => {
+        assert.ok(error instanceof TagValidationError);
+        assert.equal(error.model, "gpt-5.6-terra");
+        assert.equal(error.provider, "openai");
+        assert.equal(error.usage.input_tokens, 11);
+        return true;
+      }
+    );
   } finally {
     globalThis.fetch = originalFetch;
   }

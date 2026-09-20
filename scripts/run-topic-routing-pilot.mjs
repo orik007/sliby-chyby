@@ -5,7 +5,7 @@ import { basename, dirname, resolve } from "node:path";
 import { loadEnvFile } from "node:process";
 import { sha256 } from "./lib/collector-core.mjs";
 import { loadPublishedPromiseIds, publishedMatchingRegistry } from "./lib/published-promises.mjs";
-import { buildPromiseTaggingBrief, buildSourceTaggingBrief, loadTaggingPrompt, requestTagAssignment, taggingRuntimeConfig, validateTagAssignmentOutput } from "./lib/topic-tagger.mjs";
+import { buildPromiseTaggingBrief, buildSourceTaggingBrief, loadTaggingPrompt, requestTagAssignment, TagValidationError, taggingRuntimeConfig, validateTagAssignmentOutput } from "./lib/topic-tagger.mjs";
 import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
 import { normalizedStructuredFacts, validatePromiseRegistry } from "./lib/evidence-matcher.mjs";
 import { buildInvertedIndex, derivePromiseTopicTags, routeSourceRecord } from "./lib/topic-routing.mjs";
@@ -27,7 +27,9 @@ function parseArgs(args) {
     tagCache: "automation/topic-routing/pilot-cache",
     enrichedExcerpts: null,
     asOf: null,
-    output: "automation/runs/pipeline/topic-routing-pilot"
+    output: "automation/runs/pipeline/topic-routing-pilot",
+    samplePromises: null,
+    sampleRecords: null
   };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
@@ -39,10 +41,14 @@ function parseArgs(args) {
     else if (arg === "--enriched-excerpts") options.enrichedExcerpts = args[++index];
     else if (arg === "--as-of") options.asOf = args[++index];
     else if (arg === "--output") options.output = args[++index];
+    else if (arg === "--sample-promises") options.samplePromises = Number(args[++index]);
+    else if (arg === "--sample-records") options.sampleRecords = Number(args[++index]);
     else throw new Error(`Unknown argument: ${arg}`);
   }
   invariant(options.collectorRun, "--collector-run is required");
   invariant(/^\d{4}-\d{2}-\d{2}$/.test(options.asOf ?? ""), "--as-of must use YYYY-MM-DD");
+  invariant(options.samplePromises === null || (Number.isInteger(options.samplePromises) && options.samplePromises > 0), "--sample-promises must be a positive integer");
+  invariant(options.sampleRecords === null || (Number.isInteger(options.sampleRecords) && options.sampleRecords > 0), "--sample-records must be a positive integer");
   return options;
 }
 
@@ -109,6 +115,32 @@ function cacheFingerprintMatches(cached, { inputHash, taxonomyContentHash, promp
     && cached.modelB === runtime.modelB;
 }
 
+// A tagger call whose response fails validation (an invented tag id, or a
+// supporting excerpt not present verbatim in the brief -- most likely a
+// fabrication) must not crash the whole run: mirrors
+// validateAssessmentAttempt in scripts/lib/assessment-pipeline.mjs, which
+// the real daily assessment pipeline already relies on so one invalid
+// output fails only that one item, per docs/evidence-pipeline.md step 8.
+// Only a TagValidationError is caught here -- a network failure, an
+// authentication or quota error, or any other transport/provider failure
+// from requestTagAssignment must still fail the whole run loudly. Treating
+// those the same as an invalid model output would let a missing API key or
+// a full outage masquerade as a legitimate run that simply found nothing.
+async function safeRequestTagAssignment(args) {
+  try {
+    return { response: await requestTagAssignment(args), error: null };
+  } catch (error) {
+    if (error instanceof TagValidationError) {
+      // The paid call already happened -- requestTagAssignment attaches its
+      // provider/model/usage to the error precisely so this isolated
+      // failure still shows up in the pilot's token-usage totals instead of
+      // silently vanishing from the spend estimate.
+      return { response: null, error: error.message, provider: error.provider ?? null, model: error.model ?? null, usage: error.usage ?? null };
+    }
+    throw error;
+  }
+}
+
 async function taggedTwice({ subjectId, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache }) {
   const cached = cache.assignments[subjectId];
   if (cacheFingerprintMatches(cached, { inputHash, taxonomyContentHash, prompt, runtime })) {
@@ -123,30 +155,52 @@ async function taggedTwice({ subjectId, inputHash, brief, taxonomy, taxonomyCont
       modelA: cached.modelA,
       modelB: cached.modelB,
       usageByModel: [],
+      invalidCount: 0,
+      taggerAError: null,
+      taggerBError: null,
       reused: true
     };
   }
-  const [taggerA, taggerB] = await Promise.all([
-    requestTagAssignment({ provider: runtime.provider, apiKey: apiKeyFor(runtime.provider), model: runtime.modelA, brief, taxonomy, prompt }),
-    requestTagAssignment({ provider: runtime.provider, apiKey: apiKeyFor(runtime.provider), model: runtime.modelB, brief, taxonomy, prompt })
+  const [attemptA, attemptB] = await Promise.all([
+    safeRequestTagAssignment({ provider: runtime.provider, apiKey: apiKeyFor(runtime.provider), model: runtime.modelA, brief, taxonomy, prompt }),
+    safeRequestTagAssignment({ provider: runtime.provider, apiKey: apiKeyFor(runtime.provider), model: runtime.modelB, brief, taxonomy, prompt })
   ]);
-  cache.assignments[subjectId] = {
-    inputHash,
-    taxonomyContentHash,
-    promptContentHash: prompt.contentHash,
-    provider: runtime.provider,
-    modelA: runtime.modelA,
-    modelB: runtime.modelB,
-    taggerA: taggerA.output,
-    taggerB: taggerB.output
-  };
+  // Only a fully successful pair is cached -- a subject with one invalid
+  // side is retried in full next run rather than freezing the invalid half
+  // in place, matching the "retried until it succeeds" pattern the real
+  // evidence-pipeline enrichment step already follows.
+  if (!attemptA.error && !attemptB.error) {
+    cache.assignments[subjectId] = {
+      inputHash,
+      taxonomyContentHash,
+      promptContentHash: prompt.contentHash,
+      provider: runtime.provider,
+      modelA: runtime.modelA,
+      modelB: runtime.modelB,
+      taggerA: attemptA.response.output,
+      taggerB: attemptB.response.output
+    };
+  }
   return {
-    taggerA: taggerA.output,
-    taggerB: taggerB.output,
+    // A null tagger output is exactly what isUnknown() (topic-routing.mjs)
+    // already treats as an unclassified tagger, so an invalid response
+    // degrades to the same "only one tagger classified" / "both unknown"
+    // routing-review or orphan-review states a genuine model "unknown"
+    // answer would -- never a silently created candidate.
+    taggerA: attemptA.response?.output ?? null,
+    taggerB: attemptB.response?.output ?? null,
     provider: runtime.provider,
-    modelA: taggerA.model,
-    modelB: taggerB.model,
-    usageByModel: [{ model: taggerA.model, usage: taggerA.usage }, { model: taggerB.model, usage: taggerB.usage }].filter((entry) => entry.usage),
+    // A response object's own `.model` is preferred, but an invalid
+    // attempt's `.model` (attached by requestTagAssignment's catch) is used
+    // as the fallback before the merely-configured runtime.modelA/B, so the
+    // report still names the model that actually produced the invalid
+    // output rather than just what was requested.
+    modelA: attemptA.response?.model ?? attemptA.model ?? runtime.modelA,
+    modelB: attemptB.response?.model ?? attemptB.model ?? runtime.modelB,
+    usageByModel: [attemptA.response ?? attemptA, attemptB.response ?? attemptB].map(({ model, usage }) => ({ model, usage })).filter((entry) => entry.usage),
+    invalidCount: (attemptA.error ? 1 : 0) + (attemptB.error ? 1 : 0),
+    taggerAError: attemptA.error,
+    taggerBError: attemptB.error,
     reused: false
   };
 }
@@ -210,13 +264,18 @@ const taxonomyContentHash = taxonomyHash(taxonomy);
 const directIdIndex = directLegalIdentifierIndex(taxonomy);
 
 const registry = validatePromiseRegistry(JSON.parse(await readFile(resolve(args.promiseRegistry), "utf8")));
-const publishedRegistry = publishedMatchingRegistry(registry, await loadPublishedPromiseIds(args.publishedPromises));
+let publishedRegistry = publishedMatchingRegistry(registry, await loadPublishedPromiseIds(args.publishedPromises));
+// A sample run trims the published set down to the first N promises
+// (deterministic, not random) so a pilot run's model spend and output size
+// stay bounded; the full set is used whenever no sample size is given.
+if (args.samplePromises !== null) publishedRegistry = { ...publishedRegistry, promises: publishedRegistry.promises.slice(0, args.samplePromises) };
 const promiseById = new Map(publishedRegistry.promises.map((promise) => [promise.id, promise]));
 
 const collectorRun = JSON.parse(await readFile(resolve(args.collectorRun), "utf8"));
 invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
 const cutoff = `${args.asOf}T23:59:59.999Z`;
-const materialPrimaryRecords = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff));
+let materialPrimaryRecords = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff));
+if (args.sampleRecords !== null) materialPrimaryRecords = materialPrimaryRecords.slice(0, args.sampleRecords);
 
 const enrichedExcerptsByRecordId = args.enrichedExcerpts ? await readJsonIfExists(resolve(args.enrichedExcerpts), {}) : {};
 
@@ -234,12 +293,14 @@ const sourceTagCache = await readJsonIfExists(sourceTagCachePath, emptyTagCache(
 try {
   const promiseTaggingUsageByModel = [];
   let agreedPromiseAssignmentCount = 0;
+  let invalidPromiseTaggerCount = 0;
 
   const promiseTopicAssignments = await mapWithConcurrency(publishedRegistry.promises, runtime.concurrency, async (promise) => {
     const inputHash = sha256({ id: promise.id, originalTextCz: promise.originalTextCz, atomicClaimCz: promise.atomicClaimCz, fulfillmentTest: promise.fulfillmentTest, contradictionTest: promise.contradictionTest, promiseSource: promise.promiseSource });
     const brief = buildPromiseTaggingBrief(promise, taxonomy);
     const tagged = await taggedTwice({ subjectId: promise.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: promiseTagCache });
     promiseTaggingUsageByModel.push(...tagged.usageByModel);
+    invalidPromiseTaggerCount += tagged.invalidCount;
     const derived = derivePromiseTopicTags(taxonomy, tagged.taggerA, tagged.taggerB);
     return {
       promiseId: promise.id,
@@ -250,6 +311,11 @@ try {
       provider: tagged.provider,
       modelA: tagged.modelA,
       modelB: tagged.modelB,
+      // Per-subject, not just an aggregate count: a reviewer needs to know
+      // which promise's tagger call was invalid and why, not just that
+      // invalidPromiseTaggerCount is non-zero somewhere in the run.
+      taggerAError: tagged.taggerAError,
+      taggerBError: tagged.taggerBError,
       // The full brief, not just IDs and hashes, so an acceptance reviewer
       // can verify a cited excerpt or reproduce a cache hit's classification
       // from this uploaded artifact alone.
@@ -270,6 +336,7 @@ try {
   let orphanReviewCount = 0;
   let candidateCreatedCount = 0;
   let candidateRelationshipCount = 0;
+  let invalidSourceTaggerCount = 0;
   const evidenceItemsByPromise = new Map();
 
   const sourceRouting = await mapWithConcurrency(materialPrimaryRecords, runtime.concurrency, async (record) => {
@@ -287,11 +354,12 @@ try {
       // ever looking at taggerA/taggerB -- so there is nothing for either
       // paid tagger to add, and skipping them here saves two calls per hit.
       const route = routeSourceRecord({ taxonomy, record, taggerA: null, taggerB: null, invertedIndex, directLink, semanticDiscoveryPromiseIds: [] });
-      return { route, tagged: { taggerA: null, taggerB: null, provider: null, modelA: null, modelB: null }, inputHash, briefText: brief.text };
+      return { route, tagged: { taggerA: null, taggerB: null, provider: null, modelA: null, modelB: null, taggerAError: null, taggerBError: null }, inputHash, briefText: brief.text };
     }
 
     const tagged = await taggedTwice({ subjectId: record.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: sourceTagCache });
     sourceTaggingUsageByModel.push(...tagged.usageByModel);
+    invalidSourceTaggerCount += tagged.invalidCount;
 
     const route = routeSourceRecord({
       taxonomy,
@@ -369,6 +437,12 @@ try {
     asOf: args.asOf,
     publicationApproved: false,
     sentToAssessors: false,
+    // null on a full run; set whenever --sample-promises/--sample-records
+    // trimmed the input, so a reader of this report alone can tell it is
+    // not the complete catalogue without cross-checking the invocation.
+    sample: (args.samplePromises !== null || args.sampleRecords !== null)
+      ? { samplePromises: args.samplePromises, sampleRecords: args.sampleRecords }
+      : null,
     counts: {
       sourceRecordCount: collectorRun.records.length,
       materialPrimaryRecordCount: materialPrimaryRecords.length,
@@ -380,7 +454,13 @@ try {
       orphanReviewCount,
       candidateCreatedCount,
       candidateRelationshipCount,
-      predictedPackageCount: predictedPackages.filter((pkg) => pkg.predicted).length
+      predictedPackageCount: predictedPackages.filter((pkg) => pkg.predicted).length,
+      // A tagger response that failed excerpt-grounding or tag-id validation
+      // degrades to that side being treated as unknown (see taggedTwice)
+      // rather than stopping the run; this count is how a reader notices
+      // that degradation happened instead of it being silently invisible.
+      invalidPromiseTaggerCount,
+      invalidSourceTaggerCount
     },
     tokenUsageByPass: {
       promiseTagging: usageTotalsByModel(promiseTaggingUsageByModel),
@@ -405,6 +485,8 @@ try {
       provider: tagged.provider,
       modelA: tagged.modelA,
       modelB: tagged.modelB,
+      taggerAError: tagged.taggerAError,
+      taggerBError: tagged.taggerBError,
       route
     })),
     predictedPackages
@@ -416,6 +498,7 @@ try {
     ``,
     `As of ${args.asOf}. Taxonomy ${taxonomy.taxonomyVersion}, prompt ${prompt.version} (${prompt.contentHash.slice(0, 12)}).`,
     ``,
+    ...(report.sample ? [`**Sample run** -- promises limited to ${report.sample.samplePromises ?? "all"}, records limited to ${report.sample.sampleRecords ?? "all"}. Not the full catalogue.`, ``] : []),
     `| Metric | Count |`,
     `| --- | --- |`,
     ...Object.entries(report.counts).map(([key, value]) => `| ${key} | ${value} |`),

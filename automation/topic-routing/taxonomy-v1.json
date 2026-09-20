@@ -148,6 +148,513 @@
       "exclusionExamples": [
         "A promise about the availability of care itself rather than how it is financed (route under `healthcare-access`)."
       ]
+    },
+    {
+      "id": "economy-business-and-innovation",
+      "parent": null,
+      "labelEn": "Economy, business, and innovation",
+      "assessmentEligible": false,
+      "czechAliases": ["ekonomika", "podnikání", "inovace"],
+      "inclusionExamples": [
+        "Any promise or record about general economic policy, business regulation, entrepreneurship support, or innovation and research funding for companies."
+      ],
+      "exclusionExamples": [
+        "A promise specifically about a tax rate or the state budget (route under `public-finance`)."
+      ]
+    },
+    {
+      "id": "work-social-affairs-and-pensions",
+      "parent": null,
+      "labelEn": "Labour, social affairs, and pensions",
+      "assessmentEligible": false,
+      "czechAliases": ["sociální politika", "důchody", "trh práce"],
+      "inclusionExamples": [
+        "Any promise or record about employment, wages, social benefits, family policy, or the pension system."
+      ],
+      "exclusionExamples": [
+        "A promise about health-insurance financing rather than pensions or employment (route under `health-and-care`)."
+      ]
+    },
+    {
+      "id": "housing-and-regional-development",
+      "parent": null,
+      "labelEn": "Housing and regional development",
+      "assessmentEligible": false,
+      "czechAliases": ["bydlení", "regionální rozvoj", "výstavba"],
+      "inclusionExamples": [
+        "Any promise or record about housing affordability, construction, spatial planning, or regional development funding."
+      ],
+      "exclusionExamples": [
+        "A promise about a transport project that only happens to run through a region (route under `transport-and-infrastructure`)."
+      ]
+    },
+    {
+      "id": "education-science-and-sport",
+      "parent": null,
+      "labelEn": "Education, science, and sport",
+      "assessmentEligible": false,
+      "czechAliases": ["vzdělávání", "školství", "věda a výzkum"],
+      "inclusionExamples": [
+        "Any promise or record about schools, universities, scientific research funding, or sport support."
+      ],
+      "exclusionExamples": [
+        "A promise about vocational retraining tied to employment policy rather than the education system (route under `work-social-affairs-and-pensions`)."
+      ]
+    },
+    {
+      "id": "culture-and-media",
+      "parent": null,
+      "labelEn": "Culture and media",
+      "assessmentEligible": false,
+      "czechAliases": ["kultura", "média", "veřejnoprávní vysílání"],
+      "inclusionExamples": [
+        "Any promise or record about cultural funding, heritage protection, or media regulation and public broadcasting."
+      ],
+      "exclusionExamples": [
+        "A promise about school curricula rather than culture or media (route under `education-science-and-sport`)."
+      ]
+    },
+    {
+      "id": "transport-and-infrastructure",
+      "parent": null,
+      "labelEn": "Transport and infrastructure",
+      "assessmentEligible": false,
+      "czechAliases": ["doprava", "infrastruktura", "dálnice"],
+      "inclusionExamples": [
+        "Any promise or record about roads, railways, public transport, or infrastructure construction."
+      ],
+      "exclusionExamples": [
+        "A promise about energy infrastructure such as the power grid (route under `energy-climate-and-environment`)."
+      ]
+    },
+    {
+      "id": "energy-climate-and-environment",
+      "parent": null,
+      "labelEn": "Energy, climate, and environment",
+      "assessmentEligible": false,
+      "czechAliases": ["energetika", "klima", "životní prostředí"],
+      "inclusionExamples": [
+        "Any promise or record about energy production or prices, climate policy, or environmental protection."
+      ],
+      "exclusionExamples": [
+        "A promise about vehicle emissions tied to a transport-infrastructure project (route under `transport-and-infrastructure`)."
+      ]
+    },
+    {
+      "id": "agriculture-and-food",
+      "parent": null,
+      "labelEn": "Agriculture and food",
+      "assessmentEligible": false,
+      "czechAliases": ["zemědělství", "potraviny", "soběstačnost"],
+      "inclusionExamples": [
+        "Any promise or record about farming policy, food safety, or food self-sufficiency."
+      ],
+      "exclusionExamples": [
+        "A promise about a VAT rate on food, which is itself about taxation rather than agricultural policy (route under `taxation`)."
+      ]
+    },
+    {
+      "id": "security-defence-and-migration",
+      "parent": null,
+      "labelEn": "Security, defence, and migration",
+      "assessmentEligible": false,
+      "czechAliases": ["bezpečnost", "obrana", "migrace"],
+      "inclusionExamples": [
+        "Any promise or record about police, the armed forces, defence spending, or migration and asylum policy."
+      ],
+      "exclusionExamples": [
+        "A promise about judicial reform rather than security or defence (route under `justice-democracy-and-rights`)."
+      ]
+    },
+    {
+      "id": "justice-democracy-and-rights",
+      "parent": null,
+      "labelEn": "Justice, democracy, and rights",
+      "assessmentEligible": false,
+      "czechAliases": ["justice", "demokracie", "lidská práva"],
+      "inclusionExamples": [
+        "Any promise or record about the courts, the electoral system, anti-corruption measures, or civil rights and freedoms."
+      ],
+      "exclusionExamples": [
+        "A promise about police powers or internal security (route under `security-defence-and-migration`)."
+      ]
+    },
+    {
+      "id": "state-and-digital-public-services",
+      "parent": null,
+      "labelEn": "State administration and digital public services",
+      "assessmentEligible": false,
+      "czechAliases": ["veřejná správa", "digitalizace státu", "e-government"],
+      "inclusionExamples": [
+        "Any promise or record about public administration reform, digitalization of state services, or civil-service organization."
+      ],
+      "exclusionExamples": [
+        "A promise about online tax filing specifically, which is a tax-administration matter (route under `tax-administration`)."
+      ]
+    },
+    {
+      "id": "eu-and-foreign-policy",
+      "parent": null,
+      "labelEn": "EU and foreign policy",
+      "assessmentEligible": false,
+      "czechAliases": ["Evropská unie", "zahraniční politika", "diplomacie"],
+      "inclusionExamples": [
+        "Any promise or record about the European Union, international relations, or foreign policy positions."
+      ],
+      "exclusionExamples": [
+        "A promise about national defence spending levels rather than diplomatic or EU relations (route under `security-defence-and-migration`)."
+      ]
+    },
+    {
+      "id": "business-regulation-and-support",
+      "parent": "economy-business-and-innovation",
+      "labelEn": "Business regulation and support for entrepreneurs",
+      "assessmentEligible": true,
+      "czechAliases": ["podnikatelské prostředí", "byrokracie pro firmy", "podpora malých a středních podniků"],
+      "inclusionExamples": [
+        "A promise or record about reducing red tape for businesses, licensing rules, or direct support programmes for small and medium enterprises."
+      ],
+      "exclusionExamples": [
+        "A promise about a specific tax rate that businesses pay (route under `taxation`)."
+      ]
+    },
+    {
+      "id": "innovation-and-digital-economy",
+      "parent": "economy-business-and-innovation",
+      "labelEn": "Innovation and the digital economy",
+      "assessmentEligible": true,
+      "czechAliases": ["výzkum a vývoj firem", "digitální ekonomika", "startupy"],
+      "inclusionExamples": [
+        "A promise or record about research-and-development funding for companies, the startup ecosystem, or digital-economy competitiveness."
+      ],
+      "exclusionExamples": [
+        "A promise about digitalizing state administration itself rather than the private economy (route under `state-and-digital-public-services`)."
+      ]
+    },
+    {
+      "id": "pension-system",
+      "parent": "work-social-affairs-and-pensions",
+      "labelEn": "Pension system",
+      "assessmentEligible": true,
+      "czechAliases": ["důchodová reforma", "věk odchodu do důchodu", "valorizace důchodů"],
+      "inclusionExamples": [
+        "A promise or record about the pension system's rules, the retirement age, or pension indexation."
+      ],
+      "exclusionExamples": [
+        "A promise about general social benefits unrelated to pensions (route under `social-benefits-and-family-policy`)."
+      ]
+    },
+    {
+      "id": "social-benefits-and-family-policy",
+      "parent": "work-social-affairs-and-pensions",
+      "labelEn": "Social benefits and family policy",
+      "assessmentEligible": true,
+      "czechAliases": ["sociální dávky", "rodinná politika", "přídavky na děti"],
+      "inclusionExamples": [
+        "A promise or record about social-assistance benefits, family allowances, or parental support."
+      ],
+      "exclusionExamples": [
+        "A promise specifically about the pension system rather than family or benefit policy (route under `pension-system`)."
+      ]
+    },
+    {
+      "id": "labour-market-and-wages",
+      "parent": "work-social-affairs-and-pensions",
+      "labelEn": "Labour market and wages",
+      "assessmentEligible": true,
+      "czechAliases": ["minimální mzda", "zaměstnanost", "pracovní právo"],
+      "inclusionExamples": [
+        "A promise or record about the minimum wage, employment levels, or labour-law rules governing employment relationships."
+      ],
+      "exclusionExamples": [
+        "A promise about a pension or a family benefit rather than employment or wages (route under `pension-system` or `social-benefits-and-family-policy`)."
+      ]
+    },
+    {
+      "id": "housing-affordability",
+      "parent": "housing-and-regional-development",
+      "labelEn": "Housing affordability",
+      "assessmentEligible": true,
+      "czechAliases": ["dostupné bydlení", "nájemní bydlení", "hypotéky"],
+      "inclusionExamples": [
+        "A promise or record about housing prices, rental-housing supply, or mortgage conditions."
+      ],
+      "exclusionExamples": [
+        "A promise about regional infrastructure spending unrelated to housing itself (route under `regional-development-and-planning`)."
+      ]
+    },
+    {
+      "id": "regional-development-and-planning",
+      "parent": "housing-and-regional-development",
+      "labelEn": "Regional development and spatial planning",
+      "assessmentEligible": true,
+      "czechAliases": ["územní plánování", "stavební zákon", "obce a kraje"],
+      "inclusionExamples": [
+        "A promise or record about spatial planning rules, building permits, or targeted regional-development funding."
+      ],
+      "exclusionExamples": [
+        "A promise about housing affordability itself rather than planning or regional funding (route under `housing-affordability`)."
+      ]
+    },
+    {
+      "id": "school-education",
+      "parent": "education-science-and-sport",
+      "labelEn": "School education",
+      "assessmentEligible": true,
+      "czechAliases": ["základní a střední školství", "učitelé", "osnovy"],
+      "inclusionExamples": [
+        "A promise or record about primary or secondary schools, teacher pay, or the school curriculum."
+      ],
+      "exclusionExamples": [
+        "A promise about universities or research funding rather than schools (route under `higher-education-and-research`)."
+      ]
+    },
+    {
+      "id": "higher-education-and-research",
+      "parent": "education-science-and-sport",
+      "labelEn": "Higher education and research",
+      "assessmentEligible": true,
+      "czechAliases": ["vysoké školy", "vědecký výzkum", "akademická obec"],
+      "inclusionExamples": [
+        "A promise or record about universities, academic research funding, or doctoral study conditions."
+      ],
+      "exclusionExamples": [
+        "A promise about primary or secondary schools rather than higher education (route under `school-education`)."
+      ]
+    },
+    {
+      "id": "sport-support",
+      "parent": "education-science-and-sport",
+      "labelEn": "Sport support",
+      "assessmentEligible": true,
+      "czechAliases": ["podpora sportu", "sportoviště", "tělovýchova"],
+      "inclusionExamples": [
+        "A promise or record about funding for sports clubs, sports infrastructure, or physical-education programmes."
+      ],
+      "exclusionExamples": [
+        "A promise about school curricula that only mentions physical education in passing (route under `school-education`)."
+      ]
+    },
+    {
+      "id": "cultural-funding-and-heritage",
+      "parent": "culture-and-media",
+      "labelEn": "Cultural funding and heritage protection",
+      "assessmentEligible": true,
+      "czechAliases": ["dotace na kulturu", "památková péče", "kulturní instituce"],
+      "inclusionExamples": [
+        "A promise or record about funding for cultural institutions, artists, or the protection of historical monuments."
+      ],
+      "exclusionExamples": [
+        "A promise about media regulation or public broadcasting rather than cultural funding (route under `media-regulation-and-public-broadcasting`)."
+      ]
+    },
+    {
+      "id": "media-regulation-and-public-broadcasting",
+      "parent": "culture-and-media",
+      "labelEn": "Media regulation and public broadcasting",
+      "assessmentEligible": true,
+      "czechAliases": ["regulace médií", "koncesionářské poplatky", "nezávislost médií"],
+      "inclusionExamples": [
+        "A promise or record about public-service broadcasting funding or governance, or media-regulation rules."
+      ],
+      "exclusionExamples": [
+        "A promise about funding a specific cultural institution rather than media policy (route under `cultural-funding-and-heritage`)."
+      ]
+    },
+    {
+      "id": "road-and-rail-infrastructure",
+      "parent": "transport-and-infrastructure",
+      "labelEn": "Road and rail infrastructure",
+      "assessmentEligible": true,
+      "czechAliases": ["výstavba dálnic", "železniční koridory", "vysokorychlostní tratě"],
+      "inclusionExamples": [
+        "A promise or record about building or upgrading highways, railway lines, or other transport infrastructure."
+      ],
+      "exclusionExamples": [
+        "A promise about public-transport fares or service levels rather than infrastructure construction (route under `public-transport`)."
+      ]
+    },
+    {
+      "id": "public-transport",
+      "parent": "transport-and-infrastructure",
+      "labelEn": "Public transport",
+      "assessmentEligible": true,
+      "czechAliases": ["veřejná doprava", "MHD", "jízdné"],
+      "inclusionExamples": [
+        "A promise or record about public-transport service levels, fares, or subsidies."
+      ],
+      "exclusionExamples": [
+        "A promise about building new transport infrastructure itself rather than operating public transport (route under `road-and-rail-infrastructure`)."
+      ]
+    },
+    {
+      "id": "energy-policy-and-prices",
+      "parent": "energy-climate-and-environment",
+      "labelEn": "Energy policy and prices",
+      "assessmentEligible": true,
+      "czechAliases": ["ceny energií", "jaderná energetika", "energetická bezpečnost"],
+      "inclusionExamples": [
+        "A promise or record about energy prices, electricity or gas supply security, or nuclear or renewable energy production."
+      ],
+      "exclusionExamples": [
+        "A promise about general environmental protection unrelated to energy production or pricing (route under `climate-and-environmental-protection`)."
+      ]
+    },
+    {
+      "id": "climate-and-environmental-protection",
+      "parent": "energy-climate-and-environment",
+      "labelEn": "Climate and environmental protection",
+      "assessmentEligible": true,
+      "czechAliases": ["ochrana klimatu", "emise skleníkových plynů", "ochrana přírody"],
+      "inclusionExamples": [
+        "A promise or record about greenhouse-gas emissions targets, nature protection, or environmental-quality standards."
+      ],
+      "exclusionExamples": [
+        "A promise about energy prices or supply rather than climate or environmental protection (route under `energy-policy-and-prices`)."
+      ]
+    },
+    {
+      "id": "farming-support-and-self-sufficiency",
+      "parent": "agriculture-and-food",
+      "labelEn": "Farming support and food self-sufficiency",
+      "assessmentEligible": true,
+      "czechAliases": ["podpora zemědělců", "potravinová soběstačnost", "dotace do zemědělství"],
+      "inclusionExamples": [
+        "A promise or record about subsidies for farmers or measures aimed at increasing food self-sufficiency."
+      ],
+      "exclusionExamples": [
+        "A promise about food safety standards rather than farming support (route under `food-safety-and-standards`)."
+      ]
+    },
+    {
+      "id": "food-safety-and-standards",
+      "parent": "agriculture-and-food",
+      "labelEn": "Food safety and standards",
+      "assessmentEligible": true,
+      "czechAliases": ["bezpečnost potravin", "kvalita potravin", "označování potravin"],
+      "inclusionExamples": [
+        "A promise or record about food-safety rules, quality standards, or labelling requirements."
+      ],
+      "exclusionExamples": [
+        "A promise about farm subsidies rather than food safety or standards (route under `farming-support-and-self-sufficiency`)."
+      ]
+    },
+    {
+      "id": "police-and-internal-security",
+      "parent": "security-defence-and-migration",
+      "labelEn": "Police and internal security",
+      "assessmentEligible": true,
+      "czechAliases": ["policie", "vnitřní bezpečnost", "boj proti kriminalitě"],
+      "inclusionExamples": [
+        "A promise or record about police staffing, powers, or measures against crime."
+      ],
+      "exclusionExamples": [
+        "A promise about the armed forces or defence spending rather than domestic policing (route under `armed-forces-and-defence-spending`)."
+      ]
+    },
+    {
+      "id": "armed-forces-and-defence-spending",
+      "parent": "security-defence-and-migration",
+      "labelEn": "Armed forces and defence spending",
+      "assessmentEligible": true,
+      "czechAliases": ["armáda", "obranné výdaje", "NATO"],
+      "inclusionExamples": [
+        "A promise or record about military spending levels, armed-forces modernization, or NATO commitments."
+      ],
+      "exclusionExamples": [
+        "A promise about domestic police rather than the armed forces (route under `police-and-internal-security`)."
+      ]
+    },
+    {
+      "id": "migration-and-asylum-policy",
+      "parent": "security-defence-and-migration",
+      "labelEn": "Migration and asylum policy",
+      "assessmentEligible": true,
+      "czechAliases": ["migrační politika", "azylové řízení", "ochrana hranic"],
+      "inclusionExamples": [
+        "A promise or record about immigration rules, asylum procedures, or border-control measures."
+      ],
+      "exclusionExamples": [
+        "A promise about general policing unrelated to migration or borders (route under `police-and-internal-security`)."
+      ]
+    },
+    {
+      "id": "judiciary-and-anti-corruption",
+      "parent": "justice-democracy-and-rights",
+      "labelEn": "Judiciary and anti-corruption",
+      "assessmentEligible": true,
+      "czechAliases": ["soudnictví", "boj proti korupci", "nezávislost soudů"],
+      "inclusionExamples": [
+        "A promise or record about court organization, judicial independence, or anti-corruption measures."
+      ],
+      "exclusionExamples": [
+        "A promise about the electoral system or civil rights rather than the judiciary (route under `electoral-system-and-civil-rights`)."
+      ]
+    },
+    {
+      "id": "electoral-system-and-civil-rights",
+      "parent": "justice-democracy-and-rights",
+      "labelEn": "Electoral system and civil rights",
+      "assessmentEligible": true,
+      "czechAliases": ["volební systém", "svoboda projevu", "referendum"],
+      "inclusionExamples": [
+        "A promise or record about electoral rules, direct democracy such as referendums, or civil rights and freedoms."
+      ],
+      "exclusionExamples": [
+        "A promise about the courts or anti-corruption enforcement rather than elections or civil rights (route under `judiciary-and-anti-corruption`)."
+      ]
+    },
+    {
+      "id": "public-administration-reform",
+      "parent": "state-and-digital-public-services",
+      "labelEn": "Public administration reform",
+      "assessmentEligible": true,
+      "czechAliases": ["reforma veřejné správy", "počet úředníků", "efektivita státu"],
+      "inclusionExamples": [
+        "A promise or record about the size, organization, or efficiency of the civil service and public administration."
+      ],
+      "exclusionExamples": [
+        "A promise specifically about digital government services rather than administrative organization (route under `digital-government-services`)."
+      ]
+    },
+    {
+      "id": "digital-government-services",
+      "parent": "state-and-digital-public-services",
+      "labelEn": "Digital government services",
+      "assessmentEligible": true,
+      "czechAliases": ["digitální služby státu", "elektronická identita", "portál občana"],
+      "inclusionExamples": [
+        "A promise or record about digitalizing public services, electronic identity, or online interaction with the state."
+      ],
+      "exclusionExamples": [
+        "A promise about the size or organization of the civil service rather than digital services (route under `public-administration-reform`)."
+      ]
+    },
+    {
+      "id": "eu-membership-and-relations",
+      "parent": "eu-and-foreign-policy",
+      "labelEn": "EU membership and relations",
+      "assessmentEligible": true,
+      "czechAliases": ["členství v EU", "evropská integrace", "eurozóna"],
+      "inclusionExamples": [
+        "A promise or record about the country's EU membership terms, European integration, or eurozone accession."
+      ],
+      "exclusionExamples": [
+        "A promise about bilateral relations with a non-EU country rather than EU membership (route under `foreign-relations-and-diplomacy`)."
+      ]
+    },
+    {
+      "id": "foreign-relations-and-diplomacy",
+      "parent": "eu-and-foreign-policy",
+      "labelEn": "Foreign relations and diplomacy",
+      "assessmentEligible": true,
+      "czechAliases": ["zahraniční vztahy", "diplomatická jednání", "mezinárodní smlouvy"],
+      "inclusionExamples": [
+        "A promise or record about bilateral or multilateral diplomatic relations and international agreements."
+      ],
+      "exclusionExamples": [
+        "A promise about EU membership terms themselves rather than broader foreign relations (route under `eu-membership-and-relations`)."
+      ]
     }
   ]
 }
