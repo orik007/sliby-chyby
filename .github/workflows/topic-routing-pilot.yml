@@ -23,6 +23,11 @@ on:
         required: false
         default: ""
         type: string
+      tagging_concurrency:
+        description: Parallel tagged subjects in flight (each uses 2 API calls); leave empty for the safe Tier-1 default of 1. Raise this once the account's usage tier allows more TPM headroom.
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: read
@@ -54,7 +59,15 @@ jobs:
       SLIBY_TAGGING_PROVIDER: openai
       SLIBY_TAGGING_MODEL_A: gpt-5.6-terra
       SLIBY_TAGGING_MODEL_B: gpt-5.6-terra
-      SLIBY_TAGGING_CONCURRENCY: 4
+      # A full backfill run at the script's own default of 4 (8 parallel API
+      # calls) reliably exhausted the account's Tier-1 500,000 TPM budget for
+      # gpt-5.6-terra within about a minute -- confirmed by a real run whose
+      # retries (added for exactly this) still ran out after 6 attempts,
+      # because the account was structurally over its sustained throughput,
+      # not just hit by an isolated burst. 1 keeps sustained demand well
+      # under that budget; raise it via the tagging_concurrency input once
+      # the account's usage tier allows more TPM headroom.
+      SLIBY_TAGGING_CONCURRENCY: ${{ inputs.tagging_concurrency || '1' }}
     steps:
       - name: Check out repository
         # No explicit `ref`: this defaults to whatever ref the manual dispatch
