@@ -1,3 +1,39 @@
+const maxProviderAttempts = 6;
+const baseRetryDelayMs = 2_000;
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+/**
+ * A 429 (rate limit) or 5xx (transient provider-side failure) is expected
+ * and recoverable during a large batch -- especially a full historical
+ * backfill sending far more requests per minute than an incremental daily
+ * run -- so it is retried with backoff instead of failing the caller's
+ * entire run on the first hit. A 4xx other than 429 (bad request, invalid
+ * key, ...) is not retried: retrying it would just waste the backoff delay
+ * on an error that will never succeed.
+ */
+async function fetchJsonWithRetry(url, init) {
+  let last = null;
+  for (let attempt = 1; attempt <= maxProviderAttempts; attempt += 1) {
+    const response = await fetch(url, init);
+    const body = await response.json();
+    if (response.ok) return { response, body };
+    last = { response, body };
+    const retryable = response.status === 429 || (response.status >= 500 && response.status < 600);
+    if (!retryable || attempt === maxProviderAttempts) return last;
+    const retryAfterHeader = typeof response.headers?.get === "function" ? response.headers.get("retry-after") : null;
+    const retryAfterSeconds = retryAfterHeader === null ? NaN : Number(retryAfterHeader);
+    const delayMs = Number.isFinite(retryAfterSeconds) && retryAfterSeconds >= 0
+      ? retryAfterSeconds * 1000
+      : baseRetryDelayMs * 2 ** (attempt - 1);
+    console.warn(`Provider request to ${url} failed with ${response.status} (attempt ${attempt}/${maxProviderAttempts}); retrying in ${delayMs}ms.`);
+    await sleep(delayMs);
+  }
+  return last;
+}
+
 /**
  * Provider boundary for structured assessment calls.
  *
@@ -21,7 +57,7 @@ export async function createStructuredModelResponse({
 
   if (!apiKey) throw new Error("OPENAI_API_KEY is required for the OpenAI provider");
 
-  const response = await fetch("https://api.openai.com/v1/responses", {
+  const { response, body } = await fetchJsonWithRetry("https://api.openai.com/v1/responses", {
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -34,7 +70,6 @@ export async function createStructuredModelResponse({
     })
   });
 
-  const body = await response.json();
   if (!response.ok) {
     throw new Error(`OpenAI Responses API failed (${response.status}): ${body?.error?.message ?? "unknown error"}`);
   }
@@ -63,12 +98,11 @@ export async function createEmbeddings({ provider, apiKey, model, dimensions, in
     throw new Error("Every embedding input must be a non-empty string");
   }
 
-  const response = await fetch("https://api.openai.com/v1/embeddings", {
+  const { response, body } = await fetchJsonWithRetry("https://api.openai.com/v1/embeddings", {
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({ model, dimensions, input: inputs, encoding_format: "float" })
   });
-  const body = await response.json();
   if (!response.ok) throw new Error(`OpenAI Embeddings API failed (${response.status}): ${body?.error?.message ?? "unknown error"}`);
   if (!Array.isArray(body.data) || body.data.length !== inputs.length) throw new Error("OpenAI Embeddings API returned an unexpected result count");
 
