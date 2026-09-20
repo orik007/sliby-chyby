@@ -27,7 +27,9 @@ function parseArgs(args) {
     tagCache: "automation/topic-routing/pilot-cache",
     enrichedExcerpts: null,
     asOf: null,
-    output: "automation/runs/pipeline/topic-routing-pilot"
+    output: "automation/runs/pipeline/topic-routing-pilot",
+    samplePromises: null,
+    sampleRecords: null
   };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
@@ -39,10 +41,14 @@ function parseArgs(args) {
     else if (arg === "--enriched-excerpts") options.enrichedExcerpts = args[++index];
     else if (arg === "--as-of") options.asOf = args[++index];
     else if (arg === "--output") options.output = args[++index];
+    else if (arg === "--sample-promises") options.samplePromises = Number(args[++index]);
+    else if (arg === "--sample-records") options.sampleRecords = Number(args[++index]);
     else throw new Error(`Unknown argument: ${arg}`);
   }
   invariant(options.collectorRun, "--collector-run is required");
   invariant(/^\d{4}-\d{2}-\d{2}$/.test(options.asOf ?? ""), "--as-of must use YYYY-MM-DD");
+  invariant(options.samplePromises === null || (Number.isInteger(options.samplePromises) && options.samplePromises > 0), "--sample-promises must be a positive integer");
+  invariant(options.sampleRecords === null || (Number.isInteger(options.sampleRecords) && options.sampleRecords > 0), "--sample-records must be a positive integer");
   return options;
 }
 
@@ -210,13 +216,18 @@ const taxonomyContentHash = taxonomyHash(taxonomy);
 const directIdIndex = directLegalIdentifierIndex(taxonomy);
 
 const registry = validatePromiseRegistry(JSON.parse(await readFile(resolve(args.promiseRegistry), "utf8")));
-const publishedRegistry = publishedMatchingRegistry(registry, await loadPublishedPromiseIds(args.publishedPromises));
+let publishedRegistry = publishedMatchingRegistry(registry, await loadPublishedPromiseIds(args.publishedPromises));
+// A sample run trims the published set down to the first N promises
+// (deterministic, not random) so a pilot run's model spend and output size
+// stay bounded; the full set is used whenever no sample size is given.
+if (args.samplePromises !== null) publishedRegistry = { ...publishedRegistry, promises: publishedRegistry.promises.slice(0, args.samplePromises) };
 const promiseById = new Map(publishedRegistry.promises.map((promise) => [promise.id, promise]));
 
 const collectorRun = JSON.parse(await readFile(resolve(args.collectorRun), "utf8"));
 invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
 const cutoff = `${args.asOf}T23:59:59.999Z`;
-const materialPrimaryRecords = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff));
+let materialPrimaryRecords = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff));
+if (args.sampleRecords !== null) materialPrimaryRecords = materialPrimaryRecords.slice(0, args.sampleRecords);
 
 const enrichedExcerptsByRecordId = args.enrichedExcerpts ? await readJsonIfExists(resolve(args.enrichedExcerpts), {}) : {};
 
@@ -369,6 +380,12 @@ try {
     asOf: args.asOf,
     publicationApproved: false,
     sentToAssessors: false,
+    // null on a full run; set whenever --sample-promises/--sample-records
+    // trimmed the input, so a reader of this report alone can tell it is
+    // not the complete catalogue without cross-checking the invocation.
+    sample: (args.samplePromises !== null || args.sampleRecords !== null)
+      ? { samplePromises: args.samplePromises, sampleRecords: args.sampleRecords }
+      : null,
     counts: {
       sourceRecordCount: collectorRun.records.length,
       materialPrimaryRecordCount: materialPrimaryRecords.length,
@@ -416,6 +433,7 @@ try {
     ``,
     `As of ${args.asOf}. Taxonomy ${taxonomy.taxonomyVersion}, prompt ${prompt.version} (${prompt.contentHash.slice(0, 12)}).`,
     ``,
+    ...(report.sample ? [`**Sample run** -- promises limited to ${report.sample.samplePromises ?? "all"}, records limited to ${report.sample.sampleRecords ?? "all"}. Not the full catalogue.`, ``] : []),
     `| Metric | Count |`,
     `| --- | --- |`,
     ...Object.entries(report.counts).map(([key, value]) => `| ${key} | ${value} |`),
