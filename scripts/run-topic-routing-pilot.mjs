@@ -130,7 +130,13 @@ async function safeRequestTagAssignment(args) {
   try {
     return { response: await requestTagAssignment(args), error: null };
   } catch (error) {
-    if (error instanceof TagValidationError) return { response: null, error: error.message };
+    if (error instanceof TagValidationError) {
+      // The paid call already happened -- requestTagAssignment attaches its
+      // provider/model/usage to the error precisely so this isolated
+      // failure still shows up in the pilot's token-usage totals instead of
+      // silently vanishing from the spend estimate.
+      return { response: null, error: error.message, provider: error.provider ?? null, model: error.model ?? null, usage: error.usage ?? null };
+    }
     throw error;
   }
 }
@@ -150,6 +156,8 @@ async function taggedTwice({ subjectId, inputHash, brief, taxonomy, taxonomyCont
       modelB: cached.modelB,
       usageByModel: [],
       invalidCount: 0,
+      taggerAError: null,
+      taggerBError: null,
       reused: true
     };
   }
@@ -182,10 +190,17 @@ async function taggedTwice({ subjectId, inputHash, brief, taxonomy, taxonomyCont
     taggerA: attemptA.response?.output ?? null,
     taggerB: attemptB.response?.output ?? null,
     provider: runtime.provider,
-    modelA: attemptA.response?.model ?? runtime.modelA,
-    modelB: attemptB.response?.model ?? runtime.modelB,
-    usageByModel: [attemptA.response, attemptB.response].filter(Boolean).map(({ model, usage }) => ({ model, usage })).filter((entry) => entry.usage),
+    // A response object's own `.model` is preferred, but an invalid
+    // attempt's `.model` (attached by requestTagAssignment's catch) is used
+    // as the fallback before the merely-configured runtime.modelA/B, so the
+    // report still names the model that actually produced the invalid
+    // output rather than just what was requested.
+    modelA: attemptA.response?.model ?? attemptA.model ?? runtime.modelA,
+    modelB: attemptB.response?.model ?? attemptB.model ?? runtime.modelB,
+    usageByModel: [attemptA.response ?? attemptA, attemptB.response ?? attemptB].map(({ model, usage }) => ({ model, usage })).filter((entry) => entry.usage),
     invalidCount: (attemptA.error ? 1 : 0) + (attemptB.error ? 1 : 0),
+    taggerAError: attemptA.error,
+    taggerBError: attemptB.error,
     reused: false
   };
 }
@@ -296,6 +311,11 @@ try {
       provider: tagged.provider,
       modelA: tagged.modelA,
       modelB: tagged.modelB,
+      // Per-subject, not just an aggregate count: a reviewer needs to know
+      // which promise's tagger call was invalid and why, not just that
+      // invalidPromiseTaggerCount is non-zero somewhere in the run.
+      taggerAError: tagged.taggerAError,
+      taggerBError: tagged.taggerBError,
       // The full brief, not just IDs and hashes, so an acceptance reviewer
       // can verify a cited excerpt or reproduce a cache hit's classification
       // from this uploaded artifact alone.
@@ -334,7 +354,7 @@ try {
       // ever looking at taggerA/taggerB -- so there is nothing for either
       // paid tagger to add, and skipping them here saves two calls per hit.
       const route = routeSourceRecord({ taxonomy, record, taggerA: null, taggerB: null, invertedIndex, directLink, semanticDiscoveryPromiseIds: [] });
-      return { route, tagged: { taggerA: null, taggerB: null, provider: null, modelA: null, modelB: null }, inputHash, briefText: brief.text };
+      return { route, tagged: { taggerA: null, taggerB: null, provider: null, modelA: null, modelB: null, taggerAError: null, taggerBError: null }, inputHash, briefText: brief.text };
     }
 
     const tagged = await taggedTwice({ subjectId: record.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: sourceTagCache });
@@ -465,6 +485,8 @@ try {
       provider: tagged.provider,
       modelA: tagged.modelA,
       modelB: tagged.modelB,
+      taggerAError: tagged.taggerAError,
+      taggerBError: tagged.taggerBError,
       route
     })),
     predictedPackages

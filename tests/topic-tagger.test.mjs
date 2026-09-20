@@ -178,3 +178,37 @@ test("requestTagAssignment calls the shared OpenAI structured-response endpoint 
     globalThis.fetch = originalFetch;
   }
 });
+
+test("requestTagAssignment attaches the already-spent usage/model/provider to a TagValidationError instead of losing them", async () => {
+  // The paid call happens before validation ever runs, so a caller
+  // isolating this one invalid attempt (scripts/run-topic-routing-pilot.mjs)
+  // must still be able to fold its cost into a token-usage total -- losing
+  // it here would make every reported spend estimate an undercount whenever
+  // a tagger call is invalid.
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => ({
+    ok: true,
+    json: async () => ({
+      id: "resp_fixture",
+      model: "gpt-5.6-terra",
+      usage: { input_tokens: 11, output_tokens: 3 },
+      output: [{ content: [{ type: "output_text", text: JSON.stringify({ tags: ["not-a-real-tag"], confidence: 0.9, supportingExcerpts: [] }) }] }]
+    })
+  });
+  try {
+    const prompt = { version: "tagger-v1", contentHash: "fixture-hash", instructions: "fixture instructions" };
+    const brief = buildPromiseTaggingBrief(fiscalPromise, taxonomy);
+    await assert.rejects(
+      () => requestTagAssignment({ provider: "openai", apiKey: "fixture-key", model: "gpt-5.6-terra", brief, taxonomy, prompt }),
+      (error) => {
+        assert.ok(error instanceof TagValidationError);
+        assert.equal(error.model, "gpt-5.6-terra");
+        assert.equal(error.provider, "openai");
+        assert.equal(error.usage.input_tokens, 11);
+        return true;
+      }
+    );
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});

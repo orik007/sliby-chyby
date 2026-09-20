@@ -205,13 +205,27 @@ export async function requestTagAssignment({ provider, apiKey, model, brief, tax
     schema: tagAssignmentSchema(taxonomy),
     metadata: { subjectId: brief.subjectId, promptVersion: prompt.version }
   });
-  return {
-    subjectId: brief.subjectId,
-    provider: response.provider,
-    model: response.model,
-    promptVersion: prompt.version,
-    promptContentHash: prompt.contentHash,
-    usage: response.usage,
-    output: validateTagAssignmentOutput(response.output, taxonomy, brief.text)
-  };
+  try {
+    return {
+      subjectId: brief.subjectId,
+      provider: response.provider,
+      model: response.model,
+      promptVersion: prompt.version,
+      promptContentHash: prompt.contentHash,
+      usage: response.usage,
+      output: validateTagAssignmentOutput(response.output, taxonomy, brief.text)
+    };
+  } catch (error) {
+    // The API call already happened and already cost real tokens even
+    // though its output failed validation -- attach the response metadata
+    // to the thrown error so a caller isolating this failure (per subject)
+    // can still account for it in a token-usage/spend total instead of the
+    // paid call silently vanishing from every usage report.
+    if (error instanceof TagValidationError) {
+      error.provider = response.provider;
+      error.model = response.model;
+      error.usage = response.usage;
+    }
+    throw error;
+  }
 }
