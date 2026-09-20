@@ -57,8 +57,8 @@ export function buildPromiseTaggingBrief(promise, taxonomy) {
   return {
     subjectType: "promise",
     subjectId: promise.id,
-    // Promise tagging is specified to classify from "its exact wording and
-    // source context" (docs/topic-routing-design.md step 3) -- the promise
+    // Promise tagging is specified to classify from its exact wording and
+    // source context (docs/evidence-pipeline.md) -- the promise
     // source's own title/publisher/locator/quote, not just the derived
     // promise text, since that context can itself be topically decisive.
     text: [

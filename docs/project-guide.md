@@ -15,8 +15,6 @@ Sliboměr shows political parties' confirmed election promises, their current sc
 | Storage and validation | [data-model.md](data-model.md) |
 | Release | [release-process.md](release-process.md) |
 
-The agreed migration design for topic-based evidence routing is recorded in [topic-routing-design.md](topic-routing-design.md). It is not an active canonical rule until its implementation replaces the current evidence pipeline.
-
 ## Current operating model
 
 ```text
@@ -43,10 +41,10 @@ The daily workflow uses embeddings only to retrieve a bounded set of candidate p
 | `data/` | Public confirmed promises, common policy-category mappings, sources, current-score revisions, and system status. |
 | `archive/promise-sources/` | Original promise-source files and their verified retrieval manifest; storage format is defined in `data-model.md`. |
 | `automation/collectors/` | Allowlisted evidence-source registry. |
-| `automation/matching/` | Exact-signal configuration and semantic promise profiles for public promises. |
-| `automation/semantic-index/` | Versioned embedding index used only to retrieve candidate promise relationships. |
+| `automation/matching/` | Promise attribution configuration (party-vote and sponsor rules) and metadata for public promises. |
+| `automation/topic-routing/` | Controlled routing taxonomy and the durable tag-assignment cache used to route source records to promises. |
 | `automation/evidence-packages/` | Durable unpublished queue of enriched evidence packages awaiting assessment. |
-| `scripts/` | Validation, collection, matching, enrichment, assessment, and coverage-audit scripts. |
+| `scripts/` | Validation, collection, topic-routing, enrichment, assessment, and coverage-audit scripts. |
 | `.github/workflows/` | Verification and the daily evidence-assessment workflow. |
 
 ## Before changing the project

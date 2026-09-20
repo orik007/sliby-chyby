@@ -7,9 +7,9 @@ import { sha256 } from "./lib/collector-core.mjs";
 import { loadPublishedPromiseIds, publishedMatchingRegistry } from "./lib/published-promises.mjs";
 import { buildPromiseTaggingBrief, buildSourceTaggingBrief, loadTaggingPrompt, requestTagAssignment, TagValidationError, taggingRuntimeConfig, validateTagAssignmentOutput } from "./lib/topic-tagger.mjs";
 import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
-import { normalizedStructuredFacts, validatePromiseRegistry } from "./lib/evidence-matcher.mjs";
+import { validatePromiseRegistry } from "./lib/evidence-matcher.mjs";
 import { buildInvertedIndex, derivePromiseTopicTags, routeSourceRecord } from "./lib/topic-routing.mjs";
-import { predictBoundedPackage } from "./lib/topic-evidence-package.mjs";
+import { buildTopicEvidencePackage } from "./lib/topic-evidence-package.mjs";
 
 const envPath = resolve(".env");
 if (existsSync(envPath)) loadEnvFile(envPath);
@@ -24,10 +24,10 @@ function parseArgs(args) {
     taxonomy: "automation/topic-routing/taxonomy-v1.json",
     promiseRegistry: "automation/matching/promises.json",
     publishedPromises: "data/promises",
-    tagCache: "automation/topic-routing/pilot-cache",
+    tagCache: "automation/topic-routing/tag-cache",
     enrichedExcerpts: null,
     asOf: null,
-    output: "automation/runs/pipeline/topic-routing-pilot",
+    output: "automation/runs/pipeline/topic-routing",
     samplePromises: null,
     sampleRecords: null
   };
@@ -433,30 +433,12 @@ try {
       candidateRelationshipCount += route.candidatePromiseIds.length;
       const record = materialPrimaryRecords.find(({ id }) => id === route.recordId);
       for (const promiseId of route.candidatePromiseIds) {
-        const items = evidenceItemsByPromise.get(promiseId) ?? [];
-        // Official-document excerpts are part of what the tagger actually
-        // saw and what an eventual assessor package would carry; omitting
-        // them here would understate predictBoundedPackage's token estimate.
-        const officialDocumentExcerpts = enrichedExcerptsByRecordId[record.id] ?? [];
-        // Mirrors the real package builder's evidence shape
-        // (evidenceFromMatch in scripts/lib/evidence-matcher.mjs), which
-        // drops a parliamentary vote's per-MP individualVotes and keeps only
-        // this promise's party summary -- estimating from the raw collector
-        // payload instead would systematically overstate the token budget.
-        const structuredFacts = normalizedStructuredFacts(record, promiseById.get(promiseId)?.partyId);
-        items.push({
-          recordId: record.id,
-          primary: record.primary === true,
-          factSummary: record.title,
-          structuredFacts: officialDocumentExcerpts.length > 0 ? { ...structuredFacts, officialDocumentExcerpts } : structuredFacts
-        });
-        evidenceItemsByPromise.set(promiseId, items);
+        const routedRecords = evidenceItemsByPromise.get(promiseId) ?? [];
+        routedRecords.push({ record, routeBasis: route.routeBasis });
+        evidenceItemsByPromise.set(promiseId, routedRecords);
       }
     }
   }
-
-  const predictedPackages = [...evidenceItemsByPromise.entries()].map(([promiseId, items]) => predictBoundedPackage({ promiseId, routedEvidenceItems: items }));
-  const estimatedAssessorInputTokensTotal = predictedPackages.reduce((total, pkg) => total + pkg.estimatedAssessorInputTokens, 0);
 
   function usageTotalsByModel(usageEntries) {
     const totals = new Map();
@@ -469,13 +451,35 @@ try {
     return [...totals.values()];
   }
 
-  const runId = new Date().toISOString().replace(/[:.]/g, "-");
-  const outputDirectory = resolve(args.output, runId);
-  await mkdir(outputDirectory, { recursive: true });
+  // Unlike an old ad hoc pilot run, this is the one live run the workflow
+  // consumes deterministically every time -- so it writes directly to
+  // --output, not a further timestamped subdirectory a caller would have to
+  // discover after the fact.
+  const outputDirectory = resolve(args.output);
+  const evidencePackageDirectory = resolve(outputDirectory, "evidence-packages");
+  await mkdir(evidencePackageDirectory, { recursive: true });
+
+  // Builds a real, assessable package for every promise routing created at
+  // least one candidate relationship for -- not a token-count prediction.
+  // A promise whose only routed records fail the deterministic attribution
+  // rule (buildTopicEvidencePackage's own gate) gets no package, same as it
+  // would under the old matcher: a candidate relationship alone is never
+  // attributable party conduct.
+  const builtPackages = [];
+  for (const [promiseId, routedRecords] of evidenceItemsByPromise) {
+    const promise = promiseById.get(promiseId);
+    const evidencePackage = buildTopicEvidencePackage({ promise, routedRecords, collectorRun, asOf: args.asOf });
+    if (!evidencePackage) {
+      builtPackages.push({ promiseId, built: false, reason: "no-attributable-routed-evidence" });
+      continue;
+    }
+    await writeFile(resolve(evidencePackageDirectory, `${promiseId}.json`), `${JSON.stringify(evidencePackage, null, 2)}\n`, { flag: "wx" });
+    builtPackages.push({ promiseId, built: true, packageId: evidencePackage.packageId, selectedEvidenceCount: evidencePackage.generation.selectedPrimaryEvidenceCount });
+  }
 
   const report = {
     schemaVersion: "1.0.0",
-    pilotVersion: "topic-routing-pilot-v1",
+    routerVersion: "topic-routing-v1",
     taxonomyVersion: taxonomy.taxonomyVersion,
     taxonomyContentHash,
     promptVersion: prompt.version,
@@ -511,7 +515,8 @@ try {
       orphanReviewCount,
       candidateCreatedCount,
       candidateRelationshipCount,
-      predictedPackageCount: predictedPackages.filter((pkg) => pkg.predicted).length,
+      packageCount: builtPackages.filter((pkg) => pkg.built).length,
+      routedWithoutAttributableEvidenceCount: builtPackages.filter((pkg) => !pkg.built).length,
       // A tagger response that failed excerpt-grounding or tag-id validation
       // degrades to that side being treated as unknown (see taggedTwice)
       // rather than stopping the run; this count is how a reader notices
@@ -522,12 +527,6 @@ try {
     tokenUsageByPass: {
       promiseTagging: usageTotalsByModel(promiseTaggingUsageByModel),
       sourceTagging: usageTotalsByModel(sourceTaggingUsageByModel)
-    },
-    expectedAssessorBudget: {
-      predictedPackageCount: predictedPackages.filter((pkg) => pkg.predicted).length,
-      assessorCallsPerPackage: 2,
-      estimatedAssessorInputTokensTotal,
-      note: "Planning estimate only, per docs/topic-routing-design.md's token budget model. Does not include arbitration calls, which occur only on assessor disagreement."
     },
     // Full per-subject assignment audit: this is what lets a human perform the
     // documented acceptance review from the artifact alone, including why a
@@ -546,12 +545,12 @@ try {
       taggerBError: tagged.taggerBError,
       route
     })),
-    predictedPackages
+    builtPackages
   };
 
-  await writeFile(resolve(outputDirectory, "topic-routing-pilot-report.json"), `${JSON.stringify(report, null, 2)}\n`);
+  await writeFile(resolve(outputDirectory, "topic-routing-report.json"), `${JSON.stringify(report, null, 2)}\n`);
   const markdown = [
-    `# Topic-routing pilot report (unpublished)`,
+    `# Topic-routing report (unpublished)`,
     ``,
     `As of ${args.asOf}. Taxonomy ${taxonomy.taxonomyVersion}, prompt ${prompt.version} (${prompt.contentHash.slice(0, 12)}).`,
     ``,
@@ -561,11 +560,9 @@ try {
     `| --- | --- |`,
     ...Object.entries(report.counts).map(([key, value]) => `| ${key} | ${value} |`),
     ``,
-    `Expected assessor budget (planning estimate): ${report.expectedAssessorBudget.predictedPackageCount} package(s) x ${report.expectedAssessorBudget.assessorCallsPerPackage} assessor calls, ~${report.expectedAssessorBudget.estimatedAssessorInputTokensTotal} input tokens total.`,
-    ``,
-    `This report is unpublished operational audit data. It was not sent to any assessor or arbiter, and it does not change public data.`
+    `Real, assessable evidence packages were written to evidence-packages/ for queueing. This report itself was not sent to any assessor or arbiter, and it does not change public data by itself.`
   ].join("\n");
-  await writeFile(resolve(outputDirectory, "topic-routing-pilot-report.md"), `${markdown}\n`);
+  await writeFile(resolve(outputDirectory, "topic-routing-report.md"), `${markdown}\n`);
 
   console.log(JSON.stringify({ outputDirectory, ...report.counts, completed: report.completed }, null, 2));
 

@@ -1,77 +1,110 @@
+import { sha256 } from "./collector-core.mjs";
+import { assessableAttributionStatuses, attributionStatusForRecord, factSummary, normalizedStructuredFacts, selectBoundedPrimaryMatches } from "./evidence-matcher.mjs";
+import { validateEvidencePackage } from "./assessment-pipeline.mjs";
+
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-function estimateTokens(text) {
-  return Math.ceil(String(text ?? "").length / 4);
+/**
+ * Wraps a topic-routed record so it can go through the same bounding and
+ * ordering rule every evidence package already uses
+ * (selectBoundedPrimaryMatches in evidence-matcher.mjs), instead of a second,
+ * drifting selection rule for topic-routed evidence. `exactSignal` and
+ * `score` exist there to rank the old matcher's phrase-scored candidates;
+ * topic-routing has no equivalent score, so a direct structural link (the
+ * strongest routing basis) stands in for `exactSignal` and every other
+ * routed record ties at `score: 0`, breaking ties by recency and ID exactly
+ * as the old matcher already did.
+ */
+function asBoundableMatch(record, promise, routeBasis) {
+  const { attributionStatus } = attributionStatusForRecord(record, promise);
+  return { record, attributionStatus, exactSignal: routeBasis.includes("direct-structural-link"), score: 0, semanticCandidate: null, routeBasis };
 }
 
-function evidenceItemTokens(item) {
-  return estimateTokens(item.factSummary) + estimateTokens(JSON.stringify(item.structuredFacts ?? {}));
+function evidenceFromRoutedMatch(match, promise) {
+  const record = match.record;
+  return {
+    id: record.id,
+    role: "conduct-evidence",
+    type: record.kind,
+    title: record.title,
+    publisher: record.publisher,
+    publishedAt: String(record.occurredAt).slice(0, 10),
+    url: record.url,
+    locator: `normalized collector record ${record.id}`,
+    primary: record.primary,
+    factSummary: factSummary(record, promise.partyId),
+    structuredFacts: normalizedStructuredFacts(record, promise.partyId),
+    sourceRecordHash: record.contentHash,
+    matchBasis: {
+      routeBasis: match.routeBasis,
+      attributionStatus: match.attributionStatus
+    }
+  };
 }
 
-// The evidence items alone are not the whole assessor input: every package also
-// carries the exact promise text, its source, current assessment context, and
-// the scoring instructions. This fixed estimate keeps the reported budget from
-// silently under-counting that overhead. It is a planning estimate, not a
-// measured constant.
-const basePackageOverheadTokens = 1_200;
-
-// The design doc's assessment stage always sends two independent assessor
-// calls per changed package (an arbitration call only on disagreement).
-const assessorCallsPerPackage = 2;
+function evidenceFromMaintenanceBaseline(baseline) {
+  return { ...baseline.source, role: "maintenance-baseline" };
+}
 
 /**
- * Predicts a bounded evidence package for one promise from its routed
- * evidence items, within an explicit token budget. Never silently drops
- * material: anything beyond the budget is marked for partition review and
- * recorded with its omission reason, per the design doc's §6. The reported
- * `estimatedAssessorInputTokens` includes the fixed per-package overhead and
- * both assessor calls, so it is comparable to the doc's token-budget table.
- * `predicted` is true whenever there is any routed evidence at all, even if
- * every item is individually oversized and ends up in `omitted` with
- * `included` empty -- that promise still needs an eventual (partitioned)
- * assessor package, so it must not silently drop out of
- * `predictedPackageCount` alongside promises that were never routed a
- * source in the first place.
+ * Builds a real, assessable evidence package for one promise from its
+ * topic-routed candidate relationships -- the topic-routing counterpart to
+ * buildEvidencePackage (evidence-matcher.mjs), sharing its attribution rule,
+ * bounding rule, and fact wording so a package looks the same to an
+ * assessor regardless of which mechanism routed the evidence to it.
+ *
+ * `routedRecords` is every record this promise's routing gave a
+ * `candidate-created` disposition to, as `{ record, routeBasis }`; a record
+ * whose deterministic attribution status is not one of the assessable
+ * statuses (assessableAttributionStatuses in evidence-matcher.mjs) is
+ * dropped here, per the design doc's step 6: a candidate relationship alone
+ * is never attributable party conduct. Returns null when nothing routed to
+ * this promise clears that bar, exactly like buildEvidencePackage returning
+ * null for zero selected matches.
  */
-export function predictBoundedPackage({ promiseId, routedEvidenceItems, maxItems = 24, maxTokenBudget = 6_000 }) {
-  invariant(typeof promiseId === "string" && promiseId.length > 0, "predictBoundedPackage requires a promiseId");
-  invariant(Array.isArray(routedEvidenceItems), "predictBoundedPackage requires routedEvidenceItems");
-
-  if (routedEvidenceItems.length === 0) {
-    return { promiseId, predicted: false, included: [], omitted: [], requiresPartitionReview: false, estimatedTokens: 0, estimatedAssessorInputTokens: 0 };
-  }
-
-  const sorted = [...routedEvidenceItems].sort((a, b) => (a.primary === b.primary ? 0 : a.primary ? -1 : 1));
-
-  const included = [];
-  const omitted = [];
-  let runningTokens = 0;
-
-  for (const item of sorted) {
-    const itemTokens = evidenceItemTokens(item);
-    const wouldExceedCount = included.length >= maxItems;
-    const wouldExceedBudget = runningTokens + itemTokens > maxTokenBudget;
-    if (wouldExceedCount || wouldExceedBudget) {
-      omitted.push({
-        recordId: item.recordId,
-        reason: wouldExceedCount ? "exceeds-maximum-item-count" : "exceeds-token-budget"
-      });
-      continue;
-    }
-    included.push(item);
-    runningTokens += itemTokens;
-  }
-
-  const packageTokens = runningTokens + basePackageOverheadTokens;
-  return {
-    promiseId,
-    predicted: true,
-    included: included.map((item) => item.recordId),
-    omitted,
-    requiresPartitionReview: omitted.length > 0,
-    estimatedTokens: runningTokens,
-    estimatedAssessorInputTokens: packageTokens * assessorCallsPerPackage
+export function buildTopicEvidencePackage({ promise, routedRecords, collectorRun, asOf }) {
+  invariant(typeof asOf === "string", "buildTopicEvidencePackage requires asOf");
+  const matches = routedRecords.map(({ record, routeBasis }) => asBoundableMatch(record, promise, routeBasis));
+  const selectedMatches = selectBoundedPrimaryMatches(matches);
+  if (selectedMatches.length === 0) return null;
+  const maintenanceBaseline = promise.maintenanceBaseline
+    ? { preservedStateCz: promise.maintenanceBaseline.preservedStateCz, evidenceId: promise.maintenanceBaseline.source.id }
+    : null;
+  const evidencePackage = {
+    schemaVersion: "1.0.0",
+    methodologyVersion: "slava-v7",
+    packageId: `${promise.id}--${asOf}--generated`,
+    asOf,
+    assessmentContext: { mode: "live", ruleVersion: "period-timing-v2", maintenanceBaseline },
+    promise: {
+      id: promise.id,
+      partyPeriodId: promise.partyPeriodId,
+      partyName: promise.partyName,
+      titleCz: promise.titleCz,
+      type: promise.type,
+      atomicClaimCz: promise.atomicClaimCz,
+      originalTextCz: promise.originalTextCz,
+      fulfillmentTest: promise.fulfillmentTest,
+      contradictionTest: promise.contradictionTest
+    },
+    generation: {
+      routerVersion: "topic-routing-v1",
+      collectorRunId: collectorRun.runId,
+      collectorRunHash: sha256(collectorRun),
+      candidateMatchCount: matches.length,
+      primaryMatchCount: matches.filter(({ record, attributionStatus }) => record.primary && assessableAttributionStatuses.has(attributionStatus)).length,
+      selectedPrimaryEvidenceCount: selectedMatches.length,
+      omittedPrimaryMatchCount: Math.max(0, matches.filter(({ record, attributionStatus }) => record.primary && assessableAttributionStatuses.has(attributionStatus)).length - selectedMatches.length),
+      directionAssigned: false,
+      publicationApproved: false
+    },
+    evidence: [
+      promise.promiseSource,
+      ...(promise.maintenanceBaseline ? [evidenceFromMaintenanceBaseline(promise.maintenanceBaseline)] : []),
+      ...selectedMatches.map((match) => evidenceFromRoutedMatch(match, promise))
+    ]
   };
+  return validateEvidencePackage(evidencePackage);
 }

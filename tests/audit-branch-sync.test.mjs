@@ -22,7 +22,7 @@ const auditBranch = "automation/assessment-review";
 const checkpoint = "automation/collectors/checkpoints.json";
 const packageManifest = "automation/evidence-packages/manifest.json";
 const packageReadme = "automation/evidence-packages/README.md";
-const semanticIndex = "automation/semantic-index/promise-index.json";
+const tagCache = "automation/topic-routing/tag-cache/promise-tags.json";
 
 function createFixture() {
   const root = mkdtempSync(join(tmpdir(), "audit-snapshot-"));
@@ -46,7 +46,7 @@ function createFixture() {
   git("remote", "add", "origin", join(root, "remote.git"));
   put(checkpoint, "main checkpoint\n");
   put(packageReadme, "current main documentation\n");
-  put(semanticIndex, "main semantic index\n");
+  put(tagCache, "main tag cache\n");
   put("src/example.txt", "base\n");
   commit("base");
   git("push", "origin", "main");
@@ -71,10 +71,12 @@ test("a missing audit branch leaves the current main checkout intact until colle
     assert.equal(fixture.git("show", `HEAD:${checkpoint}`), "main checkpoint");
     assert.match(readFileSync(join(fixture.cwd, output), "utf8"), /AUDIT_BRANCH_TIP=\n/);
     fixture.put(checkpoint, "first checkpoint\n");
+    fixture.put(tagCache, "first tag cache\n");
     const persisted = run(collectionPersistence, fixture.cwd, { GITHUB_ENV: output, AUDIT_BRANCH_TIP: "" });
     assert.equal(persisted.status, 0, persisted.stderr || persisted.stdout);
     fixture.git("fetch", "origin", `refs/heads/${auditBranch}:refs/remotes/origin/${auditBranch}`);
     assert.equal(fixture.git("show", `origin/${auditBranch}:${checkpoint}`), "first checkpoint");
+    assert.equal(fixture.git("show", `origin/${auditBranch}:${tagCache}`), "first tag cache");
   } finally {
     rmSync(fixture.root, { recursive: true, force: true });
   }
@@ -87,6 +89,7 @@ test("a run restores current audit data into main and replaces the audit snapsho
     fixture.put(checkpoint, "audit checkpoint\n");
     fixture.put(packageManifest, "retained package\n");
     fixture.put(packageReadme, "outdated audit documentation\n");
+    fixture.put(tagCache, "audit tag cache\n");
     fixture.commit("audit state");
     const auditTip = fixture.git("rev-parse", "HEAD");
     fixture.git("push", "origin", auditBranch);
@@ -103,15 +106,18 @@ test("a run restores current audit data into main and replaces the audit snapsho
     assert.equal(fixture.git("show", `:${checkpoint}`), "audit checkpoint");
     assert.equal(fixture.git("show", `:${packageManifest}`), "retained package");
     assert.equal(fixture.git("show", `:${packageReadme}`), "updated main documentation");
+    assert.equal(fixture.git("show", `:${tagCache}`), "audit tag cache");
     assert.match(readFileSync(join(fixture.cwd, restoreOutput), "utf8"), new RegExp(`AUDIT_BRANCH_TIP=${auditTip}`));
 
     fixture.put(checkpoint, "new checkpoint\n");
+    fixture.put(tagCache, "updated tag cache\n");
     const persistOutput = "github-env";
     const persisted = run(collectionPersistence, fixture.cwd, { GITHUB_ENV: persistOutput, AUDIT_BRANCH_TIP: auditTip });
     assert.equal(persisted.status, 0, persisted.stderr || persisted.stdout);
     fixture.git("fetch", "origin", `refs/heads/${auditBranch}:refs/remotes/origin/${auditBranch}`);
     assert.equal(fixture.git("show", `origin/${auditBranch}:${checkpoint}`), "new checkpoint");
     assert.equal(fixture.git("show", `origin/${auditBranch}:${packageManifest}`), "retained package");
+    assert.equal(fixture.git("show", `origin/${auditBranch}:${tagCache}`), "updated tag cache");
     fixture.git("merge-base", "--is-ancestor", mainTip, `origin/${auditBranch}`);
     assert.match(readFileSync(join(fixture.cwd, persistOutput), "utf8"), new RegExp(`AUDIT_BRANCH_TIP=${fixture.git("rev-parse", "HEAD")}`));
   } finally {

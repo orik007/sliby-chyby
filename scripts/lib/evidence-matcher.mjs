@@ -35,7 +35,7 @@ function hasVerifiedVoteContext(record) {
   );
 }
 
-const assessableAttributionStatuses = new Set([
+export const assessableAttributionStatuses = new Set([
   "verified-party-vote",
   "verified-party-no-majority",
   "verified-party-sponsor",
@@ -92,30 +92,28 @@ export function validatePromiseRegistry(registry) {
   return registry;
 }
 
-export function matchRecordToPromise(record, promise, { semanticCandidate = null } = {}) {
-  const searchable = searchableRecordText(record);
-  const matchedTerms = [];
-  const matchedExternalReferences = [];
-  let score = 0;
-
-  for (const term of promise.matching.terms) {
-    if (!searchable.includes(normalizeSearchText(term.phrase))) continue;
-    score += term.weight;
-    matchedTerms.push({ phrase: term.phrase, weight: term.weight });
-  }
-  for (const reference of promise.matching.externalReferences) {
-    if (valueAtPath(record, reference.path) !== reference.equals) continue;
-    score += reference.weight;
-    matchedExternalReferences.push({
+/**
+ * Deterministically decides whether a record is attributable party conduct
+ * at all, independent of *how* the record was discovered as a candidate for
+ * this promise (the old phrase/term/semantic matcher, or topic-routing's tag
+ * agreement and direct structural links). `matchedExternalReferences` still
+ * comes from `promise.matching.externalReferences` -- that per-promise
+ * config decides attribution (verified-party-sponsor,
+ * candidate-government-action), not topical candidacy, so it is evaluated
+ * here regardless of which mechanism routed the record to this promise.
+ * Exported so topic-routing's package builder applies the exact same rule a
+ * routed candidate must clear before it counts as usable evidence, rather
+ * than a second, drifting definition of "attributable."
+ */
+export function attributionStatusForRecord(record, promise) {
+  const matchedExternalReferences = promise.matching.externalReferences
+    .filter((reference) => valueAtPath(record, reference.path) === reference.equals)
+    .map((reference) => ({
       path: reference.path,
       equals: reference.equals,
       weight: reference.weight,
       attributionStatus: reference.attributionStatus
-    });
-  }
-
-  const exactSignal = score >= promise.matching.minimumScore;
-  if (!exactSignal && !semanticCandidate) return null;
+    }));
   const partyVoteSummary = (record.payload?.partyVoteSummaries ?? []).find((summary) => summary.partyId === promise.partyId);
   const attributionStatus = partyVoteSummary?.attributionStatus === "attributed" && hasVerifiedVoteContext(record)
     ? "verified-party-vote"
@@ -130,6 +128,27 @@ export function matchRecordToPromise(record, promise, { semanticCandidate = null
       ?? matchedExternalReferences.find(({ attributionStatus: status }) => status === "candidate-government-action")?.attributionStatus
       ?? (record.primary === true && record.kind === "official-publication" && record.evidenceRole === "official-discovery" ? "candidate-government-action" : null)
       ?? "unattributed";
+  return { attributionStatus, matchedExternalReferences };
+}
+
+export function matchRecordToPromise(record, promise, { semanticCandidate = null } = {}) {
+  const searchable = searchableRecordText(record);
+  const matchedTerms = [];
+  let score = 0;
+
+  for (const term of promise.matching.terms) {
+    if (!searchable.includes(normalizeSearchText(term.phrase))) continue;
+    score += term.weight;
+    matchedTerms.push({ phrase: term.phrase, weight: term.weight });
+  }
+  for (const reference of promise.matching.externalReferences) {
+    if (valueAtPath(record, reference.path) !== reference.equals) continue;
+    score += reference.weight;
+  }
+
+  const exactSignal = score >= promise.matching.minimumScore;
+  if (!exactSignal && !semanticCandidate) return null;
+  const { attributionStatus, matchedExternalReferences } = attributionStatusForRecord(record, promise);
   return {
     record,
     score,
@@ -200,9 +219,8 @@ function partyVoteFacts(record, partyId) {
  * collector payload: a parliamentary vote's `individualVotes` (one entry
  * per MP, routinely hundreds) is dropped and replaced with the one
  * `relevantPartyVoteSummary` for this promise's party. Exported so any
- * other estimate of a package's size or content -- such as the
- * topic-routing pilot's token-budget prediction -- uses this same
- * normalization instead of drifting from what actually gets sent.
+ * other evidence-package builder -- such as topic-routing's -- uses this
+ * same normalization instead of drifting from what actually gets sent.
  */
 export function normalizedStructuredFacts(record, partyId) {
   const structuredFacts = { ...record.payload };
@@ -213,7 +231,12 @@ export function normalizedStructuredFacts(record, partyId) {
   return structuredFacts;
 }
 
-function factSummary(record, partyId) {
+/**
+ * Exported so any other evidence-package builder -- such as topic-routing's
+ * -- renders the exact same reader-facing fact text for a given record
+ * instead of a second, drifting wording rule.
+ */
+export function factSummary(record, partyId) {
   if (record.kind === "legislative-step") {
     const payload = record.payload;
     return `The official parliamentary record reports action “${payload.actionCz ?? "unspecified"}” for print ${payload.printNumber ?? "unknown"}: ${payload.printTitleCz ?? record.title}.`;
