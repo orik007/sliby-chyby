@@ -115,6 +115,20 @@ function cacheFingerprintMatches(cached, { inputHash, taxonomyContentHash, promp
     && cached.modelB === runtime.modelB;
 }
 
+// A tagger call whose response fails validation (an invented tag id, or a
+// supporting excerpt not present verbatim in the brief -- most likely a
+// fabrication) must not crash the whole run: mirrors
+// validateAssessmentAttempt in scripts/lib/assessment-pipeline.mjs, which
+// the real daily assessment pipeline already relies on so one invalid
+// output fails only that one item, per docs/evidence-pipeline.md step 8.
+async function safeRequestTagAssignment(args) {
+  try {
+    return { response: await requestTagAssignment(args), error: null };
+  } catch (error) {
+    return { response: null, error: error instanceof Error ? error.message : String(error) };
+  }
+}
+
 async function taggedTwice({ subjectId, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache }) {
   const cached = cache.assignments[subjectId];
   if (cacheFingerprintMatches(cached, { inputHash, taxonomyContentHash, prompt, runtime })) {
@@ -129,30 +143,43 @@ async function taggedTwice({ subjectId, inputHash, brief, taxonomy, taxonomyCont
       modelA: cached.modelA,
       modelB: cached.modelB,
       usageByModel: [],
+      invalidCount: 0,
       reused: true
     };
   }
-  const [taggerA, taggerB] = await Promise.all([
-    requestTagAssignment({ provider: runtime.provider, apiKey: apiKeyFor(runtime.provider), model: runtime.modelA, brief, taxonomy, prompt }),
-    requestTagAssignment({ provider: runtime.provider, apiKey: apiKeyFor(runtime.provider), model: runtime.modelB, brief, taxonomy, prompt })
+  const [attemptA, attemptB] = await Promise.all([
+    safeRequestTagAssignment({ provider: runtime.provider, apiKey: apiKeyFor(runtime.provider), model: runtime.modelA, brief, taxonomy, prompt }),
+    safeRequestTagAssignment({ provider: runtime.provider, apiKey: apiKeyFor(runtime.provider), model: runtime.modelB, brief, taxonomy, prompt })
   ]);
-  cache.assignments[subjectId] = {
-    inputHash,
-    taxonomyContentHash,
-    promptContentHash: prompt.contentHash,
-    provider: runtime.provider,
-    modelA: runtime.modelA,
-    modelB: runtime.modelB,
-    taggerA: taggerA.output,
-    taggerB: taggerB.output
-  };
+  // Only a fully successful pair is cached -- a subject with one invalid
+  // side is retried in full next run rather than freezing the invalid half
+  // in place, matching the "retried until it succeeds" pattern the real
+  // evidence-pipeline enrichment step already follows.
+  if (!attemptA.error && !attemptB.error) {
+    cache.assignments[subjectId] = {
+      inputHash,
+      taxonomyContentHash,
+      promptContentHash: prompt.contentHash,
+      provider: runtime.provider,
+      modelA: runtime.modelA,
+      modelB: runtime.modelB,
+      taggerA: attemptA.response.output,
+      taggerB: attemptB.response.output
+    };
+  }
   return {
-    taggerA: taggerA.output,
-    taggerB: taggerB.output,
+    // A null tagger output is exactly what isUnknown() (topic-routing.mjs)
+    // already treats as an unclassified tagger, so an invalid response
+    // degrades to the same "only one tagger classified" / "both unknown"
+    // routing-review or orphan-review states a genuine model "unknown"
+    // answer would -- never a silently created candidate.
+    taggerA: attemptA.response?.output ?? null,
+    taggerB: attemptB.response?.output ?? null,
     provider: runtime.provider,
-    modelA: taggerA.model,
-    modelB: taggerB.model,
-    usageByModel: [{ model: taggerA.model, usage: taggerA.usage }, { model: taggerB.model, usage: taggerB.usage }].filter((entry) => entry.usage),
+    modelA: attemptA.response?.model ?? runtime.modelA,
+    modelB: attemptB.response?.model ?? runtime.modelB,
+    usageByModel: [attemptA.response, attemptB.response].filter(Boolean).map(({ model, usage }) => ({ model, usage })).filter((entry) => entry.usage),
+    invalidCount: (attemptA.error ? 1 : 0) + (attemptB.error ? 1 : 0),
     reused: false
   };
 }
@@ -245,12 +272,14 @@ const sourceTagCache = await readJsonIfExists(sourceTagCachePath, emptyTagCache(
 try {
   const promiseTaggingUsageByModel = [];
   let agreedPromiseAssignmentCount = 0;
+  let invalidPromiseTaggerCount = 0;
 
   const promiseTopicAssignments = await mapWithConcurrency(publishedRegistry.promises, runtime.concurrency, async (promise) => {
     const inputHash = sha256({ id: promise.id, originalTextCz: promise.originalTextCz, atomicClaimCz: promise.atomicClaimCz, fulfillmentTest: promise.fulfillmentTest, contradictionTest: promise.contradictionTest, promiseSource: promise.promiseSource });
     const brief = buildPromiseTaggingBrief(promise, taxonomy);
     const tagged = await taggedTwice({ subjectId: promise.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: promiseTagCache });
     promiseTaggingUsageByModel.push(...tagged.usageByModel);
+    invalidPromiseTaggerCount += tagged.invalidCount;
     const derived = derivePromiseTopicTags(taxonomy, tagged.taggerA, tagged.taggerB);
     return {
       promiseId: promise.id,
@@ -281,6 +310,7 @@ try {
   let orphanReviewCount = 0;
   let candidateCreatedCount = 0;
   let candidateRelationshipCount = 0;
+  let invalidSourceTaggerCount = 0;
   const evidenceItemsByPromise = new Map();
 
   const sourceRouting = await mapWithConcurrency(materialPrimaryRecords, runtime.concurrency, async (record) => {
@@ -303,6 +333,7 @@ try {
 
     const tagged = await taggedTwice({ subjectId: record.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: sourceTagCache });
     sourceTaggingUsageByModel.push(...tagged.usageByModel);
+    invalidSourceTaggerCount += tagged.invalidCount;
 
     const route = routeSourceRecord({
       taxonomy,
@@ -397,7 +428,13 @@ try {
       orphanReviewCount,
       candidateCreatedCount,
       candidateRelationshipCount,
-      predictedPackageCount: predictedPackages.filter((pkg) => pkg.predicted).length
+      predictedPackageCount: predictedPackages.filter((pkg) => pkg.predicted).length,
+      // A tagger response that failed excerpt-grounding or tag-id validation
+      // degrades to that side being treated as unknown (see taggedTwice)
+      // rather than stopping the run; this count is how a reader notices
+      // that degradation happened instead of it being silently invisible.
+      invalidPromiseTaggerCount,
+      invalidSourceTaggerCount
     },
     tokenUsageByPass: {
       promiseTagging: usageTotalsByModel(promiseTaggingUsageByModel),
