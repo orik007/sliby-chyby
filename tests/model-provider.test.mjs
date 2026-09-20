@@ -263,3 +263,57 @@ test("createEmbeddings retries a 429 rate-limit response and succeeds on the nex
     globalThis.fetch = originalFetch;
   }
 });
+
+test("createStructuredModelResponse falls back to the exact exponential schedule when Retry-After is absent", async () => {
+  // Every other retry test always supplies a Retry-After header, so the
+  // fallback path (and its exact delay values) was previously exercised by
+  // nothing -- even a broken implementation that always waited a fixed 2s
+  // regardless of attempt number would have passed. Mock setTimeout itself
+  // to capture the real delay values `sleep` requests, firing immediately
+  // so the test does not actually wait in real time.
+  const originalFetch = globalThis.fetch;
+  const originalSetTimeout = globalThis.setTimeout;
+  const capturedDelaysMs = [];
+  globalThis.setTimeout = (fn, ms) => {
+    capturedDelaysMs.push(ms);
+    return originalSetTimeout(fn, 0);
+  };
+  let callCount = 0;
+  globalThis.fetch = async () => {
+    callCount += 1;
+    if (callCount <= 5) {
+      return {
+        ok: false,
+        status: 503,
+        headers: fixtureHeaders({}),
+        json: async () => ({ error: { message: "Service unavailable" } })
+      };
+    }
+    return {
+      ok: true,
+      json: async () => ({
+        id: "resp_fixture",
+        model: "gpt-5.6-terra",
+        usage: { input_tokens: 10, output_tokens: 2 },
+        output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }]
+      })
+    };
+  };
+  try {
+    const result = await createStructuredModelResponse({
+      provider: "openai",
+      apiKey: "fixture-key",
+      model: "gpt-5.6-terra",
+      instructions: "fixture",
+      input: {},
+      name: "fixture_schema",
+      schema: { type: "object" }
+    });
+    assert.equal(callCount, 6, "must exhaust all 5 retries (6 attempts total) before succeeding on the last one");
+    assert.deepEqual(capturedDelaysMs, [2000, 4000, 8000, 16000, 32000], "the fallback schedule must be exactly this exponential sequence, not just any non-zero delay");
+    assert.deepEqual(result.output, { ok: true });
+  } finally {
+    globalThis.fetch = originalFetch;
+    globalThis.setTimeout = originalSetTimeout;
+  }
+});
