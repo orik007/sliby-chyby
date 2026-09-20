@@ -106,6 +106,15 @@ jobs:
         # successful run and never pick up tags for newly collected records.
         # `key` is therefore always unique per run; `restore-keys` still
         # finds the most recent cache for the same taxonomy/prompt fingerprint.
+        #
+        # `save-always: true` overrides actions/cache's own default of
+        # skipping the save when the job fails. The pilot script's own
+        # try/finally already writes every tagger call already paid for to
+        # this same local path even on a mid-run failure (a rate-limit
+        # exhaustion, a transient outage, ...); without save-always that
+        # local progress never reaches the cache actions/cache uploads, so
+        # the next attempt would re-pay for already-tagged subjects instead
+        # of picking up the cache this run actually produced.
         uses: actions/cache@v4
         with:
           path: automation/topic-routing/pilot-cache
@@ -113,6 +122,7 @@ jobs:
           restore-keys: |
             topic-routing-pilot-cache-${{ hashFiles('automation/topic-routing/taxonomy-v1.json', 'automation/prompts/tagger-v1.md') }}-
             topic-routing-pilot-cache-
+          save-always: true
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
