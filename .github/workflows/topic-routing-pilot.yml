@@ -30,7 +30,7 @@ on:
         type: string
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: topic-routing-pilot
@@ -70,49 +70,55 @@ jobs:
       SLIBY_TAGGING_CONCURRENCY: ${{ inputs.tagging_concurrency || '1' }}
     steps:
       - name: Check out repository
-        # No explicit `ref`: this defaults to whatever ref the manual dispatch
-        # was run against (main, or an unmerged branch/PR), so a pilot change
-        # can be tried before merge. This is a deliberate, accepted tradeoff,
-        # not a claim of zero risk: the checked-out code runs with the live
-        # OPENAI_API_KEY (below) in its environment, so it could in principle
-        # use or exfiltrate that key. workflow_dispatch can only be triggered
-        # by someone with write access to this repository, though -- unlike
-        # pull_request_target on an external contributor's PR -- so this
-        # never exposes the key to untrusted third-party code, only to a
-        # branch the triggering maintainer already controls.
+        # Pinned back to `main`. An earlier revision of this workflow
+        # deliberately dropped this pin (see PR #58) precisely because the
+        # job was contents:read and "never wrote anything back" -- an
+        # unmerged branch's code could at worst leak OPENAI_API_KEY, not
+        # corrupt durable state. That justification no longer holds now that
+        # this job has contents:write and pushes tag-assignment state to the
+        # durable automation/assessment-review branch: unreviewed code could
+        # otherwise push arbitrary or corrupted data there. Pin to main so
+        # only reviewed, merged code can ever write to that branch.
         uses: actions/checkout@v5
         with:
+          ref: main
+          fetch-depth: 0
           persist-credentials: false
 
-      - name: Restore per-source collector checkpoints (read-only)
+      - name: Restore current audit state
+        # Mirrors collect-evidence.yml's own restore step: the durable
+        # source of truth for anything this pipeline must not re-pay for is
+        # the automation/assessment-review branch, committed with
+        # --force-with-lease at the end of this job -- not a GitHub Actions
+        # cache. A cache is convenient but time-boxed (evicted after 7 days
+        # unused, or once the repository's total cache size is exceeded) and,
+        # critically, is skipped on a failed job by actions/cache's own
+        # default; a git commit on a durable branch has neither problem.
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           authenticated_remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
           if git ls-remote --exit-code --heads "$authenticated_remote" automation/assessment-review >/dev/null 2>&1; then
             git fetch "$authenticated_remote" "+refs/heads/automation/assessment-review:refs/remotes/origin/automation/assessment-review"
+            audit_branch_tip="$(git rev-parse origin/automation/assessment-review)"
+            restore_paths=()
             if git cat-file -e origin/automation/assessment-review:automation/collectors/checkpoints.json 2>/dev/null; then
-              git show origin/automation/assessment-review:automation/collectors/checkpoints.json > automation/collectors/checkpoints.json
-              echo "Restored per-source checkpoints from automation/assessment-review. This workflow has contents:read only and never writes them back."
+              restore_paths+=(automation/collectors/checkpoints.json)
+            fi
+            while IFS= read -r path; do
+              restore_paths+=("$path")
+            done < <(git ls-tree -r --name-only origin/automation/assessment-review -- automation/topic-routing/pilot-cache)
+            if [ "${#restore_paths[@]}" -gt 0 ]; then
+              git restore --source=origin/automation/assessment-review --staged --worktree -- "${restore_paths[@]}"
+              echo "Restored per-source checkpoints (read-only here) and the tag-assignment cache from automation/assessment-review."
             fi
           else
-            echo "No automation/assessment-review branch found yet; the collector will bootstrap from scratch this run."
+            audit_branch_tip=""
+            echo "No automation/assessment-review branch found yet; this run bootstraps both from scratch."
           fi
-
-      - name: Restore tag-assignment audit cache
-        # GitHub Actions caches are immutable: a restore that hits the exact
-        # `key` skips saving at the end of the job entirely, so a stable key
-        # here would freeze the cache at whatever it held after the first
-        # successful run and never pick up tags for newly collected records.
-        # `key` is therefore always unique per run; `restore-keys` still
-        # finds the most recent cache for the same taxonomy/prompt fingerprint.
-        uses: actions/cache@v4
-        with:
-          path: automation/topic-routing/pilot-cache
-          key: topic-routing-pilot-cache-${{ hashFiles('automation/topic-routing/taxonomy-v1.json', 'automation/prompts/tagger-v1.md') }}-${{ github.run_id }}
-          restore-keys: |
-            topic-routing-pilot-cache-${{ hashFiles('automation/topic-routing/taxonomy-v1.json', 'automation/prompts/tagger-v1.md') }}-
-            topic-routing-pilot-cache-
+          echo "AUDIT_BRANCH_TIP=$audit_branch_tip" >> "$GITHUB_ENV"
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
@@ -152,6 +158,33 @@ jobs:
             pilot_args+=(--sample-records "$PILOT_SAMPLE_RECORDS")
           fi
           node scripts/run-topic-routing-pilot.mjs "${pilot_args[@]}"
+
+      - name: Persist tag-assignment cache to the audit branch
+        # `if: always()` is the entire point of this step: the pilot script's
+        # own try/finally (scripts/run-topic-routing-pilot.mjs) already
+        # writes every tag it has successfully paid for to
+        # automation/topic-routing/pilot-cache on disk even when the run
+        # fails partway through (a rate limit, a validation error on one
+        # subject, ...) -- but that only survives on the ephemeral runner's
+        # disk unless this step also runs and commits it. Without
+        # `always()`, a failed "Run the topic-routing pilot" step would skip
+        # straight to upload-artifact, and the next run would re-request and
+        # re-pay for every tag this one already got.
+        if: always()
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
+        run: |
+          if [ -d automation/topic-routing/pilot-cache ]; then
+            git add automation/topic-routing/pilot-cache
+          fi
+          if git diff --cached --quiet; then
+            echo "No new tag-assignment cache entries to persist."
+          else
+            git commit -m "Record topic-routing tag-assignment cache"
+            git push --force-with-lease="refs/heads/automation/assessment-review:$AUDIT_BRANCH_TIP" "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/automation/assessment-review"
+            echo "AUDIT_BRANCH_TIP=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+            echo "Persisted the tag-assignment cache to automation/assessment-review."
+          fi
 
       - name: Upload the unpublished pilot report
         if: always()
