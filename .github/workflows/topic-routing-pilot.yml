@@ -35,7 +35,13 @@ jobs:
   pilot:
     name: Run the topic-routing pilot and upload its report
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    # A full historical backfill (--since covering the whole campaign period)
+    # tags far more records than the incremental default this limit was
+    # originally sized for; a hard timeout mid-run would forcibly kill the
+    # process before its own cache-persisting `finally` block can run,
+    # losing already-paid-for tagging work. 300 minutes gives real headroom;
+    # it can be lowered again once typical backfill run time is known.
+    timeout-minutes: 300
     environment:
       name: assessment
       deployment: false
