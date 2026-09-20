@@ -51,9 +51,15 @@ jobs:
       SLIBY_TAGGING_CONCURRENCY: 4
     steps:
       - name: Check out repository
+        # No explicit `ref`: this defaults to whatever ref the manual dispatch
+        # was run against (main, or an unmerged branch/PR), so a pilot change
+        # can be tried before merge. This workflow never writes anything back
+        # to the repository (contents: read; the audit-branch restore step
+        # below is read-only), so running an unmerged branch's code here
+        # carries none of the risk `docs/release-process.md`'s merge gate
+        # guards against.
         uses: actions/checkout@v5
         with:
-          ref: main
           persist-credentials: false
 
       - name: Restore per-source collector checkpoints (read-only)
