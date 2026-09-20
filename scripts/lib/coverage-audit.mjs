@@ -54,6 +54,11 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
     collectorsBySourceId.set(collector.sourceId, collector);
   }
   const failuresBySourceId = new Map((collectorRun.failures ?? []).map((failure) => [failure.sourceId, failure]));
+  // `collectorRun.since` is the run-wide override (null on an ordinary
+  // checkpoint-driven run); a source with no `collector` entry still has
+  // its own planned start in `collectionPlan`, which must be preferred so
+  // a failed or manually-excluded source doesn't misreport `null`.
+  const collectionPlanBySourceId = new Map((collectorRun.collectionPlan ?? []).map((plan) => [plan.sourceId, plan]));
 
   // Every *enabled* source gets a row, per the evidence-pipeline rule ("write
   // a coverage audit for every confirmed promise and enabled source") --
@@ -72,7 +77,7 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
       evidenceRole: source.evidenceRole,
       coverageMode: source.coverage.mode,
       coverageNote: source.coverage.note,
-      requestedSince: collector?.collection?.since ?? collectorRun.since,
+      requestedSince: collector?.collection?.since ?? collectionPlanBySourceId.get(source.id)?.since ?? collectorRun.since,
       recordCount: recordsBySource.get(source.id) ?? 0,
       observedEarliest: range?.earliest ?? null,
       observedLatest: range?.latest ?? null,

@@ -55,6 +55,26 @@ test("a source whose own collection failed still appears in sourceCoverage, mark
   assert.match(markdown, /\*\*no\*\* — Not collected this run -- collection failed: Source msmt-news-api returned HTTP 403/);
 });
 
+test("a failed source's requestedSince comes from its own collectionPlan entry, not the null run-wide override", () => {
+  const audit = buildCoverageAudit({
+    collectorRun: {
+      // A normal checkpoint-driven run never passes --since, so the
+      // run-wide `since` is null; only collectionPlan carries each
+      // source's own planned start.
+      schemaVersion: "1.0.0", runId: "run-4", since: null,
+      collectionPlan: [{ sourceId: "msmt-news-api", mode: "incremental", since: "2026-09-10", checkpointBefore: null }],
+      collectors: [],
+      failures: [{ sourceId: "msmt-news-api", message: "HTTP 403" }],
+      records: []
+    },
+    matcherRun: { schemaVersion: "1.0.0", matchedAt: "now", asOf: "2026-09-20", promiseResults: [{ promiseId: "p1", candidateMatchCount: 0, attributablePrimaryMatchCount: 0, evidencePackage: null }] },
+    promiseRegistry: { promises: [{ id: "p1", partyId: "ano", partyName: "ANO", titleCz: "Slib" }] },
+    sourceRegistry: { sources: [{ id: "msmt-news-api", name: "Ministry of Education news archive", primary: true, evidenceRole: "official-discovery", enabled: true, coverage: { mode: "since-filtered-archive", note: "n/a" } }] },
+    proposalManifest: { proposals: [] }
+  });
+  assert.equal(audit.sourceCoverage[0].requestedSince, "2026-09-10", "a failed source's own planned start must not be lost behind the null run-wide override");
+});
+
 test("a failure message with a newline or a pipe cannot break the source coverage Markdown table", () => {
   const audit = buildCoverageAudit({
     collectorRun: {
