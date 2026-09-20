@@ -53,11 +53,14 @@ jobs:
       - name: Check out repository
         # No explicit `ref`: this defaults to whatever ref the manual dispatch
         # was run against (main, or an unmerged branch/PR), so a pilot change
-        # can be tried before merge. This workflow never writes anything back
-        # to the repository (contents: read; the audit-branch restore step
-        # below is read-only), so running an unmerged branch's code here
-        # carries none of the risk `docs/release-process.md`'s merge gate
-        # guards against.
+        # can be tried before merge. This is a deliberate, accepted tradeoff,
+        # not a claim of zero risk: the checked-out code runs with the live
+        # OPENAI_API_KEY (below) in its environment, so it could in principle
+        # use or exfiltrate that key. workflow_dispatch can only be triggered
+        # by someone with write access to this repository, though -- unlike
+        # pull_request_target on an external contributor's PR -- so this
+        # never exposes the key to untrusted third-party code, only to a
+        # branch the triggering maintainer already controls.
         uses: actions/checkout@v5
         with:
           persist-credentials: false

@@ -5,7 +5,7 @@ import { basename, dirname, resolve } from "node:path";
 import { loadEnvFile } from "node:process";
 import { sha256 } from "./lib/collector-core.mjs";
 import { loadPublishedPromiseIds, publishedMatchingRegistry } from "./lib/published-promises.mjs";
-import { buildPromiseTaggingBrief, buildSourceTaggingBrief, loadTaggingPrompt, requestTagAssignment, taggingRuntimeConfig, validateTagAssignmentOutput } from "./lib/topic-tagger.mjs";
+import { buildPromiseTaggingBrief, buildSourceTaggingBrief, loadTaggingPrompt, requestTagAssignment, TagValidationError, taggingRuntimeConfig, validateTagAssignmentOutput } from "./lib/topic-tagger.mjs";
 import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
 import { normalizedStructuredFacts, validatePromiseRegistry } from "./lib/evidence-matcher.mjs";
 import { buildInvertedIndex, derivePromiseTopicTags, routeSourceRecord } from "./lib/topic-routing.mjs";
@@ -121,11 +121,17 @@ function cacheFingerprintMatches(cached, { inputHash, taxonomyContentHash, promp
 // validateAssessmentAttempt in scripts/lib/assessment-pipeline.mjs, which
 // the real daily assessment pipeline already relies on so one invalid
 // output fails only that one item, per docs/evidence-pipeline.md step 8.
+// Only a TagValidationError is caught here -- a network failure, an
+// authentication or quota error, or any other transport/provider failure
+// from requestTagAssignment must still fail the whole run loudly. Treating
+// those the same as an invalid model output would let a missing API key or
+// a full outage masquerade as a legitimate run that simply found nothing.
 async function safeRequestTagAssignment(args) {
   try {
     return { response: await requestTagAssignment(args), error: null };
   } catch (error) {
-    return { response: null, error: error instanceof Error ? error.message : String(error) };
+    if (error instanceof TagValidationError) return { response: null, error: error.message };
+    throw error;
   }
 }
 

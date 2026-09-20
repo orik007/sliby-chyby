@@ -7,6 +7,7 @@ import {
   deriveRecordContentExcerpts,
   loadTaggingPrompt,
   requestTagAssignment,
+  TagValidationError,
   validateTagAssignmentOutput
 } from "../scripts/lib/topic-tagger.mjs";
 import { validatePromiseRegistry } from "../scripts/lib/evidence-matcher.mjs";
@@ -114,6 +115,15 @@ test("deriveRecordContentExcerpts surfaces a parliamentary vote's linked print t
 
 test("validateTagAssignmentOutput rejects an invented tag id", () => {
   assert.throws(() => validateTagAssignmentOutput({ tags: ["not-a-real-tag"], confidence: 0.8, supportingExcerpts: [] }, taxonomy), /unknown tag id/);
+});
+
+test("validateTagAssignmentOutput throws specifically TagValidationError, distinguishable from a transport/provider failure", () => {
+  // A caller (scripts/run-topic-routing-pilot.mjs) must be able to isolate
+  // an invalid model *output* from a network, auth, or quota failure inside
+  // requestTagAssignment -- catching by class, not just by "it threw",
+  // keeps that distinction reliable rather than accidentally silencing an
+  // outage as if it were an ordinary invalid answer.
+  assert.throws(() => validateTagAssignmentOutput({ tags: ["not-a-real-tag"], confidence: 0.8, supportingExcerpts: [] }, taxonomy), TagValidationError);
 });
 
 test("validateTagAssignmentOutput rejects unknown combined with a real tag", () => {
