@@ -4,32 +4,40 @@ import test from "node:test";
 
 const workflowUrl = new URL("../.github/workflows/collect-evidence.yml", import.meta.url);
 const statusUrl = new URL("../data/system-status.json", import.meta.url);
-const matcherUrl = new URL("../scripts/run-matcher.mjs", import.meta.url);
 const assessmentBatchUrl = new URL("../scripts/run-assessment-batch.mjs", import.meta.url);
 
-test("full evidence collection is scheduled daily at 09:37 Prague time", async () => {
+test("full evidence collection routes via topic tags and keeps the daily schedule paused pending its first verified run", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
-  assert.match(workflow, /cron: "37 9 \* \* \*"/);
-  assert.match(workflow, /timezone: "Europe\/Prague"/);
+  // The daily cron stays commented out until a manual run of this exact
+  // (now topic-routing-based) workflow has been verified; it is not deleted,
+  // so re-enabling it later is a one-line change.
+  assert.match(workflow, /# {3}- cron: "37 9 \* \* \*"/);
+  assert.match(workflow, /# {5}timezone: "Europe\/Prague"/);
   assert.match(workflow, /--checkpoints automation\/collectors\/checkpoints\.json/);
   assert.match(workflow, /--write-checkpoints automation\/collectors\/checkpoints\.json/);
-  assert.match(workflow, /--semantic-index automation\/semantic-index\/promise-index\.json/);
-  assert.match(workflow, /--write-semantic-index automation\/semantic-index\/promise-index\.json/);
-  assert.match(workflow, /SLIBY_SEMANTIC_CANDIDATE_LIMIT: 3/);
-  assert.match(workflow, /SLIBY_SEMANTIC_MIN_SIMILARITY: 0\.55/);
-  assert.match(workflow, /reconcile-evidence-package-queue\.mjs --queue automation\/evidence-packages/);
+  assert.match(workflow, /node scripts\/run-topic-routing\.mjs/);
+  assert.match(workflow, /--tag-cache automation\/topic-routing\/tag-cache/);
+  assert.match(workflow, /SLIBY_TAGGING_CONCURRENCY: \$\{\{ inputs\.tagging_concurrency \|\| '1' \}\}/);
   assert.match(workflow, /SLIBY_ASSESSMENT_CONCURRENCY: 4/);
   assert.match(workflow, /timeout-minutes: 90/);
   assert.match(workflow, /Persist source collection and queued evidence packages/);
   assert.match(workflow, /Queue enriched evidence packages/);
   assert.match(workflow, /--retry-blocked-queue automation\/evidence-packages/);
   assert.match(workflow, /--packages automation\/evidence-packages/);
+  assert.match(workflow, /--topic-routing-run automation\/runs\/pipeline\/github-actions\/topic-routing\/topic-routing-report\.json/);
   assert.match(workflow, /const collectorRun = JSON\.parse\(await readFile\("automation\/runs\/pipeline\/github-actions\/collector\/collector-run\.json", "utf8"\)\);/);
   assert.match(workflow, /collectorRun\.collectors\.map/);
+  // The old exact-signal/semantic matcher and its similarity-threshold
+  // reconciliation step are retired, not merely unused: topic-routing is the
+  // sole live routing mechanism per docs/evidence-pipeline.md.
+  assert.doesNotMatch(workflow, /run-matcher\.mjs/);
+  assert.doesNotMatch(workflow, /reconcile-evidence-package-queue\.mjs/);
+  assert.doesNotMatch(workflow, /SLIBY_SEMANTIC_/);
+  assert.doesNotMatch(workflow, /automation\/semantic-index/);
   assert.doesNotMatch(workflow, /^      GH_TOKEN:/m);
   assert.match(workflow, /persist-credentials: false/);
   assert.match(workflow, /uses: actions\/checkout@v5\n        with:\n          ref: main/);
-  assert.equal([...workflow.matchAll(/GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/g)].length, 5);
+  assert.equal([...workflow.matchAll(/GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/g)].length, 6);
   assert.match(workflow, /- name: Restore current audit state[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   assert.match(workflow, /- name: Persist source collection and queued evidence packages[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   assert.match(workflow, /COLLECTOR_SOURCES: \$\{\{ inputs\.sources \|\| '' \}\}/);
@@ -40,11 +48,8 @@ test("full evidence collection is scheduled daily at 09:37 Prague time", async (
   assert.match(workflow, /git push --force-with-lease="refs\/heads\/\$REVIEW_BRANCH:\$AUDIT_BRANCH_TIP" "https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git" "HEAD:refs\/heads\/\$REVIEW_BRANCH"/);
 });
 
-test("semantic retrieval ranks the whole public catalogue and limits paid assessment fan-out", async () => {
-  const [matcher, assessmentBatch] = await Promise.all([readFile(matcherUrl, "utf8"), readFile(assessmentBatchUrl, "utf8")]);
-  assert.match(matcher, /planPromiseEmbeddings\(\{ index: semanticIndex, promises: publishedRegistry\.promises \}\)/);
-  assert.match(matcher, /promises: publishedRegistry\.promises,/);
-  assert.match(matcher, /minimumSimilarity: runtime\.minimumSimilarity/);
+test("assessment fan-out stays bounded and concurrency-limited", async () => {
+  const assessmentBatch = await readFile(assessmentBatchUrl, "utf8");
   assert.match(assessmentBatch, /mapWithConcurrency\(assessmentItems, concurrency/);
   assert.match(assessmentBatch, /SLIBY_ASSESSMENT_CONCURRENCY must be an integer from 1 to 8/);
 });
@@ -56,13 +61,24 @@ test("the audit branch is a current operational snapshot restored into main", as
   assert.match(workflow, /git restore --source="origin\/\$REVIEW_BRANCH" --staged --worktree/);
   assert.match(workflow, /\*\/README\.md\) ;;/);
   assert.match(workflow, /AUDIT_BRANCH_TIP=\$audit_branch_tip/);
-  assert.match(workflow, /semantic-index/);
+  assert.match(workflow, /automation\/topic-routing\/tag-cache/);
   assert.match(workflow, /evidence-packages/);
   assert.match(workflow, /git push --force-with-lease="refs\/heads\/\$REVIEW_BRANCH:\$AUDIT_BRANCH_TIP"/);
-  assert.match(workflow, /git add automation\/collectors\/checkpoints\.json automation\/evidence-packages automation\/semantic-index/);
+  assert.match(workflow, /git add automation\/topic-routing\/tag-cache/);
+  assert.match(workflow, /git add automation\/collectors\/checkpoints\.json automation\/evidence-packages/);
   assert.doesNotMatch(workflow, /git merge --no-ff --no-commit/);
   assert.doesNotMatch(workflow, /git switch --force-create "\$REVIEW_BRANCH"/);
   assert.match(workflow, /could not create the required review pull request/);
+});
+
+test("the tag-cache persistence step survives a topic-routing failure, but checkpoints only persist on full success", async () => {
+  const workflow = await readFile(workflowUrl, "utf8");
+  const tagCacheStep = workflow.split("      - name: Persist tag-assignment cache even on a failed run")[1].split("\n      - name:")[0];
+  assert.match(tagCacheStep, /\n {8}if: always\(\)/);
+  assert.match(tagCacheStep, /if \[ -d automation\/topic-routing\/tag-cache \]; then/);
+  const checkpointsStep = workflow.split("      - name: Persist source collection and queued evidence packages")[1].split("\n      - name:")[0];
+  assert.doesNotMatch(checkpointsStep, /if: always\(\)/);
+  assert.doesNotMatch(checkpointsStep, /automation\/topic-routing\/tag-cache/);
 });
 
 test("collection and packages create a missing audit pull request without overwriting its review body", async () => {
@@ -73,12 +89,12 @@ test("collection and packages create a missing audit pull request without overwr
   assert.doesNotMatch(packagesStep, /gh pr edit/);
 });
 
-test("checkpoints persist only after matching and queuing packages", async () => {
+test("checkpoints persist only after routing and queuing packages", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
-  const matching = workflow.indexOf("      - name: Match records to every confirmed promise");
+  const routing = workflow.indexOf("      - name: Route source records to promises via topic tags");
   const queueing = workflow.indexOf("      - name: Queue enriched evidence packages");
   const persistence = workflow.indexOf("      - name: Persist source collection and queued evidence packages");
-  assert.ok(matching >= 0 && matching < queueing && queueing < persistence);
+  assert.ok(routing >= 0 && routing < queueing && queueing < persistence);
   assert.equal(workflow.includes("Persist successful source checkpoints"), false);
 });
 

@@ -118,7 +118,7 @@ test("validateTagAssignmentOutput rejects an invented tag id", () => {
 });
 
 test("validateTagAssignmentOutput throws specifically TagValidationError, distinguishable from a transport/provider failure", () => {
-  // A caller (scripts/run-topic-routing-pilot.mjs) must be able to isolate
+  // A caller (scripts/run-topic-routing.mjs) must be able to isolate
   // an invalid model *output* from a network, auth, or quota failure inside
   // requestTagAssignment -- catching by class, not just by "it threw",
   // keeps that distinction reliable rather than accidentally silencing an
@@ -181,7 +181,7 @@ test("requestTagAssignment calls the shared OpenAI structured-response endpoint 
 
 test("requestTagAssignment attaches the already-spent usage/model/provider to a TagValidationError instead of losing them", async () => {
   // The paid call happens before validation ever runs, so a caller
-  // isolating this one invalid attempt (scripts/run-topic-routing-pilot.mjs)
+  // isolating this one invalid attempt (scripts/run-topic-routing.mjs)
   // must still be able to fold its cost into a token-usage total -- losing
   // it here would make every reported spend estimate an undercount whenever
   // a tagger call is invalid.

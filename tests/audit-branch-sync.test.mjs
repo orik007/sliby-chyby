@@ -11,18 +11,23 @@ const localizeRemote = (script) => script
   .replace('authenticated_remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"', 'authenticated_remote="origin"')
   .replaceAll("$GITHUB_ENV", "github-env")
   .replaceAll("$GITHUB_OUTPUT", "github-output");
-const restoreAuditState = localizeRemote(workflow.split("      - name: Restore current audit state\n")[1]
+const extractStep = (name) => localizeRemote(workflow.split(`      - name: ${name}\n`)[1]
   .split("        run: |\n")[1].split("\n      - name:")[0]
   .split("\n").map((line) => line.replace(/^          /, "")).join("\n"));
-const collectionPersistence = localizeRemote(workflow.split("      - name: Persist source collection and queued evidence packages\n")[1]
-  .split("        run: |\n")[1].split("\n      - name:")[0]
-  .split("\n").map((line) => line.replace(/^          /, "")).join("\n"));
+const restoreAuditState = extractStep("Restore current audit state");
+// Two real steps in the workflow, each localized and run the same way a
+// failed job would: the tag-cache step is always(), the checkpoints step
+// keeps the default success() condition and is simply never invoked here
+// when a test wants to simulate a routing failure -- exactly like GitHub
+// Actions skipping it for real.
+const tagCachePersistence = extractStep("Persist tag-assignment cache even on a failed run");
+const checkpointsPersistence = extractStep("Persist source collection and queued evidence packages");
 const bash = process.platform === "win32" ? "C:/Program Files/Git/bin/bash.exe" : "bash";
 const auditBranch = "automation/assessment-review";
 const checkpoint = "automation/collectors/checkpoints.json";
 const packageManifest = "automation/evidence-packages/manifest.json";
 const packageReadme = "automation/evidence-packages/README.md";
-const semanticIndex = "automation/semantic-index/promise-index.json";
+const tagCache = "automation/topic-routing/tag-cache/promise-tags.json";
 
 function createFixture() {
   const root = mkdtempSync(join(tmpdir(), "audit-snapshot-"));
@@ -46,7 +51,7 @@ function createFixture() {
   git("remote", "add", "origin", join(root, "remote.git"));
   put(checkpoint, "main checkpoint\n");
   put(packageReadme, "current main documentation\n");
-  put(semanticIndex, "main semantic index\n");
+  put(tagCache, "main tag cache\n");
   put("src/example.txt", "base\n");
   commit("base");
   git("push", "origin", "main");
@@ -71,10 +76,15 @@ test("a missing audit branch leaves the current main checkout intact until colle
     assert.equal(fixture.git("show", `HEAD:${checkpoint}`), "main checkpoint");
     assert.match(readFileSync(join(fixture.cwd, output), "utf8"), /AUDIT_BRANCH_TIP=\n/);
     fixture.put(checkpoint, "first checkpoint\n");
-    const persisted = run(collectionPersistence, fixture.cwd, { GITHUB_ENV: output, AUDIT_BRANCH_TIP: "" });
+    fixture.put(tagCache, "first tag cache\n");
+    const tagCachePersisted = run(tagCachePersistence, fixture.cwd, { GITHUB_ENV: output, AUDIT_BRANCH_TIP: "" });
+    assert.equal(tagCachePersisted.status, 0, tagCachePersisted.stderr || tagCachePersisted.stdout);
+    const tagCacheTip = fixture.git("rev-parse", "HEAD");
+    const persisted = run(checkpointsPersistence, fixture.cwd, { GITHUB_ENV: output, AUDIT_BRANCH_TIP: tagCacheTip });
     assert.equal(persisted.status, 0, persisted.stderr || persisted.stdout);
     fixture.git("fetch", "origin", `refs/heads/${auditBranch}:refs/remotes/origin/${auditBranch}`);
     assert.equal(fixture.git("show", `origin/${auditBranch}:${checkpoint}`), "first checkpoint");
+    assert.equal(fixture.git("show", `origin/${auditBranch}:${tagCache}`), "first tag cache");
   } finally {
     rmSync(fixture.root, { recursive: true, force: true });
   }
@@ -87,6 +97,7 @@ test("a run restores current audit data into main and replaces the audit snapsho
     fixture.put(checkpoint, "audit checkpoint\n");
     fixture.put(packageManifest, "retained package\n");
     fixture.put(packageReadme, "outdated audit documentation\n");
+    fixture.put(tagCache, "audit tag cache\n");
     fixture.commit("audit state");
     const auditTip = fixture.git("rev-parse", "HEAD");
     fixture.git("push", "origin", auditBranch);
@@ -103,17 +114,65 @@ test("a run restores current audit data into main and replaces the audit snapsho
     assert.equal(fixture.git("show", `:${checkpoint}`), "audit checkpoint");
     assert.equal(fixture.git("show", `:${packageManifest}`), "retained package");
     assert.equal(fixture.git("show", `:${packageReadme}`), "updated main documentation");
+    assert.equal(fixture.git("show", `:${tagCache}`), "audit tag cache");
     assert.match(readFileSync(join(fixture.cwd, restoreOutput), "utf8"), new RegExp(`AUDIT_BRANCH_TIP=${auditTip}`));
 
     fixture.put(checkpoint, "new checkpoint\n");
+    fixture.put(tagCache, "updated tag cache\n");
     const persistOutput = "github-env";
-    const persisted = run(collectionPersistence, fixture.cwd, { GITHUB_ENV: persistOutput, AUDIT_BRANCH_TIP: auditTip });
+    const tagCachePersisted = run(tagCachePersistence, fixture.cwd, { GITHUB_ENV: persistOutput, AUDIT_BRANCH_TIP: auditTip });
+    assert.equal(tagCachePersisted.status, 0, tagCachePersisted.stderr || tagCachePersisted.stdout);
+    const tagCacheTip = fixture.git("rev-parse", "HEAD");
+    const persisted = run(checkpointsPersistence, fixture.cwd, { GITHUB_ENV: persistOutput, AUDIT_BRANCH_TIP: tagCacheTip });
     assert.equal(persisted.status, 0, persisted.stderr || persisted.stdout);
     fixture.git("fetch", "origin", `refs/heads/${auditBranch}:refs/remotes/origin/${auditBranch}`);
     assert.equal(fixture.git("show", `origin/${auditBranch}:${checkpoint}`), "new checkpoint");
     assert.equal(fixture.git("show", `origin/${auditBranch}:${packageManifest}`), "retained package");
+    assert.equal(fixture.git("show", `origin/${auditBranch}:${tagCache}`), "updated tag cache");
     fixture.git("merge-base", "--is-ancestor", mainTip, `origin/${auditBranch}`);
     assert.match(readFileSync(join(fixture.cwd, persistOutput), "utf8"), new RegExp(`AUDIT_BRANCH_TIP=${fixture.git("rev-parse", "HEAD")}`));
+  } finally {
+    rmSync(fixture.root, { recursive: true, force: true });
+  }
+});
+
+test("a routing failure persists the tag cache but never advances the checkpoint", () => {
+  // Simulates exactly the scenario the Codex/Copilot findings caught: the
+  // collector already wrote an advanced checkpoint to disk before routing
+  // ran, then routing failed. Only the always() tag-cache step executes
+  // (mirroring GitHub Actions skipping the non-always() checkpoints step
+  // after a failed prior step) -- the stale-looking advanced checkpoint on
+  // disk must never reach the audit branch, or the next run would silently
+  // skip records it never actually routed.
+  const fixture = createFixture();
+  try {
+    fixture.git("switch", "-c", auditBranch);
+    fixture.put(checkpoint, "audit checkpoint\n");
+    fixture.put(tagCache, "audit tag cache\n");
+    fixture.commit("audit state");
+    const auditTip = fixture.git("rev-parse", "HEAD");
+    fixture.git("push", "origin", auditBranch);
+    fixture.git("switch", "main");
+
+    const output = "github-env";
+    const restored = run(restoreAuditState, fixture.cwd, { GITHUB_ENV: output });
+    assert.equal(restored.status, 0, restored.stderr || restored.stdout);
+
+    // The collector advances the checkpoint on disk regardless of what
+    // routing does next; routing itself only manages to tag one more
+    // subject before failing.
+    fixture.put(checkpoint, "advanced past unrouted records\n");
+    fixture.put(tagCache, "partially updated tag cache\n");
+
+    const tagCachePersisted = run(tagCachePersistence, fixture.cwd, { GITHUB_ENV: output, AUDIT_BRANCH_TIP: auditTip });
+    assert.equal(tagCachePersisted.status, 0, tagCachePersisted.stderr || tagCachePersisted.stdout);
+    // checkpointsPersistence is deliberately never run here -- exactly what
+    // GitHub Actions does when routing fails and this step keeps the
+    // default success() condition.
+
+    fixture.git("fetch", "origin", `refs/heads/${auditBranch}:refs/remotes/origin/${auditBranch}`);
+    assert.equal(fixture.git("show", `origin/${auditBranch}:${tagCache}`), "partially updated tag cache");
+    assert.equal(fixture.git("show", `origin/${auditBranch}:${checkpoint}`), "audit checkpoint", "the checkpoint must stay at its last successful value, not the collector's unconfirmed advance");
   } finally {
     rmSync(fixture.root, { recursive: true, force: true });
   }

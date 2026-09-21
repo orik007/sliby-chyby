@@ -1,12 +1,10 @@
 name: Collect, match, and assess confirmed promises
 
 on:
-  # Scheduled daily run paused 2026-09-19 while the promise-evidence
-  # matching mechanism is reworked (the exact-signal/semantic matcher is
-  # being replaced by the tag-based routing design in
-  # docs/topic-routing-design.md). Re-enable this schedule block only once
-  # that replacement is in place; until then, run manually via
-  # workflow_dispatch when deliberately testing.
+  # Scheduled daily run stays paused until a manual workflow_dispatch run of
+  # this exact workflow (topic-routing now live, per docs/evidence-pipeline.md)
+  # has been verified end to end. Re-enable this schedule block once that
+  # first verification run has been reviewed and approved.
   # schedule:
   #   - cron: "37 9 * * *"
   #     timezone: "Europe/Prague"
@@ -24,6 +22,11 @@ on:
         type: string
       sources:
         description: Optional comma-separated collector source IDs for a targeted replay
+        required: false
+        default: ""
+        type: string
+      tagging_concurrency:
+        description: Parallel tagged subjects in flight (each uses 2 API calls); leave empty for the safe Tier-1 default of 1. Raise this once the account's usage tier allows more TPM headroom.
         required: false
         default: ""
         type: string
@@ -56,12 +59,16 @@ jobs:
       SLIBY_ASSESSOR_MODEL_A: gpt-5.6-terra
       SLIBY_ASSESSOR_MODEL_B: gpt-5.6-terra
       SLIBY_ARBITER_MODEL: gpt-5.6-sol
-      SLIBY_SEMANTIC_PROVIDER: openai
-      SLIBY_SEMANTIC_MODEL: text-embedding-3-small
-      SLIBY_SEMANTIC_DIMENSIONS: 256
-      SLIBY_SEMANTIC_CANDIDATE_LIMIT: 3
-      SLIBY_SEMANTIC_MIN_SIMILARITY: 0.55
       SLIBY_ASSESSMENT_CONCURRENCY: 4
+      SLIBY_TAGGING_PROVIDER: openai
+      SLIBY_TAGGING_MODEL_A: gpt-5.6-terra
+      SLIBY_TAGGING_MODEL_B: gpt-5.6-terra
+      # A full backfill at higher concurrency reliably exhausts a Tier-1
+      # account's sustained TPM budget for gpt-5.6-terra (confirmed by a real
+      # run). 1 keeps sustained demand well under that budget; raise it via
+      # the tagging_concurrency input once the account's usage tier allows
+      # more TPM headroom.
+      SLIBY_TAGGING_CONCURRENCY: ${{ inputs.tagging_concurrency || '1' }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
@@ -81,11 +88,12 @@ jobs:
             git fetch "$authenticated_remote" "+refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
             audit_branch_tip="$(git rev-parse "origin/$REVIEW_BRANCH")"
             restore_paths=()
-            for path in automation/collectors/checkpoints.json automation/semantic-index/promise-index.json; do
-              if git cat-file -e "origin/$REVIEW_BRANCH:$path" 2>/dev/null; then
-                restore_paths+=("$path")
-              fi
-            done
+            if git cat-file -e "origin/$REVIEW_BRANCH:automation/collectors/checkpoints.json" 2>/dev/null; then
+              restore_paths+=(automation/collectors/checkpoints.json)
+            fi
+            while IFS= read -r path; do
+              restore_paths+=("$path")
+            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache)
             for directory in automation/evidence-packages automation/review-proposals; do
               while IFS= read -r path; do
                 case "$path" in
@@ -138,39 +146,72 @@ jobs:
           fi
           node scripts/run-collectors.mjs "${collector_args[@]}"
 
-      - name: Match records to every confirmed promise
+      - name: Route source records to promises via topic tags
         run: |
           AS_OF="${MATCHER_AS_OF:-$(date -u +%F)}"
-          node scripts/run-matcher.mjs \
+          node scripts/run-topic-routing.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
-            --semantic-index automation/semantic-index/promise-index.json \
-            --write-semantic-index automation/semantic-index/promise-index.json \
+            --tag-cache automation/topic-routing/tag-cache \
             --as-of "$AS_OF" \
-            --output automation/runs/pipeline/github-actions/matcher
+            --output automation/runs/pipeline/github-actions/topic-routing
 
       - name: Enrich matched parliamentary prints with official documents
         run: |
           node scripts/run-print-enrichment.mjs \
-            --input automation/runs/pipeline/github-actions/matcher/evidence-packages \
+            --input automation/runs/pipeline/github-actions/topic-routing/evidence-packages \
             --retry-blocked-queue automation/evidence-packages \
-            --output automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages
+            --output automation/runs/pipeline/github-actions/topic-routing/enriched-evidence-packages
 
       - name: Queue enriched evidence packages
         run: |
           node scripts/queue-evidence-packages.mjs \
-            --input automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages \
+            --input automation/runs/pipeline/github-actions/topic-routing/enriched-evidence-packages \
             --queue automation/evidence-packages \
-            --enrichment-run automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json
+            --enrichment-run automation/runs/pipeline/github-actions/topic-routing/enriched-evidence-packages/enrichment-run.json
 
-      - name: Retire packages outside the active semantic policy
-        run: node scripts/reconcile-evidence-package-queue.mjs --queue automation/evidence-packages
-
-      - name: Persist source collection and queued evidence packages
-        id: packages
+      - name: Persist tag-assignment cache even on a failed run
+        id: tag-cache
+        # This step alone stays if: always(). A topic-routing failure
+        # (exhausted credits, an outage) exits non-zero after already
+        # writing whatever it tagged to automation/topic-routing/tag-cache
+        # on disk -- without always(), the default success condition would
+        # skip this step and lose it with the runner. It touches only the
+        # tag cache: unlike checkpoints or evidence packages, a partial tag
+        # cache is always safe to keep (a subject is cached only once both
+        # taggers agree in full -- see run-topic-routing.mjs), so it never
+        # needs the rest of the pipeline to have succeeded first.
+        if: always()
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
-          git add automation/collectors/checkpoints.json automation/evidence-packages automation/semantic-index
+          if [ -d automation/topic-routing/tag-cache ]; then
+            git add automation/topic-routing/tag-cache
+          fi
+          if git diff --cached --quiet; then
+            echo "created=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Record topic-routing tag-assignment cache"
+            git push --force-with-lease="refs/heads/$REVIEW_BRANCH:$AUDIT_BRANCH_TIP" "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
+            echo "AUDIT_BRANCH_TIP=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+            echo "created=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Persist source collection and queued evidence packages
+        id: packages
+        # Deliberately NOT always(): a source's checkpoint must advance
+        # only once collection, routing, enrichment, and package
+        # persistence have all succeeded in the same run (decisions.md).
+        # run-collectors.mjs already wrote the advanced checkpoint to disk
+        # regardless of what happens next, so committing it unconditionally
+        # here would tell the next run "already processed" for records that
+        # were never actually routed -- silently skipping them forever,
+        # which is worse than re-tagging them. The default success()
+        # condition means this step (and the checkpoint it stages) is
+        # simply skipped whenever an earlier step in this job failed.
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
+        run: |
+          git add automation/collectors/checkpoints.json automation/evidence-packages
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
           else
@@ -201,7 +242,7 @@ jobs:
         run: |
           node scripts/run-assessment-batch.mjs \
             --packages automation/evidence-packages \
-            --enrichment-run automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json \
+            --enrichment-run automation/runs/pipeline/github-actions/topic-routing/enriched-evidence-packages/enrichment-run.json \
             --proposals automation/review-proposals \
             --runs automation/runs/pipeline/github-actions/assessments \
             --summary automation/runs/pipeline/github-actions/assessment-batch.json \
@@ -214,7 +255,7 @@ jobs:
         run: |
           node scripts/run-coverage-audit.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
-            --matcher-run automation/runs/pipeline/github-actions/matcher/match-run.json \
+            --topic-routing-run automation/runs/pipeline/github-actions/topic-routing/topic-routing-report.json \
             --output automation/runs/pipeline/github-actions/coverage-audit.json \
             --markdown automation/runs/pipeline/github-actions/coverage-audit.md
 
@@ -222,26 +263,25 @@ jobs:
         run: |
           node --input-type=module -e '
             import { readFile, appendFile } from "node:fs/promises";
-            const run = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/match-run.json", "utf8"));
+            const run = JSON.parse(await readFile("automation/runs/pipeline/github-actions/topic-routing/topic-routing-report.json", "utf8"));
             const collectorRun = JSON.parse(await readFile("automation/runs/pipeline/github-actions/collector/collector-run.json", "utf8"));
-            const semantic = run.semanticRetrieval;
-            const enrichment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/matcher/enriched-evidence-packages/enrichment-run.json", "utf8"));
+            const enrichment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/topic-routing/enriched-evidence-packages/enrichment-run.json", "utf8"));
             const assessment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/assessment-batch.json", "utf8"));
             const coverage = JSON.parse(await readFile("automation/runs/pipeline/github-actions/coverage-audit.json", "utf8"));
             const checkpoints = JSON.parse(await readFile("automation/collectors/checkpoints.json", "utf8"));
-            const packageCount = run.promiseResults.filter((result) => result.evidencePackage).length;
-            const candidateCount = run.promiseResults.reduce((sum, result) => sum + result.candidateMatchCount, 0);
             const documentCount = enrichment.results.reduce((sum, result) => sum + result.documentEvidenceCount, 0);
             const lines = [
               "## Unpublished evidence pipeline",
               "",
-              `- Published promises checked: ${run.promiseResults.length}`,
-              `- Potential matches: ${candidateCount}`,
-              `- Semantic record embeddings: ${semantic.recordEmbeddingsCreated}`,
-              `- Semantic candidate relationships: ${semantic.candidateRelationships}`,
-              `- Semantic minimum similarity: ${semantic.minimumSimilarity}`,
-              `- Semantic index rebuilt: ${semantic.indexRebuilt}`,
-              `- Assessable evidence packages: ${packageCount}`,
+              `- Published promises checked: ${run.counts.promiseCount}`,
+              `- Material primary records: ${run.counts.materialPrimaryRecordCount}`,
+              `- Direct structural link assignments: ${run.counts.directAssignmentCount}`,
+              `- Auto-candidate relationships: ${run.counts.candidateRelationshipCount}`,
+              `- Routing review (needs human routing decision): ${run.counts.routingReviewCount}`,
+              `- Orphan review (no safe topic assignment or matching promise): ${run.counts.orphanReviewCount}`,
+              `- Assessable evidence packages: ${run.counts.packageCount}`,
+              `- Routed candidates without attributable evidence: ${run.counts.routedWithoutAttributableEvidenceCount}`,
+              `- Invalid tagger outputs (promise / source): ${run.counts.invalidPromiseTaggerCount} / ${run.counts.invalidSourceTaggerCount}`,
               `- Official print documents added: ${documentCount}`,
               `- Document-enrichment warnings: ${enrichment.warnings.length}`,
               `- New assessment proposals: ${assessment.newProposalCount}`,
@@ -280,7 +320,7 @@ jobs:
               "## Sběr dat a checkpointy zdrojů",
               "",
               "Tento pull request je auditní fronta. Uložení checkpointu pouze potvrzuje úspěšné technické získání zdroje; samo nemění veřejné hodnocení.",
-              `Sémantické vyhledání použilo ${semantic.model} a pro každý primární záznam předalo ke kontrole jen kandidáty s podobností alespoň ${semantic.minimumSimilarity}, nejvýše ${semantic.candidateLimit}; podobnost sama o sobě nepotvrzuje souvislost ani hodnocení.`,
+              `Směrování podle tagů (${run.routerVersion}, taxonomie ${run.taxonomyVersion}) vytváří kandidátní vztah, jen když se na kontrolovaném a dostatečně konkrétním tagu shodnou oba nezávislí tagovači, nebo existuje přímý strukturální odkaz; samotný kandidátní vztah nepotvrzuje přiřaditelnost ani hodnocení.`,
               "",
               "| Zdroj | Režim | Od | Záznamů | Nejnovější záznam |",
               "| --- | --- | --- | ---: | --- |",
