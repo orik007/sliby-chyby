@@ -19,7 +19,7 @@ test("full evidence collection routes via topic tags and keeps the daily schedul
   assert.match(workflow, /--tag-cache automation\/topic-routing\/tag-cache/);
   assert.match(workflow, /SLIBY_TAGGING_CONCURRENCY: \$\{\{ inputs\.tagging_concurrency \|\| '1' \}\}/);
   assert.match(workflow, /SLIBY_ASSESSMENT_CONCURRENCY: 4/);
-  assert.match(workflow, /timeout-minutes: 90/);
+  assert.match(workflow, /timeout-minutes: 300/);
   assert.match(workflow, /Persist source collection and queued evidence packages/);
   assert.match(workflow, /Queue enriched evidence packages/);
   assert.match(workflow, /--retry-blocked-queue automation\/evidence-packages/);

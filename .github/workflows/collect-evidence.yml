@@ -43,7 +43,16 @@ jobs:
   collect:
     name: Build unpublished review proposals
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    # A full historical backfill (--since covering the whole campaign period)
+    # tags far more subjects than the 90-minute default this limit was sized
+    # for. A job killed by timeout-minutes is not a graceful failure: GitHub
+    # Actions tears down the runner before any later step gets a chance to
+    # run, including "Persist tag-assignment cache even on a failed run" --
+    # so a timeout kill loses already-paid-for tagging work exactly the way
+    # this pipeline's own failure handling exists to prevent, just through a
+    # different door. 300 minutes gives real headroom for a full backfill;
+    # it can be lowered again once typical incremental run time is known.
+    timeout-minutes: 300
     environment:
       name: assessment
       deployment: false
