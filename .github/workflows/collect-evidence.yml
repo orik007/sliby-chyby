@@ -26,7 +26,7 @@ on:
         default: ""
         type: string
       tagging_concurrency:
-        description: Parallel tagged subjects in flight (each uses 2 API calls); leave empty for the safe Tier-1 default of 1. Raise this once the account's usage tier allows more TPM headroom.
+        description: Parallel tagged subjects in flight (each uses 2 API calls); leave empty for the Tier-3 default of 8. Lower this if the account's usage tier drops or TPM errors appear.
         required: false
         default: ""
         type: string
@@ -72,12 +72,13 @@ jobs:
       SLIBY_TAGGING_PROVIDER: openai
       SLIBY_TAGGING_MODEL_A: gpt-5.6-terra
       SLIBY_TAGGING_MODEL_B: gpt-5.6-terra
-      # A full backfill at higher concurrency reliably exhausts a Tier-1
-      # account's sustained TPM budget for gpt-5.6-terra (confirmed by a real
-      # run). 1 keeps sustained demand well under that budget; raise it via
-      # the tagging_concurrency input once the account's usage tier allows
-      # more TPM headroom.
-      SLIBY_TAGGING_CONCURRENCY: ${{ inputs.tagging_concurrency || '1' }}
+      # Concurrency of 1 reliably exhausted a Tier-1 account's sustained TPM
+      # budget for gpt-5.6-terra (confirmed by a real run). Now on Tier 3
+      # (5,000 RPM / 2,000,000 TPM), 8 gives real speedup for a full backfill
+      # while leaving headroom alongside SLIBY_ASSESSMENT_CONCURRENCY, which
+      # shares the same model later in the same run. Override via the
+      # tagging_concurrency input if the tier changes or TPM errors appear.
+      SLIBY_TAGGING_CONCURRENCY: ${{ inputs.tagging_concurrency || '8' }}
     steps:
       - name: Check out repository
         uses: actions/checkout@v5
