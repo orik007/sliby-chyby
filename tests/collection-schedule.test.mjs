@@ -64,10 +64,17 @@ test("the audit branch is a current operational snapshot restored into main", as
   assert.match(workflow, /automation\/topic-routing\/tag-cache/);
   assert.match(workflow, /evidence-packages/);
   assert.match(workflow, /git push --force-with-lease="refs\/heads\/\$REVIEW_BRANCH:\$AUDIT_BRANCH_TIP"/);
-  assert.match(workflow, /git add automation\/collectors\/checkpoints\.json automation\/evidence-packages automation\/topic-routing\/tag-cache/);
+  assert.match(workflow, /for path in automation\/collectors\/checkpoints\.json automation\/evidence-packages automation\/topic-routing\/tag-cache; do/);
   assert.doesNotMatch(workflow, /git merge --no-ff --no-commit/);
   assert.doesNotMatch(workflow, /git switch --force-create "\$REVIEW_BRANCH"/);
   assert.match(workflow, /could not create the required review pull request/);
+});
+
+test("the persistence step survives a topic-routing failure instead of skipping and losing already-tagged work", async () => {
+  const workflow = await readFile(workflowUrl, "utf8");
+  const persistStep = workflow.split("      - name: Persist source collection and queued evidence packages")[1].split("\n      - name:")[0];
+  assert.match(persistStep, /\n {8}if: always\(\)/);
+  assert.match(persistStep, /if \[ -e "\$path" \]; then/);
 });
 
 test("collection and packages create a missing audit pull request without overwriting its review body", async () => {

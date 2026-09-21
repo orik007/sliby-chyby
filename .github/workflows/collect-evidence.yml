@@ -171,10 +171,27 @@ jobs:
 
       - name: Persist source collection and queued evidence packages
         id: packages
+        # A topic-routing failure (exhausted credits, an outage) exits
+        # non-zero after already writing whatever it tagged to
+        # automation/topic-routing/tag-cache on disk -- without always(),
+        # the default success condition would skip this step entirely on
+        # that failure and lose it with the runner, the exact loss this
+        # migration exists to prevent. Existence-checked so a failure early
+        # enough that one of these paths was never created (or restored)
+        # does not itself fail this step.
+        if: always()
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
-          git add automation/collectors/checkpoints.json automation/evidence-packages automation/topic-routing/tag-cache
+          add_paths=()
+          for path in automation/collectors/checkpoints.json automation/evidence-packages automation/topic-routing/tag-cache; do
+            if [ -e "$path" ]; then
+              add_paths+=("$path")
+            fi
+          done
+          if [ "${#add_paths[@]}" -gt 0 ]; then
+            git add "${add_paths[@]}"
+          fi
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
           else

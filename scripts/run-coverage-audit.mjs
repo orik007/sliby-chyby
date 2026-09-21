@@ -62,9 +62,19 @@ function matcherRunFromTopicRoutingRun(topicRoutingRun, promises) {
 const args = parseArgs(process.argv.slice(2));
 const readJson = async (path) => JSON.parse(await readFile(resolve(path), "utf8"));
 const promiseRegistry = publishedMatchingRegistry(await readJson(args.promises), await loadPublishedPromiseIds(args.publishedPromises));
+const topicRoutingRun = await readJson(args.topicRoutingRun);
+// A partial report (completed: false) only covers the subjects tagged
+// before a mid-run failure -- treating every promise it never reached as
+// "no candidate match" would fabricate a false negative for a promise that
+// was simply never checked this run, exactly the silent-zero-progress
+// outcome the coverage audit exists to prevent. Fail loudly instead of
+// producing a misleading audit from incomplete data.
+if (topicRoutingRun.completed !== true) {
+  throw new Error(`Topic-routing run did not complete (failed at stage "${topicRoutingRun.failure?.stage}"): refusing to build a coverage audit from partial routing data.`);
+}
 const audit = buildCoverageAudit({
   collectorRun: await readJson(args.collectorRun),
-  matcherRun: matcherRunFromTopicRoutingRun(await readJson(args.topicRoutingRun), promiseRegistry.promises),
+  matcherRun: matcherRunFromTopicRoutingRun(topicRoutingRun, promiseRegistry.promises),
   promiseRegistry,
   sourceRegistry: await readJson(args.sources),
   proposalManifest: await readJson(args.proposals)

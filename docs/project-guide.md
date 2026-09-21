@@ -24,14 +24,15 @@ official party source
 
 allowlisted evidence sources
   -> per-source bootstrap or incremental collection at 09:37 Europe/Prague
-  -> exact signals plus semantic candidate retrieval across confirmed promises
+  -> topic routing: two independent taggers plus direct structural links create candidate relationships to confirmed promises
+  -> deterministic attribution test decides which candidates become package evidence
   -> official-document enrichment when a known target exists
   -> two independent assessments; arbiter on disagreement or one invalid assessor output
   -> unpublished audit pull request with queued evidence packages, proposals, coverage, and checkpoints
   -> separate approved public-assessment pull request when a score changes
 ```
 
-The daily workflow uses embeddings only to retrieve a bounded set of candidate promise relationships. Two independent assessors determine relevance and propose a score from bounded evidence; it never assigns a public score or publishes data. The public site makes no live AI call.
+The daily workflow uses controlled topic tags, not embeddings, to retrieve a bounded set of candidate promise relationships. Two independent assessors determine relevance and propose a score from bounded evidence; it never assigns a public score or publishes data. The public site makes no live AI call.
 
 ## Repository map
 
