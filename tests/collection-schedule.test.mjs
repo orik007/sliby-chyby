@@ -37,7 +37,7 @@ test("full evidence collection routes via topic tags and keeps the daily schedul
   assert.doesNotMatch(workflow, /^      GH_TOKEN:/m);
   assert.match(workflow, /persist-credentials: false/);
   assert.match(workflow, /uses: actions\/checkout@v5\n        with:\n          ref: main/);
-  assert.equal([...workflow.matchAll(/GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/g)].length, 5);
+  assert.equal([...workflow.matchAll(/GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/g)].length, 6);
   assert.match(workflow, /- name: Restore current audit state[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   assert.match(workflow, /- name: Persist source collection and queued evidence packages[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   assert.match(workflow, /COLLECTOR_SOURCES: \$\{\{ inputs\.sources \|\| '' \}\}/);
@@ -64,17 +64,21 @@ test("the audit branch is a current operational snapshot restored into main", as
   assert.match(workflow, /automation\/topic-routing\/tag-cache/);
   assert.match(workflow, /evidence-packages/);
   assert.match(workflow, /git push --force-with-lease="refs\/heads\/\$REVIEW_BRANCH:\$AUDIT_BRANCH_TIP"/);
-  assert.match(workflow, /for path in automation\/collectors\/checkpoints\.json automation\/evidence-packages automation\/topic-routing\/tag-cache; do/);
+  assert.match(workflow, /git add automation\/topic-routing\/tag-cache/);
+  assert.match(workflow, /git add automation\/collectors\/checkpoints\.json automation\/evidence-packages/);
   assert.doesNotMatch(workflow, /git merge --no-ff --no-commit/);
   assert.doesNotMatch(workflow, /git switch --force-create "\$REVIEW_BRANCH"/);
   assert.match(workflow, /could not create the required review pull request/);
 });
 
-test("the persistence step survives a topic-routing failure instead of skipping and losing already-tagged work", async () => {
+test("the tag-cache persistence step survives a topic-routing failure, but checkpoints only persist on full success", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
-  const persistStep = workflow.split("      - name: Persist source collection and queued evidence packages")[1].split("\n      - name:")[0];
-  assert.match(persistStep, /\n {8}if: always\(\)/);
-  assert.match(persistStep, /if \[ -e "\$path" \]; then/);
+  const tagCacheStep = workflow.split("      - name: Persist tag-assignment cache even on a failed run")[1].split("\n      - name:")[0];
+  assert.match(tagCacheStep, /\n {8}if: always\(\)/);
+  assert.match(tagCacheStep, /if \[ -d automation\/topic-routing\/tag-cache \]; then/);
+  const checkpointsStep = workflow.split("      - name: Persist source collection and queued evidence packages")[1].split("\n      - name:")[0];
+  assert.doesNotMatch(checkpointsStep, /if: always\(\)/);
+  assert.doesNotMatch(checkpointsStep, /automation\/topic-routing\/tag-cache/);
 });
 
 test("collection and packages create a missing audit pull request without overwriting its review body", async () => {

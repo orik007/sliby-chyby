@@ -169,29 +169,49 @@ jobs:
             --queue automation/evidence-packages \
             --enrichment-run automation/runs/pipeline/github-actions/topic-routing/enriched-evidence-packages/enrichment-run.json
 
-      - name: Persist source collection and queued evidence packages
-        id: packages
-        # A topic-routing failure (exhausted credits, an outage) exits
-        # non-zero after already writing whatever it tagged to
-        # automation/topic-routing/tag-cache on disk -- without always(),
-        # the default success condition would skip this step entirely on
-        # that failure and lose it with the runner, the exact loss this
-        # migration exists to prevent. Existence-checked so a failure early
-        # enough that one of these paths was never created (or restored)
-        # does not itself fail this step.
+      - name: Persist tag-assignment cache even on a failed run
+        id: tag-cache
+        # This step alone stays if: always(). A topic-routing failure
+        # (exhausted credits, an outage) exits non-zero after already
+        # writing whatever it tagged to automation/topic-routing/tag-cache
+        # on disk -- without always(), the default success condition would
+        # skip this step and lose it with the runner. It touches only the
+        # tag cache: unlike checkpoints or evidence packages, a partial tag
+        # cache is always safe to keep (a subject is cached only once both
+        # taggers agree in full -- see run-topic-routing.mjs), so it never
+        # needs the rest of the pipeline to have succeeded first.
         if: always()
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
-          add_paths=()
-          for path in automation/collectors/checkpoints.json automation/evidence-packages automation/topic-routing/tag-cache; do
-            if [ -e "$path" ]; then
-              add_paths+=("$path")
-            fi
-          done
-          if [ "${#add_paths[@]}" -gt 0 ]; then
-            git add "${add_paths[@]}"
+          if [ -d automation/topic-routing/tag-cache ]; then
+            git add automation/topic-routing/tag-cache
           fi
+          if git diff --cached --quiet; then
+            echo "created=false" >> "$GITHUB_OUTPUT"
+          else
+            git commit -m "Record topic-routing tag-assignment cache"
+            git push --force-with-lease="refs/heads/$REVIEW_BRANCH:$AUDIT_BRANCH_TIP" "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
+            echo "AUDIT_BRANCH_TIP=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+            echo "created=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Persist source collection and queued evidence packages
+        id: packages
+        # Deliberately NOT always(): a source's checkpoint must advance
+        # only once collection, routing, enrichment, and package
+        # persistence have all succeeded in the same run (decisions.md).
+        # run-collectors.mjs already wrote the advanced checkpoint to disk
+        # regardless of what happens next, so committing it unconditionally
+        # here would tell the next run "already processed" for records that
+        # were never actually routed -- silently skipping them forever,
+        # which is worse than re-tagging them. The default success()
+        # condition means this step (and the checkpoint it stages) is
+        # simply skipped whenever an earlier step in this job failed.
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
+        run: |
+          git add automation/collectors/checkpoints.json automation/evidence-packages
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
           else
