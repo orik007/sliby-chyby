@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-22T10-49-15-756Z--7196b6117517",
+  "evaluatedAt": "2026-09-22T10:49:15.756Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-b9b4bde91a9f/7196b611751790f8a5d22ba8a5b42542e188d8f8b57428a1a3d8d819967502b0.json",
+  "packageHash": "7196b611751790f8a5d22ba8a5b42542e188d8f8b57428a1a3d8d819967502b0",
+  "assessmentContentHash": "bf427a1e857c88d69d7f98686e76a228c6458c9602423f8e4b60eb50a307488f",
+  "assessmentFingerprint": "8c45a8d9f7ea0aa404e5f2b2792198bbdcd4b60cd783335359a2ed0b3cc274f0",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-b9b4bde91a9f",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v13",
+      "contentHash": "131f5cb530bdc6024cc6652335dc359e5ae4860b9cf4dcfda7fb35df34f063b2"
+    },
+    "arbiter": {
+      "version": "arbiter-v5",
+      "contentHash": "5d3c226d631557f53d328d3450edf9c3560fb30e41bc7825902244bebdd6ea7b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessParallelCalls": true,
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-5.6-terra",
+      "gpt-5.6-terra"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-b9b4bde91a9f",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-b9b4bde91a9f-source",
+        "msmt-news-api--news-17701ff8cdc55ce66fdc",
+        "msmt-news-api--news-8c0a99bd281a5ecf0620"
+      ],
+      "explanationCz": "ANO 2011 slíbilo vyhodnotit dopady systému PHmax a upravit jeho parametry. Dodané doklady ministerstva popisují změny rámcového vzdělávacího programu a návrh podpory asistentů pedagoga, nikoli vyhodnocení ani úpravu PHmax. Z podkladů proto nelze doložit významný krok ANO 2011 k tomuto konkrétnímu slibu ani krok proti němu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "V dodaném souboru chybí doklad o tom, zda ministerstvo nebo ANO 2011 vyhodnocení systému PHmax provedly, zahájily, nebo jeho parametry upravily."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-b9b4bde91a9f",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-b9b4bde91a9f-source"
+      ],
+      "explanationCz": "ANO 2011 slíbilo vyhodnotit dopady systému PHmax a podle výsledků upravit jeho parametry. Dodané podklady ale nedokládají ani provedené vyhodnocení PHmax, ani konkrétní návrh či rozhodnutí o změně jeho parametrů. V živém hodnocení proto není doložen významný posun ani směrem ke splnění, ani proti tomuto slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Soubor neobsahuje věcně relevantní doklad o postupu ANO 2011 nebo jí vedené vlády při vyhodnocování systému PHmax či při úpravě jeho parametrů. Z toho nelze spolehlivě usuzovat, zda takový krok mimo dodané podklady nastal."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_090e4d1c53d7ac47016ab25d248bfc87d291a616db7a21a15f",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 13402,
+      "input_tokens_details": {
+        "cache_write_tokens": 11919,
+        "cached_tokens": 1480
+      },
+      "output_tokens": 471,
+      "output_tokens_details": {
+        "reasoning_tokens": 212
+      },
+      "total_tokens": 13873
+    },
+    "output": {
+      "promiseId": "candidate-b9b4bde91a9f",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-b9b4bde91a9f-source",
+        "msmt-news-api--news-17701ff8cdc55ce66fdc",
+        "msmt-news-api--news-8c0a99bd281a5ecf0620"
+      ],
+      "explanationCz": "ANO 2011 slíbilo vyhodnotit dopady systému PHmax a upravit jeho parametry. Dodané doklady ministerstva popisují změny rámcového vzdělávacího programu a návrh podpory asistentů pedagoga, nikoli vyhodnocení ani úpravu PHmax. Z podkladů proto nelze doložit významný krok ANO 2011 k tomuto konkrétnímu slibu ani krok proti němu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "V dodaném souboru chybí doklad o tom, zda ministerstvo nebo ANO 2011 vyhodnocení systému PHmax provedly, zahájily, nebo jeho parametry upravily."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_08aa7b9204179433016ab25d249b0487d28e088e870aac72c4",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 13402,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 13399
+      },
+      "output_tokens": 374,
+      "output_tokens_details": {
+        "reasoning_tokens": 141
+      },
+      "total_tokens": 13776
+    },
+    "output": {
+      "promiseId": "candidate-b9b4bde91a9f",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-b9b4bde91a9f-source"
+      ],
+      "explanationCz": "ANO 2011 slíbilo vyhodnotit dopady systému PHmax a podle výsledků upravit jeho parametry. Dodané podklady ale nedokládají ani provedené vyhodnocení PHmax, ani konkrétní návrh či rozhodnutí o změně jeho parametrů. V živém hodnocení proto není doložen významný posun ani směrem ke splnění, ani proti tomuto slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Soubor neobsahuje věcně relevantní doklad o postupu ANO 2011 nebo jí vedené vlády při vyhodnocování systému PHmax či při úpravě jeho parametrů. Z toho nelze spolehlivě usuzovat, zda takový krok mimo dodané podklady nastal."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

@@ -1,0 +1,43 @@
+# Nastartujeme ekonomiku, snížíme daně občanům i firmám, zrušíme poplatky za rozhlas a televizi, zmrazíme politikům platy
+
+> Neveřejný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+
+## Návrh pro veřejný web
+
+*Nevznikl žádný návrh veřejného hodnocení ani vysvětlení.*
+
+## Co má zkontrolovat reviewer
+
+- Odpovídá navržené hodnocení metodice SLAVA Indexu?
+- Je jednání správně připsáno sledované straně?
+- Je veřejné vysvětlení pochopitelné samo o sobě a říká, kdo co udělal a jak to souvisí se slibem?
+- Jsou zkratky, právní pojmy a úřední označení při prvním použití vysvětlené?
+- Dokládají uvedené zdroje všechna podstatná tvrzení a nechybí rozporný podklad?
+
+## Technické podklady pro reviewera
+
+- Výsledek automatického procesu: oba automatické posudky označily podklady za nedostatečné
+- Interní stav: bez kandidátního stavu
+- Důvod výsledku: `insufficient-evidence`
+- Úplný strojový audit: `assessment-run.json`
+- Přesný balíček posuzovaných podkladů: `evidence-package.json`
+
+### Shoda hodnotitelů
+
+Oba nezávislí hodnotitelé dospěli ke stejnému výsledku: **podklady nestačí pro automatický návrh hodnocení**.
+
+ANO 2011 slíbilo snížit daně, zrušit rozhlasové a televizní poplatky a zmrazit platy politiků. Dodané podklady však dokládají jen dřívější kroky Ministerstva kultury týkající se veřejnoprávního rozhlasu a kultury, nikoli jednání ANO 2011 k některé z těchto konkrétních částí slibu. Z dostupných dokladů proto nelze ověřit významný posun ani opačný krok.
+
+Co zůstává nejisté:
+
+- Chybí doložený návrh, hlasování, rozhodnutí vlády nebo jiný ověřený krok ANO 2011 k daním, poplatkům za rozhlas a televizi či platům politiků.
+- Uvedené kroky Ministerstva kultury nejsou doloženy jako kroky vlády vedené ANO 2011 ani jako opatření, která by rušila poplatky.
+
+Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.
+
+### Zdroje použité při hodnocení
+
+- [Původní volební slib](https://www.anobudelip.cz/file/edee/ke-stazeni/volebni-program-2025.pdf)
+- [Ministry of Culture of the Czech Republic](https://www.mk.gov.cz/novinky-a-media-cs-4/6508cs-martin-baxa-programove-prohlaseni-voblasti-kultury-jsme-naplnili)
+- [Ministry of Culture of the Czech Republic](https://www.mk.gov.cz/novinky-a-media-cs-4/6436cs-ministr-kultury-podepsal-memorandum-o-zpusobu-naplnovani-verejne-sluzby-v-oblasti-rozhlasoveho-vysilani)
+

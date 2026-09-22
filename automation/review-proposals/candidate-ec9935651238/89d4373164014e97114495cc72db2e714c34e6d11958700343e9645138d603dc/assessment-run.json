@@ -1,0 +1,165 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-22T10-52-25-118Z--5db65f3d7d38",
+  "evaluatedAt": "2026-09-22T10:52:25.118Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-ec9935651238/5db65f3d7d389af9965d09e7b2f85196bcde19a941774805d3e6b63742fc86a2.json",
+  "packageHash": "5db65f3d7d389af9965d09e7b2f85196bcde19a941774805d3e6b63742fc86a2",
+  "assessmentContentHash": "6f57116d55bebbc8738ce44561abb8589f569656ceb0b309a0aa775ca90e9609",
+  "assessmentFingerprint": "89d4373164014e97114495cc72db2e714c34e6d11958700343e9645138d603dc",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-ec9935651238",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v13",
+      "contentHash": "131f5cb530bdc6024cc6652335dc359e5ae4860b9cf4dcfda7fb35df34f063b2"
+    },
+    "arbiter": {
+      "version": "arbiter-v5",
+      "contentHash": "5d3c226d631557f53d328d3450edf9c3560fb30e41bc7825902244bebdd6ea7b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessParallelCalls": true,
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-5.6-terra",
+      "gpt-5.6-terra"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-ec9935651238",
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ec9935651238-source",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--print-document-43310"
+      ],
+      "explanationCz": "Motoristé slíbili, že DPH bude odváděna až z uhrazených, nikoli jen vystavených faktur. V hlasování o vládním návrhu zákona podpořilo návrh všech sedm hlasujících poslanců Motoristů, což tvořilo přesnou nadpoloviční většinu jejich třináctičlenného klubu. Návrh nezavádí slíbený systém plošně, ale zkracuje ze šesti na tři měsíce dobu, po níž lze žádat opravu DPH z nezaplacené pohledávky, a rozšiřuje její limity. Jde proto o konkrétní částečný krok, který zmírňuje dopady odvádění DPH z neuhrazených faktur, nikoli o úplné splnění slibu.",
+      "confidence": "high",
+      "uncertainties": []
+    },
+    "assessor-b": {
+      "promiseId": "candidate-ec9935651238",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-ec9935651238-source",
+        "psp-core-2025--print-document-43310",
+        "psp-core-2025--vote-88356"
+      ],
+      "explanationCz": "Motoristé slíbili, že DPH bude v příslušných limitech odváděna až po zaplacení faktury. Doložený vládní návrh zákona o evidenci tržeb upravuje zejména evidenci tržeb a možnost dřívější opravy DPH u některých nezaplacených pohledávek; nezavádí obecně odvod DPH pouze ze zaplacených faktur. Poslanci Motoristů tento návrh podpořili, ale jejich hlasování se proto netýká přímo slíbeného opatření. Balíček neobsahuje ověřený návrh, rozhodnutí ani jiný krok Motoristů k přesně slíbené změně.",
+      "confidence": "high",
+      "uncertainties": [
+        "Dodané podklady neobsahují úplné znění ani jiné ověřené rozhodnutí, které by přímo řešilo odvod DPH až po zaplacení faktury.",
+        "Nelze z nich zjistit, zda Motoristé takové opatření navrhli nebo prosazovali mimo doložený návrh zákona o evidenci tržeb."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0720d4894e2fec65016ab25dd6361887d2822da3da8c5cb275",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 10863,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 10860
+      },
+      "output_tokens": 607,
+      "output_tokens_details": {
+        "reasoning_tokens": 326
+      },
+      "total_tokens": 11470
+    },
+    "output": {
+      "promiseId": "candidate-ec9935651238",
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ec9935651238-source",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--print-document-43310"
+      ],
+      "explanationCz": "Motoristé slíbili, že DPH bude odváděna až z uhrazených, nikoli jen vystavených faktur. V hlasování o vládním návrhu zákona podpořilo návrh všech sedm hlasujících poslanců Motoristů, což tvořilo přesnou nadpoloviční většinu jejich třináctičlenného klubu. Návrh nezavádí slíbený systém plošně, ale zkracuje ze šesti na tři měsíce dobu, po níž lze žádat opravu DPH z nezaplacené pohledávky, a rozšiřuje její limity. Jde proto o konkrétní částečný krok, který zmírňuje dopady odvádění DPH z neuhrazených faktur, nikoli o úplné splnění slibu.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0bc80bbe43ee0421016ab25dd623d487d298248cbd6fb185f4",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 10863,
+      "input_tokens_details": {
+        "cache_write_tokens": 9380,
+        "cached_tokens": 1480
+      },
+      "output_tokens": 449,
+      "output_tokens_details": {
+        "reasoning_tokens": 121
+      },
+      "total_tokens": 11312
+    },
+    "output": {
+      "promiseId": "candidate-ec9935651238",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-ec9935651238-source",
+        "psp-core-2025--print-document-43310",
+        "psp-core-2025--vote-88356"
+      ],
+      "explanationCz": "Motoristé slíbili, že DPH bude v příslušných limitech odváděna až po zaplacení faktury. Doložený vládní návrh zákona o evidenci tržeb upravuje zejména evidenci tržeb a možnost dřívější opravy DPH u některých nezaplacených pohledávek; nezavádí obecně odvod DPH pouze ze zaplacených faktur. Poslanci Motoristů tento návrh podpořili, ale jejich hlasování se proto netýká přímo slíbeného opatření. Balíček neobsahuje ověřený návrh, rozhodnutí ani jiný krok Motoristů k přesně slíbené změně.",
+      "confidence": "high",
+      "uncertainties": [
+        "Dodané podklady neobsahují úplné znění ani jiné ověřené rozhodnutí, které by přímo řešilo odvod DPH až po zaplacení faktury.",
+        "Nelze z nich zjistit, zda Motoristé takové opatření navrhli nebo prosazovali mimo doložený návrh zákona o evidenci tržeb."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_021ff5e869caddf7016ab25de2355887d2a9042cff5db0db60",
+    "model": "gpt-5.6-sol",
+    "usage": {
+      "input_tokens": 10630,
+      "input_tokens_details": {
+        "cache_write_tokens": 10627,
+        "cached_tokens": 0
+      },
+      "output_tokens": 316,
+      "output_tokens_details": {
+        "reasoning_tokens": 85
+      },
+      "total_tokens": 10946
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "candidate-ec9935651238-source",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--print-document-43310"
+      ],
+      "explanationCz": "První posouzení lépe rozlišuje mezi částečným krokem a úplným splněním slibu. Vládní návrh zákona o evidenci tržeb a souvisejících změnách, vedený ve Sněmovně jako tisk č. 189, zkracuje čekání na opravu DPH u nezaplacených pohledávek a rozšiřuje příslušné limity. Sedm poslanců Motoristů návrh podpořilo, a strana tak doloženě pomohla prosadit změnu ve směru svého slibu. Návrh však nezavádí obecné placení DPH až po úhradě faktury, takže slib zatím není splněn celý."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-towards",
+    "selectedReview": "assessor-a"
+  }
+}

@@ -1,0 +1,44 @@
+# Zásadně budeme bránit svobodu slova a vyjadřování
+
+> Neveřejný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+
+## Návrh pro veřejný web
+
+*Nevznikl žádný návrh veřejného hodnocení ani vysvětlení.*
+
+## Co má zkontrolovat reviewer
+
+- Odpovídá navržené hodnocení metodice SLAVA Indexu?
+- Je jednání správně připsáno sledované straně?
+- Je veřejné vysvětlení pochopitelné samo o sobě a říká, kdo co udělal a jak to souvisí se slibem?
+- Jsou zkratky, právní pojmy a úřední označení při prvním použití vysvětlené?
+- Dokládají uvedené zdroje všechna podstatná tvrzení a nechybí rozporný podklad?
+
+## Technické podklady pro reviewera
+
+- Výsledek automatického procesu: oba automatické posudky označily podklady za nedostatečné
+- Interní stav: bez kandidátního stavu
+- Důvod výsledku: `insufficient-evidence`
+- Úplný strojový audit: `assessment-run.json`
+- Přesný balíček posuzovaných podkladů: `evidence-package.json`
+
+### Shoda hodnotitelů
+
+Oba nezávislí hodnotitelé dospěli ke stejnému výsledku: **podklady nestačí pro automatický návrh hodnocení**.
+
+ANO 2011 slíbilo bránit svobodu slova a vyjadřování. Poslanci ANO většinově podpořili dvě změny volebních zákonů. Dodané znění těchto návrhů upravuje pravidla voleb a neprokazuje opatření k ochraně svobody slova či vyjadřování. Z dostupných podkladů proto není doložen významný krok ani opačné jednání k tomuto slibu.
+
+Co zůstává nejisté:
+
+- Balíček neobsahuje dostatečně věcně související podklad, který by doložil konkrétní postup ANO 2011 na ochranu svobody slova a vyjadřování nebo jednání přímo proti tomuto závazku.
+
+Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.
+
+### Zdroje použité při hodnocení
+
+- [Původní volební slib](https://www.anobudelip.cz/file/edee/ke-stazeni/volebni-program-2025.pdf)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=87594)
+- [Výsledek hlasování Poslanecké sněmovny](https://public.psp.cz/sqw/hlasy.sqw?g=87270)
+- [Úplné znění návrhu zákona na webu Poslanecké sněmovny](https://www.psp.cz/sqw/text/orig2.sqw?idd=268459)
+- [Úplné znění návrhu zákona na webu Poslanecké sněmovny](https://www.psp.cz/sqw/text/orig2.sqw?idd=270178)
+
