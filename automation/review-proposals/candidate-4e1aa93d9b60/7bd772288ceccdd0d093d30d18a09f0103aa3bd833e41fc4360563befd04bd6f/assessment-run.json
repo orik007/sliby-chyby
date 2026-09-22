@@ -1,0 +1,166 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-21T20-56-35-550Z--af7e57429af1",
+  "evaluatedAt": "2026-09-21T20:56:35.550Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-4e1aa93d9b60/af7e57429af1f1d141674ad386fe26b98d186e63cbee6050b75e377f4ba18534.json",
+  "packageHash": "af7e57429af1f1d141674ad386fe26b98d186e63cbee6050b75e377f4ba18534",
+  "assessmentContentHash": "40926be07b94a09730d918eb24a0572adeafa9d495937f46057e9b1304b94831",
+  "assessmentFingerprint": "7bd772288ceccdd0d093d30d18a09f0103aa3bd833e41fc4360563befd04bd6f",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-4e1aa93d9b60",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v13",
+      "contentHash": "131f5cb530bdc6024cc6652335dc359e5ae4860b9cf4dcfda7fb35df34f063b2"
+    },
+    "arbiter": {
+      "version": "arbiter-v5",
+      "contentHash": "5d3c226d631557f53d328d3450edf9c3560fb30e41bc7825902244bebdd6ea7b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessParallelCalls": true,
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-5.6-terra",
+      "gpt-5.6-terra"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-4e1aa93d9b60",
+      "status": "no-progress",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4e1aa93d9b60-source",
+        "government-cz-rss--fafcacf9396ad11a9ef8"
+      ],
+      "explanationCz": "Motoristé sobě slíbili započítávat náklady v blíže neurčené oblasti do obranných výdajů pro plnění závazků NATO. Dodaný záznam uvádí pouze účast premiéra a ministrů na Dnech NATO v Ostravě. Neprokazuje žádné rozhodnutí, návrh ani změnu způsobu započítávání výdajů. V živém hodnocení proto není doložen významný posun ani k naplnění, ani proti slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Slib odkazuje na „tuto oblast“, ale dodaný výňatek programu neuvádí, o jaké konkrétní náklady jde.",
+        "Dodaný vládní záznam neobsahuje informace o rozpočtovém, účetním ani aliančním postupu týkajícím se započítávání výdajů."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-4e1aa93d9b60",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-4e1aa93d9b60-source",
+        "government-cz-rss--fafcacf9396ad11a9ef8"
+      ],
+      "explanationCz": "Motoristé sobě slíbili započítávat blíže neurčené náklady do obranných výdajů pro plnění závazků NATO. Dodaný záznam pouze potvrzuje účast premiéra a ministrů na akci Dny NATO v Ostravě. Neprokazuje žádné rozhodnutí, návrh ani provedení slíbeného způsobu započítávání nákladů. Nelze proto doložit významný posun ani opačný krok.",
+      "confidence": "high",
+      "uncertainties": [
+        "Slib neupřesňuje, které konkrétní náklady označuje jako „náklady v této oblasti“, takže bez dalších souvislostí nelze přesně vymezit jeho věcný rozsah.",
+        "V dodaných podkladech chybí ověřený dokument o rozpočtovém, vládním nebo jiném opatření, které by tyto náklady zahrnulo do obranných výdajů NATO."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_04d68bd792475682016ab199f2b86c87d2bbbd486285720cf6",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 2628,
+      "input_tokens_details": {
+        "cache_write_tokens": 1145,
+        "cached_tokens": 1480
+      },
+      "output_tokens": 280,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 2908
+    },
+    "output": {
+      "promiseId": "candidate-4e1aa93d9b60",
+      "status": "no-progress",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4e1aa93d9b60-source",
+        "government-cz-rss--fafcacf9396ad11a9ef8"
+      ],
+      "explanationCz": "Motoristé sobě slíbili započítávat náklady v blíže neurčené oblasti do obranných výdajů pro plnění závazků NATO. Dodaný záznam uvádí pouze účast premiéra a ministrů na Dnech NATO v Ostravě. Neprokazuje žádné rozhodnutí, návrh ani změnu způsobu započítávání výdajů. V živém hodnocení proto není doložen významný posun ani k naplnění, ani proti slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Slib odkazuje na „tuto oblast“, ale dodaný výňatek programu neuvádí, o jaké konkrétní náklady jde.",
+        "Dodaný vládní záznam neobsahuje informace o rozpočtovém, účetním ani aliančním postupu týkajícím se započítávání výdajů."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_03da4af48c477cc1016ab199f2ae3087d29dc8cf87ef0ba7ef",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 2628,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 2625
+      },
+      "output_tokens": 290,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 2918
+    },
+    "output": {
+      "promiseId": "candidate-4e1aa93d9b60",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-4e1aa93d9b60-source",
+        "government-cz-rss--fafcacf9396ad11a9ef8"
+      ],
+      "explanationCz": "Motoristé sobě slíbili započítávat blíže neurčené náklady do obranných výdajů pro plnění závazků NATO. Dodaný záznam pouze potvrzuje účast premiéra a ministrů na akci Dny NATO v Ostravě. Neprokazuje žádné rozhodnutí, návrh ani provedení slíbeného způsobu započítávání nákladů. Nelze proto doložit významný posun ani opačný krok.",
+      "confidence": "high",
+      "uncertainties": [
+        "Slib neupřesňuje, které konkrétní náklady označuje jako „náklady v této oblasti“, takže bez dalších souvislostí nelze přesně vymezit jeho věcný rozsah.",
+        "V dodaných podkladech chybí ověřený dokument o rozpočtovém, vládním nebo jiném opatření, které by tyto náklady zahrnulo do obranných výdajů NATO."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_03ff67b4d77f3a0f016ab199fc038487d2874739a8ea234972",
+    "model": "gpt-5.6-sol",
+    "usage": {
+      "input_tokens": 2359,
+      "input_tokens_details": {
+        "cache_write_tokens": 2356,
+        "cached_tokens": 0
+      },
+      "output_tokens": 363,
+      "output_tokens_details": {
+        "reasoning_tokens": 166
+      },
+      "total_tokens": 2722
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-4e1aa93d9b60-source",
+        "government-cz-rss--fafcacf9396ad11a9ef8"
+      ],
+      "explanationCz": "Druhé hodnocení správně rozlišuje mezi tím, že není doložen posun, a tím, zda jsou podklady dostatečné pro pevný závěr. Program obsahuje slib, ale bez širšího textu není jasné, kterých nákladů se týká. Zpráva o účasti premiéra a ministrů na Dnech NATO neříká nic o započítávání těchto nákladů do obranných výdajů. Proto lze zatím říci jen to, že posun nebyl doložen, nikoli že dostupné podklady věc dostatečně prověřily."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

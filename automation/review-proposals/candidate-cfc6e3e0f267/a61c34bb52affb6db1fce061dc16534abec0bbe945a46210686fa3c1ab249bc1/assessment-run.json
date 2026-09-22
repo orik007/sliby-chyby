@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-21T20-58-44-540Z--3b53a5f78e6d",
+  "evaluatedAt": "2026-09-21T20:58:44.540Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-cfc6e3e0f267/3b53a5f78e6db23f2e05bb7fb63c8f7d4ebefdd0cc47274f3cbeed0298d527c6.json",
+  "packageHash": "3b53a5f78e6db23f2e05bb7fb63c8f7d4ebefdd0cc47274f3cbeed0298d527c6",
+  "assessmentContentHash": "f74c32980a14c966ba5cb1303ade6960a150e1a005e8c0d82a84ca8ee6f40865",
+  "assessmentFingerprint": "a61c34bb52affb6db1fce061dc16534abec0bbe945a46210686fa3c1ab249bc1",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-cfc6e3e0f267",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v13",
+      "contentHash": "131f5cb530bdc6024cc6652335dc359e5ae4860b9cf4dcfda7fb35df34f063b2"
+    },
+    "arbiter": {
+      "version": "arbiter-v5",
+      "contentHash": "5d3c226d631557f53d328d3450edf9c3560fb30e41bc7825902244bebdd6ea7b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessParallelCalls": true,
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-5.6-terra",
+      "gpt-5.6-terra"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-cfc6e3e0f267",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-cfc6e3e0f267-source",
+        "msmt-news-api--news-635bce7f2e28bdfefc80"
+      ],
+      "explanationCz": "Motoristé sobě ve volebním programu slíbili zrušit deváté třídy s výjimkou žáků, kteří nepokračují na střední školu. Doložená aktivita ministerstva se však týká pravidel bezpečné práce s chemickými látkami ve školách, nikoli organizace devátých tříd. Z podkladů proto nelze ověřit žádný relevantní krok strany ani jí přičitatelné vlády k uskutečnění nebo opuštění tohoto slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady neobsahují relevantní návrh zákona, rozhodnutí vlády, hlasování ani jiné doložené jednání Motoristů sobě k devátým třídám."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-cfc6e3e0f267",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-cfc6e3e0f267-source",
+        "msmt-news-api--news-635bce7f2e28bdfefc80"
+      ],
+      "explanationCz": "Motoristé sobě slíbili zrušit deváté třídy s výjimkou žáků, kteří nepokračují na střední školu. Dodaný doklad o činnosti ministerstva se týká bezpečného nakládání s chemickými látkami ve školách, nikoli organizace devátých tříd. Z podkladů proto nelze doložit žádný významný krok strany k naplnění ani k odmítnutí tohoto slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Balíček neobsahuje relevantní a ověřený záznam o návrhu, hlasování, rozhodnutí nebo konkrétním postoji Motoristů sobě k zrušení devátých tříd."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_00ae72a96b4cce1f016ab19a74513487d2bc92c0085860ce4f",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 2702,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 2699
+      },
+      "output_tokens": 305,
+      "output_tokens_details": {
+        "reasoning_tokens": 54
+      },
+      "total_tokens": 3007
+    },
+    "output": {
+      "promiseId": "candidate-cfc6e3e0f267",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-cfc6e3e0f267-source",
+        "msmt-news-api--news-635bce7f2e28bdfefc80"
+      ],
+      "explanationCz": "Motoristé sobě ve volebním programu slíbili zrušit deváté třídy s výjimkou žáků, kteří nepokračují na střední školu. Doložená aktivita ministerstva se však týká pravidel bezpečné práce s chemickými látkami ve školách, nikoli organizace devátých tříd. Z podkladů proto nelze ověřit žádný relevantní krok strany ani jí přičitatelné vlády k uskutečnění nebo opuštění tohoto slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady neobsahují relevantní návrh zákona, rozhodnutí vlády, hlasování ani jiné doložené jednání Motoristů sobě k devátým třídám."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_013310da167c775a016ab19a73b1e487d28ef259e8e668d860",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 2702,
+      "input_tokens_details": {
+        "cache_write_tokens": 1219,
+        "cached_tokens": 1480
+      },
+      "output_tokens": 287,
+      "output_tokens_details": {
+        "reasoning_tokens": 39
+      },
+      "total_tokens": 2989
+    },
+    "output": {
+      "promiseId": "candidate-cfc6e3e0f267",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-cfc6e3e0f267-source",
+        "msmt-news-api--news-635bce7f2e28bdfefc80"
+      ],
+      "explanationCz": "Motoristé sobě slíbili zrušit deváté třídy s výjimkou žáků, kteří nepokračují na střední školu. Dodaný doklad o činnosti ministerstva se týká bezpečného nakládání s chemickými látkami ve školách, nikoli organizace devátých tříd. Z podkladů proto nelze doložit žádný významný krok strany k naplnění ani k odmítnutí tohoto slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Balíček neobsahuje relevantní a ověřený záznam o návrhu, hlasování, rozhodnutí nebo konkrétním postoji Motoristů sobě k zrušení devátých tříd."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

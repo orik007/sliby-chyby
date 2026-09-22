@@ -1,0 +1,138 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-21T20-56-18-012Z--99f259034295",
+  "evaluatedAt": "2026-09-21T20:56:18.012Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-49157605ed73/99f25903429547adad2c00b22ae7c68d0e2dfc2f7554d84694e567a49293252c.json",
+  "packageHash": "99f25903429547adad2c00b22ae7c68d0e2dfc2f7554d84694e567a49293252c",
+  "assessmentContentHash": "fb3a62f66e5c4c380c7ddb7b5f6f6f9a9c8c9e96c26cf75fd660131afca43413",
+  "assessmentFingerprint": "f873b6938cf9a078e53931a50174b6e1b582e4b9a782613d9f37917eeb795a4a",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-49157605ed73",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v13",
+      "contentHash": "131f5cb530bdc6024cc6652335dc359e5ae4860b9cf4dcfda7fb35df34f063b2"
+    },
+    "arbiter": {
+      "version": "arbiter-v5",
+      "contentHash": "5d3c226d631557f53d328d3450edf9c3560fb30e41bc7825902244bebdd6ea7b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessParallelCalls": true,
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-5.6-terra",
+      "gpt-5.6-terra"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-49157605ed73",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-49157605ed73-source",
+        "mf-press-archive-2025-2026--archive-f1292514b4c01c50e2a7"
+      ],
+      "explanationCz": "SPD ve svém volebním programu slíbila snížit ceny elektřiny a plynu. Dodaný záznam o kroku vlády se týká regulace cen pohonných hmot a spotřební daně z nafty, nikoli elektřiny nebo plynu. Z dostupných podkladů proto není doložen žádný významný krok SPD ke splnění ani přímému popření tohoto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný vládní záznam neprokazuje, že by dané opatření prosadila SPD, a navíc se netýká cen elektřiny ani plynu.",
+        "Balíček neobsahuje ověřené podklady o konkrétním návrhu, hlasování, rozhodnutí nebo výsledku vztahujícím se ke snížení cen elektřiny a plynu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-49157605ed73",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-49157605ed73-source"
+      ],
+      "explanationCz": "SPD ve volebním programu slíbila snížit ceny elektřiny a plynu a upřednostnit při nákupu cenu. Dodané podklady však nedokládají žádný konkrétní krok SPD ani její parlamentní skupiny, který by ceny elektřiny nebo plynu snížil. Nelze proto ověřit významný posun k naplnění ani přímý krok proti tomuto slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady neobsahují ověřený návrh, hlasování, rozhodnutí ani uskutečněné opatření SPD týkající se cen elektřiny nebo plynu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f876b17ee8ddb72016ab199e9123c87d284a04e6bba91f982",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 2375,
+      "input_tokens_details": {
+        "cache_write_tokens": 892,
+        "cached_tokens": 1480
+      },
+      "output_tokens": 494,
+      "output_tokens_details": {
+        "reasoning_tokens": 222
+      },
+      "total_tokens": 2869
+    },
+    "output": {
+      "promiseId": "candidate-49157605ed73",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-49157605ed73-source",
+        "mf-press-archive-2025-2026--archive-f1292514b4c01c50e2a7"
+      ],
+      "explanationCz": "SPD ve svém volebním programu slíbila snížit ceny elektřiny a plynu. Dodaný záznam o kroku vlády se týká regulace cen pohonných hmot a spotřební daně z nafty, nikoli elektřiny nebo plynu. Z dostupných podkladů proto není doložen žádný významný krok SPD ke splnění ani přímému popření tohoto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný vládní záznam neprokazuje, že by dané opatření prosadila SPD, a navíc se netýká cen elektřiny ani plynu.",
+        "Balíček neobsahuje ověřené podklady o konkrétním návrhu, hlasování, rozhodnutí nebo výsledku vztahujícím se ke snížení cen elektřiny a plynu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_022a8503bc55a614016ab199e911d887d2bbb1dd19b5f9370f",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 2375,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 2372
+      },
+      "output_tokens": 320,
+      "output_tokens_details": {
+        "reasoning_tokens": 125
+      },
+      "total_tokens": 2695
+    },
+    "output": {
+      "promiseId": "candidate-49157605ed73",
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-49157605ed73-source"
+      ],
+      "explanationCz": "SPD ve volebním programu slíbila snížit ceny elektřiny a plynu a upřednostnit při nákupu cenu. Dodané podklady však nedokládají žádný konkrétní krok SPD ani její parlamentní skupiny, který by ceny elektřiny nebo plynu snížil. Nelze proto ověřit významný posun k naplnění ani přímý krok proti tomuto slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady neobsahují ověřený návrh, hlasování, rozhodnutí ani uskutečněné opatření SPD týkající se cen elektřiny nebo plynu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}
