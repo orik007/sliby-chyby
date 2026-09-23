@@ -10,8 +10,8 @@ const dateFormatter = new Intl.DateTimeFormat("cs-CZ", {
 const initialDate = dateFormatter.format(new Date(systemStatus.lastSuccessfulCollectionAt));
 ---
 <p class="collection-status" data-collection-status>
-  Zdroje naposledy zkontrolovány:
-  <time datetime={systemStatus.lastSuccessfulCollectionAt}>{initialDate}</time>
+  Poslední kontrola slibů proběhla:
+  <strong><time datetime={systemStatus.lastSuccessfulCollectionAt}>{initialDate}</time></strong>
 </p>
 
 <script>
