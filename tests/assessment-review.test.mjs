@@ -23,7 +23,7 @@ const runtime = { assessorProviderA: "openai", assessorProviderB: "openai", arbi
 
 test("loads only the active assessor and arbiter prompts", async () => {
   const prompts = await loadAssessmentPrompts();
-  assert.equal(prompts.assessor.version, "assessor-v13");
+  assert.equal(prompts.assessor.version, "assessor-v14");
   assert.equal(prompts.arbiter.version, "arbiter-v5");
   assert.match(prompts.assessor.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.arbiter.contentHash, /^[a-f0-9]{64}$/);

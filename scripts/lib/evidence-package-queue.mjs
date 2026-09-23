@@ -2,6 +2,7 @@ import { existsSync } from "node:fs";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { hashEvidencePackage, validateEvidencePackage } from "./assessment-pipeline.mjs";
+import { assessableAttributionStatuses } from "./evidence-matcher.mjs";
 
 const schemaVersion = "1.0.0";
 
@@ -58,6 +59,15 @@ export function currentEvidencePackageEntries(queue) {
 
 function latestUnreplacedPackageEntry(queue, promiseId) {
   return queue.packages.find((entry) => entry.promiseId === promiseId && !entry.supersededByPackageHash) ?? null;
+}
+
+// A package queued under an earlier attribution rule can cite evidence the
+// current rule no longer accepts (for example a party's own publication).
+// Such a package is retired rather than assessed.
+function usesOnlyActiveAttribution(evidencePackage) {
+  return evidencePackage.evidence
+    .filter((evidence) => evidence.role === "conduct-evidence" && evidence.matchBasis?.attributionStatus)
+    .every((evidence) => assessableAttributionStatuses.has(evidence.matchBasis.attributionStatus));
 }
 
 function eligibleUnderSemanticPolicy(evidencePackage, { candidateLimit, minimumSimilarity }) {
@@ -134,12 +144,21 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
     changed = true;
     added += 1;
   }
+  let retired = 0;
+  for (const entry of currentEvidencePackageEntries(queue)) {
+    const evidencePackage = JSON.parse(await readFile(resolve(queuePath, entry.path), "utf8"));
+    if (usesOnlyActiveAttribution(evidencePackage)) continue;
+    entry.retiredAt = now;
+    entry.retirementReason = "outside-active-attribution-policy";
+    changed = true;
+    retired += 1;
+  }
   if (changed) {
     queue.packages.sort((left, right) => left.promiseId.localeCompare(right.promiseId) || left.queuedAt.localeCompare(right.queuedAt));
     await mkdir(queuePath, { recursive: true });
     await writeFile(resolve(queuePath, "manifest.json"), `${JSON.stringify(validateEvidencePackageQueue(queue), null, 2)}\n`);
   }
-  return { added, updated, activeCount: currentEvidencePackageEntries(queue).length, changed };
+  return { added, updated, retired, activeCount: currentEvidencePackageEntries(queue).length, changed };
 }
 
 export async function reconcileEvidencePackageQueue({ queueDirectory, candidateLimit, minimumSimilarity }) {

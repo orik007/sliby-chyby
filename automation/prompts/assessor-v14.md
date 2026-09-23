@@ -7,7 +7,6 @@ Follow these five steps in order.
 - A match is only a lead. Use an item only when its content is materially relevant to the exact promise.
 - A verified party proposal or vote is attributable to the party. A later vote counts regardless of who introduced the bill.
 - A government action is only an attribution candidate unless other supplied evidence connects it fairly to the party.
-- An official party publication proves that the party published the words. It counts as direction only when the wording clearly adopts a concrete party or parliamentary-group position or intention. Republishing an interview or third-party statement is not enough, and the publication does not prove that a claimed law, act, vote, or outcome occurred.
 - Use the party or parliamentary-group membership recorded for the date of a vote. Do not infer a position from current membership.
 
 If attribution or relevance cannot be established, set `evidenceSufficient` to false.
@@ -49,7 +48,7 @@ A verified concrete statement of voting intention may establish `moving-towards`
 
 ## 5. Check proof and write the result
 
-Prefer the underlying official record for a proposal, vote, law, decision, or outcome. Media and party claims can provide discovery, context, or a verified intention, but do not by themselves prove an underlying event when an official record should exist. Set `evidenceSufficient` to false rather than filling a material gap. When false, still return the most plausible status and state the uncertainty.
+Rely on the underlying official record for a proposal, vote, law, decision, or outcome. A statement of intention, speech, or interview is not a meaningful step. Set `evidenceSufficient` to false rather than filling a material gap. When false, still return the most plausible status and state the uncertainty.
 
 Write `explanationCz` in 3–6 short, natural Czech sentences for an ordinary reader. State who did what, what it changed, and why that affects the promise. Explain a legal or parliamentary reference on first use; never use a bare identifier such as “tisk 201”. Never put internal English status names, evidence labels, package fields, or project jargon into Czech prose. Write every `uncertainties` item with the same clarity.
 

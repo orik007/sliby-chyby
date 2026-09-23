@@ -142,7 +142,7 @@ for (const promise of promises) {
     promiseId: promise.id,
     candidateMatchCount: matches.length,
     semanticCandidateMatchCount: matches.filter(({ semanticCandidate }) => semanticCandidate !== null).length,
-    attributablePrimaryMatchCount: matches.filter(({ record, attributionStatus }) => record.primary && ["verified-party-vote", "verified-party-no-majority", "verified-party-sponsor", "verified-party-publication", "candidate-government-action"].includes(attributionStatus)).length,
+    attributablePrimaryMatchCount: matches.filter(({ record, attributionStatus }) => record.primary && ["verified-party-vote", "verified-party-no-majority", "verified-party-sponsor", "candidate-government-action"].includes(attributionStatus)).length,
     evidencePackage: packagePath ? `evidence-packages/${basename(packagePath)}` : null,
     noPackageReason: packagePath ? null : "no-primary-candidate-match",
     matches: matches.map(summarizeMatch)

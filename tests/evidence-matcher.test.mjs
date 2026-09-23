@@ -4,6 +4,7 @@ import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import {
+  assessableAttributionStatuses,
   buildEvidencePackage,
   matchCollectorRecords,
   matchRecordToPromise,
@@ -66,12 +67,12 @@ test("does not turn an unrelated record into candidate evidence", () => {
 test("generated catalogue matching does not match a generic pledge verb alone", () => {
   const startups = registry.promises.find(({ id }) => id === "candidate-01b0b2fdd73f");
   const unrelated = record({
-    id: "party--sport",
+    id: "ministry--sport",
     kind: "official-publication",
-    evidenceRole: "official-party-publication",
+    evidenceRole: "official-discovery",
     title: "Podpoříme domácí sport.",
-    publisher: "Motoristé sobě",
-    payload: { sourcePartyId: "motoriste" }
+    publisher: "Ministerstvo",
+    payload: {}
   });
   assert.equal(startups.matching.requireMultiwordTerms, true);
   assert.equal(matchRecordToPromise(unrelated, startups), null);
@@ -208,7 +209,7 @@ test("treats a matched official ministry publication as a government-action cand
   assert.equal(evidencePackage.generation.directionAssigned, false);
 });
 
-test("attributes an official party publication only to the party that published it", () => {
+test("never attributes a party's own publication as party conduct", () => {
   const statement = createCollectedRecord({
     id: "party--eet",
     sourceId: "ano-party-news",
@@ -221,24 +222,8 @@ test("attributes an official party publication only to the party that published 
     url: "https://party.example/eet",
     payload: { excerptCz: "Hnutí oznámilo konkrétní další krok.", sourcePartyId: "ano" }
   });
-  const ownMatch = matchRecordToPromise(statement, eet);
-  assert.equal(ownMatch.attributionStatus, "verified-party-publication");
-  const evidencePackage = buildEvidencePackage({
-    promise: eet,
-    matches: [ownMatch],
-    collectorRun: { schemaVersion: "1.0.0", runId: "collector-party", records: [statement] },
-    asOf: "2026-09-03"
-  });
-  assert.equal(evidencePackage.evidence[1].matchBasis.attributionStatus, "verified-party-publication");
-
-  const otherPartyStatement = createCollectedRecord({
-    ...statement,
-    id: "party--eet-other",
-    sourceId: "other-party-news",
-    publisher: "Other party",
-    payload: { ...statement.payload, sourcePartyId: "spd" }
-  });
-  assert.equal(matchRecordToPromise(otherPartyStatement, eet).attributionStatus, "unattributed");
+  assert.equal(matchRecordToPromise(statement, eet).attributionStatus, "unattributed");
+  assert.equal(assessableAttributionStatuses.has("verified-party-publication"), false);
 });
 
 test("requires decisive vote context before a party direction enters the package", () => {

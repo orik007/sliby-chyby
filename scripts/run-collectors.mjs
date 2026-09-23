@@ -1,7 +1,7 @@
 import { mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import { basename, dirname, resolve } from "node:path";
 import { randomUUID } from "node:crypto";
-import { planSourceCollections, updateCollectorCheckpoints, validateCollectorCheckpoints } from "./lib/collector-checkpoints.mjs";
+import { planSourceCollections, updateCollectorCheckpoints, withoutRemovedSourceCheckpoints } from "./lib/collector-checkpoints.mjs";
 import { collectFeedSource } from "./lib/feed-collectors.mjs";
 import { deduplicateRecords, invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { collectPspSource } from "./lib/psp-collector.mjs";
@@ -46,7 +46,7 @@ invariant(selected.length > 0, "No enabled collector sources selected");
 for (const requested of args.sourceIds) invariant(selected.some((source) => source.id === requested), `Requested source is missing or disabled: ${requested}`);
 
 const checkpoints = args.checkpoints
-  ? validateCollectorCheckpoints(JSON.parse(await readFile(resolve(args.checkpoints), "utf8")), registry)
+  ? withoutRemovedSourceCheckpoints(JSON.parse(await readFile(resolve(args.checkpoints), "utf8")), registry)
   : null;
 const collectionPlan = checkpoints
   ? planSourceCollections({ registry, checkpoints, sourceIds: selected.map(({ id }) => id), requestedSince: args.since })

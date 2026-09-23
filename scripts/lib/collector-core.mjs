@@ -72,9 +72,7 @@ export function validateRegistry(registry) {
       invariant(Array.isArray(source.expectedHosts) && source.expectedHosts.length > 0, `Source ${source.id} needs expectedHosts`);
       invariant(source.coverage.mode !== "deferred", `Enabled source ${source.id} cannot have deferred coverage`);
     }
-    if (source.evidenceRole === "official-party-publication") {
-      invariant(typeof source.partyId === "string" && source.partyId.length > 0, `Party source ${source.id} needs partyId`);
-    }
+    invariant(source.evidenceRole !== "official-party-publication" && source.partyId === undefined, `Source ${source.id} is a party publication; party websites are not evidence sources`);
     if (source.wordpressCategoryId !== undefined) {
       invariant(source.collector === "wordpress-rest", `Source ${source.id} can filter a WordPress category only with the wordpress-rest collector`);
       invariant(Number.isInteger(source.wordpressCategoryId) && source.wordpressCategoryId > 0, `Source ${source.id} has invalid wordpressCategoryId`);

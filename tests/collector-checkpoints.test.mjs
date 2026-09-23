@@ -4,7 +4,8 @@ import {
   emptyCollectorCheckpoints,
   planSourceCollections,
   updateCollectorCheckpoints,
-  validateCollectorCheckpoints
+  validateCollectorCheckpoints,
+  withoutRemovedSourceCheckpoints
 } from "../scripts/lib/collector-checkpoints.mjs";
 
 const registry = {
@@ -72,4 +73,21 @@ test("a PSP snapshot map contributes an available checkpoint hash", () => {
     }]
   });
   assert.equal(updated.sourceCheckpoints.archive.snapshotHash, "c".repeat(64));
+});
+
+test("a checkpoint of a source removed from the registry is dropped instead of blocking the run", () => {
+  const checkpoint = {
+    lastSuccessfulCollectionAt: "2026-09-10T09:37:00.000Z",
+    requestedSince: "2025-10-01",
+    lastObservedRecordAt: null,
+    lastRunId: "run-1",
+    recordCount: 0,
+    snapshotHash: null
+  };
+  const checkpoints = emptyCollectorCheckpoints();
+  checkpoints.sourceCheckpoints.archive = checkpoint;
+  checkpoints.sourceCheckpoints["removed-party-news"] = checkpoint;
+  assert.throws(() => validateCollectorCheckpoints(checkpoints, registry), /unknown source removed-party-news/);
+  const pruned = withoutRemovedSourceCheckpoints(checkpoints, registry);
+  assert.deepEqual(Object.keys(pruned.sourceCheckpoints), ["archive"]);
 });

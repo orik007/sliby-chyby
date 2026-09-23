@@ -10,4 +10,4 @@ After collection, matching, and document enrichment succeed, `evidence-packages/
 
 `semantic-index/` is also held on that audit branch. It stores only the versioned promise embeddings used to retrieve candidates from new primary records. The workflow retains candidates according to the canonical [evidence pipeline](../docs/evidence-pipeline.md); a semantic candidate is not a relevance or scoring conclusion, and two assessors still evaluate each bounded package independently.
 
-The changed-input fingerprint includes assessable content, active prompt content, providers, and model IDs, so a run timestamp alone does not cause another model call. The active prompts are `assessor-v13` and `arbiter-v5`. The canonical process is [docs/evidence-pipeline.md](../docs/evidence-pipeline.md).
+The changed-input fingerprint includes assessable content, active prompt content, providers, and model IDs, so a run timestamp alone does not cause another model call. The active prompts are `assessor-v14` and `arbiter-v5`. The canonical process is [docs/evidence-pipeline.md](../docs/evidence-pipeline.md).

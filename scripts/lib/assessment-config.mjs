@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { defaultSemanticCandidateLimit, defaultSemanticMinimumSimilarity } from "./semantic-retrieval.mjs";
 
-export const assessorPromptVersion = "assessor-v13";
+export const assessorPromptVersion = "assessor-v14";
 export const arbiterPromptVersion = "arbiter-v5";
 
 export function semanticRetrievalRuntimeConfig(env = process.env) {

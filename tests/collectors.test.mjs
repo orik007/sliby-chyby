@@ -41,7 +41,11 @@ test("validates a unique, explicit collector registry", () => {
   assert.throws(() => validateRegistry({
     schemaVersion: "1.0.0",
     sources: [{ ...mediaSource, evidenceRole: "official-party-publication", primary: true }]
-  }), /needs partyId/);
+  }), /party websites are not evidence sources/);
+  assert.throws(() => validateRegistry({
+    schemaVersion: "1.0.0",
+    sources: [{ ...mediaSource, partyId: "motoriste" }]
+  }), /party websites are not evidence sources/);
 });
 
 test("retries transient source responses before accepting verified bytes", async () => {
@@ -105,14 +109,13 @@ test("retries transport failures while fetching and reading source bytes", async
   }
 });
 
-test("normalizes an official party WordPress item with explicit party attribution", () => {
+test("normalizes an official WordPress item within its configured category", () => {
   const source = {
     ...mediaSource,
-    id: "party-news",
+    id: "ministry-news",
     collector: "wordpress-rest",
     primary: true,
-    evidenceRole: "official-party-publication",
-    partyId: "motoriste",
+    evidenceRole: "official-discovery",
     apiEndpoint: "https://party.example/wp-json/wp/v2/posts",
     wordpressCategoryId: 5,
     wordpressCategorySlug: "tiskova-zprava",
@@ -122,17 +125,17 @@ test("normalizes an official party WordPress item with explicit party attributio
     id: 42,
     date_gmt: "2026-08-31T10:56:54",
     link: "https://party.example/concrete-step-42",
-    title: { rendered: "Strana představila konkrétní krok" },
-    excerpt: { rendered: "<p>Oficiální vyjádření strany.</p>" },
+    title: { rendered: "Ministerstvo představilo konkrétní krok" },
+    excerpt: { rendered: "<p>Oficiální vyjádření ministerstva.</p>" },
     categories: [5]
   }], source, { since: "2025-10-01" });
   assert.equal(records.length, 1);
   assert.equal(records[0].kind, "official-publication");
-  assert.equal(records[0].evidenceRole, "official-party-publication");
-  assert.equal(records[0].payload.sourcePartyId, "motoriste");
+  assert.equal(records[0].evidenceRole, "official-discovery");
+  assert.equal("sourcePartyId" in records[0].payload, false);
   assert.deepEqual(records[0].payload.wordpressCategoryIds, [5]);
   assert.equal(records[0].payload.wordpressCategorySlug, "tiskova-zprava");
-  assert.equal(records[0].payload.excerptCz, "Oficiální vyjádření strany.");
+  assert.equal(records[0].payload.excerptCz, "Oficiální vyjádření ministerstva.");
   assert.throws(() => parseWordPressRestPage([{
     id: 43,
     date_gmt: "2026-08-31T11:00:00",

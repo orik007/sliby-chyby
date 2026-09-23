@@ -312,8 +312,7 @@ export function parseWordPressRestPage(items, source, { since }) {
         excerptCz: cleanText(item.excerpt?.rendered, source.maxExcerptChars ?? 500),
         wordpressPostId: item.id,
         wordpressCategoryIds: Array.isArray(item.categories) ? item.categories : [],
-        ...(source.wordpressCategorySlug ? { wordpressCategorySlug: source.wordpressCategorySlug } : {}),
-        ...(source.partyId ? { sourcePartyId: source.partyId } : {})
+        ...(source.wordpressCategorySlug ? { wordpressCategorySlug: source.wordpressCategorySlug } : {})
       }
     }));
   }
