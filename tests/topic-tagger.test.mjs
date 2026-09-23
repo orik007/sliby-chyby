@@ -113,6 +113,27 @@ test("deriveRecordContentExcerpts surfaces a parliamentary vote's linked print t
   assert.ok(excerpts.some((excerpt) => excerpt.includes("100 yes, 50 no")));
 });
 
+test("deriveRecordContentExcerpts surfaces the agenda item a vote was cast on", () => {
+  const record = createCollectedRecord({
+    id: "psp--agenda-vote-fixture",
+    sourceId: "psp-core-2025",
+    kind: "parliamentary-vote",
+    primary: true,
+    evidenceRole: "primary-record",
+    occurredAt: "2026-08-26T11:05:00",
+    title: "Hlasování 951",
+    publisher: "Chamber of Deputies",
+    url: "https://public.psp.cz/sqw/hlasy.sqw?g=951",
+    payload: {
+      externalVoteId: "951",
+      agendaItem: { externalAgendaItemId: "5001", number: 3, titleCz: "Vládní návrh zákona o pravidlech rozpočtové odpovědnosti", suffixCz: "/sněmovní tisk 68/ - zákon vrácený prezidentem" },
+      linkedPrints: []
+    }
+  });
+  const excerpts = deriveRecordContentExcerpts(record);
+  assert.ok(excerpts.includes("Agenda item voted on: Vládní návrh zákona o pravidlech rozpočtové odpovědnosti /sněmovní tisk 68/ - zákon vrácený prezidentem"));
+});
+
 test("validateTagAssignmentOutput rejects an invented tag id", () => {
   assert.throws(() => validateTagAssignmentOutput({ tags: ["not-a-real-tag"], confidence: 0.8, supportingExcerpts: [] }, taxonomy), /unknown tag id/);
 });

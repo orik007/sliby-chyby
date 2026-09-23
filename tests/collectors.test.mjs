@@ -437,18 +437,103 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
     "typ_akce.unl": entry(unl(["5", "Chamber approved bill"]))
   };
 
-  const result = normalizePspData({ source, since: "2026-08-01", votesEntries, membersEntries, printsEntries });
+  const sessionsEntries = { "schuze.unl": entry(""), "bod_schuze.unl": entry("") };
+  const result = normalizePspData({ source, since: "2026-08-01", votesEntries, membersEntries, printsEntries, sessionsEntries });
   const vote = result.records.find((record) => record.kind === "parliamentary-vote");
   const step = result.records.find((record) => record.kind === "legislative-step");
   assert.ok(vote);
   assert.ok(step);
   assert.equal(vote.payload.linkedPrints[0].number, 189);
   assert.equal(vote.payload.linkedPrints[0].historyContexts[0].actionCz, "Chamber approved bill");
+  assert.equal(vote.payload.linkedPrints[0].linkBasis, "history-vote-id");
   assert.equal(vote.payload.individualVotes[0].clubMembershipsAtVote[0].projectPartyId, "ano");
   assert.equal(step.payload.externalVoteId, "900");
   assert.equal(step.payload.actionCz, "Chamber approved bill");
   assert.equal(step.payload.documentPublishedAt, "2026-08-29T09:15:00");
   assert.equal(vote.primary, true);
+});
+
+function agendaFixture({ historyAgendaId = "5001" } = {}) {
+  const source = {
+    id: "psp-core-2025",
+    publisher: "PSP",
+    evidenceRole: "primary-record",
+    partyAliases: { MS: "motoriste" },
+    term: { year: 2025, number: 10, organId: 174 }
+  };
+  const voteRow = (id, number, agenda, time, longTitle) => unl([id, "174", "29", number, agenda, "26.08.2026", time, "104", "72", "0", "0", "176", "101", "N", "A", longTitle, null]);
+  const votesEntries = {
+    "hl2025s.unl": entry(
+      voteRow("950", "10", "3", "11:00", "Pozmenovaci navrh")
+      + voteRow("951", "11", "3", "11:05", null)
+      + voteRow("952", "12", "0", "11:10", "Proceduralni hlasovani")
+    ),
+    "hl2025h1.unl": entry(unl(["100", "951", "A"]) + unl(["100", "950", "B"]) + unl(["100", "952", "A"])),
+    "zmatecne.unl": entry("")
+  };
+  const membersEntries = {
+    "osoby.unl": entry(unl(["1", null, "Novak", "Jan", null, "01.01.1980", "M", null, null])),
+    "poslanec.unl": entry(unl(["100", "1", null, null, "174", null, null, null, null, null, null, null, null, null, "1"])),
+    "zarazeni.unl": entry(unl(["1", "1760", "0", "2025-10-08 00", null, null, null])),
+    "organy.unl": entry(unl(["1760", "174", "1", "MS", "Poslanecky klub Motoriste sobe", "MS club", "08.10.2025", null, null, "0"]))
+  };
+  const print = (id, number, title) => {
+    const fields = Array(24).fill(null);
+    Object.assign(fields, { 0: id, 1: "1", 2: "20", 3: number, 4: "0", 7: "174", 10: title, 15: title });
+    return unl(fields);
+  };
+  const historyFields = Array(15).fill(null);
+  Object.assign(historyFields, { 0: "810", 1: "701", 2: "2026-08-26 11:05", 4: "11", 5: historyAgendaId, 6: "29" });
+  const printsEntries = {
+    "tisky.unl": entry(print("701", "68", "Vladni navrh zakona, kterym se meni zakon c. 23/2017 Sb., o pravidlech rozpoctove odpovednosti") + print("702", "90", "Unrelated bill")),
+    "hist.unl": entry(unl(historyFields)),
+    "stavy.unl": entry(unl(["20", "6", "1", "Approved", null, null])),
+    "prechody.unl": entry(unl(["11", "20", "20", "6", "1"])),
+    "typ_akce.unl": entry(unl(["6", "Snemovna setrvala na zakonu"]))
+  };
+  // PSP files are windows-1250; the fixture stays ASCII so UTF-8 bytes decode identically.
+  const sessionsEntries = {
+    // The invitation record for session 29 numbers item 3 differently and must be ignored.
+    "schuze.unl": entry(unl(["290", "174", "29", "25.08.2026", null, null, "1"]) + unl(["291", "174", "29", "25.08.2026", null, null, null])),
+    "bod_schuze.unl": entry(
+      unl(["4999", "290", "702", "1", "3", "Unrelated invitation item", null])
+      + unl(["5001", "291", "701", "1", "3", "Vladni navrh zakona o pravidlech rozpoctove odpovednosti", "/snemovni tisk 68/ - zakon vraceny prezidentem"])
+    )
+  };
+  return normalizePspData({ source, since: "2026-08-01", votesEntries, membersEntries, printsEntries, sessionsEntries });
+}
+
+test("PSP normalizer links votes to the print of their approved agenda item", () => {
+  const result = agendaFixture();
+  assert.deepEqual(result.warnings, []);
+  const byId = new Map(result.records.map((record) => [record.id, record]));
+  const amendment = byId.get("psp-core-2025--vote-950");
+  const finalVote = byId.get("psp-core-2025--vote-951");
+  const procedural = byId.get("psp-core-2025--vote-952");
+
+  assert.equal(finalVote.payload.agendaItem.titleCz, "Vladni navrh zakona o pravidlech rozpoctove odpovednosti");
+  assert.equal(finalVote.payload.agendaItem.suffixCz, "/snemovni tisk 68/ - zakon vraceny prezidentem");
+  assert.equal(finalVote.payload.linkedPrints.length, 1);
+  assert.equal(finalVote.payload.linkedPrints[0].number, 68);
+  assert.equal(finalVote.payload.linkedPrints[0].linkBasis, "agenda-item-final-vote");
+  assert.equal(finalVote.payload.linkedPrints[0].historyContexts[0].actionCz, "Snemovna setrvala na zakonu");
+
+  // An earlier vote on the same agenda item names the print but never inherits the decisive step.
+  assert.equal(amendment.payload.linkedPrints[0].number, 68);
+  assert.equal(amendment.payload.linkedPrints[0].linkBasis, "agenda-item");
+  assert.deepEqual(amendment.payload.linkedPrints[0].historyContexts, []);
+
+  assert.equal(procedural.payload.agendaItem, null);
+  assert.deepEqual(procedural.payload.linkedPrints, []);
+});
+
+test("PSP normalizer skips agenda links when schuze.zip and hist.unl disagree", () => {
+  const result = agendaFixture({ historyAgendaId: "7777" });
+  assert.equal(result.warnings.length, 1);
+  assert.match(result.warnings[0], /agenda-item vote links were skipped/);
+  const finalVote = result.records.find((record) => record.id === "psp-core-2025--vote-951");
+  assert.equal(finalVote.payload.agendaItem, null);
+  assert.deepEqual(finalVote.payload.linkedPrints, []);
 });
 
 test("deduplication accepts identical records and rejects conflicting content", () => {

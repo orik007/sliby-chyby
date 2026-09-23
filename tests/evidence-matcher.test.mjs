@@ -276,6 +276,21 @@ test("requires decisive vote context before a party direction enters the package
   });
   const decisiveMatch = matchRecordToPromise(decisiveVote, eet);
   assert.equal(decisiveMatch.attributionStatus, "verified-party-vote");
+
+  const vetoOverrideVote = record({
+    id: "psp--vote-veto-override",
+    kind: "parliamentary-vote",
+    title: "Vl.n.z. o evidenci tržeb",
+    payload: {
+      ...votePayload,
+      linkedPrints: [{
+        number: 189,
+        titleCz: "Vládní návrh zákona o evidenci tržeb",
+        historyContexts: [{ actionCz: "Sněmovna setrvala na zákonu", resolutionNumber: 300 }]
+      }]
+    }
+  });
+  assert.equal(matchRecordToPromise(vetoOverrideVote, eet).attributionStatus, "verified-party-vote");
 });
 
 test("includes a decisive vote without a strict party majority for non-support review", () => {

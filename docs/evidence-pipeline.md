@@ -27,6 +27,7 @@ Human review of that audit may establish that a score should change, but it does
 - Prefer primary official records. Media are discovery and context, not decisive evidence by themselves.
 - Preserve the original record, source URL, time, and content hash.
 - A party vote is attributable only under the strict-majority and decisive-motion rule in [scoring.md](scoring.md).
+- The Chamber collector links each vote to the print of its approved agenda item from the official session data. A print step recorded on that agenda item for that sitting day becomes decisive vote context only for the vote the print history names, or, when it names none, for the last valid roll-call vote on that agenda item that day. If the session data and print history disagree on agenda-item identifiers, the collector warns and keeps only the votes the print history names.
 - Bill authorship alone is not party conduct.
 - The collector, topic taggers, routing robot, and document enricher never establish relevance, attribution, or a score. Tag agreement and direct structural links only select candidates for the deterministic attribution test and the assessors.
 - The assessors and arbiter use the five-step decision order in [scoring.md](scoring.md). Their output is only a proposal for human review.

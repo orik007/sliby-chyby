@@ -18,7 +18,10 @@ const schemas = {
   history: ["historyId", "printId", "dateTime", "voteId", "transitionId", "agendaId", "session", "resolutionNumber", "committeeReporterMpId", "chairReporterMpId", "committeeResolution", "collectionPublishedAt", "collectionPart", "collectionNumber", "note"],
   state: ["stateId", "stateTypeId", "printKindId", "description", "deadline", "deadlineTransitionId"],
   transition: ["transitionId", "fromStateId", "toStateId", "actionId", "transitionType"],
-  action: ["actionId", "description"]
+  action: ["actionId", "description"],
+  // schuze.zip; only the leading columns this collector reads are declared.
+  session: ["sessionId", "organId", "number", "from", "to", "updatedAt", "isInvitation"],
+  agendaItem: ["agendaItemId", "sessionId", "printId", "typeId", "number", "fullTitle", "fullSuffix"]
 };
 
 function parseUnlLine(line) {
@@ -159,7 +162,43 @@ export function derivePartyVoteSummaries(individualVotes, { voteTypeCode = "N", 
   });
 }
 
-export function normalizePspData({ source, since, votesEntries, membersEntries, printsEntries }) {
+/**
+ * Resolves each session's approved agenda items from schuze.zip. The official
+ * data keeps up to two records per session (the proposed agenda from the
+ * invitation and the approved agenda); only the approved record is used when
+ * it exists. A vote row names its session number and agenda-item number, so
+ * the returned map is keyed by `${sessionNumber}:${agendaNumber}`.
+ */
+function approvedAgendaItems(sessionsEntries, termOrganId) {
+  const sessionRows = parseUnl(decodeEntry(sessionsEntries, "schuze.unl"), schemas.session)
+    .filter((row) => row.organId === String(termOrganId));
+  const sessionByNumber = new Map();
+  for (const row of sessionRows) {
+    const current = sessionByNumber.get(row.number);
+    if (!current || (current.isInvitation === "1" && row.isInvitation !== "1")) sessionByNumber.set(row.number, row);
+  }
+  const sessionNumberById = new Map([...sessionByNumber.values()].map((row) => [row.sessionId, row.number]));
+  const itemsByKey = new Map();
+  for (const row of parseUnl(decodeEntry(sessionsEntries, "bod_schuze.unl"), schemas.agendaItem)) {
+    const sessionNumber = sessionNumberById.get(row.sessionId);
+    if (!sessionNumber || !(Number(row.number) >= 1)) continue;
+    itemsByKey.set(`${sessionNumber}:${Number(row.number)}`, row);
+  }
+  return itemsByKey;
+}
+
+function historyContext(history, transitionById, actionById) {
+  const transition = transitionById.get(history.transitionId);
+  const action = actionById.get(transition?.actionId);
+  return {
+    externalHistoryId: history.historyId,
+    transitionId: history.transitionId,
+    actionCz: cleanText(action?.description, 500) || null,
+    resolutionNumber: numeric(history.resolutionNumber)
+  };
+}
+
+export function normalizePspData({ source, since, votesEntries, membersEntries, printsEntries, sessionsEntries }) {
   const voteRows = parseUnl(decodeEntry(votesEntries, `hl${source.term.year}s.unl`), schemas.vote)
     .filter((row) => row.organId === String(source.term.organId));
   const individualRows = parseUnl(decodeMatchingEntries(votesEntries, new RegExp(`^hl${source.term.year}h\\d+\\.unl$`, "i")), schemas.individualVote);
@@ -190,6 +229,18 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
   const transitionById = new Map(parseUnl(decodeEntry(printsEntries, "prechody.unl"), schemas.transition).map((row) => [row.transitionId, row]));
   const actionById = new Map(parseUnl(decodeEntry(printsEntries, "typ_akce.unl"), schemas.action).map((row) => [row.actionId, row]));
 
+  // Agenda items link a vote to the print it was cast on. The link is used
+  // only when schuze.zip and hist.unl agree on agenda-item identifiers;
+  // otherwise the collector warns and keeps the exact hist.unl vote links only.
+  const warnings = [];
+  let agendaItemByKey = approvedAgendaItems(sessionsEntries, source.term.organId);
+  const printLinkedItems = [...agendaItemByKey.values()].filter((item) => printById.has(item.printId));
+  const historyAgendaPairs = new Set(historyRows.map((row) => `${row.agendaId}:${row.printId}`));
+  if (printLinkedItems.length > 0 && !printLinkedItems.some((item) => historyAgendaPairs.has(`${item.agendaItemId}:${item.printId}`))) {
+    warnings.push("PSP agenda items do not match any print history agenda reference; agenda-item vote links were skipped.");
+    agendaItemByKey = new Map();
+  }
+
   const cutoff = since ?? "0000-00-00";
   const recentVotes = voteRows.filter((row) => (pspDate(row.date) ?? "0000-00-00") >= cutoff);
   const recentVoteIds = new Set(recentVotes.map((row) => row.id));
@@ -207,6 +258,44 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     const list = historyByVote.get(row.voteId) ?? [];
     list.push(row);
     historyByVote.set(row.voteId, list);
+  }
+
+  function linkedPrint(printId, linkBasis, histories) {
+    const print = printById.get(printId);
+    return {
+      externalPrintId: printId,
+      number: numeric(print?.number),
+      partNumber: numeric(print?.partNumber),
+      titleCz: cleanText(print?.fullTitle || print?.shortTitle, 1000),
+      url: print ? officialPrintUrl(source.term.number, print.number) : null,
+      documentPublishedAt: pspDateTime(print?.publishedAt),
+      linkBasis,
+      historyContexts: histories.map((history) => historyContext(history, transitionById, actionById))
+    };
+  }
+
+  // When hist.unl records a print step on an agenda item for a sitting day but
+  // names no vote, that step belongs to the last valid roll-call vote cast on
+  // that agenda item that day (the final vote on the motion that concluded
+  // it). Any earlier vote on the item (an amendment or procedural motion)
+  // stays linked to the print without that step's context.
+  const agendaFinalVoteHistories = new Map();
+  const votesByAgendaDay = new Map();
+  for (const vote of recentVotes) {
+    const agendaItem = agendaItemByKey.get(`${vote.session}:${Number(vote.agenda)}`);
+    if (!agendaItem || voidVoteIds.has(vote.id) || vote.voteType !== "N") continue;
+    const key = `${agendaItem.agendaItemId}:${pspDate(vote.date)}`;
+    const current = votesByAgendaDay.get(key);
+    if (!current || Number(vote.number) > Number(current.number)) votesByAgendaDay.set(key, vote);
+  }
+  for (const [key, vote] of votesByAgendaDay) {
+    const [agendaItemId, day] = key.split(":");
+    const agendaItem = agendaItemByKey.get(`${vote.session}:${Number(vote.agenda)}`);
+    const histories = historyRows.filter((history) => history.agendaId === agendaItemId
+      && history.printId === agendaItem.printId
+      && !history.voteId
+      && pspDateTime(history.dateTime)?.slice(0, 10) === day);
+    if (histories.length > 0) agendaFinalVoteHistories.set(vote.id, histories);
   }
 
   const records = [];
@@ -237,29 +326,14 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
       };
     });
     const historiesForVote = historyByVote.get(vote.id) ?? [];
+    const agendaItem = agendaItemByKey.get(`${vote.session}:${Number(vote.agenda)}`) ?? null;
     const linkedPrintIds = [...new Set(historiesForVote.map(({ printId }) => printId))];
-    const linkedPrints = linkedPrintIds.map((printId) => {
-      const print = printById.get(printId);
-      const historyContexts = historiesForVote.filter((history) => history.printId === printId).map((history) => {
-        const transition = transitionById.get(history.transitionId);
-        const action = actionById.get(transition?.actionId);
-        return {
-          externalHistoryId: history.historyId,
-          transitionId: history.transitionId,
-          actionCz: cleanText(action?.description, 500) || null,
-          resolutionNumber: numeric(history.resolutionNumber)
-        };
-      });
-      return {
-        externalPrintId: printId,
-        number: numeric(print?.number),
-        partNumber: numeric(print?.partNumber),
-        titleCz: cleanText(print?.fullTitle || print?.shortTitle, 1000),
-        url: print ? officialPrintUrl(source.term.number, print.number) : null,
-        documentPublishedAt: pspDateTime(print?.publishedAt),
-        historyContexts
-      };
-    });
+    const linkedPrints = linkedPrintIds.map((printId) => linkedPrint(printId, "history-vote-id",
+      historiesForVote.filter((history) => history.printId === printId)));
+    if (agendaItem && printById.has(agendaItem.printId) && !linkedPrintIds.includes(agendaItem.printId)) {
+      const decisiveHistories = agendaFinalVoteHistories.get(vote.id) ?? [];
+      linkedPrints.push(linkedPrint(agendaItem.printId, decisiveHistories.length > 0 ? "agenda-item-final-vote" : "agenda-item", decisiveHistories));
+    }
     const voidedByOfficialRecord = voidVoteIds.has(vote.id);
     const partyVoteSummaries = derivePartyVoteSummaries(individualVotes, {
       voteTypeCode: vote.voteType,
@@ -293,6 +367,12 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
         voteTypeCode: vote.voteType,
         resultCode: vote.result,
         voidedByOfficialRecord,
+        agendaItem: agendaItem ? {
+          externalAgendaItemId: agendaItem.agendaItemId,
+          number: numeric(agendaItem.number),
+          titleCz: cleanText(agendaItem.fullTitle, 1000) || null,
+          suffixCz: cleanText(agendaItem.fullSuffix, 500) || null
+        } : null,
         linkedPrints,
         individualVotes,
         partyVoteSummaries
@@ -366,7 +446,7 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     })
   };
 
-  return { records: deduplicateRecords(records), referenceData, warnings: [] };
+  return { records: deduplicateRecords(records), referenceData, warnings };
 }
 
 export async function collectPspSource(source, options) {
@@ -384,7 +464,8 @@ export async function collectPspSource(source, options) {
     since: options.since,
     votesEntries: archiveEntries(responseByName.votes.bytes, `${source.id}:votes`),
     membersEntries: archiveEntries(responseByName.members.bytes, `${source.id}:members`),
-    printsEntries: archiveEntries(responseByName.prints.bytes, `${source.id}:prints`)
+    printsEntries: archiveEntries(responseByName.prints.bytes, `${source.id}:prints`),
+    sessionsEntries: archiveEntries(responseByName.sessions.bytes, `${source.id}:sessions`)
   });
   return {
     sourceId: source.id,

@@ -26,7 +26,7 @@ function searchableRecordText(record) {
 
 function hasVerifiedVoteContext(record) {
   if (record.kind !== "parliamentary-vote") return false;
-  const decisiveActions = ["souhlas", "schvalen", "zamitnut", "vracen"];
+  const decisiveActions = ["souhlas", "schvalen", "zamitnut", "vracen", "setrval"];
   return (record.payload?.linkedPrints ?? []).some((linkedPrint) =>
     (linkedPrint.historyContexts ?? []).some((context) => {
       const action = normalizeSearchText(context.actionCz);

@@ -86,8 +86,9 @@ export function buildPromiseTaggingBrief(promise, taxonomy) {
  * A `parliamentary-vote` record's own generic title ("Hlasování 123") never
  * says what was voted on -- that lives in `payload.linkedPrints`, the same
  * print titles and recorded actions a `legislative-step` record surfaces at
- * its own top level (scripts/lib/psp-collector.mjs). Both must be read here
- * for either kind to give the tagger the text it actually needs.
+ * its own top level (scripts/lib/psp-collector.mjs), together with the
+ * agenda item the vote was cast on. All must be read here for either kind
+ * to give the tagger the text it actually needs.
  */
 export function deriveRecordContentExcerpts(record) {
   const payload = record.payload ?? {};
@@ -103,6 +104,9 @@ export function deriveRecordContentExcerpts(record) {
   }
   if (typeof payload.currentStateCz === "string" && payload.currentStateCz.length > 0) {
     excerpts.push(`Current recorded state: ${payload.currentStateCz}`);
+  }
+  if (typeof payload.agendaItem?.titleCz === "string" && payload.agendaItem.titleCz.length > 0) {
+    excerpts.push(`Agenda item voted on: ${[payload.agendaItem.titleCz, payload.agendaItem.suffixCz].filter(Boolean).join(" ")}`);
   }
   for (const linkedPrint of payload.linkedPrints ?? []) {
     if (typeof linkedPrint.titleCz === "string" && linkedPrint.titleCz.length > 0) {
