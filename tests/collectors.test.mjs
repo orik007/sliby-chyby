@@ -486,21 +486,23 @@ function agendaFixture({ historyAgendaId = "5001" } = {}) {
     return unl(fields);
   };
   const historyFields = Array(15).fill(null);
-  Object.assign(historyFields, { 0: "810", 1: "701", 2: "2026-08-26 11:05", 4: "11", 5: historyAgendaId, 6: "29" });
+  Object.assign(historyFields, { 0: "810", 1: "701", 2: "2026-08-26 00:00", 3: "951", 4: "11", 5: historyAgendaId, 6: "29" });
   const printsEntries = {
     "tisky.unl": entry(print("701", "68", "Vladni navrh zakona, kterym se meni zakon c. 23/2017 Sb., o pravidlech rozpoctove odpovednosti") + print("702", "90", "Unrelated bill")),
     "hist.unl": entry(unl(historyFields)),
     "stavy.unl": entry(unl(["20", "6", "1", "Approved", null, null])),
     "prechody.unl": entry(unl(["11", "20", "20", "6", "1"])),
-    "typ_akce.unl": entry(unl(["6", "Snemovna setrvala na zakonu"]))
+    "typ_akce.unl": entry(unl(["6", "setrvano"]))
   };
   // PSP files are windows-1250; the fixture stays ASCII so UTF-8 bytes decode identically.
   const sessionsEntries = {
-    // The invitation record for session 29 numbers item 3 differently and must be ignored.
-    "schuze.unl": entry(unl(["290", "174", "29", "25.08.2026", null, null, "1"]) + unl(["291", "174", "29", "25.08.2026", null, null, null])),
+    // The proposed and approved agendas share id_schuze and id_bod and differ in pozvanka;
+    // the proposed agenda numbers the item differently and must be ignored.
+    "schuze.unl": entry(unl(["291", "174", "29", "2026-08-25 09", null, null, "1"]) + unl(["291", "174", "29", "2026-08-25 09", null, null, null])),
     "bod_schuze.unl": entry(
-      unl(["4999", "290", "702", "1", "3", "Unrelated invitation item", null])
-      + unl(["5001", "291", "701", "1", "3", "Vladni navrh zakona o pravidlech rozpoctove odpovednosti", "/snemovni tisk 68/ - zakon vraceny prezidentem"])
+      unl(["4999", "291", "702", "1", "3", "Unrelated proposed item", null, null, null, "1"])
+      + unl(["5001", "291", "701", "13", "3", "Vladni navrh zakona o pravidlech rozpoctove odpovednosti", "/snemovni tisk 68/ - zakon vraceny prezidentem", null, "1", null])
+      + unl(["5001", "291", null, "6", "4", "Written interpellation answer", null, null, "1", null])
     )
   };
   return normalizePspData({ source, since: "2026-08-01", votesEntries, membersEntries, printsEntries, sessionsEntries });
@@ -518,10 +520,10 @@ test("PSP normalizer links votes to the print of their approved agenda item", ()
   assert.equal(finalVote.payload.agendaItem.suffixCz, "/snemovni tisk 68/ - zakon vraceny prezidentem");
   assert.equal(finalVote.payload.linkedPrints.length, 1);
   assert.equal(finalVote.payload.linkedPrints[0].number, 68);
-  assert.equal(finalVote.payload.linkedPrints[0].linkBasis, "agenda-item-final-vote");
-  assert.equal(finalVote.payload.linkedPrints[0].historyContexts[0].actionCz, "Snemovna setrvala na zakonu");
+  assert.equal(finalVote.payload.linkedPrints[0].linkBasis, "history-vote-id");
+  assert.equal(finalVote.payload.linkedPrints[0].historyContexts[0].actionCz, "setrvano");
 
-  // An earlier vote on the same agenda item names the print but never inherits the decisive step.
+  // Another vote on the same agenda item names the print but never inherits the decisive step.
   assert.equal(amendment.payload.linkedPrints[0].number, 68);
   assert.equal(amendment.payload.linkedPrints[0].linkBasis, "agenda-item");
   assert.deepEqual(amendment.payload.linkedPrints[0].historyContexts, []);
@@ -534,9 +536,9 @@ test("PSP normalizer skips agenda links when schuze.zip and hist.unl disagree", 
   const result = agendaFixture({ historyAgendaId: "7777" });
   assert.equal(result.warnings.length, 1);
   assert.match(result.warnings[0], /agenda-item vote links were skipped/);
-  const finalVote = result.records.find((record) => record.id === "psp-core-2025--vote-951");
-  assert.equal(finalVote.payload.agendaItem, null);
-  assert.deepEqual(finalVote.payload.linkedPrints, []);
+  const amendment = result.records.find((record) => record.id === "psp-core-2025--vote-950");
+  assert.equal(amendment.payload.agendaItem, null);
+  assert.deepEqual(amendment.payload.linkedPrints, []);
 });
 
 test("deduplication accepts identical records and rejects conflicting content", () => {

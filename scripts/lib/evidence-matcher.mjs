@@ -24,14 +24,27 @@ function searchableRecordText(record) {
   return normalizeSearchText([record.title, record.publisher, JSON.stringify(payload)].join(" "));
 }
 
+// Official PSP print-history actions (tisky.zip typ_akce) that record the
+// Chamber's final decision on a motion when the history step names the vote:
+// approval, rejection, insisting on a bill after a Senate or presidential
+// return, and accepting Senate amendments. Procedural steps such as "vrácen"
+// (returned to second reading), "opakovat", "přerušeno" or "odročeno" are not
+// decisive.
+const decisiveActions = new Set([
+  "souhlas",
+  "schvaleno",
+  "neschvalen",
+  "neschvalena",
+  "zamitnut",
+  "neprijat",
+  "setrvano",
+  "pozm. prijat"
+].map(normalizeSearchText));
+
 function hasVerifiedVoteContext(record) {
   if (record.kind !== "parliamentary-vote") return false;
-  const decisiveActions = ["souhlas", "schvalen", "zamitnut", "vracen", "setrval"];
   return (record.payload?.linkedPrints ?? []).some((linkedPrint) =>
-    (linkedPrint.historyContexts ?? []).some((context) => {
-      const action = normalizeSearchText(context.actionCz);
-      return decisiveActions.some((decisiveAction) => action.includes(decisiveAction));
-    })
+    (linkedPrint.historyContexts ?? []).some((context) => decisiveActions.has(normalizeSearchText(context.actionCz)))
   );
 }
 

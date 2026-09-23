@@ -21,7 +21,7 @@ const schemas = {
   action: ["actionId", "description"],
   // schuze.zip; only the leading columns this collector reads are declared.
   session: ["sessionId", "organId", "number", "from", "to", "updatedAt", "isInvitation"],
-  agendaItem: ["agendaItemId", "sessionId", "printId", "typeId", "number", "fullTitle", "fullSuffix"]
+  agendaItem: ["agendaItemId", "sessionId", "printId", "typeId", "number", "fullTitle", "fullSuffix", "note", "stateId", "isInvitation"]
 };
 
 function parseUnlLine(line) {
@@ -163,23 +163,22 @@ export function derivePartyVoteSummaries(individualVotes, { voteTypeCode = "N", 
 }
 
 /**
- * Resolves each session's approved agenda items from schuze.zip. The official
- * data keeps up to two records per session (the proposed agenda from the
- * invitation and the approved agenda); only the approved record is used when
- * it exists. A vote row names its session number and agenda-item number, so
- * the returned map is keyed by `${sessionNumber}:${agendaNumber}`.
+ * Resolves the approved agenda items of this term's sessions from schuze.zip.
+ * Per the official schema (psp.cz/sqw/hp.sqw?k=1308), a proposed and an
+ * approved agenda share the same id_schuze and id_bod and differ only in
+ * `pozvanka` (1 = proposed, null = approved); item numbers can differ between
+ * the two. Only approved items are used. Items of type 6 (individual answers
+ * to written interpellations) share an id_bod with their parent item and are
+ * skipped. A vote row names its session number and agenda-item number, so the
+ * returned map is keyed by `${sessionNumber}:${agendaNumber}`.
  */
 function approvedAgendaItems(sessionsEntries, termOrganId) {
-  const sessionRows = parseUnl(decodeEntry(sessionsEntries, "schuze.unl"), schemas.session)
-    .filter((row) => row.organId === String(termOrganId));
-  const sessionByNumber = new Map();
-  for (const row of sessionRows) {
-    const current = sessionByNumber.get(row.number);
-    if (!current || (current.isInvitation === "1" && row.isInvitation !== "1")) sessionByNumber.set(row.number, row);
-  }
-  const sessionNumberById = new Map([...sessionByNumber.values()].map((row) => [row.sessionId, row.number]));
+  const sessionNumberById = new Map(parseUnl(decodeEntry(sessionsEntries, "schuze.unl"), schemas.session)
+    .filter((row) => row.organId === String(termOrganId) && row.isInvitation !== "1")
+    .map((row) => [row.sessionId, row.number]));
   const itemsByKey = new Map();
   for (const row of parseUnl(decodeEntry(sessionsEntries, "bod_schuze.unl"), schemas.agendaItem)) {
+    if (row.isInvitation === "1" || row.typeId === "6") continue;
     const sessionNumber = sessionNumberById.get(row.sessionId);
     if (!sessionNumber || !(Number(row.number) >= 1)) continue;
     itemsByKey.set(`${sessionNumber}:${Number(row.number)}`, row);
@@ -274,30 +273,6 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     };
   }
 
-  // When hist.unl records a print step on an agenda item for a sitting day but
-  // names no vote, that step belongs to the last valid roll-call vote cast on
-  // that agenda item that day (the final vote on the motion that concluded
-  // it). Any earlier vote on the item (an amendment or procedural motion)
-  // stays linked to the print without that step's context.
-  const agendaFinalVoteHistories = new Map();
-  const votesByAgendaDay = new Map();
-  for (const vote of recentVotes) {
-    const agendaItem = agendaItemByKey.get(`${vote.session}:${Number(vote.agenda)}`);
-    if (!agendaItem || voidVoteIds.has(vote.id) || vote.voteType !== "N") continue;
-    const key = `${agendaItem.agendaItemId}:${pspDate(vote.date)}`;
-    const current = votesByAgendaDay.get(key);
-    if (!current || Number(vote.number) > Number(current.number)) votesByAgendaDay.set(key, vote);
-  }
-  for (const [key, vote] of votesByAgendaDay) {
-    const [agendaItemId, day] = key.split(":");
-    const agendaItem = agendaItemByKey.get(`${vote.session}:${Number(vote.agenda)}`);
-    const histories = historyRows.filter((history) => history.agendaId === agendaItemId
-      && history.printId === agendaItem.printId
-      && !history.voteId
-      && pspDateTime(history.dateTime)?.slice(0, 10) === day);
-    if (histories.length > 0) agendaFinalVoteHistories.set(vote.id, histories);
-  }
-
   const records = [];
   for (const vote of recentVotes) {
     const occurredOn = pspDate(vote.date);
@@ -330,9 +305,10 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     const linkedPrintIds = [...new Set(historiesForVote.map(({ printId }) => printId))];
     const linkedPrints = linkedPrintIds.map((printId) => linkedPrint(printId, "history-vote-id",
       historiesForVote.filter((history) => history.printId === printId)));
+    // The agenda item names the print a vote concerns. Only a print-history
+    // step that names this exact vote gives it decisive context.
     if (agendaItem && printById.has(agendaItem.printId) && !linkedPrintIds.includes(agendaItem.printId)) {
-      const decisiveHistories = agendaFinalVoteHistories.get(vote.id) ?? [];
-      linkedPrints.push(linkedPrint(agendaItem.printId, decisiveHistories.length > 0 ? "agenda-item-final-vote" : "agenda-item", decisiveHistories));
+      linkedPrints.push(linkedPrint(agendaItem.printId, "agenda-item", []));
     }
     const voidedByOfficialRecord = voidVoteIds.has(vote.id);
     const partyVoteSummaries = derivePartyVoteSummaries(individualVotes, {
