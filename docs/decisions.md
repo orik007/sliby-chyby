@@ -15,14 +15,13 @@ This document contains only the current confirmed rules. When a rule changes, re
 - Every promise is exactly `candidate`, `confirmed`, or `rejected`.
 - `confirmed` means public immediately. There is no confirmed-but-unpublished state.
 - A rejected promise records its reason. Candidates and rejected promises are not public.
-- The initial catalogue covers ANO 2011, SPD, and Motoristé sobě in the 2025 Czech Chamber of Deputies election, from official national party sources.
+- The initial catalogue covers ANO 2011, SPD, and Motoristé sobě in the 2025 Czech Chamber of Deputies election, from official national party sources. Election programmes are promise sources, never evidence of conduct.
 
 ## Promise source archive
 
 - Preserve the original files supporting catalogue promises in a versioned repository archive, independent of the automation audit branch. This includes the source catalogue for candidate and rejected promises.
 - Record each copy's source ID, original URL, retrieval URL and time, byte length, and SHA-256 hash. Preserve downloaded bytes unchanged; changed source content receives a new copy rather than replacing an archived file.
 - Public source links continue to point to the original publisher. An archived copy can be used as an explicitly labelled fallback if the original disappears, through the normal release process.
-- This archive covers promise sources. Daily assessment evidence is retained separately as an unpublished operational queue on the dedicated audit branch; it is not part of the public source archive.
 
 ## Policy categories
 
@@ -31,30 +30,29 @@ This document contains only the current confirmed rules. When a rule changes, re
 - When one already-confirmed promise mentions several subjects, its category follows the principal action to be assessed; its exact wording remains unchanged.
 - The public site groups and orders promises only by that common category. It does not display party-specific programme chapters as categories.
 - The category mapping retains the original programme chapter, its order, and any verified narrower source section solely for source traceability and later maintenance.
-- A category is a navigational subject label, not an editorial measure of importance. Within a category, promises follow their programme context and source order where available.
+- A category is a navigational subject label, not an editorial measure of importance.
+
+## Evidence and conduct
+
+- Only official records are evidence. A party's own website or publication, a press release, and the media are never evidence and are not collected.
+- Evidence sources are added one at a time and only after their structure is verified against official documentation and real data, their completeness is measured, and their per-run quality checks exist. The canonical source list and data rules are in [evidence-pipeline.md](evidence-pipeline.md).
+- The active source is the Chamber of Deputies. Government resolutions and the Collection of Laws follow in that order. The European Parliament and the Council of the EU come later; the Senate is not tracked now.
+- Attributable conduct is: a decisive Chamber vote (by strict majority of the party's club), a member bill (every party with a proposing MP), a government proposal, government resolution, government regulation, or ministerial decree (every governing party on its date). The canonical table is in [scoring.md](scoring.md).
+- A government decision is conduct of all governing parties together. The current government of ANO 2011, SPD, and Motoristé sobě was appointed on 15 December 2025.
 
 ## Scores and index
 
-- Every confirmed promise has one current numerical score from `-2` to `+2`. The default is `0` when no documented assessment conclusion sets another score, except for a verified maintenance baseline defined in `scoring.md`.
-- A maintenance commitment promises not to make one identified change. When the existing state is documented and remains under the responsible party or government's control, it may receive `+1`; elapsed time and merely negative wording never suffice.
-- A score is separate from the promise lifecycle and may change whenever traceable evidence justifies a new current assessment.
-- The SLAVA Index includes every confirmed promise of the party and is `round(sum(scores) / (2 × promise count) × 100)`. It ranges from `-100` to `+100`.
-- No manual aggregate is stored.
+- Every confirmed promise has one current numerical score from `-2` to `+2`. The default is `0`, except for a verified maintenance baseline defined in [scoring.md](scoring.md).
+- A proposal in line with or against the promise is `+1` or `-1`. A decision (a decisive vote, regulation, decree, or binding resolution) delivering or contradicting the whole promise is `+2` or `-2`, and only a part of it `+1` or `-1`. A decision outweighs a proposal; among conduct of the same weight, the most recent decides.
+- A score is separate from the promise lifecycle and may change whenever attributable official evidence justifies a new current assessment.
+- The SLAVA Index includes every confirmed promise of the party and is `round(sum(scores) / (2 × promise count) × 100)`. It ranges from `-100` to `+100`. No manual aggregate is stored.
 
 ## Evidence automation
 
-- The daily workflow runs at 09:37 Europe/Prague and retains a manual trigger. (Paused until a manual `workflow_dispatch` run of the topic-routing-based pipeline has been verified end to end — see `.github/workflows/collect-evidence.yml`.)
-- It collects each allowlisted source from its own durable checkpoint. A source without a checkpoint performs a bootstrap from its registry-defined `bootstrapFrom` date; a manual run may select specific sources and explicitly override their start.
-- After successful routing, enrichment, and package persistence, each source whose own collection succeeded records its own collection time, requested start, newest observed record, record count, run ID, and available snapshot hash. A source whose own collection fails keeps its prior checkpoint unchanged; this never blocks collection, routing, enrichment, or persistence for the other selected sources. A manual `--since` override for that run is never persisted, so a failed manual replay retries next time from the unchanged checkpoint's own date (or its `bootstrapFrom` if it never had one), not from the override. A failed routing, enrichment, or persistence stage instead advances no source's checkpoint for that run.
-- It routes every material primary record to confirmed promises by controlled topic tags: two independent taggers assign each promise and each record tags from the versioned routing taxonomy, or `unknown`. A direct structural link (a legal identifier already present in a record) creates a candidate relationship on its own; otherwise a candidate relationship requires both taggers to independently agree on one sufficiently specific tag with grounded supporting excerpts. A broad parent tag alone never creates a candidate relationship. A routed candidate relationship never by itself establishes attribution, a score, or publication.
-- The routing taxonomy is versioned, controlled operational data: each tag has a stable identifier, English definition, inclusion/exclusion examples, Czech aliases, and an `assessmentEligible` flag. Models may select only an existing tag identifier or `unknown`; they may never invent one. A taxonomy change is a reviewed change that records the affected subtree so every dependent classification is recomputed consistently. The tag-assignment cache is versioned operational audit data recording each accepted assignment's input-content hash, taxonomy version, prompt version, provider, model, and confidence.
-- Evidence consists only of official records: Chamber votes and prints, the Collection of Laws, and government and ministry records. A party's own website or publication is never an evidence source, and media are discovery and context only. Election programmes remain the sources of promises themselves.
-- Whether a routed candidate relationship becomes usable evidence is decided separately and deterministically: a party vote is attributable only under the strict-majority and decisive-motion rule, and an official sponsor or publication reference must match its configured record. Routing tag agreement is never itself an attribution or scoring signal.
-- It sends each new or changed bounded evidence package to two independent assessors. Each assessor first determines whether its supplied candidate evidence is materially relevant; only then does it propose a score. If the valid assessments disagree, or exactly one assessor output is invalid, an arbiter selects a usable assessment or returns no conclusion. Two invalid outputs write a private failure audit and re-enter a later assessment batch unless a newer current package for the same promise replaces them.
-- After successful routing and enrichment, it persists source checkpoints, the tag-assignment cache, and enriched evidence packages together to one dedicated unpublished audit pull request before any assessment call. Each run starts from current `main`, restores the operational audit paths from the audit branch, and lease-protects a replacement audit snapshot containing current `main` plus the updated operational state. The audit branch is never merged to `main`, and its Git history is not an audit record. The queue retains exactly one current package for each promise and keeps superseded or policy-retired package versions auditable. A package blocked by an official-document enrichment warning is retried from that queue until it succeeds or a newer package supersedes it. Assessment proposals join that same pull request. It never changes public data, a public score, or publication status.
-- A human-approved score change uses a separate scoped pull request based on current `main`. It adds an append-only public assessment revision with its cited sources; its approval and merge are governed by the release process.
-- The assessors and arbiter may cite only supplied evidence IDs. Their active prompt versions, providers, model IDs, confidence, evidence IDs, and input fingerprint remain auditable.
-- The fingerprint prevents paid reassessment when assessable input, active prompts, providers, and models are unchanged.
+- The daily workflow runs at 09:37 Europe/Prague and retains a manual trigger. It is paused until a manual run of the current pipeline has been verified end to end.
+- It collects each active source from its own durable checkpoint, routes records to confirmed promises by direct legal-identifier links or two agreeing taggers, keeps only attributable conduct, and sends each new or changed bounded package to two independent assessors, with an arbiter when their valid assessments differ or exactly one output is invalid.
+- Its output is an unpublished human-review proposal on a dedicated audit pull request. It never changes public data, a public score, or publication status. A human-approved score change is a separate scoped pull request.
+- The assessors and arbiter may cite only supplied evidence IDs. Their active prompt versions, providers, model IDs, confidence, evidence IDs, and input fingerprint remain auditable, and the fingerprint prevents paid reassessment of unchanged input.
 - A failed complete run does not advance public freshness.
 
 ## Delivery
