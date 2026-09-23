@@ -42,7 +42,7 @@ export const assessableAttributionStatuses = new Set([
   "verified-party-vote",
   "verified-party-no-majority",
   "verified-member-bill",
-  "verified-government-bill"
+  "verified-government-proposal"
 ]);
 
 export function validatePromiseRegistry(registry) {
@@ -82,8 +82,9 @@ export function validatePromiseRegistry(registry) {
  *   majority of the party's club at the vote date;
  * - the submission of a member bill, when an MP of the party's club at the
  *   submission date is among its proposers;
- * - the submission of a government bill, when the party was a government
- *   party at the submission date.
+ * - the submission of a government proposal (bill, state budget, or
+ *   international treaty), when the party was a governing party at the
+ *   submission date.
  * Anything else is unattributed and never becomes package evidence.
  */
 export function attributionStatusForRecord(record, promise) {
@@ -99,7 +100,7 @@ export function attributionStatusForRecord(record, promise) {
     const proposal = record.payload?.proposal;
     if (proposal?.proposerPartyIds?.includes(promise.partyId)) {
       if (proposal.kind === "member-bill") return { attributionStatus: "verified-member-bill" };
-      if (proposal.kind === "government-bill") return { attributionStatus: "verified-government-bill" };
+      if (proposal.kind === "government-proposal") return { attributionStatus: "verified-government-proposal" };
     }
   }
   return { attributionStatus: "unattributed" };
@@ -153,7 +154,7 @@ export function factSummary(record, partyId) {
   if (record.kind === "legislative-step") {
     const payload = record.payload;
     const proposal = payload.proposal
-      ? ` It is a ${payload.proposal.kind === "government-bill" ? "government bill" : "member bill"} submitted on ${payload.proposal.submittedOn}; proposer parties: ${payload.proposal.proposerPartyIds.join(", ") || "none tracked"}.`
+      ? ` It is a ${payload.proposal.kind === "government-proposal" ? "government bill" : "member bill"} submitted on ${payload.proposal.submittedOn}; proposer parties: ${payload.proposal.proposerPartyIds.join(", ") || "none tracked"}.`
       : "";
     return `The official parliamentary record reports action “${payload.actionCz ?? "unspecified"}” for print ${payload.printNumber ?? "unknown"}: ${payload.printTitleCz ?? record.title}.${proposal}`;
   }

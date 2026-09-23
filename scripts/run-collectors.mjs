@@ -3,7 +3,7 @@ import { basename, dirname, resolve } from "node:path";
 import { randomUUID } from "node:crypto";
 import { planSourceCollections, updateCollectorCheckpoints, withoutRemovedSourceCheckpoints } from "./lib/collector-checkpoints.mjs";
 import { deduplicateRecords, invariant, validateRegistry } from "./lib/collector-core.mjs";
-import { collectPspSource } from "./lib/psp-collector.mjs";
+import { collectPspSource, validateGovernmentPeriods } from "./lib/psp-collector.mjs";
 
 function parseArgs(args) {
   const options = { sourceIds: [], since: null, sinceDays: 7, checkpoints: null, writeCheckpoints: null, output: null };
@@ -32,6 +32,7 @@ function defaultSince(collectedAt, sinceDays) {
 
 const args = parseArgs(process.argv.slice(2));
 const registry = validateRegistry(JSON.parse(await readFile(resolve("automation/collectors/sources.json"), "utf8")));
+const governmentPeriods = validateGovernmentPeriods(JSON.parse(await readFile(resolve("automation/attribution/government-periods.json"), "utf8")));
 const collectedAt = new Date().toISOString();
 const selected = registry.sources.filter((source) => source.enabled && (args.sourceIds.length === 0 || args.sourceIds.includes(source.id)));
 invariant(selected.length > 0, "No enabled collector sources selected");
@@ -71,7 +72,7 @@ for (const source of selected) {
   invariant(plan, `Collector source ${source.id} is missing a collection plan`);
   const since = plan.since;
   try {
-    const result = await collectPspSource(source, { since, collectedAt });
+    const result = await collectPspSource(source, { since, collectedAt, governmentPeriods });
     collectorResults.push(result);
     console.log(`${source.id}: ${plan.mode} from ${since}, ${result.records.length} records, ${result.warnings.length} warnings`);
   } catch (error) {

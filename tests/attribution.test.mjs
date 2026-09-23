@@ -76,10 +76,10 @@ test("a submitted member bill is attributed to every party with a proposing MP",
   assert.equal(attributionStatusForRecord(step, { id: "other", partyId: "ods" }).attributionStatus, "unattributed");
 });
 
-test("a submitted government bill is attributed to the government parties at its submission date", () => {
-  const step = submissionStep({ kind: "government-bill", submittedOn: "2026-01-27", proposerPartyIds: ["ano", "motoriste", "spd"] });
-  assert.equal(attributionStatusForRecord(step, promise).attributionStatus, "verified-government-bill");
-  const earlierGovernment = submissionStep({ kind: "government-bill", submittedOn: "2025-11-12", proposerPartyIds: [] });
+test("a submitted government proposal is attributed to the government parties at its submission date", () => {
+  const step = submissionStep({ kind: "government-proposal", submittedOn: "2026-01-27", proposerPartyIds: ["ano", "motoriste", "spd"] });
+  assert.equal(attributionStatusForRecord(step, promise).attributionStatus, "verified-government-proposal");
+  const earlierGovernment = submissionStep({ kind: "government-proposal", submittedOn: "2025-11-12", proposerPartyIds: [] });
   assert.equal(attributionStatusForRecord(earlierGovernment, promise).attributionStatus, "unattributed");
 });
 
@@ -102,7 +102,7 @@ test("a party's own publication or a press release is never attributable", () =>
     payload: { excerptCz: "Strana tvrdí, že prosadila nižší schodek.", sourcePartyId: "motoriste" }
   });
   assert.equal(attributionStatusForRecord(publication, promise).attributionStatus, "unattributed");
-  assert.deepEqual([...assessableAttributionStatuses].sort(), ["verified-government-bill", "verified-member-bill", "verified-party-no-majority", "verified-party-vote"]);
+  assert.deepEqual([...assessableAttributionStatuses].sort(), ["verified-government-proposal", "verified-member-bill", "verified-party-no-majority", "verified-party-vote"]);
 });
 
 test("bounded selection keeps only assessable primary evidence, direct links first", () => {

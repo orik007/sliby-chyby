@@ -19,6 +19,7 @@ const schemas = {
   state: ["stateId", "stateTypeId", "printKindId", "description", "deadline", "deadlineTransitionId"],
   transition: ["transitionId", "fromStateId", "toStateId", "actionId", "transitionType"],
   action: ["actionId", "description"],
+  proposer: ["printId", "personId", "order", "type"],
   // schuze.zip; only the leading columns this collector reads are declared.
   session: ["sessionId", "organId", "number", "from", "to", "updatedAt", "isInvitation"],
   agendaItem: ["agendaItemId", "sessionId", "printId", "typeId", "number", "fullTitle", "fullSuffix", "note", "stateId", "isInvitation"]
@@ -186,6 +187,28 @@ function approvedAgendaItems(sessionsEntries, termOrganId) {
   return itemsByKey;
 }
 
+/**
+ * Validates the government periods that make a government bill conduct of
+ * the governing parties (automation/attribution/government-periods.json).
+ */
+export function validateGovernmentPeriods(governmentPeriods) {
+  invariant(governmentPeriods?.schemaVersion === "1.0.0", "Unsupported government periods schemaVersion");
+  invariant(Array.isArray(governmentPeriods.periods), "Government periods must be an array");
+  for (const period of governmentPeriods.periods) {
+    invariant(typeof period.id === "string" && period.id.length > 0, "Government period is missing id");
+    invariant(/^\d{4}-\d{2}-\d{2}$/.test(period.from), `Government period ${period.id} needs a from date`);
+    invariant(period.to === null || /^\d{4}-\d{2}-\d{2}$/.test(period.to), `Government period ${period.id} has an invalid to date`);
+    invariant(Array.isArray(period.partyIds) && period.partyIds.length > 0, `Government period ${period.id} needs partyIds`);
+    invariant(/^https:\/\//.test(period.verificationUrl), `Government period ${period.id} needs an HTTPS verificationUrl`);
+  }
+  return governmentPeriods;
+}
+
+function governmentPartiesOn(governmentPeriods, date) {
+  const period = governmentPeriods.periods.find(({ from, to }) => from <= date && (to === null || date <= to));
+  return period ? [...period.partyIds].sort() : [];
+}
+
 function historyContext(history, transitionById, actionById) {
   const transition = transitionById.get(history.transitionId);
   const action = actionById.get(transition?.actionId);
@@ -197,7 +220,8 @@ function historyContext(history, transitionById, actionById) {
   };
 }
 
-export function normalizePspData({ source, since, votesEntries, membersEntries, printsEntries, sessionsEntries }) {
+export function normalizePspData({ source, since, votesEntries, membersEntries, printsEntries, sessionsEntries, governmentPeriods }) {
+  validateGovernmentPeriods(governmentPeriods);
   const voteRows = parseUnl(decodeEntry(votesEntries, `hl${source.term.year}s.unl`), schemas.vote)
     .filter((row) => row.organId === String(source.term.organId));
   const individualRows = parseUnl(decodeMatchingEntries(votesEntries, new RegExp(`^hl${source.term.year}h\\d+\\.unl$`, "i")), schemas.individualVote);
@@ -222,6 +246,44 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
   const printRows = parseUnl(decodeEntry(printsEntries, "tisky.unl"), schemas.print)
     .filter((row) => row.termOrganId === String(source.term.organId));
   const printById = new Map(printRows.map((row) => [row.printId, row]));
+  const clubPartyOn = (personId, date) => (membershipsByPerson.get(personId) ?? [])
+    .filter((membership) => activeOn(membership, date))
+    .map((membership) => source.partyAliases[clubs.get(membership.entityId)?.abbreviation] ?? null)
+    .filter(Boolean);
+
+  // Per the official schema (psp.cz/sqw/hp.sqw?k=1303, druh_tisku.unl): the
+  // government submits kind 1 (government bill), 3 (state budget) and 4
+  // (international treaty); kind 2 with proposer type 2 or 3 is a bill of one
+  // MP or a group of MPs. A single proposer is tisky.id_osoba; several are
+  // listed in predkladatel.unl.
+  const proposersByPrint = new Map();
+  for (const row of parseUnl(decodeEntry(printsEntries, "predkladatel.unl"), schemas.proposer)) {
+    if (!printById.has(row.printId)) continue;
+    const list = proposersByPrint.get(row.printId) ?? [];
+    list.push(row.personId);
+    proposersByPrint.set(row.printId, list);
+  }
+  const proposalByPrint = new Map();
+  for (const print of printRows) {
+    const submittedOn = pspDate(print.submittedAt);
+    if (!submittedOn) continue;
+    if (print.kindId === "1" || print.kindId === "3" || print.kindId === "4") {
+      proposalByPrint.set(print.printId, {
+        kind: "government-proposal",
+        submittedOn,
+        proposerPartyIds: governmentPartiesOn(governmentPeriods, submittedOn),
+        proposerCz: cleanText(print.proposerText, 300) || null
+      });
+    } else if (print.kindId === "2" && (print.proposalTypeId === "2" || print.proposalTypeId === "3")) {
+      const personIds = [...new Set(proposersByPrint.get(print.printId) ?? (print.personId ? [print.personId] : []))];
+      proposalByPrint.set(print.printId, {
+        kind: "member-bill",
+        submittedOn,
+        proposerPartyIds: [...new Set(personIds.flatMap((personId) => clubPartyOn(personId, submittedOn)))].sort(),
+        proposerCz: cleanText(print.proposerText, 300) || null
+      });
+    }
+  }
   const historyRows = parseUnl(decodeEntry(printsEntries, "hist.unl"), schemas.history)
     .filter((row) => printById.has(row.printId));
   const stateById = new Map(parseUnl(decodeEntry(printsEntries, "stavy.unl"), schemas.state).map((row) => [row.stateId, row]));
@@ -380,6 +442,7 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
       payload: {
         externalHistoryId: history.historyId,
         externalPrintId: print.printId,
+        proposal: proposalByPrint.get(print.printId) ?? null,
         printNumber: numeric(print.number),
         partNumber: numeric(print.partNumber),
         printTitleCz: printTitle,
@@ -441,7 +504,8 @@ export async function collectPspSource(source, options) {
     votesEntries: archiveEntries(responseByName.votes.bytes, `${source.id}:votes`),
     membersEntries: archiveEntries(responseByName.members.bytes, `${source.id}:members`),
     printsEntries: archiveEntries(responseByName.prints.bytes, `${source.id}:prints`),
-    sessionsEntries: archiveEntries(responseByName.sessions.bytes, `${source.id}:sessions`)
+    sessionsEntries: archiveEntries(responseByName.sessions.bytes, `${source.id}:sessions`),
+    governmentPeriods: options.governmentPeriods
   });
   return {
     sourceId: source.id,

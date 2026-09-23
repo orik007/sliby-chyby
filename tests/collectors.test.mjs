@@ -10,6 +10,11 @@ import {
 } from "../scripts/lib/collector-core.mjs";
 import { derivePartyVoteSummaries, normalizePspData, parseUnl } from "../scripts/lib/psp-collector.mjs";
 
+const governmentPeriods = {
+  schemaVersion: "1.0.0",
+  periods: [{ id: "test-government", from: "2025-12-15", to: null, partyIds: ["ano", "motoriste", "spd"], verificationUrl: "https://gov.example/appointed" }]
+};
+
 const officialSource = {
   id: "example-chamber",
   publisher: "Example Chamber",
@@ -190,11 +195,12 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
     "hist.unl": entry(unl(historyFields)),
     "stavy.unl": entry(unl(["20", "6", "1", "Approved", null, null]) + unl(["10", "5", "1", "Before vote", null, null])),
     "prechody.unl": entry(unl(["10", "10", "20", "5", "1"])),
-    "typ_akce.unl": entry(unl(["5", "Chamber approved bill"]))
+    "typ_akce.unl": entry(unl(["5", "Chamber approved bill"])),
+    "predkladatel.unl": entry("")
   };
 
   const sessionsEntries = { "schuze.unl": entry(""), "bod_schuze.unl": entry("") };
-  const result = normalizePspData({ source, since: "2026-08-01", votesEntries, membersEntries, printsEntries, sessionsEntries });
+  const result = normalizePspData({ source, since: "2026-08-01", votesEntries, membersEntries, printsEntries, sessionsEntries, governmentPeriods });
   const vote = result.records.find((record) => record.kind === "parliamentary-vote");
   const step = result.records.find((record) => record.kind === "legislative-step");
   assert.ok(vote);
@@ -245,7 +251,8 @@ function agendaFixture({ historyAgendaId = "5001" } = {}) {
     "hist.unl": entry(unl(historyFields)),
     "stavy.unl": entry(unl(["20", "6", "1", "Approved", null, null])),
     "prechody.unl": entry(unl(["11", "20", "20", "6", "1"])),
-    "typ_akce.unl": entry(unl(["6", "setrvano"]))
+    "typ_akce.unl": entry(unl(["6", "setrvano"])),
+    "predkladatel.unl": entry("")
   };
   // PSP files are windows-1250; the fixture stays ASCII so UTF-8 bytes decode identically.
   const sessionsEntries = {
@@ -258,7 +265,7 @@ function agendaFixture({ historyAgendaId = "5001" } = {}) {
       + unl(["5001", "291", null, "6", "4", "Written interpellation answer", null, null, "1", null])
     )
   };
-  return normalizePspData({ source, since: "2026-08-01", votesEntries, membersEntries, printsEntries, sessionsEntries });
+  return normalizePspData({ source, since: "2026-08-01", votesEntries, membersEntries, printsEntries, sessionsEntries, governmentPeriods });
 }
 
 test("PSP normalizer links votes to the print of their approved agenda item", () => {
@@ -292,6 +299,58 @@ test("PSP normalizer skips agenda links when schuze.zip and hist.unl disagree", 
   const amendment = result.records.find((record) => record.id === "psp-core-2025--vote-950");
   assert.equal(amendment.payload.agendaItem, null);
   assert.deepEqual(amendment.payload.linkedPrints, []);
+});
+
+test("PSP normalizer attributes submitted bills to proposer and government parties", () => {
+  const source = {
+    id: "psp-core-2025",
+    publisher: "PSP",
+    evidenceRole: "primary-record",
+    partyAliases: { MS: "motoriste", ANO2011: "ano" },
+    term: { year: 2025, number: 10, organId: 174 }
+  };
+  const print = (id, number, kind, proposerType, personId, submitted, title) => {
+    const fields = Array(24).fill(null);
+    Object.assign(fields, { 0: id, 1: kind, 2: "20", 3: number, 4: "0", 5: proposerType, 7: "174", 8: personId, 10: title, 11: submitted, 15: title });
+    return unl(fields);
+  };
+  const submission = (historyId, printId) => {
+    const fields = Array(15).fill(null);
+    Object.assign(fields, { 0: historyId, 1: printId, 2: "2026-01-27 00:00", 4: "1" });
+    return unl(fields);
+  };
+  const result = normalizePspData({
+    source,
+    since: "2025-10-01",
+    governmentPeriods,
+    votesEntries: { "hl2025s.unl": entry(""), "hl2025h1.unl": entry(""), "zmatecne.unl": entry("") },
+    membersEntries: {
+      "osoby.unl": entry(unl(["1", null, "Novak", "Jan", null, "01.01.1980", "M", null, null]) + unl(["2", null, "Dvorak", "Petr", null, "01.01.1980", "M", null, null])),
+      "poslanec.unl": entry(unl(["100", "1", null, null, "174", null, null, null, null, null, null, null, null, null, "1"]) + unl(["101", "2", null, null, "174", null, null, null, null, null, null, null, null, null, "1"])),
+      "zarazeni.unl": entry(unl(["1", "1760", "0", "2025-10-08 00", null, null, null]) + unl(["2", "1770", "0", "2025-10-08 00", null, null, null])),
+      "organy.unl": entry(unl(["1760", "174", "1", "MS", "Klub Motoriste", "MS club", "08.10.2025", null, null, "0"]) + unl(["1770", "174", "1", "PIR", "Klub Pirati", "PIR club", "08.10.2025", null, null, "0"]))
+    },
+    printsEntries: {
+      "tisky.unl": entry(
+        print("701", "11", "2", "3", null, "06.11.2025", "Member bill")
+        + print("702", "90", "1", null, "9", "27.01.2026", "Government bill")
+        + print("703", "94", "3", null, "9", "12.11.2025", "Earlier government budget")
+        + print("704", "15", "2", "3", null, "10.11.2025", "Other party member bill")
+      ),
+      "hist.unl": entry(submission("801", "701") + submission("802", "702") + submission("803", "703") + submission("804", "704")),
+      "stavy.unl": entry(unl(["20", "1", "1", "Submitted", null, null])),
+      "prechody.unl": entry(unl(["1", "20", "20", "7", "1"])),
+      "typ_akce.unl": entry(unl(["7", "předložen"])),
+      "predkladatel.unl": entry(unl(["701", "1", "1", "0"]) + unl(["701", "2", "2", "0"]) + unl(["704", "2", "1", "0"]))
+    },
+    sessionsEntries: { "schuze.unl": entry(""), "bod_schuze.unl": entry("") }
+  });
+  const proposalOf = (printNumber) => result.records.find((record) => record.payload.printNumber === printNumber).payload.proposal;
+  assert.deepEqual(proposalOf(11), { kind: "member-bill", submittedOn: "2025-11-06", proposerPartyIds: ["motoriste"], proposerCz: null });
+  assert.deepEqual(proposalOf(90).proposerPartyIds, ["ano", "motoriste", "spd"]);
+  assert.equal(proposalOf(90).kind, "government-proposal");
+  assert.deepEqual(proposalOf(94).proposerPartyIds, [], "a proposal of the government before 15 December 2025 is not conduct of the current governing parties");
+  assert.deepEqual(proposalOf(15).proposerPartyIds, []);
 });
 
 test("deduplication accepts identical records and rejects conflicting content", () => {
