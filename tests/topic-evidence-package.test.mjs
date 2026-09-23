@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
-import { validatePromiseRegistry } from "../scripts/lib/evidence-matcher.mjs";
+import { validatePromiseRegistry } from "../scripts/lib/attribution.mjs";
 import { buildTopicEvidencePackage } from "../scripts/lib/topic-evidence-package.mjs";
 
 const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8")));

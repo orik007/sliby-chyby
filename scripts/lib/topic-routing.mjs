@@ -126,22 +126,9 @@ function promiseIdsForTags(taxonomy, invertedIndex, tagIds) {
 }
 
 /**
- * Routes one source record to zero or more promises. Semantic-discovery
- * candidates (`semanticDiscoveryPromiseIds`) are unioned into an already
- * tag- or direct-routed result and are never used to filter or retire it
- * (the property the design doc requires, lines 106-107, that the legacy
- * top-N/0.55 semantic policy violated). But a semantic hit is never by
- * itself *eligible* to drive an automatically created relationship either:
- * a promise id present only in `semanticDiscoveryPromiseIds` -- not also
- * tag-routed or direct-linked -- can never appear in `candidatePromiseIds`
- * when `disposition` is `candidate-created`, even when this record's
- * overall state is auto-candidate for some other, genuinely eligible
- * promise, and even when the agreed tag itself currently indexes no
- * promise at all. It is still retained, in `semanticOnlyPromiseIds`, for
- * human routing review. Semantic discovery also never *creates* a
- * relationship on its own when both taggers returned `unknown`: that stays
- * `orphan-review` for human routing review, not an auto-published
- * candidate purely on an embedding hint.
+ * Routes one source record to zero or more promises by agreed specific tags
+ * or a direct structural link. A record without either stays in
+ * `orphan-review` or `routing-review` for human attention.
  */
 export function routeSourceRecord({
   taxonomy,
@@ -149,13 +136,11 @@ export function routeSourceRecord({
   taggerA,
   taggerB,
   invertedIndex,
-  directLink = null,
-  semanticDiscoveryPromiseIds = []
+  directLink = null
 }) {
   invariant(typeof record.id === "string" && record.id.length > 0, "routeSourceRecord requires a record id");
 
   const combined = combineTaggerResults(taxonomy, taggerA, taggerB, { directLink });
-  const semanticSet = new Set(semanticDiscoveryPromiseIds);
 
   if (combined.state === "orphan-review") {
     return {
@@ -163,9 +148,8 @@ export function routeSourceRecord({
       disposition: "orphan-review",
       routingState: combined.state,
       reason: combined.reason,
-      candidatePromiseIds: [...semanticSet],
-      semanticOnlyPromiseIds: [...semanticSet],
-      routeBasis: semanticSet.size > 0 ? ["semantic-discovery"] : [],
+      candidatePromiseIds: [],
+      routeBasis: [],
       matchedTagIds: [],
       directLinkReason: null
     };
@@ -180,47 +164,31 @@ export function routeSourceRecord({
     ? combined.agreedTags
     : [...selectedTags(taggerA), ...selectedTags(taggerB)];
   const tagRoutedPromiseIds = promiseIdsForTags(taxonomy, invertedIndex, routingTagIds);
-
-  // Only a controlled-tag or direct-structural-link match is safe to drive
-  // an automatically created relationship (design doc step 5). Everything
-  // else in the semantic set is review-only.
-  const eligiblePromiseIds = new Set([...tagRoutedPromiseIds, ...directPromiseIds]);
-  const semanticOnlyPromiseIds = new Set([...semanticSet].filter((id) => !eligiblePromiseIds.has(id)));
-  const allCandidatePromiseIds = new Set([...eligiblePromiseIds, ...semanticSet]);
+  const candidatePromiseIds = new Set([...tagRoutedPromiseIds, ...directPromiseIds]);
   const routeBasis = [
     ...(tagRoutedPromiseIds.size > 0 ? ["controlled-tag"] : []),
-    ...(directPromiseIds.size > 0 ? ["direct-structural-link"] : []),
-    ...(semanticSet.size > 0 ? ["semantic-discovery"] : [])
+    ...(directPromiseIds.size > 0 ? ["direct-structural-link"] : [])
   ];
 
-  if (allCandidatePromiseIds.size === 0) {
+  if (candidatePromiseIds.size === 0) {
     return {
       recordId: record.id,
       disposition: "orphan-review",
       routingState: combined.state,
       reason: "no-matching-promise-after-safe-assignment",
       candidatePromiseIds: [],
-      semanticOnlyPromiseIds: [],
       routeBasis: [],
       matchedTagIds: routingTagIds,
       directLinkReason: directLink?.reason ?? null
     };
   }
 
-  // An auto-candidate tagger/direct-link state only actually creates a
-  // relationship when it has at least one eligible (tag/direct) promise --
-  // a purely semantic hit riding along on an auto-candidate record (or an
-  // agreed tag with nothing indexed under it yet) must fall back to
-  // routing-review rather than being reported as created.
-  const disposition = combined.state === "auto-candidate" && eligiblePromiseIds.size > 0 ? "candidate-created" : "routing-review";
-
   return {
     recordId: record.id,
-    disposition,
+    disposition: combined.state === "auto-candidate" ? "candidate-created" : "routing-review",
     routingState: combined.state,
     reason: combined.reason,
-    candidatePromiseIds: disposition === "candidate-created" ? [...eligiblePromiseIds] : [...allCandidatePromiseIds],
-    semanticOnlyPromiseIds: [...semanticOnlyPromiseIds],
+    candidatePromiseIds: [...candidatePromiseIds],
     routeBasis,
     matchedTagIds: routingTagIds,
     directLinkReason: directLink?.reason ?? null

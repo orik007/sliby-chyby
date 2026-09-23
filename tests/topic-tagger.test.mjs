@@ -10,7 +10,7 @@ import {
   TagValidationError,
   validateTagAssignmentOutput
 } from "../scripts/lib/topic-tagger.mjs";
-import { validatePromiseRegistry } from "../scripts/lib/evidence-matcher.mjs";
+import { validatePromiseRegistry } from "../scripts/lib/attribution.mjs";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import { validateTaxonomy } from "../scripts/lib/topic-taxonomy.mjs";
 

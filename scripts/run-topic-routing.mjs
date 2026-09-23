@@ -7,7 +7,7 @@ import { sha256 } from "./lib/collector-core.mjs";
 import { loadPublishedPromiseIds, publishedMatchingRegistry } from "./lib/published-promises.mjs";
 import { buildPromiseTaggingBrief, buildSourceTaggingBrief, loadTaggingPrompt, requestTagAssignment, TagValidationError, taggingRuntimeConfig, validateTagAssignmentOutput } from "./lib/topic-tagger.mjs";
 import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
-import { validatePromiseRegistry } from "./lib/evidence-matcher.mjs";
+import { validatePromiseRegistry } from "./lib/attribution.mjs";
 import { buildInvertedIndex, derivePromiseTopicTags, routeSourceRecord } from "./lib/topic-routing.mjs";
 import { buildTopicEvidencePackage } from "./lib/topic-evidence-package.mjs";
 
@@ -398,7 +398,7 @@ try {
           // auto-candidate unconditionally once a directLink is present, without
           // ever looking at taggerA/taggerB -- so there is nothing for either
           // paid tagger to add, and skipping them here saves two calls per hit.
-          const route = routeSourceRecord({ taxonomy, record, taggerA: null, taggerB: null, invertedIndex, directLink, semanticDiscoveryPromiseIds: [] });
+          const route = routeSourceRecord({ taxonomy, record, taggerA: null, taggerB: null, invertedIndex, directLink });
           return { route, tagged: { taggerA: null, taggerB: null, provider: null, modelA: null, modelB: null, taggerAError: null, taggerBError: null }, inputHash, briefText: brief.text };
         }
 
@@ -412,8 +412,7 @@ try {
           taggerA: tagged.taggerA,
           taggerB: tagged.taggerB,
           invertedIndex,
-          directLink: null,
-          semanticDiscoveryPromiseIds: []
+          directLink: null
         });
         return { route, tagged, inputHash, briefText: brief.text };
       });

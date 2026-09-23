@@ -2,16 +2,8 @@ import { mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import { basename, dirname, resolve } from "node:path";
 import { randomUUID } from "node:crypto";
 import { planSourceCollections, updateCollectorCheckpoints, withoutRemovedSourceCheckpoints } from "./lib/collector-checkpoints.mjs";
-import { collectFeedSource } from "./lib/feed-collectors.mjs";
 import { deduplicateRecords, invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { collectPspSource } from "./lib/psp-collector.mjs";
-import {
-  collectMkNewsArchive,
-  collectMpsvPressArchive,
-  collectMsmtNewsApi,
-  collectOfficialHtmlArchive,
-  collectWordPressRest
-} from "./lib/official-archive-collectors.mjs";
 
 function parseArgs(args) {
   const options = { sourceIds: [], since: null, sinceDays: 7, checkpoints: null, writeCheckpoints: null, output: null };
@@ -79,19 +71,7 @@ for (const source of selected) {
   invariant(plan, `Collector source ${source.id} is missing a collection plan`);
   const since = plan.since;
   try {
-    const result = source.collector === "psp-open-data"
-      ? await collectPspSource(source, { since, collectedAt })
-      : source.collector === "official-html-archive"
-        ? await collectOfficialHtmlArchive(source, { since, collectedAt })
-        : source.collector === "wordpress-rest"
-          ? await collectWordPressRest(source, { since, collectedAt })
-          : source.collector === "mk-news-archive"
-            ? await collectMkNewsArchive(source, { since, collectedAt })
-            : source.collector === "mpsv-press-archive"
-              ? await collectMpsvPressArchive(source, { since, collectedAt })
-              : source.collector === "msmt-news-api"
-                ? await collectMsmtNewsApi(source, { since, collectedAt })
-                : await collectFeedSource(source, { since, collectedAt });
+    const result = await collectPspSource(source, { since, collectedAt });
     collectorResults.push(result);
     console.log(`${source.id}: ${plan.mode} from ${since}, ${result.records.length} records, ${result.warnings.length} warnings`);
   } catch (error) {

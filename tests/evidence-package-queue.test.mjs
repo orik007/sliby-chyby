@@ -3,7 +3,7 @@ import { mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { currentEvidencePackageEntries, loadBlockedEvidencePackages, loadCurrentEvidencePackages, queueEvidencePackages, reconcileEvidencePackageQueue, validateEvidencePackageQueue } from "../scripts/lib/evidence-package-queue.mjs";
+import { currentEvidencePackageEntries, loadBlockedEvidencePackages, loadCurrentEvidencePackages, queueEvidencePackages, validateEvidencePackageQueue } from "../scripts/lib/evidence-package-queue.mjs";
 
 function evidencePackage(asOf, factSummary) {
   return {
@@ -80,23 +80,3 @@ test("rejects a queue whose supersession cycle has no current package", () => {
   }), /must have exactly one current version/);
 });
 
-test("retires a current semantic-only package outside the active policy while preserving its audit bytes", async () => {
-  const root = await mkdtemp(join(tmpdir(), "slava-evidence-queue-"));
-  const input = join(root, "input");
-  const queue = join(root, "queue");
-  await mkdir(input);
-  const weakSemanticPackage = evidencePackage("2026-09-10", "Nesouvisející evropské opatření.");
-  weakSemanticPackage.evidence[1].matchBasis = {
-    exactSignal: false,
-    semanticCandidate: { rank: 7, similarity: 0.535 }
-  };
-  await writeInput(input, weakSemanticPackage);
-  await queueEvidencePackages({ inputDirectory: input, queueDirectory: queue, enrichmentRun: { warnings: [] } });
-
-  const result = await reconcileEvidencePackageQueue({ queueDirectory: queue, candidateLimit: 3, minimumSimilarity: 0.55 });
-  assert.deepEqual(result, { retired: 1, activeCount: 0, changed: true });
-  assert.equal((await loadCurrentEvidencePackages(queue)).length, 0);
-  const manifest = validateEvidencePackageQueue(JSON.parse(await readFile(join(queue, "manifest.json"), "utf8")));
-  assert.equal(manifest.packages[0].retirementReason, "outside-active-semantic-policy");
-  assert.ok(await readFile(join(queue, manifest.packages[0].path), "utf8"));
-});

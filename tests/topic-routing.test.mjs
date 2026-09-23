@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
-import { validatePromiseRegistry } from "../scripts/lib/evidence-matcher.mjs";
+import { validatePromiseRegistry } from "../scripts/lib/attribution.mjs";
 import {
   buildInvertedIndex,
   combineTaggerResults,
@@ -91,45 +91,6 @@ test("fixture 3: an unknown classification is visible in orphan review, not sile
   const route = routeSourceRecord({ taxonomy, record, taggerA, taggerB, invertedIndex });
   assert.equal(route.disposition, "orphan-review");
   assert.notEqual(route.disposition, undefined);
-});
-
-test("a tag-routed relationship survives regardless of semantic-discovery rank/similarity (never suppressed)", () => {
-  const invertedIndex = buildInvertedIndex(taxonomy, [
-    { promiseId: fiscalPromise.id, tagAssignment: taggerOutput(["deficit-and-debt"]) }
-  ]);
-  const record = voteRecord({ id: "psp--fiscal-vote-2" });
-  const taggerA = taggerOutput(["deficit-and-debt"]);
-  const taggerB = taggerOutput(["deficit-and-debt"]);
-
-  // No semantic-discovery signal at all -- under the legacy top-3/0.55 policy
-  // this record's package could be retired as "outside-active-semantic-policy".
-  // The tag-routed relationship must still be created.
-  const routeWithoutSemantic = routeSourceRecord({ taxonomy, record, taggerA, taggerB, invertedIndex, semanticDiscoveryPromiseIds: [] });
-  assert.equal(routeWithoutSemantic.disposition, "candidate-created");
-  assert.ok(routeWithoutSemantic.candidatePromiseIds.includes(fiscalPromise.id));
-
-  // A semantic-discovery candidate for an unrelated promise never removes
-  // the tag-routed relationship -- but it also never rides along as an
-  // automatically created one of its own; it stays review-only.
-  const routeWithUnrelatedSemantic = routeSourceRecord({ taxonomy, record, taggerA, taggerB, invertedIndex, semanticDiscoveryPromiseIds: ["some-other-promise"] });
-  assert.ok(routeWithUnrelatedSemantic.candidatePromiseIds.includes(fiscalPromise.id));
-  assert.ok(!routeWithUnrelatedSemantic.candidatePromiseIds.includes("some-other-promise"), "a semantic-only hit must never be auto-created alongside a genuinely tag-routed promise");
-  assert.ok(routeWithUnrelatedSemantic.semanticOnlyPromiseIds.includes("some-other-promise"));
-});
-
-test("a semantic-only hit is never auto-created even when the agreed tag itself indexes no promise", () => {
-  // The taggers agree on a specific, assessment-eligible tag, so combined
-  // state is auto-candidate -- but no promise currently holds that tag in
-  // the inverted index, so there is no eligible (tag/direct) promise at
-  // all. A semantic-discovery hit must not exploit that to slip into
-  // candidate-created.
-  const invertedIndex = buildInvertedIndex(taxonomy, []);
-  const record = voteRecord({ id: "psp--agreed-tag-with-no-indexed-promise" });
-  const taggerA = taggerOutput(["deficit-and-debt"]);
-  const taggerB = taggerOutput(["deficit-and-debt"]);
-  const route = routeSourceRecord({ taxonomy, record, taggerA, taggerB, invertedIndex, semanticDiscoveryPromiseIds: [fiscalPromise.id] });
-  assert.notEqual(route.disposition, "candidate-created", "nothing is eligible here, so this record must not be reported as having auto-created a relationship");
-  assert.ok(route.semanticOnlyPromiseIds.includes(fiscalPromise.id), "the semantic hit stays visible for human routing review");
 });
 
 test("a direct structural link always creates an auto-candidate, independent of tagger agreement", () => {
@@ -231,18 +192,3 @@ test("a promise-topic assignment pending review still retains the full proposed 
   assert.deepEqual(new Set(derived.tags), new Set(["deficit-and-debt", "vat-policy"]));
 });
 
-test("a semantic-discovery hit alone never upgrades an unknown/unknown pair past orphan-review", () => {
-  const invertedIndex = buildInvertedIndex(taxonomy, [
-    { promiseId: fiscalPromise.id, tagAssignment: taggerOutput(["deficit-and-debt"]) }
-  ]);
-  const record = voteRecord({ id: "psp--unknown-with-semantic-hint" });
-  const route = routeSourceRecord({
-    taxonomy,
-    record,
-    taggerA: taggerOutput(["unknown"]),
-    taggerB: taggerOutput(["unknown"]),
-    invertedIndex,
-    semanticDiscoveryPromiseIds: [fiscalPromise.id]
-  });
-  assert.equal(route.disposition, "orphan-review");
-});

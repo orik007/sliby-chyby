@@ -8,44 +8,34 @@ import {
   fetchVerified,
   validateRegistry
 } from "../scripts/lib/collector-core.mjs";
-import { parseNewsSitemap, parseRssOrAtom } from "../scripts/lib/feed-collectors.mjs";
-import {
-  parseMkNewsArchive,
-  parseMpsvPressArchive,
-  parseMsmtNewsApiPage,
-  parseOfficialHtmlArchive,
-  parseWordPressRestPage
-} from "../scripts/lib/official-archive-collectors.mjs";
 import { derivePartyVoteSummaries, normalizePspData, parseUnl } from "../scripts/lib/psp-collector.mjs";
 
-const mediaSource = {
-  id: "example-media",
-  publisher: "Example Media",
-  collector: "rss",
+const officialSource = {
+  id: "example-chamber",
+  publisher: "Example Chamber",
+  collector: "psp-open-data",
   enabled: true,
-  primary: false,
-  evidenceRole: "discovery-context",
+  primary: true,
+  evidenceRole: "primary-record",
   bootstrapFrom: "2025-10-01",
-  coverage: { mode: "current-window", note: "Fixture feed exposes a current window." },
-  endpoint: "https://news.example/rss",
-  verificationUrl: "https://news.example/rss-help",
+  coverage: { mode: "term-snapshot", note: "Fixture snapshot covers the whole term." },
+  verificationUrl: "https://news.example/open-data",
   verifiedAt: "2026-08-31",
-  expectedHosts: ["news.example"],
-  maxExcerptChars: 80
+  expectedHosts: ["news.example"]
 };
 
 test("validates a unique, explicit collector registry", () => {
-  const registry = { schemaVersion: "1.0.0", sources: [mediaSource] };
+  const registry = { schemaVersion: "1.0.0", sources: [officialSource] };
   assert.equal(validateRegistry(registry), registry);
-  assert.throws(() => validateRegistry({ schemaVersion: "1.0.0", sources: [mediaSource, mediaSource] }), /Duplicate collector source id/);
+  assert.throws(() => validateRegistry({ schemaVersion: "1.0.0", sources: [officialSource, officialSource] }), /Duplicate collector source id/);
   assert.throws(() => validateRegistry({
     schemaVersion: "1.0.0",
-    sources: [{ ...mediaSource, evidenceRole: "official-party-publication", primary: true }]
-  }), /party websites are not evidence sources/);
+    sources: [{ ...officialSource, collector: "rss" }]
+  }), /Unknown collector type/);
   assert.throws(() => validateRegistry({
     schemaVersion: "1.0.0",
-    sources: [{ ...mediaSource, partyId: "motoriste" }]
-  }), /party websites are not evidence sources/);
+    sources: [{ ...officialSource, primary: false, evidenceRole: "discovery-context" }]
+  }), /not evidence sources/);
 });
 
 test("retries transient source responses before accepting verified bytes", async () => {
@@ -65,7 +55,7 @@ test("retries transient source responses before accepting verified bytes", async
     return response(200, '{"items":[]}', "application/json");
   };
   try {
-    const result = await fetchVerified(mediaSource, "https://news.example/api", {
+    const result = await fetchVerified(officialSource, "https://news.example/api", {
       maxBytes: 1_000,
       expectedContentTypes: ["application/json"],
       retryAttempts: 3,
@@ -96,7 +86,7 @@ test("retries transport failures while fetching and reading source bytes", async
     return response(async () => new TextEncoder().encode('{"items":[]}').buffer);
   };
   try {
-    const result = await fetchVerified(mediaSource, "https://news.example/api", {
+    const result = await fetchVerified(officialSource, "https://news.example/api", {
       maxBytes: 1_000,
       expectedContentTypes: ["application/json"],
       retryAttempts: 3,
@@ -109,249 +99,12 @@ test("retries transport failures while fetching and reading source bytes", async
   }
 });
 
-test("normalizes an official WordPress item within its configured category", () => {
-  const source = {
-    ...mediaSource,
-    id: "ministry-news",
-    collector: "wordpress-rest",
-    primary: true,
-    evidenceRole: "official-discovery",
-    apiEndpoint: "https://party.example/wp-json/wp/v2/posts",
-    wordpressCategoryId: 5,
-    wordpressCategorySlug: "tiskova-zprava",
-    expectedHosts: ["party.example"]
-  };
-  const records = parseWordPressRestPage([{
-    id: 42,
-    date_gmt: "2026-08-31T10:56:54",
-    link: "https://party.example/concrete-step-42",
-    title: { rendered: "Ministerstvo představilo konkrétní krok" },
-    excerpt: { rendered: "<p>Oficiální vyjádření ministerstva.</p>" },
-    categories: [5]
-  }], source, { since: "2025-10-01" });
-  assert.equal(records.length, 1);
-  assert.equal(records[0].kind, "official-publication");
-  assert.equal(records[0].evidenceRole, "official-discovery");
-  assert.equal("sourcePartyId" in records[0].payload, false);
-  assert.deepEqual(records[0].payload.wordpressCategoryIds, [5]);
-  assert.equal(records[0].payload.wordpressCategorySlug, "tiskova-zprava");
-  assert.equal(records[0].payload.excerptCz, "Oficiální vyjádření ministerstva.");
-  assert.throws(() => parseWordPressRestPage([{
-    id: 43,
-    date_gmt: "2026-08-31T11:00:00",
-    link: "https://party.example/interview-43",
-    title: { rendered: "Interview" },
-    excerpt: { rendered: "Interview jednotlivce." },
-    categories: [1]
-  }], source, { since: "2025-10-01" }), /outside its configured category/);
-});
-
 test("documents every configured collector source in the canonical pipeline policy", async () => {
   const registry = JSON.parse(await readFile(new URL("../automation/collectors/sources.json", import.meta.url), "utf8"));
   const policy = await readFile(new URL("../docs/evidence-pipeline.md", import.meta.url), "utf8");
   for (const source of registry.sources) {
     assert.match(policy, new RegExp(`\\x60${source.id}\\x60`), `Missing ${source.id} from evidence-pipeline.md`);
   }
-});
-
-test("normalizes RSS metadata without storing a full article", () => {
-  const xml = `<?xml version="1.0"?><rss version="2.0"><channel><title>Feed</title><item>
-    <guid>item-1</guid><title>Policy &amp; vote</title><link>https://news.example/article/1</link>
-    <description><![CDATA[<p>This is a publisher-provided summary with <strong>markup</strong> and deliberately more than eighty characters for truncation.</p>]]></description>
-    <pubDate>Sun, 30 Aug 2026 12:00:00 +0200</pubDate><author>Reporter</author>
-  </item></channel></rss>`;
-  const result = parseRssOrAtom(xml, mediaSource, { since: "2026-08-01" });
-  assert.equal(result.records.length, 1);
-  assert.equal(result.records[0].kind, "article");
-  assert.equal(result.records[0].primary, false);
-  assert.equal(result.records[0].payload.authorNames[0], "Reporter");
-  assert.ok(result.records[0].payload.excerptCz.length <= 80);
-  assert.doesNotMatch(result.records[0].payload.excerptCz, /<p>/);
-  assert.equal("status" in result.records[0], false);
-  assert.equal("direction" in result.records[0], false);
-  assert.equal("score" in result.records[0], false);
-});
-
-test("rejects a feed item that redirects readers outside the source allowlist", () => {
-  const xml = `<?xml version="1.0"?><rss><channel><title>Feed</title><item><title>Wrong host</title><link>https://other.example/a</link><pubDate>Sun, 30 Aug 2026 12:00:00 +0200</pubDate></item></channel></rss>`;
-  assert.throws(() => parseRssOrAtom(xml, mediaSource, { since: "2026-08-01" }), /outside the source host allowlist/);
-});
-
-test("accepts an explicitly allowlisted official linked host", () => {
-  const governmentSource = {
-    ...mediaSource,
-    id: "government-example",
-    primary: true,
-    evidenceRole: "official-discovery",
-    expectedHosts: ["vlada.gov.cz", "www.odok.cz"]
-  };
-  const xml = `<?xml version="1.0"?><rss><channel><title>Government</title><item><title>Cabinet agenda</title><link>https://www.odok.cz/portal/zvlady/jednani-detail/2026-08-31</link><pubDate>Mon, 31 Aug 2026 12:00:00 +0200</pubDate></item></channel></rss>`;
-  const result = parseRssOrAtom(xml, governmentSource, { since: "2026-08-01" });
-  assert.equal(result.records.length, 1);
-  assert.equal(result.records[0].url, "https://www.odok.cz/portal/zvlady/jednani-detail/2026-08-31");
-  assert.equal(result.records[0].primary, true);
-});
-
-test("keeps distinct official feed items that reuse one GUID and URL", () => {
-  const xml = `<?xml version="1.0"?><rss><channel><title>Government</title>
-    <item><guid>https://news.example/agenda/1</guid><title>Cabinet agenda</title><link>https://news.example/agenda/1</link><pubDate>Mon, 31 Aug 2026 12:00:00 +0200</pubDate></item>
-    <item><guid>https://news.example/agenda/1</guid><title>Cabinet agenda addendum</title><link>https://news.example/agenda/1</link><pubDate>Mon, 31 Aug 2026 12:00:00 +0200</pubDate></item>
-  </channel></rss>`;
-  const result = parseRssOrAtom(xml, mediaSource, { since: "2026-08-01" });
-  assert.equal(result.records.length, 2);
-  assert.notEqual(result.records[0].id, result.records[1].id);
-  assert.equal(result.records[0].payload.feedEntryId, result.records[1].payload.feedEntryId);
-});
-
-test("normalizes a publisher news sitemap without inventing an excerpt", () => {
-  const source = { ...mediaSource, id: "example-sitemap", collector: "news-sitemap", maxExcerptChars: 0 };
-  const xml = `<?xml version="1.0"?><urlset xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"><url>
-    <loc>https://news.example/article/2</loc><news:news><news:publication_date>2026-08-30T14:00:00+02:00</news:publication_date><news:title>Government decision</news:title></news:news>
-  </url></urlset>`;
-  const result = parseNewsSitemap(xml, source, { since: "2026-08-01" });
-  assert.equal(result.records.length, 1);
-  assert.equal(result.records[0].payload.excerptCz, "");
-  assert.equal(result.records[0].url, "https://news.example/article/2");
-});
-
-test("normalizes a bounded official Czech annual archive", () => {
-  const source = {
-    ...mediaSource,
-    id: "official-archive",
-    collector: "official-html-archive",
-    primary: true,
-    evidenceRole: "official-discovery",
-    archiveEndpoints: ["https://news.example/archive/2025"]
-  };
-  const html = `<article class="b-article link-mask"><a href="/release/a" class="b-article__link link-mask__link">Priorita &#x10C;R</a><span class="b-article__date">15. prosince 2025</span></article>`;
-  const records = parseOfficialHtmlArchive(html, source, { since: "2025-10-01" });
-  assert.equal(records.length, 1);
-  assert.equal(records[0].title, "Priorita ČR");
-  assert.equal(records[0].occurredAt, "2025-12-15T00:00:00.000Z");
-  assert.equal(records[0].url, "https://news.example/release/a");
-  assert.equal(records[0].primary, true);
-  assert.deepEqual(parseOfficialHtmlArchive(html, source, { since: "2026-01-01" }), []);
-});
-
-test("normalizes only ministry-labelled items from the Culture Ministry archive", () => {
-  const source = {
-    ...mediaSource,
-    id: "mk-news-archive",
-    collector: "mk-news-archive",
-    primary: true,
-    evidenceRole: "official-discovery",
-    archiveEndpoint: "https://www.mk.gov.cz/novinky-a-media-cs-4",
-    itemPathPrefix: "/novinky-a-media-cs-4/",
-    allowedPublisherCategories: ["ministerstvo"],
-    expectedHosts: ["www.mk.gov.cz"]
-  };
-  const html = `
-    <a href="/novinky-a-media-cs-4/1cs-ministry-item" class="malaNovinka novinka">
-      <div class="novinkaTexty"><div class="novinkaNadpis">Hmatatelné opatření</div>
-      <div class="novinkaInfo"><span class="novinkaDatum">17.08.2026 12:26</span><div><span></span><span class="novinkaDruh">ministerstvo</span></div></div>
-      <div class="novinkaText"><p>Oficiální stručný popis &amp; souvislosti.</p></div></div>
-    </a>
-    <a href="/novinky-a-media-cs-4/2cs-institution-item" class="malaNovinka novinka">
-      <div class="novinkaTexty"><div class="novinkaNadpis">Program muzea</div>
-      <div class="novinkaInfo"><span class="novinkaDatum">16.08.2026 10:00</span><div><span></span><span class="novinkaDruh">příspěvkové organizace</span></div></div>
-      <div class="novinkaText"><p>Program podřízené organizace.</p></div></div>
-    </a>`;
-  const records = parseMkNewsArchive(html, source, { since: "2025-10-01" });
-  assert.equal(records.length, 1);
-  assert.equal(records[0].title, "Hmatatelné opatření");
-  assert.equal(records[0].occurredAt, "2026-08-17T12:26:00");
-  assert.equal(records[0].payload.publisherCategory, "ministerstvo");
-  assert.equal(records[0].payload.excerptCz, "Oficiální stručný popis & souvislosti.");
-});
-
-test("normalizes a complete page from the MPSV annual archive", () => {
-  const source = {
-    ...mediaSource,
-    id: "mpsv-press-archive-2025-2026",
-    collector: "mpsv-press-archive",
-    primary: true,
-    evidenceRole: "official-discovery",
-    archiveEndpoints: ["https://mpsv.gov.cz/tiskove-zpravy-mpsv?year=2025"],
-    expectedHosts: ["mpsv.gov.cz"]
-  };
-  const html = `<span>Nalezen <b>1</b> výsledek</span><ul><li>
-    <a href="https://mpsv.gov.cz/zmena-podpory" class="card__basic card__horizontal" type="horizontal">
-      <div class="card__basic-content"><h3><span class="one-line-heading">Změna podpory</span></h3>
-      <span class="card__basic-date">30. prosince 2025</span>
-      <div class="card__basic-text">Ministerstvo zveřejnilo konkrétní opatření.</div></div>
-    </a></li></ul>`;
-  const records = parseMpsvPressArchive(html, source, { since: "2025-10-01" });
-  assert.equal(records.length, 1);
-  assert.equal(records[0].occurredAt, "2025-12-30T00:00:00.000Z");
-  assert.equal(records[0].url, "https://mpsv.gov.cz/zmena-podpory");
-  assert.equal(records[0].payload.excerptCz, "Ministerstvo zveřejnilo konkrétní opatření.");
-});
-
-test("normalizes a cursor-paginated MŠMT API page without trusting redirects", () => {
-  const source = {
-    ...mediaSource,
-    id: "msmt-news-api",
-    collector: "msmt-news-api",
-    primary: true,
-    evidenceRole: "official-discovery",
-    apiEndpoint: "https://msmt.gov.cz/api/aktuality",
-    archiveEndpoint: "https://msmt.gov.cz/aktuality",
-    itemPathPrefix: "/aktuality/",
-    expectedHosts: ["msmt.gov.cz"]
-  };
-  const page = {
-    success: true,
-    data: {
-      aktuality: {
-        pageInfo: { hasNextPage: true, endCursor: "next", total: 2 },
-        edges: [{ node: {
-          id: "post-1",
-          title: "Nové opatření ve školství",
-          date: "2026-08-20T09:15:00",
-          excerpt: "<p>Ministerstvo zveřejnilo <strong>konkrétní</strong> opatření.</p>",
-          slug: "nove-opatreni-ve-skolstvi",
-          tagsmain: { nodes: [{ name: "Ministerstvo" }] },
-          redirectacf: { redirect: true, redirecturl: "https://outside.example/ignored" }
-        } }]
-      }
-    }
-  };
-  const parsed = parseMsmtNewsApiPage(page, source, { since: "2025-10-01" });
-  assert.equal(parsed.records.length, 1);
-  assert.equal(parsed.records[0].url, "https://msmt.gov.cz/aktuality/nove-opatreni-ve-skolstvi");
-  assert.equal(parsed.records[0].payload.excerptCz, "Ministerstvo zveřejnilo konkrétní opatření.");
-  assert.deepEqual(parsed.records[0].payload.tags, ["Ministerstvo"]);
-  assert.equal(parsed.pageInfo.endCursor, "next");
-});
-
-test("safely encodes an unusual MŠMT slug returned by the official API", () => {
-  const source = {
-    ...mediaSource,
-    id: "msmt-news-api",
-    collector: "msmt-news-api",
-    primary: true,
-    evidenceRole: "official-discovery",
-    apiEndpoint: "https://msmt.gov.cz/api/aktuality",
-    archiveEndpoint: "https://msmt.gov.cz/aktuality",
-    itemPathPrefix: "/aktuality/",
-    expectedHosts: ["msmt.gov.cz"]
-  };
-  const page = {
-    success: true,
-    data: { aktuality: {
-      pageInfo: { hasNextPage: false, endCursor: null, total: 1 },
-      edges: [{ node: {
-        id: "post-2",
-        title: "Průvodce pro studenty",
-        date: "2026-02-03T10:06:09",
-        excerpt: "",
-        slug: "titulní-stránka-⁄-aktuality",
-        tagsmain: { nodes: [] }
-      } }]
-    } }
-  };
-  const parsed = parseMsmtNewsApiPage(page, source, { since: "2025-10-01" });
-  assert.equal(parsed.records[0].url, "https://msmt.gov.cz/aktuality/tituln%C3%AD-str%C3%A1nka-%E2%81%84-aktuality");
 });
 
 test("UNL parser respects escaped delimiters and null fields", () => {

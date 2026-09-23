@@ -2,7 +2,7 @@ import { existsSync } from "node:fs";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { hashEvidencePackage, validateEvidencePackage } from "./assessment-pipeline.mjs";
-import { assessableAttributionStatuses } from "./evidence-matcher.mjs";
+import { assessableAttributionStatuses } from "./attribution.mjs";
 
 const schemaVersion = "1.0.0";
 
@@ -68,16 +68,6 @@ function usesOnlyActiveAttribution(evidencePackage) {
   return evidencePackage.evidence
     .filter((evidence) => evidence.role === "conduct-evidence" && evidence.matchBasis?.attributionStatus)
     .every((evidence) => assessableAttributionStatuses.has(evidence.matchBasis.attributionStatus));
-}
-
-function eligibleUnderSemanticPolicy(evidencePackage, { candidateLimit, minimumSimilarity }) {
-  return evidencePackage.evidence
-    .filter((evidence) => evidence.role === "conduct-evidence")
-    .some((evidence) => evidence.matchBasis?.exactSignal === true || (
-      evidence.matchBasis?.semanticCandidate
-      && evidence.matchBasis.semanticCandidate.rank <= candidateLimit
-      && evidence.matchBasis.semanticCandidate.similarity >= minimumSimilarity
-    ));
 }
 
 async function loadQueue(queueDirectory) {
@@ -159,29 +149,6 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
     await writeFile(resolve(queuePath, "manifest.json"), `${JSON.stringify(validateEvidencePackageQueue(queue), null, 2)}\n`);
   }
   return { added, updated, retired, activeCount: currentEvidencePackageEntries(queue).length, changed };
-}
-
-export async function reconcileEvidencePackageQueue({ queueDirectory, candidateLimit, minimumSimilarity }) {
-  invariant(Number.isInteger(candidateLimit) && candidateLimit > 0, "Semantic candidate limit must be a positive integer");
-  invariant(Number.isFinite(minimumSimilarity) && minimumSimilarity >= -1 && minimumSimilarity <= 1, "Semantic minimum similarity must be between -1 and 1");
-  const queuePath = resolve(queueDirectory);
-  const manifestPath = resolve(queuePath, "manifest.json");
-  if (!existsSync(manifestPath)) return { retired: 0, activeCount: 0, changed: false };
-  const queue = await loadQueue(queuePath);
-  const now = new Date().toISOString();
-  let retired = 0;
-  for (const entry of currentEvidencePackageEntries(queue)) {
-    const evidencePackage = validateEvidencePackage(JSON.parse(await readFile(resolve(queuePath, entry.path), "utf8")));
-    invariant(hashEvidencePackage(evidencePackage) === entry.packageHash, `Queued package ${entry.packageHash} has changed`);
-    if (eligibleUnderSemanticPolicy(evidencePackage, { candidateLimit, minimumSimilarity })) continue;
-    entry.retiredAt = now;
-    entry.retirementReason = "outside-active-semantic-policy";
-    retired += 1;
-  }
-  if (retired > 0) {
-    await writeFile(manifestPath, `${JSON.stringify(validateEvidencePackageQueue(queue), null, 2)}\n`);
-  }
-  return { retired, activeCount: currentEvidencePackageEntries(queue).length, changed: retired > 0 };
 }
 
 export async function loadCurrentEvidencePackages(queueDirectory) {
