@@ -91,10 +91,11 @@ test("collection and packages create a missing audit pull request without overwr
 
 test("checkpoints persist only after routing and queuing packages", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
-  const routing = workflow.indexOf("      - name: Route source records to promises via topic tags");
+  const printActs = workflow.indexOf("      - name: Extract amended acts from official print texts");
+  const routing = workflow.indexOf("      - name: Route source records to promises via legal identifiers and topic tags");
   const queueing = workflow.indexOf("      - name: Queue enriched evidence packages");
   const persistence = workflow.indexOf("      - name: Persist source collection and queued evidence packages");
-  assert.ok(routing >= 0 && routing < queueing && queueing < persistence);
+  assert.ok(printActs >= 0 && printActs < routing && routing < queueing && queueing < persistence);
   assert.equal(workflow.includes("Persist successful source checkpoints"), false);
 });
 
