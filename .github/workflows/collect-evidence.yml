@@ -103,7 +103,7 @@ jobs:
             fi
             while IFS= read -r path; do
               restore_paths+=("$path")
-            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache)
+            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/print-acts)
             for directory in automation/evidence-packages automation/review-proposals; do
               while IFS= read -r path; do
                 case "$path" in
@@ -156,11 +156,19 @@ jobs:
           fi
           node scripts/run-collectors.mjs "${collector_args[@]}"
 
-      - name: Route source records to promises via topic tags
+      - name: Extract amended acts from official print texts
+        run: |
+          node scripts/run-print-acts.mjs \
+            --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
+            --cache automation/print-acts/cache.json \
+            --output automation/runs/pipeline/github-actions/print-acts
+
+      - name: Route source records to promises via legal identifiers and topic tags
         run: |
           AS_OF="${MATCHER_AS_OF:-$(date -u +%F)}"
           node scripts/run-topic-routing.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
+            --print-acts automation/runs/pipeline/github-actions/print-acts/print-acts.json \
             --tag-cache automation/topic-routing/tag-cache \
             --as-of "$AS_OF" \
             --output automation/runs/pipeline/github-actions/topic-routing
@@ -196,6 +204,9 @@ jobs:
         run: |
           if [ -d automation/topic-routing/tag-cache ]; then
             git add automation/topic-routing/tag-cache
+          fi
+          if [ -d automation/print-acts ]; then
+            git add automation/print-acts
           fi
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"

@@ -325,6 +325,7 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     const print = printById.get(printId);
     return {
       externalPrintId: printId,
+      printKindId: print?.kindId ?? null,
       number: numeric(print?.number),
       partNumber: numeric(print?.partNumber),
       titleCz: cleanText(print?.fullTitle || print?.shortTitle, 1000),
@@ -442,6 +443,7 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
       payload: {
         externalHistoryId: history.historyId,
         externalPrintId: print.printId,
+        printKindId: print.kindId,
         proposal: proposalByPrint.get(print.printId) ?? null,
         printNumber: numeric(print.number),
         partNumber: numeric(print.partNumber),

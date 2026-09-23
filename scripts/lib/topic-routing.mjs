@@ -194,3 +194,36 @@ export function routeSourceRecord({
     directLinkReason: directLink?.reason ?? null
   };
 }
+
+function recordPrintIds(record) {
+  const payload = record.payload ?? {};
+  return [
+    ...(payload.externalPrintId ? [String(payload.externalPrintId)] : []),
+    ...(payload.linkedPrints ?? []).map(({ externalPrintId }) => String(externalPrintId))
+  ];
+}
+
+/**
+ * Finds a direct structural link for a source record: a legal identifier of
+ * an act that a print the record concerns amends (from `printIdentifiers`,
+ * keyed by print ID), which a taxonomy tag lists in
+ * `directLegalIdentifiers`, resolved to promises holding that tag. Returns
+ * null when no identifier resolves to a promise.
+ */
+export function deriveDirectLink({ record, directIdIndex, invertedIndex, printIdentifiers = {} }) {
+  const identifiers = [...new Set(recordPrintIds(record).flatMap((printId) => printIdentifiers[printId]?.identifiers ?? []))].sort();
+  const promiseIds = new Set();
+  const matchedIdentifiers = [];
+  for (const identifier of identifiers) {
+    let matchedAny = false;
+    for (const tagId of directIdIndex.get(identifier) ?? []) {
+      for (const promiseId of invertedIndex.get(tagId) ?? []) {
+        promiseIds.add(promiseId);
+        matchedAny = true;
+      }
+    }
+    if (matchedAny) matchedIdentifiers.push(identifier);
+  }
+  if (promiseIds.size === 0) return null;
+  return { promiseIds: [...promiseIds].sort(), reason: `matched-legal-identifiers:${matchedIdentifiers.join(", ")}` };
+}

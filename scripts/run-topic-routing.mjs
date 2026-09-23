@@ -8,7 +8,7 @@ import { loadPublishedPromiseIds, publishedMatchingRegistry } from "./lib/publis
 import { buildPromiseTaggingBrief, buildSourceTaggingBrief, loadTaggingPrompt, requestTagAssignment, TagValidationError, taggingRuntimeConfig, validateTagAssignmentOutput } from "./lib/topic-tagger.mjs";
 import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
 import { validatePromiseRegistry } from "./lib/attribution.mjs";
-import { buildInvertedIndex, derivePromiseTopicTags, routeSourceRecord } from "./lib/topic-routing.mjs";
+import { buildInvertedIndex, deriveDirectLink, derivePromiseTopicTags, routeSourceRecord } from "./lib/topic-routing.mjs";
 import { buildTopicEvidencePackage } from "./lib/topic-evidence-package.mjs";
 
 const envPath = resolve(".env");
@@ -26,6 +26,7 @@ function parseArgs(args) {
     publishedPromises: "data/promises",
     tagCache: "automation/topic-routing/tag-cache",
     enrichedExcerpts: null,
+    printActs: null,
     asOf: null,
     output: "automation/runs/pipeline/topic-routing",
     samplePromises: null,
@@ -39,6 +40,7 @@ function parseArgs(args) {
     else if (arg === "--published-promises") options.publishedPromises = args[++index];
     else if (arg === "--tag-cache") options.tagCache = args[++index];
     else if (arg === "--enriched-excerpts") options.enrichedExcerpts = args[++index];
+    else if (arg === "--print-acts") options.printActs = args[++index];
     else if (arg === "--as-of") options.asOf = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--sample-promises") options.samplePromises = Number(args[++index]);
@@ -227,56 +229,6 @@ async function taggedTwice({ subjectId, inputHash, brief, taxonomy, taxonomyCont
   };
 }
 
-function collectStringValues(value, out = []) {
-  if (typeof value === "string") {
-    out.push(value);
-  } else if (Array.isArray(value)) {
-    for (const item of value) collectStringValues(item, out);
-  } else if (value && typeof value === "object") {
-    for (const nested of Object.values(value)) collectStringValues(nested, out);
-  }
-  return out;
-}
-
-/**
- * Finds a direct structural link for a source record: any string value
- * anywhere in its own structured payload (including nested structures such
- * as a parliamentary vote's `linkedPrints`) that exactly matches a taxonomy
- * tag's configured legal identifier, resolved to promises that already hold
- * that tag as an *accepted* (not needsReview) promise-topic assignment.
- *
- * No collector currently normalizes a print or vote's own numbering into
- * the canonical `directLegalIdentifiers` scheme the taxonomy uses (e.g.
- * "cz-act-23-2017"), so this path does not yet fire against real collected
- * records -- that normalization is separate, collector-side follow-up work,
- * not something this pilot script can fabricate. It is exercised today only
- * by fixtures that already carry a matching identifier, and by any future
- * record a collector emits with one.
- */
-function deriveDirectLink(taxonomy, record, directIdIndex, invertedIndex) {
-  const payloadValues = collectStringValues(record.payload ?? {});
-  const promiseIds = new Set();
-  const matchedIdentifiers = [];
-  for (const value of payloadValues) {
-    const tagIds = directIdIndex.get(value);
-    if (!tagIds) continue;
-    let matchedAny = false;
-    for (const tagId of tagIds) {
-      for (const promiseId of invertedIndex.get(tagId) ?? []) {
-        promiseIds.add(promiseId);
-        matchedAny = true;
-      }
-    }
-    if (matchedAny) matchedIdentifiers.push(value);
-  }
-  if (promiseIds.size === 0) return null;
-  // Accumulates every matching identifier's promises rather than returning
-  // on the first hit, so a record referencing more than one direct legal
-  // identifier does not silently lose the relationships the later ones
-  // would have added.
-  return { promiseIds: [...promiseIds], reason: `matched-legal-identifiers:${matchedIdentifiers.join(", ")}` };
-}
-
 const args = parseArgs(process.argv.slice(2));
 const runtime = taggingRuntimeConfig();
 invariant(Number.isInteger(runtime.concurrency) && runtime.concurrency > 0 && runtime.concurrency <= 16, "SLIBY_TAGGING_CONCURRENCY must be an integer from 1 to 16");
@@ -284,6 +236,10 @@ const prompt = await loadTaggingPrompt();
 const taxonomy = validateTaxonomy(JSON.parse(await readFile(resolve(args.taxonomy), "utf8")));
 const taxonomyContentHash = taxonomyHash(taxonomy);
 const directIdIndex = directLegalIdentifierIndex(taxonomy);
+// Legal identifiers of the acts each collected print amends
+// (scripts/run-print-acts.mjs); they create direct structural links.
+const printActs = args.printActs ? JSON.parse(await readFile(resolve(args.printActs), "utf8")) : { prints: {} };
+invariant(printActs.prints && typeof printActs.prints === "object", "Invalid --print-acts file");
 
 const registry = validatePromiseRegistry(JSON.parse(await readFile(resolve(args.promiseRegistry), "utf8")));
 let publishedRegistry = publishedMatchingRegistry(registry, await loadPublishedPromiseIds(args.publishedPromises));
@@ -388,7 +344,7 @@ try {
         const enrichedExcerpts = enrichedExcerptsByRecordId[record.id] ?? [];
         const inputHash = sha256({ id: record.id, title: record.title, publisher: record.publisher, kind: record.kind, url: record.url, payload: record.payload, enrichedExcerpts });
         const brief = buildSourceTaggingBrief(record, enrichedExcerpts, taxonomy);
-        const directLink = deriveDirectLink(taxonomy, record, directIdIndex, invertedIndex);
+        const directLink = deriveDirectLink({ record, directIdIndex, invertedIndex, printIdentifiers: printActs.prints });
 
         if (directLink) {
           // Design doc step 4: "The robot first applies direct structural

@@ -1,0 +1,48 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+import { actIdentifier, actsFromBillParagraphs, actsFromPrintTitle, printIdentifiers, validatePrintActsCache, emptyPrintActsCache } from "../scripts/lib/print-acts.mjs";
+import { deriveDirectLink } from "../scripts/lib/topic-routing.mjs";
+
+test("reads the acts a bill title names", () => {
+  assert.deepEqual(actsFromPrintTitle("Návrh poslance Andreje Babiše na vydání zákona, kterým se mění zákon č. 245/2000 Sb., o státních svátcích"), ["245/2000"]);
+  assert.deepEqual(actsFromPrintTitle("Vládní návrh zákona o regulaci cen pohonných hmot vládou a o změně zákona č. 526/1990 Sb., o cenách"), ["526/1990"]);
+  assert.deepEqual(actsFromPrintTitle("Vládní návrh zákona, kterým se mění některé zákony v oblasti veřejných rozpočtů"), []);
+});
+
+test("reads only amending-article headings from a bill text", () => {
+  // Headings quoted from the official text of print 90 (10th term).
+  const paragraphs = [
+    "Změna zákona o pravidlech rozpočtové odpovědnosti",
+    "Zákon č. 23/2017 Sb., o pravidlech rozpočtové odpovědnosti, ve znění zákona č. 277/2019 Sb., zákona č. 207/2020 Sb., se mění takto:",
+    "(2) V souladu s výdajovým rámcem stanoveným podle zákona upravujícího pravidla rozpočtové odpovědnosti stanoví ministerstvo …",
+    "V zákoně č. 218/2000 Sb., o rozpočtových pravidlech, se v § 24 odst. 1 …",
+    "Podle zákona č. 159/2006 Sb. se postupuje obdobně."
+  ];
+  assert.deepEqual(actsFromBillParagraphs(paragraphs), ["218/2000", "23/2017"].sort((a, b) => Number(a.split("/")[1]) - Number(b.split("/")[1])));
+});
+
+test("builds sorted legal identifiers and marks the state budget", () => {
+  assert.equal(actIdentifier("23/2017"), "cz-act-23-2017");
+  assert.deepEqual(printIdentifiers({ kindId: "1", titleActs: ["23/2017"], textActs: ["218/2000", "23/2017"] }), ["cz-act-218-2000", "cz-act-23-2017"]);
+  assert.deepEqual(printIdentifiers({ kindId: "3" }), ["cz-print-kind-state-budget"]);
+});
+
+test("validates the print-acts cache", () => {
+  const cache = emptyPrintActsCache();
+  cache.prints["43200"] = { printNumber: 90, documents: [{ filename: "t009000.docx", contentHash: "a".repeat(64) }], textActs: ["23/2017"] };
+  assert.equal(validatePrintActsCache(cache), cache);
+  cache.prints["43200"].textActs = ["zákon 23"];
+  assert.throws(() => validatePrintActsCache(cache), /invalid textActs/);
+});
+
+test("a vote on a print amending a mapped act links directly to promises holding the tag", () => {
+  const record = { id: "psp--vote-88416", payload: { linkedPrints: [{ externalPrintId: "43200" }] } };
+  const directIdIndex = new Map([["cz-act-23-2017", ["fiscal-rules"]]]);
+  const invertedIndex = new Map([["fiscal-rules", new Set(["candidate-d5359e35a4c4"])]]);
+  const printIdentifiersById = { 43200: { identifiers: ["cz-act-218-2000", "cz-act-23-2017"] } };
+  assert.deepEqual(deriveDirectLink({ record, directIdIndex, invertedIndex, printIdentifiers: printIdentifiersById }), {
+    promiseIds: ["candidate-d5359e35a4c4"],
+    reason: "matched-legal-identifiers:cz-act-23-2017"
+  });
+  assert.equal(deriveDirectLink({ record: { id: "other", payload: {} }, directIdIndex, invertedIndex, printIdentifiers: printIdentifiersById }), null);
+});
