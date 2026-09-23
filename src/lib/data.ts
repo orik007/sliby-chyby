@@ -30,6 +30,14 @@ export const statusDetails: Record<AssessmentStatus, { score: number; symbol: st
   "acting-against": { score: -2, symbol: "×", label: "Jedná proti slibu", className: "negative-strong" },
 };
 
+const promiseStatusOrder: Record<AssessmentStatus, number> = {
+  fulfilled: 0,
+  "moving-towards": 1,
+  "acting-against": 2,
+  "moving-against": 3,
+  "no-progress": 4,
+};
+
 export function getPublicAssessmentExplanation(explanation: string) {
   const publicExplanation = explanation.startsWith("Výchozí stav: ") ? explanation.slice("Výchozí stav: ".length) : explanation;
   return publicExplanation ? `${publicExplanation.charAt(0).toLocaleUpperCase("cs-CZ")}${publicExplanation.slice(1)}` : publicExplanation;
@@ -85,7 +93,7 @@ export function getPartySummary(partyPeriod: PartyPeriod) {
   const partyPromises = promises
     .filter(({ partyPeriodId }) => partyPeriodId === partyPeriod.id)
     .map((promise) => ({ promise, assessment: getLatestAssessment(promise.id), policyCategory: getPolicyCategory(promise.id), policyCategoryMapping: getPromisePolicyCategoryMapping(promise.id) }))
-    .sort((a, b) => a.policyCategory.order - b.policyCategory.order || comparePromiseSourceOrder(a, b));
+    .sort((a, b) => a.policyCategory.order - b.policyCategory.order || promiseStatusOrder[a.assessment.status] - promiseStatusOrder[b.assessment.status] || comparePromiseSourceOrder(a, b));
   const index = calculateIndex(partyPromises.map(({ promise }) => promise));
   return { party, period, partyPeriod, promises: partyPromises, index };
 }
