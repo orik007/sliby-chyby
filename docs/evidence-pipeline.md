@@ -13,7 +13,7 @@ A source is added only after all of these hold, and one source at a time:
 1. its structure is checked against the publisher's official documentation and against downloaded real data;
 2. its completeness is measured on real data (how many records resolve, link, and attribute, and how many do not);
 3. its collector has tests built from the verified structure; and
-4. every run reports the source's quality figures, and a source that fails its checks contributes nothing to that run's packages.
+4. every run reports the source's quality figures, and a failed structural check stops the affected data from being used in that run.
 
 ## Sources
 
