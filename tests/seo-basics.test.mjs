@@ -25,6 +25,21 @@ test("public pages declare a stable canonical production address", async () => {
   await assert.rejects(readFile(supersededSocialImageUrl), { code: "ENOENT" });
 });
 
+test("public pages declare the site icons and the icon files exist", async () => {
+  const baseLayout = await readFile(baseLayoutUrl, "utf8");
+  const icons = [
+    ["/favicon.ico", /<link rel="icon" href="\/favicon\.ico" sizes="32x32" \/>/],
+    ["/favicon.svg", /<link rel="icon" href="\/favicon\.svg" type="image\/svg\+xml" \/>/],
+    ["/apple-touch-icon.png", /<link rel="apple-touch-icon" href="\/apple-touch-icon\.png" \/>/],
+  ];
+
+  for (const [path, link] of icons) {
+    assert.match(baseLayout, link);
+    const file = await readFile(new URL(`../public${path}`, import.meta.url));
+    assert.ok(file.byteLength > 0, `Expected ${path} to exist`);
+  }
+});
+
 test("public crawl controls expose every published party and promise page", async () => {
   const [robots, sitemap] = await Promise.all([readFile(robotsUrl, "utf8"), readFile(sitemapUrl, "utf8")]);
 
