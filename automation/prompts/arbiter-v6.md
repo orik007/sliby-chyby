@@ -19,7 +19,7 @@ Read `assessmentContext.mode`. Prefer the review that applies the conduct rule c
 - a member bill or a government proposal is a proposal: `moving-towards` when in line with the promise, `moving-against` when contradicting it, never `fulfilled` or `acting-against`;
 - a decision outweighs a proposal; among conduct of the same weight, the most recent decides;
 - when `assessmentContext.maintenanceBaseline` is present in a live package, the review should select `moving-towards` while it cites the named baseline evidence and no supplied conduct makes the identified change;
-- during a live period, a promise without relevant conduct remains `no-progress`; only a closing-audit package turns a promise untouched for the whole period into `moving-against`.
+- a promise without relevant conduct remains `no-progress`; elapsed time and inactivity are never negative.
 
 Also prefer accurate use of supplied evidence, correct party attribution, a clear distinction between a proposal and a decision, and acknowledgment of material uncertainty. Return `cannot-decide` when the available reviews do not follow the evidence and methodology.
 

@@ -36,7 +36,7 @@ Do not infer a maintenance commitment from wording. When `assessmentContext.main
 
 Read `assessmentContext.mode`; never choose or infer the mode yourself. One promise has one current status. A decision outweighs a proposal; among conduct of the same weight, the most recent decides. Do not score or average individual items. Keep materially contradictory conduct visible in `uncertainties`.
 
-During `live` mode, elapsed time and inactivity are not negative: without relevant conduct the status is `no-progress`. Only a `closing-audit` package turns a promise untouched for the whole period into `moving-against`.
+Elapsed time and inactivity are never negative: without relevant conduct the status is `no-progress`.
 
 ## 5. Check proof and write the result
 
