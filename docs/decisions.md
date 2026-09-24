@@ -54,6 +54,7 @@ This document contains only the current confirmed rules. When a rule changes, re
 - Its output is an unpublished human-review proposal on a dedicated audit pull request. It never changes public data, a public score, or publication status. A human-approved score change is a separate scoped pull request.
 - The assessors and arbiter may cite only supplied evidence IDs. Their active prompt versions, providers, model IDs, confidence, evidence IDs, and input fingerprint remain auditable, and the fingerprint prevents paid reassessment of unchanged input.
 - A failed complete run does not advance public freshness.
+- When a rule change makes saved audit state (checkpoints, caches, queues) invalid, the pipeline generation changes and the next run starts from empty audit state. Old audit state is never repaired or reused.
 
 ## Delivery
 

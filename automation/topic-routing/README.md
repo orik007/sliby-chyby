@@ -6,9 +6,9 @@ This directory holds the controlled routing taxonomy and, on the audit branch, t
 
 The reviewed, versioned vocabulary used only for routing records to confirmed promises. It is independent of the public policy categories in [`data/promise-categories.json`](../../data/promise-categories.json).
 
-Each tag has a stable `id`, an optional `parent`, an English `labelEn`, inclusion and exclusion examples, Czech aliases, `assessmentEligible`, and optionally `directLegalIdentifiers`. Only an `assessmentEligible` tag can create a candidate relationship; a broad parent tag alone never does.
+Each tag has a stable `id`, an optional `parent`, an English `labelEn`, inclusion and exclusion examples, Czech aliases, `assessmentEligible`, and optionally `directLegalIdentifiers`. Only an `assessmentEligible` tag can route a record; a broad parent tag alone never does.
 
-`directLegalIdentifiers` lists the acts (`cz-act-<number>-<year>`, e.g. `cz-act-23-2017` for Act No. 23/2017 Coll.) or print kinds (`cz-print-kind-state-budget`) whose presence in an official print creates a direct link to every promise holding the tag. Only an assessment-eligible tag may carry them. An act is mapped only when its official name, as recorded in the Chamber's print titles, falls clearly under one tag.
+`directLegalIdentifiers` lists the acts (`cz-act-<number>-<year>`, e.g. `cz-act-23-2017` for Act No. 23/2017 Coll.) or print kinds (`cz-print-kind-state-budget`) amended by the concerned print, which link a record directly to every promise holding the tag. Only an assessment-eligible tag may carry them. An act is mapped only when its official name falls clearly under one tag.
 
 Models may return only an existing tag `id` or `unknown`. Adding, deleting, moving, or redefining a tag or its identifiers is a reviewed taxonomy change; the taxonomy content hash then recomputes every dependent classification.
 

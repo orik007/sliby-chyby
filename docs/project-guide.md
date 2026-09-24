@@ -24,8 +24,11 @@ official party source (election programme)
 
 official records only (active: Chamber of Deputies open data)
   -> per-source collection at 09:37 Europe/Prague
+  -> only records that can be attributable conduct continue
+  -> acts amended by each concerned print, from its official text
   -> routing to confirmed promises: direct legal-identifier links or two agreeing topic taggers
   -> attribution: decisive club vote, member bill, or government proposal (scoring.md)
+  -> bounded evidence package per promise
   -> official print document enrichment
   -> two independent assessments; arbiter on disagreement or one invalid output
   -> unpublished audit pull request with packages, proposals, coverage, and checkpoints
@@ -41,6 +44,7 @@ Party websites, press releases, and the media are not evidence. Government resol
 | `research/2025-election/promises.json` | Campaign sources and non-public candidate or rejected promises. |
 | `data/` | Public confirmed promises, common policy-category mappings, sources, current-score revisions, and system status. |
 | `archive/promise-sources/` | Original promise-source files and their verified retrieval manifest; storage format is defined in `data-model.md`. |
+| `automation/pipeline-generation` | Audit-state generation; changing it makes the next run start from empty audit state. |
 | `automation/collectors/` | Registry of active evidence sources. |
 | `automation/attribution/` | Governing parties and their dates, with an official source. |
 | `automation/promise-registry/` | Registry of confirmed promises used by the pipeline (exact wording, source, tests, maintenance baseline). |

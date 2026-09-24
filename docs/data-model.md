@@ -36,4 +36,4 @@ data/
 
 PDF copies are stored at `archive/promise-sources/<election-year>/<sourceId>/<sha256>.pdf`. Multiple versions of a source can coexist. These files are outside the site's `public/` directory; creating the archive does not change public links or add automatic fallback behavior.
 
-`tests/promise-source-archive.test.mjs` validates the manifest schema, file hashes and lengths, PDF signatures, and coverage of all public promises' primary sources and the research promise source catalogue. Discovery inventories outside that catalogue are not promise source records. Future source formats require a corresponding schema and validation update.
+`tests/promise-source-archive.test.mjs` validates the manifest schema, file hashes and lengths, PDF signatures, and coverage of all public promises' primary sources and the research promise source catalogue. Future source formats require a corresponding schema and validation update.
