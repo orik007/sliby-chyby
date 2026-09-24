@@ -8,20 +8,21 @@ function invariant(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-// Thrown only by validateTagAssignmentOutput, so a caller can isolate a
-// single invalid model *output* (an invented tag id, a fabricated excerpt)
-// from a transport, authentication, or provider failure inside
-// requestTagAssignment -- those must never be silently swallowed the same
-// way, or a missing API key or a full outage would look like a run that
-// legitimately found nothing.
-export class TagValidationError extends Error {}
+// Thrown only when a model output fails validation (an invented tag id, a
+// fabricated excerpt, a missing reason), so a caller can isolate a single
+// invalid *output* from a transport, authentication, or provider failure --
+// those must never be silently swallowed the same way, or a missing API key
+// or a full outage would look like a run that legitimately found nothing.
+export class ModelOutputError extends Error {}
 
-function invariantValidTag(condition, message) {
-  if (!condition) throw new TagValidationError(message);
+export function invariantValidOutput(condition, message) {
+  if (!condition) throw new ModelOutputError(message);
 }
 
-export const taggingPromptVersion = "tagger-v1";
+export const taggingPromptVersion = "promise-tagger-v1";
 
+// The cheap model pair that tags promises, screens law changes, and checks
+// relevance (docs/evidence-pipeline.md).
 export function taggingRuntimeConfig(env = process.env) {
   return {
     provider: env.SLIBY_TAGGING_PROVIDER ?? "openai",
@@ -36,7 +37,7 @@ export async function loadTaggingPrompt(root = process.cwd()) {
   return { version: taggingPromptVersion, contentHash: hashText(instructions), instructions };
 }
 
-function taxonomyDefinitionsText(taxonomy) {
+export function taxonomyDefinitionsText(taxonomy) {
   return taxonomy.tags
     .map((tag) => [
       `- id: ${tag.id}`,
@@ -74,74 +75,7 @@ export function buildPromiseTaggingBrief(promise, taxonomy) {
   };
 }
 
-/**
- * The substantive text a collected record carries: a print's title and
- * recorded action, a vote's linked prints and agenda item, and its club
- * results. A vote's own title ("Hlasování 123") never says what was voted on.
- */
-export function deriveRecordContentExcerpts(record) {
-  const payload = record.payload ?? {};
-  const excerpts = [];
-  if (typeof payload.printTitleCz === "string" && payload.printTitleCz.length > 0) {
-    excerpts.push(`Parliamentary print title: ${payload.printTitleCz}`);
-  }
-  if (typeof payload.actionCz === "string" && payload.actionCz.length > 0) {
-    excerpts.push(`Recorded official action: ${payload.actionCz}`);
-  }
-  if (typeof payload.currentStateCz === "string" && payload.currentStateCz.length > 0) {
-    excerpts.push(`Current recorded state: ${payload.currentStateCz}`);
-  }
-  if (typeof payload.agendaItem?.titleCz === "string" && payload.agendaItem.titleCz.length > 0) {
-    excerpts.push(`Agenda item voted on: ${[payload.agendaItem.titleCz, payload.agendaItem.suffixCz].filter(Boolean).join(" ")}`);
-  }
-  for (const linkedPrint of payload.linkedPrints ?? []) {
-    if (typeof linkedPrint.titleCz === "string" && linkedPrint.titleCz.length > 0) {
-      excerpts.push(`Linked parliamentary print title: ${linkedPrint.titleCz}`);
-    }
-    for (const context of linkedPrint.historyContexts ?? []) {
-      if (typeof context.actionCz === "string" && context.actionCz.length > 0) {
-        excerpts.push(`Linked print recorded action: ${context.actionCz}`);
-      }
-    }
-  }
-  if (record.kind === "parliamentary-vote" && payload.counts) {
-    excerpts.push(`Roll-call result: ${payload.counts.yes ?? 0} yes, ${payload.counts.no ?? 0} no.`);
-  }
-  return excerpts;
-}
-
-// An official-document excerpt (scripts/lib/psp-print-documents.mjs's
-// selectRelevantDocumentExcerpts) is `{ paragraph, text }`, not a plain
-// string; a fixture or a record's own derived excerpt is a plain string.
-// Stringifying the object form directly would render "[object Object]" and
-// silently drop the actual quoted text from the brief.
-function formatExcerpt(excerpt) {
-  if (typeof excerpt === "string") return excerpt;
-  if (excerpt && typeof excerpt.text === "string") {
-    return Number.isFinite(excerpt.paragraph) ? `(paragraph ${excerpt.paragraph}) ${excerpt.text}` : excerpt.text;
-  }
-  return String(excerpt);
-}
-
-export function buildSourceTaggingBrief(record, officialDocumentExcerpts, taxonomy) {
-  invariant(typeof record.id === "string" && record.id.length > 0, "Source brief requires a record id");
-  invariant(typeof record.title === "string" && record.title.length > 0, "Source brief requires a record title");
-  const excerpts = [...deriveRecordContentExcerpts(record), ...(officialDocumentExcerpts ?? [])];
-  return {
-    subjectType: "source",
-    subjectId: record.id,
-    text: [
-      `Source title: ${record.title}`,
-      `Publisher: ${record.publisher}`,
-      `Kind: ${record.kind}`,
-      `Source URL: ${record.url}`,
-      ...excerpts.map((excerpt, index) => `Excerpt ${index + 1}: ${formatExcerpt(excerpt)}`)
-    ].join("\n"),
-    taxonomyDefinitions: taxonomyDefinitionsText(taxonomy)
-  };
-}
-
-function tagAssignmentSchema(taxonomy) {
+export function tagAssignmentSchema(taxonomy) {
   const tagIds = [...taxonomy.tags.map((tag) => tag.id), "unknown"];
   return {
     type: "object",
@@ -167,56 +101,64 @@ function tagAssignmentSchema(taxonomy) {
  * forced to construct a matching brief.
  */
 export function validateTagAssignmentOutput(output, taxonomy, briefText) {
-  invariantValidTag(Array.isArray(output?.tags) && output.tags.length > 0, "Tag assignment must return at least one tag or \"unknown\"");
+  invariantValidOutput(Array.isArray(output?.tags) && output.tags.length > 0, "Tag assignment must return at least one tag or \"unknown\"");
   for (const tagId of output.tags) {
-    invariantValidTag(tagId === "unknown" || hasTag(taxonomy, tagId), `Tag assignment referenced an unknown tag id: ${tagId}`);
+    invariantValidOutput(tagId === "unknown" || hasTag(taxonomy, tagId), `Tag assignment referenced an unknown tag id: ${tagId}`);
   }
   if (output.tags.length > 1) {
-    invariantValidTag(!output.tags.includes("unknown"), "\"unknown\" cannot be combined with other tags");
+    invariantValidOutput(!output.tags.includes("unknown"), "\"unknown\" cannot be combined with other tags");
   }
-  invariantValidTag(Number.isFinite(output.confidence) && output.confidence >= 0 && output.confidence <= 1, "Tag assignment confidence must be between 0 and 1");
-  invariantValidTag(Array.isArray(output.supportingExcerpts), "Tag assignment must return supportingExcerpts");
+  invariantValidOutput(Number.isFinite(output.confidence) && output.confidence >= 0 && output.confidence <= 1, "Tag assignment confidence must be between 0 and 1");
+  invariantValidOutput(Array.isArray(output.supportingExcerpts), "Tag assignment must return supportingExcerpts");
   if (typeof briefText === "string") {
     for (const excerpt of output.supportingExcerpts) {
-      invariantValidTag(typeof excerpt === "string" && excerpt.length > 0 && briefText.includes(excerpt), `Tag assignment cites a supporting excerpt not present verbatim in the supplied brief: ${JSON.stringify(excerpt)}`);
+      invariantValidOutput(typeof excerpt === "string" && excerpt.length > 0 && briefText.includes(excerpt), `Tag assignment cites a supporting excerpt not present verbatim in the supplied brief: ${JSON.stringify(excerpt)}`);
     }
   }
   return output;
 }
 
-export async function requestTagAssignment({ provider, apiKey, model, brief, taxonomy, prompt }) {
-  const response = await createStructuredModelResponse({
-    provider,
-    apiKey,
-    model,
-    instructions: prompt.instructions,
-    input: { subjectType: brief.subjectType, subjectId: brief.subjectId, text: brief.text, taxonomyDefinitions: brief.taxonomyDefinitions },
-    name: "topic_tag_assignment",
-    schema: tagAssignmentSchema(taxonomy),
-    metadata: { subjectId: brief.subjectId, promptVersion: prompt.version },
-    logLabel: `tagging ${brief.subjectType} ${brief.subjectId}`
-  });
+/**
+ * One structured call to a cheap model whose output is then validated. The
+ * call has already cost tokens when validation fails, so its provider,
+ * model, and usage are attached to the ModelOutputError for the run's spend
+ * report instead of the paid call vanishing from it.
+ */
+export async function requestValidatedOutput({ provider, apiKey, model, prompt, input, name, schema, metadata, logLabel, validate }) {
+  const response = await createStructuredModelResponse({ provider, apiKey, model, instructions: prompt.instructions, input, name, schema, metadata, logLabel });
   try {
     return {
-      subjectId: brief.subjectId,
       provider: response.provider,
       model: response.model,
       promptVersion: prompt.version,
       promptContentHash: prompt.contentHash,
       usage: response.usage,
-      output: validateTagAssignmentOutput(response.output, taxonomy, brief.text)
+      output: validate(response.output)
     };
   } catch (error) {
-    // The API call already happened and already cost real tokens even
-    // though its output failed validation -- attach the response metadata
-    // to the thrown error so a caller isolating this failure (per subject)
-    // can still account for it in a token-usage/spend total instead of the
-    // paid call silently vanishing from every usage report.
-    if (error instanceof TagValidationError) {
+    if (error instanceof ModelOutputError) {
       error.provider = response.provider;
       error.model = response.model;
       error.usage = response.usage;
     }
     throw error;
   }
+}
+
+export async function requestTagAssignment({ provider, apiKey, model, brief, taxonomy, prompt }) {
+  const result = await requestValidatedOutput({
+    provider,
+    apiKey,
+    model,
+    prompt,
+    // The taxonomy comes first so the provider can reuse it as a cached
+    // prompt prefix across promises.
+    input: { taxonomyDefinitions: brief.taxonomyDefinitions, subjectType: brief.subjectType, subjectId: brief.subjectId, text: brief.text },
+    name: "topic_tag_assignment",
+    schema: tagAssignmentSchema(taxonomy),
+    metadata: { subjectId: brief.subjectId, promptVersion: prompt.version },
+    logLabel: `tagging ${brief.subjectType} ${brief.subjectId}`,
+    validate: (output) => validateTagAssignmentOutput(output, taxonomy, brief.text)
+  });
+  return { subjectId: brief.subjectId, ...result };
 }

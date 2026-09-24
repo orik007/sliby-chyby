@@ -1,21 +1,23 @@
 # Topic routing
 
-This directory holds the controlled routing taxonomy and, on the audit branch, the durable tag-assignment cache (`tag-cache/`). The canonical rule is [docs/evidence-pipeline.md](../../docs/evidence-pipeline.md).
+This directory holds the controlled routing taxonomy and, on the audit branch, the durable model caches (`tag-cache/`): promise tags, law-change screening, and relevance checks. The canonical rule is [docs/evidence-pipeline.md](../../docs/evidence-pipeline.md).
 
 ## `taxonomy-v1.json`
 
-The reviewed, versioned vocabulary used only for routing records to confirmed promises. It is independent of the public policy categories in [`data/promise-categories.json`](../../data/promise-categories.json).
+The reviewed, versioned vocabulary used only for routing law changes to confirmed promises. It is independent of the public policy categories in [`data/promise-categories.json`](../../data/promise-categories.json).
 
-Each tag has a stable `id`, an optional `parent`, an English `labelEn`, inclusion and exclusion examples, Czech aliases, `assessmentEligible`, and optionally `directLegalIdentifiers`. Only an `assessmentEligible` tag can route a record; a broad parent tag alone never does.
+Each tag has a stable `id`, an optional `parent`, an English `labelEn`, inclusion and exclusion examples, Czech aliases, `assessmentEligible`, and optionally `directLegalIdentifiers`. Only an `assessmentEligible` tag can route a law change; a broad parent tag alone never does.
 
-`directLegalIdentifiers` lists the acts (`cz-act-<number>-<year>`, e.g. `cz-act-23-2017` for Act No. 23/2017 Coll.) or print kinds (`cz-print-kind-state-budget`) amended by the concerned print, which link a record directly to every promise holding the tag. Only an assessment-eligible tag may carry them. An act is mapped to a tag only when its official name clearly falls under that tag. An act whose name covers several specific topics (Act No. 23/2017 Coll. on budget responsibility rules covers deficit and debt, fiscal rules, and the debt brake) is listed under each of them; its record then reaches the promises of every such tag, and the assessors decide relevance.
+`directLegalIdentifiers` lists the acts (`cz-act-<number>-<year>`, e.g. `cz-act-23-2017` for Act No. 23/2017 Coll.) or print kinds (`cz-print-kind-state-budget`) that link a law change amending that act directly to every promise holding the tag. Only an assessment-eligible tag may carry them. An act is mapped to a tag only when its official name clearly falls under that tag. An act whose name covers several specific topics (Act No. 23/2017 Coll. on budget responsibility rules covers deficit and debt, fiscal rules, and the debt brake) is listed under each of them; its law changes then reach the promises of every such tag, and the relevance checks and assessors decide relevance.
 
 Models may return only an existing tag `id` or `unknown`. Adding, deleting, moving, or redefining a tag or its identifiers is a reviewed taxonomy change; the taxonomy content hash then recomputes every dependent classification.
 
 ## Code
 
-- [`scripts/lib/print-acts.mjs`](../../scripts/lib/print-acts.mjs) and [`scripts/run-print-acts.mjs`](../../scripts/run-print-acts.mjs) derive the acts each collected print amends from its official title and bill text, cached on the audit branch in `automation/print-acts/`.
-- [`scripts/lib/topic-routing.mjs`](../../scripts/lib/topic-routing.mjs) derives direct legal-identifier links, combines two independent tagger results into `auto-candidate`, `routing-review`, or `orphan-review`, and builds the tag-to-promise index.
-- [`scripts/lib/topic-tagger.mjs`](../../scripts/lib/topic-tagger.mjs) builds bounded tagging briefs and calls the tagging model (`automation/prompts/tagger-v1.md`).
-- [`scripts/lib/topic-evidence-package.mjs`](../../scripts/lib/topic-evidence-package.mjs) builds bounded packages, keeping only conduct attributable under [`scripts/lib/attribution.mjs`](../../scripts/lib/attribution.mjs).
-- [`scripts/run-topic-routing.mjs`](../../scripts/run-topic-routing.mjs) runs routing in the daily workflow. A record with a direct link is not sent to the taggers; any other record's tagging brief includes the official names of the acts its print amends.
+- [`scripts/lib/print-parts.mjs`](../../scripts/lib/print-parts.mjs) and [`scripts/run-print-parts.mjs`](../../scripts/run-print-parts.mjs) split each print's official proposal text into law changes and find the act each one amends; texts are cached on the audit branch in `automation/print-parts/`.
+- [`scripts/lib/topic-tagger.mjs`](../../scripts/lib/topic-tagger.mjs) tags promises (`automation/prompts/promise-tagger-v1.md`).
+- [`scripts/lib/law-change-screening.mjs`](../../scripts/lib/law-change-screening.mjs) screens law changes (`law-change-screener-v1.md`) and checks the relevance of a promise and law change (`relevance-check-v1.md`).
+- [`scripts/lib/paired-model-calls.mjs`](../../scripts/lib/paired-model-calls.mjs) runs the two independent calls per subject and keeps the caches.
+- [`scripts/lib/topic-routing.mjs`](../../scripts/lib/topic-routing.mjs) combines two tag results, builds the tag-to-promise index, and routes a law change by direct legal-identifier links and agreed tags.
+- [`scripts/lib/topic-evidence-package.mjs`](../../scripts/lib/topic-evidence-package.mjs) builds one package per promise from its kept law changes and the party's conduct attributable under [`scripts/lib/attribution.mjs`](../../scripts/lib/attribution.mjs).
+- [`scripts/run-topic-routing.mjs`](../../scripts/run-topic-routing.mjs) runs promise tagging, screening, routing, relevance checks, and packaging in the daily workflow.

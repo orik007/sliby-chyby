@@ -21,6 +21,8 @@ Read `assessmentContext.mode`. Prefer the review that applies the conduct rule c
 - when `assessmentContext.maintenanceBaseline` is present in a live package, the review should select `moving-towards` while it cites the named baseline evidence and no supplied conduct makes the identified change;
 - a promise without relevant conduct remains `no-progress`; elapsed time and inactivity are never negative.
 
+Each review gives a relevance verdict for every law change in the package (`changeRelevance`). Prefer the review whose verdicts follow the full law-change texts: a law change is relevant only when its content could deliver or contradict the promise or a real part of it, not merely because it shares a topic.
+
 Also prefer accurate use of supplied evidence, correct party attribution, a clear distinction between a proposal and a decision, and acknowledgment of material uncertainty. Return `cannot-decide` when the available reviews do not follow the evidence and methodology.
 
 Return only the requested structured output and cite only supplied evidence IDs.

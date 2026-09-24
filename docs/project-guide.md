@@ -25,12 +25,13 @@ official party source (election programme)
 official records only (active: Chamber of Deputies open data)
   -> complete collection of every source at 09:37 Europe/Prague
   -> only records that can be attributable conduct continue
-  -> acts amended by each concerned print, from its official text
-  -> routing to confirmed promises: direct legal-identifier links or two agreeing topic taggers
-  -> attribution: decisive club vote, member bill, or government proposal (scoring.md)
-  -> bounded evidence package per promise
-  -> official print document enrichment
-  -> two independent assessments; arbiter on disagreement or one invalid output
+  -> each concerned print split into law changes (one part of its official text each)
+  -> two screeners read every law change: substantive or technical, and topic tags
+  -> routing of substantive changes to confirmed promises: direct legal-identifier links or two agreeing screeners
+  -> attribution: decisive club vote, member bill, or government proposal on the change's print (scoring.md)
+  -> two relevance checks per promise and law change
+  -> evidence package per promise: every kept law change in full with the party's conduct
+  -> two independent assessments with a relevance verdict per law change; arbiter on disagreement or one invalid output
   -> unpublished audit pull request with packages, proposals, coverage, and caches
   -> separate approved public-assessment pull request when a score changes
 ```
@@ -48,10 +49,10 @@ Party websites, press releases, and the media are not evidence. Government resol
 | `automation/collectors/` | Registry of active evidence sources. |
 | `automation/attribution/` | Governing parties and their dates, with an official source. |
 | `automation/promise-registry/` | Registry of confirmed promises used by the pipeline (exact wording, source, tests, maintenance baseline). |
-| `automation/topic-routing/` | Controlled routing taxonomy and the durable tag-assignment cache. |
-| `automation/evidence-packages/` | Durable unpublished queue of enriched evidence packages awaiting assessment. |
-| `automation/prompts/` | Active tagger, assessor, and arbiter prompts. |
-| `scripts/` | Validation, collection, routing, enrichment, assessment, and coverage-audit scripts. |
+| `automation/topic-routing/` | Controlled routing taxonomy and the durable model caches (promise tags, law-change screening, relevance checks). |
+| `automation/evidence-packages/` | Durable unpublished queue of evidence packages (one per promise) awaiting assessment. |
+| `automation/prompts/` | Active promise-tagger, law-change screener, relevance-check, assessor, and arbiter prompts. |
+| `scripts/` | Validation, collection, print splitting, routing, packaging, assessment, and coverage-audit scripts. |
 | `.github/workflows/` | Verification and the daily evidence-assessment workflow. |
 
 ## Before changing the project

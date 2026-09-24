@@ -3,9 +3,10 @@ import { invariant } from "./collector-core.mjs";
 const STATE_LABELS = {
   "review-candidate": "Assessment candidate awaiting human review",
   "human-review-required": "Human review required; no proposed public score",
-  "assessable-package": "Assessable primary-evidence package; not yet proposed",
-  "routed-without-attributable-conduct": "Records routed, but none is attributable conduct",
-  "no-routed-record": "No record routed in this run"
+  "assessable-package": "Evidence package queued for assessment; not yet proposed",
+  "oversized-package": "Evidence package too large for automated assessment; human review",
+  "routed-without-kept-change": "Law changes routed, but none kept (no attributable conduct, or not relevant)",
+  "no-routed-law-change": "No law change routed in this run"
 };
 
 function activeProposals(manifest) {
@@ -22,33 +23,33 @@ function activeProposals(manifest) {
 function stateFor(result, proposal) {
   if (proposal?.resolutionState === "candidate") return "review-candidate";
   if (proposal?.resolutionState === "human-review-required") return "human-review-required";
-  if (result.evidencePackage) return "assessable-package";
-  if (result.routedRecordCount > 0) return "routed-without-attributable-conduct";
-  return "no-routed-record";
+  if (result.evidencePackage) return result.oversized ? "oversized-package" : "assessable-package";
+  if (result.routedChangeCount > 0) return "routed-without-kept-change";
+  return "no-routed-law-change";
 }
 
-// Per-promise routing results from a completed topic-routing report.
+// Per-promise results from a completed law-change routing report.
 function promiseResults(routingRun, promises) {
   const routedCounts = new Map();
-  for (const { route } of routingRun.sourceTagAssignments) {
-    if (route.disposition !== "candidate-created") continue;
-    for (const promiseId of route.candidatePromiseIds) routedCounts.set(promiseId, (routedCounts.get(promiseId) ?? 0) + 1);
+  for (const { route } of routingRun.lawChanges) {
+    for (const { promiseId } of route.routedTo) routedCounts.set(promiseId, (routedCounts.get(promiseId) ?? 0) + 1);
   }
-  const packages = new Map(routingRun.builtPackages.filter((entry) => entry.built).map((entry) => [entry.promiseId, entry]));
+  const packages = new Map(routingRun.builtPackages.map((entry) => [entry.promiseId, entry]));
   return new Map(promises.map((promise) => {
     const built = packages.get(promise.id);
     return [promise.id, {
-      routedRecordCount: routedCounts.get(promise.id) ?? 0,
-      attributableEvidenceCount: built?.selectedEvidenceCount ?? 0,
+      routedChangeCount: routedCounts.get(promise.id) ?? 0,
+      packagedChangeCount: built?.lawChangeCount ?? 0,
+      oversized: built?.oversized ?? false,
       evidencePackage: built ? `evidence-packages/${promise.id}.json` : null
     }];
   }));
 }
 
-export function buildCoverageAudit({ collectorRun, routingRun, printActs, promiseRegistry, sourceRegistry, proposalManifest }) {
+export function buildCoverageAudit({ collectorRun, routingRun, printParts, promiseRegistry, sourceRegistry, proposalManifest }) {
   invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
-  invariant(routingRun?.schemaVersion === "1.0.0" && Array.isArray(routingRun.sourceTagAssignments) && Array.isArray(routingRun.builtPackages), "Invalid topic-routing run");
-  invariant(routingRun.completed === true, "A coverage audit needs a completed topic-routing run");
+  invariant(routingRun?.schemaVersion === "1.0.0" && Array.isArray(routingRun.lawChanges) && Array.isArray(routingRun.builtPackages), "Invalid law-change routing run");
+  invariant(routingRun.completed === true, "A coverage audit needs a completed law-change routing run");
   invariant(Array.isArray(promiseRegistry?.promises), "Invalid promise registry");
   invariant(Array.isArray(sourceRegistry?.sources), "Invalid source registry");
   const results = promiseResults(routingRun, promiseRegistry.promises);
@@ -102,8 +103,8 @@ export function buildCoverageAudit({ collectorRun, routingRun, printActs, promis
       titleCz: promise.titleCz,
       state,
       stateLabel: STATE_LABELS[state],
-      routedRecordCount: result.routedRecordCount,
-      attributableEvidenceCount: result.attributableEvidenceCount,
+      routedChangeCount: result.routedChangeCount,
+      packagedChangeCount: result.packagedChangeCount,
       evidencePackage: result.evidencePackage,
       activeProposal: proposal ? {
         proposalId: proposal.proposalId,
@@ -134,12 +135,20 @@ export function buildCoverageAudit({ collectorRun, routingRun, printActs, promis
     quality: {
       primaryRecordsInWindow: routingRun.counts.primaryRecordsInWindowCount,
       notAttributableSkipped: routingRun.counts.notAttributableSkippedCount,
-      routedRecords: routingRun.counts.materialPrimaryRecordCount,
-      directLinks: routingRun.counts.directAssignmentCount,
+      conductRecords: routingRun.counts.conductRecordCount,
+      lawChanges: routingRun.counts.lawChangeCount,
+      technicalLawChanges: routingRun.counts.technicalLawChangeCount,
+      substantiveLawChanges: routingRun.counts.substantiveLawChangeCount,
+      routedLawChanges: routingRun.counts.routedLawChangeCount,
+      directLinkLawChanges: routingRun.counts.directLinkLawChangeCount,
       routingReview: routingRun.counts.routingReviewCount,
       orphanReview: routingRun.counts.orphanReviewCount,
-      invalidTaggerOutputs: routingRun.counts.invalidPromiseTaggerCount + routingRun.counts.invalidSourceTaggerCount,
-      printActs: printActs?.quality ?? null
+      routedWithoutConduct: routingRun.counts.routedWithoutConductCount,
+      relevancePairs: routingRun.counts.relevancePairCount,
+      relevanceDropped: routingRun.counts.relevanceDroppedCount,
+      oversizedPackages: routingRun.counts.oversizedPackageCount,
+      invalidModelOutputs: routingRun.counts.invalidPromiseTaggerCount + routingRun.counts.invalidScreenerCount + routingRun.counts.invalidRelevanceCheckCount,
+      printParts: printParts?.quality ?? null
     },
     stateCounts,
     parties,
@@ -148,7 +157,7 @@ export function buildCoverageAudit({ collectorRun, routingRun, printActs, promis
     scoreInferred: false,
     publicationApproved: false,
     warnings: [
-      "No routed record does not mean no action and must never be converted into zero points.",
+      "No routed law change does not mean no action and must never be converted into zero points.",
       "This audit reports pipeline coverage and review state; it does not assess political promises."
     ]
   };
@@ -161,13 +170,13 @@ function renderMarkdownCell(text) {
 
 export function renderCoverageAuditMarkdown(audit) {
   const quality = audit.quality;
-  const printActs = quality.printActs;
+  const printParts = quality.printParts;
   const lines = [
     "# Evidence coverage audit",
     "",
     `Generated for ${audit.promiseCount} confirmed promises; assessment cutoff ${audit.assessmentCutoff}.`,
     "",
-    "> This is a pipeline-coverage report, not a political assessment. No routed record is not zero points.",
+    "> This is a pipeline-coverage report, not a political assessment. No routed law change is not zero points.",
     "",
     "## Data quality",
     "",
@@ -175,16 +184,23 @@ export function renderCoverageAuditMarkdown(audit) {
     "|---|---:|",
     `| Primary records in the window | ${quality.primaryRecordsInWindow} |`,
     `| Skipped: cannot be attributable conduct | ${quality.notAttributableSkipped} |`,
-    `| Routed records | ${quality.routedRecords} |`,
-    `| Direct legal-identifier links | ${quality.directLinks} |`,
+    `| Records that can be attributable conduct | ${quality.conductRecords} |`,
+    ...(printParts ? [
+      `| Prints with a DOCX proposal text | ${printParts.printsWithProposalText} of ${printParts.prints} |`,
+      `| Prints known only by title | ${printParts.printsWithoutDocxProposalText} |`,
+      `| Print-text download failures | ${printParts.textDownloadFailures} |`,
+      `| Law changes with an identified amended act | ${printParts.lawChangesWithAmendedAct} of ${printParts.lawChanges} |`
+    ] : []),
+    `| Law changes screened | ${quality.lawChanges} |`,
+    `| Technical / substantive | ${quality.technicalLawChanges} / ${quality.substantiveLawChanges} |`,
+    `| Routed law changes | ${quality.routedLawChanges} |`,
+    `| Law changes with a direct legal-identifier link | ${quality.directLinkLawChanges} |`,
     `| Routing review | ${quality.routingReview} |`,
     `| Orphan review | ${quality.orphanReview} |`,
-    `| Invalid tagger outputs | ${quality.invalidTaggerOutputs} |`,
-    ...(printActs ? [
-      `| Bills with official text | ${printActs.billsWithText} of ${printActs.bills} |`,
-      `| Bills with amended acts found | ${printActs.billsWithAmendedActs} of ${printActs.bills} |`,
-      `| Print-text fetch failures | ${printActs.textFetchFailures} |`
-    ] : []),
+    `| Routed, but the promise's party has no conduct on the print | ${quality.routedWithoutConduct} |`,
+    `| Promise and law-change pairs checked / dropped as not relevant | ${quality.relevancePairs} / ${quality.relevanceDropped} |`,
+    `| Packages too large for automated assessment | ${quality.oversizedPackages} |`,
+    `| Invalid model outputs | ${quality.invalidModelOutputs} |`,
     "",
     "## Summary",
     "",
@@ -200,9 +216,9 @@ export function renderCoverageAuditMarkdown(audit) {
     "",
     "## Promise coverage",
     "",
-    "| Party | Promise | State | Routed records | Attributable evidence |",
+    "| Party | Promise | State | Routed law changes | Packaged law changes |",
     "|---|---|---|---:|---:|",
-    ...audit.promises.map((promise) => `| ${promise.partyName} | ${promise.titleCz} | ${promise.stateLabel} | ${promise.routedRecordCount} | ${promise.attributableEvidenceCount} |`),
+    ...audit.promises.map((promise) => `| ${promise.partyName} | ${promise.titleCz} | ${promise.stateLabel} | ${promise.routedChangeCount} | ${promise.packagedChangeCount} |`),
     ""
   ];
   return lines.join("\n");

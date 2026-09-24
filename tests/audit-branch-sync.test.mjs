@@ -20,14 +20,14 @@ const restoreAuditState = extractStep("Restore current audit state");
 // keeps the default success() condition and is simply never invoked here
 // when a test wants to simulate a routing failure -- exactly like GitHub
 // Actions skipping it for real.
-const tagCachePersistence = extractStep("Persist tag-assignment cache even on a failed run");
+const tagCachePersistence = extractStep("Persist model caches even on a failed run");
 const checkpointsPersistence = extractStep("Persist source collection and queued evidence packages");
 const bash = process.platform === "win32" ? "C:/Program Files/Git/bin/bash.exe" : "bash";
 const auditBranch = "automation/assessment-review";
 const checkpoint = "automation/collectors/checkpoints.json";
 const packageManifest = "automation/evidence-packages/manifest.json";
 const packageReadme = "automation/evidence-packages/README.md";
-const tagCache = "automation/topic-routing/tag-cache/promise-tags.json";
+const tagCache = "automation/topic-routing/tag-cache/promise-tags.jsonl";
 
 function createFixture() {
   const root = mkdtempSync(join(tmpdir(), "audit-snapshot-"));

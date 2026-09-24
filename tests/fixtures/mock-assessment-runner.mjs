@@ -22,6 +22,7 @@ await mkdir(outputDirectory, { recursive: true });
 
 const review = {
   promiseId: evidencePackage.promise.id,
+  changeRelevance: evidencePackage.evidence.filter(({ role }) => role === "law-change").map(({ id }) => ({ evidenceId: id, relevant: true, reasonCz: "Změna se týká slibu." })),
   status: "moving-towards",
   evidenceSufficient: true,
   citedEvidenceIds: evidencePackage.evidence.map(({ id }) => id),

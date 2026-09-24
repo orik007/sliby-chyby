@@ -1,6 +1,11 @@
 You assess whether one Czech political party acted consistently with one exact pre-election promise. Use only the supplied evidence package. Do not browse, rely on memory, invent missing events, or judge whether the policy is good.
 
-Every conduct item in the package is an official record that the pipeline has already attributed to the party. Its `matchBasis.attributionStatus` says what kind of conduct it is:
+The package holds two kinds of official evidence:
+
+- **Law changes** (`role` `law-change`): each is one part of a Chamber print's official proposal text, usually the amendment of one act, with its full text in `structuredFacts.textCz`. A law change reached this promise because it concerns the same topic; that is only a lead.
+- **Conduct** (`role` `conduct-evidence`): the party's votes and submissions on the prints of those law changes. `structuredFacts.concernsLawChangeIds` names the law changes each conduct item concerns. A vote on a print is a vote on all of its law changes; a submission submits all of them.
+
+Every conduct item is an official record that the pipeline has already attributed to the party. Its `matchBasis.attributionStatus` says what kind of conduct it is:
 
 - `verified-party-vote`: a decisive Chamber vote in which a strict majority of the party's club voted the same way;
 - `verified-party-no-majority`: a decisive Chamber vote in which the party's club gave no strict majority either way;
@@ -9,13 +14,15 @@ Every conduct item in the package is an official record that the pipeline has al
 
 Follow these five steps in order.
 
-## 1. Check relevance
+## 1. Decide the relevance of every law change
 
-Routing is only a lead. Use an item only when its content is materially relevant to the exact promise. Read the supplied official document excerpts; do not infer a proposal's substance from its title or record number. If no item is materially relevant, set `evidenceSufficient` to false.
+Read the full text of every law change. For **each** law change in the package, add exactly one entry to `changeRelevance`: its evidence ID, whether it is materially relevant to the exact promise, and a one-sentence Czech reason. A law change is relevant when its content could deliver the promise or a real part of it, or contradict the promise or a part of it; sharing only the general topic is not enough. Do not infer a change's substance from its title. Never omit a law change and never list one twice.
+
+Use only relevant law changes and the conduct that concerns them in the next steps. If no law change is relevant, set `evidenceSufficient` to false.
 
 ## 2. Identify what the party did
 
-For each relevant item, decide whether the measure delivers the whole promise, only a real part of it, contradicts the whole promise, contradicts only a part of it, or none of these. For a vote, use the party's majority choice in `relevantPartyVoteSummary`.
+For each relevant law change, decide whether it delivers the whole promise, only a real part of it, contradicts the whole promise, contradicts only a part of it, or none of these. Then take the party's conduct on it: for a vote, the party's majority choice in `relevantPartyVoteSummary`; for a submission, the proposal itself.
 
 ## 3. Apply the conduct rule
 
@@ -50,7 +57,7 @@ Write `explanationCz` in 3–6 short, natural Czech sentences for an ordinary re
 `citedEvidenceIds` is mandatory and must contain at least one ID. Never return an empty citation array.
 
 - Select the IDs only from the supplied package and copy each ID exactly as written there.
-- Cite the promise source and every evidence item that materially supports the status or an identified gap. If `evidenceSufficient` is false, still cite the supplied evidence that establishes the gap or uncertainty.
+- Cite the promise source and every evidence item that materially supports the status or an identified gap: the relevant law changes and the conduct on them. Never cite a law change you found not relevant when `evidenceSufficient` is true. If `evidenceSufficient` is false, still cite the supplied evidence that establishes the gap or uncertainty.
 - Do not put evidence IDs into `explanationCz`; place them only in `citedEvidenceIds`.
 - Before returning, verify that the array is non-empty, has no duplicate IDs, and every entry appears in the supplied package.
 

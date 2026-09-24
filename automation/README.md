@@ -8,10 +8,10 @@ The workflow and its rules are defined only in [docs/evidence-pipeline.md](../do
 | `collectors/` | Active source registry; the record of each source's last successful collection lives on the audit branch. |
 | `attribution/` | Governing parties and their dates. |
 | `promise-registry/` | Registry of confirmed promises used by the pipeline. |
-| `topic-routing/` | Routing taxonomy; the tag-assignment cache lives on the audit branch. |
-| `print-acts/` | Cache of acts amended by each Chamber print, read from its official text (audit branch only). |
-| `evidence-packages/` | Unpublished queue of bounded evidence packages (audit branch). |
+| `topic-routing/` | Routing taxonomy; the model caches (promise tags, law-change screening, relevance checks) live on the audit branch. |
+| `print-parts/` | Cache of each Chamber print's official proposal text, one file per print, from which its law changes are split (audit branch only). |
+| `evidence-packages/` | Unpublished queue of evidence packages, one per promise (audit branch). |
 | `review-proposals/` | Unpublished assessment proposals for human review (audit branch). |
-| `prompts/` | Active tagger, assessor, and arbiter prompts. |
+| `prompts/` | Active promise-tagger, law-change screener, relevance-check, assessor, and arbiter prompts. |
 
 Everything on the audit branch is unpublished and never changes public data or a public score. The workflow never starts Copilot or Codex review.

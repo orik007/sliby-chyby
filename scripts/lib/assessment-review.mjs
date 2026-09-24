@@ -92,7 +92,7 @@ export function planAssessmentInputs({ packages, manifest, blockedPromiseIds = n
       const disposition = existingFingerprints.has(identity.assessmentFingerprint)
         ? "unchanged"
         : blockedPromiseIds.has(identity.promiseId)
-          ? "blocked-enrichment-warning"
+          ? "blocked-oversized"
           : "assess";
       return { path, evidencePackage, ...identity, disposition };
     })
@@ -141,7 +141,7 @@ const readerStatus = {
 
 function evidenceLabel(evidence) {
   if (evidence.role === "promise-source") return "Původní volební slib";
-  if (evidence.type === "legislative-document") return "Úplné znění návrhu zákona na webu Poslanecké sněmovny";
+  if (evidence.role === "law-change") return `Změna zákona v návrhu projednávaném Sněmovnou: ${evidence.structuredFacts?.titleCz ?? evidence.title}`;
   if (evidence.type === "parliamentary-vote") return "Výsledek hlasování Poslanecké sněmovny";
   if (evidence.type === "legislative-step") return "Průběh projednávání návrhu ve Sněmovně";
   return evidence.publisher;
@@ -254,6 +254,18 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     }
     lines.push("### Rozhodnutí třetího hodnotitele", "", auditRecord.arbiter.output.explanationCz, "");
   }
+  const lawChanges = evidencePackage.evidence.filter(({ role }) => role === "law-change");
+  if (lawChanges.length > 0) {
+    lines.push("### Souvisí změny zákonů se slibem?", "", "| Změna zákona | " + reviews.map(([name]) => name).join(" | ") + " |", "| --- | " + reviews.map(() => "---").join(" | ") + " |");
+    for (const change of lawChanges) {
+      const cells = reviews.map(([, review]) => {
+        const verdict = review.changeRelevance?.find(({ evidenceId }) => evidenceId === change.id);
+        return verdict ? `${verdict.relevant ? "ano" : "ne"}: ${verdict.reasonCz.replaceAll("|", "/")}` : "—";
+      });
+      lines.push(`| [${evidenceLabel(change).replaceAll("|", "/")}](${change.url}) | ${cells.join(" | ")} |`);
+    }
+    lines.push("");
+  }
   const citedIds = new Set([
     ...evidencePackage.evidence.filter(({ role }) => role === "promise-source").map(({ id }) => id),
     ...reviews.flatMap(([, review]) => review.citedEvidenceIds),
@@ -282,4 +294,39 @@ export function addReviewProposals(manifest, proposals) {
   }
   merged.proposals.sort((left, right) => left.promiseId.localeCompare(right.promiseId) || left.evaluatedAt.localeCompare(right.evaluatedAt));
   return validateReviewManifest(merged);
+}
+
+/**
+ * How the valid assessors judged each law change, keyed by the tag or
+ * direct link that routed it to the promise, so an overly broad route is
+ * visible (docs/evidence-pipeline.md, Report).
+ */
+export function relevanceVerdictsByRoute(evidencePackage, auditRecord) {
+  const routeKeys = new Map(evidencePackage.evidence.filter(({ role }) => role === "law-change").map((evidence) => [evidence.id, [
+    ...(evidence.matchBasis?.matchedTagIds ?? []).map((tagId) => `tag:${tagId}`),
+    ...(evidence.matchBasis?.directLinkIdentifiers ?? []).map((identifier) => `direct:${identifier}`)
+  ]]));
+  const verdicts = new Map();
+  for (const review of Object.values(auditRecord.validatedAssessments ?? {})) {
+    for (const { evidenceId, relevant } of review?.changeRelevance ?? []) {
+      for (const key of routeKeys.get(evidenceId) ?? []) {
+        const current = verdicts.get(key) ?? { route: key, verdicts: 0, notRelevant: 0 };
+        current.verdicts += 1;
+        if (!relevant) current.notRelevant += 1;
+        verdicts.set(key, current);
+      }
+    }
+  }
+  return [...verdicts.values()];
+}
+
+export function mergeRelevanceVerdicts(lists) {
+  const merged = new Map();
+  for (const { route, verdicts, notRelevant } of lists.flat()) {
+    const current = merged.get(route) ?? { route, verdicts: 0, notRelevant: 0 };
+    current.verdicts += verdicts;
+    current.notRelevant += notRelevant;
+    merged.set(route, current);
+  }
+  return [...merged.values()].sort((left, right) => right.notRelevant - left.notRelevant || left.route.localeCompare(right.route));
 }

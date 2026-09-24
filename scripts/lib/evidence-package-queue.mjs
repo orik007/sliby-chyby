@@ -27,7 +27,7 @@ export function validateEvidencePackageQueue(queue) {
     invariant(/^\d{4}-\d{2}-\d{2}$/.test(entry.asOf), `Queued evidence package ${entry.promiseId} has an invalid asOf`);
     invariant(typeof entry.queuedAt === "string" && !Number.isNaN(Date.parse(entry.queuedAt)), `Queued evidence package ${entry.promiseId} has an invalid queuedAt`);
     invariant(typeof entry.path === "string" && entry.path.startsWith("packages/"), `Queued evidence package ${entry.promiseId} has an invalid path`);
-    invariant(typeof entry.blockedByEnrichment === "boolean", `Queued evidence package ${entry.promiseId} must record enrichment state`);
+    invariant(entry.blockedReason === null || entry.blockedReason === "oversized", `Queued evidence package ${entry.promiseId} has an invalid blockedReason`);
     invariant(entry.withdrawnAt == null || !Number.isNaN(Date.parse(entry.withdrawnAt)), `Queued evidence package ${entry.promiseId} has an invalid withdrawnAt`);
     invariant(entry.supersedesPackageHash == null || /^[a-f0-9]{64}$/.test(entry.supersedesPackageHash), `Queued evidence package ${entry.promiseId} has an invalid supersedesPackageHash`);
     invariant(entry.supersededByPackageHash == null || /^[a-f0-9]{64}$/.test(entry.supersededByPackageHash), `Queued evidence package ${entry.promiseId} has an invalid supersededByPackageHash`);
@@ -67,18 +67,16 @@ async function loadQueue(queueDirectory) {
 async function inputPackages(inputDirectory) {
   const entries = await readdir(resolve(inputDirectory), { withFileTypes: true });
   const packages = [];
-  for (const entry of entries.filter((item) => item.isFile() && item.name.endsWith(".json") && item.name !== "enrichment-run.json").sort((left, right) => left.name.localeCompare(right.name))) {
+  for (const entry of entries.filter((item) => item.isFile() && item.name.endsWith(".json")).sort((left, right) => left.name.localeCompare(right.name))) {
     const path = resolve(inputDirectory, entry.name);
     packages.push({ path, evidencePackage: validateEvidencePackage(JSON.parse(await readFile(path, "utf8"))) });
   }
   return packages;
 }
 
-export async function queueEvidencePackages({ inputDirectory, queueDirectory, enrichmentRun }) {
-  invariant(Array.isArray(enrichmentRun?.warnings), "Invalid enrichment run warnings");
+export async function queueEvidencePackages({ inputDirectory, queueDirectory }) {
   const queuePath = resolve(queueDirectory);
   const queue = await loadQueue(queuePath);
-  const blockedPromiseIds = new Set(enrichmentRun.warnings.map(({ promiseId }) => promiseId));
   const now = new Date().toISOString();
   let changed = false;
   let added = 0;
@@ -87,7 +85,9 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
   const inputPromiseIds = new Set(input.map(({ evidencePackage }) => evidencePackage.promise.id));
   for (const { evidencePackage } of input) {
     const packageHash = hashEvidencePackage(evidencePackage);
-    const blockedByEnrichment = blockedPromiseIds.has(evidencePackage.promise.id);
+    // A package too large to assess at the normal price is kept for human
+    // review and never trimmed (docs/evidence-pipeline.md, Package).
+    const blockedReason = evidencePackage.generation?.oversized ? "oversized" : null;
     const current = latestUnreplacedPackageEntry(queue, evidencePackage.promise.id);
     // Every run rebuilds each package from the whole record history; a
     // package whose assessable content is unchanged keeps the current entry.
@@ -100,8 +100,8 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
         changed = true;
         updated += 1;
       }
-      if (existing.blockedByEnrichment !== blockedByEnrichment) {
-        existing.blockedByEnrichment = blockedByEnrichment;
+      if (existing.blockedReason !== blockedReason) {
+        existing.blockedReason = blockedReason;
         changed = true;
         updated += 1;
       }
@@ -118,7 +118,7 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
       asOf: evidencePackage.asOf,
       queuedAt: now,
       path: packagePath,
-      blockedByEnrichment,
+      blockedReason,
       withdrawnAt: null,
       supersedesPackageHash: current?.packageHash ?? null,
       supersededByPackageHash: null
@@ -147,7 +147,7 @@ export async function loadCurrentEvidencePackages(queueDirectory) {
   const queuePath = resolve(queueDirectory);
   const manifestPath = resolve(queuePath, "manifest.json");
   if (!existsSync(manifestPath)) {
-    return (await inputPackages(queuePath)).map(({ path, evidencePackage }) => ({ path, evidencePackage, blockedByEnrichment: false }));
+    return (await inputPackages(queuePath)).map(({ path, evidencePackage }) => ({ path, evidencePackage, blockedReason: evidencePackage.generation?.oversized ? "oversized" : null }));
   }
   const queue = await loadQueue(queuePath);
   const packages = [];
@@ -156,7 +156,7 @@ export async function loadCurrentEvidencePackages(queueDirectory) {
     const evidencePackage = validateEvidencePackage(JSON.parse(await readFile(path, "utf8")));
     invariant(evidencePackage.promise.id === entry.promiseId, `Queued package ${entry.packageHash} has an unexpected promise ID`);
     invariant(hashEvidencePackage(evidencePackage) === entry.packageHash, `Queued package ${entry.packageHash} has changed`);
-    packages.push({ path, evidencePackage, blockedByEnrichment: entry.blockedByEnrichment });
+    packages.push({ path, evidencePackage, blockedReason: entry.blockedReason });
   }
   return packages;
 }

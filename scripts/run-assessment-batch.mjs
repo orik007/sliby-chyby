@@ -8,7 +8,9 @@ import {
   addReviewProposals,
   createReviewProposal,
   currentReviewProposal,
+  mergeRelevanceVerdicts,
   planAssessmentInputs,
+  relevanceVerdictsByRoute,
   renderHumanReviewMarkdown,
   validateReviewManifest
 } from "./lib/assessment-review.mjs";
@@ -35,7 +37,6 @@ function parseArgs(args) {
   const options = {
     packages: null,
     retryPackages: "automation/review-proposals/failures",
-    enrichmentRun: null,
     proposals: "automation/review-proposals",
     runs: "automation/runs/pipeline/github-actions/assessments",
     summary: "automation/runs/pipeline/github-actions/assessment-batch.json",
@@ -45,7 +46,6 @@ function parseArgs(args) {
     const arg = args[index];
     if (arg === "--packages") options.packages = args[++index];
     else if (arg === "--retry-packages") options.retryPackages = args[++index];
-    else if (arg === "--enrichment-run") options.enrichmentRun = args[++index];
     else if (arg === "--proposals") options.proposals = args[++index];
     else if (arg === "--runs") options.runs = args[++index];
     else if (arg === "--summary") options.summary = args[++index];
@@ -53,7 +53,6 @@ function parseArgs(args) {
     else throw new Error(`Unknown argument: ${arg}`);
   }
   invariant(options.packages, "--packages is required");
-  invariant(options.enrichmentRun, "--enrichment-run is required");
   return options;
 }
 
@@ -102,7 +101,7 @@ function pullRequestBody(summary) {
   const dispositionLabels = {
     assessed: "nový návrh připraven ke kontrole",
     unchanged: "beze změny",
-    "blocked-enrichment-warning": "čeká na úplný úřední dokument",
+    "blocked-oversized": "balíček je příliš velký pro automatické hodnocení; čeká na lidskou kontrolu",
     "deferred-by-limit": "odloženo limitem běhu",
     "not-assessed-after-interruption": "nehodnoceno, běh byl přerušen",
     "interrupted-by-error": "hodnocení přerušeno chybou",
@@ -127,9 +126,13 @@ function pullRequestBody(summary) {
     "",
     `Nové návrhy ke kontrole: **${summary.newProposalCount}**`,
     `Nezměněné podklady bez nového volání modelů: **${summary.unchangedCount}**`,
-    `Případy čekající na úplný úřední dokument: **${summary.blockedCount}**`,
+    `Balíčky příliš velké pro automatické hodnocení: **${summary.blockedCount}**`,
     `Izolovaná selhání hodnocení: **${summary.failedCount}**`,
     `Odloženo limitem běhu (${summary.maxAssessments}): **${summary.deferredCount}**`,
+    ...(summary.relevanceVerdictsByRoute.some(({ notRelevant }) => notRelevant > 0)
+      ? ["", "Změny zákonů, které hodnotitelé označili za nesouvisející se slibem, podle štítku nebo přímé vazby, která je ke slibu přivedla:", "", "| Cesta | Nesouvisející | Verdiktů celkem |", "| --- | ---: | ---: |",
+        ...summary.relevanceVerdictsByRoute.filter(({ notRelevant }) => notRelevant > 0).map(({ route, notRelevant, verdicts }) => `| \`${route}\` | ${notRelevant} | ${verdicts} |`), ""]
+      : []),
     ...(summary.interruption ? [`Běh byl přerušen chybou (${summary.interruption.message}); nehodnoceno: **${summary.notAssessedAfterInterruptionCount}**. Dokončená hodnocení jsou uložena, další běh ohodnotí zbytek.`] : []),
     "",
     "Všechny návrhy vyžadují lidskou kontrolu a nejsou schválené ke zveřejnění."
@@ -169,16 +172,14 @@ invariant(relativeProposalRoot === "automation/review-proposals", "--proposals m
 
 const manifestPath = resolve(proposalRoot, "manifest.json");
 const manifest = validateReviewManifest(JSON.parse(await readFile(manifestPath, "utf8")));
-const enrichmentRun = JSON.parse(await readFile(resolve(options.enrichmentRun), "utf8"));
-invariant(Array.isArray(enrichmentRun?.warnings), "Invalid enrichment run warnings");
-const blockedPromiseIds = new Set(enrichmentRun.warnings.map(({ promiseId }) => promiseId));
+const blockedPromiseIds = new Set();
 
 const packages = [];
 const currentPackagePromiseIds = new Set();
-for (const { path, evidencePackage, blockedByEnrichment } of await loadCurrentEvidencePackages(packageDirectory)) {
+for (const { path, evidencePackage, blockedReason } of await loadCurrentEvidencePackages(packageDirectory)) {
   currentPackagePromiseIds.add(evidencePackage.promise.id);
   packages.push({ path, evidencePackage });
-  if (blockedByEnrichment) blockedPromiseIds.add(evidencePackage.promise.id);
+  if (blockedReason) blockedPromiseIds.add(evidencePackage.promise.id);
 }
 
 async function failurePackageFiles(directory) {
@@ -305,7 +306,7 @@ function saveProposal(proposal) {
 }
 let interruption = null;
 
-log(`assessment: ${plan.length} current packages; ${assessmentItems.length} to assess now (cap ${maxAssessments}), ${results.filter(({ disposition }) => disposition === "unchanged").length} unchanged, ${results.filter(({ disposition }) => disposition === "deferred-by-limit").length} deferred by the cap, ${results.filter(({ disposition }) => disposition === "blocked-enrichment-warning").length} blocked`);
+log(`assessment: ${plan.length} current packages; ${assessmentItems.length} to assess now (cap ${maxAssessments}), ${results.filter(({ disposition }) => disposition === "unchanged").length} unchanged, ${results.filter(({ disposition }) => disposition === "deferred-by-limit").length} deferred by the cap, ${results.filter(({ disposition }) => disposition === "blocked-oversized").length} blocked`);
 const tickAssessments = progress("assessment", assessmentItems.length, { every: 1 });
 const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (item) => {
   log(`assessing ${item.promiseId}`);
@@ -363,7 +364,8 @@ const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (i
   tickAssessments(`${item.promiseId}: ${auditRecord.resolution.state}${auditRecord.resolution.status ? ` (${auditRecord.resolution.status})` : ""}, saved`);
   return { proposal, result: {
     promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz, assessmentFingerprint: item.assessmentFingerprint,
-    disposition: "assessed", resolutionState: auditRecord.resolution.state, candidateStatus: auditRecord.resolution.status, reviewUrl: humanReviewUrl(proposal.humanReviewPath)
+    disposition: "assessed", resolutionState: auditRecord.resolution.state, candidateStatus: auditRecord.resolution.status, reviewUrl: humanReviewUrl(proposal.humanReviewPath),
+    relevanceVerdicts: relevanceVerdictsByRoute(item.evidencePackage, auditRecord)
   } };
 }, () => interruption !== null);
 for (const [index, outcome] of assessed.entries()) {
@@ -392,7 +394,7 @@ const summary = {
   packageCount: plan.length,
   newProposalCount: newProposals.length,
   unchangedCount: results.filter(({ disposition }) => disposition === "unchanged").length,
-  blockedCount: results.filter(({ disposition }) => disposition === "blocked-enrichment-warning").length,
+  blockedCount: results.filter(({ disposition }) => disposition === "blocked-oversized").length,
   failedCount: results.filter(({ disposition }) => disposition === "assessment-failed").length,
   maxAssessments,
   deferredCount: results.filter(({ disposition }) => disposition === "deferred-by-limit").length,
@@ -400,6 +402,9 @@ const summary = {
   interruption,
   interruptedCount: results.filter(({ disposition }) => disposition === "interrupted-by-error").length,
   notAssessedAfterInterruptionCount: results.filter(({ disposition }) => disposition === "not-assessed-after-interruption").length,
+  // Law changes the assessors found not relevant, by the tag or direct link
+  // that routed them: a route with many rejections is too broad.
+  relevanceVerdictsByRoute: mergeRelevanceVerdicts(results.map(({ relevanceVerdicts }) => relevanceVerdicts ?? [])),
   promptCharacters: prompts.assessor.instructions.length + prompts.arbiter.instructions.length,
   assessmentConcurrency: concurrency,
   proposalRoot: relativeProposalRoot,

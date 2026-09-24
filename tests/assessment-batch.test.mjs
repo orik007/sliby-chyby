@@ -25,6 +25,7 @@ function evidencePackage(promiseId, asOf) {
     },
     evidence: [
       { id: "promise-source", url: "https://example.test/promise", factSummary: "Přesné znění slibu.", locator: "strana 1", publishedAt: "2025-01-01", primary: true, role: "promise-source" },
+      { id: "change", url: "https://example.test/change", factSummary: "Úřední text změny zákona.", locator: "ČÁST PRVNÍ", publishedAt: asOf, primary: true, role: "law-change", matchBasis: { routeBasis: ["controlled-tag"], matchedTagIds: ["fiscal-rules"], directLinkIdentifiers: [] } },
       { id: "conduct", url: "https://example.test/conduct", factSummary: "Ověřený krok.", locator: "záznam", publishedAt: asOf, primary: true, role: "conduct-evidence" }
     ]
   };
@@ -35,12 +36,9 @@ async function writePackage(directory, evidence) {
 }
 
 async function runBatch(root, packagesDirectory, maxAssessments = "10", { failPromise = "", expectedExitCode = 0 } = {}) {
-  const enrichmentRun = join(root, "enrichment-run.json");
   const summary = join(root, "summary.json");
-  await writeFile(enrichmentRun, `${JSON.stringify({ warnings: [] })}\n`);
   const child = spawn(process.execPath, [batchScript,
     "--packages", packagesDirectory,
-    "--enrichment-run", enrichmentRun,
     "--runs", "automation/runs",
     "--summary", summary,
     "--pull-request-body", "automation/pull-request.md"
@@ -64,8 +62,8 @@ test("persists an isolated double-invalid failure, then retires it after a newer
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-batch-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v15.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v6.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v16.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v7.md"), "arbiter test prompt\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
 
   const firstPackages = join(root, "first-packages");
@@ -105,8 +103,8 @@ test("the per-run cap sends no more packages to the paid assessors, and the rest
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-limit-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v15.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v6.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v16.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v7.md"), "arbiter test prompt\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
   const packages = join(root, "packages");
   await mkdir(packages);
@@ -131,8 +129,8 @@ test("an interrupted batch keeps every finished assessment, and the next run ass
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-interrupted-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v15.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v6.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v16.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v7.md"), "arbiter test prompt\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
   const packages = join(root, "packages");
   await mkdir(packages);
@@ -154,4 +152,25 @@ test("an interrupted batch keeps every finished assessment, and the next run ass
   const resumed = await runBatch(root, packages, "10");
   assert.equal(resumed.unchangedCount, 1);
   assert.equal(resumed.newProposalCount, 2);
+});
+
+test("an oversized package is never sent to the assessors and is reported for human review", async () => {
+  const root = await mkdtemp(join(tmpdir(), "slava-assessment-oversized-"));
+  await mkdir(join(root, "automation/prompts"), { recursive: true });
+  await mkdir(join(root, "automation/review-proposals"), { recursive: true });
+  await writeFile(join(root, "automation/prompts/assessor-v16.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v7.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
+  const packages = join(root, "packages");
+  await mkdir(packages);
+  const oversized = evidencePackage("oversized-promise", "2026-09-10");
+  oversized.generation = { estimatedTokens: 300_000, oversized: true };
+  await writePackage(packages, oversized);
+  await writePackage(packages, evidencePackage("normal-promise", "2026-09-10"));
+
+  const summary = await runBatch(root, packages, "10");
+  assert.equal(summary.newProposalCount, 1);
+  assert.equal(summary.blockedCount, 1);
+  assert.equal(summary.results.find(({ promiseId }) => promiseId === "oversized-promise").disposition, "blocked-oversized");
+  assert.deepEqual(summary.relevanceVerdictsByRoute, [{ route: "tag:fiscal-rules", verdicts: 2, notRelevant: 0 }]);
 });

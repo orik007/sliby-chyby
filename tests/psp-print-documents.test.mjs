@@ -1,22 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { strToU8, zipSync } from "fflate";
-import {
-  deriveDocumentSearchTerms,
-  extractDocxParagraphs,
-  parseOfficialPrintDocumentLinks,
-  retryTransient,
-  selectRelevantDocumentExcerpts
-} from "../scripts/lib/psp-print-documents.mjs";
+import { extractDocxParagraphs, officialPrintDocumentPageUrl } from "../scripts/lib/psp-print-documents.mjs";
 
-test("finds official DOCX links and rejects unrelated download links", () => {
-  const html = `<a href="/sqw/text/orig2.sqw?idd=1">t020100.pdf</a>
-    <a href="/sqw/text/orig2.sqw?idd=2">t020100.docx</a>
-    <a href="https://other.example/file.docx">untrusted.docx</a>`;
-  assert.deepEqual(
-    parseOfficialPrintDocumentLinks(html, "https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=201&CT1=0"),
-    [{ filename: "t020100.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=2" }]
-  );
+test("builds the official print page URL", () => {
+  assert.equal(officialPrintDocumentPageUrl(10, 90, 0), "https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=90&CT1=0");
 });
 
 test("extracts readable numbered paragraphs from a bounded DOCX archive", () => {
@@ -30,47 +18,4 @@ test("extracts readable numbered paragraphs from a bounded DOCX archive", () => 
     "Návrh zákona",
     "Rozhlasové & televizní poplatky se zrušují."
   ]);
-});
-
-test("mechanically selects relevant promise paragraphs with adjacent context", () => {
-  const evidencePackage = {
-    promise: {
-      originalTextCz: "Vrátíme důchodový věk na 65 let.",
-      atomicClaimCz: "ANO vrátí důchodový věk na 65 let."
-    },
-    evidence: [{
-      structuredFacts: { printNumber: 270 },
-      matchBasis: { matchedTerms: [{ phrase: "důchodového pojištění" }] }
-    }]
-  };
-  const terms = deriveDocumentSearchTerms(evidencePackage, 270);
-  assert.ok(terms.phrases.includes("duchodoveho pojisteni"));
-  assert.ok(terms.tokens.includes("65"));
-  const excerpts = selectRelevantDocumentExcerpts([
-    "Obecná část důvodové zprávy.",
-    "Zákon o důchodovém pojištění upravuje další technické otázky.",
-    "Standardní důchodový věk činí nejvýše 65 let.",
-    "Toto ustanovení nabývá účinnosti dnem vyhlášení.",
-    "Nesouvisející rozpočtové ustanovení."
-  ], terms);
-  assert.deepEqual(excerpts.map(({ paragraph }) => paragraph), [2, 3, 4]);
-  assert.match(excerpts[1].text, /65 let/);
-});
-
-test("retries transient fetch failures but not validation failures", async () => {
-  let attempts = 0;
-  const result = await retryTransient(async () => {
-    attempts += 1;
-    if (attempts < 3) throw new TypeError("fetch failed");
-    return "ok";
-  }, { attempts: 3, delayMs: 0 });
-  assert.equal(result, "ok");
-  assert.equal(attempts, 3);
-
-  attempts = 0;
-  await assert.rejects(() => retryTransient(async () => {
-    attempts += 1;
-    throw new Error("unexpected content type");
-  }, { attempts: 3, delayMs: 0 }), /unexpected content type/);
-  assert.equal(attempts, 1);
 });

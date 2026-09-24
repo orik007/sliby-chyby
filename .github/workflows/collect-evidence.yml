@@ -98,7 +98,7 @@ jobs:
             fi
             while IFS= read -r path; do
               restore_paths+=("$path")
-            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/print-acts)
+            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/print-parts)
             for directory in automation/evidence-packages automation/review-proposals; do
               while IFS= read -r path; do
                 case "$path" in
@@ -134,46 +134,39 @@ jobs:
             --write-checkpoints automation/collectors/checkpoints.json \
             --output automation/runs/pipeline/github-actions/collector
 
-      - name: Extract amended acts from official print texts
+      - name: Split official print texts into law changes
         timeout-minutes: 60
         run: |
-          node scripts/run-print-acts.mjs \
+          node scripts/run-print-parts.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
-            --cache automation/print-acts/cache.json \
-            --output automation/runs/pipeline/github-actions/print-acts
+            --cache automation/print-parts \
+            --output automation/runs/pipeline/github-actions/print-parts
 
-      - name: Route source records to promises via legal identifiers and topic tags
+      - name: Screen law changes, route them to promises, check relevance, and build packages
         timeout-minutes: 120
         env:
-          SLIBY_STEP: tagging
+          SLIBY_STEP: routing
         run: |
           AS_OF="${AS_OF_INPUT:-$(date -u +%F)}"
           node scripts/run-topic-routing.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
-            --print-acts automation/runs/pipeline/github-actions/print-acts/print-acts.json \
+            --print-parts automation/runs/pipeline/github-actions/print-parts/print-parts.json \
             --tag-cache automation/topic-routing/tag-cache \
             --as-of "$AS_OF" \
             --output automation/runs/pipeline/github-actions/topic-routing
 
-      - name: Enrich matched parliamentary prints with official documents
-        timeout-minutes: 60
-        run: |
-          node scripts/run-print-enrichment.mjs \
-            --input automation/runs/pipeline/github-actions/topic-routing/evidence-packages \
-            --output automation/runs/pipeline/github-actions/topic-routing/enriched-evidence-packages
-
-      - name: Queue enriched evidence packages
+      - name: Queue evidence packages
         run: |
           node scripts/queue-evidence-packages.mjs \
-            --input automation/runs/pipeline/github-actions/topic-routing/enriched-evidence-packages \
-            --queue automation/evidence-packages \
-            --enrichment-run automation/runs/pipeline/github-actions/topic-routing/enriched-evidence-packages/enrichment-run.json
+            --input automation/runs/pipeline/github-actions/topic-routing/evidence-packages \
+            --queue automation/evidence-packages
 
-      - name: Persist tag-assignment cache even on a failed run
+      - name: Persist model caches even on a failed run
         id: tag-cache
-        # The only if: always() step: a failed run keeps the paid tagging
-        # work it already did. A subject is cached only once both taggers
-        # agree in full, so a partial tag cache is always safe to keep.
+        # A failed run keeps the paid promise tagging, law-change screening,
+        # and relevance checks it already did. A subject is cached only once
+        # both of its model outputs are valid, so a partial cache is always
+        # safe to keep.
         if: always()
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
@@ -184,7 +177,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
           else
-            git commit -m "Record topic-routing tag-assignment cache"
+            git commit -m "Record model caches"
             git push --force-with-lease="refs/heads/$REVIEW_BRANCH:$AUDIT_BRANCH_TIP" "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
             echo "AUDIT_BRANCH_TIP=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
             echo "created=true" >> "$GITHUB_OUTPUT"
@@ -199,8 +192,8 @@ jobs:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
           git add automation/collectors/checkpoints.json automation/evidence-packages
-          if [ -d automation/print-acts ]; then
-            git add automation/print-acts
+          if [ -d automation/print-parts ]; then
+            git add automation/print-parts
           fi
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
@@ -219,7 +212,7 @@ jobs:
           cat > "$RUNNER_TEMP/evidence-package-audit-pr.md" <<'EOF'
           ## Neveřejný audit sběru a balíčků podkladů
 
-          Tento pull request uchovává úspěšný technický sběr i ověřené, omezené balíčky podkladů po enrichmentu. Balíčky čekají na dva nezávislé posudky; samy nemění veřejná data, skóre ani stav zveřejnění.
+          Tento pull request uchovává úspěšný technický sběr, texty tisků rozdělené na změny zákonů a balíčky podkladů. Balíčky čekají na dva nezávislé posudky; samy nemění veřejná data, skóre ani stav zveřejnění.
 
           Pokud hodnocení selže nebo je přerušeno, uložené balíčky zůstanou v této auditní větvi pro další běh.
           EOF
@@ -236,7 +229,6 @@ jobs:
         run: |
           node scripts/run-assessment-batch.mjs \
             --packages automation/evidence-packages \
-            --enrichment-run automation/runs/pipeline/github-actions/topic-routing/enriched-evidence-packages/enrichment-run.json \
             --proposals automation/review-proposals \
             --runs automation/runs/pipeline/github-actions/assessments \
             --summary automation/runs/pipeline/github-actions/assessment-batch.json \
@@ -254,7 +246,7 @@ jobs:
           node scripts/run-coverage-audit.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
             --topic-routing-run automation/runs/pipeline/github-actions/topic-routing/topic-routing-report.json \
-            --print-acts automation/runs/pipeline/github-actions/print-acts/print-acts.json \
+            --print-parts automation/runs/pipeline/github-actions/print-parts/print-parts.json \
             --output automation/runs/pipeline/github-actions/coverage-audit.json \
             --markdown automation/runs/pipeline/github-actions/coverage-audit.md
 
@@ -264,40 +256,36 @@ jobs:
             import { readFile, appendFile } from "node:fs/promises";
             const run = JSON.parse(await readFile("automation/runs/pipeline/github-actions/topic-routing/topic-routing-report.json", "utf8"));
             const collectorRun = JSON.parse(await readFile("automation/runs/pipeline/github-actions/collector/collector-run.json", "utf8"));
-            const enrichment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/topic-routing/enriched-evidence-packages/enrichment-run.json", "utf8"));
             const assessment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/assessment-batch.json", "utf8"));
             const coverage = JSON.parse(await readFile("automation/runs/pipeline/github-actions/coverage-audit.json", "utf8"));
             const checkpoints = JSON.parse(await readFile("automation/collectors/checkpoints.json", "utf8"));
-            const documentCount = enrichment.results.reduce((sum, result) => sum + result.documentEvidenceCount, 0);
+            const quality = coverage.quality;
             const lines = [
               "## Unpublished evidence pipeline",
               "",
               `- Published promises checked: ${run.counts.promiseCount}`,
-              `- Primary records in the window: ${run.counts.primaryRecordsInWindowCount}`,
-              `- Skipped, cannot be attributable conduct: ${run.counts.notAttributableSkippedCount}`,
-              `- Routed records: ${run.counts.materialPrimaryRecordCount}`,
-              `- Bills with official text / amended acts found: ${coverage.quality.printActs.billsWithText} / ${coverage.quality.printActs.billsWithAmendedActs} of ${coverage.quality.printActs.bills}`,
-              `- Print-text fetch failures: ${coverage.quality.printActs.textFetchFailures}`,
-              `- Direct legal-identifier links: ${run.counts.directAssignmentCount}`,
-              `- Auto-candidate relationships: ${run.counts.candidateRelationshipCount}`,
-              `- Routing review (needs human routing decision): ${run.counts.routingReviewCount}`,
-              `- Orphan review (no safe topic assignment or matching promise): ${run.counts.orphanReviewCount}`,
-              `- Assessable evidence packages: ${run.counts.packageCount}`,
-              `- Routed candidates without attributable evidence: ${run.counts.routedWithoutAttributableEvidenceCount}`,
-              `- Invalid tagger outputs (promise / source): ${run.counts.invalidPromiseTaggerCount} / ${run.counts.invalidSourceTaggerCount}`,
-              `- Official print documents added: ${documentCount}`,
-              `- Document-enrichment warnings: ${enrichment.warnings.length}`,
+              `- Primary records in the window: ${quality.primaryRecordsInWindow}`,
+              `- Skipped, cannot be attributable conduct: ${quality.notAttributableSkipped}`,
+              `- Prints with a DOCX proposal text: ${quality.printParts.printsWithProposalText} of ${quality.printParts.prints} (title only: ${quality.printParts.printsWithoutDocxProposalText}, download failures: ${quality.printParts.textDownloadFailures})`,
+              `- Law changes screened: ${quality.lawChanges} (technical ${quality.technicalLawChanges}, substantive ${quality.substantiveLawChanges})`,
+              `- Routed law changes: ${quality.routedLawChanges} (direct legal-identifier link: ${quality.directLinkLawChanges})`,
+              `- Routing review (needs a human routing decision): ${quality.routingReview}`,
+              `- Orphan review (no safe tag or matching promise): ${quality.orphanReview}`,
+              `- Routed, but the party has no conduct on the print: ${quality.routedWithoutConduct}`,
+              `- Promise and law-change pairs checked / dropped as not relevant: ${quality.relevancePairs} / ${quality.relevanceDropped}`,
+              `- Evidence packages: ${run.counts.packageCount} (too large for automated assessment: ${quality.oversizedPackages})`,
+              `- Invalid model outputs: ${quality.invalidModelOutputs}`,
               `- New assessment proposals: ${assessment.newProposalCount}`,
               `- Unchanged assessments skipped: ${assessment.unchangedCount}`,
-              `- Assessments blocked by document warnings: ${assessment.blockedCount}`,
+              `- Packages too large to assess: ${assessment.blockedCount}`,
               `- Deferred by the per-run assessment cap (${assessment.maxAssessments}): ${assessment.deferredCount} packages, ${assessment.deferredPackageCharacters} characters`,
               `- Assessment cutoff: ${run.asOf}`,
-              `- No routed record (not a score): ${coverage.stateCounts["no-routed-record"]}`,
-              `- Routed without attributable conduct: ${coverage.stateCounts["routed-without-attributable-conduct"]}`,
+              `- No routed law change (not a score): ${coverage.stateCounts["no-routed-law-change"]}`,
+              `- Routed, but no law change kept: ${coverage.stateCounts["routed-without-kept-change"]}`,
               `- Human-review proposals or unresolved reviews: ${coverage.stateCounts["review-candidate"] + coverage.stateCounts["human-review-required"]}`,
               "- Direction assigned: no",
               "- Publication approved: no",
-              "- No routed record never becomes zero points.",
+              "- No routed law change never becomes zero points.",
               ""
             ];
             await appendFile(process.env.GITHUB_STEP_SUMMARY, lines.join("\n"));
@@ -310,7 +298,7 @@ jobs:
               "## Sběr dat",
               "",
               "Tento pull request je auditní fronta. Každý běh sbírá každý zdroj celý od jeho počátečního data; sběr nemění veřejné hodnocení.",
-              `Směrování podle tagů (${run.routerVersion}, taxonomie ${run.taxonomyVersion}) vytváří kandidátní vztah, jen když se na kontrolovaném a dostatečně konkrétním tagu shodnou oba nezávislí tagovači, nebo existuje přímý strukturální odkaz; samotný kandidátní vztah nepotvrzuje přiřaditelnost ani hodnocení.`,
+              `Jednotkou je změna zákona, tedy jedna část úředního textu tisku (${run.routerVersion}, taxonomie ${run.taxonomyVersion}). Ke slibu vede přímá vazba přes číslo zákona nebo shoda obou nezávislých modelů na konkrétním štítku; slib a změna zůstanou spolu, pokud je obě kontroly relevance neoznačí za nesouvisející. Samotné přiřazení nepotvrzuje jednání strany ani hodnocení.`,
               "",
               "| Zdroj | Od | Záznamů | Nejnovější záznam |",
               "| --- | --- | ---: | --- |",

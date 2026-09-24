@@ -115,37 +115,6 @@ export function isPotentiallyAttributable(record, partyIds) {
   return partyIds.some((partyId) => assessableAttributionStatuses.has(attributionStatusForRecord(record, { partyId }).attributionStatus));
 }
 
-// A decision (a decisive vote) outweighs a proposal (docs/scoring.md), so
-// bounding a package never drops a decision in favour of a proposal.
-const decisionStatuses = new Set(["verified-party-vote", "verified-party-no-majority"]);
-
-function compareMatches(a, b) {
-  return Number(decisionStatuses.has(b.attributionStatus)) - Number(decisionStatuses.has(a.attributionStatus))
-    || Number(b.directLink) - Number(a.directLink)
-    || String(b.record.occurredAt).localeCompare(String(a.record.occurredAt))
-    || a.record.id.localeCompare(b.record.id);
-}
-
-function groupKey(match) {
-  const payload = match.record.payload ?? {};
-  if (payload.externalPrintId) return `print:${payload.externalPrintId}`;
-  if (payload.externalVoteId) return `vote:${payload.externalVoteId}`;
-  return `${match.record.kind}:${match.record.id}`;
-}
-
-export function selectBoundedPrimaryMatches(matches, { maxPerGroup = 8, maxTotal = 24 } = {}) {
-  const primaryMatches = matches.filter(({ record, attributionStatus }) => record.primary === true && assessableAttributionStatuses.has(attributionStatus));
-  const groups = new Map();
-  for (const match of primaryMatches) {
-    const list = groups.get(groupKey(match)) ?? [];
-    list.push(match);
-    groups.set(groupKey(match), list);
-  }
-  const selected = [];
-  for (const group of groups.values()) selected.push(...group.sort(compareMatches).slice(0, maxPerGroup));
-  return selected.sort(compareMatches).slice(0, maxTotal);
-}
-
 function partyVoteFacts(record, partyId) {
   return (record.payload?.partyVoteSummaries ?? []).find((summary) => summary.partyId === partyId) ?? null;
 }
