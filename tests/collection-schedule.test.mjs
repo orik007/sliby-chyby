@@ -30,11 +30,9 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.equal([...workflow.matchAll(/GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/g)].length, 6);
   assert.match(workflow, /- name: Restore current audit state[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   assert.match(workflow, /- name: Persist source collection and queued evidence packages[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
-  assert.match(workflow, /COLLECTOR_SOURCES: \$\{\{ inputs\.sources \|\| '' \}\}/);
-  assert.match(workflow, /source_id="\$\{source_id#"\$\{source_id%%\[!\[:space:\]\]\*\}"\}"/);
-  assert.match(workflow, /source_id="\$\{source_id%"\$\{source_id##\*\[!\[:space:\]\]\}"\}"/);
-  assert.match(workflow, /COLLECTOR_SOURCES must contain comma-separated source IDs/);
-  assert.match(workflow, /collector_args\+=\(--source "\$source_id"\)/);
+  // Every run collects every source completely; no manual start date or
+  // source subset can produce a package from part of the record history.
+  assert.doesNotMatch(workflow, /inputs\.since|inputs\.sources|--since|--source /);
   assert.match(workflow, /git push --force-with-lease="refs\/heads\/\$REVIEW_BRANCH:\$AUDIT_BRANCH_TIP" "https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git" "HEAD:refs\/heads\/\$REVIEW_BRANCH"/);
 });
 

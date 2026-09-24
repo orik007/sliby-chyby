@@ -23,7 +23,7 @@ official party source (election programme)
   -> candidate, confirmed public promise, or rejected promise
 
 official records only (active: Chamber of Deputies open data)
-  -> per-source collection at 09:37 Europe/Prague
+  -> complete collection of every source at 09:37 Europe/Prague
   -> only records that can be attributable conduct continue
   -> acts amended by each concerned print, from its official text
   -> routing to confirmed promises: direct legal-identifier links or two agreeing topic taggers
@@ -31,7 +31,7 @@ official records only (active: Chamber of Deputies open data)
   -> bounded evidence package per promise
   -> official print document enrichment
   -> two independent assessments; arbiter on disagreement or one invalid output
-  -> unpublished audit pull request with packages, proposals, coverage, and checkpoints
+  -> unpublished audit pull request with packages, proposals, coverage, and caches
   -> separate approved public-assessment pull request when a score changes
 ```
 

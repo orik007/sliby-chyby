@@ -50,11 +50,11 @@ This document contains only the current confirmed rules. When a rule changes, re
 ## Evidence automation
 
 - The daily workflow runs at 09:37 Europe/Prague and retains a manual trigger. It is paused until a manual run of the current pipeline has been verified end to end.
-- It collects each active source from its own durable checkpoint, routes records to confirmed promises by direct legal-identifier links or two agreeing taggers, keeps only attributable conduct, and sends each new or changed bounded package to two independent assessors, with an arbiter when their valid assessments differ or exactly one output is invalid.
+- Every run collects every active source completely from its `bootstrapFrom` date, so each package is built from the whole record history. It routes records to confirmed promises by direct legal-identifier links or two agreeing taggers, keeps only attributable conduct, and sends each new or changed bounded package to two independent assessors, with an arbiter when their valid assessments differ or exactly one output is invalid.
 - Its output is an unpublished human-review proposal on a dedicated audit pull request. It never changes public data, a public score, or publication status. A human-approved score change is a separate scoped pull request.
 - The assessors and arbiter may cite only supplied evidence IDs. Their active prompt versions, providers, model IDs, confidence, evidence IDs, and input fingerprint remain auditable, and the fingerprint prevents paid reassessment of unchanged input.
 - A failed complete run does not advance public freshness.
-- When a rule change makes saved audit state (checkpoints, caches, queues) invalid, the pipeline generation changes and the next run starts from empty audit state. Old audit state is never repaired or reused.
+- When a rule change makes saved audit state (caches and queues) invalid, the pipeline generation changes and the next run starts from empty audit state. Old audit state is never repaired or reused.
 
 ## Delivery
 

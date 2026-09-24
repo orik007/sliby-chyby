@@ -72,16 +72,9 @@ export function buildCoverageAudit({ collectorRun, routingRun, printActs, promis
     invariant(sources.has(collector.sourceId), `Collector run references unknown source ${collector.sourceId}`);
     collectorsBySourceId.set(collector.sourceId, collector);
   }
-  const failuresBySourceId = new Map((collectorRun.failures ?? []).map((failure) => [failure.sourceId, failure]));
-  // `collectorRun.since` is only a manual override; each source's own start
-  // is in `collectionPlan`.
-  const collectionPlanBySourceId = new Map((collectorRun.collectionPlan ?? []).map((plan) => [plan.sourceId, plan]));
-
-  // Every enabled source gets a row, including one that failed or was not
-  // selected in this run.
   const sourceCoverage = sourceRegistry.sources.filter((source) => source.enabled).map((source) => {
     const collector = collectorsBySourceId.get(source.id);
-    const failure = failuresBySourceId.get(source.id);
+    invariant(collector, `Enabled source ${source.id} was not collected in this run`);
     const range = observedRangeBySource.get(source.id);
     return {
       sourceId: source.id,
@@ -90,14 +83,11 @@ export function buildCoverageAudit({ collectorRun, routingRun, printActs, promis
       evidenceRole: source.evidenceRole,
       coverageMode: source.coverage.mode,
       coverageNote: source.coverage.note,
-      requestedSince: collector?.collection?.since ?? collectionPlanBySourceId.get(source.id)?.since ?? collectorRun.since,
+      collectedSince: collector.collection.since,
       recordCount: recordsBySource.get(source.id) ?? 0,
       observedEarliest: range?.earliest ?? null,
       observedLatest: range?.latest ?? null,
-      collected: Boolean(collector),
-      warnings: collector
-        ? (collector.warnings ?? [])
-        : [failure ? `Not collected this run -- collection failed: ${failure.message}` : "Not collected this run."]
+      warnings: collector.warnings ?? []
     };
   });
 
@@ -139,7 +129,6 @@ export function buildCoverageAudit({ collectorRun, routingRun, printActs, promis
     auditVersion: "coverage-audit-v1",
     generatedAt: new Date().toISOString(),
     collectorRunId: collectorRun.runId,
-    requestedSince: collectorRun.since,
     assessmentCutoff: routingRun.asOf,
     promiseCount: promises.length,
     quality: {
@@ -205,9 +194,9 @@ export function renderCoverageAuditMarkdown(audit) {
     "",
     "## Source coverage",
     "",
-    "| Source | Collected | Mode | Records | Observed range | Limitation |",
-    "|---|---|---|---:|---|---|",
-    ...audit.sourceCoverage.map((source) => `| ${source.name} | ${source.collected ? "yes" : `**no** — ${renderMarkdownCell(source.warnings[0])}`} | \`${source.coverageMode}\` | ${source.recordCount} | ${source.observedEarliest?.slice(0, 10) ?? "—"} to ${source.observedLatest?.slice(0, 10) ?? "—"} | ${source.coverageNote} |`),
+    "| Source | Collected since | Records | Observed range | Warnings |",
+    "|---|---|---:|---|---|",
+    ...audit.sourceCoverage.map((source) => `| ${source.name} | ${source.collectedSince} | ${source.recordCount} | ${source.observedEarliest?.slice(0, 10) ?? "—"} to ${source.observedLatest?.slice(0, 10) ?? "—"} | ${source.warnings.length === 0 ? "—" : renderMarkdownCell(source.warnings.join("; "))} |`),
     "",
     "## Promise coverage",
     "",

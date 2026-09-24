@@ -14,7 +14,7 @@ const promiseRegistry = { promises: [{ id: "p1", partyId: "ano", partyName: "ANO
 
 test("coverage audit never converts a promise without routed records into a score", () => {
   const audit = buildCoverageAudit({
-    collectorRun: { schemaVersion: "1.0.0", runId: "run-1", since: null, collectors: [{ sourceId: "psp-core-2025", warnings: [] }], records: [] },
+    collectorRun: { schemaVersion: "1.0.0", runId: "run-1", collectors: [{ sourceId: "psp-core-2025", collection: { mode: "full", since: "2025-10-01" }, warnings: ["Line one\nwith a | pipe"] }], records: [] },
     routingRun: routingRun(),
     printActs,
     promiseRegistry,
@@ -28,11 +28,13 @@ test("coverage audit never converts a promise without routed records into a scor
   const markdown = renderCoverageAuditMarkdown(audit);
   assert.match(markdown, /No routed record is not zero points/);
   assert.match(markdown, /\| Bills with amended acts found \| 1 of 2 \|/);
+  const sourceRows = markdown.split("\n").filter((line) => line.startsWith("| Chamber of Deputies open data"));
+  assert.deepEqual(sourceRows, ["| Chamber of Deputies open data | 2025-10-01 | 0 | — to — | Line one with a \\| pipe |"], "runtime warning text must stay on one escaped table row");
 });
 
 test("a routed promise without attributable conduct and one with a package are told apart", () => {
   const audit = buildCoverageAudit({
-    collectorRun: { schemaVersion: "1.0.0", runId: "run-2", since: null, collectors: [], records: [] },
+    collectorRun: { schemaVersion: "1.0.0", runId: "run-2", collectors: [], records: [] },
     routingRun: routingRun({
       assignments: [
         { route: { disposition: "candidate-created", candidatePromiseIds: ["p1", "p2"] } },
@@ -50,7 +52,7 @@ test("a routed promise without attributable conduct and one with a package are t
 
 test("a partial routing run is refused", () => {
   assert.throws(() => buildCoverageAudit({
-    collectorRun: { schemaVersion: "1.0.0", runId: "run", since: null, collectors: [], records: [] },
+    collectorRun: { schemaVersion: "1.0.0", runId: "run", collectors: [], records: [] },
     routingRun: routingRun({ completed: false }),
     promiseRegistry,
     sourceRegistry: { sources: [] },
@@ -58,32 +60,19 @@ test("a partial routing run is refused", () => {
   }), /completed topic-routing run/);
 });
 
-test("a source whose collection failed still appears, marked as not collected, with its own planned start", () => {
-  const audit = buildCoverageAudit({
-    collectorRun: {
-      schemaVersion: "1.0.0", runId: "run-3", since: null,
-      collectionPlan: [{ sourceId: "psp-core-2025", mode: "incremental", since: "2026-09-10", checkpointBefore: null }],
-      collectors: [],
-      failures: [{ sourceId: "psp-core-2025", message: "Request failed\nwith a | pipe" }],
-      records: []
-    },
+test("an enabled source that was not collected is refused", () => {
+  assert.throws(() => buildCoverageAudit({
+    collectorRun: { schemaVersion: "1.0.0", runId: "run-3", collectors: [], records: [] },
     routingRun: routingRun(),
     promiseRegistry,
     sourceRegistry: { sources: [pspSource, { ...pspSource, id: "disabled", enabled: false }] },
     proposalManifest: { proposals: [] }
-  });
-  assert.equal(audit.sourceCoverage.length, 1);
-  const [row] = audit.sourceCoverage;
-  assert.equal(row.collected, false);
-  assert.equal(row.requestedSince, "2026-09-10");
-  const tableLines = renderCoverageAuditMarkdown(audit).split("\n").filter((line) => line.startsWith("| Chamber of Deputies open data"));
-  assert.equal(tableLines.length, 1, "a newline in the failure message must not create an extra table row");
-  assert.ok(tableLines[0].includes("a \\| pipe"), "a pipe in the message must be escaped");
+  }), /Enabled source psp-core-2025 was not collected/);
 });
 
 test("coverage audit prefers the active human review proposal over the routing state", () => {
   const audit = buildCoverageAudit({
-    collectorRun: { schemaVersion: "1.0.0", runId: "run", since: null, collectors: [], records: [] },
+    collectorRun: { schemaVersion: "1.0.0", runId: "run", collectors: [], records: [] },
     routingRun: routingRun({ packages: [{ promiseId: "p1", built: true, selectedEvidenceCount: 1 }] }),
     promiseRegistry,
     sourceRegistry: { sources: [] },

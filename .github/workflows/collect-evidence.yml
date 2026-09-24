@@ -8,18 +8,8 @@ on:
   #     timezone: "Europe/Prague"
   workflow_dispatch:
     inputs:
-      since:
-        description: Optional YYYY-MM-DD override for a manual backfill; leave empty for per-source checkpoints
-        required: false
-        default: ""
-        type: string
       as_of:
         description: Assessment cutoff date; leave empty to use the UTC run date
-        required: false
-        default: ""
-        type: string
-      sources:
-        description: Optional comma-separated collector source IDs for a targeted replay
         required: false
         default: ""
         type: string
@@ -49,8 +39,6 @@ jobs:
       deployment: false
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      COLLECTOR_SINCE: ${{ inputs.since || '' }}
-      COLLECTOR_SOURCES: ${{ inputs.sources || '' }}
       AS_OF_INPUT: ${{ inputs.as_of || '' }}
       REVIEW_BRANCH: automation/assessment-review
       SLIBY_ASSESSOR_PROVIDER_A: openai
@@ -129,27 +117,10 @@ jobs:
 
       - name: Collect source records
         run: |
-          collector_args=(
-            --checkpoints automation/collectors/checkpoints.json
-            --write-checkpoints automation/collectors/checkpoints.json
+          node scripts/run-collectors.mjs \
+            --checkpoints automation/collectors/checkpoints.json \
+            --write-checkpoints automation/collectors/checkpoints.json \
             --output automation/runs/pipeline/github-actions/collector
-          )
-          if [ -n "$COLLECTOR_SINCE" ]; then
-            collector_args+=(--since "$COLLECTOR_SINCE")
-          fi
-          if [ -n "$COLLECTOR_SOURCES" ]; then
-            IFS=',' read -ra source_ids <<< "$COLLECTOR_SOURCES"
-            for source_id in "${source_ids[@]}"; do
-              source_id="${source_id#"${source_id%%[![:space:]]*}"}"
-              source_id="${source_id%"${source_id##*[![:space:]]}"}"
-              if [ -z "$source_id" ]; then
-                echo "::error::COLLECTOR_SOURCES must contain comma-separated source IDs."
-                exit 1
-              fi
-              collector_args+=(--source "$source_id")
-            done
-          fi
-          node scripts/run-collectors.mjs "${collector_args[@]}"
 
       - name: Extract amended acts from official print texts
         run: |
@@ -320,33 +291,18 @@ jobs:
             await appendFile(process.env.GITHUB_STEP_SUMMARY, lines.join("\n"));
             const sourceRows = collectorRun.collectors.map((collector) => {
               const checkpoint = checkpoints.sourceCheckpoints[collector.sourceId];
-              return `| \`${collector.sourceId}\` | ${collector.collection.mode} | ${collector.collection.since} | ${collector.recordCount} | ${checkpoint?.lastObservedRecordAt?.slice(0, 10) ?? "—"} |`;
+              return `| \`${collector.sourceId}\` | ${collector.collection.since} | ${collector.recordCount} | ${checkpoint?.lastObservedRecordAt?.slice(0, 10) ?? "—"} |`;
             });
-            const failures = collectorRun.failures ?? [];
-            // A thrown error message is arbitrary text: normalize it to a
-            // single line so it cannot break the Markdown list it renders
-            // into (a newline would end the bullet early; a missing message
-            // would render the literal string "undefined").
-            const renderFailureMessage = (message) => String(message ?? "(no message)").replace(/\s+/g, " ").trim() || "(no message)";
-            const failureLines = failures.length > 0
-              ? [
-                  "",
-                  `**${failures.length} zdroj(e) dnes selhaly a jejich checkpoint se nezměnil** — příští běh je zkusí znovu od stejného data, ostatní zdroje pokračovaly beze změny:`,
-                  "",
-                  ...failures.map(({ sourceId, message, retryFrom }) => `- \`${sourceId}\`: ${renderFailureMessage(message)}${retryFrom ? ` (další běh naváže od ${retryFrom})` : ""}`)
-                ]
-              : [];
             const reviewLines = [
               "",
-              "## Sběr dat a checkpointy zdrojů",
+              "## Sběr dat",
               "",
-              "Tento pull request je auditní fronta. Uložení checkpointu pouze potvrzuje úspěšné technické získání zdroje; samo nemění veřejné hodnocení.",
+              "Tento pull request je auditní fronta. Každý běh sbírá každý zdroj celý od jeho počátečního data; sběr nemění veřejné hodnocení.",
               `Směrování podle tagů (${run.routerVersion}, taxonomie ${run.taxonomyVersion}) vytváří kandidátní vztah, jen když se na kontrolovaném a dostatečně konkrétním tagu shodnou oba nezávislí tagovači, nebo existuje přímý strukturální odkaz; samotný kandidátní vztah nepotvrzuje přiřaditelnost ani hodnocení.`,
               "",
-              "| Zdroj | Režim | Od | Záznamů | Nejnovější záznam |",
-              "| --- | --- | --- | ---: | --- |",
+              "| Zdroj | Od | Záznamů | Nejnovější záznam |",
+              "| --- | --- | ---: | --- |",
               ...sourceRows,
-              ...failureLines,
               ""
             ];
             await appendFile("automation/runs/pipeline/github-actions/assessment-review-pr.md", reviewLines.join("\n"));

@@ -42,7 +42,7 @@ These rules were verified against the official schema documentation (psp.cz page
 
 The workflow runs at 09:37 Europe/Prague and keeps a manual trigger. The schedule stays paused until a manual `workflow_dispatch` run of the current pipeline has been verified end to end (see `.github/workflows/collect-evidence.yml`).
 
-1. **Collect.** Each active source starts from its own durable checkpoint, or from its `bootstrapFrom` date when it has none. A manual run may select sources and override the start; the override is never persisted. A source whose collection fails keeps its prior checkpoint and does not stop the other sources.
+1. **Collect.** Every run collects every active source completely from its `bootstrapFrom` date, so each package is built from the whole record history and a new package never loses earlier conduct. There is no manual start date or source subset. If any source fails, the run fails and nothing is saved. `checkpoints.json` only records each source's last successful collection; it never limits what is collected.
 2. **Filter.** Only a record that can be attributable conduct of a tracked party under [scoring.md](scoring.md) continues: a decisive vote with a club result, or the submission of a member bill or government proposal. Attribution depends only on the record itself, so no other record can ever affect a score, and none is tagged or fetched further.
 3. **Read amended acts.** For each print those records concern, the acts it amends are read from its official title and text (see *Chamber data rules*).
 4. **Route.** A record is routed to confirmed promises in one of two ways:
@@ -52,7 +52,7 @@ The workflow runs at 09:37 Europe/Prague and keeps a manual trigger. The schedul
    Disagreement or weak support goes to `routing-review`; `unknown` or no promise with the tag goes to `orphan-review`. Both are for human attention and never mean no progress. Models may return only existing tag identifiers or `unknown`. A taxonomy change is a reviewed change, and its content hash recomputes every dependent classification.
 5. **Package.** Each promise with at least one routed, attributable record gets one bounded evidence package. Routing never establishes attribution or a score.
 6. **Enrich.** When a package names a Chamber print, the official print document is added. A package blocked by an enrichment warning is retried until it succeeds or a newer package replaces it.
-7. **Persist.** Before any assessment call, the source checkpoints, the tag-assignment cache, the print-text cache, and the packages are saved together to the dedicated unpublished audit pull request. A source's checkpoint advances only when collection, routing, enrichment, and persistence all succeed in the same run. The queue keeps exactly one current package per promise; superseded versions stay auditable.
+7. **Persist.** Before any assessment call, the collection record (`checkpoints.json`), the tag-assignment cache, the print-text cache, and the packages are saved together to the dedicated unpublished audit pull request, and only when collection, routing, enrichment, and persistence all succeed in the same run. The queue keeps exactly one current package per promise; superseded versions stay auditable.
 8. **Assess.** Each new or changed package goes independently to two assessors, who may cite only evidence IDs in that package. They first decide whether the evidence is materially relevant, then propose a score. When their valid assessments differ, or exactly one output is invalid, an arbiter selects a usable assessment or returns no conclusion. Two invalid outputs write a private failure audit and re-enter a later batch unless a newer package replaces them.
 9. **Report.** The proposals and a coverage audit are written to the audit pull request. The audit covers every confirmed promise and active source and reports the run's data-quality figures: records skipped as not attributable, routed records, direct links, review queues, invalid tagger outputs, and how many bills had an official text and amended acts.
 
@@ -60,7 +60,7 @@ The audit pull request is never merged to `main`, and its Git history is not an 
 
 ## Pipeline generation
 
-`automation/pipeline-generation` names the current generation of the audit state. The workflow restores checkpoints, caches, and queues from the audit branch only when that branch holds the same generation. When a rule change makes saved audit state invalid, change the generation: the next run starts from empty audit state and collects every source from its `bootstrapFrom` date. Old audit state is never repaired or reused.
+`automation/pipeline-generation` names the current generation of the audit state. The workflow restores the collection record, caches, and queues from the audit branch only when that branch holds the same generation. When a rule change makes saved audit state invalid, change the generation: the next run starts from empty caches and queues, so everything is tagged and assessed again. Old audit state is never repaired or reused.
 
 ## From proposal to public score
 
