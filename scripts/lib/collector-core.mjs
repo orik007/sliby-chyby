@@ -50,36 +50,15 @@ export function validateRegistry(registry) {
     invariant(typeof source.id === "string" && source.id.length > 0, "Collector source is missing id");
     invariant(!ids.has(source.id), `Duplicate collector source id: ${source.id}`);
     ids.add(source.id);
-    invariant([
-      "psp-open-data",
-      "rss",
-      "news-sitemap",
-      "official-html-archive",
-      "wordpress-rest",
-      "mk-news-archive",
-      "mpsv-press-archive",
-      "msmt-news-api",
-      "deferred"
-    ].includes(source.collector), `Unknown collector type: ${source.collector}`);
+    invariant(source.collector === "psp-open-data", `Unknown collector type: ${source.collector}`);
+    invariant(source.primary === true && source.evidenceRole === "primary-record", `Source ${source.id} must be a primary official record; media, press releases, and party websites are not evidence sources`);
     invariant(typeof source.enabled === "boolean", `Source ${source.id} is missing enabled`);
-    invariant(typeof source.primary === "boolean", `Source ${source.id} is missing primary`);
     invariant(/^\d{4}-\d{2}-\d{2}$/.test(source.bootstrapFrom), `Source ${source.id} needs bootstrapFrom in YYYY-MM-DD format`);
     invariant(/^\d{4}-\d{2}-\d{2}$/.test(source.verifiedAt), `Source ${source.id} has invalid verifiedAt`);
     invariant(/^https:\/\//.test(source.verificationUrl), `Source ${source.id} needs an HTTPS verificationUrl`);
-    invariant(["term-snapshot", "since-filtered-archive", "current-window", "deferred"].includes(source.coverage?.mode), `Source ${source.id} needs a supported coverage mode`);
+    invariant(source.coverage?.mode === "term-snapshot", `Source ${source.id} needs a supported coverage mode`);
     invariant(typeof source.coverage?.note === "string" && source.coverage.note.length > 0, `Source ${source.id} needs a coverage note`);
-    if (source.enabled) {
-      invariant(Array.isArray(source.expectedHosts) && source.expectedHosts.length > 0, `Source ${source.id} needs expectedHosts`);
-      invariant(source.coverage.mode !== "deferred", `Enabled source ${source.id} cannot have deferred coverage`);
-    }
-    if (source.evidenceRole === "official-party-publication") {
-      invariant(typeof source.partyId === "string" && source.partyId.length > 0, `Party source ${source.id} needs partyId`);
-    }
-    if (source.wordpressCategoryId !== undefined) {
-      invariant(source.collector === "wordpress-rest", `Source ${source.id} can filter a WordPress category only with the wordpress-rest collector`);
-      invariant(Number.isInteger(source.wordpressCategoryId) && source.wordpressCategoryId > 0, `Source ${source.id} has invalid wordpressCategoryId`);
-      invariant(typeof source.wordpressCategorySlug === "string" && source.wordpressCategorySlug.length > 0, `Source ${source.id} needs wordpressCategorySlug for audit`);
-    }
+    invariant(Array.isArray(source.expectedHosts) && source.expectedHosts.length > 0, `Source ${source.id} needs expectedHosts`);
   }
   return registry;
 }
@@ -88,7 +67,7 @@ export function validateCollectedRecord(record) {
   invariant(record?.schemaVersion === "1.0.0", "Collected record has an unsupported schemaVersion");
   invariant(typeof record.id === "string" && record.id.length > 0, "Collected record is missing id");
   invariant(typeof record.sourceId === "string" && record.sourceId.length > 0, "Collected record is missing sourceId");
-  invariant(["parliamentary-vote", "legislative-step", "official-publication", "article"].includes(record.kind), `Unknown record kind: ${record.kind}`);
+  invariant(["parliamentary-vote", "legislative-step"].includes(record.kind), `Unknown record kind: ${record.kind}`);
   invariant(typeof record.primary === "boolean", `Record ${record.id} is missing primary`);
   invariant(/^https:\/\//.test(record.url), `Record ${record.id} must use an HTTPS URL`);
   invariant(typeof record.title === "string" && record.title.length > 0, `Record ${record.id} is missing title`);

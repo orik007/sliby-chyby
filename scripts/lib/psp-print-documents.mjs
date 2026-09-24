@@ -160,7 +160,7 @@ export function buildPrintDocumentEvidence({ evidencePackage, print, document, p
     url: document.url,
     locator: `${document.filename}; mechanically selected DOCX paragraphs ${excerpts.map(({ paragraph }) => paragraph).join(", ")}`,
     primary: true,
-    factSummary: `Official proposal document for print ${print.printNumber}. Excerpts were selected mechanically around promise and matcher terms; no direction or score was assigned.`,
+    factSummary: `Official proposal document for print ${print.printNumber}. Excerpts were selected mechanically around promise terms; no direction or score was assigned.`,
     structuredFacts: {
       externalPrintId: print.externalPrintId,
       printNumber: print.printNumber,

@@ -8,40 +8,39 @@ import {
   fetchVerified,
   validateRegistry
 } from "../scripts/lib/collector-core.mjs";
-import { parseNewsSitemap, parseRssOrAtom } from "../scripts/lib/feed-collectors.mjs";
-import {
-  parseMkNewsArchive,
-  parseMpsvPressArchive,
-  parseMsmtNewsApiPage,
-  parseOfficialHtmlArchive,
-  parseWordPressRestPage
-} from "../scripts/lib/official-archive-collectors.mjs";
 import { derivePartyVoteSummaries, normalizePspData, parseUnl } from "../scripts/lib/psp-collector.mjs";
 
-const mediaSource = {
-  id: "example-media",
-  publisher: "Example Media",
-  collector: "rss",
+const governmentPeriods = {
+  schemaVersion: "1.0.0",
+  periods: [{ id: "test-government", from: "2025-12-15", to: null, partyIds: ["ano", "motoriste", "spd"], verificationUrl: "https://gov.example/appointed" }]
+};
+
+const officialSource = {
+  id: "example-chamber",
+  publisher: "Example Chamber",
+  collector: "psp-open-data",
   enabled: true,
-  primary: false,
-  evidenceRole: "discovery-context",
+  primary: true,
+  evidenceRole: "primary-record",
   bootstrapFrom: "2025-10-01",
-  coverage: { mode: "current-window", note: "Fixture feed exposes a current window." },
-  endpoint: "https://news.example/rss",
-  verificationUrl: "https://news.example/rss-help",
+  coverage: { mode: "term-snapshot", note: "Fixture snapshot covers the whole term." },
+  verificationUrl: "https://news.example/open-data",
   verifiedAt: "2026-08-31",
-  expectedHosts: ["news.example"],
-  maxExcerptChars: 80
+  expectedHosts: ["news.example"]
 };
 
 test("validates a unique, explicit collector registry", () => {
-  const registry = { schemaVersion: "1.0.0", sources: [mediaSource] };
+  const registry = { schemaVersion: "1.0.0", sources: [officialSource] };
   assert.equal(validateRegistry(registry), registry);
-  assert.throws(() => validateRegistry({ schemaVersion: "1.0.0", sources: [mediaSource, mediaSource] }), /Duplicate collector source id/);
+  assert.throws(() => validateRegistry({ schemaVersion: "1.0.0", sources: [officialSource, officialSource] }), /Duplicate collector source id/);
   assert.throws(() => validateRegistry({
     schemaVersion: "1.0.0",
-    sources: [{ ...mediaSource, evidenceRole: "official-party-publication", primary: true }]
-  }), /needs partyId/);
+    sources: [{ ...officialSource, collector: "rss" }]
+  }), /Unknown collector type/);
+  assert.throws(() => validateRegistry({
+    schemaVersion: "1.0.0",
+    sources: [{ ...officialSource, primary: false, evidenceRole: "discovery-context" }]
+  }), /not evidence sources/);
 });
 
 test("retries transient source responses before accepting verified bytes", async () => {
@@ -61,7 +60,7 @@ test("retries transient source responses before accepting verified bytes", async
     return response(200, '{"items":[]}', "application/json");
   };
   try {
-    const result = await fetchVerified(mediaSource, "https://news.example/api", {
+    const result = await fetchVerified(officialSource, "https://news.example/api", {
       maxBytes: 1_000,
       expectedContentTypes: ["application/json"],
       retryAttempts: 3,
@@ -92,7 +91,7 @@ test("retries transport failures while fetching and reading source bytes", async
     return response(async () => new TextEncoder().encode('{"items":[]}').buffer);
   };
   try {
-    const result = await fetchVerified(mediaSource, "https://news.example/api", {
+    const result = await fetchVerified(officialSource, "https://news.example/api", {
       maxBytes: 1_000,
       expectedContentTypes: ["application/json"],
       retryAttempts: 3,
@@ -105,250 +104,12 @@ test("retries transport failures while fetching and reading source bytes", async
   }
 });
 
-test("normalizes an official party WordPress item with explicit party attribution", () => {
-  const source = {
-    ...mediaSource,
-    id: "party-news",
-    collector: "wordpress-rest",
-    primary: true,
-    evidenceRole: "official-party-publication",
-    partyId: "motoriste",
-    apiEndpoint: "https://party.example/wp-json/wp/v2/posts",
-    wordpressCategoryId: 5,
-    wordpressCategorySlug: "tiskova-zprava",
-    expectedHosts: ["party.example"]
-  };
-  const records = parseWordPressRestPage([{
-    id: 42,
-    date_gmt: "2026-08-31T10:56:54",
-    link: "https://party.example/concrete-step-42",
-    title: { rendered: "Strana představila konkrétní krok" },
-    excerpt: { rendered: "<p>Oficiální vyjádření strany.</p>" },
-    categories: [5]
-  }], source, { since: "2025-10-01" });
-  assert.equal(records.length, 1);
-  assert.equal(records[0].kind, "official-publication");
-  assert.equal(records[0].evidenceRole, "official-party-publication");
-  assert.equal(records[0].payload.sourcePartyId, "motoriste");
-  assert.deepEqual(records[0].payload.wordpressCategoryIds, [5]);
-  assert.equal(records[0].payload.wordpressCategorySlug, "tiskova-zprava");
-  assert.equal(records[0].payload.excerptCz, "Oficiální vyjádření strany.");
-  assert.throws(() => parseWordPressRestPage([{
-    id: 43,
-    date_gmt: "2026-08-31T11:00:00",
-    link: "https://party.example/interview-43",
-    title: { rendered: "Interview" },
-    excerpt: { rendered: "Interview jednotlivce." },
-    categories: [1]
-  }], source, { since: "2025-10-01" }), /outside its configured category/);
-});
-
 test("documents every configured collector source in the canonical pipeline policy", async () => {
   const registry = JSON.parse(await readFile(new URL("../automation/collectors/sources.json", import.meta.url), "utf8"));
   const policy = await readFile(new URL("../docs/evidence-pipeline.md", import.meta.url), "utf8");
   for (const source of registry.sources) {
     assert.match(policy, new RegExp(`\\x60${source.id}\\x60`), `Missing ${source.id} from evidence-pipeline.md`);
   }
-});
-
-test("normalizes RSS metadata without storing a full article", () => {
-  const xml = `<?xml version="1.0"?><rss version="2.0"><channel><title>Feed</title><item>
-    <guid>item-1</guid><title>Policy &amp; vote</title><link>https://news.example/article/1</link>
-    <description><![CDATA[<p>This is a publisher-provided summary with <strong>markup</strong> and deliberately more than eighty characters for truncation.</p>]]></description>
-    <pubDate>Sun, 30 Aug 2026 12:00:00 +0200</pubDate><author>Reporter</author>
-  </item></channel></rss>`;
-  const result = parseRssOrAtom(xml, mediaSource, { since: "2026-08-01" });
-  assert.equal(result.records.length, 1);
-  assert.equal(result.records[0].kind, "article");
-  assert.equal(result.records[0].primary, false);
-  assert.equal(result.records[0].payload.authorNames[0], "Reporter");
-  assert.ok(result.records[0].payload.excerptCz.length <= 80);
-  assert.doesNotMatch(result.records[0].payload.excerptCz, /<p>/);
-  assert.equal("status" in result.records[0], false);
-  assert.equal("direction" in result.records[0], false);
-  assert.equal("score" in result.records[0], false);
-});
-
-test("rejects a feed item that redirects readers outside the source allowlist", () => {
-  const xml = `<?xml version="1.0"?><rss><channel><title>Feed</title><item><title>Wrong host</title><link>https://other.example/a</link><pubDate>Sun, 30 Aug 2026 12:00:00 +0200</pubDate></item></channel></rss>`;
-  assert.throws(() => parseRssOrAtom(xml, mediaSource, { since: "2026-08-01" }), /outside the source host allowlist/);
-});
-
-test("accepts an explicitly allowlisted official linked host", () => {
-  const governmentSource = {
-    ...mediaSource,
-    id: "government-example",
-    primary: true,
-    evidenceRole: "official-discovery",
-    expectedHosts: ["vlada.gov.cz", "www.odok.cz"]
-  };
-  const xml = `<?xml version="1.0"?><rss><channel><title>Government</title><item><title>Cabinet agenda</title><link>https://www.odok.cz/portal/zvlady/jednani-detail/2026-08-31</link><pubDate>Mon, 31 Aug 2026 12:00:00 +0200</pubDate></item></channel></rss>`;
-  const result = parseRssOrAtom(xml, governmentSource, { since: "2026-08-01" });
-  assert.equal(result.records.length, 1);
-  assert.equal(result.records[0].url, "https://www.odok.cz/portal/zvlady/jednani-detail/2026-08-31");
-  assert.equal(result.records[0].primary, true);
-});
-
-test("keeps distinct official feed items that reuse one GUID and URL", () => {
-  const xml = `<?xml version="1.0"?><rss><channel><title>Government</title>
-    <item><guid>https://news.example/agenda/1</guid><title>Cabinet agenda</title><link>https://news.example/agenda/1</link><pubDate>Mon, 31 Aug 2026 12:00:00 +0200</pubDate></item>
-    <item><guid>https://news.example/agenda/1</guid><title>Cabinet agenda addendum</title><link>https://news.example/agenda/1</link><pubDate>Mon, 31 Aug 2026 12:00:00 +0200</pubDate></item>
-  </channel></rss>`;
-  const result = parseRssOrAtom(xml, mediaSource, { since: "2026-08-01" });
-  assert.equal(result.records.length, 2);
-  assert.notEqual(result.records[0].id, result.records[1].id);
-  assert.equal(result.records[0].payload.feedEntryId, result.records[1].payload.feedEntryId);
-});
-
-test("normalizes a publisher news sitemap without inventing an excerpt", () => {
-  const source = { ...mediaSource, id: "example-sitemap", collector: "news-sitemap", maxExcerptChars: 0 };
-  const xml = `<?xml version="1.0"?><urlset xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"><url>
-    <loc>https://news.example/article/2</loc><news:news><news:publication_date>2026-08-30T14:00:00+02:00</news:publication_date><news:title>Government decision</news:title></news:news>
-  </url></urlset>`;
-  const result = parseNewsSitemap(xml, source, { since: "2026-08-01" });
-  assert.equal(result.records.length, 1);
-  assert.equal(result.records[0].payload.excerptCz, "");
-  assert.equal(result.records[0].url, "https://news.example/article/2");
-});
-
-test("normalizes a bounded official Czech annual archive", () => {
-  const source = {
-    ...mediaSource,
-    id: "official-archive",
-    collector: "official-html-archive",
-    primary: true,
-    evidenceRole: "official-discovery",
-    archiveEndpoints: ["https://news.example/archive/2025"]
-  };
-  const html = `<article class="b-article link-mask"><a href="/release/a" class="b-article__link link-mask__link">Priorita &#x10C;R</a><span class="b-article__date">15. prosince 2025</span></article>`;
-  const records = parseOfficialHtmlArchive(html, source, { since: "2025-10-01" });
-  assert.equal(records.length, 1);
-  assert.equal(records[0].title, "Priorita ČR");
-  assert.equal(records[0].occurredAt, "2025-12-15T00:00:00.000Z");
-  assert.equal(records[0].url, "https://news.example/release/a");
-  assert.equal(records[0].primary, true);
-  assert.deepEqual(parseOfficialHtmlArchive(html, source, { since: "2026-01-01" }), []);
-});
-
-test("normalizes only ministry-labelled items from the Culture Ministry archive", () => {
-  const source = {
-    ...mediaSource,
-    id: "mk-news-archive",
-    collector: "mk-news-archive",
-    primary: true,
-    evidenceRole: "official-discovery",
-    archiveEndpoint: "https://www.mk.gov.cz/novinky-a-media-cs-4",
-    itemPathPrefix: "/novinky-a-media-cs-4/",
-    allowedPublisherCategories: ["ministerstvo"],
-    expectedHosts: ["www.mk.gov.cz"]
-  };
-  const html = `
-    <a href="/novinky-a-media-cs-4/1cs-ministry-item" class="malaNovinka novinka">
-      <div class="novinkaTexty"><div class="novinkaNadpis">Hmatatelné opatření</div>
-      <div class="novinkaInfo"><span class="novinkaDatum">17.08.2026 12:26</span><div><span></span><span class="novinkaDruh">ministerstvo</span></div></div>
-      <div class="novinkaText"><p>Oficiální stručný popis &amp; souvislosti.</p></div></div>
-    </a>
-    <a href="/novinky-a-media-cs-4/2cs-institution-item" class="malaNovinka novinka">
-      <div class="novinkaTexty"><div class="novinkaNadpis">Program muzea</div>
-      <div class="novinkaInfo"><span class="novinkaDatum">16.08.2026 10:00</span><div><span></span><span class="novinkaDruh">příspěvkové organizace</span></div></div>
-      <div class="novinkaText"><p>Program podřízené organizace.</p></div></div>
-    </a>`;
-  const records = parseMkNewsArchive(html, source, { since: "2025-10-01" });
-  assert.equal(records.length, 1);
-  assert.equal(records[0].title, "Hmatatelné opatření");
-  assert.equal(records[0].occurredAt, "2026-08-17T12:26:00");
-  assert.equal(records[0].payload.publisherCategory, "ministerstvo");
-  assert.equal(records[0].payload.excerptCz, "Oficiální stručný popis & souvislosti.");
-});
-
-test("normalizes a complete page from the MPSV annual archive", () => {
-  const source = {
-    ...mediaSource,
-    id: "mpsv-press-archive-2025-2026",
-    collector: "mpsv-press-archive",
-    primary: true,
-    evidenceRole: "official-discovery",
-    archiveEndpoints: ["https://mpsv.gov.cz/tiskove-zpravy-mpsv?year=2025"],
-    expectedHosts: ["mpsv.gov.cz"]
-  };
-  const html = `<span>Nalezen <b>1</b> výsledek</span><ul><li>
-    <a href="https://mpsv.gov.cz/zmena-podpory" class="card__basic card__horizontal" type="horizontal">
-      <div class="card__basic-content"><h3><span class="one-line-heading">Změna podpory</span></h3>
-      <span class="card__basic-date">30. prosince 2025</span>
-      <div class="card__basic-text">Ministerstvo zveřejnilo konkrétní opatření.</div></div>
-    </a></li></ul>`;
-  const records = parseMpsvPressArchive(html, source, { since: "2025-10-01" });
-  assert.equal(records.length, 1);
-  assert.equal(records[0].occurredAt, "2025-12-30T00:00:00.000Z");
-  assert.equal(records[0].url, "https://mpsv.gov.cz/zmena-podpory");
-  assert.equal(records[0].payload.excerptCz, "Ministerstvo zveřejnilo konkrétní opatření.");
-});
-
-test("normalizes a cursor-paginated MŠMT API page without trusting redirects", () => {
-  const source = {
-    ...mediaSource,
-    id: "msmt-news-api",
-    collector: "msmt-news-api",
-    primary: true,
-    evidenceRole: "official-discovery",
-    apiEndpoint: "https://msmt.gov.cz/api/aktuality",
-    archiveEndpoint: "https://msmt.gov.cz/aktuality",
-    itemPathPrefix: "/aktuality/",
-    expectedHosts: ["msmt.gov.cz"]
-  };
-  const page = {
-    success: true,
-    data: {
-      aktuality: {
-        pageInfo: { hasNextPage: true, endCursor: "next", total: 2 },
-        edges: [{ node: {
-          id: "post-1",
-          title: "Nové opatření ve školství",
-          date: "2026-08-20T09:15:00",
-          excerpt: "<p>Ministerstvo zveřejnilo <strong>konkrétní</strong> opatření.</p>",
-          slug: "nove-opatreni-ve-skolstvi",
-          tagsmain: { nodes: [{ name: "Ministerstvo" }] },
-          redirectacf: { redirect: true, redirecturl: "https://outside.example/ignored" }
-        } }]
-      }
-    }
-  };
-  const parsed = parseMsmtNewsApiPage(page, source, { since: "2025-10-01" });
-  assert.equal(parsed.records.length, 1);
-  assert.equal(parsed.records[0].url, "https://msmt.gov.cz/aktuality/nove-opatreni-ve-skolstvi");
-  assert.equal(parsed.records[0].payload.excerptCz, "Ministerstvo zveřejnilo konkrétní opatření.");
-  assert.deepEqual(parsed.records[0].payload.tags, ["Ministerstvo"]);
-  assert.equal(parsed.pageInfo.endCursor, "next");
-});
-
-test("safely encodes an unusual MŠMT slug returned by the official API", () => {
-  const source = {
-    ...mediaSource,
-    id: "msmt-news-api",
-    collector: "msmt-news-api",
-    primary: true,
-    evidenceRole: "official-discovery",
-    apiEndpoint: "https://msmt.gov.cz/api/aktuality",
-    archiveEndpoint: "https://msmt.gov.cz/aktuality",
-    itemPathPrefix: "/aktuality/",
-    expectedHosts: ["msmt.gov.cz"]
-  };
-  const page = {
-    success: true,
-    data: { aktuality: {
-      pageInfo: { hasNextPage: false, endCursor: null, total: 1 },
-      edges: [{ node: {
-        id: "post-2",
-        title: "Průvodce pro studenty",
-        date: "2026-02-03T10:06:09",
-        excerpt: "",
-        slug: "titulní-stránka-⁄-aktuality",
-        tagsmain: { nodes: [] }
-      } }]
-    } }
-  };
-  const parsed = parseMsmtNewsApiPage(page, source, { since: "2025-10-01" });
-  assert.equal(parsed.records[0].url, "https://msmt.gov.cz/aktuality/tituln%C3%AD-str%C3%A1nka-%E2%81%84-aktuality");
 });
 
 test("UNL parser respects escaped delimiters and null fields", () => {
@@ -434,16 +195,19 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
     "hist.unl": entry(unl(historyFields)),
     "stavy.unl": entry(unl(["20", "6", "1", "Approved", null, null]) + unl(["10", "5", "1", "Before vote", null, null])),
     "prechody.unl": entry(unl(["10", "10", "20", "5", "1"])),
-    "typ_akce.unl": entry(unl(["5", "Chamber approved bill"]))
+    "typ_akce.unl": entry(unl(["5", "Chamber approved bill"])),
+    "predkladatel.unl": entry("")
   };
 
-  const result = normalizePspData({ source, since: "2026-08-01", votesEntries, membersEntries, printsEntries });
+  const sessionsEntries = { "schuze.unl": entry(""), "bod_schuze.unl": entry("") };
+  const result = normalizePspData({ source, since: "2026-08-01", votesEntries, membersEntries, printsEntries, sessionsEntries, governmentPeriods });
   const vote = result.records.find((record) => record.kind === "parliamentary-vote");
   const step = result.records.find((record) => record.kind === "legislative-step");
   assert.ok(vote);
   assert.ok(step);
   assert.equal(vote.payload.linkedPrints[0].number, 189);
   assert.equal(vote.payload.linkedPrints[0].historyContexts[0].actionCz, "Chamber approved bill");
+  assert.equal(vote.payload.linkedPrints[0].linkBasis, "history-vote-id");
   assert.equal(vote.payload.individualVotes[0].clubMembershipsAtVote[0].projectPartyId, "ano");
   assert.equal(step.payload.externalVoteId, "900");
   assert.equal(step.payload.actionCz, "Chamber approved bill");
@@ -451,17 +215,155 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
   assert.equal(vote.primary, true);
 });
 
+function agendaFixture({ historyAgendaId = "5001" } = {}) {
+  const source = {
+    id: "psp-core-2025",
+    publisher: "PSP",
+    evidenceRole: "primary-record",
+    partyAliases: { MS: "motoriste" },
+    term: { year: 2025, number: 10, organId: 174 }
+  };
+  const voteRow = (id, number, agenda, time, longTitle) => unl([id, "174", "29", number, agenda, "26.08.2026", time, "104", "72", "0", "0", "176", "101", "N", "A", longTitle, null]);
+  const votesEntries = {
+    "hl2025s.unl": entry(
+      voteRow("950", "10", "3", "11:00", "Pozmenovaci navrh")
+      + voteRow("951", "11", "3", "11:05", null)
+      + voteRow("952", "12", "0", "11:10", "Proceduralni hlasovani")
+    ),
+    "hl2025h1.unl": entry(unl(["100", "951", "A"]) + unl(["100", "950", "B"]) + unl(["100", "952", "A"])),
+    "zmatecne.unl": entry("")
+  };
+  const membersEntries = {
+    "osoby.unl": entry(unl(["1", null, "Novak", "Jan", null, "01.01.1980", "M", null, null])),
+    "poslanec.unl": entry(unl(["100", "1", null, null, "174", null, null, null, null, null, null, null, null, null, "1"])),
+    "zarazeni.unl": entry(unl(["1", "1760", "0", "2025-10-08 00", null, null, null])),
+    "organy.unl": entry(unl(["1760", "174", "1", "MS", "Poslanecky klub Motoriste sobe", "MS club", "08.10.2025", null, null, "0"]))
+  };
+  const print = (id, number, title) => {
+    const fields = Array(24).fill(null);
+    Object.assign(fields, { 0: id, 1: "1", 2: "20", 3: number, 4: "0", 7: "174", 10: title, 15: title });
+    return unl(fields);
+  };
+  const historyFields = Array(15).fill(null);
+  Object.assign(historyFields, { 0: "810", 1: "701", 2: "2026-08-26 00:00", 3: "951", 4: "11", 5: historyAgendaId, 6: "29" });
+  const printsEntries = {
+    "tisky.unl": entry(print("701", "68", "Vladni navrh zakona, kterym se meni zakon c. 23/2017 Sb., o pravidlech rozpoctove odpovednosti") + print("702", "90", "Unrelated bill")),
+    "hist.unl": entry(unl(historyFields)),
+    "stavy.unl": entry(unl(["20", "6", "1", "Approved", null, null])),
+    "prechody.unl": entry(unl(["11", "20", "20", "6", "1"])),
+    "typ_akce.unl": entry(unl(["6", "setrvano"])),
+    "predkladatel.unl": entry("")
+  };
+  // PSP files are windows-1250; the fixture stays ASCII so UTF-8 bytes decode identically.
+  const sessionsEntries = {
+    // The proposed and approved agendas share id_schuze and id_bod and differ in pozvanka;
+    // the proposed agenda numbers the item differently and must be ignored.
+    "schuze.unl": entry(unl(["291", "174", "29", "2026-08-25 09", null, null, "1"]) + unl(["291", "174", "29", "2026-08-25 09", null, null, null])),
+    "bod_schuze.unl": entry(
+      unl(["4999", "291", "702", "1", "3", "Unrelated proposed item", null, null, null, "1"])
+      + unl(["5001", "291", "701", "13", "3", "Vladni navrh zakona o pravidlech rozpoctove odpovednosti", "/snemovni tisk 68/ - zakon vraceny prezidentem", null, "1", null])
+      + unl(["5001", "291", null, "6", "4", "Written interpellation answer", null, null, "1", null])
+    )
+  };
+  return normalizePspData({ source, since: "2026-08-01", votesEntries, membersEntries, printsEntries, sessionsEntries, governmentPeriods });
+}
+
+test("PSP normalizer links votes to the print of their approved agenda item", () => {
+  const result = agendaFixture();
+  assert.deepEqual(result.warnings, []);
+  const byId = new Map(result.records.map((record) => [record.id, record]));
+  const amendment = byId.get("psp-core-2025--vote-950");
+  const finalVote = byId.get("psp-core-2025--vote-951");
+  const procedural = byId.get("psp-core-2025--vote-952");
+
+  assert.equal(finalVote.payload.agendaItem.titleCz, "Vladni navrh zakona o pravidlech rozpoctove odpovednosti");
+  assert.equal(finalVote.payload.agendaItem.suffixCz, "/snemovni tisk 68/ - zakon vraceny prezidentem");
+  assert.equal(finalVote.payload.linkedPrints.length, 1);
+  assert.equal(finalVote.payload.linkedPrints[0].number, 68);
+  assert.equal(finalVote.payload.linkedPrints[0].linkBasis, "history-vote-id");
+  assert.equal(finalVote.payload.linkedPrints[0].historyContexts[0].actionCz, "setrvano");
+
+  // Another vote on the same agenda item names the print but never inherits the decisive step.
+  assert.equal(amendment.payload.linkedPrints[0].number, 68);
+  assert.equal(amendment.payload.linkedPrints[0].linkBasis, "agenda-item");
+  assert.deepEqual(amendment.payload.linkedPrints[0].historyContexts, []);
+
+  assert.equal(procedural.payload.agendaItem, null);
+  assert.deepEqual(procedural.payload.linkedPrints, []);
+});
+
+test("PSP normalizer skips agenda links when schuze.zip and hist.unl disagree", () => {
+  const result = agendaFixture({ historyAgendaId: "7777" });
+  assert.equal(result.warnings.length, 1);
+  assert.match(result.warnings[0], /agenda-item vote links were skipped/);
+  const amendment = result.records.find((record) => record.id === "psp-core-2025--vote-950");
+  assert.equal(amendment.payload.agendaItem, null);
+  assert.deepEqual(amendment.payload.linkedPrints, []);
+});
+
+test("PSP normalizer attributes submitted bills to proposer and government parties", () => {
+  const source = {
+    id: "psp-core-2025",
+    publisher: "PSP",
+    evidenceRole: "primary-record",
+    partyAliases: { MS: "motoriste", ANO2011: "ano" },
+    term: { year: 2025, number: 10, organId: 174 }
+  };
+  const print = (id, number, kind, proposerType, personId, submitted, title) => {
+    const fields = Array(24).fill(null);
+    Object.assign(fields, { 0: id, 1: kind, 2: "20", 3: number, 4: "0", 5: proposerType, 7: "174", 8: personId, 10: title, 11: submitted, 15: title });
+    return unl(fields);
+  };
+  const submission = (historyId, printId) => {
+    const fields = Array(15).fill(null);
+    Object.assign(fields, { 0: historyId, 1: printId, 2: "2026-01-27 00:00", 4: "1" });
+    return unl(fields);
+  };
+  const result = normalizePspData({
+    source,
+    since: "2025-10-01",
+    governmentPeriods,
+    votesEntries: { "hl2025s.unl": entry(""), "hl2025h1.unl": entry(""), "zmatecne.unl": entry("") },
+    membersEntries: {
+      "osoby.unl": entry(unl(["1", null, "Novak", "Jan", null, "01.01.1980", "M", null, null]) + unl(["2", null, "Dvorak", "Petr", null, "01.01.1980", "M", null, null])),
+      "poslanec.unl": entry(unl(["100", "1", null, null, "174", null, null, null, null, null, null, null, null, null, "1"]) + unl(["101", "2", null, null, "174", null, null, null, null, null, null, null, null, null, "1"])),
+      "zarazeni.unl": entry(unl(["1", "1760", "0", "2025-10-08 00", null, null, null]) + unl(["2", "1770", "0", "2025-10-08 00", null, null, null])),
+      "organy.unl": entry(unl(["1760", "174", "1", "MS", "Klub Motoriste", "MS club", "08.10.2025", null, null, "0"]) + unl(["1770", "174", "1", "PIR", "Klub Pirati", "PIR club", "08.10.2025", null, null, "0"]))
+    },
+    printsEntries: {
+      "tisky.unl": entry(
+        print("701", "11", "2", "3", null, "06.11.2025", "Member bill")
+        + print("702", "90", "1", null, "9", "27.01.2026", "Government bill")
+        + print("703", "94", "3", null, "9", "12.11.2025", "Earlier government budget")
+        + print("704", "15", "2", "3", null, "10.11.2025", "Other party member bill")
+      ),
+      "hist.unl": entry(submission("801", "701") + submission("802", "702") + submission("803", "703") + submission("804", "704")),
+      "stavy.unl": entry(unl(["20", "1", "1", "Submitted", null, null])),
+      "prechody.unl": entry(unl(["1", "20", "20", "7", "1"])),
+      "typ_akce.unl": entry(unl(["7", "předložen"])),
+      "predkladatel.unl": entry(unl(["701", "1", "1", "0"]) + unl(["701", "2", "2", "0"]) + unl(["704", "2", "1", "0"]))
+    },
+    sessionsEntries: { "schuze.unl": entry(""), "bod_schuze.unl": entry("") }
+  });
+  const proposalOf = (printNumber) => result.records.find((record) => record.payload.printNumber === printNumber).payload.proposal;
+  assert.deepEqual(proposalOf(11), { kind: "member-bill", submittedOn: "2025-11-06", proposerPartyIds: ["motoriste"], proposerCz: null });
+  assert.deepEqual(proposalOf(90).proposerPartyIds, ["ano", "motoriste", "spd"]);
+  assert.equal(proposalOf(90).kind, "government-proposal");
+  assert.deepEqual(proposalOf(94).proposerPartyIds, [], "a proposal of the government before 15 December 2025 is not conduct of the current governing parties");
+  assert.deepEqual(proposalOf(15).proposerPartyIds, []);
+});
+
 test("deduplication accepts identical records and rejects conflicting content", () => {
   const base = {
-    id: "source--1",
-    sourceId: "source",
-    kind: "article",
-    primary: false,
-    evidenceRole: "discovery-context",
+    id: "psp-core-2025--vote-1",
+    sourceId: "psp-core-2025",
+    kind: "parliamentary-vote",
+    primary: true,
+    evidenceRole: "primary-record",
     occurredAt: "2026-08-30T10:00:00.000Z",
     title: "Title",
-    publisher: "Publisher",
-    url: "https://news.example/a",
+    publisher: "Chamber of Deputies of the Parliament of the Czech Republic",
+    url: "https://www.psp.cz/sqw/hlasy.sqw?g=1",
     payload: {}
   };
   const first = createCollectedRecord(base);

@@ -18,7 +18,11 @@ const schemas = {
   history: ["historyId", "printId", "dateTime", "voteId", "transitionId", "agendaId", "session", "resolutionNumber", "committeeReporterMpId", "chairReporterMpId", "committeeResolution", "collectionPublishedAt", "collectionPart", "collectionNumber", "note"],
   state: ["stateId", "stateTypeId", "printKindId", "description", "deadline", "deadlineTransitionId"],
   transition: ["transitionId", "fromStateId", "toStateId", "actionId", "transitionType"],
-  action: ["actionId", "description"]
+  action: ["actionId", "description"],
+  proposer: ["printId", "personId", "order", "type"],
+  // schuze.zip; only the leading columns this collector reads are declared.
+  session: ["sessionId", "organId", "number", "from", "to", "updatedAt", "isInvitation"],
+  agendaItem: ["agendaItemId", "sessionId", "printId", "typeId", "number", "fullTitle", "fullSuffix", "note", "stateId", "isInvitation"]
 };
 
 function parseUnlLine(line) {
@@ -159,7 +163,65 @@ export function derivePartyVoteSummaries(individualVotes, { voteTypeCode = "N", 
   });
 }
 
-export function normalizePspData({ source, since, votesEntries, membersEntries, printsEntries }) {
+/**
+ * Resolves the approved agenda items of this term's sessions from schuze.zip.
+ * Per the official schema (psp.cz/sqw/hp.sqw?k=1308), a proposed and an
+ * approved agenda share the same id_schuze and id_bod and differ only in
+ * `pozvanka` (1 = proposed, null = approved); item numbers can differ between
+ * the two. Only approved items are used. Items of type 6 (individual answers
+ * to written interpellations) share an id_bod with their parent item and are
+ * skipped. A vote row names its session number and agenda-item number, so the
+ * returned map is keyed by `${sessionNumber}:${agendaNumber}`.
+ */
+function approvedAgendaItems(sessionsEntries, termOrganId) {
+  const sessionNumberById = new Map(parseUnl(decodeEntry(sessionsEntries, "schuze.unl"), schemas.session)
+    .filter((row) => row.organId === String(termOrganId) && row.isInvitation !== "1")
+    .map((row) => [row.sessionId, row.number]));
+  const itemsByKey = new Map();
+  for (const row of parseUnl(decodeEntry(sessionsEntries, "bod_schuze.unl"), schemas.agendaItem)) {
+    if (row.isInvitation === "1" || row.typeId === "6") continue;
+    const sessionNumber = sessionNumberById.get(row.sessionId);
+    if (!sessionNumber || !(Number(row.number) >= 1)) continue;
+    itemsByKey.set(`${sessionNumber}:${Number(row.number)}`, row);
+  }
+  return itemsByKey;
+}
+
+/**
+ * Validates the government periods that make a government bill conduct of
+ * the governing parties (automation/attribution/government-periods.json).
+ */
+export function validateGovernmentPeriods(governmentPeriods) {
+  invariant(governmentPeriods?.schemaVersion === "1.0.0", "Unsupported government periods schemaVersion");
+  invariant(Array.isArray(governmentPeriods.periods), "Government periods must be an array");
+  for (const period of governmentPeriods.periods) {
+    invariant(typeof period.id === "string" && period.id.length > 0, "Government period is missing id");
+    invariant(/^\d{4}-\d{2}-\d{2}$/.test(period.from), `Government period ${period.id} needs a from date`);
+    invariant(period.to === null || /^\d{4}-\d{2}-\d{2}$/.test(period.to), `Government period ${period.id} has an invalid to date`);
+    invariant(Array.isArray(period.partyIds) && period.partyIds.length > 0, `Government period ${period.id} needs partyIds`);
+    invariant(/^https:\/\//.test(period.verificationUrl), `Government period ${period.id} needs an HTTPS verificationUrl`);
+  }
+  return governmentPeriods;
+}
+
+function governmentPartiesOn(governmentPeriods, date) {
+  const period = governmentPeriods.periods.find(({ from, to }) => from <= date && (to === null || date <= to));
+  return period ? [...period.partyIds].sort() : [];
+}
+
+function historyContext(history, transitionById, actionById) {
+  const transition = transitionById.get(history.transitionId);
+  const action = actionById.get(transition?.actionId);
+  return {
+    externalHistoryId: history.historyId,
+    transitionId: history.transitionId,
+    actionCz: cleanText(action?.description, 500) || null,
+    resolutionNumber: numeric(history.resolutionNumber)
+  };
+}
+
+export function normalizePspData({ source, since, votesEntries, membersEntries, printsEntries, sessionsEntries, governmentPeriods }) {
+  validateGovernmentPeriods(governmentPeriods);
   const voteRows = parseUnl(decodeEntry(votesEntries, `hl${source.term.year}s.unl`), schemas.vote)
     .filter((row) => row.organId === String(source.term.organId));
   const individualRows = parseUnl(decodeMatchingEntries(votesEntries, new RegExp(`^hl${source.term.year}h\\d+\\.unl$`, "i")), schemas.individualVote);
@@ -184,11 +246,61 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
   const printRows = parseUnl(decodeEntry(printsEntries, "tisky.unl"), schemas.print)
     .filter((row) => row.termOrganId === String(source.term.organId));
   const printById = new Map(printRows.map((row) => [row.printId, row]));
+  const clubPartyOn = (personId, date) => (membershipsByPerson.get(personId) ?? [])
+    .filter((membership) => activeOn(membership, date))
+    .map((membership) => source.partyAliases[clubs.get(membership.entityId)?.abbreviation] ?? null)
+    .filter(Boolean);
+
+  // Per the official schema (psp.cz/sqw/hp.sqw?k=1303, druh_tisku.unl): the
+  // government submits kind 1 (government bill), 3 (state budget) and 4
+  // (international treaty); kind 2 with proposer type 2 or 3 is a bill of one
+  // MP or a group of MPs. A single proposer is tisky.id_osoba; several are
+  // listed in predkladatel.unl.
+  const proposersByPrint = new Map();
+  for (const row of parseUnl(decodeEntry(printsEntries, "predkladatel.unl"), schemas.proposer)) {
+    if (!printById.has(row.printId)) continue;
+    const list = proposersByPrint.get(row.printId) ?? [];
+    list.push(row.personId);
+    proposersByPrint.set(row.printId, list);
+  }
+  const proposalByPrint = new Map();
+  for (const print of printRows) {
+    const submittedOn = pspDate(print.submittedAt);
+    if (!submittedOn) continue;
+    if (print.kindId === "1" || print.kindId === "3" || print.kindId === "4") {
+      proposalByPrint.set(print.printId, {
+        kind: "government-proposal",
+        submittedOn,
+        proposerPartyIds: governmentPartiesOn(governmentPeriods, submittedOn),
+        proposerCz: cleanText(print.proposerText, 300) || null
+      });
+    } else if (print.kindId === "2" && (print.proposalTypeId === "2" || print.proposalTypeId === "3")) {
+      const personIds = [...new Set(proposersByPrint.get(print.printId) ?? (print.personId ? [print.personId] : []))];
+      proposalByPrint.set(print.printId, {
+        kind: "member-bill",
+        submittedOn,
+        proposerPartyIds: [...new Set(personIds.flatMap((personId) => clubPartyOn(personId, submittedOn)))].sort(),
+        proposerCz: cleanText(print.proposerText, 300) || null
+      });
+    }
+  }
   const historyRows = parseUnl(decodeEntry(printsEntries, "hist.unl"), schemas.history)
     .filter((row) => printById.has(row.printId));
   const stateById = new Map(parseUnl(decodeEntry(printsEntries, "stavy.unl"), schemas.state).map((row) => [row.stateId, row]));
   const transitionById = new Map(parseUnl(decodeEntry(printsEntries, "prechody.unl"), schemas.transition).map((row) => [row.transitionId, row]));
   const actionById = new Map(parseUnl(decodeEntry(printsEntries, "typ_akce.unl"), schemas.action).map((row) => [row.actionId, row]));
+
+  // Agenda items link a vote to the print it was cast on. The link is used
+  // only when schuze.zip and hist.unl agree on agenda-item identifiers;
+  // otherwise the collector warns and keeps the exact hist.unl vote links only.
+  const warnings = [];
+  let agendaItemByKey = approvedAgendaItems(sessionsEntries, source.term.organId);
+  const printLinkedItems = [...agendaItemByKey.values()].filter((item) => printById.has(item.printId));
+  const historyAgendaPairs = new Set(historyRows.map((row) => `${row.agendaId}:${row.printId}`));
+  if (printLinkedItems.length > 0 && !printLinkedItems.some((item) => historyAgendaPairs.has(`${item.agendaItemId}:${item.printId}`))) {
+    warnings.push("PSP agenda items do not match any print history agenda reference; agenda-item vote links were skipped.");
+    agendaItemByKey = new Map();
+  }
 
   const cutoff = since ?? "0000-00-00";
   const recentVotes = voteRows.filter((row) => (pspDate(row.date) ?? "0000-00-00") >= cutoff);
@@ -207,6 +319,21 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     const list = historyByVote.get(row.voteId) ?? [];
     list.push(row);
     historyByVote.set(row.voteId, list);
+  }
+
+  function linkedPrint(printId, linkBasis, histories) {
+    const print = printById.get(printId);
+    return {
+      externalPrintId: printId,
+      printKindId: print?.kindId ?? null,
+      number: numeric(print?.number),
+      partNumber: numeric(print?.partNumber),
+      titleCz: cleanText(print?.fullTitle || print?.shortTitle, 1000),
+      url: print ? officialPrintUrl(source.term.number, print.number) : null,
+      documentPublishedAt: pspDateTime(print?.publishedAt),
+      linkBasis,
+      historyContexts: histories.map((history) => historyContext(history, transitionById, actionById))
+    };
   }
 
   const records = [];
@@ -237,29 +364,15 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
       };
     });
     const historiesForVote = historyByVote.get(vote.id) ?? [];
+    const agendaItem = agendaItemByKey.get(`${vote.session}:${Number(vote.agenda)}`) ?? null;
     const linkedPrintIds = [...new Set(historiesForVote.map(({ printId }) => printId))];
-    const linkedPrints = linkedPrintIds.map((printId) => {
-      const print = printById.get(printId);
-      const historyContexts = historiesForVote.filter((history) => history.printId === printId).map((history) => {
-        const transition = transitionById.get(history.transitionId);
-        const action = actionById.get(transition?.actionId);
-        return {
-          externalHistoryId: history.historyId,
-          transitionId: history.transitionId,
-          actionCz: cleanText(action?.description, 500) || null,
-          resolutionNumber: numeric(history.resolutionNumber)
-        };
-      });
-      return {
-        externalPrintId: printId,
-        number: numeric(print?.number),
-        partNumber: numeric(print?.partNumber),
-        titleCz: cleanText(print?.fullTitle || print?.shortTitle, 1000),
-        url: print ? officialPrintUrl(source.term.number, print.number) : null,
-        documentPublishedAt: pspDateTime(print?.publishedAt),
-        historyContexts
-      };
-    });
+    const linkedPrints = linkedPrintIds.map((printId) => linkedPrint(printId, "history-vote-id",
+      historiesForVote.filter((history) => history.printId === printId)));
+    // The agenda item names the print a vote concerns. Only a print-history
+    // step that names this exact vote gives it decisive context.
+    if (agendaItem && printById.has(agendaItem.printId) && !linkedPrintIds.includes(agendaItem.printId)) {
+      linkedPrints.push(linkedPrint(agendaItem.printId, "agenda-item", []));
+    }
     const voidedByOfficialRecord = voidVoteIds.has(vote.id);
     const partyVoteSummaries = derivePartyVoteSummaries(individualVotes, {
       voteTypeCode: vote.voteType,
@@ -293,6 +406,12 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
         voteTypeCode: vote.voteType,
         resultCode: vote.result,
         voidedByOfficialRecord,
+        agendaItem: agendaItem ? {
+          externalAgendaItemId: agendaItem.agendaItemId,
+          number: numeric(agendaItem.number),
+          titleCz: cleanText(agendaItem.fullTitle, 1000) || null,
+          suffixCz: cleanText(agendaItem.fullSuffix, 500) || null
+        } : null,
         linkedPrints,
         individualVotes,
         partyVoteSummaries
@@ -324,6 +443,8 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
       payload: {
         externalHistoryId: history.historyId,
         externalPrintId: print.printId,
+        printKindId: print.kindId,
+        proposal: proposalByPrint.get(print.printId) ?? null,
         printNumber: numeric(print.number),
         partNumber: numeric(print.partNumber),
         printTitleCz: printTitle,
@@ -366,7 +487,7 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     })
   };
 
-  return { records: deduplicateRecords(records), referenceData, warnings: [] };
+  return { records: deduplicateRecords(records), referenceData, warnings };
 }
 
 export async function collectPspSource(source, options) {
@@ -384,7 +505,9 @@ export async function collectPspSource(source, options) {
     since: options.since,
     votesEntries: archiveEntries(responseByName.votes.bytes, `${source.id}:votes`),
     membersEntries: archiveEntries(responseByName.members.bytes, `${source.id}:members`),
-    printsEntries: archiveEntries(responseByName.prints.bytes, `${source.id}:prints`)
+    printsEntries: archiveEntries(responseByName.prints.bytes, `${source.id}:prints`),
+    sessionsEntries: archiveEntries(responseByName.sessions.bytes, `${source.id}:sessions`),
+    governmentPeriods: options.governmentPeriods
   });
   return {
     sourceId: source.id,

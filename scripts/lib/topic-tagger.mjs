@@ -25,8 +25,8 @@ export const taggingPromptVersion = "tagger-v1";
 export function taggingRuntimeConfig(env = process.env) {
   return {
     provider: env.SLIBY_TAGGING_PROVIDER ?? "openai",
-    modelA: env.SLIBY_TAGGING_MODEL_A ?? "gpt-5.6-terra",
-    modelB: env.SLIBY_TAGGING_MODEL_B ?? "gpt-5.6-terra",
+    modelA: env.SLIBY_TAGGING_MODEL_A ?? "gpt-6-luna",
+    modelB: env.SLIBY_TAGGING_MODEL_B ?? "gpt-6-luna",
     concurrency: Number(env.SLIBY_TAGGING_CONCURRENCY ?? "4")
   };
 }
@@ -75,26 +75,13 @@ export function buildPromiseTaggingBrief(promise, taxonomy) {
 }
 
 /**
- * Extracts whatever substantive text a collected record already carries in
- * its own structured payload (an official-publication excerpt, a
- * parliamentary print's title and recorded action, or a vote's roll-call
- * result). This is real, already-collected content, distinct from the
- * enriched official-document excerpts an enrichment stage may add later; a
- * source record with only a generic title should still give the tagger
- * something decisive to classify from.
- *
- * A `parliamentary-vote` record's own generic title ("Hlasování 123") never
- * says what was voted on -- that lives in `payload.linkedPrints`, the same
- * print titles and recorded actions a `legislative-step` record surfaces at
- * its own top level (scripts/lib/psp-collector.mjs). Both must be read here
- * for either kind to give the tagger the text it actually needs.
+ * The substantive text a collected record carries: a print's title and
+ * recorded action, a vote's linked prints and agenda item, and its club
+ * results. A vote's own title ("Hlasování 123") never says what was voted on.
  */
 export function deriveRecordContentExcerpts(record) {
   const payload = record.payload ?? {};
   const excerpts = [];
-  if (typeof payload.excerptCz === "string" && payload.excerptCz.length > 0) {
-    excerpts.push(payload.excerptCz);
-  }
   if (typeof payload.printTitleCz === "string" && payload.printTitleCz.length > 0) {
     excerpts.push(`Parliamentary print title: ${payload.printTitleCz}`);
   }
@@ -103,6 +90,9 @@ export function deriveRecordContentExcerpts(record) {
   }
   if (typeof payload.currentStateCz === "string" && payload.currentStateCz.length > 0) {
     excerpts.push(`Current recorded state: ${payload.currentStateCz}`);
+  }
+  if (typeof payload.agendaItem?.titleCz === "string" && payload.agendaItem.titleCz.length > 0) {
+    excerpts.push(`Agenda item voted on: ${[payload.agendaItem.titleCz, payload.agendaItem.suffixCz].filter(Boolean).join(" ")}`);
   }
   for (const linkedPrint of payload.linkedPrints ?? []) {
     if (typeof linkedPrint.titleCz === "string" && linkedPrint.titleCz.length > 0) {

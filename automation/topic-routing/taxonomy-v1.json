@@ -34,7 +34,7 @@
       "labelEn": "Budget deficit and public debt level",
       "assessmentEligible": true,
       "czechAliases": ["schodek", "deficit", "veřejný dluh", "státní dluh", "vyrovnaný rozpočet", "zadluženost"],
-      "directLegalIdentifiers": ["cz-act-23-2017"],
+      "directLegalIdentifiers": ["cz-act-23-2017", "cz-print-kind-state-budget"],
       "inclusionExamples": [
         "A promise or record about the size of the annual budget deficit or the level of public debt.",
         "A vote on a state budget act's deficit ceiling."
@@ -49,7 +49,7 @@
       "labelEn": "Budget process and fiscal rules",
       "assessmentEligible": true,
       "czechAliases": ["rozpočtová pravidla", "rozpočtové provizorium", "pravidla schvalování rozpočtu"],
-      "directLegalIdentifiers": ["cz-act-23-2017"],
+      "directLegalIdentifiers": ["cz-act-23-2017", "cz-act-218-2000", "cz-act-250-2000"],
       "inclusionExamples": [
         "A promise to change how the state budget is proposed, negotiated, or approved between the government and the Chamber of Deputies."
       ],
@@ -90,6 +90,7 @@
       "labelEn": "Value-added tax policy",
       "assessmentEligible": true,
       "czechAliases": ["DPH", "daň z přidané hodnoty", "sazba DPH"],
+      "directLegalIdentifiers": ["cz-act-235-2004"],
       "inclusionExamples": [
         "A promise or record about a value-added tax rate, rate band, or VAT exemption."
       ],
@@ -103,11 +104,26 @@
       "labelEn": "Tax administration and reporting",
       "assessmentEligible": true,
       "czechAliases": ["evidence tržeb", "EET", "daňová správa", "daňové přiznání"],
+      "directLegalIdentifiers": ["cz-act-164-2013", "cz-act-280-2009"],
       "inclusionExamples": [
         "A promise or record about how taxes are reported, collected, or audited, such as sales-record reporting obligations."
       ],
       "exclusionExamples": [
         "A promise about the tax rate itself rather than how it is administered or reported."
+      ]
+    },
+    {
+      "id": "income-tax",
+      "parent": "taxation",
+      "labelEn": "Personal and corporate income tax",
+      "assessmentEligible": true,
+      "czechAliases": ["daň z příjmů", "daně z příjmů", "sleva na poplatníka", "daň z příjmů právnických osob"],
+      "directLegalIdentifiers": ["cz-act-586-1992"],
+      "inclusionExamples": [
+        "A promise or record about income tax rates, allowances, deductions, or the taxation of company profits."
+      ],
+      "exclusionExamples": [
+        "A promise about value-added tax (route under `vat-policy`) or about how taxes are administered (route under `tax-administration`)."
       ]
     },
     {
@@ -129,6 +145,7 @@
       "labelEn": "Access to healthcare services",
       "assessmentEligible": true,
       "czechAliases": ["dostupnost zdravotní péče", "čekací doby", "ordinace"],
+      "directLegalIdentifiers": ["cz-act-372-2011"],
       "inclusionExamples": [
         "A promise or record about waiting times, the availability of general practitioners, or regional access to care."
       ],
@@ -142,6 +159,7 @@
       "labelEn": "Healthcare financing",
       "assessmentEligible": true,
       "czechAliases": ["zdravotní pojištění", "úhrady zdravotní péče", "platba za pojištěnce"],
+      "directLegalIdentifiers": ["cz-act-592-1992"],
       "inclusionExamples": [
         "A promise or record about health-insurance contributions, state payments for state-insured persons, or provider reimbursement."
       ],
@@ -311,6 +329,7 @@
       "labelEn": "Business regulation and support for entrepreneurs",
       "assessmentEligible": true,
       "czechAliases": ["podnikatelské prostředí", "byrokracie pro firmy", "podpora malých a středních podniků"],
+      "directLegalIdentifiers": ["cz-act-72-2000", "cz-act-143-2001", "cz-act-634-1992"],
       "inclusionExamples": [
         "A promise or record about reducing red tape for businesses, licensing rules, or direct support programmes for small and medium enterprises."
       ],
@@ -324,6 +343,7 @@
       "labelEn": "Innovation and the digital economy",
       "assessmentEligible": true,
       "czechAliases": ["výzkum a vývoj firem", "digitální ekonomika", "startupy"],
+      "directLegalIdentifiers": ["cz-act-127-2005"],
       "inclusionExamples": [
         "A promise or record about research-and-development funding for companies, the startup ecosystem, or digital-economy competitiveness."
       ],
@@ -332,11 +352,26 @@
       ]
     },
     {
+      "id": "financial-sector-regulation",
+      "parent": "economy-business-and-innovation",
+      "labelEn": "Banking, capital-market, and insurance regulation",
+      "assessmentEligible": true,
+      "czechAliases": ["banky", "kapitálový trh", "pojišťovnictví", "finanční trh", "Česká národní banka"],
+      "directLegalIdentifiers": ["cz-act-21-1992", "cz-act-6-1993", "cz-act-15-1998", "cz-act-190-2004", "cz-act-256-2004", "cz-act-277-2009", "cz-act-240-2013", "cz-act-374-2015", "cz-act-257-2016", "cz-act-370-2017", "cz-act-170-2018", "cz-act-87-1995"],
+      "inclusionExamples": [
+        "A promise or record about the regulation of banks, investment funds, capital markets, insurance, payments, or consumer credit."
+      ],
+      "exclusionExamples": [
+        "A promise about general support or regulation of entrepreneurs (route under `business-regulation-and-support`)."
+      ]
+    },
+    {
       "id": "pension-system",
       "parent": "work-social-affairs-and-pensions",
       "labelEn": "Pension system",
       "assessmentEligible": true,
       "czechAliases": ["důchodová reforma", "věk odchodu do důchodu", "valorizace důchodů"],
+      "directLegalIdentifiers": ["cz-act-155-1995", "cz-act-427-2011", "cz-act-340-2006"],
       "inclusionExamples": [
         "A promise or record about the pension system's rules, the retirement age, or pension indexation."
       ],
@@ -350,6 +385,7 @@
       "labelEn": "Social benefits and family policy",
       "assessmentEligible": true,
       "czechAliases": ["sociální dávky", "rodinná politika", "přídavky na děti"],
+      "directLegalIdentifiers": ["cz-act-117-1995", "cz-act-110-2006", "cz-act-151-2025", "cz-act-329-2011", "cz-act-187-2006"],
       "inclusionExamples": [
         "A promise or record about social-assistance benefits, family allowances, or parental support."
       ],
@@ -363,6 +399,7 @@
       "labelEn": "Labour market and wages",
       "assessmentEligible": true,
       "czechAliases": ["minimální mzda", "zaměstnanost", "pracovní právo"],
+      "directLegalIdentifiers": ["cz-act-435-2004", "cz-act-251-2005", "cz-act-262-2006"],
       "inclusionExamples": [
         "A promise or record about the minimum wage, employment levels, or labour-law rules governing employment relationships."
       ],
@@ -376,6 +413,7 @@
       "labelEn": "Housing affordability",
       "assessmentEligible": true,
       "czechAliases": ["dostupné bydlení", "nájemní bydlení", "hypotéky"],
+      "directLegalIdentifiers": ["cz-act-175-2025"],
       "inclusionExamples": [
         "A promise or record about housing prices, rental-housing supply, or mortgage conditions."
       ],
@@ -389,6 +427,7 @@
       "labelEn": "Regional development and spatial planning",
       "assessmentEligible": true,
       "czechAliases": ["územní plánování", "stavební zákon", "obce a kraje"],
+      "directLegalIdentifiers": ["cz-act-248-2000", "cz-act-283-2021"],
       "inclusionExamples": [
         "A promise or record about spatial planning rules, building permits, or targeted regional-development funding."
       ],
@@ -402,6 +441,7 @@
       "labelEn": "School education",
       "assessmentEligible": true,
       "czechAliases": ["základní a střední školství", "učitelé", "osnovy"],
+      "directLegalIdentifiers": ["cz-act-561-2004"],
       "inclusionExamples": [
         "A promise or record about primary or secondary schools, teacher pay, or the school curriculum."
       ],
@@ -415,6 +455,7 @@
       "labelEn": "Higher education and research",
       "assessmentEligible": true,
       "czechAliases": ["vysoké školy", "vědecký výzkum", "akademická obec"],
+      "directLegalIdentifiers": ["cz-act-111-1998", "cz-act-341-2005", "cz-act-328-2025"],
       "inclusionExamples": [
         "A promise or record about universities, academic research funding, or doctoral study conditions."
       ],
@@ -428,6 +469,7 @@
       "labelEn": "Sport support",
       "assessmentEligible": true,
       "czechAliases": ["podpora sportu", "sportoviště", "tělovýchova"],
+      "directLegalIdentifiers": ["cz-act-115-2001"],
       "inclusionExamples": [
         "A promise or record about funding for sports clubs, sports infrastructure, or physical-education programmes."
       ],
@@ -441,6 +483,7 @@
       "labelEn": "Cultural funding and heritage protection",
       "assessmentEligible": true,
       "czechAliases": ["dotace na kulturu", "památková péče", "kulturní instituce"],
+      "directLegalIdentifiers": ["cz-act-20-1987"],
       "inclusionExamples": [
         "A promise or record about funding for cultural institutions, artists, or the protection of historical monuments."
       ],
@@ -454,6 +497,7 @@
       "labelEn": "Media regulation and public broadcasting",
       "assessmentEligible": true,
       "czechAliases": ["regulace médií", "koncesionářské poplatky", "nezávislost médií"],
+      "directLegalIdentifiers": ["cz-act-348-2005", "cz-act-483-1991", "cz-act-484-1991", "cz-act-231-2001"],
       "inclusionExamples": [
         "A promise or record about public-service broadcasting funding or governance, or media-regulation rules."
       ],
@@ -467,6 +511,7 @@
       "labelEn": "Road and rail infrastructure",
       "assessmentEligible": true,
       "czechAliases": ["výstavba dálnic", "železniční koridory", "vysokorychlostní tratě"],
+      "directLegalIdentifiers": ["cz-act-13-1997", "cz-act-266-1994", "cz-act-416-2009", "cz-act-104-2000"],
       "inclusionExamples": [
         "A promise or record about building or upgrading highways, railway lines, or other transport infrastructure."
       ],
@@ -480,6 +525,7 @@
       "labelEn": "Public transport",
       "assessmentEligible": true,
       "czechAliases": ["veřejná doprava", "MHD", "jízdné"],
+      "directLegalIdentifiers": ["cz-act-111-1994"],
       "inclusionExamples": [
         "A promise or record about public-transport service levels, fares, or subsidies."
       ],
@@ -493,6 +539,7 @@
       "labelEn": "Energy policy and prices",
       "assessmentEligible": true,
       "czechAliases": ["ceny energií", "jaderná energetika", "energetická bezpečnost"],
+      "directLegalIdentifiers": ["cz-act-458-2000", "cz-act-406-2000"],
       "inclusionExamples": [
         "A promise or record about energy prices, electricity or gas supply security, or nuclear or renewable energy production."
       ],
@@ -506,6 +553,7 @@
       "labelEn": "Climate and environmental protection",
       "assessmentEligible": true,
       "czechAliases": ["ochrana klimatu", "emise skleníkových plynů", "ochrana přírody"],
+      "directLegalIdentifiers": ["cz-act-201-2012", "cz-act-114-1992", "cz-act-541-2020", "cz-act-100-2001", "cz-act-388-1991", "cz-act-254-2001"],
       "inclusionExamples": [
         "A promise or record about greenhouse-gas emissions targets, nature protection, or environmental-quality standards."
       ],
@@ -519,6 +567,7 @@
       "labelEn": "Farming support and food self-sufficiency",
       "assessmentEligible": true,
       "czechAliases": ["podpora zemědělců", "potravinová soběstačnost", "dotace do zemědělství"],
+      "directLegalIdentifiers": ["cz-act-252-1997", "cz-act-256-2000"],
       "inclusionExamples": [
         "A promise or record about subsidies for farmers or measures aimed at increasing food self-sufficiency."
       ],
@@ -532,6 +581,7 @@
       "labelEn": "Food safety and standards",
       "assessmentEligible": true,
       "czechAliases": ["bezpečnost potravin", "kvalita potravin", "označování potravin"],
+      "directLegalIdentifiers": ["cz-act-326-2004"],
       "inclusionExamples": [
         "A promise or record about food-safety rules, quality standards, or labelling requirements."
       ],
@@ -545,6 +595,7 @@
       "labelEn": "Police and internal security",
       "assessmentEligible": true,
       "czechAliases": ["policie", "vnitřní bezpečnost", "boj proti kriminalitě"],
+      "directLegalIdentifiers": ["cz-act-273-2008", "cz-act-553-1991", "cz-act-361-2003", "cz-act-341-2011"],
       "inclusionExamples": [
         "A promise or record about police staffing, powers, or measures against crime."
       ],
@@ -558,6 +609,7 @@
       "labelEn": "Armed forces and defence spending",
       "assessmentEligible": true,
       "czechAliases": ["armáda", "obranné výdaje", "NATO"],
+      "directLegalIdentifiers": ["cz-act-221-1999"],
       "inclusionExamples": [
         "A promise or record about military spending levels, armed-forces modernization, or NATO commitments."
       ],
@@ -571,6 +623,7 @@
       "labelEn": "Migration and asylum policy",
       "assessmentEligible": true,
       "czechAliases": ["migrační politika", "azylové řízení", "ochrana hranic"],
+      "directLegalIdentifiers": ["cz-act-326-1999", "cz-act-325-1999"],
       "inclusionExamples": [
         "A promise or record about immigration rules, asylum procedures, or border-control measures."
       ],
@@ -584,6 +637,7 @@
       "labelEn": "Judiciary and anti-corruption",
       "assessmentEligible": true,
       "czechAliases": ["soudnictví", "boj proti korupci", "nezávislost soudů"],
+      "directLegalIdentifiers": ["cz-act-159-2006", "cz-act-40-2009", "cz-act-141-1961", "cz-act-99-1963", "cz-act-150-2002", "cz-act-104-2013", "cz-act-218-2003", "cz-act-279-2003"],
       "inclusionExamples": [
         "A promise or record about court organization, judicial independence, or anti-corruption measures."
       ],
@@ -597,6 +651,7 @@
       "labelEn": "Electoral system and civil rights",
       "assessmentEligible": true,
       "czechAliases": ["volební systém", "svoboda projevu", "referendum"],
+      "directLegalIdentifiers": ["cz-act-247-1995", "cz-act-491-2001", "cz-act-275-2012", "cz-act-88-2024", "cz-act-424-1991"],
       "inclusionExamples": [
         "A promise or record about electoral rules, direct democracy such as referendums, or civil rights and freedoms."
       ],
@@ -610,6 +665,7 @@
       "labelEn": "Public administration reform",
       "assessmentEligible": true,
       "czechAliases": ["reforma veřejné správy", "počet úředníků", "efektivita státu"],
+      "directLegalIdentifiers": ["cz-act-234-2014", "cz-act-2-1969", "cz-act-312-2002", "cz-act-128-2000", "cz-act-129-2000", "cz-act-131-2000", "cz-act-500-2004"],
       "inclusionExamples": [
         "A promise or record about the size, organization, or efficiency of the civil service and public administration."
       ],
@@ -623,6 +679,7 @@
       "labelEn": "Digital government services",
       "assessmentEligible": true,
       "czechAliases": ["digitální služby státu", "elektronická identita", "portál občana"],
+      "directLegalIdentifiers": ["cz-act-12-2020", "cz-act-111-2009", "cz-act-250-2017", "cz-act-365-2000"],
       "inclusionExamples": [
         "A promise or record about digitalizing public services, electronic identity, or online interaction with the state."
       ],

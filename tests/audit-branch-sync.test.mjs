@@ -137,7 +137,7 @@ test("a run restores current audit data into main and replaces the audit snapsho
 });
 
 test("a routing failure persists the tag cache but never advances the checkpoint", () => {
-  // Simulates exactly the scenario the Codex/Copilot findings caught: the
+  // Simulates this failure: the
   // collector already wrote an advanced checkpoint to disk before routing
   // ran, then routing failed. Only the always() tag-cache step executes
   // (mirroring GitHub Actions skipping the non-always() checkpoints step

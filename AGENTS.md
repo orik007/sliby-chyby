@@ -6,6 +6,11 @@
 - Then read the canonical document named by the guide. Do not recreate its rules in code comments, prompts, or another document.
 - Derive current counts and operational state from the repository and connected server-side systems, not a conversation summary.
 
+## Accuracy
+
+- **Answer only with verified facts. When you do not know something, look it up in a primary source or say plainly that you do not know. Never guess, invent, or present an assumption as fact.**
+- **Never build logic on data you have not inspected. When a source is unreachable, say so before writing code against it, and do not present untested code as working.**
+
 ## Language and decisions
 
 - Write repository content, code, identifiers, comments, and documentation in English. Communicate with the owner in Czech unless asked otherwise.

@@ -14,7 +14,7 @@ const registry = {
   ]
 };
 
-test("a missing source checkpoint causes only that source to bootstrap", () => {
+test("every source is collected completely from its bootstrapFrom date, whatever its checkpoint", () => {
   const checkpoints = emptyCollectorCheckpoints();
   checkpoints.sourceCheckpoints.archive = {
     lastSuccessfulCollectionAt: "2026-09-10T09:37:00.000Z",
@@ -27,9 +27,10 @@ test("a missing source checkpoint causes only that source to bootstrap", () => {
   validateCollectorCheckpoints(checkpoints, registry);
   const plan = planSourceCollections({ registry, checkpoints, sourceIds: ["archive", "new-source"] });
   assert.deepEqual(plan.map(({ sourceId, mode, since }) => ({ sourceId, mode, since })), [
-    { sourceId: "archive", mode: "incremental", since: "2026-09-10" },
-    { sourceId: "new-source", mode: "bootstrap", since: "2026-09-01" }
+    { sourceId: "archive", mode: "full", since: "2025-10-01" },
+    { sourceId: "new-source", mode: "full", since: "2026-09-01" }
   ]);
+  assert.equal(plan[0].checkpointBefore.lastRunId, "run-1");
 });
 
 test("a checkpoint advances only after its collector succeeded", () => {

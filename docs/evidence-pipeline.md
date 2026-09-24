@@ -1,46 +1,71 @@
-# Evidence automation
+# Evidence pipeline
 
-## Purpose
+## Authority
 
-The workflow checks confirmed public promises against records from allowlisted sources. It does not discover or confirm campaign promises. Its AI output is an unpublished proposal; it never changes a public score or publishes data.
+This is the only rule for collecting, routing, and packaging evidence and for producing unpublished assessment proposals. What counts as attributable conduct and which score it supports is defined only in [scoring.md](scoring.md).
+
+## Principle: official records only, verified before use
+
+Evidence consists only of official records. A party's own website or publication, a press release, and the media are never evidence and are not collected.
+
+A source is added only after all of these hold, and one source at a time:
+
+1. its structure is checked against the publisher's official documentation and against downloaded real data;
+2. its completeness is measured on real data (how many records resolve, link, and attribute, and how many do not);
+3. its collector has tests built from the verified structure; and
+4. every run reports the source's quality figures, and a failed structural check stops the affected data from being used in that run.
+
+## Sources
+
+| Source | Publisher and location | What it provides | Status |
+| --- | --- | --- | --- |
+| `psp-core-2025` | Chamber of Deputies open data for the 10th term: `hl-2025ps.zip` (votes), `poslanci.zip` (MPs, clubs), `tisky.zip` (prints, print history, proposers), `schuze.zip` (sessions, agenda items), documented at [psp.cz](https://www.psp.cz/sqw/hp.sqw?k=1300); official print texts from `www.psp.cz/sqw/text/` | Decisive Chamber votes with per-club results, the print each vote concerns, member bills and government proposals with their proposers and submission dates | **Active.** Verified against the official schema and live data on 23 September 2026. |
+| Government resolutions | Government Office, [ODok zVlády](https://odok.gov.cz/portal/zvlady/jednani/) | Government resolutions | **Planned.** The portal exists; a machine-readable form has not been verified. |
+| Collection of Laws | Ministry of the Interior, [e-Sbírka](https://e-sbirka.gov.cz) open data and REST API | Enacted laws, government regulations, ministerial decrees, and their effective dates | **Planned.** The publisher states that open data and a registered API exist; the data has not been inspected. |
+| European Parliament, Council of the EU | — | Votes of the parties' MEPs; the government's positions | **Later**, by the owner's decision. |
+| Senate | — | — | **Not now**, by the owner's decision. |
+
+`automation/collectors/sources.json` is the collector registry and may contain only active sources. `automation/attribution/government-periods.json` records the governing parties and their dates with an official source.
+
+## Chamber data rules
+
+These rules were verified against the official schema documentation (psp.cz pages k=1302, k=1303, k=1308) and the live open data.
+
+- **Agenda item.** A vote names its session number and agenda-item number. The collector resolves the item from the **approved** agenda: the proposed and approved agendas share `id_schuze` and `id_bod` and differ only in `pozvanka`. Items of type 6 (individual answers to written interpellations) are ignored. The vote record carries the agenda-item title and the print it concerns.
+- **Decisive vote.** A vote is decisive only when an official print-history step names that exact vote and records one of the Chamber's final decisions: `souhlas`, `schváleno`, `neschválen`, `neschválena`, `zamítnut`, `nepřijat`, `setrváno`, `pozm. přijat`. Procedural steps such as `vrácen`, `opakovat`, `přerušeno`, or `odročeno` are not decisive. The collector never infers a decisive vote from timing or order.
+- **Party vote.** The club membership of each MP on the vote date decides the party. A party direction requires a strict majority of all club members; a manual vote or a vote voided by the official record is never attributed.
+- **Proposals.** Print kind 1 (government bill), 3 (state budget), and 4 (international treaty) are government proposals. Print kind 2 with proposer type 2 or 3 is a member bill; its proposers come from `tisky.id_osoba` or, for several proposers, `predkladatel.unl`. Only the submission step (`předložen`) is a proposal.
+- **Amended acts.** The acts a bill amends or repeals are read from its official title (every listed “zákon č. X/RRRR Sb.” and “o změně zákona č. X/RRRR Sb.”, but not an act cited only inside another act's name or amendment history) and from the amending-article headings of its official text (“Zákon č. X/RRRR Sb., … se mění” or “V zákoně č. X/RRRR Sb.”); other references in the text are ignored. A state budget print carries the identifier `cz-print-kind-state-budget`. Bill texts are fetched once and cached on the audit branch (`automation/print-acts/`); a failed fetch leaves only the title's acts and is reported in the run.
+- **Consistency check.** If the session data and the print history share no agenda-item identifier, the collector records a warning and does not use agenda items in that run.
 
 ## Daily workflow
 
-It runs once daily at `09:37` in `Europe/Prague` and keeps a manual trigger. (The schedule stays paused until a manual `workflow_dispatch` run of this exact workflow has been verified end to end; see `.github/workflows/collect-evidence.yml`.)
+The workflow runs at 09:37 Europe/Prague and keeps a manual trigger. The schedule stays paused until a manual `workflow_dispatch` run of the current pipeline has been verified end to end (see `.github/workflows/collect-evidence.yml`).
 
-1. For each enabled source, select its own collection start. A source without a checkpoint performs a bootstrap from `bootstrapFrom`; an existing source starts from its own last successful collection date. A manual run may explicitly override that start.
-2. Collect and normalize the records and retain provenance and content hashes. A manual run may target selected collector source IDs for a bounded replay. One source's collection failure never stops collection for the other selected sources; that source alone keeps its prior checkpoint. A manual `--since` override is never persisted, so a failed manual replay retries next time from the unchanged checkpoint's own date (or `bootstrapFrom`), not from the override.
-3. Route material primary records to promises by controlled topic tags. Two independent taggers assign each confirmed promise and each material primary record tags from the versioned routing taxonomy (`automation/topic-routing/taxonomy-v1.json`), or `unknown`. The robot first applies direct structural mappings (a legal identifier already present in a record's own structured payload); where no direct mapping applies, a record's routing state is `auto-candidate` only when both taggers independently agree on a sufficiently specific (`assessmentEligible: true`) tag with grounded supporting excerpts. A broad parent tag alone never creates a candidate relationship. One tagger's agreement only, disagreement, or weak (ungrounded) support puts the record into `routing-review`; `unknown`, no controlled tag, or no matching promise after a safe assignment puts it into `orphan-review` instead. Either state is for human attention, never silently recorded as no progress. A candidate relationship is only potentially relevant; it is not attribution or a score.
-4. Build a bounded package of attributable primary evidence for each promise routing created a candidate relationship for. Attribution (a decisive party vote, an official sponsor reference, an official party publication) is decided deterministically from `automation/matching/promises.json`, independent of how the record was routed to the promise; a candidate relationship that fails this attribution test never becomes package evidence. The package retains its routing basis (tag identifiers, direct legal-identifier links) for audit.
-5. Enrich a known official parliamentary document only when its exact target appears in a package. Retry the current queued package when a prior enrichment warning blocked it and no newer package supersedes it.
-6. Before any assessment call, persist the successful per-source checkpoints together with the tag-assignment cache and enriched packages to the dedicated audit branch. A source's checkpoint advances only once collection for that source, routing, enrichment, and package persistence have all succeeded in the same run: a failure in routing, enrichment, or persistence advances no source's checkpoint at all for that run, and the next run reprocesses the same source range. A package remains queued until a changed package supersedes it; a later assessment failure or timeout does not discard it.
-7. Send each new or changed queued package independently to two assessors in small bounded-concurrency batches. They first determine material relevance and can cite only evidence IDs in that package.
-8. Send two valid but different assessments, or one valid assessment whose peer output is invalid, to an arbiter. It may select a usable assessment or return no conclusion. Two invalid outputs write a private failure audit under `automation/review-proposals/failures/`, re-enter a later assessment batch unless a newer current package for the same promise replaces them, fail only that package, and do not stop the batch.
-9. Store the result as an unpublished human-review proposal and write a coverage audit for every confirmed promise and enabled source.
+1. **Collect.** Every run collects every active source completely from its `bootstrapFrom` date, so each package is built from the whole record history and a new package never loses earlier conduct. There is no manual start date or source subset. If any source fails, the run fails and nothing is saved. `checkpoints.json` only records each source's last successful collection; it never limits what is collected.
+2. **Filter.** Only a record that can be attributable conduct of a tracked party under [scoring.md](scoring.md) continues: a decisive vote with a club result, or the submission of a member bill or government proposal. Attribution depends only on the record itself, so no other record can ever affect a score, and none is tagged or fetched further.
+3. **Read amended acts.** For each print those records concern, the acts it amends are read from its official title and text (see *Chamber data rules*).
+4. **Route.** A record is routed to confirmed promises in one of two ways:
+   - **Direct link.** An act amended by the concerned print, or the state budget print kind, is listed under a tag in `directLegalIdentifiers` of the taxonomy (`automation/topic-routing/taxonomy-v1.json`). The record goes to every promise with that tag, or with any of the tags when an act is listed under several, and is not sent to the taggers.
+   - **Two taggers.** Otherwise two independent taggers, given the record and the official names of the acts its print amends, must agree on the same specific (`assessmentEligible`) tag with grounded excerpts. A broad parent tag alone never routes a record.
 
-The workflow maintains one dedicated audit pull request with queued evidence packages, unpublished proposals, and per-source checkpoints. Each run checks out current `main`, restores only the operational audit paths from the audit branch, then replaces that branch with a lease-protected snapshot of current `main` plus the updated operational state. It never merges the audit branch to `main`, and Git commit history on the audit branch is not an audit record. The audit contents themselves retain the required queue, supersession, failure, and fingerprint records. The pull request is created at the first successful persistence stage and preserves its human-review body while later snapshots update the same branch. A later assessment failure does not roll the saved audit data back. This is not a Copilot or Codex review. It never writes a public score revision, changes published `data/`, or publishes anything. A failed complete run does not advance public freshness.
+   Disagreement or weak support goes to `routing-review`; `unknown` or no promise with the tag goes to `orphan-review`. Both are for human attention and never mean no progress. Models may return only existing tag identifiers or `unknown`. A taxonomy change is a reviewed change, and its content hash recomputes every dependent classification.
+5. **Package.** Each promise with at least one routed, attributable record gets one bounded evidence package. When a package must be trimmed, decisions come before proposals, then direct links, then the most recent conduct. Routing never establishes attribution or a score.
+6. **Enrich.** When a package names a Chamber print, the official print document is added. A package with an enrichment warning is not assessed; the next run rebuilds and enriches it again.
+7. **Persist.** Before any assessment call, the collection record (`checkpoints.json`), the tag-assignment cache, the print-text cache, and the packages are saved together to the dedicated unpublished audit pull request, and only when collection, routing, enrichment, and persistence all succeed in the same run. The queue keeps at most one current package per promise: a rebuilt package whose assessable content is unchanged keeps the current one, a promise that no longer gets a package has its current package withdrawn, and superseded and withdrawn versions stay auditable.
+8. **Assess.** Each new or changed package goes independently to two assessors, who may cite only evidence IDs in that package. They first decide whether the evidence is materially relevant, then propose a score. When their valid assessments differ, or exactly one output is invalid, an arbiter selects a usable assessment or returns no conclusion. Two invalid outputs write a private failure audit and re-enter a later batch unless a newer package replaces them.
+9. **Report.** The proposals and a coverage audit are written to the audit pull request. The audit covers every confirmed promise and active source and reports the run's data-quality figures: records skipped as not attributable, routed records, direct links, review queues, invalid tagger outputs, and how many bills had an official text and amended acts.
 
-Human review of that audit may establish that a score should change, but it does not publish anything. The score change must be prepared in a separate scoped pull request based on current `main`; that PR adds an append-only assessment revision with cited public sources and follows the release process.
+The audit pull request is never merged to `main`, and its Git history is not an audit record. The workflow never changes public data, a public score, or publication status. A failed complete run does not advance public freshness.
 
-## Evidence boundaries
+## Pipeline generation
 
-- Prefer primary official records. Media are discovery and context, not decisive evidence by themselves.
-- Preserve the original record, source URL, time, and content hash.
-- A party vote is attributable only under the strict-majority and decisive-motion rule in [scoring.md](scoring.md).
-- Bill authorship alone is not party conduct.
-- The collector, topic taggers, routing robot, and document enricher never establish relevance, attribution, or a score. Tag agreement and direct structural links only select candidates for the deterministic attribution test and the assessors.
-- The assessors and arbiter use the five-step decision order in [scoring.md](scoring.md). Their output is only a proposal for human review.
-- A changed-input fingerprint includes assessable content, active prompt content, providers, and model IDs. Run timestamps and collection IDs alone do not trigger another paid assessment.
-- Models may select only existing tag identifiers from the current routing taxonomy, or `unknown`; they may never invent a tag. Adding, deleting, moving, or redefining a tag is a reviewed taxonomy change that records the affected subtree so every dependent promise and source classification can be recomputed consistently, never patched one at a time.
+`automation/pipeline-generation` names the current generation of the audit state. The workflow restores the collection record, caches, and queues from the audit branch only when that branch holds the same generation. When a rule change makes saved audit state invalid, change the generation: the next run starts from empty caches and queues, so everything is tagged and assessed again. Old audit state is never repaired or reused.
 
-## Source registry
+## From proposal to public score
 
-`automation/collectors/sources.json` is the enabled-source registry. It defines each source's host, format, coverage semantics, and intended use. Adding or changing a source requires a validated registry change.
+Human review may establish that a score should change. That change is a separate scoped pull request based on current `main`, which adds an append-only assessment revision citing official sources and follows [release-process.md](release-process.md).
 
-Every source defines `bootstrapFrom`. `automation/collectors/checkpoints.json`, held on the durable audit branch, records the source-specific successful collection state. A new source has no checkpoint and therefore receives its own bootstrap; it never inherits another source's cursor. The checkpoint is operational audit data, not public assessment data.
+## Audit and cost control
 
-`automation/topic-routing/taxonomy-v1.json` is the versioned, controlled routing taxonomy: a separate vocabulary from the public policy categories in `data/promise-categories.json`, used only for routing, never for public navigation. `automation/topic-routing/tag-cache/`, held on the durable audit branch, records every accepted tag assignment (its input-content hash, taxonomy version, prompt version, provider, model, and confidence) so an unchanged promise or source record is never re-tagged, and so a run that fails partway through still keeps whatever it already tagged. The cache is operational audit data, not public assessment data.
-
-`automation/evidence-packages/manifest.json`, held on the durable audit branch, records each enriched package's hash, queue time, enrichment block state, and supersession links. Its `packages/` directory preserves the unchanged bounded package bytes. The current version of each promise package is the only version eligible for assessment; completed assessment output and a timeout never discard the queue.
-
-Current source IDs: `psp-core-2025`, `government-cz-rss`, `mpsv-press-archive-2025-2026`, `mf-press-archive-2025-2026`, `mzd-press-wordpress`, `mk-news-archive`, `msmt-news-api`, `motoriste-party-news-wordpress`, `irozhlas-domestic-rss`, `ct24-rss`, `seznam-zpravy-rss`, `novinky-news-sitemap`, `ano-party-news`, `spd-party-news`, `odok-veklep`, and `e-sbirka-open-data`.
+The assessors' and arbiter's active prompt versions, providers, model IDs, confidence, evidence IDs, and input fingerprint remain auditable. The fingerprint covers assessable content, active prompts, providers, and models, so an unchanged package is never assessed again. The tagging, assessor, and arbiter models are set in the workflow and recorded in every run. The tag-assignment cache records each accepted assignment's input hash, taxonomy version, prompt version, provider, model, and confidence, so an unchanged record is never tagged again.

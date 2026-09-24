@@ -22,6 +22,10 @@ export function validateTaxonomy(taxonomy) {
     invariant(Array.isArray(tag.czechAliases) && tag.czechAliases.length > 0, `Tag ${tag.id} needs at least one Czech alias`);
     if (tag.directLegalIdentifiers !== undefined) {
       invariant(Array.isArray(tag.directLegalIdentifiers), `Tag ${tag.id} directLegalIdentifiers must be an array`);
+      invariant(tag.assessmentEligible === true, `Tag ${tag.id} is not assessment-eligible and cannot carry directLegalIdentifiers`);
+      for (const identifier of tag.directLegalIdentifiers) {
+        invariant(/^cz-act-\d+-\d{4}$/.test(identifier) || identifier === "cz-print-kind-state-budget", `Tag ${tag.id} has an invalid legal identifier: ${identifier}`);
+      }
     }
   }
   for (const tag of taxonomy.tags) {

@@ -17,9 +17,9 @@ export async function loadPublishedPromiseIds(directory) {
   return ids;
 }
 
-export function publishedMatchingRegistry(registry, publishedPromiseIds) {
+export function publishedPromiseRegistry(registry, publishedPromiseIds) {
   const promises = registry.promises.filter(({ id }) => publishedPromiseIds.has(id));
-  const matchingIds = new Set(registry.promises.map(({ id }) => id));
-  for (const id of publishedPromiseIds) invariant(matchingIds.has(id), `Published promise ${id} is missing matching configuration`);
+  const registryIds = new Set(registry.promises.map(({ id }) => id));
+  for (const id of publishedPromiseIds) invariant(registryIds.has(id), `Published promise ${id} is missing from the promise registry`);
   return { ...registry, promises };
 }

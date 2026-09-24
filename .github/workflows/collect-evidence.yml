@@ -1,32 +1,20 @@
 name: Collect, match, and assess confirmed promises
 
 on:
-  # Scheduled daily run stays paused until a manual workflow_dispatch run of
-  # this exact workflow (topic-routing now live, per docs/evidence-pipeline.md)
-  # has been verified end to end. Re-enable this schedule block once that
-  # first verification run has been reviewed and approved.
+  # The daily run stays paused until a manual workflow_dispatch run of this
+  # workflow has been verified end to end (docs/evidence-pipeline.md).
   # schedule:
   #   - cron: "37 9 * * *"
   #     timezone: "Europe/Prague"
   workflow_dispatch:
     inputs:
-      since:
-        description: Optional YYYY-MM-DD override for a manual backfill; leave empty for per-source checkpoints
-        required: false
-        default: ""
-        type: string
       as_of:
         description: Assessment cutoff date; leave empty to use the UTC run date
         required: false
         default: ""
         type: string
-      sources:
-        description: Optional comma-separated collector source IDs for a targeted replay
-        required: false
-        default: ""
-        type: string
       tagging_concurrency:
-        description: Parallel tagged subjects in flight (each uses 2 API calls); leave empty for the Tier-3 default of 8. Lower this if the account's usage tier drops or TPM errors appear.
+        description: Parallel tagged subjects (each uses 2 API calls); leave empty for 8
         required: false
         default: ""
         type: string
@@ -43,24 +31,15 @@ jobs:
   collect:
     name: Build unpublished review proposals
     runs-on: ubuntu-latest
-    # A full historical backfill (--since covering the whole campaign period)
-    # tags far more subjects than the 90-minute default this limit was sized
-    # for. A job killed by timeout-minutes is not a graceful failure: GitHub
-    # Actions tears down the runner before any later step gets a chance to
-    # run, including "Persist tag-assignment cache even on a failed run" --
-    # so a timeout kill loses already-paid-for tagging work exactly the way
-    # this pipeline's own failure handling exists to prevent, just through a
-    # different door. 300 minutes gives real headroom for a full backfill;
-    # it can be lowered again once typical incremental run time is known.
+    # A job killed by timeout-minutes cannot persist its tag cache, so the
+    # limit leaves headroom for a full-term first run.
     timeout-minutes: 300
     environment:
       name: assessment
       deployment: false
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      COLLECTOR_SINCE: ${{ inputs.since || '' }}
-      COLLECTOR_SOURCES: ${{ inputs.sources || '' }}
-      MATCHER_AS_OF: ${{ inputs.as_of || '' }}
+      AS_OF_INPUT: ${{ inputs.as_of || '' }}
       REVIEW_BRANCH: automation/assessment-review
       SLIBY_ASSESSOR_PROVIDER_A: openai
       SLIBY_ASSESSOR_PROVIDER_B: openai
@@ -70,14 +49,10 @@ jobs:
       SLIBY_ARBITER_MODEL: gpt-5.6-sol
       SLIBY_ASSESSMENT_CONCURRENCY: 4
       SLIBY_TAGGING_PROVIDER: openai
-      SLIBY_TAGGING_MODEL_A: gpt-5.6-terra
-      SLIBY_TAGGING_MODEL_B: gpt-5.6-terra
-      # Concurrency of 1 reliably exhausted a Tier-1 account's sustained TPM
-      # budget for gpt-5.6-terra (confirmed by a real run). Now on Tier 3
-      # (5,000 RPM / 2,000,000 TPM), 8 gives real speedup for a full backfill
-      # while leaving headroom alongside SLIBY_ASSESSMENT_CONCURRENCY, which
-      # shares the same model later in the same run. Override via the
-      # tagging_concurrency input if the tier changes or TPM errors appear.
+      SLIBY_TAGGING_MODEL_A: gpt-6-luna
+      SLIBY_TAGGING_MODEL_B: gpt-6-luna
+      # Parallel tagged subjects; override with the tagging_concurrency input
+      # if the account's rate limits change.
       SLIBY_TAGGING_CONCURRENCY: ${{ inputs.tagging_concurrency || '8' }}
     steps:
       - name: Check out repository
@@ -98,12 +73,20 @@ jobs:
             git fetch "$authenticated_remote" "+refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
             audit_branch_tip="$(git rev-parse "origin/$REVIEW_BRANCH")"
             restore_paths=()
+            # Audit state from another pipeline generation (automation/pipeline-generation)
+            # is never restored: the run starts from empty checkpoints, caches, and queues.
+            audit_generation="$(git show "origin/$REVIEW_BRANCH:automation/pipeline-generation" 2>/dev/null || true)"
+            if [ "$audit_generation" != "$(cat automation/pipeline-generation)" ]; then
+              echo "::notice::The audit branch holds another pipeline generation; starting from a fresh audit state."
+              echo "AUDIT_BRANCH_TIP=$audit_branch_tip" >> "$GITHUB_ENV"
+              exit 0
+            fi
             if git cat-file -e "origin/$REVIEW_BRANCH:automation/collectors/checkpoints.json" 2>/dev/null; then
               restore_paths+=(automation/collectors/checkpoints.json)
             fi
             while IFS= read -r path; do
               restore_paths+=("$path")
-            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache)
+            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/print-acts)
             for directory in automation/evidence-packages automation/review-proposals; do
               while IFS= read -r path; do
                 case "$path" in
@@ -134,33 +117,24 @@ jobs:
 
       - name: Collect source records
         run: |
-          collector_args=(
-            --checkpoints automation/collectors/checkpoints.json
-            --write-checkpoints automation/collectors/checkpoints.json
+          node scripts/run-collectors.mjs \
+            --checkpoints automation/collectors/checkpoints.json \
+            --write-checkpoints automation/collectors/checkpoints.json \
             --output automation/runs/pipeline/github-actions/collector
-          )
-          if [ -n "$COLLECTOR_SINCE" ]; then
-            collector_args+=(--since "$COLLECTOR_SINCE")
-          fi
-          if [ -n "$COLLECTOR_SOURCES" ]; then
-            IFS=',' read -ra source_ids <<< "$COLLECTOR_SOURCES"
-            for source_id in "${source_ids[@]}"; do
-              source_id="${source_id#"${source_id%%[![:space:]]*}"}"
-              source_id="${source_id%"${source_id##*[![:space:]]}"}"
-              if [ -z "$source_id" ]; then
-                echo "::error::COLLECTOR_SOURCES must contain comma-separated source IDs."
-                exit 1
-              fi
-              collector_args+=(--source "$source_id")
-            done
-          fi
-          node scripts/run-collectors.mjs "${collector_args[@]}"
 
-      - name: Route source records to promises via topic tags
+      - name: Extract amended acts from official print texts
         run: |
-          AS_OF="${MATCHER_AS_OF:-$(date -u +%F)}"
+          node scripts/run-print-acts.mjs \
+            --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
+            --cache automation/print-acts/cache.json \
+            --output automation/runs/pipeline/github-actions/print-acts
+
+      - name: Route source records to promises via legal identifiers and topic tags
+        run: |
+          AS_OF="${AS_OF_INPUT:-$(date -u +%F)}"
           node scripts/run-topic-routing.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
+            --print-acts automation/runs/pipeline/github-actions/print-acts/print-acts.json \
             --tag-cache automation/topic-routing/tag-cache \
             --as-of "$AS_OF" \
             --output automation/runs/pipeline/github-actions/topic-routing
@@ -169,7 +143,6 @@ jobs:
         run: |
           node scripts/run-print-enrichment.mjs \
             --input automation/runs/pipeline/github-actions/topic-routing/evidence-packages \
-            --retry-blocked-queue automation/evidence-packages \
             --output automation/runs/pipeline/github-actions/topic-routing/enriched-evidence-packages
 
       - name: Queue enriched evidence packages
@@ -181,15 +154,9 @@ jobs:
 
       - name: Persist tag-assignment cache even on a failed run
         id: tag-cache
-        # This step alone stays if: always(). A topic-routing failure
-        # (exhausted credits, an outage) exits non-zero after already
-        # writing whatever it tagged to automation/topic-routing/tag-cache
-        # on disk -- without always(), the default success condition would
-        # skip this step and lose it with the runner. It touches only the
-        # tag cache: unlike checkpoints or evidence packages, a partial tag
-        # cache is always safe to keep (a subject is cached only once both
-        # taggers agree in full -- see run-topic-routing.mjs), so it never
-        # needs the rest of the pipeline to have succeeded first.
+        # The only if: always() step: a failed run keeps the paid tagging
+        # work it already did. A subject is cached only once both taggers
+        # agree in full, so a partial tag cache is always safe to keep.
         if: always()
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
@@ -208,20 +175,16 @@ jobs:
 
       - name: Persist source collection and queued evidence packages
         id: packages
-        # Deliberately NOT always(): a source's checkpoint must advance
-        # only once collection, routing, enrichment, and package
-        # persistence have all succeeded in the same run (decisions.md).
-        # run-collectors.mjs already wrote the advanced checkpoint to disk
-        # regardless of what happens next, so committing it unconditionally
-        # here would tell the next run "already processed" for records that
-        # were never actually routed -- silently skipping them forever,
-        # which is worse than re-tagging them. The default success()
-        # condition means this step (and the checkpoint it stages) is
-        # simply skipped whenever an earlier step in this job failed.
+        # Runs only when every earlier step succeeded, so the collection
+        # record, the print-text cache, and the packages are saved together
+        # from a complete run (docs/evidence-pipeline.md, Persist).
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
           git add automation/collectors/checkpoints.json automation/evidence-packages
+          if [ -d automation/print-acts ]; then
+            git add automation/print-acts
+          fi
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
           else
@@ -266,6 +229,7 @@ jobs:
           node scripts/run-coverage-audit.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
             --topic-routing-run automation/runs/pipeline/github-actions/topic-routing/topic-routing-report.json \
+            --print-acts automation/runs/pipeline/github-actions/print-acts/print-acts.json \
             --output automation/runs/pipeline/github-actions/coverage-audit.json \
             --markdown automation/runs/pipeline/github-actions/coverage-audit.md
 
@@ -284,8 +248,12 @@ jobs:
               "## Unpublished evidence pipeline",
               "",
               `- Published promises checked: ${run.counts.promiseCount}`,
-              `- Material primary records: ${run.counts.materialPrimaryRecordCount}`,
-              `- Direct structural link assignments: ${run.counts.directAssignmentCount}`,
+              `- Primary records in the window: ${run.counts.primaryRecordsInWindowCount}`,
+              `- Skipped, cannot be attributable conduct: ${run.counts.notAttributableSkippedCount}`,
+              `- Routed records: ${run.counts.materialPrimaryRecordCount}`,
+              `- Bills with official text / amended acts found: ${coverage.quality.printActs.billsWithText} / ${coverage.quality.printActs.billsWithAmendedActs} of ${coverage.quality.printActs.bills}`,
+              `- Print-text fetch failures: ${coverage.quality.printActs.textFetchFailures}`,
+              `- Direct legal-identifier links: ${run.counts.directAssignmentCount}`,
               `- Auto-candidate relationships: ${run.counts.candidateRelationshipCount}`,
               `- Routing review (needs human routing decision): ${run.counts.routingReviewCount}`,
               `- Orphan review (no safe topic assignment or matching promise): ${run.counts.orphanReviewCount}`,
@@ -298,44 +266,29 @@ jobs:
               `- Unchanged assessments skipped: ${assessment.unchangedCount}`,
               `- Assessments blocked by document warnings: ${assessment.blockedCount}`,
               `- Assessment cutoff: ${run.asOf}`,
-              `- No candidate match (not a score): ${coverage.stateCounts["no-candidate-match"]}`,
-              `- Matches without attributable primary evidence: ${coverage.stateCounts["candidate-matches-without-attributable-primary"]}`,
+              `- No routed record (not a score): ${coverage.stateCounts["no-routed-record"]}`,
+              `- Routed without attributable conduct: ${coverage.stateCounts["routed-without-attributable-conduct"]}`,
               `- Human-review proposals or unresolved reviews: ${coverage.stateCounts["review-candidate"] + coverage.stateCounts["human-review-required"]}`,
               "- Direction assigned: no",
               "- Publication approved: no",
-              "- A missing match never becomes zero points.",
+              "- No routed record never becomes zero points.",
               ""
             ];
             await appendFile(process.env.GITHUB_STEP_SUMMARY, lines.join("\n"));
             const sourceRows = collectorRun.collectors.map((collector) => {
               const checkpoint = checkpoints.sourceCheckpoints[collector.sourceId];
-              return `| \`${collector.sourceId}\` | ${collector.collection.mode} | ${collector.collection.since} | ${collector.recordCount} | ${checkpoint?.lastObservedRecordAt?.slice(0, 10) ?? "—"} |`;
+              return `| \`${collector.sourceId}\` | ${collector.collection.since} | ${collector.recordCount} | ${checkpoint?.lastObservedRecordAt?.slice(0, 10) ?? "—"} |`;
             });
-            const failures = collectorRun.failures ?? [];
-            // A thrown error message is arbitrary text: normalize it to a
-            // single line so it cannot break the Markdown list it renders
-            // into (a newline would end the bullet early; a missing message
-            // would render the literal string "undefined").
-            const renderFailureMessage = (message) => String(message ?? "(no message)").replace(/\s+/g, " ").trim() || "(no message)";
-            const failureLines = failures.length > 0
-              ? [
-                  "",
-                  `**${failures.length} zdroj(e) dnes selhaly a jejich checkpoint se nezměnil** — příští běh je zkusí znovu od stejného data, ostatní zdroje pokračovaly beze změny:`,
-                  "",
-                  ...failures.map(({ sourceId, message, retryFrom }) => `- \`${sourceId}\`: ${renderFailureMessage(message)}${retryFrom ? ` (další běh naváže od ${retryFrom})` : ""}`)
-                ]
-              : [];
             const reviewLines = [
               "",
-              "## Sběr dat a checkpointy zdrojů",
+              "## Sběr dat",
               "",
-              "Tento pull request je auditní fronta. Uložení checkpointu pouze potvrzuje úspěšné technické získání zdroje; samo nemění veřejné hodnocení.",
+              "Tento pull request je auditní fronta. Každý běh sbírá každý zdroj celý od jeho počátečního data; sběr nemění veřejné hodnocení.",
               `Směrování podle tagů (${run.routerVersion}, taxonomie ${run.taxonomyVersion}) vytváří kandidátní vztah, jen když se na kontrolovaném a dostatečně konkrétním tagu shodnou oba nezávislí tagovači, nebo existuje přímý strukturální odkaz; samotný kandidátní vztah nepotvrzuje přiřaditelnost ani hodnocení.`,
               "",
-              "| Zdroj | Režim | Od | Záznamů | Nejnovější záznam |",
-              "| --- | --- | --- | ---: | --- |",
+              "| Zdroj | Od | Záznamů | Nejnovější záznam |",
+              "| --- | --- | ---: | --- |",
               ...sourceRows,
-              ...failureLines,
               ""
             ];
             await appendFile("automation/runs/pipeline/github-actions/assessment-review-pr.md", reviewLines.join("\n"));

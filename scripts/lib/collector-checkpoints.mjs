@@ -38,10 +38,6 @@ export function validateCollectorCheckpoints(checkpoints, registry) {
   return checkpoints;
 }
 
-function checkpointSince(checkpoint) {
-  return checkpoint.lastSuccessfulCollectionAt.slice(0, 10);
-}
-
 function snapshotHash(result) {
   if (result.snapshot?.contentHash) return result.snapshot.contentHash;
   const snapshots = Array.isArray(result.snapshots)
@@ -52,19 +48,22 @@ function snapshotHash(result) {
   return snapshots.map((snapshot) => snapshot?.contentHash).filter(Boolean).at(-1) ?? null;
 }
 
-export function planSourceCollections({ registry, checkpoints, sourceIds, requestedSince = null }) {
-  if (requestedSince !== null) invariant(isIsoDate(requestedSince), "Requested collection start must use YYYY-MM-DD");
+/**
+ * Every run collects every source completely from its bootstrapFrom date, so
+ * each evidence package is built from the whole record history. A checkpoint
+ * only records the last successful collection; it never limits what is
+ * collected.
+ */
+export function planSourceCollections({ registry, checkpoints, sourceIds }) {
   validateCollectorCheckpoints(checkpoints, registry);
   return sourceIds.map((sourceId) => {
     const source = registry.sources.find(({ id }) => id === sourceId);
     invariant(source, `Unknown collector source ${sourceId}`);
-    const checkpoint = checkpoints.sourceCheckpoints[sourceId] ?? null;
-    const since = requestedSince ?? (checkpoint ? checkpointSince(checkpoint) : source.bootstrapFrom);
     return {
       sourceId,
-      mode: requestedSince ? "manual-override" : checkpoint ? "incremental" : "bootstrap",
-      since,
-      checkpointBefore: checkpoint
+      mode: "full",
+      since: source.bootstrapFrom,
+      checkpointBefore: checkpoints.sourceCheckpoints[sourceId] ?? null
     };
   });
 }

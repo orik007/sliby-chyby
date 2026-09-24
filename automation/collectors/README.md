@@ -1,7 +1,5 @@
 # Evidence collectors
 
-Collectors retrieve records from the enabled sources in [`sources.json`](sources.json). Each source has its own `bootstrapFrom` date. [`checkpoints.json`](checkpoints.json) records the successful collection point per source; a newly added source has no checkpoint and receives a fresh bootstrap. Each collected record keeps its source, URL, time, and content hash.
+[`sources.json`](sources.json) lists the active evidence sources; only primary official records are allowed. Every run collects each source completely from its `bootstrapFrom` date. `checkpoints.json` on the audit branch only records its last successful collection.
 
-Collectors only collect and normalize evidence. They do not decide whether a campaign statement is a promise, change a promise status, assign a score, or publish data.
-
-The daily workflow runs the collectors at 09:37 Prague time, then matches records to confirmed public promises and writes a coverage audit. Its complete current definition is [docs/evidence-pipeline.md](../../docs/evidence-pipeline.md).
+Collectors only collect and normalize official records. They never decide relevance, a score, or publication. The source list, the verification rule for adding a source, and the Chamber data rules are in [docs/evidence-pipeline.md](../../docs/evidence-pipeline.md).

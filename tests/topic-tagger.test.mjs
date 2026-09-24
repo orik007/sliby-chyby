@@ -10,12 +10,12 @@ import {
   TagValidationError,
   validateTagAssignmentOutput
 } from "../scripts/lib/topic-tagger.mjs";
-import { validatePromiseRegistry } from "../scripts/lib/evidence-matcher.mjs";
+import { validatePromiseRegistry } from "../scripts/lib/attribution.mjs";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import { validateTaxonomy } from "../scripts/lib/topic-taxonomy.mjs";
 
 const taxonomy = validateTaxonomy(JSON.parse(await readFile(new URL("../automation/topic-routing/taxonomy-v1.json", import.meta.url), "utf8")));
-const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8")));
+const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8")));
 const fiscalPromise = registry.promises.find(({ id }) => id === "candidate-d5359e35a4c4");
 
 test("loadTaggingPrompt hashes the versioned prompt file", async () => {
@@ -23,7 +23,7 @@ test("loadTaggingPrompt hashes the versioned prompt file", async () => {
   assert.equal(prompt.version, "tagger-v1");
   assert.match(prompt.contentHash, /^[a-f0-9]{64}$/);
   assert.ok(prompt.instructions.includes("Never invent a tag identifier"));
-  assert.ok(prompt.instructions.includes("Never return an empty tag list"), "the prompt's tag contract must match validateTagAssignmentOutput's non-empty requirement, or a compliant zero-tag response would crash the pilot");
+  assert.ok(prompt.instructions.includes("Never return an empty tag list"), "the prompt's tag contract must match validateTagAssignmentOutput's non-empty requirement, or a compliant zero-tag response would crash the run");
   assert.ok(prompt.instructions.includes("empty excerpt-citation list"), "an unknown result must never be told to explain itself in a citation, since only verbatim brief material can pass validateTagAssignmentOutput's grounding check");
 });
 
@@ -111,6 +111,27 @@ test("deriveRecordContentExcerpts surfaces a parliamentary vote's linked print t
   assert.ok(excerpts.some((excerpt) => excerpt.includes("Novela zákona o pravidlech rozpočtové odpovědnosti")), "must surface the linked print's own title, not just the vote's generic title");
   assert.ok(excerpts.some((excerpt) => excerpt.includes("3. čtení")), "must surface the linked print's recorded action");
   assert.ok(excerpts.some((excerpt) => excerpt.includes("100 yes, 50 no")));
+});
+
+test("deriveRecordContentExcerpts surfaces the agenda item a vote was cast on", () => {
+  const record = createCollectedRecord({
+    id: "psp--agenda-vote-fixture",
+    sourceId: "psp-core-2025",
+    kind: "parliamentary-vote",
+    primary: true,
+    evidenceRole: "primary-record",
+    occurredAt: "2026-08-26T11:05:00",
+    title: "Hlasování 951",
+    publisher: "Chamber of Deputies",
+    url: "https://public.psp.cz/sqw/hlasy.sqw?g=951",
+    payload: {
+      externalVoteId: "951",
+      agendaItem: { externalAgendaItemId: "5001", number: 3, titleCz: "Vládní návrh zákona o pravidlech rozpočtové odpovědnosti", suffixCz: "/sněmovní tisk 68/ - zákon vrácený prezidentem" },
+      linkedPrints: []
+    }
+  });
+  const excerpts = deriveRecordContentExcerpts(record);
+  assert.ok(excerpts.includes("Agenda item voted on: Vládní návrh zákona o pravidlech rozpočtové odpovědnosti /sněmovní tisk 68/ - zákon vrácený prezidentem"));
 });
 
 test("validateTagAssignmentOutput rejects an invented tag id", () => {

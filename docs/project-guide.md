@@ -18,21 +18,24 @@ Sliboměr shows political parties' confirmed election promises, their current sc
 ## Current operating model
 
 ```text
-official party source
+official party source (election programme)
   -> promise
   -> candidate, confirmed public promise, or rejected promise
 
-allowlisted evidence sources
-  -> per-source bootstrap or incremental collection at 09:37 Europe/Prague
-  -> topic routing: two independent taggers plus direct structural links create candidate relationships to confirmed promises
-  -> deterministic attribution test decides which candidates become package evidence
-  -> official-document enrichment when a known target exists
-  -> two independent assessments; arbiter on disagreement or one invalid assessor output
-  -> unpublished audit pull request with queued evidence packages, proposals, coverage, and checkpoints
+official records only (active: Chamber of Deputies open data)
+  -> complete collection of every source at 09:37 Europe/Prague
+  -> only records that can be attributable conduct continue
+  -> acts amended by each concerned print, from its official text
+  -> routing to confirmed promises: direct legal-identifier links or two agreeing topic taggers
+  -> attribution: decisive club vote, member bill, or government proposal (scoring.md)
+  -> bounded evidence package per promise
+  -> official print document enrichment
+  -> two independent assessments; arbiter on disagreement or one invalid output
+  -> unpublished audit pull request with packages, proposals, coverage, and caches
   -> separate approved public-assessment pull request when a score changes
 ```
 
-The daily workflow uses controlled topic tags, not embeddings, to retrieve a bounded set of candidate promise relationships. Two independent assessors determine relevance and propose a score from bounded evidence; it never assigns a public score or publishes data. The public site makes no live AI call.
+Party websites, press releases, and the media are not evidence. Government resolutions and the Collection of Laws are the next planned sources and are added only after their data is verified. The public site makes no live AI call.
 
 ## Repository map
 
@@ -41,11 +44,14 @@ The daily workflow uses controlled topic tags, not embeddings, to retrieve a bou
 | `research/2025-election/promises.json` | Campaign sources and non-public candidate or rejected promises. |
 | `data/` | Public confirmed promises, common policy-category mappings, sources, current-score revisions, and system status. |
 | `archive/promise-sources/` | Original promise-source files and their verified retrieval manifest; storage format is defined in `data-model.md`. |
-| `automation/collectors/` | Allowlisted evidence-source registry. |
-| `automation/matching/` | Promise attribution configuration (party-vote and sponsor rules) and metadata for public promises. |
-| `automation/topic-routing/` | Controlled routing taxonomy and the durable tag-assignment cache used to route source records to promises. |
+| `automation/pipeline-generation` | Audit-state generation; changing it makes the next run start from empty audit state. |
+| `automation/collectors/` | Registry of active evidence sources. |
+| `automation/attribution/` | Governing parties and their dates, with an official source. |
+| `automation/promise-registry/` | Registry of confirmed promises used by the pipeline (exact wording, source, tests, maintenance baseline). |
+| `automation/topic-routing/` | Controlled routing taxonomy and the durable tag-assignment cache. |
 | `automation/evidence-packages/` | Durable unpublished queue of enriched evidence packages awaiting assessment. |
-| `scripts/` | Validation, collection, topic-routing, enrichment, assessment, and coverage-audit scripts. |
+| `automation/prompts/` | Active tagger, assessor, and arbiter prompts. |
+| `scripts/` | Validation, collection, routing, enrichment, assessment, and coverage-audit scripts. |
 | `.github/workflows/` | Verification and the daily evidence-assessment workflow. |
 
 ## Before changing the project

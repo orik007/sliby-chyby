@@ -4,11 +4,11 @@ import { mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import { basename, dirname, resolve } from "node:path";
 import { loadEnvFile } from "node:process";
 import { sha256 } from "./lib/collector-core.mjs";
-import { loadPublishedPromiseIds, publishedMatchingRegistry } from "./lib/published-promises.mjs";
+import { loadPublishedPromiseIds, publishedPromiseRegistry } from "./lib/published-promises.mjs";
 import { buildPromiseTaggingBrief, buildSourceTaggingBrief, loadTaggingPrompt, requestTagAssignment, TagValidationError, taggingRuntimeConfig, validateTagAssignmentOutput } from "./lib/topic-tagger.mjs";
 import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
-import { validatePromiseRegistry } from "./lib/evidence-matcher.mjs";
-import { buildInvertedIndex, derivePromiseTopicTags, routeSourceRecord } from "./lib/topic-routing.mjs";
+import { isPotentiallyAttributable, validatePromiseRegistry } from "./lib/attribution.mjs";
+import { buildInvertedIndex, deriveDirectLink, derivePromiseTopicTags, recordPrintIds, routeSourceRecord } from "./lib/topic-routing.mjs";
 import { buildTopicEvidencePackage } from "./lib/topic-evidence-package.mjs";
 
 const envPath = resolve(".env");
@@ -22,10 +22,11 @@ function parseArgs(args) {
   const options = {
     collectorRun: null,
     taxonomy: "automation/topic-routing/taxonomy-v1.json",
-    promiseRegistry: "automation/matching/promises.json",
+    promiseRegistry: "automation/promise-registry/promises.json",
     publishedPromises: "data/promises",
     tagCache: "automation/topic-routing/tag-cache",
     enrichedExcerpts: null,
+    printActs: null,
     asOf: null,
     output: "automation/runs/pipeline/topic-routing",
     samplePromises: null,
@@ -39,6 +40,7 @@ function parseArgs(args) {
     else if (arg === "--published-promises") options.publishedPromises = args[++index];
     else if (arg === "--tag-cache") options.tagCache = args[++index];
     else if (arg === "--enriched-excerpts") options.enrichedExcerpts = args[++index];
+    else if (arg === "--print-acts") options.printActs = args[++index];
     else if (arg === "--as-of") options.asOf = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--sample-promises") options.samplePromises = Number(args[++index]);
@@ -155,7 +157,7 @@ async function safeRequestTagAssignment(args) {
     if (error instanceof TagValidationError) {
       // The paid call already happened -- requestTagAssignment attaches its
       // provider/model/usage to the error precisely so this isolated
-      // failure still shows up in the pilot's token-usage totals instead of
+      // failure still shows up in the run's token-usage totals instead of
       // silently vanishing from the spend estimate.
       return { response: null, error: error.message, provider: error.provider ?? null, model: error.model ?? null, usage: error.usage ?? null };
     }
@@ -227,56 +229,6 @@ async function taggedTwice({ subjectId, inputHash, brief, taxonomy, taxonomyCont
   };
 }
 
-function collectStringValues(value, out = []) {
-  if (typeof value === "string") {
-    out.push(value);
-  } else if (Array.isArray(value)) {
-    for (const item of value) collectStringValues(item, out);
-  } else if (value && typeof value === "object") {
-    for (const nested of Object.values(value)) collectStringValues(nested, out);
-  }
-  return out;
-}
-
-/**
- * Finds a direct structural link for a source record: any string value
- * anywhere in its own structured payload (including nested structures such
- * as a parliamentary vote's `linkedPrints`) that exactly matches a taxonomy
- * tag's configured legal identifier, resolved to promises that already hold
- * that tag as an *accepted* (not needsReview) promise-topic assignment.
- *
- * No collector currently normalizes a print or vote's own numbering into
- * the canonical `directLegalIdentifiers` scheme the taxonomy uses (e.g.
- * "cz-act-23-2017"), so this path does not yet fire against real collected
- * records -- that normalization is separate, collector-side follow-up work,
- * not something this pilot script can fabricate. It is exercised today only
- * by fixtures that already carry a matching identifier, and by any future
- * record a collector emits with one.
- */
-function deriveDirectLink(taxonomy, record, directIdIndex, invertedIndex) {
-  const payloadValues = collectStringValues(record.payload ?? {});
-  const promiseIds = new Set();
-  const matchedIdentifiers = [];
-  for (const value of payloadValues) {
-    const tagIds = directIdIndex.get(value);
-    if (!tagIds) continue;
-    let matchedAny = false;
-    for (const tagId of tagIds) {
-      for (const promiseId of invertedIndex.get(tagId) ?? []) {
-        promiseIds.add(promiseId);
-        matchedAny = true;
-      }
-    }
-    if (matchedAny) matchedIdentifiers.push(value);
-  }
-  if (promiseIds.size === 0) return null;
-  // Accumulates every matching identifier's promises rather than returning
-  // on the first hit, so a record referencing more than one direct legal
-  // identifier does not silently lose the relationships the later ones
-  // would have added.
-  return { promiseIds: [...promiseIds], reason: `matched-legal-identifiers:${matchedIdentifiers.join(", ")}` };
-}
-
 const args = parseArgs(process.argv.slice(2));
 const runtime = taggingRuntimeConfig();
 invariant(Number.isInteger(runtime.concurrency) && runtime.concurrency > 0 && runtime.concurrency <= 16, "SLIBY_TAGGING_CONCURRENCY must be an integer from 1 to 16");
@@ -284,11 +236,15 @@ const prompt = await loadTaggingPrompt();
 const taxonomy = validateTaxonomy(JSON.parse(await readFile(resolve(args.taxonomy), "utf8")));
 const taxonomyContentHash = taxonomyHash(taxonomy);
 const directIdIndex = directLegalIdentifierIndex(taxonomy);
+// Legal identifiers of the acts each collected print amends
+// (scripts/run-print-acts.mjs); they create direct structural links.
+const printActs = args.printActs ? JSON.parse(await readFile(resolve(args.printActs), "utf8")) : { prints: {} };
+invariant(printActs.prints && typeof printActs.prints === "object", "Invalid --print-acts file");
 
 const registry = validatePromiseRegistry(JSON.parse(await readFile(resolve(args.promiseRegistry), "utf8")));
-let publishedRegistry = publishedMatchingRegistry(registry, await loadPublishedPromiseIds(args.publishedPromises));
+let publishedRegistry = publishedPromiseRegistry(registry, await loadPublishedPromiseIds(args.publishedPromises));
 // A sample run trims the published set down to the first N promises
-// (deterministic, not random) so a pilot run's model spend and output size
+// (deterministic, not random) so a sample run's model spend and output size
 // stay bounded; the full set is used whenever no sample size is given.
 if (args.samplePromises !== null) publishedRegistry = { ...publishedRegistry, promises: publishedRegistry.promises.slice(0, args.samplePromises) };
 const promiseById = new Map(publishedRegistry.promises.map((promise) => [promise.id, promise]));
@@ -296,7 +252,11 @@ const promiseById = new Map(publishedRegistry.promises.map((promise) => [promise
 const collectorRun = JSON.parse(await readFile(resolve(args.collectorRun), "utf8"));
 invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
 const cutoff = `${args.asOf}T23:59:59.999Z`;
-let materialPrimaryRecords = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff));
+// Only records that can be attributable conduct of a tracked party are routed
+// and tagged; every other record could never reach an evidence package.
+const trackedPartyIds = [...new Set(publishedRegistry.promises.map(({ partyId }) => partyId))].sort();
+const primaryRecordsInWindow = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff));
+let materialPrimaryRecords = primaryRecordsInWindow.filter((record) => isPotentiallyAttributable(record, trackedPartyIds));
 if (args.sampleRecords !== null) materialPrimaryRecords = materialPrimaryRecords.slice(0, args.sampleRecords);
 
 const enrichedExcerptsByRecordId = args.enrichedExcerpts ? await readJsonIfExists(resolve(args.enrichedExcerpts), {}) : {};
@@ -385,10 +345,13 @@ try {
   if (!runFailure) {
     try {
       sourceRouting = await mapWithConcurrency(materialPrimaryRecords, runtime.concurrency, async (record) => {
-        const enrichedExcerpts = enrichedExcerptsByRecordId[record.id] ?? [];
+        const enrichedExcerpts = [
+          ...(enrichedExcerptsByRecordId[record.id] ?? []),
+          ...recordPrintIds(record).map((printId) => printActs.prints[printId]?.excerpt).filter(Boolean)
+        ];
         const inputHash = sha256({ id: record.id, title: record.title, publisher: record.publisher, kind: record.kind, url: record.url, payload: record.payload, enrichedExcerpts });
         const brief = buildSourceTaggingBrief(record, enrichedExcerpts, taxonomy);
-        const directLink = deriveDirectLink(taxonomy, record, directIdIndex, invertedIndex);
+        const directLink = deriveDirectLink({ record, directIdIndex, invertedIndex, printIdentifiers: printActs.prints });
 
         if (directLink) {
           // Design doc step 4: "The robot first applies direct structural
@@ -398,7 +361,7 @@ try {
           // auto-candidate unconditionally once a directLink is present, without
           // ever looking at taggerA/taggerB -- so there is nothing for either
           // paid tagger to add, and skipping them here saves two calls per hit.
-          const route = routeSourceRecord({ taxonomy, record, taggerA: null, taggerB: null, invertedIndex, directLink, semanticDiscoveryPromiseIds: [] });
+          const route = routeSourceRecord({ taxonomy, record, taggerA: null, taggerB: null, invertedIndex, directLink });
           return { route, tagged: { taggerA: null, taggerB: null, provider: null, modelA: null, modelB: null, taggerAError: null, taggerBError: null }, inputHash, briefText: brief.text };
         }
 
@@ -412,8 +375,7 @@ try {
           taggerA: tagged.taggerA,
           taggerB: tagged.taggerB,
           invertedIndex,
-          directLink: null,
-          semanticDiscoveryPromiseIds: []
+          directLink: null
         });
         return { route, tagged, inputHash, briefText: brief.text };
       });
@@ -451,20 +413,12 @@ try {
     return [...totals.values()];
   }
 
-  // Unlike an old ad hoc pilot run, this is the one live run the workflow
-  // consumes deterministically every time -- so it writes directly to
-  // --output, not a further timestamped subdirectory a caller would have to
-  // discover after the fact.
   const outputDirectory = resolve(args.output);
   const evidencePackageDirectory = resolve(outputDirectory, "evidence-packages");
   await mkdir(evidencePackageDirectory, { recursive: true });
 
-  // Builds a real, assessable package for every promise routing created at
-  // least one candidate relationship for -- not a token-count prediction.
-  // A promise whose only routed records fail the deterministic attribution
-  // rule (buildTopicEvidencePackage's own gate) gets no package, same as it
-  // would under the old matcher: a candidate relationship alone is never
-  // attributable party conduct.
+  // A package is built for every promise with at least one routed record
+  // that is attributable conduct; routing alone never establishes it.
   const builtPackages = [];
   for (const [promiseId, routedRecords] of evidenceItemsByPromise) {
     const promise = promiseById.get(promiseId);
@@ -506,6 +460,8 @@ try {
       : null,
     counts: {
       sourceRecordCount: collectorRun.records.length,
+      primaryRecordsInWindowCount: primaryRecordsInWindow.length,
+      notAttributableSkippedCount: primaryRecordsInWindow.length - materialPrimaryRecords.length,
       materialPrimaryRecordCount: materialPrimaryRecords.length,
       promiseCount: publishedRegistry.promises.length,
       directAssignmentCount,
@@ -577,5 +533,5 @@ if (runFailure) {
   // real failure (an exhausted account, an outage), and must still exit
   // non-zero so the workflow step and CI report it loudly instead of a
   // partial run looking like a clean success.
-  throw new Error(`Topic-routing pilot failed at stage "${runFailure.stage}": ${runFailure.message}`);
+  throw new Error(`Topic routing failed at stage "${runFailure.stage}": ${runFailure.message}`);
 }

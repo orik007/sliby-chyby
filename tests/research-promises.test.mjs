@@ -11,10 +11,10 @@ test("research promises use one source catalog and three promise statuses", asyn
   );
   const policyCategoryData = JSON.parse(await readFile(new URL("../data/promise-categories.json", import.meta.url), "utf8"));
   const categoryAudit = JSON.parse(await readFile(new URL("../research/2025-election/promise-category-audit.json", import.meta.url), "utf8"));
-  const matchingRegistry = JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8"));
+  const promiseRegistry = JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8"));
   const publicPromiseIds = new Set(publicPromises.map(({ id }) => id));
   const publicPromiseById = new Map(publicPromises.map((promise) => [promise.id, promise]));
-  const matchingPromiseById = new Map(matchingRegistry.promises.map((promise) => [promise.id, promise]));
+  const registryPromiseById = new Map(promiseRegistry.promises.map((promise) => [promise.id, promise]));
   const sourceIds = new Set(catalog.sources.map(({ id }) => id));
   const promiseIds = new Set();
   assert.equal(catalog.sources.length, 3);
@@ -78,13 +78,13 @@ test("research promises use one source catalog and three promise statuses", asyn
   ]);
   for (const promiseId of cleanedPromiseIds) {
     const publicPromise = publicPromiseById.get(promiseId);
-    const matchingPromise = matchingPromiseById.get(promiseId);
+    const registryPromise = registryPromiseById.get(promiseId);
     assert.ok(publicPromise, `Cleaned public promise is missing: ${promiseId}`);
-    assert.ok(matchingPromise, `Matching registry promise is missing: ${promiseId}`);
-    assert.equal(matchingPromise.titleCz, publicPromise.title, `Matching title differs for ${promiseId}`);
-    assert.equal(matchingPromise.atomicClaimCz, publicPromise.originalText, `Matching atomic claim differs for ${promiseId}`);
-    assert.equal(matchingPromise.originalTextCz, publicPromise.originalText, `Matching wording differs for ${promiseId}`);
-    assert.equal(matchingPromise.promiseSource.exactQuoteCz, publicPromise.originalText, `Matching source quote differs for ${promiseId}`);
+    assert.ok(registryPromise, `Registry promise is missing: ${promiseId}`);
+    assert.equal(registryPromise.titleCz, publicPromise.title, `Registry title differs for ${promiseId}`);
+    assert.equal(registryPromise.atomicClaimCz, publicPromise.originalText, `Registry atomic claim differs for ${promiseId}`);
+    assert.equal(registryPromise.originalTextCz, publicPromise.originalText, `Registry wording differs for ${promiseId}`);
+    assert.equal(registryPromise.promiseSource.exactQuoteCz, publicPromise.originalText, `Registry source quote differs for ${promiseId}`);
   }
 
   assert.equal(policyCategoryData.schemaVersion, 1);

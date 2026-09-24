@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { hashEvidencePackage, validateEvidencePackage } from "./assessment-pipeline.mjs";
+import { hashAssessmentContent, hashEvidencePackage, validateEvidencePackage } from "./assessment-pipeline.mjs";
 
 const schemaVersion = "1.0.0";
 
@@ -28,9 +28,7 @@ export function validateEvidencePackageQueue(queue) {
     invariant(typeof entry.queuedAt === "string" && !Number.isNaN(Date.parse(entry.queuedAt)), `Queued evidence package ${entry.promiseId} has an invalid queuedAt`);
     invariant(typeof entry.path === "string" && entry.path.startsWith("packages/"), `Queued evidence package ${entry.promiseId} has an invalid path`);
     invariant(typeof entry.blockedByEnrichment === "boolean", `Queued evidence package ${entry.promiseId} must record enrichment state`);
-    invariant(entry.retiredAt === undefined || entry.retiredAt === null || (typeof entry.retiredAt === "string" && !Number.isNaN(Date.parse(entry.retiredAt))), `Queued evidence package ${entry.promiseId} has an invalid retirement time`);
-    invariant(entry.retirementReason === undefined || entry.retirementReason === null || typeof entry.retirementReason === "string", `Queued evidence package ${entry.promiseId} has an invalid retirement reason`);
-    invariant(entry.retiredAt == null || typeof entry.retirementReason === "string", `Retired evidence package ${entry.promiseId} needs a retirement reason`);
+    invariant(entry.withdrawnAt == null || !Number.isNaN(Date.parse(entry.withdrawnAt)), `Queued evidence package ${entry.promiseId} has an invalid withdrawnAt`);
     invariant(entry.supersedesPackageHash == null || /^[a-f0-9]{64}$/.test(entry.supersedesPackageHash), `Queued evidence package ${entry.promiseId} has an invalid supersedesPackageHash`);
     invariant(entry.supersededByPackageHash == null || /^[a-f0-9]{64}$/.test(entry.supersededByPackageHash), `Queued evidence package ${entry.promiseId} has an invalid supersededByPackageHash`);
   }
@@ -53,21 +51,11 @@ export function validateEvidencePackageQueue(queue) {
 
 export function currentEvidencePackageEntries(queue) {
   validateEvidencePackageQueue(queue);
-  return queue.packages.filter((entry) => !entry.supersededByPackageHash && entry.retiredAt == null).sort((left, right) => left.promiseId.localeCompare(right.promiseId));
+  return queue.packages.filter((entry) => !entry.supersededByPackageHash && entry.withdrawnAt == null).sort((left, right) => left.promiseId.localeCompare(right.promiseId));
 }
 
 function latestUnreplacedPackageEntry(queue, promiseId) {
   return queue.packages.find((entry) => entry.promiseId === promiseId && !entry.supersededByPackageHash) ?? null;
-}
-
-function eligibleUnderSemanticPolicy(evidencePackage, { candidateLimit, minimumSimilarity }) {
-  return evidencePackage.evidence
-    .filter((evidence) => evidence.role === "conduct-evidence")
-    .some((evidence) => evidence.matchBasis?.exactSignal === true || (
-      evidence.matchBasis?.semanticCandidate
-      && evidence.matchBasis.semanticCandidate.rank <= candidateLimit
-      && evidence.matchBasis.semanticCandidate.similarity >= minimumSimilarity
-    ));
 }
 
 async function loadQueue(queueDirectory) {
@@ -95,25 +83,30 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
   let changed = false;
   let added = 0;
   let updated = 0;
-  for (const { evidencePackage } of await inputPackages(inputDirectory)) {
+  const input = await inputPackages(inputDirectory);
+  const inputPromiseIds = new Set(input.map(({ evidencePackage }) => evidencePackage.promise.id));
+  for (const { evidencePackage } of input) {
     const packageHash = hashEvidencePackage(evidencePackage);
     const blockedByEnrichment = blockedPromiseIds.has(evidencePackage.promise.id);
-    const matching = queue.packages.find((entry) => entry.packageHash === packageHash);
-    if (matching) {
-      if (!matching.supersededByPackageHash && matching.retiredAt != null) {
-        matching.retiredAt = null;
-        matching.retirementReason = null;
+    const current = latestUnreplacedPackageEntry(queue, evidencePackage.promise.id);
+    // Every run rebuilds each package from the whole record history; a
+    // package whose assessable content is unchanged keeps the current entry.
+    const unchanged = current
+      && hashAssessmentContent(JSON.parse(await readFile(resolve(queuePath, current.path), "utf8"))) === hashAssessmentContent(evidencePackage);
+    const existing = unchanged ? current : queue.packages.find((entry) => entry.packageHash === packageHash);
+    if (existing) {
+      if (existing.withdrawnAt != null) {
+        existing.withdrawnAt = null;
         changed = true;
         updated += 1;
       }
-      if (matching.blockedByEnrichment !== blockedByEnrichment) {
-        matching.blockedByEnrichment = blockedByEnrichment;
+      if (existing.blockedByEnrichment !== blockedByEnrichment) {
+        existing.blockedByEnrichment = blockedByEnrichment;
         changed = true;
         updated += 1;
       }
       continue;
     }
-    const current = latestUnreplacedPackageEntry(queue, evidencePackage.promise.id);
     if (current) current.supersededByPackageHash = packageHash;
     const packagePath = `packages/${evidencePackage.promise.id}/${packageHash}.json`;
     const destination = resolve(queuePath, packagePath);
@@ -126,43 +119,28 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
       queuedAt: now,
       path: packagePath,
       blockedByEnrichment,
-      retiredAt: null,
-      retirementReason: null,
+      withdrawnAt: null,
       supersedesPackageHash: current?.packageHash ?? null,
       supersededByPackageHash: null
     });
     changed = true;
     added += 1;
   }
+  // Every run builds the complete package set, so a promise that no longer
+  // gets a package has no current package to assess.
+  let withdrawn = 0;
+  for (const entry of currentEvidencePackageEntries(queue)) {
+    if (inputPromiseIds.has(entry.promiseId)) continue;
+    entry.withdrawnAt = now;
+    changed = true;
+    withdrawn += 1;
+  }
   if (changed) {
     queue.packages.sort((left, right) => left.promiseId.localeCompare(right.promiseId) || left.queuedAt.localeCompare(right.queuedAt));
     await mkdir(queuePath, { recursive: true });
     await writeFile(resolve(queuePath, "manifest.json"), `${JSON.stringify(validateEvidencePackageQueue(queue), null, 2)}\n`);
   }
-  return { added, updated, activeCount: currentEvidencePackageEntries(queue).length, changed };
-}
-
-export async function reconcileEvidencePackageQueue({ queueDirectory, candidateLimit, minimumSimilarity }) {
-  invariant(Number.isInteger(candidateLimit) && candidateLimit > 0, "Semantic candidate limit must be a positive integer");
-  invariant(Number.isFinite(minimumSimilarity) && minimumSimilarity >= -1 && minimumSimilarity <= 1, "Semantic minimum similarity must be between -1 and 1");
-  const queuePath = resolve(queueDirectory);
-  const manifestPath = resolve(queuePath, "manifest.json");
-  if (!existsSync(manifestPath)) return { retired: 0, activeCount: 0, changed: false };
-  const queue = await loadQueue(queuePath);
-  const now = new Date().toISOString();
-  let retired = 0;
-  for (const entry of currentEvidencePackageEntries(queue)) {
-    const evidencePackage = validateEvidencePackage(JSON.parse(await readFile(resolve(queuePath, entry.path), "utf8")));
-    invariant(hashEvidencePackage(evidencePackage) === entry.packageHash, `Queued package ${entry.packageHash} has changed`);
-    if (eligibleUnderSemanticPolicy(evidencePackage, { candidateLimit, minimumSimilarity })) continue;
-    entry.retiredAt = now;
-    entry.retirementReason = "outside-active-semantic-policy";
-    retired += 1;
-  }
-  if (retired > 0) {
-    await writeFile(manifestPath, `${JSON.stringify(validateEvidencePackageQueue(queue), null, 2)}\n`);
-  }
-  return { retired, activeCount: currentEvidencePackageEntries(queue).length, changed: retired > 0 };
+  return { added, updated, withdrawn, activeCount: currentEvidencePackageEntries(queue).length, changed };
 }
 
 export async function loadCurrentEvidencePackages(queueDirectory) {
@@ -181,8 +159,4 @@ export async function loadCurrentEvidencePackages(queueDirectory) {
     packages.push({ path, evidencePackage, blockedByEnrichment: entry.blockedByEnrichment });
   }
   return packages;
-}
-
-export async function loadBlockedEvidencePackages(queueDirectory) {
-  return (await loadCurrentEvidencePackages(queueDirectory)).filter(({ blockedByEnrichment }) => blockedByEnrichment);
 }

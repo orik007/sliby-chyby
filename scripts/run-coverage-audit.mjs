@@ -1,13 +1,14 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { buildCoverageAudit, renderCoverageAuditMarkdown } from "./lib/coverage-audit.mjs";
-import { loadPublishedPromiseIds, publishedMatchingRegistry } from "./lib/published-promises.mjs";
+import { loadPublishedPromiseIds, publishedPromiseRegistry } from "./lib/published-promises.mjs";
 
 function parseArgs(args) {
   const options = {
     collectorRun: null,
     topicRoutingRun: null,
-    promises: "automation/matching/promises.json",
+    printActs: null,
+    promises: "automation/promise-registry/promises.json",
     publishedPromises: "data/promises",
     sources: "automation/collectors/sources.json",
     proposals: "automation/review-proposals/manifest.json",
@@ -18,6 +19,7 @@ function parseArgs(args) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];
     else if (arg === "--topic-routing-run") options.topicRoutingRun = args[++index];
+    else if (arg === "--print-acts") options.printActs = args[++index];
     else if (arg === "--promises") options.promises = args[++index];
     else if (arg === "--published-promises") options.publishedPromises = args[++index];
     else if (arg === "--sources") options.sources = args[++index];
@@ -30,51 +32,15 @@ function parseArgs(args) {
   return options;
 }
 
-// buildCoverageAudit (scripts/lib/coverage-audit.mjs) speaks the old
-// matcher's per-promise report shape (candidateMatchCount,
-// attributablePrimaryMatchCount, evidencePackage) unchanged, since that
-// logic is otherwise untouched by the topic-routing migration. This adapts
-// a topic-routing report into that same shape rather than duplicating or
-// rewriting the (already tested) coverage-audit logic itself.
-function matcherRunFromTopicRoutingRun(topicRoutingRun, promises) {
-  const candidateCountsByPromise = new Map();
-  for (const { route } of topicRoutingRun.sourceTagAssignments) {
-    if (route.disposition !== "candidate-created") continue;
-    for (const promiseId of route.candidatePromiseIds) {
-      candidateCountsByPromise.set(promiseId, (candidateCountsByPromise.get(promiseId) ?? 0) + 1);
-    }
-  }
-  const packagesByPromise = new Map(topicRoutingRun.builtPackages.filter((entry) => entry.built).map((entry) => [entry.promiseId, entry]));
-  return {
-    schemaVersion: "1.0.0",
-    promiseResults: promises.map((promise) => {
-      const built = packagesByPromise.get(promise.id);
-      return {
-        promiseId: promise.id,
-        candidateMatchCount: candidateCountsByPromise.get(promise.id) ?? 0,
-        attributablePrimaryMatchCount: built?.selectedEvidenceCount ?? 0,
-        evidencePackage: built ? `evidence-packages/${promise.id}.json` : null
-      };
-    })
-  };
-}
-
 const args = parseArgs(process.argv.slice(2));
 const readJson = async (path) => JSON.parse(await readFile(resolve(path), "utf8"));
-const promiseRegistry = publishedMatchingRegistry(await readJson(args.promises), await loadPublishedPromiseIds(args.publishedPromises));
-const topicRoutingRun = await readJson(args.topicRoutingRun);
-// A partial report (completed: false) only covers the subjects tagged
-// before a mid-run failure -- treating every promise it never reached as
-// "no candidate match" would fabricate a false negative for a promise that
-// was simply never checked this run, exactly the silent-zero-progress
-// outcome the coverage audit exists to prevent. Fail loudly instead of
-// producing a misleading audit from incomplete data.
-if (topicRoutingRun.completed !== true) {
-  throw new Error(`Topic-routing run did not complete (failed at stage "${topicRoutingRun.failure?.stage}"): refusing to build a coverage audit from partial routing data.`);
-}
+const promiseRegistry = publishedPromiseRegistry(await readJson(args.promises), await loadPublishedPromiseIds(args.publishedPromises));
 const audit = buildCoverageAudit({
   collectorRun: await readJson(args.collectorRun),
-  matcherRun: matcherRunFromTopicRoutingRun(topicRoutingRun, promiseRegistry.promises),
+  // A partial routing run would report unchecked promises as "no routed
+  // record"; buildCoverageAudit refuses it.
+  routingRun: await readJson(args.topicRoutingRun),
+  printActs: args.printActs ? await readJson(args.printActs) : null,
   promiseRegistry,
   sourceRegistry: await readJson(args.sources),
   proposalManifest: await readJson(args.proposals)
