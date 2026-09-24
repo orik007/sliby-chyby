@@ -36,8 +36,8 @@ jobs:
   collect:
     name: Build unpublished review proposals
     runs-on: ubuntu-latest
-    # A job killed by timeout-minutes cannot persist its tag cache, so the
-    # limit leaves headroom for a full-term first run.
+    # Leaves headroom for a full first run. Paid work is written to disk as
+    # it is produced, so a killed run loses at most the calls in flight.
     timeout-minutes: 300
     environment:
       name: assessment
@@ -220,6 +220,7 @@ jobs:
           fi
 
       - name: Assess only new or changed packages
+        id: assess
         run: |
           node scripts/run-assessment-batch.mjs \
             --packages automation/evidence-packages \
@@ -229,7 +230,11 @@ jobs:
             --summary automation/runs/pipeline/github-actions/assessment-batch.json \
             --pull-request-body automation/runs/pipeline/github-actions/assessment-review-pr.md
 
+      # The next steps also run when the assessment stopped part-way (for
+      # example on exhausted API credit), so every finished, paid assessment
+      # is saved and the next run assesses only the rest.
       - name: Refresh human review pages
+        if: always() && steps.assess.outcome != 'skipped'
         run: npm run reviews:refresh
 
       - name: Audit coverage of every published promise
@@ -305,6 +310,7 @@ jobs:
 
       - name: Commit new review proposals
         id: proposals
+        if: always() && steps.assess.outcome != 'skipped'
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
@@ -320,7 +326,7 @@ jobs:
           echo "AUDIT_BRANCH_TIP=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
 
       - name: Create or update human-review pull request
-        if: steps.proposals.outputs.created == 'true'
+        if: always() && steps.proposals.outputs.created == 'true'
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |

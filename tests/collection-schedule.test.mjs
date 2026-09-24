@@ -33,6 +33,9 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   // Every run collects every source completely; no manual start date or
   // source subset can produce a package from part of the record history.
   assert.doesNotMatch(workflow, /inputs\.since|inputs\.sources|--since|--source /);
+  // Finished assessments are saved even when the assessment step fails.
+  assert.match(workflow, /- name: Commit new review proposals\n        id: proposals\n        if: always\(\) && steps\.assess\.outcome != 'skipped'/);
+  assert.match(workflow, /- name: Create or update human-review pull request\n        if: always\(\) && steps\.proposals\.outputs\.created == 'true'/);
   // Paid assessments have a hard per-run cap that defaults to none.
   assert.match(workflow, /max_assessments:\n        description: [^\n]+\n        required: true\n        default: "0"/);
   assert.match(workflow, /SLIBY_MAX_ASSESSMENTS: \$\{\{ inputs\.max_assessments \|\| '0' \}\}/);
