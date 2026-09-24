@@ -115,8 +115,13 @@ export function isPotentiallyAttributable(record, partyIds) {
   return partyIds.some((partyId) => assessableAttributionStatuses.has(attributionStatusForRecord(record, { partyId }).attributionStatus));
 }
 
+// A decision (a decisive vote) outweighs a proposal (docs/scoring.md), so
+// bounding a package never drops a decision in favour of a proposal.
+const decisionStatuses = new Set(["verified-party-vote", "verified-party-no-majority"]);
+
 function compareMatches(a, b) {
-  return Number(b.directLink) - Number(a.directLink)
+  return Number(decisionStatuses.has(b.attributionStatus)) - Number(decisionStatuses.has(a.attributionStatus))
+    || Number(b.directLink) - Number(a.directLink)
     || String(b.record.occurredAt).localeCompare(String(a.record.occurredAt))
     || a.record.id.localeCompare(b.record.id);
 }

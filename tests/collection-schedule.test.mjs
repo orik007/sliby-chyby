@@ -19,7 +19,7 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.match(workflow, /timeout-minutes: 300/);
   assert.match(workflow, /Persist source collection and queued evidence packages/);
   assert.match(workflow, /Queue enriched evidence packages/);
-  assert.match(workflow, /--retry-blocked-queue automation\/evidence-packages/);
+  assert.doesNotMatch(workflow, /--retry-blocked-queue/);
   assert.match(workflow, /--packages automation\/evidence-packages/);
   assert.match(workflow, /--topic-routing-run automation\/runs\/pipeline\/github-actions\/topic-routing\/topic-routing-report\.json/);
   assert.match(workflow, /const collectorRun = JSON\.parse\(await readFile\("automation\/runs\/pipeline\/github-actions\/collector\/collector-run\.json", "utf8"\)\);/);

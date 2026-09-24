@@ -28,6 +28,7 @@ export function validateEvidencePackageQueue(queue) {
     invariant(typeof entry.queuedAt === "string" && !Number.isNaN(Date.parse(entry.queuedAt)), `Queued evidence package ${entry.promiseId} has an invalid queuedAt`);
     invariant(typeof entry.path === "string" && entry.path.startsWith("packages/"), `Queued evidence package ${entry.promiseId} has an invalid path`);
     invariant(typeof entry.blockedByEnrichment === "boolean", `Queued evidence package ${entry.promiseId} must record enrichment state`);
+    invariant(entry.withdrawnAt == null || !Number.isNaN(Date.parse(entry.withdrawnAt)), `Queued evidence package ${entry.promiseId} has an invalid withdrawnAt`);
     invariant(entry.supersedesPackageHash == null || /^[a-f0-9]{64}$/.test(entry.supersedesPackageHash), `Queued evidence package ${entry.promiseId} has an invalid supersedesPackageHash`);
     invariant(entry.supersededByPackageHash == null || /^[a-f0-9]{64}$/.test(entry.supersededByPackageHash), `Queued evidence package ${entry.promiseId} has an invalid supersededByPackageHash`);
   }
@@ -50,7 +51,7 @@ export function validateEvidencePackageQueue(queue) {
 
 export function currentEvidencePackageEntries(queue) {
   validateEvidencePackageQueue(queue);
-  return queue.packages.filter((entry) => !entry.supersededByPackageHash).sort((left, right) => left.promiseId.localeCompare(right.promiseId));
+  return queue.packages.filter((entry) => !entry.supersededByPackageHash && entry.withdrawnAt == null).sort((left, right) => left.promiseId.localeCompare(right.promiseId));
 }
 
 function latestUnreplacedPackageEntry(queue, promiseId) {
@@ -82,7 +83,9 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
   let changed = false;
   let added = 0;
   let updated = 0;
-  for (const { evidencePackage } of await inputPackages(inputDirectory)) {
+  const input = await inputPackages(inputDirectory);
+  const inputPromiseIds = new Set(input.map(({ evidencePackage }) => evidencePackage.promise.id));
+  for (const { evidencePackage } of input) {
     const packageHash = hashEvidencePackage(evidencePackage);
     const blockedByEnrichment = blockedPromiseIds.has(evidencePackage.promise.id);
     const current = latestUnreplacedPackageEntry(queue, evidencePackage.promise.id);
@@ -92,6 +95,11 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
       && hashAssessmentContent(JSON.parse(await readFile(resolve(queuePath, current.path), "utf8"))) === hashAssessmentContent(evidencePackage);
     const existing = unchanged ? current : queue.packages.find((entry) => entry.packageHash === packageHash);
     if (existing) {
+      if (existing.withdrawnAt != null) {
+        existing.withdrawnAt = null;
+        changed = true;
+        updated += 1;
+      }
       if (existing.blockedByEnrichment !== blockedByEnrichment) {
         existing.blockedByEnrichment = blockedByEnrichment;
         changed = true;
@@ -111,18 +119,28 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
       queuedAt: now,
       path: packagePath,
       blockedByEnrichment,
+      withdrawnAt: null,
       supersedesPackageHash: current?.packageHash ?? null,
       supersededByPackageHash: null
     });
     changed = true;
     added += 1;
   }
+  // Every run builds the complete package set, so a promise that no longer
+  // gets a package has no current package to assess.
+  let withdrawn = 0;
+  for (const entry of currentEvidencePackageEntries(queue)) {
+    if (inputPromiseIds.has(entry.promiseId)) continue;
+    entry.withdrawnAt = now;
+    changed = true;
+    withdrawn += 1;
+  }
   if (changed) {
     queue.packages.sort((left, right) => left.promiseId.localeCompare(right.promiseId) || left.queuedAt.localeCompare(right.queuedAt));
     await mkdir(queuePath, { recursive: true });
     await writeFile(resolve(queuePath, "manifest.json"), `${JSON.stringify(validateEvidencePackageQueue(queue), null, 2)}\n`);
   }
-  return { added, updated, activeCount: currentEvidencePackageEntries(queue).length, changed };
+  return { added, updated, withdrawn, activeCount: currentEvidencePackageEntries(queue).length, changed };
 }
 
 export async function loadCurrentEvidencePackages(queueDirectory) {
@@ -141,8 +159,4 @@ export async function loadCurrentEvidencePackages(queueDirectory) {
     packages.push({ path, evidencePackage, blockedByEnrichment: entry.blockedByEnrichment });
   }
   return packages;
-}
-
-export async function loadBlockedEvidencePackages(queueDirectory) {
-  return (await loadCurrentEvidencePackages(queueDirectory)).filter(({ blockedByEnrichment }) => blockedByEnrichment);
 }

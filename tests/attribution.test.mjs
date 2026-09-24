@@ -113,6 +113,18 @@ test("bounded selection keeps only assessable primary evidence, direct links fir
   assert.deepEqual(selectBoundedPrimaryMatches([tagged, procedural, direct]).map(({ record }) => record.id), ["psp--vote-direct", "psp--vote-tagged"]);
 });
 
+test("bounded selection never drops a decision in favour of newer proposals", () => {
+  const proposals = Array.from({ length: 30 }, (_, index) => ({
+    record: { ...submissionStep({ kind: "government-proposal", submittedOn: "2026-09-01", proposerPartyIds: ["motoriste"] }), id: `psp--proposal-${index}`, occurredAt: `2026-09-${String(index % 28 + 1).padStart(2, "0")}T00:00:00`, payload: { externalPrintId: `print-${index}` } },
+    attributionStatus: "verified-government-proposal",
+    directLink: true
+  }));
+  const olderVote = { record: { ...voteRecord({ id: "psp--vote-older" }), occurredAt: "2026-01-01T00:00:00" }, attributionStatus: "verified-party-vote", directLink: false };
+  const selected = selectBoundedPrimaryMatches([...proposals, olderVote]).map(({ record }) => record.id);
+  assert.equal(selected.length, 24);
+  assert.equal(selected[0], "psp--vote-older");
+});
+
 test("only records that can be attributable conduct of a tracked party are routed", () => {
   const tracked = ["ano", "motoriste", "spd"];
   assert.equal(isPotentiallyAttributable(voteRecord(), tracked), true);

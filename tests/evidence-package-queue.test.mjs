@@ -3,7 +3,7 @@ import { mkdtemp, mkdir, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { currentEvidencePackageEntries, loadBlockedEvidencePackages, loadCurrentEvidencePackages, queueEvidencePackages, validateEvidencePackageQueue } from "../scripts/lib/evidence-package-queue.mjs";
+import { currentEvidencePackageEntries, loadCurrentEvidencePackages, queueEvidencePackages, validateEvidencePackageQueue } from "../scripts/lib/evidence-package-queue.mjs";
 
 function evidencePackage(asOf, factSummary) {
   return {
@@ -31,19 +31,19 @@ test("keeps a current enriched package across assessment failures and preserves 
   await mkdir(input);
   await writeInput(input, evidencePackage("2026-09-10", "První ověřený krok."));
   const first = await queueEvidencePackages({ inputDirectory: input, queueDirectory: queue, enrichmentRun: { warnings: [] } });
-  assert.deepEqual(first, { added: 1, updated: 0, activeCount: 1, changed: true });
+  assert.deepEqual(first, { added: 1, updated: 0, withdrawn: 0, activeCount: 1, changed: true });
   assert.equal((await loadCurrentEvidencePackages(queue))[0].blockedByEnrichment, false);
 
   await writeInput(input, evidencePackage("2026-09-11", "Novější ověřený krok."));
   const second = await queueEvidencePackages({ inputDirectory: input, queueDirectory: queue, enrichmentRun: { warnings: [{ promiseId: "test-promise" }] } });
-  assert.deepEqual(second, { added: 1, updated: 0, activeCount: 1, changed: true });
+  assert.deepEqual(second, { added: 1, updated: 0, withdrawn: 0, activeCount: 1, changed: true });
   const manifest = validateEvidencePackageQueue(JSON.parse(await readFile(join(queue, "manifest.json"), "utf8")));
   assert.equal(manifest.packages.length, 2);
   assert.equal(currentEvidencePackageEntries(manifest).length, 1);
   const current = await loadCurrentEvidencePackages(queue);
   assert.equal(current[0].evidencePackage.asOf, "2026-09-11");
   assert.equal(current[0].blockedByEnrichment, true);
-  assert.equal((await loadBlockedEvidencePackages(queue))[0].evidencePackage.asOf, "2026-09-11");
+  assert.equal((await loadCurrentEvidencePackages(queue)).filter(({ blockedByEnrichment }) => blockedByEnrichment)[0].evidencePackage.asOf, "2026-09-11");
 });
 
 test("rejects a queue whose supersession cycle has no current package", () => {
@@ -72,6 +72,26 @@ test("a daily rebuild with unchanged assessable content keeps the current packag
   // Next day: same evidence, only the run's cutoff and package ID differ.
   await writeInput(input, { ...structuredClone(first), asOf: "2026-09-11", packageId: "test-promise--2026-09-11" });
   const second = await queueEvidencePackages({ inputDirectory: input, queueDirectory: queue, enrichmentRun: { warnings: [] } });
-  assert.deepEqual(second, { added: 0, updated: 0, activeCount: 1, changed: false });
+  assert.deepEqual(second, { added: 0, updated: 0, withdrawn: 0, activeCount: 1, changed: false });
   assert.equal((await loadCurrentEvidencePackages(queue))[0].evidencePackage.asOf, "2026-09-10");
+});
+
+test("a promise that no longer gets a package has no current package, and returns when it gets one again", async () => {
+  const root = await mkdtemp(join(tmpdir(), "slava-evidence-queue-withdrawn-"));
+  const input = join(root, "input");
+  const empty = join(root, "empty");
+  const queue = join(root, "queue");
+  await mkdir(input);
+  await mkdir(empty);
+  const first = evidencePackage("2026-09-10", "Ověřený krok.");
+  await writeInput(input, first);
+  await queueEvidencePackages({ inputDirectory: input, queueDirectory: queue, enrichmentRun: { warnings: [] } });
+
+  const withdrawn = await queueEvidencePackages({ inputDirectory: empty, queueDirectory: queue, enrichmentRun: { warnings: [] } });
+  assert.deepEqual(withdrawn, { added: 0, updated: 0, withdrawn: 1, activeCount: 0, changed: true });
+  assert.deepEqual(await loadCurrentEvidencePackages(queue), []);
+
+  await writeInput(input, { ...structuredClone(first), asOf: "2026-09-12", packageId: "test-promise--2026-09-12" });
+  const restored = await queueEvidencePackages({ inputDirectory: input, queueDirectory: queue, enrichmentRun: { warnings: [] } });
+  assert.deepEqual(restored, { added: 0, updated: 1, withdrawn: 0, activeCount: 1, changed: true });
 });

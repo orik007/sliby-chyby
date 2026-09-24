@@ -11,7 +11,6 @@ import {
   printDocumentEnrichmentVersion,
   selectRelevantDocumentExcerpts
 } from "./lib/psp-print-documents.mjs";
-import { loadBlockedEvidencePackages } from "./lib/evidence-package-queue.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -22,7 +21,6 @@ function parseArgs(args) {
     input: null,
     output: null,
     sourceRegistry: "automation/collectors/sources.json",
-    retryBlockedQueue: null,
     requireDocuments: false
   };
   for (let index = 0; index < args.length; index += 1) {
@@ -30,7 +28,6 @@ function parseArgs(args) {
     if (arg === "--input") options.input = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--sources") options.sourceRegistry = args[++index];
-    else if (arg === "--retry-blocked-queue") options.retryBlockedQueue = args[++index];
     else if (arg === "--require-documents") options.requireDocuments = true;
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -83,13 +80,6 @@ const packagesByPromiseId = new Map();
 for (const path of await inputFiles(args.input)) {
   const value = validateEvidencePackage(JSON.parse(await readFile(path, "utf8")));
   packagesByPromiseId.set(value.promise.id, { path, value });
-}
-if (args.retryBlockedQueue) {
-  for (const { path, evidencePackage } of await loadBlockedEvidencePackages(args.retryBlockedQueue)) {
-    if (!packagesByPromiseId.has(evidencePackage.promise.id)) {
-      packagesByPromiseId.set(evidencePackage.promise.id, { path, value: evidencePackage });
-    }
-  }
 }
 const packages = [...packagesByPromiseId.values()].sort((left, right) => left.value.promise.id.localeCompare(right.value.promise.id));
 const printCache = new Map();
