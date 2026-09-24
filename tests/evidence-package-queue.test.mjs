@@ -31,12 +31,12 @@ test("keeps a current enriched package across assessment failures and preserves 
   await mkdir(input);
   await writeInput(input, evidencePackage("2026-09-10", "První ověřený krok."));
   const first = await queueEvidencePackages({ inputDirectory: input, queueDirectory: queue, enrichmentRun: { warnings: [] } });
-  assert.deepEqual(first, { added: 1, updated: 0, retired: 0, activeCount: 1, changed: true });
+  assert.deepEqual(first, { added: 1, updated: 0, activeCount: 1, changed: true });
   assert.equal((await loadCurrentEvidencePackages(queue))[0].blockedByEnrichment, false);
 
   await writeInput(input, evidencePackage("2026-09-11", "Novější ověřený krok."));
   const second = await queueEvidencePackages({ inputDirectory: input, queueDirectory: queue, enrichmentRun: { warnings: [{ promiseId: "test-promise" }] } });
-  assert.deepEqual(second, { added: 1, updated: 0, retired: 0, activeCount: 1, changed: true });
+  assert.deepEqual(second, { added: 1, updated: 0, activeCount: 1, changed: true });
   const manifest = validateEvidencePackageQueue(JSON.parse(await readFile(join(queue, "manifest.json"), "utf8")));
   assert.equal(manifest.packages.length, 2);
   assert.equal(currentEvidencePackageEntries(manifest).length, 1);
@@ -44,27 +44,6 @@ test("keeps a current enriched package across assessment failures and preserves 
   assert.equal(current[0].evidencePackage.asOf, "2026-09-11");
   assert.equal(current[0].blockedByEnrichment, true);
   assert.equal((await loadBlockedEvidencePackages(queue))[0].evidencePackage.asOf, "2026-09-11");
-});
-
-test("retires a queued package that cites evidence the current attribution rule no longer accepts", async () => {
-  const root = await mkdtemp(join(tmpdir(), "slava-evidence-queue-retire-"));
-  const input = join(root, "input");
-  const queue = join(root, "queue");
-  await mkdir(input);
-  const partyPackage = evidencePackage("2026-09-10", "Strana oznámila krok.");
-  partyPackage.evidence[1].matchBasis = { routeBasis: ["controlled-tag"], attributionStatus: "verified-party-publication" };
-  await writeInput(input, partyPackage);
-  const first = await queueEvidencePackages({ inputDirectory: input, queueDirectory: queue, enrichmentRun: { warnings: [] } });
-  assert.deepEqual(first, { added: 1, updated: 0, retired: 1, activeCount: 0, changed: true });
-  const manifest = validateEvidencePackageQueue(JSON.parse(await readFile(join(queue, "manifest.json"), "utf8")));
-  assert.equal(manifest.packages[0].retirementReason, "outside-active-attribution-policy");
-  assert.deepEqual(await loadCurrentEvidencePackages(queue), []);
-
-  const officialPackage = evidencePackage("2026-09-11", "Sněmovna schválila zákon.");
-  officialPackage.evidence[1].matchBasis = { routeBasis: ["controlled-tag"], attributionStatus: "verified-party-vote" };
-  await writeInput(input, officialPackage);
-  const second = await queueEvidencePackages({ inputDirectory: input, queueDirectory: queue, enrichmentRun: { warnings: [] } });
-  assert.deepEqual(second, { added: 1, updated: 0, retired: 0, activeCount: 1, changed: true });
 });
 
 test("rejects a queue whose supersession cycle has no current package", () => {

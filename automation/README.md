@@ -6,7 +6,7 @@ The workflow and its rules are defined only in [docs/evidence-pipeline.md](../do
 | --- | --- |
 | `collectors/` | Active source registry; per-source checkpoints live on the audit branch. |
 | `attribution/` | Governing parties and their dates. |
-| `matching/` | Registry of confirmed promises used by the pipeline. |
+| `promise-registry/` | Registry of confirmed promises used by the pipeline. |
 | `topic-routing/` | Routing taxonomy; the tag-assignment cache lives on the audit branch. |
 | `evidence-packages/` | Unpublished queue of bounded evidence packages (audit branch). |
 | `review-proposals/` | Unpublished assessment proposals for human review (audit branch). |

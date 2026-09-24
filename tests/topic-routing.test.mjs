@@ -12,7 +12,7 @@ import {
 import { validateTaxonomy } from "../scripts/lib/topic-taxonomy.mjs";
 
 const taxonomy = validateTaxonomy(JSON.parse(await readFile(new URL("../automation/topic-routing/taxonomy-v1.json", import.meta.url), "utf8")));
-const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8")));
+const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8")));
 const fiscalPromise = registry.promises.find(({ id }) => id === "candidate-d5359e35a4c4");
 
 function taggerOutput(tags, { confidence = 0.9, supportingExcerpts = ["fixture excerpt"] } = {}) {

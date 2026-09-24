@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readdir, readFile } from "node:fs/promises";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
-import { loadPublishedPromiseIds, publishedMatchingRegistry } from "../scripts/lib/published-promises.mjs";
+import { loadPublishedPromiseIds, publishedPromiseRegistry } from "../scripts/lib/published-promises.mjs";
 
 async function readJsonDirectory(relativePath) {
   const directory = new URL(`../${relativePath}/`, import.meta.url);
@@ -68,9 +68,9 @@ test("production assessments retain their sources", async () => {
 
 test("the evidence pipeline selects exactly the published promises", async () => {
   const [registry, publishedIds] = await Promise.all([
-    (async () => JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8")))(),
+    (async () => JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8")))(),
     loadPublishedPromiseIds(fileURLToPath(new URL("../data/promises/", import.meta.url)))
   ]);
-  const selected = publishedMatchingRegistry(registry, publishedIds);
+  const selected = publishedPromiseRegistry(registry, publishedIds);
   assert.deepEqual(selected.promises.map(({ id }) => id).sort(), [...publishedIds].sort());
 });

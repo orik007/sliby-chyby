@@ -12,7 +12,7 @@ import {
 } from "../scripts/lib/attribution.mjs";
 import { loadPublishedPromiseIds } from "../scripts/lib/published-promises.mjs";
 
-const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8")));
+const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8")));
 const promise = { id: "test-promise", partyId: "motoriste" };
 
 test("the promise registry contains exactly the confirmed public promises", async () => {
@@ -89,27 +89,26 @@ test("only the submission step of a bill is a proposal", () => {
   assert.equal(attributionStatusForRecord(step, promise).attributionStatus, "unattributed");
 });
 
-test("a party's own publication or a press release is never attributable", () => {
-  const publication = createCollectedRecord({
+test("only Chamber votes and legislative steps can be collected, and only four statuses are assessable", () => {
+  assert.throws(() => createCollectedRecord({
     id: "party--post",
-    sourceId: "motoriste-party-news-wordpress",
+    sourceId: "party-news",
     kind: "official-publication",
     primary: true,
-    evidenceRole: "official-party-publication",
+    evidenceRole: "primary-record",
     occurredAt: "2026-09-19T10:00:00.000Z",
     title: "Motoristé prosadili nižší schodek",
     publisher: "Motoristé sobě",
     url: "https://party.example/post",
-    payload: { excerptCz: "Strana tvrdí, že prosadila nižší schodek.", sourcePartyId: "motoriste" }
-  });
-  assert.equal(attributionStatusForRecord(publication, promise).attributionStatus, "unattributed");
+    payload: {}
+  }), /Unknown record kind/);
   assert.deepEqual([...assessableAttributionStatuses].sort(), ["verified-government-proposal", "verified-member-bill", "verified-party-no-majority", "verified-party-vote"]);
 });
 
 test("bounded selection keeps only assessable primary evidence, direct links first", () => {
-  const direct = { record: voteRecord({ id: "psp--vote-direct" }), attributionStatus: "verified-party-vote", exactSignal: true };
-  const tagged = { record: voteRecord({ id: "psp--vote-tagged" }), attributionStatus: "verified-party-vote", exactSignal: false };
-  const procedural = { record: voteRecord({ id: "psp--vote-procedural" }), attributionStatus: "candidate-party-vote-without-decisive-context", exactSignal: true };
+  const direct = { record: voteRecord({ id: "psp--vote-direct" }), attributionStatus: "verified-party-vote", directLink: true };
+  const tagged = { record: voteRecord({ id: "psp--vote-tagged" }), attributionStatus: "verified-party-vote", directLink: false };
+  const procedural = { record: voteRecord({ id: "psp--vote-procedural" }), attributionStatus: "candidate-party-vote-without-decisive-context", directLink: true };
   assert.deepEqual(selectBoundedPrimaryMatches([tagged, procedural, direct]).map(({ record }) => record.id), ["psp--vote-direct", "psp--vote-tagged"]);
 });
 

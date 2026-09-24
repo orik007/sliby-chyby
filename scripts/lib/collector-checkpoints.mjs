@@ -38,18 +38,6 @@ export function validateCollectorCheckpoints(checkpoints, registry) {
   return checkpoints;
 }
 
-/**
- * Drops the checkpoints of sources removed from the registry, so a source
- * retired by a confirmed rule change never blocks the next run. A disabled
- * source still in the registry keeps its checkpoint.
- */
-export function withoutRemovedSourceCheckpoints(checkpoints, registry) {
-  const knownSourceIds = new Set(registry.sources.map(({ id }) => id));
-  const sourceCheckpoints = Object.fromEntries(Object.entries(checkpoints?.sourceCheckpoints ?? {})
-    .filter(([sourceId]) => knownSourceIds.has(sourceId)));
-  return validateCollectorCheckpoints({ ...checkpoints, sourceCheckpoints }, registry);
-}
-
 function checkpointSince(checkpoint) {
   return checkpoint.lastSuccessfulCollectionAt.slice(0, 10);
 }

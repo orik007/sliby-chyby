@@ -59,7 +59,6 @@ export function validatePromiseRegistry(registry) {
     invariant(typeof promise.promiseSource.exactQuoteCz === "string" && promise.originalTextCz.includes(promise.promiseSource.exactQuoteCz), `Promise ${promise.id} exact quote is not present verbatim in its original text`);
     invariant(/^https:\/\//.test(promise.promiseSource.url), `Promise ${promise.id} source must use HTTPS`);
     invariant(/^\d{4}(?:-\d{2})?(?:-\d{2})?$/.test(promise.promiseSource.publishedAt), `Promise ${promise.id} source has an invalid publication date`);
-    invariant(promise.matching === undefined, `Promise ${promise.id} carries retired phrase-matching configuration`);
     if (promise.maintenanceBaseline !== undefined) {
       const baseline = promise.maintenanceBaseline;
       invariant(baseline && typeof baseline === "object", `Promise ${promise.id} has an invalid maintenance baseline`);
@@ -117,7 +116,7 @@ export function isPotentiallyAttributable(record, partyIds) {
 }
 
 function compareMatches(a, b) {
-  return Number(b.exactSignal) - Number(a.exactSignal)
+  return Number(b.directLink) - Number(a.directLink)
     || String(b.record.occurredAt).localeCompare(String(a.record.occurredAt))
     || a.record.id.localeCompare(b.record.id);
 }

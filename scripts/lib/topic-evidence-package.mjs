@@ -13,7 +13,7 @@ function invariant(condition, message) {
  */
 function asBoundableMatch(record, promise, routeBasis) {
   const { attributionStatus } = attributionStatusForRecord(record, promise);
-  return { record, attributionStatus, exactSignal: routeBasis.includes("direct-structural-link"), routeBasis };
+  return { record, attributionStatus, directLink: routeBasis.includes("direct-structural-link"), routeBasis };
 }
 
 function evidenceFromRoutedMatch(match, promise) {
@@ -80,7 +80,7 @@ export function buildTopicEvidencePackage({ promise, routedRecords, collectorRun
       routerVersion: "topic-routing-v1",
       collectorRunId: collectorRun.runId,
       collectorRunHash: sha256(collectorRun),
-      candidateMatchCount: matches.length,
+      routedRecordCount: matches.length,
       primaryMatchCount: matches.filter(({ record, attributionStatus }) => record.primary && assessableAttributionStatuses.has(attributionStatus)).length,
       selectedPrimaryEvidenceCount: selectedMatches.length,
       omittedPrimaryMatchCount: Math.max(0, matches.filter(({ record, attributionStatus }) => record.primary && assessableAttributionStatuses.has(attributionStatus)).length - selectedMatches.length),

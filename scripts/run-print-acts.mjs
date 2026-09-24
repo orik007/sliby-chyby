@@ -24,7 +24,7 @@ import {
  * print with its title-derived acts only.
  */
 function parseArgs(args) {
-  const options = { collectorRun: null, cache: null, output: null, sourceRegistry: "automation/collectors/sources.json", promiseRegistry: "automation/matching/promises.json" };
+  const options = { collectorRun: null, cache: null, output: null, sourceRegistry: "automation/collectors/sources.json", promiseRegistry: "automation/promise-registry/promises.json" };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];

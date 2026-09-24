@@ -43,7 +43,7 @@ Party websites, press releases, and the media are not evidence. Government resol
 | `archive/promise-sources/` | Original promise-source files and their verified retrieval manifest; storage format is defined in `data-model.md`. |
 | `automation/collectors/` | Registry of active evidence sources. |
 | `automation/attribution/` | Governing parties and their dates, with an official source. |
-| `automation/matching/` | Registry of confirmed promises used by the pipeline (exact wording, source, tests, maintenance baseline). |
+| `automation/promise-registry/` | Registry of confirmed promises used by the pipeline (exact wording, source, tests, maintenance baseline). |
 | `automation/topic-routing/` | Controlled routing taxonomy and the durable tag-assignment cache. |
 | `automation/evidence-packages/` | Durable unpublished queue of enriched evidence packages awaiting assessment. |
 | `automation/prompts/` | Active tagger, assessor, and arbiter prompts. |

@@ -266,7 +266,7 @@ test("createEmbeddings retries a 429 rate-limit response and succeeds on the nex
 
 test("createStructuredModelResponse falls back to the exact exponential schedule when Retry-After is absent", async () => {
   // Every other retry test always supplies a Retry-After header, so the
-  // fallback path (and its exact delay values) was previously exercised by
+  // fallback path (and its exact delay values) would otherwise be exercised by
   // nothing -- even a broken implementation that always waited a fixed 2s
   // regardless of attempt number would have passed. Mock setTimeout itself
   // to capture the real delay values `sleep` requests, firing immediately

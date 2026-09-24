@@ -4,8 +4,8 @@ const STATE_LABELS = {
   "review-candidate": "Assessment candidate awaiting human review",
   "human-review-required": "Human review required; no proposed public score",
   "assessable-package": "Assessable primary-evidence package; not yet proposed",
-  "candidate-matches-without-attributable-primary": "Candidate matches found, but no attributable primary evidence",
-  "no-candidate-match": "No candidate match found in this run"
+  "routed-without-attributable-conduct": "Records routed, but none is attributable conduct",
+  "no-routed-record": "No record routed in this run"
 };
 
 function activeProposals(manifest) {
@@ -23,16 +23,35 @@ function stateFor(result, proposal) {
   if (proposal?.resolutionState === "candidate") return "review-candidate";
   if (proposal?.resolutionState === "human-review-required") return "human-review-required";
   if (result.evidencePackage) return "assessable-package";
-  if (result.candidateMatchCount > 0) return "candidate-matches-without-attributable-primary";
-  return "no-candidate-match";
+  if (result.routedRecordCount > 0) return "routed-without-attributable-conduct";
+  return "no-routed-record";
 }
 
-export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, sourceRegistry, proposalManifest }) {
+// Per-promise routing results from a completed topic-routing report.
+function promiseResults(routingRun, promises) {
+  const routedCounts = new Map();
+  for (const { route } of routingRun.sourceTagAssignments) {
+    if (route.disposition !== "candidate-created") continue;
+    for (const promiseId of route.candidatePromiseIds) routedCounts.set(promiseId, (routedCounts.get(promiseId) ?? 0) + 1);
+  }
+  const packages = new Map(routingRun.builtPackages.filter((entry) => entry.built).map((entry) => [entry.promiseId, entry]));
+  return new Map(promises.map((promise) => {
+    const built = packages.get(promise.id);
+    return [promise.id, {
+      routedRecordCount: routedCounts.get(promise.id) ?? 0,
+      attributableEvidenceCount: built?.selectedEvidenceCount ?? 0,
+      evidencePackage: built ? `evidence-packages/${promise.id}.json` : null
+    }];
+  }));
+}
+
+export function buildCoverageAudit({ collectorRun, routingRun, printActs, promiseRegistry, sourceRegistry, proposalManifest }) {
   invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
-  invariant(matcherRun?.schemaVersion === "1.0.0" && Array.isArray(matcherRun.promiseResults), "Invalid matcher run");
+  invariant(routingRun?.schemaVersion === "1.0.0" && Array.isArray(routingRun.sourceTagAssignments) && Array.isArray(routingRun.builtPackages), "Invalid topic-routing run");
+  invariant(routingRun.completed === true, "A coverage audit needs a completed topic-routing run");
   invariant(Array.isArray(promiseRegistry?.promises), "Invalid promise registry");
   invariant(Array.isArray(sourceRegistry?.sources), "Invalid source registry");
-  const results = new Map(matcherRun.promiseResults.map((result) => [result.promiseId, result]));
+  const results = promiseResults(routingRun, promiseRegistry.promises);
   const proposals = activeProposals(proposalManifest);
   const sources = new Map(sourceRegistry.sources.map((source) => [source.id, source]));
   const recordsBySource = new Map();
@@ -54,18 +73,12 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
     collectorsBySourceId.set(collector.sourceId, collector);
   }
   const failuresBySourceId = new Map((collectorRun.failures ?? []).map((failure) => [failure.sourceId, failure]));
-  // `collectorRun.since` is the run-wide override (null on an ordinary
-  // checkpoint-driven run); a source with no `collector` entry still has
-  // its own planned start in `collectionPlan`, which must be preferred so
-  // a failed or manually-excluded source doesn't misreport `null`.
+  // `collectorRun.since` is only a manual override; each source's own start
+  // is in `collectionPlan`.
   const collectionPlanBySourceId = new Map((collectorRun.collectionPlan ?? []).map((plan) => [plan.sourceId, plan]));
 
-  // Every *enabled* source gets a row, per the evidence-pipeline rule ("write
-  // a coverage audit for every confirmed promise and enabled source") --
-  // not just the ones `run-collectors.mjs` actually collected this run. A
-  // source whose own collection failed (or one excluded from a targeted
-  // manual replay) must still be visible here as a gap, rather than
-  // silently disappearing as if it were never enabled at all.
+  // Every enabled source gets a row, including one that failed or was not
+  // selected in this run.
   const sourceCoverage = sourceRegistry.sources.filter((source) => source.enabled).map((source) => {
     const collector = collectorsBySourceId.get(source.id);
     const failure = failuresBySourceId.get(source.id);
@@ -90,7 +103,6 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
 
   const promises = promiseRegistry.promises.map((promise) => {
     const result = results.get(promise.id);
-    invariant(result, `Matcher run is missing promise ${promise.id}`);
     const proposal = proposals.get(promise.id) ?? null;
     const state = stateFor(result, proposal);
     return {
@@ -100,8 +112,8 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
       titleCz: promise.titleCz,
       state,
       stateLabel: STATE_LABELS[state],
-      candidateMatchCount: result.candidateMatchCount,
-      attributablePrimaryMatchCount: result.attributablePrimaryMatchCount,
+      routedRecordCount: result.routedRecordCount,
+      attributableEvidenceCount: result.attributableEvidenceCount,
       evidencePackage: result.evidencePackage,
       activeProposal: proposal ? {
         proposalId: proposal.proposalId,
@@ -127,10 +139,19 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
     auditVersion: "coverage-audit-v1",
     generatedAt: new Date().toISOString(),
     collectorRunId: collectorRun.runId,
-    matchedAt: matcherRun.matchedAt,
     requestedSince: collectorRun.since,
-    assessmentCutoff: matcherRun.asOf,
+    assessmentCutoff: routingRun.asOf,
     promiseCount: promises.length,
+    quality: {
+      primaryRecordsInWindow: routingRun.counts.primaryRecordsInWindowCount,
+      notAttributableSkipped: routingRun.counts.notAttributableSkippedCount,
+      routedRecords: routingRun.counts.materialPrimaryRecordCount,
+      directLinks: routingRun.counts.directAssignmentCount,
+      routingReview: routingRun.counts.routingReviewCount,
+      orphanReview: routingRun.counts.orphanReviewCount,
+      invalidTaggerOutputs: routingRun.counts.invalidPromiseTaggerCount + routingRun.counts.invalidSourceTaggerCount,
+      printActs: printActs?.quality ?? null
+    },
     stateCounts,
     parties,
     sourceCoverage,
@@ -138,28 +159,43 @@ export function buildCoverageAudit({ collectorRun, matcherRun, promiseRegistry, 
     scoreInferred: false,
     publicationApproved: false,
     warnings: [
-      "No candidate match does not mean no action and must never be converted into zero points.",
-      "A current-window source cannot provide historical completeness merely because the run requested an earlier date.",
+      "No routed record does not mean no action and must never be converted into zero points.",
       "This audit reports pipeline coverage and review state; it does not assess political promises."
     ]
   };
 }
 
-// A warning or failure message is arbitrary runtime text (a thrown error's
-// own message, or a collector's parsed-content warning) -- never assume it
-// is safe to drop straight into a Markdown table cell. A newline would
-// break out of the row; an unescaped `|` would split it into extra columns.
+// Runtime text may contain newlines or pipes that would break a table row.
 function renderMarkdownCell(text) {
   return String(text ?? "").replace(/\s+/g, " ").trim().replace(/\|/g, "\\|");
 }
 
 export function renderCoverageAuditMarkdown(audit) {
+  const quality = audit.quality;
+  const printActs = quality.printActs;
   const lines = [
     "# Evidence coverage audit",
     "",
-    `Generated for ${audit.promiseCount} reviewed promises; assessment cutoff ${audit.assessmentCutoff}.`,
+    `Generated for ${audit.promiseCount} confirmed promises; assessment cutoff ${audit.assessmentCutoff}.`,
     "",
-    "> This is a pipeline-coverage report, not a political assessment. No match is not zero points.",
+    "> This is a pipeline-coverage report, not a political assessment. No routed record is not zero points.",
+    "",
+    "## Data quality",
+    "",
+    "| Measure | Count |",
+    "|---|---:|",
+    `| Primary records in the window | ${quality.primaryRecordsInWindow} |`,
+    `| Skipped: cannot be attributable conduct | ${quality.notAttributableSkipped} |`,
+    `| Routed records | ${quality.routedRecords} |`,
+    `| Direct legal-identifier links | ${quality.directLinks} |`,
+    `| Routing review | ${quality.routingReview} |`,
+    `| Orphan review | ${quality.orphanReview} |`,
+    `| Invalid tagger outputs | ${quality.invalidTaggerOutputs} |`,
+    ...(printActs ? [
+      `| Bills with official text | ${printActs.billsWithText} of ${printActs.bills} |`,
+      `| Bills with amended acts found | ${printActs.billsWithAmendedActs} of ${printActs.bills} |`,
+      `| Print-text fetch failures | ${printActs.textFetchFailures} |`
+    ] : []),
     "",
     "## Summary",
     "",
@@ -175,9 +211,9 @@ export function renderCoverageAuditMarkdown(audit) {
     "",
     "## Promise coverage",
     "",
-    "| Party | Promise | State | Matches | Attributable primary |",
+    "| Party | Promise | State | Routed records | Attributable evidence |",
     "|---|---|---|---:|---:|",
-    ...audit.promises.map((promise) => `| ${promise.partyName} | ${promise.titleCz} | ${promise.stateLabel} | ${promise.candidateMatchCount} | ${promise.attributablePrimaryMatchCount} |`),
+    ...audit.promises.map((promise) => `| ${promise.partyName} | ${promise.titleCz} | ${promise.stateLabel} | ${promise.routedRecordCount} | ${promise.attributableEvidenceCount} |`),
     ""
   ];
   return lines.join("\n");

@@ -5,7 +5,7 @@ import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import { validatePromiseRegistry } from "../scripts/lib/attribution.mjs";
 import { buildTopicEvidencePackage } from "../scripts/lib/topic-evidence-package.mjs";
 
-const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8")));
+const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8")));
 const fiscalPromise = registry.promises.find(({ id }) => id === "candidate-d5359e35a4c4");
 const collectorRun = { schemaVersion: "1.0.0", runId: "fixture-run", records: [] };
 

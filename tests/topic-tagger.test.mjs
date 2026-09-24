@@ -15,7 +15,7 @@ import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import { validateTaxonomy } from "../scripts/lib/topic-taxonomy.mjs";
 
 const taxonomy = validateTaxonomy(JSON.parse(await readFile(new URL("../automation/topic-routing/taxonomy-v1.json", import.meta.url), "utf8")));
-const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/matching/promises.json", import.meta.url), "utf8")));
+const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8")));
 const fiscalPromise = registry.promises.find(({ id }) => id === "candidate-d5359e35a4c4");
 
 test("loadTaggingPrompt hashes the versioned prompt file", async () => {
@@ -23,7 +23,7 @@ test("loadTaggingPrompt hashes the versioned prompt file", async () => {
   assert.equal(prompt.version, "tagger-v1");
   assert.match(prompt.contentHash, /^[a-f0-9]{64}$/);
   assert.ok(prompt.instructions.includes("Never invent a tag identifier"));
-  assert.ok(prompt.instructions.includes("Never return an empty tag list"), "the prompt's tag contract must match validateTagAssignmentOutput's non-empty requirement, or a compliant zero-tag response would crash the pilot");
+  assert.ok(prompt.instructions.includes("Never return an empty tag list"), "the prompt's tag contract must match validateTagAssignmentOutput's non-empty requirement, or a compliant zero-tag response would crash the run");
   assert.ok(prompt.instructions.includes("empty excerpt-citation list"), "an unknown result must never be told to explain itself in a citation, since only verbatim brief material can pass validateTagAssignmentOutput's grounding check");
 });
 

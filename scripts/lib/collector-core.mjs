@@ -67,7 +67,7 @@ export function validateCollectedRecord(record) {
   invariant(record?.schemaVersion === "1.0.0", "Collected record has an unsupported schemaVersion");
   invariant(typeof record.id === "string" && record.id.length > 0, "Collected record is missing id");
   invariant(typeof record.sourceId === "string" && record.sourceId.length > 0, "Collected record is missing sourceId");
-  invariant(["parliamentary-vote", "legislative-step", "official-publication", "article"].includes(record.kind), `Unknown record kind: ${record.kind}`);
+  invariant(["parliamentary-vote", "legislative-step"].includes(record.kind), `Unknown record kind: ${record.kind}`);
   invariant(typeof record.primary === "boolean", `Record ${record.id} is missing primary`);
   invariant(/^https:\/\//.test(record.url), `Record ${record.id} must use an HTTPS URL`);
   invariant(typeof record.title === "string" && record.title.length > 0, `Record ${record.id} is missing title`);

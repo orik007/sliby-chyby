@@ -4,7 +4,7 @@ import { mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import { basename, dirname, resolve } from "node:path";
 import { loadEnvFile } from "node:process";
 import { sha256 } from "./lib/collector-core.mjs";
-import { loadPublishedPromiseIds, publishedMatchingRegistry } from "./lib/published-promises.mjs";
+import { loadPublishedPromiseIds, publishedPromiseRegistry } from "./lib/published-promises.mjs";
 import { buildPromiseTaggingBrief, buildSourceTaggingBrief, loadTaggingPrompt, requestTagAssignment, TagValidationError, taggingRuntimeConfig, validateTagAssignmentOutput } from "./lib/topic-tagger.mjs";
 import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
 import { isPotentiallyAttributable, validatePromiseRegistry } from "./lib/attribution.mjs";
@@ -22,7 +22,7 @@ function parseArgs(args) {
   const options = {
     collectorRun: null,
     taxonomy: "automation/topic-routing/taxonomy-v1.json",
-    promiseRegistry: "automation/matching/promises.json",
+    promiseRegistry: "automation/promise-registry/promises.json",
     publishedPromises: "data/promises",
     tagCache: "automation/topic-routing/tag-cache",
     enrichedExcerpts: null,
@@ -157,7 +157,7 @@ async function safeRequestTagAssignment(args) {
     if (error instanceof TagValidationError) {
       // The paid call already happened -- requestTagAssignment attaches its
       // provider/model/usage to the error precisely so this isolated
-      // failure still shows up in the pilot's token-usage totals instead of
+      // failure still shows up in the run's token-usage totals instead of
       // silently vanishing from the spend estimate.
       return { response: null, error: error.message, provider: error.provider ?? null, model: error.model ?? null, usage: error.usage ?? null };
     }
@@ -242,9 +242,9 @@ const printActs = args.printActs ? JSON.parse(await readFile(resolve(args.printA
 invariant(printActs.prints && typeof printActs.prints === "object", "Invalid --print-acts file");
 
 const registry = validatePromiseRegistry(JSON.parse(await readFile(resolve(args.promiseRegistry), "utf8")));
-let publishedRegistry = publishedMatchingRegistry(registry, await loadPublishedPromiseIds(args.publishedPromises));
+let publishedRegistry = publishedPromiseRegistry(registry, await loadPublishedPromiseIds(args.publishedPromises));
 // A sample run trims the published set down to the first N promises
-// (deterministic, not random) so a pilot run's model spend and output size
+// (deterministic, not random) so a sample run's model spend and output size
 // stay bounded; the full set is used whenever no sample size is given.
 if (args.samplePromises !== null) publishedRegistry = { ...publishedRegistry, promises: publishedRegistry.promises.slice(0, args.samplePromises) };
 const promiseById = new Map(publishedRegistry.promises.map((promise) => [promise.id, promise]));
@@ -413,20 +413,12 @@ try {
     return [...totals.values()];
   }
 
-  // Unlike an old ad hoc pilot run, this is the one live run the workflow
-  // consumes deterministically every time -- so it writes directly to
-  // --output, not a further timestamped subdirectory a caller would have to
-  // discover after the fact.
   const outputDirectory = resolve(args.output);
   const evidencePackageDirectory = resolve(outputDirectory, "evidence-packages");
   await mkdir(evidencePackageDirectory, { recursive: true });
 
-  // Builds a real, assessable package for every promise routing created at
-  // least one candidate relationship for -- not a token-count prediction.
-  // A promise whose only routed records fail the deterministic attribution
-  // rule (buildTopicEvidencePackage's own gate) gets no package, same as it
-  // would under the old matcher: a candidate relationship alone is never
-  // attributable party conduct.
+  // A package is built for every promise with at least one routed record
+  // that is attributable conduct; routing alone never establishes it.
   const builtPackages = [];
   for (const [promiseId, routedRecords] of evidenceItemsByPromise) {
     const promise = promiseById.get(promiseId);
@@ -541,5 +533,5 @@ if (runFailure) {
   // real failure (an exhausted account, an outage), and must still exit
   // non-zero so the workflow step and CI report it loudly instead of a
   // partial run looking like a clean success.
-  throw new Error(`Topic-routing pilot failed at stage "${runFailure.stage}": ${runFailure.message}`);
+  throw new Error(`Topic routing failed at stage "${runFailure.stage}": ${runFailure.message}`);
 }

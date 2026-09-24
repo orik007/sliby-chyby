@@ -355,15 +355,15 @@ test("PSP normalizer attributes submitted bills to proposer and government parti
 
 test("deduplication accepts identical records and rejects conflicting content", () => {
   const base = {
-    id: "source--1",
-    sourceId: "source",
-    kind: "article",
-    primary: false,
-    evidenceRole: "discovery-context",
+    id: "psp-core-2025--vote-1",
+    sourceId: "psp-core-2025",
+    kind: "parliamentary-vote",
+    primary: true,
+    evidenceRole: "primary-record",
     occurredAt: "2026-08-30T10:00:00.000Z",
     title: "Title",
-    publisher: "Publisher",
-    url: "https://news.example/a",
+    publisher: "Chamber of Deputies of the Parliament of the Czech Republic",
+    url: "https://www.psp.cz/sqw/hlasy.sqw?g=1",
     payload: {}
   };
   const first = createCollectedRecord(base);

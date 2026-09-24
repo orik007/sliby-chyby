@@ -272,6 +272,7 @@ jobs:
           node scripts/run-coverage-audit.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
             --topic-routing-run automation/runs/pipeline/github-actions/topic-routing/topic-routing-report.json \
+            --print-acts automation/runs/pipeline/github-actions/print-acts/print-acts.json \
             --output automation/runs/pipeline/github-actions/coverage-audit.json \
             --markdown automation/runs/pipeline/github-actions/coverage-audit.md
 
@@ -290,8 +291,12 @@ jobs:
               "## Unpublished evidence pipeline",
               "",
               `- Published promises checked: ${run.counts.promiseCount}`,
-              `- Material primary records: ${run.counts.materialPrimaryRecordCount}`,
-              `- Direct structural link assignments: ${run.counts.directAssignmentCount}`,
+              `- Primary records in the window: ${run.counts.primaryRecordsInWindowCount}`,
+              `- Skipped, cannot be attributable conduct: ${run.counts.notAttributableSkippedCount}`,
+              `- Routed records: ${run.counts.materialPrimaryRecordCount}`,
+              `- Bills with official text / amended acts found: ${coverage.quality.printActs.billsWithText} / ${coverage.quality.printActs.billsWithAmendedActs} of ${coverage.quality.printActs.bills}`,
+              `- Print-text fetch failures: ${coverage.quality.printActs.textFetchFailures}`,
+              `- Direct legal-identifier links: ${run.counts.directAssignmentCount}`,
               `- Auto-candidate relationships: ${run.counts.candidateRelationshipCount}`,
               `- Routing review (needs human routing decision): ${run.counts.routingReviewCount}`,
               `- Orphan review (no safe topic assignment or matching promise): ${run.counts.orphanReviewCount}`,
@@ -304,12 +309,12 @@ jobs:
               `- Unchanged assessments skipped: ${assessment.unchangedCount}`,
               `- Assessments blocked by document warnings: ${assessment.blockedCount}`,
               `- Assessment cutoff: ${run.asOf}`,
-              `- No candidate match (not a score): ${coverage.stateCounts["no-candidate-match"]}`,
-              `- Matches without attributable primary evidence: ${coverage.stateCounts["candidate-matches-without-attributable-primary"]}`,
+              `- No routed record (not a score): ${coverage.stateCounts["no-routed-record"]}`,
+              `- Routed without attributable conduct: ${coverage.stateCounts["routed-without-attributable-conduct"]}`,
               `- Human-review proposals or unresolved reviews: ${coverage.stateCounts["review-candidate"] + coverage.stateCounts["human-review-required"]}`,
               "- Direction assigned: no",
               "- Publication approved: no",
-              "- A missing match never becomes zero points.",
+              "- No routed record never becomes zero points.",
               ""
             ];
             await appendFile(process.env.GITHUB_STEP_SUMMARY, lines.join("\n"));

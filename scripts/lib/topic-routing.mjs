@@ -74,7 +74,7 @@ export function combineTaggerResults(taxonomy, taggerA, taggerB, { directLink = 
 
 /**
  * Derives one promise's accepted routing tags from two independent tagger
- * proposals, for pilot measurement purposes. When the taggers groundedly
+ * proposals. When the taggers groundedly
  * agree on a specific tag (`auto-candidate`), only that agreed set becomes
  * the accepted `tags` -- a tag proposed by just one tagger must not ride
  * along into an assignment marked `needsReview: false`, since that flag is
