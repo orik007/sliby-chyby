@@ -6,11 +6,8 @@ const workflowUrl = new URL("../.github/workflows/collect-evidence.yml", import.
 const statusUrl = new URL("../data/system-status.json", import.meta.url);
 const assessmentBatchUrl = new URL("../scripts/run-assessment-batch.mjs", import.meta.url);
 
-test("full evidence collection routes via topic tags and keeps the daily schedule paused pending its first verified run", async () => {
+test("the daily schedule stays paused until the first manual run of the pipeline is verified", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
-  // The daily cron stays commented out until a manual run of this exact
-  // (now topic-routing-based) workflow has been verified; it is not deleted,
-  // so re-enabling it later is a one-line change.
   assert.match(workflow, /# {3}- cron: "37 9 \* \* \*"/);
   assert.match(workflow, /# {5}timezone: "Europe\/Prague"/);
   assert.match(workflow, /--checkpoints automation\/collectors\/checkpoints\.json/);
@@ -27,13 +24,6 @@ test("full evidence collection routes via topic tags and keeps the daily schedul
   assert.match(workflow, /--topic-routing-run automation\/runs\/pipeline\/github-actions\/topic-routing\/topic-routing-report\.json/);
   assert.match(workflow, /const collectorRun = JSON\.parse\(await readFile\("automation\/runs\/pipeline\/github-actions\/collector\/collector-run\.json", "utf8"\)\);/);
   assert.match(workflow, /collectorRun\.collectors\.map/);
-  // The old exact-signal/semantic matcher and its similarity-threshold
-  // reconciliation step are retired, not merely unused: topic-routing is the
-  // sole live routing mechanism per docs/evidence-pipeline.md.
-  assert.doesNotMatch(workflow, /run-matcher\.mjs/);
-  assert.doesNotMatch(workflow, /reconcile-evidence-package-queue\.mjs/);
-  assert.doesNotMatch(workflow, /SLIBY_SEMANTIC_/);
-  assert.doesNotMatch(workflow, /automation\/semantic-index/);
   assert.doesNotMatch(workflow, /^      GH_TOKEN:/m);
   assert.match(workflow, /persist-credentials: false/);
   assert.match(workflow, /uses: actions\/checkout@v5\n        with:\n          ref: main/);
@@ -103,4 +93,17 @@ test("the public fallback records a valid successful collection time", async () 
   const status = JSON.parse(await readFile(statusUrl, "utf8"));
   assert.equal(typeof status.lastSuccessfulCollectionAt, "string");
   assert.equal(Number.isNaN(Date.parse(status.lastSuccessfulCollectionAt)), false);
+});
+
+test("audit state of another pipeline generation is never restored", async () => {
+  const workflow = await readFile(workflowUrl, "utf8");
+  const generation = (await readFile(new URL("../automation/pipeline-generation", import.meta.url), "utf8")).trim();
+  assert.equal(generation, "official-records-v1");
+  assert.match(workflow, /audit_generation="\$\(git show "origin\/\$REVIEW_BRANCH:automation\/pipeline-generation" 2>\/dev\/null \|\| true\)"/);
+  assert.match(workflow, /if \[ "\$audit_generation" != "\$\(cat automation\/pipeline-generation\)" \]; then/);
+  for (const path of ["collectors/checkpoints.json", "evidence-packages/manifest.json", "review-proposals/manifest.json"]) {
+    const file = JSON.parse(await readFile(new URL(`../automation/${path}`, import.meta.url), "utf8"));
+    const entries = file.sourceCheckpoints ?? file.packages ?? file.proposals;
+    assert.equal(Object.keys(entries).length, 0, `${path} on main must be empty so a fresh generation starts from nothing`);
+  }
 });

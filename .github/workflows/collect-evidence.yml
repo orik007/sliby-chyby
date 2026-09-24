@@ -1,10 +1,8 @@
 name: Collect, match, and assess confirmed promises
 
 on:
-  # Scheduled daily run stays paused until a manual workflow_dispatch run of
-  # this exact workflow (topic-routing now live, per docs/evidence-pipeline.md)
-  # has been verified end to end. Re-enable this schedule block once that
-  # first verification run has been reviewed and approved.
+  # The daily run stays paused until a manual workflow_dispatch run of this
+  # workflow has been verified end to end (docs/evidence-pipeline.md).
   # schedule:
   #   - cron: "37 9 * * *"
   #     timezone: "Europe/Prague"
@@ -26,7 +24,7 @@ on:
         default: ""
         type: string
       tagging_concurrency:
-        description: Parallel tagged subjects in flight (each uses 2 API calls); leave empty for the Tier-3 default of 8. Lower this if the account's usage tier drops or TPM errors appear.
+        description: Parallel tagged subjects (each uses 2 API calls); leave empty for 8
         required: false
         default: ""
         type: string
@@ -43,15 +41,8 @@ jobs:
   collect:
     name: Build unpublished review proposals
     runs-on: ubuntu-latest
-    # A full historical backfill (--since covering the whole campaign period)
-    # tags far more subjects than the 90-minute default this limit was sized
-    # for. A job killed by timeout-minutes is not a graceful failure: GitHub
-    # Actions tears down the runner before any later step gets a chance to
-    # run, including "Persist tag-assignment cache even on a failed run" --
-    # so a timeout kill loses already-paid-for tagging work exactly the way
-    # this pipeline's own failure handling exists to prevent, just through a
-    # different door. 300 minutes gives real headroom for a full backfill;
-    # it can be lowered again once typical incremental run time is known.
+    # A job killed by timeout-minutes cannot persist its tag cache, so the
+    # limit leaves headroom for a full-term first run.
     timeout-minutes: 300
     environment:
       name: assessment
@@ -60,7 +51,7 @@ jobs:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       COLLECTOR_SINCE: ${{ inputs.since || '' }}
       COLLECTOR_SOURCES: ${{ inputs.sources || '' }}
-      MATCHER_AS_OF: ${{ inputs.as_of || '' }}
+      AS_OF_INPUT: ${{ inputs.as_of || '' }}
       REVIEW_BRANCH: automation/assessment-review
       SLIBY_ASSESSOR_PROVIDER_A: openai
       SLIBY_ASSESSOR_PROVIDER_B: openai
@@ -72,12 +63,8 @@ jobs:
       SLIBY_TAGGING_PROVIDER: openai
       SLIBY_TAGGING_MODEL_A: gpt-6-luna
       SLIBY_TAGGING_MODEL_B: gpt-6-luna
-      # Concurrency of 1 reliably exhausted a Tier-1 account's sustained TPM
-      # budget for gpt-5.6-terra (confirmed by a real run). Now on Tier 3
-      # (5,000 RPM / 2,000,000 TPM), 8 gives real speedup for a full backfill
-      # while leaving headroom alongside SLIBY_ASSESSMENT_CONCURRENCY, which
-      # shares the same model later in the same run. Override via the
-      # tagging_concurrency input if the tier changes or TPM errors appear.
+      # Parallel tagged subjects; override with the tagging_concurrency input
+      # if the account's rate limits change.
       SLIBY_TAGGING_CONCURRENCY: ${{ inputs.tagging_concurrency || '8' }}
     steps:
       - name: Check out repository
@@ -98,6 +85,14 @@ jobs:
             git fetch "$authenticated_remote" "+refs/heads/$REVIEW_BRANCH:refs/remotes/origin/$REVIEW_BRANCH"
             audit_branch_tip="$(git rev-parse "origin/$REVIEW_BRANCH")"
             restore_paths=()
+            # Audit state from another pipeline generation (automation/pipeline-generation)
+            # is never restored: the run starts from empty checkpoints, caches, and queues.
+            audit_generation="$(git show "origin/$REVIEW_BRANCH:automation/pipeline-generation" 2>/dev/null || true)"
+            if [ "$audit_generation" != "$(cat automation/pipeline-generation)" ]; then
+              echo "::notice::The audit branch holds another pipeline generation; starting from a fresh audit state."
+              echo "AUDIT_BRANCH_TIP=$audit_branch_tip" >> "$GITHUB_ENV"
+              exit 0
+            fi
             if git cat-file -e "origin/$REVIEW_BRANCH:automation/collectors/checkpoints.json" 2>/dev/null; then
               restore_paths+=(automation/collectors/checkpoints.json)
             fi
@@ -165,7 +160,7 @@ jobs:
 
       - name: Route source records to promises via legal identifiers and topic tags
         run: |
-          AS_OF="${MATCHER_AS_OF:-$(date -u +%F)}"
+          AS_OF="${AS_OF_INPUT:-$(date -u +%F)}"
           node scripts/run-topic-routing.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
             --print-acts automation/runs/pipeline/github-actions/print-acts/print-acts.json \
