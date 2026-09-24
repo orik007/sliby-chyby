@@ -6,6 +6,7 @@ import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import {
   assessableAttributionStatuses,
   attributionStatusForRecord,
+  isPotentiallyAttributable,
   selectBoundedPrimaryMatches,
   validatePromiseRegistry
 } from "../scripts/lib/attribution.mjs";
@@ -110,4 +111,13 @@ test("bounded selection keeps only assessable primary evidence, direct links fir
   const tagged = { record: voteRecord({ id: "psp--vote-tagged" }), attributionStatus: "verified-party-vote", exactSignal: false };
   const procedural = { record: voteRecord({ id: "psp--vote-procedural" }), attributionStatus: "candidate-party-vote-without-decisive-context", exactSignal: true };
   assert.deepEqual(selectBoundedPrimaryMatches([tagged, procedural, direct]).map(({ record }) => record.id), ["psp--vote-direct", "psp--vote-tagged"]);
+});
+
+test("only records that can be attributable conduct of a tracked party are routed", () => {
+  const tracked = ["ano", "motoriste", "spd"];
+  assert.equal(isPotentiallyAttributable(voteRecord(), tracked), true);
+  assert.equal(isPotentiallyAttributable(voteRecord({ actions: ["přikázán"] }), tracked), false);
+  assert.equal(isPotentiallyAttributable(submissionStep({ kind: "member-bill", submittedOn: "2026-01-27", proposerPartyIds: ["motoriste"] }), tracked), true);
+  assert.equal(isPotentiallyAttributable(submissionStep({ kind: "member-bill", submittedOn: "2026-01-27", proposerPartyIds: [] }), tracked), false);
+  assert.equal(isPotentiallyAttributable(submissionStep({ kind: "member-bill", submittedOn: "2026-01-27", proposerPartyIds: ["motoriste"] }, "přikázán"), tracked), false);
 });

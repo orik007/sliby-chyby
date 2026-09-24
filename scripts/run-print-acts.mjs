@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
+import { isPotentiallyAttributable } from "./lib/attribution.mjs";
 import { fetchVerified, invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { extractDocxParagraphs, officialPrintDocumentPageUrl, parseOfficialPrintDocumentLinks } from "./lib/psp-print-documents.mjs";
 import {
@@ -15,20 +16,22 @@ import {
 } from "./lib/print-acts.mjs";
 
 /**
- * Derives the acts each collected Chamber print amends, from its official
+ * Derives the acts each Chamber print concerned by a potentially attributable
+ * record amends, from its official
  * title and its official bill text, and writes the legal identifiers used
  * as direct routing links (docs/evidence-pipeline.md). Bill texts are
  * fetched once and cached; a failed fetch is reported and leaves the
  * print with its title-derived acts only.
  */
 function parseArgs(args) {
-  const options = { collectorRun: null, cache: null, output: null, sourceRegistry: "automation/collectors/sources.json" };
+  const options = { collectorRun: null, cache: null, output: null, sourceRegistry: "automation/collectors/sources.json", promiseRegistry: "automation/matching/promises.json" };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];
     else if (arg === "--cache") options.cache = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--sources") options.sourceRegistry = args[++index];
+    else if (arg === "--promises") options.promiseRegistry = args[++index];
     else throw new Error(`Unknown argument: ${arg}`);
   }
   invariant(options.collectorRun && options.cache && options.output, "--collector-run, --cache, and --output are required");
@@ -80,7 +83,11 @@ const cachePath = resolve(args.cache);
 let cache = existsSync(cachePath) ? validatePrintActsCache(JSON.parse(await readFile(cachePath, "utf8"))) : emptyPrintActsCache();
 if (cache.extractorVersion !== printActsExtractorVersion) cache = emptyPrintActsCache();
 
-const prints = collectPrints(collectorRun.records);
+// Only prints that a potentially attributable record concerns matter for
+// routing; the texts of all other prints are never fetched.
+const promiseRegistry = JSON.parse(await readFile(resolve(args.promiseRegistry), "utf8"));
+const trackedPartyIds = [...new Set(promiseRegistry.promises.map(({ partyId }) => partyId))].sort();
+const prints = collectPrints(collectorRun.records.filter((record) => record.primary === true && isPotentiallyAttributable(record, trackedPartyIds)));
 const failures = [];
 const result = {};
 for (const print of prints) {

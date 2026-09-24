@@ -7,7 +7,7 @@ import { sha256 } from "./lib/collector-core.mjs";
 import { loadPublishedPromiseIds, publishedMatchingRegistry } from "./lib/published-promises.mjs";
 import { buildPromiseTaggingBrief, buildSourceTaggingBrief, loadTaggingPrompt, requestTagAssignment, TagValidationError, taggingRuntimeConfig, validateTagAssignmentOutput } from "./lib/topic-tagger.mjs";
 import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
-import { validatePromiseRegistry } from "./lib/attribution.mjs";
+import { isPotentiallyAttributable, validatePromiseRegistry } from "./lib/attribution.mjs";
 import { buildInvertedIndex, deriveDirectLink, derivePromiseTopicTags, recordPrintIds, routeSourceRecord } from "./lib/topic-routing.mjs";
 import { buildTopicEvidencePackage } from "./lib/topic-evidence-package.mjs";
 
@@ -252,7 +252,11 @@ const promiseById = new Map(publishedRegistry.promises.map((promise) => [promise
 const collectorRun = JSON.parse(await readFile(resolve(args.collectorRun), "utf8"));
 invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
 const cutoff = `${args.asOf}T23:59:59.999Z`;
-let materialPrimaryRecords = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff));
+// Only records that can be attributable conduct of a tracked party are routed
+// and tagged; every other record could never reach an evidence package.
+const trackedPartyIds = [...new Set(publishedRegistry.promises.map(({ partyId }) => partyId))].sort();
+const primaryRecordsInWindow = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff));
+let materialPrimaryRecords = primaryRecordsInWindow.filter((record) => isPotentiallyAttributable(record, trackedPartyIds));
 if (args.sampleRecords !== null) materialPrimaryRecords = materialPrimaryRecords.slice(0, args.sampleRecords);
 
 const enrichedExcerptsByRecordId = args.enrichedExcerpts ? await readJsonIfExists(resolve(args.enrichedExcerpts), {}) : {};
@@ -464,6 +468,8 @@ try {
       : null,
     counts: {
       sourceRecordCount: collectorRun.records.length,
+      primaryRecordsInWindowCount: primaryRecordsInWindow.length,
+      notAttributableSkippedCount: primaryRecordsInWindow.length - materialPrimaryRecords.length,
       materialPrimaryRecordCount: materialPrimaryRecords.length,
       promiseCount: publishedRegistry.promises.length,
       directAssignmentCount,

@@ -25,8 +25,8 @@ export const taggingPromptVersion = "tagger-v1";
 export function taggingRuntimeConfig(env = process.env) {
   return {
     provider: env.SLIBY_TAGGING_PROVIDER ?? "openai",
-    modelA: env.SLIBY_TAGGING_MODEL_A ?? "gpt-5.6-terra",
-    modelB: env.SLIBY_TAGGING_MODEL_B ?? "gpt-5.6-terra",
+    modelA: env.SLIBY_TAGGING_MODEL_A ?? "gpt-6-luna",
+    modelB: env.SLIBY_TAGGING_MODEL_B ?? "gpt-6-luna",
     concurrency: Number(env.SLIBY_TAGGING_CONCURRENCY ?? "4")
   };
 }

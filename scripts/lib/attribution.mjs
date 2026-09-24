@@ -106,6 +106,16 @@ export function attributionStatusForRecord(record, promise) {
   return { attributionStatus: "unattributed" };
 }
 
+/**
+ * Whether a record can become package evidence for any of the given parties.
+ * Attribution depends only on the record itself (its kind, decisive vote
+ * context, club majorities, and proposers), so a record that fails this test
+ * can never affect a score and is not routed or tagged.
+ */
+export function isPotentiallyAttributable(record, partyIds) {
+  return partyIds.some((partyId) => assessableAttributionStatuses.has(attributionStatusForRecord(record, { partyId }).attributionStatus));
+}
+
 function compareMatches(a, b) {
   return Number(b.exactSignal) - Number(a.exactSignal)
     || String(b.record.occurredAt).localeCompare(String(a.record.occurredAt))
