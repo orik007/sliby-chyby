@@ -1,7 +1,8 @@
 import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
-import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
-import { dirname, relative, resolve } from "node:path";
+import { randomUUID } from "node:crypto";
+import { mkdir, readFile, readdir, rename, rm, writeFile } from "node:fs/promises";
+import { basename, dirname, relative, resolve } from "node:path";
 import { assessmentRuntimeConfig, loadAssessmentPrompts } from "./lib/assessment-config.mjs";
 import {
   addReviewProposals,
@@ -16,6 +17,17 @@ import { loadCurrentEvidencePackages } from "./lib/evidence-package-queue.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
+}
+
+async function writeJsonAtomically(filePath, value) {
+  const temporary = resolve(dirname(filePath), `.${basename(filePath)}.${randomUUID()}.tmp`);
+  try {
+    await writeFile(temporary, `${JSON.stringify(value, null, 2)}\n`, { encoding: "utf8", flag: "wx" });
+    await rename(temporary, filePath);
+  } catch (error) {
+    await rm(temporary, { force: true });
+    throw error;
+  }
 }
 
 function parseArgs(args) {
@@ -44,11 +56,11 @@ function parseArgs(args) {
   return options;
 }
 
-async function runAssessment(packagePath, outputRoot) {
+async function runAssessment(packagePath, outputRoot, responseCache) {
   const runner = process.env.SLIBY_ASSESSMENT_RUNNER ?? "scripts/run-assessment.mjs";
   const child = spawn(process.execPath, [runner, packagePath, outputRoot], {
     cwd: process.cwd(),
-    env: process.env,
+    env: { ...process.env, SLIBY_RESPONSE_CACHE: responseCache },
     stdio: ["ignore", "pipe", "inherit"]
   });
   let stdout = "";
@@ -90,6 +102,9 @@ function pullRequestBody(summary) {
     assessed: "nový návrh připraven ke kontrole",
     unchanged: "beze změny",
     "blocked-enrichment-warning": "čeká na úplný úřední dokument",
+    "deferred-by-limit": "odloženo limitem běhu",
+    "not-assessed-after-interruption": "nehodnoceno, běh byl přerušen",
+    "interrupted-by-error": "hodnocení přerušeno chybou",
     "assessment-failed": "automatické hodnocení selhalo; zkusí se znovu v dalším běhu"
   };
   const lines = [
@@ -113,6 +128,8 @@ function pullRequestBody(summary) {
     `Nezměněné podklady bez nového volání modelů: **${summary.unchangedCount}**`,
     `Případy čekající na úplný úřední dokument: **${summary.blockedCount}**`,
     `Izolovaná selhání hodnocení: **${summary.failedCount}**`,
+    `Odloženo limitem běhu (${summary.maxAssessments}): **${summary.deferredCount}**`,
+    ...(summary.interruption ? [`Běh byl přerušen chybou (${summary.interruption.message}); nehodnoceno: **${summary.notAssessedAfterInterruptionCount}**. Dokončená hodnocení jsou uložena, další běh ohodnotí zbytek.`] : []),
     "",
     "Všechny návrhy vyžadují lidskou kontrolu a nejsou schválené ke zveřejnění."
   );
@@ -124,11 +141,13 @@ function humanReviewUrl(reviewPath) {
   return `https://github.com/${process.env.GITHUB_REPOSITORY}/blob/${process.env.REVIEW_BRANCH}/${reviewPath}`;
 }
 
-async function mapWithConcurrency(items, concurrency, worker) {
+// Stops starting new items once shouldStop() is true; items already running
+// finish. Skipped items leave their result slot undefined.
+async function mapWithConcurrency(items, concurrency, worker, shouldStop = () => false) {
   const results = new Array(items.length);
   let nextIndex = 0;
   async function runWorker() {
-    while (nextIndex < items.length) {
+    while (nextIndex < items.length && !shouldStop()) {
       const index = nextIndex;
       nextIndex += 1;
       results[index] = await worker(items[index]);
@@ -230,6 +249,8 @@ const prompts = await loadAssessmentPrompts();
 const runtime = assessmentRuntimeConfig();
 invariant(Number.isInteger(runtime.concurrency) && runtime.concurrency > 0 && runtime.concurrency <= 8, "SLIBY_ASSESSMENT_CONCURRENCY must be an integer from 1 to 8");
 const { concurrency, ...assessmentRuntime } = runtime;
+const maxAssessments = Number(process.env.SLIBY_MAX_ASSESSMENTS ?? "0");
+invariant(Number.isInteger(maxAssessments) && maxAssessments >= 0, "SLIBY_MAX_ASSESSMENTS must be a non-negative integer");
 const plan = planAssessmentInputs({ packages, manifest, blockedPromiseIds, prompts, runtime: assessmentRuntime });
 const newProposals = [];
 const results = [];
@@ -250,11 +271,54 @@ for (const item of plan) {
     });
     continue;
   }
+  // Packages beyond the per-run cap stay queued and are assessed in a later
+  // run; they are reported with their size so the cost can be estimated.
+  if (assessmentItems.length >= maxAssessments) {
+    results.push({
+      promiseId: item.promiseId,
+      promiseTitleCz: item.evidencePackage.promise.titleCz,
+      assessmentFingerprint: item.assessmentFingerprint,
+      disposition: "deferred-by-limit",
+      resolutionState: null,
+      candidateStatus: null,
+      reviewUrl: null,
+      packageCharacters: JSON.stringify(item.evidencePackage).length
+    });
+    continue;
+  }
   assessmentItems.push(item);
 }
 
+// Each paid assessment is saved at once: its proposal files are written as
+// soon as it finishes and the manifest is rewritten atomically after every
+// proposal. A failure (for example exhausted API credit) stops new
+// assessments; the finished ones stay saved, and a later run assesses only
+// what is still missing.
+let currentManifest = manifest;
+let manifestWrites = Promise.resolve();
+function saveProposal(proposal) {
+  currentManifest = addReviewProposals(currentManifest, [proposal]);
+  const snapshot = currentManifest;
+  manifestWrites = manifestWrites.then(() => writeJsonAtomically(manifestPath, snapshot));
+  return manifestWrites;
+}
+let interruption = null;
+
 const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (item) => {
-  const auditRecord = await runAssessment(item.path, runRoot);
+  // Paid model responses of an unfinished assessment wait here until the
+  // assessment is saved, so a retry pays only for the missing calls.
+  const responseCache = resolve(proposalRoot, "responses", item.promiseId, item.assessmentFingerprint);
+  let auditRecord;
+  try {
+    auditRecord = await runAssessment(item.path, runRoot, responseCache);
+  } catch (error) {
+    interruption ??= { promiseId: item.promiseId, message: error instanceof Error ? error.message : String(error) };
+    return { interrupted: true, result: {
+      promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz, assessmentFingerprint: item.assessmentFingerprint,
+      disposition: "interrupted-by-error", resolutionState: null, candidateStatus: null, reviewUrl: null,
+      error: error instanceof Error ? error.message : String(error)
+    } };
+  }
   invariant(auditRecord.assessmentFingerprint === item.assessmentFingerprint, `Fingerprint changed while assessing ${item.promiseId}`);
   if (auditRecord.resolution.state === "assessment-failed") {
     const relativeFailureDirectory = `automation/review-proposals/failures/${item.promiseId}/${item.assessmentFingerprint}`;
@@ -262,6 +326,7 @@ const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (i
     await mkdir(failureDirectory, { recursive: true });
     await writeFile(resolve(failureDirectory, "evidence-package.json"), `${JSON.stringify(item.evidencePackage, null, 2)}\n`);
     await writeFile(resolve(failureDirectory, "assessment-run.json"), `${JSON.stringify(auditRecord, null, 2)}\n`);
+    await rm(responseCache, { recursive: true, force: true });
     return { proposal: null, result: {
       promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz,
       assessmentFingerprint: item.assessmentFingerprint, disposition: "assessment-failed",
@@ -272,10 +337,13 @@ const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (i
   const relativeProposalDirectory = `automation/review-proposals/${item.promiseId}/${item.assessmentFingerprint}`;
   const proposalDirectory = resolve(relativeProposalDirectory);
   await mkdir(resolve(proposalRoot, item.promiseId), { recursive: true });
+  // A proposal to assess is not in the manifest, so an existing directory is
+  // an unfinished write from an interrupted run.
+  await rm(proposalDirectory, { recursive: true, force: true });
   await mkdir(proposalDirectory, { recursive: false });
   await writeFile(resolve(proposalDirectory, "evidence-package.json"), `${JSON.stringify(item.evidencePackage, null, 2)}\n`, { flag: "wx" });
   await writeFile(resolve(proposalDirectory, "assessment-run.json"), `${JSON.stringify(auditRecord, null, 2)}\n`, { flag: "wx" });
-  const previousProposal = currentReviewProposal(manifest, item.promiseId);
+  const previousProposal = currentReviewProposal(currentManifest, item.promiseId);
   const proposal = createReviewProposal({ auditRecord, proposalDirectory: relativeProposalDirectory, supersedesProposalId: previousProposal?.proposalId ?? null });
   await writeFile(resolve(proposalDirectory, "proposal.json"), `${JSON.stringify(proposal, null, 2)}\n`, { flag: "wx" });
   await writeFile(resolve(proposalDirectory, "review.md"), renderHumanReviewMarkdown({ evidencePackage: item.evidencePackage, auditRecord, proposal }), { flag: "wx" });
@@ -283,18 +351,31 @@ const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (i
     proposal,
     reason: "replaced-by-successful-assessment"
   })));
+  await saveProposal(proposal);
+  await rm(responseCache, { recursive: true, force: true });
   return { proposal, result: {
     promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz, assessmentFingerprint: item.assessmentFingerprint,
     disposition: "assessed", resolutionState: auditRecord.resolution.state, candidateStatus: auditRecord.resolution.status, reviewUrl: humanReviewUrl(proposal.humanReviewPath)
   } };
-});
-for (const { proposal, result } of assessed) {
-  if (proposal) newProposals.push(proposal);
-  results.push(result);
+}, () => interruption !== null);
+for (const [index, outcome] of assessed.entries()) {
+  if (!outcome) {
+    const item = assessmentItems[index];
+    results.push({
+      promiseId: item.promiseId,
+      promiseTitleCz: item.evidencePackage.promise.titleCz,
+      assessmentFingerprint: item.assessmentFingerprint,
+      disposition: "not-assessed-after-interruption",
+      resolutionState: null,
+      candidateStatus: null,
+      reviewUrl: null
+    });
+    continue;
+  }
+  if (outcome?.proposal) newProposals.push(outcome.proposal);
+  results.push(outcome.result);
 }
-
-const updatedManifest = addReviewProposals(manifest, newProposals);
-await writeFile(manifestPath, `${JSON.stringify(updatedManifest, null, 2)}\n`);
+await manifestWrites;
 
 const summary = {
   schemaVersion: "1.0.0",
@@ -305,6 +386,13 @@ const summary = {
   unchangedCount: results.filter(({ disposition }) => disposition === "unchanged").length,
   blockedCount: results.filter(({ disposition }) => disposition === "blocked-enrichment-warning").length,
   failedCount: results.filter(({ disposition }) => disposition === "assessment-failed").length,
+  maxAssessments,
+  deferredCount: results.filter(({ disposition }) => disposition === "deferred-by-limit").length,
+  deferredPackageCharacters: results.filter(({ disposition }) => disposition === "deferred-by-limit").reduce((sum, { packageCharacters }) => sum + packageCharacters, 0),
+  interruption,
+  interruptedCount: results.filter(({ disposition }) => disposition === "interrupted-by-error").length,
+  notAssessedAfterInterruptionCount: results.filter(({ disposition }) => disposition === "not-assessed-after-interruption").length,
+  promptCharacters: prompts.assessor.instructions.length + prompts.arbiter.instructions.length,
   assessmentConcurrency: concurrency,
   proposalRoot: relativeProposalRoot,
   results
@@ -320,7 +408,16 @@ console.log(JSON.stringify({
   unchangedCount: summary.unchangedCount,
   blockedCount: summary.blockedCount,
   failedCount: summary.failedCount,
+  deferredCount: summary.deferredCount,
+  deferredPackageCharacters: summary.deferredPackageCharacters,
   summaryPath,
   pullRequestBodyPath,
+  interruption,
   publicationApproved: false
 }, null, 2));
+// The summary and every finished proposal are saved; the run still fails so
+// the interruption is visible, and a later run assesses the rest.
+if (interruption) {
+  console.error(`Assessment stopped after an error for ${interruption.promiseId}: ${interruption.message}`);
+  process.exitCode = 1;
+}

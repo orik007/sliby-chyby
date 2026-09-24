@@ -5,6 +5,11 @@ import { hashAssessmentContent, hashAssessmentFingerprint, hashEvidencePackage, 
 
 const [packagePath, outputRoot] = process.argv.slice(2);
 const evidencePackage = validateEvidencePackage(JSON.parse(await readFile(resolve(packagePath), "utf8")));
+// Simulates a provider error such as exhausted API credit.
+if (evidencePackage.promise.id === process.env.SLIBY_MOCK_FAIL_PROMISE) {
+  console.error("Provider request failed with 429: insufficient quota");
+  process.exit(1);
+}
 const prompts = await loadAssessmentPrompts();
 const runtime = assessmentRuntimeConfig();
 const packageHash = hashEvidencePackage(evidencePackage);

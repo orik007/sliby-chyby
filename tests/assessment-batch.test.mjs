@@ -34,7 +34,7 @@ async function writePackage(directory, evidence) {
   await writeFile(join(directory, `${evidence.promise.id}-${evidence.asOf}.json`), `${JSON.stringify(evidence, null, 2)}\n`);
 }
 
-async function runBatch(root, packagesDirectory) {
+async function runBatch(root, packagesDirectory, maxAssessments = "10", { failPromise = "", expectedExitCode = 0 } = {}) {
   const enrichmentRun = join(root, "enrichment-run.json");
   const summary = join(root, "summary.json");
   await writeFile(enrichmentRun, `${JSON.stringify({ warnings: [] })}\n`);
@@ -46,7 +46,7 @@ async function runBatch(root, packagesDirectory) {
     "--pull-request-body", "automation/pull-request.md"
   ], {
     cwd: root,
-    env: { ...process.env, SLIBY_ASSESSMENT_RUNNER: mockRunner, SLIBY_ASSESSMENT_CONCURRENCY: "1" },
+    env: { ...process.env, SLIBY_ASSESSMENT_RUNNER: mockRunner, SLIBY_ASSESSMENT_CONCURRENCY: "1", SLIBY_MAX_ASSESSMENTS: maxAssessments, SLIBY_MOCK_FAIL_PROMISE: failPromise },
     stdio: "pipe"
   });
   let stderr = "";
@@ -56,7 +56,7 @@ async function runBatch(root, packagesDirectory) {
     child.on("error", reject);
     child.on("exit", (code) => resolveExit(code));
   });
-  assert.equal(exitCode, 0, stderr);
+  assert.equal(exitCode, expectedExitCode, stderr);
   return JSON.parse(await readFile(summary, "utf8"));
 }
 
@@ -99,4 +99,59 @@ test("persists an isolated double-invalid failure, then retires it after a newer
   const third = await runBatch(root, emptyPackages);
   assert.equal(third.packageCount, 0);
   assert.equal(third.failedCount, 0);
+});
+
+test("the per-run cap sends no more packages to the paid assessors, and the rest stay pending", async () => {
+  const root = await mkdtemp(join(tmpdir(), "slava-assessment-limit-"));
+  await mkdir(join(root, "automation/prompts"), { recursive: true });
+  await mkdir(join(root, "automation/review-proposals"), { recursive: true });
+  await writeFile(join(root, "automation/prompts/assessor-v15.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v6.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
+  const packages = join(root, "packages");
+  await mkdir(packages);
+  for (const id of ["promise-a", "promise-b", "promise-c"]) await writePackage(packages, evidencePackage(id, "2026-09-10"));
+
+  const none = await runBatch(root, packages, "0");
+  assert.equal(none.newProposalCount, 0);
+  assert.equal(none.deferredCount, 3);
+  assert.ok(none.deferredPackageCharacters > 0);
+
+  const one = await runBatch(root, packages, "1");
+  assert.equal(one.newProposalCount, 1);
+  assert.equal(one.deferredCount, 2);
+
+  const rest = await runBatch(root, packages, "5");
+  assert.equal(rest.newProposalCount, 2);
+  assert.equal(rest.unchangedCount, 1);
+  assert.equal(rest.deferredCount, 0);
+});
+
+test("an interrupted batch keeps every finished assessment, and the next run assesses only the rest", async () => {
+  const root = await mkdtemp(join(tmpdir(), "slava-assessment-interrupted-"));
+  await mkdir(join(root, "automation/prompts"), { recursive: true });
+  await mkdir(join(root, "automation/review-proposals"), { recursive: true });
+  await writeFile(join(root, "automation/prompts/assessor-v15.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v6.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
+  const packages = join(root, "packages");
+  await mkdir(packages);
+  for (const id of ["promise-a", "promise-b", "promise-c"]) await writePackage(packages, evidencePackage(id, "2026-09-10"));
+
+  const interrupted = await runBatch(root, packages, "10", { failPromise: "promise-b", expectedExitCode: 1 });
+  assert.equal(interrupted.newProposalCount, 1);
+  assert.equal(interrupted.interruption.promiseId, "promise-b");
+  assert.equal(interrupted.interruptedCount, 1);
+  assert.equal(interrupted.notAssessedAfterInterruptionCount, 1);
+  const manifest = JSON.parse(await readFile(join(root, "automation/review-proposals/manifest.json"), "utf8"));
+  assert.deepEqual(manifest.proposals.map(({ promiseId }) => promiseId), ["promise-a"]);
+
+  // An unfinished proposal write left by a killed run must not block resuming.
+  const pending = interrupted.results.find(({ promiseId }) => promiseId === "promise-c");
+  const leftover = join(root, "automation/review-proposals/promise-c", pending.assessmentFingerprint);
+  await mkdir(leftover, { recursive: true });
+  await writeFile(join(leftover, "evidence-package.json"), "{");
+  const resumed = await runBatch(root, packages, "10");
+  assert.equal(resumed.unchangedCount, 1);
+  assert.equal(resumed.newProposalCount, 2);
 });

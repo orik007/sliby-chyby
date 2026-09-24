@@ -33,6 +33,16 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   // Every run collects every source completely; no manual start date or
   // source subset can produce a package from part of the record history.
   assert.doesNotMatch(workflow, /inputs\.since|inputs\.sources|--since|--source /);
+  // The paid steps stop before the job limit, so the saving steps always run.
+  assert.match(workflow, /timeout-minutes: 300/);
+  assert.match(workflow, /- name: Route source records to promises via legal identifiers and topic tags\n        timeout-minutes: 120/);
+  assert.match(workflow, /- name: Assess only new or changed packages\n        id: assess\n        timeout-minutes: 120/);
+  // Finished assessments are saved even when the assessment step fails.
+  assert.match(workflow, /- name: Commit new review proposals\n        id: proposals\n        if: always\(\) && steps\.assess\.outcome != 'skipped'/);
+  assert.match(workflow, /- name: Create or update human-review pull request\n        if: always\(\) && steps\.proposals\.outputs\.created == 'true'/);
+  // Paid assessments have a hard per-run cap that defaults to none.
+  assert.match(workflow, /max_assessments:\n        description: [^\n]+\n        required: true\n        default: "0"/);
+  assert.match(workflow, /SLIBY_MAX_ASSESSMENTS: \$\{\{ inputs\.max_assessments \|\| '0' \}\}/);
   const packageJson = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
   assert.equal(packageJson.scripts["collect:evidence"], "node scripts/run-collectors.mjs");
   assert.match(workflow, /git push --force-with-lease="refs\/heads\/\$REVIEW_BRANCH:\$AUDIT_BRANCH_TIP" "https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git" "HEAD:refs\/heads\/\$REVIEW_BRANCH"/);

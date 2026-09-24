@@ -15,6 +15,7 @@ import {
 } from "./lib/assessment-pipeline.mjs";
 import { assessmentRuntimeConfig, loadAssessmentPrompts } from "./lib/assessment-config.mjs";
 import { createStructuredModelResponse } from "./lib/model-provider.mjs";
+import { cachedModelResponse } from "./lib/response-cache.mjs";
 
 const envPath = resolve(".env");
 if (existsSync(envPath)) loadEnvFile(envPath);
@@ -67,11 +68,23 @@ async function createStructuredResponse({ provider, model, instructions, input, 
   });
 }
 
+// SLIBY_RESPONSE_CACHE (set by run-assessment-batch.mjs) keeps every paid
+// response of this assessment until the assessment is saved.
+const responseCache = process.env.SLIBY_RESPONSE_CACHE || null;
+function cachedResponse(role, request) {
+  return cachedModelResponse({ directory: responseCache, role, keyInput: { assessmentFingerprint, role, request }, request: () => createStructuredResponse(request) });
+}
+
 const assessorInput = { packageHash, evidencePackage };
-const [rawA, rawB] = await Promise.all([
-  createStructuredResponse({ provider: assessorProviderA, model: assessorModelA, instructions: assessorInstructions, input: assessorInput, name: "slava_assessment", schema: assessmentOutputJsonSchema }),
-  createStructuredResponse({ provider: assessorProviderB, model: assessorModelB, instructions: assessorInstructions, input: assessorInput, name: "slava_assessment", schema: assessmentOutputJsonSchema })
+// Both assessors are awaited before any error is raised, so a response that
+// arrived is saved even when the other call fails.
+const assessorCalls = await Promise.allSettled([
+  cachedResponse("assessor-a", { provider: assessorProviderA, model: assessorModelA, instructions: assessorInstructions, input: assessorInput, name: "slava_assessment", schema: assessmentOutputJsonSchema }),
+  cachedResponse("assessor-b", { provider: assessorProviderB, model: assessorModelB, instructions: assessorInstructions, input: assessorInput, name: "slava_assessment", schema: assessmentOutputJsonSchema })
 ]);
+const failedAssessorCall = assessorCalls.find(({ status }) => status === "rejected");
+if (failedAssessorCall) throw failedAssessorCall.reason;
+const [rawA, rawB] = assessorCalls.map(({ value }) => value);
 
 const assessmentPair = resolveAvailableAssessmentReviews(rawA.output, rawB.output, evidencePackage);
 const { reviewA, reviewB, validationErrors } = assessmentPair;
@@ -80,7 +93,7 @@ let rawArbiter = null;
 
 if (resolution.state === "arbitration-required") {
   if (!arbiterModel) throw new Error("SLIBY_ARBITER_MODEL is required because the assessors disagreed");
-  rawArbiter = await createStructuredResponse({
+  rawArbiter = await cachedResponse("arbiter", {
     provider: arbiterProvider,
     model: arbiterModel,
     instructions: arbiterInstructions,

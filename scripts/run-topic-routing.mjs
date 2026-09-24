@@ -165,7 +165,18 @@ async function safeRequestTagAssignment(args) {
   }
 }
 
-async function taggedTwice({ subjectId, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache }) {
+// Every newly cached assignment is written to disk at once (atomically and
+// in order), so a run that is killed at any point keeps all tagging it has
+// already paid for.
+function cachePersister(filePath, cache) {
+  let chain = Promise.resolve();
+  return () => {
+    chain = chain.then(() => writeJsonAtomically(filePath, cache));
+    return chain;
+  };
+}
+
+async function taggedTwice({ subjectId, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache, persistCache }) {
   const cached = cache.assignments[subjectId];
   if (cacheFingerprintMatches(cached, { inputHash, taxonomyContentHash, prompt, runtime })) {
     // Re-validate even a cache hit: the fingerprint guarantees the same
@@ -204,6 +215,7 @@ async function taggedTwice({ subjectId, inputHash, brief, taxonomy, taxonomyCont
       taggerA: attemptA.response.output,
       taggerB: attemptB.response.output
     };
+    await persistCache();
   }
   return {
     // A null tagger output is exactly what isUnknown() (topic-routing.mjs)
@@ -265,6 +277,8 @@ const promiseTagCachePath = resolve(args.tagCache, "promise-tags.json");
 const sourceTagCachePath = resolve(args.tagCache, "source-tags.json");
 const promiseTagCache = await readJsonIfExists(promiseTagCachePath, emptyTagCache(taxonomy.taxonomyVersion, taxonomyContentHash, prompt.contentHash));
 const sourceTagCache = await readJsonIfExists(sourceTagCachePath, emptyTagCache(taxonomy.taxonomyVersion, taxonomyContentHash, prompt.contentHash));
+const persistPromiseTagCache = cachePersister(promiseTagCachePath, promiseTagCache);
+const persistSourceTagCache = cachePersister(sourceTagCachePath, sourceTagCache);
 
 // Everything from here through the report write is wrapped so that any
 // later failure -- a bad model response failing excerpt-grounding
@@ -292,7 +306,7 @@ try {
     promiseTopicAssignments = await mapWithConcurrency(publishedRegistry.promises, runtime.concurrency, async (promise) => {
       const inputHash = sha256({ id: promise.id, originalTextCz: promise.originalTextCz, atomicClaimCz: promise.atomicClaimCz, fulfillmentTest: promise.fulfillmentTest, contradictionTest: promise.contradictionTest, promiseSource: promise.promiseSource });
       const brief = buildPromiseTaggingBrief(promise, taxonomy);
-      const tagged = await taggedTwice({ subjectId: promise.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: promiseTagCache });
+      const tagged = await taggedTwice({ subjectId: promise.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: promiseTagCache, persistCache: persistPromiseTagCache });
       promiseTaggingUsageByModel.push(...tagged.usageByModel);
       invalidPromiseTaggerCount += tagged.invalidCount;
       const derived = derivePromiseTopicTags(taxonomy, tagged.taggerA, tagged.taggerB);
@@ -365,7 +379,7 @@ try {
           return { route, tagged: { taggerA: null, taggerB: null, provider: null, modelA: null, modelB: null, taggerAError: null, taggerBError: null }, inputHash, briefText: brief.text };
         }
 
-        const tagged = await taggedTwice({ subjectId: record.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: sourceTagCache });
+        const tagged = await taggedTwice({ subjectId: record.id, inputHash, brief, taxonomy, taxonomyContentHash, prompt, runtime, cache: sourceTagCache, persistCache: persistSourceTagCache });
         sourceTaggingUsageByModel.push(...tagged.usageByModel);
         invalidSourceTaggerCount += tagged.invalidCount;
 

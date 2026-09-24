@@ -13,6 +13,11 @@ on:
         required: false
         default: ""
         type: string
+      max_assessments:
+        description: Maximum evidence packages sent to the paid assessors in this run; 0 assesses none
+        required: true
+        default: "0"
+        type: string
       tagging_concurrency:
         description: Parallel tagged subjects (each uses 2 API calls); leave empty for 8
         required: false
@@ -31,8 +36,9 @@ jobs:
   collect:
     name: Build unpublished review proposals
     runs-on: ubuntu-latest
-    # A job killed by timeout-minutes cannot persist its tag cache, so the
-    # limit leaves headroom for a full-term first run.
+    # The two paid steps have their own, shorter limits. A step that reaches
+    # its limit fails like any other error, so the always() steps still save
+    # the paid work already written to disk; the job limit is never reached.
     timeout-minutes: 300
     environment:
       name: assessment
@@ -48,6 +54,9 @@ jobs:
       SLIBY_ASSESSOR_MODEL_B: gpt-5.6-terra
       SLIBY_ARBITER_MODEL: gpt-5.6-sol
       SLIBY_ASSESSMENT_CONCURRENCY: 4
+      # A hard cap on packages sent to the paid assessors per run. A run
+      # without the input (the schedule) assesses none until a cap is set.
+      SLIBY_MAX_ASSESSMENTS: ${{ inputs.max_assessments || '0' }}
       SLIBY_TAGGING_PROVIDER: openai
       SLIBY_TAGGING_MODEL_A: gpt-6-luna
       SLIBY_TAGGING_MODEL_B: gpt-6-luna
@@ -130,6 +139,7 @@ jobs:
             --output automation/runs/pipeline/github-actions/print-acts
 
       - name: Route source records to promises via legal identifiers and topic tags
+        timeout-minutes: 120
         run: |
           AS_OF="${AS_OF_INPUT:-$(date -u +%F)}"
           node scripts/run-topic-routing.mjs \
@@ -212,6 +222,8 @@ jobs:
           fi
 
       - name: Assess only new or changed packages
+        id: assess
+        timeout-minutes: 120
         run: |
           node scripts/run-assessment-batch.mjs \
             --packages automation/evidence-packages \
@@ -221,7 +233,11 @@ jobs:
             --summary automation/runs/pipeline/github-actions/assessment-batch.json \
             --pull-request-body automation/runs/pipeline/github-actions/assessment-review-pr.md
 
+      # The next steps also run when the assessment stopped part-way (for
+      # example on exhausted API credit), so every finished, paid assessment
+      # is saved and the next run assesses only the rest.
       - name: Refresh human review pages
+        if: always() && steps.assess.outcome != 'skipped'
         run: npm run reviews:refresh
 
       - name: Audit coverage of every published promise
@@ -265,6 +281,7 @@ jobs:
               `- New assessment proposals: ${assessment.newProposalCount}`,
               `- Unchanged assessments skipped: ${assessment.unchangedCount}`,
               `- Assessments blocked by document warnings: ${assessment.blockedCount}`,
+              `- Deferred by the per-run assessment cap (${assessment.maxAssessments}): ${assessment.deferredCount} packages, ${assessment.deferredPackageCharacters} characters`,
               `- Assessment cutoff: ${run.asOf}`,
               `- No routed record (not a score): ${coverage.stateCounts["no-routed-record"]}`,
               `- Routed without attributable conduct: ${coverage.stateCounts["routed-without-attributable-conduct"]}`,
@@ -296,6 +313,7 @@ jobs:
 
       - name: Commit new review proposals
         id: proposals
+        if: always() && steps.assess.outcome != 'skipped'
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
@@ -311,7 +329,7 @@ jobs:
           echo "AUDIT_BRANCH_TIP=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
 
       - name: Create or update human-review pull request
-        if: steps.proposals.outputs.created == 'true'
+        if: always() && steps.proposals.outputs.created == 'true'
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
