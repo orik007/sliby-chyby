@@ -1,6 +1,6 @@
 import { invariant } from "./collector-core.mjs";
 
-export const printActsExtractorVersion = "print-acts-v1";
+export const printActsExtractorVersion = "print-acts-v2";
 
 // Official print kinds (tisky.zip druh_tisku.unl) whose text can amend acts:
 // government bills and member bills.
@@ -24,28 +24,64 @@ function sortedActs(acts) {
   });
 }
 
+// The official name that follows an act reference ("…Sb., o pravidlech
+// rozpočtové odpovědnosti, ve znění…"), up to the amendment history.
+function actName(rest) {
+  const name = String(rest ?? "")
+    .split(/,\s*ve\s+znění|,?\s+se\s+(?:mění|doplňuje)|\s+a\s+(?:další|o\s+změně)|\s*\(|;|:/)[0]
+    .replace(/[\s,]+$/, "")
+    .trim();
+  return name.length > 0 ? name.slice(0, 200) : null;
+}
+
+function uniqueNamedActs(namedActs) {
+  const byAct = new Map();
+  for (const { act, name } of namedActs) {
+    if (!byAct.has(act) || (!byAct.get(act) && name)) byAct.set(act, name ?? null);
+  }
+  return sortedActs([...byAct.keys()]).map((act) => ({ act, name: byAct.get(act) }));
+}
+
 /**
  * Acts named in an official print title ("…kterým se mění zákon
- * č. 245/2000 Sb.…", "…a o změně zákona č. 526/1990 Sb.…"). A bill title
- * names only the acts the bill creates or amends.
+ * č. 245/2000 Sb., o státních svátcích…"), with their official names. A bill
+ * title names only the acts the bill creates or amends.
  */
-export function actsFromPrintTitle(title) {
-  return sortedActs([...String(title ?? "").matchAll(/č\.\s*(\d+)\/(\d{4})\s*Sb\./g)].map((match) => `${match[1]}/${match[2]}`));
+export function namedActsFromPrintTitle(title) {
+  return uniqueNamedActs([...String(title ?? "").matchAll(/č\.\s*(\d+)\/(\d{4})\s*Sb\.(?:,\s*([^;]*))?/g)]
+    .map((match) => ({ act: `${match[1]}/${match[2]}`, name: actName(match[3]) })));
 }
 
 /**
  * Acts amended by an official bill text: an amending article opens with
- * "Zákon č. X/YYYY Sb., …, se mění …" or "V zákoně č. X/YYYY Sb. …".
- * References to other acts elsewhere in the text are ignored.
+ * "Zákon č. X/YYYY Sb., <name>, …, se mění …" or "V zákoně č. X/YYYY Sb.,
+ * <name>, …". References to other acts elsewhere in the text are ignored.
  */
-export function actsFromBillParagraphs(paragraphs) {
-  const acts = [];
+export function namedActsFromBillParagraphs(paragraphs) {
+  const namedActs = [];
   for (const paragraph of paragraphs) {
-    const match = /^Zákona?\s+č\.\s*(\d+)\/(\d{4})\s*Sb\.,[\s\S]*?\bse\s+(?:mění|doplňuje)/i.exec(paragraph)
-      ?? /^V\s+zákoně\s+č\.\s*(\d+)\/(\d{4})\s*Sb\./i.exec(paragraph);
-    if (match) acts.push(`${match[1]}/${match[2]}`);
+    const heading = /^Zákona?\s+č\.\s*(\d+)\/(\d{4})\s*Sb\.,([\s\S]*?)\bse\s+(?:mění|doplňuje)/i.exec(paragraph);
+    const inline = heading ? null : /^V\s+zákoně\s+č\.\s*(\d+)\/(\d{4})\s*Sb\.,?([^;]*)/i.exec(paragraph);
+    const match = heading ?? inline;
+    if (match) namedActs.push({ act: `${match[1]}/${match[2]}`, name: actName(match[3]) });
   }
-  return sortedActs(acts);
+  return uniqueNamedActs(namedActs);
+}
+
+export function actsFromPrintTitle(title) {
+  return namedActsFromPrintTitle(title).map(({ act }) => act);
+}
+
+export function actsFromBillParagraphs(paragraphs) {
+  return namedActsFromBillParagraphs(paragraphs).map(({ act }) => act);
+}
+
+/**
+ * One line per amended act with its official name, for a tagging brief.
+ */
+export function amendedActsExcerpt(namedActs) {
+  if (namedActs.length === 0) return null;
+  return `Acts amended by the concerned parliamentary print: ${namedActs.map(({ act, name }) => `zákon č. ${act} Sb.${name ? `, ${name}` : ""}`).join("; ")}`;
 }
 
 export function printIdentifiers({ kindId, titleActs = [], textActs = [] }) {
@@ -68,7 +104,7 @@ export function validatePrintActsCache(cache) {
     for (const document of entry.documents) {
       invariant(typeof document.filename === "string" && /^[a-f0-9]{64}$/.test(document.contentHash), `Print-acts cache entry ${printId} has an invalid document`);
     }
-    invariant(Array.isArray(entry.textActs) && entry.textActs.every((act) => /^\d+\/\d{4}$/.test(act)), `Print-acts cache entry ${printId} has invalid textActs`);
+    invariant(Array.isArray(entry.textActs) && entry.textActs.every(({ act, name }) => /^\d+\/\d{4}$/.test(act) && (name === null || typeof name === "string")), `Print-acts cache entry ${printId} has invalid textActs`);
   }
   return cache;
 }

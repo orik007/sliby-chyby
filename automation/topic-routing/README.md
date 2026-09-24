@@ -18,4 +18,4 @@ Models may return only an existing tag `id` or `unknown`. Adding, deleting, movi
 - [`scripts/lib/topic-routing.mjs`](../../scripts/lib/topic-routing.mjs) derives direct legal-identifier links, combines two independent tagger results into `auto-candidate`, `routing-review`, or `orphan-review`, and builds the tag-to-promise index.
 - [`scripts/lib/topic-tagger.mjs`](../../scripts/lib/topic-tagger.mjs) builds bounded tagging briefs and calls the tagging model (`automation/prompts/tagger-v1.md`).
 - [`scripts/lib/topic-evidence-package.mjs`](../../scripts/lib/topic-evidence-package.mjs) builds bounded packages, keeping only conduct attributable under [`scripts/lib/attribution.mjs`](../../scripts/lib/attribution.mjs).
-- [`scripts/run-topic-routing.mjs`](../../scripts/run-topic-routing.mjs) runs routing in the daily workflow. A record with a direct link is not sent to the taggers.
+- [`scripts/run-topic-routing.mjs`](../../scripts/run-topic-routing.mjs) runs routing in the daily workflow. A record with a direct link is not sent to the taggers; any other record's tagging brief includes the official names of the acts its print amends.

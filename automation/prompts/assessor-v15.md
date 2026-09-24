@@ -26,6 +26,8 @@ A **decision** is a decisive vote:
 - majority `yes` on a measure contradicting the whole promise, or majority `no` on a measure delivering it: `acting-against`; when the contradiction concerns only a part: `moving-against`;
 - no strict majority at a decisive vote on a measure delivering the promise: `moving-against`.
 
+Score a vote by the party's own choice on the vote date. Whether the measure later passed the Senate, survived a presidential return, or took effect does not change it.
+
 A **proposal** is a member bill or a government proposal: in line with the promise `moving-towards`; contradicting it `moving-against`. A proposal is never `fulfilled` or `acting-against`.
 
 Do not infer a maintenance commitment from wording. When `assessmentContext.maintenanceBaseline` is present, it is the supplied audit determination that the promise qualifies. In `live` mode, choose `moving-towards` for it while no supplied conduct makes the identified change; cite the named baseline evidence.

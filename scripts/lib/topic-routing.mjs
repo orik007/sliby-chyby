@@ -195,7 +195,7 @@ export function routeSourceRecord({
   };
 }
 
-function recordPrintIds(record) {
+export function recordPrintIds(record) {
   const payload = record.payload ?? {};
   return [
     ...(payload.externalPrintId ? [String(payload.externalPrintId)] : []),

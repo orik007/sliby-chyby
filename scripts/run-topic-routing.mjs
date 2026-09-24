@@ -8,7 +8,7 @@ import { loadPublishedPromiseIds, publishedMatchingRegistry } from "./lib/publis
 import { buildPromiseTaggingBrief, buildSourceTaggingBrief, loadTaggingPrompt, requestTagAssignment, TagValidationError, taggingRuntimeConfig, validateTagAssignmentOutput } from "./lib/topic-tagger.mjs";
 import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
 import { validatePromiseRegistry } from "./lib/attribution.mjs";
-import { buildInvertedIndex, deriveDirectLink, derivePromiseTopicTags, routeSourceRecord } from "./lib/topic-routing.mjs";
+import { buildInvertedIndex, deriveDirectLink, derivePromiseTopicTags, recordPrintIds, routeSourceRecord } from "./lib/topic-routing.mjs";
 import { buildTopicEvidencePackage } from "./lib/topic-evidence-package.mjs";
 
 const envPath = resolve(".env");
@@ -341,7 +341,10 @@ try {
   if (!runFailure) {
     try {
       sourceRouting = await mapWithConcurrency(materialPrimaryRecords, runtime.concurrency, async (record) => {
-        const enrichedExcerpts = enrichedExcerptsByRecordId[record.id] ?? [];
+        const enrichedExcerpts = [
+          ...(enrichedExcerptsByRecordId[record.id] ?? []),
+          ...recordPrintIds(record).map((printId) => printActs.prints[printId]?.excerpt).filter(Boolean)
+        ];
         const inputHash = sha256({ id: record.id, title: record.title, publisher: record.publisher, kind: record.kind, url: record.url, payload: record.payload, enrichedExcerpts });
         const brief = buildSourceTaggingBrief(record, enrichedExcerpts, taxonomy);
         const directLink = deriveDirectLink({ record, directIdIndex, invertedIndex, printIdentifiers: printActs.prints });

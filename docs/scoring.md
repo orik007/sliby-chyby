@@ -31,6 +31,8 @@ Only the conduct in this table can change a score. Each row names the only offic
 | **Government regulation** (nařízení vlády) | Collection of Laws, [e-Sbírka](https://e-sbirka.gov.cz) — *planned, not yet collected* | A legally binding decision of the whole government | Every governing party on the adoption date | `+2` whole / `+1` part | `-2` whole / `-1` part |
 | **Ministerial decree** (vyhláška) | Collection of Laws, e-Sbírka — *planned, not yet collected* | A legally binding decision of one ministry | Every governing party on the adoption date | `+2` whole / `+1` part | `-2` whole / `-1` part |
 
+A vote is scored by the party's own choice on the vote date. The later fate of the measure (a Senate or presidential return, entry into force) does not change that score; only a later attributable conduct can.
+
 A government resolution that only approves a bill for submission to the Chamber is not counted separately; the government proposal in the Chamber counts. A vote in which the club has no strict majority is attributed to the party only as the missed opportunity in the vote row.
 
 The governing parties and their dates are recorded in `automation/attribution/government-periods.json` with an official source. The current government of ANO 2011, SPD, and Motoristé sobě was appointed on 15 December 2025; a proposal or decision of an earlier government is not conduct of these parties.

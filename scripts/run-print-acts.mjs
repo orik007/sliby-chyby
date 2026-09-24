@@ -4,10 +4,11 @@ import { dirname, resolve } from "node:path";
 import { fetchVerified, invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { extractDocxParagraphs, officialPrintDocumentPageUrl, parseOfficialPrintDocumentLinks } from "./lib/psp-print-documents.mjs";
 import {
-  actsFromBillParagraphs,
-  actsFromPrintTitle,
+  amendedActsExcerpt,
   billPrintKindIds,
   emptyPrintActsCache,
+  namedActsFromBillParagraphs,
+  namedActsFromPrintTitle,
   printActsExtractorVersion,
   printIdentifiers,
   validatePrintActsCache
@@ -61,9 +62,11 @@ async function fetchBillText(source, print, termNumber) {
       expectedContentTypes: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"]
     });
     documents.push({ filename: link.filename, url: file.finalUrl, contentHash: file.contentHash });
-    textActs.push(...actsFromBillParagraphs(extractDocxParagraphs(file.bytes)));
+    textActs.push(...namedActsFromBillParagraphs(extractDocxParagraphs(file.bytes)));
   }
-  return { documents, textActs: [...new Set(textActs)].sort() };
+  const byAct = new Map();
+  for (const { act, name } of textActs) if (!byAct.get(act)) byAct.set(act, name);
+  return { documents, textActs: [...byAct].map(([act, name]) => ({ act, name })).sort((left, right) => left.act.localeCompare(right.act)) };
 }
 
 const args = parseArgs(process.argv.slice(2));
@@ -81,7 +84,7 @@ const prints = collectPrints(collectorRun.records);
 const failures = [];
 const result = {};
 for (const print of prints) {
-  const titleActs = actsFromPrintTitle(print.title);
+  const titleActs = namedActsFromPrintTitle(print.title);
   let textActs = [];
   if (billPrintKindIds.has(print.kindId)) {
     const cached = cache.prints[print.printId];
@@ -97,12 +100,15 @@ for (const print of prints) {
       }
     }
   }
+  const namedActs = new Map();
+  for (const { act, name } of [...textActs, ...titleActs]) if (!namedActs.get(act)) namedActs.set(act, name);
+  const acts = [...namedActs].map(([act, name]) => ({ act, name }));
   result[print.printId] = {
     printNumber: print.number,
     kindId: print.kindId,
-    titleActs,
-    textActs,
-    identifiers: printIdentifiers({ kindId: print.kindId, titleActs, textActs })
+    acts,
+    excerpt: amendedActsExcerpt(acts),
+    identifiers: printIdentifiers({ kindId: print.kindId, titleActs: titleActs.map(({ act }) => act), textActs: textActs.map(({ act }) => act) })
   };
 }
 
@@ -111,7 +117,8 @@ const quality = {
   prints: prints.length,
   bills: bills.length,
   billsWithText: bills.filter((print) => cache.prints[print.printId]).length,
-  billsWithAmendedActs: bills.filter((print) => result[print.printId].titleActs.length + result[print.printId].textActs.length > 0).length,
+  billsWithAmendedActs: bills.filter((print) => result[print.printId].acts.length > 0).length,
+  billsWithUnnamedActs: bills.filter((print) => result[print.printId].acts.some(({ name }) => !name)).length,
   printsWithIdentifiers: Object.values(result).filter(({ identifiers }) => identifiers.length > 0).length,
   textFetchFailures: failures.length
 };

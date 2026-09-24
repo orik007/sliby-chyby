@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { actIdentifier, actsFromBillParagraphs, actsFromPrintTitle, printIdentifiers, validatePrintActsCache, emptyPrintActsCache } from "../scripts/lib/print-acts.mjs";
+import { actIdentifier, actsFromBillParagraphs, actsFromPrintTitle, amendedActsExcerpt, namedActsFromBillParagraphs, namedActsFromPrintTitle, printIdentifiers, validatePrintActsCache, emptyPrintActsCache } from "../scripts/lib/print-acts.mjs";
 import { deriveDirectLink } from "../scripts/lib/topic-routing.mjs";
 
 test("reads the acts a bill title names", () => {
@@ -29,9 +29,9 @@ test("builds sorted legal identifiers and marks the state budget", () => {
 
 test("validates the print-acts cache", () => {
   const cache = emptyPrintActsCache();
-  cache.prints["43200"] = { printNumber: 90, documents: [{ filename: "t009000.docx", contentHash: "a".repeat(64) }], textActs: ["23/2017"] };
+  cache.prints["43200"] = { printNumber: 90, documents: [{ filename: "t009000.docx", contentHash: "a".repeat(64) }], textActs: [{ act: "23/2017", name: "o pravidlech rozpočtové odpovědnosti" }] };
   assert.equal(validatePrintActsCache(cache), cache);
-  cache.prints["43200"].textActs = ["zákon 23"];
+  cache.prints["43200"].textActs = [{ act: "zákon 23", name: null }];
   assert.throws(() => validatePrintActsCache(cache), /invalid textActs/);
 });
 
@@ -45,4 +45,22 @@ test("a vote on a print amending a mapped act links directly to promises holding
     reason: "matched-legal-identifiers:cz-act-23-2017"
   });
   assert.equal(deriveDirectLink({ record: { id: "other", payload: {} }, directIdIndex, invertedIndex, printIdentifiers: printIdentifiersById }), null);
+});
+
+test("keeps the official names of amended acts for the tagging brief", () => {
+  assert.deepEqual(namedActsFromBillParagraphs([
+    "Zákon č. 23/2017 Sb., o pravidlech rozpočtové odpovědnosti, ve znění zákona č. 277/2019 Sb., se mění takto:",
+    "V zákoně č. 218/2000 Sb., o rozpočtových pravidlech, ve znění pozdějších předpisů, se v § 24 …"
+  ]), [
+    { act: "218/2000", name: "o rozpočtových pravidlech" },
+    { act: "23/2017", name: "o pravidlech rozpočtové odpovědnosti" }
+  ]);
+  assert.deepEqual(namedActsFromPrintTitle("Návrh poslance na vydání zákona, kterým se mění zákon č. 245/2000 Sb., o státních svátcích, o ostatních svátcích, ve znění pozdějších předpisů"), [
+    { act: "245/2000", name: "o státních svátcích, o ostatních svátcích" }
+  ]);
+  assert.equal(
+    amendedActsExcerpt([{ act: "23/2017", name: "o pravidlech rozpočtové odpovědnosti" }, { act: "1/1993", name: null }]),
+    "Acts amended by the concerned parliamentary print: zákon č. 23/2017 Sb., o pravidlech rozpočtové odpovědnosti; zákon č. 1/1993 Sb."
+  );
+  assert.equal(amendedActsExcerpt([]), null);
 });
