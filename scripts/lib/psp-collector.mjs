@@ -1,4 +1,5 @@
 import { unzipSync } from "fflate";
+import { log } from "./run-log.mjs";
 import {
   cleanText,
   createCollectedRecord,
@@ -492,13 +493,17 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
 
 export async function collectPspSource(source, options) {
   const endpointEntries = Object.entries(source.endpoints);
+  log(`${source.id}: downloading ${endpointEntries.length} official files (${endpointEntries.map(([name]) => name).join(", ")})`);
   const responses = await Promise.all(endpointEntries.map(async ([name, endpoint]) => {
+    const startedAt = Date.now();
     const response = await fetchVerified(source, endpoint, {
       maxBytes: 20_000_000,
       expectedContentTypes: ["zip", "octet-stream"]
     });
+    log(`${source.id}: downloaded ${name} (${(response.bytes.byteLength / 1_000_000).toFixed(1)} MB in ${((Date.now() - startedAt) / 1000).toFixed(1)} s)`);
     return [name, response];
   }));
+  log(`${source.id}: parsing votes, members, prints, and sessions`);
   const responseByName = Object.fromEntries(responses);
   const normalized = normalizePspData({
     source,

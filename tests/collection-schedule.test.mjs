@@ -40,6 +40,9 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   // Finished assessments are saved even when the assessment step fails.
   assert.match(workflow, /- name: Commit new review proposals\n        id: proposals\n        if: always\(\) && steps\.assess\.outcome != 'skipped'/);
   assert.match(workflow, /- name: Create or update human-review pull request\n        if: always\(\) && steps\.proposals\.outputs\.created == 'true'/);
+  // Every paid call is logged, and the spend is reported even after a failure.
+  assert.match(workflow, /SLIBY_MODEL_CALL_LOG: automation\/runs\/pipeline\/github-actions\/model-calls\.jsonl/);
+  assert.match(workflow, /- name: Report model calls and estimated spend\n        if: always\(\)/);
   // Paid assessments have a hard per-run cap that defaults to none.
   assert.match(workflow, /max_assessments:\n        description: [^\n]+\n        required: true\n        default: "0"/);
   assert.match(workflow, /SLIBY_MAX_ASSESSMENTS: \$\{\{ inputs\.max_assessments \|\| '0' \}\}/);

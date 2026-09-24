@@ -10,6 +10,7 @@ import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./li
 import { isPotentiallyAttributable, validatePromiseRegistry } from "./lib/attribution.mjs";
 import { buildInvertedIndex, deriveDirectLink, derivePromiseTopicTags, recordPrintIds, routeSourceRecord } from "./lib/topic-routing.mjs";
 import { buildTopicEvidencePackage } from "./lib/topic-evidence-package.mjs";
+import { log, progress } from "./lib/run-log.mjs";
 
 const envPath = resolve(".env");
 if (existsSync(envPath)) loadEnvFile(envPath);
@@ -94,7 +95,7 @@ function emptyTagCache(taxonomyVersion, taxonomyContentHash, promptContentHash) 
 // is exactly what left a run with nothing to show after it failed partway
 // through. The thrown error's `partialResults` carries them so the caller
 // can still build an accurate report from whatever finished.
-async function mapWithConcurrency(items, concurrency, worker) {
+async function mapWithConcurrency(items, concurrency, worker, onDone = () => {}) {
   const results = new Array(items.length);
   let nextIndex = 0;
   let firstError = null;
@@ -104,8 +105,10 @@ async function mapWithConcurrency(items, concurrency, worker) {
       nextIndex += 1;
       try {
         results[index] = await worker(items[index]);
+        onDone(results[index]);
       } catch (error) {
         firstError = error;
+        log(`stopping: ${error instanceof Error ? error.message : String(error)}`);
       }
     }
   }
@@ -303,6 +306,9 @@ try {
   let invalidPromiseTaggerCount = 0;
 
   try {
+    const promiseCachedCount = publishedRegistry.promises.filter((promise) => promiseTagCache.assignments[promise.id]).length;
+    log(`promise tagging: ${publishedRegistry.promises.length} promises, up to ${promiseCachedCount} already in the tag cache (${runtime.modelA} + ${runtime.modelB}, ${runtime.concurrency} at a time)`);
+    const tickPromises = progress("promise tagging", publishedRegistry.promises.length, { every: 25 });
     promiseTopicAssignments = await mapWithConcurrency(publishedRegistry.promises, runtime.concurrency, async (promise) => {
       const inputHash = sha256({ id: promise.id, originalTextCz: promise.originalTextCz, atomicClaimCz: promise.atomicClaimCz, fulfillmentTest: promise.fulfillmentTest, contradictionTest: promise.contradictionTest, promiseSource: promise.promiseSource });
       const brief = buildPromiseTaggingBrief(promise, taxonomy);
@@ -330,7 +336,7 @@ try {
         briefText: brief.text,
         inputHash
       };
-    });
+    }, ({ promiseId, tagAssignment }) => tickPromises(`${promiseId}: ${tagAssignment.tags.join(", ")}`));
   } catch (error) {
     promiseTopicAssignments = error.partialResults ?? [];
     runFailure = { stage: "promise-tagging", message: error.message };
@@ -358,6 +364,8 @@ try {
   // round of retries to learn that again.
   if (!runFailure) {
     try {
+      log(`record routing: ${materialPrimaryRecords.length} records that can be attributable conduct (of ${primaryRecordsInWindow.length} in the window); a direct legal link skips the taggers`);
+      const tickRecords = progress("record routing", materialPrimaryRecords.length, { every: 10 });
       sourceRouting = await mapWithConcurrency(materialPrimaryRecords, runtime.concurrency, async (record) => {
         const enrichedExcerpts = [
           ...(enrichedExcerptsByRecordId[record.id] ?? []),
@@ -392,7 +400,7 @@ try {
           directLink: null
         });
         return { route, tagged, inputHash, briefText: brief.text };
-      });
+      }, ({ route }) => tickRecords(`${route.recordId}: ${route.disposition}${route.routeBasis.includes("direct-structural-link") ? " (direct link)" : ""}`));
     } catch (error) {
       sourceRouting = error.partialResults ?? [];
       runFailure = { stage: "source-tagging", message: error.message };
@@ -433,6 +441,7 @@ try {
 
   // A package is built for every promise with at least one routed record
   // that is attributable conduct; routing alone never establishes it.
+  log(`building evidence packages for ${evidenceItemsByPromise.size} promises with routed records`);
   const builtPackages = [];
   for (const [promiseId, routedRecords] of evidenceItemsByPromise) {
     const promise = promiseById.get(promiseId);

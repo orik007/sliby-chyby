@@ -193,7 +193,8 @@ export async function requestTagAssignment({ provider, apiKey, model, brief, tax
     input: { subjectType: brief.subjectType, subjectId: brief.subjectId, text: brief.text, taxonomyDefinitions: brief.taxonomyDefinitions },
     name: "topic_tag_assignment",
     schema: tagAssignmentSchema(taxonomy),
-    metadata: { subjectId: brief.subjectId, promptVersion: prompt.version }
+    metadata: { subjectId: brief.subjectId, promptVersion: prompt.version },
+    logLabel: `tagging ${brief.subjectType} ${brief.subjectId}`
   });
   try {
     return {

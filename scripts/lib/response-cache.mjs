@@ -13,13 +13,16 @@ function keyOf(keyInput) {
  * after some calls of one assessment reuses those paid responses next time.
  * Without a cache directory it only makes the request.
  */
-export async function cachedModelResponse({ directory, role, keyInput, request }) {
+export async function cachedModelResponse({ directory, role, keyInput, request, onReuse = () => {} }) {
   if (!directory) return request();
   const path = join(directory, `${role}.json`);
   const key = keyOf(keyInput);
   if (existsSync(path)) {
     const saved = JSON.parse(await readFile(path, "utf8"));
-    if (saved.key === key) return saved.response;
+    if (saved.key === key) {
+      onReuse();
+      return saved.response;
+    }
   }
   const response = await request();
   await mkdir(directory, { recursive: true });

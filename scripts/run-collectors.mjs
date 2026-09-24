@@ -4,6 +4,7 @@ import { randomUUID } from "node:crypto";
 import { emptyCollectorCheckpoints, planSourceCollections, updateCollectorCheckpoints, validateCollectorCheckpoints } from "./lib/collector-checkpoints.mjs";
 import { deduplicateRecords, invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { collectPspSource, validateGovernmentPeriods } from "./lib/psp-collector.mjs";
+import { log } from "./lib/run-log.mjs";
 
 function parseArgs(args) {
   const options = { checkpoints: null, writeCheckpoints: null, output: null };
@@ -34,11 +35,13 @@ const plansBySourceId = new Map(collectionPlan.map((plan) => [plan.sourceId, pla
 // Every source is collected completely. A failed source fails the run, so no
 // evidence package is ever built from part of the record history.
 const collectorResults = [];
+log(`collecting ${selected.length} active source(s): ${selected.map(({ id }) => id).join(", ")}`);
 for (const source of selected) {
   const { since } = plansBySourceId.get(source.id);
+  log(`${source.id}: collecting everything since ${since}`);
   const result = await collectPspSource(source, { since, collectedAt, governmentPeriods });
   collectorResults.push(result);
-  console.log(`${source.id}: from ${since}, ${result.records.length} records, ${result.warnings.length} warnings`);
+  log(`${source.id}: ${result.records.length} records, ${result.warnings.length} warnings${result.warnings.length ? `: ${result.warnings.join("; ")}` : ""}`);
 }
 
 async function writeCheckpointsAtomically(filePath, checkpoints) {

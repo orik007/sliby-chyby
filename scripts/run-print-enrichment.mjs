@@ -1,6 +1,7 @@
 import { mkdir, readFile, readdir, stat, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { validateEvidencePackage } from "./lib/assessment-pipeline.mjs";
+import { log, progress } from "./lib/run-log.mjs";
 import { fetchVerified, sha256, validateRegistry } from "./lib/collector-core.mjs";
 import {
   buildPrintDocumentEvidence,
@@ -110,6 +111,8 @@ async function loadPrintDocument(print) {
 const outputDirectory = resolve(args.output);
 await mkdir(outputDirectory, { recursive: true });
 const results = [];
+log(`adding official print documents to ${packages.length} evidence packages`);
+const tickPackages = progress("enriching packages", packages.length, { every: 20 });
 for (const entry of packages) {
   const evidencePackage = structuredClone(entry.value);
   const additions = [];
@@ -144,6 +147,7 @@ for (const entry of packages) {
     documentEvidenceCount: additions.length,
     outputFile: basename(outputPath)
   });
+  tickPackages(`${evidencePackage.promise.id}: ${additions.length} document(s)`);
 }
 
 const run = {

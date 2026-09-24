@@ -14,6 +14,7 @@ import {
 } from "./lib/assessment-review.mjs";
 import { validateEvidencePackage } from "./lib/assessment-pipeline.mjs";
 import { loadCurrentEvidencePackages } from "./lib/evidence-package-queue.mjs";
+import { log, progress } from "./lib/run-log.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -304,7 +305,10 @@ function saveProposal(proposal) {
 }
 let interruption = null;
 
+log(`assessment: ${plan.length} current packages; ${assessmentItems.length} to assess now (cap ${maxAssessments}), ${results.filter(({ disposition }) => disposition === "unchanged").length} unchanged, ${results.filter(({ disposition }) => disposition === "deferred-by-limit").length} deferred by the cap, ${results.filter(({ disposition }) => disposition === "blocked-enrichment-warning").length} blocked`);
+const tickAssessments = progress("assessment", assessmentItems.length, { every: 1 });
 const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (item) => {
+  log(`assessing ${item.promiseId}`);
   // Paid model responses of an unfinished assessment wait here until the
   // assessment is saved, so a retry pays only for the missing calls.
   const responseCache = resolve(proposalRoot, "responses", item.promiseId, item.assessmentFingerprint);
@@ -313,6 +317,8 @@ const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (i
     auditRecord = await runAssessment(item.path, runRoot, responseCache);
   } catch (error) {
     interruption ??= { promiseId: item.promiseId, message: error instanceof Error ? error.message : String(error) };
+    log(`assessment of ${item.promiseId} stopped by an error; no new assessments start: ${interruption.message}`);
+    tickAssessments(`${item.promiseId}: interrupted`);
     return { interrupted: true, result: {
       promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz, assessmentFingerprint: item.assessmentFingerprint,
       disposition: "interrupted-by-error", resolutionState: null, candidateStatus: null, reviewUrl: null,
@@ -327,6 +333,7 @@ const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (i
     await writeFile(resolve(failureDirectory, "evidence-package.json"), `${JSON.stringify(item.evidencePackage, null, 2)}\n`);
     await writeFile(resolve(failureDirectory, "assessment-run.json"), `${JSON.stringify(auditRecord, null, 2)}\n`);
     await rm(responseCache, { recursive: true, force: true });
+    tickAssessments(`${item.promiseId}: both assessor outputs invalid, failure saved`);
     return { proposal: null, result: {
       promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz,
       assessmentFingerprint: item.assessmentFingerprint, disposition: "assessment-failed",
@@ -353,6 +360,7 @@ const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (i
   })));
   await saveProposal(proposal);
   await rm(responseCache, { recursive: true, force: true });
+  tickAssessments(`${item.promiseId}: ${auditRecord.resolution.state}${auditRecord.resolution.status ? ` (${auditRecord.resolution.status})` : ""}, saved`);
   return { proposal, result: {
     promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz, assessmentFingerprint: item.assessmentFingerprint,
     disposition: "assessed", resolutionState: auditRecord.resolution.state, candidateStatus: auditRecord.resolution.status, reviewUrl: humanReviewUrl(proposal.humanReviewPath)

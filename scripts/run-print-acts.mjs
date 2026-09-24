@@ -4,6 +4,7 @@ import { dirname, resolve } from "node:path";
 import { isPotentiallyAttributable } from "./lib/attribution.mjs";
 import { fetchVerified, invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { extractDocxParagraphs, officialPrintDocumentPageUrl, parseOfficialPrintDocumentLinks } from "./lib/psp-print-documents.mjs";
+import { log, progress } from "./lib/run-log.mjs";
 import {
   amendedActsExcerpt,
   billPrintKindIds,
@@ -90,23 +91,34 @@ const trackedPartyIds = [...new Set(promiseRegistry.promises.map(({ partyId }) =
 const prints = collectPrints(collectorRun.records.filter((record) => record.primary === true && isPotentiallyAttributable(record, trackedPartyIds)));
 const failures = [];
 const result = {};
-for (const print of prints) {
-  const titleActs = namedActsFromPrintTitle(print.title);
-  let textActs = [];
-  if (billPrintKindIds.has(print.kindId)) {
-    const cached = cache.prints[print.printId];
-    if (cached) {
-      textActs = cached.textActs;
-    } else {
-      try {
-        const fetched = await fetchBillText(source, print, source.term.number);
-        cache.prints[print.printId] = { printNumber: print.number, documents: fetched.documents, textActs: fetched.textActs, extractedAt: new Date().toISOString() };
-        textActs = fetched.textActs;
-      } catch (error) {
-        failures.push({ printId: print.printId, printNumber: print.number, message: error instanceof Error ? error.message : String(error) });
-      }
+const toFetch = prints.filter((print) => billPrintKindIds.has(print.kindId) && !cache.prints[print.printId]);
+log(`${prints.length} prints concern potentially attributable records; ${toFetch.length} bill texts to download, the rest are cached or not bills`);
+
+// Bill texts are downloaded four at a time; each print is independent.
+const tick = progress("downloading bill texts", toFetch.length);
+let nextIndex = 0;
+async function downloadWorker() {
+  while (nextIndex < toFetch.length) {
+    const print = toFetch[nextIndex];
+    nextIndex += 1;
+    const startedAt = Date.now();
+    try {
+      const fetched = await fetchBillText(source, print, source.term.number);
+      cache.prints[print.printId] = { printNumber: print.number, documents: fetched.documents, textActs: fetched.textActs, extractedAt: new Date().toISOString() };
+      tick(`print ${print.number}: ${fetched.documents.length} document(s), ${fetched.textActs.length} amended act(s), ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      failures.push({ printId: print.printId, printNumber: print.number, message });
+      log(`print ${print.number}: bill text not available (${message}); only its title is used`);
+      tick(`print ${print.number}: failed`);
     }
   }
+}
+await Promise.all(Array.from({ length: Math.min(4, toFetch.length) }, downloadWorker));
+
+for (const print of prints) {
+  const titleActs = namedActsFromPrintTitle(print.title);
+  const textActs = billPrintKindIds.has(print.kindId) ? cache.prints[print.printId]?.textActs ?? [] : [];
   const namedActs = new Map();
   for (const { act, name } of [...textActs, ...titleActs]) if (!namedActs.get(act)) namedActs.set(act, name);
   const acts = [...namedActs].map(([act, name]) => ({ act, name }));
@@ -134,4 +146,5 @@ await mkdir(dirname(cachePath), { recursive: true });
 await writeFile(cachePath, `${JSON.stringify(validatePrintActsCache(cache), null, 2)}\n`);
 await mkdir(resolve(args.output), { recursive: true });
 await writeFile(resolve(args.output, "print-acts.json"), `${JSON.stringify({ schemaVersion: "1.0.0", extractorVersion: printActsExtractorVersion, quality, failures, prints: result }, null, 2)}\n`);
+log(`amended acts: ${quality.billsWithAmendedActs} of ${quality.bills} bills, ${quality.textFetchFailures} text download failure(s)`);
 console.log(JSON.stringify({ quality, failures }, null, 2));
