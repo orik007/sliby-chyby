@@ -90,6 +90,7 @@ function pullRequestBody(summary) {
     assessed: "nový návrh připraven ke kontrole",
     unchanged: "beze změny",
     "blocked-enrichment-warning": "čeká na úplný úřední dokument",
+    "deferred-by-limit": "odloženo limitem běhu",
     "assessment-failed": "automatické hodnocení selhalo; zkusí se znovu v dalším běhu"
   };
   const lines = [
@@ -113,6 +114,7 @@ function pullRequestBody(summary) {
     `Nezměněné podklady bez nového volání modelů: **${summary.unchangedCount}**`,
     `Případy čekající na úplný úřední dokument: **${summary.blockedCount}**`,
     `Izolovaná selhání hodnocení: **${summary.failedCount}**`,
+    `Odloženo limitem běhu (${summary.maxAssessments}): **${summary.deferredCount}**`,
     "",
     "Všechny návrhy vyžadují lidskou kontrolu a nejsou schválené ke zveřejnění."
   );
@@ -230,6 +232,8 @@ const prompts = await loadAssessmentPrompts();
 const runtime = assessmentRuntimeConfig();
 invariant(Number.isInteger(runtime.concurrency) && runtime.concurrency > 0 && runtime.concurrency <= 8, "SLIBY_ASSESSMENT_CONCURRENCY must be an integer from 1 to 8");
 const { concurrency, ...assessmentRuntime } = runtime;
+const maxAssessments = Number(process.env.SLIBY_MAX_ASSESSMENTS ?? "0");
+invariant(Number.isInteger(maxAssessments) && maxAssessments >= 0, "SLIBY_MAX_ASSESSMENTS must be a non-negative integer");
 const plan = planAssessmentInputs({ packages, manifest, blockedPromiseIds, prompts, runtime: assessmentRuntime });
 const newProposals = [];
 const results = [];
@@ -247,6 +251,21 @@ for (const item of plan) {
       resolutionState: null,
       candidateStatus: null,
       reviewUrl: humanReviewUrl(existingProposal?.humanReviewPath)
+    });
+    continue;
+  }
+  // Packages beyond the per-run cap stay queued and are assessed in a later
+  // run; they are reported with their size so the cost can be estimated.
+  if (assessmentItems.length >= maxAssessments) {
+    results.push({
+      promiseId: item.promiseId,
+      promiseTitleCz: item.evidencePackage.promise.titleCz,
+      assessmentFingerprint: item.assessmentFingerprint,
+      disposition: "deferred-by-limit",
+      resolutionState: null,
+      candidateStatus: null,
+      reviewUrl: null,
+      packageCharacters: JSON.stringify(item.evidencePackage).length
     });
     continue;
   }
@@ -305,6 +324,10 @@ const summary = {
   unchangedCount: results.filter(({ disposition }) => disposition === "unchanged").length,
   blockedCount: results.filter(({ disposition }) => disposition === "blocked-enrichment-warning").length,
   failedCount: results.filter(({ disposition }) => disposition === "assessment-failed").length,
+  maxAssessments,
+  deferredCount: results.filter(({ disposition }) => disposition === "deferred-by-limit").length,
+  deferredPackageCharacters: results.filter(({ disposition }) => disposition === "deferred-by-limit").reduce((sum, { packageCharacters }) => sum + packageCharacters, 0),
+  promptCharacters: prompts.assessor.instructions.length + prompts.arbiter.instructions.length,
   assessmentConcurrency: concurrency,
   proposalRoot: relativeProposalRoot,
   results
@@ -320,6 +343,8 @@ console.log(JSON.stringify({
   unchangedCount: summary.unchangedCount,
   blockedCount: summary.blockedCount,
   failedCount: summary.failedCount,
+  deferredCount: summary.deferredCount,
+  deferredPackageCharacters: summary.deferredPackageCharacters,
   summaryPath,
   pullRequestBodyPath,
   publicationApproved: false

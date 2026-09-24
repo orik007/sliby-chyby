@@ -33,6 +33,9 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   // Every run collects every source completely; no manual start date or
   // source subset can produce a package from part of the record history.
   assert.doesNotMatch(workflow, /inputs\.since|inputs\.sources|--since|--source /);
+  // Paid assessments have a hard per-run cap that defaults to none.
+  assert.match(workflow, /max_assessments:\n        description: [^\n]+\n        required: true\n        default: "0"/);
+  assert.match(workflow, /SLIBY_MAX_ASSESSMENTS: \$\{\{ inputs\.max_assessments \|\| '0' \}\}/);
   const packageJson = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
   assert.equal(packageJson.scripts["collect:evidence"], "node scripts/run-collectors.mjs");
   assert.match(workflow, /git push --force-with-lease="refs\/heads\/\$REVIEW_BRANCH:\$AUDIT_BRANCH_TIP" "https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git" "HEAD:refs\/heads\/\$REVIEW_BRANCH"/);

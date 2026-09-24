@@ -13,6 +13,11 @@ on:
         required: false
         default: ""
         type: string
+      max_assessments:
+        description: Maximum evidence packages sent to the paid assessors in this run; 0 assesses none
+        required: true
+        default: "0"
+        type: string
       tagging_concurrency:
         description: Parallel tagged subjects (each uses 2 API calls); leave empty for 8
         required: false
@@ -48,6 +53,9 @@ jobs:
       SLIBY_ASSESSOR_MODEL_B: gpt-5.6-terra
       SLIBY_ARBITER_MODEL: gpt-5.6-sol
       SLIBY_ASSESSMENT_CONCURRENCY: 4
+      # A hard cap on packages sent to the paid assessors per run. A run
+      # without the input (the schedule) assesses none until a cap is set.
+      SLIBY_MAX_ASSESSMENTS: ${{ inputs.max_assessments || '0' }}
       SLIBY_TAGGING_PROVIDER: openai
       SLIBY_TAGGING_MODEL_A: gpt-6-luna
       SLIBY_TAGGING_MODEL_B: gpt-6-luna
@@ -265,6 +273,7 @@ jobs:
               `- New assessment proposals: ${assessment.newProposalCount}`,
               `- Unchanged assessments skipped: ${assessment.unchangedCount}`,
               `- Assessments blocked by document warnings: ${assessment.blockedCount}`,
+              `- Deferred by the per-run assessment cap (${assessment.maxAssessments}): ${assessment.deferredCount} packages, ${assessment.deferredPackageCharacters} characters`,
               `- Assessment cutoff: ${run.asOf}`,
               `- No routed record (not a score): ${coverage.stateCounts["no-routed-record"]}`,
               `- Routed without attributable conduct: ${coverage.stateCounts["routed-without-attributable-conduct"]}`,
