@@ -8,7 +8,7 @@ The reviewed, versioned vocabulary used only for routing records to confirmed pr
 
 Each tag has a stable `id`, an optional `parent`, an English `labelEn`, inclusion and exclusion examples, Czech aliases, `assessmentEligible`, and optionally `directLegalIdentifiers`. Only an `assessmentEligible` tag can route a record; a broad parent tag alone never does.
 
-`directLegalIdentifiers` lists the acts (`cz-act-<number>-<year>`, e.g. `cz-act-23-2017` for Act No. 23/2017 Coll.) or print kinds (`cz-print-kind-state-budget`) amended by the concerned print, which link a record directly to every promise holding the tag. Only an assessment-eligible tag may carry them. An act is mapped only when its official name falls clearly under one tag.
+`directLegalIdentifiers` lists the acts (`cz-act-<number>-<year>`, e.g. `cz-act-23-2017` for Act No. 23/2017 Coll.) or print kinds (`cz-print-kind-state-budget`) amended by the concerned print, which link a record directly to every promise holding the tag. Only an assessment-eligible tag may carry them. An act is mapped to a tag only when its official name clearly falls under that tag. An act whose name covers several specific topics (Act No. 23/2017 Coll. on budget responsibility rules covers deficit and debt, fiscal rules, and the debt brake) is listed under each of them; its record then reaches the promises of every such tag, and the assessors decide relevance.
 
 Models may return only an existing tag `id` or `unknown`. Adding, deleting, moving, or redefining a tag or its identifiers is a reviewed taxonomy change; the taxonomy content hash then recomputes every dependent classification.
 

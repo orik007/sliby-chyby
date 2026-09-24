@@ -23,7 +23,8 @@ A **decision** is a decisive vote:
 
 - majority `yes` on a measure delivering the whole promise: `fulfilled`; on a measure delivering only a part: `moving-towards`;
 - majority `no` on a measure contradicting the promise: `moving-towards`;
-- majority `yes` on a measure contradicting the whole promise, or majority `no` on a measure delivering it: `acting-against`; when the contradiction concerns only a part: `moving-against`;
+- majority `yes` on a measure contradicting the whole promise, or majority `no` on a measure delivering the whole promise: `acting-against`;
+- majority `yes` on a measure contradicting only a part, or majority `no` on a measure delivering only a part: `moving-against`;
 - no strict majority at a decisive vote on a measure delivering the promise: `moving-against`.
 
 Score a vote by the party's own choice on the vote date. Whether the measure later passed the Senate, survived a presidential return, or took effect does not change it.

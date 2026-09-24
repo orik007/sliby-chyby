@@ -6,6 +6,7 @@ import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import {
   assessableAttributionStatuses,
   attributionStatusForRecord,
+  factSummary,
   isPotentiallyAttributable,
   selectBoundedPrimaryMatches,
   validatePromiseRegistry
@@ -42,7 +43,7 @@ function voteRecord({ id = "psp--vote-1", actions = ["souhlas"], summary = { att
   });
 }
 
-function submissionStep(proposal, actionCz = "předložen") {
+function submissionStep(proposal, actionCz = "předložen", printKindId = proposal.kind === "member-bill" ? "2" : "1") {
   return createCollectedRecord({
     id: `psp--step-${proposal.kind}-${actionCz}`,
     sourceId: "psp-core-2025",
@@ -53,7 +54,7 @@ function submissionStep(proposal, actionCz = "předložen") {
     title: "90/0: předložen — Vládní návrh zákona, kterým se mění některé zákony v oblasti veřejných rozpočtů",
     publisher: "Chamber of Deputies",
     url: "https://public.psp.cz/sqw/historie.sqw?o=10&t=90",
-    payload: { externalPrintId: "43200", printNumber: 90, actionCz, proposal }
+    payload: { externalPrintId: "43200", printNumber: 90, printKindId, actionCz, proposal }
   });
 }
 
@@ -119,4 +120,12 @@ test("only records that can be attributable conduct of a tracked party are route
   assert.equal(isPotentiallyAttributable(submissionStep({ kind: "member-bill", submittedOn: "2026-01-27", proposerPartyIds: ["motoriste"] }), tracked), true);
   assert.equal(isPotentiallyAttributable(submissionStep({ kind: "member-bill", submittedOn: "2026-01-27", proposerPartyIds: [] }), tracked), false);
   assert.equal(isPotentiallyAttributable(submissionStep({ kind: "member-bill", submittedOn: "2026-01-27", proposerPartyIds: ["motoriste"] }, "přikázán"), tracked), false);
+});
+
+test("a proposal's fact summary names its official print kind", () => {
+  const proposal = { kind: "government-proposal", submittedOn: "2026-01-27", proposerPartyIds: ["ano", "motoriste", "spd"] };
+  assert.match(factSummary(submissionStep(proposal), "motoriste"), /It is a government bill submitted on 2026-01-27/);
+  assert.match(factSummary(submissionStep(proposal, "předložen", "3"), "motoriste"), /It is a government state budget bill/);
+  assert.match(factSummary(submissionStep(proposal, "předložen", "4"), "motoriste"), /It is an international treaty submitted by the government/);
+  assert.match(factSummary(submissionStep({ ...proposal, kind: "member-bill" }), "motoriste"), /It is a member bill/);
 });

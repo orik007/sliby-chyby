@@ -159,11 +159,21 @@ export function normalizedStructuredFacts(record, partyId) {
   return structuredFacts;
 }
 
+// Official print kinds (tisky.zip druh_tisku.unl) of a government proposal.
+const governmentProposalLabels = { 1: "a government bill", 3: "a government state budget bill", 4: "an international treaty submitted by the government" };
+
+function proposalLabel(payload) {
+  if (payload.proposal.kind === "member-bill") return "a member bill";
+  const label = governmentProposalLabels[payload.printKindId];
+  invariant(label, `Government proposal print ${payload.printNumber} has unsupported print kind ${payload.printKindId}`);
+  return label;
+}
+
 export function factSummary(record, partyId) {
   if (record.kind === "legislative-step") {
     const payload = record.payload;
     const proposal = payload.proposal
-      ? ` It is a ${payload.proposal.kind === "government-proposal" ? "government bill" : "member bill"} submitted on ${payload.proposal.submittedOn}; proposer parties: ${payload.proposal.proposerPartyIds.join(", ") || "none tracked"}.`
+      ? ` It is ${proposalLabel(payload)} submitted on ${payload.proposal.submittedOn}; proposer parties: ${payload.proposal.proposerPartyIds.join(", ") || "none tracked"}.`
       : "";
     return `The official parliamentary record reports action “${payload.actionCz ?? "unspecified"}” for print ${payload.printNumber ?? "unknown"}: ${payload.printTitleCz ?? record.title}.${proposal}`;
   }

@@ -15,7 +15,7 @@ Human-readable Czech is a required part of the result. Write `explanationCz` for
 
 Read `assessmentContext.mode`. Prefer the review that applies the conduct rule correctly:
 
-- a decisive vote is a decision: majority `yes` on a measure delivering the whole promise is `fulfilled`, on a part `moving-towards`; majority `yes` on a measure contradicting the whole promise, or majority `no` on a measure delivering it, is `acting-against`, on a part `moving-against`; majority `no` on a contradicting measure is `moving-towards`; no strict majority at a decisive vote on a measure delivering the promise is `moving-against`;
+- a decisive vote is a decision: majority `yes` on a measure delivering the whole promise is `fulfilled`, on a part `moving-towards`; majority `yes` on a measure contradicting the whole promise, or majority `no` on a measure delivering the whole promise, is `acting-against`; majority `yes` on a measure contradicting only a part, or majority `no` on a measure delivering only a part, is `moving-against`; majority `no` on a contradicting measure is `moving-towards`; no strict majority at a decisive vote on a measure delivering the promise is `moving-against`;
 - a member bill or a government proposal is a proposal: `moving-towards` when in line with the promise, `moving-against` when contradicting it, never `fulfilled` or `acting-against`;
 - a decision outweighs a proposal; among conduct of the same weight, the most recent decides;
 - when `assessmentContext.maintenanceBaseline` is present in a live package, the review should select `moving-towards` while it cites the named baseline evidence and no supplied conduct makes the identified change;

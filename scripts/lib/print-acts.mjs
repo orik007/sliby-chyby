@@ -1,6 +1,6 @@
 import { invariant } from "./collector-core.mjs";
 
-export const printActsExtractorVersion = "print-acts-v2";
+export const printActsExtractorVersion = "print-acts-v3";
 
 // Official print kinds (tisky.zip druh_tisku.unl) whose text can amend acts:
 // government bills and member bills.
@@ -27,9 +27,15 @@ function sortedActs(acts) {
 // The official name that follows an act reference ("…Sb., o pravidlech
 // rozpočtové odpovědnosti, ve znění…"), up to the amendment history.
 function actName(rest) {
-  const name = String(rest ?? "")
-    .split(/,\s*ve\s+znění|,?\s+se\s+(?:mění|doplňuje)|\s+a\s+(?:další|o\s+změně)|\s*\(|;|:/)[0]
-    .replace(/[\s,]+$/, "")
+  const text = String(rest ?? "").replace(/^[\s,]+/, "");
+  // An amending act's own name begins "kterým se mění …"; elsewhere
+  // "… se mění" ends the name.
+  const end = /^kterým\s+se\b/.test(text)
+    ? /,\s*ve\s+znění|,?\s+a\s+kterým\s+se|;|:/
+    : /,\s*ve\s+znění|,?\s+se\s+(?:mění|doplňuje)|,?\s+a\s+kterým\s+se|\s+a\s+(?:další|o\s+změně)|\s*\(|;|:/;
+  const name = text
+    .split(end)[0]
+    .replace(/(?:[\s,]+a)?[\s,]+$/, "")
     .trim();
   return name.length > 0 ? name.slice(0, 200) : null;
 }
@@ -42,14 +48,35 @@ function uniqueNamedActs(namedActs) {
   return sortedActs([...byAct.keys()]).map((act) => ({ act, name: byAct.get(act) }));
 }
 
+const titleReferencePattern = /(\S+)(?:\s+České\s+národní\s+rady)?\s+č\.\s*(\d+)\/(\d{4})\s*Sb\./g;
+
 /**
- * Acts named in an official print title ("…kterým se mění zákon
- * č. 245/2000 Sb., o státních svátcích…"), with their official names. A bill
- * title names only the acts the bill creates or amends.
+ * Acts an official print title amends or repeals, with their official names.
+ * A title lists them as "zákon č. X/YYYY Sb., <name>, ve znění …" joined by
+ * commas and "a", or as "o změně zákona č. X/YYYY Sb." A reference inside
+ * another act's name ("o změně a doplnění zákona č. …", "kterým se mění
+ * zákon č. …") or its amendment history ("ve znění zákona č. …") is not an
+ * act the print amends.
  */
 export function namedActsFromPrintTitle(title) {
-  return uniqueNamedActs([...String(title ?? "").matchAll(/č\.\s*(\d+)\/(\d{4})\s*Sb\.(?:,\s*([^;]*))?/g)]
-    .map((match) => ({ act: `${match[1]}/${match[2]}`, name: actName(match[3]) })));
+  const text = String(title ?? "");
+  const references = [...text.matchAll(titleReferencePattern)];
+  const amended = [];
+  let previousEnd = null;
+  for (const match of references) {
+    const between = previousEnd === null ? "" : text.slice(previousEnd, match.index);
+    const previousNameEnded = previousEnd === null || /ve\s+znění/.test(between);
+    const amendedInList = /^zákon$/i.test(match[1]) && !/kterým\s+se\s+mění/.test(between);
+    const amendedByChange = /^zákona$/i.test(match[1]) && /o\s+změně\s+$/.test(text.slice(0, match.index)) && previousNameEnded;
+    if (!amendedInList && !amendedByChange) continue;
+    amended.push(match);
+    previousEnd = match.index + match[0].length;
+  }
+  // An act's name runs to the next amended act.
+  return uniqueNamedActs(amended.map((match, index) => ({
+    act: `${match[2]}/${match[3]}`,
+    name: actName(text.slice(match.index + match[0].length, amended[index + 1]?.index ?? text.length))
+  })));
 }
 
 /**
@@ -60,7 +87,7 @@ export function namedActsFromPrintTitle(title) {
 export function namedActsFromBillParagraphs(paragraphs) {
   const namedActs = [];
   for (const paragraph of paragraphs) {
-    const heading = /^Zákona?\s+č\.\s*(\d+)\/(\d{4})\s*Sb\.,([\s\S]*?)\bse\s+(?:mění|doplňuje)/i.exec(paragraph);
+    const heading = /^Zákona?\s+č\.\s*(\d+)\/(\d{4})\s*Sb\.,([\s\S]*)\bse\s+(?:mění|doplňuje)/i.exec(paragraph);
     const inline = heading ? null : /^V\s+zákoně\s+č\.\s*(\d+)\/(\d{4})\s*Sb\.,?([^;]*)/i.exec(paragraph);
     const match = heading ?? inline;
     if (match) namedActs.push({ act: `${match[1]}/${match[2]}`, name: actName(match[3]) });
