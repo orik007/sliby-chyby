@@ -36,8 +36,9 @@ jobs:
   collect:
     name: Build unpublished review proposals
     runs-on: ubuntu-latest
-    # Leaves headroom for a full first run. Paid work is written to disk as
-    # it is produced, so a killed run loses at most the calls in flight.
+    # The two paid steps have their own, shorter limits. A step that reaches
+    # its limit fails like any other error, so the always() steps still save
+    # the paid work already written to disk; the job limit is never reached.
     timeout-minutes: 300
     environment:
       name: assessment
@@ -138,6 +139,7 @@ jobs:
             --output automation/runs/pipeline/github-actions/print-acts
 
       - name: Route source records to promises via legal identifiers and topic tags
+        timeout-minutes: 120
         run: |
           AS_OF="${AS_OF_INPUT:-$(date -u +%F)}"
           node scripts/run-topic-routing.mjs \
@@ -221,6 +223,7 @@ jobs:
 
       - name: Assess only new or changed packages
         id: assess
+        timeout-minutes: 120
         run: |
           node scripts/run-assessment-batch.mjs \
             --packages automation/evidence-packages \

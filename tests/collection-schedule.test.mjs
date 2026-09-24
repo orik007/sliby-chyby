@@ -33,6 +33,10 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   // Every run collects every source completely; no manual start date or
   // source subset can produce a package from part of the record history.
   assert.doesNotMatch(workflow, /inputs\.since|inputs\.sources|--since|--source /);
+  // The paid steps stop before the job limit, so the saving steps always run.
+  assert.match(workflow, /timeout-minutes: 300/);
+  assert.match(workflow, /- name: Route source records to promises via legal identifiers and topic tags\n        timeout-minutes: 120/);
+  assert.match(workflow, /- name: Assess only new or changed packages\n        id: assess\n        timeout-minutes: 120/);
   // Finished assessments are saved even when the assessment step fails.
   assert.match(workflow, /- name: Commit new review proposals\n        id: proposals\n        if: always\(\) && steps\.assess\.outcome != 'skipped'/);
   assert.match(workflow, /- name: Create or update human-review pull request\n        if: always\(\) && steps\.proposals\.outputs\.created == 'true'/);
