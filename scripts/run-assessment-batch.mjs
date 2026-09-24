@@ -56,11 +56,11 @@ function parseArgs(args) {
   return options;
 }
 
-async function runAssessment(packagePath, outputRoot) {
+async function runAssessment(packagePath, outputRoot, responseCache) {
   const runner = process.env.SLIBY_ASSESSMENT_RUNNER ?? "scripts/run-assessment.mjs";
   const child = spawn(process.execPath, [runner, packagePath, outputRoot], {
     cwd: process.cwd(),
-    env: process.env,
+    env: { ...process.env, SLIBY_RESPONSE_CACHE: responseCache },
     stdio: ["ignore", "pipe", "inherit"]
   });
   let stdout = "";
@@ -104,6 +104,7 @@ function pullRequestBody(summary) {
     "blocked-enrichment-warning": "čeká na úplný úřední dokument",
     "deferred-by-limit": "odloženo limitem běhu",
     "not-assessed-after-interruption": "nehodnoceno, běh byl přerušen",
+    "interrupted-by-error": "hodnocení přerušeno chybou",
     "assessment-failed": "automatické hodnocení selhalo; zkusí se znovu v dalším běhu"
   };
   const lines = [
@@ -304,12 +305,19 @@ function saveProposal(proposal) {
 let interruption = null;
 
 const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (item) => {
+  // Paid model responses of an unfinished assessment wait here until the
+  // assessment is saved, so a retry pays only for the missing calls.
+  const responseCache = resolve(proposalRoot, "responses", item.promiseId, item.assessmentFingerprint);
   let auditRecord;
   try {
-    auditRecord = await runAssessment(item.path, runRoot);
+    auditRecord = await runAssessment(item.path, runRoot, responseCache);
   } catch (error) {
     interruption ??= { promiseId: item.promiseId, message: error instanceof Error ? error.message : String(error) };
-    return null;
+    return { interrupted: true, result: {
+      promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz, assessmentFingerprint: item.assessmentFingerprint,
+      disposition: "interrupted-by-error", resolutionState: null, candidateStatus: null, reviewUrl: null,
+      error: error instanceof Error ? error.message : String(error)
+    } };
   }
   invariant(auditRecord.assessmentFingerprint === item.assessmentFingerprint, `Fingerprint changed while assessing ${item.promiseId}`);
   if (auditRecord.resolution.state === "assessment-failed") {
@@ -318,6 +326,7 @@ const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (i
     await mkdir(failureDirectory, { recursive: true });
     await writeFile(resolve(failureDirectory, "evidence-package.json"), `${JSON.stringify(item.evidencePackage, null, 2)}\n`);
     await writeFile(resolve(failureDirectory, "assessment-run.json"), `${JSON.stringify(auditRecord, null, 2)}\n`);
+    await rm(responseCache, { recursive: true, force: true });
     return { proposal: null, result: {
       promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz,
       assessmentFingerprint: item.assessmentFingerprint, disposition: "assessment-failed",
@@ -343,6 +352,7 @@ const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (i
     reason: "replaced-by-successful-assessment"
   })));
   await saveProposal(proposal);
+  await rm(responseCache, { recursive: true, force: true });
   return { proposal, result: {
     promiseId: item.promiseId, promiseTitleCz: item.evidencePackage.promise.titleCz, assessmentFingerprint: item.assessmentFingerprint,
     disposition: "assessed", resolutionState: auditRecord.resolution.state, candidateStatus: auditRecord.resolution.status, reviewUrl: humanReviewUrl(proposal.humanReviewPath)
@@ -362,7 +372,7 @@ for (const [index, outcome] of assessed.entries()) {
     });
     continue;
   }
-  if (outcome.proposal) newProposals.push(outcome.proposal);
+  if (outcome?.proposal) newProposals.push(outcome.proposal);
   results.push(outcome.result);
 }
 await manifestWrites;
@@ -380,6 +390,7 @@ const summary = {
   deferredCount: results.filter(({ disposition }) => disposition === "deferred-by-limit").length,
   deferredPackageCharacters: results.filter(({ disposition }) => disposition === "deferred-by-limit").reduce((sum, { packageCharacters }) => sum + packageCharacters, 0),
   interruption,
+  interruptedCount: results.filter(({ disposition }) => disposition === "interrupted-by-error").length,
   notAssessedAfterInterruptionCount: results.filter(({ disposition }) => disposition === "not-assessed-after-interruption").length,
   promptCharacters: prompts.assessor.instructions.length + prompts.arbiter.instructions.length,
   assessmentConcurrency: concurrency,

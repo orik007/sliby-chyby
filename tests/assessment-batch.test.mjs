@@ -141,7 +141,8 @@ test("an interrupted batch keeps every finished assessment, and the next run ass
   const interrupted = await runBatch(root, packages, "10", { failPromise: "promise-b", expectedExitCode: 1 });
   assert.equal(interrupted.newProposalCount, 1);
   assert.equal(interrupted.interruption.promiseId, "promise-b");
-  assert.equal(interrupted.notAssessedAfterInterruptionCount, 2);
+  assert.equal(interrupted.interruptedCount, 1);
+  assert.equal(interrupted.notAssessedAfterInterruptionCount, 1);
   const manifest = JSON.parse(await readFile(join(root, "automation/review-proposals/manifest.json"), "utf8"));
   assert.deepEqual(manifest.proposals.map(({ promiseId }) => promiseId), ["promise-a"]);
 
