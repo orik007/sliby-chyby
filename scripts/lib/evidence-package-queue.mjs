@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { hashEvidencePackage, validateEvidencePackage } from "./assessment-pipeline.mjs";
+import { hashAssessmentContent, hashEvidencePackage, validateEvidencePackage } from "./assessment-pipeline.mjs";
 
 const schemaVersion = "1.0.0";
 
@@ -85,7 +85,12 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
   for (const { evidencePackage } of await inputPackages(inputDirectory)) {
     const packageHash = hashEvidencePackage(evidencePackage);
     const blockedByEnrichment = blockedPromiseIds.has(evidencePackage.promise.id);
-    const existing = queue.packages.find((entry) => entry.packageHash === packageHash);
+    const current = latestUnreplacedPackageEntry(queue, evidencePackage.promise.id);
+    // Every run rebuilds each package from the whole record history; a
+    // package whose assessable content is unchanged keeps the current entry.
+    const unchanged = current
+      && hashAssessmentContent(JSON.parse(await readFile(resolve(queuePath, current.path), "utf8"))) === hashAssessmentContent(evidencePackage);
+    const existing = unchanged ? current : queue.packages.find((entry) => entry.packageHash === packageHash);
     if (existing) {
       if (existing.blockedByEnrichment !== blockedByEnrichment) {
         existing.blockedByEnrichment = blockedByEnrichment;
@@ -94,7 +99,6 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory, en
       }
       continue;
     }
-    const current = latestUnreplacedPackageEntry(queue, evidencePackage.promise.id);
     if (current) current.supersededByPackageHash = packageHash;
     const packagePath = `packages/${evidencePackage.promise.id}/${packageHash}.json`;
     const destination = resolve(queuePath, packagePath);

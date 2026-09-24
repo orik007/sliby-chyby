@@ -59,3 +59,19 @@ test("rejects a queue whose supersession cycle has no current package", () => {
   }), /must have exactly one current version/);
 });
 
+
+test("a daily rebuild with unchanged assessable content keeps the current package", async () => {
+  const root = await mkdtemp(join(tmpdir(), "slava-evidence-queue-unchanged-"));
+  const input = join(root, "input");
+  const queue = join(root, "queue");
+  await mkdir(input);
+  const first = evidencePackage("2026-09-10", "Ověřený krok.");
+  await writeInput(input, first);
+  await queueEvidencePackages({ inputDirectory: input, queueDirectory: queue, enrichmentRun: { warnings: [] } });
+
+  // Next day: same evidence, only the run's cutoff and package ID differ.
+  await writeInput(input, { ...structuredClone(first), asOf: "2026-09-11", packageId: "test-promise--2026-09-11" });
+  const second = await queueEvidencePackages({ inputDirectory: input, queueDirectory: queue, enrichmentRun: { warnings: [] } });
+  assert.deepEqual(second, { added: 0, updated: 0, activeCount: 1, changed: false });
+  assert.equal((await loadCurrentEvidencePackages(queue))[0].evidencePackage.asOf, "2026-09-10");
+});
