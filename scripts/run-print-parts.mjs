@@ -1,8 +1,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
-import { fetchVerified, invariant, validateRegistry } from "./lib/collector-core.mjs";
-import { extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl } from "./lib/psp-print-documents.mjs";
+import { invariant, validateRegistry } from "./lib/collector-core.mjs";
+import { createPspFetcher, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings } from "./lib/psp-print-documents.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
 
@@ -51,31 +51,7 @@ function collectPrints(records) {
   return [...prints.values()].sort((left, right) => left.number - right.number);
 }
 
-// With four parallel requests, psp.cz intermittently refused connections
-// within the first minute in two runs (25 September 2026, connect timeouts),
-// and one URL failed all four attempts spaced 1, 2, and 4 s apart. So at
-// most two requests are open at a time, across all prints, and a failed
-// request waits longer before each retry: 5, 10, 20, 40, and 80 s. A
-// request keeps its slot while it waits, so when psp.cz stops answering,
-// every download pauses rather than adding connections.
-const pspConcurrency = 2;
-const pspRetry = { retryAttempts: 6, retryDelayMs: 5_000 };
-function concurrencyLimit(limit) {
-  let active = 0;
-  const waiting = [];
-  return async (task) => {
-    if (active >= limit) await new Promise((resolveTurn) => waiting.push(resolveTurn));
-    active += 1;
-    try {
-      return await task();
-    } finally {
-      active -= 1;
-      waiting.shift()?.();
-    }
-  };
-}
-const pspRequest = concurrencyLimit(pspConcurrency);
-const fetchPsp = (source, url, options) => pspRequest(() => fetchVerified(source, url, { ...options, ...pspRetry }));
+const fetchPsp = createPspFetcher();
 
 const htmlOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };
 const docxOptions = { maxBytes: 20_000_000, expectedContentTypes: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"] };
@@ -177,7 +153,7 @@ async function downloadWorker() {
     tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
   }
 }
-await Promise.all(Array.from({ length: Math.min(pspConcurrency, prints.length) }, downloadWorker));
+await Promise.all(Array.from({ length: Math.min(pspDownloadSettings.concurrency, prints.length) }, downloadWorker));
 
 const result = {};
 for (const print of prints) {

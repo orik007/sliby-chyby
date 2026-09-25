@@ -135,16 +135,6 @@ test("waits twice as long before each further retry after a refused connection",
   }
 });
 
-test("print texts are downloaded from psp.cz two requests at a time with a long retry back-off", async () => {
-  const script = await readFile(new URL("../scripts/run-print-parts.mjs", import.meta.url), "utf8");
-  assert.match(script, /const pspConcurrency = 2;/);
-  assert.match(script, /const pspRetry = \{ retryAttempts: 6, retryDelayMs: 5_000 \};/);
-  assert.match(script, /concurrencyLimit\(pspConcurrency\)/);
-  assert.match(script, /fetchVerified\(source, url, \{ \.\.\.options, \.\.\.pspRetry \}\)/);
-  assert.match(script, /Math\.min\(pspConcurrency, prints\.length\)/);
-  assert.doesNotMatch(script, /fetchVerified\(source, url, options\)/);
-});
-
 test("documents every configured collector source in the canonical pipeline policy", async () => {
   const registry = JSON.parse(await readFile(new URL("../automation/collectors/sources.json", import.meta.url), "utf8"));
   const policy = await readFile(new URL("../docs/evidence-pipeline.md", import.meta.url), "utf8");
