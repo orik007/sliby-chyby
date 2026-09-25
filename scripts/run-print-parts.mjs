@@ -51,8 +51,9 @@ function collectPrints(records) {
   return [...prints.values()].sort((left, right) => left.number - right.number);
 }
 
-// psp.cz stopped accepting connections after about twenty seconds of four
-// parallel requests in two runs (25 September 2026, connect timeouts), so at
+// With four parallel requests, psp.cz intermittently refused connections
+// within the first minute in two runs (25 September 2026, connect timeouts),
+// and one URL failed all four attempts spaced 1, 2, and 4 s apart. So at
 // most two requests are open at a time, across all prints, and a failed
 // request waits longer before each retry: 5, 10, 20, 40, and 80 s. A
 // request keeps its slot while it waits, so when psp.cz stops answering,
