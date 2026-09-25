@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { mkdtemp, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
+import { mkdtemp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import test from "node:test";
+import { renderReviewPullRequestBody } from "../scripts/lib/assessment-review.mjs";
 
 const repositoryRoot = resolve(import.meta.dirname, "..");
 const batchScript = resolve(repositoryRoot, "scripts/run-assessment-batch.mjs");
@@ -35,7 +36,16 @@ async function writePackage(directory, evidence) {
   await writeFile(join(directory, `${evidence.promise.id}-${evidence.asOf}.json`), `${JSON.stringify(evidence, null, 2)}\n`);
 }
 
-async function runBatch(root, packagesDirectory, maxAssessments = "10", { failPromise = "", expectedExitCode = 0 } = {}) {
+async function writePublicRevisions(root, statuses, { revision = 1, publishedAt = "2026-09-07" } = {}) {
+  const directory = join(root, "data/assessment-revisions");
+  await mkdir(directory, { recursive: true });
+  for (const [promiseId, status] of Object.entries(statuses)) {
+    const id = `${promiseId}--${String(revision).padStart(3, "0")}`;
+    await writeFile(join(directory, `${id}.json`), `${JSON.stringify({ id, promiseId, revision, status, explanationShort: "Stav.", publishedAt, evidenceSourceIds: ["source"], isDemo: false }, null, 2)}\n`);
+  }
+}
+
+async function runBatch(root, packagesDirectory, maxAssessments = "10", { failPromise = "", humanReviewPromise = "", expectedExitCode = 0 } = {}) {
   const summary = join(root, "summary.json");
   const child = spawn(process.execPath, [batchScript,
     "--packages", packagesDirectory,
@@ -44,7 +54,7 @@ async function runBatch(root, packagesDirectory, maxAssessments = "10", { failPr
     "--pull-request-body", "automation/pull-request.md"
   ], {
     cwd: root,
-    env: { ...process.env, SLIBY_ASSESSMENT_RUNNER: mockRunner, SLIBY_ASSESSMENT_CONCURRENCY: "1", SLIBY_MAX_ASSESSMENTS: maxAssessments, SLIBY_MOCK_FAIL_PROMISE: failPromise },
+    env: { ...process.env, SLIBY_ASSESSMENT_RUNNER: mockRunner, SLIBY_ASSESSMENT_CONCURRENCY: "1", SLIBY_MAX_ASSESSMENTS: maxAssessments, SLIBY_MOCK_FAIL_PROMISE: failPromise, SLIBY_MOCK_HUMAN_REVIEW_PROMISE: humanReviewPromise },
     stdio: "pipe"
   });
   let stderr = "";
@@ -65,6 +75,7 @@ test("persists an isolated double-invalid failure, then retires it after a newer
   await writeFile(join(root, "automation/prompts/assessor-v16.md"), "assessor test prompt\n");
   await writeFile(join(root, "automation/prompts/arbiter-v7.md"), "arbiter test prompt\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
+  await writePublicRevisions(root, { "failed-promise": "no-progress", "successful-peer": "no-progress" });
 
   const firstPackages = join(root, "first-packages");
   await mkdir(firstPackages);
@@ -106,6 +117,7 @@ test("the per-run cap sends no more packages to the paid assessors, and the rest
   await writeFile(join(root, "automation/prompts/assessor-v16.md"), "assessor test prompt\n");
   await writeFile(join(root, "automation/prompts/arbiter-v7.md"), "arbiter test prompt\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
+  await writePublicRevisions(root, { "promise-a": "no-progress", "promise-b": "no-progress", "promise-c": "no-progress" });
   const packages = join(root, "packages");
   await mkdir(packages);
   for (const id of ["promise-a", "promise-b", "promise-c"]) await writePackage(packages, evidencePackage(id, "2026-09-10"));
@@ -132,6 +144,7 @@ test("an interrupted batch keeps every finished assessment, and the next run ass
   await writeFile(join(root, "automation/prompts/assessor-v16.md"), "assessor test prompt\n");
   await writeFile(join(root, "automation/prompts/arbiter-v7.md"), "arbiter test prompt\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
+  await writePublicRevisions(root, { "promise-a": "no-progress", "promise-b": "no-progress", "promise-c": "no-progress" });
   const packages = join(root, "packages");
   await mkdir(packages);
   for (const id of ["promise-a", "promise-b", "promise-c"]) await writePackage(packages, evidencePackage(id, "2026-09-10"));
@@ -161,6 +174,7 @@ test("an oversized package is never sent to the assessors and is reported for hu
   await writeFile(join(root, "automation/prompts/assessor-v16.md"), "assessor test prompt\n");
   await writeFile(join(root, "automation/prompts/arbiter-v7.md"), "arbiter test prompt\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
+  await writePublicRevisions(root, { "oversized-promise": "no-progress", "normal-promise": "no-progress" });
   const packages = join(root, "packages");
   await mkdir(packages);
   const oversized = evidencePackage("oversized-promise", "2026-09-10");
@@ -173,4 +187,126 @@ test("an oversized package is never sent to the assessors and is reported for hu
   assert.equal(summary.blockedCount, 1);
   assert.equal(summary.results.find(({ promiseId }) => promiseId === "oversized-promise").disposition, "blocked-oversized");
   assert.deepEqual(summary.relevanceVerdictsByRoute, [{ route: "tag:fiscal-rules", verdicts: 2, notRelevant: 0 }]);
+});
+
+test("the review pull request lists every current proposal that changes the public score, and what needs a person", async () => {
+  const root = await mkdtemp(join(tmpdir(), "slava-assessment-changes-"));
+  await mkdir(join(root, "automation/prompts"), { recursive: true });
+  await mkdir(join(root, "automation/review-proposals"), { recursive: true });
+  await writeFile(join(root, "automation/prompts/assessor-v16.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v7.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
+  // The mock assessors propose "moving-towards" for every promise.
+  await writePublicRevisions(root, { "changed-promise": "no-progress", "confirmed-promise": "moving-towards", "oversized-promise": "no-progress" });
+  const packages = join(root, "packages");
+  await mkdir(packages);
+  await writePackage(packages, evidencePackage("changed-promise", "2026-09-10"));
+  await writePackage(packages, evidencePackage("confirmed-promise", "2026-09-10"));
+  const oversized = evidencePackage("oversized-promise", "2026-09-10");
+  oversized.generation = { estimatedTokens: 300_000, oversized: true };
+  await writePackage(packages, oversized);
+
+  const summary = await runBatch(root, packages, "10");
+  assert.equal(summary.newProposalCount, 2);
+  assert.equal(summary.scoreChangeCount, 1);
+  assert.equal(summary.confirmedCount, 1);
+  const body = await readFile(join(root, "automation/pull-request.md"), "utf8");
+  assert.match(body, /### Návrhy, které mění hodnocení na webu \(1, z toho nové: 1\)/);
+  assert.match(body, /#### Testovací slib changed-promise \(`changed-promise`\)/);
+  assert.match(body, /Na webu: \*\*Zatím bez ověřeného podstatného posunu \(0\)\*\* → navrženo: \*\*Směřuje ke splnění \(\+1\)\*\*/);
+  assert.match(body, /> Strana provedla ověřený krok související s tímto slibem\./);
+  assert.match(body, /\*Nový návrh z tohoto běhu\.\*/);
+  assert.doesNotMatch(body, /confirmed-promise/);
+  assert.match(body, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Testovací slib oversized-promise \(`oversized-promise`\): balíček je příliš velký/);
+  assert.match(body, /Nové návrhy, které potvrzují hodnocení na webu: \*\*1\*\*/);
+
+  // An unreviewed change stays listed in later runs, no longer marked new.
+  const rerun = await runBatch(root, packages, "10");
+  assert.equal(rerun.unchangedCount, 2);
+  assert.equal(rerun.scoreChangeCount, 1);
+  const rerunBody = await readFile(join(root, "automation/pull-request.md"), "utf8");
+  assert.match(rerunBody, /\(1, z toho nové: 0\)/);
+  assert.match(rerunBody, /Testovací slib changed-promise/);
+  assert.doesNotMatch(rerunBody, /nový návrh z tohoto běhu/i);
+
+  // Newer evidence not yet assessed marks the proposal as outdated.
+  await writePackage(packages, evidencePackage("changed-promise", "2026-09-11"));
+  await rm(join(packages, "changed-promise-2026-09-10.json"));
+  const deferred = await runBatch(root, packages, "0");
+  assert.equal(deferred.deferredCount, 1);
+  assert.match(await readFile(join(root, "automation/pull-request.md"), "utf8"), /\*Podklady se od návrhu změnily, nový návrh zatím nevznikl\.\*/);
+
+  // Once the public site shows the proposed score, the change is no longer listed.
+  await writePublicRevisions(root, { "changed-promise": "moving-towards" }, { revision: 2 });
+  const published = await runBatch(root, packages, "0");
+  assert.equal(published.scoreChangeCount, 0);
+  assert.match(await readFile(join(root, "automation/pull-request.md"), "utf8"), /Žádný aktuální návrh nemění hodnocení zveřejněné na webu\./);
+});
+
+test("a proposal for a promise without a public score is listed as a change", async () => {
+  const root = await mkdtemp(join(tmpdir(), "slava-assessment-no-public-"));
+  await mkdir(join(root, "automation/prompts"), { recursive: true });
+  await mkdir(join(root, "automation/review-proposals"), { recursive: true });
+  await writeFile(join(root, "automation/prompts/assessor-v16.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v7.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
+  await writePublicRevisions(root, {});
+  const packages = join(root, "packages");
+  await mkdir(packages);
+  await writePackage(packages, evidencePackage("unknown-promise", "2026-09-10"));
+  const summary = await runBatch(root, packages, "10");
+  assert.equal(summary.scoreChangeCount, 1);
+  assert.match(await readFile(join(root, "automation/pull-request.md"), "utf8"), /Na webu: \*\*bez hodnocení na webu\*\* → navrženo/);
+});
+
+test("a human review stays listed until a public revision follows it, and a withdrawn package is marked", async () => {
+  const root = await mkdtemp(join(tmpdir(), "slava-assessment-human-review-"));
+  await mkdir(join(root, "automation/prompts"), { recursive: true });
+  await mkdir(join(root, "automation/review-proposals"), { recursive: true });
+  await writeFile(join(root, "automation/prompts/assessor-v16.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v7.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
+  await writePublicRevisions(root, { "review-promise": "no-progress", "changed-promise": "no-progress" });
+  const packages = join(root, "packages");
+  await mkdir(packages);
+  await writePackage(packages, evidencePackage("review-promise", "2026-09-10"));
+  await writePackage(packages, evidencePackage("changed-promise", "2026-09-10"));
+
+  const first = await runBatch(root, packages, "10", { humanReviewPromise: "review-promise" });
+  assert.equal(first.humanReviewCount, 1);
+  const body = await readFile(join(root, "automation/pull-request.md"), "utf8");
+  assert.match(body, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Testovací slib review-promise \(`review-promise`\): oba automatické posudky označily podklady za nedostatečné \(nový návrh z tohoto běhu\)/);
+
+  // The change proposal's package is withdrawn: it stays listed and is marked.
+  await rm(join(packages, "changed-promise-2026-09-10.json"));
+  const withdrawn = await runBatch(root, packages, "10", { humanReviewPromise: "review-promise" });
+  assert.equal(withdrawn.scoreChangeCount, 1);
+  assert.match(await readFile(join(root, "automation/pull-request.md"), "utf8"), /#### Testovací slib changed-promise[^]*\*Slib už nemá žádný aktuální balíček podkladů\.\*/);
+
+  // Any later public revision settles a proposal, whatever score it gives.
+  await writePublicRevisions(root, { "review-promise": "no-progress", "changed-promise": "acting-against" }, { revision: 2, publishedAt: "2026-09-12" });
+  const settled = await runBatch(root, packages, "10", { humanReviewPromise: "review-promise" });
+  assert.equal(settled.humanReviewCount, 0);
+  assert.equal(settled.scoreChangeCount, 0);
+});
+
+function reviewSummary(pendingReviews, results = []) {
+  return { pendingReviews, results, confirmedCount: 0, unchangedCount: 0, maxAssessments: 0, deferredCount: 0, failedCount: 0, interruption: null, relevanceVerdictsByRoute: [] };
+}
+
+function scoreChange(index, explanationCz) {
+  return { promiseId: `promise-${index}`, promiseTitleCz: `Slib ${index}`, kind: "score-change", publicStatus: "no-progress", candidateStatus: "moving-towards", resolutionReason: "assessor-consensus", explanationCz, reviewUrl: null, newInRun: true, packageState: "current" };
+}
+
+test("the review pull request body stays under the GitHub limit and keeps model text inert", () => {
+  const short = renderReviewPullRequestBody(reviewSummary([scoreChange(1, "Viz @someone a #12.")], [{ promiseId: "promise-1", promiseTitleCz: "Slib 1", disposition: "blocked-oversized", reviewUrl: null }]));
+  assert.match(short, /> Viz @\u200bsomeone a \\#\u200b12\./);
+  assert.match(short, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Slib 1 \(`promise-1`\): balíček je příliš velký/);
+
+  const many = Array.from({ length: 700 }, (_, index) => scoreChange(index, "Dlouhé vysvětlení. ".repeat(20)));
+  const body = renderReviewPullRequestBody(reviewSummary(many));
+  assert.ok(body.length <= 60_000, `body has ${body.length} characters`);
+  assert.match(body, /\(700, z toho nové: 700\)/);
+  assert.match(body, /Vysvětlení jsou kvůli délce jen na stránkách jednotlivých návrhů/);
+  assert.match(body, /… a dalších \d+; úplný seznam je v `assessment-batch.json`/);
 });

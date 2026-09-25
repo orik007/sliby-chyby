@@ -7,11 +7,14 @@ import { assessmentRuntimeConfig, loadAssessmentPrompts } from "./lib/assessment
 import {
   addReviewProposals,
   createReviewProposal,
+  currentPublicRevisions,
   currentReviewProposal,
   mergeRelevanceVerdicts,
   planAssessmentInputs,
+  proposedPublicExplanation,
   relevanceVerdictsByRoute,
   renderHumanReviewMarkdown,
+  renderReviewPullRequestBody,
   validateReviewManifest
 } from "./lib/assessment-review.mjs";
 import { validateEvidencePackage } from "./lib/assessment-pipeline.mjs";
@@ -40,7 +43,8 @@ function parseArgs(args) {
     proposals: "automation/review-proposals",
     runs: "automation/runs/pipeline/github-actions/assessments",
     summary: "automation/runs/pipeline/github-actions/assessment-batch.json",
-    pullRequestBody: "automation/runs/pipeline/github-actions/assessment-review-pr.md"
+    pullRequestBody: "automation/runs/pipeline/github-actions/assessment-review-pr.md",
+    publicRevisions: "data/assessment-revisions"
   };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
@@ -50,6 +54,7 @@ function parseArgs(args) {
     else if (arg === "--runs") options.runs = args[++index];
     else if (arg === "--summary") options.summary = args[++index];
     else if (arg === "--pull-request-body") options.pullRequestBody = args[++index];
+    else if (arg === "--public-revisions") options.publicRevisions = args[++index];
     else throw new Error(`Unknown argument: ${arg}`);
   }
   invariant(options.packages, "--packages is required");
@@ -90,56 +95,6 @@ function validateAssessmentAudit(audit, result) {
   return audit;
 }
 
-function pullRequestBody(summary) {
-  const statusLabels = {
-    fulfilled: "splněno",
-    "moving-towards": "směřuje ke splnění",
-    "no-progress": "bez podstatného posunu",
-    "moving-against": "směřuje proti slibu",
-    "acting-against": "jedná proti slibu"
-  };
-  const dispositionLabels = {
-    assessed: "nový návrh připraven ke kontrole",
-    unchanged: "beze změny",
-    "blocked-oversized": "balíček je příliš velký pro automatické hodnocení; čeká na lidskou kontrolu",
-    "deferred-by-limit": "odloženo limitem běhu",
-    "not-assessed-after-interruption": "nehodnoceno, běh byl přerušen",
-    "interrupted-by-error": "hodnocení přerušeno chybou",
-    "assessment-failed": "automatické hodnocení selhalo; zkusí se znovu v dalším běhu"
-  };
-  const lines = [
-    "## Neveřejné návrhy hodnocení SLAVA",
-    "",
-    "Tento pull request ukládá automaticky připravené návrhy k lidské kontrole. Jeho sloučení **nezveřejní hodnocení ani nezmění veřejný web**.",
-    "",
-    "| Slib | Výsledek zpracování | Navržené hodnocení |",
-    "| --- | --- | --- |"
-  ];
-  for (const result of summary.results) {
-    const pipelineResult = result.resolutionState === "human-review-required"
-      ? "nelze férově rozhodnout bez člověka"
-      : dispositionLabels[result.disposition] ?? result.disposition;
-    const promiseLabel = result.reviewUrl ? `[${result.promiseTitleCz}](${result.reviewUrl})` : result.promiseTitleCz;
-    lines.push(`| ${promiseLabel} (\`${result.promiseId}\`) | ${pipelineResult} | ${statusLabels[result.candidateStatus] ?? "—"} |`);
-  }
-  lines.push(
-    "",
-    `Nové návrhy ke kontrole: **${summary.newProposalCount}**`,
-    `Nezměněné podklady bez nového volání modelů: **${summary.unchangedCount}**`,
-    `Balíčky příliš velké pro automatické hodnocení: **${summary.blockedCount}**`,
-    `Izolovaná selhání hodnocení: **${summary.failedCount}**`,
-    `Odloženo limitem běhu (${summary.maxAssessments}): **${summary.deferredCount}**`,
-    ...(summary.relevanceVerdictsByRoute.some(({ notRelevant }) => notRelevant > 0)
-      ? ["", "Změny zákonů, které hodnotitelé označili za nesouvisející se slibem, podle štítku nebo přímé vazby, která je ke slibu přivedla:", "", "| Cesta | Nesouvisející | Verdiktů celkem |", "| --- | ---: | ---: |",
-        ...summary.relevanceVerdictsByRoute.filter(({ notRelevant }) => notRelevant > 0).map(({ route, notRelevant, verdicts }) => `| \`${route}\` | ${notRelevant} | ${verdicts} |`), ""]
-      : []),
-    ...(summary.interruption ? [`Běh byl přerušen chybou (${summary.interruption.message}); nehodnoceno: **${summary.notAssessedAfterInterruptionCount}**. Dokončená hodnocení jsou uložena, další běh ohodnotí zbytek.`] : []),
-    "",
-    "Všechny návrhy vyžadují lidskou kontrolu a nejsou schválené ke zveřejnění."
-  );
-  return `${lines.join("\n")}\n`;
-}
-
 function humanReviewUrl(reviewPath) {
   if (!reviewPath || !process.env.GITHUB_REPOSITORY || !process.env.REVIEW_BRANCH) return null;
   return `https://github.com/${process.env.GITHUB_REPOSITORY}/blob/${process.env.REVIEW_BRANCH}/${reviewPath}`;
@@ -172,6 +127,10 @@ invariant(relativeProposalRoot === "automation/review-proposals", "--proposals m
 
 const manifestPath = resolve(proposalRoot, "manifest.json");
 const manifest = validateReviewManifest(JSON.parse(await readFile(manifestPath, "utf8")));
+const publicRevisionDirectory = resolve(options.publicRevisions);
+const publicRevisions = currentPublicRevisions(await Promise.all((await readdir(publicRevisionDirectory))
+  .filter((name) => name.endsWith(".json"))
+  .map(async (name) => ({ name, ...JSON.parse(await readFile(resolve(publicRevisionDirectory, name), "utf8")) }))));
 const blockedPromiseIds = new Set();
 
 const packages = [];
@@ -246,6 +205,8 @@ for (const [promiseId, failures] of activeFailuresByPromise) {
   }
 }
 packages.push(...retryCandidates.values());
+// A retried failure package is not a current package of its promise.
+const retryPromiseIds = new Set(retryCandidates.keys());
 
 const prompts = await loadAssessmentPrompts();
 const runtime = assessmentRuntimeConfig();
@@ -352,7 +313,7 @@ const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (i
   await writeFile(resolve(proposalDirectory, "evidence-package.json"), `${JSON.stringify(item.evidencePackage, null, 2)}\n`, { flag: "wx" });
   await writeFile(resolve(proposalDirectory, "assessment-run.json"), `${JSON.stringify(auditRecord, null, 2)}\n`, { flag: "wx" });
   const previousProposal = currentReviewProposal(currentManifest, item.promiseId);
-  const proposal = createReviewProposal({ auditRecord, proposalDirectory: relativeProposalDirectory, supersedesProposalId: previousProposal?.proposalId ?? null });
+  const proposal = createReviewProposal({ auditRecord, proposalDirectory: relativeProposalDirectory, supersedesProposalId: previousProposal?.proposalId ?? null, publicRevisionAtEvaluation: publicRevisions.get(item.promiseId)?.revision ?? 0 });
   await writeFile(resolve(proposalDirectory, "proposal.json"), `${JSON.stringify(proposal, null, 2)}\n`, { flag: "wx" });
   await writeFile(resolve(proposalDirectory, "review.md"), renderHumanReviewMarkdown({ evidencePackage: item.evidencePackage, auditRecord, proposal }), { flag: "wx" });
   await Promise.all((activeFailuresByPromise.get(item.promiseId) ?? []).map((failure) => retireFailure(failure, {
@@ -387,12 +348,63 @@ for (const [index, outcome] of assessed.entries()) {
 }
 await manifestWrites;
 
+// The current proposals that still need a person (docs/evidence-pipeline.md,
+// step 10). A file that cannot be read only loses the explanation or title.
+async function readProposalFile(proposal, name) {
+  try {
+    return JSON.parse(await readFile(resolve(proposal.path, name), "utf8"));
+  } catch (error) {
+    log(`cannot read ${name} of proposal ${proposal.proposalId}: ${error instanceof Error ? error.message : String(error)}`);
+    return null;
+  }
+}
+function explanationOf(proposal, auditRecord) {
+  try {
+    return proposedPublicExplanation(auditRecord);
+  } catch (error) {
+    log(`cannot read the explanation of proposal ${proposal.proposalId}: ${error instanceof Error ? error.message : String(error)}`);
+    return null;
+  }
+}
+const newProposalIds = new Set(newProposals.map(({ proposalId }) => proposalId));
+const planByPromise = new Map(plan.map((item) => [item.promiseId, item]));
+const pendingReviews = (await Promise.all(currentManifest.proposals.filter(({ supersededByProposalId }) => !supersededByProposalId).map(async (proposal) => {
+  const publicRevision = publicRevisions.get(proposal.promiseId) ?? null;
+  if ((publicRevision?.revision ?? 0) > proposal.publicRevisionAtEvaluation) return null;
+  if (proposal.resolutionState === "candidate" && proposal.candidateStatus === (publicRevision?.status ?? null)) return null;
+  const item = retryPromiseIds.has(proposal.promiseId) ? null : planByPromise.get(proposal.promiseId);
+  const packageState = !item
+    ? "withdrawn"
+    : item.assessmentContentHash === proposal.assessmentContentHash
+      ? "current"
+      : "changed";
+  const isCandidate = proposal.resolutionState === "candidate";
+  const auditRecord = isCandidate ? await readProposalFile(proposal, "assessment-run.json") : null;
+  const evidencePackage = planByPromise.get(proposal.promiseId)?.evidencePackage ?? await readProposalFile(proposal, "evidence-package.json");
+  return {
+    promiseId: proposal.promiseId,
+    promiseTitleCz: evidencePackage?.promise?.titleCz ?? proposal.promiseId,
+    kind: isCandidate ? "score-change" : "human-review",
+    publicStatus: publicRevision?.status ?? null,
+    candidateStatus: proposal.candidateStatus,
+    resolutionReason: proposal.resolutionReason,
+    explanationCz: auditRecord ? explanationOf(proposal, auditRecord) : null,
+    reviewUrl: humanReviewUrl(proposal.humanReviewPath),
+    newInRun: newProposalIds.has(proposal.proposalId),
+    packageState
+  };
+}))).filter(Boolean);
+pendingReviews.sort((left, right) => left.promiseId.localeCompare(right.promiseId));
+
 const summary = {
   schemaVersion: "1.0.0",
   generatedAt: new Date().toISOString(),
   publicationApproved: false,
   packageCount: plan.length,
   newProposalCount: newProposals.length,
+  scoreChangeCount: pendingReviews.filter(({ kind }) => kind === "score-change").length,
+  humanReviewCount: pendingReviews.filter(({ kind }) => kind === "human-review").length,
+  confirmedCount: newProposals.filter(({ promiseId, resolutionState, candidateStatus }) => resolutionState === "candidate" && candidateStatus === publicRevisions.get(promiseId)?.status).length,
   unchangedCount: results.filter(({ disposition }) => disposition === "unchanged").length,
   blockedCount: results.filter(({ disposition }) => disposition === "blocked-oversized").length,
   failedCount: results.filter(({ disposition }) => disposition === "assessment-failed").length,
@@ -408,12 +420,13 @@ const summary = {
   promptCharacters: prompts.assessor.instructions.length + prompts.arbiter.instructions.length,
   assessmentConcurrency: concurrency,
   proposalRoot: relativeProposalRoot,
+  pendingReviews,
   results
 };
 await mkdir(resolve(summaryPath, ".."), { recursive: true });
 await mkdir(resolve(pullRequestBodyPath, ".."), { recursive: true });
 await writeFile(summaryPath, `${JSON.stringify(summary, null, 2)}\n`);
-await writeFile(pullRequestBodyPath, pullRequestBody(summary));
+await writeFile(pullRequestBodyPath, renderReviewPullRequestBody(summary));
 
 console.log(JSON.stringify({
   packageCount: summary.packageCount,

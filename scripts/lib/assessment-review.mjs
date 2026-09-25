@@ -39,6 +39,7 @@ export function validateReviewManifest(manifest) {
     invariant(proposal.resolutionState !== "candidate" || proposal.candidateStatus !== null, `Candidate proposal ${proposal.proposalId} must include a status`);
     invariant(proposal.resolutionState !== "human-review-required" || proposal.candidateStatus === null, `Human-review proposal ${proposal.proposalId} cannot include a candidate status`);
     invariant(typeof proposal.evaluatedAt === "string" && !Number.isNaN(Date.parse(proposal.evaluatedAt)), `Review proposal ${proposal.proposalId} has an invalid evaluatedAt`);
+    invariant(Number.isInteger(proposal.publicRevisionAtEvaluation) && proposal.publicRevisionAtEvaluation >= 0, `Review proposal ${proposal.proposalId} has an invalid publicRevisionAtEvaluation`);
     invariant(proposal.humanReviewRequired === true, `Review proposal ${proposal.proposalId} must require human review`);
     invariant(proposal.publicationApproved === false, `Review proposal ${proposal.proposalId} must remain unpublished`);
     invariant(typeof proposal.path === "string" && proposal.path.startsWith("automation/review-proposals/"), `Review proposal ${proposal.proposalId} has an invalid path`);
@@ -99,7 +100,10 @@ export function planAssessmentInputs({ packages, manifest, blockedPromiseIds = n
     .sort((left, right) => left.promiseId.localeCompare(right.promiseId));
 }
 
-export function createReviewProposal({ auditRecord, proposalDirectory, supersedesProposalId = null }) {
+// `publicRevisionAtEvaluation` is the promise's latest public revision number
+// when the proposal was made (0 when it has none).
+export function createReviewProposal({ auditRecord, proposalDirectory, supersedesProposalId = null, publicRevisionAtEvaluation }) {
+  invariant(Number.isInteger(publicRevisionAtEvaluation) && publicRevisionAtEvaluation >= 0, "createReviewProposal requires publicRevisionAtEvaluation");
   invariant(auditRecord?.publicationApproved === false, "Assessment audit must remain unpublished");
   invariant(["candidate", "human-review-required"].includes(auditRecord?.resolution?.state), "Assessment audit has no reviewable resolution");
   invariant(/^[a-f0-9]{64}$/.test(auditRecord.assessmentFingerprint), "Assessment audit has an invalid fingerprint");
@@ -116,6 +120,7 @@ export function createReviewProposal({ auditRecord, proposalDirectory, supersede
     assessmentContentHash: auditRecord.assessmentContentHash,
     packageHash: auditRecord.packageHash,
     evaluatedAt: auditRecord.evaluatedAt,
+    publicRevisionAtEvaluation,
     resolutionState: auditRecord.resolution.state,
     resolutionReason: auditRecord.resolution.reason,
     candidateStatus: auditRecord.resolution.status,
@@ -131,7 +136,16 @@ export function createReviewProposal({ auditRecord, proposalDirectory, supersede
   };
 }
 
-const readerStatus = {
+export const resolutionLabels = {
+  "assessor-consensus": "oba automatické posudky se shodly",
+  "arbiter-selection": "o neshodě automatických posudků rozhodl třetí hodnotitel",
+  "arbiter-confirmed-single-assessor": "třetí hodnotitel ověřil jediný použitelný automatický posudek",
+  "insufficient-evidence": "oba automatické posudky označily podklady za nedostatečné",
+  "arbiter-cannot-decide": "třetí hodnotitel nedokázal spor rozhodnout",
+  "arbiter-selected-insufficient-evidence": "třetí hodnotitel vybral posudek s nedostatečnými podklady"
+};
+
+export const readerStatus = {
   fulfilled: { label: "Splněno", score: "+2" },
   "moving-towards": { label: "Směřuje ke splnění", score: "+1" },
   "no-progress": { label: "Zatím bez ověřeného podstatného posunu", score: "0" },
@@ -165,6 +179,40 @@ export function simplifyPublicExplanation(explanation) {
   return simplified.replace(/(elektronick\p{L}*\s+evidenc\p{L}*\s+tržeb)\s+EET 2\.0\b/iu, "$1 (EET 2.0)");
 }
 
+// The assessment whose explanation the proposal carries: the one the arbiter
+// selected, or the first valid one when both assessors agreed.
+function chosenReview(auditRecord) {
+  const reviewsByAssessor = auditRecord.validatedAssessments ?? {};
+  return auditRecord.resolution.selectedReview === "assessor-b"
+    ? reviewsByAssessor["assessor-b"]
+    : reviewsByAssessor["assessor-a"] ?? reviewsByAssessor["assessor-b"];
+}
+
+/** The public explanation a candidate proposal would carry, or null. */
+export function proposedPublicExplanation(auditRecord) {
+  if (auditRecord.resolution.state !== "candidate" || !auditRecord.resolution.status) return null;
+  const chosen = chosenReview(auditRecord);
+  return chosen ? simplifyPublicExplanation(chosen.explanationCz) : null;
+}
+
+/**
+ * The latest revision of every promise in `data/assessment-revisions`, the
+ * score the public site shows. Returns a map of promise ID to
+ * `{ status, revision }`.
+ */
+export function currentPublicRevisions(revisions) {
+  const latest = new Map();
+  for (const revision of revisions) {
+    const label = revision.name ?? revision.id;
+    invariant(typeof revision.promiseId === "string" && revision.promiseId.length > 0, `Assessment revision ${label} has no promiseId`);
+    invariant(Number.isInteger(revision.revision) && revision.revision > 0, `Assessment revision ${label} has an invalid revision number`);
+    invariant(Object.hasOwn(readerStatus, revision.status), `Assessment revision ${label} has an unknown status`);
+    const current = latest.get(revision.promiseId);
+    if (!current || revision.revision > current.revision) latest.set(revision.promiseId, revision);
+  }
+  return new Map([...latest].map(([promiseId, { status, revision }]) => [promiseId, { status, revision }]));
+}
+
 export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal }) {
   validateEvidencePackage(evidencePackage);
   const reviewsByAssessor = auditRecord.validatedAssessments ?? {};
@@ -172,25 +220,15 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     ["První posudek", reviewsByAssessor["assessor-a"]],
     ["Druhý posudek", reviewsByAssessor["assessor-b"]]
   ].filter(([, review]) => review);
-  const chosen = auditRecord.resolution.selectedReview === "assessor-b"
-    ? reviewsByAssessor["assessor-b"]
-    : reviewsByAssessor["assessor-a"] ?? reviewsByAssessor["assessor-b"];
+  const chosen = chosenReview(auditRecord);
   const proposed = proposal.candidateStatus ? readerStatus[proposal.candidateStatus] : null;
   const hasPublicCandidate = proposal.resolutionState === "candidate";
   if (hasPublicCandidate && !proposed) {
     throw new Error(`Candidate review proposal ${proposal.proposalId} must use a supported candidateStatus.`);
   }
-  const publicExplanation = hasPublicCandidate
-    ? simplifyPublicExplanation(chosen.explanationCz)
-    : null;
-  const resolutionLabel = {
-    "assessor-consensus": "oba automatické posudky se shodly",
-    "arbiter-selection": "o neshodě automatických posudků rozhodl třetí hodnotitel",
-    "arbiter-confirmed-single-assessor": "třetí hodnotitel ověřil jediný použitelný automatický posudek",
-    "insufficient-evidence": "oba automatické posudky označily podklady za nedostatečné",
-    "arbiter-cannot-decide": "třetí hodnotitel nedokázal spor rozhodnout",
-    "arbiter-selected-insufficient-evidence": "třetí hodnotitel vybral posudek s nedostatečnými podklady"
-  }[proposal.resolutionReason] ?? proposal.resolutionReason;
+  const publicExplanation = hasPublicCandidate ? proposedPublicExplanation(auditRecord) : null;
+  if (hasPublicCandidate) invariant(publicExplanation, `Candidate review proposal ${proposal.proposalId} has no chosen assessment.`);
+  const resolutionLabel = resolutionLabels[proposal.resolutionReason] ?? proposal.resolutionReason;
   const lines = [
     `# ${evidencePackage.promise.titleCz}`,
     "",
@@ -330,4 +368,87 @@ export function mergeRelevanceVerdicts(lists) {
     merged.set(route, current);
   }
   return [...merged.values()].sort((left, right) => right.notRelevant - left.notRelevant || left.route.localeCompare(right.route));
+}
+
+// GitHub rejects a pull request body above 65,536 characters.
+// The workflow appends a short data-collection section after this text.
+const maxPullRequestBodyCharacters = 55_000;
+
+// Model-written text is shown as plain text: no Markdown, HTML, mentions, or
+// issue links in the pull request.
+function inertMarkdown(text) {
+  return String(text)
+    .replace(/\s+/g, " ")
+    .replaceAll("@", "@\u200b")
+    .replace(/#(\d)/g, "#\u200b$1")
+    .replace(/\b(GH)-(\d)/gi, "$1\u200b-$2")
+    .replace(/[\\`*_[\]{}()<>#+!|~&:-]/g, "\\$&");
+}
+
+// What the pull request lists is defined in docs/evidence-pipeline.md, step 10.
+export function renderReviewPullRequestBody(summary) {
+  for (const [withExplanations, listLimit] of [[true, Infinity], [false, Infinity], [false, 200], [false, 50]]) {
+    const body = renderPullRequestBodyWith(summary, withExplanations, listLimit);
+    if (body.length <= maxPullRequestBodyCharacters) return body;
+  }
+  return renderPullRequestBodyWith(summary, false, 0);
+}
+
+function renderPullRequestBodyWith(summary, withExplanations, listLimit) {
+  const status = (value) => value ? `${readerStatus[value].label} (${readerStatus[value].score})` : "bez hodnocení na webu";
+  const heading = (item) => `${item.reviewUrl ? `[${item.promiseTitleCz}](${item.reviewUrl})` : item.promiseTitleCz} (\`${item.promiseId}\`)`;
+  const notes = (item) => [
+    ...(item.newInRun ? ["nový návrh z tohoto běhu"] : []),
+    ...(item.packageState === "changed" ? ["podklady se od návrhu změnily, nový návrh zatím nevznikl"] : []),
+    ...(item.packageState === "withdrawn" ? ["slib už nemá žádný aktuální balíček podkladů"] : [])
+  ];
+  const omitted = (count) => count > 0 ? [`*… a dalších ${count}; úplný seznam je v \`assessment-batch.json\` v artefaktu běhu.*`, ""] : [];
+  const changes = summary.pendingReviews.filter(({ kind }) => kind === "score-change");
+  const humanReviews = summary.pendingReviews.filter(({ kind }) => kind === "human-review");
+  const oversized = summary.results.filter(({ disposition }) => disposition === "blocked-oversized");
+  const attention = [
+    ...humanReviews.map((item) => `- ${heading(item)}: ${resolutionLabels[item.resolutionReason] ?? item.resolutionReason}${notes(item).map((note) => ` (${note})`).join("")}`),
+    ...oversized.map((result) => `- ${heading(result)}: balíček je příliš velký pro automatické hodnocení`)
+  ];
+  const lines = [
+    "## Neveřejné návrhy změn hodnocení SLAVA",
+    "",
+    "Tento pull request ukládá automaticky připravené návrhy k lidské kontrole. Jeho sloučení **nezveřejní hodnocení ani nezmění veřejný web**. Návrh zmizí z tohoto přehledu, až hodnocení na webu změní samostatný pull request, nebo až ho nahradí novější návrh.",
+    "",
+    `### Návrhy, které mění hodnocení na webu (${changes.length}, z toho nové: ${changes.filter(({ newInRun }) => newInRun).length})`,
+    ""
+  ];
+  if (changes.length === 0) lines.push("Žádný aktuální návrh nemění hodnocení zveřejněné na webu.", "");
+  if (!withExplanations && changes.length > 0) lines.push("*Vysvětlení jsou kvůli délce jen na stránkách jednotlivých návrhů.*", "");
+  for (const item of changes.slice(0, listLimit)) {
+    lines.push(
+      `#### ${heading(item)}`,
+      "",
+      `Na webu: **${status(item.publicStatus)}** → navrženo: **${status(item.candidateStatus)}**`,
+      "",
+      ...(withExplanations && item.explanationCz ? [`> ${inertMarkdown(item.explanationCz)}`, ""] : []),
+      ...notes(item).map((note) => `*${note[0].toUpperCase()}${note.slice(1)}.*`).flatMap((note) => [note, ""])
+    );
+  }
+  lines.push(...omitted(changes.length - Math.min(changes.length, listLimit)));
+  if (attention.length > 0) {
+    lines.push(`### Vyžaduje lidské rozhodnutí (${attention.length})`, "", ...attention.slice(0, listLimit), "", ...omitted(attention.length - Math.min(attention.length, listLimit)));
+  }
+  lines.push(
+    "### Ostatní",
+    "",
+    `- Nové návrhy, které potvrzují hodnocení na webu: **${summary.confirmedCount}**`,
+    `- Beze změny podkladů, bez nového volání modelů: **${summary.unchangedCount}**`,
+    `- Odloženo limitem běhu (${summary.maxAssessments}): **${summary.deferredCount}**`,
+    `- Izolovaná selhání hodnocení, zkusí se znovu v dalším běhu: **${summary.failedCount}**`,
+    ...(summary.interruption ? [`- Běh byl přerušen chybou (${inertMarkdown(summary.interruption.message.slice(0, 300))}); nehodnoceno: **${summary.interruptedCount + summary.notAssessedAfterInterruptionCount}**. Dokončená hodnocení jsou uložena, další běh ohodnotí zbytek.`] : []),
+    ...(summary.relevanceVerdictsByRoute.some(({ notRelevant }) => notRelevant > 0)
+      ? ["", "Změny zákonů, které hodnotitelé označili za nesouvisející se slibem, podle štítku nebo přímé vazby, která je ke slibu přivedla:", "", "| Cesta | Nesouvisející | Verdiktů celkem |", "| --- | ---: | ---: |",
+        ...summary.relevanceVerdictsByRoute.filter(({ notRelevant }) => notRelevant > 0).slice(0, listLimit === Infinity ? Infinity : 20).map(({ route, notRelevant, verdicts }) => `| \`${route}\` | ${notRelevant} | ${verdicts} |`)]
+      : []),
+    "",
+    "Všechny návrhy vyžadují lidskou kontrolu a nejsou schválené ke zveřejnění. Úplný přehled všech balíčků je v `assessment-batch.json` v artefaktu běhu.",
+    ""
+  );
+  return `${lines.join("\n")}\n`;
 }

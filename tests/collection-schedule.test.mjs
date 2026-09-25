@@ -44,7 +44,8 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.match(workflow, /- name: Assess only new or changed packages\n        id: assess\n        timeout-minutes: 120/);
   // Finished assessments are saved even when the assessment step fails.
   assert.match(workflow, /- name: Commit new review proposals\n        id: proposals\n        if: always\(\) && steps\.assess\.outcome != 'skipped'/);
-  assert.match(workflow, /- name: Create or update human-review pull request\n        if: always\(\) && steps\.proposals\.outputs\.created == 'true'/);
+  // The review pull request text is refreshed on every run that saved its state.
+  assert.match(workflow, /- name: Create or update human-review pull request\n        if: always\(\) && steps\.proposals\.outcome == 'success' && hashFiles\('automation\/runs\/pipeline\/github-actions\/assessment-review-pr\.md'\) != ''/);
   // Every paid call is logged, and the spend is reported even after a failure.
   assert.match(workflow, /SLIBY_MODEL_CALL_LOG: automation\/runs\/pipeline\/github-actions\/model-calls\.jsonl/);
   assert.match(workflow, /- name: Report model calls and estimated spend\n        if: always\(\)/);

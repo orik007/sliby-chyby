@@ -16,6 +16,7 @@ const packageHash = hashEvidencePackage(evidencePackage);
 const assessmentContentHash = hashAssessmentContent(evidencePackage);
 const assessmentFingerprint = hashAssessmentFingerprint({ assessmentContentHash, prompts, runtime });
 const failed = evidencePackage.promise.id === "failed-promise" && evidencePackage.asOf === "2026-09-10";
+const humanReview = evidencePackage.promise.id === process.env.SLIBY_MOCK_HUMAN_REVIEW_PROMISE;
 const evaluatedAt = `${evidencePackage.asOf}T12:00:00.000Z`;
 const outputDirectory = join(resolve(outputRoot), `${evidencePackage.promise.id}-${evidencePackage.asOf}`);
 await mkdir(outputDirectory, { recursive: true });
@@ -44,7 +45,9 @@ const auditRecord = {
   arbiter: null,
   resolution: failed
     ? { state: "assessment-failed", reason: "both-assessors-invalid", status: null, selectedReview: null }
-    : { state: "candidate", reason: "assessor-consensus", status: "moving-towards", selectedReview: "consensus" }
+    : humanReview
+      ? { state: "human-review-required", reason: "insufficient-evidence", status: null, selectedReview: null }
+      : { state: "candidate", reason: "assessor-consensus", status: "moving-towards", selectedReview: "consensus" }
 };
 await writeFile(join(outputDirectory, "assessment-run.json"), `${JSON.stringify(auditRecord, null, 2)}\n`);
 console.log(JSON.stringify({ outputDirectory, assessmentContentHash, assessmentFingerprint }));

@@ -274,6 +274,7 @@ jobs:
               `- Evidence packages: ${run.counts.packageCount} (too large for automated assessment: ${quality.oversizedPackages})`,
               `- Invalid model outputs: ${quality.invalidModelOutputs}`,
               `- New assessment proposals: ${assessment.newProposalCount}`,
+              `- Current proposals changing the public score: ${assessment.scoreChangeCount}; left for human review: ${assessment.humanReviewCount}`,
               `- Unchanged assessments skipped: ${assessment.unchangedCount}`,
               `- Packages too large to assess: ${assessment.blockedCount}`,
               `- Deferred by the per-run assessment cap (${assessment.maxAssessments}): ${assessment.deferredCount} packages, ${assessment.deferredPackageCharacters} characters`,
@@ -323,12 +324,19 @@ jobs:
           git push --force-with-lease="refs/heads/$REVIEW_BRANCH:$AUDIT_BRANCH_TIP" "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "HEAD:refs/heads/$REVIEW_BRANCH"
           echo "AUDIT_BRANCH_TIP=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
 
+      # The text lists what is still open against the public site, so it is
+      # refreshed on every run, also when no new proposal was saved.
       - name: Create or update human-review pull request
-        if: always() && steps.proposals.outputs.created == 'true'
+        if: always() && steps.proposals.outcome == 'success' && hashFiles('automation/runs/pipeline/github-actions/assessment-review-pr.md') != ''
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
+          PROPOSALS_CREATED: ${{ steps.proposals.outputs.created }}
         run: |
           PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVIEW_BRANCH" --base main --state open --json number --jq '.[0].number')"
+          if [ -z "$PR_NUMBER" ] && [ "$PROPOSALS_CREATED" != "true" ]; then
+            echo "No review pull request is open and no new proposal was saved." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
           if [ -n "$PR_NUMBER" ]; then
             gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md
             PR_URL="$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json url --jq '.url')"
