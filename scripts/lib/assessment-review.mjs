@@ -7,15 +7,6 @@ function invariant(condition, message) {
 export const reviewManifestSchemaVersion = "1.0.0";
 export const assessmentFingerprintVersion = "assessment-fingerprint-v1";
 
-export function emptyReviewManifest() {
-  return {
-    schemaVersion: reviewManifestSchemaVersion,
-    fingerprintVersion: assessmentFingerprintVersion,
-    publicationApproved: false,
-    proposals: []
-  };
-}
-
 export function validateReviewManifest(manifest) {
   invariant(manifest && typeof manifest === "object", "Review manifest must be an object");
   invariant(manifest.schemaVersion === reviewManifestSchemaVersion, "Unsupported review manifest schemaVersion");
