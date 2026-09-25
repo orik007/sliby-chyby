@@ -1,8 +1,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
-import { fetchVerified, invariant, validateRegistry } from "./lib/collector-core.mjs";
-import { extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl } from "./lib/psp-print-documents.mjs";
+import { invariant, validateRegistry } from "./lib/collector-core.mjs";
+import { createPspFetcher, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings } from "./lib/psp-print-documents.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
 
@@ -51,23 +51,7 @@ function collectPrints(records) {
   return [...prints.values()].sort((left, right) => left.number - right.number);
 }
 
-// At most four requests to psp.cz are open at a time, across all prints.
-function concurrencyLimit(limit) {
-  let active = 0;
-  const waiting = [];
-  return async (task) => {
-    if (active >= limit) await new Promise((resolveTurn) => waiting.push(resolveTurn));
-    active += 1;
-    try {
-      return await task();
-    } finally {
-      active -= 1;
-      waiting.shift()?.();
-    }
-  };
-}
-const pspRequest = concurrencyLimit(4);
-const fetchPsp = (source, url, options) => pspRequest(() => fetchVerified(source, url, options));
+const fetchPsp = createPspFetcher();
 
 const htmlOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };
 const docxOptions = { maxBytes: 20_000_000, expectedContentTypes: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"] };
@@ -152,8 +136,8 @@ const approvedPrintIds = new Set(conductRecords.flatMap((record) => (record.payl
   .map((print) => String(print.externalPrintId))));
 log(`${prints.length} prints concern potentially attributable records; downloading their proposal texts, later texts, and Senate resolutions`);
 
-// Prints are processed four at a time and each request to psp.cz goes
-// through fetchPsp, which keeps at most four open. A failed download stops
+// Prints are processed two at a time and each request to psp.cz goes
+// through fetchPsp, which keeps at most two open. A failed download stops
 // the run: a law change must never silently miss a text.
 const fetched = new Map();
 const tick = progress("downloading print texts", prints.length);
@@ -169,7 +153,7 @@ async function downloadWorker() {
     tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
   }
 }
-await Promise.all(Array.from({ length: Math.min(4, prints.length) }, downloadWorker));
+await Promise.all(Array.from({ length: Math.min(pspDownloadSettings.concurrency, prints.length) }, downloadWorker));
 
 const result = {};
 for (const print of prints) {

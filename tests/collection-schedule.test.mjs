@@ -40,7 +40,7 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   // The paid steps stop before the job limit, so the saving steps always run.
   assert.match(workflow, /timeout-minutes: 300/);
   assert.match(workflow, /- name: Screen law changes, route them to promises, check relevance, and build packages\n        timeout-minutes: 120/);
-  assert.match(workflow, /- name: Split official print texts into law changes\n        timeout-minutes: 60/);
+  assert.match(workflow, /- name: Split official print texts into law changes\n        timeout-minutes: 120/);
   assert.match(workflow, /- name: Assess only new or changed packages\n        id: assess\n        timeout-minutes: 120/);
   // Finished assessments are saved even when the assessment step fails.
   assert.match(workflow, /- name: Commit new review proposals\n        id: proposals\n        if: always\(\) && steps\.assess\.outcome != 'skipped'/);

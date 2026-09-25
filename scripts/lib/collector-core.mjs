@@ -18,11 +18,6 @@ export function sha256(value) {
   return createHash("sha256").update(input).digest("hex");
 }
 
-export function asArray(value) {
-  if (value === undefined || value === null) return [];
-  return Array.isArray(value) ? value : [value];
-}
-
 export function cleanText(value, maxLength = Number.POSITIVE_INFINITY) {
   if (value === undefined || value === null) return "";
   const raw = typeof value === "object" ? value["#text"] ?? value.__cdata ?? "" : String(value);
@@ -174,8 +169,3 @@ export async function fetchVerified(source, endpoint, { maxBytes, expectedConten
   };
 }
 
-export function parseIsoDate(value) {
-  if (!value) return null;
-  const date = new Date(value);
-  return Number.isNaN(date.valueOf()) ? null : date.toISOString();
-}

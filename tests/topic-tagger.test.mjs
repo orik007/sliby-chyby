@@ -35,7 +35,7 @@ test("buildPromiseTaggingBrief includes only the promise's own supplied fields a
   assert.ok(brief.taxonomyDefinitions.includes("deficit-and-debt"));
 });
 
-test("buildPromiseTaggingBrief includes the promise's own source context, per the design doc's step 3", () => {
+test("buildPromiseTaggingBrief includes the promise's own source context", () => {
   const brief = buildPromiseTaggingBrief(fiscalPromise, taxonomy);
   const source = fiscalPromise.promiseSource;
   assert.ok(brief.text.includes(source.title), "source title must inform classification, not just the derived promise text");

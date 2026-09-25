@@ -140,7 +140,7 @@ jobs:
             --output automation/runs/pipeline/github-actions/collector
 
       - name: Split official print texts into law changes
-        timeout-minutes: 60
+        timeout-minutes: 120
         run: |
           node scripts/run-print-parts.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \

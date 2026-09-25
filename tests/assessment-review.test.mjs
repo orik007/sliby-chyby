@@ -3,7 +3,7 @@ import { readdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
 import { arbiterPromptVersion, assessorPromptVersion, loadAssessmentPrompts } from "../scripts/lib/assessment-config.mjs";
-import { emptyReviewManifest, mergeRelevanceVerdicts, planAssessmentInputs, relevanceVerdictsByRoute, renderHumanReviewMarkdown, validateReviewManifest } from "../scripts/lib/assessment-review.mjs";
+import { assessmentFingerprintVersion, mergeRelevanceVerdicts, reviewManifestSchemaVersion, planAssessmentInputs, relevanceVerdictsByRoute, renderHumanReviewMarkdown, validateReviewManifest } from "../scripts/lib/assessment-review.mjs";
 import { relevancePromptVersion, screeningPromptVersion } from "../scripts/lib/law-change-screening.mjs";
 import { taggingPromptVersion } from "../scripts/lib/topic-tagger.mjs";
 
@@ -27,7 +27,7 @@ const runtime = { assessorProviderA: "openai", assessorProviderB: "openai", arbi
 test("loads only the active assessor and arbiter prompts", async () => {
   const prompts = await loadAssessmentPrompts();
   assert.equal(prompts.assessor.version, "assessor-v16");
-  assert.equal(prompts.arbiter.version, "arbiter-v7");
+  assert.equal(prompts.arbiter.version, "arbiter-v8");
   assert.match(prompts.assessor.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.arbiter.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.assessor.instructions, /maintenanceBaseline/);
@@ -43,7 +43,7 @@ test("retains only the active prompt files", async () => {
 });
 
 test("plans an unseen package for human review without publication", () => {
-  const manifest = emptyReviewManifest();
+  const manifest = { schemaVersion: reviewManifestSchemaVersion, fingerprintVersion: assessmentFingerprintVersion, publicationApproved: false, proposals: [] };
   assert.equal(validateReviewManifest(manifest), manifest);
   const plan = planAssessmentInputs({
     packages: [{ path: "test.json", evidencePackage }],
@@ -89,4 +89,22 @@ test("the human review page shows each assessor's relevance verdict for every la
   assert.match(markdown, /### Souvisí změny zákonů se slibem\?/);
   assert.match(markdown, /Změna rozpočtových pravidel\]\(https:\/\/example.test\/change-1\) \| ano: Mění schvalování rozpočtu/);
   assert.match(markdown, /Účinnost\]\(https:\/\/example.test\/change-2\) \| ne: Stanoví jen den účinnosti\. \| ano: Určuje, kdy změna začne platit\. \|/);
+});
+
+test("the human review page shows both differing assessments and the arbiter's decision", () => {
+  const against = { ...reviewB, status: "moving-against", explanationCz: "Schválené znění pravidla pro schvalování rozpočtu oslabuje.", uncertainties: ["Není jasné, zda se změna použije už na příští rozpočet."] };
+  const arbitrated = {
+    validatedAssessments: { "assessor-a": reviewA, "assessor-b": against },
+    arbiter: { output: { choice: "assessor-b", citedEvidenceIds: ["conduct"], explanationCz: "Druhý posudek vychází ze schváleného znění, o kterém se hlasovalo." } },
+    resolution: { state: "candidate", reason: "arbiter-selection", status: "moving-against", selectedReview: "assessor-b" }
+  };
+  const proposal = { proposalId: "test-promise--def", candidateStatus: "moving-against", resolutionState: "candidate", resolutionReason: "arbiter-selection", supersedesProposalId: null };
+  const markdown = renderHumanReviewMarkdown({ evidencePackage, auditRecord: arbitrated, proposal });
+  // The public candidate is the arbiter's choice, with its explanation.
+  assert.match(markdown, /## Návrh pro veřejný web[^]*\*\*Směřuje proti slibu \(−1\)\*\*[^]*Schválené znění pravidla pro schvalování rozpočtu oslabuje\./);
+  assert.match(markdown, /o neshodě automatických posudků rozhodl třetí hodnotitel/);
+  assert.match(markdown, /### Odlišné posudky/);
+  assert.match(markdown, /#### První posudek: Směřuje ke splnění \(\+1\)/);
+  assert.match(markdown, /#### Druhý posudek: Směřuje proti slibu \(−1\)[^]*Není jasné, zda se změna použije už na příští rozpočet\./);
+  assert.match(markdown, /### Rozhodnutí třetího hodnotitele\n\nDruhý posudek vychází ze schváleného znění, o kterém se hlasovalo\./);
 });

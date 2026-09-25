@@ -2,11 +2,9 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import {
-  aliasIndex,
   ancestorChain,
   directLegalIdentifierIndex,
   isAssessmentEligible,
-  isDescendant,
   resolveTag,
   taxonomyHash,
   validateTaxonomy
@@ -14,7 +12,7 @@ import {
 
 const taxonomy = validateTaxonomy(JSON.parse(await readFile(new URL("../automation/topic-routing/taxonomy-v1.json", import.meta.url), "utf8")));
 
-test("the committed taxonomy is valid and contains the design doc's example branch", () => {
+test("the committed taxonomy is valid and contains the fiscal example branch", () => {
   assert.equal(taxonomy.taxonomyVersion, "topic-routing-v1");
   assert.ok(resolveTag(taxonomy, "public-finance"));
   assert.ok(resolveTag(taxonomy, "fiscal-responsibility"));
@@ -30,11 +28,6 @@ test("a broad parent tag is never assessment-eligible by itself", () => {
   assert.equal(isAssessmentEligible(taxonomy, "deficit-and-debt"), true);
 });
 
-test("isDescendant reports the full ancestor chain, not just the direct parent", () => {
-  assert.equal(isDescendant(taxonomy, "deficit-and-debt", "public-finance"), true);
-  assert.equal(isDescendant(taxonomy, "deficit-and-debt", "health-and-care"), false);
-});
-
 test("rejects a tag with an unknown parent", () => {
   const broken = { ...taxonomy, tags: [...taxonomy.tags, { id: "orphan-tag", parent: "does-not-exist", labelEn: "x", assessmentEligible: true, inclusionExamples: ["x"], exclusionExamples: ["x"], czechAliases: ["x"] }] };
   assert.throws(() => validateTaxonomy(broken), /unknown parent/);
@@ -45,11 +38,13 @@ test("rejects duplicate tag ids", () => {
   assert.throws(() => validateTaxonomy(broken), /Duplicate taxonomy tag id/);
 });
 
-test("aliasIndex resolves a Czech alias to its tag id and rejects a duplicate alias", () => {
-  const index = aliasIndex(taxonomy);
-  assert.equal(index.get("dph"), "vat-policy");
+test("rejects a Czech alias assigned to more than one tag", () => {
   const broken = { ...taxonomy, tags: [...taxonomy.tags, { id: "duplicate-alias-tag", parent: null, labelEn: "x", assessmentEligible: true, inclusionExamples: ["x"], exclusionExamples: ["x"], czechAliases: ["DPH"] }] };
-  assert.throws(() => aliasIndex(broken), /assigned to more than one tag/);
+  assert.throws(() => validateTaxonomy(broken), /assigned to more than one tag/);
+  const repeated = { ...taxonomy, tags: taxonomy.tags.map((tag, index) => (index === 0 ? { ...tag, czechAliases: [...tag.czechAliases, tag.czechAliases[0].toUpperCase()] } : tag)) };
+  assert.throws(() => validateTaxonomy(repeated), /lists the Czech alias .* twice/);
+  const invalid = { ...taxonomy, tags: taxonomy.tags.map((tag, index) => (index === 0 ? { ...tag, czechAliases: [...tag.czechAliases, null] } : tag)) };
+  assert.throws(() => validateTaxonomy(invalid), /empty or invalid Czech alias/);
 });
 
 test("taxonomyHash changes when a tag's Czech aliases or examples change, not just its id/parent/eligibility", () => {

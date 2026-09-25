@@ -186,3 +186,32 @@ test("a law change found not relevant cannot support a sufficient assessment", (
   assert.equal(validateAssessmentOutput(citesRejected, evidencePackage), citesRejected);
   assert.deepEqual(assessmentOutputJsonSchema.required.includes("changeRelevance"), true);
 });
+
+test("two valid assessments that disagree go to the arbiter, whose choice decides", () => {
+  const towards = review("moving-towards");
+  const against = review("moving-against");
+  assert.deepEqual(resolveAssessmentReviews(towards, against, evidencePackage), { state: "arbitration-required", reason: "assessor-disagreement", status: null, selectedReview: null });
+  const choose = (choice) => resolveAssessmentReviews(towards, against, evidencePackage, { choice, citedEvidenceIds: ["conduct"], explanationCz: "Druhý posudek odpovídá předloženým podkladům." });
+  assert.deepEqual(choose("assessor-a"), { state: "candidate", reason: "arbiter-selection", status: "moving-towards", selectedReview: "assessor-a" });
+  assert.deepEqual(choose("assessor-b"), { state: "candidate", reason: "arbiter-selection", status: "moving-against", selectedReview: "assessor-b" });
+  assert.deepEqual(choose("cannot-decide"), { state: "human-review-required", reason: "arbiter-cannot-decide", status: null, selectedReview: null });
+  // An arbiter may cite only evidence of the package.
+  assert.throws(() => resolveAssessmentReviews(towards, against, evidencePackage, { choice: "assessor-a", citedEvidenceIds: ["invented"], explanationCz: "Druhý posudek odpovídá předloženým podkladům." }), /invented evidence ID/);
+});
+
+test("assessments that differ only in whether the evidence suffices also go to the arbiter", () => {
+  const sufficient = review("no-progress");
+  const insufficient = { ...review("no-progress"), evidenceSufficient: false };
+  assert.equal(resolveAssessmentReviews(sufficient, insufficient, evidencePackage).state, "arbitration-required");
+  // An arbiter that selects the assessment with insufficient evidence leaves it to a person.
+  assert.deepEqual(resolveAssessmentReviews(sufficient, insufficient, evidencePackage, { choice: "assessor-b", citedEvidenceIds: ["conduct"], explanationCz: "Druhý posudek odpovídá předloženým podkladům." }),
+    { state: "human-review-required", reason: "arbiter-selected-insufficient-evidence", status: null, selectedReview: "assessor-b" });
+  // Both assessors finding the evidence insufficient needs no arbiter, but a person.
+  assert.deepEqual(resolveAssessmentReviews(insufficient, { ...insufficient }, evidencePackage), { state: "human-review-required", reason: "insufficient-evidence", status: null, selectedReview: null });
+});
+
+test("an assessment may cite only evidence of its package", () => {
+  const invented = review("moving-towards");
+  invented.citedEvidenceIds = ["promise-source", "change-1", "news-article"];
+  assert.throws(() => validateAssessmentOutput(invented, evidencePackage), /invented evidence ID: news-article/);
+});

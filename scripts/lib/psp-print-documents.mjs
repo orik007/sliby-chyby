@@ -1,5 +1,5 @@
 import { unzipSync } from "fflate";
-import { invariant } from "./collector-core.mjs";
+import { fetchVerified, invariant } from "./collector-core.mjs";
 
 function decodeXml(value) {
   return value
@@ -10,6 +10,33 @@ function decodeXml(value) {
     .replace(/&apos;/g, "'")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">");
+}
+
+// With four parallel requests, psp.cz intermittently refused connections
+// within the first minute in two runs (25 September 2026, connect timeouts),
+// and one URL failed all four attempts spaced 1, 2, and 4 s apart. So at
+// most two requests are open at a time, and a failed request waits longer
+// before each retry: 5, 10, 20, 40, and 80 s. A request keeps its slot while
+// it waits, so when psp.cz stops answering, every download pauses rather
+// than adding connections.
+export const pspDownloadSettings = { concurrency: 2, retryAttempts: 6, retryDelayMs: 5_000 };
+
+// Returns a fetch that sends every request through one shared limit. A
+// request takes a slot only for itself, never while holding another, so the
+// limit cannot deadlock.
+export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs } = pspDownloadSettings) {
+  let active = 0;
+  const waiting = [];
+  return async (source, url, options) => {
+    if (active >= concurrency) await new Promise((resolveTurn) => waiting.push(resolveTurn));
+    active += 1;
+    try {
+      return await fetchVerified(source, url, { ...options, retryAttempts, retryDelayMs });
+    } finally {
+      active -= 1;
+      waiting.shift()?.();
+    }
+  };
 }
 
 export function officialPrintDocumentPageUrl(termNumber, printNumber, partNumber = 0) {
