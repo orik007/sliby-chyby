@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createEmbeddings, createStructuredModelResponse } from "../scripts/lib/model-provider.mjs";
+import { createStructuredModelResponse } from "../scripts/lib/model-provider.mjs";
 
 function fixtureHeaders(map) {
   return { get: (key) => map[key.toLowerCase()] ?? null };
@@ -228,37 +228,6 @@ test("createStructuredModelResponse honors an HTTP-date Retry-After, not just de
     });
     assert.equal(callCount, 2);
     assert.deepEqual(result.output, { ok: true });
-  } finally {
-    globalThis.fetch = originalFetch;
-  }
-});
-
-test("createEmbeddings retries a 429 rate-limit response and succeeds on the next attempt", async () => {
-  const originalFetch = globalThis.fetch;
-  let callCount = 0;
-  globalThis.fetch = async () => {
-    callCount += 1;
-    if (callCount === 1) {
-      return {
-        ok: false,
-        status: 429,
-        headers: fixtureHeaders({ "retry-after": "0" }),
-        json: async () => ({ error: { message: "Rate limit reached" } })
-      };
-    }
-    return {
-      ok: true,
-      json: async () => ({
-        model: "text-embedding-3-small",
-        usage: { input_tokens: 5 },
-        data: [{ index: 0, embedding: [0.1, 0.2, 0.3] }]
-      })
-    };
-  };
-  try {
-    const result = await createEmbeddings({ provider: "openai", apiKey: "fixture-key", model: "text-embedding-3-small", dimensions: 3, inputs: ["fixture text"] });
-    assert.equal(callCount, 2, "the retried embedding request must actually be attempted a second time");
-    assert.deepEqual(result.embeddings, [[0.1, 0.2, 0.3]]);
   } finally {
     globalThis.fetch = originalFetch;
   }

@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { log } from "./run-log.mjs";
 
 export function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -136,13 +137,19 @@ export async function fetchVerified(source, endpoint, { maxBytes, expectedConten
       });
       if (response.ok) bytes = new Uint8Array(await response.arrayBuffer());
     } catch (error) {
-      if (attempt === retryAttempts) throw error;
+      const reason = error?.name === "AbortError" ? "no answer within 45 s" : (error instanceof Error ? error.message : String(error));
+      if (attempt === retryAttempts) {
+        log(`download failed after ${attempt} attempts: ${endpoint} (${reason})`);
+        throw error;
+      }
+      log(`download attempt ${attempt}/${retryAttempts} failed: ${endpoint} (${reason}); retrying`);
       await delay(retryDelayMs * 2 ** (attempt - 1));
       continue;
     } finally {
       clearTimeout(timeout);
     }
     if (response.ok || !isTransientResponse(response) || attempt === retryAttempts) break;
+    log(`download attempt ${attempt}/${retryAttempts} got HTTP ${response.status}: ${endpoint}; retrying`);
     await response.body?.cancel();
     await delay(retryDelayMs * 2 ** (attempt - 1));
   }

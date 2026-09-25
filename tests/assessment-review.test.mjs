@@ -3,7 +3,8 @@ import { readdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
 import { arbiterPromptVersion, assessorPromptVersion, loadAssessmentPrompts } from "../scripts/lib/assessment-config.mjs";
-import { emptyReviewManifest, planAssessmentInputs, validateReviewManifest } from "../scripts/lib/assessment-review.mjs";
+import { emptyReviewManifest, mergeRelevanceVerdicts, planAssessmentInputs, relevanceVerdictsByRoute, renderHumanReviewMarkdown, validateReviewManifest } from "../scripts/lib/assessment-review.mjs";
+import { relevancePromptVersion, screeningPromptVersion } from "../scripts/lib/law-change-screening.mjs";
 import { taggingPromptVersion } from "../scripts/lib/topic-tagger.mjs";
 
 const evidencePackage = {
@@ -15,6 +16,8 @@ const evidencePackage = {
   promise: { id: "test-promise", originalTextCz: "Testovací slib.", fulfillmentTest: "Ověřitelný výsledek.", contradictionTest: "Ověřitelný rozpor." },
   evidence: [
     { id: "promise-source", url: "https://example.test/promise", factSummary: "Přesné znění slibu.", locator: "strana 1", publishedAt: "2025-01-01", primary: true, role: "promise-source" },
+    { id: "change-1", url: "https://example.test/change-1", factSummary: "Úřední text změny zákona.", locator: "ČÁST PRVNÍ", publishedAt: "2026-09-01", primary: true, role: "law-change", title: "90: ČÁST PRVNÍ – Změna rozpočtových pravidel", structuredFacts: { titleCz: "Změna rozpočtových pravidel" }, matchBasis: { routeBasis: ["direct-structural-link", "controlled-tag"], matchedTagIds: ["fiscal-rules"], directLinkIdentifiers: ["cz-act-218-2000"] } },
+    { id: "change-2", url: "https://example.test/change-2", factSummary: "Úřední text změny zákona.", locator: "ČÁST DRUHÁ", publishedAt: "2026-09-01", primary: true, role: "law-change", title: "90: ČÁST DRUHÁ – Účinnost", structuredFacts: { titleCz: "Účinnost" }, matchBasis: { routeBasis: ["controlled-tag"], matchedTagIds: ["fiscal-rules"], directLinkIdentifiers: [] } },
     { id: "conduct", url: "https://example.test/conduct", factSummary: "Ověřený krok.", locator: "záznam", publishedAt: "2026-09-10", primary: true, role: "conduct-evidence" }
   ]
 };
@@ -23,18 +26,20 @@ const runtime = { assessorProviderA: "openai", assessorProviderB: "openai", arbi
 
 test("loads only the active assessor and arbiter prompts", async () => {
   const prompts = await loadAssessmentPrompts();
-  assert.equal(prompts.assessor.version, "assessor-v15");
-  assert.equal(prompts.arbiter.version, "arbiter-v6");
+  assert.equal(prompts.assessor.version, "assessor-v16");
+  assert.equal(prompts.arbiter.version, "arbiter-v7");
   assert.match(prompts.assessor.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.arbiter.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.assessor.instructions, /maintenanceBaseline/);
   assert.match(prompts.assessor.instructions, /Never return an empty citation array/);
   assert.match(prompts.arbiter.instructions, /maintenanceBaseline/);
+  assert.match(prompts.assessor.instructions, /changeRelevance/);
+  assert.match(prompts.arbiter.instructions, /changeRelevance/);
 });
 
 test("retains only the active prompt files", async () => {
   const promptFiles = await readdir(resolve(import.meta.dirname, "../automation/prompts"));
-  assert.deepEqual(promptFiles.sort(), [`${arbiterPromptVersion}.md`, `${assessorPromptVersion}.md`, `${taggingPromptVersion}.md`].sort());
+  assert.deepEqual(promptFiles.sort(), [`${arbiterPromptVersion}.md`, `${assessorPromptVersion}.md`, `${taggingPromptVersion}.md`, `${screeningPromptVersion}.md`, `${relevancePromptVersion}.md`].sort());
 });
 
 test("plans an unseen package for human review without publication", () => {
@@ -48,4 +53,40 @@ test("plans an unseen package for human review without publication", () => {
   });
   assert.equal(plan[0].disposition, "assess");
   assert.equal(manifest.publicationApproved, false);
+});
+
+const reviewA = {
+  promiseId: "test-promise",
+  changeRelevance: [
+    { evidenceId: "change-1", relevant: true, reasonCz: "Mění schvalování rozpočtu, o kterém slib mluví." },
+    { evidenceId: "change-2", relevant: false, reasonCz: "Stanoví jen den účinnosti." }
+  ],
+  status: "moving-towards",
+  evidenceSufficient: true,
+  citedEvidenceIds: ["promise-source", "change-1", "conduct"],
+  explanationCz: "Vláda předložila změnu pravidel pro schvalování rozpočtu, kterou slib žádá.",
+  confidence: "medium",
+  uncertainties: []
+};
+const reviewB = { ...reviewA, changeRelevance: [reviewA.changeRelevance[0], { evidenceId: "change-2", relevant: true, reasonCz: "Určuje, kdy změna začne platit." }] };
+const auditRecord = {
+  validatedAssessments: { "assessor-a": reviewA, "assessor-b": reviewB },
+  arbiter: null,
+  resolution: { state: "candidate", reason: "assessor-consensus", status: "moving-towards", selectedReview: "consensus" }
+};
+
+test("counts the assessors' relevance verdicts by the tag or direct link that routed each law change", () => {
+  const verdicts = relevanceVerdictsByRoute(evidencePackage, auditRecord);
+  assert.deepEqual(verdicts.find(({ route }) => route === "tag:fiscal-rules"), { route: "tag:fiscal-rules", verdicts: 4, notRelevant: 1 });
+  assert.deepEqual(verdicts.find(({ route }) => route === "direct:cz-act-218-2000"), { route: "direct:cz-act-218-2000", verdicts: 2, notRelevant: 0 });
+  const merged = mergeRelevanceVerdicts([verdicts, verdicts]);
+  assert.deepEqual(merged[0], { route: "tag:fiscal-rules", verdicts: 8, notRelevant: 2 });
+});
+
+test("the human review page shows each assessor's relevance verdict for every law change", () => {
+  const proposal = { proposalId: "test-promise--abc", candidateStatus: "moving-towards", resolutionState: "candidate", resolutionReason: "assessor-consensus", supersedesProposalId: null };
+  const markdown = renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal });
+  assert.match(markdown, /### Souvisí změny zákonů se slibem\?/);
+  assert.match(markdown, /Změna rozpočtových pravidel\]\(https:\/\/example.test\/change-1\) \| ano: Mění schvalování rozpočtu/);
+  assert.match(markdown, /Účinnost\]\(https:\/\/example.test\/change-2\) \| ne: Stanoví jen den účinnosti\. \| ano: Určuje, kdy změna začne platit\. \|/);
 });

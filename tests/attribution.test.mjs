@@ -8,8 +8,8 @@ import {
   attributionStatusForRecord,
   factSummary,
   isPotentiallyAttributable,
-  selectBoundedPrimaryMatches,
-  validatePromiseRegistry
+  validatePromiseRegistry,
+  versionConcerned
 } from "../scripts/lib/attribution.mjs";
 import { loadPublishedPromiseIds } from "../scripts/lib/published-promises.mjs";
 
@@ -106,25 +106,6 @@ test("only Chamber votes and legislative steps can be collected, and only four s
   assert.deepEqual([...assessableAttributionStatuses].sort(), ["verified-government-proposal", "verified-member-bill", "verified-party-no-majority", "verified-party-vote"]);
 });
 
-test("bounded selection keeps only assessable primary evidence, direct links first", () => {
-  const direct = { record: voteRecord({ id: "psp--vote-direct" }), attributionStatus: "verified-party-vote", directLink: true };
-  const tagged = { record: voteRecord({ id: "psp--vote-tagged" }), attributionStatus: "verified-party-vote", directLink: false };
-  const procedural = { record: voteRecord({ id: "psp--vote-procedural" }), attributionStatus: "candidate-party-vote-without-decisive-context", directLink: true };
-  assert.deepEqual(selectBoundedPrimaryMatches([tagged, procedural, direct]).map(({ record }) => record.id), ["psp--vote-direct", "psp--vote-tagged"]);
-});
-
-test("bounded selection never drops a decision in favour of newer proposals", () => {
-  const proposals = Array.from({ length: 30 }, (_, index) => ({
-    record: { ...submissionStep({ kind: "government-proposal", submittedOn: "2026-09-01", proposerPartyIds: ["motoriste"] }), id: `psp--proposal-${index}`, occurredAt: `2026-09-${String(index % 28 + 1).padStart(2, "0")}T00:00:00`, payload: { externalPrintId: `print-${index}` } },
-    attributionStatus: "verified-government-proposal",
-    directLink: true
-  }));
-  const olderVote = { record: { ...voteRecord({ id: "psp--vote-older" }), occurredAt: "2026-01-01T00:00:00" }, attributionStatus: "verified-party-vote", directLink: false };
-  const selected = selectBoundedPrimaryMatches([...proposals, olderVote]).map(({ record }) => record.id);
-  assert.equal(selected.length, 24);
-  assert.equal(selected[0], "psp--vote-older");
-});
-
 test("only records that can be attributable conduct of a tracked party are routed", () => {
   const tracked = ["ano", "motoriste", "spd"];
   assert.equal(isPotentiallyAttributable(voteRecord(), tracked), true);
@@ -140,4 +121,33 @@ test("a proposal's fact summary names its official print kind", () => {
   assert.match(factSummary(submissionStep(proposal, "předložen", "3"), "motoriste"), /It is a government state budget bill/);
   assert.match(factSummary(submissionStep(proposal, "předložen", "4"), "motoriste"), /It is an international treaty submitted by the government/);
   assert.match(factSummary(submissionStep({ ...proposal, kind: "member-bill" }), "motoriste"), /It is a member bill/);
+});
+
+test("a vote concerns the text its print-history step decided on", () => {
+  const vote = (actionCz, stageCz, printKindId = "1") => ({ kind: "parliamentary-vote", payload: { linkedPrints: [{ externalPrintId: "43200", printKindId, historyContexts: [{ actionCz: "přikázán", stageCz: "1. čtení" }, { actionCz, stageCz }] }] } });
+  const concerned = (record) => versionConcerned(record, "43200");
+  const plain = (version, extra = {}) => ({ version, withSenateResolution: false, sameAsApproved: false, mark: null, ...extra });
+  // Stages and actions as psp.cz names them (typ_stavu.unl, typ_akce.unl).
+  assert.deepEqual(concerned({ kind: "legislative-step", payload: {} }), plain("proposed"));
+  assert.deepEqual(concerned(vote("souhlas", "3. čtení")), plain("approved"));
+  assert.deepEqual(concerned(vote("souhlas", "1. čtení (§ 90, odst. 2) - podr. rozprava")), plain("approved"));
+  assert.deepEqual(concerned(vote("souhlas", "2. čtení", "4")), plain("proposed"), "a treaty has no approved text");
+  // After a Senate return, insisting re-adopts the approved text.
+  assert.deepEqual(concerned(vote("setrváno", "Sněmovna (Senát)")), plain("passed", { withSenateResolution: true, sameAsApproved: true }));
+  // A vote on the Senate's amendments concerns the approved text changed by
+  // them, which is the passed text.
+  assert.deepEqual(concerned(vote("pozm. přijat", "Sněmovna (Senát)")), plain("passed", { withSenateResolution: true }));
+  assert.deepEqual(concerned(vote("nepřijat", "Sněmovna (Senát)")), plain("passed", { withSenateResolution: true }));
+  // After a presidential return, the text sent to the President may include
+  // accepted Senate amendments, so the approved text is not assumed to be it.
+  assert.deepEqual(concerned(vote("setrváno", "Sněmovna (Prezident)")), plain("passed"));
+  assert.deepEqual(concerned(vote("nepřijat", "Sněmovna (Prezident)")), plain("passed"));
+  assert.deepEqual(concerned(vote("zamítnut", "3. čtení")), plain("proposed", { mark: "third-reading-rejection" }));
+  assert.deepEqual(concerned(vote("zamítnut", "1. čtení")), plain("proposed"));
+  assert.deepEqual(concerned(vote("schváleno", "1. čtení", "5")), plain("proposed"));
+  // "nepřijat" outside a return is not a vote on the Senate's resolution.
+  assert.deepEqual(concerned(vote("nepřijat", "3. čtení")), plain("proposed"));
+  // A vote linked to a print only through its agenda item is not conduct on
+  // that print.
+  assert.equal(versionConcerned({ kind: "parliamentary-vote", payload: { linkedPrints: [{ externalPrintId: "43200", printKindId: "1", historyContexts: [] }] } }, "43200"), null);
 });

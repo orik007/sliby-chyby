@@ -18,7 +18,11 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.match(workflow, /SLIBY_ASSESSMENT_CONCURRENCY: 4/);
   assert.match(workflow, /timeout-minutes: 300/);
   assert.match(workflow, /Persist source collection and queued evidence packages/);
-  assert.match(workflow, /Queue enriched evidence packages/);
+  assert.match(workflow, /Queue evidence packages/);
+  assert.doesNotMatch(workflow, /enrich/i);
+  assert.match(workflow, /node scripts\/run-print-parts\.mjs/);
+  assert.doesNotMatch(workflow, /automation\/print-parts/);
+  assert.match(workflow, /--print-parts automation\/runs\/pipeline\/github-actions\/print-parts\/print-parts\.json/);
   assert.doesNotMatch(workflow, /--retry-blocked-queue/);
   assert.match(workflow, /--packages automation\/evidence-packages/);
   assert.match(workflow, /--topic-routing-run automation\/runs\/pipeline\/github-actions\/topic-routing\/topic-routing-report\.json/);
@@ -35,11 +39,16 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.doesNotMatch(workflow, /inputs\.since|inputs\.sources|--since|--source /);
   // The paid steps stop before the job limit, so the saving steps always run.
   assert.match(workflow, /timeout-minutes: 300/);
-  assert.match(workflow, /- name: Route source records to promises via legal identifiers and topic tags\n        timeout-minutes: 120/);
+  assert.match(workflow, /- name: Screen law changes, route them to promises, check relevance, and build packages\n        timeout-minutes: 120/);
+  assert.match(workflow, /- name: Split official print texts into law changes\n        timeout-minutes: 60/);
   assert.match(workflow, /- name: Assess only new or changed packages\n        id: assess\n        timeout-minutes: 120/);
   // Finished assessments are saved even when the assessment step fails.
   assert.match(workflow, /- name: Commit new review proposals\n        id: proposals\n        if: always\(\) && steps\.assess\.outcome != 'skipped'/);
-  assert.match(workflow, /- name: Create or update human-review pull request\n        if: always\(\) && steps\.proposals\.outputs\.created == 'true'/);
+  // The review pull request text is refreshed on every run that saved its state.
+  assert.match(workflow, /- name: Create or update human-review pull request\n        if: always\(\) && steps\.proposals\.outcome == 'success' && hashFiles\('automation\/runs\/pipeline\/github-actions\/assessment-review-pr\.md'\) != ''/);
+  // Every paid call is logged, and the spend is reported even after a failure.
+  assert.match(workflow, /SLIBY_MODEL_CALL_LOG: automation\/runs\/pipeline\/github-actions\/model-calls\.jsonl/);
+  assert.match(workflow, /- name: Report model calls and estimated spend\n        if: always\(\)/);
   // Paid assessments have a hard per-run cap that defaults to none.
   assert.match(workflow, /max_assessments:\n        description: [^\n]+\n        required: true\n        default: "0"/);
   assert.match(workflow, /SLIBY_MAX_ASSESSMENTS: \$\{\{ inputs\.max_assessments \|\| '0' \}\}/);
@@ -71,9 +80,9 @@ test("the audit branch is a current operational snapshot restored into main", as
   assert.match(workflow, /could not create the required review pull request/);
 });
 
-test("the tag-cache persistence step survives a topic-routing failure, but checkpoints only persist on full success", async () => {
+test("the model-cache persistence step survives a routing failure, but checkpoints only persist on full success", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
-  const tagCacheStep = workflow.split("      - name: Persist tag-assignment cache even on a failed run")[1].split("\n      - name:")[0];
+  const tagCacheStep = workflow.split("      - name: Persist model caches even on a failed run")[1].split("\n      - name:")[0];
   assert.match(tagCacheStep, /\n {8}if: always\(\)/);
   assert.match(tagCacheStep, /if \[ -d automation\/topic-routing\/tag-cache \]; then/);
   const checkpointsStep = workflow.split("      - name: Persist source collection and queued evidence packages")[1].split("\n      - name:")[0];
@@ -91,11 +100,11 @@ test("collection and packages create a missing audit pull request without overwr
 
 test("checkpoints persist only after routing and queuing packages", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
-  const printActs = workflow.indexOf("      - name: Extract amended acts from official print texts");
-  const routing = workflow.indexOf("      - name: Route source records to promises via legal identifiers and topic tags");
-  const queueing = workflow.indexOf("      - name: Queue enriched evidence packages");
+  const printParts = workflow.indexOf("      - name: Split official print texts into law changes");
+  const routing = workflow.indexOf("      - name: Screen law changes, route them to promises, check relevance, and build packages");
+  const queueing = workflow.indexOf("      - name: Queue evidence packages");
   const persistence = workflow.indexOf("      - name: Persist source collection and queued evidence packages");
-  assert.ok(printActs >= 0 && printActs < routing && routing < queueing && queueing < persistence);
+  assert.ok(printParts >= 0 && printParts < routing && routing < queueing && queueing < persistence);
   assert.equal(workflow.includes("Persist successful source checkpoints"), false);
 });
 
@@ -108,7 +117,8 @@ test("the public fallback records a valid successful collection time", async () 
 test("audit state of another pipeline generation is never restored", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
   const generation = (await readFile(new URL("../automation/pipeline-generation", import.meta.url), "utf8")).trim();
-  assert.equal(generation, "official-records-v1");
+  assert.equal(generation, "law-changes-v1");
+  assert.match(workflow, /-- automation\/topic-routing\/tag-cache\)/);
   assert.match(workflow, /audit_generation="\$\(git show "origin\/\$REVIEW_BRANCH:automation\/pipeline-generation" 2>\/dev\/null \|\| true\)"/);
   assert.match(workflow, /if \[ "\$audit_generation" != "\$\(cat automation\/pipeline-generation\)" \]; then/);
   for (const path of ["collectors/checkpoints.json", "evidence-packages/manifest.json", "review-proposals/manifest.json"]) {

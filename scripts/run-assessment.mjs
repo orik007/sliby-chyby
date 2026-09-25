@@ -16,6 +16,7 @@ import {
 import { assessmentRuntimeConfig, loadAssessmentPrompts } from "./lib/assessment-config.mjs";
 import { createStructuredModelResponse } from "./lib/model-provider.mjs";
 import { cachedModelResponse } from "./lib/response-cache.mjs";
+import { log } from "./lib/run-log.mjs";
 
 const envPath = resolve(".env");
 if (existsSync(envPath)) loadEnvFile(envPath);
@@ -55,7 +56,7 @@ function apiKeyFor(provider) {
 const assessorInstructions = prompts.assessor.instructions;
 const arbiterInstructions = prompts.arbiter.instructions;
 
-async function createStructuredResponse({ provider, model, instructions, input, name, schema }) {
+async function createStructuredResponse({ provider, model, instructions, input, name, schema }, logLabel = null) {
   return createStructuredModelResponse({
     provider,
     apiKey: apiKeyFor(provider),
@@ -64,7 +65,8 @@ async function createStructuredResponse({ provider, model, instructions, input, 
     input,
     name,
     schema,
-    metadata: { project: "sliby-chyby", package_id: evidencePackage.packageId }
+    metadata: { project: "sliby-chyby", package_id: evidencePackage.packageId },
+    logLabel
   });
 }
 
@@ -72,7 +74,8 @@ async function createStructuredResponse({ provider, model, instructions, input, 
 // response of this assessment until the assessment is saved.
 const responseCache = process.env.SLIBY_RESPONSE_CACHE || null;
 function cachedResponse(role, request) {
-  return cachedModelResponse({ directory: responseCache, role, keyInput: { assessmentFingerprint, role, request }, request: () => createStructuredResponse(request) });
+  const label = `${role} ${evidencePackage.promise.id}`;
+  return cachedModelResponse({ directory: responseCache, role, keyInput: { assessmentFingerprint, role, request }, request: () => createStructuredResponse(request, label), onReuse: () => log(`${label}: reused the saved response, no new call`) });
 }
 
 const assessorInput = { packageHash, evidencePackage };

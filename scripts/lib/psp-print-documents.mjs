@@ -1,12 +1,5 @@
 import { unzipSync } from "fflate";
-import { cleanText, invariant, sha256 } from "./collector-core.mjs";
-
-export const printDocumentEnrichmentVersion = "psp-print-document-v1";
-
-const stopWords = new Set([
-  "ano", "bude", "budeme", "ceska", "ceske", "cesky", "dalsi", "jejich", "ktery", "ktere", "musi",
-  "navrh", "obnovime", "podle", "pro", "program", "slib", "strana", "vratime", "zakon", "zakona", "zrusime"
-]);
+import { invariant } from "./collector-core.mjs";
 
 function decodeXml(value) {
   return value
@@ -19,48 +12,12 @@ function decodeXml(value) {
     .replace(/&gt;/g, ">");
 }
 
-function normalize(value) {
-  return String(value ?? "")
-    .normalize("NFD")
-    .replace(/\p{Diacritic}/gu, "")
-    .toLocaleLowerCase("cs-CZ")
-    .replace(/[^a-z0-9]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-export async function retryTransient(operation, { attempts = 3, delayMs = 500 } = {}) {
-  invariant(Number.isInteger(attempts) && attempts > 0, "Retry attempts must be a positive integer");
-  let lastError;
-  for (let attempt = 1; attempt <= attempts; attempt += 1) {
-    try {
-      return await operation(attempt);
-    } catch (error) {
-      lastError = error;
-      const message = String(error?.message ?? error);
-      const transient = /fetch failed|aborted|timed? out|HTTP (?:429|5\d\d)/i.test(message);
-      if (!transient || attempt === attempts) throw error;
-      await new Promise((resolve) => setTimeout(resolve, delayMs * (2 ** (attempt - 1))));
-    }
-  }
-  throw lastError;
-}
-
 export function officialPrintDocumentPageUrl(termNumber, printNumber, partNumber = 0) {
   return `https://www.psp.cz/sqw/text/tiskt.sqw?O=${termNumber}&CT=${printNumber}&CT1=${partNumber}`;
 }
 
-export function parseOfficialPrintDocumentLinks(html, pageUrl) {
-  const links = [];
-  const pattern = /<a\b[^>]*href=["']([^"']*orig2\.sqw[^"']*)["'][^>]*>([\s\S]*?)<\/a>/gi;
-  for (const match of String(html).matchAll(pattern)) {
-    const label = cleanText(decodeXml(match[2]), 300);
-    if (!/\.docx$/i.test(label)) continue;
-    const url = new URL(decodeXml(match[1]), pageUrl);
-    invariant(url.protocol === "https:" && url.hostname === "www.psp.cz", `Official print document redirected outside the PSP allowlist: ${url}`);
-    links.push({ filename: label, url: url.href });
-  }
-  return links;
+export function officialPrintHistoryUrl(termNumber, printNumber) {
+  return `https://www.psp.cz/sqw/historie.sqw?o=${termNumber}&t=${printNumber}`;
 }
 
 export function extractDocxParagraphs(bytes) {
@@ -86,100 +43,4 @@ export function extractDocxParagraphs(bytes) {
   }
   invariant(paragraphs.length > 0, "Official DOCX document contains no readable paragraphs");
   return paragraphs;
-}
-
-export function deriveDocumentSearchTerms(evidencePackage, printNumber) {
-  const phrases = new Set();
-  for (const evidence of evidencePackage.evidence ?? []) {
-    const facts = evidence.structuredFacts ?? {};
-    const belongsToPrint = facts.printNumber === printNumber
-      || (facts.linkedPrints ?? []).some((linkedPrint) => linkedPrint.number === printNumber);
-    if (!belongsToPrint) continue;
-    for (const term of evidence.matchBasis?.matchedTerms ?? []) {
-      const normalized = normalize(term.phrase);
-      if (normalized.length >= 3) phrases.add(normalized);
-    }
-  }
-
-  const promiseText = normalize(`${evidencePackage.promise?.originalTextCz ?? ""} ${evidencePackage.promise?.atomicClaimCz ?? ""}`);
-  const tokens = new Set(promiseText.split(" ").filter((token) =>
-    /^\d+$/.test(token) || (token.length >= 4 && !stopWords.has(token))
-  ));
-  return {
-    phrases: [...phrases].sort(),
-    tokens: [...tokens].sort()
-  };
-}
-
-function paragraphScore(paragraph, searchTerms) {
-  const text = normalize(paragraph);
-  let score = 0;
-  for (const phrase of searchTerms.phrases) if (text.includes(phrase)) score += 20;
-  for (const token of searchTerms.tokens) {
-    const present = new RegExp(`(?:^| )${token}(?: |$)`).test(text);
-    if (present) score += /^\d+$/.test(token) ? 100 : 2;
-  }
-  return score;
-}
-
-export function selectRelevantDocumentExcerpts(paragraphs, searchTerms, { maxCharacters = 12_000, maxSeedParagraphs = 12 } = {}) {
-  const ranked = paragraphs
-    .map((text, index) => ({ index, score: paragraphScore(text, searchTerms) }))
-    .filter(({ score }) => score > 0)
-    .sort((a, b) => b.score - a.score || a.index - b.index)
-    .slice(0, maxSeedParagraphs);
-
-  const selectedIndexes = new Set();
-  for (const { index } of ranked) {
-    for (const candidate of [index - 1, index, index + 1]) {
-      if (candidate >= 0 && candidate < paragraphs.length) selectedIndexes.add(candidate);
-    }
-  }
-
-  const excerpts = [];
-  let usedCharacters = 0;
-  for (const index of [...selectedIndexes].sort((a, b) => a - b)) {
-    const text = paragraphs[index];
-    if (usedCharacters + text.length > maxCharacters) continue;
-    excerpts.push({ paragraph: index + 1, text });
-    usedCharacters += text.length;
-  }
-  return excerpts;
-}
-
-export function buildPrintDocumentEvidence({ evidencePackage, print, document, paragraphs, excerpts }) {
-  invariant(excerpts.length > 0, `No relevant excerpts selected for print ${print.printNumber}`);
-  const documentHash = sha256(document.bytes);
-  return {
-    id: `psp-core-2025--print-document-${print.externalPrintId}`,
-    role: "conduct-evidence",
-    type: "legislative-document",
-    title: `${print.printNumber}/${print.partNumber}: official proposal document ${document.filename}`,
-    publisher: "Chamber of Deputies of the Parliament of the Czech Republic",
-    publishedAt: print.publishedAt,
-    url: document.url,
-    locator: `${document.filename}; mechanically selected DOCX paragraphs ${excerpts.map(({ paragraph }) => paragraph).join(", ")}`,
-    primary: true,
-    factSummary: `Official proposal document for print ${print.printNumber}. Excerpts were selected mechanically around promise terms; no direction or score was assigned.`,
-    structuredFacts: {
-      externalPrintId: print.externalPrintId,
-      printNumber: print.printNumber,
-      partNumber: print.partNumber,
-      documentFilename: document.filename,
-      documentContentHash: documentHash,
-      documentByteLength: document.bytes.byteLength,
-      paragraphCount: paragraphs.length,
-      selectedParagraphCount: excerpts.length,
-      searchTerms: deriveDocumentSearchTerms(evidencePackage, print.printNumber),
-      documentExcerptsCz: excerpts,
-      enrichmentVersion: printDocumentEnrichmentVersion
-    },
-    sourceRecordHash: documentHash,
-    matchBasis: {
-      score: null,
-      attributionStatus: "document-for-matched-print",
-      matchedTerms: [],
-      matchedExternalReferences: [{ path: "structuredFacts.externalPrintId", equals: print.externalPrintId }]
-    }
-  };
 }

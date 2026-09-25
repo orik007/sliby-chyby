@@ -7,7 +7,7 @@ function parseArgs(args) {
   const options = {
     collectorRun: null,
     topicRoutingRun: null,
-    printActs: null,
+    printParts: null,
     promises: "automation/promise-registry/promises.json",
     publishedPromises: "data/promises",
     sources: "automation/collectors/sources.json",
@@ -19,7 +19,7 @@ function parseArgs(args) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];
     else if (arg === "--topic-routing-run") options.topicRoutingRun = args[++index];
-    else if (arg === "--print-acts") options.printActs = args[++index];
+    else if (arg === "--print-parts") options.printParts = args[++index];
     else if (arg === "--promises") options.promises = args[++index];
     else if (arg === "--published-promises") options.publishedPromises = args[++index];
     else if (arg === "--sources") options.sources = args[++index];
@@ -38,9 +38,9 @@ const promiseRegistry = publishedPromiseRegistry(await readJson(args.promises), 
 const audit = buildCoverageAudit({
   collectorRun: await readJson(args.collectorRun),
   // A partial routing run would report unchecked promises as "no routed
-  // record"; buildCoverageAudit refuses it.
+  // law change"; buildCoverageAudit refuses it.
   routingRun: await readJson(args.topicRoutingRun),
-  printActs: args.printActs ? await readJson(args.printActs) : null,
+  printParts: args.printParts ? await readJson(args.printParts) : null,
   promiseRegistry,
   sourceRegistry: await readJson(args.sources),
   proposalManifest: await readJson(args.proposals)

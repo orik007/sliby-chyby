@@ -24,6 +24,8 @@ const evidencePackage = {
   },
   evidence: [
     { id: "promise-source", url: "https://example.test/promise", factSummary: "Přesné znění slibu.", locator: "strana 1", publishedAt: "2025-01-01", primary: true, role: "promise-source" },
+    { id: "change-1", url: "https://example.test/change-1", factSummary: "Úřední text první změny zákona.", locator: "ČÁST PRVNÍ", publishedAt: "2026-09-01", primary: true, role: "law-change" },
+    { id: "change-2", url: "https://example.test/change-2", factSummary: "Úřední text druhé změny zákona.", locator: "ČÁST DRUHÁ", publishedAt: "2026-09-01", primary: true, role: "law-change" },
     { id: "conduct", url: "https://example.test/conduct", factSummary: "Ověřený krok.", locator: "záznam", publishedAt: "2026-09-10", primary: true, role: "conduct-evidence" }
   ]
 };
@@ -31,9 +33,13 @@ const evidencePackage = {
 function review(status) {
   return {
     promiseId: "test-promise",
+    changeRelevance: [
+      { evidenceId: "change-1", relevant: true, reasonCz: "Změna upravuje přesně to, co slib žádá." },
+      { evidenceId: "change-2", relevant: false, reasonCz: "Změna se týká jiné věci." }
+    ],
     status,
     evidenceSufficient: true,
-    citedEvidenceIds: ["promise-source", "conduct"],
+    citedEvidenceIds: ["promise-source", "change-1", "conduct"],
     explanationCz: "Strana provedla ověřený krok související s tímto slibem.",
     confidence: "high",
     uncertainties: []
@@ -53,11 +59,11 @@ const assessmentRuntime = {
   arbiterModel: "c"
 };
 
-test("validates a bounded assessment package and hashes assessable content", () => {
+test("validates an assessment package and hashes assessable content", () => {
   assert.equal(validateEvidencePackage(evidencePackage), evidencePackage);
   assert.match(hashAssessmentContent(evidencePackage), /^[a-f0-9]{64}$/);
   const changed = structuredClone(evidencePackage);
-  changed.evidence[1].factSummary = "Jiný ověřený krok.";
+  changed.evidence[3].factSummary = "Jiný ověřený krok.";
   assert.notEqual(hashAssessmentContent(changed), hashAssessmentContent(evidencePackage));
 });
 
@@ -139,4 +145,44 @@ test("ignores concurrency when hashing assessment identity", () => {
   const first = hashAssessmentFingerprint({ assessmentContentHash: content, prompts, runtime: { ...assessmentRuntime, concurrency: 1 } });
   const second = hashAssessmentFingerprint({ assessmentContentHash: content, prompts, runtime: { ...assessmentRuntime, concurrency: 8 } });
   assert.equal(first, second);
+});
+
+test("requires a law change in every package", () => {
+  const withoutChange = structuredClone(evidencePackage);
+  withoutChange.evidence = withoutChange.evidence.filter(({ role }) => role !== "law-change");
+  assert.throws(() => validateEvidencePackage(withoutChange), /Missing law change/);
+});
+
+test("requires exactly one relevance verdict for every law change", () => {
+  const omitted = review("moving-towards");
+  omitted.changeRelevance = omitted.changeRelevance.slice(0, 1);
+  assert.throws(() => validateAssessmentOutput(omitted, evidencePackage), /omits the relevance verdict for law change change-2/);
+
+  const twice = review("moving-towards");
+  twice.changeRelevance.push({ evidenceId: "change-1", relevant: false, reasonCz: "Znovu." });
+  assert.throws(() => validateAssessmentOutput(twice, evidencePackage), /more than one relevance verdict/);
+
+  const notAChange = review("moving-towards");
+  notAChange.changeRelevance.push({ evidenceId: "conduct", relevant: true, reasonCz: "Hlasování." });
+  assert.throws(() => validateAssessmentOutput(notAChange, evidencePackage), /other than a law change/);
+
+  const withoutReason = review("moving-towards");
+  withoutReason.changeRelevance[0].reasonCz = " ";
+  assert.throws(() => validateAssessmentOutput(withoutReason, evidencePackage), /needs a reason/);
+
+  // An invalid output is isolated to that assessor, like any other.
+  const resolved = resolveAvailableAssessmentReviews(omitted, review("moving-towards"), evidencePackage);
+  assert.equal(resolved.reviewA, null);
+  assert.equal(resolved.resolution.state, "arbitration-required");
+});
+
+test("a law change found not relevant cannot support a sufficient assessment", () => {
+  const citesRejected = review("moving-towards");
+  citesRejected.citedEvidenceIds.push("change-2");
+  assert.throws(() => validateAssessmentOutput(citesRejected, evidencePackage), /cites law change change-2 it found not relevant/);
+  // Without sufficient evidence, the rejected change may still be cited to
+  // show the gap.
+  citesRejected.evidenceSufficient = false;
+  assert.equal(validateAssessmentOutput(citesRejected, evidencePackage), citesRejected);
+  assert.deepEqual(assessmentOutputJsonSchema.required.includes("changeRelevance"), true);
 });

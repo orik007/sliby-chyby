@@ -5,9 +5,18 @@ export const assessmentStatuses = ["fulfilled", "moving-towards", "no-progress",
 export const assessmentOutputJsonSchema = {
   type: "object",
   additionalProperties: false,
-  required: ["promiseId", "status", "evidenceSufficient", "citedEvidenceIds", "explanationCz", "confidence", "uncertainties"],
+  required: ["promiseId", "changeRelevance", "status", "evidenceSufficient", "citedEvidenceIds", "explanationCz", "confidence", "uncertainties"],
   properties: {
     promiseId: { type: "string" },
+    changeRelevance: {
+      type: "array",
+      items: {
+        type: "object",
+        additionalProperties: false,
+        required: ["evidenceId", "relevant", "reasonCz"],
+        properties: { evidenceId: { type: "string" }, relevant: { type: "boolean" }, reasonCz: { type: "string" } }
+      }
+    },
     status: { type: "string", enum: assessmentStatuses },
     evidenceSufficient: { type: "boolean" },
     citedEvidenceIds: { type: "array", minItems: 1, items: { type: "string" } },
@@ -125,6 +134,7 @@ export function validateEvidencePackage(evidencePackage) {
   }
 
   invariant(evidencePackage.evidence.some(({ role }) => role === "promise-source"), "Missing promise source");
+  invariant(evidencePackage.evidence.some(({ role }) => role === "law-change"), "Missing law change");
   invariant(evidencePackage.evidence.some(({ role }) => role === "conduct-evidence"), "Missing conduct evidence");
   if (maintenanceBaseline) {
     invariant(evidencePackage.evidence.some(({ id, role }) => id === maintenanceBaseline.evidenceId && role === "maintenance-baseline"), "Maintenance baseline evidence is missing");
@@ -147,6 +157,23 @@ export function validateAssessmentOutput(output, evidencePackage) {
   const allowedIds = new Set(evidencePackage.evidence.map(({ id }) => id));
   for (const evidenceId of output.citedEvidenceIds) invariant(allowedIds.has(evidenceId), `Assessment invented evidence ID: ${evidenceId}`);
   invariant(new Set(output.citedEvidenceIds).size === output.citedEvidenceIds.length, "Assessment cites duplicate evidence IDs");
+
+  // Every law change in the package gets exactly one relevance verdict.
+  const lawChangeIds = evidencePackage.evidence.filter(({ role }) => role === "law-change").map(({ id }) => id);
+  invariant(Array.isArray(output.changeRelevance), "Assessment must give a relevance verdict for every law change");
+  const verdictIds = output.changeRelevance.map(({ evidenceId }) => evidenceId);
+  for (const verdict of output.changeRelevance) {
+    invariant(lawChangeIds.includes(verdict.evidenceId), `Relevance verdict names something other than a law change in the package: ${verdict.evidenceId}`);
+    invariant(typeof verdict.relevant === "boolean", `Relevance verdict for ${verdict.evidenceId} must say relevant or not`);
+    invariant(typeof verdict.reasonCz === "string" && verdict.reasonCz.trim().length > 0, `Relevance verdict for ${verdict.evidenceId} needs a reason`);
+  }
+  invariant(new Set(verdictIds).size === verdictIds.length, "Assessment gives a law change more than one relevance verdict");
+  for (const evidenceId of lawChangeIds) invariant(verdictIds.includes(evidenceId), `Assessment omits the relevance verdict for law change ${evidenceId}`);
+  // Only a relevant law change may support the proposed score.
+  const irrelevant = new Set(output.changeRelevance.filter(({ relevant }) => !relevant).map(({ evidenceId }) => evidenceId));
+  if (output.evidenceSufficient) {
+    for (const evidenceId of output.citedEvidenceIds) invariant(!irrelevant.has(evidenceId), `Assessment cites law change ${evidenceId} it found not relevant`);
+  }
   return output;
 }
 

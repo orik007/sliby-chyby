@@ -37,14 +37,10 @@ function groundedSelectedTags(taggerOutput) {
  * doc's table. `agreedTags` carries only the tags that both taggers
  * independently and groundedly agreed are sufficiently specific — the set
  * that may drive an auto-created relationship. A one-sided or ungrounded
- * proposal never appears in `agreedTags`; it still reaches routing-review
- * review through the broader union `routeSourceRecord` builds below.
+ * proposal never appears in `agreedTags`; it only makes the result
+ * `routing-review` for human attention.
  */
-export function combineTaggerResults(taxonomy, taggerA, taggerB, { directLink = null } = {}) {
-  if (directLink) {
-    return { state: "auto-candidate", reason: "direct-structural-link", directLink, agreedTags: [] };
-  }
-
+export function combineTaggerResults(taxonomy, taggerA, taggerB) {
   const aUnknown = isUnknown(taggerA);
   const bUnknown = isUnknown(taggerB);
 
@@ -126,104 +122,62 @@ function promiseIdsForTags(taxonomy, invertedIndex, tagIds) {
 }
 
 /**
- * Routes one source record to zero or more promises by agreed specific tags
- * or a direct structural link. A record without either stays in
- * `orphan-review` or `routing-review` for human attention.
+ * Legal identifiers of a law change (the acts it amends, or the state budget
+ * print kind) that a taxonomy tag lists in `directLegalIdentifiers`,
+ * resolved to the promises holding that tag.
  */
-export function routeSourceRecord({
-  taxonomy,
-  record,
-  taggerA,
-  taggerB,
-  invertedIndex,
-  directLink = null
-}) {
-  invariant(typeof record.id === "string" && record.id.length > 0, "routeSourceRecord requires a record id");
-
-  const combined = combineTaggerResults(taxonomy, taggerA, taggerB, { directLink });
-
-  if (combined.state === "orphan-review") {
-    return {
-      recordId: record.id,
-      disposition: "orphan-review",
-      routingState: combined.state,
-      reason: combined.reason,
-      candidatePromiseIds: [],
-      routeBasis: [],
-      matchedTagIds: [],
-      directLinkReason: null
-    };
-  }
-
-  const directPromiseIds = new Set(directLink?.promiseIds ?? (directLink?.promiseId ? [directLink.promiseId] : []));
-  // Auto-candidate uses only the tags both taggers groundedly agreed were
-  // sufficiently specific. Routing-review uses the broader union of every
-  // proposed tag (including one-sided or ungrounded ones) so the record
-  // still surfaces for human routing review rather than being lost.
-  const routingTagIds = combined.state === "auto-candidate"
-    ? combined.agreedTags
-    : [...selectedTags(taggerA), ...selectedTags(taggerB)];
-  const tagRoutedPromiseIds = promiseIdsForTags(taxonomy, invertedIndex, routingTagIds);
-  const candidatePromiseIds = new Set([...tagRoutedPromiseIds, ...directPromiseIds]);
-  const routeBasis = [
-    ...(tagRoutedPromiseIds.size > 0 ? ["controlled-tag"] : []),
-    ...(directPromiseIds.size > 0 ? ["direct-structural-link"] : [])
-  ];
-
-  if (candidatePromiseIds.size === 0) {
-    return {
-      recordId: record.id,
-      disposition: "orphan-review",
-      routingState: combined.state,
-      reason: "no-matching-promise-after-safe-assignment",
-      candidatePromiseIds: [],
-      routeBasis: [],
-      matchedTagIds: routingTagIds,
-      directLinkReason: directLink?.reason ?? null
-    };
-  }
-
-  return {
-    recordId: record.id,
-    disposition: combined.state === "auto-candidate" ? "candidate-created" : "routing-review",
-    routingState: combined.state,
-    reason: combined.reason,
-    candidatePromiseIds: [...candidatePromiseIds],
-    routeBasis,
-    matchedTagIds: routingTagIds,
-    directLinkReason: directLink?.reason ?? null
-  };
-}
-
-export function recordPrintIds(record) {
-  const payload = record.payload ?? {};
-  return [
-    ...(payload.externalPrintId ? [String(payload.externalPrintId)] : []),
-    ...(payload.linkedPrints ?? []).map(({ externalPrintId }) => String(externalPrintId))
-  ];
-}
-
-/**
- * Finds a direct structural link for a source record: a legal identifier of
- * an act that a print the record concerns amends (from `printIdentifiers`,
- * keyed by print ID), which a taxonomy tag lists in
- * `directLegalIdentifiers`, resolved to promises holding that tag. Returns
- * null when no identifier resolves to a promise.
- */
-export function deriveDirectLink({ record, directIdIndex, invertedIndex, printIdentifiers = {} }) {
-  const identifiers = [...new Set(recordPrintIds(record).flatMap((printId) => printIdentifiers[printId]?.identifiers ?? []))].sort();
+export function directLinkForChange({ change, directIdIndex, invertedIndex }) {
   const promiseIds = new Set();
   const matchedIdentifiers = [];
-  for (const identifier of identifiers) {
+  const matchedTagIds = new Set();
+  for (const identifier of [...new Set(change.identifiers)].sort()) {
     let matchedAny = false;
     for (const tagId of directIdIndex.get(identifier) ?? []) {
       for (const promiseId of invertedIndex.get(tagId) ?? []) {
         promiseIds.add(promiseId);
+        matchedTagIds.add(tagId);
         matchedAny = true;
       }
     }
     if (matchedAny) matchedIdentifiers.push(identifier);
   }
   if (promiseIds.size === 0) return null;
-  return { promiseIds: [...promiseIds].sort(), reason: `matched-legal-identifiers:${matchedIdentifiers.join(", ")}` };
+  return { promiseIds: [...promiseIds].sort(), matchedIdentifiers, matchedTagIds: [...matchedTagIds].sort() };
+}
+
+/**
+ * Routes one substantive law change to promises by a direct legal-identifier
+ * link and by the specific tags both screeners groundedly agree on; a change
+ * gets the promises of both. Without either it stays in `routing-review` or
+ * `orphan-review` for human attention.
+ */
+export function routeLawChange({ taxonomy, change, screenerA, screenerB, invertedIndex, directIdIndex }) {
+  invariant(typeof change.changeId === "string" && change.changeId.length > 0, "routeLawChange requires a changeId");
+  const directLink = directLinkForChange({ change, directIdIndex, invertedIndex });
+  const combined = combineTaggerResults(taxonomy, screenerA, screenerB);
+  const agreedTagIds = combined.state === "auto-candidate" ? combined.agreedTags : [];
+  const tagPromiseIds = promiseIdsForTags(taxonomy, invertedIndex, agreedTagIds);
+  // Each promise records how the change reached it, so the assessment
+  // summary can count rejected changes by the tag or link that routed them.
+  const routes = new Map();
+  for (const promiseId of directLink?.promiseIds ?? []) routes.set(promiseId, { direct: true, tagIds: [] });
+  for (const tagId of agreedTagIds) {
+    for (const promiseId of promiseIdsForTags(taxonomy, invertedIndex, [tagId])) {
+      const route = routes.get(promiseId) ?? { direct: false, tagIds: [] };
+      route.tagIds.push(tagId);
+      routes.set(promiseId, route);
+    }
+  }
+  const routedTo = [...routes].sort(([left], [right]) => left.localeCompare(right)).map(([promiseId, route]) => ({
+    promiseId,
+    routeBasis: [...(route.direct ? ["direct-structural-link"] : []), ...(route.tagIds.length > 0 ? ["controlled-tag"] : [])],
+    matchedTagIds: route.tagIds,
+    directLinkIdentifiers: route.direct ? directLink.matchedIdentifiers : []
+  }));
+  if (routedTo.length > 0) {
+    return { changeId: change.changeId, disposition: "routed", reason: directLink && tagPromiseIds.size > 0 ? "direct-link-and-agreed-tags" : directLink ? "direct-structural-link" : combined.reason, routedTo };
+  }
+  const disposition = combined.state === "orphan-review" || combined.state === "auto-candidate" ? "orphan-review" : "routing-review";
+  const reason = combined.state === "auto-candidate" ? "no-matching-promise-after-safe-assignment" : combined.reason;
+  return { changeId: change.changeId, disposition, reason, routedTo: [] };
 }
