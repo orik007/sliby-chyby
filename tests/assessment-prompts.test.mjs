@@ -14,7 +14,9 @@ const conductRules = [
   ["no strict majority on a delivering measure moves against", /no strict majority at a decisive vote on a measure delivering the promise(?::| is) `moving-against`/],
   ["a proposal is never fulfilled or acting against", /never `fulfilled` or `acting-against`/],
   ["a decision outweighs a proposal; the most recent decides", /A decision outweighs a proposal; among conduct of the same weight, the most recent decides/i],
-  ["inactivity is never negative", /elapsed time and inactivity are never negative/i]
+  ["inactivity is never negative", /elapsed time and inactivity are never negative/i],
+  ["a vote is scored on the vote date", /[Ss]core(?:d)? (?:a vote by|by) the party's own choice on the vote date/],
+  ["the later fate of a measure does not change the vote", /[Ww]hether the measure later passed the Senate, survived a presidential return, or took effect does not change it/]
 ];
 
 test("the assessor prompt states every scoring rule of docs/scoring.md", async () => {
@@ -25,8 +27,6 @@ test("the assessor prompt states every scoring rule of docs/scoring.md", async (
     ["each conduct is judged by its own version", /Judge every conduct by its own version: a submission by the proposed text, a vote by the text it decided on/],
     ["a later decision decides by its own text", /When a later decision concerns a text that no longer delivers what the proposal delivered, that decision decides by its own text/],
     ["a proposal moves towards when in line and against when contradicting", /A \*\*proposal\*\* is a member bill or a government proposal: in line with the promise `moving-towards`; contradicting it `moving-against`/],
-    ["a vote is scored on the vote date", /Score a vote by the party's own choice on the vote date/],
-    ["the later fate of a measure does not change the vote", /Whether the measure later passed the Senate, survived a presidential return, or took effect does not change it/],
     ["a maintenance baseline moves towards", /When `assessmentContext\.maintenanceBaseline` is present, it is the supplied audit determination that the promise qualifies\. In `live` mode, choose `moving-towards` for it/],
     ["one relevance verdict for every law change", /For \*\*each\*\* law change in the package, add exactly one entry to `changeRelevance`/],
     ["sharing a topic is not relevance", /sharing only the general topic is not enough/],

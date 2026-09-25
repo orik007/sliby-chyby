@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 export const assessorPromptVersion = "assessor-v16";
-export const arbiterPromptVersion = "arbiter-v7";
+export const arbiterPromptVersion = "arbiter-v8";
 
 export function hashText(text) {
   return createHash("sha256").update(text).digest("hex");
