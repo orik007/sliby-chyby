@@ -2,6 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { createStructuredModelResponse } from "../scripts/lib/model-provider.mjs";
 
+// Stub calls never belong in a real run's spend log.
+delete process.env.SLIBY_MODEL_CALL_LOG;
+
 function fixtureHeaders(map) {
   return { get: (key) => map[key.toLowerCase()] ?? null };
 }

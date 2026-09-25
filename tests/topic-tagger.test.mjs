@@ -11,6 +11,9 @@ import {
 import { validatePromiseRegistry } from "../scripts/lib/attribution.mjs";
 import { validateTaxonomy } from "../scripts/lib/topic-taxonomy.mjs";
 
+// Stub calls never belong in a real run's spend log.
+delete process.env.SLIBY_MODEL_CALL_LOG;
+
 const taxonomy = validateTaxonomy(JSON.parse(await readFile(new URL("../automation/topic-routing/taxonomy-v1.json", import.meta.url), "utf8")));
 const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8")));
 const fiscalPromise = registry.promises.find(({ id }) => id === "candidate-d5359e35a4c4");

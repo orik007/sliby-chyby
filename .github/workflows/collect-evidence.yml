@@ -125,6 +125,11 @@ jobs:
         run: npm ci
 
       - name: Run deterministic tests
+        # Tests never reach a paid model, and their stub calls never belong
+        # in the run's spend log.
+        env:
+          OPENAI_API_KEY: ""
+          SLIBY_MODEL_CALL_LOG: ""
         run: npm test
 
       - name: Collect source records
