@@ -37,7 +37,7 @@ official records only (active: Chamber of Deputies open data)
   -> separate approved public-assessment pull request when a score changes
 ```
 
-Party websites, press releases, and the media are not evidence. Government resolutions and the Collection of Laws are the next planned sources and are added only after their data is verified. The public site makes no live AI call.
+Party websites, press releases, and the media are not evidence. The public site makes no live AI call.
 
 ## Repository map
 

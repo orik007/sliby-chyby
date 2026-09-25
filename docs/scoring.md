@@ -27,21 +27,18 @@ Only the conduct in this table can change a score. Each row names the only offic
 | **Decisive Chamber vote** | Chamber of Deputies open data, [psp.cz](https://www.psp.cz/sqw/hp.sqw?k=1300): a roll-call vote that the official print history names as the Chamber's final decision (approved, rejected, insisted on the bill after a Senate or presidential return, accepted Senate amendments) | How the party's MPs decided a bill, the state budget, or a treaty | The party whose parliamentary club voted that way by strict majority of all its members on the vote date | `+2` if the measure delivers the whole promise; `+1` if only a part, or if the party voted down a contradicting measure | `-2` if the party adopted a measure contradicting the whole promise or voted down a measure delivering the whole promise; `-1` if either concerns only a part, or if the club gave no strict majority for a measure delivering the promise |
 | **Member bill** | Chamber print of kind “Návrh zákona” submitted by one MP or a group of MPs (print history step “předložen”) | The party's MPs formally proposed a law | Every tracked party with at least one proposing MP in its club on the submission date | `+1` | `-1` |
 | **Government proposal** | Chamber print of kind “Vládní návrh zákona”, “Státní rozpočet”, or “Mezinárodní smlouva” (step “předložen”) | The government formally proposed a law, the budget, or a treaty | Every governing party on the submission date | `+1` | `-1` |
-| **Government resolution** | Government resolutions in the government's [ODok](https://odok.gov.cz/portal/zvlady/jednani/) system — *planned, not yet collected* | A decision of the whole government | Every governing party on the decision date | `+2` for a binding decision delivering the whole promise, `+1` for a part or for adopting a plan, strategy, or position | `-2` / `-1` correspondingly |
-| **Government regulation** (nařízení vlády) | Collection of Laws, [e-Sbírka](https://e-sbirka.gov.cz) — *planned, not yet collected* | A legally binding decision of the whole government | Every governing party on the adoption date | `+2` whole / `+1` part | `-2` whole / `-1` part |
-| **Ministerial decree** (vyhláška) | Collection of Laws, e-Sbírka — *planned, not yet collected* | A legally binding decision of one ministry | Every governing party on the adoption date | `+2` whole / `+1` part | `-2` whole / `-1` part |
 
 A vote is scored by the party's own choice on the vote date. The later fate of the measure (a Senate or presidential return, entry into force) does not change that score; only a later attributable conduct can.
 
 Each conduct is judged against the text it concerned. A bill's text can change while the Chamber debates it, so a submission concerns the proposed text, a vote approving a bill in the third reading concerns the text the Chamber approved, and a vote on a bill returned by the Senate or the President concerns the text it decided on. When a later decision on the same bill concerns a text that no longer delivers what the proposal delivered, that decision is scored by its own text, even if the earlier proposal was in line with the promise.
 
-A government resolution that only approves a bill for submission to the Chamber is not counted separately; the government proposal in the Chamber counts. A vote in which the club has no strict majority is attributed to the party only as the missed opportunity in the vote row.
+A vote in which the club has no strict majority is attributed to the party only as the missed opportunity in the vote row.
 
 The governing parties and their dates are recorded in `automation/attribution/government-periods.json` with an official source. The current government of ANO 2011, SPD, and Motoristé sobě was appointed on 15 December 2025; a proposal or decision of an earlier government is not conduct of these parties.
 
 ## Current score
 
-The current score reflects the party's most significant attributable conduct on the promise so far. A decision (a vote, regulation, decree, or binding resolution) outweighs a proposal; among conduct of the same weight, the most recent one decides. Earlier conduct remains visible in the append-only revision history.
+The current score reflects the party's most significant attributable conduct on the promise so far. A decision (a decisive vote) outweighs a proposal; among conduct of the same weight, the most recent one decides. Earlier conduct remains visible in the append-only revision history.
 
 For each changed evidence package, apply this order:
 

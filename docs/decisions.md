@@ -36,14 +36,14 @@ This document contains only the current confirmed rules. When a rule changes, re
 
 - Only official records are evidence. A party's own website or publication, a press release, and the media are never evidence and are not collected.
 - Evidence sources are added one at a time and only after their structure is verified against official documentation and real data, their completeness is measured, and their per-run quality checks exist. The canonical source list and data rules are in [evidence-pipeline.md](evidence-pipeline.md).
-- The active source is the Chamber of Deputies. Government resolutions and the Collection of Laws follow in that order. The European Parliament and the Council of the EU come later; the Senate is not tracked now.
-- Attributable conduct is: a decisive Chamber vote (by strict majority of the party's club), a member bill (every party with a proposing MP), a government proposal, government resolution, government regulation, or ministerial decree (every governing party on its date). The canonical table is in [scoring.md](scoring.md).
-- A government decision is conduct of all governing parties together. The current government of ANO 2011, SPD, and Motoristé sobě was appointed on 15 December 2025.
+- The only source is the Chamber of Deputies.
+- Attributable conduct is: a decisive Chamber vote (by strict majority of the party's club), a member bill (every party with a proposing MP), or a government proposal (every governing party on its date). The canonical table is in [scoring.md](scoring.md).
+- A government proposal is conduct of all governing parties together. The current government of ANO 2011, SPD, and Motoristé sobě was appointed on 15 December 2025.
 
 ## Scores and index
 
 - Every confirmed promise has one current numerical score from `-2` to `+2`. The default is `0`, except for a verified maintenance baseline defined in [scoring.md](scoring.md).
-- A proposal in line with or against the promise is `+1` or `-1`. A decision (a decisive vote, regulation, decree, or binding resolution) delivering or contradicting the whole promise is `+2` or `-2`, and only a part of it `+1` or `-1`. A decision outweighs a proposal; among conduct of the same weight, the most recent decides.
+- A proposal in line with or against the promise is `+1` or `-1`. A decision (a decisive vote) delivering or contradicting the whole promise is `+2` or `-2`, and only a part of it `+1` or `-1`. A decision outweighs a proposal; among conduct of the same weight, the most recent decides.
 - A score is separate from the promise lifecycle and may change whenever attributable official evidence justifies a new current assessment.
 - The SLAVA Index of a party is derived from the current scores of all its confirmed promises, which are exactly its promises on the public site. It ranges from `-100` to `+100`; its formula is in [slava-index.md](slava-index.md). No manual aggregate is stored.
 

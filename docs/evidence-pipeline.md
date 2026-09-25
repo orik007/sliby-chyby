@@ -20,10 +20,6 @@ A source is added only after all of these hold, and one source at a time:
 | Source | Publisher and location | What it provides | Status |
 | --- | --- | --- | --- |
 | `psp-core-2025` | Chamber of Deputies open data for the 10th term: `hl-2025ps.zip` (votes), `poslanci.zip` (MPs, clubs), `tisky.zip` (prints, print history, proposers), `schuze.zip` (sessions, agenda items), documented at [psp.cz](https://www.psp.cz/sqw/hp.sqw?k=1300); official print texts from `www.psp.cz/sqw/text/` | Decisive Chamber votes with per-club results, the print each vote concerns, member bills and government proposals with their proposers and submission dates | **Active.** Verified against the official schema and live data on 23 September 2026. |
-| Government resolutions | Government Office, [ODok zVlády](https://odok.gov.cz/portal/zvlady/jednani/) | Government resolutions | **Planned.** The portal exists; a machine-readable form has not been verified. |
-| Collection of Laws | Ministry of the Interior, [e-Sbírka](https://e-sbirka.gov.cz) open data and REST API | Enacted laws, government regulations, ministerial decrees, and their effective dates | **Planned.** The publisher states that open data and a registered API exist; the data has not been inspected. |
-| European Parliament, Council of the EU | — | Votes of the parties' MEPs; the government's positions | **Later**, by the owner's decision. |
-| Senate | — | — | **Not now**, by the owner's decision. A Senate resolution returning a bill is read only as the Chamber's own sub-print on psp.cz (see *Chamber data rules*). |
 
 `automation/collectors/sources.json` is the collector registry and may contain only active sources. `automation/attribution/government-periods.json` records the governing parties and their dates with an official source.
 
