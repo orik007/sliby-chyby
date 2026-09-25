@@ -10,7 +10,8 @@ Sliboměr shows political parties' confirmed election promises, their current sc
 | --- | --- |
 | Current project rules | [decisions.md](decisions.md) |
 | Promise lifecycle | [promise-selection.md](promise-selection.md) |
-| Scores and SLAVA Index | [scoring.md](scoring.md) |
+| Scoring a promise | [scoring.md](scoring.md) |
+| SLAVA Index | [slava-index.md](slava-index.md) |
 | Evidence automation | [evidence-pipeline.md](evidence-pipeline.md) |
 | Storage and validation | [data-model.md](data-model.md) |
 | Release | [release-process.md](release-process.md) |

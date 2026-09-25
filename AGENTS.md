@@ -20,7 +20,8 @@
 ## Canonical rules
 
 - [promise-selection.md](docs/promise-selection.md) is the sole promise-lifecycle rule.
-- [scoring.md](docs/scoring.md) is the sole score and SLAVA Index rule.
+- [scoring.md](docs/scoring.md) is the sole rule for scoring a promise.
+- [slava-index.md](docs/slava-index.md) is the sole SLAVA Index rule.
 - [evidence-pipeline.md](docs/evidence-pipeline.md) is the sole evidence-pipeline rule.
 - [release-process.md](docs/release-process.md) is the sole release rule.
 

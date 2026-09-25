@@ -6,7 +6,7 @@
 - Only confirmed promises are in `data/` and visible publicly.
 - Every confirmed promise has one current score revision. The default score is `0` when no documented assessment conclusion sets another score, except for a documented maintenance baseline as defined in `scoring.md`.
 - Score revisions are append-only. The latest revision is current.
-- Every revision lists traceable source records. The SLAVA Index is derived, never stored as an editable value.
+- Every revision lists traceable source records. The SLAVA Index is derived, never stored as an editable value ([slava-index.md](slava-index.md)).
 - A source is one document or record. A promise references one source and an exact locator.
 - Candidate and rejected promises remain in `research/`; a rejected promise has a reason.
 

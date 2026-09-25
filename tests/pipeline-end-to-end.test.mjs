@@ -54,11 +54,12 @@ async function modelCalls(path) {
 
 const readJson = async (path) => JSON.parse(await readFile(path, "utf8"));
 
-// A checkout with the repository's prompts, taxonomy, prices, and source
-// registry, and the fixture promises and public scores.
+// A checkout with the repository's prompts, scoring rule, taxonomy, prices,
+// and source registry, and the fixture promises and public scores.
 async function checkout(root) {
   const copy = (from, to = from) => cp(join(repositoryRoot, from), join(root, to), { recursive: true });
   await copy("automation/prompts");
+  await copy("docs/scoring.md");
   await copy("automation/model-prices.json");
   await copy("automation/topic-routing/taxonomy-v1.json");
   await copy("automation/collectors/sources.json");

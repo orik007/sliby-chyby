@@ -2,7 +2,7 @@
 
 ## Authority
 
-This is the only operational definition of score values, attributable conduct, and the SLAVA Index. It is a **confirmed decision**. Promise lifecycle is defined only in [promise-selection.md](promise-selection.md); how evidence is collected is defined only in [evidence-pipeline.md](evidence-pipeline.md).
+This is the only operational definition of how one promise is scored: score values, attributable conduct, and the current score. It is a **confirmed decision**. The assessors and the arbiter receive this document unchanged, so it holds only what scoring a promise needs. Promise lifecycle is defined only in [promise-selection.md](promise-selection.md), how evidence is collected only in [evidence-pipeline.md](evidence-pipeline.md), and the party aggregate only in [slava-index.md](slava-index.md).
 
 ## Score values
 
@@ -49,7 +49,6 @@ For each changed evidence package, apply this order:
 2. Establish whether the conduct is attributable to the party under the table above.
 3. Compare the conduct with the exact promise, without making the promise more specific.
 4. Choose the single score that best describes the current position.
-5. Record a new immutable revision when the current score or its explanation changes.
 
 Contradictory evidence stays in the audit. Evidence items are not separately scored and never averaged. If the package cannot support a fair conclusion, the current score stays unchanged; that lack of conclusion is not a score status.
 
@@ -68,17 +67,3 @@ A documented maintenance baseline is `+1` when the preserved state holds at the 
 Do not infer a maintenance commitment merely from a negative word, and do not award `+1` for elapsed time alone. Commitments such as “we will stop”, “we will abolish”, or “we will prevent” require attributable conduct and otherwise remain at `0`.
 
 Example: “Zavazujeme se, že naše vláda nepřijme euro ani nepodnikne žádné kroky směrem k jeho zavedení.” is a maintenance commitment. If the Czech Republic has not adopted the euro when the responsible government takes office, the current state may be recorded as `+1` with the explanation: “Stav, který slib zachovává, zatím trvá.”
-
-## SLAVA Index
-
-Only `confirmed` promises enter the index. For a party with current scores `s₁ … sₙ`:
-
-```text
-SLAVA Index = round(sum(sᵢ) / (2 × n) × 100)
-```
-
-It ranges from `−100` to `+100` and is shown as index points without a percent sign. Recalculate it from every confirmed promise whenever public promise data or a current score revision changes. If a party has no confirmed promises, the index is unavailable.
-
-## Audit
-
-Assessment revisions are append-only and list their cited official source IDs. An automated assessment is only an unpublished human-review proposal; it is not a score state and cannot change public data. Its audit retains active prompt and model identifiers, evidence identifiers, confidence, and the changed-input fingerprint.
