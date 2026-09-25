@@ -54,7 +54,8 @@ async function runBatch(root, packagesDirectory, maxAssessments = "10", { failPr
     "--pull-request-body", "automation/pull-request.md"
   ], {
     cwd: root,
-    env: { ...process.env, SLIBY_ASSESSMENT_RUNNER: mockRunner, SLIBY_ASSESSMENT_CONCURRENCY: "1", SLIBY_MAX_ASSESSMENTS: maxAssessments, SLIBY_MOCK_FAIL_PROMISE: failPromise, SLIBY_MOCK_HUMAN_REVIEW_PROMISE: humanReviewPromise },
+    // The workflow's own review-branch and spend-log settings must not leak in.
+    env: { ...process.env, REVIEW_BRANCH: "", GITHUB_REPOSITORY: "", SLIBY_MODEL_CALL_LOG: "", SLIBY_ASSESSMENT_RUNNER: mockRunner, SLIBY_ASSESSMENT_CONCURRENCY: "1", SLIBY_MAX_ASSESSMENTS: maxAssessments, SLIBY_MOCK_FAIL_PROMISE: failPromise, SLIBY_MOCK_HUMAN_REVIEW_PROMISE: humanReviewPromise },
     stdio: "pipe"
   });
   let stderr = "";
