@@ -129,9 +129,10 @@ export function proposalDocumentLink(html, pageUrl) {
   return null;
 }
 
-// "ČÁST PRVNÍ", "ČÁST DVACÁTÁ TŘETÍ", "Část druhá": one or two ordinal
-// words, which end in -á or -í.
-const partHeadingPattern = /^ČÁST\s+\p{L}+[áí](?:\s+\p{L}+[áí])?$/iu;
+// "ČÁST PRVNÍ", "ČÁST DVACÁTÁ TŘETÍ", "ČÁST STO DVACÁTÁ PRVNÍ", "Část
+// druhá": one or two ordinal words ending in -á or -í, after 100 preceded by
+// "sto".
+const partHeadingPattern = /^ČÁST\s+(?:STO\s+)?\p{L}+[áí](?:\s+\p{L}+[áí])?$/iu;
 const memorandumHeadingPattern = /^důvodová\s+zpráva$/iu;
 
 /**
@@ -159,6 +160,9 @@ export function splitProposalText(paragraphs) {
     paragraphs: body.slice(start, starts[index + 1] ?? body.length)
   }));
 }
+
+// Print kinds divided into parts (docs/evidence-pipeline.md, Law changes).
+const partedPrintKindIds = new Set(["1", "2"]);
 
 // The texts of a bill as the Chamber debates it (docs/evidence-pipeline.md,
 // Versions of a law change): proposed, approved by the Chamber in the third
@@ -272,9 +276,11 @@ function resolvedVersion(change, version) {
   return entry?.sameAs ? change.versions[entry.sameAs] : entry;
 }
 
-// A part's text without its heading line, which renumbering changes.
-function bodyOf(textCz) {
-  return textCz === null ? null : textCz.split("\n").slice(1).join("\n");
+// The text of a version without its part heading, which renumbering changes;
+// a text without a part heading is compared whole.
+function bodyOf({ heading, textCz }) {
+  if (textCz === null) return null;
+  return heading ? textCz.split("\n").slice(1).join("\n") : textCz;
 }
 
 // The latest version of a change that has not removed it.
@@ -282,11 +288,12 @@ function latestTextVersion(change) {
   return [...versionKeys].reverse().find((version) => change.versions[version] && !change.versions[version].removed) ?? null;
 }
 
-function versionOf(part, document) {
+function versionOf(part, amendedAct, document) {
   return {
     heading: part.heading,
     titleCz: part.titleCz,
     textCz: part.paragraphs ? part.paragraphs.join("\n") : null,
+    amendedAct,
     document: document ? { filename: document.filename, url: document.url } : null
   };
 }
@@ -311,7 +318,9 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [] })
   for (const version of versionKeys) {
     const text = texts[version] ?? null;
     if (!text && !(version === "proposed" && !firstText)) continue;
-    const parts = text ? splitProposalText(text.paragraphs) : [{ heading: null, titleCz: null, paragraphs: null }];
+    const parts = !text
+      ? [{ heading: null, titleCz: null, paragraphs: null }]
+      : partedPrintKindIds.has(String(print.kindId)) ? splitProposalText(text.paragraphs) : [{ heading: null, titleCz: null, paragraphs: proposalBody(text.paragraphs) }];
     const entries = parts.map((part) => {
       const amended = part.paragraphs ? amendedActOfPart(part.paragraphs) : null;
       return { part, amended, key: partKey(part, amended), words: part.paragraphs ? partWords(part.paragraphs) : new Set() };
@@ -330,21 +339,19 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [] })
           printTitleCz: print.title,
           printPageUrl: print.pageUrl,
           addedIn: fromFirstText ? "proposed" : version,
-          amendedActs: [],
-          versions: fromFirstText ? { proposed: { heading: null, titleCz: print.title, textCz: null, document: null } } : {}
+          versions: fromFirstText ? { proposed: { heading: null, titleCz: print.title, textCz: null, amendedAct: null, document: null } } : {}
         };
         changes.push(change);
       }
       // A matched change is compared with its latest text in the next version.
       change.key = entry.key;
       change.words = entry.words;
-      if (entry.amended) change.amendedActs.push(entry.amended);
-      const entryVersion = versionOf({ ...entry.part, titleCz: entry.part.titleCz ?? print.title }, text?.document ?? null);
+      const entryVersion = versionOf({ ...entry.part, titleCz: entry.part.titleCz ?? print.title }, entry.amended, text?.document ?? null);
       // A version whose text equals the latest earlier text is stored as the
       // same, so models do not read (and pay for) the text twice.
       const previous = latestTextVersion(change);
-      change.versions[version] = previous && entryVersion.textCz !== null && bodyOf(resolvedVersion(change, previous).textCz) === bodyOf(entryVersion.textCz)
-        ? { sameAs: change.versions[previous].sameAs ?? previous, heading: entryVersion.heading, titleCz: entryVersion.titleCz, document: entryVersion.document }
+      change.versions[version] = previous && entryVersion.textCz !== null && bodyOf(resolvedVersion(change, previous)) === bodyOf(entryVersion)
+        ? { sameAs: change.versions[previous].sameAs ?? previous, heading: entryVersion.heading, titleCz: entryVersion.titleCz, amendedAct: entryVersion.amendedAct, document: entryVersion.document }
         : entryVersion;
     }
     // A part of an earlier version that this text no longer has was removed.
@@ -360,13 +367,32 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [] })
     textCz: paragraphs.join("\n")
   }));
   return changes.map((change) => {
-    const acts = uniqueNamedActs([...change.amendedActs, ...(single && change.fromFirstText ? namedActsFromPrintTitle(print.title) : [])]);
-    const identifiers = acts.map(({ act }) => actIdentifier(act));
-    if (print.kindId === "3") identifiers.push(stateBudgetIdentifier);
-    // A version keeps its own heading even when its text is stored as the
-    // same as an earlier one: renumbering changes only the heading.
-    const latest = change.versions[latestTextVersion(change)];
-    const { amendedActs, key, words, fromFirstText, ...rest } = change;
-    return { ...rest, heading: latest.heading, titleCz: latest.titleCz, acts, identifiers, senateResolutions: resolutions };
+    const { key, words, fromFirstText, ...rest } = change;
+    return withDerivedFields({ ...rest, titleActs: single && fromFirstText ? namedActsFromPrintTitle(print.title) : [], senateResolutions: resolutions });
   });
+}
+
+// The acts, legal identifiers, heading, and title of a law change, derived
+// from its versions: the acts its versions amend and, for a print that is a
+// single change, the acts of the print title. The heading and title are those
+// of the latest version that has not removed it; a version keeps its own
+// heading even when its text is stored as the same as an earlier one.
+function withDerivedFields(change) {
+  const acts = uniqueNamedActs([...Object.values(change.versions).map(({ amendedAct }) => amendedAct).filter(Boolean), ...change.titleActs]);
+  const identifiers = acts.map(({ act }) => actIdentifier(act));
+  if (change.printKindId === "3") identifiers.push(stateBudgetIdentifier);
+  const latest = change.versions[latestTextVersion(change)];
+  return { ...change, heading: latest.heading, titleCz: latest.titleCz, acts, identifiers };
+}
+
+/**
+ * A law change with only its versions up to `lastVersion`, and the acts,
+ * identifiers, heading, and title those versions give, or null when the change
+ * did not yet exist in that version (docs/evidence-pipeline.md, Conduct and
+ * version).
+ */
+export function changeThroughVersion(change, lastVersion) {
+  const kept = versionKeys.slice(0, versionKeys.indexOf(lastVersion) + 1).filter((version) => change.versions[version]);
+  if (kept.length === 0) return null;
+  return withDerivedFields({ ...change, versions: Object.fromEntries(kept.map((version) => [version, change.versions[version]])) });
 }

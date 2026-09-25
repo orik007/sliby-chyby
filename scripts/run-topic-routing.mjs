@@ -20,7 +20,7 @@ import {
 import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
 import { isPotentiallyAttributable, validatePromiseRegistry } from "./lib/attribution.mjs";
 import { buildInvertedIndex, derivePromiseTopicTags, routeLawChange } from "./lib/topic-routing.mjs";
-import { attributableConductOnChange, buildLawChangeEvidencePackage, maxPackageTokens } from "./lib/topic-evidence-package.mjs";
+import { attributableConductOnChange, buildLawChangeEvidencePackage, lawChangesAtCutoff, maxPackageTokens } from "./lib/topic-evidence-package.mjs";
 import { cachePersister, loadModelCache, mapWithConcurrency, pairedModelCall, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 
@@ -125,9 +125,9 @@ for (const record of primaryRecordsInWindow) {
     if (!printFirstSeenOn.has(printId) || date < printFirstSeenOn.get(printId)) printFirstSeenOn.set(printId, date);
   }
 }
-let changes = Object.entries(printParts.prints)
+let changes = lawChangesAtCutoff(Object.entries(printParts.prints)
   .filter(([printId]) => recordsByPrintId.has(printId))
-  .flatMap(([, print]) => print.changes);
+  .flatMap(([, print]) => print.changes), recordsByPrintId);
 if (args.sampleChanges !== null) changes = changes.slice(0, args.sampleChanges);
 
 const cachePaths = {
@@ -188,7 +188,7 @@ const promiseTopicAssignments = await stage("promise-tagging", publishedRegistry
 const invertedIndex = buildInvertedIndex(taxonomy, promiseTopicAssignments);
 
 // 2. Screening and routing of every law change (steps 4 and 5).
-log(`law-change screening: ${changes.length} law changes from ${recordsByPrintId.size} prints with attributable conduct`);
+log(`law-change screening: ${changes.length} law changes from ${new Set(changes.map(({ printId }) => printId)).size} prints with attributable conduct`);
 const tickChanges = progress("law-change screening", changes.length, { every: 20 });
 const screenedChanges = await stage("law-change-screening", changes, async (change) => {
   const brief = buildScreeningBrief(change, taxonomy);

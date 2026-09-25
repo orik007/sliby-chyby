@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import { validatePromiseRegistry } from "../scripts/lib/attribution.mjs";
-import { buildLawChangeEvidencePackage, estimatePackageTokens, lawChangeEvidenceId, maxPackageTokens, versionOfChange } from "../scripts/lib/topic-evidence-package.mjs";
+import { buildLawChangeEvidencePackage, estimatePackageTokens, lawChangesAtCutoff, lawChangeEvidenceId, maxPackageTokens, versionOfChange } from "../scripts/lib/topic-evidence-package.mjs";
 
 const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8")));
 const fiscalPromise = registry.promises.find(({ id }) => id === "candidate-d5359e35a4c4");
@@ -51,6 +51,7 @@ function lawChange(index, textCz = "Zákon č. 23/2017 Sb., o pravidlech rozpoč
     heading,
     titleCz,
     acts: [{ act: index === 1 ? "23/2017" : "218/2000", name: null }],
+    titleActs: [{ act: index === 1 ? "23/2017" : "218/2000", name: null }],
     identifiers: [index === 1 ? "cz-act-23-2017" : "cz-act-218-2000"],
     versions: versions ?? { proposed: { heading, titleCz, textCz, document: { filename: "t009000.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=1" } } },
     senateResolutions: []
@@ -191,4 +192,26 @@ test("a package holds only the versions up to the latest one its conduct concern
   };
   const pkg = buildLawChangeEvidencePackage({ promise: fiscalPromise, keptChanges: [{ change: lawChange(1, null, versions), route }], recordsByPrintId: new Map([["43200", [submissionRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
   assert.deepEqual(Object.keys(pkg.evidence.find(({ role }) => role === "law-change").structuredFacts.versions), ["proposed"]);
+});
+
+test("at the cutoff a law change has only the versions its print's conduct concerns", () => {
+  const approvedVote = attributedVoteRecord({ id: "psp--vote-approved", payload: { linkedPrints: [{ externalPrintId: "43200", printKindId: "1", historyContexts: [{ actionCz: "souhlas", stageCz: "3. čtení" }] }] } });
+  const submission = { ...attributedVoteRecord(), id: "psp--submission", kind: "legislative-step", payload: {} };
+  const withApproved = { ...lawChange(1), versions: { proposed: lawChange(1).versions.proposed, approved: { heading: "ČÁST PRVNÍ", titleCz: "Změna", textCz: "Nový text.", amendedAct: null, document: null } } };
+  const added = { ...lawChange(2), changeId: "43200-approved-2", addedIn: "approved", versions: { approved: { heading: "ČÁST DRUHÁ", titleCz: "Změna", textCz: "Nová část.", amendedAct: null, document: null } } };
+  // Only the submission before the cutoff: the proposal, without the added part.
+  const early = lawChangesAtCutoff([withApproved, added], new Map([["43200", [submission]]]));
+  assert.deepEqual(early.map(({ changeId, versions }) => [changeId, Object.keys(versions)]), [["43200-1", ["proposed"]]]);
+  // After the approving vote, both changes with the approved text.
+  const late = lawChangesAtCutoff([withApproved, added], new Map([["43200", [submission, approvedVote]]]));
+  assert.deepEqual(late.map(({ changeId, versions }) => [changeId, Object.keys(versions)]), [["43200-1", ["proposed", "approved"]], ["43200-approved-2", ["approved"]]]);
+  // A print without conduct naming it contributes no law change.
+  assert.deepEqual(lawChangesAtCutoff([withApproved], new Map()), []);
+
+  // A print without a proposal text whose parts come from the approved text
+  // is, before that text, one law change known by its title.
+  const titleOnly = (index) => ({ ...lawChange(index), changeId: `43200-${index}`, printTitleCz: "Návrh zákona, kterým se mění zákon č. 23/2017 Sb.", titleActs: [], versions: { proposed: { heading: null, titleCz: "Návrh zákona", textCz: null, amendedAct: null, document: null }, approved: { heading: `ČÁST ${index}`, titleCz: "Změna", textCz: "Text.", amendedAct: { act: "23/2017", name: null }, document: null } } });
+  const beforeText = lawChangesAtCutoff([titleOnly(1), titleOnly(2)], new Map([["43200", [submission]]]));
+  assert.equal(beforeText.length, 1);
+  assert.deepEqual(beforeText[0].identifiers, ["cz-act-23-2017"]);
 });

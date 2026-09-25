@@ -1,7 +1,7 @@
 import { sha256 } from "./collector-core.mjs";
 import { assessableAttributionStatuses, attributionStatusForRecord, factSummary, normalizedStructuredFacts, versionConcerned } from "./attribution.mjs";
 import { validateEvidencePackage } from "./assessment-pipeline.mjs";
-import { versionKeys, versionLabels } from "./print-parts.mjs";
+import { changeThroughVersion, namedActsFromPrintTitle, versionKeys, versionLabels } from "./print-parts.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -61,21 +61,44 @@ export function attributableConductOnChange(records, promise, change) {
     .filter(({ version }) => version !== null);
 }
 
-export function senateResolutionEvidenceId(change, partNumber) {
-  return `psp-core-2025--senate-resolution-${change.printId}-${partNumber}`;
+/**
+ * The law changes as they stood at the cutoff (docs/evidence-pipeline.md,
+ * step 3): each with its versions up to the latest one that the conduct on
+ * its print concerns. `recordsByPrintId` holds the conduct records up to the
+ * cutoff. A print without a proposal text whose parts are known only from a
+ * later text is, before that text, one law change known by its title.
+ */
+export function lawChangesAtCutoff(changes, recordsByPrintId) {
+  const lastVersionByPrint = new Map();
+  const lastVersionOf = (printId) => {
+    if (!lastVersionByPrint.has(printId)) {
+      const positions = (recordsByPrintId.get(printId) ?? [])
+        .map((record) => versionConcerned(record, printId)?.version)
+        .filter(Boolean)
+        .map((version) => versionKeys.indexOf(version));
+      lastVersionByPrint.set(printId, positions.length > 0 ? versionKeys[Math.max(...positions)] : null);
+    }
+    return lastVersionByPrint.get(printId);
+  };
+  const titleOnlyPrints = new Set();
+  const result = [];
+  for (const change of changes) {
+    const lastVersion = lastVersionOf(change.printId);
+    const atCutoff = lastVersion ? changeThroughVersion(change, lastVersion) : null;
+    if (!atCutoff) continue;
+    const titleOnly = Object.keys(change.versions).length > 1 && Object.keys(atCutoff.versions).length === 1 && atCutoff.versions.proposed?.textCz === null;
+    if (!titleOnly) {
+      result.push(atCutoff);
+    } else if (!titleOnlyPrints.has(change.printId)) {
+      titleOnlyPrints.add(change.printId);
+      result.push(changeThroughVersion({ ...change, titleActs: namedActsFromPrintTitle(change.printTitleCz) }, lastVersion));
+    }
+  }
+  return result;
 }
 
-/**
- * A law change with only the versions up to the latest one that the
- * package's conduct concerns: a later text adds nothing to judging that
- * conduct, and it may not have existed at the package cutoff.
- */
-function throughVersion(change, lastVersion) {
-  const kept = versionKeys.slice(0, versionKeys.indexOf(lastVersion) + 1).filter((version) => change.versions[version]);
-  const trimmed = { ...change, versions: Object.fromEntries(kept.map((version) => [version, change.versions[version]])) };
-  const latest = [...kept].reverse().find((version) => !trimmed.versions[version].removed) ?? kept[0];
-  const latestEntry = trimmed.versions[latest];
-  return { ...trimmed, heading: latestEntry.heading ?? change.heading, titleCz: latestEntry.titleCz ?? change.titleCz };
+export function senateResolutionEvidenceId(change, partNumber) {
+  return `psp-core-2025--senate-resolution-${change.printId}-${partNumber}`;
 }
 
 function evidenceFromLawChange(change, route, publishedAt, senateResolutionIds) {
@@ -181,7 +204,9 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
     const conduct = attributableConductOnChange(recordsByPrintId.get(fullChange.printId) ?? [], promise, fullChange);
     if (conduct.length === 0) continue;
     const lastVersion = versionKeys[Math.max(...conduct.map(({ version }) => versionKeys.indexOf(version.version)))];
-    const change = throughVersion(fullChange, lastVersion);
+    // A later text adds nothing to judging this conduct and may not have
+    // existed at the package cutoff.
+    const change = changeThroughVersion(fullChange, lastVersion);
     changes.push({ change, route });
     for (const { version, ...item } of conduct) {
       conductById.set(item.record.id, item);

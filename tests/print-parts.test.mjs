@@ -10,7 +10,8 @@ import {
   namedActsFromPrintTitle,
   proposalBody,
   proposalDocumentLink,
-  splitProposalText
+  splitProposalText,
+  changeThroughVersion
 } from "../scripts/lib/print-parts.mjs";
 
 // Paragraphs of the official DOCX proposal texts of 10th-term prints 85 (a
@@ -209,7 +210,44 @@ test("a part is matched across versions even when its key changes or two parts a
 test("a later version with the same text is stored as the same, not repeated", () => {
   const paragraphs = proposalBody(print85Paragraphs);
   const changes = lawChangesOfPrint({ print: print85, texts: { proposed: { document, paragraphs }, approved: { document, paragraphs }, passed: { document, paragraphs } } });
-  assert.deepEqual(changes[0].versions.approved, { sameAs: "proposed", heading: "ČÁST PRVNÍ", titleCz: "Změna zákona o životním a existenčním minimu", document: { filename: document.filename, url: document.url } });
+  assert.deepEqual(changes[0].versions.approved, { sameAs: "proposed", heading: "ČÁST PRVNÍ", titleCz: "Změna zákona o životním a existenčním minimu", amendedAct: { act: "110/2006", name: "o životním a existenčním minimu" }, document: { filename: document.filename, url: document.url } });
   assert.equal(changes[0].versions.passed.sameAs, "proposed");
   assert.equal(changes[0].titleCz, "Změna zákona o životním a existenčním minimu");
+});
+
+test("a part heading after 100 starts with \"sto\"; other text is no heading", () => {
+  const parts = splitProposalText(["ČÁST STO DVACÁTÁ", "Změna zákona o daních z příjmů", "Text.", "ČÁST STO DVACÁTÁ PRVNÍ", "Účinnost", "Část čtvrtá a pátá", "ČÁST I", "Text."]);
+  assert.deepEqual(parts.map(({ heading }) => heading), ["ČÁST STO DVACÁTÁ", "ČÁST STO DVACÁTÁ PRVNÍ"]);
+});
+
+test("a text without a part heading is compared whole, so a changed first paragraph is a new version", () => {
+  const print = { ...print85, title: "Návrh zákona o podpoře bydlení" };
+  const proposed = ["Zákon o podpoře bydlení", "§ 1 Příspěvek činí 1 000 Kč.", "§ 2 Účinnost."];
+  const approved = ["Zákon o podpoře bydlení a o změně souvisejících zákonů", "§ 1 Příspěvek činí 1 000 Kč.", "§ 2 Účinnost."];
+  const [change] = lawChangesOfPrint({ print, texts: { proposed: { document, paragraphs: proposed }, approved: { document, paragraphs: approved } } });
+  assert.equal(change.versions.approved.sameAs, undefined);
+  assert.match(change.versions.approved.textCz, /o změně souvisejících zákonů/);
+});
+
+test("a state budget or a treaty is one law change, even with part headings", () => {
+  const paragraphs = ["ČÁST PRVNÍ", "Příjmy", "Text.", "ČÁST DRUHÁ", "Výdaje", "Text."];
+  for (const kindId of ["3", "4"]) {
+    const changes = lawChangesOfPrint({ print: { ...print85, kindId }, texts: { proposed: { document, paragraphs } } });
+    assert.equal(changes.length, 1, `print kind ${kindId}`);
+    assert.equal(changes[0].heading, null);
+  }
+  const budget = lawChangesOfPrint({ print: { ...print85, kindId: "3" }, texts: { proposed: { document, paragraphs } } });
+  assert.deepEqual(budget[0].identifiers, ["cz-print-kind-state-budget"]);
+});
+
+test("a change through a version keeps only those versions and the acts they amend", () => {
+  const act = (number) => `Zákon č. ${number}/2000 Sb., o něčem, se mění takto:`;
+  const proposed = ["ČÁST PRVNÍ", "Změna zákona A", act(1), "V § 1 se slovo zrušuje."];
+  const approved = ["ČÁST PRVNÍ", "Změna zákona A", act(1), "V § 1 se slovo nahrazuje jiným.", "ČÁST DRUHÁ", "Změna zákona B", act(2), "V § 2 se slovo zrušuje."];
+  const [first, added] = lawChangesOfPrint({ print: print85, texts: { proposed: { document, paragraphs: proposed }, approved: { document, paragraphs: approved } } });
+  assert.deepEqual(Object.keys(changeThroughVersion(first, "proposed").versions), ["proposed"]);
+  assert.deepEqual(changeThroughVersion(first, "proposed").identifiers, ["cz-act-1-2000"]);
+  // A change added in the approved text did not exist in the proposal.
+  assert.equal(changeThroughVersion(added, "proposed"), null);
+  assert.deepEqual(changeThroughVersion(added, "approved").identifiers, ["cz-act-2-2000"]);
 });
