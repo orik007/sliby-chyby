@@ -41,6 +41,10 @@ test("rejects duplicate tag ids", () => {
 test("rejects a Czech alias assigned to more than one tag", () => {
   const broken = { ...taxonomy, tags: [...taxonomy.tags, { id: "duplicate-alias-tag", parent: null, labelEn: "x", assessmentEligible: true, inclusionExamples: ["x"], exclusionExamples: ["x"], czechAliases: ["DPH"] }] };
   assert.throws(() => validateTaxonomy(broken), /assigned to more than one tag/);
+  const repeated = { ...taxonomy, tags: taxonomy.tags.map((tag, index) => (index === 0 ? { ...tag, czechAliases: [...tag.czechAliases, tag.czechAliases[0].toUpperCase()] } : tag)) };
+  assert.throws(() => validateTaxonomy(repeated), /lists the Czech alias .* twice/);
+  const invalid = { ...taxonomy, tags: taxonomy.tags.map((tag, index) => (index === 0 ? { ...tag, czechAliases: [...tag.czechAliases, null] } : tag)) };
+  assert.throws(() => validateTaxonomy(invalid), /empty or invalid Czech alias/);
 });
 
 test("taxonomyHash changes when a tag's Czech aliases or examples change, not just its id/parent/eligibility", () => {

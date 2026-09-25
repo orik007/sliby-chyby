@@ -10,7 +10,7 @@ export function validateTaxonomy(taxonomy) {
   invariant(Array.isArray(taxonomy.tags) && taxonomy.tags.length > 0, "Taxonomy must contain tags");
 
   const ids = new Set();
-  const aliases = new Set();
+  const aliasOwners = new Map();
   for (const tag of taxonomy.tags) {
     invariant(typeof tag.id === "string" && tag.id.length > 0, "Taxonomy tag is missing id");
     invariant(!ids.has(tag.id), `Duplicate taxonomy tag id: ${tag.id}`);
@@ -22,9 +22,12 @@ export function validateTaxonomy(taxonomy) {
     invariant(Array.isArray(tag.exclusionExamples) && tag.exclusionExamples.length > 0, `Tag ${tag.id} needs at least one exclusion example`);
     invariant(Array.isArray(tag.czechAliases) && tag.czechAliases.length > 0, `Tag ${tag.id} needs at least one Czech alias`);
     for (const alias of tag.czechAliases) {
+      invariant(typeof alias === "string" && alias.trim().length > 0, `Tag ${tag.id} has an empty or invalid Czech alias`);
       const key = alias.trim().toLocaleLowerCase("cs-CZ");
-      invariant(!aliases.has(key), `Czech alias "${alias}" is assigned to more than one tag`);
-      aliases.add(key);
+      const owner = aliasOwners.get(key);
+      invariant(owner !== tag.id, `Tag ${tag.id} lists the Czech alias "${alias}" twice`);
+      invariant(owner === undefined, `Czech alias "${alias}" is assigned to more than one tag: ${owner} and ${tag.id}`);
+      aliasOwners.set(key, tag.id);
     }
     if (tag.directLegalIdentifiers !== undefined) {
       invariant(Array.isArray(tag.directLegalIdentifiers), `Tag ${tag.id} directLegalIdentifiers must be an array`);

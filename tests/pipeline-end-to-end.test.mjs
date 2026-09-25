@@ -1,30 +1,33 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { cp, mkdir, mkdtemp, readFile, readdir } from "node:fs/promises";
+import { cp, mkdtemp, readFile, readdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import test from "node:test";
+import { pathToFileURL } from "node:url";
 
 // One real Chamber print (tisk 189, the revenue-registration bill) taken from
 // the collector and print-text runs of 25 September 2026: its six law
 // changes with their proposed, approved, and passed texts, the Senate's
 // resolution, the three attributable records (the government's submission,
 // the third-reading approval, and the vote insisting on the bill after the
-// Senate's return), and two records that cannot be attributable conduct. The
-// pipeline scripts run as in the workflow, with a deterministic stand-in for
-// the model provider (tests/fixtures/stub-openai.mjs).
+// Senate's return), and two records that cannot be attributable conduct. Four
+// published promises with their public scores stand in for the catalogue,
+// so a change to the live data never changes this test. The pipeline scripts
+// run as in the workflow, in a checkout of their own, with a deterministic
+// stand-in for the model provider (tests/fixtures/stub-openai.mjs).
 const repositoryRoot = resolve(import.meta.dirname, "..");
 const fixtures = resolve(repositoryRoot, "tests/fixtures/pipeline");
-const stub = resolve(repositoryRoot, "tests/fixtures/stub-openai.mjs");
+const stub = pathToFileURL(resolve(repositoryRoot, "tests/fixtures/stub-openai.mjs")).href;
 const script = (name) => resolve(repositoryRoot, "scripts", name);
 const vatPromiseId = "ano-2025-restaurant-nonalcoholic-vat-12";
 const dissentingModel = "stub-dissenting-model";
 
-async function run(args, { cwd = repositoryRoot, environment = {} } = {}) {
+async function run(args, { cwd, environment = {} }) {
   const child = spawn(process.execPath, args, {
     cwd,
-    // Only these settings reach the scripts: no key, network, or workflow
-    // setting of the machine running the tests.
+    // Only these settings reach the scripts, and the checkout has no .env:
+    // no key, network, or setting of the machine running the tests.
     env: { PATH: process.env.PATH, OPENAI_API_KEY: "stub", ...environment },
     stdio: "pipe"
   });
@@ -51,15 +54,32 @@ async function modelCalls(path) {
 
 const readJson = async (path) => JSON.parse(await readFile(path, "utf8"));
 
-test("one real print runs through routing, packaging, assessment, and the review report", { timeout: 240_000 }, async () => {
+// A checkout with the repository's prompts, taxonomy, prices, and source
+// registry, and the fixture promises and public scores.
+async function checkout(root) {
+  const copy = (from, to = from) => cp(join(repositoryRoot, from), join(root, to), { recursive: true });
+  await copy("automation/prompts");
+  await copy("automation/model-prices.json");
+  await copy("automation/topic-routing/taxonomy-v1.json");
+  await copy("automation/collectors/sources.json");
+  await copy("automation/review-proposals/manifest.json");
+  await copy("tests/fixtures/pipeline/promise-registry.json", "automation/promise-registry/promises.json");
+  await copy("tests/fixtures/pipeline/promises", "data/promises");
+  await copy("tests/fixtures/pipeline/assessment-revisions", "data/assessment-revisions");
+}
+
+test("one real print runs through routing, packaging, assessment, and the review report", { timeout: 240_000 }, async (t) => {
   const work = await mkdtemp(join(tmpdir(), "slava-pipeline-"));
+  t.after(() => rm(work, { recursive: true, force: true }));
+  const root = join(work, "checkout");
+  await checkout(root);
   const routingOutput = join(work, "routing");
   const routingArgs = (output, log) => [["--import", stub, script("run-topic-routing.mjs"),
     "--collector-run", join(fixtures, "collector-run.json"),
     "--print-parts", join(fixtures, "print-parts.json"),
     "--tag-cache", join(work, "tag-cache"),
     "--as-of", "2026-09-25",
-    "--output", output].flat(), { environment: { STUB_OPENAI_LOG: log } }];
+    "--output", output].flat(), { cwd: root, environment: { STUB_OPENAI_LOG: log } }];
 
   // Routing: screening, relevance checks, and packages.
   await run(...routingArgs(routingOutput, join(work, "routing-calls.jsonl")));
@@ -119,18 +139,11 @@ test("one real print runs through routing, packaging, assessment, and the review
   await run(...routingArgs(join(work, "routing-again"), join(work, "routing-again-calls.jsonl")));
   assert.equal((await modelCalls(join(work, "routing-again-calls.jsonl"))).length, 0);
 
-  // Queue the packages in an audit-branch checkout with the published scores.
-  const root = join(work, "audit");
-  await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await cp(join(repositoryRoot, "automation/prompts"), join(root, "automation/prompts"), { recursive: true });
-  await cp(join(repositoryRoot, "automation/model-prices.json"), join(root, "automation/model-prices.json"));
-  await cp(join(repositoryRoot, "automation/review-proposals/manifest.json"), join(root, "automation/review-proposals/manifest.json"));
-  await cp(join(repositoryRoot, "data/assessment-revisions"), join(root, "data/assessment-revisions"), { recursive: true });
-  await run([script("queue-evidence-packages.mjs"), "--input", join(routingOutput, "evidence-packages"), "--queue", join(root, "automation/evidence-packages")]);
+  await run([script("queue-evidence-packages.mjs"), "--input", join(routingOutput, "evidence-packages"), "--queue", "automation/evidence-packages"], { cwd: root });
 
   // Assessment with the real runner: the assessors disagree, so the arbiter decides.
   const assessmentEnvironment = (log) => ({
-    NODE_OPTIONS: `--import ${stub}`,
+    NODE_OPTIONS: `--import "${stub}"`,
     SLIBY_ASSESSMENT_RUNNER: script("run-assessment.mjs"),
     SLIBY_MAX_ASSESSMENTS: "5",
     SLIBY_ASSESSOR_MODEL_B: dissentingModel,
@@ -140,8 +153,10 @@ test("one real print runs through routing, packaging, assessment, and the review
   await run([script("run-assessment-batch.mjs"), "--packages", "automation/evidence-packages"], { cwd: root, environment: assessmentEnvironment(join(work, "assessment-calls.jsonl")) });
   const calls = await modelCalls(join(work, "assessment-calls.jsonl"));
   assert.deepEqual(calls.map(({ name }) => name).sort(), ["slava_arbitration", "slava_arbitration", "slava_assessment", "slava_assessment", "slava_assessment", "slava_assessment"]);
-  // Each model reads only its own package.
-  for (const call of calls) assert.ok(packages.some(({ packageId }) => packageId === call.input.evidencePackage.packageId));
+  // Each package goes to both assessors and the arbiter, and to nothing else.
+  for (const { packageId } of packages) {
+    assert.deepEqual(calls.filter(({ input }) => input.evidencePackage.packageId === packageId).map(({ name }) => name).sort(), ["slava_arbitration", "slava_assessment", "slava_assessment"]);
+  }
 
   const summary = await readJson(join(root, "automation/runs/pipeline/github-actions/assessment-batch.json"));
   assert.equal(summary.newProposalCount, 2);
@@ -171,7 +186,7 @@ test("one real print runs through routing, packaging, assessment, and the review
     "--print-parts", join(fixtures, "print-parts.json"),
     "--proposals", join(root, "automation/review-proposals/manifest.json"),
     "--output", join(work, "coverage-audit.json"),
-    "--markdown", join(work, "coverage-audit.md")]);
+    "--markdown", join(work, "coverage-audit.md")], { cwd: root });
   const audit = await readJson(join(work, "coverage-audit.json"));
   assert.equal(audit.promises.length, audit.promiseCount);
   assert.equal(audit.stateCounts["review-candidate"], 2);

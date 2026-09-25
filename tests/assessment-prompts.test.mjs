@@ -14,7 +14,6 @@ const conductRules = [
   ["no strict majority on a delivering measure moves against", /no strict majority at a decisive vote on a measure delivering the promise(?::| is) `moving-against`/],
   ["a proposal is never fulfilled or acting against", /never `fulfilled` or `acting-against`/],
   ["a decision outweighs a proposal; the most recent decides", /A decision outweighs a proposal; among conduct of the same weight, the most recent decides/i],
-  ["a maintenance baseline moves towards", /maintenanceBaseline[^]*`moving-towards`/],
   ["inactivity is never negative", /elapsed time and inactivity are never negative/i]
 ];
 
@@ -25,7 +24,10 @@ test("the assessor prompt states every scoring rule of docs/scoring.md", async (
     ["only the supplied evidence", /Use only the supplied evidence package/],
     ["each conduct is judged by its own version", /Judge every conduct by its own version: a submission by the proposed text, a vote by the text it decided on/],
     ["a later decision decides by its own text", /When a later decision concerns a text that no longer delivers what the proposal delivered, that decision decides by its own text/],
+    ["a proposal moves towards when in line and against when contradicting", /A \*\*proposal\*\* is a member bill or a government proposal: in line with the promise `moving-towards`; contradicting it `moving-against`/],
     ["a vote is scored on the vote date", /Score a vote by the party's own choice on the vote date/],
+    ["the later fate of a measure does not change the vote", /Whether the measure later passed the Senate, survived a presidential return, or took effect does not change it/],
+    ["a maintenance baseline moves towards", /When `assessmentContext\.maintenanceBaseline` is present, it is the supplied audit determination that the promise qualifies\. In `live` mode, choose `moving-towards` for it/],
     ["one relevance verdict for every law change", /For \*\*each\*\* law change in the package, add exactly one entry to `changeRelevance`/],
     ["sharing a topic is not relevance", /sharing only the general topic is not enough/],
     ["no relevant change is insufficient evidence", /If no law change is relevant, set `evidenceSufficient` to false/],
@@ -40,7 +42,9 @@ test("the arbiter prompt states the same scoring rules and may only choose betwe
   for (const [rule, pattern] of conductRules) assert.match(arbiter.instructions, pattern, rule);
   const rules = [
     ["only the supplied package and reviews", /Use only the supplied package and reviews/],
+    ["a proposal moves towards when in line and against when contradicting", /a member bill or a government proposal is a proposal: `moving-towards` when in line with the promise, `moving-against` when contradicting it/],
     ["choose a review or cannot-decide", /Select `assessor-a`, select `assessor-b`, or return `cannot-decide`/],
+    ["a maintenance baseline moves towards", /when `assessmentContext\.maintenanceBaseline` is present in a live package, the review should select `moving-towards`/],
     ["never select an unavailable review", /never select the unavailable assessor/],
     ["judge each conduct by its own version", /judges each conduct by its own version/],
     ["a later decision by its own text", /a later decision by its own text even when the earlier proposal was in line with the promise/],

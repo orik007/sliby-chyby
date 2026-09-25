@@ -3,7 +3,7 @@ import { readdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import test from "node:test";
 import { arbiterPromptVersion, assessorPromptVersion, loadAssessmentPrompts } from "../scripts/lib/assessment-config.mjs";
-import { assessmentFingerprintVersion, mergeRelevanceVerdicts, planAssessmentInputs, relevanceVerdictsByRoute, renderHumanReviewMarkdown, validateReviewManifest } from "../scripts/lib/assessment-review.mjs";
+import { assessmentFingerprintVersion, mergeRelevanceVerdicts, reviewManifestSchemaVersion, planAssessmentInputs, relevanceVerdictsByRoute, renderHumanReviewMarkdown, validateReviewManifest } from "../scripts/lib/assessment-review.mjs";
 import { relevancePromptVersion, screeningPromptVersion } from "../scripts/lib/law-change-screening.mjs";
 import { taggingPromptVersion } from "../scripts/lib/topic-tagger.mjs";
 
@@ -43,7 +43,7 @@ test("retains only the active prompt files", async () => {
 });
 
 test("plans an unseen package for human review without publication", () => {
-  const manifest = { schemaVersion: "1.0.0", fingerprintVersion: assessmentFingerprintVersion, publicationApproved: false, proposals: [] };
+  const manifest = { schemaVersion: reviewManifestSchemaVersion, fingerprintVersion: assessmentFingerprintVersion, publicationApproved: false, proposals: [] };
   assert.equal(validateReviewManifest(manifest), manifest);
   const plan = planAssessmentInputs({
     packages: [{ path: "test.json", evidencePackage }],
