@@ -32,18 +32,34 @@ export async function writeJsonAtomically(filePath, value) {
 export async function loadModelCache(filePath) {
   const entries = {};
   if (existsSync(filePath)) {
-    for (const [index, line] of (await readFile(filePath, "utf8")).split("\n").entries()) {
+    const content = await readFile(filePath, "utf8");
+    const lines = content.split("\n");
+    const lastLine = lines.findLastIndex((line) => line.trim() !== "");
+    let validLength = content.length;
+    let offset = 0;
+    for (const [index, line] of lines.entries()) {
+      const start = offset;
+      offset += line.length + 1;
       if (line.trim() === "") continue;
       let value;
       try {
         value = JSON.parse(line);
       } catch {
-        // Only the last line can be cut short, by a run killed mid-write.
+        // Only the last line can be cut short, by a run killed mid-write; it
+        // is removed so the next result is appended on a line of its own.
+        if (index !== lastLine) throw new Error(`Corrupt model cache ${filePath} line ${index + 1}`);
+        validLength = start;
         continue;
       }
       if (typeof value?.subjectId !== "string") throw new Error(`Invalid model cache ${filePath} line ${index + 1}`);
       const { subjectId, ...entry } = value;
       entries[subjectId] = entry;
+    }
+    const repaired = content.slice(0, validLength);
+    const normalized = repaired === "" || repaired.endsWith("\n") ? repaired : `${repaired}\n`;
+    if (normalized !== content) {
+      log(`model cache ${filePath}: removed a line cut short by an interrupted run`);
+      await writeFile(filePath, normalized, "utf8");
     }
   }
   return { filePath, entries };
@@ -114,21 +130,26 @@ function fingerprintMatches(cached, fingerprint) {
 /**
  * Two independent calls on one subject. `fingerprint` must cover everything
  * that could change a response (the input hash, the prompt and taxonomy
- * hashes, the provider, and both models); a cached pair is reused only when
- * all of it matches, and is validated again with `revalidate`. Only a pair
- * whose both outputs are valid is cached: an invalid side is retried in the
- * next run. An invalid side is returned as null.
+ * hashes, the provider, and both models); a cached side is reused only when
+ * all of it matches, and is validated again with `revalidate`. Each valid
+ * side is cached as soon as it exists; an invalid side is cached as null and
+ * called again in the next run, which reuses the valid side. An invalid side
+ * is returned as null.
  */
 export async function pairedModelCall({ subjectId, fingerprint, cache, persist, callA, callB, revalidate = (output) => output }) {
-  const cached = cache.entries[subjectId];
-  if (fingerprintMatches(cached, fingerprint)) {
-    return { a: revalidate(cached.a), b: revalidate(cached.b), errorA: null, errorB: null, modelA: fingerprint.modelA, modelB: fingerprint.modelB, usageByModel: [], invalidCount: 0, reused: true };
-  }
-  const [attemptA, attemptB] = await Promise.all([isolateInvalidOutput(callA), isolateInvalidOutput(callB)]);
-  if (!attemptA.error && !attemptB.error) {
-    cache.entries[subjectId] = { ...fingerprint, a: attemptA.response.output, b: attemptB.response.output };
+  const cached = fingerprintMatches(cache.entries[subjectId], fingerprint) ? cache.entries[subjectId] : null;
+  const reusedA = cached?.a != null;
+  const reusedB = cached?.b != null;
+  const [attemptA, attemptB] = await Promise.all([
+    reusedA ? { response: { output: revalidate(cached.a), model: fingerprint.modelA }, error: null, reused: true } : isolateInvalidOutput(callA),
+    reusedB ? { response: { output: revalidate(cached.b), model: fingerprint.modelB }, error: null, reused: true } : isolateInvalidOutput(callB)
+  ]);
+  const reused = reusedA && reusedB;
+  if (!reused && (!attemptA.error || !attemptB.error)) {
+    cache.entries[subjectId] = { ...fingerprint, a: attemptA.response?.output ?? null, b: attemptB.response?.output ?? null };
     await persist(subjectId);
   }
+  const called = [attemptA, attemptB].filter((attempt) => !attempt.reused);
   return {
     a: attemptA.response?.output ?? null,
     b: attemptB.response?.output ?? null,
@@ -136,9 +157,9 @@ export async function pairedModelCall({ subjectId, fingerprint, cache, persist, 
     errorB: attemptB.error,
     modelA: attemptA.response?.model ?? attemptA.model ?? fingerprint.modelA,
     modelB: attemptB.response?.model ?? attemptB.model ?? fingerprint.modelB,
-    usageByModel: [attemptA.response ?? attemptA, attemptB.response ?? attemptB].filter((entry) => entry.usage).map(({ model, usage }) => ({ model, usage })),
+    usageByModel: called.map((attempt) => attempt.response ?? attempt).filter((entry) => entry.usage).map(({ model, usage }) => ({ model, usage })),
     invalidCount: (attemptA.error ? 1 : 0) + (attemptB.error ? 1 : 0),
-    reused: false
+    reused
   };
 }
 

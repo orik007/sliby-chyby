@@ -12,8 +12,10 @@ function stamp() {
   return `[${new Date().toISOString().slice(11, 19)} +${Math.floor(seconds / 60)}m${String(seconds % 60).padStart(2, "0")}s]`;
 }
 
+// Log lines go to stderr: a script's stdout may carry its machine-readable
+// result (run-assessment.mjs).
 export function log(message) {
-  console.log(`${stamp()} ${message}`);
+  console.error(`${stamp()} ${message}`);
 }
 
 /**

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import { mkdtemp, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -30,13 +31,13 @@ test("every paid model call is appended to the model-call log", async () => {
 
 test("progress logs in batches and always at the last item", () => {
   const lines = [];
-  const original = console.log;
-  console.log = (line) => lines.push(line);
+  const original = console.error;
+  console.error = (line) => lines.push(line);
   try {
     const tick = progress("downloading", 5, { every: 2, seconds: 3600 });
     for (let index = 0; index < 5; index += 1) tick(`item ${index}`);
   } finally {
-    console.log = original;
+    console.error = original;
   }
   assert.deepEqual(lines.map((line) => line.replace(/^\[[^\]]+\] /, "")), [
     "downloading: 5 to process",
@@ -44,4 +45,12 @@ test("progress logs in batches and always at the last item", () => {
     "downloading: 4/5 (last: item 3)",
     "downloading: 5/5 (last: item 4)"
   ]);
+});
+
+test("log lines never reach stdout, which carries a script's machine-readable result", () => {
+  const moduleUrl = new URL("../scripts/lib/run-log.mjs", import.meta.url).href;
+  const child = spawnSync(process.execPath, ["--input-type=module", "-e", `import { log } from ${JSON.stringify(moduleUrl)}; log("progress"); console.log(JSON.stringify({ ok: true }));`], { encoding: "utf8" });
+  assert.equal(child.status, 0, child.stderr);
+  assert.deepEqual(JSON.parse(child.stdout), { ok: true });
+  assert.match(child.stderr, /progress/);
 });

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { appendFile, mkdtemp, readFile } from "node:fs/promises";
+import { appendFile, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -24,16 +24,23 @@ test("a valid pair is cached at once and reused only while the whole fingerprint
   const changed = await pairedModelCall({ subjectId: "s1", fingerprint: { ...fingerprint, inputHash: "h2" }, cache, persist, callA: counted({ v: 3 }), callB: counted({ v: 4 }) });
   assert.deepEqual([changed.a, changed.reused, calls], [{ v: 3 }, false, 4]);
 
-  // The journal is appended, never rewritten; a later line replaces an
-  // earlier one, and a line cut short by a killed run is ignored.
+  // The journal is appended; a later line replaces an earlier one, and a
+  // last line cut short by a killed run is removed, so the next result is
+  // appended on a line of its own.
   await appendFile(path, '{"subjectId":"s2","a":');
   const reloaded = await loadModelCache(path);
-  assert.equal((await readFile(path, "utf8")).split("\n").filter(Boolean).length, 3);
+  assert.equal((await readFile(path, "utf8")).split("\n").filter(Boolean).length, 2);
   assert.deepEqual(Object.keys(reloaded.entries), ["s1"]);
   assert.deepEqual(reloaded.entries.s1.a, { v: 3 });
+  await pairedModelCall({ subjectId: "s3", fingerprint, cache: reloaded, persist: cachePersister(reloaded), callA: answer({ v: 5 }), callB: answer({ v: 6 }) });
+  assert.deepEqual(Object.keys((await loadModelCache(path)).entries), ["s1", "s3"]);
+
+  // A damaged line before the last one is an error, never skipped.
+  await writeFile(path, `{"subjectId":"s1","a":\n${JSON.stringify({ subjectId: "s2", ...fingerprint, a: {}, b: {} })}\n`);
+  await assert.rejects(() => loadModelCache(path), /Corrupt model cache .* line 1/);
 });
 
-test("an invalid output fails only its side, keeps its cost, and is never cached", async () => {
+test("an invalid output fails only its side and keeps its cost; the valid side is cached and reused", async () => {
   const cache = { filePath: null, entries: {} };
   const invalid = async () => {
     const error = new ModelOutputError("invented tag");
@@ -44,7 +51,14 @@ test("an invalid output fails only its side, keeps its cost, and is never cached
   const result = await pairedModelCall({ subjectId: "s1", fingerprint, cache, persist: async () => {}, callA: invalid, callB: answer({ v: 2 }) });
   assert.deepEqual([result.a, result.b, result.errorA, result.invalidCount], [null, { v: 2 }, "invented tag", 1]);
   assert.equal(result.usageByModel.length, 2);
-  assert.equal(cache.entries.s1, undefined);
+  assert.deepEqual([cache.entries.s1.a, cache.entries.s1.b], [null, { v: 2 }]);
+
+  // The next run calls only the side that was invalid.
+  let calls = 0;
+  const retried = await pairedModelCall({ subjectId: "s1", fingerprint, cache, persist: async () => {}, callA: async () => { calls += 1; return answer({ v: 1 })(); }, callB: async () => { calls += 10; return answer({ v: 9 })(); } });
+  assert.deepEqual([retried.a, retried.b, retried.reused, retried.usageByModel.length, calls], [{ v: 1 }, { v: 2 }, false, 1, 1]);
+  const reused = await pairedModelCall({ subjectId: "s1", fingerprint, cache, persist: async () => {}, callA: invalid, callB: invalid });
+  assert.deepEqual([reused.a, reused.b, reused.reused], [{ v: 1 }, { v: 2 }, true]);
 });
 
 test("a transport failure stops the run, and finished subjects travel with the error", async () => {
