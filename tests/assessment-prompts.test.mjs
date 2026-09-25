@@ -1,10 +1,20 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { loadAssessmentPrompts } from "../scripts/lib/assessment-config.mjs";
+import { hashText, loadAssessmentPrompts } from "../scripts/lib/assessment-config.mjs";
 
 // The assessors and the arbiter apply docs/scoring.md through their prompts.
-// Each rule below is one the models must follow; losing it from a prompt
-// changes how promises are scored.
+// The patterns below match the prompts' wording of that document; they are
+// not a source of rules. They were checked against the version of
+// docs/scoring.md whose hash is recorded here, so any change to it fails
+// until the prompts and these patterns are brought in line with it.
+const reviewedScoringHash = "0341b6a6ef07e2791f462559ecd40707f79239d4777cfd7233c17030642b171b";
+
+test("the prompt checks were reviewed against the current docs/scoring.md", async () => {
+  const scoring = await readFile(new URL("../docs/scoring.md", import.meta.url), "utf8");
+  assert.equal(hashText(scoring), reviewedScoringHash, "docs/scoring.md changed: bring the assessor and arbiter prompts and the patterns in this test in line with it, then record its new hash here");
+});
+
 const conductRules = [
   ["a whole-promise decision is fulfilled", /majority `yes` on a measure delivering the whole promise(?::| is) `fulfilled`/],
   ["a part-promise decision moves towards", /on a (?:measure delivering only a )?part(?::)? `moving-towards`/],
