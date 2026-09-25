@@ -51,7 +51,14 @@ function collectPrints(records) {
   return [...prints.values()].sort((left, right) => left.number - right.number);
 }
 
-// At most four requests to psp.cz are open at a time, across all prints.
+// psp.cz stopped accepting connections after about twenty seconds of four
+// parallel requests in two runs (25 September 2026, connect timeouts), so at
+// most two requests are open at a time, across all prints, and a failed
+// request waits longer before each retry: 5, 10, 20, 40, and 80 s. A
+// request keeps its slot while it waits, so when psp.cz stops answering,
+// every download pauses rather than adding connections.
+const pspConcurrency = 2;
+const pspRetry = { retryAttempts: 6, retryDelayMs: 5_000 };
 function concurrencyLimit(limit) {
   let active = 0;
   const waiting = [];
@@ -66,8 +73,8 @@ function concurrencyLimit(limit) {
     }
   };
 }
-const pspRequest = concurrencyLimit(4);
-const fetchPsp = (source, url, options) => pspRequest(() => fetchVerified(source, url, options));
+const pspRequest = concurrencyLimit(pspConcurrency);
+const fetchPsp = (source, url, options) => pspRequest(() => fetchVerified(source, url, { ...options, ...pspRetry }));
 
 const htmlOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };
 const docxOptions = { maxBytes: 20_000_000, expectedContentTypes: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"] };
@@ -152,8 +159,8 @@ const approvedPrintIds = new Set(conductRecords.flatMap((record) => (record.payl
   .map((print) => String(print.externalPrintId))));
 log(`${prints.length} prints concern potentially attributable records; downloading their proposal texts, later texts, and Senate resolutions`);
 
-// Prints are processed four at a time and each request to psp.cz goes
-// through fetchPsp, which keeps at most four open. A failed download stops
+// Prints are processed two at a time and each request to psp.cz goes
+// through fetchPsp, which keeps at most two open. A failed download stops
 // the run: a law change must never silently miss a text.
 const fetched = new Map();
 const tick = progress("downloading print texts", prints.length);
@@ -169,7 +176,7 @@ async function downloadWorker() {
     tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
   }
 }
-await Promise.all(Array.from({ length: Math.min(4, prints.length) }, downloadWorker));
+await Promise.all(Array.from({ length: Math.min(pspConcurrency, prints.length) }, downloadWorker));
 
 const result = {};
 for (const print of prints) {

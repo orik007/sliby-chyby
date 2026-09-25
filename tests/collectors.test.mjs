@@ -104,6 +104,47 @@ test("retries transport failures while fetching and reading source bytes", async
   }
 });
 
+test("waits twice as long before each further retry after a refused connection", async () => {
+  const originalFetch = globalThis.fetch;
+  const attemptTimes = [];
+  globalThis.fetch = async () => {
+    attemptTimes.push(Date.now());
+    if (attemptTimes.length < 4) throw new TypeError("fetch failed", { cause: { code: "UND_ERR_CONNECT_TIMEOUT" } });
+    return {
+      ok: true,
+      status: 200,
+      url: "https://news.example/api",
+      headers: new Headers({ "content-type": "application/json" }),
+      body: null,
+      arrayBuffer: async () => new TextEncoder().encode("{}").buffer
+    };
+  };
+  try {
+    await fetchVerified(officialSource, "https://news.example/api", {
+      maxBytes: 1_000,
+      expectedContentTypes: ["application/json"],
+      retryAttempts: 4,
+      retryDelayMs: 40
+    });
+    const waits = attemptTimes.slice(1).map((time, index) => time - attemptTimes[index]);
+    assert.equal(waits.length, 3);
+    // Timers never fire early; allow a millisecond of clock rounding.
+    [40, 80, 160].forEach((expected, index) => assert.ok(waits[index] >= expected - 1, `wait ${index + 1} was ${waits[index]} ms, expected at least ${expected} ms`));
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("print texts are downloaded from psp.cz two requests at a time with a long retry back-off", async () => {
+  const script = await readFile(new URL("../scripts/run-print-parts.mjs", import.meta.url), "utf8");
+  assert.match(script, /const pspConcurrency = 2;/);
+  assert.match(script, /const pspRetry = \{ retryAttempts: 6, retryDelayMs: 5_000 \};/);
+  assert.match(script, /concurrencyLimit\(pspConcurrency\)/);
+  assert.match(script, /fetchVerified\(source, url, \{ \.\.\.options, \.\.\.pspRetry \}\)/);
+  assert.match(script, /Math\.min\(pspConcurrency, prints\.length\)/);
+  assert.doesNotMatch(script, /fetchVerified\(source, url, options\)/);
+});
+
 test("documents every configured collector source in the canonical pipeline policy", async () => {
   const registry = JSON.parse(await readFile(new URL("../automation/collectors/sources.json", import.meta.url), "utf8"));
   const policy = await readFile(new URL("../docs/evidence-pipeline.md", import.meta.url), "utf8");
