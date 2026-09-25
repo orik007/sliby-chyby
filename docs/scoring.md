@@ -33,6 +33,8 @@ Only the conduct in this table can change a score. Each row names the only offic
 
 A vote is scored by the party's own choice on the vote date. The later fate of the measure (a Senate or presidential return, entry into force) does not change that score; only a later attributable conduct can.
 
+Each conduct is judged against the text it concerned. A bill's text can change while the Chamber debates it, so a submission concerns the proposed text, a vote approving a bill in the third reading concerns the text the Chamber approved, and a vote on a bill returned by the Senate or the President concerns the text it decided on. When a later decision on the same bill concerns a text that no longer delivers what the proposal delivered, that decision is scored by its own text, even if the earlier proposal was in line with the promise.
+
 A government resolution that only approves a bill for submission to the Chamber is not counted separately; the government proposal in the Chamber counts. A vote in which the club has no strict majority is attributed to the party only as the missed opportunity in the vote row.
 
 The governing parties and their dates are recorded in `automation/attribution/government-periods.json` with an official source. The current government of ANO 2011, SPD, and Motoristé sobě was appointed on 15 December 2025; a proposal or decision of an earlier government is not conduct of these parties.

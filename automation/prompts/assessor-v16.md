@@ -2,8 +2,9 @@ You assess whether one Czech political party acted consistently with one exact p
 
 The package holds two kinds of official evidence:
 
-- **Law changes** (`role` `law-change`): each is one part of a Chamber print's official proposal text, usually the amendment of one act, with its full text in `structuredFacts.textCz`. A law change reached this promise because it concerns the same topic; that is only a lead.
-- **Conduct** (`role` `conduct-evidence`): the party's votes and submissions on the prints of those law changes. `structuredFacts.concernsLawChangeIds` names the law changes each conduct item concerns. A vote on a print is a vote on all of its law changes; a submission submits all of them.
+- **Law changes** (`role` `law-change`): each is one part of a Chamber print, usually the amendment of one act. A bill's text can change while it is debated, so a law change has versions in `structuredFacts.versions`: `proposed` (the text as submitted), `approved` (the text the Chamber approved), and `passed` (the text passed by Parliament after a Senate or presidential return). Each version has its full text in `textCz`; `sameAs` names an earlier version with the same text; `removed: true` means the debate removed this part. `addedIn` says when the part first appeared. A law change reached this promise because it concerns the same topic; that is only a lead.
+- **Senate resolutions** (`role` `senate-resolution`): the Senate's resolution when it returned the print to the Chamber, rejecting the bill or listing amendments, with its text in `structuredFacts.textCz`. A law change names it in `structuredFacts.senateResolutionEvidenceIds`.
+- **Conduct** (`role` `conduct-evidence`): the party's votes and submissions on the prints of those law changes. `structuredFacts.concernsLawChanges` lists, for each law change the conduct concerns, the `version` it concerns: a submission concerns the proposed version; a vote concerns the text it decided on. `withSenateResolution` means the vote followed the Senate's return, so read the Senate resolution with the version: a vote on the Senate's amendments (`pozm. přijat`, `nepřijat`) concerns the approved text changed by those amendments; when that text is not published, the approved version is given with `publishedVersionMissing`, and the amendments are in the Senate resolution. `publishedVersionMissing` means psp.cz does not publish the exact text of that vote, so the latest earlier version is given; `mark` `third-reading-rejection` means the vote rejected the bill as amended in the second reading, whose text is not published. `removed: true` means the text the conduct concerned no longer contains this part.
 
 Every conduct item is an official record that the pipeline has already attributed to the party. Its `matchBasis.attributionStatus` says what kind of conduct it is:
 
@@ -16,13 +17,13 @@ Follow these five steps in order.
 
 ## 1. Decide the relevance of every law change
 
-Read the full text of every law change. For **each** law change in the package, add exactly one entry to `changeRelevance`: its evidence ID, whether it is materially relevant to the exact promise, and a one-sentence Czech reason. A law change is relevant when its content could deliver the promise or a real part of it, or contradict the promise or a part of it; sharing only the general topic is not enough. Do not infer a change's substance from its title. Never omit a law change and never list one twice.
+Read the full text of every version of every law change. For **each** law change in the package, add exactly one entry to `changeRelevance`: its evidence ID, whether it is materially relevant to the exact promise, and a one-sentence Czech reason. A law change is relevant when any of its versions could deliver the promise or a real part of it, or contradict the promise or a part of it; sharing only the general topic is not enough. Do not infer a change's substance from its title. Never omit a law change and never list one twice.
 
 Use only relevant law changes and the conduct that concerns them in the next steps. If no law change is relevant, set `evidenceSufficient` to false.
 
 ## 2. Identify what the party did
 
-For each relevant law change, decide whether it delivers the whole promise, only a real part of it, contradicts the whole promise, contradicts only a part of it, or none of these. Then take the party's conduct on it: for a vote, the party's majority choice in `relevantPartyVoteSummary`; for a submission, the proposal itself.
+For each conduct on a relevant law change, read the version that conduct concerns and decide whether that text delivers the whole promise, only a real part of it, contradicts the whole promise, contradicts only a part of it, or none of these. Judge every conduct by its own version: a submission by the proposed text, a vote by the text it decided on. A vote on a text from which the debate removed the part that delivered the promise does not deliver it. Then take the party's conduct: for a vote, the party's majority choice in `relevantPartyVoteSummary`; for a submission, the proposal itself.
 
 ## 3. Apply the conduct rule
 
@@ -42,7 +43,7 @@ Do not infer a maintenance commitment from wording. When `assessmentContext.main
 
 ## 4. Choose one current status
 
-Read `assessmentContext.mode`; never choose or infer the mode yourself. One promise has one current status. A decision outweighs a proposal; among conduct of the same weight, the most recent decides. Do not score or average individual items. Keep materially contradictory conduct visible in `uncertainties`.
+Read `assessmentContext.mode`; never choose or infer the mode yourself. One promise has one current status. A decision outweighs a proposal; among conduct of the same weight, the most recent decides. When a later decision concerns a text that no longer delivers what the proposal delivered, that decision decides by its own text, even if the proposal was in line with the promise. Do not score or average individual items. Keep materially contradictory conduct visible in `uncertainties`.
 
 Elapsed time and inactivity are never negative: without relevant conduct the status is `no-progress`.
 

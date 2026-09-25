@@ -98,7 +98,7 @@ jobs:
             fi
             while IFS= read -r path; do
               restore_paths+=("$path")
-            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/print-parts)
+            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache)
             for directory in automation/evidence-packages automation/review-proposals; do
               while IFS= read -r path; do
                 case "$path" in
@@ -139,7 +139,6 @@ jobs:
         run: |
           node scripts/run-print-parts.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
-            --cache automation/print-parts \
             --output automation/runs/pipeline/github-actions/print-parts
 
       - name: Screen law changes, route them to promises, check relevance, and build packages
@@ -186,15 +185,12 @@ jobs:
       - name: Persist source collection and queued evidence packages
         id: packages
         # Runs only when every earlier step succeeded, so the collection
-        # record, the print-text cache, and the packages are saved together
+        # record and the packages are saved together
         # from a complete run (docs/evidence-pipeline.md, Persist).
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
           git add automation/collectors/checkpoints.json automation/evidence-packages
-          if [ -d automation/print-parts ]; then
-            git add automation/print-parts
-          fi
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
           else
@@ -212,7 +208,7 @@ jobs:
           cat > "$RUNNER_TEMP/evidence-package-audit-pr.md" <<'EOF'
           ## Neveřejný audit sběru a balíčků podkladů
 
-          Tento pull request uchovává úspěšný technický sběr, texty tisků rozdělené na změny zákonů a balíčky podkladů. Balíčky čekají na dva nezávislé posudky; samy nemění veřejná data, skóre ani stav zveřejnění.
+          Tento pull request uchovává úspěšný technický sběr, uložené výsledky levných modelů a balíčky podkladů. Balíčky čekají na dva nezávislé posudky; samy nemění veřejná data, skóre ani stav zveřejnění.
 
           Pokud hodnocení selže nebo je přerušeno, uložené balíčky zůstanou v této auditní větvi pro další běh.
           EOF
@@ -266,7 +262,9 @@ jobs:
               `- Published promises checked: ${run.counts.promiseCount}`,
               `- Primary records in the window: ${quality.primaryRecordsInWindow}`,
               `- Skipped, cannot be attributable conduct: ${quality.notAttributableSkipped}`,
-              `- Prints with a DOCX proposal text: ${quality.printParts.printsWithProposalText} of ${quality.printParts.prints} (title only: ${quality.printParts.printsWithoutDocxProposalText}, download failures: ${quality.printParts.textDownloadFailures})`,
+              `- Prints with a DOCX proposal text: ${quality.printParts.printsWithProposalText} of ${quality.printParts.prints}; with an approved / passed text: ${quality.printParts.printsWithApprovedText} / ${quality.printParts.printsWithPassedText}; returned by the Senate (rejected or amended): ${quality.printParts.printsWithSenateResolution}`,
+              `- Law changes: ${quality.printParts.lawChanges} (added / removed during the debate: ${quality.printParts.lawChangesAddedInDebate} / ${quality.printParts.lawChangesRemovedInDebate})`,
+              `- Approved bills without an approved text on psp.cz: ${quality.printParts.approvedBillsWithoutApprovedText}; text warnings: ${quality.printParts.textWarnings}`,
               `- Law changes screened: ${quality.lawChanges} (technical ${quality.technicalLawChanges}, substantive ${quality.substantiveLawChanges})`,
               `- Routed law changes: ${quality.routedLawChanges} (direct legal-identifier link: ${quality.directLinkLawChanges})`,
               `- Routing review (needs a human routing decision): ${quality.routingReview}`,

@@ -18,6 +18,8 @@ const schemas = {
   print: ["printId", "kindId", "stateId", "number", "partNumber", "proposalTypeId", "proposerOrganId", "termOrganId", "personId", "proposerText", "shortTitle", "submittedAt", "distributedAt", "nextAt", "electronicAt", "fullTitle", "deadlineChange", "deadline", "fastTrack", "textUrl", "isEu", "publishedAt", "confidenceLinked", "status"],
   history: ["historyId", "printId", "dateTime", "voteId", "transitionId", "agendaId", "session", "resolutionNumber", "committeeReporterMpId", "chairReporterMpId", "committeeResolution", "collectionPublishedAt", "collectionPart", "collectionNumber", "note"],
   state: ["stateId", "stateTypeId", "printKindId", "description", "deadline", "deadlineTransitionId"],
+  stateType: ["stateTypeId", "description"],
+  subPrint: ["printId", "partNumber", "historyId", "kindId", "shortTitle", "fullTitle"],
   transition: ["transitionId", "fromStateId", "toStateId", "actionId", "transitionType"],
   action: ["actionId", "description"],
   proposer: ["printId", "personId", "order", "type"],
@@ -210,16 +212,24 @@ function governmentPartiesOn(governmentPeriods, date) {
   return period ? [...period.partyIds].sort() : [];
 }
 
-function historyContext(history, transitionById, actionById) {
+// The stage of the debate a history step leaves (typ_stavu of its
+// transition's starting state, e.g. "3. čtení" or "Sněmovna (Senát)"): it
+// tells which text of the bill a vote concerned (docs/evidence-pipeline.md).
+function historyContext(history, { transitionById, actionById, stageOfState }) {
   const transition = transitionById.get(history.transitionId);
   const action = actionById.get(transition?.actionId);
   return {
     externalHistoryId: history.historyId,
     transitionId: history.transitionId,
     actionCz: cleanText(action?.description, 500) || null,
+    stageCz: stageOfState(transition?.fromStateId),
     resolutionNumber: numeric(history.resolutionNumber)
   };
 }
+
+// Official print kind (druh_tisku.unl) of a Senate resolution returning a
+// bill to the Chamber, a sub-print listed in tisky_za.unl.
+const senateResolutionKindId = "11";
 
 export function normalizePspData({ source, since, votesEntries, membersEntries, printsEntries, sessionsEntries, governmentPeriods }) {
   validateGovernmentPeriods(governmentPeriods);
@@ -290,6 +300,14 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
   const stateById = new Map(parseUnl(decodeEntry(printsEntries, "stavy.unl"), schemas.state).map((row) => [row.stateId, row]));
   const transitionById = new Map(parseUnl(decodeEntry(printsEntries, "prechody.unl"), schemas.transition).map((row) => [row.transitionId, row]));
   const actionById = new Map(parseUnl(decodeEntry(printsEntries, "typ_akce.unl"), schemas.action).map((row) => [row.actionId, row]));
+  const stateTypeById = new Map(parseUnl(decodeEntry(printsEntries, "typ_stavu.unl"), schemas.stateType).map((row) => [row.stateTypeId, row]));
+  const stageOfState = (stateId) => cleanText(stateTypeById.get(stateById.get(stateId)?.stateTypeId)?.description, 200) || null;
+  const historyTables = { transitionById, actionById, stageOfState };
+  const senateResolutionParts = new Map();
+  for (const row of parseUnl(decodeEntry(printsEntries, "tisky_za.unl"), schemas.subPrint)) {
+    if (row.kindId !== senateResolutionKindId || !printById.has(row.printId)) continue;
+    senateResolutionParts.set(row.printId, [...(senateResolutionParts.get(row.printId) ?? []), numeric(row.partNumber)].sort((left, right) => left - right));
+  }
 
   // Agenda items link a vote to the print it was cast on. The link is used
   // only when schuze.zip and hist.unl agree on agenda-item identifiers;
@@ -332,8 +350,9 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
       titleCz: cleanText(print?.fullTitle || print?.shortTitle, 1000),
       url: print ? officialPrintUrl(source.term.number, print.number) : null,
       documentPublishedAt: pspDateTime(print?.publishedAt),
+      senateResolutionPartNumbers: senateResolutionParts.get(printId) ?? [],
       linkBasis,
-      historyContexts: histories.map((history) => historyContext(history, transitionById, actionById))
+      historyContexts: histories.map((history) => historyContext(history, historyTables))
     };
   }
 
@@ -450,9 +469,11 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
         partNumber: numeric(print.partNumber),
         printTitleCz: printTitle,
         documentPublishedAt: pspDateTime(print.publishedAt),
+        senateResolutionPartNumbers: senateResolutionParts.get(print.printId) ?? [],
         transitionId: history.transitionId,
         actionCz: actionTitle,
         fromStateCz: cleanText(fromState?.description, 500) || null,
+        stageCz: stageOfState(transition?.fromStateId),
         toStateCz: cleanText(toState?.description, 500) || null,
         currentStateCz: cleanText(stateById.get(print.stateId)?.description, 500) || null,
         externalVoteId: history.voteId,

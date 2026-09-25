@@ -20,7 +20,7 @@ import {
 import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
 import { isPotentiallyAttributable, validatePromiseRegistry } from "./lib/attribution.mjs";
 import { buildInvertedIndex, derivePromiseTopicTags, routeLawChange } from "./lib/topic-routing.mjs";
-import { attributableConductOnPrint, buildLawChangeEvidencePackage, maxPackageTokens } from "./lib/topic-evidence-package.mjs";
+import { attributableConductOnChange, buildLawChangeEvidencePackage, maxPackageTokens } from "./lib/topic-evidence-package.mjs";
 import { cachePersister, loadModelCache, mapWithConcurrency, pairedModelCall, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 
@@ -219,7 +219,7 @@ for (const { change, route } of screenedChanges) {
   for (const target of route.routedTo) {
     const promise = promiseById.get(target.promiseId);
     if (!promise) continue;
-    if (attributableConductOnPrint(recordsByPrintId.get(change.printId) ?? [], promise).length === 0) {
+    if (attributableConductOnChange(recordsByPrintId.get(change.printId) ?? [], promise, change).length === 0) {
       routedWithoutConductCount += 1;
       continue;
     }
@@ -318,7 +318,8 @@ const report = {
     heading: change.heading,
     titleCz: change.titleCz,
     acts: change.acts,
-    textCharacters: change.textCz?.length ?? 0,
+    addedIn: change.addedIn,
+    versions: Object.fromEntries(Object.entries(change.versions).map(([version, entry]) => [version, entry.removed ? "removed" : entry.sameAs ? `same as ${entry.sameAs}` : entry.textCz === null ? "title only" : `${entry.textCz.length} characters`])),
     substantive,
     screenerA,
     screenerB,

@@ -1,77 +1,133 @@
-import { existsSync } from "node:fs";
-import { mkdir, readFile, readdir, writeFile } from "node:fs/promises";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { isPotentiallyAttributable } from "./lib/attribution.mjs";
+import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { fetchVerified, invariant, validateRegistry } from "./lib/collector-core.mjs";
-import { extractDocxParagraphs, officialPrintDocumentPageUrl } from "./lib/psp-print-documents.mjs";
+import { extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl } from "./lib/psp-print-documents.mjs";
 import { log, progress } from "./lib/run-log.mjs";
-import { lawChangesOfPrint, printPartsSplitterVersion, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
+import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
 
 /**
- * Splits every Chamber print concerned by a potentially attributable record
- * into law changes (docs/evidence-pipeline.md, Chamber data rules). Each
- * print's proposal text is fetched once and cached, one file per print,
- * without its explanatory memorandum. A print without a readable DOCX
- * proposal text is one law change with only its title; a failed download
- * is reported and retried in the next run.
+ * Downloads, in every run, the official texts of every Chamber print that a
+ * potentially attributable record concerns (the proposal and, for a bill,
+ * the text the Chamber approved, the text passed by Parliament, and any
+ * Senate resolution returning it) and splits them into law changes with
+ * their versions (docs/evidence-pipeline.md, Chamber data rules). Nothing
+ * is cached, so a later text is used as soon as psp.cz publishes it. A
+ * failed download fails the run; a text that psp.cz lists without a DOCX
+ * file is treated as not published and reported.
  */
 function parseArgs(args) {
-  const options = { collectorRun: null, cache: null, output: null, sourceRegistry: "automation/collectors/sources.json", promiseRegistry: "automation/promise-registry/promises.json" };
+  const options = { collectorRun: null, output: null, sourceRegistry: "automation/collectors/sources.json", promiseRegistry: "automation/promise-registry/promises.json" };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];
-    else if (arg === "--cache") options.cache = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--sources") options.sourceRegistry = args[++index];
     else if (arg === "--promises") options.promiseRegistry = args[++index];
     else throw new Error(`Unknown argument: ${arg}`);
   }
-  invariant(options.collectorRun && options.cache && options.output, "--collector-run, --cache, and --output are required");
+  invariant(options.collectorRun && options.output, "--collector-run and --output are required");
   return options;
 }
 
 function collectPrints(records) {
   const prints = new Map();
-  const add = ({ externalPrintId, printKindId, number, partNumber, titleCz }) => {
+  const add = ({ externalPrintId, printKindId, number, partNumber, titleCz, senateResolutionPartNumbers }) => {
     if (!externalPrintId || !Number.isInteger(number)) return;
-    prints.set(String(externalPrintId), { printId: String(externalPrintId), kindId: printKindId ?? null, number, partNumber: partNumber ?? 0, title: titleCz ?? "" });
+    prints.set(String(externalPrintId), {
+      printId: String(externalPrintId),
+      kindId: printKindId ?? null,
+      number,
+      partNumber: partNumber ?? 0,
+      title: titleCz ?? "",
+      senateResolutionPartNumbers: senateResolutionPartNumbers ?? []
+    });
   };
   for (const record of records) {
     const payload = record.payload ?? {};
-    if (record.kind === "legislative-step") add({ externalPrintId: payload.externalPrintId, printKindId: payload.printKindId, number: payload.printNumber, partNumber: payload.partNumber, titleCz: payload.printTitleCz });
+    if (record.kind === "legislative-step") add({ ...payload, number: payload.printNumber, titleCz: payload.printTitleCz });
     for (const linkedPrint of payload.linkedPrints ?? []) add(linkedPrint);
   }
   return [...prints.values()].sort((left, right) => left.number - right.number);
 }
 
-async function fetchProposalText(source, print, termNumber) {
-  const pageUrl = officialPrintDocumentPageUrl(termNumber, print.number, print.partNumber);
-  const page = await fetchVerified(source, pageUrl, { maxBytes: 1_000_000, expectedContentTypes: ["text/html"] });
-  const link = proposalDocumentLink(new TextDecoder("windows-1250").decode(page.bytes), pageUrl);
-  if (!link) return { document: null, paragraphs: null };
-  const file = await fetchVerified(source, link.url, {
-    maxBytes: 20_000_000,
-    expectedContentTypes: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"]
-  });
-  return {
-    document: { filename: link.filename, url: file.finalUrl, sectionLabel: link.sectionLabel, contentHash: file.contentHash },
-    paragraphs: proposalBody(extractDocxParagraphs(file.bytes))
+// At most four requests to psp.cz are open at a time, across all prints.
+function concurrencyLimit(limit) {
+  let active = 0;
+  const waiting = [];
+  return async (task) => {
+    if (active >= limit) await new Promise((resolveTurn) => waiting.push(resolveTurn));
+    active += 1;
+    try {
+      return await task();
+    } finally {
+      active -= 1;
+      waiting.shift()?.();
+    }
   };
 }
+const pspRequest = concurrencyLimit(4);
+const fetchPsp = (source, url, options) => pspRequest(() => fetchVerified(source, url, options));
 
-async function loadCache(directory) {
-  const cache = new Map();
-  if (!existsSync(directory)) return cache;
-  for (const entry of await readdir(directory, { withFileTypes: true })) {
-    if (!entry.isFile() || !entry.name.endsWith(".json")) continue;
-    const value = JSON.parse(await readFile(resolve(directory, entry.name), "utf8"));
-    // Texts split by an older splitter are fetched again.
-    if (value.splitterVersion !== printPartsSplitterVersion) continue;
-    invariant(typeof value.printId === "string" && Number.isInteger(value.printNumber), `Invalid print-parts cache file ${entry.name}`);
-    invariant((value.document === null) === (value.paragraphs === null), `Print-parts cache file ${entry.name} must have both a document and its text, or neither`);
-    cache.set(value.printId, value);
+const htmlOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };
+const docxOptions = { maxBytes: 20_000_000, expectedContentTypes: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"] };
+const decodePage = (page) => new TextDecoder("windows-1250").decode(page.bytes);
+
+// A downloaded DOCX that cannot be read as text (for example a scanned
+// image) is treated like a text that is not published: reported, never
+// fatal. A failed download still fails the run.
+async function fetchDocx(source, url, filename, warnings, printNumber, version) {
+  const file = await fetchPsp(source, url, docxOptions);
+  try {
+    return { document: { filename, url: file.finalUrl }, paragraphs: proposalBody(extractDocxParagraphs(file.bytes)) };
+  } catch (error) {
+    warnings.push({ printNumber, kind: "unreadable-docx", version, detail: `${filename}: ${error instanceof Error ? error.message : String(error)}` });
+    return null;
   }
-  return cache;
+}
+
+// A DOCX file listed in a print page's proposal-text section: the proposal
+// itself (part 0) or a Senate resolution sub-print ("Text").
+async function fetchPrintPageText(source, termNumber, printNumber, partNumber, warnings, version) {
+  const pageUrl = officialPrintDocumentPageUrl(termNumber, printNumber, partNumber);
+  const link = proposalDocumentLink(decodePage(await fetchPsp(source, pageUrl, htmlOptions)), pageUrl);
+  return link ? fetchDocx(source, link.url, link.filename, warnings, printNumber, version) : null;
+}
+
+// The names psp.cz gives the later-text pages, used to trace a version.
+const laterTextNames = { approved: (number) => `Schválený text tisku ${number} (DOCX)`, passed: (number) => `Text tisku ${number} přijatý Parlamentem (DOCX)` };
+
+async function laterText(source, print, version, url, warnings) {
+  const docxUrl = laterTextDocxLink(decodePage(await fetchPsp(source, url, htmlOptions)), url);
+  if (!docxUrl) {
+    warnings.push({ printNumber: print.number, kind: "later-text-without-docx", version, detail: `the ${version} text is listed without a DOCX file` });
+    return null;
+  }
+  return fetchDocx(source, docxUrl, laterTextNames[version](print.number), warnings, print.number, version);
+}
+
+async function senateResolution(source, termNumber, print, partNumber, warnings) {
+  const resolution = await fetchPrintPageText(source, termNumber, print.number, partNumber, warnings, "senate-resolution");
+  if (!resolution) warnings.push({ printNumber: print.number, kind: "senate-resolution-without-text", detail: `the Senate resolution ${print.number}/${partNumber} has no readable DOCX text` });
+  return resolution ? { partNumber, ...resolution } : null;
+}
+
+async function fetchPrintTexts(source, print, termNumber) {
+  const warnings = [];
+  const bill = billPrintKindIds.has(String(print.kindId));
+  const historyUrl = officialPrintHistoryUrl(termNumber, print.number);
+  const [proposal, historyPage] = await Promise.all([
+    fetchPrintPageText(source, termNumber, print.number, print.partNumber, warnings, "proposed"),
+    bill ? fetchPsp(source, historyUrl, htmlOptions) : null
+  ]);
+  const links = historyPage ? laterTextLinks(decodePage(historyPage), historyUrl) : { approved: null, passed: null };
+  const [approved, passed, ...resolutions] = await Promise.all([
+    links.approved ? laterText(source, print, "approved", links.approved, warnings) : null,
+    links.passed ? laterText(source, print, "passed", links.passed, warnings) : null,
+    ...print.senateResolutionPartNumbers.map((partNumber) => senateResolution(source, termNumber, print, partNumber, warnings))
+  ]);
+  const texts = Object.fromEntries(Object.entries({ proposed: proposal, approved, passed }).filter(([, text]) => text));
+  return { texts, senateResolutions: resolutions.filter(Boolean), warnings };
 }
 
 const args = parseArgs(process.argv.slice(2));
@@ -81,71 +137,76 @@ invariant(source?.enabled, "Enabled psp-core-2025 source is required");
 const collectorRun = JSON.parse(await readFile(resolve(args.collectorRun), "utf8"));
 invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
 
-const cacheDirectory = resolve(args.cache);
-const cache = await loadCache(cacheDirectory);
-await mkdir(cacheDirectory, { recursive: true });
-
 // Only prints that a potentially attributable record concerns can carry
 // attributable conduct; the texts of all other prints are never fetched.
 const promiseRegistry = JSON.parse(await readFile(resolve(args.promiseRegistry), "utf8"));
 const trackedPartyIds = [...new Set(promiseRegistry.promises.map(({ partyId }) => partyId))].sort();
-const prints = collectPrints(collectorRun.records.filter((record) => record.primary === true && isPotentiallyAttributable(record, trackedPartyIds)));
-const toFetch = prints.filter((print) => !cache.has(print.printId));
-log(`${prints.length} prints concern potentially attributable records; ${toFetch.length} proposal texts to download, ${prints.length - toFetch.length} cached`);
+const conductRecords = collectorRun.records.filter((record) => record.primary === true && isPotentiallyAttributable(record, trackedPartyIds));
+const prints = collectPrints(conductRecords);
+// Bills with a decisive vote on their approved text (the rule of
+// versionConcerned): each should have an approved text on psp.cz, so one
+// without it shows a text psp.cz does not publish or a history page that
+// was not read.
+const approvedPrintIds = new Set(conductRecords.flatMap((record) => (record.payload?.linkedPrints ?? [])
+  .filter((print) => versionConcerned(record, print.externalPrintId)?.version === "approved")
+  .map((print) => String(print.externalPrintId))));
+log(`${prints.length} prints concern potentially attributable records; downloading their proposal texts, later texts, and Senate resolutions`);
 
-// Texts are downloaded four at a time; each print is saved to the cache at
-// once, so an interrupted run keeps every text it already has.
-const failures = [];
-const tick = progress("downloading proposal texts", toFetch.length);
+// Prints are processed four at a time and each request to psp.cz goes
+// through fetchPsp, which keeps at most four open. A failed download stops
+// the run: a law change must never silently miss a text.
+const fetched = new Map();
+const tick = progress("downloading print texts", prints.length);
 let nextIndex = 0;
 async function downloadWorker() {
-  while (nextIndex < toFetch.length) {
-    const print = toFetch[nextIndex];
+  while (nextIndex < prints.length) {
+    const print = prints[nextIndex];
     nextIndex += 1;
     const startedAt = Date.now();
-    try {
-      const fetched = await fetchProposalText(source, print, source.term.number);
-      const entry = { splitterVersion: printPartsSplitterVersion, printId: print.printId, printNumber: print.number, ...fetched, fetchedAt: new Date().toISOString() };
-      await writeFile(resolve(cacheDirectory, `${print.printId}.json`), `${JSON.stringify(entry, null, 2)}\n`);
-      cache.set(print.printId, entry);
-      tick(`print ${print.number}: ${fetched.document ? `${fetched.document.filename}, ${fetched.paragraphs.length} paragraphs` : "no DOCX proposal text, title only"}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
-    } catch (error) {
-      const message = error instanceof Error ? error.message : String(error);
-      failures.push({ printId: print.printId, printNumber: print.number, message });
-      log(`print ${print.number}: proposal text not available (${message}); only its title is used in this run`);
-      tick(`print ${print.number}: failed`);
-    }
+    const result = await fetchPrintTexts(source, print, source.term.number);
+    fetched.set(print.printId, result);
+    const versions = Object.keys(result.texts);
+    tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
   }
 }
-await Promise.all(Array.from({ length: Math.min(4, toFetch.length) }, downloadWorker));
+await Promise.all(Array.from({ length: Math.min(4, prints.length) }, downloadWorker));
 
 const result = {};
 for (const print of prints) {
   print.pageUrl = officialPrintDocumentPageUrl(source.term.number, print.number, print.partNumber);
-  const cached = cache.get(print.printId);
-  const changes = lawChangesOfPrint({ print, document: cached?.document ?? null, paragraphs: cached?.paragraphs ?? null });
+  const { texts, senateResolutions, warnings } = fetched.get(print.printId);
+  if (approvedPrintIds.has(print.printId) && !texts.approved && !warnings.some(({ version }) => version === "approved")) {
+    warnings.push({ printNumber: print.number, kind: "approved-without-approved-text", detail: "a vote on the approved text is recorded, but psp.cz lists no approved text" });
+  }
+  for (const warning of warnings) log(`print ${warning.printNumber}: ${warning.detail}`);
   result[print.printId] = {
     printNumber: print.number,
     kindId: print.kindId,
     titleCz: print.title,
-    textStatus: cached?.document ? "proposal-text" : cached ? "no-docx-proposal-text" : "download-failed",
-    changes
+    versions: Object.keys(texts),
+    warnings,
+    changes: lawChangesOfPrint({ print, texts, senateResolutions })
   };
 }
 
 const allChanges = Object.values(result).flatMap(({ changes }) => changes);
 const quality = {
   prints: prints.length,
-  printsWithProposalText: Object.values(result).filter(({ textStatus }) => textStatus === "proposal-text").length,
-  printsWithoutDocxProposalText: Object.values(result).filter(({ textStatus }) => textStatus === "no-docx-proposal-text").length,
-  textDownloadFailures: failures.length,
+  printsWithProposalText: Object.values(result).filter(({ versions }) => versions.includes("proposed")).length,
+  printsWithoutDocxProposalText: Object.values(result).filter(({ versions }) => !versions.includes("proposed")).length,
+  printsWithApprovedText: Object.values(result).filter(({ versions }) => versions.includes("approved")).length,
+  printsWithPassedText: Object.values(result).filter(({ versions }) => versions.includes("passed")).length,
+  printsWithSenateResolution: Object.values(result).filter(({ changes }) => changes[0]?.senateResolutions.length > 0).length,
+  approvedBillsWithoutApprovedText: Object.values(result).filter(({ warnings }) => warnings.some(({ kind }) => kind === "approved-without-approved-text")).length,
+  textWarnings: Object.values(result).reduce((sum, { warnings }) => sum + warnings.length, 0),
   lawChanges: allChanges.length,
+  lawChangesAddedInDebate: allChanges.filter(({ addedIn }) => addedIn !== "proposed").length,
+  lawChangesRemovedInDebate: allChanges.filter(({ versions }) => Object.values(versions).some((version) => version.removed)).length,
   lawChangesWithAmendedAct: allChanges.filter(({ acts }) => acts.length > 0).length,
-  lawChangesWithIdentifiers: allChanges.filter(({ identifiers }) => identifiers.length > 0).length,
-  titleOnlyLawChanges: allChanges.filter(({ textCz }) => textCz === null).length
+  titleOnlyLawChanges: allChanges.filter(({ versions }) => versions.proposed && !versions.proposed.removed && versions.proposed.textCz === null).length
 };
 
 await mkdir(resolve(args.output), { recursive: true });
-await writeFile(resolve(args.output, "print-parts.json"), `${JSON.stringify({ schemaVersion: "1.0.0", splitterVersion: printPartsSplitterVersion, quality, failures, prints: result }, null, 2)}\n`);
-log(`law changes: ${quality.lawChanges} from ${quality.prints} prints (${quality.printsWithProposalText} with a proposal text, ${quality.printsWithoutDocxProposalText} without a DOCX text, ${quality.textDownloadFailures} download failures)`);
-console.log(JSON.stringify({ quality, failures }, null, 2));
+await writeFile(resolve(args.output, "print-parts.json"), `${JSON.stringify({ schemaVersion: "1.0.0", quality, prints: result }, null, 2)}\n`);
+log(`law changes: ${quality.lawChanges} from ${quality.prints} prints (${quality.printsWithProposalText} with a proposal text, ${quality.printsWithApprovedText} with an approved text, ${quality.printsWithPassedText} with a passed text, ${quality.printsWithSenateResolution} with a Senate resolution, ${quality.textWarnings} text warning(s))`);
+console.log(JSON.stringify({ quality }, null, 2));

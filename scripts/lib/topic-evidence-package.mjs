@@ -1,6 +1,7 @@
 import { sha256 } from "./collector-core.mjs";
-import { assessableAttributionStatuses, attributionStatusForRecord, factSummary, normalizedStructuredFacts } from "./attribution.mjs";
+import { assessableAttributionStatuses, attributionStatusForRecord, factSummary, normalizedStructuredFacts, versionConcerned } from "./attribution.mjs";
 import { validateEvidencePackage } from "./assessment-pipeline.mjs";
+import { versionKeys, versionLabels } from "./print-parts.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -23,16 +24,70 @@ export function lawChangeEvidenceId(change) {
 }
 
 /**
- * The records that are the promise party's attributable conduct on a print:
- * its decisive votes and its submission (docs/scoring.md).
+ * The version of one law change a conduct concerns. When psp.cz does not
+ * publish that version, the latest earlier version is used and
+ * `publishedVersionMissing` names the one the conduct concerned. Returns
+ * null when the law change did not yet exist in the text the conduct
+ * concerned (a change added in the debate is never part of the submission).
  */
-export function attributableConductOnPrint(records, promise) {
-  return records
-    .map((record) => ({ record, attributionStatus: attributionStatusForRecord(record, promise).attributionStatus }))
-    .filter(({ attributionStatus }) => assessableAttributionStatuses.has(attributionStatus));
+export function versionOfChange(change, concerned) {
+  if (!concerned) return null;
+  const position = versionKeys.indexOf(concerned.version);
+  for (let index = position; index >= 0; index -= 1) {
+    const version = versionKeys[index];
+    const entry = change.versions[version];
+    if (!entry) continue;
+    return {
+      version,
+      removed: entry.removed === true,
+      publishedVersionMissing: version === concerned.version || (concerned.sameAsApproved && version === "approved") ? null : concerned.version,
+      withSenateResolution: concerned.withSenateResolution,
+      mark: concerned.mark
+    };
+  }
+  return null;
 }
 
-function evidenceFromLawChange(change, route, publishedAt) {
+/**
+ * The records that are the promise party's attributable conduct on a law
+ * change: its decisive votes and its submission (docs/scoring.md), each with
+ * the version of the change it concerns.
+ */
+export function attributableConductOnChange(records, promise, change) {
+  return records
+    .map((record) => ({ record, attributionStatus: attributionStatusForRecord(record, promise).attributionStatus }))
+    .filter(({ attributionStatus }) => assessableAttributionStatuses.has(attributionStatus))
+    .map((item) => ({ ...item, version: versionOfChange(change, versionConcerned(item.record, change.printId)) }))
+    .filter(({ version }) => version !== null);
+}
+
+export function senateResolutionEvidenceId(change, partNumber) {
+  return `psp-core-2025--senate-resolution-${change.printId}-${partNumber}`;
+}
+
+/**
+ * A law change with only the versions up to the latest one that the
+ * package's conduct concerns: a later text adds nothing to judging that
+ * conduct, and it may not have existed at the package cutoff.
+ */
+function throughVersion(change, lastVersion) {
+  const kept = versionKeys.slice(0, versionKeys.indexOf(lastVersion) + 1).filter((version) => change.versions[version]);
+  const trimmed = { ...change, versions: Object.fromEntries(kept.map((version) => [version, change.versions[version]])) };
+  const latest = [...kept].reverse().find((version) => !trimmed.versions[version].removed) ?? kept[0];
+  const latestEntry = trimmed.versions[latest];
+  return { ...trimmed, heading: latestEntry.heading ?? change.heading, titleCz: latestEntry.titleCz ?? change.titleCz };
+}
+
+function evidenceFromLawChange(change, route, publishedAt, senateResolutionIds) {
+  const versions = versionKeys.filter((version) => change.versions[version]);
+  const latest = [...versions].reverse().find((version) => !change.versions[version].removed);
+  const latestDocument = change.versions[latest].document;
+  const describe = (version) => {
+    const entry = change.versions[version];
+    if (entry.removed) return `removed in the ${versionLabels[version]}`;
+    if (entry.sameAs) return `${versionLabels[version]} (the same as the ${versionLabels[entry.sameAs]})`;
+    return entry.textCz === null ? `${versionLabels[version]}: print title only` : versionLabels[version];
+  };
   return {
     id: lawChangeEvidenceId(change),
     role: "law-change",
@@ -40,12 +95,10 @@ function evidenceFromLawChange(change, route, publishedAt) {
     title: `${change.printNumber}: ${change.heading ? `${change.heading} – ` : ""}${change.titleCz}`,
     publisher: "Chamber of Deputies of the Parliament of the Czech Republic",
     publishedAt,
-    url: change.document?.url ?? change.printPageUrl,
-    locator: change.document ? `${change.document.filename}, ${change.heading ?? "whole proposal text"}` : "print title only; no DOCX proposal text",
+    url: latestDocument?.url ?? change.printPageUrl,
+    locator: latestDocument ? `${latestDocument.filename}, ${change.heading ?? "whole text"}` : "print title only; no DOCX text",
     primary: true,
-    factSummary: change.textCz === null
-      ? `Law change in print ${change.printNumber}, known only from its official title: ${change.titleCz}.`
-      : `Official text of ${change.heading ? `part “${change.heading} – ${change.titleCz}”` : "the proposal"} of print ${change.printNumber}.`,
+    factSummary: `Law change ${change.heading ? `“${change.heading} – ${change.titleCz}”` : `“${change.titleCz}”`} of print ${change.printNumber}${change.addedIn === "proposed" ? "" : `, added in the ${versionLabels[change.addedIn]}`}. Versions: ${versions.map(describe).join("; ")}.`,
     structuredFacts: {
       changeId: change.changeId,
       externalPrintId: change.printId,
@@ -55,9 +108,11 @@ function evidenceFromLawChange(change, route, publishedAt) {
       heading: change.heading,
       titleCz: change.titleCz,
       acts: change.acts,
-      textCz: change.textCz
+      addedIn: change.addedIn,
+      versions: change.versions,
+      senateResolutionEvidenceIds: senateResolutionIds
     },
-    sourceRecordHash: sha256(change.textCz ?? change.titleCz),
+    sourceRecordHash: sha256(change.versions),
     matchBasis: {
       routeBasis: route.routeBasis,
       matchedTagIds: route.matchedTagIds,
@@ -66,7 +121,7 @@ function evidenceFromLawChange(change, route, publishedAt) {
   };
 }
 
-function evidenceFromConduct({ record, attributionStatus }, promise, changeIds) {
+function evidenceFromConduct({ record, attributionStatus }, promise, concerns) {
   return {
     id: record.id,
     role: "conduct-evidence",
@@ -78,9 +133,28 @@ function evidenceFromConduct({ record, attributionStatus }, promise, changeIds) 
     locator: `normalized collector record ${record.id}`,
     primary: record.primary,
     factSummary: factSummary(record, promise.partyId),
-    structuredFacts: { ...normalizedStructuredFacts(record, promise.partyId), concernsLawChangeIds: changeIds },
+    structuredFacts: { ...normalizedStructuredFacts(record, promise.partyId), concernsLawChanges: concerns },
     sourceRecordHash: record.contentHash,
     matchBasis: { attributionStatus }
+  };
+}
+
+// A Senate resolution returning a print to the Chamber, once per package;
+// it is dated by the first vote after the return, which it precedes.
+function evidenceFromSenateResolution(change, resolution, publishedAt) {
+  return {
+    id: senateResolutionEvidenceId(change, resolution.partNumber),
+    role: "senate-resolution",
+    type: "senate-resolution",
+    title: `${change.printNumber}/${resolution.partNumber}: Senate resolution returning the bill to the Chamber`,
+    publisher: "Chamber of Deputies of the Parliament of the Czech Republic",
+    publishedAt,
+    url: resolution.document.url,
+    locator: resolution.document.filename,
+    primary: true,
+    factSummary: `The Senate's resolution on print ${change.printNumber}, rejecting the bill or returning it with amendments, as published by the Chamber of Deputies (sub-print ${change.printNumber}/${resolution.partNumber}).`,
+    structuredFacts: { externalPrintId: change.printId, printNumber: change.printNumber, partNumber: resolution.partNumber, textCz: resolution.textCz },
+    sourceRecordHash: sha256(resolution.textCz)
   };
 }
 
@@ -89,8 +163,9 @@ function evidenceFromMaintenanceBaseline(baseline) {
 }
 
 /**
- * One promise's evidence package: every kept law change in full, and the
- * party's attributable conduct on each of their prints. Nothing is trimmed.
+ * One promise's evidence package: every kept law change with the full text
+ * of each version, and the party's attributable conduct on each of their
+ * prints, naming the version of each change it concerns. Nothing is trimmed.
  * `keptChanges` is `[{ change, route }]`; `recordsByPrintId` holds the
  * primary records concerning each print, and `printFirstSeenOn` each print's
  * earliest record date. A caller building many packages passes the
@@ -101,18 +176,34 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
   invariant(typeof asOf === "string", "buildLawChangeEvidencePackage requires asOf");
   const changes = [];
   const conductById = new Map();
-  const changeIdsByRecord = new Map();
-  for (const { change, route } of [...keptChanges].sort((left, right) => left.change.printNumber - right.change.printNumber || left.change.index - right.change.index)) {
-    const conduct = attributableConductOnPrint(recordsByPrintId.get(change.printId) ?? [], promise);
+  const concernsByRecord = new Map();
+  for (const { change: fullChange, route } of [...keptChanges].sort((left, right) => left.change.printNumber - right.change.printNumber || left.change.changeId.localeCompare(right.change.changeId, "en", { numeric: true }))) {
+    const conduct = attributableConductOnChange(recordsByPrintId.get(fullChange.printId) ?? [], promise, fullChange);
     if (conduct.length === 0) continue;
+    const lastVersion = versionKeys[Math.max(...conduct.map(({ version }) => versionKeys.indexOf(version.version)))];
+    const change = throughVersion(fullChange, lastVersion);
     changes.push({ change, route });
-    for (const item of conduct) {
+    for (const { version, ...item } of conduct) {
       conductById.set(item.record.id, item);
-      changeIdsByRecord.set(item.record.id, [...(changeIdsByRecord.get(item.record.id) ?? []), change.changeId]);
+      concernsByRecord.set(item.record.id, [...(concernsByRecord.get(item.record.id) ?? []), { changeId: change.changeId, evidenceId: lawChangeEvidenceId(change), ...version }]);
     }
   }
   if (changes.length === 0) return null;
   const conduct = [...conductById.values()].sort((left, right) => String(left.record.occurredAt).localeCompare(String(right.record.occurredAt)) || left.record.id.localeCompare(right.record.id));
+  // A print's Senate resolution goes into the package once, when a vote in it
+  // followed the Senate's return.
+  const senateResolutions = new Map();
+  for (const { record } of conduct) {
+    for (const concern of concernsByRecord.get(record.id)) {
+      if (!concern.withSenateResolution) continue;
+      const { change } = changes.find(({ change: item }) => item.changeId === concern.changeId);
+      for (const resolution of change.senateResolutions) {
+        const id = senateResolutionEvidenceId(change, resolution.partNumber);
+        if (!senateResolutions.has(id)) senateResolutions.set(id, evidenceFromSenateResolution(change, resolution, String(record.occurredAt).slice(0, 10)));
+      }
+    }
+  }
+  const resolutionIdsOf = (change) => change.senateResolutions.map(({ partNumber }) => senateResolutionEvidenceId(change, partNumber)).filter((id) => senateResolutions.has(id));
   const maintenanceBaseline = promise.maintenanceBaseline
     ? { preservedStateCz: promise.maintenanceBaseline.preservedStateCz, evidenceId: promise.maintenanceBaseline.source.id }
     : null;
@@ -145,8 +236,9 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
     evidence: [
       promise.promiseSource,
       ...(promise.maintenanceBaseline ? [evidenceFromMaintenanceBaseline(promise.maintenanceBaseline)] : []),
-      ...changes.map(({ change, route }) => evidenceFromLawChange(change, route, printFirstSeenOn.get(change.printId))),
-      ...conduct.map((item) => evidenceFromConduct(item, promise, changeIdsByRecord.get(item.record.id)))
+      ...changes.map(({ change, route }) => evidenceFromLawChange(change, route, printFirstSeenOn.get(change.printId), resolutionIdsOf(change))),
+      ...senateResolutions.values(),
+      ...conduct.map((item) => evidenceFromConduct(item, promise, concernsByRecord.get(item.record.id)))
     ]
   };
   validateEvidencePackage(evidencePackage);

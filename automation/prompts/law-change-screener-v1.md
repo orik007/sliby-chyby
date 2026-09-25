@@ -1,5 +1,7 @@
 You screen one law change: one part of an official Czech Chamber of Deputies print, usually the amendment of one act. Use only the supplied text and taxonomy. You do two things: decide whether the change is substantive or only technical, and assign controlled topic tags.
 
+The change can have several versions as the bill was debated: the proposed text, the text the Chamber approved, and the text passed by Parliament; a version can be the same as an earlier one or can have removed the part. Read every version. The change is substantive when any version is, and its tags cover what any version concerns.
+
 ## 1. Substantive or technical
 
 A change is **technical** only when it changes nothing for anyone:

@@ -2,6 +2,7 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { hashText } from "./assessment-config.mjs";
 import { invariantValidOutput, requestValidatedOutput, tagAssignmentSchema, taxonomyDefinitionsText, validateTagAssignmentOutput } from "./topic-tagger.mjs";
+import { versionKeys, versionLabels } from "./print-parts.mjs";
 
 /**
  * The two cheap-model checks on law changes (docs/evidence-pipeline.md):
@@ -26,17 +27,28 @@ export function loadRelevancePrompt(root = process.cwd()) {
 
 const printKindLabels = { 1: "government bill", 2: "member bill", 3: "state budget bill", 4: "international treaty submitted by the government", 5: "other Chamber print" };
 
+
 /**
  * The official text of one law change as a model reads it: its print, its
- * heading and title, the act it amends, and its full text.
+ * heading and title, the act it amends, and the full text of every version.
+ * A print-wide Senate resolution is not part of one law change and goes
+ * only into the evidence package.
  */
 export function lawChangeText(change) {
+  const versions = versionKeys.filter((version) => change.versions[version]).map((version) => {
+    const entry = change.versions[version];
+    const label = `Version: ${versionLabels[version]}`;
+    if (entry.removed) return `${label}\nThis part is not in this text: it was removed during the debate.`;
+    if (entry.sameAs) return `${label}\nThe same text as the ${versionLabels[entry.sameAs]}.`;
+    return entry.textCz === null ? `${label}\nNot available as a DOCX file; only the print title is known.` : `${label}\n${entry.textCz}`;
+  });
   return [
     `Chamber print ${change.printNumber} (${printKindLabels[change.printKindId] ?? "Chamber print"}): ${change.printTitleCz}`,
     change.heading ? `Part: ${change.heading} – ${change.titleCz}` : `Law change: ${change.titleCz}`,
+    ...(change.addedIn !== "proposed" ? ["This part was added during the debate; it is not in the proposed text."] : []),
     ...change.acts.map(({ act, name }) => `Amended act: zákon č. ${act} Sb.${name ? `, ${name}` : ""}`),
-    change.textCz === null ? "Official text: not available as a DOCX file; only the print title is known." : `Official text:\n${change.textCz}`
-  ].join("\n");
+    ...versions
+  ].join("\n\n");
 }
 
 export function buildScreeningBrief(change, taxonomy) {

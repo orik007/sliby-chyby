@@ -196,6 +196,8 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
     "stavy.unl": entry(unl(["20", "6", "1", "Approved", null, null]) + unl(["10", "5", "1", "Before vote", null, null])),
     "prechody.unl": entry(unl(["10", "10", "20", "5", "1"])),
     "typ_akce.unl": entry(unl(["5", "Chamber approved bill"])),
+    "typ_stavu.unl": entry(unl(["5", "3. cteni"]) + unl(["6", "Odesilano do Senatu"])),
+    "tisky_za.unl": entry(unl(["700", "2", "801", "11", "Usnesení Senátu k tisku 189/0", "Usnesení Senátu"]) + unl(["700", "1", "801", "12", "Zákon ze Senátu", "Zákon ze Senátu"])),
     "predkladatel.unl": entry("")
   };
 
@@ -212,6 +214,12 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
   assert.equal(step.payload.externalVoteId, "900");
   assert.equal(step.payload.actionCz, "Chamber approved bill");
   assert.equal(step.payload.documentPublishedAt, "2026-08-29T09:15:00");
+  // The stage the step leaves tells which text of the bill the vote concerned.
+  assert.equal(vote.payload.linkedPrints[0].historyContexts[0].stageCz, "3. cteni");
+  assert.equal(step.payload.stageCz, "3. cteni");
+  // Only the Senate resolution sub-print (druh_tisku 11) is listed.
+  assert.deepEqual(vote.payload.linkedPrints[0].senateResolutionPartNumbers, [2]);
+  assert.deepEqual(step.payload.senateResolutionPartNumbers, [2]);
   assert.equal(vote.primary, true);
 });
 
@@ -252,6 +260,8 @@ function agendaFixture({ historyAgendaId = "5001" } = {}) {
     "stavy.unl": entry(unl(["20", "6", "1", "Approved", null, null])),
     "prechody.unl": entry(unl(["11", "20", "20", "6", "1"])),
     "typ_akce.unl": entry(unl(["6", "setrvano"])),
+    "typ_stavu.unl": entry(unl(["6", "Snemovna (Senat)"])),
+    "tisky_za.unl": entry(""),
     "predkladatel.unl": entry("")
   };
   // PSP files are windows-1250; the fixture stays ASCII so UTF-8 bytes decode identically.
@@ -341,6 +351,8 @@ test("PSP normalizer attributes submitted bills to proposer and government parti
       "stavy.unl": entry(unl(["20", "1", "1", "Submitted", null, null])),
       "prechody.unl": entry(unl(["1", "20", "20", "7", "1"])),
       "typ_akce.unl": entry(unl(["7", "předložen"])),
+      "typ_stavu.unl": entry(""),
+      "tisky_za.unl": entry(""),
       "predkladatel.unl": entry(unl(["701", "1", "1", "0"]) + unl(["701", "2", "2", "0"]) + unl(["704", "2", "1", "0"]))
     },
     sessionsEntries: { "schuze.unl": entry(""), "bod_schuze.unl": entry("") }

@@ -21,7 +21,7 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.match(workflow, /Queue evidence packages/);
   assert.doesNotMatch(workflow, /enrich/i);
   assert.match(workflow, /node scripts\/run-print-parts\.mjs/);
-  assert.match(workflow, /--cache automation\/print-parts/);
+  assert.doesNotMatch(workflow, /automation\/print-parts/);
   assert.match(workflow, /--print-parts automation\/runs\/pipeline\/github-actions\/print-parts\/print-parts\.json/);
   assert.doesNotMatch(workflow, /--retry-blocked-queue/);
   assert.match(workflow, /--packages automation\/evidence-packages/);
@@ -117,7 +117,7 @@ test("audit state of another pipeline generation is never restored", async () =>
   const workflow = await readFile(workflowUrl, "utf8");
   const generation = (await readFile(new URL("../automation/pipeline-generation", import.meta.url), "utf8")).trim();
   assert.equal(generation, "law-changes-v1");
-  assert.match(workflow, /automation\/topic-routing\/tag-cache automation\/print-parts\)/);
+  assert.match(workflow, /-- automation\/topic-routing\/tag-cache\)/);
   assert.match(workflow, /audit_generation="\$\(git show "origin\/\$REVIEW_BRANCH:automation\/pipeline-generation" 2>\/dev\/null \|\| true\)"/);
   assert.match(workflow, /if \[ "\$audit_generation" != "\$\(cat automation\/pipeline-generation\)" \]; then/);
   for (const path of ["collectors/checkpoints.json", "evidence-packages/manifest.json", "review-proposals/manifest.json"]) {

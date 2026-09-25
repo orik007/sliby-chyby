@@ -187,9 +187,13 @@ export function renderCoverageAuditMarkdown(audit) {
     `| Records that can be attributable conduct | ${quality.conductRecords} |`,
     ...(printParts ? [
       `| Prints with a DOCX proposal text | ${printParts.printsWithProposalText} of ${printParts.prints} |`,
-      `| Prints known only by title | ${printParts.printsWithoutDocxProposalText} |`,
-      `| Print-text download failures | ${printParts.textDownloadFailures} |`,
-      `| Law changes with an identified amended act | ${printParts.lawChangesWithAmendedAct} of ${printParts.lawChanges} |`
+      `| Prints without a DOCX proposal text | ${printParts.printsWithoutDocxProposalText} |`,
+      `| Prints with a text approved by the Chamber / passed by Parliament | ${printParts.printsWithApprovedText} / ${printParts.printsWithPassedText} |`,
+      `| Prints returned by the Senate (rejected or amended) | ${printParts.printsWithSenateResolution} |`,
+      `| Law changes added / removed during the debate | ${printParts.lawChangesAddedInDebate} / ${printParts.lawChangesRemovedInDebate} |`,
+      `| Law changes with an identified amended act | ${printParts.lawChangesWithAmendedAct} of ${printParts.lawChanges} |`,
+      `| Approved bills without an approved text on psp.cz | ${printParts.approvedBillsWithoutApprovedText} |`,
+      `| Text warnings (a text listed without a DOCX file, a missing approved text) | ${printParts.textWarnings} |`
     ] : []),
     `| Law changes screened | ${quality.lawChanges} |`,
     `| Technical / substantive | ${quality.technicalLawChanges} / ${quality.substantiveLawChanges} |`,

@@ -16,6 +16,10 @@ export function officialPrintDocumentPageUrl(termNumber, printNumber, partNumber
   return `https://www.psp.cz/sqw/text/tiskt.sqw?O=${termNumber}&CT=${printNumber}&CT1=${partNumber}`;
 }
 
+export function officialPrintHistoryUrl(termNumber, printNumber) {
+  return `https://www.psp.cz/sqw/historie.sqw?o=${termNumber}&t=${printNumber}`;
+}
+
 export function extractDocxParagraphs(bytes) {
   const entries = unzipSync(bytes);
   const names = Object.keys(entries);

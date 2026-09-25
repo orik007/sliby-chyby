@@ -14,7 +14,7 @@ Models may return only an existing tag `id` or `unknown`. Adding, deleting, movi
 
 ## Code
 
-- [`scripts/lib/print-parts.mjs`](../../scripts/lib/print-parts.mjs) and [`scripts/run-print-parts.mjs`](../../scripts/run-print-parts.mjs) split each print's official proposal text into law changes and find the act each one amends; texts are cached on the audit branch in `automation/print-parts/`.
+- [`scripts/lib/print-parts.mjs`](../../scripts/lib/print-parts.mjs) and [`scripts/run-print-parts.mjs`](../../scripts/run-print-parts.mjs) download each print's proposal text and its later texts in every run, split them into law changes with their versions, and find the act each one amends.
 - [`scripts/lib/topic-tagger.mjs`](../../scripts/lib/topic-tagger.mjs) tags promises (`automation/prompts/promise-tagger-v1.md`).
 - [`scripts/lib/law-change-screening.mjs`](../../scripts/lib/law-change-screening.mjs) screens law changes (`law-change-screener-v1.md`) and checks the relevance of a promise and law change (`relevance-check-v1.md`).
 - [`scripts/lib/paired-model-calls.mjs`](../../scripts/lib/paired-model-calls.mjs) runs the two independent calls per subject and keeps the caches.

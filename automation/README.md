@@ -9,7 +9,6 @@ The workflow and its rules are defined only in [docs/evidence-pipeline.md](../do
 | `attribution/` | Governing parties and their dates. |
 | `promise-registry/` | Registry of confirmed promises used by the pipeline. |
 | `topic-routing/` | Routing taxonomy; the model caches (promise tags, law-change screening, relevance checks) live on the audit branch. |
-| `print-parts/` | Cache of each Chamber print's official proposal text, one file per print, from which its law changes are split (audit branch only). |
 | `evidence-packages/` | Unpublished queue of evidence packages, one per promise (audit branch). |
 | `review-proposals/` | Unpublished assessment proposals for human review (audit branch). |
 | `prompts/` | Active promise-tagger, law-change screener, relevance-check, assessor, and arbiter prompts. |

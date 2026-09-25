@@ -38,6 +38,48 @@ function hasVerifiedVoteContext(record) {
   );
 }
 
+// Official print kinds (druh_tisku.unl) that are bills: a government bill,
+// a member bill, and the state budget.
+const billPrintKindIds = new Set(["1", "2", "3"]);
+
+export { billPrintKindIds };
+
+/**
+ * Which version of a print's law changes a conduct concerns
+ * (docs/evidence-pipeline.md, Conduct and version): a submission concerns
+ * the proposed text; a vote, the text its print-history step decided on,
+ * read from the step's action and stage. `withSenateResolution` marks a vote
+ * after the Senate returned the bill (rejecting it or with amendments), so
+ * the Senate's resolution goes with it; `sameAsApproved` marks a vote whose
+ * text is the approved one when psp.cz lists no passed text; `mark` names a
+ * vote whose exact text psp.cz does not publish. Returns null for a vote
+ * whose print history does not name it as a decisive step of this print.
+ */
+export function versionConcerned(record, printId) {
+  const concerned = (version, extra = {}) => ({ version, withSenateResolution: false, sameAsApproved: false, mark: null, ...extra });
+  if (record.kind !== "parliamentary-vote") return concerned("proposed");
+  const linkedPrint = (record.payload?.linkedPrints ?? []).find((print) => String(print.externalPrintId) === String(printId));
+  const context = (linkedPrint?.historyContexts ?? []).find((item) => decisiveActions.has(normalizeSearchText(item.actionCz)));
+  // A vote is conduct on a print only when that print's own history names it
+  // as a decisive step; a print linked only through the agenda item is not.
+  if (!context) return null;
+  const action = normalizeSearchText(context.actionCz);
+  const stage = normalizeSearchText(context.stageCz);
+  const afterSenate = /^snemovna \(senat\)/.test(stage);
+  const afterPresident = /^snemovna \(prezident\)/.test(stage);
+  if (action === "souhlas" && billPrintKindIds.has(String(linkedPrint?.printKindId))) return concerned("approved");
+  // After a Senate return, insisting re-adopts the text the Chamber approved.
+  if (afterSenate && action === "setrvano") return concerned("passed", { withSenateResolution: true, sameAsApproved: true });
+  // A vote on the Senate's amendments concerns the approved text changed by
+  // them: the passed text when psp.cz publishes it.
+  if (afterSenate && (action === "pozm. prijat" || action === "neprijat")) return concerned("passed", { withSenateResolution: true });
+  // After a presidential return, the vote concerns the text sent to the
+  // President, which may include accepted Senate amendments.
+  if (afterPresident && (action === "setrvano" || action === "neprijat")) return concerned("passed");
+  if (/^3\. cteni/.test(stage) && ["zamitnut", "neschvalen", "neschvalena"].includes(action)) return concerned("proposed", { mark: "third-reading-rejection" });
+  return concerned("proposed");
+}
+
 export const assessableAttributionStatuses = new Set([
   "verified-party-vote",
   "verified-party-no-majority",
