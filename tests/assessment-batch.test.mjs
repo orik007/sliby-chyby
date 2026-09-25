@@ -45,7 +45,7 @@ async function writePublicRevisions(root, statuses, { revision = 1, publishedAt 
   }
 }
 
-async function runBatch(root, packagesDirectory, maxAssessments = "10", { failPromise = "", humanReviewPromise = "", expectedExitCode = 0 } = {}) {
+async function runBatch(root, packagesDirectory, maxAssessments = "10", { failPromise = "", humanReviewPromise = "", expectedExitCode = 0, environment = {} } = {}) {
   const summary = join(root, "summary.json");
   const child = spawn(process.execPath, [batchScript,
     "--packages", packagesDirectory,
@@ -54,8 +54,9 @@ async function runBatch(root, packagesDirectory, maxAssessments = "10", { failPr
     "--pull-request-body", "automation/pull-request.md"
   ], {
     cwd: root,
-    // The workflow's own review-branch and spend-log settings must not leak in.
-    env: { ...process.env, REVIEW_BRANCH: "", GITHUB_REPOSITORY: "", SLIBY_MODEL_CALL_LOG: "", SLIBY_ASSESSMENT_RUNNER: mockRunner, SLIBY_ASSESSMENT_CONCURRENCY: "1", SLIBY_MAX_ASSESSMENTS: maxAssessments, SLIBY_MOCK_FAIL_PROMISE: failPromise, SLIBY_MOCK_HUMAN_REVIEW_PROMISE: humanReviewPromise },
+    // Only the listed settings reach the batch: the workflow's own
+    // environment (review branch, models, API key) must not change a test.
+    env: { PATH: process.env.PATH, SLIBY_ASSESSMENT_RUNNER: mockRunner, SLIBY_ASSESSMENT_CONCURRENCY: "1", SLIBY_MAX_ASSESSMENTS: maxAssessments, SLIBY_MOCK_FAIL_PROMISE: failPromise, SLIBY_MOCK_HUMAN_REVIEW_PROMISE: humanReviewPromise, ...environment },
     stdio: "pipe"
   });
   let stderr = "";
@@ -310,4 +311,22 @@ test("the review pull request body stays under the GitHub limit and keeps model 
   assert.match(body, /\(700, z toho nové: 700\)/);
   assert.match(body, /Vysvětlení jsou kvůli délce jen na stránkách jednotlivých návrhů/);
   assert.match(body, /… a dalších \d+; úplný seznam je v `assessment-batch.json`/);
+});
+
+test("in the workflow, each listed promise links to its review page on the audit branch", async () => {
+  const root = await mkdtemp(join(tmpdir(), "slava-assessment-links-"));
+  await mkdir(join(root, "automation/prompts"), { recursive: true });
+  await mkdir(join(root, "automation/review-proposals"), { recursive: true });
+  await writeFile(join(root, "automation/prompts/assessor-v16.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v7.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
+  await writePublicRevisions(root, { "linked-promise": "no-progress" });
+  const packages = join(root, "packages");
+  await mkdir(packages);
+  await writePackage(packages, evidencePackage("linked-promise", "2026-09-10"));
+  const summary = await runBatch(root, packages, "10", { environment: { GITHUB_REPOSITORY: "example/repository", REVIEW_BRANCH: "automation/assessment-review" } });
+  const [pending] = summary.pendingReviews;
+  assert.match(pending.reviewUrl, /^https:\/\/github\.com\/example\/repository\/blob\/automation\/assessment-review\/automation\/review-proposals\/linked-promise\/[a-f0-9]{64}\/review\.md$/);
+  const body = await readFile(join(root, "automation/pull-request.md"), "utf8");
+  assert.ok(body.includes(`#### [Testovací slib linked-promise](${pending.reviewUrl}) (\`linked-promise\`)`));
 });

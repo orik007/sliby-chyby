@@ -48,6 +48,8 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.match(workflow, /- name: Create or update human-review pull request\n        if: always\(\) && steps\.proposals\.outcome == 'success' && hashFiles\('automation\/runs\/pipeline\/github-actions\/assessment-review-pr\.md'\) != ''/);
   // Every paid call is logged, and the spend is reported even after a failure.
   assert.match(workflow, /SLIBY_MODEL_CALL_LOG: automation\/runs\/pipeline\/github-actions\/model-calls\.jsonl/);
+  // The tests run without the API key and without the run's spend log.
+  assert.match(workflow, /- name: Run deterministic tests\n(?:\s+#[^\n]*\n)*\s+env:\n\s+OPENAI_API_KEY: ""\n\s+SLIBY_MODEL_CALL_LOG: ""\n\s+run: npm test/);
   assert.match(workflow, /- name: Report model calls and estimated spend\n        if: always\(\)/);
   // Paid assessments have a hard per-run cap that defaults to none.
   assert.match(workflow, /max_assessments:\n        description: [^\n]+\n        required: true\n        default: "0"/);

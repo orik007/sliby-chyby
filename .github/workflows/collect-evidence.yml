@@ -125,8 +125,10 @@ jobs:
         run: npm ci
 
       - name: Run deterministic tests
-        # Test calls are stubs and never belong in the run's spend log.
+        # Tests never reach a paid model, and their stub calls never belong
+        # in the run's spend log.
         env:
+          OPENAI_API_KEY: ""
           SLIBY_MODEL_CALL_LOG: ""
         run: npm test
 
