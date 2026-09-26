@@ -8,7 +8,7 @@ function invariant(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-export const packageBuilderVersion = "law-change-package-v1";
+export const packageBuilderVersion = "law-change-package-v2";
 
 export function estimatePackageTokens(evidencePackage) {
   return estimateTokens(JSON.stringify(evidencePackage));

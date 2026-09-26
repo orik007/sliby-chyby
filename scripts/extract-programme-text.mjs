@@ -29,6 +29,7 @@ export function formatPages(pages) {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const manifest = JSON.parse(await readFile(manifestUrl, "utf8"));
+  if (new Set(manifest.entries.map(({ sourceId }) => sourceId)).size !== manifest.entries.length) throw new Error("Every archived programme needs its own source ID");
   await mkdir(outputDirectory, { recursive: true });
   for (const entry of manifest.entries) {
     const pages = await extractPdfPages(await readFile(new URL(`../${entry.path}`, import.meta.url)));

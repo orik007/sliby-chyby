@@ -1,5 +1,6 @@
 import { readdir, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
+import { taxonomyHash, validateTaxonomy } from "./topic-taxonomy.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -16,6 +17,7 @@ function assertMaintenanceBaseline(id, baseline) {
   invariant(source && typeof source === "object", `Promise ${id} maintenance baseline is missing its source`);
   for (const field of ["id", "url", "publishedAt", "locator", "factSummary"]) invariant(typeof source[field] === "string" && source[field].length > 0, `Promise ${id} maintenance baseline source is missing ${field}`);
   invariant(/^https:\/\//.test(source.url), `Promise ${id} maintenance baseline source must use HTTPS`);
+  invariant(/^\d{4}-\d{2}-\d{2}$/.test(source.publishedAt) && !Number.isNaN(Date.parse(source.publishedAt)), `Promise ${id} maintenance baseline source has an invalid publication date`);
   invariant(source.primary === true, `Promise ${id} maintenance baseline source must be primary`);
 }
 
@@ -25,7 +27,7 @@ function assertMaintenanceBaseline(id, baseline) {
  * its routing tags from automation/topic-routing/promise-tags.json. A
  * statement is never tracked.
  */
-export async function loadTrackedPromises(root = process.cwd(), { taxonomy } = {}) {
+export async function loadTrackedPromises(root = process.cwd()) {
   const data = (path) => resolve(root, "data", path);
   const [items, parties, partyPeriods, sources] = await Promise.all([
     readJsonDirectory(data("promises")),
@@ -35,8 +37,9 @@ export async function loadTrackedPromises(root = process.cwd(), { taxonomy } = {
   ]);
   const tagFile = JSON.parse(await readFile(resolve(root, "automation/topic-routing/promise-tags.json"), "utf8"));
   invariant(tagFile?.schemaVersion === "1.0.0" && tagFile.promises && typeof tagFile.promises === "object", "Invalid promise tag file");
-  const routingTaxonomy = taxonomy ?? JSON.parse(await readFile(resolve(root, "automation/topic-routing/taxonomy-v2.json"), "utf8"));
-  invariant(tagFile.taxonomyVersion === routingTaxonomy.taxonomyVersion, "Promise tag file does not match the routing taxonomy version");
+  // Tags were reviewed against one exact taxonomy; any change to it invalidates them.
+  const routingTaxonomy = validateTaxonomy(JSON.parse(await readFile(resolve(root, "automation/topic-routing/taxonomy-v2.json"), "utf8")));
+  invariant(tagFile.taxonomyVersion === routingTaxonomy.taxonomyVersion && tagFile.taxonomyContentHash === taxonomyHash(routingTaxonomy), "Promise tags were reviewed against a different routing taxonomy");
   const eligibleTags = new Set(routingTaxonomy.tags.filter(({ assessmentEligible }) => assessmentEligible).map(({ id }) => id));
   const partyById = new Map(parties.map((party) => [party.id, party]));
   const partyPeriodById = new Map(partyPeriods.map((partyPeriod) => [partyPeriod.id, partyPeriod]));
@@ -93,5 +96,5 @@ export async function loadTrackedPromises(root = process.cwd(), { taxonomy } = {
     });
   }
   for (const id of Object.keys(tagFile.promises)) invariant(trackedIds.has(id), `Tagged item ${id} is not a tracked promise`);
-  return { promises: promises.sort((left, right) => left.id.localeCompare(right.id)) };
+  return { taxonomy: routingTaxonomy, promises: promises.sort((left, right) => left.id.localeCompare(right.id)) };
 }

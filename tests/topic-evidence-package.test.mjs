@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import { loadTrackedPromises } from "../scripts/lib/published-promises.mjs";
 import { buildLawChangeEvidencePackage, estimatePackageTokens, lawChangesAtCutoff, lawChangeEvidenceId, versionOfChange } from "../scripts/lib/topic-evidence-package.mjs";
@@ -7,7 +8,7 @@ import { charactersPerToken, estimateTokens, maxRequestInputTokens } from "../sc
 
 const assessorInstructions = "assessor instructions";
 
-const registry = await loadTrackedPromises(new URL("..", import.meta.url).pathname);
+const registry = await loadTrackedPromises(fileURLToPath(new URL("..", import.meta.url)));
 const fiscalPromise = registry.promises.find(({ id }) => id === "candidate-d5359e35a4c4");
 const collectorRun = { schemaVersion: "1.0.0", runId: "fixture-run", records: [] };
 

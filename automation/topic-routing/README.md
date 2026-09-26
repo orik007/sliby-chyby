@@ -14,7 +14,7 @@ Models may return only an existing tag `id` or `unknown`. Adding, deleting, movi
 
 ## `promise-tags.json`
 
-The routing tags of every promise, keyed by promise ID: one or more specific (`assessmentEligible`) tag identifiers. They are assigned once when the promise is catalogued and reviewed in the pull request that adds or changes it; no model tags promises. A statement has no entry. A law change tagged with one of a promise's tags, or amending an act that one of them lists in `directLegalIdentifiers`, is routed to that promise.
+The routing tags of every promise, keyed by promise ID: one or more specific (`assessmentEligible`) tag identifiers. They are assigned once when the promise is catalogued and reviewed in the pull request that adds or changes it; no model tags promises. A statement has no entry. The file records the `taxonomyVersion` and `taxonomyContentHash` of the taxonomy the tags were reviewed against; any change to `taxonomy-v2.json` makes the pipeline refuse the tags until they are reviewed again and the hash is updated. A law change tagged with one of a promise's tags, or amending an act that one of them lists in `directLegalIdentifiers`, is routed to that promise.
 
 ## Code
 

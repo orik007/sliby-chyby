@@ -27,7 +27,7 @@ const auditBranch = "automation/assessment-review";
 const checkpoint = "automation/collectors/checkpoints.json";
 const packageManifest = "automation/evidence-packages/manifest.json";
 const packageReadme = "automation/evidence-packages/README.md";
-const tagCache = "automation/topic-routing/tag-cache/promise-tags.jsonl";
+const tagCache = "automation/topic-routing/tag-cache/law-change-screening.jsonl";
 
 function createFixture() {
   const root = mkdtempSync(join(tmpdir(), "audit-snapshot-"));

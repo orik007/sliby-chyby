@@ -82,12 +82,17 @@ export function getCurrentPeriod() {
   if (!period) throw new Error("No current period configured");
   return period;
 }
+// Each promise's revisions, newest first, indexed once for the whole build.
+const historyByPromise = new Map<string, AssessmentRevision[]>();
+for (const revision of assessmentRevisions) historyByPromise.set(revision.promiseId, [...(historyByPromise.get(revision.promiseId) ?? []), revision]);
+for (const history of historyByPromise.values()) history.sort((a, b) => b.revision - a.revision);
+
 export function getLatestAssessment(promiseId: string): AssessmentRevision {
-  const revision = assessmentRevisions.filter((item) => item.promiseId === promiseId).sort((a, b) => b.revision - a.revision)[0];
+  const revision = historyByPromise.get(promiseId)?.[0];
   if (!revision) throw new Error(`No assessment for promise ${promiseId}`);
   return revision;
 }
-export function getAssessmentHistory(promiseId: string) { return assessmentRevisions.filter((item) => item.promiseId === promiseId).sort((a, b) => b.revision - a.revision); }
+export function getAssessmentHistory(promiseId: string) { return [...(historyByPromise.get(promiseId) ?? [])]; }
 export function calculateIndex(partyPromises: PromiseRecord[]) {
   const scores = partyPromises.map(({ id }) => statusDetails[getLatestAssessment(id).status].score);
   return calculateSlavaIndex(scores);

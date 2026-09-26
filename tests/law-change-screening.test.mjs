@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 import {
   buildRelevanceBrief,
   buildScreeningBrief,
@@ -22,7 +23,7 @@ import { validateTaxonomy } from "../scripts/lib/topic-taxonomy.mjs";
 delete process.env.SLIBY_MODEL_CALL_LOG;
 
 const taxonomy = validateTaxonomy(JSON.parse(await readFile(new URL("../automation/topic-routing/taxonomy-v2.json", import.meta.url), "utf8")));
-const registry = await loadTrackedPromises(new URL("..", import.meta.url).pathname);
+const registry = await loadTrackedPromises(fileURLToPath(new URL("..", import.meta.url)));
 const fiscalPromise = registry.promises.find(({ id }) => id === "candidate-d5359e35a4c4");
 
 const proposedText = "ČÁST DRUHÁ\nZměna rozpočtových pravidel\nV § 24 odst. 1 zákona č. 218/2000 Sb. se číslo „2“ nahrazuje číslem „3“.";

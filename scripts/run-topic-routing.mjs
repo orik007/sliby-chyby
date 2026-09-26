@@ -17,7 +17,7 @@ import {
   validateRelevanceOutput,
   validateScreeningOutput
 } from "./lib/law-change-screening.mjs";
-import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
+import { directLegalIdentifierIndex, taxonomyHash } from "./lib/topic-taxonomy.mjs";
 import { isPotentiallyAttributable } from "./lib/attribution.mjs";
 import { buildInvertedIndex, routeLawChange } from "./lib/topic-routing.mjs";
 import { attributableConductOnChange, buildLawChangeEvidencePackage, lawChangesAtCutoff } from "./lib/topic-evidence-package.mjs";
@@ -43,7 +43,6 @@ function parseArgs(args) {
   const options = {
     collectorRun: null,
     printParts: null,
-    taxonomy: "automation/topic-routing/taxonomy-v2.json",
     tagCache: "automation/topic-routing/tag-cache",
     asOf: null,
     output: "automation/runs/pipeline/topic-routing",
@@ -54,7 +53,6 @@ function parseArgs(args) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];
     else if (arg === "--print-parts") options.printParts = args[++index];
-    else if (arg === "--taxonomy") options.taxonomy = args[++index];
     else if (arg === "--tag-cache") options.tagCache = args[++index];
     else if (arg === "--as-of") options.asOf = args[++index];
     else if (arg === "--output") options.output = args[++index];
@@ -88,13 +86,13 @@ const runtime = pairedModelRuntimeConfig();
 invariant(Number.isInteger(runtime.concurrency) && runtime.concurrency > 0 && runtime.concurrency <= 16, "SLIBY_TAGGING_CONCURRENCY must be an integer from 1 to 16");
 const apiKey = apiKeyFor(runtime.provider);
 const prompts = { screening: await loadScreeningPrompt(), relevance: await loadRelevancePrompt() };
-const taxonomy = validateTaxonomy(JSON.parse(await readFile(resolve(args.taxonomy), "utf8")));
+// The routing taxonomy is the one the promise tags were reviewed against.
+let { taxonomy, promises } = await loadTrackedPromises();
 const taxonomyContentHash = taxonomyHash(taxonomy);
 const directIdIndex = directLegalIdentifierIndex(taxonomy);
 const printParts = JSON.parse(await readFile(resolve(args.printParts), "utf8"));
 invariant(printParts?.schemaVersion === "1.0.0" && printParts.prints && typeof printParts.prints === "object", "Invalid --print-parts file");
 
-let { promises } = await loadTrackedPromises(process.cwd(), { taxonomy });
 // A sample run keeps the first N promises or law changes (deterministic) so
 // its spend and output stay bounded; a full run uses everything.
 if (args.samplePromises !== null) promises = promises.slice(0, args.samplePromises);

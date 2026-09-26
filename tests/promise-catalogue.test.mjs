@@ -17,6 +17,8 @@ const notCataloguedReasons = new Set(["heading", "layout", "description", "justi
 
 // Each programme is one canonical stream; a page is its range in the stream.
 const manifest = await json("archive/promise-sources/manifest.json");
+// One text file per source: a changed programme needs a new source ID.
+assert.equal(new Set(manifest.entries.map(({ sourceId }) => sourceId)).size, manifest.entries.length, "Every archived programme needs its own source ID");
 const programmes = new Map();
 for (const { sourceId } of manifest.entries) {
   const text = await readFile(new URL(`../research/2025-election/programme-text/${sourceId}.txt`, import.meta.url), "utf8");
@@ -86,6 +88,21 @@ test("the programme text is the text of the archived PDFs", async () => {
 
 test("every published item quotes its programme exactly", async () => {
   for (const item of await publishedItems()) assertQuote(item.primarySourceId, item.sourceLocator.page, item.originalText, item.id);
+});
+
+test("the programme order of published items follows their position in the programme", async () => {
+  const bySource = new Map();
+  for (const item of await publishedItems()) bySource.set(item.primarySourceId, [...(bySource.get(item.primarySourceId) ?? []), item]);
+  for (const [sourceId, items] of bySource) {
+    items.sort((left, right) => left.sourceOrder - right.sourceOrder);
+    assert.equal(new Set(items.map(({ sourceOrder }) => sourceOrder)).size, items.length, `${sourceId} repeats a programme order`);
+    let previous = -1;
+    for (const item of items) {
+      const [[start]] = occurrences(sourceId, item.sourceLocator.page, item.originalText, item.id);
+      assert.ok(start >= previous, `${item.id} is out of programme order`);
+      previous = start;
+    }
+  }
 });
 
 test("every rejected occurrence quotes its programme exactly and states a technical reason", async () => {
