@@ -53,7 +53,8 @@ function mockResponse(output, usage = { input_tokens: 100, output_tokens: 20 }) 
 
 test("the screening and relevance prompts state the conservative rules", async () => {
   const screening = await loadScreeningPrompt();
-  assert.equal(screening.version, "law-change-screener-v1");
+  assert.equal(screening.version, "law-change-screener-v2");
+  assert.doesNotMatch(screening.instructions, /excerpt|supportingExcerpts/i, "screeners quote nothing");
   assert.match(screening.instructions, /When in doubt, the change is substantive/);
   assert.match(screening.instructions, /even one number/);
   const relevance = await loadRelevancePrompt();
@@ -80,13 +81,12 @@ test("a model reads every version of the law change with its print, heading, ame
   assert.ok(brief.taxonomyDefinitions.includes("fiscal-rules"));
 });
 
-test("a screening output needs a verdict, a reason, valid tags, and verbatim excerpts", () => {
-  const brief = buildScreeningBrief(change, taxonomy);
-  const valid = { substantive: true, reasonCz: "Mění číslo v rozpočtových pravidlech.", tags: ["fiscal-rules"], confidence: 0.8, supportingExcerpts: ["Změna rozpočtových pravidel"] };
-  assert.equal(validateScreeningOutput(valid, taxonomy, brief.text), valid);
-  assert.throws(() => validateScreeningOutput({ ...valid, substantive: "yes" }, taxonomy, brief.text), ModelOutputError);
-  assert.throws(() => validateScreeningOutput({ ...valid, reasonCz: "" }, taxonomy, brief.text), /reason/);
-  assert.throws(() => validateScreeningOutput({ ...valid, supportingExcerpts: ["invented"] }, taxonomy, brief.text), /not present verbatim/);
+test("a screening output needs a verdict, a reason, valid tags, and a confidence", () => {
+  const valid = { substantive: true, reasonCz: "Mění číslo v rozpočtových pravidlech.", tags: ["fiscal-rules"], confidence: 0.8 };
+  assert.equal(validateScreeningOutput(valid, taxonomy), valid);
+  assert.throws(() => validateScreeningOutput({ ...valid, substantive: "yes" }, taxonomy), ModelOutputError);
+  assert.throws(() => validateScreeningOutput({ ...valid, reasonCz: "" }, taxonomy), /reason/);
+  assert.throws(() => validateScreeningOutput({ ...valid, confidence: 2 }, taxonomy), /confidence/);
 });
 
 test("a law change is dropped as technical only when both valid screeners say so", () => {
@@ -107,7 +107,7 @@ test("a pair is dropped as not relevant only when both valid checks say so", () 
 });
 
 test("screening sends the taxonomy first so it can be a cached prompt prefix", async () => {
-  const mock = mockResponse({ substantive: false, reasonCz: "Jen přečíslování.", tags: ["unknown"], confidence: 0.2, supportingExcerpts: [] });
+  const mock = mockResponse({ substantive: false, reasonCz: "Jen přečíslování.", tags: ["unknown"], confidence: 0.2 });
   const originalFetch = globalThis.fetch;
   globalThis.fetch = mock.fetch;
   try {

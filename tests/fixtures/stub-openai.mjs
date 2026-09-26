@@ -13,13 +13,13 @@ function tagOf(text) {
 function answer(name, input, model) {
   if (name === "topic_tag_assignment") {
     const tag = tagOf(input.text);
-    return { tags: [tag], confidence: tag === "unknown" ? 0.1 : 0.9, supportingExcerpts: tag === "unknown" ? [] : [input.text.slice(0, 20)] };
+    return { tags: [tag], confidence: tag === "unknown" ? 0.1 : 0.9 };
   }
   if (name === "law_change_screening") {
     // A part that only sets the effective date is technical.
     const technical = /\n(?:účinnost|ÚČINNOST)\n/.test(input.text) && input.text.length < 1000;
     const tag = tagOf(input.text);
-    return { substantive: !technical, reasonCz: technical ? "Stanoví jen den účinnosti." : "Mění pravidla.", tags: [tag], confidence: tag === "unknown" ? 0.1 : 0.9, supportingExcerpts: tag === "unknown" ? [] : [input.text.slice(0, 20)] };
+    return { substantive: !technical, reasonCz: technical ? "Stanoví jen den účinnosti." : "Mění pravidla.", tags: [tag], confidence: tag === "unknown" ? 0.1 : 0.9 };
   }
   if (name === "law_change_relevance") return { relevant: true, reasonCz: "Změna se týká slibu." };
   if (name === "slava_assessment") {

@@ -9,7 +9,7 @@ import { versionKeys, versionLabels } from "./print-parts.mjs";
  * screening every law change (substantive or technical, and its topic tags)
  * and checking whether a routed law change is relevant to one promise.
  */
-export const screeningPromptVersion = "law-change-screener-v1";
+export const screeningPromptVersion = "law-change-screener-v2";
 export const relevancePromptVersion = "relevance-check-v1";
 
 async function loadPrompt(version, root) {
@@ -69,10 +69,10 @@ function screeningSchema(taxonomy) {
   };
 }
 
-export function validateScreeningOutput(output, taxonomy, briefText) {
+export function validateScreeningOutput(output, taxonomy) {
   invariantValidOutput(typeof output?.substantive === "boolean", "Screening must say whether the change is substantive");
   invariantValidOutput(typeof output.reasonCz === "string" && output.reasonCz.trim().length > 0, "Screening must give a reason");
-  validateTagAssignmentOutput(output, taxonomy, briefText);
+  validateTagAssignmentOutput(output, taxonomy);
   return output;
 }
 
@@ -89,7 +89,7 @@ export async function requestScreening({ provider, apiKey, model, brief, taxonom
     schema: screeningSchema(taxonomy),
     metadata: { subjectId: brief.changeId, promptVersion: prompt.version },
     logLabel: `screening law change ${brief.changeId}`,
-    validate: (output) => validateScreeningOutput(output, taxonomy, brief.text)
+    validate: (output) => validateScreeningOutput(output, taxonomy)
   });
 }
 

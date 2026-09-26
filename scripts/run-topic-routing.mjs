@@ -170,7 +170,7 @@ const promiseTopicAssignments = await stage("promise-tagging", publishedRegistry
     persist: persist.promiseTags,
     callA: () => requestTagAssignment({ provider: runtime.provider, apiKey, model: runtime.modelA, brief, taxonomy, prompt: prompts.tagging }),
     callB: () => requestTagAssignment({ provider: runtime.provider, apiKey, model: runtime.modelB, brief, taxonomy, prompt: prompts.tagging }),
-    revalidate: (output) => validateTagAssignmentOutput(output, taxonomy, brief.text)
+    revalidate: (output) => validateTagAssignmentOutput(output, taxonomy)
   });
   usage.promiseTagging.push(...tagged.usageByModel);
   invalid.promiseTagging += tagged.invalidCount;
@@ -201,7 +201,7 @@ const screenedChanges = await stage("law-change-screening", changes, async (chan
     persist: persist.screening,
     callA: () => requestScreening({ provider: runtime.provider, apiKey, model: runtime.modelA, brief, taxonomy, prompt: prompts.screening }),
     callB: () => requestScreening({ provider: runtime.provider, apiKey, model: runtime.modelB, brief, taxonomy, prompt: prompts.screening }),
-    revalidate: (output) => validateScreeningOutput(output, taxonomy, brief.text)
+    revalidate: (output) => validateScreeningOutput(output, taxonomy)
   });
   usage.screening.push(...screened.usageByModel);
   invalid.screening += screened.invalidCount;

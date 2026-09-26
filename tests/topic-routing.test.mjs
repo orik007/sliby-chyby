@@ -16,8 +16,8 @@ const directIdIndex = directLegalIdentifierIndex(taxonomy);
 const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8")));
 const fiscalPromise = registry.promises.find(({ id }) => id === "candidate-d5359e35a4c4");
 
-function taggerOutput(tags, { confidence = 0.9, supportingExcerpts = ["fixture excerpt"] } = {}) {
-  return { tags, confidence, supportingExcerpts };
+function taggerOutput(tags, { confidence = 0.9 } = {}) {
+  return { tags, confidence };
 }
 
 function lawChange(overrides = {}) {
@@ -44,7 +44,7 @@ test("agreement on a broad parent or on a sibling tag never routes to the fiscal
 });
 
 test("an unknown classification is visible in orphan review, and disagreement in routing review", () => {
-  const unknown = taggerOutput(["unknown"], { supportingExcerpts: [] });
+  const unknown = taggerOutput(["unknown"]);
   assert.equal(routeLawChange({ taxonomy, change: lawChange(), screenerA: unknown, screenerB: unknown, invertedIndex: fiscalIndex(), directIdIndex }).disposition, "orphan-review");
   const disagreement = routeLawChange({ taxonomy, change: lawChange(), screenerA: taggerOutput(["deficit-and-debt"]), screenerB: taggerOutput(["vat-policy"]), invertedIndex: fiscalIndex(), directIdIndex });
   assert.equal(disagreement.disposition, "routing-review");
@@ -57,7 +57,7 @@ test("a law change amending a mapped act links directly, whatever the screeners'
   const invertedIndex = buildInvertedIndex(taxonomy, [{ promiseId: fiscalPromise.id, tagAssignment: taggerOutput(["fiscal-rules"]) }]);
   const change = lawChange({ identifiers: ["cz-act-218-2000"] });
   assert.deepEqual(directLinkForChange({ change, directIdIndex, invertedIndex }), { promiseIds: [fiscalPromise.id], matchedIdentifiers: ["cz-act-218-2000"], matchedTagIds: ["fiscal-rules"] });
-  const unknown = taggerOutput(["unknown"], { supportingExcerpts: [] });
+  const unknown = taggerOutput(["unknown"]);
   const route = routeLawChange({ taxonomy, change, screenerA: unknown, screenerB: unknown, invertedIndex, directIdIndex });
   assert.equal(route.disposition, "routed");
   assert.equal(route.reason, "direct-structural-link");
@@ -93,20 +93,19 @@ test("a promise-topic assignment still pending human review is excluded from rou
   assert.notEqual(route.disposition, "routed");
 });
 
-test("agreement on a specific tag with zero confidence or no excerpts is weak support, not auto-candidate", () => {
-  const zeroConfidence = combineTaggerResults(
+test("agreement on a specific tag below a confidence of 0.5 on either side is weak support, not auto-candidate", () => {
+  const lowConfidence = combineTaggerResults(
     taxonomy,
-    taggerOutput(["deficit-and-debt"], { confidence: 0 }),
-    taggerOutput(["deficit-and-debt"], { confidence: 0 })
+    taggerOutput(["deficit-and-debt"], { confidence: 0.49 }),
+    taggerOutput(["deficit-and-debt"], { confidence: 0.9 })
   );
-  assert.equal(zeroConfidence.state, "routing-review");
-
-  const noExcerpts = combineTaggerResults(
+  assert.deepEqual([lowConfidence.state, lowConfidence.reason], ["routing-review", "taggers-agree-only-on-broad-or-low-confidence-tag"]);
+  const confident = combineTaggerResults(
     taxonomy,
-    taggerOutput(["deficit-and-debt"], { supportingExcerpts: [] }),
-    taggerOutput(["deficit-and-debt"], { supportingExcerpts: [] })
+    taggerOutput(["deficit-and-debt"], { confidence: 0.5 }),
+    taggerOutput(["deficit-and-debt"], { confidence: 0.5 })
   );
-  assert.equal(noExcerpts.state, "routing-review");
+  assert.equal(confident.state, "auto-candidate");
 });
 
 test("a promise-topic assignment's accepted tags exclude a one-sided tag even when the pair also agrees on a specific tag", () => {

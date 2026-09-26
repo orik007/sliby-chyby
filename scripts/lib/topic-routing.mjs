@@ -4,7 +4,7 @@ function invariant(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-const minimumGroundedConfidence = 0.5;
+const minimumConfidence = 0.5;
 
 function selectedTags(taggerOutput) {
   return (taggerOutput?.tags ?? []).filter((tagId) => tagId !== "unknown");
@@ -15,28 +15,24 @@ function isUnknown(taggerOutput) {
 }
 
 /**
- * A tagger's tag selection only counts as agreement support when it is
- * grounded: a plausible confidence and at least one cited excerpt. A tag
- * returned with zero confidence or no supporting excerpt is weak support and
- * must not by itself clear the auto-candidate bar, even if the peer tagger
- * proposes the same tag.
+ * A tagger's tag selection only counts as agreement support with a plausible
+ * confidence. A tag returned with low confidence is weak support and must not
+ * by itself clear the auto-candidate bar, even if the peer tagger proposes
+ * the same tag.
  */
-function isGrounded(taggerOutput) {
-  return Number.isFinite(taggerOutput?.confidence)
-    && taggerOutput.confidence >= minimumGroundedConfidence
-    && Array.isArray(taggerOutput?.supportingExcerpts)
-    && taggerOutput.supportingExcerpts.length > 0;
+function isConfident(taggerOutput) {
+  return Number.isFinite(taggerOutput?.confidence) && taggerOutput.confidence >= minimumConfidence;
 }
 
-function groundedSelectedTags(taggerOutput) {
-  return isGrounded(taggerOutput) ? selectedTags(taggerOutput) : [];
+function confidentSelectedTags(taggerOutput) {
+  return isConfident(taggerOutput) ? selectedTags(taggerOutput) : [];
 }
 
 /**
  * Combines two independent tagger outputs into one routing state, per the
  * doc's table. `agreedTags` carries only the tags that both taggers
- * independently and groundedly agreed are sufficiently specific — the set
- * that may drive an auto-created relationship. A one-sided or ungrounded
+ * independently and confidently agreed are sufficiently specific — the set
+ * that may drive an auto-created relationship. A one-sided or low-confidence
  * proposal never appears in `agreedTags`; it only makes the result
  * `routing-review` for human attention.
  */
@@ -51,26 +47,26 @@ export function combineTaggerResults(taxonomy, taggerA, taggerB) {
     return { state: "routing-review", reason: "only-one-tagger-classified", agreedTags: [] };
   }
 
-  const groundedA = groundedSelectedTags(taggerA);
-  const groundedB = groundedSelectedTags(taggerB);
-  const agreedGroundedSpecific = groundedA.filter(
-    (tagId) => groundedB.includes(tagId) && isAssessmentEligible(taxonomy, tagId)
+  const confidentA = confidentSelectedTags(taggerA);
+  const confidentB = confidentSelectedTags(taggerB);
+  const agreedConfidentSpecific = confidentA.filter(
+    (tagId) => confidentB.includes(tagId) && isAssessmentEligible(taxonomy, tagId)
   );
-  if (agreedGroundedSpecific.length > 0) {
-    return { state: "auto-candidate", reason: "taggers-agree-on-specific-tag", agreedTags: agreedGroundedSpecific };
+  if (agreedConfidentSpecific.length > 0) {
+    return { state: "auto-candidate", reason: "taggers-agree-on-specific-tag", agreedTags: agreedConfidentSpecific };
   }
 
   const rawA = selectedTags(taggerA);
   const rawB = selectedTags(taggerB);
   if (rawA.some((tagId) => rawB.includes(tagId))) {
-    return { state: "routing-review", reason: "taggers-agree-only-on-broad-or-ungrounded-tag", agreedTags: [] };
+    return { state: "routing-review", reason: "taggers-agree-only-on-broad-or-low-confidence-tag", agreedTags: [] };
   }
   return { state: "routing-review", reason: "taggers-disagree", agreedTags: [] };
 }
 
 /**
  * Derives one promise's accepted routing tags from two independent tagger
- * proposals. When the taggers groundedly
+ * proposals. When the taggers confidently
  * agree on a specific tag (`auto-candidate`), only that agreed set becomes
  * the accepted `tags` -- a tag proposed by just one tagger must not ride
  * along into an assignment marked `needsReview: false`, since that flag is
@@ -147,7 +143,7 @@ export function directLinkForChange({ change, directIdIndex, invertedIndex }) {
 
 /**
  * Routes one substantive law change to promises by a direct legal-identifier
- * link and by the specific tags both screeners groundedly agree on; a change
+ * link and by the specific tags both screeners confidently agree on; a change
  * gets the promises of both. Without either it stays in `routing-review` or
  * `orphan-review` for human attention.
  */

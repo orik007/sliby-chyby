@@ -30,8 +30,7 @@ Tag the change even when it is technical.
 - Select one or more tag identifiers from the supplied taxonomy, or only `unknown`. Never return an empty tag list and never invent an identifier.
 - Read each candidate tag's Czech aliases, definition, and inclusion and exclusion examples.
 - Select every specific tag the change clearly concerns. Select a broad parent tag only when no child tag fits.
-- If nothing fits, or the text is too ambiguous to classify safely, return `unknown` with an empty excerpt list.
-- Quote in `supportingExcerpts` short passages copied **exactly** from the supplied text that justify the tags. Never paraphrase and never quote your own reasoning.
+- If nothing fits, or the text is too ambiguous to classify safely, return `unknown`.
 - Report your confidence in the tags as a number from 0 to 1.
 
 ## Never

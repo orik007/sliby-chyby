@@ -6,6 +6,7 @@ import {
   loadTaggingPrompt,
   ModelOutputError,
   requestTagAssignment,
+  tagAssignmentSchema,
   validateTagAssignmentOutput
 } from "../scripts/lib/topic-tagger.mjs";
 import { validatePromiseRegistry } from "../scripts/lib/attribution.mjs";
@@ -20,11 +21,11 @@ const fiscalPromise = registry.promises.find(({ id }) => id === "candidate-d5359
 
 test("loadTaggingPrompt hashes the versioned prompt file", async () => {
   const prompt = await loadTaggingPrompt();
-  assert.equal(prompt.version, "promise-tagger-v1");
+  assert.equal(prompt.version, "promise-tagger-v2");
   assert.match(prompt.contentHash, /^[a-f0-9]{64}$/);
   assert.ok(prompt.instructions.includes("Never invent a tag identifier"));
   assert.ok(prompt.instructions.includes("Never return an empty tag list"), "the prompt's tag contract must match validateTagAssignmentOutput's non-empty requirement, or a compliant zero-tag response would crash the run");
-  assert.ok(prompt.instructions.includes("empty excerpt-citation list"), "an unknown result must never be told to explain itself in a citation, since only verbatim brief material can pass validateTagAssignmentOutput's grounding check");
+  assert.doesNotMatch(prompt.instructions, /excerpt|citation/i, "taggers quote nothing");
 });
 
 test("buildPromiseTaggingBrief includes only the promise's own supplied fields and the taxonomy definitions", () => {
@@ -46,7 +47,7 @@ test("buildPromiseTaggingBrief includes the promise's own source context", () =>
 });
 
 test("validateTagAssignmentOutput rejects an invented tag id", () => {
-  assert.throws(() => validateTagAssignmentOutput({ tags: ["not-a-real-tag"], confidence: 0.8, supportingExcerpts: [] }, taxonomy), /unknown tag id/);
+  assert.throws(() => validateTagAssignmentOutput({ tags: ["not-a-real-tag"], confidence: 0.8 }, taxonomy), /unknown tag id/);
 });
 
 test("validateTagAssignmentOutput throws specifically ModelOutputError, distinguishable from a transport/provider failure", () => {
@@ -55,31 +56,22 @@ test("validateTagAssignmentOutput throws specifically ModelOutputError, distingu
   // requestTagAssignment -- catching by class, not just by "it threw",
   // keeps that distinction reliable rather than accidentally silencing an
   // outage as if it were an ordinary invalid answer.
-  assert.throws(() => validateTagAssignmentOutput({ tags: ["not-a-real-tag"], confidence: 0.8, supportingExcerpts: [] }, taxonomy), ModelOutputError);
+  assert.throws(() => validateTagAssignmentOutput({ tags: ["not-a-real-tag"], confidence: 0.8 }, taxonomy), ModelOutputError);
 });
 
 test("validateTagAssignmentOutput rejects unknown combined with a real tag", () => {
-  assert.throws(() => validateTagAssignmentOutput({ tags: ["deficit-and-debt", "unknown"], confidence: 0.8, supportingExcerpts: [] }, taxonomy), /cannot be combined/);
+  assert.throws(() => validateTagAssignmentOutput({ tags: ["deficit-and-debt", "unknown"], confidence: 0.8 }, taxonomy), /cannot be combined/);
 });
 
 test("validateTagAssignmentOutput accepts a valid real-tag result", () => {
-  const output = validateTagAssignmentOutput({ tags: ["deficit-and-debt"], confidence: 0.9, supportingExcerpts: ["exact quote"] }, taxonomy);
+  const output = validateTagAssignmentOutput({ tags: ["deficit-and-debt"], confidence: 0.9 }, taxonomy);
   assert.deepEqual(output.tags, ["deficit-and-debt"]);
 });
 
-test("validateTagAssignmentOutput accepts a supportingExcerpt present verbatim in the supplied brief", () => {
-  const brief = buildPromiseTaggingBrief(fiscalPromise, taxonomy);
-  const verbatimExcerpt = fiscalPromise.originalTextCz;
-  const output = validateTagAssignmentOutput({ tags: ["deficit-and-debt"], confidence: 0.9, supportingExcerpts: [verbatimExcerpt] }, taxonomy, brief.text);
-  assert.deepEqual(output.supportingExcerpts, [verbatimExcerpt]);
-});
-
-test("validateTagAssignmentOutput rejects a fabricated supportingExcerpt not present in the supplied brief", () => {
-  const brief = buildPromiseTaggingBrief(fiscalPromise, taxonomy);
-  assert.throws(
-    () => validateTagAssignmentOutput({ tags: ["deficit-and-debt"], confidence: 0.9, supportingExcerpts: ["text the model invented, never supplied to it"] }, taxonomy, brief.text),
-    /not present verbatim/
-  );
+test("the tag-assignment schema asks only for tags and a confidence", () => {
+  const schema = tagAssignmentSchema(taxonomy);
+  assert.deepEqual(Object.keys(schema.properties), ["tags", "confidence"]);
+  assert.deepEqual(schema.required, ["tags", "confidence"]);
 });
 
 test("requestTagAssignment calls the shared OpenAI structured-response endpoint and validates its output", async () => {
@@ -93,7 +85,7 @@ test("requestTagAssignment calls the shared OpenAI structured-response endpoint 
         id: "resp_fixture",
         model: "gpt-5.6-terra",
         usage: { input_tokens: 42, output_tokens: 7 },
-        output: [{ content: [{ type: "output_text", text: JSON.stringify({ tags: ["deficit-and-debt"], confidence: 0.95, supportingExcerpts: [fiscalPromise.originalTextCz] }) }] }]
+        output: [{ content: [{ type: "output_text", text: JSON.stringify({ tags: ["deficit-and-debt"], confidence: 0.95 }) }] }]
       })
     };
   };
@@ -124,7 +116,7 @@ test("requestTagAssignment attaches the already-spent usage/model/provider to a 
       id: "resp_fixture",
       model: "gpt-5.6-terra",
       usage: { input_tokens: 11, output_tokens: 3 },
-      output: [{ content: [{ type: "output_text", text: JSON.stringify({ tags: ["not-a-real-tag"], confidence: 0.9, supportingExcerpts: [] }) }] }]
+      output: [{ content: [{ type: "output_text", text: JSON.stringify({ tags: ["not-a-real-tag"], confidence: 0.9 }) }] }]
     })
   });
   try {
