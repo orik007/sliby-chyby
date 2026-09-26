@@ -30,7 +30,8 @@ const printKindLabels = { 1: "government bill", 2: "member bill", 3: "state budg
 
 /**
  * The official text of one law change as a model reads it: its print, its
- * heading and title, the act it amends, and the full text of every version.
+ * heading and title, the act it amends, and the full text and effective date
+ * of every version.
  * A print-wide Senate resolution is not part of one law change and goes
  * only into the evidence package.
  */
@@ -39,8 +40,9 @@ export function lawChangeText(change) {
     const entry = change.versions[version];
     const label = `Version: ${versionLabels[version]}`;
     if (entry.removed) return `${label}\nThis part is not in this text: it was removed during the debate.`;
-    if (entry.sameAs) return `${label}\nThe same text as the ${versionLabels[entry.sameAs]}.`;
-    return entry.textCz === null ? `${label}\nNot available as a DOCX file; only the print title is known.` : `${label}\n${entry.textCz}`;
+    const effective = entry.effectiveCz ? `\nEffective date of this text (účinnost):\n${entry.effectiveCz}` : "";
+    if (entry.sameAs) return `${label}\nThe same text as the ${versionLabels[entry.sameAs]}.${effective}`;
+    return entry.textCz === null ? `${label}\nNot available as a DOCX file; only the print title is known.` : `${label}\n${entry.textCz}${effective}`;
   });
   return [
     `Chamber print ${change.printNumber} (${printKindLabels[change.printKindId] ?? "Chamber print"}): ${change.printTitleCz}`,

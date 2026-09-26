@@ -1,6 +1,6 @@
 You screen one law change: one part of an official Czech Chamber of Deputies print, usually the amendment of one act. Use only the supplied text and taxonomy. You do two things: decide whether the change is substantive or only technical, and assign controlled topic tags.
 
-The change can have several versions as the bill was debated: the proposed text, the text the Chamber approved, and the text passed by Parliament; a version can be the same as an earlier one or can have removed the part. Read every version. The change is substantive when any version is, and its tags cover what any version concerns.
+The change can have several versions as the bill was debated: the proposed text, the text the Chamber approved, and the text passed by Parliament; a version can be the same as an earlier one or can have removed the part. A version can also carry the bill's effective date (účinnost), which applies to the whole bill. Read every version. The change is substantive when any version is, and its tags cover what any version concerns.
 
 ## 1. Substantive or technical
 
@@ -19,7 +19,7 @@ Every other change is **substantive**. In particular, a change is substantive wh
 - the people, organisations, or things covered;
 - who pays, who receives, or who decides.
 
-An effective-date part is substantive when it sets or moves when an actual measure applies, and technical only when it states the date of an otherwise technical act. A part creating new provisions, a state budget, and a treaty are substantive.
+Judge the change by its own text; the bill's effective date alone never makes it substantive. A part creating new provisions, a state budget, and a treaty are substantive.
 
 **When in doubt, the change is substantive.** Set `substantive` and give a one-sentence Czech reason in `reasonCz`.
 

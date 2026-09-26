@@ -74,7 +74,7 @@ test("persists an isolated double-invalid failure, then retires it after a newer
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-batch-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
   await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
@@ -118,7 +118,7 @@ test("the per-run cap sends no more packages to the paid assessors, and the rest
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-limit-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
   await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
@@ -147,7 +147,7 @@ test("an interrupted batch keeps every finished assessment, and the next run ass
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-interrupted-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
   await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
@@ -179,7 +179,7 @@ test("an oversized package is never sent to the assessors and is reported for hu
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-oversized-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
   await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
@@ -203,7 +203,7 @@ test("the review pull request lists every current proposal that changes the publ
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-changes-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
   await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
@@ -259,7 +259,7 @@ test("a proposal for a promise without a public score is listed as a change", as
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-no-public-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
   await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
@@ -277,7 +277,7 @@ test("a human review stays listed until a public revision follows it, and a with
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-human-review-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
   await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
@@ -331,7 +331,7 @@ test("in the workflow, each listed promise links to its review page on the audit
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-links-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
   await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");

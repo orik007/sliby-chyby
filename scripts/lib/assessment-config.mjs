@@ -2,7 +2,7 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-export const assessorPromptVersion = "assessor-v17";
+export const assessorPromptVersion = "assessor-v18";
 export const arbiterPromptVersion = "arbiter-v9";
 export const scoringRulePath = "docs/scoring.md";
 
