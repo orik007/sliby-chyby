@@ -24,7 +24,7 @@ There is no fourth state and no unpublished promise or statement. Every promise 
 
 ## Promise or statement
 
-The test is one question: **can a concrete law change, vote, or government proposal be in line with it or against it?** When it can, the item is a promise, even without a number or deadline. A clear direction in a concrete area is enough (“Podpoříme výstavbu nájemních bytů”), and so is a rejection of something concrete (“Politický dialog a obchodní výměnu … s Ruskem … vylučujeme”: a vote to end the sanctions contradicts it). When it cannot, the item is a statement: a value, a general goal, a position without a concrete object, a foreign-policy attitude that no Chamber conduct decides, or a sentence that only describes the effect of the party's other commitments.
+The test is one question: **can a concrete law change, vote, or government proposal be in line with it or against it?** When it can, the item is a promise, even without a number or deadline. A clear direction in a concrete area is enough (“Podpoříme výstavbu nájemních bytů”), and so is a rejection of something concrete (“Politický dialog a obchodní výměnu … s Ruskem … vylučujeme”: a vote to end the sanctions contradicts it). A commitment to a condition that a law or government step can support or undermine is also a promise (“Zavedeme jasná a stabilní daňová pravidla”); the line is drawn generously in favour of a promise. When it cannot, the item is a statement: a value, a general goal, a position without a concrete object, a foreign-policy attitude that no Chamber conduct decides, or a sentence that only describes the effect of the party's other commitments.
 
 ## Splitting and duplicates
 
