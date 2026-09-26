@@ -19,20 +19,32 @@ import { lawChangeText } from "../scripts/lib/law-change-screening.mjs";
 // member bill) and 163 (a government bill), the file tables of the psp.cz
 // pages of prints 16 and 91, the later-text links of print 77's history
 // page, and print 16's approved-text page, downloaded on 24-25 September
-// 2026.
+// 2026; the file tables of prints 57 and 87 and the Senate referral in
+// print 163's history, downloaded on 26 September 2026.
 const fixture = (name) => readFile(new URL(`./fixtures/print-parts/${name}`, import.meta.url), "utf8");
 const print85Paragraphs = JSON.parse(await fixture("print-85-paragraphs.json"));
 const print163 = JSON.parse(await fixture("print-163-paragraphs.json"));
 const pageUrl = (number) => `https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=${number}&CT1=0`;
 
-test("reads only the proposal-text DOCX from a print page", async () => {
+test("reads only the proposal-text Word file from a print page, a DOCX before a DOC", async () => {
   // Print 16 also lists the RIA, the consolidated text with marked changes,
   // and EU compatibility; only the bill itself is the proposal text.
   assert.deepEqual(proposalDocumentLink(await fixture("print-16-files.html"), pageUrl(16)), {
     filename: "t001600.docx",
     url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=265179",
-    sectionLabel: "Návrh zákona včetně důvodové zprávy"
+    sectionLabel: "Návrh zákona včetně důvodové zprávy",
+    format: "docx"
   });
+  // Print 57 lists its bill only as PDF and .doc; the .doc is read.
+  assert.deepEqual(proposalDocumentLink(await fixture("print-57-files.html"), pageUrl(57)), {
+    filename: "t005700.doc",
+    url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=266020",
+    sectionLabel: "Návrh zákona včetně důvodové zprávy",
+    format: "doc"
+  });
+  // Print 87 lists its bill only as PDF, which is never read; the DOCX files
+  // of other sections are not the proposal text.
+  assert.equal(proposalDocumentLink(await fixture("print-87-files.html"), pageUrl(87)), null);
   // Print 91 (a state fund budget) has its resolution only as a legacy .doc;
   // its text is the DOCX of the section "Text".
   const print91 = proposalDocumentLink(await fixture("print-91-files.html"), pageUrl(91));
@@ -147,9 +159,18 @@ test("reads the later-text links from a print's history page and the DOCX of a l
   const historyUrl = "https://www.psp.cz/sqw/historie.sqw?o=10&t=77";
   assert.deepEqual(laterTextLinks(await fixture("print-77-history-status.html"), historyUrl), {
     approved: "https://www.psp.cz/sqw/text/tiskt.sqw?o=10&ct=77&ct1=0&v=PZ&pn=4&pt=1",
-    passed: "https://www.psp.cz/sqw/text/tiskt.sqw?o=10&ct=77&ct1=0&v=SZ"
+    passed: "https://www.psp.cz/sqw/text/tiskt.sqw?o=10&ct=77&ct1=0&v=SZ",
+    referredToSenate: null
   });
-  assert.deepEqual(laterTextLinks("<p>No later text.</p>", historyUrl), { approved: null, passed: null });
+  assert.deepEqual(laterTextLinks("<p>No later text.</p>", historyUrl), { approved: null, passed: null, referredToSenate: null });
+  // Print 163, which the Senate rejected, has no approved-text page; its
+  // history links sub-print 163/2 with the text referred to the Senate, and
+  // then the Senate's document 163/3.
+  assert.deepEqual(laterTextLinks(await fixture("print-163-history-senate.html"), "https://www.psp.cz/sqw/historie.sqw?o=10&t=163"), {
+    approved: null,
+    passed: null,
+    referredToSenate: "https://www.psp.cz/sqw/text/tiskt.sqw?o=10&ct=163&ct1=2"
+  });
   // The link is found by its text-page kind, not by the surrounding markup.
   assert.equal(laterTextLinks('<div><a title="Schválený text" class="x" href="/sqw/text/tiskt.sqw?o=10&amp;ct=5&amp;ct1=0&amp;v=PZ&amp;pn=2&amp;pt=1">text</a></div>', historyUrl).approved, "https://www.psp.cz/sqw/text/tiskt.sqw?o=10&ct=5&ct1=0&v=PZ&pn=2&pt=1");
   assert.throws(() => laterTextLinks('<a href="https://evil.example/sqw/text/tiskt.sqw?v=SZ">x</a>', historyUrl), /outside the PSP allowlist/);

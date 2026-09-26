@@ -42,7 +42,7 @@ export function lawChangeText(change) {
     if (entry.removed) return `${label}\nThis part is not in this text: it was removed during the debate.`;
     const effective = entry.effectiveCz ? `\nEffective date of this text (účinnost):\n${entry.effectiveCz}` : "";
     if (entry.sameAs) return `${label}\nThe same text as the ${versionLabels[entry.sameAs]}.${effective}`;
-    return entry.textCz === null ? `${label}\nNot available as a DOCX file; only the print title is known.` : `${label}\n${entry.textCz}${effective}`;
+    return entry.textCz === null ? `${label}\nNot available as a DOCX or DOC file; only the print title is known.` : `${label}\n${entry.textCz}${effective}`;
   });
   return [
     `Chamber print ${change.printNumber} (${printKindLabels[change.printKindId] ?? "Chamber print"}): ${change.printTitleCz}`,

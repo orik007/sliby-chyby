@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { strToU8, zipSync } from "fflate";
-import { createPspFetcher, extractDocxParagraphs, officialPrintDocumentPageUrl, pspDownloadSettings } from "../scripts/lib/psp-print-documents.mjs";
+import { createPspFetcher, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, pspDownloadSettings } from "../scripts/lib/psp-print-documents.mjs";
+import { proposalBody } from "../scripts/lib/print-parts.mjs";
 
 test("builds the official print page URL", () => {
   assert.equal(officialPrintDocumentPageUrl(10, 90, 0), "https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=90&CT1=0");
@@ -58,6 +59,19 @@ async function withStubPsp(stub, run) {
     globalThis.fetch = originalFetch;
   }
 }
+
+test("reads the paragraphs of a Word 97-2003 proposal text with its quotation marks as written", async () => {
+  // Print 72's proposal text, which psp.cz lists only as .doc and PDF
+  // (downloaded on 26 September 2026).
+  const paragraphs = await extractDocParagraphs(await readFile(new URL("./fixtures/print-parts/print-72-proposal.doc", import.meta.url)));
+  assert.deepEqual(paragraphs.slice(0, 3), ["Návrh", "ZÁKON", "ze dne … 2026,"]);
+  assert.ok(paragraphs.includes("V § 32 se slova „výbor pro mediální záležitosti“ nahrazují slovy „výbor pro kulturu a mediální záležitosti“."));
+  assert.ok(paragraphs.every((paragraph) => paragraph === paragraph.trim() && !/\s{2}|[\t\u00a0]/.test(paragraph)));
+  const body = proposalBody(paragraphs);
+  assert.ok(body.length < paragraphs.length);
+  assert.deepEqual(body.slice(-3), ["Čl. II", "Účinnost", "Tento zákon nabývá účinnosti patnáctým dnem následujícím po dni jeho vyhlášení."]);
+  await assert.rejects(() => extractDocParagraphs(new TextEncoder().encode("not a Word file")));
+});
 
 test("print-text downloads use two requests at a time and six attempts with a 5 s back-off", () => {
   assert.deepEqual(pspDownloadSettings, { concurrency: 2, retryAttempts: 6, retryDelayMs: 5_000 });

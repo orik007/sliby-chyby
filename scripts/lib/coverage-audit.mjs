@@ -185,14 +185,14 @@ export function renderCoverageAuditMarkdown(audit) {
     `| Skipped: cannot be attributable conduct | ${quality.notAttributableSkipped} |`,
     `| Records that can be attributable conduct | ${quality.conductRecords} |`,
     ...(printParts ? [
-      `| Prints with a DOCX proposal text | ${printParts.printsWithProposalText} of ${printParts.prints} |`,
-      `| Prints without a DOCX proposal text | ${printParts.printsWithoutDocxProposalText} |`,
+      `| Prints with a DOCX or DOC proposal text | ${printParts.printsWithProposalText} of ${printParts.prints} |`,
+      `| Prints without a DOCX or DOC proposal text (only a PDF or none) | ${printParts.printsWithoutProposalText} |`,
       `| Prints with a text approved by the Chamber / passed by Parliament | ${printParts.printsWithApprovedText} / ${printParts.printsWithPassedText} |`,
       `| Prints returned by the Senate (rejected or amended) | ${printParts.printsWithSenateResolution} |`,
       `| Law changes added / removed during the debate | ${printParts.lawChangesAddedInDebate} / ${printParts.lawChangesRemovedInDebate} |`,
       `| Law changes with an identified amended act | ${printParts.lawChangesWithAmendedAct} of ${printParts.lawChanges} |`,
       `| Approved bills without an approved text on psp.cz | ${printParts.approvedBillsWithoutApprovedText} |`,
-      `| Text warnings (a text listed without a DOCX file, a missing approved text) | ${printParts.textWarnings} |`
+      `| Text warnings (a text listed without a DOCX or DOC file, a missing approved text) | ${printParts.textWarnings} |`
     ] : []),
     `| Law changes screened | ${quality.lawChanges} |`,
     `| Technical / substantive | ${quality.technicalLawChanges} / ${quality.substantiveLawChanges} |`,

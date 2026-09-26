@@ -9,7 +9,7 @@ import { cleanText, invariant } from "./collector-core.mjs";
 // print kind itself.
 export const stateBudgetIdentifier = "cz-print-kind-state-budget";
 
-// The labelled section of a print page whose DOCX file is the proposal text:
+// The labelled section of a print page whose Word file is the proposal text:
 // the bill (or state budget) with its explanatory memorandum, or the text of
 // a treaty or another print. Other sections (RIA, the consolidated text with
 // marked changes, EU compatibility, annexes) are never read.
@@ -109,13 +109,15 @@ export function amendedActOfPart(paragraphs) {
 }
 
 /**
- * The proposal-text DOCX of a print page: the first DOCX file listed under
- * one of the proposal sections. Returns null when the page has none (for
- * example, only a legacy .doc file).
+ * The proposal-text Word file of a print page: the first DOCX file listed
+ * under one of the proposal sections or, when there is none, the first
+ * Word 97-2003 (.doc) file there. Returns null when the page has neither
+ * (for example, only a PDF, which is never read).
  */
 export function proposalDocumentLink(html, pageUrl) {
   const files = String(html).split("Soubory sněmovního tisku")[1]?.split("</table>")[0] ?? "";
   let section = null;
+  const found = { docx: null, doc: null };
   const pattern = /<th\b[^>]*>([\s\S]*?)<\/th>|<a\b[^>]*href=["']([^"']*orig2\.sqw[^"']*)["'][^>]*>([^<]+)<\/a>/gi;
   for (const match of files.matchAll(pattern)) {
     if (match[1] !== undefined) {
@@ -123,10 +125,11 @@ export function proposalDocumentLink(html, pageUrl) {
       continue;
     }
     const filename = cleanText(match[3], 200);
-    if (!section || !/\.docx$/i.test(filename) || !proposalSectionLabels.some((label) => label.test(section))) continue;
-    return { filename, url: pspUrl(match[2], pageUrl), sectionLabel: section };
+    const format = /\.(docx?)$/i.exec(filename)?.[1].toLowerCase();
+    if (!section || !format || found[format] || !proposalSectionLabels.some((label) => label.test(section))) continue;
+    found[format] = { filename, url: pspUrl(match[2], pageUrl), sectionLabel: section, format };
   }
-  return null;
+  return found.docx ?? found.doc;
 }
 
 // "ČÁST PRVNÍ", "ČÁST DVACÁTÁ TŘETÍ", "ČÁST STO DVACÁTÁ PRVNÍ", "Část
@@ -192,14 +195,21 @@ function pspUrl(href, pageUrl) {
  * Links to a bill's later texts on its history page: "Text návrhu zákona
  * schváleného Poslaneckou sněmovnou" (approved, a text page with `v=PZ`) and
  * "… přijatého Parlamentem České republiky" (passed, `v=SZ`). They are not
- * in the open data, so any link to such a text page is read.
+ * in the open data, so any link to such a text page is read. A bill whose
+ * approved text has no such page (one the Senate rejected) links the print
+ * holding the text "ve znění, ve kterém byl postoupen Senátu"
+ * (`referredToSenate`).
  */
 export function laterTextLinks(historyHtml, pageUrl) {
-  const links = { approved: null, passed: null };
+  const links = { approved: null, passed: null, referredToSenate: null };
   for (const match of String(historyHtml).matchAll(/href="([^"]*tiskt\.sqw\?[^"]*)"/g)) {
     const kind = /[?&](?:amp;)?v=(PZ|SZ)(?:&|$)/.exec(match[1])?.[1];
     if (kind) links[kind === "PZ" ? "approved" : "passed"] ??= pspUrl(match[1], pageUrl);
   }
+  // "Návrh zákona ve znění, ve kterém byl postoupen Senátu rozeslán … jako
+  // tisk 163/2": the approved text as a sub-print of the bill.
+  const referred = /ve\s+znění,\s+ve\s+kterém\s+byl\s+postoupen\s+Senátu[^<]*(?:<(?!\/p\b)[^>]*>[^<]*)*?<a\s+href="([^"]*tiskt\.sqw\?[^"]*)"/i.exec(String(historyHtml));
+  if (referred) links.referredToSenate = pspUrl(referred[1], pageUrl);
   return links;
 }
 

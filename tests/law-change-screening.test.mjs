@@ -73,7 +73,7 @@ test("a model reads every version of the law change with its print, heading, ame
   const same = lawChangeText({ ...change, versions: { proposed: change.versions.proposed, approved: { sameAs: "proposed", document: null } } });
   assert.match(same, /Version: text approved by the Chamber\nThe same text as the proposed text\./);
   const titleOnly = lawChangeText({ ...change, heading: null, versions: { proposed: { heading: null, titleCz: change.printTitleCz, textCz: null, document: null } }, senateResolutions: [] });
-  assert.match(titleOnly, /Version: proposed text\nNot available as a DOCX file; only the print title is known\./);
+  assert.match(titleOnly, /Version: proposed text\nNot available as a DOCX or DOC file; only the print title is known\./);
   const removed = lawChangeText({ ...change, versions: { proposed: change.versions.proposed, approved: { removed: true } } });
   assert.match(removed, /Version: text approved by the Chamber\nThis part is not in this text: it was removed during the debate\./);
   assert.match(lawChangeText({ ...change, addedIn: "approved" }), /This part was added during the debate; it is not in the proposed text\./);

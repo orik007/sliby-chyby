@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
-import { createPspFetcher, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings } from "./lib/psp-print-documents.mjs";
+import { createPspFetcher, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings } from "./lib/psp-print-documents.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
 
@@ -13,8 +13,8 @@ import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, proposalBody, pro
  * Senate resolution returning it) and splits them into law changes with
  * their versions (docs/evidence-pipeline.md, Chamber data rules). Nothing
  * is cached, so a later text is used as soon as psp.cz publishes it. A
- * failed download fails the run; a text that psp.cz lists without a DOCX
- * file is treated as not published and reported.
+ * failed download fails the run; a text that psp.cz lists without a DOCX or
+ * DOC file is treated as not published and reported.
  */
 function parseArgs(args) {
   const options = { collectorRun: null, output: null, sourceRegistry: "automation/collectors/sources.json", promiseRegistry: "automation/promise-registry/promises.json" };
@@ -54,28 +54,36 @@ function collectPrints(records) {
 const fetchPsp = createPspFetcher();
 
 const htmlOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };
-const docxOptions = { maxBytes: 20_000_000, expectedContentTypes: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"] };
+const wordOptions = {
+  docx: { maxBytes: 20_000_000, expectedContentTypes: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"] },
+  doc: { maxBytes: 20_000_000, expectedContentTypes: ["application/msword", "application/octet-stream"] }
+};
+const extractParagraphs = { docx: async (bytes) => extractDocxParagraphs(bytes), doc: extractDocParagraphs };
 const decodePage = (page) => new TextDecoder("windows-1250").decode(page.bytes);
 
-// A downloaded DOCX that cannot be read as text (for example a scanned
-// image) is treated like a text that is not published: reported, never
-// fatal. A failed download still fails the run.
-async function fetchDocx(source, url, filename, warnings, printNumber, version) {
-  const file = await fetchPsp(source, url, docxOptions);
+// A downloaded DOCX or DOC file that cannot be read as text (for example a
+// scanned image) is treated like a text that is not published: reported,
+// never fatal. A failed download still fails the run.
+async function fetchWordText(source, url, filename, format, warnings, printNumber, version) {
+  const file = await fetchPsp(source, url, wordOptions[format]);
   try {
-    return { document: { filename, url: file.finalUrl }, paragraphs: proposalBody(extractDocxParagraphs(file.bytes)) };
+    return { document: { filename, url: file.finalUrl }, paragraphs: proposalBody(await extractParagraphs[format](file.bytes)) };
   } catch (error) {
-    warnings.push({ printNumber, kind: "unreadable-docx", version, detail: `${filename}: ${error instanceof Error ? error.message : String(error)}` });
+    warnings.push({ printNumber, kind: `unreadable-${format}`, version, detail: `${filename}: ${error instanceof Error ? error.message : String(error)}` });
     return null;
   }
 }
 
-// A DOCX file listed in a print page's proposal-text section: the proposal
-// itself (part 0) or a Senate resolution sub-print ("Text").
-async function fetchPrintPageText(source, termNumber, printNumber, partNumber, warnings, version) {
-  const pageUrl = officialPrintDocumentPageUrl(termNumber, printNumber, partNumber);
+// The Word file listed in a print page's proposal-text section: the
+// proposal itself (part 0), a Senate resolution sub-print ("Text"), or the
+// sub-print with the text referred to the Senate ("Text").
+async function fetchPageText(source, pageUrl, printNumber, warnings, version) {
   const link = proposalDocumentLink(decodePage(await fetchPsp(source, pageUrl, htmlOptions)), pageUrl);
-  return link ? fetchDocx(source, link.url, link.filename, warnings, printNumber, version) : null;
+  return link ? fetchWordText(source, link.url, link.filename, link.format, warnings, printNumber, version) : null;
+}
+
+function fetchPrintPageText(source, termNumber, printNumber, partNumber, warnings, version) {
+  return fetchPageText(source, officialPrintDocumentPageUrl(termNumber, printNumber, partNumber), printNumber, warnings, version);
 }
 
 // The names psp.cz gives the later-text pages, used to trace a version.
@@ -87,12 +95,12 @@ async function laterText(source, print, version, url, warnings) {
     warnings.push({ printNumber: print.number, kind: "later-text-without-docx", version, detail: `the ${version} text is listed without a DOCX file` });
     return null;
   }
-  return fetchDocx(source, docxUrl, laterTextNames[version](print.number), warnings, print.number, version);
+  return fetchWordText(source, docxUrl, laterTextNames[version](print.number), "docx", warnings, print.number, version);
 }
 
 async function senateResolution(source, termNumber, print, partNumber, warnings) {
   const resolution = await fetchPrintPageText(source, termNumber, print.number, partNumber, warnings, "senate-resolution");
-  if (!resolution) warnings.push({ printNumber: print.number, kind: "senate-resolution-without-text", detail: `the Senate resolution ${print.number}/${partNumber} has no readable DOCX text` });
+  if (!resolution) warnings.push({ printNumber: print.number, kind: "senate-resolution-without-text", detail: `the Senate resolution ${print.number}/${partNumber} has no readable DOCX or DOC text` });
   return resolution ? { partNumber, ...resolution } : null;
 }
 
@@ -104,9 +112,14 @@ async function fetchPrintTexts(source, print, termNumber) {
     fetchPrintPageText(source, termNumber, print.number, print.partNumber, warnings, "proposed"),
     bill ? fetchPsp(source, historyUrl, htmlOptions) : null
   ]);
-  const links = historyPage ? laterTextLinks(decodePage(historyPage), historyUrl) : { approved: null, passed: null };
+  const links = historyPage ? laterTextLinks(decodePage(historyPage), historyUrl) : { approved: null, passed: null, referredToSenate: null };
+  // Without an approved-text page, the approved text is the sub-print with
+  // the text referred to the Senate, when the history links one.
+  const approvedText = links.approved
+    ? laterText(source, print, "approved", links.approved, warnings)
+    : links.referredToSenate ? fetchPageText(source, links.referredToSenate, print.number, warnings, "approved") : null;
   const [approved, passed, ...resolutions] = await Promise.all([
-    links.approved ? laterText(source, print, "approved", links.approved, warnings) : null,
+    approvedText,
     links.passed ? laterText(source, print, "passed", links.passed, warnings) : null,
     ...print.senateResolutionPartNumbers.map((partNumber) => senateResolution(source, termNumber, print, partNumber, warnings))
   ]);
@@ -150,7 +163,7 @@ async function downloadWorker() {
     const result = await fetchPrintTexts(source, print, source.term.number);
     fetched.set(print.printId, result);
     const versions = Object.keys(result.texts);
-    tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
+    tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX or DOC proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
   }
 }
 await Promise.all(Array.from({ length: Math.min(pspDownloadSettings.concurrency, prints.length) }, downloadWorker));
@@ -177,7 +190,7 @@ const allChanges = Object.values(result).flatMap(({ changes }) => changes);
 const quality = {
   prints: prints.length,
   printsWithProposalText: Object.values(result).filter(({ versions }) => versions.includes("proposed")).length,
-  printsWithoutDocxProposalText: Object.values(result).filter(({ versions }) => !versions.includes("proposed")).length,
+  printsWithoutProposalText: Object.values(result).filter(({ versions }) => !versions.includes("proposed")).length,
   printsWithApprovedText: Object.values(result).filter(({ versions }) => versions.includes("approved")).length,
   printsWithPassedText: Object.values(result).filter(({ versions }) => versions.includes("passed")).length,
   printsWithSenateResolution: Object.values(result).filter(({ changes }) => changes[0]?.senateResolutions.length > 0).length,
