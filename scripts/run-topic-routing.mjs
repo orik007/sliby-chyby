@@ -43,7 +43,7 @@ function parseArgs(args) {
   const options = {
     collectorRun: null,
     printParts: null,
-    taxonomy: "automation/topic-routing/taxonomy-v1.json",
+    taxonomy: "automation/topic-routing/taxonomy-v2.json",
     promiseRegistry: "automation/promise-registry/promises.json",
     publishedPromises: "data/promises",
     tagCache: "automation/topic-routing/tag-cache",

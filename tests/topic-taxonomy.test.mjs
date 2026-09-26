@@ -10,10 +10,10 @@ import {
   validateTaxonomy
 } from "../scripts/lib/topic-taxonomy.mjs";
 
-const taxonomy = validateTaxonomy(JSON.parse(await readFile(new URL("../automation/topic-routing/taxonomy-v1.json", import.meta.url), "utf8")));
+const taxonomy = validateTaxonomy(JSON.parse(await readFile(new URL("../automation/topic-routing/taxonomy-v2.json", import.meta.url), "utf8")));
 
 test("the committed taxonomy is valid and contains the fiscal example branch", () => {
-  assert.equal(taxonomy.taxonomyVersion, "topic-routing-v1");
+  assert.equal(taxonomy.taxonomyVersion, "topic-routing-v2");
   assert.ok(resolveTag(taxonomy, "public-finance"));
   assert.ok(resolveTag(taxonomy, "fiscal-responsibility"));
   assert.ok(resolveTag(taxonomy, "deficit-and-debt"));
@@ -87,4 +87,35 @@ test("directLegalIdentifierIndex groups tags sharing a legal identifier", () => 
   assert.ok(fiscalTags.includes("deficit-and-debt"));
   assert.ok(fiscalTags.includes("fiscal-rules"));
   assert.ok(fiscalTags.includes("debt-brake"));
+});
+
+// Acts amended by law changes of run 56 (26 September 2026) that no specific
+// tag covered, so their changes could not reach any promise.
+test("acts that no specific tag covered in run 56 now link to one", () => {
+  const index = directLegalIdentifierIndex(taxonomy);
+  const expected = {
+    "cz-act-49-1997": "aviation-and-waterways",
+    "cz-act-114-1995": "aviation-and-waterways",
+    "cz-act-361-2000": "road-traffic-and-vehicles",
+    "cz-act-338-1992": "property-and-vehicle-taxes",
+    "cz-act-16-1993": "property-and-vehicle-taxes",
+    "cz-act-378-2007": "medicines-and-medical-devices",
+    "cz-act-375-2022": "medicines-and-medical-devices",
+    "cz-act-108-2006": "social-services",
+    "cz-act-589-1992": "social-security-contributions",
+    "cz-act-45-2013": "criminal-law-and-victims",
+    "cz-act-89-2012": "civil-law",
+    "cz-act-329-1999": "state-records-and-documents",
+    "cz-act-245-2000": "state-symbols-and-holidays",
+    "cz-act-332-2025": "postal-services",
+    "cz-act-246-1992": "animal-breeding-and-welfare",
+    "cz-act-449-2001": "forestry-and-hunting",
+    "cz-act-156-2000": "police-and-internal-security",
+    "cz-act-257-2001": "cultural-funding-and-heritage",
+    "cz-act-17-2012": "tax-administration"
+  };
+  for (const [act, tagId] of Object.entries(expected)) {
+    assert.ok(index.get(act)?.includes(tagId), `${act} links to ${tagId}`);
+    assert.equal(isAssessmentEligible(taxonomy, tagId), true, tagId);
+  }
 });

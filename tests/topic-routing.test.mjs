@@ -11,7 +11,7 @@ import {
 } from "../scripts/lib/topic-routing.mjs";
 import { directLegalIdentifierIndex, validateTaxonomy } from "../scripts/lib/topic-taxonomy.mjs";
 
-const taxonomy = validateTaxonomy(JSON.parse(await readFile(new URL("../automation/topic-routing/taxonomy-v1.json", import.meta.url), "utf8")));
+const taxonomy = validateTaxonomy(JSON.parse(await readFile(new URL("../automation/topic-routing/taxonomy-v2.json", import.meta.url), "utf8")));
 const directIdIndex = directLegalIdentifierIndex(taxonomy);
 const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8")));
 const fiscalPromise = registry.promises.find(({ id }) => id === "candidate-d5359e35a4c4");

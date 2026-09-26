@@ -62,7 +62,7 @@ async function checkout(root) {
   await copy("automation/prompts");
   await copy("docs/scoring.md");
   await copy("automation/model-prices.json");
-  await copy("automation/topic-routing/taxonomy-v1.json");
+  await copy("automation/topic-routing/taxonomy-v2.json");
   await copy("automation/collectors/sources.json");
   await copy("automation/review-proposals/manifest.json");
   await copy("tests/fixtures/pipeline/promise-registry.json", "automation/promise-registry/promises.json");
