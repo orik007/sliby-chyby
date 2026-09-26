@@ -35,22 +35,27 @@ test("both screeners agreeing on a specific tag route the law change to the prom
   assert.deepEqual(route.routedTo, [{ promiseId: fiscalPromise.id, routeBasis: ["controlled-tag"], matchedTagIds: ["deficit-and-debt"], directLinkIdentifiers: [] }]);
 });
 
-test("agreement on a broad parent or on a sibling tag never routes to the fiscal promise", () => {
-  const broadOnly = combineTaggerResults(taxonomy, taggerOutput(["fiscal-responsibility"]), taggerOutput(["fiscal-responsibility"]));
-  assert.equal(broadOnly.state, "routing-review", "agreement on a broad parent alone must never be auto-candidate");
-  const route = routeLawChange({ taxonomy, change: lawChange(), screenerA: taggerOutput(["vat-policy"]), screenerB: taggerOutput(["vat-policy"]), invertedIndex: fiscalIndex(), directIdIndex });
-  assert.equal(route.disposition, "orphan-review");
-  assert.deepEqual(route.routedTo, []);
+test("a broad parent tag alone, or a tag no promise holds, routes a law change nowhere", () => {
+  const broadOnly = routeLawChange({ taxonomy, change: lawChange(), screenerA: taggerOutput(["fiscal-responsibility"]), screenerB: taggerOutput(["fiscal-responsibility"]), invertedIndex: fiscalIndex(), directIdIndex });
+  assert.deepEqual([broadOnly.disposition, broadOnly.reason, broadOnly.routedTo], ["unrouted", "no-specific-tag", []]);
+  const otherTopic = routeLawChange({ taxonomy, change: lawChange(), screenerA: taggerOutput(["vat-policy"]), screenerB: taggerOutput(["vat-policy"]), invertedIndex: fiscalIndex(), directIdIndex });
+  assert.deepEqual([otherTopic.disposition, otherTopic.reason, otherTopic.routedTo], ["unrouted", "no-promise-with-its-tags", []]);
+  const unknown = taggerOutput(["unknown"]);
+  assert.equal(routeLawChange({ taxonomy, change: lawChange(), screenerA: unknown, screenerB: unknown, invertedIndex: fiscalIndex(), directIdIndex }).reason, "no-specific-tag");
 });
 
-test("an unknown classification is visible in orphan review, and disagreement in routing review", () => {
-  const unknown = taggerOutput(["unknown"]);
-  assert.equal(routeLawChange({ taxonomy, change: lawChange(), screenerA: unknown, screenerB: unknown, invertedIndex: fiscalIndex(), directIdIndex }).disposition, "orphan-review");
-  const disagreement = routeLawChange({ taxonomy, change: lawChange(), screenerA: taggerOutput(["deficit-and-debt"]), screenerB: taggerOutput(["vat-policy"]), invertedIndex: fiscalIndex(), directIdIndex });
-  assert.equal(disagreement.disposition, "routing-review");
-  assert.equal(disagreement.reason, "taggers-disagree");
-  // An invalid screener output (null) is treated like one unclassified side.
-  assert.equal(routeLawChange({ taxonomy, change: lawChange(), screenerA: null, screenerB: taggerOutput(["deficit-and-debt"]), invertedIndex: fiscalIndex(), directIdIndex }).disposition, "routing-review");
+test("a law change carries the specific tags of either screener: one screener's unknown, invalid output, or other tag does not block them", () => {
+  const routedBy = (screenerA, screenerB) => routeLawChange({ taxonomy, change: lawChange(), screenerA, screenerB, invertedIndex: fiscalIndex(), directIdIndex });
+  for (const [screenerA, screenerB] of [
+    [taggerOutput(["unknown"]), taggerOutput(["deficit-and-debt"])],
+    [null, taggerOutput(["deficit-and-debt"])],
+    [taggerOutput(["vat-policy"]), taggerOutput(["deficit-and-debt"])]
+  ]) {
+    const route = routedBy(screenerA, screenerB);
+    assert.deepEqual([route.disposition, route.reason, route.routedTo.map(({ promiseId }) => promiseId)], ["routed", "screener-tags", [fiscalPromise.id]]);
+  }
+  // A tag given with a confidence below 0.5 does not count.
+  assert.equal(routedBy(taggerOutput(["unknown"]), taggerOutput(["deficit-and-debt"], { confidence: 0.4 })).disposition, "unrouted");
 });
 
 test("a law change amending a mapped act links directly, whatever the screeners' tags", () => {
@@ -71,20 +76,20 @@ test("a direct link and agreed tags together reach the promises of both", () => 
     { promiseId: "fixture-vat-promise", tagAssignment: taggerOutput(["vat-policy"]) }
   ]);
   const route = routeLawChange({ taxonomy, change: lawChange({ identifiers: ["cz-act-218-2000"] }), screenerA: taggerOutput(["vat-policy"]), screenerB: taggerOutput(["vat-policy"]), invertedIndex, directIdIndex });
-  assert.equal(route.reason, "direct-link-and-agreed-tags");
+  assert.equal(route.reason, "direct-link-and-tags");
   assert.deepEqual(route.routedTo.map(({ promiseId, routeBasis }) => [promiseId, routeBasis]), [
     [fiscalPromise.id, ["direct-structural-link"]],
     ["fixture-vat-promise", ["controlled-tag"]]
   ]);
 });
 
-test("a one-sided tag never routes, even when the pair also agrees on a specific tag", () => {
+test("a law change reaches the promises of every tag of both screeners", () => {
   const invertedIndex = buildInvertedIndex(taxonomy, [
     { promiseId: fiscalPromise.id, tagAssignment: taggerOutput(["deficit-and-debt"]) },
     { promiseId: "fixture-vat-promise", tagAssignment: taggerOutput(["vat-policy"]) }
   ]);
   const route = routeLawChange({ taxonomy, change: lawChange(), screenerA: taggerOutput(["deficit-and-debt", "vat-policy"]), screenerB: taggerOutput(["deficit-and-debt"]), invertedIndex, directIdIndex });
-  assert.deepEqual(route.routedTo.map(({ promiseId }) => promiseId), [fiscalPromise.id]);
+  assert.deepEqual(route.routedTo.map(({ promiseId, matchedTagIds }) => [promiseId, matchedTagIds]), [[fiscalPromise.id, ["deficit-and-debt"]], ["fixture-vat-promise", ["vat-policy"]]]);
 });
 
 test("a promise-topic assignment still pending human review is excluded from routing", () => {

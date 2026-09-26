@@ -142,16 +142,27 @@ export function directLinkForChange({ change, directIdIndex, invertedIndex }) {
 }
 
 /**
+ * The specific tags a law change carries: every specific tag either screener
+ * gives with a confidence of at least 0.5. An `unknown` or a low-confidence
+ * answer of one screener does not block the other's tags, and the relevance
+ * checks then read every pair in full.
+ */
+export function lawChangeTags(taxonomy, screenerA, screenerB) {
+  return [...new Set([...confidentSelectedTags(screenerA), ...confidentSelectedTags(screenerB)])]
+    .filter((tagId) => isAssessmentEligible(taxonomy, tagId))
+    .sort();
+}
+
+/**
  * Routes one substantive law change to promises by a direct legal-identifier
- * link and by the specific tags both screeners confidently agree on; a change
- * gets the promises of both. Without either it stays in `routing-review` or
- * `orphan-review` for human attention.
+ * link and by the specific tags of either screener; a change gets the
+ * promises of both. A change that reaches no promise is `unrouted`: it has
+ * no specific tag, or no promise holds one of its tags.
  */
 export function routeLawChange({ taxonomy, change, screenerA, screenerB, invertedIndex, directIdIndex }) {
   invariant(typeof change.changeId === "string" && change.changeId.length > 0, "routeLawChange requires a changeId");
   const directLink = directLinkForChange({ change, directIdIndex, invertedIndex });
-  const combined = combineTaggerResults(taxonomy, screenerA, screenerB);
-  const agreedTagIds = combined.state === "auto-candidate" ? combined.agreedTags : [];
+  const agreedTagIds = lawChangeTags(taxonomy, screenerA, screenerB);
   const tagPromiseIds = promiseIdsForTags(taxonomy, invertedIndex, agreedTagIds);
   // Each promise records how the change reached it, so the assessment
   // summary can count rejected changes by the tag or link that routed them.
@@ -171,9 +182,8 @@ export function routeLawChange({ taxonomy, change, screenerA, screenerB, inverte
     directLinkIdentifiers: route.direct ? directLink.matchedIdentifiers : []
   }));
   if (routedTo.length > 0) {
-    return { changeId: change.changeId, disposition: "routed", reason: directLink && tagPromiseIds.size > 0 ? "direct-link-and-agreed-tags" : directLink ? "direct-structural-link" : combined.reason, routedTo };
+    return { changeId: change.changeId, disposition: "routed", reason: directLink && tagPromiseIds.size > 0 ? "direct-link-and-tags" : directLink ? "direct-structural-link" : "screener-tags", routedTo };
   }
-  const disposition = combined.state === "orphan-review" || combined.state === "auto-candidate" ? "orphan-review" : "routing-review";
-  const reason = combined.state === "auto-candidate" ? "no-matching-promise-after-safe-assignment" : combined.reason;
-  return { changeId: change.changeId, disposition, reason, routedTo: [] };
+  const reason = agreedTagIds.length > 0 ? "no-promise-with-its-tags" : "no-specific-tag";
+  return { changeId: change.changeId, disposition: "unrouted", reason, routedTo: [] };
 }

@@ -5,7 +5,7 @@ import { buildCoverageAudit, renderCoverageAuditMarkdown } from "../scripts/lib/
 const pspSource = { id: "psp-core-2025", name: "Chamber of Deputies open data", primary: true, evidenceRole: "primary-record", enabled: true, coverage: { mode: "term-snapshot", note: "Whole 10th term." } };
 const counts = {
   primaryRecordsInWindowCount: 10, notAttributableSkippedCount: 7, conductRecordCount: 3, lawChangeCount: 5, technicalLawChangeCount: 2, substantiveLawChangeCount: 3,
-  routedLawChangeCount: 2, directLinkLawChangeCount: 1, routingReviewCount: 0, orphanReviewCount: 1, routedWithoutConductCount: 1, relevancePairCount: 4,
+  routedLawChangeCount: 2, directLinkLawChangeCount: 1, unroutedLawChangeCount: 1, routedWithoutConductCount: 1, relevancePairCount: 4,
   relevanceDroppedCount: 1, oversizedPackageCount: 0, invalidPromiseTaggerCount: 0, invalidScreenerCount: 1, invalidRelevanceCheckCount: 0
 };
 
