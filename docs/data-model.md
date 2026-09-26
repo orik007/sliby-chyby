@@ -31,7 +31,7 @@ A file in `data/promises` stores one item: `id`, `slug` (its URL), `partyPeriodI
 
 `automation/topic-routing/promise-tags.json` maps every promise ID to its reviewed specific routing tags ([evidence-pipeline.md](evidence-pipeline.md)); statements have none.
 
-`research/2025-election/rejected.json` lists every rejected occurrence with its `sourceId`, `locator`, exact `originalTextCz`, and `reason` code; a duplicate names the published item it repeats in `duplicateOf`. `research/2025-election/programme-text/` holds the text of each archived programme, page by page, extracted by `scripts/extract-programme-text.mjs`; `tests/promise-catalogue.test.mjs` checks that it is the text of the archived files and that every quote is its exact wording.
+`research/2025-election/rejected.json` lists every rejected occurrence with its `sourceId`, `locator`, exact `originalTextCz`, and `reason` code; a duplicate names the published item it repeats in `duplicateOf`. `research/2025-election/not-catalogued.json` lists every other programme passage with its `sourceId`, `locator`, exact `originalTextCz`, and `reason` code. `research/2025-election/programme-text/` holds the text of each archived programme, page by page, extracted by `scripts/extract-programme-text.mjs`; `tests/promise-catalogue.test.mjs` checks that it is the text of the archived files, that every quote and recorded passage is its exact wording, and that together they account for the whole text of every programme.
 
 ## Promise source archive
 

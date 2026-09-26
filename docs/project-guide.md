@@ -43,7 +43,7 @@ Party websites, press releases, and the media are not evidence. The public site 
 
 | Path | Purpose |
 | --- | --- |
-| `research/2025-election/` | Extracted text of the archived programmes and the non-public rejected occurrences. |
+| `research/2025-election/` | Extracted text of the archived programmes, the non-public rejected occurrences, and the record of passages that are not catalogued. |
 | `data/` | Public promises and statements, policy categories, sources, current-score revisions, and system status. |
 | `archive/promise-sources/` | Original promise-source files and their verified retrieval manifest; storage format is defined in `data-model.md`. |
 | `automation/pipeline-generation` | Audit-state generation; changing it makes the next run start from empty audit state. |

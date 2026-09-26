@@ -29,7 +29,7 @@ The test is one question: **can a concrete law change, vote, or government propo
 ## Splitting and duplicates
 
 - One promise is one commitment that can be assessed independently. A sentence with commitments on different subjects is split into separate promises that share the sentence as their quote; a list of similar measures on one subject stays one promise.
-- A sentence that only states the purpose or effect of the commitment before it stays in that commitment's quote.
+- A sentence that only states the purpose or effect of a commitment is not a separate item; the commitment's quote may include it.
 - The same commitment repeated in one programme (in the introduction, a chapter's list of priorities, and the chapter itself) is catalogued once, where it is stated most completely; its other occurrences are rejected as duplicates of it.
 - An introduction or priority line that only summarises commitments catalogued separately is rejected as such a summary.
 
@@ -52,6 +52,21 @@ A vague, general, or unmeasurable statement is never rejected; it is a statement
 - **Locator**: the PDF page where the quote begins, and the item's position in the programme (`sourceOrder`).
 
 Every quote is checked against the text of the archived programme (`research/2025-election/programme-text/`, produced by `scripts/extract-programme-text.mjs` from the files in `archive/promise-sources/`).
+
+## Coverage record
+
+Every passage of a programme that is not the quote of a promise, statement, or rejected occurrence is recorded in `research/2025-election/not-catalogued.json` with the reason it is not catalogued. The record is not a catalogue state: it is the evidence that no sentence was overlooked, and a test checks that the quotes and recorded passages together account for the whole text of every programme. Each passage records exactly one of these codes:
+
+| `reason` | Meaning |
+| --- | --- |
+| `heading` | A chapter or section heading, a list label, or a running header. |
+| `layout` | A page number, footer, bullet, table of contents, or other layout text. |
+| `description` | A description of the present state, of facts, or of the party itself. |
+| `justification` | A reason for a commitment, or its purpose or effect. |
+| `criticism` | Criticism of the current or a previous government or of other actors. |
+| `appeal` | An appeal to voters, a greeting, a signature, or a slogan without a commitment. |
+
+A sentence in which the party says what it will do, wants, rejects, or how something will be is never recorded here; it is a promise, a statement, or a rejected occurrence.
 
 ## Category and routing tags
 
