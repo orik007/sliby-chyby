@@ -3,7 +3,10 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import { validatePromiseRegistry } from "../scripts/lib/attribution.mjs";
-import { buildLawChangeEvidencePackage, estimatePackageTokens, lawChangesAtCutoff, lawChangeEvidenceId, maxPackageTokens, versionOfChange } from "../scripts/lib/topic-evidence-package.mjs";
+import { buildLawChangeEvidencePackage, estimatePackageTokens, lawChangesAtCutoff, lawChangeEvidenceId, versionOfChange } from "../scripts/lib/topic-evidence-package.mjs";
+import { estimateTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
+
+const assessorInstructions = "assessor instructions";
 
 const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8")));
 const fiscalPromise = registry.promises.find(({ id }) => id === "candidate-d5359e35a4c4");
@@ -64,6 +67,7 @@ const printFirstSeenOn = new Map([["43200", "2026-02-01"]]);
 test("a package holds every kept law change in full and the party's conduct on its print, once", () => {
   const vote = attributedVoteRecord();
   const pkg = buildLawChangeEvidencePackage({
+    assessorInstructions,
     promise: fiscalPromise,
     keptChanges: [{ change: lawChange(2), route }, { change: lawChange(1), route }],
     recordsByPrintId: new Map([["43200", [vote]]]),
@@ -89,17 +93,27 @@ test("a package holds every kept law change in full and the party's conduct on i
 
 test("nothing is trimmed: many law changes all stay in the package", () => {
   const keptChanges = Array.from({ length: 40 }, (_, index) => ({ change: { ...lawChange(index + 1), heading: `ČÁST ${index + 1}` }, route }));
-  const pkg = buildLawChangeEvidencePackage({ promise: fiscalPromise, keptChanges, recordsByPrintId: new Map([["43200", [attributedVoteRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
+  const pkg = buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges, recordsByPrintId: new Map([["43200", [attributedVoteRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
   assert.equal(pkg.evidence.filter(({ role }) => role === "law-change").length, 40);
 });
 
 test("a package above the normal-price input limit is marked oversized, not trimmed", () => {
-  const huge = "x".repeat(maxPackageTokens * 3 + 10);
-  const pkg = buildLawChangeEvidencePackage({ promise: fiscalPromise, keptChanges: [{ change: lawChange(1, huge), route }], recordsByPrintId: new Map([["43200", [attributedVoteRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
+  const huge = "x".repeat(maxRequestInputTokens * 3 + 10);
+  const pkg = buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: [{ change: lawChange(1, huge), route }], recordsByPrintId: new Map([["43200", [attributedVoteRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
   assert.equal(pkg.generation.oversized, true);
-  assert.ok(pkg.generation.estimatedTokens > maxPackageTokens);
+  assert.ok(pkg.generation.estimatedTokens > maxRequestInputTokens);
   assert.equal(pkg.evidence.find(({ role }) => role === "law-change").structuredFacts.versions.proposed.textCz, huge);
   assert.equal(estimatePackageTokens({ text: "abc" }), Math.ceil(JSON.stringify({ text: "abc" }).length / 3));
+});
+
+test("the assessor instructions count towards the input limit of a package", () => {
+  const build = (text, instructions) => buildLawChangeEvidencePackage({ assessorInstructions: instructions, promise: fiscalPromise, keptChanges: [{ change: lawChange(1, text), route }], recordsByPrintId: new Map([["43200", [attributedVoteRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
+  // A text that leaves room for short instructions but not for long ones.
+  const text = "x".repeat((maxRequestInputTokens - 6_000) * 3);
+  assert.equal(build(text, assessorInstructions).generation.oversized, false);
+  const longInstructions = "i".repeat(10_000 * 3);
+  assert.equal(estimateTokens(longInstructions), 10_000);
+  assert.equal(build(text, longInstructions).generation.oversized, true);
 });
 
 test("a law change without attributable conduct of the promise's party builds no package", () => {
@@ -116,9 +130,9 @@ test("a law change without attributable conduct of the promise's party builds no
     url: "https://public.psp.cz/sqw/hlasy.sqw?g=2",
     payload: { externalVoteId: "2", counts: { yes: 50, no: 40 }, linkedPrints: [{ externalPrintId: "43200", historyContexts: [{ actionCz: "souhlas" }] }] }
   });
-  const pkg = buildLawChangeEvidencePackage({ promise: fiscalPromise, keptChanges: [{ change: lawChange(1), route }], recordsByPrintId: new Map([["43200", [unattributed]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
+  const pkg = buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: [{ change: lawChange(1), route }], recordsByPrintId: new Map([["43200", [unattributed]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
   assert.equal(pkg, null);
-  assert.equal(buildLawChangeEvidencePackage({ promise: fiscalPromise, keptChanges: [], recordsByPrintId: new Map(), printFirstSeenOn, collectorRun, asOf: "2026-06-15" }), null);
+  assert.equal(buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: [], recordsByPrintId: new Map(), printFirstSeenOn, collectorRun, asOf: "2026-06-15" }), null);
 });
 
 function submissionRecord() {
@@ -142,6 +156,7 @@ test("each conduct names the version it concerns: the submission the proposal, t
     approved: { heading: "ČÁST PRVNÍ", titleCz: "Změna", textCz: "Schodek nejvýše 3 %.", document: null }
   };
   const pkg = buildLawChangeEvidencePackage({
+    assessorInstructions,
     promise: fiscalPromise,
     keptChanges: [{ change: lawChange(1, null, versions), route }],
     recordsByPrintId: new Map([["43200", [submissionRecord(), attributedVoteRecord({ payload: { linkedPrints: [{ externalPrintId: "43200", printKindId: "1", historyContexts: [{ actionCz: "souhlas", stageCz: "3. čtení" }] }] } })]]]),
@@ -170,7 +185,7 @@ test("a vote after the Senate's return brings the Senate resolution into the pac
   const resolution = { partNumber: 6, document: { filename: "t009006.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=6" }, textCz: "Senát vrací návrh zákona ve znění pozměňovacích návrhů." };
   const change = (index) => ({ ...lawChange(index), versions: { proposed: lawChange(index).versions.proposed, approved: { sameAs: "proposed", document: null } }, senateResolutions: [resolution] });
   const afterSenate = attributedVoteRecord({ id: "psp--vote-senate", occurredAt: "2026-05-26T00:00:00", payload: { linkedPrints: [{ externalPrintId: "43200", printKindId: "1", historyContexts: [{ actionCz: "pozm. přijat", stageCz: "Sněmovna (Senát)" }] }] } });
-  const pkg = buildLawChangeEvidencePackage({ promise: fiscalPromise, keptChanges: [{ change: change(1), route }, { change: change(2), route }], recordsByPrintId: new Map([["43200", [afterSenate]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
+  const pkg = buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: [{ change: change(1), route }, { change: change(2), route }], recordsByPrintId: new Map([["43200", [afterSenate]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
   const resolutions = pkg.evidence.filter(({ role }) => role === "senate-resolution");
   assert.equal(resolutions.length, 1);
   assert.equal(resolutions[0].structuredFacts.textCz, resolution.textCz);
@@ -181,7 +196,7 @@ test("a vote after the Senate's return brings the Senate resolution into the pac
   assert.deepEqual([concern.version, concern.withSenateResolution], ["approved", true]);
 
   // Without such a vote, the resolution stays out of the package.
-  const noReturn = buildLawChangeEvidencePackage({ promise: fiscalPromise, keptChanges: [{ change: change(1), route }], recordsByPrintId: new Map([["43200", [attributedVoteRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
+  const noReturn = buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: [{ change: change(1), route }], recordsByPrintId: new Map([["43200", [attributedVoteRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
   assert.equal(noReturn.evidence.some(({ role }) => role === "senate-resolution"), false);
 });
 
@@ -190,7 +205,7 @@ test("a package holds only the versions up to the latest one its conduct concern
     proposed: { heading: "ČÁST PRVNÍ", titleCz: "Změna", textCz: "Schodek nejvýše 2 %.", document: null },
     approved: { heading: "ČÁST PRVNÍ", titleCz: "Změna", textCz: "Schodek nejvýše 3 %.", document: null }
   };
-  const pkg = buildLawChangeEvidencePackage({ promise: fiscalPromise, keptChanges: [{ change: lawChange(1, null, versions), route }], recordsByPrintId: new Map([["43200", [submissionRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
+  const pkg = buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: [{ change: lawChange(1, null, versions), route }], recordsByPrintId: new Map([["43200", [submissionRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
   assert.deepEqual(Object.keys(pkg.evidence.find(({ role }) => role === "law-change").structuredFacts.versions), ["proposed"]);
 });
 

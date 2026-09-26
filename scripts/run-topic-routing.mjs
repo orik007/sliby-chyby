@@ -20,7 +20,8 @@ import {
 import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
 import { isPotentiallyAttributable, validatePromiseRegistry } from "./lib/attribution.mjs";
 import { buildInvertedIndex, derivePromiseTopicTags, routeLawChange } from "./lib/topic-routing.mjs";
-import { attributableConductOnChange, buildLawChangeEvidencePackage, lawChangesAtCutoff, maxPackageTokens } from "./lib/topic-evidence-package.mjs";
+import { attributableConductOnChange, buildLawChangeEvidencePackage, lawChangesAtCutoff } from "./lib/topic-evidence-package.mjs";
+import { loadAssessmentPrompts, maxRequestInputTokens } from "./lib/assessment-config.mjs";
 import { cachePersister, loadModelCache, mapWithConcurrency, pairedModelCall, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 
@@ -259,12 +260,13 @@ if (!runFailure) {
   }
   log(`building evidence packages for ${keptByPromise.size} promises`);
   const collectorRunHash = sha256(collectorRun);
+  const assessorInstructions = (await loadAssessmentPrompts()).assessor.instructions;
   for (const [promiseId, keptChanges] of [...keptByPromise].sort(([left], [right]) => left.localeCompare(right))) {
-    const evidencePackage = buildLawChangeEvidencePackage({ promise: promiseById.get(promiseId), keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash, asOf: args.asOf });
+    const evidencePackage = buildLawChangeEvidencePackage({ promise: promiseById.get(promiseId), keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash, asOf: args.asOf, assessorInstructions });
     if (!evidencePackage) continue;
     await writeFile(resolve(packageDirectory, `${promiseId}.json`), `${JSON.stringify(evidencePackage, null, 2)}\n`, { flag: "wx" });
     builtPackages.push({ promiseId, lawChangeCount: evidencePackage.generation.lawChangeCount, conductCount: evidencePackage.generation.conductCount, estimatedTokens: evidencePackage.generation.estimatedTokens, oversized: evidencePackage.generation.oversized });
-    if (evidencePackage.generation.oversized) log(`${promiseId}: package of about ${evidencePackage.generation.estimatedTokens} tokens exceeds ${maxPackageTokens}; it is reported for human review and not assessed`);
+    if (evidencePackage.generation.oversized) log(`${promiseId}: package of about ${evidencePackage.generation.estimatedTokens} tokens exceeds ${maxRequestInputTokens} together with the assessor instructions; it is reported for human review and not assessed`);
   }
 }
 
