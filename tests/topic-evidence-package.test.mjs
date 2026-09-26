@@ -97,7 +97,7 @@ test("nothing is trimmed: many law changes all stay in the package", () => {
   assert.equal(pkg.evidence.filter(({ role }) => role === "law-change").length, 40);
 });
 
-test("a package above the normal-price input limit is marked oversized, not trimmed", () => {
+test("a package larger than the models can read is marked oversized, not trimmed", () => {
   const huge = "x".repeat(maxRequestInputTokens * charactersPerToken + 10);
   const pkg = buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: [{ change: lawChange(1, huge), route }], recordsByPrintId: new Map([["43200", [attributedVoteRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
   assert.equal(pkg.generation.oversized, true);
