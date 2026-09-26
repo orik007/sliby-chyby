@@ -75,7 +75,7 @@ test("persists an isolated double-invalid failure, then retires it after a newer
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
   await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
@@ -119,7 +119,7 @@ test("the per-run cap sends no more packages to the paid assessors, and the rest
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
   await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
@@ -148,7 +148,7 @@ test("an interrupted batch keeps every finished assessment, and the next run ass
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
   await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
@@ -180,7 +180,7 @@ test("an oversized package is never sent to the assessors and is reported for hu
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
   await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
@@ -204,7 +204,7 @@ test("the review pull request lists every current proposal that changes the publ
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
   await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
@@ -260,7 +260,7 @@ test("a proposal for a promise without a public score is listed as a change", as
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
   await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
@@ -278,7 +278,7 @@ test("a human review stays listed until a public revision follows it, and a with
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
   await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
@@ -332,7 +332,7 @@ test("in the workflow, each listed promise links to its review page on the audit
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
   await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);

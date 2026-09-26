@@ -10,7 +10,7 @@ import { versionKeys, versionLabels } from "./print-parts.mjs";
  * and checking whether a routed law change is relevant to one promise.
  */
 export const screeningPromptVersion = "law-change-screener-v2";
-export const relevancePromptVersion = "relevance-check-v1";
+export const relevancePromptVersion = "relevance-check-v2";
 
 async function loadPrompt(version, root) {
   const instructions = await readFile(resolve(root, `automation/prompts/${version}.md`), "utf8");
@@ -36,11 +36,17 @@ const printKindLabels = { 1: "government bill", 2: "member bill", 3: "state budg
  * only into the evidence package.
  */
 export function lawChangeText(change) {
+  // An effective date equal to that of the version before is named, not
+  // repeated.
+  let previousEffective = null;
   const versions = versionKeys.filter((version) => change.versions[version]).map((version) => {
     const entry = change.versions[version];
     const label = `Version: ${versionLabels[version]}`;
     if (entry.removed) return `${label}\nThis part is not in this text: it was removed during the debate.`;
-    const effective = entry.effectiveCz ? `\nEffective date of this text (účinnost):\n${entry.effectiveCz}` : "";
+    const effective = !entry.effectiveCz ? ""
+      : entry.effectiveCz === previousEffective?.text ? `\nEffective date of this text (účinnost): the same as in the ${versionLabels[previousEffective.version]}.`
+      : `\nEffective date of this text (účinnost):\n${entry.effectiveCz}`;
+    if (entry.effectiveCz) previousEffective = { version, text: entry.effectiveCz };
     if (entry.sameAs) return `${label}\nThe same text as the ${versionLabels[entry.sameAs]}.${effective}`;
     return entry.textCz === null ? `${label}\nNot available as a DOCX or DOC file; only the print title is known.` : `${label}\n${entry.textCz}${effective}`;
   });

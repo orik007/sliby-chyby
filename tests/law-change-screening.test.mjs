@@ -58,7 +58,7 @@ test("the screening and relevance prompts state the conservative rules", async (
   assert.match(screening.instructions, /When in doubt, the change is substantive/);
   assert.match(screening.instructions, /even one number/);
   const relevance = await loadRelevancePrompt();
-  assert.equal(relevance.version, "relevance-check-v1");
+  assert.equal(relevance.version, "relevance-check-v2");
   assert.match(relevance.instructions, /When in doubt, answer relevant/);
 });
 

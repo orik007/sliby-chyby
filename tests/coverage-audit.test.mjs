@@ -47,7 +47,7 @@ test("a routed promise without a kept law change, one with a package, and one wi
     routingRun: routingRun({
       lawChanges: [
         { route: { disposition: "routed", routedTo: [{ promiseId: "p1" }, { promiseId: "p2" }, { promiseId: "p3" }] } },
-        { route: { disposition: "orphan-review", routedTo: [] } }
+        { route: { disposition: "unrouted", routedTo: [] } }
       ],
       packages: [{ promiseId: "p2", lawChangeCount: 1, oversized: false }, { promiseId: "p3", lawChangeCount: 1, oversized: true }]
     }),

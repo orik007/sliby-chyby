@@ -171,6 +171,9 @@ test("reads the later-text links from a print's history page and the DOCX of a l
     passed: null,
     referredToSenate: "https://www.psp.cz/sqw/text/tiskt.sqw?o=10&ct=163&ct1=2"
   });
+  // An entry without its own link never takes the link of the next entry,
+  // such as the Senate's document.
+  assert.equal(laterTextLinks('<p>Návrh zákona ve znění, ve kterém byl postoupen Senátu, doručen Senátu.<br>Dokument Senátu rozeslán jako tisk <B><a href="/sqw/text/tiskt.sqw?o=10&ct=163&ct1=3">163/3</a></B>.</p>', historyUrl).referredToSenate, null);
   // The link is found by its text-page kind, not by the surrounding markup.
   assert.equal(laterTextLinks('<div><a title="Schválený text" class="x" href="/sqw/text/tiskt.sqw?o=10&amp;ct=5&amp;ct1=0&amp;v=PZ&amp;pn=2&amp;pt=1">text</a></div>', historyUrl).approved, "https://www.psp.cz/sqw/text/tiskt.sqw?o=10&ct=5&ct1=0&v=PZ&pn=2&pt=1");
   assert.throws(() => laterTextLinks('<a href="https://evil.example/sqw/text/tiskt.sqw?v=SZ">x</a>', historyUrl), /outside the PSP allowlist/);
@@ -265,6 +268,13 @@ test("the effective-date part is no law change; its text goes with every version
   assert.ok(text.includes(`Version: text approved by the Chamber\nThe same text as the proposed text.\nEffective date of this text (účinnost):\nČl. VIII\n${approvedDate}`));
   assert.ok(text.includes(`Effective date of this text (účinnost):\nČl. VIII\n${proposedDate}`));
   assert.doesNotMatch(text, /Part: ČÁST DRUHÁ/);
+  // An unchanged effective date is named, not repeated.
+  const unchanged = lawChangeText(lawChangesOfPrint({ print, texts: {
+    proposed: { document: doc, paragraphs: [...partOne, ...effective(proposedDate)] },
+    approved: { document: doc, paragraphs: [...partOne, ...effective(proposedDate)] }
+  } })[0]);
+  assert.equal(unchanged.split(proposedDate).length, 2);
+  assert.match(unchanged, /The same text as the proposed text\.\nEffective date of this text \(účinnost\): the same as in the proposed text\./);
 
   // A part after the effective-date part keeps its position in the change ID.
   const [later] = lawChangesOfPrint({ print, texts: { proposed: { document: doc, paragraphs: [...effective(proposedDate).map((paragraph) => paragraph === "ČÁST DRUHÁ" ? "ČÁST PRVNÍ" : paragraph), ...partOne.map((paragraph) => paragraph === "ČÁST PRVNÍ" ? "ČÁST DRUHÁ" : paragraph)] } } });

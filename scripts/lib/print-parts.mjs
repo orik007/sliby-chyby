@@ -208,7 +208,9 @@ export function laterTextLinks(historyHtml, pageUrl) {
   }
   // "Návrh zákona ve znění, ve kterém byl postoupen Senátu rozeslán … jako
   // tisk 163/2": the approved text as a sub-print of the bill.
-  const referred = /ve\s+znění,\s+ve\s+kterém\s+byl\s+postoupen\s+Senátu[^<]*(?:<(?!\/p\b)[^>]*>[^<]*)*?<a\s+href="([^"]*tiskt\.sqw\?[^"]*)"/i.exec(String(historyHtml));
+  // The link must follow "jako tisk" within the same entry, which ends at
+  // a line break or the end of the paragraph.
+  const referred = /ve\s+znění,\s+ve\s+kterém\s+byl\s+postoupen\s+Senátu(?:(?!<br\b|<\/p\b|<\/li\b)[\s\S])*?jako\s+tisk\s*(?:<(?!a\b|br\b|\/p\b)[^>]*>\s*)*<a\s+href="([^"]*tiskt\.sqw\?[^"]*)"/i.exec(String(historyHtml));
   if (referred) links.referredToSenate = pspUrl(referred[1], pageUrl);
   return links;
 }

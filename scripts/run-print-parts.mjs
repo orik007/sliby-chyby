@@ -58,7 +58,7 @@ const wordOptions = {
   docx: { maxBytes: 20_000_000, expectedContentTypes: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"] },
   doc: { maxBytes: 20_000_000, expectedContentTypes: ["application/msword", "application/octet-stream"] }
 };
-const extractParagraphs = { docx: async (bytes) => extractDocxParagraphs(bytes), doc: extractDocParagraphs };
+const extractParagraphs = { docx: extractDocxParagraphs, doc: extractDocParagraphs };
 const decodePage = (page) => new TextDecoder("windows-1250").decode(page.bytes);
 
 // A downloaded DOCX or DOC file that cannot be read as text (for example a
@@ -98,6 +98,17 @@ async function laterText(source, print, version, url, warnings) {
   return fetchWordText(source, docxUrl, laterTextNames[version](print.number), "docx", warnings, print.number, version);
 }
 
+// The approved text of a bill the Senate rejected: the sub-print with the
+// text referred to the Senate. A sub-print without a readable Word file is
+// reported like a later text without one.
+async function referredText(source, print, url, warnings) {
+  const text = await fetchPageText(source, url, print.number, warnings, "approved");
+  if (!text && !warnings.some(({ version }) => version === "approved")) {
+    warnings.push({ printNumber: print.number, kind: "later-text-without-docx", version: "approved", detail: "the approved text (the sub-print referred to the Senate) is listed without a DOCX or DOC file" });
+  }
+  return text;
+}
+
 async function senateResolution(source, termNumber, print, partNumber, warnings) {
   const resolution = await fetchPrintPageText(source, termNumber, print.number, partNumber, warnings, "senate-resolution");
   if (!resolution) warnings.push({ printNumber: print.number, kind: "senate-resolution-without-text", detail: `the Senate resolution ${print.number}/${partNumber} has no readable DOCX or DOC text` });
@@ -117,7 +128,7 @@ async function fetchPrintTexts(source, print, termNumber) {
   // the text referred to the Senate, when the history links one.
   const approvedText = links.approved
     ? laterText(source, print, "approved", links.approved, warnings)
-    : links.referredToSenate ? fetchPageText(source, links.referredToSenate, print.number, warnings, "approved") : null;
+    : links.referredToSenate ? referredText(source, print, links.referredToSenate, warnings) : null;
   const [approved, passed, ...resolutions] = await Promise.all([
     approvedText,
     links.passed ? laterText(source, print, "passed", links.passed, warnings) : null,

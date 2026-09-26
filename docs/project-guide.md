@@ -28,7 +28,7 @@ official records only (active: Chamber of Deputies open data)
   -> only records that can be attributable conduct continue
   -> each concerned print split into law changes (one part of its official text each)
   -> two screeners read every law change: substantive or technical, and topic tags
-  -> routing of substantive changes to confirmed promises: direct legal-identifier links or two agreeing screeners
+  -> routing of substantive changes to confirmed promises: direct legal-identifier links or the specific tags of either screener
   -> attribution: decisive club vote, member bill, or government proposal on the change's print (scoring.md)
   -> two relevance checks per promise and law change
   -> evidence package per promise: every kept law change in full with the party's conduct
