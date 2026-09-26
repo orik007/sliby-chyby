@@ -2,11 +2,13 @@
 
 ## Authority
 
-This is the only operational definition of how one promise is scored: score values, attributable conduct, and the current score. It is a **confirmed decision**. The assessors and the arbiter receive this document unchanged, so it holds only what scoring a promise needs. Promise lifecycle is defined only in [promise-selection.md](promise-selection.md), how evidence is collected only in [evidence-pipeline.md](evidence-pipeline.md), and the party aggregate only in [slava-index.md](slava-index.md).
+This is the only operational definition of how one promise is scored: score values, attributable conduct, and the current score. It is a **confirmed decision**. The assessors and the arbiter receive this document unchanged, so it holds only what scoring a promise needs. The promise catalogue is defined only in [promise-selection.md](promise-selection.md), how evidence is collected only in [evidence-pipeline.md](evidence-pipeline.md), and the party aggregate only in [slava-index.md](slava-index.md).
 
 ## Score values
 
-Every confirmed promise has one current numerical score. The default is `0`, except for a documented maintenance baseline as defined below. A score is not a lifecycle state and never decides whether a promise is public.
+Every promise has one current numerical score. The default is `0`, except for a documented maintenance baseline as defined below. A score is not a catalogue state and never decides whether a promise is public. A statement ([promise-selection.md](promise-selection.md)) has no score.
+
+A promise is its title and its exact wording. The title names the one commitment that is assessed; the wording is what the party wrote and can include a neighbouring sentence for context, which is not part of the commitment. The title never adds anything the wording does not say.
 
 | Score | Public label | Meaning |
 | ---: | --- | --- |
@@ -44,7 +46,7 @@ For each changed evidence package, apply this order:
 
 1. Establish the relevant facts from the supplied official evidence.
 2. Establish whether the conduct is attributable to the party under the table above.
-3. Compare the conduct with the exact promise, without making the promise more specific.
+3. Compare the conduct with the commitment named by the promise title, read with its exact wording, without making the promise more specific.
 4. Choose the single score that best describes the current position.
 
 Contradictory evidence stays in the audit. Evidence items are not separately scored and never averaged. If the package cannot support a fair conclusion, the current score stays unchanged; that lack of conclusion is not a score status.

@@ -94,9 +94,9 @@ export function directLegalIdentifierIndex(taxonomy) {
 }
 
 /**
- * A content fingerprint of everything a tagging brief actually derives from
+ * A content fingerprint of everything a screening brief actually derives from
  * the taxonomy -- not just `taxonomyVersion`. `taxonomyDefinitionsText`
- * (scripts/lib/topic-tagger.mjs) renders `taxonomy.tags` and each tag's
+ * (scripts/lib/model-output.mjs) renders `taxonomy.tags` and each tag's
  * `czechAliases`/`inclusionExamples`/`exclusionExamples` in their exact
  * given order, so this must hash that same exact order rather than a sorted
  * one: reordering a tag definition or its aliases changes the precise text

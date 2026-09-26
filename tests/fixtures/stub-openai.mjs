@@ -11,10 +11,6 @@ function tagOf(text) {
 }
 
 function answer(name, input, model) {
-  if (name === "topic_tag_assignment") {
-    const tag = tagOf(input.text);
-    return { tags: [tag], confidence: tag === "unknown" ? 0.1 : 0.9 };
-  }
   if (name === "law_change_screening") {
     // The stub takes the amendment of the Customs Administration Act for a
     // technical change, so a run has one.

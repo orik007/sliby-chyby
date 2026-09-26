@@ -1,15 +1,13 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { buildCoverageAudit, renderCoverageAuditMarkdown } from "./lib/coverage-audit.mjs";
-import { loadPublishedPromiseIds, publishedPromiseRegistry } from "./lib/published-promises.mjs";
+import { loadTrackedPromises } from "./lib/published-promises.mjs";
 
 function parseArgs(args) {
   const options = {
     collectorRun: null,
     topicRoutingRun: null,
     printParts: null,
-    promises: "automation/promise-registry/promises.json",
-    publishedPromises: "data/promises",
     sources: "automation/collectors/sources.json",
     proposals: "automation/review-proposals/manifest.json",
     output: null,
@@ -20,8 +18,6 @@ function parseArgs(args) {
     if (arg === "--collector-run") options.collectorRun = args[++index];
     else if (arg === "--topic-routing-run") options.topicRoutingRun = args[++index];
     else if (arg === "--print-parts") options.printParts = args[++index];
-    else if (arg === "--promises") options.promises = args[++index];
-    else if (arg === "--published-promises") options.publishedPromises = args[++index];
     else if (arg === "--sources") options.sources = args[++index];
     else if (arg === "--proposals") options.proposals = args[++index];
     else if (arg === "--output") options.output = args[++index];
@@ -34,14 +30,13 @@ function parseArgs(args) {
 
 const args = parseArgs(process.argv.slice(2));
 const readJson = async (path) => JSON.parse(await readFile(resolve(path), "utf8"));
-const promiseRegistry = publishedPromiseRegistry(await readJson(args.promises), await loadPublishedPromiseIds(args.publishedPromises));
 const audit = buildCoverageAudit({
   collectorRun: await readJson(args.collectorRun),
   // A partial routing run would report unchecked promises as "no routed
   // law change"; buildCoverageAudit refuses it.
   routingRun: await readJson(args.topicRoutingRun),
   printParts: args.printParts ? await readJson(args.printParts) : null,
-  promiseRegistry,
+  trackedPromises: await loadTrackedPromises(),
   sourceRegistry: await readJson(args.sources),
   proposalManifest: await readJson(args.proposals)
 });

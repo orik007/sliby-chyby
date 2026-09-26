@@ -46,13 +46,13 @@ function promiseResults(routingRun, promises) {
   }));
 }
 
-export function buildCoverageAudit({ collectorRun, routingRun, printParts, promiseRegistry, sourceRegistry, proposalManifest }) {
+export function buildCoverageAudit({ collectorRun, routingRun, printParts, trackedPromises, sourceRegistry, proposalManifest }) {
   invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
   invariant(routingRun?.schemaVersion === "1.0.0" && Array.isArray(routingRun.lawChanges) && Array.isArray(routingRun.builtPackages), "Invalid law-change routing run");
   invariant(routingRun.completed === true, "A coverage audit needs a completed law-change routing run");
-  invariant(Array.isArray(promiseRegistry?.promises), "Invalid promise registry");
+  invariant(Array.isArray(trackedPromises?.promises), "Invalid tracked promises");
   invariant(Array.isArray(sourceRegistry?.sources), "Invalid source registry");
-  const results = promiseResults(routingRun, promiseRegistry.promises);
+  const results = promiseResults(routingRun, trackedPromises.promises);
   const proposals = activeProposals(proposalManifest);
   const sources = new Map(sourceRegistry.sources.map((source) => [source.id, source]));
   const recordsBySource = new Map();
@@ -92,7 +92,7 @@ export function buildCoverageAudit({ collectorRun, routingRun, printParts, promi
     };
   });
 
-  const promises = promiseRegistry.promises.map((promise) => {
+  const promises = trackedPromises.promises.map((promise) => {
     const result = results.get(promise.id);
     const proposal = proposals.get(promise.id) ?? null;
     const state = stateFor(result, proposal);
@@ -146,7 +146,7 @@ export function buildCoverageAudit({ collectorRun, routingRun, printParts, promi
       relevancePairs: routingRun.counts.relevancePairCount,
       relevanceDropped: routingRun.counts.relevanceDroppedCount,
       oversizedPackages: routingRun.counts.oversizedPackageCount,
-      invalidModelOutputs: routingRun.counts.invalidPromiseTaggerCount + routingRun.counts.invalidScreenerCount + routingRun.counts.invalidRelevanceCheckCount,
+      invalidModelOutputs: routingRun.counts.invalidScreenerCount + routingRun.counts.invalidRelevanceCheckCount,
       printParts: printParts?.quality ?? null
     },
     stateCounts,
@@ -173,7 +173,7 @@ export function renderCoverageAuditMarkdown(audit) {
   const lines = [
     "# Evidence coverage audit",
     "",
-    `Generated for ${audit.promiseCount} confirmed promises; assessment cutoff ${audit.assessmentCutoff}.`,
+    `Generated for ${audit.promiseCount} promises; assessment cutoff ${audit.assessmentCutoff}.`,
     "",
     "> This is a pipeline-coverage report, not a political assessment. No routed law change is not zero points.",
     "",

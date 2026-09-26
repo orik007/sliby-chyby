@@ -3,8 +3,8 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { loadEnvFile } from "node:process";
 import { sha256 } from "./lib/collector-core.mjs";
-import { loadPublishedPromiseIds, publishedPromiseRegistry } from "./lib/published-promises.mjs";
-import { buildPromiseTaggingBrief, loadTaggingPrompt, requestTagAssignment, taggingRuntimeConfig, validateTagAssignmentOutput } from "./lib/topic-tagger.mjs";
+import { loadTrackedPromises } from "./lib/published-promises.mjs";
+import { pairedModelRuntimeConfig } from "./lib/model-output.mjs";
 import {
   buildRelevanceBrief,
   buildScreeningBrief,
@@ -18,16 +18,16 @@ import {
   validateScreeningOutput
 } from "./lib/law-change-screening.mjs";
 import { directLegalIdentifierIndex, taxonomyHash, validateTaxonomy } from "./lib/topic-taxonomy.mjs";
-import { isPotentiallyAttributable, validatePromiseRegistry } from "./lib/attribution.mjs";
-import { buildInvertedIndex, derivePromiseTopicTags, routeLawChange } from "./lib/topic-routing.mjs";
+import { isPotentiallyAttributable } from "./lib/attribution.mjs";
+import { buildInvertedIndex, routeLawChange } from "./lib/topic-routing.mjs";
 import { attributableConductOnChange, buildLawChangeEvidencePackage, lawChangesAtCutoff } from "./lib/topic-evidence-package.mjs";
 import { loadAssessmentPrompts, maxRequestInputTokens } from "./lib/assessment-config.mjs";
 import { cachePersister, loadModelCache, mapWithConcurrency, pairedModelCall, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 
 /**
- * Screens every law change, routes the substantive ones to confirmed
- * promises, checks the relevance of each promise and law change, and builds
+ * Screens every law change, routes the substantive ones to promises by
+ * their reviewed tags, checks the relevance of each promise and law change, and builds
  * one evidence package per promise (docs/evidence-pipeline.md, steps 4-7).
  * Every paid result is cached at once; a stage that fails stops the run
  * after the report and the caches are written.
@@ -44,8 +44,6 @@ function parseArgs(args) {
     collectorRun: null,
     printParts: null,
     taxonomy: "automation/topic-routing/taxonomy-v2.json",
-    promiseRegistry: "automation/promise-registry/promises.json",
-    publishedPromises: "data/promises",
     tagCache: "automation/topic-routing/tag-cache",
     asOf: null,
     output: "automation/runs/pipeline/topic-routing",
@@ -57,8 +55,6 @@ function parseArgs(args) {
     if (arg === "--collector-run") options.collectorRun = args[++index];
     else if (arg === "--print-parts") options.printParts = args[++index];
     else if (arg === "--taxonomy") options.taxonomy = args[++index];
-    else if (arg === "--promises") options.promiseRegistry = args[++index];
-    else if (arg === "--published-promises") options.publishedPromises = args[++index];
     else if (arg === "--tag-cache") options.tagCache = args[++index];
     else if (arg === "--as-of") options.asOf = args[++index];
     else if (arg === "--output") options.output = args[++index];
@@ -88,27 +84,27 @@ function recordPrintIds(record) {
 }
 
 const args = parseArgs(process.argv.slice(2));
-const runtime = taggingRuntimeConfig();
+const runtime = pairedModelRuntimeConfig();
 invariant(Number.isInteger(runtime.concurrency) && runtime.concurrency > 0 && runtime.concurrency <= 16, "SLIBY_TAGGING_CONCURRENCY must be an integer from 1 to 16");
 const apiKey = apiKeyFor(runtime.provider);
-const prompts = { tagging: await loadTaggingPrompt(), screening: await loadScreeningPrompt(), relevance: await loadRelevancePrompt() };
+const prompts = { screening: await loadScreeningPrompt(), relevance: await loadRelevancePrompt() };
 const taxonomy = validateTaxonomy(JSON.parse(await readFile(resolve(args.taxonomy), "utf8")));
 const taxonomyContentHash = taxonomyHash(taxonomy);
 const directIdIndex = directLegalIdentifierIndex(taxonomy);
 const printParts = JSON.parse(await readFile(resolve(args.printParts), "utf8"));
 invariant(printParts?.schemaVersion === "1.0.0" && printParts.prints && typeof printParts.prints === "object", "Invalid --print-parts file");
 
-const registry = validatePromiseRegistry(JSON.parse(await readFile(resolve(args.promiseRegistry), "utf8")));
-let publishedRegistry = publishedPromiseRegistry(registry, await loadPublishedPromiseIds(args.publishedPromises));
+let { promises } = await loadTrackedPromises();
 // A sample run keeps the first N promises or law changes (deterministic) so
 // its spend and output stay bounded; a full run uses everything.
-if (args.samplePromises !== null) publishedRegistry = { ...publishedRegistry, promises: publishedRegistry.promises.slice(0, args.samplePromises) };
-const promiseById = new Map(publishedRegistry.promises.map((promise) => [promise.id, promise]));
+if (args.samplePromises !== null) promises = promises.slice(0, args.samplePromises);
+const promiseById = new Map(promises.map((promise) => [promise.id, promise]));
+const invertedIndex = buildInvertedIndex(taxonomy, promises);
 
 const collectorRun = JSON.parse(await readFile(resolve(args.collectorRun), "utf8"));
 invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
 const cutoff = `${args.asOf}T23:59:59.999Z`;
-const trackedPartyIds = [...new Set(publishedRegistry.promises.map(({ partyId }) => partyId))].sort();
+const trackedPartyIds = [...new Set(promises.map(({ partyId }) => partyId))].sort();
 const primaryRecordsInWindow = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff));
 // Only records that can be attributable conduct of a tracked party continue;
 // they link law changes to the party's votes and submissions.
@@ -132,19 +128,17 @@ let changes = lawChangesAtCutoff(Object.entries(printParts.prints)
 if (args.sampleChanges !== null) changes = changes.slice(0, args.sampleChanges);
 
 const cachePaths = {
-  promiseTags: resolve(args.tagCache, "promise-tags.jsonl"),
   screening: resolve(args.tagCache, "law-change-screening.jsonl"),
   relevance: resolve(args.tagCache, "relevance-checks.jsonl")
 };
 const caches = {
-  promiseTags: await loadModelCache(cachePaths.promiseTags),
   screening: await loadModelCache(cachePaths.screening),
   relevance: await loadModelCache(cachePaths.relevance)
 };
 const persist = Object.fromEntries(Object.entries(caches).map(([key, cache]) => [key, cachePersister(cache)]));
 const models = { provider: runtime.provider, modelA: runtime.modelA, modelB: runtime.modelB };
-const usage = { promiseTagging: [], screening: [], relevance: [] };
-const invalid = { promiseTagging: 0, screening: 0, relevance: 0 };
+const usage = { screening: [], relevance: [] };
+const invalid = { screening: 0, relevance: 0 };
 let runFailure = null;
 
 async function stage(name, items, worker, onDone) {
@@ -157,38 +151,7 @@ async function stage(name, items, worker, onDone) {
   }
 }
 
-// 1. Promise tags (docs/evidence-pipeline.md, Route).
-log(`promise tagging: ${publishedRegistry.promises.length} promises (${runtime.modelA} + ${runtime.modelB}, ${runtime.concurrency} at a time)`);
-const tickPromises = progress("promise tagging", publishedRegistry.promises.length, { every: 50 });
-const promiseTopicAssignments = await stage("promise-tagging", publishedRegistry.promises, async (promise) => {
-  const brief = buildPromiseTaggingBrief(promise, taxonomy);
-  const fingerprint = { inputHash: sha256(brief.text), taxonomyContentHash, promptContentHash: prompts.tagging.contentHash, ...models };
-  const tagged = await pairedModelCall({
-    subjectId: promise.id,
-    fingerprint,
-    cache: caches.promiseTags,
-    persist: persist.promiseTags,
-    callA: () => requestTagAssignment({ provider: runtime.provider, apiKey, model: runtime.modelA, brief, taxonomy, prompt: prompts.tagging }),
-    callB: () => requestTagAssignment({ provider: runtime.provider, apiKey, model: runtime.modelB, brief, taxonomy, prompt: prompts.tagging }),
-    revalidate: (output) => validateTagAssignmentOutput(output, taxonomy)
-  });
-  usage.promiseTagging.push(...tagged.usageByModel);
-  invalid.promiseTagging += tagged.invalidCount;
-  const derived = derivePromiseTopicTags(taxonomy, tagged.a, tagged.b);
-  return {
-    promiseId: promise.id,
-    tagAssignment: { tags: derived.tags.length > 0 ? derived.tags : ["unknown"] },
-    needsReview: derived.needsReview,
-    taggerA: tagged.a,
-    taggerB: tagged.b,
-    taggerAError: tagged.errorA,
-    taggerBError: tagged.errorB,
-    reused: tagged.reused
-  };
-}, ({ promiseId, tagAssignment }) => tickPromises(`${promiseId}: ${tagAssignment.tags.join(", ")}`));
-const invertedIndex = buildInvertedIndex(taxonomy, promiseTopicAssignments);
-
-// 2. Screening and routing of every law change (steps 4 and 5).
+// 1. Screening and routing of every law change (steps 4 and 5).
 log(`law-change screening: ${changes.length} law changes from ${new Set(changes.map(({ printId }) => printId)).size} prints with attributable conduct`);
 const tickChanges = progress("law-change screening", changes.length, { every: 20 });
 const screenedChanges = await stage("law-change-screening", changes, async (change) => {
@@ -228,7 +191,7 @@ for (const { change, route } of screenedChanges) {
   }
 }
 
-// 3. Relevance of each promise and law change (step 6).
+// 2. Relevance of each promise and law change (step 6).
 log(`relevance checks: ${pairs.length} promise and law-change pairs`);
 const tickPairs = progress("relevance checks", pairs.length, { every: 50 });
 const checkedPairs = await stage("relevance-check", pairs, async (pair) => {
@@ -248,7 +211,7 @@ const checkedPairs = await stage("relevance-check", pairs, async (pair) => {
   return { ...pair, kept: isKeptByRelevance(checked.a, checked.b), checkA: checked.a, checkB: checked.b, checkAError: checked.errorA, checkBError: checked.errorB };
 }, ({ promise, change, kept }) => tickPairs(`${promise.id} × ${change.changeId}: ${kept ? "kept" : "dropped"}`));
 
-// 4. One package per promise (step 7), only from a complete run.
+// 3. One package per promise (step 7), only from a complete run.
 const outputDirectory = resolve(args.output);
 const packageDirectory = resolve(outputDirectory, "evidence-packages");
 await mkdir(packageDirectory, { recursive: true });
@@ -275,8 +238,7 @@ const counts = {
   primaryRecordsInWindowCount: primaryRecordsInWindow.length,
   notAttributableSkippedCount: primaryRecordsInWindow.length - conductRecords.length,
   conductRecordCount: conductRecords.length,
-  promiseCount: publishedRegistry.promises.length,
-  agreedPromiseAssignmentCount: promiseTopicAssignments.filter(({ needsReview }) => !needsReview).length,
+  promiseCount: promises.length,
   lawChangeCount: changes.length,
   screenedLawChangeCount: screenedChanges.length,
   technicalLawChangeCount: screenedChanges.filter(({ substantive }) => !substantive).length,
@@ -290,7 +252,6 @@ const counts = {
   relevanceDroppedCount: checkedPairs.filter(({ kept }) => !kept).length,
   packageCount: builtPackages.length,
   oversizedPackageCount: builtPackages.filter(({ oversized }) => oversized).length,
-  invalidPromiseTaggerCount: invalid.promiseTagging,
   invalidScreenerCount: invalid.screening,
   invalidRelevanceCheckCount: invalid.relevance
 };
@@ -312,7 +273,6 @@ const report = {
   sample: args.samplePromises !== null || args.sampleChanges !== null ? { samplePromises: args.samplePromises, sampleChanges: args.sampleChanges } : null,
   counts,
   tokenUsageByStage: Object.fromEntries(Object.entries(usage).map(([key, entries]) => [key, usageTotalsByModel(entries)])),
-  promiseTopicAssignments,
   lawChanges: screenedChanges.map(({ change, substantive, route, screenerA, screenerB, screenerAError, screenerBError }) => ({
     changeId: change.changeId,
     printNumber: change.printNumber,

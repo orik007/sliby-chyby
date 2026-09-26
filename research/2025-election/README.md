@@ -1,17 +1,8 @@
 # 2025 election research
 
-This directory stores campaign sources and non-public promise research for ANO 2011, SPD, and Motoristé sobě in the 2025 Czech Chamber of Deputies election.
+This directory holds the non-public part of the promise catalogue for ANO 2011, SPD, and Motoristé sobě in the 2025 Czech Chamber of Deputies election. The catalogue rule is [promise-selection.md](../../docs/promise-selection.md).
 
-A source is one concrete official party item; the current sources are the three official election programmes (PDF). A source may support many promises. Every promise has one source ID and an exact locator within that source.
+- `programme-text/` holds the text of each archived official programme (`archive/promise-sources/`), page by page, as extracted by `scripts/extract-programme-text.mjs`. Every quote of a promise, statement, or rejected occurrence is checked against it.
+- `rejected.json` lists every rejected occurrence with its source, page, exact wording, and technical reason; a duplicate names the published promise or statement it repeats (`duplicateOf`). Rejected occurrences are never public.
 
-Every promise is one of three states:
-
-- `candidate`: found but not confirmed;
-- `confirmed`: represented by the public promise with the same ID in `data/promises`;
-- `rejected`: not admitted to the catalogue, with a reason.
-
-`promises.json` is the campaign-source and promise catalogue. Exact wording and the original source stay attached to every promise.
-
-`category-audit.md` and `promise-category-audit.json` are non-public source-review artifacts for the common-category mapping in `data/promise-categories.json`. They retain source-section and heading-review work; the public site displays only the common category.
-
-Confirmation follows [promise-selection.md](../../docs/promise-selection.md): it creates the public promise, source, and initial score revision together. No candidate or rejected promise is public or enters the SLAVA Index.
+Promises and statements themselves are public data in `data/promises`.

@@ -49,8 +49,12 @@ test("archive rejects unknown sources, mismatched URLs, and unmanifested files",
 
 test("promise source archive is complete and preserves verified original bytes", async () => {
   const manifest = manifestSchema.parse(await json("archive/promise-sources/manifest.json"));
-  const research = await json("research/2025-election/promises.json");
-  const required = new Map(research.sources.map((source) => [source.id, source.url]));
+  const rejected = await json("research/2025-election/rejected.json");
+  const required = new Map();
+  for (const { sourceId } of rejected.rejected) {
+    const source = await json(`data/sources/${sourceId}.json`);
+    required.set(source.id, source.url);
+  }
   for (const filename of await readdir(new URL("data/promises/", root))) {
     if (!filename.endsWith(".json")) continue;
     const promise = await json(`data/promises/${filename}`);

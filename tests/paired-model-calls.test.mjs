@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 import { cachePersister, loadModelCache, mapWithConcurrency, pairedModelCall } from "../scripts/lib/paired-model-calls.mjs";
-import { ModelOutputError } from "../scripts/lib/topic-tagger.mjs";
+import { ModelOutputError } from "../scripts/lib/model-output.mjs";
 
 const fingerprint = { inputHash: "h1", promptContentHash: "p1", provider: "openai", modelA: "a", modelB: "b" };
 const answer = (output) => async () => ({ output, model: "gpt-6-luna", usage: { input_tokens: 10, output_tokens: 1 } });

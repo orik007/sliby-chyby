@@ -5,6 +5,7 @@ import { invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { createPspFetcher, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings } from "./lib/psp-print-documents.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
+import { loadTrackedPromises } from "./lib/published-promises.mjs";
 
 /**
  * Downloads, in every run, the official texts of every Chamber print that a
@@ -17,13 +18,12 @@ import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, proposalBody, pro
  * DOC file is treated as not published and reported.
  */
 function parseArgs(args) {
-  const options = { collectorRun: null, output: null, sourceRegistry: "automation/collectors/sources.json", promiseRegistry: "automation/promise-registry/promises.json" };
+  const options = { collectorRun: null, output: null, sourceRegistry: "automation/collectors/sources.json" };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--sources") options.sourceRegistry = args[++index];
-    else if (arg === "--promises") options.promiseRegistry = args[++index];
     else throw new Error(`Unknown argument: ${arg}`);
   }
   invariant(options.collectorRun && options.output, "--collector-run and --output are required");
@@ -147,8 +147,8 @@ invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.
 
 // Only prints that a potentially attributable record concerns can carry
 // attributable conduct; the texts of all other prints are never fetched.
-const promiseRegistry = JSON.parse(await readFile(resolve(args.promiseRegistry), "utf8"));
-const trackedPartyIds = [...new Set(promiseRegistry.promises.map(({ partyId }) => partyId))].sort();
+const { promises } = await loadTrackedPromises();
+const trackedPartyIds = [...new Set(promises.map(({ partyId }) => partyId))].sort();
 const conductRecords = collectorRun.records.filter((record) => record.primary === true && isPotentiallyAttributable(record, trackedPartyIds));
 const prints = collectPrints(conductRecords);
 // Bills with a decisive vote on their approved text (the rule of

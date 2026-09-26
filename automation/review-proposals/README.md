@@ -1,6 +1,6 @@
 # Unpublished assessment proposals
 
-This is the human-review queue of proposed assessments of confirmed promises, kept on the audit branch.
+This is the human-review queue of proposed assessments of promises, kept on the audit branch.
 
 - A proposal is created from one evidence package: the law changes routed to one promise and the party's attributable conduct on them.
 - Two independent assessors evaluate it; an arbiter is used when valid assessments disagree or exactly one assessor output is invalid.

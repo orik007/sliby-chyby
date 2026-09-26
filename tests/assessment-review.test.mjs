@@ -5,7 +5,6 @@ import test from "node:test";
 import { arbiterPromptVersion, assessorPromptVersion, loadAssessmentPrompts } from "../scripts/lib/assessment-config.mjs";
 import { assessmentFingerprintVersion, mergeRelevanceVerdicts, reviewManifestSchemaVersion, planAssessmentInputs, relevanceVerdictsByRoute, renderHumanReviewMarkdown, validateReviewManifest } from "../scripts/lib/assessment-review.mjs";
 import { relevancePromptVersion, screeningPromptVersion } from "../scripts/lib/law-change-screening.mjs";
-import { taggingPromptVersion } from "../scripts/lib/topic-tagger.mjs";
 
 const evidencePackage = {
   schemaVersion: "1.0.0",
@@ -13,7 +12,7 @@ const evidencePackage = {
   packageId: "test-promise--2026-09-10--generated",
   asOf: "2026-09-10",
   assessmentContext: { mode: "live", ruleVersion: "period-timing-v2", maintenanceBaseline: null },
-  promise: { id: "test-promise", originalTextCz: "Testovací slib.", fulfillmentTest: "Ověřitelný výsledek.", contradictionTest: "Ověřitelný rozpor." },
+  promise: { id: "test-promise", titleCz: "Testovací slib", originalTextCz: "Testovací slib." },
   evidence: [
     { id: "promise-source", url: "https://example.test/promise", factSummary: "Přesné znění slibu.", locator: "strana 1", publishedAt: "2025-01-01", primary: true, role: "promise-source" },
     { id: "change-1", url: "https://example.test/change-1", factSummary: "Úřední text změny zákona.", locator: "ČÁST PRVNÍ", publishedAt: "2026-09-01", primary: true, role: "law-change", title: "90: ČÁST PRVNÍ – Změna rozpočtových pravidel", structuredFacts: { titleCz: "Změna rozpočtových pravidel" }, matchBasis: { routeBasis: ["direct-structural-link", "controlled-tag"], matchedTagIds: ["fiscal-rules"], directLinkIdentifiers: ["cz-act-218-2000"] } },
@@ -39,7 +38,7 @@ test("loads only the active assessor and arbiter prompts", async () => {
 
 test("retains only the active prompt files", async () => {
   const promptFiles = await readdir(resolve(import.meta.dirname, "../automation/prompts"));
-  assert.deepEqual(promptFiles.sort(), [`${arbiterPromptVersion}.md`, `${assessorPromptVersion}.md`, `${taggingPromptVersion}.md`, `${screeningPromptVersion}.md`, `${relevancePromptVersion}.md`].sort());
+  assert.deepEqual(promptFiles.sort(), [`${arbiterPromptVersion}.md`, `${assessorPromptVersion}.md`, `${screeningPromptVersion}.md`, `${relevancePromptVersion}.md`].sort());
 });
 
 test("plans an unseen package for human review without publication", () => {

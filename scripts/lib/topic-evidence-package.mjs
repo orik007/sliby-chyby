@@ -239,11 +239,7 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
       partyPeriodId: promise.partyPeriodId,
       partyName: promise.partyName,
       titleCz: promise.titleCz,
-      type: promise.type,
-      atomicClaimCz: promise.atomicClaimCz,
-      originalTextCz: promise.originalTextCz,
-      fulfillmentTest: promise.fulfillmentTest,
-      contradictionTest: promise.contradictionTest
+      originalTextCz: promise.originalTextCz
     },
     generation: {
       builderVersion: packageBuilderVersion,

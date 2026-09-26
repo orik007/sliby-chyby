@@ -56,7 +56,8 @@ async function modelCalls(path) {
 const readJson = async (path) => JSON.parse(await readFile(path, "utf8"));
 
 // A checkout with the repository's prompts, scoring rule, taxonomy, prices,
-// and source registry, and the fixture promises and public scores.
+// source registry, parties, and sources, and the fixture promises, their
+// tags, and their public scores.
 async function checkout(root) {
   const copy = (from, to = from) => cp(join(repositoryRoot, from), join(root, to), { recursive: true });
   await copy("automation/prompts");
@@ -65,8 +66,11 @@ async function checkout(root) {
   await copy("automation/topic-routing/taxonomy-v2.json");
   await copy("automation/collectors/sources.json");
   await copy("automation/review-proposals/manifest.json");
-  await copy("tests/fixtures/pipeline/promise-registry.json", "automation/promise-registry/promises.json");
+  await copy("tests/fixtures/pipeline/promise-tags.json", "automation/topic-routing/promise-tags.json");
   await copy("tests/fixtures/pipeline/promises", "data/promises");
+  await copy("data/parties");
+  await copy("data/party-periods");
+  await copy("data/sources");
   await copy("tests/fixtures/pipeline/assessment-revisions", "data/assessment-revisions");
 }
 
@@ -96,11 +100,11 @@ test("one real print runs through routing, packaging, assessment, and the review
     routed: report.counts.routedLawChangeCount,
     directLinks: report.counts.directLinkLawChangeCount,
     packages: report.counts.packageCount,
-    invalid: report.counts.invalidScreenerCount + report.counts.invalidRelevanceCheckCount + report.counts.invalidPromiseTaggerCount
+    invalid: report.counts.invalidScreenerCount + report.counts.invalidRelevanceCheckCount
   }, { records: 5, skipped: 2, conduct: 3, lawChanges: 5, technical: 1, routed: 1, directLinks: 1, packages: 2, invalid: 0 });
 
   // Only the value-added tax law change reaches promises: through the act it
-  // amends, which the VAT tag maps, to the promises tagged with it.
+  // amends, which the VAT tag maps, to the two promises tagged with it.
   const packageFiles = (await readdir(join(routingOutput, "evidence-packages"))).sort();
   assert.equal(packageFiles.length, 2);
   const packages = await Promise.all(packageFiles.map((file) => readJson(join(routingOutput, "evidence-packages", file))));

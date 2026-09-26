@@ -14,15 +14,15 @@ import {
   validateRelevanceOutput,
   validateScreeningOutput
 } from "../scripts/lib/law-change-screening.mjs";
-import { ModelOutputError } from "../scripts/lib/topic-tagger.mjs";
-import { validatePromiseRegistry } from "../scripts/lib/attribution.mjs";
+import { ModelOutputError } from "../scripts/lib/model-output.mjs";
+import { loadTrackedPromises } from "../scripts/lib/published-promises.mjs";
 import { validateTaxonomy } from "../scripts/lib/topic-taxonomy.mjs";
 
 // Stub calls never belong in a real run's spend log.
 delete process.env.SLIBY_MODEL_CALL_LOG;
 
 const taxonomy = validateTaxonomy(JSON.parse(await readFile(new URL("../automation/topic-routing/taxonomy-v2.json", import.meta.url), "utf8")));
-const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8")));
+const registry = await loadTrackedPromises(new URL("..", import.meta.url).pathname);
 const fiscalPromise = registry.promises.find(({ id }) => id === "candidate-d5359e35a4c4");
 
 const proposedText = "ČÁST DRUHÁ\nZměna rozpočtových pravidel\nV § 24 odst. 1 zákona č. 218/2000 Sb. se číslo „2“ nahrazuje číslem „3“.";
@@ -58,8 +58,9 @@ test("the screening and relevance prompts state the conservative rules", async (
   assert.match(screening.instructions, /When in doubt, the change is substantive/);
   assert.match(screening.instructions, /even one number/);
   const relevance = await loadRelevancePrompt();
-  assert.equal(relevance.version, "relevance-check-v2");
+  assert.equal(relevance.version, "relevance-check-v3");
   assert.match(relevance.instructions, /When in doubt, answer relevant/);
+  assert.match(relevance.instructions, /its title names the one commitment assessed/);
 });
 
 test("a model reads every version of the law change with its print, heading, amended act, and never the print-wide Senate resolution", () => {
@@ -126,8 +127,8 @@ test("screening sends the taxonomy first so it can be a cached prompt prefix", a
 test("a relevance check reads the exact promise with its tests and the law-change text", async () => {
   const brief = buildRelevanceBrief(fiscalPromise, change);
   assert.equal(brief.pairId, `${fiscalPromise.id}--43200-2`);
-  assert.ok(brief.promise.includes(fiscalPromise.originalTextCz));
-  assert.ok(brief.promise.includes(`Fulfillment test: ${fiscalPromise.fulfillmentTest}`));
+  assert.ok(brief.promise.includes(`Promise (the commitment assessed): ${fiscalPromise.titleCz}`));
+  assert.ok(brief.promise.includes(`Exact source wording (Czech): ${fiscalPromise.originalTextCz}`));
   assert.ok(brief.lawChange.includes(proposedText));
   const mock = mockResponse({ relevant: true, reasonCz: "Pravidla se týkají schodku." });
   const originalFetch = globalThis.fetch;

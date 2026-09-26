@@ -116,8 +116,7 @@ export function validateEvidencePackage(evidencePackage) {
   }
   invariant(evidencePackage.promise && typeof evidencePackage.promise.id === "string", "Missing promise");
   invariant(typeof evidencePackage.promise.originalTextCz === "string" && evidencePackage.promise.originalTextCz.length > 0, "Missing original promise text");
-  invariant(typeof evidencePackage.promise.fulfillmentTest === "string" && evidencePackage.promise.fulfillmentTest.length > 0, "Missing fulfillment test");
-  invariant(typeof evidencePackage.promise.contradictionTest === "string" && evidencePackage.promise.contradictionTest.length > 0, "Missing contradiction test");
+  invariant(typeof evidencePackage.promise.titleCz === "string" && evidencePackage.promise.titleCz.length > 0, "Missing promise title");
   invariant(Array.isArray(evidencePackage.evidence) && evidencePackage.evidence.length > 0, "Evidence package must contain evidence");
 
   const ids = new Set();

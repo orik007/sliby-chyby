@@ -18,9 +18,8 @@ const evidencePackage = {
   assessmentContext: { mode: "live", ruleVersion: "period-timing-v2", maintenanceBaseline: null },
   promise: {
     id: "test-promise",
-    originalTextCz: "Testovací slib.",
-    fulfillmentTest: "Ověřitelný výsledek.",
-    contradictionTest: "Ověřitelný rozpor."
+    titleCz: "Testovací slib",
+    originalTextCz: "Testovací slib."
   },
   evidence: [
     { id: "promise-source", url: "https://example.test/promise", factSummary: "Přesné znění slibu.", locator: "strana 1", publishedAt: "2025-01-01", primary: true, role: "promise-source" },

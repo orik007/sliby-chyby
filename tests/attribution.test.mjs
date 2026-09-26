@@ -1,27 +1,15 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { fileURLToPath } from "node:url";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import {
   assessableAttributionStatuses,
   attributionStatusForRecord,
   factSummary,
   isPotentiallyAttributable,
-  validatePromiseRegistry,
   versionConcerned
 } from "../scripts/lib/attribution.mjs";
-import { loadPublishedPromiseIds } from "../scripts/lib/published-promises.mjs";
 
-const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8")));
 const promise = { id: "test-promise", partyId: "motoriste" };
-
-test("the promise registry contains exactly the confirmed public promises", async () => {
-  assert.equal(registry.status, "confirmed-promise-registry-v2");
-  const publishedPromiseIds = await loadPublishedPromiseIds(fileURLToPath(new URL("../data/promises/", import.meta.url)));
-  assert.deepEqual(new Set(registry.promises.map(({ id }) => id)), publishedPromiseIds);
-  assert.ok(registry.promises.every((entry) => entry.promiseSource.primary && entry.matching === undefined));
-});
 
 function voteRecord({ id = "psp--vote-1", actions = ["souhlas"], summary = { attributionStatus: "attributed", majorityChoice: "yes" } } = {}) {
   return createCollectedRecord({

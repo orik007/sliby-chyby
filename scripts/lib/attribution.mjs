@@ -87,35 +87,6 @@ export const assessableAttributionStatuses = new Set([
   "verified-government-proposal"
 ]);
 
-export function validatePromiseRegistry(registry) {
-  invariant(registry?.schemaVersion === "1.0.0", "Unsupported promise registry schemaVersion");
-  invariant(Array.isArray(registry.promises) && registry.promises.length > 0, "Promise registry must contain promises");
-  const ids = new Set();
-  for (const promise of registry.promises) {
-    invariant(typeof promise.id === "string" && promise.id.length > 0, "Registry promise is missing id");
-    invariant(!ids.has(promise.id), `Duplicate registry promise id: ${promise.id}`);
-    ids.add(promise.id);
-    invariant(typeof promise.partyId === "string" && promise.partyId.length > 0, `Promise ${promise.id} is missing partyId`);
-    invariant(typeof promise.originalTextCz === "string" && promise.originalTextCz.length > 0, `Promise ${promise.id} is missing original text`);
-    invariant(promise.promiseSource?.primary === true, `Promise ${promise.id} must have a primary promise source`);
-    invariant(typeof promise.promiseSource.exactQuoteCz === "string" && promise.originalTextCz.includes(promise.promiseSource.exactQuoteCz), `Promise ${promise.id} exact quote is not present verbatim in its original text`);
-    invariant(/^https:\/\//.test(promise.promiseSource.url), `Promise ${promise.id} source must use HTTPS`);
-    invariant(/^\d{4}(?:-\d{2})?(?:-\d{2})?$/.test(promise.promiseSource.publishedAt), `Promise ${promise.id} source has an invalid publication date`);
-    if (promise.maintenanceBaseline !== undefined) {
-      const baseline = promise.maintenanceBaseline;
-      invariant(baseline && typeof baseline === "object", `Promise ${promise.id} has an invalid maintenance baseline`);
-      invariant(typeof baseline.preservedStateCz === "string" && baseline.preservedStateCz.length > 0, `Promise ${promise.id} maintenance baseline is missing the preserved state`);
-      invariant(baseline.source?.primary === true, `Promise ${promise.id} maintenance baseline must have a primary source`);
-      invariant(typeof baseline.source.id === "string" && baseline.source.id.length > 0, `Promise ${promise.id} maintenance baseline source is missing an ID`);
-      invariant(/^https:\/\//.test(baseline.source.url), `Promise ${promise.id} maintenance baseline source must use HTTPS`);
-      invariant(typeof baseline.source.factSummary === "string" && baseline.source.factSummary.length > 0, `Promise ${promise.id} maintenance baseline source is missing factSummary`);
-      invariant(typeof baseline.source.locator === "string" && baseline.source.locator.length > 0, `Promise ${promise.id} maintenance baseline source is missing a locator`);
-      invariant(/^\d{4}(?:-\d{2})?(?:-\d{2})?$/.test(baseline.source.publishedAt), `Promise ${promise.id} maintenance baseline source has an invalid publication date`);
-    }
-  }
-  return registry;
-}
-
 /**
  * Deterministically decides whether a routed record is attributable conduct
  * of the promise's party, per docs/scoring.md:

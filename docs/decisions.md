@@ -11,25 +11,24 @@ This document contains only the current confirmed rules. When a rule changes, re
 ## Promise catalogue
 
 - A source is one verifiable item: one PDF, page, post, video, article, vote, or official record. It has an ID, type, title, publisher, URL, and any known date.
-- A source can support many promises. A promise records its source ID and an exact locator, such as a PDF page, paragraph, or video timestamp.
-- Every promise is exactly `candidate`, `confirmed`, or `rejected`.
-- `confirmed` means public immediately. There is no confirmed-but-unpublished state.
-- A rejected promise records its reason. Candidates and rejected promises are not public.
-- The initial catalogue covers ANO 2011, SPD, and Motoristé sobě in the 2025 Czech Chamber of Deputies election, from official national party sources. Election programmes are promise sources, never evidence of conduct.
+- A source can support many catalogue items. An item records its source ID and an exact locator, such as a PDF page.
+- The catalogue covers every statement of the official national programmes of ANO 2011, SPD, and Motoristé sobě for the 2025 Czech Chamber of Deputies election in which the party says what it will do, what it wants, what it rejects, or how something will be. Election programmes are promise sources, never evidence of conduct.
+- Every catalogued item is exactly a `promise` (slib), a `statement` (výrok), or `rejected` (zamítnuto). A promise is an item that attributable conduct can deliver or contradict; it is public, scored, and counts in the SLAVA Index. A statement is an official item that no attributable conduct can deliver or contradict; it is public, has no score, and never counts in the index. A rejected occurrence is not public and records a technical reason (a duplicate, a summary of items catalogued separately, a truncated extraction, or a sentence that is not the party's own statement).
+- Statements are not yet shown on the site; showing them behind an opt-in filter on the party page is a separate change.
+- An item's quote is the exact programme wording without layout artefacts; its title names the one commitment assessed, written only from facts in the quote. The canonical rule is [promise-selection.md](promise-selection.md).
+- Routing tags of a promise are assigned once when it is catalogued and reviewed in its pull request; no model tags promises.
 
 ## Promise source archive
 
-- Preserve the original files supporting catalogue promises in a versioned repository archive, independent of the automation audit branch. This includes the source catalogue for candidate and rejected promises.
+- Preserve the original files of every catalogued source in a versioned repository archive, independent of the automation audit branch, together with their extracted text against which every quote is checked.
 - Record each copy's source ID, original URL, retrieval URL and time, byte length, and SHA-256 hash. Preserve downloaded bytes unchanged; changed source content receives a new copy rather than replacing an archived file.
 - Public source links continue to point to the original publisher. An archived copy can be used as an explicitly labelled fallback if the original disappears, through the normal release process.
 
 ## Policy categories
 
-- Every confirmed promise has exactly one common policy category from the controlled 2025 category list.
-- The common category is decided for each promise from its exact commitment and source context. A party programme chapter is traceability metadata and never decides a category by itself.
-- When one already-confirmed promise mentions several subjects, its category follows the principal action to be assessed; its exact wording remains unchanged.
-- The public site groups and orders promises only by that common category. It does not display party-specific programme chapters as categories.
-- The category mapping retains the original programme chapter, its order, and any verified narrower source section solely for source traceability and later maintenance.
+- Every promise and statement has exactly one common policy category from the controlled 2025 category list, decided from its exact wording.
+- When one item mentions several subjects, its category follows the principal commitment named by its title.
+- The public site groups promises only by that common category and orders them within it by score and then by their order in the programme.
 - A category is a navigational subject label, not an editorial measure of importance.
 
 ## Evidence and conduct
@@ -42,16 +41,16 @@ This document contains only the current confirmed rules. When a rule changes, re
 
 ## Scores and index
 
-- Every confirmed promise has one current numerical score from `-2` to `+2`. The default is `0`, except for a verified maintenance baseline defined in [scoring.md](scoring.md).
+- Every promise has one current numerical score from `-2` to `+2`. The default is `0`, except for a verified maintenance baseline defined in [scoring.md](scoring.md). A statement has no score and no score history.
 - A proposal in line with or against the promise is `+1` or `-1`. A decision (a decisive vote) delivering or contradicting the whole promise is `+2` or `-2`, and only a part of it `+1` or `-1`. A decision outweighs a proposal; among conduct of the same weight, the most recent decides.
-- A score is separate from the promise lifecycle and may change whenever attributable official evidence justifies a new current assessment.
-- The SLAVA Index of a party is derived from the current scores of all its confirmed promises, which are exactly its promises on the public site. It ranges from `-100` to `+100`; its formula is in [slava-index.md](slava-index.md). No manual aggregate is stored.
+- A score is separate from the catalogue state and may change whenever attributable official evidence justifies a new current assessment.
+- The SLAVA Index of a party is derived from the current scores of all its promises, which are exactly its scored promises on the public site. It ranges from `-100` to `+100`; its formula is in [slava-index.md](slava-index.md). No manual aggregate is stored.
 
 ## Evidence automation
 
 - The daily workflow runs at 09:37 Europe/Prague and retains a manual trigger. It is paused until a manual run of the current pipeline has been verified end to end.
 - Every run collects every active source completely from its `bootstrapFrom` date, so each package is built from the whole record history. The unit of evidence is a **law change**: one part of a print's official proposal text, usually the amendment of one act. The print only links a law change to the party's attributable conduct on it (its decisive votes and its submission). A law change has versions as the bill is debated (proposed, approved by the Chamber, passed by Parliament), and each conduct is judged against the version it concerned. Print texts are downloaded again in every run; only paid model results are cached.
-- Two independent screeners read every law change in full, with no change dropped by rule; a change is substantive when either screener says so. A substantive change is routed to confirmed promises by direct legal-identifier links or by the specific tags of either screener, to the promises whose two taggers agree on that tag, and a promise and change are kept unless two independent relevance checks both find them unrelated.
+- Two independent screeners read every law change in full, with no change dropped by rule; a change is substantive when either screener says so. A substantive change is routed to promises by direct legal-identifier links or by the specific tags of either screener, to the promises holding that tag in their reviewed routing tags, and a promise and change are kept unless two independent relevance checks both find them unrelated. Statements are never routed or assessed.
 - A promise's package holds every kept law change in full with the party's conduct on it, without a count limit or excerpt selection; a package is assessed whatever its size and is reported for human review only when it is larger than the models can read; it is never trimmed. Each new or changed package, up to a per-run cap on paid assessments, goes to two independent assessors, with an arbiter when their valid assessments differ or exactly one output is invalid. Each assessor states for every law change in the package whether it is relevant to the promise and why.
 - Its output is an unpublished human-review proposal on a dedicated audit pull request. It never changes public data, a public score, or publication status. A human-approved score change is a separate scoped pull request.
 - Every AI request has its own prompt written only for that request, holding only what it needs. The assessors and the arbiter also receive [scoring.md](scoring.md) unchanged; no prompt restates its rules.

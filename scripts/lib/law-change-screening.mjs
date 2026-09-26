@@ -1,7 +1,7 @@
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { hashText } from "./assessment-config.mjs";
-import { invariantValidOutput, requestValidatedOutput, tagAssignmentSchema, taxonomyDefinitionsText, validateTagAssignmentOutput } from "./topic-tagger.mjs";
+import { invariantValidOutput, requestValidatedOutput, tagAssignmentSchema, taxonomyDefinitionsText, validateTagAssignmentOutput } from "./model-output.mjs";
 import { versionKeys, versionLabels } from "./print-parts.mjs";
 
 /**
@@ -10,7 +10,7 @@ import { versionKeys, versionLabels } from "./print-parts.mjs";
  * and checking whether a routed law change is relevant to one promise.
  */
 export const screeningPromptVersion = "law-change-screener-v2";
-export const relevancePromptVersion = "relevance-check-v2";
+export const relevancePromptVersion = "relevance-check-v3";
 
 async function loadPrompt(version, root) {
   const instructions = await readFile(resolve(root, `automation/prompts/${version}.md`), "utf8");
@@ -111,11 +111,9 @@ export function isSubstantive(screenerA, screenerB) {
 
 export function promiseText(promise) {
   return [
-    `Promise (Czech, exact wording): ${promise.originalTextCz}`,
-    promise.atomicClaimCz ? `Atomic claim: ${promise.atomicClaimCz}` : null,
-    `Fulfillment test: ${promise.fulfillmentTest}`,
-    `Contradiction test: ${promise.contradictionTest}`
-  ].filter(Boolean).join("\n");
+    `Promise (the commitment assessed): ${promise.titleCz}`,
+    `Exact source wording (Czech): ${promise.originalTextCz}`
+  ].join("\n");
 }
 
 export function buildRelevanceBrief(promise, change) {
