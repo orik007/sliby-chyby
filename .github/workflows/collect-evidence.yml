@@ -167,8 +167,8 @@ jobs:
 
       - name: Persist model caches even on a failed run
         id: tag-cache
-        # A failed run keeps the paid promise tagging, law-change screening,
-        # and relevance checks it already did. A subject is cached only once
+        # A failed run keeps the paid law-change screening and relevance
+        # checks it already did. A subject is cached only once
         # both of its model outputs are valid, so a partial cache is always
         # safe to keep.
         if: always()

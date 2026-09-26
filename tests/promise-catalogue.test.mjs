@@ -3,11 +3,15 @@ import { readdir, readFile } from "node:fs/promises";
 import test from "node:test";
 import { extractPdfPages, formatPages } from "../scripts/extract-programme-text.mjs";
 
-// Quotes drop what the PDF layout adds: line breaks, word breaks at line
-// ends, and page footers. They are compared without white space and dashes,
-// so a quote must otherwise be the exact wording of the archived programme.
-const canonical = (text) => text.replace(/[\s\-‐‑–—­]/g, "");
+// Quotes drop what the PDF layout adds: white space, line breaks, and page
+// footers. A hyphen at the end of a line is either a word break, which the
+// quote drops, or a real hyphen, which it keeps; every other character,
+// dashes included, must be the exact wording of the archived programme.
+const lineBreakHyphen = "\u0000";
+const canonicalSource = (text) => text.replace(/-[ \t]*\n/g, lineBreakHyphen).replace(/[\s\u00ad]/g, "");
+const canonicalQuote = (text) => text.replace(/\s/g, "");
 const json = async (path) => JSON.parse(await readFile(new URL(`../${path}`, import.meta.url), "utf8"));
+const rejectionReasons = new Set(["duplicate", "summary", "list-estimate", "not-party-statement", "truncated"]);
 
 const manifest = await json("archive/promise-sources/manifest.json");
 const programmePages = new Map();
@@ -15,15 +19,38 @@ for (const { sourceId } of manifest.entries) {
   const text = await readFile(new URL(`../research/2025-election/programme-text/${sourceId}.txt`, import.meta.url), "utf8");
   const parts = text.split(/=== PAGE (\d+) ===\n/);
   const pages = new Map();
-  for (let index = 1; index < parts.length; index += 2) pages.set(Number(parts[index]), canonical(parts[index + 1]));
+  for (let index = 1; index < parts.length; index += 2) pages.set(Number(parts[index]), canonicalSource(parts[index + 1]));
   programmePages.set(sourceId, pages);
+}
+
+function matchesAt(text, quote, start) {
+  let position = start;
+  for (let index = 0; index < quote.length; position += 1) {
+    if (position >= text.length) return false;
+    if (text[position] === lineBreakHyphen) {
+      if (quote[index] === "-") index += 1;
+    } else if (text[position] === quote[index]) {
+      index += 1;
+    } else {
+      return false;
+    }
+  }
+  return true;
 }
 
 function assertVerbatim(sourceId, page, quote, label) {
   const pages = programmePages.get(sourceId);
   assert.ok(pages, `No programme text for ${label}`);
-  const text = (pages.get(page) ?? "") + (pages.get(page + 1) ?? "");
-  assert.ok(text.includes(canonical(quote)), `${label} is not the exact wording on page ${page} of ${sourceId}`);
+  const pageText = pages.get(page);
+  assert.ok(pageText, `${label} names page ${page}, which ${sourceId} does not have`);
+  // The quote begins on its stated page and may continue onto the next one.
+  const text = pageText + (pages.get(page + 1) ?? "");
+  const canonical = canonicalQuote(quote);
+  let found = false;
+  for (let start = text.indexOf(canonical[0]); start !== -1 && start < pageText.length && !found; start = text.indexOf(canonical[0], start + 1)) {
+    found = matchesAt(text, canonical, start);
+  }
+  assert.ok(found, `${label} is not the exact wording beginning on page ${page} of ${sourceId}`);
   assert.doesNotMatch(quote, /Volební program hnutí ANO \/ 2025|Umíme vyřešit i složité věci \|/, `${label} contains a page footer`);
 }
 
@@ -54,7 +81,7 @@ test("every rejected occurrence quotes its programme exactly and states a techni
   for (const [index, occurrence] of rejected.entries()) {
     const label = `rejected occurrence ${index}`;
     assertVerbatim(occurrence.sourceId, occurrence.locator.page, occurrence.originalTextCz, label);
-    assert.ok(typeof occurrence.reason === "string" && occurrence.reason.length > 0, `${label} has no reason`);
+    assert.ok(rejectionReasons.has(occurrence.reason), `${label} has no technical reason code`);
     if (occurrence.reason === "duplicate") {
       assert.equal(published.get(occurrence.duplicateOf)?.primarySourceId, occurrence.sourceId, `${label} must name a published item of the same programme`);
     } else {

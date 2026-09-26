@@ -63,7 +63,8 @@ function assertRelationships() {
     if (item.kind === "statement" && assessedPromiseIds.has(item.id)) throw new Error(`A statement has no score: ${item.id}`);
   }
   for (const promise of promises) if (!assessedPromiseIds.has(promise.id)) throw new Error(`Published promise is missing its current score: ${promise.id}`);
-  for (const revision of allAssessmentRevisions) if (!itemIds.has(revision.promiseId)) throw new Error(`Unknown promise in assessment: ${revision.id}`);
+  const allItemIds = new Set(allPromises.map(({ id }) => id));
+  for (const revision of allAssessmentRevisions) if (!allItemIds.has(revision.promiseId)) throw new Error(`Unknown promise in assessment: ${revision.id}`);
   for (const revision of assessmentRevisions) {
     if (!promiseIds.has(revision.promiseId)) throw new Error(`Unknown promise in assessment: ${revision.id}`);
     for (const sourceId of revision.evidenceSourceIds) if (!sourceIds.has(sourceId)) throw new Error(`Unknown evidence source ${sourceId} in ${revision.id}`);

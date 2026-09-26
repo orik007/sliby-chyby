@@ -5,7 +5,7 @@
 - A catalogue item belongs to one party in one electoral period. Repeated wording in a later period is a new item.
 - Promises and statements are in `data/promises`; rejected occurrences are in `research/2025-election/rejected.json` and are never public ([promise-selection.md](promise-selection.md)).
 - Every promise has one current score revision. The default score is `0` when no documented assessment conclusion sets another score, except for a documented maintenance baseline as defined in `scoring.md`. A statement has no score revision.
-- Score revisions are append-only. The latest revision is current.
+- Score revisions are append-only while the item is a promise ([promise-selection.md](promise-selection.md)). The latest revision is current.
 - Every revision lists traceable source records. The SLAVA Index is derived, never stored as an editable value ([slava-index.md](slava-index.md)).
 - A source is one document or record. An item references one source and an exact locator.
 
@@ -31,7 +31,7 @@ A file in `data/promises` stores one item: `id`, `slug` (its URL), `partyPeriodI
 
 `automation/topic-routing/promise-tags.json` maps every promise ID to its reviewed specific routing tags ([evidence-pipeline.md](evidence-pipeline.md)); statements have none.
 
-`research/2025-election/rejected.json` lists every rejected occurrence with its `sourceId`, `locator`, exact `originalTextCz`, and `reason`; a duplicate names the published item it repeats in `duplicateOf`. `research/2025-election/programme-text/` holds the text of each archived programme, page by page, extracted by `scripts/extract-programme-text.mjs`; `tests/promise-catalogue.test.mjs` checks that it is the text of the archived files and that every quote is its exact wording.
+`research/2025-election/rejected.json` lists every rejected occurrence with its `sourceId`, `locator`, exact `originalTextCz`, and `reason` code; a duplicate names the published item it repeats in `duplicateOf`. `research/2025-election/programme-text/` holds the text of each archived programme, page by page, extracted by `scripts/extract-programme-text.mjs`; `tests/promise-catalogue.test.mjs` checks that it is the text of the archived files and that every quote is its exact wording.
 
 ## Promise source archive
 

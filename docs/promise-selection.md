@@ -33,7 +33,17 @@ The test is one question: **can a concrete law change, vote, or government propo
 - The same commitment repeated in one programme (in the introduction, a chapter's list of priorities, and the chapter itself) is catalogued once, where it is stated most completely; its other occurrences are rejected as duplicates of it.
 - An introduction or priority line that only summarises commitments catalogued separately is rejected as such a summary.
 
-Rejection reasons are technical only: a duplicate, a summary of commitments catalogued separately, a truncated extraction, an estimate in a list rather than a statement, or a sentence that is not the party's own statement. A vague, general, or unmeasurable statement is never rejected; it is a statement.
+Rejection reasons are technical only, and each rejected occurrence records exactly one of these codes:
+
+| `reason` | Meaning |
+| --- | --- |
+| `duplicate` | The item is catalogued elsewhere in the same programme; `duplicateOf` names it. |
+| `summary` | An introduction or priority line that only summarises items catalogued separately. |
+| `list-estimate` | An amount in a list of estimates, not a statement of its own. |
+| `not-party-statement` | A sentence describing someone else's actions, not the party's own statement. |
+| `truncated` | An extraction that cannot be quoted as a complete sentence. |
+
+A vague, general, or unmeasurable statement is never rejected; it is a statement.
 
 ## Quote and title
 
@@ -49,4 +59,4 @@ Every promise and statement has exactly one common policy category ([decisions.m
 
 ## Changing the catalogue
 
-A catalogue change is a normal validated data change through the release process. Adding a promise creates its public item, its tags, and its first score revision with value `0` together; adding a statement creates only its item. When an existing promise becomes a statement, its item keeps its ID and URL and its score revisions are removed, because a statement has no score. When an existing item becomes a rejected occurrence, it leaves the site.
+A catalogue change is a normal validated data change through the release process. Adding a promise creates its public item, its tags, and its first score revision with value `0` together; adding a statement creates only its item. Score history is append-only for as long as an item is a promise. When a promise becomes a statement, its item keeps its ID and URL and its score revisions are removed, because a statement has no score. When an item becomes a rejected occurrence, it and its score revisions leave the site.

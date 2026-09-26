@@ -30,7 +30,7 @@
 - Preserve exact programme wording and source; every quote must match the archived programme text. The catalogue covers every statement of the official national party programmes as defined in the canonical catalogue rule.
 - Every catalogued item is a promise, a statement, or a rejected occurrence. A promise is public and scored; a statement is public, has no score, and never counts in the SLAVA Index; a rejected occurrence has a technical reason and is not public. Do not add a fourth state.
 - A promise's score is always a number from `-2` to `+2`, defaulting to `0` except for a documented maintenance baseline defined in the canonical scoring rule; it is separate from the catalogue state.
-- Keep public assessment history append-only and derive, never manually edit, the SLAVA Index.
+- Keep a promise's public assessment history append-only while it is a promise (the catalogue rule removes it only when the item stops being a promise) and derive, never manually edit, the SLAVA Index.
 - Promise routing tags are assigned once and reviewed with the promise; no model tags promises. The daily pipeline uses two independent AI assessors and one arbiter when the valid assessments disagree or exactly one assessor output is invalid. Their output is an unpublished human-review proposal, never a public score or publication decision.
 - Models may cite only evidence supplied in their bounded package. Keep active prompt, model, evidence-ID, confidence, and fingerprint records auditable.
 - The daily pipeline runs at 09:37 Europe/Prague and keeps the manual trigger. A failed complete run must not advance public freshness.

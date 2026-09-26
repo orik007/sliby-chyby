@@ -94,7 +94,7 @@ const directIdIndex = directLegalIdentifierIndex(taxonomy);
 const printParts = JSON.parse(await readFile(resolve(args.printParts), "utf8"));
 invariant(printParts?.schemaVersion === "1.0.0" && printParts.prints && typeof printParts.prints === "object", "Invalid --print-parts file");
 
-let { promises } = await loadTrackedPromises();
+let { promises } = await loadTrackedPromises(process.cwd(), { taxonomy });
 // A sample run keeps the first N promises or law changes (deterministic) so
 // its spend and output stay bounded; a full run uses everything.
 if (args.samplePromises !== null) promises = promises.slice(0, args.samplePromises);
