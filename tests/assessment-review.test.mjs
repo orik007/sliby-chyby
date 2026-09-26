@@ -122,5 +122,5 @@ test("the human review page never calls differing assessments a consensus when t
   assert.match(markdown, /\*Nevznikl žádný návrh veřejného hodnocení ani vysvětlení\.\*/);
   assert.match(markdown, /### Odlišné posudky/);
   assert.match(markdown, /#### Druhý posudek: Směřuje proti slibu \(−1\)/);
-  assert.match(markdown, /### Rozhodnutí třetího hodnotitele\n\nTřetí hodnotitel nebyl zavolán, protože balíček s oběma posudky je pro něj příliš velký\./);
+  assert.match(markdown, /### Rozhodnutí třetího hodnotitele\n\nTřetí hodnotitel nebyl zavolán, protože balíček s oběma posudky je větší, než dokáže přečíst\./);
 });

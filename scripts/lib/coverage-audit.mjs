@@ -4,7 +4,7 @@ const STATE_LABELS = {
   "review-candidate": "Assessment candidate awaiting human review",
   "human-review-required": "Human review required; no proposed public score",
   "assessable-package": "Evidence package queued for assessment; not yet proposed",
-  "oversized-package": "Evidence package too large for automated assessment; human review",
+  "oversized-package": "Evidence package larger than the models can read; human review",
   "routed-without-kept-change": "Law changes routed, but none kept (no attributable conduct, or not relevant)",
   "no-routed-law-change": "No law change routed in this run"
 };
@@ -203,7 +203,7 @@ export function renderCoverageAuditMarkdown(audit) {
     `| Orphan review | ${quality.orphanReview} |`,
     `| Routed, but the promise's party has no conduct on the print | ${quality.routedWithoutConduct} |`,
     `| Promise and law-change pairs checked / dropped as not relevant | ${quality.relevancePairs} / ${quality.relevanceDropped} |`,
-    `| Packages too large for automated assessment | ${quality.oversizedPackages} |`,
+    `| Packages larger than the models can read | ${quality.oversizedPackages} |`,
     `| Invalid model outputs | ${quality.invalidModelOutputs} |`,
     "",
     "## Summary",

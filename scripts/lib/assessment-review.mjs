@@ -134,7 +134,7 @@ export const resolutionLabels = {
   "insufficient-evidence": "oba automatické posudky označily podklady za nedostatečné",
   "arbiter-cannot-decide": "třetí hodnotitel nedokázal spor rozhodnout",
   "arbiter-selected-insufficient-evidence": "třetí hodnotitel vybral posudek s nedostatečnými podklady",
-  "arbiter-input-too-large": "posudky se neshodly a balíček s nimi je pro třetího hodnotitele příliš velký"
+  "arbiter-input-too-large": "posudky se neshodly a balíček s nimi je větší, než třetí hodnotitel dokáže přečíst"
 };
 
 export const readerStatus = {
@@ -284,7 +284,7 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
         lines.push("Co zůstává nejisté:", "", ...review.uncertainties.map((item) => `- ${item}`), "");
       }
     }
-    lines.push("### Rozhodnutí třetího hodnotitele", "", auditRecord.arbiter ? auditRecord.arbiter.output.explanationCz : "Třetí hodnotitel nebyl zavolán, protože balíček s oběma posudky je pro něj příliš velký. Spor musí rozhodnout člověk.", "");
+    lines.push("### Rozhodnutí třetího hodnotitele", "", auditRecord.arbiter ? auditRecord.arbiter.output.explanationCz : "Třetí hodnotitel nebyl zavolán, protože balíček s oběma posudky je větší, než dokáže přečíst. Spor musí rozhodnout člověk.", "");
   }
   const lawChanges = evidencePackage.evidence.filter(({ role }) => role === "law-change");
   if (lawChanges.length > 0) {
@@ -401,7 +401,7 @@ function renderPullRequestBodyWith(summary, withExplanations, listLimit) {
   const oversized = summary.results.filter(({ disposition }) => disposition === "blocked-oversized");
   const attention = [
     ...humanReviews.map((item) => `- ${heading(item)}: ${resolutionLabels[item.resolutionReason] ?? item.resolutionReason}${notes(item).map((note) => ` (${note})`).join("")}`),
-    ...oversized.map((result) => `- ${heading(result)}: balíček je příliš velký pro automatické hodnocení`)
+    ...oversized.map((result) => `- ${heading(result)}: balíček je větší, než model dokáže přečíst`)
   ];
   const lines = [
     "## Neveřejné návrhy změn hodnocení SLAVA",

@@ -1,11 +1,39 @@
 {
   "schemaVersion": "1.0.0",
   "source": "https://developers.openai.com/api/docs/pricing",
-  "verifiedOn": "2026-09-24",
-  "unit": "USD per 1M tokens, standard short-context prices",
+  "verifiedOn": "2026-09-26",
+  "unit": "USD per 1M tokens, standard processing",
+  "longContextThresholdTokens": 272000,
   "models": {
-    "gpt-6-luna": { "input": 0.10, "cachedInput": 0.01, "output": 0.50 },
-    "gpt-5.6-terra": { "input": 2.00, "cachedInput": 0.20, "output": 12.00 },
-    "gpt-5.6-sol": { "input": 4.00, "cachedInput": 0.40, "output": 20.00 }
+    "gpt-6-luna": {
+      "input": 0.1,
+      "cachedInput": 0.01,
+      "output": 0.5,
+      "longContext": {
+        "input": 0.2,
+        "cachedInput": 0.02,
+        "output": 0.75
+      }
+    },
+    "gpt-5.6-terra": {
+      "input": 2.0,
+      "cachedInput": 0.2,
+      "output": 12.0,
+      "longContext": {
+        "input": 4.0,
+        "cachedInput": 0.4,
+        "output": 18.0
+      }
+    },
+    "gpt-5.6-sol": {
+      "input": 4.0,
+      "cachedInput": 0.4,
+      "output": 20.0,
+      "longContext": {
+        "input": 8.0,
+        "cachedInput": 0.8,
+        "output": 30.0
+      }
+    }
   }
 }

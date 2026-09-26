@@ -85,8 +85,8 @@ export async function queueEvidencePackages({ inputDirectory, queueDirectory }) 
   const inputPromiseIds = new Set(input.map(({ evidencePackage }) => evidencePackage.promise.id));
   for (const { evidencePackage } of input) {
     const packageHash = hashEvidencePackage(evidencePackage);
-    // A package too large to assess at the normal price is kept for human
-    // review and never trimmed (docs/evidence-pipeline.md, Package).
+    // A package larger than the models can read is kept for human review and
+    // never trimmed (docs/evidence-pipeline.md, Package).
     const blockedReason = evidencePackage.generation?.oversized ? "oversized" : null;
     const current = latestUnreplacedPackageEntry(queue, evidencePackage.promise.id);
     // Every run rebuilds each package from the whole record history; a

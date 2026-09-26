@@ -49,12 +49,15 @@ function modelPrices() {
 /**
  * Estimated cost in USD of one call from the provider's reported usage and
  * the published prices in automation/model-prices.json; null when either is
- * missing. It is an estimate, not the provider's invoice.
+ * missing. A request with more input tokens than the long-context threshold
+ * is priced at the long-context rates in full. It is an estimate, not the
+ * provider's invoice.
  */
 export function estimateCallCost(model, usage, table = modelPrices()) {
-  const price = table.models?.[model];
-  if (!price || !usage) return null;
+  const standard = table.models?.[model];
+  if (!standard || !usage) return null;
   const input = usage.input_tokens ?? 0;
+  const price = input > (table.longContextThresholdTokens ?? Number.POSITIVE_INFINITY) && standard.longContext ? standard.longContext : standard;
   const cached = usage.input_tokens_details?.cached_tokens ?? 0;
   const output = usage.output_tokens ?? 0;
   return ((input - cached) * price.input + cached * price.cachedInput + output * price.output) / 1_000_000;

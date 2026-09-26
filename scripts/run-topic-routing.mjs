@@ -266,7 +266,7 @@ if (!runFailure) {
     if (!evidencePackage) continue;
     await writeFile(resolve(packageDirectory, `${promiseId}.json`), `${JSON.stringify(evidencePackage, null, 2)}\n`, { flag: "wx" });
     builtPackages.push({ promiseId, lawChangeCount: evidencePackage.generation.lawChangeCount, conductCount: evidencePackage.generation.conductCount, estimatedTokens: evidencePackage.generation.estimatedTokens, oversized: evidencePackage.generation.oversized });
-    if (evidencePackage.generation.oversized) log(`${promiseId}: package of about ${evidencePackage.generation.estimatedTokens} tokens exceeds ${maxRequestInputTokens} together with the assessor instructions; it is reported for human review and not assessed`);
+    if (evidencePackage.generation.oversized) log(`${promiseId}: package of about ${evidencePackage.generation.estimatedTokens} tokens exceeds ${maxRequestInputTokens}, the most the models can read, together with the assessor instructions; it is reported for human review and not assessed`);
   }
 }
 

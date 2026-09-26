@@ -229,7 +229,7 @@ test("the review pull request lists every current proposal that changes the publ
   assert.match(body, /> Strana provedla ověřený krok související s tímto slibem\./);
   assert.match(body, /\*Nový návrh z tohoto běhu\.\*/);
   assert.doesNotMatch(body, /confirmed-promise/);
-  assert.match(body, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Testovací slib oversized-promise \(`oversized-promise`\): balíček je příliš velký/);
+  assert.match(body, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Testovací slib oversized-promise \(`oversized-promise`\): balíček je větší, než model dokáže přečíst/);
   assert.match(body, /Nové návrhy, které potvrzují hodnocení na webu: \*\*1\*\*/);
 
   // An unreviewed change stays listed in later runs, no longer marked new.
@@ -317,7 +317,7 @@ function scoreChange(index, explanationCz) {
 test("the review pull request body stays under the GitHub limit and keeps model text inert", () => {
   const short = renderReviewPullRequestBody(reviewSummary([scoreChange(1, "Viz @someone a #12.")], [{ promiseId: "promise-1", promiseTitleCz: "Slib 1", disposition: "blocked-oversized", reviewUrl: null }]));
   assert.match(short, /> Viz @\u200bsomeone a \\#\u200b12\./);
-  assert.match(short, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Slib 1 \(`promise-1`\): balíček je příliš velký/);
+  assert.match(short, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Slib 1 \(`promise-1`\): balíček je větší, než model dokáže přečíst/);
 
   const many = Array.from({ length: 700 }, (_, index) => scoreChange(index, "Dlouhé vysvětlení. ".repeat(20)));
   const body = renderReviewPullRequestBody(reviewSummary(many));
