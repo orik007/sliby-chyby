@@ -112,7 +112,8 @@ test("acts that no specific tag covered in run 56 now link to one", () => {
     "cz-act-449-2001": "forestry-and-hunting",
     "cz-act-156-2000": "police-and-internal-security",
     "cz-act-257-2001": "cultural-funding-and-heritage",
-    "cz-act-17-2012": "tax-administration"
+    "cz-act-17-2012": "tax-administration",
+    "cz-act-330-2025": "regional-development-and-planning"
   };
   for (const [act, tagId] of Object.entries(expected)) {
     assert.ok(index.get(act)?.includes(tagId), `${act} links to ${tagId}`);
