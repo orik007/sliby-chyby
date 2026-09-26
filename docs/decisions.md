@@ -28,7 +28,7 @@ This document contains only the current confirmed rules. When a rule changes, re
 
 - Every promise and statement has exactly one common policy category from the controlled 2025 category list, decided from its exact wording.
 - When one item mentions several subjects, its category follows the principal commitment named by its title.
-- The public site groups promises only by that common category and orders them within it by score and then by their order in the programme.
+- The public site groups promises only by that common category and orders them within it by current assessment status (fulfilled, moving towards, acting against, moving against, no verified progress) and then by their order in the programme.
 - A category is a navigational subject label, not an editorial measure of importance.
 
 ## Evidence and conduct
