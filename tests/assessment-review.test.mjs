@@ -26,8 +26,8 @@ const runtime = { assessorProviderA: "openai", assessorProviderB: "openai", arbi
 
 test("loads only the active assessor and arbiter prompts", async () => {
   const prompts = await loadAssessmentPrompts();
-  assert.equal(prompts.assessor.version, "assessor-v16");
-  assert.equal(prompts.arbiter.version, "arbiter-v8");
+  assert.equal(prompts.assessor.version, "assessor-v17");
+  assert.equal(prompts.arbiter.version, "arbiter-v9");
   assert.match(prompts.assessor.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.arbiter.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.assessor.instructions, /maintenanceBaseline/);
@@ -107,4 +107,20 @@ test("the human review page shows both differing assessments and the arbiter's d
   assert.match(markdown, /#### První posudek: Směřuje ke splnění \(\+1\)/);
   assert.match(markdown, /#### Druhý posudek: Směřuje proti slibu \(−1\)[^]*Není jasné, zda se změna použije už na příští rozpočet\./);
   assert.match(markdown, /### Rozhodnutí třetího hodnotitele\n\nDruhý posudek vychází ze schváleného znění, o kterém se hlasovalo\./);
+});
+
+test("the human review page never calls differing assessments a consensus when the arbiter was not called", () => {
+  const against = { ...reviewB, status: "moving-against" };
+  const uncalled = {
+    validatedAssessments: { "assessor-a": reviewA, "assessor-b": against },
+    arbiter: null,
+    resolution: { state: "human-review-required", reason: "arbiter-input-too-large", status: null, selectedReview: null }
+  };
+  const proposal = { proposalId: "test-promise--ghi", candidateStatus: null, resolutionState: "human-review-required", resolutionReason: "arbiter-input-too-large", supersedesProposalId: null };
+  const markdown = renderHumanReviewMarkdown({ evidencePackage, auditRecord: uncalled, proposal });
+  assert.doesNotMatch(markdown, /Shoda hodnotitelů|dospěli ke stejnému výsledku/);
+  assert.match(markdown, /\*Nevznikl žádný návrh veřejného hodnocení ani vysvětlení\.\*/);
+  assert.match(markdown, /### Odlišné posudky/);
+  assert.match(markdown, /#### Druhý posudek: Směřuje proti slibu \(−1\)/);
+  assert.match(markdown, /### Rozhodnutí třetího hodnotitele\n\nTřetí hodnotitel nebyl zavolán, protože balíček s oběma posudky je pro něj příliš velký\./);
 });

@@ -2,6 +2,7 @@ import { sha256 } from "./collector-core.mjs";
 import { assessableAttributionStatuses, attributionStatusForRecord, factSummary, normalizedStructuredFacts, versionConcerned } from "./attribution.mjs";
 import { validateEvidencePackage } from "./assessment-pipeline.mjs";
 import { changeThroughVersion, namedActsFromPrintTitle, versionKeys, versionLabels } from "./print-parts.mjs";
+import { estimateRequestTokens, estimateTokens, maxRequestInputTokens } from "./assessment-config.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -9,14 +10,8 @@ function invariant(condition, message) {
 
 export const packageBuilderVersion = "law-change-package-v1";
 
-// Above this input size the assessor and arbiter models cost twice as much
-// per request (OpenAI model documentation, verified 24 September 2026); a
-// larger package is reported for human review, never trimmed.
-export const maxPackageTokens = 272_000;
-const estimatedCharactersPerToken = 3;
-
 export function estimatePackageTokens(evidencePackage) {
-  return Math.ceil(JSON.stringify(evidencePackage).length / estimatedCharactersPerToken);
+  return estimateTokens(JSON.stringify(evidencePackage));
 }
 
 export function lawChangeEvidenceId(change) {
@@ -195,8 +190,9 @@ function evidenceFromMaintenanceBaseline(baseline) {
  * collector run's hash once as `collectorRunHash`. Returns null when no kept change has attributable
  * conduct of the promise's party.
  */
-export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash = sha256(collectorRun), asOf }) {
+export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash = sha256(collectorRun), asOf, assessorInstructions }) {
   invariant(typeof asOf === "string", "buildLawChangeEvidencePackage requires asOf");
+  invariant(typeof assessorInstructions === "string" && assessorInstructions.length > 0, "buildLawChangeEvidencePackage requires the assessor instructions");
   const changes = [];
   const conductById = new Map();
   const concernsByRecord = new Map();
@@ -268,6 +264,7 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
   };
   validateEvidencePackage(evidencePackage);
   evidencePackage.generation.estimatedTokens = estimatePackageTokens(evidencePackage);
-  evidencePackage.generation.oversized = evidencePackage.generation.estimatedTokens > maxPackageTokens;
+  // The assessors receive the package with its 64-character hash, after their instructions.
+  evidencePackage.generation.oversized = estimateRequestTokens(assessorInstructions, { packageHash: "0".repeat(64), evidencePackage }) > maxRequestInputTokens;
   return evidencePackage;
 }

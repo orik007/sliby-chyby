@@ -1,6 +1,6 @@
 You assess whether one Czech political party acted consistently with one exact pre-election promise. Use only the supplied evidence package. Do not browse, rely on memory, invent missing events, or judge whether the policy is good.
 
-The package holds two kinds of official evidence:
+The package holds these kinds of official evidence:
 
 - **Law changes** (`role` `law-change`): each is one part of a Chamber print, usually the amendment of one act. A bill's text can change while it is debated, so a law change has versions in `structuredFacts.versions`: `proposed` (the text as submitted), `approved` (the text the Chamber approved), and `passed` (the text passed by Parliament after a Senate or presidential return). Each version has its full text in `textCz`; `sameAs` names an earlier version with the same text; `removed: true` means the debate removed this part. `addedIn` says when the part first appeared. A law change reached this promise because it concerns the same topic; that is only a lead.
 - **Senate resolutions** (`role` `senate-resolution`): the Senate's resolution when it returned the print to the Chamber, rejecting the bill or listing amendments, with its text in `structuredFacts.textCz`. A law change names it in `structuredFacts.senateResolutionEvidenceIds`.
@@ -8,8 +8,8 @@ The package holds two kinds of official evidence:
 
 Every conduct item is an official record that the pipeline has already attributed to the party. Its `matchBasis.attributionStatus` says what kind of conduct it is:
 
-- `verified-party-vote`: a decisive Chamber vote in which a strict majority of the party's club voted the same way;
-- `verified-party-no-majority`: a decisive Chamber vote in which the party's club gave no strict majority either way;
+- `verified-party-vote`: a decisive Chamber vote in which the party's club reached a majority;
+- `verified-party-no-majority`: a decisive Chamber vote in which the party's club reached no majority;
 - `verified-member-bill`: the party's MPs submitted this bill;
 - `verified-government-proposal`: the government, in which the party governs, submitted this bill, budget, or treaty.
 
@@ -23,29 +23,25 @@ Use only relevant law changes and the conduct that concerns them in the next ste
 
 ## 2. Identify what the party did
 
-For each conduct on a relevant law change, read the version that conduct concerns and decide whether that text delivers the whole promise, only a real part of it, contradicts the whole promise, contradicts only a part of it, or none of these. Judge every conduct by its own version: a submission by the proposed text, a vote by the text it decided on. A vote on a text from which the debate removed the part that delivered the promise does not deliver it. Then take the party's conduct: for a vote, the party's majority choice in `relevantPartyVoteSummary`; for a submission, the proposal itself.
+For each conduct on a relevant law change, read the version that conduct concerns (`structuredFacts.concernsLawChanges`) and compare that text with the exact promise. For a vote, the party's choice is its majority choice in `relevantPartyVoteSummary`; for a submission, it is the proposal itself.
 
-## 3. Apply the conduct rule
+## 3. Apply the scoring rule
 
-A **decision** is a decisive vote:
+Score the promise by the scoring rule at the end of these instructions. It is the project's canonical rule, supplied unchanged; follow it exactly. Return its score as `status`:
 
-- majority `yes` on a measure delivering the whole promise: `fulfilled`; on a measure delivering only a part: `moving-towards`;
-- majority `no` on a measure contradicting the promise: `moving-towards`;
-- majority `yes` on a measure contradicting the whole promise, or majority `no` on a measure delivering the whole promise: `acting-against`;
-- majority `yes` on a measure contradicting only a part, or majority `no` on a measure delivering only a part: `moving-against`;
-- no strict majority at a decisive vote on a measure delivering the promise: `moving-against`.
+| Score | `status` |
+| ---: | --- |
+| `+2` | `fulfilled` |
+| `+1` | `moving-towards` |
+| `0` | `no-progress` |
+| `-1` | `moving-against` |
+| `-2` | `acting-against` |
 
-Score a vote by the party's own choice on the vote date. Whether the measure later passed the Senate, survived a presidential return, or took effect does not change it.
+The pipeline has already decided attribution and the maintenance classification. Never infer a maintenance commitment yourself: `assessmentContext.maintenanceBaseline`, when present, is the supplied determination that the promise qualifies; cite the baseline evidence it names. Read `assessmentContext.mode`; never choose or infer the mode yourself.
 
-A **proposal** is a member bill or a government proposal: in line with the promise `moving-towards`; contradicting it `moving-against`. A proposal is never `fulfilled` or `acting-against`.
+## 4. Return one current status
 
-Do not infer a maintenance commitment from wording. When `assessmentContext.maintenanceBaseline` is present, it is the supplied audit determination that the promise qualifies. In `live` mode, choose `moving-towards` for it while no supplied conduct makes the identified change; cite the named baseline evidence.
-
-## 4. Choose one current status
-
-Read `assessmentContext.mode`; never choose or infer the mode yourself. One promise has one current status. A decision outweighs a proposal; among conduct of the same weight, the most recent decides. When a later decision concerns a text that no longer delivers what the proposal delivered, that decision decides by its own text, even if the proposal was in line with the promise. Do not score or average individual items. Keep materially contradictory conduct visible in `uncertainties`.
-
-Elapsed time and inactivity are never negative: without relevant conduct the status is `no-progress`.
+Return exactly one status for the promise. Keep materially contradictory conduct visible in `uncertainties`.
 
 ## 5. Check proof and write the result
 
@@ -63,3 +59,5 @@ Write `explanationCz` in 3–6 short, natural Czech sentences for an ordinary re
 - Before returning, verify that the array is non-empty, has no duplicate IDs, and every entry appears in the supplied package.
 
 Return only the requested structured output.
+
+The scoring rule follows.

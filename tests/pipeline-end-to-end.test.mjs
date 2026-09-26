@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import test from "node:test";
 import { pathToFileURL } from "node:url";
+import { maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
 
 // One real Chamber print (tisk 189, the revenue-registration bill) taken from
 // the collector and print-text runs of 25 September 2026: its six law
@@ -54,11 +55,12 @@ async function modelCalls(path) {
 
 const readJson = async (path) => JSON.parse(await readFile(path, "utf8"));
 
-// A checkout with the repository's prompts, taxonomy, prices, and source
-// registry, and the fixture promises and public scores.
+// A checkout with the repository's prompts, scoring rule, taxonomy, prices,
+// and source registry, and the fixture promises and public scores.
 async function checkout(root) {
   const copy = (from, to = from) => cp(join(repositoryRoot, from), join(root, to), { recursive: true });
   await copy("automation/prompts");
+  await copy("docs/scoring.md");
   await copy("automation/model-prices.json");
   await copy("automation/topic-routing/taxonomy-v1.json");
   await copy("automation/collectors/sources.json");
@@ -192,4 +194,13 @@ test("one real print runs through routing, packaging, assessment, and the review
   assert.equal(audit.stateCounts["review-candidate"], 2);
   assert.equal(audit.stateCounts["no-routed-law-change"], audit.promiseCount - 2);
   assert.ok(audit.promises.every(({ scoreInferred, publicationApproved }) => scoreInferred === false && publicationApproved === false));
+
+  // Reviews too long for the arbiter's input limit: the arbiter is never
+  // called and the disagreement goes to human review.
+  const { stdout } = await run([script("run-assessment.mjs"), join(routingOutput, "evidence-packages", `${vatPromiseId}.json`), join(work, "long-reviews")], {
+    cwd: root,
+    environment: { ...assessmentEnvironment(join(work, "long-review-calls.jsonl")), STUB_OPENAI_EXPLANATION_CHARS: String(maxRequestInputTokens * 3 / 2) }
+  });
+  assert.deepEqual((await modelCalls(join(work, "long-review-calls.jsonl"))).map(({ name }) => name), ["slava_assessment", "slava_assessment"]);
+  assert.deepEqual(JSON.parse(stdout).resolution, { state: "human-review-required", reason: "arbiter-input-too-large", status: null, selectedReview: null });
 });

@@ -33,7 +33,9 @@ function answer(name, input, model) {
       status: model === process.env.STUB_OPENAI_DISSENTING_MODEL ? "moving-against" : "moving-towards",
       evidenceSufficient: true,
       citedEvidenceIds: evidencePackage.evidence.map(({ id }) => id),
-      explanationCz: "Vláda předložila návrh zákona, který směřuje ke splnění tohoto slibu.",
+      // STUB_OPENAI_EXPLANATION_CHARS lengthens the explanation, so a test
+      // can make the reviews too large for the arbiter's input limit.
+      explanationCz: "Vláda předložila návrh zákona, který směřuje ke splnění tohoto slibu.".padEnd(Number(process.env.STUB_OPENAI_EXPLANATION_CHARS ?? 0), " Podrobnosti."),
       confidence: "high",
       uncertainties: []
     };

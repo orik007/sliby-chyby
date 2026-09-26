@@ -13,7 +13,7 @@ import {
   validateArbiterOutput,
   validateEvidencePackage
 } from "./lib/assessment-pipeline.mjs";
-import { assessmentRuntimeConfig, loadAssessmentPrompts } from "./lib/assessment-config.mjs";
+import { assessmentRuntimeConfig, estimateRequestTokens, loadAssessmentPrompts, maxRequestInputTokens } from "./lib/assessment-config.mjs";
 import { createStructuredModelResponse } from "./lib/model-provider.mjs";
 import { cachedModelResponse } from "./lib/response-cache.mjs";
 import { log } from "./lib/run-log.mjs";
@@ -96,16 +96,25 @@ let rawArbiter = null;
 
 if (resolution.state === "arbitration-required") {
   if (!arbiterModel) throw new Error("SLIBY_ARBITER_MODEL is required because the assessors disagreed");
-  rawArbiter = await cachedResponse("arbiter", {
-    provider: arbiterProvider,
-    model: arbiterModel,
-    instructions: arbiterInstructions,
-    input: { packageHash, evidencePackage, reviews: { "assessor-a": reviewA, "assessor-b": reviewB } },
-    name: "slava_arbitration",
-    schema: arbiterOutputJsonSchema
-  });
-  validateArbiterOutput(rawArbiter.output, evidencePackage);
-  resolution = resolveAssessmentReviews(reviewA, reviewB, evidencePackage, rawArbiter.output);
+  const arbiterInput = { packageHash, evidencePackage, reviews: { "assessor-a": reviewA, "assessor-b": reviewB } };
+  // The arbiter also reads both reviews, so its request is checked against
+  // the input limit only now; a larger one goes to human review uncalled.
+  const arbiterRequestTokens = estimateRequestTokens(arbiterInstructions, arbiterInput);
+  if (arbiterRequestTokens > maxRequestInputTokens) {
+    log(`arbiter ${evidencePackage.promise.id}: request of about ${arbiterRequestTokens} tokens exceeds ${maxRequestInputTokens}; not called, human review`);
+    resolution = { state: "human-review-required", reason: "arbiter-input-too-large", status: null, selectedReview: null };
+  } else {
+    rawArbiter = await cachedResponse("arbiter", {
+      provider: arbiterProvider,
+      model: arbiterModel,
+      instructions: arbiterInstructions,
+      input: arbiterInput,
+      name: "slava_arbitration",
+      schema: arbiterOutputJsonSchema
+    });
+    validateArbiterOutput(rawArbiter.output, evidencePackage);
+    resolution = resolveAssessmentReviews(reviewA, reviewB, evidencePackage, rawArbiter.output);
+  }
 }
 
 const now = new Date();

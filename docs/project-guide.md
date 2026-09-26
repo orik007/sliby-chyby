@@ -10,7 +10,8 @@ Sliboměr shows political parties' confirmed election promises, their current sc
 | --- | --- |
 | Current project rules | [decisions.md](decisions.md) |
 | Promise lifecycle | [promise-selection.md](promise-selection.md) |
-| Scores and SLAVA Index | [scoring.md](scoring.md) |
+| Scoring a promise | [scoring.md](scoring.md) |
+| SLAVA Index | [slava-index.md](slava-index.md) |
 | Evidence automation | [evidence-pipeline.md](evidence-pipeline.md) |
 | Storage and validation | [data-model.md](data-model.md) |
 | Release | [release-process.md](release-process.md) |
@@ -36,7 +37,7 @@ official records only (active: Chamber of Deputies open data)
   -> separate approved public-assessment pull request when a score changes
 ```
 
-Party websites, press releases, and the media are not evidence. Government resolutions and the Collection of Laws are the next planned sources and are added only after their data is verified. The public site makes no live AI call.
+Party websites, press releases, and the media are not evidence. The public site makes no live AI call.
 
 ## Repository map
 

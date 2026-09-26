@@ -6,7 +6,7 @@ Sliboměr lets ordinary visitors see what a party promised before an election an
 
 The site is mobile-first and simple: a party index, confirmed promises, a score symbol plus text, a plain Czech explanation, and expandable evidence. Color is never the only carrier of meaning. A public explanation must say who did what and why it matters, and explain parliamentary or legal identifiers on first use.
 
-The score display and index follow [scoring.md](scoring.md). There is no public “not assessed” status. A confirmed promise is visible immediately with score `0` until its evidence justifies a revision.
+The score display follows [scoring.md](scoring.md) and the party index [slava-index.md](slava-index.md). There is no public “not assessed” status. A confirmed promise is visible immediately with score `0` until its evidence justifies a revision.
 
 ## Technical direction
 

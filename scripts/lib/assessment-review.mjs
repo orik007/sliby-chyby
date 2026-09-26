@@ -133,7 +133,8 @@ export const resolutionLabels = {
   "arbiter-confirmed-single-assessor": "třetí hodnotitel ověřil jediný použitelný automatický posudek",
   "insufficient-evidence": "oba automatické posudky označily podklady za nedostatečné",
   "arbiter-cannot-decide": "třetí hodnotitel nedokázal spor rozhodnout",
-  "arbiter-selected-insufficient-evidence": "třetí hodnotitel vybral posudek s nedostatečnými podklady"
+  "arbiter-selected-insufficient-evidence": "třetí hodnotitel vybral posudek s nedostatečnými podklady",
+  "arbiter-input-too-large": "posudky se neshodly a balíček s nimi je pro třetího hodnotitele příliš velký"
 };
 
 export const readerStatus = {
@@ -258,7 +259,8 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     "- Přesný balíček posuzovaných podkladů: `evidence-package.json`",
     ""
   ];
-  if (!auditRecord.arbiter) {
+  // Only agreeing assessors reach a result without the arbiter.
+  if (["assessor-consensus", "insufficient-evidence"].includes(auditRecord.resolution.reason)) {
     const consensusResult = proposed
       ? `${proposed.label} (${proposed.score})`
       : "podklady nestačí pro automatický návrh hodnocení";
@@ -282,7 +284,7 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
         lines.push("Co zůstává nejisté:", "", ...review.uncertainties.map((item) => `- ${item}`), "");
       }
     }
-    lines.push("### Rozhodnutí třetího hodnotitele", "", auditRecord.arbiter.output.explanationCz, "");
+    lines.push("### Rozhodnutí třetího hodnotitele", "", auditRecord.arbiter ? auditRecord.arbiter.output.explanationCz : "Třetí hodnotitel nebyl zavolán, protože balíček s oběma posudky je pro něj příliš velký. Spor musí rozhodnout člověk.", "");
   }
   const lawChanges = evidencePackage.evidence.filter(({ role }) => role === "law-change");
   if (lawChanges.length > 0) {
