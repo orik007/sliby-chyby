@@ -21,7 +21,7 @@ import { validateTaxonomy } from "../scripts/lib/topic-taxonomy.mjs";
 // Stub calls never belong in a real run's spend log.
 delete process.env.SLIBY_MODEL_CALL_LOG;
 
-const taxonomy = validateTaxonomy(JSON.parse(await readFile(new URL("../automation/topic-routing/taxonomy-v1.json", import.meta.url), "utf8")));
+const taxonomy = validateTaxonomy(JSON.parse(await readFile(new URL("../automation/topic-routing/taxonomy-v2.json", import.meta.url), "utf8")));
 const registry = validatePromiseRegistry(JSON.parse(await readFile(new URL("../automation/promise-registry/promises.json", import.meta.url), "utf8")));
 const fiscalPromise = registry.promises.find(({ id }) => id === "candidate-d5359e35a4c4");
 
@@ -53,11 +53,12 @@ function mockResponse(output, usage = { input_tokens: 100, output_tokens: 20 }) 
 
 test("the screening and relevance prompts state the conservative rules", async () => {
   const screening = await loadScreeningPrompt();
-  assert.equal(screening.version, "law-change-screener-v1");
+  assert.equal(screening.version, "law-change-screener-v2");
+  assert.doesNotMatch(screening.instructions, /excerpt|supportingExcerpts/i, "screeners quote nothing");
   assert.match(screening.instructions, /When in doubt, the change is substantive/);
   assert.match(screening.instructions, /even one number/);
   const relevance = await loadRelevancePrompt();
-  assert.equal(relevance.version, "relevance-check-v1");
+  assert.equal(relevance.version, "relevance-check-v2");
   assert.match(relevance.instructions, /When in doubt, answer relevant/);
 });
 
@@ -72,7 +73,7 @@ test("a model reads every version of the law change with its print, heading, ame
   const same = lawChangeText({ ...change, versions: { proposed: change.versions.proposed, approved: { sameAs: "proposed", document: null } } });
   assert.match(same, /Version: text approved by the Chamber\nThe same text as the proposed text\./);
   const titleOnly = lawChangeText({ ...change, heading: null, versions: { proposed: { heading: null, titleCz: change.printTitleCz, textCz: null, document: null } }, senateResolutions: [] });
-  assert.match(titleOnly, /Version: proposed text\nNot available as a DOCX file; only the print title is known\./);
+  assert.match(titleOnly, /Version: proposed text\nNot available as a DOCX or DOC file; only the print title is known\./);
   const removed = lawChangeText({ ...change, versions: { proposed: change.versions.proposed, approved: { removed: true } } });
   assert.match(removed, /Version: text approved by the Chamber\nThis part is not in this text: it was removed during the debate\./);
   assert.match(lawChangeText({ ...change, addedIn: "approved" }), /This part was added during the debate; it is not in the proposed text\./);
@@ -80,13 +81,12 @@ test("a model reads every version of the law change with its print, heading, ame
   assert.ok(brief.taxonomyDefinitions.includes("fiscal-rules"));
 });
 
-test("a screening output needs a verdict, a reason, valid tags, and verbatim excerpts", () => {
-  const brief = buildScreeningBrief(change, taxonomy);
-  const valid = { substantive: true, reasonCz: "Mění číslo v rozpočtových pravidlech.", tags: ["fiscal-rules"], confidence: 0.8, supportingExcerpts: ["Změna rozpočtových pravidel"] };
-  assert.equal(validateScreeningOutput(valid, taxonomy, brief.text), valid);
-  assert.throws(() => validateScreeningOutput({ ...valid, substantive: "yes" }, taxonomy, brief.text), ModelOutputError);
-  assert.throws(() => validateScreeningOutput({ ...valid, reasonCz: "" }, taxonomy, brief.text), /reason/);
-  assert.throws(() => validateScreeningOutput({ ...valid, supportingExcerpts: ["invented"] }, taxonomy, brief.text), /not present verbatim/);
+test("a screening output needs a verdict, a reason, valid tags, and a confidence", () => {
+  const valid = { substantive: true, reasonCz: "Mění číslo v rozpočtových pravidlech.", tags: ["fiscal-rules"], confidence: 0.8 };
+  assert.equal(validateScreeningOutput(valid, taxonomy), valid);
+  assert.throws(() => validateScreeningOutput({ ...valid, substantive: "yes" }, taxonomy), ModelOutputError);
+  assert.throws(() => validateScreeningOutput({ ...valid, reasonCz: "" }, taxonomy), /reason/);
+  assert.throws(() => validateScreeningOutput({ ...valid, confidence: 2 }, taxonomy), /confidence/);
 });
 
 test("a law change is dropped as technical only when both valid screeners say so", () => {
@@ -107,7 +107,7 @@ test("a pair is dropped as not relevant only when both valid checks say so", () 
 });
 
 test("screening sends the taxonomy first so it can be a cached prompt prefix", async () => {
-  const mock = mockResponse({ substantive: false, reasonCz: "Jen přečíslování.", tags: ["unknown"], confidence: 0.2, supportingExcerpts: [] });
+  const mock = mockResponse({ substantive: false, reasonCz: "Jen přečíslování.", tags: ["unknown"], confidence: 0.2 });
   const originalFetch = globalThis.fetch;
   globalThis.fetch = mock.fetch;
   try {

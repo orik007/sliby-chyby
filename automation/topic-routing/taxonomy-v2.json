@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0.0",
-  "taxonomyVersion": "topic-routing-v1",
+  "taxonomyVersion": "topic-routing-v2",
   "tags": [
     {
       "id": "public-finance",
@@ -103,8 +103,8 @@
       "parent": "taxation",
       "labelEn": "Tax administration and reporting",
       "assessmentEligible": true,
-      "czechAliases": ["evidence tržeb", "EET", "daňová správa", "daňové přiznání"],
-      "directLegalIdentifiers": ["cz-act-164-2013", "cz-act-280-2009"],
+      "czechAliases": ["evidence tržeb", "EET", "daňová správa", "daňové přiznání", "celní správa"],
+      "directLegalIdentifiers": ["cz-act-164-2013", "cz-act-280-2009", "cz-act-17-2012"],
       "inclusionExamples": [
         "A promise or record about how taxes are reported, collected, or audited, such as sales-record reporting obligations."
       ],
@@ -124,6 +124,20 @@
       ],
       "exclusionExamples": [
         "A promise about value-added tax (route under `vat-policy`) or about how taxes are administered (route under `tax-administration`)."
+      ]
+    },
+    {
+      "id": "property-and-vehicle-taxes",
+      "parent": "taxation",
+      "labelEn": "Property tax and road tax",
+      "assessmentEligible": true,
+      "czechAliases": ["daň z nemovitých věcí", "daň z nemovitostí", "silniční daň"],
+      "directLegalIdentifiers": ["cz-act-338-1992", "cz-act-16-1993"],
+      "inclusionExamples": [
+        "A promise or record about the tax on real estate or the road tax on vehicles."
+      ],
+      "exclusionExamples": [
+        "A promise about VAT or income tax (route under `vat-policy` or `income-tax`)."
       ]
     },
     {
@@ -165,6 +179,20 @@
       ],
       "exclusionExamples": [
         "A promise about the availability of care itself rather than how it is financed (route under `healthcare-access`)."
+      ]
+    },
+    {
+      "id": "medicines-and-medical-devices",
+      "parent": "health-and-care",
+      "labelEn": "Medicines and medical devices",
+      "assessmentEligible": true,
+      "czechAliases": ["léčiva", "léky", "zdravotnické prostředky", "lékárny"],
+      "directLegalIdentifiers": ["cz-act-378-2007", "cz-act-375-2022"],
+      "inclusionExamples": [
+        "A promise or record about the supply, reserves, domestic production, pricing, or regulation of medicines or medical devices."
+      ],
+      "exclusionExamples": [
+        "A promise about waiting times or access to doctors (route under `healthcare-access`)."
       ]
     },
     {
@@ -408,6 +436,34 @@
       ]
     },
     {
+      "id": "social-services",
+      "parent": "work-social-affairs-and-pensions",
+      "labelEn": "Social services and long-term care",
+      "assessmentEligible": true,
+      "czechAliases": ["sociální služby", "pečovatelská služba", "domovy pro seniory"],
+      "directLegalIdentifiers": ["cz-act-108-2006"],
+      "inclusionExamples": [
+        "A promise or record about social services, care homes, home care, or their funding."
+      ],
+      "exclusionExamples": [
+        "A promise about cash benefits for families (route under `social-benefits-and-family-policy`)."
+      ]
+    },
+    {
+      "id": "social-security-contributions",
+      "parent": "work-social-affairs-and-pensions",
+      "labelEn": "Social security contributions",
+      "assessmentEligible": true,
+      "czechAliases": ["pojistné na sociální zabezpečení", "odvody na sociální pojištění", "odvody OSVČ"],
+      "directLegalIdentifiers": ["cz-act-589-1992", "cz-act-582-1991", "cz-act-323-2025"],
+      "inclusionExamples": [
+        "A promise or record about social security contributions, the minimum contributions of the self-employed, or how employers report them."
+      ],
+      "exclusionExamples": [
+        "A promise about the amount of pensions or the retirement age (route under `pension-system`)."
+      ]
+    },
+    {
       "id": "housing-affordability",
       "parent": "housing-and-regional-development",
       "labelEn": "Housing affordability",
@@ -427,7 +483,7 @@
       "labelEn": "Regional development and spatial planning",
       "assessmentEligible": true,
       "czechAliases": ["územní plánování", "stavební zákon", "obce a kraje"],
-      "directLegalIdentifiers": ["cz-act-248-2000", "cz-act-283-2021"],
+      "directLegalIdentifiers": ["cz-act-248-2000", "cz-act-283-2021", "cz-act-330-2025"],
       "inclusionExamples": [
         "A promise or record about spatial planning rules, building permits, or targeted regional-development funding."
       ],
@@ -482,8 +538,8 @@
       "parent": "culture-and-media",
       "labelEn": "Cultural funding and heritage protection",
       "assessmentEligible": true,
-      "czechAliases": ["dotace na kulturu", "památková péče", "kulturní instituce"],
-      "directLegalIdentifiers": ["cz-act-20-1987"],
+      "czechAliases": ["dotace na kulturu", "památková péče", "kulturní instituce", "knihovny"],
+      "directLegalIdentifiers": ["cz-act-20-1987", "cz-act-257-2001"],
       "inclusionExamples": [
         "A promise or record about funding for cultural institutions, artists, or the protection of historical monuments."
       ],
@@ -531,6 +587,34 @@
       ],
       "exclusionExamples": [
         "A promise about building new transport infrastructure itself rather than operating public transport (route under `road-and-rail-infrastructure`)."
+      ]
+    },
+    {
+      "id": "aviation-and-waterways",
+      "parent": "transport-and-infrastructure",
+      "labelEn": "Aviation, airports, and inland waterways",
+      "assessmentEligible": true,
+      "czechAliases": ["letectví", "letiště", "vnitrozemská plavba", "vodní doprava"],
+      "directLegalIdentifiers": ["cz-act-49-1997", "cz-act-114-1995"],
+      "inclusionExamples": [
+        "A promise or record about civil aviation, airports, drones, or inland navigation and waterways."
+      ],
+      "exclusionExamples": [
+        "A promise about roads or railways (route under `road-and-rail-infrastructure`)."
+      ]
+    },
+    {
+      "id": "road-traffic-and-vehicles",
+      "parent": "transport-and-infrastructure",
+      "labelEn": "Road traffic rules and vehicles",
+      "assessmentEligible": true,
+      "czechAliases": ["silniční provoz", "bodový systém", "technická kontrola vozidel", "řidičské průkazy"],
+      "directLegalIdentifiers": ["cz-act-361-2000", "cz-act-56-2001"],
+      "inclusionExamples": [
+        "A promise or record about traffic rules, driving licences and the penalty-point system, or the registration and technical inspection of vehicles."
+      ],
+      "exclusionExamples": [
+        "A promise about building or upgrading roads (route under `road-and-rail-infrastructure`)."
       ]
     },
     {
@@ -590,12 +674,40 @@
       ]
     },
     {
+      "id": "animal-breeding-and-welfare",
+      "parent": "agriculture-and-food",
+      "labelEn": "Animal breeding and animal welfare",
+      "assessmentEligible": true,
+      "czechAliases": ["ochrana zvířat", "týrání zvířat", "chov zvířat", "plemenitba"],
+      "directLegalIdentifiers": ["cz-act-246-1992", "cz-act-154-2000"],
+      "inclusionExamples": [
+        "A promise or record about the protection of animals against cruelty, stray animals, or the breeding and registration of farm animals."
+      ],
+      "exclusionExamples": [
+        "A promise about subsidies for farmers (route under `farming-support-and-self-sufficiency`)."
+      ]
+    },
+    {
+      "id": "forestry-and-hunting",
+      "parent": "agriculture-and-food",
+      "labelEn": "Forestry and hunting",
+      "assessmentEligible": true,
+      "czechAliases": ["myslivost", "lesnictví", "hospodaření v lesích"],
+      "directLegalIdentifiers": ["cz-act-449-2001"],
+      "inclusionExamples": [
+        "A promise or record about hunting, game management, or forest management."
+      ],
+      "exclusionExamples": [
+        "A promise about nature or climate protection in general (route under `climate-and-environmental-protection`)."
+      ]
+    },
+    {
       "id": "police-and-internal-security",
       "parent": "security-defence-and-migration",
       "labelEn": "Police and internal security",
       "assessmentEligible": true,
-      "czechAliases": ["policie", "vnitřní bezpečnost", "boj proti kriminalitě"],
-      "directLegalIdentifiers": ["cz-act-273-2008", "cz-act-553-1991", "cz-act-361-2003", "cz-act-341-2011"],
+      "czechAliases": ["policie", "vnitřní bezpečnost", "boj proti kriminalitě", "zbraně"],
+      "directLegalIdentifiers": ["cz-act-273-2008", "cz-act-553-1991", "cz-act-361-2003", "cz-act-341-2011", "cz-act-156-2000"],
       "inclusionExamples": [
         "A promise or record about police staffing, powers, or measures against crime."
       ],
@@ -660,6 +772,34 @@
       ]
     },
     {
+      "id": "criminal-law-and-victims",
+      "parent": "justice-democracy-and-rights",
+      "labelEn": "Criminal law and victims of crime",
+      "assessmentEligible": true,
+      "czechAliases": ["oběti trestných činů", "pomoc obětem", "trestní právo"],
+      "directLegalIdentifiers": ["cz-act-45-2013"],
+      "inclusionExamples": [
+        "A promise or record about the rights of and support for victims of crime, or about criminal offences and penalties."
+      ],
+      "exclusionExamples": [
+        "A promise about how courts or prosecutors are organised (route under `judiciary-and-anti-corruption`)."
+      ]
+    },
+    {
+      "id": "civil-law",
+      "parent": "justice-democracy-and-rights",
+      "labelEn": "Civil law",
+      "assessmentEligible": true,
+      "czechAliases": ["občanský zákoník", "občanské právo"],
+      "directLegalIdentifiers": ["cz-act-89-2012", "cz-act-123-2024"],
+      "inclusionExamples": [
+        "A promise or record about the Civil Code: property, contracts, family law, inheritance, or found property."
+      ],
+      "exclusionExamples": [
+        "A promise about criminal offences (route under `criminal-law-and-victims`)."
+      ]
+    },
+    {
       "id": "public-administration-reform",
       "parent": "state-and-digital-public-services",
       "labelEn": "Public administration reform",
@@ -685,6 +825,48 @@
       ],
       "exclusionExamples": [
         "A promise about the size or organization of the civil service rather than digital services (route under `public-administration-reform`)."
+      ]
+    },
+    {
+      "id": "state-records-and-documents",
+      "parent": "state-and-digital-public-services",
+      "labelEn": "State registers, identity documents, and official records",
+      "assessmentEligible": true,
+      "czechAliases": ["matriky", "občanské průkazy", "cestovní pasy", "státní statistika", "Sbírka zákonů"],
+      "directLegalIdentifiers": ["cz-act-301-2000", "cz-act-414-2023", "cz-act-329-1999", "cz-act-269-2021", "cz-act-89-1995", "cz-act-222-2016", "cz-act-277-2019"],
+      "inclusionExamples": [
+        "A promise or record about registers of births, marriages, and names, identity cards and passports, official statistics, or the Collection of Laws."
+      ],
+      "exclusionExamples": [
+        "A promise about digital access to public services in general (route under `digital-government-services`)."
+      ]
+    },
+    {
+      "id": "state-symbols-and-holidays",
+      "parent": "state-and-digital-public-services",
+      "labelEn": "State symbols and public holidays",
+      "assessmentEligible": true,
+      "czechAliases": ["státní svátky", "státní symboly", "významné dny"],
+      "directLegalIdentifiers": ["cz-act-245-2000"],
+      "inclusionExamples": [
+        "A promise or record about public holidays, days of remembrance, or state and regional symbols and flags."
+      ],
+      "exclusionExamples": [
+        "A promise about working time or days off in labour law (route under `labour-market-and-wages`)."
+      ]
+    },
+    {
+      "id": "postal-services",
+      "parent": "state-and-digital-public-services",
+      "labelEn": "Postal services",
+      "assessmentEligible": true,
+      "czechAliases": ["Česká pošta", "poštovní služby", "pobočky pošty"],
+      "directLegalIdentifiers": ["cz-act-29-2000", "cz-act-332-2025"],
+      "inclusionExamples": [
+        "A promise or record about the postal service, Česká pošta, or its branch network."
+      ],
+      "exclusionExamples": [
+        "A promise about telecommunications or internet access (route under `digital-government-services`)."
       ]
     },
     {

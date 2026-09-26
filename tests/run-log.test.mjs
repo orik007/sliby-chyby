@@ -14,6 +14,25 @@ test("a call's estimated cost uses uncached input, cached input, and output pric
   assert.equal(estimateCallCost("gpt-6-luna", null, table), null);
 });
 
+test("a request above the long-context threshold is priced at the long-context rates in full", () => {
+  const table = { longContextThresholdTokens: 272_000, models: { "gpt-5.6-terra": { input: 2, cachedInput: 0.2, output: 12, longContext: { input: 4, cachedInput: 0.4, output: 18 } } } };
+  const at = (input) => estimateCallCost("gpt-5.6-terra", { input_tokens: input, input_tokens_details: { cached_tokens: 0 }, output_tokens: 1_000 }, table);
+  assert.equal(at(272_000).toFixed(6), ((272_000 * 2 + 1_000 * 12) / 1_000_000).toFixed(6));
+  assert.equal(at(272_001).toFixed(6), ((272_001 * 4 + 1_000 * 18) / 1_000_000).toFixed(6));
+});
+
+test("the price table carries the long-context rates for every model", async () => {
+  const table = JSON.parse(await readFile(new URL("../automation/model-prices.json", import.meta.url), "utf8"));
+  assert.equal(table.longContextThresholdTokens, 272_000);
+  for (const [model, price] of Object.entries(table.models)) {
+    assert.ok(price.longContext, `${model} has long-context prices`);
+    // OpenAI charges long context at twice the input and cached-input rate and 1.5 times the output rate.
+    assert.equal(price.longContext.input, price.input * 2, model);
+    assert.equal(price.longContext.cachedInput, price.cachedInput * 2, model);
+    assert.equal(price.longContext.output, price.output * 1.5, model);
+  }
+});
+
 test("every paid model call is appended to the model-call log", async () => {
   const file = join(await mkdtemp(join(tmpdir(), "slava-run-log-")), "nested", "model-calls.jsonl");
   const previous = process.env.SLIBY_MODEL_CALL_LOG;

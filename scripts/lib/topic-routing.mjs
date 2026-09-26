@@ -4,7 +4,7 @@ function invariant(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-const minimumGroundedConfidence = 0.5;
+const minimumConfidence = 0.5;
 
 function selectedTags(taggerOutput) {
   return (taggerOutput?.tags ?? []).filter((tagId) => tagId !== "unknown");
@@ -15,28 +15,24 @@ function isUnknown(taggerOutput) {
 }
 
 /**
- * A tagger's tag selection only counts as agreement support when it is
- * grounded: a plausible confidence and at least one cited excerpt. A tag
- * returned with zero confidence or no supporting excerpt is weak support and
- * must not by itself clear the auto-candidate bar, even if the peer tagger
- * proposes the same tag.
+ * A tagger's tag selection only counts as agreement support with a plausible
+ * confidence. A tag returned with low confidence is weak support and must not
+ * by itself clear the auto-candidate bar, even if the peer tagger proposes
+ * the same tag.
  */
-function isGrounded(taggerOutput) {
-  return Number.isFinite(taggerOutput?.confidence)
-    && taggerOutput.confidence >= minimumGroundedConfidence
-    && Array.isArray(taggerOutput?.supportingExcerpts)
-    && taggerOutput.supportingExcerpts.length > 0;
+function isConfident(taggerOutput) {
+  return Number.isFinite(taggerOutput?.confidence) && taggerOutput.confidence >= minimumConfidence;
 }
 
-function groundedSelectedTags(taggerOutput) {
-  return isGrounded(taggerOutput) ? selectedTags(taggerOutput) : [];
+function confidentSelectedTags(taggerOutput) {
+  return isConfident(taggerOutput) ? selectedTags(taggerOutput) : [];
 }
 
 /**
  * Combines two independent tagger outputs into one routing state, per the
  * doc's table. `agreedTags` carries only the tags that both taggers
- * independently and groundedly agreed are sufficiently specific — the set
- * that may drive an auto-created relationship. A one-sided or ungrounded
+ * independently and confidently agreed are sufficiently specific — the set
+ * that may drive an auto-created relationship. A one-sided or low-confidence
  * proposal never appears in `agreedTags`; it only makes the result
  * `routing-review` for human attention.
  */
@@ -51,26 +47,26 @@ export function combineTaggerResults(taxonomy, taggerA, taggerB) {
     return { state: "routing-review", reason: "only-one-tagger-classified", agreedTags: [] };
   }
 
-  const groundedA = groundedSelectedTags(taggerA);
-  const groundedB = groundedSelectedTags(taggerB);
-  const agreedGroundedSpecific = groundedA.filter(
-    (tagId) => groundedB.includes(tagId) && isAssessmentEligible(taxonomy, tagId)
+  const confidentA = confidentSelectedTags(taggerA);
+  const confidentB = confidentSelectedTags(taggerB);
+  const agreedConfidentSpecific = confidentA.filter(
+    (tagId) => confidentB.includes(tagId) && isAssessmentEligible(taxonomy, tagId)
   );
-  if (agreedGroundedSpecific.length > 0) {
-    return { state: "auto-candidate", reason: "taggers-agree-on-specific-tag", agreedTags: agreedGroundedSpecific };
+  if (agreedConfidentSpecific.length > 0) {
+    return { state: "auto-candidate", reason: "taggers-agree-on-specific-tag", agreedTags: agreedConfidentSpecific };
   }
 
   const rawA = selectedTags(taggerA);
   const rawB = selectedTags(taggerB);
   if (rawA.some((tagId) => rawB.includes(tagId))) {
-    return { state: "routing-review", reason: "taggers-agree-only-on-broad-or-ungrounded-tag", agreedTags: [] };
+    return { state: "routing-review", reason: "taggers-agree-only-on-broad-or-low-confidence-tag", agreedTags: [] };
   }
   return { state: "routing-review", reason: "taggers-disagree", agreedTags: [] };
 }
 
 /**
  * Derives one promise's accepted routing tags from two independent tagger
- * proposals. When the taggers groundedly
+ * proposals. When the taggers confidently
  * agree on a specific tag (`auto-candidate`), only that agreed set becomes
  * the accepted `tags` -- a tag proposed by just one tagger must not ride
  * along into an assignment marked `needsReview: false`, since that flag is
@@ -146,16 +142,27 @@ export function directLinkForChange({ change, directIdIndex, invertedIndex }) {
 }
 
 /**
+ * The specific tags a law change carries: every specific tag either screener
+ * gives with a confidence of at least 0.5. An `unknown` or a low-confidence
+ * answer of one screener does not block the other's tags, and the relevance
+ * checks then read every pair in full.
+ */
+export function lawChangeTags(taxonomy, screenerA, screenerB) {
+  return [...new Set([...confidentSelectedTags(screenerA), ...confidentSelectedTags(screenerB)])]
+    .filter((tagId) => isAssessmentEligible(taxonomy, tagId))
+    .sort();
+}
+
+/**
  * Routes one substantive law change to promises by a direct legal-identifier
- * link and by the specific tags both screeners groundedly agree on; a change
- * gets the promises of both. Without either it stays in `routing-review` or
- * `orphan-review` for human attention.
+ * link and by the specific tags of either screener; a change gets the
+ * promises of both. A change that reaches no promise is `unrouted`: it has
+ * no specific tag, or no promise holds one of its tags.
  */
 export function routeLawChange({ taxonomy, change, screenerA, screenerB, invertedIndex, directIdIndex }) {
   invariant(typeof change.changeId === "string" && change.changeId.length > 0, "routeLawChange requires a changeId");
   const directLink = directLinkForChange({ change, directIdIndex, invertedIndex });
-  const combined = combineTaggerResults(taxonomy, screenerA, screenerB);
-  const agreedTagIds = combined.state === "auto-candidate" ? combined.agreedTags : [];
+  const agreedTagIds = lawChangeTags(taxonomy, screenerA, screenerB);
   const tagPromiseIds = promiseIdsForTags(taxonomy, invertedIndex, agreedTagIds);
   // Each promise records how the change reached it, so the assessment
   // summary can count rejected changes by the tag or link that routed them.
@@ -175,9 +182,8 @@ export function routeLawChange({ taxonomy, change, screenerA, screenerB, inverte
     directLinkIdentifiers: route.direct ? directLink.matchedIdentifiers : []
   }));
   if (routedTo.length > 0) {
-    return { changeId: change.changeId, disposition: "routed", reason: directLink && tagPromiseIds.size > 0 ? "direct-link-and-agreed-tags" : directLink ? "direct-structural-link" : combined.reason, routedTo };
+    return { changeId: change.changeId, disposition: "routed", reason: directLink && tagPromiseIds.size > 0 ? "direct-link-and-tags" : directLink ? "direct-structural-link" : "screener-tags", routedTo };
   }
-  const disposition = combined.state === "orphan-review" || combined.state === "auto-candidate" ? "orphan-review" : "routing-review";
-  const reason = combined.state === "auto-candidate" ? "no-matching-promise-after-safe-assignment" : combined.reason;
-  return { changeId: change.changeId, disposition, reason, routedTo: [] };
+  const reason = agreedTagIds.length > 0 ? "no-promise-with-its-tags" : "no-specific-tag";
+  return { changeId: change.changeId, disposition: "unrouted", reason, routedTo: [] };
 }

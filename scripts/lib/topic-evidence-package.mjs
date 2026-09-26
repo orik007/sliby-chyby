@@ -114,7 +114,7 @@ function evidenceFromLawChange(change, route, publishedAt, senateResolutionIds) 
     publisher: "Chamber of Deputies of the Parliament of the Czech Republic",
     publishedAt,
     url: latestDocument?.url ?? change.printPageUrl,
-    locator: latestDocument ? `${latestDocument.filename}, ${change.heading ?? "whole text"}` : "print title only; no DOCX text",
+    locator: latestDocument ? `${latestDocument.filename}, ${change.heading ?? "whole text"}` : "print title only; no DOCX or DOC text",
     primary: true,
     factSummary: `Law change ${change.heading ? `“${change.heading} – ${change.titleCz}”` : `“${change.titleCz}”`} of print ${change.printNumber}${change.addedIn === "proposed" ? "" : `, added in the ${versionLabels[change.addedIn]}`}. Versions: ${versions.map(describe).join("; ")}.`,
     structuredFacts: {

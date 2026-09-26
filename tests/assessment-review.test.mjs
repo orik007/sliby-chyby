@@ -17,7 +17,7 @@ const evidencePackage = {
   evidence: [
     { id: "promise-source", url: "https://example.test/promise", factSummary: "Přesné znění slibu.", locator: "strana 1", publishedAt: "2025-01-01", primary: true, role: "promise-source" },
     { id: "change-1", url: "https://example.test/change-1", factSummary: "Úřední text změny zákona.", locator: "ČÁST PRVNÍ", publishedAt: "2026-09-01", primary: true, role: "law-change", title: "90: ČÁST PRVNÍ – Změna rozpočtových pravidel", structuredFacts: { titleCz: "Změna rozpočtových pravidel" }, matchBasis: { routeBasis: ["direct-structural-link", "controlled-tag"], matchedTagIds: ["fiscal-rules"], directLinkIdentifiers: ["cz-act-218-2000"] } },
-    { id: "change-2", url: "https://example.test/change-2", factSummary: "Úřední text změny zákona.", locator: "ČÁST DRUHÁ", publishedAt: "2026-09-01", primary: true, role: "law-change", title: "90: ČÁST DRUHÁ – Účinnost", structuredFacts: { titleCz: "Účinnost" }, matchBasis: { routeBasis: ["controlled-tag"], matchedTagIds: ["fiscal-rules"], directLinkIdentifiers: [] } },
+    { id: "change-2", url: "https://example.test/change-2", factSummary: "Úřední text změny zákona.", locator: "ČÁST DRUHÁ", publishedAt: "2026-09-01", primary: true, role: "law-change", title: "90: ČÁST DRUHÁ – Přechodná ustanovení", structuredFacts: { titleCz: "Přechodná ustanovení" }, matchBasis: { routeBasis: ["controlled-tag"], matchedTagIds: ["fiscal-rules"], directLinkIdentifiers: [] } },
     { id: "conduct", url: "https://example.test/conduct", factSummary: "Ověřený krok.", locator: "záznam", publishedAt: "2026-09-10", primary: true, role: "conduct-evidence" }
   ]
 };
@@ -26,8 +26,8 @@ const runtime = { assessorProviderA: "openai", assessorProviderB: "openai", arbi
 
 test("loads only the active assessor and arbiter prompts", async () => {
   const prompts = await loadAssessmentPrompts();
-  assert.equal(prompts.assessor.version, "assessor-v17");
-  assert.equal(prompts.arbiter.version, "arbiter-v9");
+  assert.equal(prompts.assessor.version, "assessor-v18");
+  assert.equal(prompts.arbiter.version, "arbiter-v10");
   assert.match(prompts.assessor.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.arbiter.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.assessor.instructions, /maintenanceBaseline/);
@@ -59,7 +59,7 @@ const reviewA = {
   promiseId: "test-promise",
   changeRelevance: [
     { evidenceId: "change-1", relevant: true, reasonCz: "Mění schvalování rozpočtu, o kterém slib mluví." },
-    { evidenceId: "change-2", relevant: false, reasonCz: "Stanoví jen den účinnosti." }
+    { evidenceId: "change-2", relevant: false, reasonCz: "Upravuje jen dokončení zahájených řízení." }
   ],
   status: "moving-towards",
   evidenceSufficient: true,
@@ -68,7 +68,7 @@ const reviewA = {
   confidence: "medium",
   uncertainties: []
 };
-const reviewB = { ...reviewA, changeRelevance: [reviewA.changeRelevance[0], { evidenceId: "change-2", relevant: true, reasonCz: "Určuje, kdy změna začne platit." }] };
+const reviewB = { ...reviewA, changeRelevance: [reviewA.changeRelevance[0], { evidenceId: "change-2", relevant: true, reasonCz: "Určuje, podle kterých pravidel se řízení dokončí." }] };
 const auditRecord = {
   validatedAssessments: { "assessor-a": reviewA, "assessor-b": reviewB },
   arbiter: null,
@@ -88,7 +88,7 @@ test("the human review page shows each assessor's relevance verdict for every la
   const markdown = renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal });
   assert.match(markdown, /### Souvisí změny zákonů se slibem\?/);
   assert.match(markdown, /Změna rozpočtových pravidel\]\(https:\/\/example.test\/change-1\) \| ano: Mění schvalování rozpočtu/);
-  assert.match(markdown, /Účinnost\]\(https:\/\/example.test\/change-2\) \| ne: Stanoví jen den účinnosti\. \| ano: Určuje, kdy změna začne platit\. \|/);
+  assert.match(markdown, /Přechodná ustanovení\]\(https:\/\/example.test\/change-2\) \| ne: Upravuje jen dokončení zahájených řízení\. \| ano: Určuje, podle kterých pravidel se řízení dokončí\. \|/);
 });
 
 test("the human review page shows both differing assessments and the arbiter's decision", () => {
@@ -122,5 +122,5 @@ test("the human review page never calls differing assessments a consensus when t
   assert.match(markdown, /\*Nevznikl žádný návrh veřejného hodnocení ani vysvětlení\.\*/);
   assert.match(markdown, /### Odlišné posudky/);
   assert.match(markdown, /#### Druhý posudek: Směřuje proti slibu \(−1\)/);
-  assert.match(markdown, /### Rozhodnutí třetího hodnotitele\n\nTřetí hodnotitel nebyl zavolán, protože balíček s oběma posudky je pro něj příliš velký\./);
+  assert.match(markdown, /### Rozhodnutí třetího hodnotitele\n\nTřetí hodnotitel nebyl zavolán, protože balíček s oběma posudky je větší, než dokáže přečíst\./);
 });

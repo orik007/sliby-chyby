@@ -2,18 +2,26 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-export const assessorPromptVersion = "assessor-v17";
-export const arbiterPromptVersion = "arbiter-v9";
+export const assessorPromptVersion = "assessor-v18";
+export const arbiterPromptVersion = "arbiter-v10";
 export const scoringRulePath = "docs/scoring.md";
 
-// Above this input size the assessor and arbiter models cost twice as much
-// per request (OpenAI model documentation, verified 24 September 2026). A
-// request is estimated at three characters per token, instructions and
-// input together; a larger one is reported for human review, never trimmed.
-export const maxRequestInputTokens = 272_000;
+// The assessor and arbiter models read at most 1,050,000 tokens, their
+// answer of up to 128,000 tokens included (OpenAI model documentation,
+// verified 26 September 2026), so a request can carry at most 922,000 input
+// tokens, instructions and input together; a larger one cannot be sent, is
+// reported for human review, and is never trimmed. A request above 272,000
+// input tokens is sent at the long-context price
+// (automation/model-prices.json).
+export const maxRequestInputTokens = 922_000;
+
+// Run 56's 1,110 screening requests had 2.78 to 4.17 characters per billed
+// input token, the fewest in the largest legal texts, so a request is
+// estimated at 2.5 characters per token to stay below the limit.
+export const charactersPerToken = 2.5;
 
 export function estimateTokens(text) {
-  return Math.ceil(text.length / 3);
+  return Math.ceil(text.length / charactersPerToken);
 }
 
 // The input of a model call is sent as JSON text.

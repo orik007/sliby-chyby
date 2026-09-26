@@ -5,7 +5,7 @@ import { buildCoverageAudit, renderCoverageAuditMarkdown } from "../scripts/lib/
 const pspSource = { id: "psp-core-2025", name: "Chamber of Deputies open data", primary: true, evidenceRole: "primary-record", enabled: true, coverage: { mode: "term-snapshot", note: "Whole 10th term." } };
 const counts = {
   primaryRecordsInWindowCount: 10, notAttributableSkippedCount: 7, conductRecordCount: 3, lawChangeCount: 5, technicalLawChangeCount: 2, substantiveLawChangeCount: 3,
-  routedLawChangeCount: 2, directLinkLawChangeCount: 1, routingReviewCount: 0, orphanReviewCount: 1, routedWithoutConductCount: 1, relevancePairCount: 4,
+  routedLawChangeCount: 2, directLinkLawChangeCount: 1, unroutedLawChangeCount: 1, routedWithoutConductCount: 1, relevancePairCount: 4,
   relevanceDroppedCount: 1, oversizedPackageCount: 0, invalidPromiseTaggerCount: 0, invalidScreenerCount: 1, invalidRelevanceCheckCount: 0
 };
 
@@ -13,7 +13,7 @@ function routingRun({ lawChanges = [], packages = [], completed = true } = {}) {
   return { schemaVersion: "1.0.0", asOf: "2026-09-23", completed, counts, lawChanges, builtPackages: packages };
 }
 
-const printParts = { quality: { prints: 2, printsWithProposalText: 1, printsWithoutDocxProposalText: 1, printsWithApprovedText: 1, printsWithPassedText: 0, printsWithSenateResolution: 1, lawChanges: 5, lawChangesAddedInDebate: 1, lawChangesRemovedInDebate: 2, lawChangesWithAmendedAct: 3, titleOnlyLawChanges: 1, approvedBillsWithoutApprovedText: 1, textWarnings: 2 } };
+const printParts = { quality: { prints: 2, printsWithProposalText: 1, printsWithoutProposalText: 1, printsWithApprovedText: 1, printsWithPassedText: 0, printsWithSenateResolution: 1, lawChanges: 5, lawChangesAddedInDebate: 1, lawChangesRemovedInDebate: 2, lawChangesWithAmendedAct: 3, titleOnlyLawChanges: 1, approvedBillsWithoutApprovedText: 1, textWarnings: 2 } };
 const promiseRegistry = { promises: [{ id: "p1", partyId: "ano", partyName: "ANO", titleCz: "Slib" }] };
 
 test("coverage audit never converts a promise without routed records into a score", () => {
@@ -47,7 +47,7 @@ test("a routed promise without a kept law change, one with a package, and one wi
     routingRun: routingRun({
       lawChanges: [
         { route: { disposition: "routed", routedTo: [{ promiseId: "p1" }, { promiseId: "p2" }, { promiseId: "p3" }] } },
-        { route: { disposition: "orphan-review", routedTo: [] } }
+        { route: { disposition: "unrouted", routedTo: [] } }
       ],
       packages: [{ promiseId: "p2", lawChangeCount: 1, oversized: false }, { promiseId: "p3", lawChangeCount: 1, oversized: true }]
     }),

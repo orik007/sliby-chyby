@@ -5,7 +5,7 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import test from "node:test";
 import { pathToFileURL } from "node:url";
-import { maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
+import { charactersPerToken, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
 
 // One real Chamber print (tisk 189, the revenue-registration bill) taken from
 // the collector and print-text runs of 25 September 2026: its six law
@@ -62,7 +62,7 @@ async function checkout(root) {
   await copy("automation/prompts");
   await copy("docs/scoring.md");
   await copy("automation/model-prices.json");
-  await copy("automation/topic-routing/taxonomy-v1.json");
+  await copy("automation/topic-routing/taxonomy-v2.json");
   await copy("automation/collectors/sources.json");
   await copy("automation/review-proposals/manifest.json");
   await copy("tests/fixtures/pipeline/promise-registry.json", "automation/promise-registry/promises.json");
@@ -97,7 +97,7 @@ test("one real print runs through routing, packaging, assessment, and the review
     directLinks: report.counts.directLinkLawChangeCount,
     packages: report.counts.packageCount,
     invalid: report.counts.invalidScreenerCount + report.counts.invalidRelevanceCheckCount + report.counts.invalidPromiseTaggerCount
-  }, { records: 5, skipped: 2, conduct: 3, lawChanges: 6, technical: 1, routed: 1, directLinks: 1, packages: 2, invalid: 0 });
+  }, { records: 5, skipped: 2, conduct: 3, lawChanges: 5, technical: 1, routed: 1, directLinks: 1, packages: 2, invalid: 0 });
 
   // Only the value-added tax law change reaches promises: through the act it
   // amends, which the VAT tag maps, to the promises tagged with it.
@@ -110,10 +110,10 @@ test("one real print runs through routing, packaging, assessment, and the review
     const lawChanges = evidencePackage.evidence.filter(({ role }) => role === "law-change");
     assert.deepEqual(lawChanges.map(({ structuredFacts }) => structuredFacts.changeId), ["43310-3"]);
     assert.deepEqual(lawChanges[0].matchBasis.directLinkIdentifiers, ["cz-act-235-2004"]);
-    // The technical part (the effective date) and the records that cannot be
-    // conduct are in no package.
+    // The technical part, though its act is directly linked, and the records
+    // that cannot be conduct are in no package.
     const ids = evidencePackage.evidence.map(({ id }) => id);
-    assert.ok(!ids.includes("psp-core-2025--law-change-43310-6"));
+    assert.ok(!ids.includes("psp-core-2025--law-change-43310-5"));
     assert.ok(!ids.includes("psp-core-2025--print-step-211391") && !ids.includes("psp-core-2025--vote-87641"));
   }
 
@@ -122,6 +122,9 @@ test("one real print runs through routing, packaging, assessment, and the review
   const [vatChange] = vatPackage.evidence.filter(({ role }) => role === "law-change");
   assert.deepEqual(Object.keys(vatChange.structuredFacts.versions), ["proposed", "approved", "passed"]);
   assert.equal(vatChange.structuredFacts.versions.passed.sameAs, "approved");
+  // The bill's effective date goes with each version; part six ("ÚČINNOST")
+  // is no law change.
+  assert.match(vatChange.structuredFacts.versions.approved.effectiveCz, /^§ 36\nTento zákon nabývá účinnosti dnem 1\. ledna 2027/);
   const resolutions = vatPackage.evidence.filter(({ role }) => role === "senate-resolution");
   assert.equal(resolutions.length, 1);
   assert.deepEqual(vatChange.structuredFacts.senateResolutionEvidenceIds, [resolutions[0].id]);
@@ -199,7 +202,7 @@ test("one real print runs through routing, packaging, assessment, and the review
   // called and the disagreement goes to human review.
   const { stdout } = await run([script("run-assessment.mjs"), join(routingOutput, "evidence-packages", `${vatPromiseId}.json`), join(work, "long-reviews")], {
     cwd: root,
-    environment: { ...assessmentEnvironment(join(work, "long-review-calls.jsonl")), STUB_OPENAI_EXPLANATION_CHARS: String(maxRequestInputTokens * 3 / 2) }
+    environment: { ...assessmentEnvironment(join(work, "long-review-calls.jsonl")), STUB_OPENAI_EXPLANATION_CHARS: String(maxRequestInputTokens * charactersPerToken / 2) }
   });
   assert.deepEqual((await modelCalls(join(work, "long-review-calls.jsonl"))).map(({ name }) => name), ["slava_assessment", "slava_assessment"]);
   assert.deepEqual(JSON.parse(stdout).resolution, { state: "human-review-required", reason: "arbiter-input-too-large", status: null, selectedReview: null });

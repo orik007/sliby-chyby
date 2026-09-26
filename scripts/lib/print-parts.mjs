@@ -9,7 +9,7 @@ import { cleanText, invariant } from "./collector-core.mjs";
 // print kind itself.
 export const stateBudgetIdentifier = "cz-print-kind-state-budget";
 
-// The labelled section of a print page whose DOCX file is the proposal text:
+// The labelled section of a print page whose Word file is the proposal text:
 // the bill (or state budget) with its explanatory memorandum, or the text of
 // a treaty or another print. Other sections (RIA, the consolidated text with
 // marked changes, EU compatibility, annexes) are never read.
@@ -109,13 +109,15 @@ export function amendedActOfPart(paragraphs) {
 }
 
 /**
- * The proposal-text DOCX of a print page: the first DOCX file listed under
- * one of the proposal sections. Returns null when the page has none (for
- * example, only a legacy .doc file).
+ * The proposal-text Word file of a print page: the first DOCX file listed
+ * under one of the proposal sections or, when there is none, the first
+ * Word 97-2003 (.doc) file there. Returns null when the page has neither
+ * (for example, only a PDF, which is never read).
  */
 export function proposalDocumentLink(html, pageUrl) {
   const files = String(html).split("Soubory sněmovního tisku")[1]?.split("</table>")[0] ?? "";
   let section = null;
+  const found = { docx: null, doc: null };
   const pattern = /<th\b[^>]*>([\s\S]*?)<\/th>|<a\b[^>]*href=["']([^"']*orig2\.sqw[^"']*)["'][^>]*>([^<]+)<\/a>/gi;
   for (const match of files.matchAll(pattern)) {
     if (match[1] !== undefined) {
@@ -123,10 +125,11 @@ export function proposalDocumentLink(html, pageUrl) {
       continue;
     }
     const filename = cleanText(match[3], 200);
-    if (!section || !/\.docx$/i.test(filename) || !proposalSectionLabels.some((label) => label.test(section))) continue;
-    return { filename, url: pspUrl(match[2], pageUrl), sectionLabel: section };
+    const format = /\.(docx?)$/i.exec(filename)?.[1].toLowerCase();
+    if (!section || !format || found[format] || !proposalSectionLabels.some((label) => label.test(section))) continue;
+    found[format] = { filename, url: pspUrl(match[2], pageUrl), sectionLabel: section, format };
   }
-  return null;
+  return found.docx ?? found.doc;
 }
 
 // "ČÁST PRVNÍ", "ČÁST DVACÁTÁ TŘETÍ", "ČÁST STO DVACÁTÁ PRVNÍ", "Část
@@ -164,6 +167,15 @@ export function splitProposalText(paragraphs) {
 // Print kinds divided into parts (docs/evidence-pipeline.md, Law changes).
 const partedPrintKindIds = new Set(["1", "2"]);
 
+// The part of a bill that states when it takes effect ("ČÁST … ÚČINNOST").
+// It is not a law change; its text belongs to every law change of the same
+// text (docs/evidence-pipeline.md, Effective date).
+const effectivePartTitlePattern = /^účinnost$/iu;
+
+function isEffectivePart(part) {
+  return part.heading !== null && effectivePartTitlePattern.test(String(part.titleCz ?? "").trim());
+}
+
 // The texts of a bill as the Chamber debates it (docs/evidence-pipeline.md,
 // Versions of a law change): proposed, approved by the Chamber in the third
 // reading, and passed by Parliament after a Senate or presidential return.
@@ -183,14 +195,23 @@ function pspUrl(href, pageUrl) {
  * Links to a bill's later texts on its history page: "Text návrhu zákona
  * schváleného Poslaneckou sněmovnou" (approved, a text page with `v=PZ`) and
  * "… přijatého Parlamentem České republiky" (passed, `v=SZ`). They are not
- * in the open data, so any link to such a text page is read.
+ * in the open data, so any link to such a text page is read. A bill whose
+ * approved text has no such page (one the Senate rejected) links the print
+ * holding the text "ve znění, ve kterém byl postoupen Senátu"
+ * (`referredToSenate`).
  */
 export function laterTextLinks(historyHtml, pageUrl) {
-  const links = { approved: null, passed: null };
+  const links = { approved: null, passed: null, referredToSenate: null };
   for (const match of String(historyHtml).matchAll(/href="([^"]*tiskt\.sqw\?[^"]*)"/g)) {
     const kind = /[?&](?:amp;)?v=(PZ|SZ)(?:&|$)/.exec(match[1])?.[1];
     if (kind) links[kind === "PZ" ? "approved" : "passed"] ??= pspUrl(match[1], pageUrl);
   }
+  // "Návrh zákona ve znění, ve kterém byl postoupen Senátu rozeslán … jako
+  // tisk 163/2": the approved text as a sub-print of the bill.
+  // The link must follow "jako tisk" within the same entry, which ends at
+  // a line break or the end of the paragraph.
+  const referred = /ve\s+znění,\s+ve\s+kterém\s+byl\s+postoupen\s+Senátu(?:(?!<br\b|<\/p\b|<\/li\b)[\s\S])*?jako\s+tisk\s*(?:<(?!a\b|br\b|\/p\b)[^>]*>\s*)*<a\s+href="([^"]*tiskt\.sqw\?[^"]*)"/i.exec(String(historyHtml));
+  if (referred) links.referredToSenate = pspUrl(referred[1], pageUrl);
   return links;
 }
 
@@ -288,12 +309,13 @@ function latestTextVersion(change) {
   return [...versionKeys].reverse().find((version) => change.versions[version] && !change.versions[version].removed) ?? null;
 }
 
-function versionOf(part, amendedAct, document) {
+function versionOf(part, amendedAct, document, effectiveCz = null) {
   return {
     heading: part.heading,
     titleCz: part.titleCz,
     textCz: part.paragraphs ? part.paragraphs.join("\n") : null,
     amendedAct,
+    effectiveCz,
     document: document ? { filename: document.filename, url: document.url } : null
   };
 }
@@ -306,8 +328,9 @@ function versionOf(part, amendedAct, document) {
  * of a later text is matched to an earlier law change by the act it amends,
  * its title, and the similarity of its text (matchParts); a part without a
  * match is a law change added during the debate, and a law change missing
- * from a later text is marked `removed` in that version. A print that is a
- * single change also takes its title's acts.
+ * from a later text is marked `removed` in that version. A part titled
+ * "Účinnost" is not a law change: its text is each version's `effectiveCz`.
+ * A print that is a single change also takes its title's acts.
  */
 export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [] }) {
   const changes = [];
@@ -321,13 +344,20 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [] })
     const parts = !text
       ? [{ heading: null, titleCz: null, paragraphs: null }]
       : partedPrintKindIds.has(String(print.kindId)) ? splitProposalText(text.paragraphs) : [{ heading: null, titleCz: null, paragraphs: proposalBody(text.paragraphs) }];
-    const entries = parts.map((part) => {
+    // The effective-date text of this version, without the part heading and
+    // title; null when the text has no effective-date part.
+    const effectiveParts = parts.filter(isEffectivePart);
+    const effectiveCz = effectiveParts.length > 0 ? effectiveParts.map((part) => part.paragraphs.slice(2).join("\n")).join("\n") : null;
+    // A part keeps its position in the text, so its change ID does not
+    // depend on whether an effective-date part precedes it.
+    const entries = parts.map((part, position) => ({ part, position })).filter(({ part }) => !isEffectivePart(part)).map(({ part, position }) => {
       const amended = part.paragraphs ? amendedActOfPart(part.paragraphs) : null;
-      return { part, amended, key: partKey(part, amended), words: part.paragraphs ? partWords(part.paragraphs) : new Set() };
+      return { part, position, amended, key: partKey(part, amended), words: part.paragraphs ? partWords(part.paragraphs) : new Set() };
     });
     const matched = matchParts(entries, changes);
-    for (const [position, entry] of entries.entries()) {
-      let change = matched[position];
+    for (const [index, entry] of entries.entries()) {
+      const { position } = entry;
+      let change = matched[index];
       if (!change) {
         const fromFirstText = proposalUnknown && version === firstText;
         change = {
@@ -339,19 +369,20 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [] })
           printTitleCz: print.title,
           printPageUrl: print.pageUrl,
           addedIn: fromFirstText ? "proposed" : version,
-          versions: fromFirstText ? { proposed: { heading: null, titleCz: print.title, textCz: null, amendedAct: null, document: null } } : {}
+          versions: fromFirstText ? { proposed: { heading: null, titleCz: print.title, textCz: null, amendedAct: null, effectiveCz: null, document: null } } : {}
         };
         changes.push(change);
       }
       // A matched change is compared with its latest text in the next version.
       change.key = entry.key;
       change.words = entry.words;
-      const entryVersion = versionOf({ ...entry.part, titleCz: entry.part.titleCz ?? print.title }, entry.amended, text?.document ?? null);
+      const entryVersion = versionOf({ ...entry.part, titleCz: entry.part.titleCz ?? print.title }, entry.amended, text?.document ?? null, effectiveCz);
       // A version whose text equals the latest earlier text is stored as the
-      // same, so models do not read (and pay for) the text twice.
+      // same, so models do not read (and pay for) the text twice. The
+      // effective date is the version's own.
       const previous = latestTextVersion(change);
       change.versions[version] = previous && entryVersion.textCz !== null && bodyOf(resolvedVersion(change, previous)) === bodyOf(entryVersion)
-        ? { sameAs: change.versions[previous].sameAs ?? previous, heading: entryVersion.heading, titleCz: entryVersion.titleCz, amendedAct: entryVersion.amendedAct, document: entryVersion.document }
+        ? { sameAs: change.versions[previous].sameAs ?? previous, heading: entryVersion.heading, titleCz: entryVersion.titleCz, amendedAct: entryVersion.amendedAct, effectiveCz, document: entryVersion.document }
         : entryVersion;
     }
     // A part of an earlier version that this text no longer has was removed.

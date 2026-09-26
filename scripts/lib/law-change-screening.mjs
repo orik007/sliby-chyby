@@ -9,8 +9,8 @@ import { versionKeys, versionLabels } from "./print-parts.mjs";
  * screening every law change (substantive or technical, and its topic tags)
  * and checking whether a routed law change is relevant to one promise.
  */
-export const screeningPromptVersion = "law-change-screener-v1";
-export const relevancePromptVersion = "relevance-check-v1";
+export const screeningPromptVersion = "law-change-screener-v2";
+export const relevancePromptVersion = "relevance-check-v2";
 
 async function loadPrompt(version, root) {
   const instructions = await readFile(resolve(root, `automation/prompts/${version}.md`), "utf8");
@@ -30,17 +30,25 @@ const printKindLabels = { 1: "government bill", 2: "member bill", 3: "state budg
 
 /**
  * The official text of one law change as a model reads it: its print, its
- * heading and title, the act it amends, and the full text of every version.
+ * heading and title, the act it amends, and the full text and effective date
+ * of every version.
  * A print-wide Senate resolution is not part of one law change and goes
  * only into the evidence package.
  */
 export function lawChangeText(change) {
+  // An effective date equal to that of the version before is named, not
+  // repeated.
+  let previousEffective = null;
   const versions = versionKeys.filter((version) => change.versions[version]).map((version) => {
     const entry = change.versions[version];
     const label = `Version: ${versionLabels[version]}`;
     if (entry.removed) return `${label}\nThis part is not in this text: it was removed during the debate.`;
-    if (entry.sameAs) return `${label}\nThe same text as the ${versionLabels[entry.sameAs]}.`;
-    return entry.textCz === null ? `${label}\nNot available as a DOCX file; only the print title is known.` : `${label}\n${entry.textCz}`;
+    const effective = !entry.effectiveCz ? ""
+      : entry.effectiveCz === previousEffective?.text ? `\nEffective date of this text (účinnost): the same as in the ${versionLabels[previousEffective.version]}.`
+      : `\nEffective date of this text (účinnost):\n${entry.effectiveCz}`;
+    if (entry.effectiveCz) previousEffective = { version, text: entry.effectiveCz };
+    if (entry.sameAs) return `${label}\nThe same text as the ${versionLabels[entry.sameAs]}.${effective}`;
+    return entry.textCz === null ? `${label}\nNot available as a DOCX or DOC file; only the print title is known.` : `${label}\n${entry.textCz}${effective}`;
   });
   return [
     `Chamber print ${change.printNumber} (${printKindLabels[change.printKindId] ?? "Chamber print"}): ${change.printTitleCz}`,
@@ -69,10 +77,10 @@ function screeningSchema(taxonomy) {
   };
 }
 
-export function validateScreeningOutput(output, taxonomy, briefText) {
+export function validateScreeningOutput(output, taxonomy) {
   invariantValidOutput(typeof output?.substantive === "boolean", "Screening must say whether the change is substantive");
   invariantValidOutput(typeof output.reasonCz === "string" && output.reasonCz.trim().length > 0, "Screening must give a reason");
-  validateTagAssignmentOutput(output, taxonomy, briefText);
+  validateTagAssignmentOutput(output, taxonomy);
   return output;
 }
 
@@ -89,7 +97,7 @@ export async function requestScreening({ provider, apiKey, model, brief, taxonom
     schema: screeningSchema(taxonomy),
     metadata: { subjectId: brief.changeId, promptVersion: prompt.version },
     logLabel: `screening law change ${brief.changeId}`,
-    validate: (output) => validateScreeningOutput(output, taxonomy, brief.text)
+    validate: (output) => validateScreeningOutput(output, taxonomy)
   });
 }
 

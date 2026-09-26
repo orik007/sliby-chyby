@@ -74,8 +74,8 @@ test("persists an isolated double-invalid failure, then retires it after a newer
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-batch-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
@@ -118,8 +118,8 @@ test("the per-run cap sends no more packages to the paid assessors, and the rest
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-limit-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
@@ -147,8 +147,8 @@ test("an interrupted batch keeps every finished assessment, and the next run ass
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-interrupted-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
@@ -179,8 +179,8 @@ test("an oversized package is never sent to the assessors and is reported for hu
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-oversized-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
@@ -203,8 +203,8 @@ test("the review pull request lists every current proposal that changes the publ
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-changes-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
@@ -229,7 +229,7 @@ test("the review pull request lists every current proposal that changes the publ
   assert.match(body, /> Strana provedla ověřený krok související s tímto slibem\./);
   assert.match(body, /\*Nový návrh z tohoto běhu\.\*/);
   assert.doesNotMatch(body, /confirmed-promise/);
-  assert.match(body, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Testovací slib oversized-promise \(`oversized-promise`\): balíček je příliš velký/);
+  assert.match(body, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Testovací slib oversized-promise \(`oversized-promise`\): balíček je větší, než model dokáže přečíst/);
   assert.match(body, /Nové návrhy, které potvrzují hodnocení na webu: \*\*1\*\*/);
 
   // An unreviewed change stays listed in later runs, no longer marked new.
@@ -259,8 +259,8 @@ test("a proposal for a promise without a public score is listed as a change", as
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-no-public-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
@@ -277,8 +277,8 @@ test("a human review stays listed until a public revision follows it, and a with
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-human-review-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);
@@ -317,7 +317,7 @@ function scoreChange(index, explanationCz) {
 test("the review pull request body stays under the GitHub limit and keeps model text inert", () => {
   const short = renderReviewPullRequestBody(reviewSummary([scoreChange(1, "Viz @someone a #12.")], [{ promiseId: "promise-1", promiseTitleCz: "Slib 1", disposition: "blocked-oversized", reviewUrl: null }]));
   assert.match(short, /> Viz @\u200bsomeone a \\#\u200b12\./);
-  assert.match(short, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Slib 1 \(`promise-1`\): balíček je příliš velký/);
+  assert.match(short, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Slib 1 \(`promise-1`\): balíček je větší, než model dokáže přečíst/);
 
   const many = Array.from({ length: 700 }, (_, index) => scoreChange(index, "Dlouhé vysvětlení. ".repeat(20)));
   const body = renderReviewPullRequestBody(reviewSummary(many));
@@ -331,8 +331,8 @@ test("in the workflow, each listed promise links to its review page on the audit
   const root = await mkdtemp(join(tmpdir(), "slava-assessment-links-"));
   await mkdir(join(root, "automation/prompts"), { recursive: true });
   await mkdir(join(root, "automation/review-proposals"), { recursive: true });
-  await writeFile(join(root, "automation/prompts/assessor-v17.md"), "assessor test prompt\n");
-  await writeFile(join(root, "automation/prompts/arbiter-v9.md"), "arbiter test prompt\n");
+  await writeFile(join(root, "automation/prompts/assessor-v18.md"), "assessor test prompt\n");
+  await writeFile(join(root, "automation/prompts/arbiter-v10.md"), "arbiter test prompt\n");
   await mkdir(join(root, "docs"), { recursive: true });
   await writeFile(join(root, "docs/scoring.md"), "scoring test rule\n");
   await writeFile(join(root, "automation/review-proposals/manifest.json"), `${JSON.stringify({ schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [] }, null, 2)}\n`);

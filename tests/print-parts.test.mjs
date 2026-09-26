@@ -13,25 +13,38 @@ import {
   splitProposalText,
   changeThroughVersion
 } from "../scripts/lib/print-parts.mjs";
+import { lawChangeText } from "../scripts/lib/law-change-screening.mjs";
 
 // Paragraphs of the official DOCX proposal texts of 10th-term prints 85 (a
 // member bill) and 163 (a government bill), the file tables of the psp.cz
 // pages of prints 16 and 91, the later-text links of print 77's history
 // page, and print 16's approved-text page, downloaded on 24-25 September
-// 2026.
+// 2026; the file tables of prints 57 and 87 and the Senate referral in
+// print 163's history, downloaded on 26 September 2026.
 const fixture = (name) => readFile(new URL(`./fixtures/print-parts/${name}`, import.meta.url), "utf8");
 const print85Paragraphs = JSON.parse(await fixture("print-85-paragraphs.json"));
 const print163 = JSON.parse(await fixture("print-163-paragraphs.json"));
 const pageUrl = (number) => `https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=${number}&CT1=0`;
 
-test("reads only the proposal-text DOCX from a print page", async () => {
+test("reads only the proposal-text Word file from a print page, a DOCX before a DOC", async () => {
   // Print 16 also lists the RIA, the consolidated text with marked changes,
   // and EU compatibility; only the bill itself is the proposal text.
   assert.deepEqual(proposalDocumentLink(await fixture("print-16-files.html"), pageUrl(16)), {
     filename: "t001600.docx",
     url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=265179",
-    sectionLabel: "Návrh zákona včetně důvodové zprávy"
+    sectionLabel: "Návrh zákona včetně důvodové zprávy",
+    format: "docx"
   });
+  // Print 57 lists its bill only as PDF and .doc; the .doc is read.
+  assert.deepEqual(proposalDocumentLink(await fixture("print-57-files.html"), pageUrl(57)), {
+    filename: "t005700.doc",
+    url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=266020",
+    sectionLabel: "Návrh zákona včetně důvodové zprávy",
+    format: "doc"
+  });
+  // Print 87 lists its bill only as PDF, which is never read; the DOCX files
+  // of other sections are not the proposal text.
+  assert.equal(proposalDocumentLink(await fixture("print-87-files.html"), pageUrl(87)), null);
   // Print 91 (a state fund budget) has its resolution only as a legacy .doc;
   // its text is the DOCX of the section "Text".
   const print91 = proposalDocumentLink(await fixture("print-91-files.html"), pageUrl(91));
@@ -81,11 +94,12 @@ test("each part of a print is one law change with its full text, acts, and ident
   assert.deepEqual(changes.map(({ changeId, identifiers, addedIn }) => [changeId, identifiers, addedIn]), [
     ["44085-1", ["cz-act-110-2006"], "proposed"],
     ["44085-2", ["cz-act-108-2006"], "proposed"],
-    ["44085-3", ["cz-act-152-2025"], "proposed"],
-    ["44085-4", [], "proposed"]
+    ["44085-3", ["cz-act-152-2025"], "proposed"]
   ]);
   assert.match(changes[0].versions.proposed.textCz, /^ČÁST PRVNÍ\nZměna zákona o životním a existenčním minimu\nČl\. I\n/);
-  assert.equal(changes[3].versions.proposed.textCz, "ČÁST ČTVRTÁ\núčinnost\nČl. IV\nTento zákon nabývá účinnosti dnem 30. dubna 2026.");
+  // Part four ("účinnost") is not a law change; its text is every change's
+  // effective date.
+  for (const change of changes) assert.equal(change.versions.proposed.effectiveCz, "Čl. IV\nTento zákon nabývá účinnosti dnem 30. dubna 2026.");
   assert.equal(changes[0].printPageUrl, pageUrl(85));
   assert.equal(changes[0].versions.proposed.document.filename, "t008500.docx");
   assert.deepEqual(Object.keys(changes[0].versions), ["proposed"]);
@@ -130,8 +144,10 @@ test("without a proposal text, the parts of the first later text are the law cha
   assert.equal(titleOnly.titleCz, title);
   assert.deepEqual(titleOnly.identifiers, ["cz-act-375-2022"]);
   const withApproved = lawChangesOfPrint({ print, texts: { approved: { document, paragraphs: proposalBody(print85Paragraphs) } } });
-  assert.equal(withApproved.length, 4);
-  assert.deepEqual(withApproved.map(({ addedIn }) => addedIn), ["proposed", "proposed", "proposed", "proposed"]);
+  assert.equal(withApproved.length, 3);
+  assert.deepEqual(withApproved.map(({ addedIn }) => addedIn), ["proposed", "proposed", "proposed"]);
+  assert.equal(withApproved[0].versions.proposed.effectiveCz, null);
+  assert.match(withApproved[0].versions.approved.effectiveCz, /dnem 30\. dubna 2026/);
   assert.equal(withApproved[0].changeId, "1-1");
   assert.equal(withApproved[0].versions.proposed.textCz, null);
   assert.match(withApproved[0].versions.approved.textCz, /^ČÁST PRVNÍ/);
@@ -143,9 +159,21 @@ test("reads the later-text links from a print's history page and the DOCX of a l
   const historyUrl = "https://www.psp.cz/sqw/historie.sqw?o=10&t=77";
   assert.deepEqual(laterTextLinks(await fixture("print-77-history-status.html"), historyUrl), {
     approved: "https://www.psp.cz/sqw/text/tiskt.sqw?o=10&ct=77&ct1=0&v=PZ&pn=4&pt=1",
-    passed: "https://www.psp.cz/sqw/text/tiskt.sqw?o=10&ct=77&ct1=0&v=SZ"
+    passed: "https://www.psp.cz/sqw/text/tiskt.sqw?o=10&ct=77&ct1=0&v=SZ",
+    referredToSenate: null
   });
-  assert.deepEqual(laterTextLinks("<p>No later text.</p>", historyUrl), { approved: null, passed: null });
+  assert.deepEqual(laterTextLinks("<p>No later text.</p>", historyUrl), { approved: null, passed: null, referredToSenate: null });
+  // Print 163, which the Senate rejected, has no approved-text page; its
+  // history links sub-print 163/2 with the text referred to the Senate, and
+  // then the Senate's document 163/3.
+  assert.deepEqual(laterTextLinks(await fixture("print-163-history-senate.html"), "https://www.psp.cz/sqw/historie.sqw?o=10&t=163"), {
+    approved: null,
+    passed: null,
+    referredToSenate: "https://www.psp.cz/sqw/text/tiskt.sqw?o=10&ct=163&ct1=2"
+  });
+  // An entry without its own link never takes the link of the next entry,
+  // such as the Senate's document.
+  assert.equal(laterTextLinks('<p>Návrh zákona ve znění, ve kterém byl postoupen Senátu, doručen Senátu.<br>Dokument Senátu rozeslán jako tisk <B><a href="/sqw/text/tiskt.sqw?o=10&ct=163&ct1=3">163/3</a></B>.</p>', historyUrl).referredToSenate, null);
   // The link is found by its text-page kind, not by the surrounding markup.
   assert.equal(laterTextLinks('<div><a title="Schválený text" class="x" href="/sqw/text/tiskt.sqw?o=10&amp;ct=5&amp;ct1=0&amp;v=PZ&amp;pn=2&amp;pt=1">text</a></div>', historyUrl).approved, "https://www.psp.cz/sqw/text/tiskt.sqw?o=10&ct=5&ct1=0&v=PZ&pn=2&pt=1");
   assert.throws(() => laterTextLinks('<a href="https://evil.example/sqw/text/tiskt.sqw?v=SZ">x</a>', historyUrl), /outside the PSP allowlist/);
@@ -199,20 +227,59 @@ test("a part is matched across versions even when its key changes or two parts a
 
   // A part retitled in the debate stays the same law change.
   const retitled = lawChangesOfPrint({ print, texts: {
-    proposed: { document: doc, paragraphs: ["ČÁST PRVNÍ", "Účinnost", "Tento zákon nabývá účinnosti prvním dnem kalendářního měsíce následujícího po dni jeho vyhlášení."] },
-    approved: { document: doc, paragraphs: ["ČÁST PRVNÍ", "Přechodné ustanovení a účinnost", "Tento zákon nabývá účinnosti prvním dnem druhého kalendářního měsíce následujícího po dni jeho vyhlášení."] }
+    proposed: { document: doc, paragraphs: ["ČÁST PRVNÍ", "Přechodné ustanovení", "Řízení zahájená přede dnem nabytí účinnosti tohoto zákona se dokončí podle dosavadních právních předpisů."] },
+    approved: { document: doc, paragraphs: ["ČÁST PRVNÍ", "Přechodná ustanovení", "Řízení zahájená přede dnem nabytí účinnosti tohoto zákona se dokončí podle dosavadních právních předpisů.", "Lhůty běžící přede dnem nabytí účinnosti tohoto zákona se posuzují podle dosavadních právních předpisů."] }
   } });
   assert.equal(retitled.length, 1);
-  assert.equal(retitled[0].titleCz, "Přechodné ustanovení a účinnost");
+  assert.equal(retitled[0].titleCz, "Přechodná ustanovení");
   assert.equal(retitled[0].addedIn, "proposed");
 });
 
 test("a later version with the same text is stored as the same, not repeated", () => {
   const paragraphs = proposalBody(print85Paragraphs);
   const changes = lawChangesOfPrint({ print: print85, texts: { proposed: { document, paragraphs }, approved: { document, paragraphs }, passed: { document, paragraphs } } });
-  assert.deepEqual(changes[0].versions.approved, { sameAs: "proposed", heading: "ČÁST PRVNÍ", titleCz: "Změna zákona o životním a existenčním minimu", amendedAct: { act: "110/2006", name: "o životním a existenčním minimu" }, document: { filename: document.filename, url: document.url } });
+  assert.deepEqual(changes[0].versions.approved, { sameAs: "proposed", heading: "ČÁST PRVNÍ", titleCz: "Změna zákona o životním a existenčním minimu", amendedAct: { act: "110/2006", name: "o životním a existenčním minimu" }, effectiveCz: "Čl. IV\nTento zákon nabývá účinnosti dnem 30. dubna 2026.", document: { filename: document.filename, url: document.url } });
   assert.equal(changes[0].versions.passed.sameAs, "proposed");
   assert.equal(changes[0].titleCz, "Změna zákona o životním a existenčním minimu");
+});
+
+test("the effective-date part is no law change; its text goes with every version of every change", () => {
+  // The effective-date wording of print 13's proposed and approved texts on
+  // psp.cz (run 56); the amending part is a made-up one that the debate
+  // left unchanged.
+  const print = { printId: "43120", number: 13, kindId: "1", title: "Vládní návrh zákona", pageUrl: pageUrl(13) };
+  const doc = { filename: "t.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=1" };
+  const partOne = ["ČÁST PRVNÍ", "Změna zákona o daních z příjmů", "Čl. I", "V § 4 zákona č. 586/1992 Sb., o daních z příjmů, se číslo „3“ nahrazuje číslem „4“."];
+  const effective = (text) => ["ČÁST DRUHÁ", "ÚČINNOST", "Čl. VIII", text];
+  const proposedDate = "Tento zákon nabývá účinnosti dnem 16. dubna 2026, s výjimkou ustanovení čl. I bodů 106, 107, 109, 111 až 114 a 158 až 160, která nabývají účinnosti dnem 16. dubna 2027.";
+  const approvedDate = "Tento zákon nabývá účinnosti prvním dnem druhého kalendářního měsíce následujícího po jeho vyhlášení, s výjimkou ustanovení čl. I bodů 107, 108, 110, 112 až 115 a 160 až 162, která nabývají účinnosti dnem 16. dubna 2027.";
+  const changes = lawChangesOfPrint({ print, texts: {
+    proposed: { document: doc, paragraphs: [...partOne, ...effective(proposedDate)] },
+    approved: { document: doc, paragraphs: [...partOne, ...effective(approvedDate)] }
+  } });
+  assert.deepEqual(changes.map(({ changeId }) => changeId), ["43120-1"]);
+  const [change] = changes;
+  assert.equal(change.versions.proposed.effectiveCz, `Čl. VIII\n${proposedDate}`);
+  // The text is the same, so it is stored once; the effective date is the
+  // version's own.
+  assert.equal(change.versions.approved.sameAs, "proposed");
+  assert.equal(change.versions.approved.effectiveCz, `Čl. VIII\n${approvedDate}`);
+  const text = lawChangeText(change);
+  assert.ok(text.includes(`Version: text approved by the Chamber\nThe same text as the proposed text.\nEffective date of this text (účinnost):\nČl. VIII\n${approvedDate}`));
+  assert.ok(text.includes(`Effective date of this text (účinnost):\nČl. VIII\n${proposedDate}`));
+  assert.doesNotMatch(text, /Part: ČÁST DRUHÁ/);
+  // An unchanged effective date is named, not repeated.
+  const unchanged = lawChangeText(lawChangesOfPrint({ print, texts: {
+    proposed: { document: doc, paragraphs: [...partOne, ...effective(proposedDate)] },
+    approved: { document: doc, paragraphs: [...partOne, ...effective(proposedDate)] }
+  } })[0]);
+  assert.equal(unchanged.split(proposedDate).length, 2);
+  assert.match(unchanged, /The same text as the proposed text\.\nEffective date of this text \(účinnost\): the same as in the proposed text\./);
+
+  // A part after the effective-date part keeps its position in the change ID.
+  const [later] = lawChangesOfPrint({ print, texts: { proposed: { document: doc, paragraphs: [...effective(proposedDate).map((paragraph) => paragraph === "ČÁST DRUHÁ" ? "ČÁST PRVNÍ" : paragraph), ...partOne.map((paragraph) => paragraph === "ČÁST PRVNÍ" ? "ČÁST DRUHÁ" : paragraph)] } } });
+  assert.equal(later.changeId, "43120-2");
+  assert.equal(later.versions.proposed.effectiveCz, `Čl. VIII\n${proposedDate}`);
 });
 
 test("a part heading after 100 starts with \"sto\"; other text is no heading", () => {

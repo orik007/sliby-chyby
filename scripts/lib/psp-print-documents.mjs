@@ -1,4 +1,5 @@
 import { unzipSync } from "fflate";
+import WordExtractor from "word-extractor";
 import { fetchVerified, invariant } from "./collector-core.mjs";
 
 function decodeXml(value) {
@@ -69,5 +70,17 @@ export function extractDocxParagraphs(bytes) {
     if (text) paragraphs.push(text);
   }
   invariant(paragraphs.length > 0, "Official DOCX document contains no readable paragraphs");
+  return paragraphs;
+}
+
+/**
+ * The paragraphs of a Word 97-2003 (.doc) file, which psp.cz lists for some
+ * prints instead of a DOCX. Quotation marks are kept as written
+ * (`filterUnicode: false`), and white space is normalized as in a DOCX.
+ */
+export async function extractDocParagraphs(bytes) {
+  const document = await new WordExtractor().extract(Buffer.from(bytes));
+  const paragraphs = document.getBody({ filterUnicode: false }).split(/\r?\n/).map((paragraph) => paragraph.replace(/\s+/g, " ").trim()).filter(Boolean);
+  invariant(paragraphs.length > 0, "Official DOC document contains no readable paragraphs");
   return paragraphs;
 }

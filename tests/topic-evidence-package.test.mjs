@@ -4,7 +4,7 @@ import test from "node:test";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import { validatePromiseRegistry } from "../scripts/lib/attribution.mjs";
 import { buildLawChangeEvidencePackage, estimatePackageTokens, lawChangesAtCutoff, lawChangeEvidenceId, versionOfChange } from "../scripts/lib/topic-evidence-package.mjs";
-import { estimateTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
+import { charactersPerToken, estimateTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
 
 const assessorInstructions = "assessor instructions";
 
@@ -97,21 +97,21 @@ test("nothing is trimmed: many law changes all stay in the package", () => {
   assert.equal(pkg.evidence.filter(({ role }) => role === "law-change").length, 40);
 });
 
-test("a package above the normal-price input limit is marked oversized, not trimmed", () => {
-  const huge = "x".repeat(maxRequestInputTokens * 3 + 10);
+test("a package larger than the models can read is marked oversized, not trimmed", () => {
+  const huge = "x".repeat(maxRequestInputTokens * charactersPerToken + 10);
   const pkg = buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: [{ change: lawChange(1, huge), route }], recordsByPrintId: new Map([["43200", [attributedVoteRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
   assert.equal(pkg.generation.oversized, true);
   assert.ok(pkg.generation.estimatedTokens > maxRequestInputTokens);
   assert.equal(pkg.evidence.find(({ role }) => role === "law-change").structuredFacts.versions.proposed.textCz, huge);
-  assert.equal(estimatePackageTokens({ text: "abc" }), Math.ceil(JSON.stringify({ text: "abc" }).length / 3));
+  assert.equal(estimatePackageTokens({ text: "abc" }), Math.ceil(JSON.stringify({ text: "abc" }).length / charactersPerToken));
 });
 
 test("the assessor instructions count towards the input limit of a package", () => {
   const build = (text, instructions) => buildLawChangeEvidencePackage({ assessorInstructions: instructions, promise: fiscalPromise, keptChanges: [{ change: lawChange(1, text), route }], recordsByPrintId: new Map([["43200", [attributedVoteRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
   // A text that leaves room for short instructions but not for long ones.
-  const text = "x".repeat((maxRequestInputTokens - 6_000) * 3);
+  const text = "x".repeat((maxRequestInputTokens - 6_000) * charactersPerToken);
   assert.equal(build(text, assessorInstructions).generation.oversized, false);
-  const longInstructions = "i".repeat(10_000 * 3);
+  const longInstructions = "i".repeat(10_000 * charactersPerToken);
   assert.equal(estimateTokens(longInstructions), 10_000);
   assert.equal(build(text, longInstructions).generation.oversized, true);
 });

@@ -43,7 +43,7 @@ function parseArgs(args) {
   const options = {
     collectorRun: null,
     printParts: null,
-    taxonomy: "automation/topic-routing/taxonomy-v1.json",
+    taxonomy: "automation/topic-routing/taxonomy-v2.json",
     promiseRegistry: "automation/promise-registry/promises.json",
     publishedPromises: "data/promises",
     tagCache: "automation/topic-routing/tag-cache",
@@ -170,7 +170,7 @@ const promiseTopicAssignments = await stage("promise-tagging", publishedRegistry
     persist: persist.promiseTags,
     callA: () => requestTagAssignment({ provider: runtime.provider, apiKey, model: runtime.modelA, brief, taxonomy, prompt: prompts.tagging }),
     callB: () => requestTagAssignment({ provider: runtime.provider, apiKey, model: runtime.modelB, brief, taxonomy, prompt: prompts.tagging }),
-    revalidate: (output) => validateTagAssignmentOutput(output, taxonomy, brief.text)
+    revalidate: (output) => validateTagAssignmentOutput(output, taxonomy)
   });
   usage.promiseTagging.push(...tagged.usageByModel);
   invalid.promiseTagging += tagged.invalidCount;
@@ -201,7 +201,7 @@ const screenedChanges = await stage("law-change-screening", changes, async (chan
     persist: persist.screening,
     callA: () => requestScreening({ provider: runtime.provider, apiKey, model: runtime.modelA, brief, taxonomy, prompt: prompts.screening }),
     callB: () => requestScreening({ provider: runtime.provider, apiKey, model: runtime.modelB, brief, taxonomy, prompt: prompts.screening }),
-    revalidate: (output) => validateScreeningOutput(output, taxonomy, brief.text)
+    revalidate: (output) => validateScreeningOutput(output, taxonomy)
   });
   usage.screening.push(...screened.usageByModel);
   invalid.screening += screened.invalidCount;
@@ -266,7 +266,7 @@ if (!runFailure) {
     if (!evidencePackage) continue;
     await writeFile(resolve(packageDirectory, `${promiseId}.json`), `${JSON.stringify(evidencePackage, null, 2)}\n`, { flag: "wx" });
     builtPackages.push({ promiseId, lawChangeCount: evidencePackage.generation.lawChangeCount, conductCount: evidencePackage.generation.conductCount, estimatedTokens: evidencePackage.generation.estimatedTokens, oversized: evidencePackage.generation.oversized });
-    if (evidencePackage.generation.oversized) log(`${promiseId}: package of about ${evidencePackage.generation.estimatedTokens} tokens exceeds ${maxRequestInputTokens} together with the assessor instructions; it is reported for human review and not assessed`);
+    if (evidencePackage.generation.oversized) log(`${promiseId}: package of about ${evidencePackage.generation.estimatedTokens} tokens exceeds ${maxRequestInputTokens}, the most the models can read, together with the assessor instructions; it is reported for human review and not assessed`);
   }
 }
 
@@ -283,8 +283,7 @@ const counts = {
   substantiveLawChangeCount: screenedChanges.filter(({ substantive }) => substantive).length,
   routedLawChangeCount: screenedChanges.filter(({ route }) => route.disposition === "routed").length,
   directLinkLawChangeCount: screenedChanges.filter(({ route }) => route.routedTo.some(({ routeBasis }) => routeBasis.includes("direct-structural-link"))).length,
-  routingReviewCount: screenedChanges.filter(({ route }) => route.disposition === "routing-review").length,
-  orphanReviewCount: screenedChanges.filter(({ route }) => route.disposition === "orphan-review").length,
+  unroutedLawChangeCount: screenedChanges.filter(({ route }) => route.disposition === "unrouted").length,
   routedWithoutConductCount,
   relevancePairCount: pairs.length,
   relevanceKeptCount: checkedPairs.filter(({ kept }) => kept).length,

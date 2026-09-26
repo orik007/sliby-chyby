@@ -9,7 +9,7 @@ function invariant(condition, message) {
 }
 
 // Thrown only when a model output fails validation (an invented tag id, a
-// fabricated excerpt, a missing reason), so a caller can isolate a single
+// missing reason), so a caller can isolate a single
 // invalid *output* from a transport, authentication, or provider failure --
 // those must never be silently swallowed the same way, or a missing API key
 // or a full outage would look like a run that legitimately found nothing.
@@ -19,7 +19,7 @@ export function invariantValidOutput(condition, message) {
   if (!condition) throw new ModelOutputError(message);
 }
 
-export const taggingPromptVersion = "promise-tagger-v1";
+export const taggingPromptVersion = "promise-tagger-v2";
 
 // The cheap model pair that tags promises, screens law changes, and checks
 // relevance (docs/evidence-pipeline.md).
@@ -81,26 +81,14 @@ export function tagAssignmentSchema(taxonomy) {
     type: "object",
     properties: {
       tags: { type: "array", items: { type: "string", enum: tagIds } },
-      confidence: { type: "number" },
-      supportingExcerpts: { type: "array", items: { type: "string" } }
+      confidence: { type: "number" }
     },
-    required: ["tags", "confidence", "supportingExcerpts"],
+    required: ["tags", "confidence"],
     additionalProperties: false
   };
 }
 
-/**
- * `briefText`, when supplied, grounds `supportingExcerpts`: `isGrounded`
- * (scripts/lib/topic-routing.mjs) treats any non-empty excerpt array as
- * sufficient support for an auto-candidate, so an unvalidated excerpt would
- * let fabricated model text clear that gate. Each excerpt must therefore
- * appear verbatim in the exact material the tagger was actually given,
- * mirroring how citedEvidenceIds are checked against the supplied package
- * in scripts/lib/assessment-pipeline.mjs. Optional so callers that only
- * exercise the structural checks (tests, malformed-output fixtures) are not
- * forced to construct a matching brief.
- */
-export function validateTagAssignmentOutput(output, taxonomy, briefText) {
+export function validateTagAssignmentOutput(output, taxonomy) {
   invariantValidOutput(Array.isArray(output?.tags) && output.tags.length > 0, "Tag assignment must return at least one tag or \"unknown\"");
   for (const tagId of output.tags) {
     invariantValidOutput(tagId === "unknown" || hasTag(taxonomy, tagId), `Tag assignment referenced an unknown tag id: ${tagId}`);
@@ -109,12 +97,6 @@ export function validateTagAssignmentOutput(output, taxonomy, briefText) {
     invariantValidOutput(!output.tags.includes("unknown"), "\"unknown\" cannot be combined with other tags");
   }
   invariantValidOutput(Number.isFinite(output.confidence) && output.confidence >= 0 && output.confidence <= 1, "Tag assignment confidence must be between 0 and 1");
-  invariantValidOutput(Array.isArray(output.supportingExcerpts), "Tag assignment must return supportingExcerpts");
-  if (typeof briefText === "string") {
-    for (const excerpt of output.supportingExcerpts) {
-      invariantValidOutput(typeof excerpt === "string" && excerpt.length > 0 && briefText.includes(excerpt), `Tag assignment cites a supporting excerpt not present verbatim in the supplied brief: ${JSON.stringify(excerpt)}`);
-    }
-  }
   return output;
 }
 
@@ -158,7 +140,7 @@ export async function requestTagAssignment({ provider, apiKey, model, brief, tax
     schema: tagAssignmentSchema(taxonomy),
     metadata: { subjectId: brief.subjectId, promptVersion: prompt.version },
     logLabel: `tagging ${brief.subjectType} ${brief.subjectId}`,
-    validate: (output) => validateTagAssignmentOutput(output, taxonomy, brief.text)
+    validate: (output) => validateTagAssignmentOutput(output, taxonomy)
   });
   return { subjectId: brief.subjectId, ...result };
 }
