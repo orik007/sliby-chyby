@@ -93,7 +93,11 @@ async function fetchJsonWithRetry(url, init) {
     if (!retryable || attempt === maxProviderAttempts) return last;
     const retryAfterHeader = typeof response.headers?.get === "function" ? response.headers.get("retry-after") : null;
     const retryAfterMs = parseRetryAfterMs(retryAfterHeader);
-    const delayMs = retryAfterMs !== null ? retryAfterMs : backoffMs(attempt);
+    // Retry-After is only a lower bound: at a token-per-minute limit it asks
+    // for about a second, and every parallel request that waits just that
+    // long hits the same limit again (run 57 gave up after eight such
+    // one-second retries). The backoff spreads them out.
+    const delayMs = Math.max(retryAfterMs ?? 0, backoffMs(attempt));
     console.warn(`Provider request to ${url} failed with ${response.status} (attempt ${attempt}/${maxProviderAttempts}); retrying in ${delayMs}ms.`);
     await sleep(delayMs);
   }

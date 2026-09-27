@@ -139,7 +139,10 @@ export async function requestRelevance({ provider, apiKey, model, brief, prompt 
     apiKey,
     model,
     prompt,
-    input: { promise: brief.promise, lawChange: brief.lawChange },
+    // The law change comes first: every promise it is checked against then
+    // shares the instructions and its text as one prefix, which the
+    // provider's prompt cache bills at a tenth.
+    input: { lawChange: brief.lawChange, promise: brief.promise },
     name: "law_change_relevance",
     schema: relevanceSchema,
     metadata: { subjectId: brief.pairId.slice(0, 64), promptVersion: prompt.version },

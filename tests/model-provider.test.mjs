@@ -83,6 +83,12 @@ test("createStructuredModelResponse does not retry a non-retryable 4xx error", a
 
 test("createStructuredModelResponse gives up after repeated 429s and reports the last failure", async () => {
   const originalFetch = globalThis.fetch;
+  const originalSetTimeout = globalThis.setTimeout;
+  const capturedDelaysMs = [];
+  globalThis.setTimeout = (fn, ms) => {
+    capturedDelaysMs.push(ms);
+    return originalSetTimeout(fn, 0);
+  };
   let callCount = 0;
   globalThis.fetch = async () => {
     callCount += 1;
@@ -107,8 +113,11 @@ test("createStructuredModelResponse gives up after repeated 429s and reports the
       /OpenAI Responses API failed \(429\)/
     );
     assert.equal(callCount, 8, "must retry up to the fixed attempt cap, not forever");
+    // A Retry-After of 0 does not shorten the backoff.
+    assert.deepEqual(capturedDelaysMs, [2000, 4000, 8000, 16000, 32000, 64000, 120000]);
   } finally {
     globalThis.fetch = originalFetch;
+    globalThis.setTimeout = originalSetTimeout;
   }
 });
 

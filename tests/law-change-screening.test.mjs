@@ -138,6 +138,9 @@ test("a relevance check reads the exact promise with its tests and the law-chang
     const result = await requestRelevance({ provider: "openai", apiKey: "key", model: "gpt-6-luna", brief, prompt: await loadRelevancePrompt() });
     assert.equal(result.output.relevant, true);
     assert.equal(mock.body().text.format.name, "law_change_relevance");
+    // The law change comes before the promise, so the checks of one change
+    // against many promises share a cached prefix.
+    assert.deepEqual(Object.keys(JSON.parse(mock.body().input)), ["lawChange", "promise"]);
   } finally {
     globalThis.fetch = originalFetch;
   }
