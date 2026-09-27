@@ -14,9 +14,10 @@ const allPromises = parseCollection(import.meta.glob("../../data/promises/*.json
 export const sources = parseCollection(import.meta.glob("../../data/sources/*.json", { eager: true, import: "default" }), sourceSchema);
 const allAssessmentRevisions = parseCollection(import.meta.glob("../../data/assessment-revisions/*.json", { eager: true, import: "default" }), assessmentRevisionSchema);
 const publishedItems = allPromises.filter(({ isDemo }) => !isDemo);
-// Statements are published data but not yet shown on the site
-// (docs/promise-selection.md); only promises are listed and scored.
+// Only promises are scored; statements are listed without a score
+// (docs/promise-selection.md).
 export const promises = publishedItems.filter(({ kind }) => kind === "promise");
+export const statements = publishedItems.filter(({ kind }) => kind === "statement");
 const visiblePromiseIds = new Set(promises.map(({ id }) => id));
 export const assessmentRevisions = allAssessmentRevisions.filter(({ promiseId }) => visiblePromiseIds.has(promiseId));
 export const systemStatus = systemStatusSchema.parse(systemStatusData);
@@ -31,6 +32,8 @@ export const statusDetails: Record<AssessmentStatus, { score: number; symbol: st
   "moving-against": { score: -1, symbol: "↘", label: "Směřuje proti slibu", className: "negative" },
   "acting-against": { score: -2, symbol: "×", label: "Jedná proti slibu", className: "negative-strong" },
 };
+
+export const statementExplanation = "Výrok strany. Nelze ho splnit ani porušit konkrétním krokem, proto nemá skóre a nepočítá se do SLAVA Indexu.";
 
 const promiseStatusOrder: Record<AssessmentStatus, number> = {
   fulfilled: 0,
@@ -105,8 +108,12 @@ export function getPartySummary(partyPeriod: PartyPeriod) {
     .filter(({ partyPeriodId }) => partyPeriodId === partyPeriod.id)
     .map((promise) => ({ promise, assessment: getLatestAssessment(promise.id), policyCategory: getPolicyCategory(promise) }))
     .sort((a, b) => a.policyCategory.order - b.policyCategory.order || promiseStatusOrder[a.assessment.status] - promiseStatusOrder[b.assessment.status] || a.promise.sourceOrder - b.promise.sourceOrder);
+  const partyStatements = statements
+    .filter(({ partyPeriodId }) => partyPeriodId === partyPeriod.id)
+    .map((statement) => ({ statement, policyCategory: getPolicyCategory(statement) }))
+    .sort((a, b) => a.policyCategory.order - b.policyCategory.order || a.statement.sourceOrder - b.statement.sourceOrder);
   const index = calculateIndex(partyPromises.map(({ promise }) => promise));
-  return { party, period, partyPeriod, promises: partyPromises, index };
+  return { party, period, partyPeriod, promises: partyPromises, statements: partyStatements, index };
 }
 export function getCurrentPartySummaries() {
   const period = getCurrentPeriod();
@@ -121,4 +128,12 @@ export function getSource(sourceId: string) {
   const source = sources.find(({ id }) => id === sourceId);
   if (!source) throw new Error(`Unknown source ${sourceId}`);
   return source;
+}
+// The item's original source with its locator; a PDF link opens at the quoted page.
+export function getItemSource(item: PromiseRecord) {
+  const source = getSource(item.primarySourceId);
+  const { page, paragraph, timestamp, imageRegion } = item.sourceLocator;
+  const locatorLabel = page ? `strana ${page}` : paragraph ? `odstavec ${paragraph}` : timestamp ? `čas ${timestamp}` : `oblast ${imageRegion}`;
+  const url = source.url && page ? `${source.url}#page=${page}` : source.url;
+  return { source, locatorLabel, url };
 }

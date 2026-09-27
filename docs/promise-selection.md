@@ -17,7 +17,7 @@ Every catalogued item has exactly one state:
 | State | Meaning | Public? | Score |
 | --- | --- | --- | --- |
 | `promise` (slib) | A statement that attributable conduct can deliver or contradict. | Yes | Yes, and it counts in the SLAVA Index. |
-| `statement` (výrok) | An official statement of the party that no attributable conduct can deliver or contradict. | Yes, but not yet shown on the site. | None, never even `0`, and never in the SLAVA Index. |
+| `statement` (výrok) | An official statement of the party that no attributable conduct can deliver or contradict. | Yes, on the party page when the visitor turns on the statements filter. | None, never even `0`, and never in the SLAVA Index. |
 | `rejected` (zamítnuto) | An occurrence rejected for a technical reason only. | No | None |
 
 There is no fourth state and no unpublished promise or statement. Every promise and statement is in `data/promises` with `kind` `promise` or `statement`; rejected occurrences are in `research/2025-election/rejected.json`.

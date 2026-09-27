@@ -14,7 +14,7 @@ This document contains only the current confirmed rules. When a rule changes, re
 - A source can support many catalogue items. An item records its source ID and an exact locator, such as a PDF page.
 - The catalogue covers every statement of the official national programmes of ANO 2011, SPD, and Motoristé sobě for the 2025 Czech Chamber of Deputies election in which the party says what it will do, what it wants, what it rejects, or how something will be. Every other passage of a programme is recorded with its reason as not catalogued, so that the catalogue is checked against the whole programme text. Election programmes are promise sources, never evidence of conduct.
 - Every catalogued item is exactly a `promise` (slib), a `statement` (výrok), or `rejected` (zamítnuto). A promise is an item that attributable conduct can deliver or contradict; it is public, scored, and counts in the SLAVA Index. A statement is an official item that no attributable conduct can deliver or contradict; it is public, has no score, and never counts in the index. A rejected occurrence is not public and records one technical reason code from [promise-selection.md](promise-selection.md): `duplicate`, `summary`, `list-estimate`, `not-party-statement`, or `truncated`.
-- Statements are not yet shown on the site; showing them behind an opt-in filter on the party page is a separate change.
+- The party page shows statements only after the visitor turns on the statements filter; each statement is labelled as having no score. Every promise and statement has a public detail page with its exact quote and a link to the original programme at its page.
 - An item's quote is the exact programme wording without layout artefacts; its title names the one commitment assessed, written only from facts in the quote. The canonical rule is [promise-selection.md](promise-selection.md).
 - Routing tags of a promise are assigned once when it is catalogued and reviewed in its pull request; no model tags promises.
 
@@ -28,7 +28,7 @@ This document contains only the current confirmed rules. When a rule changes, re
 
 - Every promise and statement has exactly one common policy category from the controlled 2025 category list, decided from its exact wording.
 - When one item mentions several subjects, its category follows the principal commitment named by its title.
-- The public site groups promises only by that common category and orders them within it by current assessment status (fulfilled, moving towards, acting against, moving against, no verified progress) and then by their order in the programme.
+- The public site groups promises only by that common category and orders them within it by current assessment status (fulfilled, moving towards, acting against, moving against, no verified progress) and then by their order in the programme. Shown statements follow the promises of their category in programme order.
 - A category is a navigational subject label, not an editorial measure of importance.
 
 ## Evidence and conduct

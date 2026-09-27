@@ -15,6 +15,7 @@ export const GET: APIRoute = ({ site, url }) => {
     "/metodika",
     ...summaries.map(({ party }) => `/strany/${party.slug}`),
     ...summaries.flatMap(({ party, promises }) => promises.map(({ promise }) => `/sliby/${party.slug}/${promise.slug}`)),
+    ...summaries.flatMap(({ party, statements }) => statements.map(({ statement }) => `/sliby/${party.slug}/${statement.slug}`)),
   ];
   const urls = paths.map((path) => `<url><loc>${escapeXml(new URL(path, siteUrl).href)}</loc></url>`).join("");
 

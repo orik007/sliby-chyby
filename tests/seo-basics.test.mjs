@@ -40,11 +40,12 @@ test("public pages declare the site icons and the icon files exist", async () =>
   }
 });
 
-test("public crawl controls expose every published party and promise page", async () => {
+test("public crawl controls expose every published party, promise, and statement page", async () => {
   const [robots, sitemap] = await Promise.all([readFile(robotsUrl, "utf8"), readFile(sitemapUrl, "utf8")]);
 
   assert.match(robots, /Sitemap: \$\{sitemapUrl\}/);
   assert.match(sitemap, /getCurrentPartySummaries/);
   assert.match(sitemap, /\/strany\/\$\{party\.slug\}/);
   assert.match(sitemap, /\/sliby\/\$\{party\.slug\}\/\$\{promise\.slug\}/);
+  assert.match(sitemap, /\/sliby\/\$\{party\.slug\}\/\$\{statement\.slug\}/);
 });
