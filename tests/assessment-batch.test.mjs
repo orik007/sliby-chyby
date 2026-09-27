@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, readFile, readdir, rm, writeFile } from "node:fs/promis
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import test from "node:test";
-import { renderReviewPullRequestBody } from "../scripts/lib/assessment-review.mjs";
+import { continuationMarker, renderReviewPullRequest } from "../scripts/lib/assessment-review.mjs";
 
 const repositoryRoot = resolve(import.meta.dirname, "..");
 const batchScript = resolve(repositoryRoot, "scripts/run-assessment-batch.mjs");
@@ -224,7 +224,7 @@ test("the review pull request lists every current proposal that changes the publ
   assert.match(body, /### Návrhy, které mění hodnocení na webu \(1, z toho nové: 1\)/);
   assert.match(body, /#### Testovací slib changed-promise \(`changed-promise`\)/);
   assert.match(body, /Na webu: \*\*Zatím bez ověřeného podstatného posunu \(0\)\*\* → navrženo: \*\*Směřuje ke splnění \(\+1\)\*\*/);
-  assert.match(body, /> Strana provedla ověřený krok související s tímto slibem\./);
+  assert.match(body, /- \*\*První hodnotitel:\*\* Směřuje ke splnění \(\+1\)\. Strana provedla ověřený krok související s tímto slibem\.\n- \*\*Druhý hodnotitel:\*\* Směřuje ke splnění \(\+1\)\. [^\n]+\n- \*\*Třetí hodnotitel:\*\* nevolán, posudky se shodly\./);
   assert.match(body, /\*Nový návrh z tohoto běhu\.\*/);
   assert.doesNotMatch(body, /confirmed-promise/);
   assert.match(body, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Testovací slib oversized-promise \(`oversized-promise`\): balíček je větší, než model dokáže přečíst/);
@@ -308,21 +308,63 @@ function reviewSummary(pendingReviews, results = []) {
   return { pendingReviews, results, confirmedCount: 0, unchangedCount: 0, maxAssessments: 0, deferredCount: 0, failedCount: 0, interruption: null, relevanceVerdictsByRoute: [] };
 }
 
-function scoreChange(index, explanationCz) {
-  return { promiseId: `promise-${index}`, promiseTitleCz: `Slib ${index}`, kind: "score-change", publicStatus: "no-progress", candidateStatus: "moving-towards", resolutionReason: "assessor-consensus", explanationCz, reviewUrl: null, newInRun: true, packageState: "current" };
+function scoreChange(index, explanationCz, verdicts = null) {
+  return { promiseId: `promise-${index}`, promiseTitleCz: `Slib ${index}`, partyName: "ANO 2011", kind: "score-change", publicStatus: "no-progress", candidateStatus: "moving-towards", resolutionReason: verdicts?.arbiter ? "arbiter-selection" : "assessor-consensus", explanationCz, verdicts, reviewUrl: null, newInRun: true, packageState: "current" };
 }
 
-test("the review pull request body stays under the GitHub limit and keeps model text inert", () => {
-  const short = renderReviewPullRequestBody(reviewSummary([scoreChange(1, "Viz @someone a #12.")], [{ promiseId: "promise-1", promiseTitleCz: "Slib 1", disposition: "blocked-oversized", reviewUrl: null }]));
-  assert.match(short, /> Viz @\u200bsomeone a \\#\u200b12\./);
-  assert.match(short, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Slib 1 \(`promise-1`\): balíček je větší, než model dokáže přečíst/);
+const assessorVerdict = (explanationCz, status = "moving-towards") => ({ status, evidenceSufficient: true, explanationCz });
 
-  const many = Array.from({ length: 700 }, (_, index) => scoreChange(index, "Dlouhé vysvětlení. ".repeat(20)));
-  const body = renderReviewPullRequestBody(reviewSummary(many));
-  assert.ok(body.length <= 60_000, `body has ${body.length} characters`);
-  assert.match(body, /\(700, z toho nové: 700\)/);
-  assert.match(body, /Vysvětlení jsou kvůli délce jen na stránkách jednotlivých návrhů/);
-  assert.match(body, /… a dalších \d+; úplný seznam je v `assessment-batch.json`/);
+test("each listed change shows both assessors and the arbiter with their reasons, as inert text", () => {
+  const verdicts = { assessorA: assessorVerdict("Viz @someone a #12."), assessorB: null, arbiter: { choice: "assessor-a", explanationCz: "První posudek odpovídá **podkladům**." } };
+  const { body, comments } = renderReviewPullRequest(reviewSummary([scoreChange(1, "Viz @someone a #12.", verdicts)], [{ promiseId: "promise-1", promiseTitleCz: "Slib 1", disposition: "blocked-oversized", reviewUrl: null }]));
+  assert.deepEqual(comments, []);
+  assert.match(body, /ANO 2011 · Na webu: \*\*Zatím bez ověřeného podstatného posunu \(0\)\*\* → navrženo: \*\*Směřuje ke splnění \(\+1\)\*\* · o neshodě automatických posudků rozhodl třetí hodnotitel/);
+  assert.match(body, /- \*\*První hodnotitel:\*\* Směřuje ke splnění \(\+1\)\. Viz @\u200bsomeone a \\#\u200b12\./);
+  assert.match(body, /- \*\*Druhý hodnotitel:\*\* výstup neprošel kontrolou, nepoužil se\./);
+  assert.match(body, /- \*\*Třetí hodnotitel:\*\* vybral první posudek\. První posudek odpovídá \\\*\\\*podkladům\\\*\\\*\./);
+  assert.match(body, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Slib 1 \(`promise-1`\): balíček je větší, než model dokáže přečíst/);
+
+  const consensus = renderReviewPullRequest(reviewSummary([scoreChange(2, "x", { assessorA: assessorVerdict("A."), assessorB: assessorVerdict("B."), arbiter: null })]));
+  assert.match(consensus.body, /- \*\*Třetí hodnotitel:\*\* nevolán, posudky se shodly\./);
+});
+
+test("a list too long for the body continues, in order and complete, in comments within GitHub's limit", () => {
+  const many = Array.from({ length: 700 }, (_, index) => scoreChange(index, "x", { assessorA: assessorVerdict("Dlouhé vysvětlení. ".repeat(30)), assessorB: assessorVerdict("Jiné vysvětlení. ".repeat(30)), arbiter: null }));
+  const humans = Array.from({ length: 300 }, (_, index) => ({ promiseId: `human-${index}`, promiseTitleCz: `Lidské ${index}`, partyName: "SPD", kind: "human-review", resolutionReason: "insufficient-evidence", reviewUrl: null, newInRun: false, packageState: "current" }));
+  const { body, comments } = renderReviewPullRequest(reviewSummary([...many, ...humans]));
+  assert.ok(body.length <= 56_000, `body has ${body.length} characters`);
+  assert.ok(comments.length > 1);
+  for (const comment of comments) {
+    assert.ok(comment.length <= 61_000, `a comment has ${comment.length} characters`);
+    assert.ok(comment.startsWith(`${continuationMarker}\n`));
+  }
+  assert.match(body, new RegExp(`Přehled pokračuje v ${comments.length} komentářích pod tímto pull requestem`));
+  assert.match(comments[0], new RegExp(`pokračování 2/${comments.length + 1}`));
+  const all = [body, ...comments].join("\n");
+  const listed = [...all.matchAll(/\(`((?:promise|human)-\d+)`\)/g)].map(([, id]) => id);
+  assert.deepEqual(listed, [...many.map(({ promiseId }) => promiseId), ...humans.map(({ promiseId }) => promiseId)], "every item is listed once, in order");
+  assert.match(all, /### Návrhy, které mění hodnocení na webu \(700, z toho nové: 700\) \(pokračování\)/);
+  // No page ends with a heading whose first item moved to the next page.
+  for (const page of [body.slice(0, body.indexOf("\n\nVšechny návrhy")), ...comments]) assert.doesNotMatch(page.trimEnd(), /\n###[^\n]*$/);
+  assert.match(body, /### Souhrn\n\n- Návrhy, které mění hodnocení na webu: \*\*700\*\*\n- Vyžaduje lidské rozhodnutí: \*\*300\*\*/);
+});
+
+test("the continuation stops at a bounded number of comments and says what was left out", () => {
+  const huge = Array.from({ length: 6_000 }, (_, index) => scoreChange(index, "x", { assessorA: assessorVerdict("Velmi dlouhé vysvětlení. ".repeat(80)), assessorB: assessorVerdict("Jiné. ".repeat(250)), arbiter: null }));
+  const humans = Array.from({ length: 3 }, (_, index) => ({ promiseId: `human-${index}`, promiseTitleCz: `Lidské ${index}`, kind: "human-review", resolutionReason: "insufficient-evidence", reviewUrl: null, newInRun: false, packageState: "current" }));
+  const summary = { ...reviewSummary([...huge, ...humans]), failedCount: 7, relevanceVerdictsByRoute: [{ route: "tag:example", notRelevant: 3, verdicts: 5 }] };
+  const { body, comments } = renderReviewPullRequest(summary);
+  assert.equal(comments.length, 40);
+  // The note counts exactly the items left out, never a heading.
+  const listed = new Set([...[body, ...comments].join("\n").matchAll(/\(`((?:promise|human)-\d+)`\)/g)].map(([, id]) => id));
+  const [, omitted] = comments.at(-1).match(/… a dalších (\d+) položek se sem nevešlo; úplný seznam je v `assessment-batch.json`/);
+  assert.equal(Number(omitted), huge.length + humans.length - listed.size);
+  // The counts and the route table stay in the body, however long the list.
+  assert.match(body, /Izolovaná selhání hodnocení, zkusí se znovu v dalším běhu: \*\*7\*\*/);
+  assert.match(body, /\| `tag:example` \| 3 \| 5 \|/);
+  assert.ok(comments.every((comment) => comment.length <= 61_000));
+  // A reason longer than the listed limit is cut in the list.
+  assert.match(comments[0], /Velmi dlouhé vysvětlení\. [^\n]* …\n/);
 });
 
 test("in the workflow, each listed promise links to its review page on the audit branch", async () => {

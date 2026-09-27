@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { continuationMarker } from "../scripts/lib/assessment-review.mjs";
 
 const workflowUrl = new URL("../.github/workflows/collect-evidence.yml", import.meta.url);
 const statusUrl = new URL("../data/system-status.json", import.meta.url);
@@ -47,6 +48,14 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.match(workflow, /- name: Commit new review proposals\n        id: proposals\n        if: always\(\) && steps\.assess\.outcome != 'skipped'/);
   // The review pull request text is refreshed on every run that saved its state.
   assert.match(workflow, /- name: Create or update human-review pull request\n        if: always\(\) && steps\.proposals\.outcome == 'success' && hashFiles\('automation\/runs\/pipeline\/github-actions\/assessment-review-pr\.md'\) != ''/);
+  // A list too long for the body continues in the run's own comments, edited
+  // in place, added, or deleted, so they never pile up.
+  assert.ok(workflow.includes(`select(.user.login == \\"$COMMENT_AUTHOR\\" and (.body | startswith(\\"${continuationMarker}\\")))`));
+  assert.match(workflow, /USES_DEFAULT_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN == '' \}\}/);
+  assert.match(workflow, /COMMENT_AUTHOR="\$\(gh api user --jq \.login\)"/);
+  assert.match(workflow, /gh api -X PATCH "repos\/\$GITHUB_REPOSITORY\/issues\/comments\/\$\{OLD_COMMENTS\[\$index\]\}" -F "body=@\$\{NEW_COMMENTS\[\$index\]\}"/);
+  assert.match(workflow, /gh api -X POST "repos\/\$GITHUB_REPOSITORY\/issues\/\$PR_NUMBER\/comments" -F "body=@\$\{NEW_COMMENTS\[\$index\]\}"/);
+  assert.match(workflow, /gh api -X DELETE "repos\/\$GITHUB_REPOSITORY\/issues\/comments\/\$\{OLD_COMMENTS\[\$index\]\}"/);
   // Every paid call is logged, and the spend is reported even after a failure.
   assert.match(workflow, /SLIBY_MODEL_CALL_LOG: automation\/runs\/pipeline\/github-actions\/model-calls\.jsonl/);
   // The tests run without the API key and without the run's spend log.

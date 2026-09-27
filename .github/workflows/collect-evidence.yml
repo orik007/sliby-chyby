@@ -349,6 +349,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
           PROPOSALS_CREATED: ${{ steps.proposals.outputs.created }}
+          USES_DEFAULT_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN == '' }}
         run: |
           PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVIEW_BRANCH" --base main --state open --json number --jq '.[0].number')"
           if [ -z "$PR_NUMBER" ] && [ "$PROPOSALS_CREATED" != "true" ]; then
@@ -367,7 +368,38 @@ jobs:
               exit 1
             fi
           fi
-          echo "Review pull request: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
+          # A list too long for the body continues in numbered comments. The
+          # previous run's continuation comments are edited in place, extra
+          # ones deleted, and missing ones added, so they stay in order and
+          # never pile up.
+          PR_NUMBER="${PR_URL##*/}"
+          # The run's comments are its token's own comments that start with the
+          # hidden marker, so a marker anyone else pastes is never touched. The
+          # default workflow token writes as github-actions[bot]; for another
+          # token its login must be read, or the step stops rather than post a
+          # second set. A failed listing stops the step too.
+          if [ "$USES_DEFAULT_TOKEN" = "true" ]; then
+            COMMENT_AUTHOR="github-actions[bot]"
+          else
+            COMMENT_AUTHOR="$(gh api user --jq .login)"
+          fi
+          [[ "$COMMENT_AUTHOR" =~ ^[A-Za-z0-9-]+(\[bot\])?$ ]] || { echo "::error::Cannot tell which account writes the continuation comments."; exit 1; }
+          OLD_COMMENT_IDS="$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" --jq ".[] | select(.user.login == \"$COMMENT_AUTHOR\" and (.body | startswith(\"<!-- slava-review-continuation -->\"))) | .id")"
+          OLD_COMMENTS=()
+          if [ -n "$OLD_COMMENT_IDS" ]; then mapfile -t OLD_COMMENTS <<< "$OLD_COMMENT_IDS"; fi
+          NEW_COMMENTS=(automation/runs/pipeline/github-actions/assessment-review-pr-comments/*.md)
+          [ -e "${NEW_COMMENTS[0]}" ] || NEW_COMMENTS=()
+          for index in "${!NEW_COMMENTS[@]}"; do
+            if [ "$index" -lt "${#OLD_COMMENTS[@]}" ]; then
+              gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/${OLD_COMMENTS[$index]}" -F "body=@${NEW_COMMENTS[$index]}" > /dev/null
+            else
+              gh api -X POST "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" -F "body=@${NEW_COMMENTS[$index]}" > /dev/null
+            fi
+          done
+          for (( index=${#NEW_COMMENTS[@]}; index<${#OLD_COMMENTS[@]}; index++ )); do
+            gh api -X DELETE "repos/$GITHUB_REPOSITORY/issues/comments/${OLD_COMMENTS[$index]}"
+          done
+          echo "Review pull request: $PR_URL (${#NEW_COMMENTS[@]} continuation comment(s))" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Report model calls and estimated spend
         if: always()
