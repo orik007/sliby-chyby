@@ -476,7 +476,7 @@ export function renderReviewPullRequest(summary) {
       blocks: changes.length > 0 ? changes.map(changeBlock) : ["Žádný aktuální návrh nemění hodnocení zveřejněné na webu.\n"]
     },
     ...(attention.length > 0 ? [{ title: `### Vyžaduje lidské rozhodnutí (${attention.length})`, blocks: attention }] : []),
-    ...(routeTable ? [{ title: "### Nesouvisející změny zákonů podle cesty", blocks: [routeTable] }] : [])
+    ...(routeTable ? [{ title: "### Nesouvisející změny zákonů podle cesty", blocks: [routeTable], countable: false }] : [])
   ];
 
   const intro = [
@@ -502,18 +502,19 @@ export function renderReviewPullRequest(summary) {
     page = [];
     used = 0;
   };
-  // Only list items count as left out; a heading is not an item.
-  const add = (text, continuedTitle) => {
-    const item = continuedTitle !== null;
+  // A section heading travels with its first block, so no page ends with an
+  // empty heading. Only list items count as left out; the route table does
+  // not.
+  const add = (text, { continuedTitle, countable }) => {
     if (pages.length > maxContinuationComments) {
-      if (item) omitted += 1;
+      if (countable) omitted += 1;
       return;
     }
     const size = text.length + 1;
     if (used + size > budget() && page.length > 0) {
       newPage();
       if (pages.length > maxContinuationComments) {
-        if (item) omitted += 1;
+        if (countable) omitted += 1;
         return;
       }
       if (continuedTitle) {
@@ -525,8 +526,10 @@ export function renderReviewPullRequest(summary) {
     used += Math.min(size, budget());
   };
   for (const section of sections) {
-    add(`\n${section.title}\n`, null);
-    for (const block of section.blocks) add(block, section.title);
+    section.blocks.forEach((block, index) => add(
+      index === 0 ? `\n${section.title}\n\n${block}` : block,
+      { continuedTitle: index === 0 ? null : section.title, countable: section.countable !== false }
+    ));
   }
   if (page.length > 0 && pages.length <= maxContinuationComments) pages.push(page);
   if (omitted > 0) pages.at(-1).push(`*… a dalších ${omitted} položek se sem nevešlo; úplný seznam je v \`assessment-batch.json\` v artefaktu běhu a na stránkách návrhů.*\n`);

@@ -372,8 +372,13 @@ jobs:
           # ones deleted, and missing ones added, so they stay in order and
           # never pile up.
           PR_NUMBER="${PR_URL##*/}"
-          # A failed listing stops the step rather than posting a second set.
-          OLD_COMMENT_IDS="$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" --jq '.[] | select(.body | startswith("<!-- slava-review-continuation -->")) | .id')"
+          # Only this token's own comments with the marker are the run's; a
+          # failed listing stops the step rather than posting a second set.
+          # The default workflow token cannot read /user and posts as
+          # github-actions[bot].
+          COMMENT_AUTHOR="$(gh api user --jq .login 2>/dev/null)" || true
+          [[ "$COMMENT_AUTHOR" =~ ^[A-Za-z0-9-]+$ ]] || COMMENT_AUTHOR='github-actions[bot]'
+          OLD_COMMENT_IDS="$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" --jq ".[] | select(.user.login == \"$COMMENT_AUTHOR\" and (.body | startswith(\"<!-- slava-review-continuation -->\"))) | .id")"
           OLD_COMMENTS=()
           if [ -n "$OLD_COMMENT_IDS" ]; then mapfile -t OLD_COMMENTS <<< "$OLD_COMMENT_IDS"; fi
           NEW_COMMENTS=(automation/runs/pipeline/github-actions/assessment-review-pr-comments/*.md)

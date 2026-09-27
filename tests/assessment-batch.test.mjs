@@ -344,13 +344,15 @@ test("a list too long for the body continues, in order and complete, in comments
   const listed = [...all.matchAll(/\(`((?:promise|human)-\d+)`\)/g)].map(([, id]) => id);
   assert.deepEqual(listed, [...many.map(({ promiseId }) => promiseId), ...humans.map(({ promiseId }) => promiseId)], "every item is listed once, in order");
   assert.match(all, /### Návrhy, které mění hodnocení na webu \(700, z toho nové: 700\) \(pokračování\)/);
+  // No page ends with a heading whose first item moved to the next page.
+  for (const page of [body.slice(0, body.indexOf("\n\nVšechny návrhy")), ...comments]) assert.doesNotMatch(page.trimEnd(), /\n###[^\n]*$/);
   assert.match(body, /### Souhrn\n\n- Návrhy, které mění hodnocení na webu: \*\*700\*\*\n- Vyžaduje lidské rozhodnutí: \*\*300\*\*/);
 });
 
 test("the continuation stops at a bounded number of comments and says what was left out", () => {
   const huge = Array.from({ length: 6_000 }, (_, index) => scoreChange(index, "x", { assessorA: assessorVerdict("Velmi dlouhé vysvětlení. ".repeat(80)), assessorB: assessorVerdict("Jiné. ".repeat(250)), arbiter: null }));
   const humans = Array.from({ length: 3 }, (_, index) => ({ promiseId: `human-${index}`, promiseTitleCz: `Lidské ${index}`, kind: "human-review", resolutionReason: "insufficient-evidence", reviewUrl: null, newInRun: false, packageState: "current" }));
-  const summary = { ...reviewSummary([...huge, ...humans]), failedCount: 7 };
+  const summary = { ...reviewSummary([...huge, ...humans]), failedCount: 7, relevanceVerdictsByRoute: [{ route: "tag:example", notRelevant: 3, verdicts: 5 }] };
   const { body, comments } = renderReviewPullRequest(summary);
   assert.equal(comments.length, 40);
   // The note counts exactly the items left out, never a heading.
