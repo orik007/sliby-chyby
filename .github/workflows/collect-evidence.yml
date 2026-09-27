@@ -372,7 +372,10 @@ jobs:
           # ones deleted, and missing ones added, so they stay in order and
           # never pile up.
           PR_NUMBER="${PR_URL##*/}"
-          mapfile -t OLD_COMMENTS < <(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" --jq '.[] | select(.body | startswith("<!-- slava-review-continuation -->")) | .id')
+          # A failed listing stops the step rather than posting a second set.
+          OLD_COMMENT_IDS="$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" --jq '.[] | select(.body | startswith("<!-- slava-review-continuation -->")) | .id')"
+          OLD_COMMENTS=()
+          if [ -n "$OLD_COMMENT_IDS" ]; then mapfile -t OLD_COMMENTS <<< "$OLD_COMMENT_IDS"; fi
           NEW_COMMENTS=(automation/runs/pipeline/github-actions/assessment-review-pr-comments/*.md)
           [ -e "${NEW_COMMENTS[0]}" ] || NEW_COMMENTS=()
           for index in "${!NEW_COMMENTS[@]}"; do

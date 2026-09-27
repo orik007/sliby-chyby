@@ -455,6 +455,7 @@ export function renderReviewPullRequest(summary) {
     ...humanReviews.map((item) => `- ${heading(item)}: ${party(item)}${resolutionLabels[item.resolutionReason] ?? item.resolutionReason}${notes(item).map((note) => ` (${note})`).join("")}`),
     ...oversized.map((result) => `- ${heading(result)}: balíček je větší, než model dokáže přečíst`)
   ];
+  // The counts and any interruption stay in the body, so they are never cut.
   const others = [
     `- Nové návrhy, které potvrzují hodnocení na webu: **${summary.confirmedCount}**`,
     `- Beze změny podkladů, bez nového volání modelů: **${summary.unchangedCount}**`,
@@ -475,14 +476,19 @@ export function renderReviewPullRequest(summary) {
       blocks: changes.length > 0 ? changes.map(changeBlock) : ["Žádný aktuální návrh nemění hodnocení zveřejněné na webu.\n"]
     },
     ...(attention.length > 0 ? [{ title: `### Vyžaduje lidské rozhodnutí (${attention.length})`, blocks: attention }] : []),
-    { title: "### Ostatní", blocks: [others, ...(routeTable ? [routeTable] : [])] }
+    ...(routeTable ? [{ title: "### Nesouvisející změny zákonů podle cesty", blocks: [routeTable] }] : [])
   ];
 
   const intro = [
     "## Neveřejné návrhy změn hodnocení SLAVA",
     "",
     "Tento pull request ukládá automaticky připravené návrhy k lidské kontrole. Jeho sloučení **nezveřejní hodnocení ani nezmění veřejný web**. Návrh zmizí z tohoto přehledu, až hodnocení na webu změní samostatný pull request, nebo až ho nahradí novější návrh. U každé změny jsou verdikty obou automatických hodnotitelů a třetího hodnotitele s jejich zdůvodněním; úplný záznam je na stránce návrhu.",
-    ""
+    "",
+    "### Souhrn",
+    "",
+    `- Návrhy, které mění hodnocení na webu: **${changes.length}**`,
+    `- Vyžaduje lidské rozhodnutí: **${attention.length}**`,
+    others
   ].join("\n");
   // Reserved for the note that the list continues in comments.
   const noteReserve = 400;
@@ -496,16 +502,18 @@ export function renderReviewPullRequest(summary) {
     page = [];
     used = 0;
   };
+  // Only list items count as left out; a heading is not an item.
   const add = (text, continuedTitle) => {
+    const item = continuedTitle !== null;
     if (pages.length > maxContinuationComments) {
-      omitted += 1;
+      if (item) omitted += 1;
       return;
     }
     const size = text.length + 1;
     if (used + size > budget() && page.length > 0) {
       newPage();
       if (pages.length > maxContinuationComments) {
-        omitted += 1;
+        if (item) omitted += 1;
         return;
       }
       if (continuedTitle) {

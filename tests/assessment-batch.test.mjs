@@ -344,14 +344,21 @@ test("a list too long for the body continues, in order and complete, in comments
   const listed = [...all.matchAll(/\(`((?:promise|human)-\d+)`\)/g)].map(([, id]) => id);
   assert.deepEqual(listed, [...many.map(({ promiseId }) => promiseId), ...humans.map(({ promiseId }) => promiseId)], "every item is listed once, in order");
   assert.match(all, /### Návrhy, které mění hodnocení na webu \(700, z toho nové: 700\) \(pokračování\)/);
-  assert.match(all, /### Ostatní/);
+  assert.match(body, /### Souhrn\n\n- Návrhy, které mění hodnocení na webu: \*\*700\*\*\n- Vyžaduje lidské rozhodnutí: \*\*300\*\*/);
 });
 
 test("the continuation stops at a bounded number of comments and says what was left out", () => {
   const huge = Array.from({ length: 6_000 }, (_, index) => scoreChange(index, "x", { assessorA: assessorVerdict("Velmi dlouhé vysvětlení. ".repeat(80)), assessorB: assessorVerdict("Jiné. ".repeat(250)), arbiter: null }));
-  const { comments } = renderReviewPullRequest(reviewSummary(huge));
+  const humans = Array.from({ length: 3 }, (_, index) => ({ promiseId: `human-${index}`, promiseTitleCz: `Lidské ${index}`, kind: "human-review", resolutionReason: "insufficient-evidence", reviewUrl: null, newInRun: false, packageState: "current" }));
+  const summary = { ...reviewSummary([...huge, ...humans]), failedCount: 7 };
+  const { body, comments } = renderReviewPullRequest(summary);
   assert.equal(comments.length, 40);
-  assert.match(comments.at(-1), /… a dalších \d+ položek se sem nevešlo; úplný seznam je v `assessment-batch.json`/);
+  // The note counts exactly the items left out, never a heading.
+  const listed = new Set([...[body, ...comments].join("\n").matchAll(/\(`((?:promise|human)-\d+)`\)/g)].map(([, id]) => id));
+  const [, omitted] = comments.at(-1).match(/… a dalších (\d+) položek se sem nevešlo; úplný seznam je v `assessment-batch.json`/);
+  assert.equal(Number(omitted), huge.length + humans.length - listed.size);
+  // The counts stay in the body, however long the list.
+  assert.match(body, /Izolovaná selhání hodnocení, zkusí se znovu v dalším běhu: \*\*7\*\*/);
   assert.ok(comments.every((comment) => comment.length <= 61_000));
   // A reason longer than the listed limit is cut in the list.
   assert.match(comments[0], /Velmi dlouhé vysvětlení\. [^\n]* …\n/);
