@@ -566,16 +566,45 @@ h1 em {
 .promise-category h3 {
   margin: 0 0 14px;
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 18px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
   font: 800 clamp(23px, 3vw, 32px)/1.1 "Manrope", sans-serif;
   letter-spacing: -0.04em;
 }
 
-.promise-category h3 span {
+.promise-category h3 .category-count {
+  margin-left: auto;
   color: var(--muted);
   font: 700 14px/1 "DM Sans", system-ui, sans-serif;
+}
+
+.category-breakdown {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  letter-spacing: 0;
+}
+
+.category-breakdown > span {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #eeece4;
+  color: var(--muted);
+  font: 700 13px/1 "DM Sans", system-ui, sans-serif;
+  white-space: nowrap;
+}
+
+.category-breakdown .breakdown-positive,
+.category-breakdown .breakdown-positive-strong {
+  color: #12613a;
+  background: #dceee1;
+}
+
+.category-breakdown .breakdown-negative,
+.category-breakdown .breakdown-negative-strong {
+  color: #8a3124;
+  background: #f4ddd7;
 }
 
 .promise-list {
