@@ -23,35 +23,36 @@ function decodeXml(value) {
 // it waits, so when psp.cz stops answering, every download pauses rather
 // than adding connections.
 //
-// psp.cz closes the connection after every answer, so each request opens a
-// new one. In run 64 (27 September 2026) the first 46 connections within
-// 13 s all succeeded; afterwards about 13 in a row succeeded and then the
-// next two were dropped without an answer, again and again, 63 of 467 in
-// all, at about 46 connections a minute. That fits a limit on new
-// connections of roughly 45 to 50 a minute after an initial allowance. So a
-// new attempt, retries included, starts at least 1.5 s after the previous
-// one (at most 40 a minute), and connecting may take at most 3 s: a
-// successful connection took 0.3 s (median) and at most 0.8 s in nine of
-// ten, and a dropped one is never answered.
+// psp.cz closes the connection after every answer and drops new
+// connections above a rate; the spacing and the connect limit that keep
+// the download under it, and the run that measured it, are described in
+// docs/evidence-pipeline.md.
 export const pspDownloadSettings = { concurrency: 2, retryAttempts: 6, retryDelayMs: 5_000, minIntervalMs: 1_500, connectTimeoutMs: 3_000 };
 
 // Returns a fetch that sends every request through one shared limit. A
 // request takes a slot only for itself, never while holding another, so the
-// limit cannot deadlock. Attempts share one schedule, so no two start less
-// than `minIntervalMs` apart.
+// limit cannot deadlock. Attempts, retries included, take turns on one
+// schedule, and each starts at least `minIntervalMs` after the previous one
+// actually started. `close` releases the connection pool.
 // `onAttempt` receives every attempt's record (see fetchVerified).
 export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, minIntervalMs = 0, connectTimeoutMs = null, onAttempt = null } = pspDownloadSettings) {
+  invariant(Number.isInteger(minIntervalMs) && minIntervalMs >= 0, "minIntervalMs must be a non-negative integer");
+  invariant(connectTimeoutMs === null || (Number.isInteger(connectTimeoutMs) && connectTimeoutMs > 0), "connectTimeoutMs must be a positive integer or null");
   let active = 0;
   const waiting = [];
-  let nextStart = 0;
-  const beforeAttempt = async () => {
-    const start = Math.max(Date.now(), nextStart);
-    nextStart = start + minIntervalMs;
-    const wait = start - Date.now();
-    if (wait > 0) await new Promise((resolveWait) => setTimeout(resolveWait, wait));
+  let lastStart = -Infinity;
+  let turn = Promise.resolve();
+  const beforeAttempt = () => {
+    const mine = turn.then(async () => {
+      const wait = lastStart + minIntervalMs - Date.now();
+      if (wait > 0) await new Promise((resolveWait) => setTimeout(resolveWait, wait));
+      lastStart = Date.now();
+    });
+    turn = mine;
+    return mine;
   };
   const dispatcher = connectTimeoutMs ? new Agent({ connect: { timeout: connectTimeoutMs } }) : undefined;
-  return async (source, url, options) => {
+  const fetchPsp = async (source, url, options) => {
     if (active >= concurrency) await new Promise((resolveTurn) => waiting.push(resolveTurn));
     active += 1;
     try {
@@ -61,6 +62,8 @@ export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, min
       waiting.shift()?.();
     }
   };
+  fetchPsp.close = async () => dispatcher?.close();
+  return fetchPsp;
 }
 
 /**
@@ -82,8 +85,9 @@ const connectChannels = ["undici:client:beforeConnect", "undici:client:connected
  * run artifact: every download attempt (passed to `onAttempt`) and every new
  * connection Node's fetch opens to `hostname`, with how long connecting took
  * and why it failed. A request sent over a kept-alive connection opens none.
- * Connections are observed through Node's diagnostics channels for its
- * bundled HTTP client; `stop` ends the observation. `onEntry`, when given,
+ * Connections are observed through the `undici:client:*` diagnostics
+ * channels, which both Node's bundled client and the undici package the
+ * fetcher's connection pool comes from publish; `stop` ends the observation. `onEntry`, when given,
  * receives each entry as soon as it is recorded, so it can be saved before
  * the process ends.
  */

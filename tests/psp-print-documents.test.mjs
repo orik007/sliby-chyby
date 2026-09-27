@@ -2,6 +2,7 @@ import { createServer } from "node:http";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { Agent } from "undici";
 import { strToU8, zipSync } from "fflate";
 import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, pspDownloadSettings, summarizePspRequests } from "../scripts/lib/psp-print-documents.mjs";
 import { proposalBody } from "../scripts/lib/print-parts.mjs";
@@ -30,10 +31,11 @@ const pause = (milliseconds) => new Promise((resolve) => setTimeout(resolve, mil
 // A stand-in for psp.cz: each listed URL refuses the connection that many
 // times, and every answer takes a few milliseconds.
 function stubPsp(refusals = {}) {
-  const log = { starts: [], ends: [], open: 0, maxOpen: 0 };
+  const log = { starts: [], ends: [], open: 0, maxOpen: 0, dispatchers: [] };
   const remaining = { ...refusals };
-  const fetch = async (url) => {
+  const fetch = async (url, init = {}) => {
     log.starts.push({ url, at: Date.now() });
+    log.dispatchers.push(init.dispatcher);
     log.open += 1;
     log.maxOpen = Math.max(log.maxOpen, log.open);
     try {
@@ -76,6 +78,20 @@ test("reads the paragraphs of a Word 97-2003 proposal text with its quotation ma
 
 test("print-text downloads use two requests at a time, six attempts with a 5 s back-off, 1.5 s between attempts, and a 3 s connect limit", () => {
   assert.deepEqual(pspDownloadSettings, { concurrency: 2, retryAttempts: 6, retryDelayMs: 5_000, minIntervalMs: 1_500, connectTimeoutMs: 3_000 });
+});
+
+test("the psp.cz fetcher connects through a pool with its connect limit, validates its settings, and closes the pool", async () => {
+  const stub = stubPsp();
+  const fetchPsp = createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0, connectTimeoutMs: 3_000 });
+  await withStubPsp(stub, () => fetchPsp(pspSource, "https://www.psp.cz/sqw/historie.sqw?o=10&t=1", htmlOptions));
+  assert.ok(stub.log.dispatchers[0] instanceof Agent);
+  await fetchPsp.close();
+  assert.equal(stub.log.dispatchers[0].closed, true);
+  const plain = stubPsp();
+  await withStubPsp(plain, () => createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0 })(pspSource, "https://www.psp.cz/sqw/historie.sqw?o=10&t=1", htmlOptions));
+  assert.equal(plain.log.dispatchers[0], undefined, "without a connect limit Node's default pool is used");
+  assert.throws(() => createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0, connectTimeoutMs: 0 }), /connectTimeoutMs must be a positive integer or null/);
+  assert.throws(() => createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0, minIntervalMs: -1 }), /minIntervalMs must be a non-negative integer/);
 });
 
 test("the psp.cz fetcher starts no two attempts, retries included, closer than its interval", async () => {
@@ -205,7 +221,7 @@ test("run-print-parts.mjs sends every psp.cz request through the shared fetcher 
   assert.match(script, /const fetchPsp = createPspFetcher\(\{ \.\.\.pspDownloadSettings, onAttempt: pspRequests\.onAttempt \}\);/);
   // Each entry is appended as it happens, so the file survives a step timeout.
   assert.match(script, /createPspRequestLog\(\{ onEntry: \(entry\) => appendFileSync\(pspRequestFile, /);
-  assert.match(script, /finally \{\s*pspRequests\.stop\(\);/);
+  assert.match(script, /finally \{\s*await fetchPsp\.close\(\);\s*pspRequests\.stop\(\);/);
   assert.doesNotMatch(script, /fetchVerified|globalThis\.fetch|\bfetch\(/);
   assert.match(script, /await allSettledOrThrow\(Array\.from\(\{ length: Math\.min\(pspDownloadSettings\.concurrency, prints\.length\) \}, downloadWorker\)\)/);
   assert.match(script, /while \(!downloadFailed && nextIndex < prints\.length\)/);
