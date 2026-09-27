@@ -210,7 +210,7 @@ const retryPromiseIds = new Set(retryCandidates.keys());
 
 const prompts = await loadAssessmentPrompts();
 const runtime = assessmentRuntimeConfig();
-invariant(Number.isInteger(runtime.concurrency) && runtime.concurrency > 0 && runtime.concurrency <= 8, "SLIBY_ASSESSMENT_CONCURRENCY must be an integer from 1 to 8");
+invariant(Number.isInteger(runtime.concurrency) && runtime.concurrency > 0 && runtime.concurrency <= 32, "SLIBY_ASSESSMENT_CONCURRENCY must be an integer from 1 to 32");
 const { concurrency, ...assessmentRuntime } = runtime;
 const maxAssessments = Number(process.env.SLIBY_MAX_ASSESSMENTS ?? "0");
 invariant(Number.isInteger(maxAssessments) && maxAssessments >= 0, "SLIBY_MAX_ASSESSMENTS must be a non-negative integer");

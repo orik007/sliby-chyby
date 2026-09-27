@@ -17,7 +17,8 @@ test("a valid pair is cached at once and reused only while the whole fingerprint
   const counted = (output) => async () => { calls += 1; return answer(output)(); };
   const first = await pairedModelCall({ subjectId: "s1", fingerprint, cache, persist, callA: counted({ v: 1 }), callB: counted({ v: 2 }) });
   assert.deepEqual([first.a, first.b, first.reused, first.usageByModel.length], [{ v: 1 }, { v: 2 }, false, 2]);
-  assert.deepEqual(JSON.parse(await readFile(path, "utf8")).a, { v: 1 }, "the paid result is on disk before the call returns");
+  const journal = (await readFile(path, "utf8")).split("\n").filter(Boolean).map((line) => JSON.parse(line));
+  assert.deepEqual(journal.map(({ a, b }) => [a, b]), [[{ v: 1 }, null], [{ v: 1 }, { v: 2 }]], "A is on disk before B is called, and the pair when the call returns");
 
   const reused = await pairedModelCall({ subjectId: "s1", fingerprint, cache, persist, callA: counted({ v: 9 }), callB: counted({ v: 9 }) });
   assert.deepEqual([reused.a, reused.reused, calls], [{ v: 1 }, true, 2]);
@@ -29,7 +30,7 @@ test("a valid pair is cached at once and reused only while the whole fingerprint
   // appended on a line of its own.
   await appendFile(path, '{"subjectId":"s2","a":');
   const reloaded = await loadModelCache(path);
-  assert.equal((await readFile(path, "utf8")).split("\n").filter(Boolean).length, 2);
+  assert.equal((await readFile(path, "utf8")).split("\n").filter(Boolean).length, 4);
   assert.deepEqual(Object.keys(reloaded.entries), ["s1"]);
   assert.deepEqual(reloaded.entries.s1.a, { v: 3 });
   await pairedModelCall({ subjectId: "s3", fingerprint, cache: reloaded, persist: cachePersister(reloaded), callA: answer({ v: 5 }), callB: answer({ v: 6 }) });
@@ -59,6 +60,26 @@ test("an invalid output fails only its side and keeps its cost; the valid side i
   assert.deepEqual([retried.a, retried.b, retried.reused, retried.usageByModel.length, calls], [{ v: 1 }, { v: 2 }, false, 1, 1]);
   const reused = await pairedModelCall({ subjectId: "s1", fingerprint, cache, persist: async () => {}, callA: invalid, callB: invalid });
   assert.deepEqual([reused.a, reused.b, reused.reused], [{ v: 1 }, { v: 2 }, true]);
+});
+
+test("B is called only after A has answered, and a transport failure of B keeps A", async () => {
+  const events = [];
+  const timed = (side, output) => async () => { events.push(`${side} start`); await new Promise((resolve) => setTimeout(resolve, 20)); events.push(`${side} end`); return answer(output)(); };
+  await pairedModelCall({ subjectId: "s1", fingerprint, cache: { entries: {} }, persist: async () => {}, callA: timed("a", { v: 1 }), callB: timed("b", { v: 2 }) });
+  assert.deepEqual(events, ["a start", "a end", "b start", "b end"]);
+
+  const cache = { entries: {} };
+  const outage = async () => { throw new Error("OpenAI Responses API failed (503): unavailable"); };
+  await assert.rejects(() => pairedModelCall({ subjectId: "s1", fingerprint, cache, persist: async () => {}, callA: answer({ v: 1 }), callB: outage }), /unavailable/);
+  assert.deepEqual([cache.entries.s1.a, cache.entries.s1.b], [{ v: 1 }, null], "the paid answer of A is saved before the run stops");
+});
+
+test("a saved answer that no longer validates stops the pair before any paid call", async () => {
+  let calls = 0;
+  const cache = { entries: { s1: { ...fingerprint, a: null, b: { v: "old" } } } };
+  const revalidate = (output) => { if (output.v === "old") throw new Error("saved answer is invalid"); return output; };
+  await assert.rejects(() => pairedModelCall({ subjectId: "s1", fingerprint, cache, persist: async () => {}, callA: async () => { calls += 1; return answer({ v: 1 })(); }, callB: answer({ v: 2 }), revalidate }), /saved answer is invalid/);
+  assert.equal(calls, 0);
 });
 
 test("a transport failure stops the run, and finished subjects travel with the error", async () => {

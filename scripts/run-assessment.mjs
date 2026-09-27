@@ -79,15 +79,12 @@ function cachedResponse(role, request) {
 }
 
 const assessorInput = { packageHash, evidencePackage };
-// Both assessors are awaited before any error is raised, so a response that
-// arrived is saved even when the other call fails.
-const assessorCalls = await Promise.allSettled([
-  cachedResponse("assessor-a", { provider: assessorProviderA, model: assessorModelA, instructions: assessorInstructions, input: assessorInput, name: "slava_assessment", schema: assessmentOutputJsonSchema }),
-  cachedResponse("assessor-b", { provider: assessorProviderB, model: assessorModelB, instructions: assessorInstructions, input: assessorInput, name: "slava_assessment", schema: assessmentOutputJsonSchema })
-]);
-const failedAssessorCall = assessorCalls.find(({ status }) => status === "rejected");
-if (failedAssessorCall) throw failedAssessorCall.reason;
-const [rawA, rawB] = assessorCalls.map(({ value }) => value);
+// Assessor B is called only after A has answered: with the same model both
+// send the same request, so B reads the provider's prompt cache and pays a
+// tenth for the input they share. Each response is saved as soon as it
+// arrives, so a failure of B never loses A.
+const rawA = await cachedResponse("assessor-a", { provider: assessorProviderA, model: assessorModelA, instructions: assessorInstructions, input: assessorInput, name: "slava_assessment", schema: assessmentOutputJsonSchema });
+const rawB = await cachedResponse("assessor-b", { provider: assessorProviderB, model: assessorModelB, instructions: assessorInstructions, input: assessorInput, name: "slava_assessment", schema: assessmentOutputJsonSchema });
 
 const assessmentPair = resolveAvailableAssessmentReviews(rawA.output, rawB.output, evidencePackage);
 const { reviewA, reviewB, validationErrors } = assessmentPair;
@@ -139,7 +136,10 @@ const auditRecord = {
   },
   publicationApproved: false,
   independence: {
-    statelessParallelCalls: true,
+    // Each call is stateless (nothing is stored at the provider); B is
+    // called after A has answered, with the same request.
+    statelessCalls: true,
+    callOrder: ["assessor-a", "assessor-b"],
     assessorProviders: [rawA.provider, rawB.provider],
     assessorModels: [rawA.model, rawB.model],
     sameProvider: rawA.provider === rawB.provider,

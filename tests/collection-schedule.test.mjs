@@ -14,8 +14,9 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.match(workflow, /--write-checkpoints automation\/collectors\/checkpoints\.json/);
   assert.match(workflow, /node scripts\/run-topic-routing\.mjs/);
   assert.match(workflow, /--tag-cache automation\/topic-routing\/tag-cache/);
-  assert.match(workflow, /SLIBY_TAGGING_CONCURRENCY: \$\{\{ inputs\.tagging_concurrency \|\| '8' \}\}/);
-  assert.match(workflow, /SLIBY_ASSESSMENT_CONCURRENCY: 4/);
+  assert.match(workflow, /SLIBY_TAGGING_CONCURRENCY: \$\{\{ inputs\.tagging_concurrency \|\| '32' \}\}/);
+  assert.match(workflow, /SLIBY_SERVICE_TIER: flex/);
+  assert.match(workflow, /SLIBY_ASSESSMENT_CONCURRENCY: \$\{\{ inputs\.assessment_concurrency \|\| '16' \}\}/);
   assert.match(workflow, /timeout-minutes: 300/);
   assert.match(workflow, /Persist source collection and queued evidence packages/);
   assert.match(workflow, /Queue evidence packages/);
@@ -62,7 +63,7 @@ test("the daily schedule stays paused until the first manual run of the pipeline
 test("assessment fan-out stays bounded and concurrency-limited", async () => {
   const assessmentBatch = await readFile(assessmentBatchUrl, "utf8");
   assert.match(assessmentBatch, /mapWithConcurrency\(assessmentItems, concurrency/);
-  assert.match(assessmentBatch, /SLIBY_ASSESSMENT_CONCURRENCY must be an integer from 1 to 8/);
+  assert.match(assessmentBatch, /SLIBY_ASSESSMENT_CONCURRENCY must be an integer from 1 to 32/);
 });
 
 test("the audit branch is a current operational snapshot restored into main", async () => {
