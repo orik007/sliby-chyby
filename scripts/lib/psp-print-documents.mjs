@@ -1,5 +1,6 @@
 import { subscribe, unsubscribe } from "node:diagnostics_channel";
 import { unzipSync } from "fflate";
+import { Agent } from "undici";
 import WordExtractor from "word-extractor";
 import { fetchVerified, invariant, requestFailureCode } from "./collector-core.mjs";
 
@@ -21,25 +22,49 @@ function decodeXml(value) {
 // before each retry: 5, 10, 20, 40, and 80 s. A request keeps its slot while
 // it waits, so when psp.cz stops answering, every download pauses rather
 // than adding connections.
-export const pspDownloadSettings = { concurrency: 2, retryAttempts: 6, retryDelayMs: 5_000 };
+//
+// psp.cz closes the connection after every answer and drops new
+// connections above a rate; the spacing and the connect limit that keep
+// the download under it, and the run that measured it, are described in
+// docs/evidence-pipeline.md.
+export const pspDownloadSettings = { concurrency: 2, retryAttempts: 6, retryDelayMs: 5_000, minIntervalMs: 1_500, connectTimeoutMs: 3_000 };
 
 // Returns a fetch that sends every request through one shared limit. A
 // request takes a slot only for itself, never while holding another, so the
-// limit cannot deadlock.
+// limit cannot deadlock. Attempts, retries included, take turns on one
+// schedule, and each starts at least `minIntervalMs` after the previous one
+// actually started. `close` releases the connection pool once every request
+// has settled; it never waits on an unread answer.
 // `onAttempt` receives every attempt's record (see fetchVerified).
-export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, onAttempt = null } = pspDownloadSettings) {
+export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, minIntervalMs = 0, connectTimeoutMs = null, onAttempt = null } = pspDownloadSettings) {
+  invariant(Number.isInteger(minIntervalMs) && minIntervalMs >= 0, "minIntervalMs must be a non-negative integer");
+  invariant(connectTimeoutMs === null || (Number.isInteger(connectTimeoutMs) && connectTimeoutMs > 0), "connectTimeoutMs must be a positive integer or null");
   let active = 0;
   const waiting = [];
-  return async (source, url, options) => {
+  let lastStart = -Infinity;
+  let turn = Promise.resolve();
+  const beforeAttempt = () => {
+    const mine = turn.then(async () => {
+      const wait = lastStart + minIntervalMs - Date.now();
+      if (wait > 0) await new Promise((resolveWait) => setTimeout(resolveWait, wait));
+      lastStart = Date.now();
+    });
+    turn = mine;
+    return mine;
+  };
+  const dispatcher = connectTimeoutMs ? new Agent({ connect: { timeout: connectTimeoutMs } }) : undefined;
+  const fetchPsp = async (source, url, options) => {
     if (active >= concurrency) await new Promise((resolveTurn) => waiting.push(resolveTurn));
     active += 1;
     try {
-      return await fetchVerified(source, url, { ...options, retryAttempts, retryDelayMs, onAttempt });
+      return await fetchVerified(source, url, { ...options, retryAttempts, retryDelayMs, onAttempt, beforeAttempt, dispatcher });
     } finally {
       active -= 1;
       waiting.shift()?.();
     }
   };
+  fetchPsp.close = async () => dispatcher?.destroy();
+  return fetchPsp;
 }
 
 /**
@@ -61,8 +86,9 @@ const connectChannels = ["undici:client:beforeConnect", "undici:client:connected
  * run artifact: every download attempt (passed to `onAttempt`) and every new
  * connection Node's fetch opens to `hostname`, with how long connecting took
  * and why it failed. A request sent over a kept-alive connection opens none.
- * Connections are observed through Node's diagnostics channels for its
- * bundled HTTP client; `stop` ends the observation. `onEntry`, when given,
+ * Connections are observed through the `undici:client:*` diagnostics
+ * channels, which both Node's bundled client and the undici package the
+ * fetcher's connection pool comes from publish; `stop` ends the observation. `onEntry`, when given,
  * receives each entry as soon as it is recorded, so it can be saved before
  * the process ends.
  */
