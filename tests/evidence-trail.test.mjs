@@ -99,6 +99,7 @@ test("the public schema accepts only official psp.cz links and requires the revi
   assert.ok(proposalId);
   assert.equal(assessmentRevisionSchema.safeParse(withoutProposal).success, false);
   assert.equal(assessmentRevisionSchema.safeParse({ ...revision, evidenceTrail: undefined, evidenceSourceIds: [] }).success, false);
+  assert.equal(assessmentRevisionSchema.safeParse({ ...revision, evidenceSourceIds: [promise.primarySourceId] }).success, false);
 });
 
 test("trail dates keep their calendar day in any time zone", () => {

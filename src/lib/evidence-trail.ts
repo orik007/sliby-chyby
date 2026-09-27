@@ -75,19 +75,6 @@ export function stepNotes(step: EvidenceTrailStep, print: EvidenceTrailPrint) {
   });
 }
 
-// A short line for the revision history panel.
-export function stepSummary(step: EvidenceTrailStep) {
-  if (step.kind === "submission") return `${formatDate(step.date)} · předložení návrhu`;
-  if (step.kind === "vote") return `${formatDate(step.date)} · ${step.club === "yes" ? "klub pro" : step.club === "no" ? "klub proti" : "klub bez většiny"}, ${step.counts.yes}:${step.counts.no}`;
-  return "Senát vrátil návrh";
-}
-
-export function stepSummaryLink(step: EvidenceTrailStep, printUrl: string) {
-  if (step.kind === "vote") return { label: "hlasování", url: step.url };
-  if (step.kind === "senate-resolution") return { label: "usnesení", url: step.url };
-  return { label: "průběh", url: printUrl };
-}
-
 export function trailStepCount(trail: EvidenceTrailPrint[]) {
   return trail.reduce((count, print) => count + print.steps.length, 0);
 }
