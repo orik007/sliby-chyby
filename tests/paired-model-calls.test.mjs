@@ -17,7 +17,8 @@ test("a valid pair is cached at once and reused only while the whole fingerprint
   const counted = (output) => async () => { calls += 1; return answer(output)(); };
   const first = await pairedModelCall({ subjectId: "s1", fingerprint, cache, persist, callA: counted({ v: 1 }), callB: counted({ v: 2 }) });
   assert.deepEqual([first.a, first.b, first.reused, first.usageByModel.length], [{ v: 1 }, { v: 2 }, false, 2]);
-  assert.deepEqual(JSON.parse(await readFile(path, "utf8")).a, { v: 1 }, "the paid result is on disk before the call returns");
+  const journal = (await readFile(path, "utf8")).split("\n").filter(Boolean).map((line) => JSON.parse(line));
+  assert.deepEqual(journal.map(({ a, b }) => [a, b]), [[{ v: 1 }, null], [{ v: 1 }, { v: 2 }]], "A is on disk before B is called, and the pair when the call returns");
 
   const reused = await pairedModelCall({ subjectId: "s1", fingerprint, cache, persist, callA: counted({ v: 9 }), callB: counted({ v: 9 }) });
   assert.deepEqual([reused.a, reused.reused, calls], [{ v: 1 }, true, 2]);
@@ -29,7 +30,7 @@ test("a valid pair is cached at once and reused only while the whole fingerprint
   // appended on a line of its own.
   await appendFile(path, '{"subjectId":"s2","a":');
   const reloaded = await loadModelCache(path);
-  assert.equal((await readFile(path, "utf8")).split("\n").filter(Boolean).length, 2);
+  assert.equal((await readFile(path, "utf8")).split("\n").filter(Boolean).length, 4);
   assert.deepEqual(Object.keys(reloaded.entries), ["s1"]);
   assert.deepEqual(reloaded.entries.s1.a, { v: 3 });
   await pairedModelCall({ subjectId: "s3", fingerprint, cache: reloaded, persist: cachePersister(reloaded), callA: answer({ v: 5 }), callB: answer({ v: 6 }) });

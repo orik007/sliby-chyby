@@ -152,16 +152,13 @@ export async function pairedModelCall({ subjectId, fingerprint, cache, persist, 
     cache.entries[subjectId] = { ...fingerprint, a: attemptA.response?.output ?? null, b };
     await persist(subjectId);
   };
-  let attemptB;
-  try {
-    attemptB = reusedB ? { response: { output: savedB, model: fingerprint.modelB }, error: null, reused: true } : await isolateInvalidOutput(callB);
-  } catch (error) {
-    // A transport failure of B stops the run; a new valid A is saved first.
-    if (!reusedA && !attemptA.error) await save(null);
-    throw error;
-  }
+  // A new valid A is saved before B's paid call, so a failure or a killed
+  // run while B is in flight never loses it.
+  const savedEarly = !reusedA && !attemptA.error && !reusedB;
+  if (savedEarly) await save(null);
+  const attemptB = reusedB ? { response: { output: savedB, model: fingerprint.modelB }, error: null, reused: true } : await isolateInvalidOutput(callB);
   const reused = reusedA && reusedB;
-  if (!reused && (!attemptA.error || !attemptB.error)) await save(attemptB.response?.output ?? null);
+  if (!reused && (!attemptA.error || !attemptB.error) && !(savedEarly && attemptB.error)) await save(attemptB.response?.output ?? null);
   const called = [attemptA, attemptB].filter((attempt) => !attempt.reused);
   return {
     a: attemptA.response?.output ?? null,
