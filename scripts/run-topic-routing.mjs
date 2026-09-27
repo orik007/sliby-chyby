@@ -83,7 +83,7 @@ function recordPrintIds(record) {
 
 const args = parseArgs(process.argv.slice(2));
 const runtime = pairedModelRuntimeConfig();
-invariant(Number.isInteger(runtime.concurrency) && runtime.concurrency > 0 && runtime.concurrency <= 16, "SLIBY_TAGGING_CONCURRENCY must be an integer from 1 to 16");
+invariant(Number.isInteger(runtime.concurrency) && runtime.concurrency > 0 && runtime.concurrency <= 64, "SLIBY_TAGGING_CONCURRENCY must be an integer from 1 to 64");
 const apiKey = apiKeyFor(runtime.provider);
 const prompts = { screening: await loadScreeningPrompt(), relevance: await loadRelevancePrompt() };
 // The routing taxonomy is the one the promise tags were reviewed against.

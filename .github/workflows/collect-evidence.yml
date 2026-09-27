@@ -19,7 +19,12 @@ on:
         default: "0"
         type: string
       tagging_concurrency:
-        description: Parallel tagged subjects (each makes its 2 API calls one after the other); leave empty for 16
+        description: Parallel tagged subjects (each makes its 2 API calls one after the other); leave empty for 32
+        required: false
+        default: ""
+        type: string
+      assessment_concurrency:
+        description: Parallel assessed packages (each calls its assessors one after the other); leave empty for 16
         required: false
         default: ""
         type: string
@@ -53,7 +58,9 @@ jobs:
       SLIBY_ASSESSOR_MODEL_A: gpt-5.6-terra
       SLIBY_ASSESSOR_MODEL_B: gpt-5.6-terra
       SLIBY_ARBITER_MODEL: gpt-5.6-sol
-      SLIBY_ASSESSMENT_CONCURRENCY: 4
+      # Parallel assessed packages. At usage tier 4 the assessor model allows
+      # 10,000 requests and 4,000,000 tokens a minute; a 429 is retried.
+      SLIBY_ASSESSMENT_CONCURRENCY: ${{ inputs.assessment_concurrency || '16' }}
       # A hard cap on packages sent to the paid assessors per run. A run
       # without the input (the schedule) assesses none until a cap is set.
       SLIBY_MAX_ASSESSMENTS: ${{ inputs.max_assessments || '0' }}
@@ -64,9 +71,10 @@ jobs:
       SLIBY_TAGGING_MODEL_A: gpt-6-luna
       SLIBY_TAGGING_MODEL_B: gpt-6-luna
       # Parallel tagged subjects; the two calls of a subject run one after the
-      # other, so 16 keeps as many requests in flight as 8 did in parallel.
-      # Override with the tagging_concurrency input if rate limits change.
-      SLIBY_TAGGING_CONCURRENCY: ${{ inputs.tagging_concurrency || '16' }}
+      # other. At usage tier 4 the screening model allows 10,000 requests and
+      # 10,000,000 tokens a minute; run 56 used about 1,800,000 a minute with
+      # 16 requests in flight. Override with the tagging_concurrency input.
+      SLIBY_TAGGING_CONCURRENCY: ${{ inputs.tagging_concurrency || '32' }}
       # OpenAI Flex processing: the same models at half price, answered more
       # slowly (docs/evidence-pipeline.md).
       SLIBY_SERVICE_TIER: flex
