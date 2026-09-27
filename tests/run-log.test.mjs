@@ -14,6 +14,14 @@ test("a call's estimated cost uses uncached input, cached input, and output pric
   assert.equal(estimateCallCost("gpt-6-luna", null, table), null);
 });
 
+test("input written to the prompt cache is billed at the cache-write rate instead of the uncached rate", () => {
+  const table = { models: { "gpt-6-luna": { input: 0.10, cachedInput: 0.01, cacheWrite: 0.125, output: 0.50 } } };
+  const usage = { input_tokens: 1_000_000, input_tokens_details: { cached_tokens: 200_000, cache_write_tokens: 600_000 }, output_tokens: 0 };
+  assert.equal(estimateCallCost("gpt-6-luna", usage, table).toFixed(4), (0.02 + 0.002 + 0.075).toFixed(4));
+  const { cacheWrite, ...withoutCacheWrite } = table.models["gpt-6-luna"];
+  assert.equal(estimateCallCost("gpt-6-luna", usage, { models: { "gpt-6-luna": withoutCacheWrite } }), null, "a cache write the table does not price has no estimate");
+});
+
 test("a request above the long-context threshold is priced at the long-context rates in full", () => {
   const table = { longContextThresholdTokens: 272_000, models: { "gpt-5.6-terra": { input: 2, cachedInput: 0.2, output: 12, longContext: { input: 4, cachedInput: 0.4, output: 18 } } } };
   const at = (input) => estimateCallCost("gpt-5.6-terra", { input_tokens: input, input_tokens_details: { cached_tokens: 0 }, output_tokens: 1_000 }, table);
@@ -37,11 +45,13 @@ test("the price table carries the long-context rates for every model", async () 
     // OpenAI charges long context at twice the input and cached-input rate and 1.5 times the output rate.
     assert.equal(price.longContext.input, price.input * 2, model);
     assert.equal(price.longContext.cachedInput, price.cachedInput * 2, model);
+    // A cache write costs 1.25 times the uncached input rate in every tier.
+    for (const rates of [price, price.longContext, price.flex, price.flex.longContext]) assert.equal(rates.cacheWrite, rates.input * 1.25, `${model} cache write`);
     assert.equal(price.longContext.output, price.output * 1.5, model);
     // Flex processing costs half the standard price, long context included.
     for (const rates of [price, price.longContext]) {
       const flex = rates === price ? price.flex : price.flex.longContext;
-      for (const key of ["input", "cachedInput", "output"]) assert.equal(flex[key], rates[key] / 2, `${model} Flex ${key}`);
+      for (const key of ["input", "cachedInput", "cacheWrite", "output"]) assert.equal(flex[key], rates[key] / 2, `${model} Flex ${key}`);
     }
   }
 });

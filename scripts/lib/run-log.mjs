@@ -52,8 +52,11 @@ function modelPrices() {
  * missing, or when the call was processed in a tier other than standard or
  * Flex, which the table does not price.
  * A request with more input tokens than the long-context threshold is priced
- * at the long-context rates in full. It is an estimate, not the provider's
- * invoice.
+ * at the long-context rates in full. Input tokens are billed in three
+ * disjoint parts: cached input, input written to the prompt cache (at the
+ * cache-write rate), and the rest at the uncached rate. It is an estimate, not
+ * the provider's invoice; null when a call wrote to the cache and the table has
+ * no cache-write rate.
  */
 export function estimateCallCost(model, usage, table = modelPrices(), serviceTier = null) {
   if (serviceTier && !["default", "flex"].includes(serviceTier)) return null;
@@ -62,8 +65,10 @@ export function estimateCallCost(model, usage, table = modelPrices(), serviceTie
   const input = usage.input_tokens ?? 0;
   const price = input > (table.longContextThresholdTokens ?? Number.POSITIVE_INFINITY) && tier.longContext ? tier.longContext : tier;
   const cached = usage.input_tokens_details?.cached_tokens ?? 0;
+  const written = usage.input_tokens_details?.cache_write_tokens ?? 0;
+  if (written > 0 && price.cacheWrite == null) return null;
   const output = usage.output_tokens ?? 0;
-  return ((input - cached) * price.input + cached * price.cachedInput + output * price.output) / 1_000_000;
+  return ((input - cached - written) * price.input + cached * price.cachedInput + (written > 0 ? written * price.cacheWrite : 0) + output * price.output) / 1_000_000;
 }
 
 let processTotal = 0;
