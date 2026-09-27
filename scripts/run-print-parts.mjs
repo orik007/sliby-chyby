@@ -3,7 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
-import { createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings } from "./lib/psp-print-documents.mjs";
+import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings } from "./lib/psp-print-documents.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
@@ -118,7 +118,7 @@ async function fetchPrintTexts(source, print, termNumber) {
   const warnings = [];
   const bill = billPrintKindIds.has(String(print.kindId));
   const historyUrl = officialPrintHistoryUrl(termNumber, print.number);
-  const [proposal, historyPage] = await Promise.all([
+  const [proposal, historyPage] = await allSettledOrThrow([
     fetchPrintPageText(source, termNumber, print.number, print.partNumber, warnings, "proposed"),
     bill ? fetchPsp(source, historyUrl, htmlOptions) : null
   ]);
@@ -128,7 +128,7 @@ async function fetchPrintTexts(source, print, termNumber) {
   const approvedText = links.approved
     ? laterText(source, print, "approved", links.approved, warnings)
     : links.referredToSenate ? referredText(source, print, links.referredToSenate, warnings) : null;
-  const [approved, passed, ...resolutions] = await Promise.all([
+  const [approved, passed, ...resolutions] = await allSettledOrThrow([
     approvedText,
     links.passed ? laterText(source, print, "passed", links.passed, warnings) : null,
     ...print.senateResolutionPartNumbers.map((partNumber) => senateResolution(source, termNumber, print, partNumber, warnings))
@@ -172,23 +172,32 @@ log(`${prints.length} prints concern potentially attributable records; downloadi
 
 // Prints are processed two at a time and each request to psp.cz goes
 // through fetchPsp, which keeps at most two open. A failed download stops
-// the run: a law change must never silently miss a text.
+// the run: a law change must never silently miss a text. After a failure no
+// worker starts another print, and the run waits for the requests still
+// open, so the request log is complete when it is closed.
 const fetched = new Map();
 const tick = progress("downloading print texts", prints.length);
 let nextIndex = 0;
+let downloadFailed = false;
 async function downloadWorker() {
-  while (nextIndex < prints.length) {
+  while (!downloadFailed && nextIndex < prints.length) {
     const print = prints[nextIndex];
     nextIndex += 1;
     const startedAt = Date.now();
-    const result = await fetchPrintTexts(source, print, source.term.number);
+    let result;
+    try {
+      result = await fetchPrintTexts(source, print, source.term.number);
+    } catch (error) {
+      downloadFailed = true;
+      throw error;
+    }
     fetched.set(print.printId, result);
     const versions = Object.keys(result.texts);
     tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX or DOC proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
   }
 }
 try {
-  await Promise.all(Array.from({ length: Math.min(pspDownloadSettings.concurrency, prints.length) }, downloadWorker));
+  await allSettledOrThrow(Array.from({ length: Math.min(pspDownloadSettings.concurrency, prints.length) }, downloadWorker));
 } finally {
   pspRequests.stop();
   const usage = pspRequests.summary();

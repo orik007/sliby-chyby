@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { strToU8, zipSync } from "fflate";
-import { createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, pspDownloadSettings, summarizePspRequests } from "../scripts/lib/psp-print-documents.mjs";
+import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, pspDownloadSettings, summarizePspRequests } from "../scripts/lib/psp-print-documents.mjs";
 import { proposalBody } from "../scripts/lib/print-parts.mjs";
 
 test("builds the official print page URL", () => {
@@ -177,6 +177,18 @@ test("a psp.cz request summary counts failures by cause and the busiest 60 s", (
   });
 });
 
+test("a failed download is reported only after every other request has finished", async () => {
+  const finished = [];
+  const slow = pause(30).then(() => finished.push("slow"));
+  const failing = pause(5).then(() => {
+    finished.push("failing");
+    throw new Error("download failed");
+  });
+  await assert.rejects(allSettledOrThrow([failing, slow]), /download failed/);
+  assert.deepEqual(finished, ["failing", "slow"]);
+  assert.deepEqual(await allSettledOrThrow([Promise.resolve(1), null]), [1, null]);
+});
+
 test("run-print-parts.mjs sends every psp.cz request through the shared fetcher and logs it", async () => {
   const script = await readFile(new URL("../scripts/run-print-parts.mjs", import.meta.url), "utf8");
   assert.match(script, /const fetchPsp = createPspFetcher\(\{ \.\.\.pspDownloadSettings, onAttempt: pspRequests\.onAttempt \}\);/);
@@ -184,5 +196,7 @@ test("run-print-parts.mjs sends every psp.cz request through the shared fetcher 
   assert.match(script, /createPspRequestLog\(\{ onEntry: \(entry\) => appendFileSync\(pspRequestFile, /);
   assert.match(script, /finally \{\s*pspRequests\.stop\(\);/);
   assert.doesNotMatch(script, /fetchVerified|globalThis\.fetch|\bfetch\(/);
-  assert.match(script, /Math\.min\(pspDownloadSettings\.concurrency, prints\.length\)/);
+  assert.match(script, /await allSettledOrThrow\(Array\.from\(\{ length: Math\.min\(pspDownloadSettings\.concurrency, prints\.length\) \}, downloadWorker\)\)/);
+  assert.match(script, /while \(!downloadFailed && nextIndex < prints\.length\)/);
+  assert.doesNotMatch(script, /Promise\.all\(/, "a failed download never leaves another request running unseen");
 });

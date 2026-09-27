@@ -42,6 +42,18 @@ export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, onA
   };
 }
 
+/**
+ * Like Promise.all, but rejects only after every promise has settled, with
+ * the first rejection in order. A failed download then never leaves another
+ * request running unseen after the request log is closed.
+ */
+export async function allSettledOrThrow(promises) {
+  const outcomes = await Promise.allSettled(promises);
+  const failure = outcomes.find(({ status }) => status === "rejected");
+  if (failure) throw failure.reason;
+  return outcomes.map(({ value }) => value);
+}
+
 const connectChannels = ["undici:client:beforeConnect", "undici:client:connected", "undici:client:connectError"];
 
 /**
