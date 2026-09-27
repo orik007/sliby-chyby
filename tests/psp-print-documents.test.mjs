@@ -86,7 +86,7 @@ test("the psp.cz fetcher connects through a pool with its connect limit, validat
   await withStubPsp(stub, () => fetchPsp(pspSource, "https://www.psp.cz/sqw/historie.sqw?o=10&t=1", htmlOptions));
   assert.ok(stub.log.dispatchers[0] instanceof Agent);
   await fetchPsp.close();
-  assert.equal(stub.log.dispatchers[0].closed, true);
+  assert.equal(stub.log.dispatchers[0].destroyed, true);
   const plain = stubPsp();
   await withStubPsp(plain, () => createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0 })(pspSource, "https://www.psp.cz/sqw/historie.sqw?o=10&t=1", htmlOptions));
   assert.equal(plain.log.dispatchers[0], undefined, "without a connect limit Node's default pool is used");

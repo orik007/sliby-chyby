@@ -177,6 +177,7 @@ export async function fetchVerified(source, endpoint, { maxBytes, expectedConten
     await delay(retryDelayMs * 2 ** (attempt - 1));
   }
 
+  if (!response.ok) await response.body?.cancel();
   invariant(response.ok, `Source ${source.id} returned HTTP ${response.status}`);
   const finalUrl = new URL(response.url);
   invariant(finalUrl.protocol === "https:" && allowedHostname(finalUrl.hostname, source.expectedHosts), `Source ${source.id} redirected outside its allowlist`);

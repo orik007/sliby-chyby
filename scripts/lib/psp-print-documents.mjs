@@ -33,7 +33,8 @@ export const pspDownloadSettings = { concurrency: 2, retryAttempts: 6, retryDela
 // request takes a slot only for itself, never while holding another, so the
 // limit cannot deadlock. Attempts, retries included, take turns on one
 // schedule, and each starts at least `minIntervalMs` after the previous one
-// actually started. `close` releases the connection pool.
+// actually started. `close` releases the connection pool once every request
+// has settled; it never waits on an unread answer.
 // `onAttempt` receives every attempt's record (see fetchVerified).
 export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, minIntervalMs = 0, connectTimeoutMs = null, onAttempt = null } = pspDownloadSettings) {
   invariant(Number.isInteger(minIntervalMs) && minIntervalMs >= 0, "minIntervalMs must be a non-negative integer");
@@ -62,7 +63,7 @@ export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, min
       waiting.shift()?.();
     }
   };
-  fetchPsp.close = async () => dispatcher?.close();
+  fetchPsp.close = async () => dispatcher?.destroy();
   return fetchPsp;
 }
 
