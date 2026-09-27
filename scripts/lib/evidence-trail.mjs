@@ -62,10 +62,12 @@ function stepFromConduct(item, printId, changes) {
     return { kind: "submission", evidenceId: item.id, date: facts.proposal.submittedOn, proposal: proposalKind(facts), proposerCz: facts.proposal.proposerCz ?? null, ...textOf(item, changes) };
   }
   invariant(item.type === "parliamentary-vote", `Unsupported conduct ${item.id}`);
-  const context = facts.linkedPrints.find((print) => String(print.externalPrintId) === printId).historyContexts.find(({ actionCz }) => isDecisiveAction(actionCz));
+  const linkedPrint = (facts.linkedPrints ?? []).find((print) => String(print.externalPrintId) === printId);
+  const context = (linkedPrint?.historyContexts ?? []).find(({ actionCz }) => isDecisiveAction(actionCz));
+  invariant(context, `Vote ${item.id} has no decisive history step on print ${printId}`);
   const club = facts.relevantPartyVoteSummary;
   invariant(club, `Vote ${item.id} has no club result`);
-  const { yes, no, abstained, notVoting, absent } = club.counts;
+  const { yes, no, abstained, notVoting, absent, unknown } = club.counts;
   return {
     kind: "vote",
     evidenceId: item.id,
@@ -74,7 +76,7 @@ function stepFromConduct(item, printId, changes) {
     stageCz: context.stageCz,
     actionCz: context.actionCz,
     club: club.attributionStatus === "attributed" ? club.majorityChoice : "no-majority",
-    counts: { yes, no, abstained, notVoting, absent },
+    counts: { yes, no, abstained, notVoting, absent, unknown },
     ...textOf(item, changes)
   };
 }
@@ -95,17 +97,22 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
   invariant(chosen, "The proposal has no chosen assessment");
   const cited = new Set(chosen.citedEvidenceIds);
   const relevant = new Set(chosen.changeRelevance.filter(({ relevant: isRelevant }) => isRelevant).map(({ evidenceId }) => evidenceId));
-  const evidence = evidencePackage.evidence.filter(({ id }) => cited.has(id));
-  const conduct = evidence.filter(({ role }) => role === "conduct-evidence");
+  const conduct = evidencePackage.evidence.filter(({ id, role }) => cited.has(id) && role === "conduct-evidence");
+  // A relevant law change enters the trail when the assessment cites it or
+  // cites conduct on it, so no cited conduct is lost.
+  const concerned = new Set(conduct.flatMap(({ structuredFacts }) => structuredFacts.concernsLawChanges.map(({ evidenceId }) => evidenceId)));
+  const evidence = evidencePackage.evidence.filter(({ id, role }) => cited.has(id) || (role === "law-change" && concerned.has(id)));
   const changesByPrint = new Map();
   for (const change of evidence.filter(({ role, id }) => role === "law-change" && relevant.has(id))) {
     const printId = String(change.structuredFacts.externalPrintId);
     changesByPrint.set(printId, [...(changesByPrint.get(printId) ?? []), change]);
   }
-  return [...changesByPrint].map(([printId, changes]) => {
+  // A print whose relevant changes the assessment cites without any conduct on
+  // them has no attributable step to show and is left out.
+  return [...changesByPrint].flatMap(([printId, changes]) => {
     const changeIds = new Set(changes.map(({ id }) => id));
     const onPrint = conduct.filter((item) => item.structuredFacts.concernsLawChanges.some(({ evidenceId }) => changeIds.has(evidenceId)));
-    invariant(onPrint.length > 0, `The chosen assessment cites no conduct on print ${changes[0].structuredFacts.printNumber}`);
+    if (onPrint.length === 0) return [];
     const resolutionIds = new Set(changes.flatMap(({ structuredFacts }) => structuredFacts.senateResolutionEvidenceIds ?? []));
     const steps = [
       ...onPrint.map((item) => stepFromConduct(item, printId, changes)),
@@ -116,7 +123,7 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
         .filter(({ role, id }) => role === "senate-resolution" && resolutionIds.has(id))
         .map((item) => ({ kind: "senate-resolution", evidenceId: item.id, date: item.publishedAt, printPartCz: `${item.structuredFacts.printNumber}/${item.structuredFacts.partNumber}`, url: item.url }))
     ].sort((left, right) => left.date.localeCompare(right.date) || stepOrder[left.kind] - stepOrder[right.kind]);
-    return {
+    return [{
       printNumber: changes[0].structuredFacts.printNumber,
       printUrl: printUrlOf(printId, onPrint),
       lawChanges: changes.map(({ id, structuredFacts }) => ({
@@ -126,7 +133,7 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
         amendedActs: [...new Set((structuredFacts.acts ?? []).map(({ act }) => act).filter((act) => /^\d+\/\d{4}$/.test(act)))]
       })),
       steps: steps.map(({ kind, date, ...step }) => (kind === "senate-resolution" ? { kind, ...step } : { kind, date, ...step }))
-    };
+    }];
   });
 }
 
@@ -135,18 +142,26 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
  * candidate proposal (docs/evidence-pipeline.md, From proposal to public
  * score). `fileId` is the promise's file name in `data/promises`, which
  * prefixes its revision files; `revisions` are the promise's current
- * revisions. The proposal must have been compared with the current public
- * revision, so a proposal made before a later revision is refused.
+ * revisions; `manifestProposal` is the proposal's entry in the review
+ * manifest. The proposal must be current in the manifest and have been
+ * compared with the current public revision, so a superseded proposal or one
+ * made before a later revision is refused.
  */
-export function createAssessmentRevision({ proposal, evidencePackage, auditRecord, promise, fileId, revisions, publishedAt }) {
+export function createAssessmentRevision({ proposal, manifestProposal, evidencePackage, auditRecord, promise, fileId, revisions, publishedAt }) {
+  // Supersession is recorded only in the review manifest.
+  invariant(manifestProposal?.proposalId === proposal.proposalId, `Proposal ${proposal.proposalId} is not in the review manifest`);
+  invariant(!manifestProposal.supersededByProposalId, `Proposal ${proposal.proposalId} is superseded by ${manifestProposal.supersededByProposalId}`);
   invariant(/^\d{4}-\d{2}-\d{2}$/.test(publishedAt) && new Date(`${publishedAt}T00:00:00Z`).toISOString().startsWith(publishedAt), "The publication date must be a calendar date YYYY-MM-DD");
   invariant(promise.kind === "promise", `${promise.id} is not a promise`);
   invariant(proposal.promiseId === promise.id && auditRecord.promiseId === promise.id && evidencePackage.promise.id === promise.id, "The proposal belongs to another promise");
   invariant(hashEvidencePackage(evidencePackage) === proposal.packageHash && auditRecord.packageHash === proposal.packageHash, "The evidence package is not the one the proposal assessed");
   invariant(auditRecord.assessmentFingerprint === proposal.assessmentFingerprint && auditRecord.assessmentContentHash === proposal.assessmentContentHash, "The assessment run is not the one the proposal records");
   invariant(proposal.resolutionState === "candidate" && proposal.candidateStatus === auditRecord.resolution.status, "Only a candidate proposal can become a public revision");
-  const current = Math.max(0, ...revisions.filter(({ promiseId }) => promiseId === promise.id).map(({ revision }) => revision));
+  const promiseRevisions = revisions.filter(({ promiseId }) => promiseId === promise.id);
+  const current = Math.max(0, ...promiseRevisions.map(({ revision }) => revision));
   invariant(proposal.publicRevisionAtEvaluation === current, `The proposal was compared with revision ${proposal.publicRevisionAtEvaluation}, but the current revision is ${current}`);
+  const currentDate = promiseRevisions.find(({ revision }) => revision === current)?.publishedAt ?? "";
+  invariant(publishedAt >= currentDate && publishedAt >= evidencePackage.asOf, `The publication date must not precede the current revision (${currentDate}) or the evidence package (${evidencePackage.asOf})`);
   const evidenceTrail = buildEvidenceTrail(evidencePackage, auditRecord);
   invariant(evidenceTrail.length > 0 || proposal.candidateStatus === "no-progress", "A score other than no progress needs an evidence trail");
   const revision = current + 1;

@@ -28,11 +28,17 @@ const noteLabels: Record<ConductStep["notes"][number]["note"], string> = {
   "third-reading-rejection": "Hlasovalo se o navrženém textu upraveném pozměňovacími návrhy, který psp.cz nezveřejňuje jako celek; odkaz vede na navržený text.",
 };
 
-// Trail dates are Prague calendar dates (YYYY-MM-DD); formatting them from
-// their parts keeps the day independent of the build machine's time zone.
+// Data dates are calendar dates (YYYY-MM-DD); formatting them from their
+// parts keeps the day independent of the build machine's time zone.
 export function formatDate(date: string) {
   const [year, month, day] = date.split("-").map(Number);
   return `${day}. ${month}. ${year}`;
+}
+
+export function moreLawChangesLabel(count: number) {
+  if (count === 1) return "a 1 další část";
+  if (count <= 4) return `a ${count} další části`;
+  return `a ${count} dalších částí`;
 }
 
 export function lawChangeLabel({ headingCz, titleCz }: EvidenceTrailPrint["lawChanges"][number]) {
@@ -53,8 +59,8 @@ export function stepTitle(step: EvidenceTrailStep) {
 export function stepDetails(step: EvidenceTrailStep) {
   if (step.kind === "submission") return [step.proposal === "member-bill" ? `Navrhovatelé: ${step.proposerCz ?? "poslanci"}; mezi nimi je alespoň jeden poslanec klubu strany.` : "Strana byla v den předložení součástí vlády."];
   if (step.kind === "vote") {
-    const { yes, no, abstained, notVoting, absent } = step.counts;
-    const counts = [`pro: ${yes}`, `proti: ${no}`, ...(abstained ? [`zdrželi se: ${abstained}`] : []), ...(notVoting ? [`nehlasovali: ${notVoting}`] : []), ...(absent ? [`nepřítomni: ${absent}`] : [])];
+    const { yes, no, abstained, notVoting, absent, unknown } = step.counts;
+    const counts = [`pro: ${yes}`, `proti: ${no}`, ...(abstained ? [`zdrželi se: ${abstained}`] : []), ...(notVoting ? [`nehlasovali: ${notVoting}`] : []), ...(absent ? [`nepřítomni: ${absent}`] : []), ...(unknown ? [`neznámý záznam: ${unknown}`] : [])];
     return [`Rozhodnutí Sněmovny: ${step.stageCz}, ${step.actionCz}`, `Poslanci klubu strany: ${counts.join(" · ")}`];
   }
   return [];

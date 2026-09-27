@@ -29,7 +29,7 @@ test("the trail groups cited relevant law changes by print, with the cited condu
   assert.deepEqual(print.steps.map(({ kind, version }) => [kind, version]), [["submission", "proposed"], ["vote", "approved"], ["senate-resolution", undefined], ["vote", "passed"]]);
   const [submission, approval, resolution, insistence] = print.steps;
   assert.deepEqual({ ...submission, textUrl: undefined }, { kind: "submission", date: "2025-12-29", evidenceId: "psp-core-2025--print-step-210648", proposal: "member-bill", proposerCz: "Vondráček R. a další", version: "proposed", textUrl: undefined, notes: [] });
-  assert.deepEqual([approval.stageCz, approval.actionCz, approval.club, approval.counts], ["3. čtení", "souhlas", "yes", { yes: 14, no: 0, abstained: 0, notVoting: 0, absent: 1 }]);
+  assert.deepEqual([approval.stageCz, approval.actionCz, approval.club, approval.counts], ["3. čtení", "souhlas", "yes", { yes: 14, no: 0, abstained: 0, notVoting: 0, absent: 1, unknown: 0 }]);
   assert.equal(approval.url, "https://public.psp.cz/sqw/hlasy.sqw?g=88026");
   assert.deepEqual(resolution, { kind: "senate-resolution", evidenceId: "psp-core-2025--senate-resolution-43184-7", printPartCz: "77/7", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=279102" });
   assert.deepEqual([insistence.date, insistence.stageCz, insistence.actionCz], ["2026-09-08", "Sněmovna (Senát)", "setrváno"]);
@@ -55,6 +55,16 @@ test("a version without a published text has no link and says why", async () => 
   assert.deepEqual(submission.notes, [{ note: "text-not-published", lawChangeIds: ["psp-core-2025--law-change-43184-14"] }]);
 });
 
+test("cited conduct on a relevant law change stays in the trail when the change itself is not cited", async () => {
+  const { evidencePackage, auditRecord } = await fixture("spd-2025-079ef4aef5");
+  const uncited = structuredClone(auditRecord);
+  const chosen = uncited.validatedAssessments["assessor-a"];
+  chosen.citedEvidenceIds = chosen.citedEvidenceIds.filter((id) => id !== "psp-core-2025--law-change-43184-14");
+  const [print] = buildEvidenceTrail(evidencePackage, uncited);
+  assert.equal(print.lawChanges[0].lawChangeId, "psp-core-2025--law-change-43184-14");
+  assert.ok(print.steps.some(({ evidenceId }) => evidenceId === "psp-core-2025--vote-88450"));
+});
+
 test("only relevant cited law changes and cited conduct enter the trail", async () => {
   const { evidencePackage, auditRecord } = await fixture("spd-2025-079ef4aef5");
   const chosen = auditRecord.validatedAssessments["assessor-a"];
@@ -68,7 +78,7 @@ test("only relevant cited law changes and cited conduct enter the trail", async 
 
 test("a reviewed proposal becomes the next valid public revision with its trail", async () => {
   const { proposal, evidencePackage, auditRecord, promise } = await fixture("spd-2025-079ef4aef5");
-  const revision = createAssessmentRevision({ proposal, evidencePackage, auditRecord, promise, fileId: "spd-2025-079ef4aef5", revisions: [baseline(promise)], publishedAt: "2026-09-28" });
+  const revision = createAssessmentRevision({ proposal, manifestProposal: proposal, evidencePackage, auditRecord, promise, fileId: "spd-2025-079ef4aef5", revisions: [baseline(promise)], publishedAt: "2026-09-28" });
   assert.deepEqual([revision.id, revision.revision, revision.status, revision.proposalId, revision.evidenceSourceIds], ["spd-2025-079ef4aef5--002", 2, proposal.candidateStatus, proposal.proposalId, []]);
   assert.equal(revision.evidenceTrail.length, 1);
   assert.ok(revision.explanationShort.length > 0);
@@ -80,7 +90,7 @@ test("a no-progress proposal without a relevant law change cites the promise sou
   const noProgress = structuredClone(auditRecord);
   noProgress.resolution.status = "no-progress";
   for (const verdict of noProgress.validatedAssessments["assessor-a"].changeRelevance) verdict.relevant = false;
-  const args = { evidencePackage, auditRecord: noProgress, promise, fileId: "spd-2025-079ef4aef5", revisions: [baseline(promise)], publishedAt: "2026-09-28" };
+  const args = { manifestProposal: proposal, evidencePackage, auditRecord: noProgress, promise, fileId: "spd-2025-079ef4aef5", revisions: [baseline(promise)], publishedAt: "2026-09-28" };
   const revision = createAssessmentRevision({ ...args, proposal: { ...proposal, candidateStatus: "no-progress" } });
   assert.deepEqual([revision.status, revision.evidenceSourceIds, revision.evidenceTrail, revision.proposalId], ["no-progress", [promise.primarySourceId], undefined, proposal.proposalId]);
   assert.deepEqual(assessmentRevisionSchema.parse(revision), revision);
@@ -90,7 +100,7 @@ test("a no-progress proposal without a relevant law change cites the promise sou
 
 test("a proposal compared with an older public revision or another package is refused", async () => {
   const { proposal, evidencePackage, auditRecord, promise } = await fixture("spd-2025-079ef4aef5");
-  const args = { proposal, evidencePackage, auditRecord, promise, fileId: "spd-2025-079ef4aef5", publishedAt: "2026-09-28" };
+  const args = { proposal, manifestProposal: proposal, evidencePackage, auditRecord, promise, fileId: "spd-2025-079ef4aef5", publishedAt: "2026-09-28" };
   assert.throws(() => createAssessmentRevision({ ...args, revisions: [baseline(promise), { ...baseline(promise), revision: 2 }] }), /compared with revision 1/);
   const changed = structuredClone(evidencePackage);
   changed.asOf = "2026-09-28";
@@ -98,11 +108,15 @@ test("a proposal compared with an older public revision or another package is re
   assert.throws(() => createAssessmentRevision({ ...args, proposal: { ...proposal, resolutionState: "human-review-required" }, revisions: [baseline(promise)] }), /Only a candidate/);
   assert.throws(() => createAssessmentRevision({ ...args, auditRecord: { ...auditRecord, assessmentFingerprint: "0".repeat(64) }, revisions: [baseline(promise)] }), /not the one the proposal records/);
   assert.throws(() => createAssessmentRevision({ ...args, publishedAt: "2026-02-31", revisions: [baseline(promise)] }), /calendar date/);
+  assert.throws(() => createAssessmentRevision({ ...args, manifestProposal: { ...proposal, supersededByProposalId: "newer" }, revisions: [baseline(promise)] }), /superseded by newer/);
+  assert.throws(() => createAssessmentRevision({ ...args, manifestProposal: undefined, revisions: [baseline(promise)] }), /not in the review manifest/);
+  assert.throws(() => createAssessmentRevision({ ...args, revisions: [{ ...baseline(promise), publishedAt: "2026-09-29" }] }), /must not precede the current revision/);
+  assert.throws(() => createAssessmentRevision({ ...args, publishedAt: "2026-09-01", revisions: [baseline(promise)] }), /must not precede/);
 });
 
 test("the public schema accepts only official psp.cz links and requires the reviewed proposal", async () => {
   const { proposal, evidencePackage, auditRecord, promise } = await fixture("spd-2025-079ef4aef5");
-  const revision = createAssessmentRevision({ proposal, evidencePackage, auditRecord, promise, fileId: "spd-2025-079ef4aef5", revisions: [baseline(promise)], publishedAt: "2026-09-28" });
+  const revision = createAssessmentRevision({ proposal, manifestProposal: proposal, evidencePackage, auditRecord, promise, fileId: "spd-2025-079ef4aef5", revisions: [baseline(promise)], publishedAt: "2026-09-28" });
   const withLink = structuredClone(revision);
   withLink.evidenceTrail[0].steps[1].url = "https://example.com/hlasovani";
   assert.equal(assessmentRevisionSchema.safeParse(withLink).success, false);
