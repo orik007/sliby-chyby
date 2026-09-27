@@ -65,7 +65,8 @@ async function runAssessment(packagePath, outputRoot, responseCache) {
   const runner = process.env.SLIBY_ASSESSMENT_RUNNER ?? "scripts/run-assessment.mjs";
   const child = spawn(process.execPath, [runner, packagePath, outputRoot], {
     cwd: process.cwd(),
-    env: { ...process.env, SLIBY_RESPONSE_CACHE: responseCache },
+    // The packages assessed at once share the account's token budget.
+    env: { ...process.env, SLIBY_RESPONSE_CACHE: responseCache, SLIBY_TOKEN_BUDGET_SHARE: String(runtime.concurrency) },
     stdio: ["ignore", "pipe", "inherit"]
   });
   let stdout = "";

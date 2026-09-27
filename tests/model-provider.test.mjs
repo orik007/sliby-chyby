@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { createServer } from "node:http";
 import test from "node:test";
-import { createRequestDispatcher, createStructuredModelResponse } from "../scripts/lib/model-provider.mjs";
+import { createRequestDispatcher, createStructuredModelResponse, reserveInputTokens, tokenBudgetPerMinute } from "../scripts/lib/model-provider.mjs";
 
 // Stub calls never belong in a real run's spend log.
 delete process.env.SLIBY_MODEL_CALL_LOG;
@@ -378,6 +378,42 @@ test("each backoff wait is jittered between half and all of its step", async () 
   } finally {
     globalThis.fetch = originalFetch;
     timers.restore();
+  }
+});
+
+test("requests wait while a model's input tokens of the last minute would exceed its budget", async () => {
+  // A fake clock: each wait advances it and returns at once.
+  const originalSetTimeout = globalThis.setTimeout;
+  const originalNow = Date.now;
+  let clock = 1_000_000;
+  const waits = [];
+  Date.now = () => clock;
+  globalThis.setTimeout = (fn, ms) => { waits.push(ms); clock += ms; return originalSetTimeout(fn, 0); };
+  try {
+    const budget = tokenBudgetPerMinute("fixture-model");
+    await reserveInputTokens("fixture-model", budget - 10);
+    await reserveInputTokens("fixture-model", 10);
+    assert.deepEqual(waits, [], "requests within the budget are sent at once");
+    await reserveInputTokens("fixture-model", 1);
+    assert.deepEqual(waits, [60_000], "the next request waits until the first leaves the minute");
+    await reserveInputTokens("fixture-model", budget * 3);
+    assert.ok(waits.length >= 2, "a request larger than the budget waits for an empty minute");
+  } finally {
+    Date.now = originalNow;
+    globalThis.setTimeout = originalSetTimeout;
+  }
+});
+
+test("the token budget is shared among parallel processes", () => {
+  const original = process.env.SLIBY_TOKEN_BUDGET_SHARE;
+  try {
+    delete process.env.SLIBY_TOKEN_BUDGET_SHARE;
+    assert.equal(tokenBudgetPerMinute("gpt-6-luna"), 8_000_000);
+    process.env.SLIBY_TOKEN_BUDGET_SHARE = "16";
+    assert.equal(tokenBudgetPerMinute("gpt-6-luna"), 500_000);
+    assert.equal(tokenBudgetPerMinute("gpt-5.6-terra"), 200_000);
+  } finally {
+    if (original === undefined) delete process.env.SLIBY_TOKEN_BUDGET_SHARE; else process.env.SLIBY_TOKEN_BUDGET_SHARE = original;
   }
 });
 

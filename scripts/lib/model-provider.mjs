@@ -30,6 +30,39 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// Input tokens a minute each model may use in this process: 80 % of the
+// usage-tier-4 limits on the OpenAI model pages (gpt-6-luna 10,000,000,
+// gpt-5.6-terra 4,000,000; cached input counts too). A process that shares
+// the account with parallel processes gets its share through
+// SLIBY_TOKEN_BUDGET_SHARE (docs/evidence-pipeline.md).
+const tokensPerMinute = { "gpt-6-luna": 8_000_000, "gpt-5.6-terra": 3_200_000 };
+const charactersPerToken = 2.5;
+const tokenWindows = new Map();
+
+export function tokenBudgetPerMinute(model) {
+  const share = Number(process.env.SLIBY_TOKEN_BUDGET_SHARE ?? "1");
+  return Math.floor((tokensPerMinute[model] ?? 1_000_000) / (Number.isFinite(share) && share >= 1 ? share : 1));
+}
+
+// Waits until the request's estimated input fits the model's budget for the
+// last minute; a request larger than the whole budget waits for an empty
+// minute and is then sent alone.
+export async function reserveInputTokens(model, tokens) {
+  const budget = tokenBudgetPerMinute(model);
+  for (;;) {
+    const now = Date.now();
+    const window = (tokenWindows.get(model) ?? []).filter(({ at }) => now - at < 60_000);
+    const used = window.reduce((sum, entry) => sum + entry.tokens, 0);
+    if (window.length === 0 || used + tokens <= budget) {
+      window.push({ at: now, tokens });
+      tokenWindows.set(model, window);
+      return;
+    }
+    tokenWindows.set(model, window);
+    await sleep(Math.max(250, window[0].at + 60_000 - now));
+  }
+}
+
 // A retryable 5xx can come back with an empty, HTML, or otherwise
 // non-JSON body (an intermediate gateway's own error page, not the
 // provider's), which must not itself crash the request before its status
@@ -73,9 +106,10 @@ function backoffMs(attempt) {
   return Math.round(step / 2 + (Math.random() * step) / 2);
 }
 
-async function fetchJsonWithRetry(url, init) {
+async function fetchJsonWithRetry(url, init, { model, estimatedTokens }) {
   let last = null;
   for (let attempt = 1; attempt <= maxProviderAttempts; attempt += 1) {
+    await reserveInputTokens(model, estimatedTokens);
     let response;
     try {
       response = await fetch(url, { ...init, dispatcher: requestDispatcher });
@@ -129,6 +163,7 @@ export async function createStructuredModelResponse({
   if (!apiKey) throw new Error("OPENAI_API_KEY is required for the OpenAI provider");
   const tier = serviceTier();
 
+  const requestInput = JSON.stringify(input);
   const { response, body } = await fetchJsonWithRetry("https://api.openai.com/v1/responses", {
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
@@ -137,11 +172,11 @@ export async function createStructuredModelResponse({
       service_tier: tier,
       store: false,
       instructions,
-      input: JSON.stringify(input),
+      input: requestInput,
       text: { format: { type: "json_schema", name, strict: true, schema } },
       metadata
     })
-  });
+  }, { model, estimatedTokens: Math.ceil((instructions.length + requestInput.length) / charactersPerToken) });
 
   if (!response.ok) {
     const message = `OpenAI Responses API failed (${response.status}): ${body?.error?.message ?? "unknown error"}`;
