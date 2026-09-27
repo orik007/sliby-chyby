@@ -120,6 +120,13 @@ export function buildRelevanceBrief(promise, change) {
   return { pairId: `${promise.id}--${change.changeId}`, promise: promiseText(promise), lawChange: lawChangeText(change) };
 }
 
+// The model input of a relevance check, law change first
+// (docs/evidence-pipeline.md). Its cache fingerprint hashes the same object;
+// the hash sorts keys, so the order does not change it.
+export function relevanceInput(brief) {
+  return { lawChange: brief.lawChange, promise: brief.promise };
+}
+
 const relevanceSchema = {
   type: "object",
   properties: { relevant: { type: "boolean" }, reasonCz: { type: "string" } },
@@ -139,10 +146,7 @@ export async function requestRelevance({ provider, apiKey, model, brief, prompt 
     apiKey,
     model,
     prompt,
-    // The law change comes first: every promise it is checked against then
-    // shares the instructions and its text as one prefix, which the
-    // provider's prompt cache bills at a tenth.
-    input: { lawChange: brief.lawChange, promise: brief.promise },
+    input: relevanceInput(brief),
     name: "law_change_relevance",
     schema: relevanceSchema,
     metadata: { subjectId: brief.pairId.slice(0, 64), promptVersion: prompt.version },

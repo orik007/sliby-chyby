@@ -6,11 +6,27 @@ import { createRequestDispatcher, createStructuredModelResponse } from "../scrip
 // Stub calls never belong in a real run's spend log.
 delete process.env.SLIBY_MODEL_CALL_LOG;
 
+// Retries wait with a jittered backoff. Tests replace the timer so they do not
+// wait, record each requested delay, and fix the jitter at its maximum so
+// the delays are exact.
+function instantTimers({ random = 1 } = {}) {
+  const originalSetTimeout = globalThis.setTimeout;
+  const originalRandom = Math.random;
+  const delays = [];
+  globalThis.setTimeout = (fn, ms) => {
+    delays.push(ms);
+    return originalSetTimeout(fn, 0);
+  };
+  Math.random = () => random;
+  return { delays, restore: () => { globalThis.setTimeout = originalSetTimeout; Math.random = originalRandom; } };
+}
+
 function fixtureHeaders(map) {
   return { get: (key) => map[key.toLowerCase()] ?? null };
 }
 
 test("createStructuredModelResponse retries a 429 rate-limit response and succeeds on the next attempt", async () => {
+  const timers = instantTimers();
   const originalFetch = globalThis.fetch;
   let callCount = 0;
   globalThis.fetch = async () => {
@@ -46,6 +62,7 @@ test("createStructuredModelResponse retries a 429 rate-limit response and succee
     assert.equal(callCount, 2, "the retried request must actually be attempted a second time");
     assert.deepEqual(result.output, { ok: true });
   } finally {
+    timers.restore();
     globalThis.fetch = originalFetch;
   }
 });
@@ -83,12 +100,7 @@ test("createStructuredModelResponse does not retry a non-retryable 4xx error", a
 
 test("createStructuredModelResponse gives up after repeated 429s and reports the last failure", async () => {
   const originalFetch = globalThis.fetch;
-  const originalSetTimeout = globalThis.setTimeout;
-  const capturedDelaysMs = [];
-  globalThis.setTimeout = (fn, ms) => {
-    capturedDelaysMs.push(ms);
-    return originalSetTimeout(fn, 0);
-  };
+  const timers = instantTimers();
   let callCount = 0;
   globalThis.fetch = async () => {
     callCount += 1;
@@ -114,14 +126,15 @@ test("createStructuredModelResponse gives up after repeated 429s and reports the
     );
     assert.equal(callCount, 8, "must retry up to the fixed attempt cap, not forever");
     // A Retry-After of 0 does not shorten the backoff.
-    assert.deepEqual(capturedDelaysMs, [2000, 4000, 8000, 16000, 32000, 64000, 120000]);
+    assert.deepEqual(timers.delays, [2000, 4000, 8000, 16000, 32000, 64000, 120000]);
   } finally {
     globalThis.fetch = originalFetch;
-    globalThis.setTimeout = originalSetTimeout;
+    timers.restore();
   }
 });
 
 test("createStructuredModelResponse retries a transient 5xx response and succeeds on the next attempt", async () => {
+  const timers = instantTimers();
   const originalFetch = globalThis.fetch;
   let callCount = 0;
   globalThis.fetch = async () => {
@@ -157,11 +170,13 @@ test("createStructuredModelResponse retries a transient 5xx response and succeed
     assert.equal(callCount, 2, "a transient 5xx must be retried, not treated as final");
     assert.deepEqual(result.output, { ok: true });
   } finally {
+    timers.restore();
     globalThis.fetch = originalFetch;
   }
 });
 
 test("createStructuredModelResponse retries a 5xx with a non-JSON body instead of crashing before classification", async () => {
+  const timers = instantTimers();
   // A retryable 5xx can come back from an intermediate gateway with an
   // empty or HTML error page, not the provider's own JSON error shape.
   // response.json() would reject on that body -- this must not bypass
@@ -201,14 +216,16 @@ test("createStructuredModelResponse retries a 5xx with a non-JSON body instead o
     assert.equal(callCount, 2, "an unparseable body on a retryable status must not skip the retry");
     assert.deepEqual(result.output, { ok: true });
   } finally {
+    timers.restore();
     globalThis.fetch = originalFetch;
   }
 });
 
 test("createStructuredModelResponse honors an HTTP-date Retry-After, not just delta-seconds", async () => {
+  const timers = instantTimers();
   const originalFetch = globalThis.fetch;
   let callCount = 0;
-  const retryAt = new Date(Date.now() + 5).toUTCString();
+  const retryAt = new Date(Date.now() + 60_000).toUTCString();
   globalThis.fetch = async () => {
     callCount += 1;
     if (callCount === 1) {
@@ -239,9 +256,13 @@ test("createStructuredModelResponse honors an HTTP-date Retry-After, not just de
       name: "fixture_schema",
       schema: { type: "object" }
     });
+    // The date asks for about a minute, longer than the first backoff step,
+    // so it sets the wait.
+    assert.ok(timers.delays[0] > 50_000 && timers.delays[0] <= 60_000, `waited ${timers.delays[0]} ms`);
     assert.equal(callCount, 2);
     assert.deepEqual(result.output, { ok: true });
   } finally {
+    timers.restore();
     globalThis.fetch = originalFetch;
   }
 });
@@ -254,12 +275,7 @@ test("createStructuredModelResponse falls back to the exact exponential schedule
   // to capture the real delay values `sleep` requests, firing immediately
   // so the test does not actually wait in real time.
   const originalFetch = globalThis.fetch;
-  const originalSetTimeout = globalThis.setTimeout;
-  const capturedDelaysMs = [];
-  globalThis.setTimeout = (fn, ms) => {
-    capturedDelaysMs.push(ms);
-    return originalSetTimeout(fn, 0);
-  };
+  const timers = instantTimers();
   let callCount = 0;
   globalThis.fetch = async () => {
     callCount += 1;
@@ -292,15 +308,16 @@ test("createStructuredModelResponse falls back to the exact exponential schedule
       schema: { type: "object" }
     });
     assert.equal(callCount, 8, "must exhaust all 7 retries (8 attempts total) before succeeding on the last one");
-    assert.deepEqual(capturedDelaysMs, [2000, 4000, 8000, 16000, 32000, 64000, 120000], "the fallback schedule must be exactly this exponential sequence, capped at two minutes");
+    assert.deepEqual(timers.delays, [2000, 4000, 8000, 16000, 32000, 64000, 120000], "the fallback schedule must be exactly this exponential sequence, capped at two minutes");
     assert.deepEqual(result.output, { ok: true });
   } finally {
     globalThis.fetch = originalFetch;
-    globalThis.setTimeout = originalSetTimeout;
+    timers.restore();
   }
 });
 
 test("createStructuredModelResponse asks for Flex processing and retries a Flex timeout", async () => {
+  const timers = instantTimers();
   const originalFetch = globalThis.fetch;
   const bodies = [];
   globalThis.fetch = async (url, init) => {
@@ -323,14 +340,14 @@ test("createStructuredModelResponse asks for Flex processing and retries a Flex 
     assert.ok(bodies.every((body) => body.service_tier === "flex"));
     assert.deepEqual(result.output, { ok: true });
   } finally {
+    timers.restore();
     globalThis.fetch = originalFetch;
   }
 });
 
 test("a request that fails without a response is retried", async () => {
   const originalFetch = globalThis.fetch;
-  const originalSetTimeout = globalThis.setTimeout;
-  globalThis.setTimeout = (fn) => originalSetTimeout(fn, 0);
+  const timers = instantTimers();
   let callCount = 0;
   globalThis.fetch = async () => {
     callCount += 1;
@@ -342,7 +359,25 @@ test("a request that fails without a response is retried", async () => {
     assert.equal(callCount, 2);
   } finally {
     globalThis.fetch = originalFetch;
-    globalThis.setTimeout = originalSetTimeout;
+    timers.restore();
+  }
+});
+
+test("each backoff wait is jittered between half and all of its step", async () => {
+  const originalFetch = globalThis.fetch;
+  const timers = instantTimers({ random: 0 });
+  let callCount = 0;
+  globalThis.fetch = async () => {
+    callCount += 1;
+    if (callCount <= 3) return { ok: false, status: 429, headers: fixtureHeaders({ "retry-after": "0" }), json: async () => ({ error: { message: "Rate limit reached" } }) };
+    return { ok: true, json: async () => ({ id: "resp_fixture", model: "gpt-6-luna", usage: { input_tokens: 1, output_tokens: 1 }, output: [{ content: [{ type: "output_text", text: "{}" }] }] }) };
+  };
+  try {
+    await createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6-luna", instructions: "fixture", input: {}, name: "fixture_schema", schema: { type: "object" } });
+    assert.deepEqual(timers.delays, [1000, 2000, 4000]);
+  } finally {
+    globalThis.fetch = originalFetch;
+    timers.restore();
   }
 });
 
