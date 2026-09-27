@@ -50,7 +50,9 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.match(workflow, /- name: Create or update human-review pull request\n        if: always\(\) && steps\.proposals\.outcome == 'success' && hashFiles\('automation\/runs\/pipeline\/github-actions\/assessment-review-pr\.md'\) != ''/);
   // A list too long for the body continues in the run's own comments, edited
   // in place, added, or deleted, so they never pile up.
-  assert.ok(workflow.includes(`OLD_COMMENT_IDS="$(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" --jq '.[] | select(.body | startswith("${continuationMarker}")) | .id')"`));
+  assert.ok(workflow.includes(`select(.user.login == \\"$COMMENT_AUTHOR\\" and (.body | startswith(\\"${continuationMarker}\\")))`));
+  assert.match(workflow, /USES_DEFAULT_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN == '' \}\}/);
+  assert.match(workflow, /COMMENT_AUTHOR="\$\(gh api user --jq \.login\)"/);
   assert.match(workflow, /gh api -X PATCH "repos\/\$GITHUB_REPOSITORY\/issues\/comments\/\$\{OLD_COMMENTS\[\$index\]\}" -F "body=@\$\{NEW_COMMENTS\[\$index\]\}"/);
   assert.match(workflow, /gh api -X POST "repos\/\$GITHUB_REPOSITORY\/issues\/\$PR_NUMBER\/comments" -F "body=@\$\{NEW_COMMENTS\[\$index\]\}"/);
   assert.match(workflow, /gh api -X DELETE "repos\/\$GITHUB_REPOSITORY\/issues\/comments\/\$\{OLD_COMMENTS\[\$index\]\}"/);
