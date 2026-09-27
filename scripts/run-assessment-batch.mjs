@@ -65,7 +65,8 @@ async function runAssessment(packagePath, outputRoot, responseCache) {
   const runner = process.env.SLIBY_ASSESSMENT_RUNNER ?? "scripts/run-assessment.mjs";
   const child = spawn(process.execPath, [runner, packagePath, outputRoot], {
     cwd: process.cwd(),
-    env: { ...process.env, SLIBY_RESPONSE_CACHE: responseCache },
+    // The packages assessed at once share the account's token budget.
+    env: { ...process.env, SLIBY_RESPONSE_CACHE: responseCache, SLIBY_TOKEN_BUDGET_SHARE: String(budgetShare) },
     stdio: ["ignore", "pipe", "inherit"]
   });
   let stdout = "";
@@ -269,6 +270,8 @@ let interruption = null;
 
 log(`assessment: ${plan.length} current packages; ${assessmentItems.length} to assess now (cap ${maxAssessments}), ${results.filter(({ disposition }) => disposition === "unchanged").length} unchanged, ${results.filter(({ disposition }) => disposition === "deferred-by-limit").length} deferred by the cap, ${results.filter(({ disposition }) => disposition === "blocked-oversized").length} blocked`);
 const tickAssessments = progress("assessment", assessmentItems.length, { every: 1 });
+// The packages assessed at the same time share the account's token budget.
+const budgetShare = Math.max(1, Math.min(concurrency, assessmentItems.length));
 const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (item) => {
   log(`assessing ${item.promiseId}`);
   // Paid model responses of an unfinished assessment wait here until the
