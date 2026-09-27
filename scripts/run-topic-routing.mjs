@@ -12,6 +12,7 @@ import {
   isSubstantive,
   loadRelevancePrompt,
   loadScreeningPrompt,
+  relevanceInput,
   requestRelevance,
   requestScreening,
   validateRelevanceOutput,
@@ -194,7 +195,7 @@ log(`relevance checks: ${pairs.length} promise and law-change pairs`);
 const tickPairs = progress("relevance checks", pairs.length, { every: 50 });
 const checkedPairs = await stage("relevance-check", pairs, async (pair) => {
   const brief = buildRelevanceBrief(pair.promise, pair.change);
-  const fingerprint = { inputHash: sha256({ promise: brief.promise, lawChange: brief.lawChange }), promptContentHash: prompts.relevance.contentHash, ...models };
+  const fingerprint = { inputHash: sha256(relevanceInput(brief)), promptContentHash: prompts.relevance.contentHash, ...models };
   const checked = await pairedModelCall({
     subjectId: brief.pairId,
     fingerprint,

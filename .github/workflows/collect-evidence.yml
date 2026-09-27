@@ -19,7 +19,7 @@ on:
         default: "0"
         type: string
       tagging_concurrency:
-        description: Parallel tagged subjects (each makes its 2 API calls one after the other); leave empty for 32
+        description: Parallel tagged subjects (each makes its 2 API calls one after the other); leave empty for 24
         required: false
         default: ""
         type: string
@@ -73,9 +73,9 @@ jobs:
       SLIBY_TAGGING_MODEL_B: gpt-6-luna
       # Parallel tagged subjects; the two calls of a subject run one after the
       # other. At usage tier 4 the screening model allows 10,000 requests and
-      # 10,000,000 tokens a minute; run 56 used about 1,800,000 a minute with
-      # 16 requests in flight. Override with the tagging_concurrency input.
-      SLIBY_TAGGING_CONCURRENCY: ${{ inputs.tagging_concurrency || '32' }}
+      # 10,000,000 tokens a minute, cached input included; run 57 reached that
+      # limit with 32 in flight. Override with the tagging_concurrency input.
+      SLIBY_TAGGING_CONCURRENCY: ${{ inputs.tagging_concurrency || '24' }}
       # OpenAI Flex processing: the same models at half price, answered more
       # slowly (docs/evidence-pipeline.md).
       SLIBY_SERVICE_TIER: flex

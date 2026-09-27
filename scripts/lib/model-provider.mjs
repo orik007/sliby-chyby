@@ -46,7 +46,7 @@ async function parseJsonBodyOrNull(response) {
 // non-negative integer) or an HTTP-date. Treating the date form as invalid
 // and silently falling back to the fixed exponential schedule can retry far
 // earlier than the provider actually asked for and trigger another rate
-// limit; a date already in the past means retry immediately (zero delay).
+// limit; a date already in the past asks for no wait of its own.
 function parseRetryAfterMs(headerValue) {
   if (typeof headerValue !== "string" || headerValue.trim() === "") return null;
   const trimmed = headerValue.trim();
@@ -66,8 +66,11 @@ function parseRetryAfterMs(headerValue) {
  * Any other 4xx (bad request, invalid key, ...) is not retried: retrying it
  * would just waste the backoff delay on an error that will never succeed.
  */
+// Equal jitter: between half and all of the exponential step, so parallel
+// requests rejected together do not retry together.
 function backoffMs(attempt) {
-  return Math.min(baseRetryDelayMs * 2 ** (attempt - 1), maxRetryDelayMs);
+  const step = Math.min(baseRetryDelayMs * 2 ** (attempt - 1), maxRetryDelayMs);
+  return Math.round(step / 2 + (Math.random() * step) / 2);
 }
 
 async function fetchJsonWithRetry(url, init) {
@@ -93,7 +96,8 @@ async function fetchJsonWithRetry(url, init) {
     if (!retryable || attempt === maxProviderAttempts) return last;
     const retryAfterHeader = typeof response.headers?.get === "function" ? response.headers.get("retry-after") : null;
     const retryAfterMs = parseRetryAfterMs(retryAfterHeader);
-    const delayMs = retryAfterMs !== null ? retryAfterMs : backoffMs(attempt);
+    // Retry-After is a lower bound (docs/evidence-pipeline.md).
+    const delayMs = Math.max(retryAfterMs ?? 0, backoffMs(attempt));
     console.warn(`Provider request to ${url} failed with ${response.status} (attempt ${attempt}/${maxProviderAttempts}); retrying in ${delayMs}ms.`);
     await sleep(delayMs);
   }
