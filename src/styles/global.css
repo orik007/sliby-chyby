@@ -399,6 +399,14 @@ h1 em {
   margin: 0;
 }
 
+.footer-score-negative {
+  color: #8a3124;
+}
+
+.footer-score-positive {
+  color: #12613a;
+}
+
 .back-link {
   display: inline-block;
   margin-bottom: 38px;
@@ -469,6 +477,29 @@ h1 em {
   color: var(--ink);
 }
 
+.score-breakdown .breakdown-positive,
+.score-breakdown .breakdown-positive-strong,
+.category-breakdown .breakdown-positive,
+.category-breakdown .breakdown-positive-strong {
+  color: #12613a;
+  background: #dceee1;
+}
+
+.score-breakdown .breakdown-negative,
+.score-breakdown .breakdown-negative-strong,
+.category-breakdown .breakdown-negative,
+.category-breakdown .breakdown-negative-strong {
+  color: #8a3124;
+  background: #f4ddd7;
+}
+
+.score-breakdown .breakdown-positive b,
+.score-breakdown .breakdown-positive-strong b,
+.score-breakdown .breakdown-negative b,
+.score-breakdown .breakdown-negative-strong b {
+  color: inherit;
+}
+
 .promise-section {
   padding: 58px 0 90px;
 }
@@ -536,19 +567,51 @@ h1 em {
   display: inline;
 }
 
-.promise-category h3 {
+.category-heading {
   margin: 0 0 14px;
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 18px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+}
+
+.promise-category h3 {
+  margin: 0;
   font: 800 clamp(23px, 3vw, 32px)/1.1 "Manrope", sans-serif;
   letter-spacing: -0.04em;
 }
 
-.promise-category h3 span {
+.category-heading .category-count {
+  margin-left: auto;
   color: var(--muted);
   font: 700 14px/1 "DM Sans", system-ui, sans-serif;
+}
+
+.category-breakdown {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  letter-spacing: 0;
+}
+
+.category-breakdown > span {
+  padding: 5px 10px;
+  border-radius: 999px;
+  background: #eeece4;
+  color: var(--muted);
+  font: 700 13px/1 "DM Sans", system-ui, sans-serif;
+  white-space: nowrap;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
 .promise-list {
@@ -1108,13 +1171,13 @@ h1 em {
   line-height: 1.55;
 }
 
-.negative-score-note {
+.methodology-note {
   margin: 18px 0 0;
   padding: 17px 20px;
-  border-left: 4px solid #c94538;
+  border-left: 4px solid #3a6ea5;
   border-radius: 8px;
-  color: #773126;
-  background: #f4ddd7;
+  color: #1f3d5c;
+  background: #dfe8f1;
   line-height: 1.55;
 }
 
