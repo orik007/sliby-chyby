@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-46-13-029Z--71b68ba5e5bb",
+  "evaluatedAt": "2026-09-27T14:46:13.029Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-68bfbc27c3a3/71b68ba5e5bb69b6bdbb54ca0f6e4b582beda7d6266a7285b6833582dff56166.json",
+  "packageHash": "71b68ba5e5bb69b6bdbb54ca0f6e4b582beda7d6266a7285b6833582dff56166",
+  "assessmentContentHash": "a77c0f6f70022d45527f6149739f83215c3669397344f6ece6055ae82e03c0ec",
+  "assessmentFingerprint": "e9eb48d7ab1de8fa3f2301f2d4dad36951473671b02408b202563c6e2fd35dfa",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-68bfbc27c3a3",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-68bfbc27c3a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-57",
+          "relevant": false,
+          "reasonCz": "Změna ruší části § 173 školského zákona, ale její text se netýká odměňování učitelů ani jejich platů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh zákoníku práce zavádí příplatek nejméně 1 500 Kč měsíčně pro některé pedagogické pracovníky, což může částečně zvýšit jejich odměňování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-68bfbc27c3a3--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž je ANO zastoupeno, předložila návrh změny zákoníku práce. Návrh přiznává mimo jiné příplatek nejméně 1 500 Kč měsíčně pedagogickým pracovníkům vykonávajícím činnost třídního učitele a další uvedené funkce. Tím může částečně zvýšit odměny některých učitelů, ale sám nezaručuje průměrný plat 75 tisíc korun pro všechny učitele na konci volebního období.",
+      "confidence": "high",
+      "uncertainties": [
+        "Příplatek se týká jen některých pedagogických pracovníků; podklady neukazují jeho dopad na průměrný plat všech učitelů ani to, zda bude návrh přijat."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-68bfbc27c3a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-57",
+          "relevant": false,
+          "reasonCz": "Změna pouze ruší části ustanovení § 173 školského zákona a její text neobsahuje úpravu platů učitelů ani jiný mechanismus, který by mohl podstatně ovlivnit jejich průměrný plat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Navržená změna zákoníku práce stanoví pedagogickým pracovníkům vykonávajícím vybrané vedoucí činnosti příplatek nejméně 1 500 Kč měsíčně, a tím zasahuje do části jejich odměňování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-68bfbc27c3a3--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda předložila návrh změny zákoníku práce, který zavádí příplatek nejméně 1 500 Kč měsíčně pro pedagogické pracovníky vykonávající například činnost třídního učitele. Jde o návrh, který může zvýšit plat části učitelů, takže představuje dílčí krok směrem ke slibu. Podklady ale nepotvrzují, že návrh byl schválen, ani že průměrný plat učitelů dosáhl slíbených 75 tisíc korun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh je v podkladech doložen jako předložený, nikoli jako schválený; jeho účinek na platy proto nelze považovat za uskutečněný.",
+        "Podklady neuvádějí skutečný průměrný plat učitelů, takže nelze ověřit, zda dosáhne 75 tisíc korun na konci volebního období."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_001e211c15f74650016ab92c25ea8487d197337a7d478b08c9",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 18056,
+      "input_tokens_details": {
+        "cache_write_tokens": 14816,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1147,
+      "output_tokens_details": {
+        "reasoning_tokens": 731
+      },
+      "total_tokens": 19203
+    },
+    "output": {
+      "promiseId": "candidate-68bfbc27c3a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-57",
+          "relevant": false,
+          "reasonCz": "Změna ruší části § 173 školského zákona, ale její text se netýká odměňování učitelů ani jejich platů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh zákoníku práce zavádí příplatek nejméně 1 500 Kč měsíčně pro některé pedagogické pracovníky, což může částečně zvýšit jejich odměňování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-68bfbc27c3a3--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž je ANO zastoupeno, předložila návrh změny zákoníku práce. Návrh přiznává mimo jiné příplatek nejméně 1 500 Kč měsíčně pedagogickým pracovníkům vykonávajícím činnost třídního učitele a další uvedené funkce. Tím může částečně zvýšit odměny některých učitelů, ale sám nezaručuje průměrný plat 75 tisíc korun pro všechny učitele na konci volebního období.",
+      "confidence": "high",
+      "uncertainties": [
+        "Příplatek se týká jen některých pedagogických pracovníků; podklady neukazují jeho dopad na průměrný plat všech učitelů ani to, zda bude návrh přijat."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_094229146b3575fa016ab92c2c0a6487d1987c3e6022fac466",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 18056,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 18053
+      },
+      "output_tokens": 1786,
+      "output_tokens_details": {
+        "reasoning_tokens": 1239
+      },
+      "total_tokens": 19842
+    },
+    "output": {
+      "promiseId": "candidate-68bfbc27c3a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-57",
+          "relevant": false,
+          "reasonCz": "Změna pouze ruší části ustanovení § 173 školského zákona a její text neobsahuje úpravu platů učitelů ani jiný mechanismus, který by mohl podstatně ovlivnit jejich průměrný plat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Navržená změna zákoníku práce stanoví pedagogickým pracovníkům vykonávajícím vybrané vedoucí činnosti příplatek nejméně 1 500 Kč měsíčně, a tím zasahuje do části jejich odměňování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-68bfbc27c3a3--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda předložila návrh změny zákoníku práce, který zavádí příplatek nejméně 1 500 Kč měsíčně pro pedagogické pracovníky vykonávající například činnost třídního učitele. Jde o návrh, který může zvýšit plat části učitelů, takže představuje dílčí krok směrem ke slibu. Podklady ale nepotvrzují, že návrh byl schválen, ani že průměrný plat učitelů dosáhl slíbených 75 tisíc korun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh je v podkladech doložen jako předložený, nikoli jako schválený; jeho účinek na platy proto nelze považovat za uskutečněný.",
+        "Podklady neuvádějí skutečný průměrný plat učitelů, takže nelze ověřit, zda dosáhne 75 tisíc korun na konci volebního období."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

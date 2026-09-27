@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-56-57-210Z--7debfe4a6809",
+  "evaluatedAt": "2026-09-27T14:56:57.210Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-314d7e5cfa/7debfe4a68098701406f055c58cf2cfa3cdef8780f68e0a8cf32c1bd8472e452.json",
+  "packageHash": "7debfe4a68098701406f055c58cf2cfa3cdef8780f68e0a8cf32c1bd8472e452",
+  "assessmentContentHash": "8b37cb88c14a09c4e0958a61394d67af53426f60b07342b054cdb745d0683c08",
+  "assessmentFingerprint": "e43e1362f15d05e928ec4d1b35312ab2adf24ac18628d64f74d5807fc21ef696",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-314d7e5cfa",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-314d7e5cfa",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Návrh stanoví souhrnné příjmy a výdaje státního rozpočtu, ale jeho předložené znění neurčuje, že obranné prostředky mají směřovat na produkty českého zbrojního průmyslu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-314d7e5cfa--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026 a poslanci Motoristů sobě pro něj hlasovali. Návrh stanoví celkové příjmy a výdaje rozpočtu, ale předložený text nesměřuje obranné prostředky výslovně k českým zbrojním výrobkům. Z těchto podkladů proto nelze doložit podstatný posun ke slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Návrh odkazuje na přílohy s výdaji podle kapitol, jejichž obsah zde není uveden; nelze proto ověřit, zda rozpočet nějakou část obranných prostředků směřuje k českým výrobcům."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-314d7e5cfa",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu stanoví výdaje a odkazuje na jejich rozpis podle kapitol, takže může ovlivnit objem obranných prostředků; předložený text ale neukazuje, zda směřují k českému zbrojnímu průmyslu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-314d7e5cfa--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026 a poslanci Motoristů pro něj většinově hlasovali. Návrh stanoví celkové výdaje a odkazuje na přílohy s rozpisem výdajů podle kapitol. Z dodaného textu ale nelze zjistit, kolik prostředků jde na obranu ani zda mají směřovat k českým zbrojařům. Proto zatím nelze doložit posun ke splnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Přílohy s rozpisem výdajů podle kapitol nejsou v dodaném podkladu obsaženy; bez nich nelze ověřit, zda rozpočet vyčleňuje obranné prostředky na produkty českého zbrojního průmyslu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_067b205982d3b66a016ab92ea740cc87d18197bb4c78d66c69",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 6621,
+      "input_tokens_details": {
+        "cache_write_tokens": 3381,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1674,
+      "output_tokens_details": {
+        "reasoning_tokens": 1261
+      },
+      "total_tokens": 8295
+    },
+    "output": {
+      "promiseId": "motoriste-2025-314d7e5cfa",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Návrh stanoví souhrnné příjmy a výdaje státního rozpočtu, ale jeho předložené znění neurčuje, že obranné prostředky mají směřovat na produkty českého zbrojního průmyslu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-314d7e5cfa--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026 a poslanci Motoristů sobě pro něj hlasovali. Návrh stanoví celkové příjmy a výdaje rozpočtu, ale předložený text nesměřuje obranné prostředky výslovně k českým zbrojním výrobkům. Z těchto podkladů proto nelze doložit podstatný posun ke slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Návrh odkazuje na přílohy s výdaji podle kapitol, jejichž obsah zde není uveden; nelze proto ověřit, zda rozpočet nějakou část obranných prostředků směřuje k českým výrobcům."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b12a9e3164364f4016ab92eb0078487d18588fa04cd6d360a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 6621,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 6618
+      },
+      "output_tokens": 1688,
+      "output_tokens_details": {
+        "reasoning_tokens": 1295
+      },
+      "total_tokens": 8309
+    },
+    "output": {
+      "promiseId": "motoriste-2025-314d7e5cfa",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu stanoví výdaje a odkazuje na jejich rozpis podle kapitol, takže může ovlivnit objem obranných prostředků; předložený text ale neukazuje, zda směřují k českému zbrojnímu průmyslu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-314d7e5cfa--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026 a poslanci Motoristů pro něj většinově hlasovali. Návrh stanoví celkové výdaje a odkazuje na přílohy s rozpisem výdajů podle kapitol. Z dodaného textu ale nelze zjistit, kolik prostředků jde na obranu ani zda mají směřovat k českým zbrojařům. Proto zatím nelze doložit posun ke splnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Přílohy s rozpisem výdajů podle kapitol nejsou v dodaném podkladu obsaženy; bez nich nelze ověřit, zda rozpočet vyčleňuje obranné prostředky na produkty českého zbrojního průmyslu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

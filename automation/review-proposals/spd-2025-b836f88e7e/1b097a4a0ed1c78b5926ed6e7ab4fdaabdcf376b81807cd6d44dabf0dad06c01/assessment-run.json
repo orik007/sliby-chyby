@@ -1,0 +1,252 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T15-03-03-743Z--2fc0dbfabf57",
+  "evaluatedAt": "2026-09-27T15:03:03.743Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-b836f88e7e/2fc0dbfabf578a8f6f21a57a6b321e78ddcc799a9e352da7f30b3bff52d2a65b.json",
+  "packageHash": "2fc0dbfabf578a8f6f21a57a6b321e78ddcc799a9e352da7f30b3bff52d2a65b",
+  "assessmentContentHash": "fce96f074c89d552c9baa6727aaac525afad6c1a77bcc19e4e4dd1c6634cd2c0",
+  "assessmentFingerprint": "1b097a4a0ed1c78b5926ed6e7ab4fdaabdcf376b81807cd6d44dabf0dad06c01",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-b836f88e7e",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-b836f88e7e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválené znění zavádí aukční kapacitní mechanismus, který může podporovat dostupnost výrobních zdrojů včetně uhelných elektráren, ale jejich provoz do roku 2050 nenařizuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-13",
+          "relevant": false,
+          "reasonCz": "Návrh i schválené znění ruší dvě věty týkající se Energetického regulačního úřadu, nikoli provozu elektráren nebo výroby elektřiny z uhlí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-43",
+          "relevant": false,
+          "reasonCz": "Změna ruší jednu větu v zákoně o hospodaření energií, ale její text neřeší provoz uhelných elektráren ani jejich dobu provozu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": false,
+          "reasonCz": "Změna upravuje financování nízkouhlíkové výrobny, ale neprodlužuje provoz uhelných elektráren ani nestanovuje dobu jejich provozu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-b836f88e7e--source",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro návrh, který zavádí kapacitní mechanismus: provozovatel přenosové soustavy má zajišťovat dostupnost výkonu výroben elektřiny a za tuto dostupnost se uzavírají placené smlouvy. Takové opatření může podpořit udržení výrobních kapacit, ale nezaručuje provoz uhelných elektráren. SPD hlasovala pro návrh také poté, co jej Senát zamítl; ani toto hlasování však nestanovilo uhelným elektrárnám provoz minimálně do roku 2050. Jde proto o dílčí posun, nikoli o splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Kapacitní mechanismus neurčuje, zda se o podporu ucházejí uhelné elektrárny, ani nezavazuje k jejich provozu do roku 2050; jeho přínos pro tento konkrétní slib je proto pouze nepřímý."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-b836f88e7e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválená verze zavádí kapacitní mechanismus pro zajištění dostupnosti výkonu elektráren, což může podpořit jejich další provoz, ale nestanoví nic výslovně o uhlí ani o roce 2050."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-13",
+          "relevant": false,
+          "reasonCz": "Všechny verze této změny upravují pouze pravidla týkající se Energetického regulačního úřadu a nijak nemění provoz uhelných elektráren ani dobu jejich provozu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-43",
+          "relevant": false,
+          "reasonCz": "Změna ruší poslední větu ustanovení zákona o hospodaření energií, ale její text nesměřuje k provozu elektráren ani k jeho prodloužení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Změna upravuje financování výstavby nízkouhlíkové výrobny včetně jaderného zařízení, a tím může podpořit jadernou část slibu, nikoli však prodloužení provozu uhlí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-b836f88e7e--source",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro změnu energetického zákona, která zavádí kapacitní mechanismus a může podpořit udržení dostupného výkonu elektráren, včetně uhelných. Hlasovali také pro změnu pravidel financování výstavby nízkouhlíkové výrobny, která zahrnuje jaderné zařízení. Tyto kroky podporují části slibu, ale žádný z nich přímo nezaručuje provoz uhelných elektráren do roku 2050. Proto je doložen dílčí posun, nikoli splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Kapacitní mechanismus může pomoci zachovat dostupnost výkonu, ale předložené texty nestanoví, že ho využijí právě uhelné elektrárny ani že zůstanou v provozu do roku 2050."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_034ed64d42dc29c0016ab93002e29487d1a771eb366f2f0e30",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 29329,
+      "input_tokens_details": {
+        "cache_write_tokens": 26089,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 3062,
+      "output_tokens_details": {
+        "reasoning_tokens": 2333
+      },
+      "total_tokens": 32391
+    },
+    "output": {
+      "promiseId": "spd-2025-b836f88e7e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválené znění zavádí aukční kapacitní mechanismus, který může podporovat dostupnost výrobních zdrojů včetně uhelných elektráren, ale jejich provoz do roku 2050 nenařizuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-13",
+          "relevant": false,
+          "reasonCz": "Návrh i schválené znění ruší dvě věty týkající se Energetického regulačního úřadu, nikoli provozu elektráren nebo výroby elektřiny z uhlí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-43",
+          "relevant": false,
+          "reasonCz": "Změna ruší jednu větu v zákoně o hospodaření energií, ale její text neřeší provoz uhelných elektráren ani jejich dobu provozu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": false,
+          "reasonCz": "Změna upravuje financování nízkouhlíkové výrobny, ale neprodlužuje provoz uhelných elektráren ani nestanovuje dobu jejich provozu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-b836f88e7e--source",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro návrh, který zavádí kapacitní mechanismus: provozovatel přenosové soustavy má zajišťovat dostupnost výkonu výroben elektřiny a za tuto dostupnost se uzavírají placené smlouvy. Takové opatření může podpořit udržení výrobních kapacit, ale nezaručuje provoz uhelných elektráren. SPD hlasovala pro návrh také poté, co jej Senát zamítl; ani toto hlasování však nestanovilo uhelným elektrárnám provoz minimálně do roku 2050. Jde proto o dílčí posun, nikoli o splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Kapacitní mechanismus neurčuje, zda se o podporu ucházejí uhelné elektrárny, ani nezavazuje k jejich provozu do roku 2050; jeho přínos pro tento konkrétní slib je proto pouze nepřímý."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_09cea6346d8b964a016ab93012d75487d198ac0d771c9569c7",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 29329,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 29326
+      },
+      "output_tokens": 3789,
+      "output_tokens_details": {
+        "reasoning_tokens": 3087
+      },
+      "total_tokens": 33118
+    },
+    "output": {
+      "promiseId": "spd-2025-b836f88e7e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": true,
+          "reasonCz": "Schválená verze zavádí kapacitní mechanismus pro zajištění dostupnosti výkonu elektráren, což může podpořit jejich další provoz, ale nestanoví nic výslovně o uhlí ani o roce 2050."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-13",
+          "relevant": false,
+          "reasonCz": "Všechny verze této změny upravují pouze pravidla týkající se Energetického regulačního úřadu a nijak nemění provoz uhelných elektráren ani dobu jejich provozu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-43",
+          "relevant": false,
+          "reasonCz": "Změna ruší poslední větu ustanovení zákona o hospodaření energií, ale její text nesměřuje k provozu elektráren ani k jeho prodloužení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Změna upravuje financování výstavby nízkouhlíkové výrobny včetně jaderného zařízení, a tím může podpořit jadernou část slibu, nikoli však prodloužení provozu uhlí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-b836f88e7e--source",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro změnu energetického zákona, která zavádí kapacitní mechanismus a může podpořit udržení dostupného výkonu elektráren, včetně uhelných. Hlasovali také pro změnu pravidel financování výstavby nízkouhlíkové výrobny, která zahrnuje jaderné zařízení. Tyto kroky podporují části slibu, ale žádný z nich přímo nezaručuje provoz uhelných elektráren do roku 2050. Proto je doložen dílčí posun, nikoli splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Kapacitní mechanismus může pomoci zachovat dostupnost výkonu, ale předložené texty nestanoví, že ho využijí právě uhelné elektrárny ani že zůstanou v provozu do roku 2050."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

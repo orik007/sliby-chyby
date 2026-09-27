@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-44-27-718Z--f357e0a6a0e3",
+  "evaluatedAt": "2026-09-27T14:44:27.718Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-4b329a71b0cd/f357e0a6a0e3f8000e567dcd692bb39e54ce35dc4d53da1a5203d43842b8e2c4.json",
+  "packageHash": "f357e0a6a0e3f8000e567dcd692bb39e54ce35dc4d53da1a5203d43842b8e2c4",
+  "assessmentContentHash": "e79545f40f4e6a46c0b4d5294594518a8264074d932689e74be0bdaf0fa1297b",
+  "assessmentFingerprint": "32142402b7dcc4838bf286bbf2e2ec326e200896821d67acd7a1ad999e6e1a02",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-4b329a71b0cd",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-4b329a71b0cd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-6",
+          "relevant": false,
+          "reasonCz": "Ve všech verzích se mění ustanovení o působnosti Úřadu pro ochranu hospodářské soutěže, text ale neřeší investiční pobídky ani podporu zahraničních subjektů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu stanoví celkové příjmy, výdaje a schodek a odkazuje na rozpočtové přílohy, ale předložený text neuvádí investiční pobídky ani jejich zrušení."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-4b329a71b0cd--source",
+        "psp-core-2025--law-change-43184-6",
+        "psp-core-2025--law-change-43204-1"
+      ],
+      "explanationCz": "SPD ve svém programu slíbila zrušit investiční pobídky zahraničním subjektům. Předložená změna zákona o působnosti Úřadu pro ochranu hospodářské soutěže upravuje ustanovení o tomto úřadu, nikoli pobídky. Předložený návrh státního rozpočtu uvádí celkové rozpočtové částky, ale v poskytnutém textu nejsou konkrétní ustanovení o investičních pobídkách. Z těchto podkladů proto nelze ověřit podstatný posun ke splnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují relevantní právní změnu, podle níž by bylo možné posoudit zrušení investičních pobídek; uvedené rozpočtové přílohy nejsou součástí předloženého textu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-4b329a71b0cd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-6",
+          "relevant": false,
+          "reasonCz": "Změny působnosti Úřadu pro ochranu hospodářské soutěže upravují jeho zákonné pravomoci, ale v žádné verzi se netýkají investičních pobídek ani jejich zrušení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu stanoví výdaje a odkazuje na přílohy s jejich rozpisem, které by mohly zahrnovat prostředky související s investičními pobídkami, jejich obsah však není doložen."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-4b329a71b0cd--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "SPD slíbila zrušit investiční pobídky zahraničním subjektům. Vláda předložila návrh státního rozpočtu na rok 2026 a poslanci SPD pro něj hlasovali, ale doložený text stanoví hlavně celkové částky a odkazuje na přílohy s podrobnějším rozpisem výdajů. Z dostupných podkladů proto nelze ověřit, zda rozpočet pobídky financuje, omezuje, nebo se jich netýká. Zatím tedy není doložen podstatný posun ke splnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují rozpis výdajů v přílohách rozpočtu, takže nelze zjistit, zda rozpočet počítá s prostředky na investiční pobídky.",
+        "Hlasování SPD se týkalo schváleného znění rozpočtu, které není v balíčku zveřejněno; nelze proto porovnat přesné znění přijaté Sněmovnou se slibem."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0b5717002de84283016ab92bbc5d7887d1bdacbceeb0fe3e27",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 11489,
+      "input_tokens_details": {
+        "cache_write_tokens": 8249,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 983,
+      "output_tokens_details": {
+        "reasoning_tokens": 516
+      },
+      "total_tokens": 12472
+    },
+    "output": {
+      "promiseId": "candidate-4b329a71b0cd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-6",
+          "relevant": false,
+          "reasonCz": "Ve všech verzích se mění ustanovení o působnosti Úřadu pro ochranu hospodářské soutěže, text ale neřeší investiční pobídky ani podporu zahraničních subjektů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu stanoví celkové příjmy, výdaje a schodek a odkazuje na rozpočtové přílohy, ale předložený text neuvádí investiční pobídky ani jejich zrušení."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-4b329a71b0cd--source",
+        "psp-core-2025--law-change-43184-6",
+        "psp-core-2025--law-change-43204-1"
+      ],
+      "explanationCz": "SPD ve svém programu slíbila zrušit investiční pobídky zahraničním subjektům. Předložená změna zákona o působnosti Úřadu pro ochranu hospodářské soutěže upravuje ustanovení o tomto úřadu, nikoli pobídky. Předložený návrh státního rozpočtu uvádí celkové rozpočtové částky, ale v poskytnutém textu nejsou konkrétní ustanovení o investičních pobídkách. Z těchto podkladů proto nelze ověřit podstatný posun ke splnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují relevantní právní změnu, podle níž by bylo možné posoudit zrušení investičních pobídek; uvedené rozpočtové přílohy nejsou součástí předloženého textu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b48c74c511c3a81016ab92bc1bcdc87d1925cf514a350d6ce",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 11489,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 11486
+      },
+      "output_tokens": 1870,
+      "output_tokens_details": {
+        "reasoning_tokens": 1295
+      },
+      "total_tokens": 13359
+    },
+    "output": {
+      "promiseId": "candidate-4b329a71b0cd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-6",
+          "relevant": false,
+          "reasonCz": "Změny působnosti Úřadu pro ochranu hospodářské soutěže upravují jeho zákonné pravomoci, ale v žádné verzi se netýkají investičních pobídek ani jejich zrušení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu stanoví výdaje a odkazuje na přílohy s jejich rozpisem, které by mohly zahrnovat prostředky související s investičními pobídkami, jejich obsah však není doložen."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-4b329a71b0cd--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "SPD slíbila zrušit investiční pobídky zahraničním subjektům. Vláda předložila návrh státního rozpočtu na rok 2026 a poslanci SPD pro něj hlasovali, ale doložený text stanoví hlavně celkové částky a odkazuje na přílohy s podrobnějším rozpisem výdajů. Z dostupných podkladů proto nelze ověřit, zda rozpočet pobídky financuje, omezuje, nebo se jich netýká. Zatím tedy není doložen podstatný posun ke splnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují rozpis výdajů v přílohách rozpočtu, takže nelze zjistit, zda rozpočet počítá s prostředky na investiční pobídky.",
+        "Hlasování SPD se týkalo schváleného znění rozpočtu, které není v balíčku zveřejněno; nelze proto porovnat přesné znění přijaté Sněmovnou se slibem."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

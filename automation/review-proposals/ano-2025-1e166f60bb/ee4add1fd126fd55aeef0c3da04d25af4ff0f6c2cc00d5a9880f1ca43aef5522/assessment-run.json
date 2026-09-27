@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-34-57-042Z--fda8e5138bed",
+  "evaluatedAt": "2026-09-27T14:34:57.042Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-1e166f60bb/fda8e5138bed50cba055085fc97d7fafbbceb1d31f77045837008b89818bfb0c.json",
+  "packageHash": "fda8e5138bed50cba055085fc97d7fafbbceb1d31f77045837008b89818bfb0c",
+  "assessmentContentHash": "b65156a977de50e5ca3a25666a1672cf1020af9dcc8922f4c8dc89a0be7aa4f9",
+  "assessmentFingerprint": "ee4add1fd126fd55aeef0c3da04d25af4ff0f6c2cc00d5a9880f1ca43aef5522",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-1e166f60bb",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-1e166f60bb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Změna rozpočtových pravidel v žádné verzi nestanoví nástupní plat vojáků ani částku 50 tisíc korun; schválená verze pouze umožňuje navýšit některé výdaje na obranu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-1e166f60bb--source",
+        "psp-core-2025--law-change-43200-2"
+      ],
+      "explanationCz": "Slib ANO se týká nástupního platu 50 tisíc korun pro vojáky z povolání po základním výcviku od roku 2026. Jediná zákonná změna v podkladech upravuje rozpočtová pravidla a nestanoví takový plat ani jeho výši. Podklady proto nedokládají podstatný posun ke splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují relevantní opatření k nástupním platům vojáků, takže z nich nelze určit, zda se straně podařilo slib prosadit jiným způsobem."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-1e166f60bb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválená verze umožňuje navýšit výdajový rámec o výdaje na obranu nad 2 % HDP, což může otevřít prostor i pro financování platů, ale žádný nástupní plat vojáků nestanoví."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-1e166f60bb--source",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila návrh změn rozpočtových pravidel a poslanci ANO pro něj hlasovali při schvalování i při pozdějších rozhodnutích o jeho osudu. Schválený text umožňuje zvýšit výdajový rámec o část výdajů na obranu nad 2 % HDP, ale neurčuje nástupní plat vojáků ani částku 50 tisíc korun. Senát vrátil návrh s pozměňovacími návrhy, které se týkaly zejména financování infrastruktury a dalších rozpočtových pravidel, nikoli nástupních platů. Proto dostupné texty nedokládají posun k uvedené výši platu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U hlasování po vrácení zákona prezidentem není zveřejněno přesné znění textu, o němž poslanci rozhodovali; posouzení proto vychází z poslední dostupné verze.",
+        "Výjimka pro výdaje na obranu může nepřímo usnadnit financování platů, ale podklady nedokládají, že by peníze byly určeny na nástupní platy nebo že by jejich výše dosáhla 50 tisíc korun."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f044ef0c6186e26016ab92974645487d18cfbb43a45ccfe2d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 20624,
+      "input_tokens_details": {
+        "cache_write_tokens": 17384,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1310,
+      "output_tokens_details": {
+        "reasoning_tokens": 993
+      },
+      "total_tokens": 21934
+    },
+    "output": {
+      "promiseId": "ano-2025-1e166f60bb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Změna rozpočtových pravidel v žádné verzi nestanoví nástupní plat vojáků ani částku 50 tisíc korun; schválená verze pouze umožňuje navýšit některé výdaje na obranu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-1e166f60bb--source",
+        "psp-core-2025--law-change-43200-2"
+      ],
+      "explanationCz": "Slib ANO se týká nástupního platu 50 tisíc korun pro vojáky z povolání po základním výcviku od roku 2026. Jediná zákonná změna v podkladech upravuje rozpočtová pravidla a nestanoví takový plat ani jeho výši. Podklady proto nedokládají podstatný posun ke splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují relevantní opatření k nástupním platům vojáků, takže z nich nelze určit, zda se straně podařilo slib prosadit jiným způsobem."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0fcb070eda2bd0ae016ab9297c26e487d1be229369b984dfd8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 20624,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 20621
+      },
+      "output_tokens": 3980,
+      "output_tokens_details": {
+        "reasoning_tokens": 3412
+      },
+      "total_tokens": 24604
+    },
+    "output": {
+      "promiseId": "ano-2025-1e166f60bb",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválená verze umožňuje navýšit výdajový rámec o výdaje na obranu nad 2 % HDP, což může otevřít prostor i pro financování platů, ale žádný nástupní plat vojáků nestanoví."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-1e166f60bb--source",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila návrh změn rozpočtových pravidel a poslanci ANO pro něj hlasovali při schvalování i při pozdějších rozhodnutích o jeho osudu. Schválený text umožňuje zvýšit výdajový rámec o část výdajů na obranu nad 2 % HDP, ale neurčuje nástupní plat vojáků ani částku 50 tisíc korun. Senát vrátil návrh s pozměňovacími návrhy, které se týkaly zejména financování infrastruktury a dalších rozpočtových pravidel, nikoli nástupních platů. Proto dostupné texty nedokládají posun k uvedené výši platu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U hlasování po vrácení zákona prezidentem není zveřejněno přesné znění textu, o němž poslanci rozhodovali; posouzení proto vychází z poslední dostupné verze.",
+        "Výjimka pro výdaje na obranu může nepřímo usnadnit financování platů, ale podklady nedokládají, že by peníze byly určeny na nástupní platy nebo že by jejich výše dosáhla 50 tisíc korun."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

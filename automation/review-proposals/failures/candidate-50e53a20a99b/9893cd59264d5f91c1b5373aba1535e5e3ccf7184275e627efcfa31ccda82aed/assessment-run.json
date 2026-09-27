@@ -1,0 +1,148 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-44-55-937Z--f0794c872c61",
+  "evaluatedAt": "2026-09-27T14:44:55.937Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-50e53a20a99b/f0794c872c6155dc56d3b16af836e090f7860c9882edb870d52d868e39e09230.json",
+  "packageHash": "f0794c872c6155dc56d3b16af836e090f7860c9882edb870d52d868e39e09230",
+  "assessmentContentHash": "2a67edf944b7286e6077efbdac7568d870e512db50eff64ba42983e6f648b44c",
+  "assessmentFingerprint": "9893cd59264d5f91c1b5373aba1535e5e3ccf7184275e627efcfa31ccda82aed",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-50e53a20a99b",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+    "assessor-b": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b"
+  },
+  "validatedAssessments": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_079716107500644d016ab92bd2827487d180b002931267606e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12239,
+      "input_tokens_details": {
+        "cache_write_tokens": 8999,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1749,
+      "output_tokens_details": {
+        "reasoning_tokens": 1168
+      },
+      "total_tokens": 13988
+    },
+    "output": {
+      "promiseId": "candidate-50e53a20a99b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená verze stanoví rozvoj sportovní infrastruktury jako prioritu a umožňuje podporovat pořízení či technické zhodnocení majetku, což může přispět k části slibu o školní sportovní infrastruktuře."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-57",
+          "relevant": false,
+          "reasonCz": "Změny školského zákona upravují ustanovení o působnosti školských orgánů, nikoli výstavbu, rekonstrukci ani využívání sportovní infrastruktury."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-50e53a20a99b--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro sněmovní tisk 77, tedy návrh zákona projednávaný Poslaneckou sněmovnou, při schválení i při hlasování po zamítnutí Senátem. Schválená změna zákona o podpoře sportu označuje rozvoj sportovní infrastruktury za prioritu a rozšiřuje možnosti podpory pořízení či technického zhodnocení majetku. To může podpořit část slibu o školních sportovištích, ale změna výslovně nezaručuje výstavbu školních zařízení ani jejich využívání veřejností. Původně předložený poslanecký návrh se školní infrastrukturou nezabýval.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Změna stanoví obecnou podporu sportovní infrastruktury, ale z předložených podkladů nelze určit, zda z ní budou konkrétně financována školní sportoviště ani zda budou přístupná široké veřejnosti."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0d83a37fb9eff532016ab92bdc419887d18b27d790edfd958d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12239,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 12236
+      },
+      "output_tokens": 2253,
+      "output_tokens_details": {
+        "reasoning_tokens": 1651
+      },
+      "total_tokens": 14492
+    },
+    "output": {
+      "promiseId": "candidate-50e53a20a99b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a přijatá verze rozšiřuje podporu také na školní sport a umožňuje podporovat pořízení či technické zhodnocení majetku sportovních organizací, což může přispět k části slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-57",
+          "relevant": false,
+          "reasonCz": "Tato změna upravuje pouze ustanovení školského zákona o postupech a pravomocích podle § 173, nikoli školní sportovní infrastrukturu, její financování ani využití veřejností."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-50e53a20a99b--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7"
+      ],
+      "explanationCz": "Poslanci ANO podpořili ve třetím čtení a po zamítnutí Senátem také setrvání na návrhu zákona předloženém jako sněmovní tisk 77, tedy návrhu poslanců týkajícím se mimo jiné podpory sportu. Jeho schválená podoba rozšířila podporu také na školní a vysokoškolský sport a umožnila podporovat pořízení či technické zhodnocení majetku sportovních organizací. Původní poslanecký návrh školní sportovní infrastrukturu neupravoval; změny v této oblasti se objevily až ve schváleném znění. Jde proto o dílčí posun ke slibu, nikoli o jeho úplné naplnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Změna rozšiřuje možnosti podpory školního sportu a majetku sportovních organizací, ale výslovně nezaručuje financování výstavby či rekonstrukce školních sportovišť ani jejich zpřístupnění široké veřejnosti."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "assessment-failed",
+    "reason": "both-assessors-invalid",
+    "status": null,
+    "selectedReview": null
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-54-12-812Z--44fa18ea3951",
+  "evaluatedAt": "2026-09-27T14:54:12.812Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-e373ccf10499/44fa18ea395197090809cd636975c1414a727048260299a8d889f6a4de4b1773.json",
+  "packageHash": "44fa18ea395197090809cd636975c1414a727048260299a8d889f6a4de4b1773",
+  "assessmentContentHash": "2abec4d244c251daae4b85870b7adfc891a97f6791316f567f0e99f794e0d03a",
+  "assessmentFingerprint": "5e73fe645fff5035bde7eb8d18dd69aa61068aef56eafda4c5f309197812442a",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-e373ccf10499",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-e373ccf10499",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+          "relevant": false,
+          "reasonCz": "Ustanovení upravuje kvalifikační lhůty pro podnikatele v poradenské psychoterapii, ale nedokládá změnu komunitních služeb duševního zdraví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění provozní pravidla pro poskytovatele sociálních služeb komunitního charakteru, a proto se materiálně týká podmínek rozvoje komunitních služeb."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e373ccf10499--source",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--print-step-211961"
+      ],
+      "explanationCz": "Vláda, v níž ANO působí, předložila návrh novely pravidel ochrany veřejného zdraví. Návrh vyjímá poskytovatele sociálních služeb komunitního charakteru z jednoho provozního režimu, takže mění podmínky pro poskytování komunitních služeb. Jde o posun, který může rozvoj těchto služeb podpořit, návrh však sám nezajišťuje rozšíření služeb duševního zdraví ani jejich dostupnost či kvalitu. Proto je doložen dílčí posun návrhem, nikoli splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z návrhu není zřejmé, zda se výjimka vztáhne přímo na komunitní služby duševního zdraví ani jak konkrétně ovlivní jejich dostupnost nebo kvalitu. Jde o předložený návrh; balíček nedokládá, že byl přijat."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-e373ccf10499",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+          "relevant": true,
+          "reasonCz": "Přechodná lhůta pro stávající poskytovatele poradenské psychoterapie může ovlivnit zachování dostupnosti služby související s duševním zdravím."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": false,
+          "reasonCz": "Výjimka pro poskytovatele sociálních služeb komunitního charakteru upravuje hygienický režim zařízení, nikoli dostupnost či kvalitu komunitních služeb duševního zdraví."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e373ccf10499--source",
+        "psp-core-2025--law-change-43189-approved-3",
+        "psp-core-2025--vote-87617"
+      ],
+      "explanationCz": "Poslanci ANO při závěrečném hlasování ve Sněmovně většinově podpořili změnu, která dosavadním provozovatelům poradenské psychoterapie dává do 1. července 2029 na splnění požadavku vysokoškolského magisterského vzdělání. Přechodná lhůta může pomoci zachovat dostupnost psychoterapeutické péče, a tím přispívá k části slibu. Doklad ale neukazuje, že se tím komunitní služby duševního zdraví skutečně rozšířily nebo že se zvýšila jejich kvalita.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Vliv přechodné lhůty na skutečnou dostupnost komunitních služeb není doložen a vazba poradenské psychoterapie na komunitní služby je nepřímá."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0868e6d34315b990016ab92df7811087d1a5cbc368d6f17a21",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 27802,
+      "input_tokens_details": {
+        "cache_write_tokens": 24562,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2616,
+      "output_tokens_details": {
+        "reasoning_tokens": 2171
+      },
+      "total_tokens": 30418
+    },
+    "output": {
+      "promiseId": "candidate-e373ccf10499",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+          "relevant": false,
+          "reasonCz": "Ustanovení upravuje kvalifikační lhůty pro podnikatele v poradenské psychoterapii, ale nedokládá změnu komunitních služeb duševního zdraví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění provozní pravidla pro poskytovatele sociálních služeb komunitního charakteru, a proto se materiálně týká podmínek rozvoje komunitních služeb."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e373ccf10499--source",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--print-step-211961"
+      ],
+      "explanationCz": "Vláda, v níž ANO působí, předložila návrh novely pravidel ochrany veřejného zdraví. Návrh vyjímá poskytovatele sociálních služeb komunitního charakteru z jednoho provozního režimu, takže mění podmínky pro poskytování komunitních služeb. Jde o posun, který může rozvoj těchto služeb podpořit, návrh však sám nezajišťuje rozšíření služeb duševního zdraví ani jejich dostupnost či kvalitu. Proto je doložen dílčí posun návrhem, nikoli splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z návrhu není zřejmé, zda se výjimka vztáhne přímo na komunitní služby duševního zdraví ani jak konkrétně ovlivní jejich dostupnost nebo kvalitu. Jde o předložený návrh; balíček nedokládá, že byl přijat."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0047d1c65393d04f016ab92e07dcf887d1867b5252923bf08e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 27802,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 27799
+      },
+      "output_tokens": 2195,
+      "output_tokens_details": {
+        "reasoning_tokens": 1772
+      },
+      "total_tokens": 29997
+    },
+    "output": {
+      "promiseId": "candidate-e373ccf10499",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-approved-3",
+          "relevant": true,
+          "reasonCz": "Přechodná lhůta pro stávající poskytovatele poradenské psychoterapie může ovlivnit zachování dostupnosti služby související s duševním zdravím."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": false,
+          "reasonCz": "Výjimka pro poskytovatele sociálních služeb komunitního charakteru upravuje hygienický režim zařízení, nikoli dostupnost či kvalitu komunitních služeb duševního zdraví."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e373ccf10499--source",
+        "psp-core-2025--law-change-43189-approved-3",
+        "psp-core-2025--vote-87617"
+      ],
+      "explanationCz": "Poslanci ANO při závěrečném hlasování ve Sněmovně většinově podpořili změnu, která dosavadním provozovatelům poradenské psychoterapie dává do 1. července 2029 na splnění požadavku vysokoškolského magisterského vzdělání. Přechodná lhůta může pomoci zachovat dostupnost psychoterapeutické péče, a tím přispívá k části slibu. Doklad ale neukazuje, že se tím komunitní služby duševního zdraví skutečně rozšířily nebo že se zvýšila jejich kvalita.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Vliv přechodné lhůty na skutečnou dostupnost komunitních služeb není doložen a vazba poradenské psychoterapie na komunitní služby je nepřímá."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

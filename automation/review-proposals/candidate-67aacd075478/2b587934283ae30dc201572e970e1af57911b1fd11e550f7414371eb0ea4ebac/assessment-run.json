@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-46-04-370Z--1fdc39b28347",
+  "evaluatedAt": "2026-09-27T14:46:04.370Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-67aacd075478/1fdc39b283472a1115a1e7d6514cb175d8e47932d0d63013f2c4c3833d5ad771.json",
+  "packageHash": "1fdc39b283472a1115a1e7d6514cb175d8e47932d0d63013f2c4c3833d5ad771",
+  "assessmentContentHash": "8d20852f11ec202962049eed912db9ceb7717cbf1051dfe0e3100f42ef033d9c",
+  "assessmentFingerprint": "2b587934283ae30dc201572e970e1af57911b1fd11e550f7414371eb0ea4ebac",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-67aacd075478",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-67aacd075478",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": false,
+          "reasonCz": "Změna pouze nahrazuje označení určitého druhu pozemku v zákoně o rostlinolékařské péči a její text neuvádí omezení pesticidů či hnojiv ani rovné zacházení s dovozem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-50",
+          "relevant": false,
+          "reasonCz": "Změna pouze ruší blíže neuvedenou větu v zákoně o zemědělské a potravinářské inspekci a její text nespojuje tuto úpravu s pesticidy, hnojivy ani dovozem."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-67aacd075478--source",
+        "psp-core-2025--law-change-43174-approved-36",
+        "psp-core-2025--law-change-43184-approved-50"
+      ],
+      "explanationCz": "Slib Motoristů sobě se týká odmítnutí dalších omezení pesticidů a hnojiv a rovných pravidel pro dovážené a domácí zboží. Poslanci strany hlasovali pro změnu rostlinolékařského zákona, která podle předloženého textu pouze mění označení pozemku, a pro změnu zákona o inspekci, která ruší jednu větu. Tyto konkrétní úpravy textově nedokládají posun v žádné části slibu. Protože balíček neobsahuje žádnou věcně relevantní změnu, nelze z něj posun spolehlivě ověřit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text změny rostlinolékařského zákona neuvádí širší znění dotčeného ustanovení a u změny inspekčního zákona není uvedeno znění rušené věty; jejich případný dopad na slib proto nelze z poskytnutých podkladů ověřit."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-67aacd075478",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": false,
+          "reasonCz": "Změna pouze rozšiřuje okruh pozemků, na něž se vztahuje ustanovení rostlinolékařského zákona, a text se netýká omezení pesticidů či hnojiv ani pravidel pro dovoz."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-50",
+          "relevant": false,
+          "reasonCz": "Zveřejněný text pouze ruší druhou větu ustanovení o Státní zemědělské a potravinářské inspekci a neukazuje, že by měnil omezení pesticidů či hnojiv nebo rovné zacházení s dováženými komoditami."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-67aacd075478--source",
+        "psp-core-2025--law-change-43174-approved-36",
+        "psp-core-2025--law-change-43184-approved-50"
+      ],
+      "explanationCz": "Motoristé ve volebním programu slíbili odmítat další omezení pesticidů a hnojiv a prosazovat stejná pravidla pro domácí i dovážené komodity. Jedna posuzovaná změna upravuje, kterých pozemků se týká ustanovení rostlinolékařského zákona, nikoli pravidla pro pesticidy či dovoz. Druhá ruší větu v zákoně o zemědělské a potravinářské inspekci, ale dostupný text neuvádí její obsah. Balíček proto nedokládá podstatný posun k naplnění slibu, zároveň však kvůli chybějícímu obsahu rušené věty nelze její účinek úplně posoudit.",
+      "confidence": "low",
+      "uncertainties": [
+        "Zveřejněný text změny zákona o Státní zemědělské a potravinářské inspekci neobsahuje znění rušené věty, takže nelze vyloučit její případnou souvislost s kontrolou dovážených komodit."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_000cc08a17107ebb016ab92c1a35dc87d19d3877ca80993c00",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 11137,
+      "input_tokens_details": {
+        "cache_write_tokens": 7897,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1594,
+      "output_tokens_details": {
+        "reasoning_tokens": 1092
+      },
+      "total_tokens": 12731
+    },
+    "output": {
+      "promiseId": "candidate-67aacd075478",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": false,
+          "reasonCz": "Změna pouze nahrazuje označení určitého druhu pozemku v zákoně o rostlinolékařské péči a její text neuvádí omezení pesticidů či hnojiv ani rovné zacházení s dovozem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-50",
+          "relevant": false,
+          "reasonCz": "Změna pouze ruší blíže neuvedenou větu v zákoně o zemědělské a potravinářské inspekci a její text nespojuje tuto úpravu s pesticidy, hnojivy ani dovozem."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-67aacd075478--source",
+        "psp-core-2025--law-change-43174-approved-36",
+        "psp-core-2025--law-change-43184-approved-50"
+      ],
+      "explanationCz": "Slib Motoristů sobě se týká odmítnutí dalších omezení pesticidů a hnojiv a rovných pravidel pro dovážené a domácí zboží. Poslanci strany hlasovali pro změnu rostlinolékařského zákona, která podle předloženého textu pouze mění označení pozemku, a pro změnu zákona o inspekci, která ruší jednu větu. Tyto konkrétní úpravy textově nedokládají posun v žádné části slibu. Protože balíček neobsahuje žádnou věcně relevantní změnu, nelze z něj posun spolehlivě ověřit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text změny rostlinolékařského zákona neuvádí širší znění dotčeného ustanovení a u změny inspekčního zákona není uvedeno znění rušené věty; jejich případný dopad na slib proto nelze z poskytnutých podkladů ověřit."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_09162a5d21ff6013016ab92c23095c87d1980074b0a6d20acf",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 11137,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 11134
+      },
+      "output_tokens": 1803,
+      "output_tokens_details": {
+        "reasoning_tokens": 1276
+      },
+      "total_tokens": 12940
+    },
+    "output": {
+      "promiseId": "candidate-67aacd075478",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-36",
+          "relevant": false,
+          "reasonCz": "Změna pouze rozšiřuje okruh pozemků, na něž se vztahuje ustanovení rostlinolékařského zákona, a text se netýká omezení pesticidů či hnojiv ani pravidel pro dovoz."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-50",
+          "relevant": false,
+          "reasonCz": "Zveřejněný text pouze ruší druhou větu ustanovení o Státní zemědělské a potravinářské inspekci a neukazuje, že by měnil omezení pesticidů či hnojiv nebo rovné zacházení s dováženými komoditami."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-67aacd075478--source",
+        "psp-core-2025--law-change-43174-approved-36",
+        "psp-core-2025--law-change-43184-approved-50"
+      ],
+      "explanationCz": "Motoristé ve volebním programu slíbili odmítat další omezení pesticidů a hnojiv a prosazovat stejná pravidla pro domácí i dovážené komodity. Jedna posuzovaná změna upravuje, kterých pozemků se týká ustanovení rostlinolékařského zákona, nikoli pravidla pro pesticidy či dovoz. Druhá ruší větu v zákoně o zemědělské a potravinářské inspekci, ale dostupný text neuvádí její obsah. Balíček proto nedokládá podstatný posun k naplnění slibu, zároveň však kvůli chybějícímu obsahu rušené věty nelze její účinek úplně posoudit.",
+      "confidence": "low",
+      "uncertainties": [
+        "Zveřejněný text změny zákona o Státní zemědělské a potravinářské inspekci neobsahuje znění rušené věty, takže nelze vyloučit její případnou souvislost s kontrolou dovážených komodit."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

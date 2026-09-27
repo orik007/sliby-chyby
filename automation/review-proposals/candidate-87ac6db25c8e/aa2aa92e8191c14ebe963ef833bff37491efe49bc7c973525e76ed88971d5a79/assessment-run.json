@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-47-33-312Z--084767a93d19",
+  "evaluatedAt": "2026-09-27T14:47:33.312Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-87ac6db25c8e/084767a93d19a889a926629dd19e37bd46578da3f69a2e32517a9d36ea5b40cb.json",
+  "packageHash": "084767a93d19a889a926629dd19e37bd46578da3f69a2e32517a9d36ea5b40cb",
+  "assessmentContentHash": "8a45b3ed98f426beb675a4222b9f77111bb8e82724c15e36f510c2ab93cc8996",
+  "assessmentFingerprint": "aa2aa92e8191c14ebe963ef833bff37491efe49bc7c973525e76ed88971d5a79",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-87ac6db25c8e",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-87ac6db25c8e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Předložený text pouze uvádí, že jde o rámcovou smlouvu o přeshraniční spolupráci zdravotnických záchranných služeb, ale její vlastní obsah není součástí podkladů a není doložena vazba na personální vyhlášku ani ukazatele kvality péče."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-5",
+          "relevant": false,
+          "reasonCz": "Změna upravuje řízený přístup ke zdravotnickým datům, nikoli personální vyhlášku nebo zavedení sledování výstupních ukazatelů kvality péče."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-87ac6db25c8e--source",
+        "psp-core-2025--law-change-43110-1",
+        "psp-core-2025--law-change-43161-5"
+      ],
+      "explanationCz": "Motoristé ve svém programu slíbili postupně zrušit personální vyhlášku ve zdravotnictví a zavést sledování výstupních ukazatelů kvality péče. Posuzované změny se však týkají přeshraniční spolupráce záchranných služeb a řízeného přístupu ke zdravotnickým datům; doložený text druhé změny neřeší personální vyhlášku ani ukazatele kvality. Z předložených podkladů proto nelze ověřit podstatný posun ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Obsah rámcové smlouvy o přeshraniční spolupráci zdravotnických záchranných služeb není v podkladech uveden; nelze proto vyloučit její případné další souvislosti, ale žádná vazba na slib není doložena."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-87ac6db25c8e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Návrh se týká přeshraniční spolupráce zdravotnických záchranných služeb a nemění personální vyhlášku ani nezavádí sledování výstupních ukazatelů kvality péče."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-5",
+          "relevant": false,
+          "reasonCz": "Změna upravuje řízený přístup k datům pro statistický ústav, ale nestanoví sledování výstupních ukazatelů kvality péče ani neruší personální vyhlášku."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-87ac6db25c8e--source",
+        "psp-core-2025--law-change-43110-1",
+        "psp-core-2025--vote-87271",
+        "psp-core-2025--law-change-43161-5",
+        "psp-core-2025--vote-86767"
+      ],
+      "explanationCz": "Slib Motoristů sobě míří na zrušení personální vyhlášky ve zdravotnictví a zavedení sledování kvality péče podle výstupních ukazatelů. Poslanci strany hlasovali pro návrh o přeshraniční spolupráci zdravotnických záchranných služeb, ten však slib nijak nenaplňuje. Hlasovali také pro změnu pravidel přístupu zdravotnického statistického ústavu k datům, která ale nezavádí ukazatele kvality péče ani neruší personální vyhlášku. V dodaných podkladech proto není doložen podstatný posun ke slibu, ale bez dalších relevantních dokladů nelze posoudit jiné případné kroky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady obsahují pouze hlasování o přeshraniční spolupráci záchranných služeb a o přístupu statistického ústavu k datům; nedokládají jiné možné kroky k rušení personální vyhlášky nebo k zavedení ukazatelů kvality péče."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f0d69fb5fa221a4016ab92c7996dc87d1aeb6e55ba6f204cd",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9255,
+      "input_tokens_details": {
+        "cache_write_tokens": 6015,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 992,
+      "output_tokens_details": {
+        "reasoning_tokens": 516
+      },
+      "total_tokens": 10247
+    },
+    "output": {
+      "promiseId": "candidate-87ac6db25c8e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Předložený text pouze uvádí, že jde o rámcovou smlouvu o přeshraniční spolupráci zdravotnických záchranných služeb, ale její vlastní obsah není součástí podkladů a není doložena vazba na personální vyhlášku ani ukazatele kvality péče."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-5",
+          "relevant": false,
+          "reasonCz": "Změna upravuje řízený přístup ke zdravotnickým datům, nikoli personální vyhlášku nebo zavedení sledování výstupních ukazatelů kvality péče."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-87ac6db25c8e--source",
+        "psp-core-2025--law-change-43110-1",
+        "psp-core-2025--law-change-43161-5"
+      ],
+      "explanationCz": "Motoristé ve svém programu slíbili postupně zrušit personální vyhlášku ve zdravotnictví a zavést sledování výstupních ukazatelů kvality péče. Posuzované změny se však týkají přeshraniční spolupráce záchranných služeb a řízeného přístupu ke zdravotnickým datům; doložený text druhé změny neřeší personální vyhlášku ani ukazatele kvality. Z předložených podkladů proto nelze ověřit podstatný posun ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Obsah rámcové smlouvy o přeshraniční spolupráci zdravotnických záchranných služeb není v podkladech uveden; nelze proto vyloučit její případné další souvislosti, ale žádná vazba na slib není doložena."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0c82db3074f63da9016ab92c7ec56887d1a4663a1dab2b121a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9255,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 9252
+      },
+      "output_tokens": 1282,
+      "output_tokens_details": {
+        "reasoning_tokens": 692
+      },
+      "total_tokens": 10537
+    },
+    "output": {
+      "promiseId": "candidate-87ac6db25c8e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Návrh se týká přeshraniční spolupráce zdravotnických záchranných služeb a nemění personální vyhlášku ani nezavádí sledování výstupních ukazatelů kvality péče."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-5",
+          "relevant": false,
+          "reasonCz": "Změna upravuje řízený přístup k datům pro statistický ústav, ale nestanoví sledování výstupních ukazatelů kvality péče ani neruší personální vyhlášku."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-87ac6db25c8e--source",
+        "psp-core-2025--law-change-43110-1",
+        "psp-core-2025--vote-87271",
+        "psp-core-2025--law-change-43161-5",
+        "psp-core-2025--vote-86767"
+      ],
+      "explanationCz": "Slib Motoristů sobě míří na zrušení personální vyhlášky ve zdravotnictví a zavedení sledování kvality péče podle výstupních ukazatelů. Poslanci strany hlasovali pro návrh o přeshraniční spolupráci zdravotnických záchranných služeb, ten však slib nijak nenaplňuje. Hlasovali také pro změnu pravidel přístupu zdravotnického statistického ústavu k datům, která ale nezavádí ukazatele kvality péče ani neruší personální vyhlášku. V dodaných podkladech proto není doložen podstatný posun ke slibu, ale bez dalších relevantních dokladů nelze posoudit jiné případné kroky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady obsahují pouze hlasování o přeshraniční spolupráci záchranných služeb a o přístupu statistického ústavu k datům; nedokládají jiné možné kroky k rušení personální vyhlášky nebo k zavedení ukazatelů kvality péče."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

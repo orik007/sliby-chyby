@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-44-53-235Z--700c1b9d5430",
+  "evaluatedAt": "2026-09-27T14:44:53.235Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-4d7caeaa1c74/700c1b9d5430813788ac58ba5f88fbc1b1f4900818763a4c165830ea77d90cc0.json",
+  "packageHash": "700c1b9d5430813788ac58ba5f88fbc1b1f4900818763a4c165830ea77d90cc0",
+  "assessmentContentHash": "efdb99724dea1266e0b54fe351daf7ecd8e832f38bed685d1e8c4ca2e5d11546",
+  "assessmentFingerprint": "0246bd7f15449a964562976e4d04cc86c10c58db7e31ca2e64e2440b07d0f5c3",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-4d7caeaa1c74",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b"
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-4d7caeaa1c74",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43164-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí hlášení hrozícího přerušení dodávek zdravotnických prostředků, šetření jejich dostupnosti a možnost dočasně upravit jejich dodávání či používání."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-64",
+          "relevant": false,
+          "reasonCz": "Text pouze vypouští části vět v zákoně o léčivech, ale nedokládá, že by tím měnil dostupnost léčiv nebo jejich dodávky; samotná souvislost s léčivy nestačí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4d7caeaa1c74--source",
+        "psp-core-2025--law-change-43164-1",
+        "psp-core-2025--vote-87045",
+        "psp-core-2025--vote-87487",
+        "psp-core-2025--senate-resolution-43164-2"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu zákona o zdravotnických prostředcích, která zavádí hlášení hrozícího přerušení dodávek a šetření dostupnosti důležitých prostředků. Pokud je jejich dostupnost ohrožena, ministerstvo může dočasně upravit jejich dodávání nebo používání. Senátní změny upravily způsob hlášení, ale zachovaly hlavní opatření k dostupnosti. Jde o doložený krok týkající se zdravotnických prostředků, nikoli o zajištění spolehlivých dodávek všech léčiv i prostředků bez výpadků.",
+      "confidence": "high",
+      "uncertainties": []
+    },
+    "assessor-b": null
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_01b09710c6981e18016ab92bc7102c87d18ac11194d8926b59",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 20151,
+      "input_tokens_details": {
+        "cache_write_tokens": 16911,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 3254,
+      "output_tokens_details": {
+        "reasoning_tokens": 2820
+      },
+      "total_tokens": 23405
+    },
+    "output": {
+      "promiseId": "candidate-4d7caeaa1c74",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43164-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí hlášení hrozícího přerušení dodávek zdravotnických prostředků, šetření jejich dostupnosti a možnost dočasně upravit jejich dodávání či používání."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-64",
+          "relevant": false,
+          "reasonCz": "Text pouze vypouští části vět v zákoně o léčivech, ale nedokládá, že by tím měnil dostupnost léčiv nebo jejich dodávky; samotná souvislost s léčivy nestačí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4d7caeaa1c74--source",
+        "psp-core-2025--law-change-43164-1",
+        "psp-core-2025--vote-87045",
+        "psp-core-2025--vote-87487",
+        "psp-core-2025--senate-resolution-43164-2"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu zákona o zdravotnických prostředcích, která zavádí hlášení hrozícího přerušení dodávek a šetření dostupnosti důležitých prostředků. Pokud je jejich dostupnost ohrožena, ministerstvo může dočasně upravit jejich dodávání nebo používání. Senátní změny upravily způsob hlášení, ale zachovaly hlavní opatření k dostupnosti. Jde o doložený krok týkající se zdravotnických prostředků, nikoli o zajištění spolehlivých dodávek všech léčiv i prostředků bez výpadků.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_026bce4a2e070683016ab92bd7c07c87d1806a3a6ab3ddf8f4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 20151,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 20148
+      },
+      "output_tokens": 1751,
+      "output_tokens_details": {
+        "reasoning_tokens": 1226
+      },
+      "total_tokens": 21902
+    },
+    "output": {
+      "promiseId": "candidate-4d7caeaa1c74",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43164-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí hlášení hrozícího přerušení dodávek zdravotnických prostředků, šetření jejich nedostupnosti a možnost dočasných opatření, čímž může řešit část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-64",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší část vět v zákoně o léčivech, ale neuvádí, čeho se rušené části týkají, takže nelze doložit vliv na spolehlivost dodávek."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4d7caeaa1c74--source",
+        "psp-core-2025--law-change-43164-1",
+        "psp-core-2025--vote-87045",
+        "psp-core-2025--vote-87487",
+        "psp-core-2025--senate-resolution-43164-2"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro vládní novelu zákona o zdravotnických prostředcích, tedy zdravotnických pomůckách (sněmovní tisk 57). Novela zavádí hlášení očekávaného přerušení dodávek a šetření nedostupnosti pomůcek; při ohrožení dostupnosti umožňuje ministerstvu dočasně upravit jejich dodávání či používání. Po vrácení návrhu Senátem poslanci ANO podpořili i pozměněné znění, které zachovalo hlášení přes formulář a vypustilo přechod na informační systém. Jde o posun u zdravotnických prostředků, ale slib zahrnuje také léčiva a zajištění dodávek jako celku.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_079d0ce7985f7713016ab92be0e52087d1aa1aa1c0c97fcc3c",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 19762,
+      "input_tokens_details": {
+        "cache_write_tokens": 17345,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 474,
+      "output_tokens_details": {
+        "reasoning_tokens": 224
+      },
+      "total_tokens": 20236
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "candidate-4d7caeaa1c74--source",
+        "psp-core-2025--law-change-43164-1",
+        "psp-core-2025--vote-87487",
+        "psp-core-2025--senate-resolution-43164-2"
+      ],
+      "explanationCz": "Použitelný posudek správně rozlišuje mezi změnou týkající se zdravotnických prostředků a nesouvisející dílčí změnou zákona o léčivech. Poslanci ANO podpořili návrh zákona o zdravotnických prostředcích, vedený ve Sněmovně jako tisk č. 57, který zavádí včasné hlášení hrozících výpadků a postup pro řešení nedostupnosti. Senát upravil hlavně způsob hlášení, ale opatření na ochranu dostupnosti zůstala zachována. Tento krok může pomoci s dostupností prostředků, sám ale nezajišťuje dodávky všech léčiv a prostředků bez výpadků."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-confirmed-single-assessor",
+    "status": "moving-towards",
+    "selectedReview": "assessor-a"
+  }
+}

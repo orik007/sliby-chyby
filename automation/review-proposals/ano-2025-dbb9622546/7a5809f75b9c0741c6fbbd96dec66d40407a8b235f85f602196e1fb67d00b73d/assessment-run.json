@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-39-33-669Z--7355c9d52cac",
+  "evaluatedAt": "2026-09-27T14:39:33.669Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-dbb9622546/7355c9d52caca6dfef1404118f2f6ea6fbf487b6ef3e536613220d3bfbf2e554.json",
+  "packageHash": "7355c9d52caca6dfef1404118f2f6ea6fbf487b6ef3e536613220d3bfbf2e554",
+  "assessmentContentHash": "b4b131d6dfdb376a8ada42544385a86c473dc35f45997956b3a01b1adf7b85bc",
+  "assessmentFingerprint": "7a5809f75b9c0741c6fbbd96dec66d40407a8b235f85f602196e1fb67d00b73d",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-dbb9622546",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": null,
+    "assessor-b": {
+      "promiseId": "ano-2025-dbb9622546",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a přijatá verze označuje rozvoj sportovní infrastruktury za prioritu a připouští podporu investic do majetku, avšak navržená verze tyto změny neobsahuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-dbb9622546--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh zákona, ale jeho původní ustanovení o sportu upravovalo vedení agentury, nikoli systém financování infrastruktury. V červenci poslanci ANO hlasovali pro znění, které rozšířilo priority státní podpory o rozvoj sportovní infrastruktury a zahrnulo do podpory také pořízení či technické zhodnocení majetku. Senát návrh zamítl; v září poslanci ANO hlasovali pro to, aby na něm Sněmovna setrvala, a Parlament jej přijal. Jde o dílčí posun, protože tyto změny samy nezavádějí transparentní rozdělování podle potřeb, spolupráci krajů a obcí ani jasné spolufinancování.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_044b405820f3c614016ab92a8fd45487d18cdf51513cd717b8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10537,
+      "input_tokens_details": {
+        "cache_write_tokens": 7297,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1888,
+      "output_tokens_details": {
+        "reasoning_tokens": 1377
+      },
+      "total_tokens": 12425
+    },
+    "output": {
+      "promiseId": "ano-2025-dbb9622546",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená verze řadí rozvoj sportovní infrastruktury mezi priority a umožňuje podporu pořízení či technického zhodnocení majetku, čímž naplňuje část slibu, ale neřeší transparentní systém ani spolufinancování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-dbb9622546--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh novely zákona o státních zaměstnancích (sněmovní tisk 77), ale jeho původní část o sportu měnila jen pravidla fungování sportovní agentury a systém financování nezaváděla. Poslanci ANO pak hlasovali pro pozměněnou verzi, která stanoví rozvoj sportovní infrastruktury jako prioritu a umožňuje podporovat pořízení či technické zhodnocení majetku. Hlasovali pro ni také poté, co Senát návrh zamítl a Sněmovna o něm rozhodovala znovu. Jde o posun v podpoře infrastruktury, ale doložený text nezajišťuje transparentní rozdělování peněz podle potřeb ani jasné spolufinancování.",
+      "confidence": "high",
+      "uncertainties": [
+        "Z doložené novely nelze potvrdit, že by financování bylo rozdělováno podle skutečných potřeb občanů a sportovních svazů nebo že by bylo stanoveno jasné spolufinancování."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0123709085ace748016ab92a99cfdc87d1bac3b753daefc6d5",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10537,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 10534
+      },
+      "output_tokens": 1256,
+      "output_tokens_details": {
+        "reasoning_tokens": 804
+      },
+      "total_tokens": 11793
+    },
+    "output": {
+      "promiseId": "ano-2025-dbb9622546",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a přijatá verze označuje rozvoj sportovní infrastruktury za prioritu a připouští podporu investic do majetku, avšak navržená verze tyto změny neobsahuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-dbb9622546--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh zákona, ale jeho původní ustanovení o sportu upravovalo vedení agentury, nikoli systém financování infrastruktury. V červenci poslanci ANO hlasovali pro znění, které rozšířilo priority státní podpory o rozvoj sportovní infrastruktury a zahrnulo do podpory také pořízení či technické zhodnocení majetku. Senát návrh zamítl; v září poslanci ANO hlasovali pro to, aby na něm Sněmovna setrvala, a Parlament jej přijal. Jde o dílčí posun, protože tyto změny samy nezavádějí transparentní rozdělování podle potřeb, spolupráci krajů a obcí ani jasné spolufinancování.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_04f1d05dc025bf7a016ab92aa0b60087d19525dd51d8046d3d",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 10119,
+      "input_tokens_details": {
+        "cache_write_tokens": 7702,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 440,
+      "output_tokens_details": {
+        "reasoning_tokens": 206
+      },
+      "total_tokens": 10559
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "ano-2025-dbb9622546--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "K dispozici bylo jen jedno použitelné posouzení a odpovídá doloženým krokům. Poslanci ANO nejprve podali návrh, jehož původní část o sportu řešila jiné otázky než financování infrastruktury. Později ale poslanci ANO podpořili konečné znění zákona, které mezi priority zařadilo rozvoj sportovní infrastruktury a umožňuje podporu pořízení či zlepšování majetku. Je to jen část slibu, protože zákon nezavádí průhledné rozdělování peněz podle potřeb, spolupráci s kraji a obcemi ani jasné spolufinancování."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-confirmed-single-assessor",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

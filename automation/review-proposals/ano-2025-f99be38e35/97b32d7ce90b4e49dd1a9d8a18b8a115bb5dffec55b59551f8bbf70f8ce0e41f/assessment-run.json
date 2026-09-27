@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-40-20-525Z--3d181a147fd2",
+  "evaluatedAt": "2026-09-27T14:40:20.525Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-f99be38e35/3d181a147fd2fe2b0ec472573b57490b06274439e2c14d63a718ae8ba9c7e00b.json",
+  "packageHash": "3d181a147fd2fe2b0ec472573b57490b06274439e2c14d63a718ae8ba9c7e00b",
+  "assessmentContentHash": "8335ca183f72c9effaf29a401b9df751b929fce4c4b2cb8cc4be9b66f0a4a375",
+  "assessmentFingerprint": "97b32d7ce90b4e49dd1a9d8a18b8a115bb5dffec55b59551f8bbf70f8ce0e41f",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-f99be38e35",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-f99be38e35",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43144-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu financuje podporu audiovize a kinematografických projektů, což může tvořit část slibu týkající se mladých talentů ve filmu, ale nezmiňuje jejich podporu konkrétně."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-f99be38e35--source",
+        "psp-core-2025--law-change-43144-1",
+        "psp-core-2025--vote-86961"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro rozpočet Státního fondu audiovize na rok 2026, který počítá s 230,3 milionu korun na podporu kinematografických projektů a s celkovými výdaji 401,46 milionu korun na podporu audiovize. To se týká filmové části slibu, ale návrh neuvádí, že peníze mají posílit granty či stipendia určená mladým umělcům. Z dostupných podkladů proto nelze ověřit, že hlasování slib skutečně posunulo.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet uvádí podporu kinematografických projektů, ale nevymezuje, zda budou prostředky určeny mladým umělcům ani zda jde o navýšení právě jejich grantů či stipendií; nelze proto spolehlivě určit, zda hlasování naplnilo filmovou část slibu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-f99be38e35",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43144-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu vyčleňuje prostředky na podporu projektů v kinematografii, tedy v jedné z oblastí výslovně uvedených ve slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-f99be38e35--source",
+        "psp-core-2025--law-change-43144-1",
+        "psp-core-2025--vote-86961"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali v prvním čtení pro návrh rozpočtu Státního fondu audiovize na rok 2026, který počítá s 230 miliony korun na podporu projektů v kinematografii. Tím podpořili financování filmové oblasti zmíněné ve slibu. Rozpočet však nestanoví zvláštní granty či stipendia pro mladé umělce a sám o sobě nedokládá, že se jejich podpora oproti dřívějšku zvýšila, takže jde jen o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z rozpočtového návrhu nelze doložit, zda se podpora mladých umělců zvýší oproti předchozímu období; částka na kinematografii není výslovně určena mladým talentům ani stipendijním programům."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0170ef49cd4e08c5016ab92abab0b087d19e0410663bbf603b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 21559,
+      "input_tokens_details": {
+        "cache_write_tokens": 18319,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2145,
+      "output_tokens_details": {
+        "reasoning_tokens": 1749
+      },
+      "total_tokens": 23704
+    },
+    "output": {
+      "promiseId": "ano-2025-f99be38e35",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43144-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu financuje podporu audiovize a kinematografických projektů, což může tvořit část slibu týkající se mladých talentů ve filmu, ale nezmiňuje jejich podporu konkrétně."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-f99be38e35--source",
+        "psp-core-2025--law-change-43144-1",
+        "psp-core-2025--vote-86961"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro rozpočet Státního fondu audiovize na rok 2026, který počítá s 230,3 milionu korun na podporu kinematografických projektů a s celkovými výdaji 401,46 milionu korun na podporu audiovize. To se týká filmové části slibu, ale návrh neuvádí, že peníze mají posílit granty či stipendia určená mladým umělcům. Z dostupných podkladů proto nelze ověřit, že hlasování slib skutečně posunulo.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet uvádí podporu kinematografických projektů, ale nevymezuje, zda budou prostředky určeny mladým umělcům ani zda jde o navýšení právě jejich grantů či stipendií; nelze proto spolehlivě určit, zda hlasování naplnilo filmovou část slibu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_02acf2da30a190c6016ab92ac5e89087d192e56045b350153e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 21559,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 21556
+      },
+      "output_tokens": 2151,
+      "output_tokens_details": {
+        "reasoning_tokens": 1778
+      },
+      "total_tokens": 23710
+    },
+    "output": {
+      "promiseId": "ano-2025-f99be38e35",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43144-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu vyčleňuje prostředky na podporu projektů v kinematografii, tedy v jedné z oblastí výslovně uvedených ve slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-f99be38e35--source",
+        "psp-core-2025--law-change-43144-1",
+        "psp-core-2025--vote-86961"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali v prvním čtení pro návrh rozpočtu Státního fondu audiovize na rok 2026, který počítá s 230 miliony korun na podporu projektů v kinematografii. Tím podpořili financování filmové oblasti zmíněné ve slibu. Rozpočet však nestanoví zvláštní granty či stipendia pro mladé umělce a sám o sobě nedokládá, že se jejich podpora oproti dřívějšku zvýšila, takže jde jen o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z rozpočtového návrhu nelze doložit, zda se podpora mladých umělců zvýší oproti předchozímu období; částka na kinematografii není výslovně určena mladým talentům ani stipendijním programům."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0f9be1ef54511575016ab92ad06aec87d19a5fd624a439ac21",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 21489,
+      "input_tokens_details": {
+        "cache_write_tokens": 19072,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 345,
+      "output_tokens_details": {
+        "reasoning_tokens": 156
+      },
+      "total_tokens": 21834
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "psp-core-2025--law-change-43144-1",
+        "psp-core-2025--vote-86961"
+      ],
+      "explanationCz": "Volím posouzení A. Poslanci ANO podpořili v prvním čtení návrh rozpočtu Státního fondu audiovize na rok 2026, vedený ve Sněmovně jako tisk č. 37. Návrh sice obsahuje peníze na podporu audiovize a filmových projektů, ale neříká, že jsou určeny mladým umělcům, ani že zvyšují jejich granty či stipendia. Navíc šlo o hlasování v prvním čtení, ne o konečné rozhodnutí o návrhu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

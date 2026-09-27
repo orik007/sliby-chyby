@@ -1,0 +1,250 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-43-21-502Z--b2c0ea6ed8d3",
+  "evaluatedAt": "2026-09-27T14:43:21.502Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-31d50c7d74d5/b2c0ea6ed8d34366566830df07832fc190747d48bbe38495a2a1077ae805148a.json",
+  "packageHash": "b2c0ea6ed8d34366566830df07832fc190747d48bbe38495a2a1077ae805148a",
+  "assessmentContentHash": "4a1c725553157f531e737f1f74ce9954579b52d65322784e933577f9176c85a3",
+  "assessmentFingerprint": "511467177ca5f1eeccfac571e6d1a28464222208d26ad0e1b15d834bea900077",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-31d50c7d74d5",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-31d50c7d74d5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Schválená verze výslovně upravuje povolování malých vodních děl pro čištění odpadních vod, což se přímo týká domovních čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navrhované zrušení zákona o jednotném environmentálním stanovisku samo o sobě nerozšiřuje projekt domovních čistíren a v poslaneckou sněmovnou schváleném znění bylo odstraněno."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Změna pouze prodlužuje lhůtu v dřívějším zákoně a její text nespojuje tuto lhůtu s domovními čistírnami ani s rozšířením projektu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet počítá s obecnou podporou vodohospodářské infrastruktury a odvádění odpadních vod, ale nevyčleňuje prostředky na domovní čistírny ani na rozšíření tohoto projektu do krajů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-31d50c7d74d5--source",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh na změny vodního zákona, jehož původní text přesunoval některá vodoprávní rozhodnutí na stavební úřady. V později schváleném znění se navíc u malých čistíren s označením CE do 50 ekvivalentních obyvatel nakládání s vodami považuje za povolené spolu s povolením stavby. Poslanci ANO hlasovali pro toto znění; poté, co Senát návrh odmítl, Sněmovna setrvala na svém původně schváleném znění. Jde o dílčí právní krok usnadňující povolování domovních čistíren, nikoli o doložené rozšíření projektu do všech krajů.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda se projekt domovních čistíren skutečně rozšířil do jednotlivých krajů; zachycují pouze právní změnu usnadňující povolování části těchto zařízení."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-31d50c7d74d5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Schválené znění zavádí zvláštní režim pro malé čistírny odpadních vod do kapacity odpovídající 50 obyvatelům, což může usnadnit část slíbeného rozšíření domovních čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navrhované zrušení zákona o jednotném environmentálním stanovisku samo neupravuje dostupnost domovních čistíren ani jejich rozšíření do krajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Text pouze prodlužuje lhůtu v dřívější změně vodního zákona, ale neuvádí, že by se tato lhůta týkala domovních čistíren nebo jejich rozšíření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu obsahuje konkrétní prostředky na podporu vodohospodářské infrastruktury a odpadních vod, což může podpořit část obecného závazku ke kvalitní infrastruktuře."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-31d50c7d74d5--source",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-86968",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Program ANO slibuje kvalitní infrastrukturu i v menších obcích a rozšíření projektu domovních čistíren do všech krajů. Poslanci ANO předložili širší návrh změn stavebního zákona a později podpořili jeho schválené znění, které u malých čistíren do kapacity odpovídající 50 obyvatelům s příslušným označením CE spojuje povolení nakládání s vodami s povolením stavby; to usnadňuje část slíbeného rozšíření. Senát návrh odmítl, ale poslanci ANO hlasovali, aby Poslanecká sněmovna na svém znění setrvala. ANO také podpořilo návrh rozpočtu Státního fondu životního prostředí s prostředky na vodohospodářskou infrastrukturu, avšak předložené podklady nedokládají, že jsou určeny přímo na domovní čistírny ve všech krajích.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočtová podpora se týká vodohospodářské infrastruktury obecně; podklady neukazují, zda peníze zamíří do menších obcí nebo přímo na domovní čistírny. Není doloženo ani rozšíření projektu do všech krajů."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_08a9a3e06bf078da016ab92b5d8f0487d1a79b74d37afa60f2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 32505,
+      "input_tokens_details": {
+        "cache_write_tokens": 29265,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 3565,
+      "output_tokens_details": {
+        "reasoning_tokens": 2791
+      },
+      "total_tokens": 36070
+    },
+    "output": {
+      "promiseId": "candidate-31d50c7d74d5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Schválená verze výslovně upravuje povolování malých vodních děl pro čištění odpadních vod, což se přímo týká domovních čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navrhované zrušení zákona o jednotném environmentálním stanovisku samo o sobě nerozšiřuje projekt domovních čistíren a v poslaneckou sněmovnou schváleném znění bylo odstraněno."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Změna pouze prodlužuje lhůtu v dřívějším zákoně a její text nespojuje tuto lhůtu s domovními čistírnami ani s rozšířením projektu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet počítá s obecnou podporou vodohospodářské infrastruktury a odvádění odpadních vod, ale nevyčleňuje prostředky na domovní čistírny ani na rozšíření tohoto projektu do krajů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-31d50c7d74d5--source",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh na změny vodního zákona, jehož původní text přesunoval některá vodoprávní rozhodnutí na stavební úřady. V později schváleném znění se navíc u malých čistíren s označením CE do 50 ekvivalentních obyvatel nakládání s vodami považuje za povolené spolu s povolením stavby. Poslanci ANO hlasovali pro toto znění; poté, co Senát návrh odmítl, Sněmovna setrvala na svém původně schváleném znění. Jde o dílčí právní krok usnadňující povolování domovních čistíren, nikoli o doložené rozšíření projektu do všech krajů.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda se projekt domovních čistíren skutečně rozšířil do jednotlivých krajů; zachycují pouze právní změnu usnadňující povolování části těchto zařízení."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_029d8b39fc5076c3016ab92b6f169c87d1b792e36685f3e41e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 32505,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 32502
+      },
+      "output_tokens": 5260,
+      "output_tokens_details": {
+        "reasoning_tokens": 4485
+      },
+      "total_tokens": 37765
+    },
+    "output": {
+      "promiseId": "candidate-31d50c7d74d5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Schválené znění zavádí zvláštní režim pro malé čistírny odpadních vod do kapacity odpovídající 50 obyvatelům, což může usnadnit část slíbeného rozšíření domovních čistíren."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-41",
+          "relevant": false,
+          "reasonCz": "Navrhované zrušení zákona o jednotném environmentálním stanovisku samo neupravuje dostupnost domovních čistíren ani jejich rozšíření do krajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Text pouze prodlužuje lhůtu v dřívější změně vodního zákona, ale neuvádí, že by se tato lhůta týkala domovních čistíren nebo jejich rozšíření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu obsahuje konkrétní prostředky na podporu vodohospodářské infrastruktury a odpadních vod, což může podpořit část obecného závazku ke kvalitní infrastruktuře."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-31d50c7d74d5--source",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-86968",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Program ANO slibuje kvalitní infrastrukturu i v menších obcích a rozšíření projektu domovních čistíren do všech krajů. Poslanci ANO předložili širší návrh změn stavebního zákona a později podpořili jeho schválené znění, které u malých čistíren do kapacity odpovídající 50 obyvatelům s příslušným označením CE spojuje povolení nakládání s vodami s povolením stavby; to usnadňuje část slíbeného rozšíření. Senát návrh odmítl, ale poslanci ANO hlasovali, aby Poslanecká sněmovna na svém znění setrvala. ANO také podpořilo návrh rozpočtu Státního fondu životního prostředí s prostředky na vodohospodářskou infrastrukturu, avšak předložené podklady nedokládají, že jsou určeny přímo na domovní čistírny ve všech krajích.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočtová podpora se týká vodohospodářské infrastruktury obecně; podklady neukazují, zda peníze zamíří do menších obcí nebo přímo na domovní čistírny. Není doloženo ani rozšíření projektu do všech krajů."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

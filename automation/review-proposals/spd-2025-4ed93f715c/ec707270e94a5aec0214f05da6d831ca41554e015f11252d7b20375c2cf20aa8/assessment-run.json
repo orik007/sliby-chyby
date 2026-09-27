@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T15-01-53-950Z--46b725cd1532",
+  "evaluatedAt": "2026-09-27T15:01:53.950Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-4ed93f715c/46b725cd1532aaadc3469b3bc0bd84457e561786d6cb47a2e833c96ba6b9f34f.json",
+  "packageHash": "46b725cd1532aaadc3469b3bc0bd84457e561786d6cb47a2e833c96ba6b9f34f",
+  "assessmentContentHash": "ac10a02b654ef2c3ea8021a5fd100edae5e7b92e5f33ca8560abcde11e2cd00c",
+  "assessmentFingerprint": "ec707270e94a5aec0214f05da6d831ca41554e015f11252d7b20375c2cf20aa8",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-4ed93f715c",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-4ed93f715c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a přijatá verze rozšiřuje podporu sportu také o výdaje na pořádání významných sportovních akcí, což může naplnit část slibu vytvořit pro tyto akce podmínky."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-4ed93f715c--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7"
+      ],
+      "explanationCz": "Původní poslanecký návrh, který předložili také poslanci SPD, měnil u zákona o podpoře sportu pouze pravidla týkající se Národní sportovní agentury. Schválená verze návrhu ale rozšířila podporu sportu i na výdaje spojené s pořádáním významných sportovních akcí. Poslanci SPD hlasovali pro její schválení a po zamítnutí návrhu Senátem hlasovali také pro setrvání na sněmovní verzi. Tím podpořili část slibu, avšak tato ustanovení sama nezajišťují pořádání velkých mezinárodních akcí jako celku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Zákon počítá s podporou pořádání významných sportovních akcí, ale výslovně nezmiňuje jejich mezinárodní charakter ani sám nezaručuje vytvoření všech podmínek pro pořádání takových akcí. Proto je doložen pouze částečný posun."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-4ed93f715c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a přijatá verze zákona umožňuje poskytovat podporu také na pořádání významných sportovních akcí a akcí mimořádné důležitosti, což může přispět k podmínkám pro velké mezinárodní sportovní akce."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-4ed93f715c--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7"
+      ],
+      "explanationCz": "SPD slíbila vytvořit podmínky pro pořádání velkých mezinárodních sportovních akcí. Její poslanci hlasovali pro novelu zákona o podpoře sportu, která umožňuje podporovat také pořádání významných sportovních akcí a akcí mimořádné důležitosti. Po zamítnutí návrhu Senátem poslanci SPD hlasovali pro setrvání na schváleném znění. Jde o dílčí posun: novela umožňuje podporu akcí, ale sama nedokládá vytvoření všech potřebných podmínek pro velké mezinárodní události.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Znění zákona hovoří o významných sportovních akcích, nikoli výslovně o velkých mezinárodních akcích; důkazy proto potvrzují možnost dílčí podpory, ne konkrétní zajištění mezinárodní akce."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_092011ce3f5c5280016ab92fd2e71087d1a16520da95378ebc",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10482,
+      "input_tokens_details": {
+        "cache_write_tokens": 7242,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1301,
+      "output_tokens_details": {
+        "reasoning_tokens": 847
+      },
+      "total_tokens": 11783
+    },
+    "output": {
+      "promiseId": "spd-2025-4ed93f715c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a přijatá verze rozšiřuje podporu sportu také o výdaje na pořádání významných sportovních akcí, což může naplnit část slibu vytvořit pro tyto akce podmínky."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-4ed93f715c--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7"
+      ],
+      "explanationCz": "Původní poslanecký návrh, který předložili také poslanci SPD, měnil u zákona o podpoře sportu pouze pravidla týkající se Národní sportovní agentury. Schválená verze návrhu ale rozšířila podporu sportu i na výdaje spojené s pořádáním významných sportovních akcí. Poslanci SPD hlasovali pro její schválení a po zamítnutí návrhu Senátem hlasovali také pro setrvání na sněmovní verzi. Tím podpořili část slibu, avšak tato ustanovení sama nezajišťují pořádání velkých mezinárodních akcí jako celku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Zákon počítá s podporou pořádání významných sportovních akcí, ale výslovně nezmiňuje jejich mezinárodní charakter ani sám nezaručuje vytvoření všech podmínek pro pořádání takových akcí. Proto je doložen pouze částečný posun."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0a754e307246e0e6016ab92fdaed3487d1b71b8eecb9c081dc",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10482,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 10479
+      },
+      "output_tokens": 1202,
+      "output_tokens_details": {
+        "reasoning_tokens": 760
+      },
+      "total_tokens": 11684
+    },
+    "output": {
+      "promiseId": "spd-2025-4ed93f715c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a přijatá verze zákona umožňuje poskytovat podporu také na pořádání významných sportovních akcí a akcí mimořádné důležitosti, což může přispět k podmínkám pro velké mezinárodní sportovní akce."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-4ed93f715c--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7"
+      ],
+      "explanationCz": "SPD slíbila vytvořit podmínky pro pořádání velkých mezinárodních sportovních akcí. Její poslanci hlasovali pro novelu zákona o podpoře sportu, která umožňuje podporovat také pořádání významných sportovních akcí a akcí mimořádné důležitosti. Po zamítnutí návrhu Senátem poslanci SPD hlasovali pro setrvání na schváleném znění. Jde o dílčí posun: novela umožňuje podporu akcí, ale sama nedokládá vytvoření všech potřebných podmínek pro velké mezinárodní události.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Znění zákona hovoří o významných sportovních akcích, nikoli výslovně o velkých mezinárodních akcích; důkazy proto potvrzují možnost dílčí podpory, ne konkrétní zajištění mezinárodní akce."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

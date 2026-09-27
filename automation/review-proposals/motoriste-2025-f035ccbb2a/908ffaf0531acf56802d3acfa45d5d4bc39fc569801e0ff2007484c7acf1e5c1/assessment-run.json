@@ -1,0 +1,217 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T15-00-28-809Z--2e49d2291d2e",
+  "evaluatedAt": "2026-09-27T15:00:28.809Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-f035ccbb2a/2e49d2291d2ec3b732b5a67fe617b2e32f6abf06fe35a42f0d72fbbf344e45d6.json",
+  "packageHash": "2e49d2291d2ec3b732b5a67fe617b2e32f6abf06fe35a42f0d72fbbf344e45d6",
+  "assessmentContentHash": "7a597a644d1e3d49f6a9216fb2f21842056991f270f32aee0dc37920e823f08d",
+  "assessmentFingerprint": "908ffaf0531acf56802d3acfa45d5d4bc39fc569801e0ff2007484c7acf1e5c1",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-f035ccbb2a",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-f035ccbb2a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-2",
+          "relevant": true,
+          "reasonCz": "Návrh u nenárokových dotací ukládá nové povinnosti poskytovatelům, včetně prohlášení o střetu zájmů a zveřejnění záměru s možností námitek, takže může zvyšovat byrokracii, kterou slib chce omezit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-3",
+          "relevant": false,
+          "reasonCz": "Změna zkracuje lhůtu pro zahájení řízení o vrácení neoprávněně vyplacené dotace, ale nemění dotační tituly, duplicitní kontroly ani administrativní postupy, na něž se slib vztahuje."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-f035ccbb2a--source",
+        "psp-core-2025--law-change-43343-2",
+        "psp-core-2025--print-step-211601"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě spolu s poslanci dalších stran předložili návrh zákona, který mimo jiné mění pravidla pro poskytování zemědělských dotací. U některých dotací bez právního nároku by poskytovatelé museli nově vyžadovat prohlášení o střetu zájmů a zveřejnit záměr dotaci poskytnout, aby bylo možné podat námitky. Tato navržená administrativa jde proti části slibu o omezení byrokracie; jde však o předložený návrh, nikoli o doloženou účinnou změnu.",
+      "confidence": "high",
+      "uncertainties": []
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-f035ccbb2a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-2",
+          "relevant": true,
+          "reasonCz": "Navržená změna pravidel pro dotace ukládá nová prohlášení a postupy při střetu zájmů, takže se přímo týká administrativní zátěže při poskytování podpor."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-3",
+          "relevant": true,
+          "reasonCz": "Zkrácení lhůty pro zahájení řízení o vrácení dotace z deseti na čtyři roky omezuje dobu, po kterou mohou být příjemci vystaveni tomuto kontrolnímu řízení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-f035ccbb2a--source",
+        "psp-core-2025--law-change-43343-2",
+        "psp-core-2025--law-change-43343-3",
+        "psp-core-2025--print-step-211601"
+      ],
+      "explanationCz": "Poslanci Motoristů spolu s poslanci dalších stran předložili návrh zákona, který mimo jiné mění pravidla zemědělských dotací a činnosti Státního zemědělského intervenčního fondu (SZIF). Návrh zkracuje lhůtu pro zahájení řízení o vrácení dotace z deseti na čtyři roky, čímž částečně omezuje dobu kontrolní nejistoty pro příjemce. Zároveň však zavádí nová prohlášení a další postupy při posuzování střetu zájmů u některých dotací, což administrativní povinnosti přidává. Návrh tedy přináší dílčí posun v omezení kontrol, ale současně jde v části administrativy opačným směrem.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh současně zkracuje dobu pro zahájení řízení o vrácení dotace a zavádí nové administrativní postupy při střetu zájmů; posouzení jako dílčího posunu proto závisí na tom, kterou z těchto částí přikládáme větší váhu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0557dba0ba5a1e59016ab92f746f4487d1816d02bb8a88b748",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8233,
+      "input_tokens_details": {
+        "cache_write_tokens": 4993,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1469,
+      "output_tokens_details": {
+        "reasoning_tokens": 1034
+      },
+      "total_tokens": 9702
+    },
+    "output": {
+      "promiseId": "motoriste-2025-f035ccbb2a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-2",
+          "relevant": true,
+          "reasonCz": "Návrh u nenárokových dotací ukládá nové povinnosti poskytovatelům, včetně prohlášení o střetu zájmů a zveřejnění záměru s možností námitek, takže může zvyšovat byrokracii, kterou slib chce omezit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-3",
+          "relevant": false,
+          "reasonCz": "Změna zkracuje lhůtu pro zahájení řízení o vrácení neoprávněně vyplacené dotace, ale nemění dotační tituly, duplicitní kontroly ani administrativní postupy, na něž se slib vztahuje."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-f035ccbb2a--source",
+        "psp-core-2025--law-change-43343-2",
+        "psp-core-2025--print-step-211601"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě spolu s poslanci dalších stran předložili návrh zákona, který mimo jiné mění pravidla pro poskytování zemědělských dotací. U některých dotací bez právního nároku by poskytovatelé museli nově vyžadovat prohlášení o střetu zájmů a zveřejnit záměr dotaci poskytnout, aby bylo možné podat námitky. Tato navržená administrativa jde proti části slibu o omezení byrokracie; jde však o předložený návrh, nikoli o doloženou účinnou změnu.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_07e1ce666ff92216016ab92f7c99d487d1883d20eaa93b062c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8233,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8230
+      },
+      "output_tokens": 2092,
+      "output_tokens_details": {
+        "reasoning_tokens": 1552
+      },
+      "total_tokens": 10325
+    },
+    "output": {
+      "promiseId": "motoriste-2025-f035ccbb2a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-2",
+          "relevant": true,
+          "reasonCz": "Navržená změna pravidel pro dotace ukládá nová prohlášení a postupy při střetu zájmů, takže se přímo týká administrativní zátěže při poskytování podpor."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-3",
+          "relevant": true,
+          "reasonCz": "Zkrácení lhůty pro zahájení řízení o vrácení dotace z deseti na čtyři roky omezuje dobu, po kterou mohou být příjemci vystaveni tomuto kontrolnímu řízení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-f035ccbb2a--source",
+        "psp-core-2025--law-change-43343-2",
+        "psp-core-2025--law-change-43343-3",
+        "psp-core-2025--print-step-211601"
+      ],
+      "explanationCz": "Poslanci Motoristů spolu s poslanci dalších stran předložili návrh zákona, který mimo jiné mění pravidla zemědělských dotací a činnosti Státního zemědělského intervenčního fondu (SZIF). Návrh zkracuje lhůtu pro zahájení řízení o vrácení dotace z deseti na čtyři roky, čímž částečně omezuje dobu kontrolní nejistoty pro příjemce. Zároveň však zavádí nová prohlášení a další postupy při posuzování střetu zájmů u některých dotací, což administrativní povinnosti přidává. Návrh tedy přináší dílčí posun v omezení kontrol, ale současně jde v části administrativy opačným směrem.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh současně zkracuje dobu pro zahájení řízení o vrácení dotace a zavádí nové administrativní postupy při střetu zájmů; posouzení jako dílčího posunu proto závisí na tom, kterou z těchto částí přikládáme větší váhu."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_060406410d58e66c016ab92f875b7087d1b9132b489196e236",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 8371,
+      "input_tokens_details": {
+        "cache_write_tokens": 5954,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 546,
+      "output_tokens_details": {
+        "reasoning_tokens": 344
+      },
+      "total_tokens": 8917
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "motoriste-2025-f035ccbb2a--source",
+        "psp-core-2025--law-change-43343-2",
+        "psp-core-2025--print-step-211601"
+      ],
+      "explanationCz": "Volím hodnocení A. Poslanci Motoristů sobě předložili návrh, který u části zemědělských dotací zavádí nová prohlášení, zveřejňování záměrů a vyřizování námitek. To může zvýšit papírování, které chtěli Motoristé omezit. Druhá změna pouze zkracuje dobu pro zahájení řízení o vrácení neoprávněně vyplacené dotace; sama neomezuje duplicitní kontroly ani nezjednodušuje dotační tituly."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-against",
+    "selectedReview": "assessor-a"
+  }
+}

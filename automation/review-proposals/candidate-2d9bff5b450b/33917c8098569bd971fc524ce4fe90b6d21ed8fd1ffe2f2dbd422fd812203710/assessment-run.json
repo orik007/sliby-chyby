@@ -1,0 +1,216 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-42-57-858Z--82ac5da0da27",
+  "evaluatedAt": "2026-09-27T14:42:57.858Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-2d9bff5b450b/82ac5da0da27610fcee1eba3c16a4f2562f68686650e778d862d72509ca01fda.json",
+  "packageHash": "82ac5da0da27610fcee1eba3c16a4f2562f68686650e778d862d72509ca01fda",
+  "assessmentContentHash": "ffbdfffc17d60504e63218a92f0f0339985d0e7db65a4ac1495d375adc504e5c",
+  "assessmentFingerprint": "33917c8098569bd971fc524ce4fe90b6d21ed8fd1ffe2f2dbd422fd812203710",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-2d9bff5b450b",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-2d9bff5b450b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Novela upravuje stavební právo, ale žádná její verze nestanoví podporu výměny domácích kotlů ani takovou výměnu jinak materiálně neumožňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu podporuje obecná opatření energetických úspor v domácnostech, ale neuvádí podporu výměny kotlů ani neumožňuje určit, že by na ni prostředky směřovaly."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-2d9bff5b450b--source",
+        "psp-core-2025--law-change-43207-1"
+      ],
+      "explanationCz": "ANO slíbilo podpořit výměnu dalších stovek tisíc domácích kotlů, včetně starších plynových kotlů. Předložený návrh rozpočtu Státního fondu životního prostředí počítá s prostředky na energetické úspory v domácnostech, ale neříká, že mají podpořit právě výměnu kotlů. Z dostupných podkladů proto nelze doložit ověřený podstatný posun ve slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet zmiňuje obecné programy energetických úspor v domácnostech, ale neuvádí, zda a v jakém rozsahu podporují výměnu kotlů; podklady tak neumožňují posoudit případný dílčí přínos."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-2d9bff5b450b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Novela stavebního zákona upravuje především stavební řízení a pravidla výstavby, nikoli podporu výměny domácích kotlů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu počítá s podporou energetických úspor v rezidenčním sektoru a programy pro domácnosti, což může přispět k části slibu o podpoře výměny kotlů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2d9bff5b450b--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Návrh rozpočtu Státního fondu životního prostředí na rok 2026 počítá s podporou energetických úspor v rezidenčním sektoru a s pokračováním programů pro domácnosti. Poslanci ANO pro návrh rozpočtu hlasovali. Tato podpora může přispět k energetickým úpravám domácností, ale rozpočet výslovně neuvádí výměnu kotlů ani cílový počet výměn. Jde proto o dílčí posun, nikoli o splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet nevyčleňuje prostředky výslovně na výměnu domácích kotlů ani nedokládá, kolik kotlů by podpora mohla zahrnout."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0785346cc6f9c591016ab92b52c08887d1a6689309d997ae9e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 145308,
+      "input_tokens_details": {
+        "cache_write_tokens": 142068,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2184,
+      "output_tokens_details": {
+        "reasoning_tokens": 1706
+      },
+      "total_tokens": 147492
+    },
+    "output": {
+      "promiseId": "candidate-2d9bff5b450b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Novela upravuje stavební právo, ale žádná její verze nestanoví podporu výměny domácích kotlů ani takovou výměnu jinak materiálně neumožňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu podporuje obecná opatření energetických úspor v domácnostech, ale neuvádí podporu výměny kotlů ani neumožňuje určit, že by na ni prostředky směřovaly."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-2d9bff5b450b--source",
+        "psp-core-2025--law-change-43207-1"
+      ],
+      "explanationCz": "ANO slíbilo podpořit výměnu dalších stovek tisíc domácích kotlů, včetně starších plynových kotlů. Předložený návrh rozpočtu Státního fondu životního prostředí počítá s prostředky na energetické úspory v domácnostech, ale neříká, že mají podpořit právě výměnu kotlů. Z dostupných podkladů proto nelze doložit ověřený podstatný posun ve slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet zmiňuje obecné programy energetických úspor v domácnostech, ale neuvádí, zda a v jakém rozsahu podporují výměnu kotlů; podklady tak neumožňují posoudit případný dílčí přínos."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b3021990c360b53016ab92b5e545087d18aa52273b6af7df8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 145308,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 145305
+      },
+      "output_tokens": 2722,
+      "output_tokens_details": {
+        "reasoning_tokens": 2295
+      },
+      "total_tokens": 148030
+    },
+    "output": {
+      "promiseId": "candidate-2d9bff5b450b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Novela stavebního zákona upravuje především stavební řízení a pravidla výstavby, nikoli podporu výměny domácích kotlů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu počítá s podporou energetických úspor v rezidenčním sektoru a programy pro domácnosti, což může přispět k části slibu o podpoře výměny kotlů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2d9bff5b450b--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Návrh rozpočtu Státního fondu životního prostředí na rok 2026 počítá s podporou energetických úspor v rezidenčním sektoru a s pokračováním programů pro domácnosti. Poslanci ANO pro návrh rozpočtu hlasovali. Tato podpora může přispět k energetickým úpravám domácností, ale rozpočet výslovně neuvádí výměnu kotlů ani cílový počet výměn. Jde proto o dílčí posun, nikoli o splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet nevyčleňuje prostředky výslovně na výměnu domácích kotlů ani nedokládá, kolik kotlů by podpora mohla zahrnout."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0558343001d78a63016ab92b6c0cc087d1a6da17160bf79c30",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 145322,
+      "input_tokens_details": {
+        "cache_write_tokens": 142905,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 409,
+      "output_tokens_details": {
+        "reasoning_tokens": 206
+      },
+      "total_tokens": 145731
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "candidate-2d9bff5b450b--source",
+        "psp-core-2025--law-change-43207-1"
+      ],
+      "explanationCz": "ANO slíbilo podporu výměny stovek tisíc starých domácích kotlů. Návrh rozpočtu Státního fondu životního prostředí sice obsahuje obecnou podporu energetických úspor v domácnostech, ale nevyčleňuje peníze na výměnu kotlů ani neuvádí počet podpořených výměn. Druhé hodnocení z této obecné podpory vyvozuje dílčí posun, což podklady samy nedokládají. Přesvědčivější je proto závěr, že zatím není doložen konkrétní krok k tomuto slibu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

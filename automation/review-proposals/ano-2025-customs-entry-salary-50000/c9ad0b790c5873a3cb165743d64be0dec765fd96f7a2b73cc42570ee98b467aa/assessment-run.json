@@ -1,0 +1,199 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-39-26-847Z--a0534e687888",
+  "evaluatedAt": "2026-09-27T14:39:26.847Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-customs-entry-salary-50000/a0534e687888c4d3d7bfabd0a27940b3e96db06cd10192fd59559eb4aede5fbb.json",
+  "packageHash": "a0534e687888c4d3d7bfabd0a27940b3e96db06cd10192fd59559eb4aede5fbb",
+  "assessmentContentHash": "09c2848b1c2603eb5b932c67ac5d421f3d15972f36e007f0898cb2e26e288eaa",
+  "assessmentFingerprint": "c9ad0b790c5873a3cb165743d64be0dec765fd96f7a2b73cc42570ee98b467aa",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-customs-entry-salary-50000",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-customs-entry-salary-50000",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění pravidla pro platové tarify zaměstnanců veřejné správy a stanoví jejich stupnice pro jednotlivé kalendářní roky, což může posunout pravidelnou valorizaci platů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-customs-entry-salary-50000--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž je ANO zastoupeno, předložila návrh změny zákoníku práce. Návrh upravuje pravidla pro platové tarify zaměstnanců veřejné správy a počítá se stupnicemi tarifů pro jednotlivé kalendářní roky, zpravidla účinnými od začátku roku. Tím se návrh částečně přibližuje slibu pravidelně valorizovat platy. Jde však pouze o návrh; sám nezaručuje zvýšení platů celníků ani nástupní plat 50 tisíc korun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z podkladů není zřejmé, zda se upravená pravidla zákoníku práce vztahují také na celníky, ani jaké případné zvýšení jejich platů by přinesla."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-customs-entry-salary-50000",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Navržené změny zákoníku práce upravují platové tarify zaměstnanců a počítají zpravidla s účinností jejich stupnic od začátku kalendářního roku, což se věcně týká části slibu o zvyšování a pravidelné valorizaci platů, byť text výslovně celníky nezmiňuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-customs-entry-salary-50000--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž je ANO zastoupeno, předložila návrh novely zákoníku práce. Návrh upravuje pravidla pro platové tarify a počítá zpravidla s jejich změnou od začátku kalendářního roku, takže se týká části slibu o valorizaci. Nestanoví však celníkům nástupní plat 50 tisíc korun ani sám nezaručuje pravidelné zvýšení jejich platů. Z předložených podkladů navíc není jasné, zda se tato pravidla vztahují právě na celníky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, zda se navržená pravidla zákoníku práce pro platové tarify vztahují na celníky; proto nelze s jistotou potvrdit, že návrh posouvá právě jejich platy. Návrh také neobsahuje konkrétní nástupní plat 50 tisíc korun ani závazný mechanismus pravidelného zvyšování platů celníků."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0908cbf1f77b1f2f016ab92a812c6c87d192dcc0f97d9aba33",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 13883,
+      "input_tokens_details": {
+        "cache_write_tokens": 10643,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2373,
+      "output_tokens_details": {
+        "reasoning_tokens": 2000
+      },
+      "total_tokens": 16256
+    },
+    "output": {
+      "promiseId": "ano-2025-customs-entry-salary-50000",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění pravidla pro platové tarify zaměstnanců veřejné správy a stanoví jejich stupnice pro jednotlivé kalendářní roky, což může posunout pravidelnou valorizaci platů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-customs-entry-salary-50000--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž je ANO zastoupeno, předložila návrh změny zákoníku práce. Návrh upravuje pravidla pro platové tarify zaměstnanců veřejné správy a počítá se stupnicemi tarifů pro jednotlivé kalendářní roky, zpravidla účinnými od začátku roku. Tím se návrh částečně přibližuje slibu pravidelně valorizovat platy. Jde však pouze o návrh; sám nezaručuje zvýšení platů celníků ani nástupní plat 50 tisíc korun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z podkladů není zřejmé, zda se upravená pravidla zákoníku práce vztahují také na celníky, ani jaké případné zvýšení jejich platů by přinesla."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_00eb3612dc11b66c016ab92a8d9f5887d1ae69350a4a4b907b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 13883,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 13880
+      },
+      "output_tokens": 2114,
+      "output_tokens_details": {
+        "reasoning_tokens": 1663
+      },
+      "total_tokens": 15997
+    },
+    "output": {
+      "promiseId": "ano-2025-customs-entry-salary-50000",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Navržené změny zákoníku práce upravují platové tarify zaměstnanců a počítají zpravidla s účinností jejich stupnic od začátku kalendářního roku, což se věcně týká části slibu o zvyšování a pravidelné valorizaci platů, byť text výslovně celníky nezmiňuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-customs-entry-salary-50000--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž je ANO zastoupeno, předložila návrh novely zákoníku práce. Návrh upravuje pravidla pro platové tarify a počítá zpravidla s jejich změnou od začátku kalendářního roku, takže se týká části slibu o valorizaci. Nestanoví však celníkům nástupní plat 50 tisíc korun ani sám nezaručuje pravidelné zvýšení jejich platů. Z předložených podkladů navíc není jasné, zda se tato pravidla vztahují právě na celníky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, zda se navržená pravidla zákoníku práce pro platové tarify vztahují na celníky; proto nelze s jistotou potvrdit, že návrh posouvá právě jejich platy. Návrh také neobsahuje konkrétní nástupní plat 50 tisíc korun ani závazný mechanismus pravidelného zvyšování platů celníků."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_051e3d8f87b7174d016ab92a98cee887d1a4e02d8268e1db03",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 13869,
+      "input_tokens_details": {
+        "cache_write_tokens": 11452,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 546,
+      "output_tokens_details": {
+        "reasoning_tokens": 327
+      },
+      "total_tokens": 14415
+    },
+    "output": {
+      "choice": "cannot-decide",
+      "citedEvidenceIds": [
+        "ano-2025-customs-entry-salary-50000--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Oba posudky správně uvádějí, že vláda s účastí ANO předložila návrh změny zákoníku práce. Neshodují se jen v míře jistoty, ale oba považují návrh za krok k platu celníků. Text návrhu však celníky neuvádí, neurčuje jim nástupní plat 50 tisíc korun ani nezavádí pravidelné zvyšování jejich platů. Pouhá úprava obecných pravidel pro některé platové tarify proto nestačí k jistému závěru, že jde o posun u tohoto konkrétního slibu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-cannot-decide",
+    "status": null,
+    "selectedReview": null
+  }
+}

@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-53-45-121Z--f1048108592e",
+  "evaluatedAt": "2026-09-27T14:53:45.121Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-db7ed9494707/f1048108592e65e46042e6431a4e8c0a97f64c3c454ee2fe3d8ff06c1e71aa91.json",
+  "packageHash": "f1048108592e65e46042e6431a4e8c0a97f64c3c454ee2fe3d8ff06c1e71aa91",
+  "assessmentContentHash": "950f3373620216b21bb774d0a2dd5e7378a1a07921c7afb7de528bd2ebfa8329",
+  "assessmentFingerprint": "078f05f6323c4ad5a05398eab47b5973809070b793b1bf2ba325c469fcdd1d7b",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-db7ed9494707",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-db7ed9494707",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-57",
+          "relevant": false,
+          "reasonCz": "Změna ruší části ustanovení o služebních poměrech, ale její text se netýká používání ani podpory digitálních nástrojů při výuce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-3",
+          "relevant": false,
+          "reasonCz": "Návrh ruší pravidlo o uznávání zahraničního vzdělání a kvalifikací, což digitální nástroje ve školách nijak nemění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43354-1",
+          "relevant": true,
+          "reasonCz": "Návrh omezuje používání mobilních a dalších elektronických zařízení při vzdělávání, tedy i přístup k části digitálních nástrojů, byť školám dovoluje povolit jejich vzdělávací využití."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-db7ed9494707--source",
+        "psp-core-2025--law-change-43354-1",
+        "psp-core-2025--print-step-211650"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh, který by žákům při výuce obecně zakázal používat mobilní telefony a jiná elektronická komunikační zařízení. Školy by sice mohly povolit jejich využití pro vzdělávání, návrh však takové používání nepodporuje jako dostupnou možnost a zavádí pro ně omezení. Jde proto o krok proti části slibu o podpoře dostupných digitálních nástrojů, nikoli o důkaz, že se strana postavila proti celému slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh ponechává školám možnost povolit použití zařízení pro vzdělávání; dostupné podklady proto dokládají jen dílčí rozpor se slibem, nikoli omezení všech digitálních nástrojů."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-db7ed9494707",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-57",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší části ustanovení o školském zákoně, ale nijak neupravuje dostupnost ani používání digitálních nástrojů při výuce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-3",
+          "relevant": false,
+          "reasonCz": "Návrh ruší dočasné pravidlo týkající se uznávání zahraničního vzdělání, nikoli digitálních nástrojů ve školách."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43354-1",
+          "relevant": true,
+          "reasonCz": "Návrh omezuje používání mobilních telefonů a dalších elektronických komunikačních zařízení při vzdělávání, takže přímo zasahuje do dostupnosti digitálního nástroje ve škole."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-db7ed9494707--source",
+        "psp-core-2025--law-change-43354-1",
+        "psp-core-2025--print-step-211650"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh, který by při vzdělávání zakázal žákům používat mobilní telefony a další elektronická komunikační zařízení. Škola by sice mohla jejich použití povolit pro výuku, ale návrh by běžně přístup k těmto digitálním nástrojům omezil. Jde proto o dílčí krok proti slibu podporovat dostupné digitální nástroje ve školách; doložené je předložení návrhu, nikoli jeho přijetí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh umožňuje škole povolit používání zařízení pro vzdělávání, takže jeho dopad na výuku závisí na rozhodnutí školy."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0377a50d51ae8071016ab92de84de087d18e521fbc2c04f7f7",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12347,
+      "input_tokens_details": {
+        "cache_write_tokens": 9107,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1353,
+      "output_tokens_details": {
+        "reasoning_tokens": 798
+      },
+      "total_tokens": 13700
+    },
+    "output": {
+      "promiseId": "candidate-db7ed9494707",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-57",
+          "relevant": false,
+          "reasonCz": "Změna ruší části ustanovení o služebních poměrech, ale její text se netýká používání ani podpory digitálních nástrojů při výuce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-3",
+          "relevant": false,
+          "reasonCz": "Návrh ruší pravidlo o uznávání zahraničního vzdělání a kvalifikací, což digitální nástroje ve školách nijak nemění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43354-1",
+          "relevant": true,
+          "reasonCz": "Návrh omezuje používání mobilních a dalších elektronických zařízení při vzdělávání, tedy i přístup k části digitálních nástrojů, byť školám dovoluje povolit jejich vzdělávací využití."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-db7ed9494707--source",
+        "psp-core-2025--law-change-43354-1",
+        "psp-core-2025--print-step-211650"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh, který by žákům při výuce obecně zakázal používat mobilní telefony a jiná elektronická komunikační zařízení. Školy by sice mohly povolit jejich využití pro vzdělávání, návrh však takové používání nepodporuje jako dostupnou možnost a zavádí pro ně omezení. Jde proto o krok proti části slibu o podpoře dostupných digitálních nástrojů, nikoli o důkaz, že se strana postavila proti celému slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh ponechává školám možnost povolit použití zařízení pro vzdělávání; dostupné podklady proto dokládají jen dílčí rozpor se slibem, nikoli omezení všech digitálních nástrojů."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0d00b880203718bb016ab92df0304c87d1b2539651b8fe9164",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12347,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 12344
+      },
+      "output_tokens": 1335,
+      "output_tokens_details": {
+        "reasoning_tokens": 874
+      },
+      "total_tokens": 13682
+    },
+    "output": {
+      "promiseId": "candidate-db7ed9494707",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-57",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší části ustanovení o školském zákoně, ale nijak neupravuje dostupnost ani používání digitálních nástrojů při výuce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-3",
+          "relevant": false,
+          "reasonCz": "Návrh ruší dočasné pravidlo týkající se uznávání zahraničního vzdělání, nikoli digitálních nástrojů ve školách."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43354-1",
+          "relevant": true,
+          "reasonCz": "Návrh omezuje používání mobilních telefonů a dalších elektronických komunikačních zařízení při vzdělávání, takže přímo zasahuje do dostupnosti digitálního nástroje ve škole."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-db7ed9494707--source",
+        "psp-core-2025--law-change-43354-1",
+        "psp-core-2025--print-step-211650"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh, který by při vzdělávání zakázal žákům používat mobilní telefony a další elektronická komunikační zařízení. Škola by sice mohla jejich použití povolit pro výuku, ale návrh by běžně přístup k těmto digitálním nástrojům omezil. Jde proto o dílčí krok proti slibu podporovat dostupné digitální nástroje ve školách; doložené je předložení návrhu, nikoli jeho přijetí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh umožňuje škole povolit používání zařízení pro vzdělávání, takže jeho dopad na výuku závisí na rozhodnutí školy."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

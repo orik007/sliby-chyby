@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-55-08-130Z--12bc866b1cd9",
+  "evaluatedAt": "2026-09-27T14:55:08.130Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-f6e02107c9e1/12bc866b1cd9958d7063318aa1c0dddc29fb1fb86da1cef37fa1e2213fdc8aa2.json",
+  "packageHash": "12bc866b1cd9958d7063318aa1c0dddc29fb1fb86da1cef37fa1e2213fdc8aa2",
+  "assessmentContentHash": "771241ce9b3d26ed353600a821349749e1ed708a6c024ec30819898cb82c489e",
+  "assessmentFingerprint": "d853ac5ba07a9f8e9836918bda4a3841fe347b298070bc2712d16c4bab291468",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-f6e02107c9e1",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-f6e02107c9e1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-2",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší část ustanovení zákona o sociálních službách, ale nezavádí ani nemění jednotnou státem hrazenou platformu tísňové asistence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-3",
+          "relevant": false,
+          "reasonCz": "Text rovněž ruší část ustanovení zákona o sociálních službách a neobsahuje změnu platformy tísňové asistence ani jejího financování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": false,
+          "reasonCz": "Změna ruší nebo odkládá vybraná ustanovení dřívější novely sociálních služeb, ale její text nezavádí ani nemění slibovanou platformu či její státní úhradu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f6e02107c9e1--source",
+        "psp-core-2025--law-change-43195-2",
+        "psp-core-2025--law-change-43198-3",
+        "psp-core-2025--law-change-43240-4"
+      ],
+      "explanationCz": "Motoristé slíbili zavést jednotnou platformu tísňové asistence hrazenou státem. Předložené změny zákonů o sociálních službách pouze ruší části existujících ustanovení nebo mění účinnost jiných ustanovení; žádná podle svého textu takovou platformu ani její financování nezavádí. V těchto podkladech proto není doložen podstatný posun ke slibu ani proti němu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady obsahují pouze uvedené změny zákonů o sociálních službách; nedokládají, zda Motoristé podnikli jiné kroky k zavedení platformy tísňové asistence."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-f6e02107c9e1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-2",
+          "relevant": false,
+          "reasonCz": "Navržená i schválená verze pouze ruší část ustanovení zákona o sociálních službách o jiné povinnosti, nikoli jednotnou státem hrazenou platformu tísňové asistence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-3",
+          "relevant": false,
+          "reasonCz": "Navržená i schválená verze ruší stejnou část ustanovení zákona o sociálních službách a platformu tísňové asistence nezavádí ani jí zjevně nebrání."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": false,
+          "reasonCz": "Text mění vybrané body dřívější novely zákona o sociálních službách a posouvá jejich účinnost, ale netýká se platformy tísňové asistence."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f6e02107c9e1--source",
+        "psp-core-2025--law-change-43195-2",
+        "psp-core-2025--law-change-43198-3",
+        "psp-core-2025--law-change-43240-4"
+      ],
+      "explanationCz": "Motoristé sobě slíbili jednotnou státem hrazenou platformu tísňové asistence. Dodané legislativní texty upravují jiné části zákona o sociálních službách a žádný z nich takovou platformu nezavádí ani se jí zjevně netýká. Proto z těchto podkladů nelze doložit podstatný posun ve slibu; jeho stav hodnotím jako zatím bez ověřeného podstatného posunu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují legislativní změnu ani stranické jednání, které by se materiálně vztahovalo k platformě tísňové asistence; nelze proto potvrdit, zda strana pokročila jiným způsobem."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_061fbdafdec584c1016ab92e3ba4c487d196b5afd275d1a67e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12171,
+      "input_tokens_details": {
+        "cache_write_tokens": 8931,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1716,
+      "output_tokens_details": {
+        "reasoning_tokens": 1224
+      },
+      "total_tokens": 13887
+    },
+    "output": {
+      "promiseId": "candidate-f6e02107c9e1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-2",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší část ustanovení zákona o sociálních službách, ale nezavádí ani nemění jednotnou státem hrazenou platformu tísňové asistence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-3",
+          "relevant": false,
+          "reasonCz": "Text rovněž ruší část ustanovení zákona o sociálních službách a neobsahuje změnu platformy tísňové asistence ani jejího financování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": false,
+          "reasonCz": "Změna ruší nebo odkládá vybraná ustanovení dřívější novely sociálních služeb, ale její text nezavádí ani nemění slibovanou platformu či její státní úhradu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f6e02107c9e1--source",
+        "psp-core-2025--law-change-43195-2",
+        "psp-core-2025--law-change-43198-3",
+        "psp-core-2025--law-change-43240-4"
+      ],
+      "explanationCz": "Motoristé slíbili zavést jednotnou platformu tísňové asistence hrazenou státem. Předložené změny zákonů o sociálních službách pouze ruší části existujících ustanovení nebo mění účinnost jiných ustanovení; žádná podle svého textu takovou platformu ani její financování nezavádí. V těchto podkladech proto není doložen podstatný posun ke slibu ani proti němu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady obsahují pouze uvedené změny zákonů o sociálních službách; nedokládají, zda Motoristé podnikli jiné kroky k zavedení platformy tísňové asistence."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_05da5d979d5f69c2016ab92e451d1087d189de5fe74cedad39",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12171,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 12168
+      },
+      "output_tokens": 1084,
+      "output_tokens_details": {
+        "reasoning_tokens": 505
+      },
+      "total_tokens": 13255
+    },
+    "output": {
+      "promiseId": "candidate-f6e02107c9e1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-2",
+          "relevant": false,
+          "reasonCz": "Navržená i schválená verze pouze ruší část ustanovení zákona o sociálních službách o jiné povinnosti, nikoli jednotnou státem hrazenou platformu tísňové asistence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-3",
+          "relevant": false,
+          "reasonCz": "Navržená i schválená verze ruší stejnou část ustanovení zákona o sociálních službách a platformu tísňové asistence nezavádí ani jí zjevně nebrání."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": false,
+          "reasonCz": "Text mění vybrané body dřívější novely zákona o sociálních službách a posouvá jejich účinnost, ale netýká se platformy tísňové asistence."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f6e02107c9e1--source",
+        "psp-core-2025--law-change-43195-2",
+        "psp-core-2025--law-change-43198-3",
+        "psp-core-2025--law-change-43240-4"
+      ],
+      "explanationCz": "Motoristé sobě slíbili jednotnou státem hrazenou platformu tísňové asistence. Dodané legislativní texty upravují jiné části zákona o sociálních službách a žádný z nich takovou platformu nezavádí ani se jí zjevně netýká. Proto z těchto podkladů nelze doložit podstatný posun ve slibu; jeho stav hodnotím jako zatím bez ověřeného podstatného posunu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují legislativní změnu ani stranické jednání, které by se materiálně vztahovalo k platformě tísňové asistence; nelze proto potvrdit, zda strana pokročila jiným způsobem."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

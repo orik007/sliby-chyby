@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-45-57-195Z--1a8e835dbe43",
+  "evaluatedAt": "2026-09-27T14:45:57.195Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-6386c23a5432/1a8e835dbe435a37e781492341a01bc75ea0c91a9dd08fe65110b4e056c691f2.json",
+  "packageHash": "1a8e835dbe435a37e781492341a01bc75ea0c91a9dd08fe65110b4e056c691f2",
+  "assessmentContentHash": "5449a1a2730c890ce55986d36beced808c0a271644a926ede5c0033074bb356e",
+  "assessmentFingerprint": "0bf851b1d877876ab8f19c6d650ca5a33a7d437f788a86759a53df4c6222d3e6",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-6386c23a5432",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-6386c23a5432",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh dotačních programů pro zemědělství zahrnuje také program poradenství a vzdělávání, který může přispět k profesnímu vzdělávání v zemědělství."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-3",
+          "relevant": false,
+          "reasonCz": "Změna pouze zkracuje lhůty pro zahájení řízení o vrácení dotací a nijak neupravuje podporu mladých zemědělců ani vzdělávání."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6386c23a5432--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě hlasovali pro návrh dotačních programů zemědělství na rok 2026, který počítá mimo jiné s programem poradenství a vzdělávání. To může podpořit profesní vzdělávání v zemědělství, a proto jde o dílčí posun směrem ke slibu. Návrh však neuvádí zvláštní podporu mladým pracovníkům či začínajícím zemědělcům ani daňové prázdniny pro mladé zemědělce.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh zmiňuje poradenství a vzdělávání, ale z dostupného textu není zřejmé, zda jsou tyto programy určeny nebo lépe dostupné mladým zemědělským zaměstnancům a začínajícím zemědělcům."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-6386c23a5432",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh dotačních programů pro zemědělství na rok 2026 zahrnuje také program poradenství a vzdělávání, který může podpořit část slibu týkající se profesního vzdělávání, ač mladé pracovníky výslovně nezmiňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-3",
+          "relevant": false,
+          "reasonCz": "Změna zkracuje lhůty pro zahájení řízení o vrácení dotace, ale nijak neupravuje podporu mladých zemědělců, zemědělských zaměstnanců ani jejich vzdělávání."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-6386c23a5432--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Návrh dotačních programů pro zemědělství na rok 2026 zahrnuje také poradenství a vzdělávání, což může souviset s částí slibu o profesním vzdělávání. Poslanci Motoristů pro něj hlasovali v prvním čtení, tedy při úvodním projednávání návrhu. Tento záznam ale nedokládá závěrečné rozhodnutí Sněmovny, které by bylo možné podle pravidel započítat jako rozhodující krok; zatím proto není ověřen podstatný posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček dokládá hlasování Motoristů v prvním čtení, nikoli jejich hlasování při konečném rozhodnutí o dotačních programech. Bez tohoto záznamu nelze určit, zda strana návrh nakonec podpořila."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_039194a31c21954e016ab92c0f514487d1995cd56b68dc97b2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9693,
+      "input_tokens_details": {
+        "cache_write_tokens": 6453,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1332,
+      "output_tokens_details": {
+        "reasoning_tokens": 892
+      },
+      "total_tokens": 11025
+    },
+    "output": {
+      "promiseId": "candidate-6386c23a5432",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh dotačních programů pro zemědělství zahrnuje také program poradenství a vzdělávání, který může přispět k profesnímu vzdělávání v zemědělství."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-3",
+          "relevant": false,
+          "reasonCz": "Změna pouze zkracuje lhůty pro zahájení řízení o vrácení dotací a nijak neupravuje podporu mladých zemědělců ani vzdělávání."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6386c23a5432--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě hlasovali pro návrh dotačních programů zemědělství na rok 2026, který počítá mimo jiné s programem poradenství a vzdělávání. To může podpořit profesní vzdělávání v zemědělství, a proto jde o dílčí posun směrem ke slibu. Návrh však neuvádí zvláštní podporu mladým pracovníkům či začínajícím zemědělcům ani daňové prázdniny pro mladé zemědělce.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh zmiňuje poradenství a vzdělávání, ale z dostupného textu není zřejmé, zda jsou tyto programy určeny nebo lépe dostupné mladým zemědělským zaměstnancům a začínajícím zemědělcům."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0a209efd989b55f1016ab92c16b4e887d1894e9b659140bf54",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9693,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 9690
+      },
+      "output_tokens": 2334,
+      "output_tokens_details": {
+        "reasoning_tokens": 1869
+      },
+      "total_tokens": 12027
+    },
+    "output": {
+      "promiseId": "candidate-6386c23a5432",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh dotačních programů pro zemědělství na rok 2026 zahrnuje také program poradenství a vzdělávání, který může podpořit část slibu týkající se profesního vzdělávání, ač mladé pracovníky výslovně nezmiňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-3",
+          "relevant": false,
+          "reasonCz": "Změna zkracuje lhůty pro zahájení řízení o vrácení dotace, ale nijak neupravuje podporu mladých zemědělců, zemědělských zaměstnanců ani jejich vzdělávání."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-6386c23a5432--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Návrh dotačních programů pro zemědělství na rok 2026 zahrnuje také poradenství a vzdělávání, což může souviset s částí slibu o profesním vzdělávání. Poslanci Motoristů pro něj hlasovali v prvním čtení, tedy při úvodním projednávání návrhu. Tento záznam ale nedokládá závěrečné rozhodnutí Sněmovny, které by bylo možné podle pravidel započítat jako rozhodující krok; zatím proto není ověřen podstatný posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček dokládá hlasování Motoristů v prvním čtení, nikoli jejich hlasování při konečném rozhodnutí o dotačních programech. Bez tohoto záznamu nelze určit, zda strana návrh nakonec podpořila."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_023bc297e20dd2d1016ab92c22b9fc87d196899d0d188b07f2",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 9760,
+      "input_tokens_details": {
+        "cache_write_tokens": 7343,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 214,
+      "output_tokens_details": {
+        "reasoning_tokens": 52
+      },
+      "total_tokens": 9974
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Volím druhé hodnocení. Návrh dotačních programů pro zemědělství obsahuje také poradenství a vzdělávání, takže se může týkat části slibu. Poslanci Motoristů sobě jej podpořili jen při úvodním projednávání ve Sněmovně. Nejde ale o konečné rozhodnutí o návrhu, a proto tento hlas zatím nelze počítat jako ověřený podstatný posun."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

@@ -1,0 +1,273 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T15-00-20-404Z--7d69f220828e",
+  "evaluatedAt": "2026-09-27T15:00:20.404Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-e0064dfa12/7d69f220828eb4cdfad7775afc8981d8a3c41df9d71eb7f79ceaa1fe2f8d6d77.json",
+  "packageHash": "7d69f220828eb4cdfad7775afc8981d8a3c41df9d71eb7f79ceaa1fe2f8d6d77",
+  "assessmentContentHash": "8f48e6d326054c4b55fac7899b9c00b29b2fdba9688fc227edaba1a82e947a75",
+  "assessmentFingerprint": "b571efadb4ff1a95c68c59a1fef80a3cbb1e682846f572e0f7c91b6a3f45c41e",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-e0064dfa12",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-e0064dfa12",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Změna prodlužuje lhůtu v úpravě vodního zákona z 2 na 4 roky, ale její text nezavádí ani neruší žádnou environmentální daň či poplatek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-71",
+          "relevant": false,
+          "reasonCz": "Změna vypouští část pravidla pro dodávání dřeva na trh, avšak v žádné verzi se netýká zavádění environmentálních daní nebo poplatků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43224-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje mechanismus uhlíkového vyrovnání na hranicích včetně jistot, prodeje uhlíkových certifikátů a sankcí, a tím se věcně týká environmentálního nákladového mechanismu pro dovozce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43398-2",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí správní poplatek 10 000 Kč za žádost o souhlas k využití odpadů, tedy nový poplatek související s environmentální regulací."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-e0064dfa12--source",
+        "psp-core-2025--law-change-43224-1",
+        "psp-core-2025--print-step-210832",
+        "psp-core-2025--law-change-43398-2",
+        "psp-core-2025--print-step-212013"
+      ],
+      "explanationCz": "Vláda, jejíž součástí byli Motoristé, předložila návrh pravidel pro uhlíkové vyrovnání na hranicích, který upravuje jistoty a prodej uhlíkových certifikátů; samotný návrh navazuje na přímo použitelná pravidla EU. Později vláda předložila také návrh, který zavádí poplatek 10 000 Kč za žádost o souhlas k využití odpadů. Jde o nový poplatek spojený s environmentální regulací, a proto tento návrh jde proti části slibu o moratoriu. Návrhy nebyly v předložených podkladech doloženy jako schválené zákony.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, nakolik nový poplatek 10 000 Kč konkrétně snižuje konkurenceschopnost českého průmyslu vůči okolním státům.",
+        "Návrh k uhlíkovému vyrovnání provádí mechanismus upravený právem EU; podklady neprokazují, že by sám zaváděl novou povinnost platit za certifikáty."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-e0064dfa12",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Změna prodlužuje lhůtu v úpravě vodního zákona, ale žádná z jejích verzí nezavádí ani neruší environmentální daň či poplatek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-71",
+          "relevant": false,
+          "reasonCz": "Předložená část ruší ustanovení právní úpravy prodeje a vývozu dřeva, ale její text se netýká zavedení environmentální daně ani poplatku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43224-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje správu uhlíkového vyrovnání na hranicích, včetně jistot a certifikátů CBAM, a může se tak týkat environmentálního zpoplatnění průmyslových dovozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43398-2",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí poplatek 10 000 Kč za žádost o souhlas s využitím odpadu, tedy nový poplatek v oblasti environmentální regulace."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-e0064dfa12--source",
+        "psp-core-2025--law-change-43224-1",
+        "psp-core-2025--print-step-210832",
+        "psp-core-2025--law-change-43398-2",
+        "psp-core-2025--print-step-212013"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, v červenci 2026 navrhla poplatek 10 000 Kč za žádost o souhlas s využitím odpadu. Jde o nový poplatek v environmentální oblasti, a návrh proto míří proti části slibu o moratoriu. Podklady ale neukazují, zda tento poplatek skutečně snižuje konkurenceschopnost českého průmyslu vůči okolním státům. Vláda už dříve navrhla také pravidla pro uhlíkové vyrovnání na hranicích a certifikáty CBAM; návrh provádí unijní mechanismus a podklady neprokazují, že zavádí novou českou daň či poplatek.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U poplatku za souhlas s využitím odpadu není doloženo, zda jeho výše snižuje konkurenceschopnost českého průmyslu vůči okolním státům; proto je závěr, že návrh odporuje části slibu, předběžný.",
+        "Návrh pravidel pro CBAM pracuje s certifikáty a jistotami podle přímo použitelného unijního mechanismu; podklady neumožňují určit, zda jde o zavádění nové environmentální daně či poplatku ve smyslu slibu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0aeca23df7049e23016ab92f5bc1f487d1b17f5d110fb33f09",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 20950,
+      "input_tokens_details": {
+        "cache_write_tokens": 17710,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 3961,
+      "output_tokens_details": {
+        "reasoning_tokens": 3253
+      },
+      "total_tokens": 24911
+    },
+    "output": {
+      "promiseId": "motoriste-2025-e0064dfa12",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Změna prodlužuje lhůtu v úpravě vodního zákona z 2 na 4 roky, ale její text nezavádí ani neruší žádnou environmentální daň či poplatek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-71",
+          "relevant": false,
+          "reasonCz": "Změna vypouští část pravidla pro dodávání dřeva na trh, avšak v žádné verzi se netýká zavádění environmentálních daní nebo poplatků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43224-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje mechanismus uhlíkového vyrovnání na hranicích včetně jistot, prodeje uhlíkových certifikátů a sankcí, a tím se věcně týká environmentálního nákladového mechanismu pro dovozce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43398-2",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí správní poplatek 10 000 Kč za žádost o souhlas k využití odpadů, tedy nový poplatek související s environmentální regulací."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-e0064dfa12--source",
+        "psp-core-2025--law-change-43224-1",
+        "psp-core-2025--print-step-210832",
+        "psp-core-2025--law-change-43398-2",
+        "psp-core-2025--print-step-212013"
+      ],
+      "explanationCz": "Vláda, jejíž součástí byli Motoristé, předložila návrh pravidel pro uhlíkové vyrovnání na hranicích, který upravuje jistoty a prodej uhlíkových certifikátů; samotný návrh navazuje na přímo použitelná pravidla EU. Později vláda předložila také návrh, který zavádí poplatek 10 000 Kč za žádost o souhlas k využití odpadů. Jde o nový poplatek spojený s environmentální regulací, a proto tento návrh jde proti části slibu o moratoriu. Návrhy nebyly v předložených podkladech doloženy jako schválené zákony.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, nakolik nový poplatek 10 000 Kč konkrétně snižuje konkurenceschopnost českého průmyslu vůči okolním státům.",
+        "Návrh k uhlíkovému vyrovnání provádí mechanismus upravený právem EU; podklady neprokazují, že by sám zaváděl novou povinnost platit za certifikáty."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_002a9b5f52e0814c016ab92f72726c87d19b2059e1c2bd3b43",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 20950,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 20947
+      },
+      "output_tokens": 2716,
+      "output_tokens_details": {
+        "reasoning_tokens": 1976
+      },
+      "total_tokens": 23666
+    },
+    "output": {
+      "promiseId": "motoriste-2025-e0064dfa12",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Změna prodlužuje lhůtu v úpravě vodního zákona, ale žádná z jejích verzí nezavádí ani neruší environmentální daň či poplatek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-71",
+          "relevant": false,
+          "reasonCz": "Předložená část ruší ustanovení právní úpravy prodeje a vývozu dřeva, ale její text se netýká zavedení environmentální daně ani poplatku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43224-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje správu uhlíkového vyrovnání na hranicích, včetně jistot a certifikátů CBAM, a může se tak týkat environmentálního zpoplatnění průmyslových dovozů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43398-2",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí poplatek 10 000 Kč za žádost o souhlas s využitím odpadu, tedy nový poplatek v oblasti environmentální regulace."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-e0064dfa12--source",
+        "psp-core-2025--law-change-43224-1",
+        "psp-core-2025--print-step-210832",
+        "psp-core-2025--law-change-43398-2",
+        "psp-core-2025--print-step-212013"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, v červenci 2026 navrhla poplatek 10 000 Kč za žádost o souhlas s využitím odpadu. Jde o nový poplatek v environmentální oblasti, a návrh proto míří proti části slibu o moratoriu. Podklady ale neukazují, zda tento poplatek skutečně snižuje konkurenceschopnost českého průmyslu vůči okolním státům. Vláda už dříve navrhla také pravidla pro uhlíkové vyrovnání na hranicích a certifikáty CBAM; návrh provádí unijní mechanismus a podklady neprokazují, že zavádí novou českou daň či poplatek.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U poplatku za souhlas s využitím odpadu není doloženo, zda jeho výše snižuje konkurenceschopnost českého průmyslu vůči okolním státům; proto je závěr, že návrh odporuje části slibu, předběžný.",
+        "Návrh pravidel pro CBAM pracuje s certifikáty a jistotami podle přímo použitelného unijního mechanismu; podklady neumožňují určit, zda jde o zavádění nové environmentální daně či poplatku ve smyslu slibu."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_023d5b904f043a81016ab92f80621c87d1b37e3ad2f16c28fe",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 21559,
+      "input_tokens_details": {
+        "cache_write_tokens": 19142,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 436,
+      "output_tokens_details": {
+        "reasoning_tokens": 134
+      },
+      "total_tokens": 21995
+    },
+    "output": {
+      "choice": "cannot-decide",
+      "citedEvidenceIds": [
+        "motoriste-2025-e0064dfa12--source",
+        "psp-core-2025--law-change-43398-2",
+        "psp-core-2025--print-step-212013",
+        "psp-core-2025--law-change-43224-1",
+        "psp-core-2025--print-step-210832"
+      ],
+      "explanationCz": "Oba posudky správně uvádějí, že vláda s účastí Motoristů sobě předložila návrh na poplatek 10 000 Kč za žádost související s využitím odpadů. Ze samotného textu ale není patrné, zda tento poplatek snižuje konkurenceschopnost českého průmyslu vůči okolním státům, což je součást slibu. Návrh pravidel pro uhlíkové vyrovnání na hranicích hlavně provádí unijní pravidla; podklady neprokazují, že by sám zavedl novou českou daň nebo poplatek. Jeden posudek přesto považuje závěr za dostatečně doložený a druhý mu při chybějícím důkazu přisuzuje stejný výsledek, proto nelze vybrat ani jeden."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-cannot-decide",
+    "status": null,
+    "selectedReview": null
+  }
+}

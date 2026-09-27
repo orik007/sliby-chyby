@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-47-37-295Z--a75e0aa90788",
+  "evaluatedAt": "2026-09-27T14:47:37.295Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-81fd9e4db92e/a75e0aa9078819ea67a940f800fb38f8f0e3dea264b3ef72374e0c91e0ff3c68.json",
+  "packageHash": "a75e0aa9078819ea67a940f800fb38f8f0e3dea264b3ef72374e0c91e0ff3c68",
+  "assessmentContentHash": "591ea26a96dc6cb5c54076e2015f441c06444fe2d498c5ce96120f60e4f2f0a6",
+  "assessmentFingerprint": "1ee5fc6030afe9a13c1e4bec8f84f37ea549bca4d3a693fc261623f1446765ec",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-81fd9e4db92e",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-81fd9e4db92e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-13",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší dvě věty v § 17b odst. 17 energetického zákona a neuvádí jejich obsah ani výslovnou vazbu na ETS2, bydlení či osobní dopravu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-43",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší poslední větu v § 13b odst. 4 zákona o hospodaření energií a neuvádí její obsah ani výslovnou vazbu na ETS2, bydlení či osobní dopravu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-81fd9e4db92e--source",
+        "psp-core-2025--law-change-43184-13",
+        "psp-core-2025--law-change-43184-approved-43"
+      ],
+      "explanationCz": "Slib ANO se týká nezavedení systému emisních povolenek ETS2 pro bydlení a osobní dopravu. Předložené změny energetického zákona a zákona o hospodaření energií pouze ruší vybrané věty, jejichž obsah podklady neuvádějí. Nelze proto ověřit, zda se těchto ustanovení slib týká; žádný podstatný posun na základě dostupných textů doložit nelze.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění rušených vět v energetickém zákoně ani v zákoně o hospodaření energií, takže nelze vyloučit jejich věcnou vazbu na ETS2 a spolehlivě vyhodnotit příslušná hlasování ANO."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-81fd9e4db92e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-13",
+          "relevant": false,
+          "reasonCz": "Text mění pouze § 17b odst. 17 energetického zákona zrušením dvou vět a neuvádí, že by upravoval zavedení ETS2 pro bydlení nebo osobní dopravu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-43",
+          "relevant": false,
+          "reasonCz": "Text mění pouze § 13b odst. 4 zákona o hospodaření energií zrušením poslední věty a neuvádí, že by upravoval zavedení ETS2 pro bydlení nebo osobní dopravu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-81fd9e4db92e--source",
+        "psp-core-2025--law-change-43184-13",
+        "psp-core-2025--law-change-43184-approved-43"
+      ],
+      "explanationCz": "ANO slíbilo nezavést rozšíření emisních povolenek ETS2 na bydlení a osobní dopravu. Předložené změny ruší věty v energetickém zákoně a v zákoně o hospodaření energií, ale jejich text neukazuje, že by se týkaly tohoto slibu. Proto z dodaných podkladů nelze ověřit podstatný posun a stav zůstává bez ověřeného posunu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neuvádějí znění rušených vět ani jejich účinek, takže nelze vyloučit nepřímou souvislost těchto změn se slibem."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0cdc3dc03b9e97ba016ab92c6e97ac87d1ae0a09487f616af5",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10522,
+      "input_tokens_details": {
+        "cache_write_tokens": 7282,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2555,
+      "output_tokens_details": {
+        "reasoning_tokens": 2117
+      },
+      "total_tokens": 13077
+    },
+    "output": {
+      "promiseId": "candidate-81fd9e4db92e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-13",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší dvě věty v § 17b odst. 17 energetického zákona a neuvádí jejich obsah ani výslovnou vazbu na ETS2, bydlení či osobní dopravu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-43",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší poslední větu v § 13b odst. 4 zákona o hospodaření energií a neuvádí její obsah ani výslovnou vazbu na ETS2, bydlení či osobní dopravu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-81fd9e4db92e--source",
+        "psp-core-2025--law-change-43184-13",
+        "psp-core-2025--law-change-43184-approved-43"
+      ],
+      "explanationCz": "Slib ANO se týká nezavedení systému emisních povolenek ETS2 pro bydlení a osobní dopravu. Předložené změny energetického zákona a zákona o hospodaření energií pouze ruší vybrané věty, jejichž obsah podklady neuvádějí. Nelze proto ověřit, zda se těchto ustanovení slib týká; žádný podstatný posun na základě dostupných textů doložit nelze.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění rušených vět v energetickém zákoně ani v zákoně o hospodaření energií, takže nelze vyloučit jejich věcnou vazbu na ETS2 a spolehlivě vyhodnotit příslušná hlasování ANO."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0d9a0bba692908c5016ab92c7be27c87d189828e4c9ffd47e2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10522,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 10519
+      },
+      "output_tokens": 2429,
+      "output_tokens_details": {
+        "reasoning_tokens": 2014
+      },
+      "total_tokens": 12951
+    },
+    "output": {
+      "promiseId": "candidate-81fd9e4db92e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-13",
+          "relevant": false,
+          "reasonCz": "Text mění pouze § 17b odst. 17 energetického zákona zrušením dvou vět a neuvádí, že by upravoval zavedení ETS2 pro bydlení nebo osobní dopravu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-43",
+          "relevant": false,
+          "reasonCz": "Text mění pouze § 13b odst. 4 zákona o hospodaření energií zrušením poslední věty a neuvádí, že by upravoval zavedení ETS2 pro bydlení nebo osobní dopravu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-81fd9e4db92e--source",
+        "psp-core-2025--law-change-43184-13",
+        "psp-core-2025--law-change-43184-approved-43"
+      ],
+      "explanationCz": "ANO slíbilo nezavést rozšíření emisních povolenek ETS2 na bydlení a osobní dopravu. Předložené změny ruší věty v energetickém zákoně a v zákoně o hospodaření energií, ale jejich text neukazuje, že by se týkaly tohoto slibu. Proto z dodaných podkladů nelze ověřit podstatný posun a stav zůstává bez ověřeného posunu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neuvádějí znění rušených vět ani jejich účinek, takže nelze vyloučit nepřímou souvislost těchto změn se slibem."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

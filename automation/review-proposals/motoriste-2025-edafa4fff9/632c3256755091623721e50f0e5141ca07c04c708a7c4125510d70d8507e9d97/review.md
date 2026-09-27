@@ -1,0 +1,50 @@
+# Okamžité ukončení inkluze a obnovení speciálních škol a tříd
+
+> Neveřejný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+
+## Návrh pro veřejný web
+
+*Nevznikl žádný návrh veřejného hodnocení ani vysvětlení.*
+
+## Co má zkontrolovat reviewer
+
+- Odpovídá navržené hodnocení metodice SLAVA Indexu?
+- Je jednání správně připsáno sledované straně?
+- Je veřejné vysvětlení pochopitelné samo o sobě a říká, kdo co udělal a jak to souvisí se slibem?
+- Jsou zkratky, právní pojmy a úřední označení při prvním použití vysvětlené?
+- Dokládají uvedené zdroje všechna podstatná tvrzení a nechybí rozporný podklad?
+
+## Technické podklady pro reviewera
+
+- Výsledek automatického procesu: oba automatické posudky označily podklady za nedostatečné
+- Interní stav: bez kandidátního stavu
+- Důvod výsledku: `insufficient-evidence`
+- Úplný strojový audit: `assessment-run.json`
+- Přesný balíček posuzovaných podkladů: `evidence-package.json`
+
+### Shoda hodnotitelů
+
+Oba nezávislí hodnotitelé dospěli ke stejnému výsledku: **podklady nestačí pro automatický návrh hodnocení**.
+
+Slib požaduje ukončit inkluzi a znovu zřídit speciální školy nebo třídy. Dodané podklady nedokládají žádnou změnu, která by tyto kroky uskutečňovala nebo jim odporovala. Jedna změna ruší ustanovení týkající se uznávání zahraničního vzdělání, druhá ruší dvě blíže nevypsané části školského zákona. Jejich dopad proto nelze z podkladů úplně ověřit a nelze z nich spolehlivě posoudit všechny možné související kroky.
+
+Co zůstává nejisté:
+
+- U změny školského zákona nejsou v podkladech uvedeny rušené věty § 173 ani jejich obsah; nelze proto ověřit, zda měly nějaký věcný vztah k inkluzi nebo speciálním školám.
+- Podklady nepokrývají případné kroky mimo předložené legislativní změny, takže z nich nelze vyvodit, že strana nejednala jinak.
+
+Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.
+
+### Souvisí změny zákonů se slibem?
+
+| Změna zákona | První posudek | Druhý posudek |
+| --- | --- | --- |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna školského zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280393) | ne: Text ruší dvě blíže nevypsaná ustanovení § 173 školského zákona, ale z dodaného znění nelze doložit, že se týkají inkluze nebo speciálních škol či tříd. | ne: Změna pouze ruší dvě části § 173 školského zákona, ale její text neukazuje, že by ukončovala inkluzi nebo zřizovala speciální školy či třídy. |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o opatřeních v oblasti školství v souvislosti s ozbrojeným konfliktem na území Ukrajiny vyvolaným invazí vojsk Ruské federace](https://www.psp.cz/sqw/text/orig2.sqw?idd=271313) | ne: Změna ruší § 9 zákona o opatřeních ve školství souvisejících s válkou na Ukrajině a přechodné ustanovení ji spojuje s uznáváním zahraničního vzdělání, nikoli s inkluzí či speciálními školami. | ne: Návrh ruší ustanovení zákona o školských opatřeních souvisejících s válkou na Ukrajině a řeší uznávání zahraničního vzdělání, nikoli inkluzi nebo speciální školy či třídy. |
+
+### Zdroje použité při hodnocení
+
+- [Původní volební slib](https://motoristesobe.cz/wp-content/uploads/Volebni_program-2025_MOTORISTE-SOBE.pdf)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna školského zákona](https://www.psp.cz/sqw/text/orig2.sqw?idd=280393)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona o opatřeních v oblasti školství v souvislosti s ozbrojeným konfliktem na území Ukrajiny vyvolaným invazí vojsk Ruské federace](https://www.psp.cz/sqw/text/orig2.sqw?idd=271313)
+

@@ -1,0 +1,266 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-40-43-952Z--2a487bcc5459",
+  "evaluatedAt": "2026-09-27T14:40:43.952Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-online-tax-office/2a487bcc54590f20c1b157a0664305c560f705d6fe6ad1c77bec35096c0049ce.json",
+  "packageHash": "2a487bcc54590f20c1b157a0664305c560f705d6fe6ad1c77bec35096c0049ce",
+  "assessmentContentHash": "f0cf3479e52baca0ba27a8963341d4fb2dc3ab2d95b5357180cf541e59524d84",
+  "assessmentFingerprint": "88ac9ace8c30175237209b4cb6110dcc1ae1876c279f0991abcc62ce6fa2caa0",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-online-tax-office",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-online-tax-office",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší poslední větu ustanovení o informačních systémech veřejné správy a neukazuje změnu daňové agendy ani jejího zpřístupnění přes aplikaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Změna ruší ustanovení o údajích a ověřování v základních registrech, ale její text nepropojuje tuto změnu s on-line finančním úřadem nebo daňovou agendou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": false,
+          "reasonCz": "Změna ruší části zákona o právu na digitální služby a upravuje související pokutu a příslušný úřad, nikoli však daňovou agendu ani její mobilní zpřístupnění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Návrh mění termíny či ruší bod dřívějšího zákona o elektronizaci veřejné správy, ale text neukazuje dopad na on-line finanční úřad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Návrh evidence tržeb ukládá správci daně poskytovat přes daňovou informační schránku informace o evidovaných tržbách, což představuje dílčí on-line daňovou službu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-online-tax-office--source",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona o evidenci tržeb, který počítá s poskytováním informací o evidovaných tržbách přes daňovou informační schránku. Jde o dílčí on-line daňovou službu, nikoli o dokončení celé slíbené přehledné agendy ani o mobilní aplikaci. Poslanci ANO hlasovali pro návrh ve třetím čtení a po vrácení Senátem také pro jeho přijetí; senátní úpravy podle předložených textů ustanovení o poskytování těchto informací nemění. Doložené rozhodnutí tedy naplňuje jen část slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Doložené zákonné opatření upravuje informace o evidovaných tržbách v daňové informační schránce; balíček nedokládá dokončení širší daňové agendy ani její dostupnost v mobilní aplikaci."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-online-tax-office",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Změna pouze ruší blíže neupřesněnou větu v zákoně o informačních systémech veřejné správy a její text neukazuje dopad na daňovou agendu ani mobilní aplikaci finanční správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Změna odstraňuje některé údaje a pravidla v zákoně o základních registrech, ale její text se netýká online daňové agendy ani mobilní aplikace finanční správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": false,
+          "reasonCz": "Změna zákona o právu na digitální služby ruší některá ustanovení a upravuje pokutu i příslušnost úřadu, avšak nenabízí ani neomezuje slíbenou online daňovou agendu či mobilní aplikaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Navržená verze posouvá termíny u blíže neurčeného ustanovení o elektronizaci a schválená verze toto ustanovení ruší, přičemž žádná z verzí nespojuje změnu s finanční správou nebo její mobilní aplikací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Zákon zavádí elektronickou evidenci tržeb a stanoví, že daňová informační schránka umožní získat potřebné certifikáty a zobrazí informace o evidovaných tržbách, což představuje konkrétní část online daňových služeb."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-online-tax-office--source",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda vedená ANO předložila zákon o evidenci tržeb, který využívá daňovou informační schránku finanční správy k získání certifikátů a poskytování informací o evidovaných tržbách. Poslanci ANO návrh podpořili při schvalování ve třetím čtení i při hlasování po jeho vrácení Senátem s pozměňovacími návrhy. Jde o dílčí rozšíření elektronické komunikace v daňové oblasti, nikoli o dokončení jednoduché a přehledné daňové agendy dostupné v mobilní aplikaci. Proto je doložen posun k části slibu, nikoli jeho úplné splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Doložené změny se týkají elektronické evidence tržeb a daňové informační schránky; balíček neprokazuje, zda byla dokončena celá online agenda ani zda je dostupná přes mobilní aplikaci."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0b7344b176afa2af016ab92acf633887d1b01668757a7c4183",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 30750,
+      "input_tokens_details": {
+        "cache_write_tokens": 27510,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2928,
+      "output_tokens_details": {
+        "reasoning_tokens": 2195
+      },
+      "total_tokens": 33678
+    },
+    "output": {
+      "promiseId": "ano-2025-online-tax-office",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší poslední větu ustanovení o informačních systémech veřejné správy a neukazuje změnu daňové agendy ani jejího zpřístupnění přes aplikaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Změna ruší ustanovení o údajích a ověřování v základních registrech, ale její text nepropojuje tuto změnu s on-line finančním úřadem nebo daňovou agendou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": false,
+          "reasonCz": "Změna ruší části zákona o právu na digitální služby a upravuje související pokutu a příslušný úřad, nikoli však daňovou agendu ani její mobilní zpřístupnění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Návrh mění termíny či ruší bod dřívějšího zákona o elektronizaci veřejné správy, ale text neukazuje dopad na on-line finanční úřad."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Návrh evidence tržeb ukládá správci daně poskytovat přes daňovou informační schránku informace o evidovaných tržbách, což představuje dílčí on-line daňovou službu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-online-tax-office--source",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona o evidenci tržeb, který počítá s poskytováním informací o evidovaných tržbách přes daňovou informační schránku. Jde o dílčí on-line daňovou službu, nikoli o dokončení celé slíbené přehledné agendy ani o mobilní aplikaci. Poslanci ANO hlasovali pro návrh ve třetím čtení a po vrácení Senátem také pro jeho přijetí; senátní úpravy podle předložených textů ustanovení o poskytování těchto informací nemění. Doložené rozhodnutí tedy naplňuje jen část slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Doložené zákonné opatření upravuje informace o evidovaných tržbách v daňové informační schránce; balíček nedokládá dokončení širší daňové agendy ani její dostupnost v mobilní aplikaci."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0a46dd29f1350fdb016ab92adda8a487d18358788a19ecf573",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 30750,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 30747
+      },
+      "output_tokens": 2954,
+      "output_tokens_details": {
+        "reasoning_tokens": 2160
+      },
+      "total_tokens": 33704
+    },
+    "output": {
+      "promiseId": "ano-2025-online-tax-office",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Změna pouze ruší blíže neupřesněnou větu v zákoně o informačních systémech veřejné správy a její text neukazuje dopad na daňovou agendu ani mobilní aplikaci finanční správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Změna odstraňuje některé údaje a pravidla v zákoně o základních registrech, ale její text se netýká online daňové agendy ani mobilní aplikace finanční správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": false,
+          "reasonCz": "Změna zákona o právu na digitální služby ruší některá ustanovení a upravuje pokutu i příslušnost úřadu, avšak nenabízí ani neomezuje slíbenou online daňovou agendu či mobilní aplikaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Navržená verze posouvá termíny u blíže neurčeného ustanovení o elektronizaci a schválená verze toto ustanovení ruší, přičemž žádná z verzí nespojuje změnu s finanční správou nebo její mobilní aplikací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Zákon zavádí elektronickou evidenci tržeb a stanoví, že daňová informační schránka umožní získat potřebné certifikáty a zobrazí informace o evidovaných tržbách, což představuje konkrétní část online daňových služeb."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-online-tax-office--source",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda vedená ANO předložila zákon o evidenci tržeb, který využívá daňovou informační schránku finanční správy k získání certifikátů a poskytování informací o evidovaných tržbách. Poslanci ANO návrh podpořili při schvalování ve třetím čtení i při hlasování po jeho vrácení Senátem s pozměňovacími návrhy. Jde o dílčí rozšíření elektronické komunikace v daňové oblasti, nikoli o dokončení jednoduché a přehledné daňové agendy dostupné v mobilní aplikaci. Proto je doložen posun k části slibu, nikoli jeho úplné splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Doložené změny se týkají elektronické evidence tržeb a daňové informační schránky; balíček neprokazuje, zda byla dokončena celá online agenda ani zda je dostupná přes mobilní aplikaci."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

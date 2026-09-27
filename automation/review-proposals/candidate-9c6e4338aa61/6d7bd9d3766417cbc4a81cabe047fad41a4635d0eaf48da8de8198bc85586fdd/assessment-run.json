@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-49-33-043Z--6033ca6fbab8",
+  "evaluatedAt": "2026-09-27T14:49:33.043Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-9c6e4338aa61/6033ca6fbab8e5bfd644a2fad4da1938d6cab91c5614db290c148b2de6c62e1b.json",
+  "packageHash": "6033ca6fbab8e5bfd644a2fad4da1938d6cab91c5614db290c148b2de6c62e1b",
+  "assessmentContentHash": "d5ea4f8bbd2d1ca3148bc28dc7d317b788e9f5f77a009e553e943affe7de82c7",
+  "assessmentFingerprint": "6d7bd9d3766417cbc4a81cabe047fad41a4635d0eaf48da8de8198bc85586fdd",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-9c6e4338aa61",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-9c6e4338aa61",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje obecné pracovněprávní a organizační poměry státních zaměstnanců, ale žádné ustanovení neruší ani přímo nemění uvedený odbor či krizový tým."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": false,
+          "reasonCz": "Změna zákona o zpracování osobních údajů se týká rušení ustanovení o osobních údajích, nikoli existence nebo zrušení uvedených útvarů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-9c6e4338aa61--source",
+        "psp-core-2025--law-change-43183-1",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--print-step-210647",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-87958",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88449",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO předložili a podpořili zákon upravující pracovní poměry státních zaměstnanců a související změnu zákona o osobních údajích. První zákon upravuje například organizaci úřadů a zaměstnávání státních zaměstnanců, ale jeho text nezrušil Odbor strategické komunikace ani Krizový informační tým. Změna zákona o osobních údajích se slibu netýká. V předložených podkladech proto není doloženo zrušení žádného z uvedených útvarů.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují důkaz, zda byly uvedené útvary zrušeny jiným rozhodnutím než těmi, která jsou zde zachycena."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-9c6e4338aa61",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": false,
+          "reasonCz": "Zákon upravuje obecná pravidla pro státní zaměstnance a organizační strukturu úřadů, ale žádná jeho verze neruší ani konkrétně neukládá zrušit uvedené dva útvary."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": false,
+          "reasonCz": "Změna se týká zákona o zpracování osobních údajů a nijak neupravuje ani neruší Odbor strategické komunikace nebo Krizový informační tým."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-9c6e4338aa61--source",
+        "psp-core-2025--law-change-43183-1",
+        "psp-core-2025--law-change-43184-22"
+      ],
+      "explanationCz": "Slib ANO se týká zrušení Odboru strategické komunikace na Úřadu vlády a Krizového informačního týmu na ministerstvu vnitra. Předložená změna pravidel pro státní zaměstnance upravuje obecně fungování úřadů, ale zrušení těchto útvarů neobsahuje. Další doložená změna se týká zpracování osobních údajů. Podklady tedy nedokládají relevantní krok ke splnění ani odmítnutí slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Balíček neobsahuje doklad o samostatném rozhodnutí nebo administrativním kroku týkajícím se existence těchto dvou útvarů; hodnocení proto vychází jen z předložených legislativních podkladů."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f261422dde9d800016ab92ce1787087d1a69bac476d84514c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 48963,
+      "input_tokens_details": {
+        "cache_write_tokens": 45723,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2314,
+      "output_tokens_details": {
+        "reasoning_tokens": 1743
+      },
+      "total_tokens": 51277
+    },
+    "output": {
+      "promiseId": "candidate-9c6e4338aa61",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje obecné pracovněprávní a organizační poměry státních zaměstnanců, ale žádné ustanovení neruší ani přímo nemění uvedený odbor či krizový tým."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": false,
+          "reasonCz": "Změna zákona o zpracování osobních údajů se týká rušení ustanovení o osobních údajích, nikoli existence nebo zrušení uvedených útvarů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-9c6e4338aa61--source",
+        "psp-core-2025--law-change-43183-1",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--print-step-210647",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-87958",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88449",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO předložili a podpořili zákon upravující pracovní poměry státních zaměstnanců a související změnu zákona o osobních údajích. První zákon upravuje například organizaci úřadů a zaměstnávání státních zaměstnanců, ale jeho text nezrušil Odbor strategické komunikace ani Krizový informační tým. Změna zákona o osobních údajích se slibu netýká. V předložených podkladech proto není doloženo zrušení žádného z uvedených útvarů.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neobsahují důkaz, zda byly uvedené útvary zrušeny jiným rozhodnutím než těmi, která jsou zde zachycena."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0c74b412c6427ad7016ab92ceeb89087d1bb43fcbc018f984a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 48963,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 48960
+      },
+      "output_tokens": 2703,
+      "output_tokens_details": {
+        "reasoning_tokens": 2270
+      },
+      "total_tokens": 51666
+    },
+    "output": {
+      "promiseId": "candidate-9c6e4338aa61",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-1",
+          "relevant": false,
+          "reasonCz": "Zákon upravuje obecná pravidla pro státní zaměstnance a organizační strukturu úřadů, ale žádná jeho verze neruší ani konkrétně neukládá zrušit uvedené dva útvary."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": false,
+          "reasonCz": "Změna se týká zákona o zpracování osobních údajů a nijak neupravuje ani neruší Odbor strategické komunikace nebo Krizový informační tým."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-9c6e4338aa61--source",
+        "psp-core-2025--law-change-43183-1",
+        "psp-core-2025--law-change-43184-22"
+      ],
+      "explanationCz": "Slib ANO se týká zrušení Odboru strategické komunikace na Úřadu vlády a Krizového informačního týmu na ministerstvu vnitra. Předložená změna pravidel pro státní zaměstnance upravuje obecně fungování úřadů, ale zrušení těchto útvarů neobsahuje. Další doložená změna se týká zpracování osobních údajů. Podklady tedy nedokládají relevantní krok ke splnění ani odmítnutí slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Balíček neobsahuje doklad o samostatném rozhodnutí nebo administrativním kroku týkajícím se existence těchto dvou útvarů; hodnocení proto vychází jen z předložených legislativních podkladů."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

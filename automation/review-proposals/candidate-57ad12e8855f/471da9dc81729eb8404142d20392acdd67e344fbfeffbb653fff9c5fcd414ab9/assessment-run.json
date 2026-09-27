@@ -1,0 +1,240 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-45-37-489Z--a7a7b3b99b8a",
+  "evaluatedAt": "2026-09-27T14:45:37.489Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-57ad12e8855f/a7a7b3b99b8af6536b651ca315ce2283909db7cb18f1646298692181b301f907.json",
+  "packageHash": "a7a7b3b99b8af6536b651ca315ce2283909db7cb18f1646298692181b301f907",
+  "assessmentContentHash": "80241986e8866d8bc34d6bdf63c3033772ae289c4e16461013217fa7464eee30",
+  "assessmentFingerprint": "471da9dc81729eb8404142d20392acdd67e344fbfeffbb653fff9c5fcd414ab9",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-57ad12e8855f",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": null,
+    "assessor-b": {
+      "promiseId": "candidate-57ad12e8855f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-24",
+          "relevant": false,
+          "reasonCz": "Změny se týkají zejména zaměstnanců Grantové a Technologické agentury a dílčí agendy úřadu vlády, ale žádná verze přímo nemění postavení, působnost ani vedení Rady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+          "relevant": true,
+          "reasonCz": "Schválené znění ruší jednu působnost Rady v zákoně a převádí správu informačního systému výzkumu z Úřadu vlády na ministerstvo, což se dotýká jejího institucionálního postavení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43406-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně převádí na ministerstvo některé působnosti vykonávané Radou a mění její roli při návrhu výdajů na výzkum."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43406-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje právní postavení veřejných infrastrukturních institucí, ale nemění postavení, vedení ani působnost Rady."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-57ad12e8855f--source",
+        "psp-core-2025--law-change-43184-approved-49",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--law-change-43406-1",
+        "psp-core-2025--print-step-212033"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh zákona, který mimo jiné zrušil jednu působnost Rady vlády pro výzkum, vývoj a inovace a převedl správu výzkumného informačního systému z Úřadu vlády na Ministerstvo průmyslu a obchodu. Po zamítnutí návrhu Senátem, tedy horní komorou Parlamentu, poslanci ANO hlasovali také pro setrvání na tomto znění. Později poslanci ANO předložili další návrh, který počítá s převedením některých působností Rady na ministerstvo. Tyto kroky oslabují alespoň část pozice Rady, kterou slib požaduje posílit, avšak výslovně nemění, kdo ji vede.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh poslanců ANO z roku 2026 zároveň zachovává Radě úlohu při návrhu výdajů na výzkum, takže jeho celkový dopad na slib je smíšený; předložený text však výslovně převádí některé působnosti Rady na ministerstvo."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0aa66d1fde3681b9016ab92be217a887d19b26726cd8ab0098",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 21955,
+      "input_tokens_details": {
+        "cache_write_tokens": 18715,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 4589,
+      "output_tokens_details": {
+        "reasoning_tokens": 3786
+      },
+      "total_tokens": 26544
+    },
+    "output": {
+      "promiseId": "candidate-57ad12e8855f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-24",
+          "relevant": true,
+          "reasonCz": "Schválené znění přesouvá správu informačního systému výzkumu z Úřadu vlády na Ministerstvo průmyslu a obchodu, což mění umístění části agendy související s institucionálním postavením Rady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+          "relevant": true,
+          "reasonCz": "Změna zasahuje do zákonných úkolů Rady zrušením ustanovení § 35 odst. 2 písm. h) a současně přesouvá některé výzkumné agendy a prostředky z Úřadu vlády na ministerstvo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43406-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně převádí na Ministerstvo průmyslu a obchodu působnost vykonávanou Radou i související zaměstnance, majetek a rozpočtové prostředky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43406-2",
+          "relevant": false,
+          "reasonCz": "Text upravuje právní postavení a činnost veřejných infrastrukturních institucí, nikoli postavení Rady ani její vedení."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-57ad12e8855f--source",
+        "psp-core-2025--law-change-43184-24",
+        "psp-core-2025--law-change-43184-approved-49",
+        "psp-core-2025--law-change-43406-1",
+        "psp-core-2025--print-step-212033",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh zákona označený jako sněmovní tisk 77, který mimo jiné přesunul správu informačního systému výzkumu z Úřadu vlády na Ministerstvo průmyslu a obchodu a zrušil jedno ustanovení o úkolech Rady. Po zamítnutí návrhu Senátem poslanci ANO v září hlasovali pro jeho prosazení ve Sněmovně. Později poslanci ANO předložili další návrh, který převáděl působnost vykonávanou Radou i související zaměstnance a prostředky na ministerstvo. Tyto kroky oslabují část slibu o posílení Rady, ale předložené texty výslovně nemění, kdo jí předsedá, proto jde o postup proti části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Zákonné texty výslovně neurčují, zda Rada bude pod přímým vedením premiéra nebo jím určeného vicepremiéra; doložené změny se týkají její působnosti a související administrativy, takže nelze doložit rozpor s celým slibem.",
+        "Návrh poslanců ANO na převod působnosti na ministerstvo je doložen jako předložený návrh; balíček nedokládá následné hlasování o tomto návrhu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_072eb44302ac9e4f016ab92bf92d6887d1bde2bee9bc49e5d0",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 21955,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 21952
+      },
+      "output_tokens": 3788,
+      "output_tokens_details": {
+        "reasoning_tokens": 2984
+      },
+      "total_tokens": 25743
+    },
+    "output": {
+      "promiseId": "candidate-57ad12e8855f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-24",
+          "relevant": false,
+          "reasonCz": "Změny se týkají zejména zaměstnanců Grantové a Technologické agentury a dílčí agendy úřadu vlády, ale žádná verze přímo nemění postavení, působnost ani vedení Rady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-49",
+          "relevant": true,
+          "reasonCz": "Schválené znění ruší jednu působnost Rady v zákoně a převádí správu informačního systému výzkumu z Úřadu vlády na ministerstvo, což se dotýká jejího institucionálního postavení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43406-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně převádí na ministerstvo některé působnosti vykonávané Radou a mění její roli při návrhu výdajů na výzkum."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43406-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje právní postavení veřejných infrastrukturních institucí, ale nemění postavení, vedení ani působnost Rady."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-57ad12e8855f--source",
+        "psp-core-2025--law-change-43184-approved-49",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--law-change-43406-1",
+        "psp-core-2025--print-step-212033"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh zákona, který mimo jiné zrušil jednu působnost Rady vlády pro výzkum, vývoj a inovace a převedl správu výzkumného informačního systému z Úřadu vlády na Ministerstvo průmyslu a obchodu. Po zamítnutí návrhu Senátem, tedy horní komorou Parlamentu, poslanci ANO hlasovali také pro setrvání na tomto znění. Později poslanci ANO předložili další návrh, který počítá s převedením některých působností Rady na ministerstvo. Tyto kroky oslabují alespoň část pozice Rady, kterou slib požaduje posílit, avšak výslovně nemění, kdo ji vede.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh poslanců ANO z roku 2026 zároveň zachovává Radě úlohu při návrhu výdajů na výzkum, takže jeho celkový dopad na slib je smíšený; předložený text však výslovně převádí některé působnosti Rady na ministerstvo."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_06e520c02d35c97c016ab92c0cc3cc87d19b4beeb2493d3ddd",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 21851,
+      "input_tokens_details": {
+        "cache_write_tokens": 19434,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 456,
+      "output_tokens_details": {
+        "reasoning_tokens": 160
+      },
+      "total_tokens": 22307
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-57ad12e8855f--source",
+        "psp-core-2025--law-change-43184-approved-49",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--law-change-43406-1",
+        "psp-core-2025--print-step-212033"
+      ],
+      "explanationCz": "K dispozici je jen posouzení druhého hodnotitele a opírá se o doložené kroky poslanců ANO. Poslanci ANO podpořili návrh změn zákonů o státních zaměstnancích, vedený ve Sněmovně jako tisk č. 77, který mimo jiné omezuje jednu z úloh Rady a přesouvá správu výzkumného informačního systému z Úřadu vlády na ministerstvo. Později poslanci ANO předložili také návrh, který převádí další úkoly Rady na ministerstvo. Tyto kroky mohou oslabit část postavení Rady, i když samy přímo neurčují, zda ji vede premiér nebo vicepremiér; závěr druhého hodnotitele proto odpovídá doloženým skutečnostem."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-confirmed-single-assessor",
+    "status": "moving-against",
+    "selectedReview": "assessor-b"
+  }
+}

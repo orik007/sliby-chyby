@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-45-45-888Z--a3804981cd99",
+  "evaluatedAt": "2026-09-27T14:45:45.888Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-6133a5f517c9/a3804981cd9930997fece460f04feb24157a04cae3ad80c32f22caf74b017ce2.json",
+  "packageHash": "a3804981cd9930997fece460f04feb24157a04cae3ad80c32f22caf74b017ce2",
+  "assessmentContentHash": "abab04da800792f502cd46451703957340866c59568ebac1dc241a4261f6ec53",
+  "assessmentFingerprint": "240584a5e96263486d67ddff0f5bca6944a67426f21952dd3ac8624d5623dbdc",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-6133a5f517c9",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-6133a5f517c9",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Novela ukládá zaměstnavatelům při práci s azbestem povinnost doložit školení zaměstnanců, což odporuje části slibu o úlevě od školení BOZP."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6133a5f517c9--source",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--print-step-211961"
+      ],
+      "explanationCz": "Vláda, v níž jsou Motoristé sobě zastoupeni, předložila Poslanecké sněmovně návrh novely zákona o ochraně veřejného zdraví. Návrh ukládá zaměstnavatelům při práci s azbestem povinnost doložit školení zaměstnanců o prevenci zdravotních rizik. To jde proti části slibu, která pro mikrozaměstnavatele počítá s úlevou od školení bezpečnosti práce. Jde však jen o návrh a konkrétní oblast práce s azbestem; návrh nezavádí slíbený režim mikrozaměstnavatele ani výjimku z GDPR.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Doložený návrh se týká školení při práci s azbestem, nikoli obecného režimu BOZP pro mikrozaměstnavatele; v balíčku není doloženo jednání Motoristů sobě k výjimce z GDPR ani k zavedení tohoto režimu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-6133a5f517c9",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá zaměstnavatelům při práci s azbestem zajistit školení zaměstnanců, což se může střetnout se slibovaným odstraněním školení BOZP pro mikrozaměstnavatele."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6133a5f517c9--source",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--print-step-211961"
+      ],
+      "explanationCz": "Vláda, v níž jsou Motoristé sobě zastoupeni, předložila návrh novely zákona o ochraně veřejného zdraví. Návrh vyžaduje, aby zaměstnavatel při práci s azbestem doložil školení zaměstnanců o prevenci zdravotních rizik. To jde proti části slibu odstranit školení BOZP v režimu mikrozaměstnavatele, byť jen v úzce vymezené situaci. Jde proto o posun proti této části slibu, nikoli o popření celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Tento návrh se týká školení zaměstnanců při práci s azbestem; neřeší výjimku z GDPR ani osobní složky a evidence neukazuje, že by návrh zaváděl celý slíbený režim mikrozaměstnavatele."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_05706aa7e8763157016ab92c0c2fe887d1a263cf84aba7e75f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 25764,
+      "input_tokens_details": {
+        "cache_write_tokens": 22524,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1349,
+      "output_tokens_details": {
+        "reasoning_tokens": 954
+      },
+      "total_tokens": 27113
+    },
+    "output": {
+      "promiseId": "candidate-6133a5f517c9",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Novela ukládá zaměstnavatelům při práci s azbestem povinnost doložit školení zaměstnanců, což odporuje části slibu o úlevě od školení BOZP."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6133a5f517c9--source",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--print-step-211961"
+      ],
+      "explanationCz": "Vláda, v níž jsou Motoristé sobě zastoupeni, předložila Poslanecké sněmovně návrh novely zákona o ochraně veřejného zdraví. Návrh ukládá zaměstnavatelům při práci s azbestem povinnost doložit školení zaměstnanců o prevenci zdravotních rizik. To jde proti části slibu, která pro mikrozaměstnavatele počítá s úlevou od školení bezpečnosti práce. Jde však jen o návrh a konkrétní oblast práce s azbestem; návrh nezavádí slíbený režim mikrozaměstnavatele ani výjimku z GDPR.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Doložený návrh se týká školení při práci s azbestem, nikoli obecného režimu BOZP pro mikrozaměstnavatele; v balíčku není doloženo jednání Motoristů sobě k výjimce z GDPR ani k zavedení tohoto režimu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_06cd0e3529383d95016ab92c13191c87d19c9c25861913e307",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 25764,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 25761
+      },
+      "output_tokens": 1257,
+      "output_tokens_details": {
+        "reasoning_tokens": 878
+      },
+      "total_tokens": 27021
+    },
+    "output": {
+      "promiseId": "candidate-6133a5f517c9",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá zaměstnavatelům při práci s azbestem zajistit školení zaměstnanců, což se může střetnout se slibovaným odstraněním školení BOZP pro mikrozaměstnavatele."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6133a5f517c9--source",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--print-step-211961"
+      ],
+      "explanationCz": "Vláda, v níž jsou Motoristé sobě zastoupeni, předložila návrh novely zákona o ochraně veřejného zdraví. Návrh vyžaduje, aby zaměstnavatel při práci s azbestem doložil školení zaměstnanců o prevenci zdravotních rizik. To jde proti části slibu odstranit školení BOZP v režimu mikrozaměstnavatele, byť jen v úzce vymezené situaci. Jde proto o posun proti této části slibu, nikoli o popření celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Tento návrh se týká školení zaměstnanců při práci s azbestem; neřeší výjimku z GDPR ani osobní složky a evidence neukazuje, že by návrh zaváděl celý slíbený režim mikrozaměstnavatele."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

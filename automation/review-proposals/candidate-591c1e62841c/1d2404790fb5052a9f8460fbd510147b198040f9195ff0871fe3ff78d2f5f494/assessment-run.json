@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-45-15-086Z--0fc0c0eef614",
+  "evaluatedAt": "2026-09-27T14:45:15.086Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-591c1e62841c/0fc0c0eef61406ba16e9ed0ef0de6594f2b8b1c05aed0c82250f999783f7a619.json",
+  "packageHash": "0fc0c0eef61406ba16e9ed0ef0de6594f2b8b1c05aed0c82250f999783f7a619",
+  "assessmentContentHash": "3039823a2638eb565c286955db8b33d7aa03e78f8ae54b74237c93322b1e46c2",
+  "assessmentFingerprint": "1d2404790fb5052a9f8460fbd510147b198040f9195ff0871fe3ff78d2f5f494",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-591c1e62841c",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-591c1e62841c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a přijatá verze rozšiřuje možnost státní podpory sportu a pohybových aktivit a odstraňuje výjimku pro školní a vysokoškolský sport, což může podpořit část slibu, přestože zvláštní program pro školní sportovní kluby nezřizuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-591c1e62841c--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7"
+      ],
+      "explanationCz": "Původní návrh poslanců ANO v části o sportu upravoval pravidla fungování sportovní agentury, nikoli dotační program pro školní kluby. Poslanci ANO pak hlasovali pro znění, které rozšiřuje podporu sportovních organizací a pohybových aktivit a ruší výjimku pro školní a vysokoškolský sport. Po zamítnutí návrhu Senátem Sněmovna setrvala na svém znění a poslanci ANO je znovu podpořili. Tato změna může školní sport zpřístupnit širší dotační podpoře, ale samostatný program pro školní sportovní kluby s aktivitami pro všechny věkové skupiny nezavádí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z doloženého znění nelze potvrdit, že vznikne samostatný dotační program výslovně určený školním sportovním klubům ani že budou financovány jmenované mimoškolní aktivity, soutěže a tréninky pro všechny věkové skupiny."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-591c1e62841c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená verze odstraňuje výjimku pro školní a vysokoškolský sport z pravidel státní podpory, takže může zpřístupnit podporu i části školního sportu, ale nezavádí zvláštní program pro školní kluby."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-591c1e62841c--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Původní návrh poslanců ANO měnil pravidla jmenování v oblasti sportu, nikoli podporu školních sportovních klubů. Později poslanci ANO hlasovali pro změnu zákona o podpoře sportu, která ruší výjimku pro školní a vysokoškolský sport ze státní podpory. Senát návrh zamítl, ale Poslanecká sněmovna na něm poté setrvala. Jde o dílčí krok směrem ke slibu, nikoli o zavedení samostatného dotačního programu pro školní kluby pořádající aktivity, soutěže a tréninky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají širší možnost podpory školního sportu, ale neukazují, že vznikl samostatný dotační program určený školním sportovním klubům."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_069f3738f44b26af016ab92be838dc87d1b81f916bba0cc7d8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10480,
+      "input_tokens_details": {
+        "cache_write_tokens": 7240,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1897,
+      "output_tokens_details": {
+        "reasoning_tokens": 1367
+      },
+      "total_tokens": 12377
+    },
+    "output": {
+      "promiseId": "candidate-591c1e62841c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a přijatá verze rozšiřuje možnost státní podpory sportu a pohybových aktivit a odstraňuje výjimku pro školní a vysokoškolský sport, což může podpořit část slibu, přestože zvláštní program pro školní sportovní kluby nezřizuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-591c1e62841c--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7"
+      ],
+      "explanationCz": "Původní návrh poslanců ANO v části o sportu upravoval pravidla fungování sportovní agentury, nikoli dotační program pro školní kluby. Poslanci ANO pak hlasovali pro znění, které rozšiřuje podporu sportovních organizací a pohybových aktivit a ruší výjimku pro školní a vysokoškolský sport. Po zamítnutí návrhu Senátem Sněmovna setrvala na svém znění a poslanci ANO je znovu podpořili. Tato změna může školní sport zpřístupnit širší dotační podpoře, ale samostatný program pro školní sportovní kluby s aktivitami pro všechny věkové skupiny nezavádí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z doloženého znění nelze potvrdit, že vznikne samostatný dotační program výslovně určený školním sportovním klubům ani že budou financovány jmenované mimoškolní aktivity, soutěže a tréninky pro všechny věkové skupiny."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b4860979f35f8c2016ab92bf2c7b087d1abeeed212cbff456",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10480,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 10477
+      },
+      "output_tokens": 1509,
+      "output_tokens_details": {
+        "reasoning_tokens": 1034
+      },
+      "total_tokens": 11989
+    },
+    "output": {
+      "promiseId": "candidate-591c1e62841c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená verze odstraňuje výjimku pro školní a vysokoškolský sport z pravidel státní podpory, takže může zpřístupnit podporu i části školního sportu, ale nezavádí zvláštní program pro školní kluby."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-591c1e62841c--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Původní návrh poslanců ANO měnil pravidla jmenování v oblasti sportu, nikoli podporu školních sportovních klubů. Později poslanci ANO hlasovali pro změnu zákona o podpoře sportu, která ruší výjimku pro školní a vysokoškolský sport ze státní podpory. Senát návrh zamítl, ale Poslanecká sněmovna na něm poté setrvala. Jde o dílčí krok směrem ke slibu, nikoli o zavedení samostatného dotačního programu pro školní kluby pořádající aktivity, soutěže a tréninky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají širší možnost podpory školního sportu, ale neukazují, že vznikl samostatný dotační program určený školním sportovním klubům."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

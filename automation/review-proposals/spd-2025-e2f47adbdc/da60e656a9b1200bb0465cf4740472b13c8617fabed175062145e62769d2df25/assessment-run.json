@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T15-03-23-927Z--4f367f0eb5ca",
+  "evaluatedAt": "2026-09-27T15:03:23.927Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-e2f47adbdc/4f367f0eb5caaea5122d2927f85a0e06850c4a387450e0c9dbd8021e0e0d58cd.json",
+  "packageHash": "4f367f0eb5caaea5122d2927f85a0e06850c4a387450e0c9dbd8021e0e0d58cd",
+  "assessmentContentHash": "70a3eb3c4473ade2c7ff6ed5155f72e739666eca6be80b87afe045f10a715c44",
+  "assessmentFingerprint": "da60e656a9b1200bb0465cf4740472b13c8617fabed175062145e62769d2df25",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-e2f47adbdc",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-e2f47adbdc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-1",
+          "relevant": true,
+          "reasonCz": "Schválená novela umožňuje v omezených případech vyplatit odkup investičních podílů nepeněžně, tedy majetkem místo peněz, což se přímo dotýká části slibu o právu na hotovostní platbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-4",
+          "relevant": false,
+          "reasonCz": "Předložené znění pouze ruší část ustanovení zákona o České obchodní inspekci, ale neukazuje, že by změna upravovala hotovostní platby, karty nebo digitální peněženky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-65",
+          "relevant": false,
+          "reasonCz": "Předložené znění pouze ruší odstavec zákona proti praní špinavých peněz a neukazuje, že by tato změna upravovala hotovostní platby, karty nebo digitální peněženky."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-e2f47adbdc--source",
+        "psp-core-2025--law-change-43120-1",
+        "psp-core-2025--vote-87503"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu zákona o investičních fondech, která připouští, aby se odkup podílů v některých fondech vyplatil majetkem místo peněz. Tato možnost se týká pouze odkupu požadovaného profesionálním zákazníkem a musí splňovat stanovené podmínky. Nejde o povinnou kartu ani digitální peněženku, ale v tomto omezeném případě novela připouští plnění jinak než v penězích, a proto jde částečně proti právu na hotovostní platbu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Doložená možnost nepeněžního odkupu se týká jen určitých investičních fondů a profesionálních zákazníků; její dopad na širší právo na hotovostní platby je proto omezený."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-e2f47adbdc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-1",
+          "relevant": true,
+          "reasonCz": "Novela umožňuje za stanovených podmínek vyplatit odkup z otevřeného investičního fondu nepeněžně, a tím omezuje hotovostní výplatu v této konkrétní situaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-4",
+          "relevant": false,
+          "reasonCz": "Změna upravuje vymezení působnosti České obchodní inspekce, nikoli právo platit hotovostí nebo povinnost používat kartu či digitální peněženku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-65",
+          "relevant": false,
+          "reasonCz": "Změna ruší ustanovení zákona proti praní peněz, ale její text se netýká hotovostních plateb ani povinného používání digitální peněženky či karty."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-e2f47adbdc--source",
+        "psp-core-2025--law-change-43120-1",
+        "psp-core-2025--vote-87503"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu zákona o investičních společnostech a investičních fondech. Ta umožňuje, aby otevřený investiční fond za určitých podmínek vyřídil odkup nepeněžně, tedy převedením majetku místo peněz, pokud o odkup žádá profesionální zákazník. Tím se v této omezené situaci zužuje možnost dostat při odkupu peníze; novela ale neřeší běžné placení kartou ani digitální peněženky. Jde proto o dílčí krok proti slibu o právu na platbu v hotovosti.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dopad se týká pouze odkupů z investičních fondů a profesionálních zákazníků; poskytnuté podklady neukazují širší dopad na běžné hotovostní platby."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0b7ff57d3024844e016ab93028191887d1b3bcd0953ae0e669",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 95743,
+      "input_tokens_details": {
+        "cache_write_tokens": 92503,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1717,
+      "output_tokens_details": {
+        "reasoning_tokens": 1167
+      },
+      "total_tokens": 97460
+    },
+    "output": {
+      "promiseId": "spd-2025-e2f47adbdc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-1",
+          "relevant": true,
+          "reasonCz": "Schválená novela umožňuje v omezených případech vyplatit odkup investičních podílů nepeněžně, tedy majetkem místo peněz, což se přímo dotýká části slibu o právu na hotovostní platbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-4",
+          "relevant": false,
+          "reasonCz": "Předložené znění pouze ruší část ustanovení zákona o České obchodní inspekci, ale neukazuje, že by změna upravovala hotovostní platby, karty nebo digitální peněženky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-65",
+          "relevant": false,
+          "reasonCz": "Předložené znění pouze ruší odstavec zákona proti praní špinavých peněz a neukazuje, že by tato změna upravovala hotovostní platby, karty nebo digitální peněženky."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-e2f47adbdc--source",
+        "psp-core-2025--law-change-43120-1",
+        "psp-core-2025--vote-87503"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu zákona o investičních fondech, která připouští, aby se odkup podílů v některých fondech vyplatil majetkem místo peněz. Tato možnost se týká pouze odkupu požadovaného profesionálním zákazníkem a musí splňovat stanovené podmínky. Nejde o povinnou kartu ani digitální peněženku, ale v tomto omezeném případě novela připouští plnění jinak než v penězích, a proto jde částečně proti právu na hotovostní platbu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Doložená možnost nepeněžního odkupu se týká jen určitých investičních fondů a profesionálních zákazníků; její dopad na širší právo na hotovostní platby je proto omezený."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0d3c31fa6e0abfbd016ab93032693087d195e7eca4ad324380",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 95743,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 95740
+      },
+      "output_tokens": 1765,
+      "output_tokens_details": {
+        "reasoning_tokens": 1238
+      },
+      "total_tokens": 97508
+    },
+    "output": {
+      "promiseId": "spd-2025-e2f47adbdc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-1",
+          "relevant": true,
+          "reasonCz": "Novela umožňuje za stanovených podmínek vyplatit odkup z otevřeného investičního fondu nepeněžně, a tím omezuje hotovostní výplatu v této konkrétní situaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-4",
+          "relevant": false,
+          "reasonCz": "Změna upravuje vymezení působnosti České obchodní inspekce, nikoli právo platit hotovostí nebo povinnost používat kartu či digitální peněženku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-65",
+          "relevant": false,
+          "reasonCz": "Změna ruší ustanovení zákona proti praní peněz, ale její text se netýká hotovostních plateb ani povinného používání digitální peněženky či karty."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-e2f47adbdc--source",
+        "psp-core-2025--law-change-43120-1",
+        "psp-core-2025--vote-87503"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu zákona o investičních společnostech a investičních fondech. Ta umožňuje, aby otevřený investiční fond za určitých podmínek vyřídil odkup nepeněžně, tedy převedením majetku místo peněz, pokud o odkup žádá profesionální zákazník. Tím se v této omezené situaci zužuje možnost dostat při odkupu peníze; novela ale neřeší běžné placení kartou ani digitální peněženky. Jde proto o dílčí krok proti slibu o právu na platbu v hotovosti.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dopad se týká pouze odkupů z investičních fondů a profesionálních zákazníků; poskytnuté podklady neukazují širší dopad na běžné hotovostní platby."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

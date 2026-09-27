@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-35-16-795Z--5e1398b657ff",
+  "evaluatedAt": "2026-09-27T14:35:16.795Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-3a6ae325f1/5e1398b657ffa6f1f3eddf0fd3dd450ff930b985c3797261097f33bd0fa90301.json",
+  "packageHash": "5e1398b657ffa6f1f3eddf0fd3dd450ff930b985c3797261097f33bd0fa90301",
+  "assessmentContentHash": "67c3901d3de08d67f5d810dcbf58ff152f7f9d06170fdd6879b560202459ab12",
+  "assessmentFingerprint": "6fe88b99be24644051fc37e69246c42b1fc365b4fcd21af870db847dd9edea14",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-3a6ae325f1",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-3a6ae325f1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": true,
+          "reasonCz": "Změna přímo ruší ustanovení zákona o zpracování osobních údajů, takže může zasáhnout část slibu o ochraně před šmírováním, avšak z předloženého textu nelze zjistit obsah rušených pravidel ani směr dopadu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-3a6ae325f1--source",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh a poté hlasovali pro jeho schválení; po zamítnutí Senátem hlasovali také pro setrvání Poslanecké sněmovny na návrhu. Zákon ruší některá ustanovení pravidel pro zpracování osobních údajů, ale předložené znění neuvádí obsah rušených částí. Proto nelze ověřit, zda tato změna zvyšuje, nebo snižuje ochranu před šmírováním; zároveň se její text výslovně netýká DSA ani moderování obsahu neziskovými organizacemi.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není doložen obsah rušeného odstavce § 51 ani poslední věty § 52 zákona o zpracování osobních údajů, takže nelze určit, zda změna chrání před sledováním, nebo ochranu oslabuje.",
+        "Z dostupného textu nelze vyvodit dopad na slib odmítnout DSA ani na moderování obsahu nevolenými neziskovými organizacemi."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-3a6ae325f1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": true,
+          "reasonCz": "Změna zákona o zpracování osobních údajů může souviset s ochranou občanů před šmírováním, ale znění vypouštěných ustanovení v balíčku chybí."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-3a6ae325f1--source",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh zákona a později hlasovali pro jeho schválení; po zamítnutí Senátem hlasovali také pro to, aby na něm Sněmovna setrvala. Návrh mimo jiné ruší část ustanovení zákona o zpracování osobních údajů, což může souviset se slibem chránit občany před šmírováním. Podklady ale neuvádějí obsah vypuštěných ustanovení ani to, jak jejich zrušení mění ochranu osobních údajů, takže nelze určit, zda návrh slib naplňuje, nebo mu odporuje. Z dostupných důkazů proto nelze doložit podstatný posun.",
+      "confidence": "low",
+      "uncertainties": [
+        "Balíček neobsahuje znění vypuštěné poslední věty § 52 odst. 1 ani zrušeného § 51 odst. 3 zákona o zpracování osobních údajů; bez něj nelze posoudit dopad změny na ochranu před šmírováním. Proto nelze směr předložení návrhu ani hlasů ANO vůči slibu spolehlivě určit."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0ed826b6e3ec81d0016ab9299201e487d1a0afae58b76211e3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8364,
+      "input_tokens_details": {
+        "cache_write_tokens": 5124,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1636,
+      "output_tokens_details": {
+        "reasoning_tokens": 1156
+      },
+      "total_tokens": 10000
+    },
+    "output": {
+      "promiseId": "ano-2025-3a6ae325f1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": true,
+          "reasonCz": "Změna přímo ruší ustanovení zákona o zpracování osobních údajů, takže může zasáhnout část slibu o ochraně před šmírováním, avšak z předloženého textu nelze zjistit obsah rušených pravidel ani směr dopadu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-3a6ae325f1--source",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh a poté hlasovali pro jeho schválení; po zamítnutí Senátem hlasovali také pro setrvání Poslanecké sněmovny na návrhu. Zákon ruší některá ustanovení pravidel pro zpracování osobních údajů, ale předložené znění neuvádí obsah rušených částí. Proto nelze ověřit, zda tato změna zvyšuje, nebo snižuje ochranu před šmírováním; zároveň se její text výslovně netýká DSA ani moderování obsahu neziskovými organizacemi.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není doložen obsah rušeného odstavce § 51 ani poslední věty § 52 zákona o zpracování osobních údajů, takže nelze určit, zda změna chrání před sledováním, nebo ochranu oslabuje.",
+        "Z dostupného textu nelze vyvodit dopad na slib odmítnout DSA ani na moderování obsahu nevolenými neziskovými organizacemi."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_08046fb20aeb2a01016ab9299b356087d1bbd35409bbcc0acf",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8364,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8361
+      },
+      "output_tokens": 1926,
+      "output_tokens_details": {
+        "reasoning_tokens": 1393
+      },
+      "total_tokens": 10290
+    },
+    "output": {
+      "promiseId": "ano-2025-3a6ae325f1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": true,
+          "reasonCz": "Změna zákona o zpracování osobních údajů může souviset s ochranou občanů před šmírováním, ale znění vypouštěných ustanovení v balíčku chybí."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-3a6ae325f1--source",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh zákona a později hlasovali pro jeho schválení; po zamítnutí Senátem hlasovali také pro to, aby na něm Sněmovna setrvala. Návrh mimo jiné ruší část ustanovení zákona o zpracování osobních údajů, což může souviset se slibem chránit občany před šmírováním. Podklady ale neuvádějí obsah vypuštěných ustanovení ani to, jak jejich zrušení mění ochranu osobních údajů, takže nelze určit, zda návrh slib naplňuje, nebo mu odporuje. Z dostupných důkazů proto nelze doložit podstatný posun.",
+      "confidence": "low",
+      "uncertainties": [
+        "Balíček neobsahuje znění vypuštěné poslední věty § 52 odst. 1 ani zrušeného § 51 odst. 3 zákona o zpracování osobních údajů; bez něj nelze posoudit dopad změny na ochranu před šmírováním. Proto nelze směr předložení návrhu ani hlasů ANO vůči slibu spolehlivě určit."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

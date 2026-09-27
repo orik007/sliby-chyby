@@ -1,0 +1,183 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-52-54-787Z--3752885d4a10",
+  "evaluatedAt": "2026-09-27T14:52:54.787Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-d2651630160e/3752885d4a10d16f5ff2f72339d14f8689af9c6d610055eafda8fc227c47f039.json",
+  "packageHash": "3752885d4a10d16f5ff2f72339d14f8689af9c6d610055eafda8fc227c47f039",
+  "assessmentContentHash": "edf6b4db846ddd1c3e7ab4d4e274734173f5dfe505618aca9407a3408aa86018",
+  "assessmentFingerprint": "9c4c3b9a57a0606bcfa8f2dad57d07a61b6589f89168bc142964b4164ef6e9c7",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-d2651630160e",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b"
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-d2651630160e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-27",
+          "relevant": false,
+          "reasonCz": "Tato změna pouze vypouští ze zákona o pozemních komunikacích slova „k výkonu státní služby“ a žádná její dostupná verze se netýká nízkoemisních zón ani omezení provozu starších vozidel."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-d2651630160e--source",
+        "psp-core-2025--law-change-43184-approved-27",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Motoristé sobě slíbili nepodporovat plošné nízkoemisní zóny postihující majitele starších, ale funkčních vozidel. Poslanci strany hlasovali pro návrh zákona týkající se státních zaměstnanců, a to při jeho schválení i při následném hlasování po zamítnutí Senátem. Příslušná změna zákona o pozemních komunikacích pouze vypouští slova týkající se výkonu státní služby; nízkoemisní zóny ani provoz starších vozidel neupravuje. Z těchto hlasování proto nelze ověřit, zda strana svůj slib plnila nebo porušila.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené hlasování se týkají návrhu, jehož zjištěná změna zákona o pozemních komunikacích nesouvisí s nízkoemisními zónami; balíček proto neumožňuje určit postoj Motoristů sobě k samotnému slibu."
+      ]
+    },
+    "assessor-b": null
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0216294ffb801d43016ab92db2881487d1b56d16ef1be358f4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 7218,
+      "input_tokens_details": {
+        "cache_write_tokens": 3978,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1061,
+      "output_tokens_details": {
+        "reasoning_tokens": 634
+      },
+      "total_tokens": 8279
+    },
+    "output": {
+      "promiseId": "candidate-d2651630160e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-27",
+          "relevant": false,
+          "reasonCz": "Tato změna pouze vypouští ze zákona o pozemních komunikacích slova „k výkonu státní služby“ a žádná její dostupná verze se netýká nízkoemisních zón ani omezení provozu starších vozidel."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-d2651630160e--source",
+        "psp-core-2025--law-change-43184-approved-27",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Motoristé sobě slíbili nepodporovat plošné nízkoemisní zóny postihující majitele starších, ale funkčních vozidel. Poslanci strany hlasovali pro návrh zákona týkající se státních zaměstnanců, a to při jeho schválení i při následném hlasování po zamítnutí Senátem. Příslušná změna zákona o pozemních komunikacích pouze vypouští slova týkající se výkonu státní služby; nízkoemisní zóny ani provoz starších vozidel neupravuje. Z těchto hlasování proto nelze ověřit, zda strana svůj slib plnila nebo porušila.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené hlasování se týkají návrhu, jehož zjištěná změna zákona o pozemních komunikacích nesouvisí s nízkoemisními zónami; balíček proto neumožňuje určit postoj Motoristů sobě k samotnému slibu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_008e429a6bacb4fa016ab92dba0eb087d186cc4261335c7235",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 7218,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 7215
+      },
+      "output_tokens": 1472,
+      "output_tokens_details": {
+        "reasoning_tokens": 1011
+      },
+      "total_tokens": 8690
+    },
+    "output": {
+      "promiseId": "candidate-d2651630160e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-27",
+          "relevant": false,
+          "reasonCz": "Změna pouze vypouští ze zákona o pozemních komunikacích slova „k výkonu státní služby“ a nijak neupravuje nízkoemisní zóny ani omezení vozidel."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-d2651630160e--source",
+        "psp-core-2025--law-change-43184-approved-27",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Motoristé hlasovali pro návrh zákona o státních zaměstnancích, který Poslanecká sněmovna projednávala jako sněmovní tisk 77. Senát tento návrh zamítl a sněmovna poté hlasovala pro setrvání na svém znění. Doložená změna zákona o pozemních komunikacích však pouze vypouští slova týkající se výkonu státní služby; nízkoemisní zóny ani omezení starších vozidel neupravuje. Z těchto podkladů proto nelze ověřit posun ve vztahu k tomuto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady zachycují hlasování Motoristů pro návrh zákona, ale doložená část tohoto návrhu neřeší nízkoemisní zóny; z balíčku proto nelze určit, jak strana jednala o opatřeních, která by se slibu skutečně týkala."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0d5a75991d5a4040016ab92dc3c1c887d1b7ce56153047e0c5",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 6821,
+      "input_tokens_details": {
+        "cache_write_tokens": 4404,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 304,
+      "output_tokens_details": {
+        "reasoning_tokens": 90
+      },
+      "total_tokens": 7125
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "candidate-d2651630160e--source",
+        "psp-core-2025--law-change-43184-approved-27",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Volím posouzení A. Motoristé sobě hlasovali pro zákon o státních zaměstnancích, vedený ve Sněmovně jako tisk č. 77, při jeho schválení i po zamítnutí Senátem. Změna zákona o pozemních komunikacích v tomto návrhu ale jen vypouští slova o výkonu státní služby; nijak neupravuje nízkoemisní zóny ani omezení starších vozidel. Tato hlasování proto neukazují, zda strana svůj slib dodržela, nebo porušila."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

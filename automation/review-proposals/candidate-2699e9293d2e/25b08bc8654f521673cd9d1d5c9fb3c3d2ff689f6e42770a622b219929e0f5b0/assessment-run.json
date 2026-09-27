@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-42-26-363Z--825ef4663da0",
+  "evaluatedAt": "2026-09-27T14:42:26.363Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-2699e9293d2e/825ef4663da02ec697c091b24471f236f62d0561aad4905dea16fc49ab034dba.json",
+  "packageHash": "825ef4663da02ec697c091b24471f236f62d0561aad4905dea16fc49ab034dba",
+  "assessmentContentHash": "51f3f1547ecd93676840caa552d4739cfd1ad132e6145af0a9b083f8405f5f54",
+  "assessmentFingerprint": "25b08bc8654f521673cd9d1d5c9fb3c3d2ff689f6e42770a622b219929e0f5b0",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-2699e9293d2e",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-2699e9293d2e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-50",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší druhou větu v § 1 odst. 5 zákona o Státní zemědělské a potravinářské inspekci, ale neuvádí její obsah ani změnu kontrol dovážených potravin či obchodních dohod."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-2699e9293d2e--source",
+        "psp-core-2025--law-change-43184-approved-50"
+      ],
+      "explanationCz": "Slib ANO se týká přísných kontrol kvality a původu dovážených potravin i blokování některých obchodních dohod. Jediná dohledaná změna zákona o Státní zemědělské a potravinářské inspekci ruší druhou větu v jednom ustanovení, ale předložené podklady neuvádějí, co tato věta stanovila. Nelze proto ověřit, zda změna ovlivnila kontroly nebo naplnila či oslabovala některou část slibu; podstatný posun není doložen.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není uvedeno znění rušené věty ani její dosavadní právní účinek, takže nelze určit, zda změna zákona ovlivnila kontroly dovážených potravin."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-2699e9293d2e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-50",
+          "relevant": true,
+          "reasonCz": "Změna ruší větu v zákoně upravujícím Státní zemědělskou a potravinářskou inspekci, takže může ovlivnit právní rámec kontrol potravin; z předloženého textu ale nelze určit, zda se týká dovozu nebo původu potravin."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-2699e9293d2e--source",
+        "psp-core-2025--law-change-43184-approved-50",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh zákona, který ruší druhou větu v odstavci zákona upravujícího Státní zemědělskou a potravinářskou inspekci. Senát návrh odmítl a poslanci ANO poté hlasovali pro setrvání Sněmovny na návrhu. Z dostupného znění ale nelze zjistit, jaký dopad má zrušení této věty na kontroly dovážených potravin. Podklady také nedokládají krok k blokování obchodních dohod s třetími zeměmi, takže směr jednání vůči celému slibu nelze ověřit.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není uvedeno znění rušené věty ani její účinek, proto nelze posoudit, zda hlasování ANO posílilo, nebo oslabilo kontroly dovážených potravin.",
+        "V balíčku není doloženo jednání ANO o blokování obchodních dohod s třetími zeměmi, které nesplňují evropské standardy."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_00d232f91eeb83ea016ab92b3de5f887d1b93e1f638be76358",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 7345,
+      "input_tokens_details": {
+        "cache_write_tokens": 4105,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1513,
+      "output_tokens_details": {
+        "reasoning_tokens": 1110
+      },
+      "total_tokens": 8858
+    },
+    "output": {
+      "promiseId": "candidate-2699e9293d2e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-50",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší druhou větu v § 1 odst. 5 zákona o Státní zemědělské a potravinářské inspekci, ale neuvádí její obsah ani změnu kontrol dovážených potravin či obchodních dohod."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-2699e9293d2e--source",
+        "psp-core-2025--law-change-43184-approved-50"
+      ],
+      "explanationCz": "Slib ANO se týká přísných kontrol kvality a původu dovážených potravin i blokování některých obchodních dohod. Jediná dohledaná změna zákona o Státní zemědělské a potravinářské inspekci ruší druhou větu v jednom ustanovení, ale předložené podklady neuvádějí, co tato věta stanovila. Nelze proto ověřit, zda změna ovlivnila kontroly nebo naplnila či oslabovala některou část slibu; podstatný posun není doložen.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není uvedeno znění rušené věty ani její dosavadní právní účinek, takže nelze určit, zda změna zákona ovlivnila kontroly dovážených potravin."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0c141ecccc2d9951016ab92b465ab087d195a71d273283e3cf",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 7345,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 7342
+      },
+      "output_tokens": 2229,
+      "output_tokens_details": {
+        "reasoning_tokens": 1752
+      },
+      "total_tokens": 9574
+    },
+    "output": {
+      "promiseId": "candidate-2699e9293d2e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-50",
+          "relevant": true,
+          "reasonCz": "Změna ruší větu v zákoně upravujícím Státní zemědělskou a potravinářskou inspekci, takže může ovlivnit právní rámec kontrol potravin; z předloženého textu ale nelze určit, zda se týká dovozu nebo původu potravin."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-2699e9293d2e--source",
+        "psp-core-2025--law-change-43184-approved-50",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh zákona, který ruší druhou větu v odstavci zákona upravujícího Státní zemědělskou a potravinářskou inspekci. Senát návrh odmítl a poslanci ANO poté hlasovali pro setrvání Sněmovny na návrhu. Z dostupného znění ale nelze zjistit, jaký dopad má zrušení této věty na kontroly dovážených potravin. Podklady také nedokládají krok k blokování obchodních dohod s třetími zeměmi, takže směr jednání vůči celému slibu nelze ověřit.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není uvedeno znění rušené věty ani její účinek, proto nelze posoudit, zda hlasování ANO posílilo, nebo oslabilo kontroly dovážených potravin.",
+        "V balíčku není doloženo jednání ANO o blokování obchodních dohod s třetími zeměmi, které nesplňují evropské standardy."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

@@ -1,0 +1,340 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-40-01-429Z--35654a6bf30c",
+  "evaluatedAt": "2026-09-27T14:40:01.429Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-digital-tax-cobra/35654a6bf30ce538e75779da154bd95b0cd38da523ae3033625dd4c64198f81f.json",
+  "packageHash": "35654a6bf30ce538e75779da154bd95b0cd38da523ae3033625dd4c64198f81f",
+  "assessmentContentHash": "dbe0f2716b80e0cb06ef22ff170f2c02e6d65346a51b7dd631c439e91771f302",
+  "assessmentFingerprint": "f181ed002700ae01c2733b7f89b0bb49b483d032b919f2a7299cbb35091f50ea",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-digital-tax-cobra",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-digital-tax-cobra",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje dohled nad kapitálovým trhem, ale nestanoví sběr ani analytické vyhodnocování údajů k odhalování fiktivních obchodů či daňové optimalizace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": true,
+          "reasonCz": "Navržená smlouva s Tanzanií umožňuje výměnu daňových informací a odmítnutí výhod při zneužívajících uspořádáních, což může pomoci odhalovat daňové úniky a nezákonnou optimalizaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí automatické oznamování údajů o transakcích s kryptoaktivy a jejich uchovávání pro správu daní, tedy zdroj údajů využitelný při odhalování daňových úniků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Zákon zavádí automatizované shromažďování údajů o evidovaných tržbách a výslovně je spojuje s účinnějším ověřováním daňových povinností."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Změna umožňuje finanční správě získávat údaje od daňových subjektů při plnění povinností evidence tržeb, což je relevantní podpůrný zdroj údajů pro daňovou kontrolu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": false,
+          "reasonCz": "Změna pouze svěřuje celní správě kontrolu a sankcionování povinností evidence tržeb, ale neřeší zjišťování ani analýzu fiktivních obchodů či nezákonné daňové optimalizace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Navržená smlouva s Argentinou upravuje výměnu daňových informací a obsahuje ustanovení proti vyhýbání se daňové povinnosti, což může přispět k odhalování daňových úniků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-digital-tax-cobra--source",
+        "psp-core-2025--law-change-43194-1",
+        "psp-core-2025--print-step-210710",
+        "psp-core-2025--law-change-43208-1",
+        "psp-core-2025--print-step-210766",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--print-step-211887"
+      ],
+      "explanationCz": "Vláda předložila smlouvy s Tanzanií a Argentinou, které počítají s výměnou daňových informací a opatřeními proti daňovým únikům. Předložila také návrh na automatické oznamování transakcí s kryptoaktivy pro správu daní. Poslanci ANO hlasovali pro zákon o evidenci tržeb, který zavádí automatizované zjišťování údajů a jejich využití k ověřování daňových povinností; po vrácení návrhu Senátem podpořili zachování sněmovního znění. Jde o dílčí kroky k získávání a využívání daňových údajů, nikoli o doložené zavedení slibovaného analytického systému s umělou inteligencí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda byl skutečně zaveden systém Digitální daňové kobry ani zda používá pokročilé analytické nástroje a umělou inteligenci; doložené kroky proto potvrzují jen dílčí posun."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-digital-tax-cobra",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-2",
+          "relevant": true,
+          "reasonCz": "Novela umožňuje určité zapojení správce daně do komunikace s dohledem nad kapitálovým trhem, což může podpořit předávání informací pro odhalování daňových praktik, ale nezavádí analytické nástroje ani umělou inteligenci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": true,
+          "reasonCz": "Smlouva s Tanzanií upravuje výměnu daňových informací a výslovně míří na daňové úniky a vyhýbání se daňové povinnosti, tedy na část cíle slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí automatické oznamování údajů o transakcích s kryptoaktivy a jejich předávání správci daně, což může poskytnout podklady k odhalování daňových úniků či optimalizací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Evidence tržeb má automatizovaně shromažďovat údaje o tržbách a zefektivnit ověřování daňových povinností, což představuje část kontroly, kterou slib předpokládá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Změna upravuje pravomoci Finanční správy při získávání údajů od daňových subjektů pro evidenci tržeb, a může tak podpořit ověřování jejich daňových povinností."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Změna svěřuje Celní správě kontrolu evidence tržeb a ukládání pokut, čímž posiluje kontrolní část slibu, nikoli však jeho analytickou či umělou inteligencí podporovanou část."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Smlouva s Argentinou umožňuje výměnu daňových informací a obsahuje ustanovení proti daňovým únikům a vyhýbání se daňové povinnosti, což odpovídá části cíle slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-digital-tax-cobra--source",
+        "psp-core-2025--law-change-43120-2",
+        "psp-core-2025--law-change-43194-1",
+        "psp-core-2025--law-change-43208-1",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--law-change-43310-5",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--print-step-210710",
+        "psp-core-2025--print-step-210766",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-87503",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda ANO předložila návrhy na výměnu daňových informací s Tanzanií a Argentinou a na automatické oznamování transakcí s kryptoaktivy správci daně. Poslanci ANO také hlasovali pro změny pravomocí finančních a celních orgánů i pro obnovení evidence tržeb, která má automatizovaně shromažďovat údaje a pomáhat ověřovat daňové povinnosti. Tato opatření podporují některé části slibu, zejména získávání údajů a daňovou kontrolu, proto jde o dílčí posun. Předložené texty ale nedokládají zavedení slíbené Digitální daňové kobry ani využití pokročilé analytiky a umělé inteligence.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají návrhy a přijatá opatření v oblasti výměny informací, evidence tržeb a daňové kontroly, ale nedokládají, zda byla Digitální daňová kobra skutečně zavedena ani zda při odhalování fiktivních obchodů a nezákonných daňových optimalizací používá pokročilé analytické nástroje nebo umělou inteligenci."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_082d434c5c1cdb2e016ab92a9c81c887d1839d90e9be162417",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 92578,
+      "input_tokens_details": {
+        "cache_write_tokens": 89338,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 3686,
+      "output_tokens_details": {
+        "reasoning_tokens": 2491
+      },
+      "total_tokens": 96264
+    },
+    "output": {
+      "promiseId": "ano-2025-digital-tax-cobra",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje dohled nad kapitálovým trhem, ale nestanoví sběr ani analytické vyhodnocování údajů k odhalování fiktivních obchodů či daňové optimalizace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": true,
+          "reasonCz": "Navržená smlouva s Tanzanií umožňuje výměnu daňových informací a odmítnutí výhod při zneužívajících uspořádáních, což může pomoci odhalovat daňové úniky a nezákonnou optimalizaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí automatické oznamování údajů o transakcích s kryptoaktivy a jejich uchovávání pro správu daní, tedy zdroj údajů využitelný při odhalování daňových úniků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Zákon zavádí automatizované shromažďování údajů o evidovaných tržbách a výslovně je spojuje s účinnějším ověřováním daňových povinností."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Změna umožňuje finanční správě získávat údaje od daňových subjektů při plnění povinností evidence tržeb, což je relevantní podpůrný zdroj údajů pro daňovou kontrolu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": false,
+          "reasonCz": "Změna pouze svěřuje celní správě kontrolu a sankcionování povinností evidence tržeb, ale neřeší zjišťování ani analýzu fiktivních obchodů či nezákonné daňové optimalizace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Navržená smlouva s Argentinou upravuje výměnu daňových informací a obsahuje ustanovení proti vyhýbání se daňové povinnosti, což může přispět k odhalování daňových úniků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-digital-tax-cobra--source",
+        "psp-core-2025--law-change-43194-1",
+        "psp-core-2025--print-step-210710",
+        "psp-core-2025--law-change-43208-1",
+        "psp-core-2025--print-step-210766",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--print-step-211887"
+      ],
+      "explanationCz": "Vláda předložila smlouvy s Tanzanií a Argentinou, které počítají s výměnou daňových informací a opatřeními proti daňovým únikům. Předložila také návrh na automatické oznamování transakcí s kryptoaktivy pro správu daní. Poslanci ANO hlasovali pro zákon o evidenci tržeb, který zavádí automatizované zjišťování údajů a jejich využití k ověřování daňových povinností; po vrácení návrhu Senátem podpořili zachování sněmovního znění. Jde o dílčí kroky k získávání a využívání daňových údajů, nikoli o doložené zavedení slibovaného analytického systému s umělou inteligencí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda byl skutečně zaveden systém Digitální daňové kobry ani zda používá pokročilé analytické nástroje a umělou inteligenci; doložené kroky proto potvrzují jen dílčí posun."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_08731bbf1842c640016ab92aae212087d1ad78bcde39d7a4af",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 92578,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 92575
+      },
+      "output_tokens": 4225,
+      "output_tokens_details": {
+        "reasoning_tokens": 2945
+      },
+      "total_tokens": 96803
+    },
+    "output": {
+      "promiseId": "ano-2025-digital-tax-cobra",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-2",
+          "relevant": true,
+          "reasonCz": "Novela umožňuje určité zapojení správce daně do komunikace s dohledem nad kapitálovým trhem, což může podpořit předávání informací pro odhalování daňových praktik, ale nezavádí analytické nástroje ani umělou inteligenci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": true,
+          "reasonCz": "Smlouva s Tanzanií upravuje výměnu daňových informací a výslovně míří na daňové úniky a vyhýbání se daňové povinnosti, tedy na část cíle slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí automatické oznamování údajů o transakcích s kryptoaktivy a jejich předávání správci daně, což může poskytnout podklady k odhalování daňových úniků či optimalizací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Evidence tržeb má automatizovaně shromažďovat údaje o tržbách a zefektivnit ověřování daňových povinností, což představuje část kontroly, kterou slib předpokládá."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Změna upravuje pravomoci Finanční správy při získávání údajů od daňových subjektů pro evidenci tržeb, a může tak podpořit ověřování jejich daňových povinností."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-5",
+          "relevant": true,
+          "reasonCz": "Změna svěřuje Celní správě kontrolu evidence tržeb a ukládání pokut, čímž posiluje kontrolní část slibu, nikoli však jeho analytickou či umělou inteligencí podporovanou část."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Smlouva s Argentinou umožňuje výměnu daňových informací a obsahuje ustanovení proti daňovým únikům a vyhýbání se daňové povinnosti, což odpovídá části cíle slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-digital-tax-cobra--source",
+        "psp-core-2025--law-change-43120-2",
+        "psp-core-2025--law-change-43194-1",
+        "psp-core-2025--law-change-43208-1",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--law-change-43310-5",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--print-step-210710",
+        "psp-core-2025--print-step-210766",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-87503",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda ANO předložila návrhy na výměnu daňových informací s Tanzanií a Argentinou a na automatické oznamování transakcí s kryptoaktivy správci daně. Poslanci ANO také hlasovali pro změny pravomocí finančních a celních orgánů i pro obnovení evidence tržeb, která má automatizovaně shromažďovat údaje a pomáhat ověřovat daňové povinnosti. Tato opatření podporují některé části slibu, zejména získávání údajů a daňovou kontrolu, proto jde o dílčí posun. Předložené texty ale nedokládají zavedení slíbené Digitální daňové kobry ani využití pokročilé analytiky a umělé inteligence.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají návrhy a přijatá opatření v oblasti výměny informací, evidence tržeb a daňové kontroly, ale nedokládají, zda byla Digitální daňová kobra skutečně zavedena ani zda při odhalování fiktivních obchodů a nezákonných daňových optimalizací používá pokročilé analytické nástroje nebo umělou inteligenci."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-34-57-574Z--512b90e3514d",
+  "evaluatedAt": "2026-09-27T14:34:57.574Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-167b9246f3/512b90e3514d9ec5c1bb83e205e06004d6d8d9325da39f86b09303d2e51e88a2.json",
+  "packageHash": "512b90e3514d9ec5c1bb83e205e06004d6d8d9325da39f86b09303d2e51e88a2",
+  "assessmentContentHash": "15a7927a81b9a7f859a3429e858676139eea92376e60d72730ecaca545521f5a",
+  "assessmentFingerprint": "ae7e492cea5f9d76e733ce036374cfa838b9710943bbfe6c641a0d6ffbbd296c",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-167b9246f3",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-167b9246f3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": false,
+          "reasonCz": "Doložený text pouze posouvá datum účinnosti změn zákona č. 123/2024 Sb., ale neuvádí, že tyto změny zavádějí nebo upravují hromadné žaloby."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-167b9246f3--source",
+        "psp-core-2025--law-change-43308-6",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh a jejich většina pro něj hlasovala. Doložená část návrhu pouze posouvá datum účinnosti změn zákona č. 123/2024 Sb. z 1. ledna 2027 na 1. července 2028. Podklady ale neuvádějí, že tyto změny souvisejí s institutem hromadných žalob, takže jednání nelze započítat jako posun ke slibu ani proti němu. Plnění slibu proto zatím není doloženo.",
+      "confidence": "low",
+      "uncertainties": [
+        "Z poskytnutého textu nelze zjistit, zda změny zákona č. 123/2024 Sb., jejichž účinnost návrh odkládá, upravují hromadné žaloby; bez této souvislosti nelze hlasování ANO vůči slibu spolehlivě vyhodnotit."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-167b9246f3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": true,
+          "reasonCz": "Změna posouvá účinnost úpravy občanského zákoníku z 1. ledna 2027 na 1. července 2028, a může tak odsunout část právního rámce souvisejícího se slibem, ačkoli sama neuvádí, zda se týká hromadných žalob."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-167b9246f3--source",
+        "psp-core-2025--law-change-43308-6",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "Poslanci ANO předložili sněmovní tisk č. 187, tedy návrh na změnu některých zákonů v oblasti vnitřní správy. Jeho část posouvá účinnost úpravy občanského zákoníku z 1. ledna 2027 na 1. července 2028. V závěrečném hlasování o návrhu hlasovala většina klubu ANO pro jeho schválení. Pokud odkládaná úprava souvisí s hromadnými žalobami, tento krok jejich právní rámec oddaluje a jde proti slibu; podklady však její konkrétní obsah neukazují.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neuvádějí obsah ustanovení, jehož účinnost se posouvá, ani zda toto ustanovení upravuje hromadné žaloby; proto nelze spolehlivě určit rozsah rozporu se slibem."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0c0ee60380e2bd97016ab92973f97887d1ab891eabe898ce48",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 6414,
+      "input_tokens_details": {
+        "cache_write_tokens": 3174,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1804,
+      "output_tokens_details": {
+        "reasoning_tokens": 1403
+      },
+      "total_tokens": 8218
+    },
+    "output": {
+      "promiseId": "ano-2025-167b9246f3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": false,
+          "reasonCz": "Doložený text pouze posouvá datum účinnosti změn zákona č. 123/2024 Sb., ale neuvádí, že tyto změny zavádějí nebo upravují hromadné žaloby."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-167b9246f3--source",
+        "psp-core-2025--law-change-43308-6",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh a jejich většina pro něj hlasovala. Doložená část návrhu pouze posouvá datum účinnosti změn zákona č. 123/2024 Sb. z 1. ledna 2027 na 1. července 2028. Podklady ale neuvádějí, že tyto změny souvisejí s institutem hromadných žalob, takže jednání nelze započítat jako posun ke slibu ani proti němu. Plnění slibu proto zatím není doloženo.",
+      "confidence": "low",
+      "uncertainties": [
+        "Z poskytnutého textu nelze zjistit, zda změny zákona č. 123/2024 Sb., jejichž účinnost návrh odkládá, upravují hromadné žaloby; bez této souvislosti nelze hlasování ANO vůči slibu spolehlivě vyhodnotit."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_081270f04bcc2129016ab9297e291887d19b7ca06ab4fe40a6",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 6414,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 6411
+      },
+      "output_tokens": 3301,
+      "output_tokens_details": {
+        "reasoning_tokens": 2864
+      },
+      "total_tokens": 9715
+    },
+    "output": {
+      "promiseId": "ano-2025-167b9246f3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-6",
+          "relevant": true,
+          "reasonCz": "Změna posouvá účinnost úpravy občanského zákoníku z 1. ledna 2027 na 1. července 2028, a může tak odsunout část právního rámce souvisejícího se slibem, ačkoli sama neuvádí, zda se týká hromadných žalob."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-167b9246f3--source",
+        "psp-core-2025--law-change-43308-6",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "Poslanci ANO předložili sněmovní tisk č. 187, tedy návrh na změnu některých zákonů v oblasti vnitřní správy. Jeho část posouvá účinnost úpravy občanského zákoníku z 1. ledna 2027 na 1. července 2028. V závěrečném hlasování o návrhu hlasovala většina klubu ANO pro jeho schválení. Pokud odkládaná úprava souvisí s hromadnými žalobami, tento krok jejich právní rámec oddaluje a jde proti slibu; podklady však její konkrétní obsah neukazují.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neuvádějí obsah ustanovení, jehož účinnost se posouvá, ani zda toto ustanovení upravuje hromadné žaloby; proto nelze spolehlivě určit rozsah rozporu se slibem."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_099e9543142c921e016ab9298ec5dc87d1ac048b5aae683b1c",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 6414,
+      "input_tokens_details": {
+        "cache_write_tokens": 3997,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 270,
+      "output_tokens_details": {
+        "reasoning_tokens": 68
+      },
+      "total_tokens": 6684
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-167b9246f3--source",
+        "psp-core-2025--law-change-43308-6",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "Volím hodnocení A. Poslanci ANO návrh předložili a většina jejich klubu jej ve Sněmovně podpořila, ale doložená část návrhu jen odkládá účinnost blíže neurčené změny občanského zákoníku. Podklady neukazují, že tato změna upravuje hromadné žaloby nebo práva spotřebitelů. Nelze proto tento krok hodnotit ani jako pomoc se splněním slibu, ani jako postup proti němu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

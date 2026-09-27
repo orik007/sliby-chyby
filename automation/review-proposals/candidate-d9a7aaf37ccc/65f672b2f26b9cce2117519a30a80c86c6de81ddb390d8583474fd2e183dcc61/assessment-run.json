@@ -1,0 +1,292 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-54-03-666Z--04a9cbe6259a",
+  "evaluatedAt": "2026-09-27T14:54:03.666Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-d9a7aaf37ccc/04a9cbe6259aa8ca10ce34f5394210779c133ffc79531be98f2e96abd725e9d6.json",
+  "packageHash": "04a9cbe6259aa8ca10ce34f5394210779c133ffc79531be98f2e96abd725e9d6",
+  "assessmentContentHash": "c837095ab6a456c38635b70e3a0e0add6d7d2f711f1402519542bbfbe0d03689",
+  "assessmentFingerprint": "65f672b2f26b9cce2117519a30a80c86c6de81ddb390d8583474fd2e183dcc61",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-d9a7aaf37ccc",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-d9a7aaf37ccc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší blíže neurčenou větu v zákoně o informačních systémech veřejné správy a neukazuje, že by se týkala zakládání firem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje elektronické podepisování a digitální potvrzování údajů, ale neobsahuje proces založení firmy ani lhůtu pro její vznik."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje elektronickou identifikaci a digitální peněženku obecně, nikoli postup online založení firmy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Text mění pravidla pro údaje v základních registrech a elektronickou identifikaci, ale nespojuje je se zakládáním firem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Návrh ruší nebo mění ustanovení zákona o elektronizaci veřejné správy, avšak jeho text neukazuje, že se týká založení firmy online."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-d9a7aaf37ccc--source",
+        "psp-core-2025--law-change-43184-12",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--law-change-43293-4",
+        "psp-core-2025--law-change-43308-4"
+      ],
+      "explanationCz": "Slib Motoristů se týká možnosti založit firmu online do 24 hodin. Posuzované legislativní texty upravují jiné oblasti, například digitální identifikaci či informační systémy, ale žádný z nich nestanoví online postup založení firmy ani slíbenou lhůtu. Proto nelze doložit podstatný posun ke splnění slibu a nejpravděpodobnějším hodnocením je zatím žádný posun. Dostupné podklady však neumožňují vyloučit, že některé obecné změny digitální identifikace mohou být pro takový postup podpůrné.",
+      "confidence": "low",
+      "uncertainties": [
+        "Některé návrhy mění obecná pravidla elektronické identifikace a veřejných informačních systémů; podklady ale neukazují, zda nebo jak se tato pravidla uplatní při online zakládání firem."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-d9a7aaf37ccc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší jednu větu v zákoně o informačních systémech veřejné správy a neukazuje, že by tím měnil zakládání firem online."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje prokazovat skutečnosti online digitální peněženkou a ukládá příslušným subjektům takové prokázání umožnit, což může být dílčí součástí online vyřizování při založení firmy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje elektronickou identifikaci prostřednictvím digitální peněženky, která může být dílčím předpokladem online založení firmy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": true,
+          "reasonCz": "Návrh ruší některé údaje a možnosti v základních registrech výslovně spojené s elektronickou identifikací a autentizací, tedy s digitálním ověřováním potřebným pro online úkony."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Navržené změny termínů i pozdější zrušení příslušného bodu neukazují konkrétní dopad na online zakládání firem ani na jeho rychlost."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d9a7aaf37ccc--source",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-4",
+        "psp-core-2025--print-step-211258"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, předložila návrh umožňující online prokazování skutečností digitální peněženkou a upravující elektronickou identifikaci; to může podpořit část digitálních úkonů při založení firmy. Pozdější vládní návrh ruší některé údaje a možnosti v základních registrech spojené s elektronickou identifikací a autentizací, což jde proti části slibu o digitalizaci. Žádný z těchto návrhů přímo nezavádí založení firmy online do 24 hodin, ale poslední uvedený návrh směřuje proti části závazku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, zda rušení údajů pro elektronickou identifikaci v základních registrech konkrétně ovlivní zakládání firem; žádný relevantní návrh také výslovně neupravuje online založení firmy do 24 hodin."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_059914ad6ccdd9ce016ab92ddd54c887d18772b95e98306ab0",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 29132,
+      "input_tokens_details": {
+        "cache_write_tokens": 25892,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 3114,
+      "output_tokens_details": {
+        "reasoning_tokens": 2439
+      },
+      "total_tokens": 32246
+    },
+    "output": {
+      "promiseId": "candidate-d9a7aaf37ccc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší blíže neurčenou větu v zákoně o informačních systémech veřejné správy a neukazuje, že by se týkala zakládání firem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje elektronické podepisování a digitální potvrzování údajů, ale neobsahuje proces založení firmy ani lhůtu pro její vznik."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje elektronickou identifikaci a digitální peněženku obecně, nikoli postup online založení firmy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Text mění pravidla pro údaje v základních registrech a elektronickou identifikaci, ale nespojuje je se zakládáním firem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Návrh ruší nebo mění ustanovení zákona o elektronizaci veřejné správy, avšak jeho text neukazuje, že se týká založení firmy online."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-d9a7aaf37ccc--source",
+        "psp-core-2025--law-change-43184-12",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--law-change-43293-4",
+        "psp-core-2025--law-change-43308-4"
+      ],
+      "explanationCz": "Slib Motoristů se týká možnosti založit firmu online do 24 hodin. Posuzované legislativní texty upravují jiné oblasti, například digitální identifikaci či informační systémy, ale žádný z nich nestanoví online postup založení firmy ani slíbenou lhůtu. Proto nelze doložit podstatný posun ke splnění slibu a nejpravděpodobnějším hodnocením je zatím žádný posun. Dostupné podklady však neumožňují vyloučit, že některé obecné změny digitální identifikace mohou být pro takový postup podpůrné.",
+      "confidence": "low",
+      "uncertainties": [
+        "Některé návrhy mění obecná pravidla elektronické identifikace a veřejných informačních systémů; podklady ale neukazují, zda nebo jak se tato pravidla uplatní při online zakládání firem."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_088cfb0011a44425016ab92deff5d087d1adddebcaf1a76966",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 29132,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 29129
+      },
+      "output_tokens": 4134,
+      "output_tokens_details": {
+        "reasoning_tokens": 3400
+      },
+      "total_tokens": 33266
+    },
+    "output": {
+      "promiseId": "candidate-d9a7aaf37ccc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší jednu větu v zákoně o informačních systémech veřejné správy a neukazuje, že by tím měnil zakládání firem online."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje prokazovat skutečnosti online digitální peněženkou a ukládá příslušným subjektům takové prokázání umožnit, což může být dílčí součástí online vyřizování při založení firmy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje elektronickou identifikaci prostřednictvím digitální peněženky, která může být dílčím předpokladem online založení firmy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": true,
+          "reasonCz": "Návrh ruší některé údaje a možnosti v základních registrech výslovně spojené s elektronickou identifikací a autentizací, tedy s digitálním ověřováním potřebným pro online úkony."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Navržené změny termínů i pozdější zrušení příslušného bodu neukazují konkrétní dopad na online zakládání firem ani na jeho rychlost."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d9a7aaf37ccc--source",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-4",
+        "psp-core-2025--print-step-211258"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, předložila návrh umožňující online prokazování skutečností digitální peněženkou a upravující elektronickou identifikaci; to může podpořit část digitálních úkonů při založení firmy. Pozdější vládní návrh ruší některé údaje a možnosti v základních registrech spojené s elektronickou identifikací a autentizací, což jde proti části slibu o digitalizaci. Žádný z těchto návrhů přímo nezavádí založení firmy online do 24 hodin, ale poslední uvedený návrh směřuje proti části závazku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, zda rušení údajů pro elektronickou identifikaci v základních registrech konkrétně ovlivní zakládání firem; žádný relevantní návrh také výslovně neupravuje online založení firmy do 24 hodin."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_05401cefdb41e811016ab92e07567c87d1a0a9c560ad5469c0",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 29703,
+      "input_tokens_details": {
+        "cache_write_tokens": 27286,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 384,
+      "output_tokens_details": {
+        "reasoning_tokens": 193
+      },
+      "total_tokens": 30087
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "candidate-d9a7aaf37ccc--source",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--law-change-43293-4"
+      ],
+      "explanationCz": "Volím hodnocení assessora A. Slib se týká konkrétně možnosti založit firmu přes internet do 24 hodin. Vládní návrhy upravují digitální peněženku, elektronické ověřování a údaje v registrech, ale z jejich textu neplyne změna postupu pro založení firmy ani jeho rychlosti. Není proto podloženo tvrzení, že návrh na změnu registrů jde proti tomuto slibu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

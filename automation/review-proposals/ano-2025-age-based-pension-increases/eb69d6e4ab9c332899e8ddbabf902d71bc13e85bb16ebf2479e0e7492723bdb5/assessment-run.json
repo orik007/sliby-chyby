@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-38-02-933Z--336616d8cab5",
+  "evaluatedAt": "2026-09-27T14:38:02.933Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-age-based-pension-increases/336616d8cab58b9c4c283000b10ee43998646cd197f40c1a804f973ea45dbf31.json",
+  "packageHash": "336616d8cab58b9c4c283000b10ee43998646cd197f40c1a804f973ea45dbf31",
+  "assessmentContentHash": "8d799440c84fcfa06a00000f450908f10f5da858e8a9c04ac98d20a82c53d20a",
+  "assessmentFingerprint": "eb69d6e4ab9c332899e8ddbabf902d71bc13e85bb16ebf2479e0e7492723bdb5",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-age-based-pension-increases",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-age-based-pension-increases",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Navržená změna přímo upravuje věkové zvýšení důchodů, ale místo slíbených částek stanoví 500 Kč při dosažení 80, 85, 90 a 95 let a 1 000 Kč až od 100 let."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje pouze postup při oznamování a administraci zvýšení důchodu, nikoli věkové hranice ani jeho výši."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-age-based-pension-increases--source",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona měnícího pravidla pro věkové zvýšení důchodů. Návrh počítá s 500 Kč při dosažení 80, 85, 90 a 95 let a s 1 000 Kč až od 100 let, takže je v rozporu se slíbeným zvýšením o 1 000 Kč v 85 letech, 1 500 Kč v 90 letech a dalších 2 000 Kč v 95 letech. Jde o vládní návrh, nikoli o doložené schválení zákona.",
+      "confidence": "high",
+      "uncertainties": []
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-age-based-pension-increases",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje věkové zvýšení důchodů o 500 Kč od 80, 85, 90 a 95 let a o 1 000 Kč od 100 let, takže přímo mění věkové částky oproti slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": false,
+          "reasonCz": "Mění pouze administrativní postupy a oznamování zvýšení, nikoli věkové hranice ani výši slíbených částek."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-age-based-pension-increases--source",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona, na němž se jako vládní strana podílelo také ANO 2011. Návrh počítá s příplatkem 500 Kč od 80, 85, 90 a 95 let a 1 000 Kč od 100 let. To se rozchází se slibovanými částkami 1 000 Kč od 85 let, 1 500 Kč od 90 let a dalších 2 000 Kč od 95 let. Jde zatím o předložený návrh, nikoli o schválenou změnu.",
+      "confidence": "high",
+      "uncertainties": [
+        "V dodaných podkladech je doloženo předložení návrhu, ale ne jeho pozdější projednání ani konečné znění; další postup proto může současné hodnocení změnit."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_09434b5ae5a1bd9a016ab92a3d858c87d1a2e2856f2d7594d0",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10705,
+      "input_tokens_details": {
+        "cache_write_tokens": 7465,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1284,
+      "output_tokens_details": {
+        "reasoning_tokens": 844
+      },
+      "total_tokens": 11989
+    },
+    "output": {
+      "promiseId": "ano-2025-age-based-pension-increases",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Navržená změna přímo upravuje věkové zvýšení důchodů, ale místo slíbených částek stanoví 500 Kč při dosažení 80, 85, 90 a 95 let a 1 000 Kč až od 100 let."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje pouze postup při oznamování a administraci zvýšení důchodu, nikoli věkové hranice ani jeho výši."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-age-based-pension-increases--source",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona měnícího pravidla pro věkové zvýšení důchodů. Návrh počítá s 500 Kč při dosažení 80, 85, 90 a 95 let a s 1 000 Kč až od 100 let, takže je v rozporu se slíbeným zvýšením o 1 000 Kč v 85 letech, 1 500 Kč v 90 letech a dalších 2 000 Kč v 95 letech. Jde o vládní návrh, nikoli o doložené schválení zákona.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_04c019403776f113016ab92a44a2a487d1b64764746ba590b6",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10705,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 10702
+      },
+      "output_tokens": 1275,
+      "output_tokens_details": {
+        "reasoning_tokens": 844
+      },
+      "total_tokens": 11980
+    },
+    "output": {
+      "promiseId": "ano-2025-age-based-pension-increases",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje věkové zvýšení důchodů o 500 Kč od 80, 85, 90 a 95 let a o 1 000 Kč od 100 let, takže přímo mění věkové částky oproti slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": false,
+          "reasonCz": "Mění pouze administrativní postupy a oznamování zvýšení, nikoli věkové hranice ani výši slíbených částek."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-age-based-pension-increases--source",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona, na němž se jako vládní strana podílelo také ANO 2011. Návrh počítá s příplatkem 500 Kč od 80, 85, 90 a 95 let a 1 000 Kč od 100 let. To se rozchází se slibovanými částkami 1 000 Kč od 85 let, 1 500 Kč od 90 let a dalších 2 000 Kč od 95 let. Jde zatím o předložený návrh, nikoli o schválenou změnu.",
+      "confidence": "high",
+      "uncertainties": [
+        "V dodaných podkladech je doloženo předložení návrhu, ale ne jeho pozdější projednání ani konečné znění; další postup proto může současné hodnocení změnit."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

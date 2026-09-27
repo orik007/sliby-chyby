@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T15-00-48-883Z--9a99f353647b",
+  "evaluatedAt": "2026-09-27T15:00:48.883Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-079ef4aef5/9a99f353647bcf8053aa787b56a305a3593462d1474c0ef6de3c8785b775d681.json",
+  "packageHash": "9a99f353647bcf8053aa787b56a305a3593462d1474c0ef6de3c8785b775d681",
+  "assessmentContentHash": "538ee2a671fcec4403aea84c40414f270a0a6e1530f0e372b8194cf806509b3a",
+  "assessmentFingerprint": "973feb691613eb2989a40f48c7c37485ebb6739633e236a8f94b841ab45bb0be",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-079ef4aef5",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-079ef4aef5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Původní verze mění pouze pravidla pro Národní sportovní agenturu, ale schválená a přijatá verze výslovně umožňuje podporu sportovních organizací, což může zahrnovat i amatérské kluby."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-079ef4aef5--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci SPD předložili návrh, jehož původní část týkající se podpory sportu upravovala jen pravidla pro Národní sportovní agenturu. V pozdější schválené podobě návrh umožnil podporu sportovním organizacím na jejich sportovní činnost a poslanci SPD pro něj hlasovali. Senát (horní komora Parlamentu) návrh zamítl, ale poslanci SPD následně hlasovali pro setrvání Poslanecké sněmovny na návrhu. Jde o posun ke slibu, protože podpora sportovních organizací může zahrnout i amatérské kluby, zákon je však výslovně nejmenuje ani jim podporu nezaručuje.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Znění zákona výslovně nezmiňuje amatérské sportovní kluby; posun proto vychází z obecného ustanovení o podpoře sportovních organizací a nedokládá, že se podpora skutečně dostane právě ke klubům."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-079ef4aef5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená verze mění pravidla podpory sportovních organizací a umožňuje poskytovat podporu na sport, což může zahrnout i amatérské kluby, ale výslovně jim podporu nezaručuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-079ef4aef5--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "SPD ve Sněmovně podpořilo změnu zákona o podpoře sportu, která rozšiřuje možnosti státní podpory sportovních organizací, včetně podpory sportu dospělých a sportu pro všechny. Po zamítnutí návrhu Senátem poslanci SPD hlasovali také pro setrvání Sněmovny na návrhu. Změna tak může pomoci i amatérským klubům, ale nezaručuje, že podporu skutečně dostanou; jde proto o částečný posun ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text zákona mluví obecně o sportovních organizacích a sportu, nikoli výslovně o amatérských klubech, a nedokládá, zda konkrétní kluby podporu dostaly."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0c430245622330fa016ab92f8ff13c87d1a7b96f09f1bf894a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10443,
+      "input_tokens_details": {
+        "cache_write_tokens": 7203,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1702,
+      "output_tokens_details": {
+        "reasoning_tokens": 1246
+      },
+      "total_tokens": 12145
+    },
+    "output": {
+      "promiseId": "spd-2025-079ef4aef5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Původní verze mění pouze pravidla pro Národní sportovní agenturu, ale schválená a přijatá verze výslovně umožňuje podporu sportovních organizací, což může zahrnovat i amatérské kluby."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-079ef4aef5--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci SPD předložili návrh, jehož původní část týkající se podpory sportu upravovala jen pravidla pro Národní sportovní agenturu. V pozdější schválené podobě návrh umožnil podporu sportovním organizacím na jejich sportovní činnost a poslanci SPD pro něj hlasovali. Senát (horní komora Parlamentu) návrh zamítl, ale poslanci SPD následně hlasovali pro setrvání Poslanecké sněmovny na návrhu. Jde o posun ke slibu, protože podpora sportovních organizací může zahrnout i amatérské kluby, zákon je však výslovně nejmenuje ani jim podporu nezaručuje.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Znění zákona výslovně nezmiňuje amatérské sportovní kluby; posun proto vychází z obecného ustanovení o podpoře sportovních organizací a nedokládá, že se podpora skutečně dostane právě ke klubům."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b80c9622cc2885c016ab92f999ca887d1a6733d23c65d3aea",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10443,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 10440
+      },
+      "output_tokens": 1339,
+      "output_tokens_details": {
+        "reasoning_tokens": 900
+      },
+      "total_tokens": 11782
+    },
+    "output": {
+      "promiseId": "spd-2025-079ef4aef5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená verze mění pravidla podpory sportovních organizací a umožňuje poskytovat podporu na sport, což může zahrnout i amatérské kluby, ale výslovně jim podporu nezaručuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-079ef4aef5--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "SPD ve Sněmovně podpořilo změnu zákona o podpoře sportu, která rozšiřuje možnosti státní podpory sportovních organizací, včetně podpory sportu dospělých a sportu pro všechny. Po zamítnutí návrhu Senátem poslanci SPD hlasovali také pro setrvání Sněmovny na návrhu. Změna tak může pomoci i amatérským klubům, ale nezaručuje, že podporu skutečně dostanou; jde proto o částečný posun ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text zákona mluví obecně o sportovních organizacích a sportu, nikoli výslovně o amatérských klubech, a nedokládá, zda konkrétní kluby podporu dostaly."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

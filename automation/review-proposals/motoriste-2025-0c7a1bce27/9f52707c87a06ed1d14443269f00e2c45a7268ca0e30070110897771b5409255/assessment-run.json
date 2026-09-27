@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-56-16-502Z--4385343baf12",
+  "evaluatedAt": "2026-09-27T14:56:16.502Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-0c7a1bce27/4385343baf12ffdfb418e4d8bbce547383ae818d5dfcd00762d433eea7167a13.json",
+  "packageHash": "4385343baf12ffdfb418e4d8bbce547383ae818d5dfcd00762d433eea7167a13",
+  "assessmentContentHash": "40ff5ae608da78781d97b040ac6cff773ad72a0d438e8d2b1044f48def07dabf",
+  "assessmentFingerprint": "9f52707c87a06ed1d14443269f00e2c45a7268ca0e30070110897771b5409255",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-0c7a1bce27",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-0c7a1bce27",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Text smlouvy řeší přeshraniční spolupráci zdravotnické záchranné služby, nikoli kompetence sester ani motivaci lékařů k nedostatkovým oborům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Návrh v zákoně o ochraně veřejného zdraví nahrazuje v jednom ustanovení zdravotnického asistenta praktickou nebo dětskou sestrou, a může tak rozšířit jejich uznávané působení v dané oblasti."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-0c7a1bce27--source",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--print-step-211961"
+      ],
+      "explanationCz": "Vláda předložila návrh novely zákona o ochraně veřejného zdraví, který mění okruh zdravotnických pracovníků uvedených v jednom jeho ustanovení. Namísto zdravotnického asistenta v něm uvádí praktickou nebo dětskou sestru, což představuje dílčí posun v uznání jejich působení. Jde zatím o návrh, nikoli o schválenou změnu, a týká se jen části slibu o sestrách. Návrh neřeší motivaci mladých lékařů k nedostatkovým oborům.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z předloženého znění nelze určit, zda změna seznamu pracovníků skutečně rozšiřuje odborné kompetence sester, nebo pouze upravuje jejich uznání v konkrétní oblasti.",
+        "V předložených podkladech není doloženo opatření týkající se motivace mladých lékařů ke vstupu do nedostatkových oborů."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-0c7a1bce27",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Dodaná verze uvádí pouze rámcovou smlouvu o přeshraniční spolupráci zdravotnické záchranné služby a její vlastní text neobsahuje, takže z ní nelze doložit změnu kompetencí sester ani motivaci lékařů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění pravidla ochrany veřejného zdraví a v jedné části upravuje označení některých zdravotnických povolání, nerozšiřuje však kompetence zdravotních sester ani nemotivuje mladé lékaře k nedostatkovým oborům."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-0c7a1bce27--source",
+        "psp-core-2025--law-change-43110-1",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--vote-87271"
+      ],
+      "explanationCz": "Program Motoristů slibuje rozšířit kompetence zdravotních sester a motivovat mladé lékaře k nedostatkovým oborům. Poslanci strany hlasovali pro ratifikaci rámcové smlouvy o přeshraniční spolupráci zdravotnické záchranné služby, ale dodané znění smlouvy její konkrétní obsah neukazuje. Další předložený návrh mění pravidla ochrany veřejného zdraví, avšak v poskytnutém textu není doloženo, že by naplňoval některou část slibu. Proto nelze z těchto podkladů ověřit podstatný posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text rámcové smlouvy o přeshraniční spolupráci zdravotnické záchranné služby není v podkladech obsažen; hlasování Motoristů pro její ratifikaci proto nelze spolehlivě porovnat s obsahem slibu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_094b200aa1381991016ab92e78bd4487d191f9bc40fb0a0903",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 27344,
+      "input_tokens_details": {
+        "cache_write_tokens": 24104,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1841,
+      "output_tokens_details": {
+        "reasoning_tokens": 1343
+      },
+      "total_tokens": 29185
+    },
+    "output": {
+      "promiseId": "motoriste-2025-0c7a1bce27",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Text smlouvy řeší přeshraniční spolupráci zdravotnické záchranné služby, nikoli kompetence sester ani motivaci lékařů k nedostatkovým oborům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Návrh v zákoně o ochraně veřejného zdraví nahrazuje v jednom ustanovení zdravotnického asistenta praktickou nebo dětskou sestrou, a může tak rozšířit jejich uznávané působení v dané oblasti."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-0c7a1bce27--source",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--print-step-211961"
+      ],
+      "explanationCz": "Vláda předložila návrh novely zákona o ochraně veřejného zdraví, který mění okruh zdravotnických pracovníků uvedených v jednom jeho ustanovení. Namísto zdravotnického asistenta v něm uvádí praktickou nebo dětskou sestru, což představuje dílčí posun v uznání jejich působení. Jde zatím o návrh, nikoli o schválenou změnu, a týká se jen části slibu o sestrách. Návrh neřeší motivaci mladých lékařů k nedostatkovým oborům.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z předloženého znění nelze určit, zda změna seznamu pracovníků skutečně rozšiřuje odborné kompetence sester, nebo pouze upravuje jejich uznání v konkrétní oblasti.",
+        "V předložených podkladech není doloženo opatření týkající se motivace mladých lékařů ke vstupu do nedostatkových oborů."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_04e5bf8d96629deb016ab92e82cf1887d1b2850a1f8fa4bb49",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 27344,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 27341
+      },
+      "output_tokens": 1861,
+      "output_tokens_details": {
+        "reasoning_tokens": 1337
+      },
+      "total_tokens": 29205
+    },
+    "output": {
+      "promiseId": "motoriste-2025-0c7a1bce27",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Dodaná verze uvádí pouze rámcovou smlouvu o přeshraniční spolupráci zdravotnické záchranné služby a její vlastní text neobsahuje, takže z ní nelze doložit změnu kompetencí sester ani motivaci lékařů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění pravidla ochrany veřejného zdraví a v jedné části upravuje označení některých zdravotnických povolání, nerozšiřuje však kompetence zdravotních sester ani nemotivuje mladé lékaře k nedostatkovým oborům."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-0c7a1bce27--source",
+        "psp-core-2025--law-change-43110-1",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--vote-87271"
+      ],
+      "explanationCz": "Program Motoristů slibuje rozšířit kompetence zdravotních sester a motivovat mladé lékaře k nedostatkovým oborům. Poslanci strany hlasovali pro ratifikaci rámcové smlouvy o přeshraniční spolupráci zdravotnické záchranné služby, ale dodané znění smlouvy její konkrétní obsah neukazuje. Další předložený návrh mění pravidla ochrany veřejného zdraví, avšak v poskytnutém textu není doloženo, že by naplňoval některou část slibu. Proto nelze z těchto podkladů ověřit podstatný posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text rámcové smlouvy o přeshraniční spolupráci zdravotnické záchranné služby není v podkladech obsažen; hlasování Motoristů pro její ratifikaci proto nelze spolehlivě porovnat s obsahem slibu."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0f7961bb99246f47016ab92e8d477c87d1b7564d461a4477af",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 27528,
+      "input_tokens_details": {
+        "cache_write_tokens": 25111,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 313,
+      "output_tokens_details": {
+        "reasoning_tokens": 113
+      },
+      "total_tokens": 27841
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "motoriste-2025-0c7a1bce27--source",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--print-step-211961"
+      ],
+      "explanationCz": "Volím posouzení B, protože návrh vlády pouze nahrazuje v jednom ustanovení označení zdravotnického asistenta praktickou nebo dětskou sestrou. Z textu neplyne, že by tím sestry získaly nové pravomoci, ani že by návrh řešil příchod mladých lékařů do chybějících oborů. Motoristé jsou součástí vlády, která tento návrh předložila, ale samotná změna názvů povolání nestačí k doložení posunu ve slibu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

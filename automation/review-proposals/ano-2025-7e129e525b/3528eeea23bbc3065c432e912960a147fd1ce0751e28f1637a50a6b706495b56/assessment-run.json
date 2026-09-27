@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-37-17-216Z--a464facc72a6",
+  "evaluatedAt": "2026-09-27T14:37:17.216Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-7e129e525b/a464facc72a69e0b47dca0c4ab9dfc26c1fa863a21f87a9fa153ccb3cf36bbfd.json",
+  "packageHash": "a464facc72a69e0b47dca0c4ab9dfc26c1fa863a21f87a9fa153ccb3cf36bbfd",
+  "assessmentContentHash": "f2a351bb4210bc660ab522cd9d3271167f809b99660191a0e8024a131823818e",
+  "assessmentFingerprint": "3528eeea23bbc3065c432e912960a147fd1ce0751e28f1637a50a6b706495b56",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-7e129e525b",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-7e129e525b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje rozpočtová pravidla a ve schválené verzi umožňuje navýšit výdaje na obranu, ale žádnou část prostředků ani opatření nesměřuje ke komunikační infrastruktuře."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-7e129e525b--source",
+        "psp-core-2025--law-change-43200-2"
+      ],
+      "explanationCz": "Slib se týká modernizace komunikační infrastruktury pro obranu a krizové situace, aby armáda a složky IZS mohly bezpečně komunikovat. Posuzovaná změna rozpočtových pravidel ve schválené verzi umožňuje navýšit výdaje na obranu, ale neurčuje, že mají směřovat na komunikační infrastrukturu. Z předložených podkladů proto nelze doložit podstatný posun ke splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, zda ANO podniklo jiné kroky k modernizaci komunikační infrastruktury; obsahují pouze rozpočtovou změnu, která takovou modernizaci konkrétně neřeší."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-7e129e525b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválená verze umožňuje v letech 2026–2036 zvýšit celkové výdaje o výdaje na obranu nad 2 % HDP, a vytváří tak rozpočtový prostor, který může zahrnout i obrannou komunikační infrastrukturu, přestože ji výslovně neurčuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-7e129e525b--source",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila změnu rozpočtových pravidel a poslanci ANO ji podpořili při schvalování i při pozdějších hlasováních po návratu od Senátu a prezidenta. Schválená úprava umožňuje v letech 2026–2036 zvýšit celkové výdaje o část obranných výdajů přesahující 2 % HDP. Tím vzniká rozpočtový prostor, který může podpořit i obrannou komunikační infrastrukturu, ale zákon její modernizaci ani konkrétní výdaje na ni nezajišťuje. Jde proto o dílčí posun, nikoli o splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Změna pouze umožňuje vyšší výdaje na obranu; nepřikazuje ani konkrétně nevyčleňuje peníze na komunikační infrastrukturu a předložené podklady nedokládají, že k její modernizaci skutečně došlo."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_07cbddf56ba7c587016ab92a01a46487d1b397ccd2c71368bf",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 20625,
+      "input_tokens_details": {
+        "cache_write_tokens": 17385,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1700,
+      "output_tokens_details": {
+        "reasoning_tokens": 1321
+      },
+      "total_tokens": 22325
+    },
+    "output": {
+      "promiseId": "ano-2025-7e129e525b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje rozpočtová pravidla a ve schválené verzi umožňuje navýšit výdaje na obranu, ale žádnou část prostředků ani opatření nesměřuje ke komunikační infrastruktuře."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-7e129e525b--source",
+        "psp-core-2025--law-change-43200-2"
+      ],
+      "explanationCz": "Slib se týká modernizace komunikační infrastruktury pro obranu a krizové situace, aby armáda a složky IZS mohly bezpečně komunikovat. Posuzovaná změna rozpočtových pravidel ve schválené verzi umožňuje navýšit výdaje na obranu, ale neurčuje, že mají směřovat na komunikační infrastrukturu. Z předložených podkladů proto nelze doložit podstatný posun ke splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, zda ANO podniklo jiné kroky k modernizaci komunikační infrastruktury; obsahují pouze rozpočtovou změnu, která takovou modernizaci konkrétně neřeší."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0645bd328efad672016ab92a0a502487d19d38ae2de3631674",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 20625,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 20622
+      },
+      "output_tokens": 3049,
+      "output_tokens_details": {
+        "reasoning_tokens": 2569
+      },
+      "total_tokens": 23674
+    },
+    "output": {
+      "promiseId": "ano-2025-7e129e525b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválená verze umožňuje v letech 2026–2036 zvýšit celkové výdaje o výdaje na obranu nad 2 % HDP, a vytváří tak rozpočtový prostor, který může zahrnout i obrannou komunikační infrastrukturu, přestože ji výslovně neurčuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-7e129e525b--source",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila změnu rozpočtových pravidel a poslanci ANO ji podpořili při schvalování i při pozdějších hlasováních po návratu od Senátu a prezidenta. Schválená úprava umožňuje v letech 2026–2036 zvýšit celkové výdaje o část obranných výdajů přesahující 2 % HDP. Tím vzniká rozpočtový prostor, který může podpořit i obrannou komunikační infrastrukturu, ale zákon její modernizaci ani konkrétní výdaje na ni nezajišťuje. Jde proto o dílčí posun, nikoli o splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Změna pouze umožňuje vyšší výdaje na obranu; nepřikazuje ani konkrétně nevyčleňuje peníze na komunikační infrastrukturu a předložené podklady nedokládají, že k její modernizaci skutečně došlo."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0ebb89c739ed7662016ab92a19be2887d1a92e96fe97510739",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 20604,
+      "input_tokens_details": {
+        "cache_write_tokens": 18187,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 309,
+      "output_tokens_details": {
+        "reasoning_tokens": 123
+      },
+      "total_tokens": 20913
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-7e129e525b--source",
+        "psp-core-2025--law-change-43200-2"
+      ],
+      "explanationCz": "Slib ANO míří přímo na modernizaci bezpečné komunikace armády a složek IZS. Změna rozpočtových pravidel sice dovoluje za určitých podmínek zvýšit výdaje na obranu, ale neurčuje peníze ani opatření pro komunikační infrastrukturu. Pouhá možnost, že by se z širších obranných výdajů dala taková infrastruktura jednou financovat, není konkrétním krokem k tomuto slibu. Přesvědčivější je proto hodnocení assessora A."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

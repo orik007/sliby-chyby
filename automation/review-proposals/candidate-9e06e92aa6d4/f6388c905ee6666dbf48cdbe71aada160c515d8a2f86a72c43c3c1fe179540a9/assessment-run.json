@@ -1,0 +1,188 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-49-28-661Z--48610717429a",
+  "evaluatedAt": "2026-09-27T14:49:28.661Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-9e06e92aa6d4/48610717429afe76e8fac4e3b63fc7306403536e72745d11e840fe3fa03ace4e.json",
+  "packageHash": "48610717429afe76e8fac4e3b63fc7306403536e72745d11e840fe3fa03ace4e",
+  "assessmentContentHash": "2b8854f2c5332e086578aa73c1746621d49070e6dce7d8536f4daf4ea080dbc8",
+  "assessmentFingerprint": "f6388c905ee6666dbf48cdbe71aada160c515d8a2f86a72c43c3c1fe179540a9",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-9e06e92aa6d4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": null,
+    "assessor-b": {
+      "promiseId": "candidate-9e06e92aa6d4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválené a přijaté znění rozšiřuje podporu sportu a odstraňuje dosavadní výjimku pro školní a vysokoškolský sport, což může podpořit i univerzitní sport, ačkoli původní navržená verze tuto změnu neobsahovala."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9e06e92aa6d4--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO předložili původní návrh, jehož část o podpoře sportu ještě univerzitní sport neřešila. Pozdější schválené znění novely zákona o podpoře sportu rozšířilo priority na pohybové aktivity a odstranilo výjimku pro školní a vysokoškolský sport z pravidel podpory. Klub ANO hlasoval pro toto znění a po zamítnutí Senátem také pro to, aby na něm Poslanecká sněmovna setrvala. Jde o posun k podpoře univerzitního sportu, novela ale výslovně nezavádí podporu univerzitních týmů a lig ani jejich propojení se vzděláváním.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Znění neurčuje zvláštní podporu univerzitních týmů a lig ani způsob jejich propojení se vzděláváním; z těchto podkladů proto nelze určit, jaký konkrétní přínos jim změna přinese."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_07c5ab76bcf0801b016ab92ce203c087d1a6c5f9c7c01fa003",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10442,
+      "input_tokens_details": {
+        "cache_write_tokens": 7202,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1677,
+      "output_tokens_details": {
+        "reasoning_tokens": 1222
+      },
+      "total_tokens": 12119
+    },
+    "output": {
+      "promiseId": "candidate-9e06e92aa6d4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a přijatá verze otevírá podporu podle zákona také školnímu a vysokoškolskému sportu a zahrnuje podporu vzdělávání, což může naplnit část slibu, přestože univerzitní týmy ani ligy výslovně nezmiňuje."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9e06e92aa6d4--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Původně předložená část návrhu zákona měnila jen pravidla jmenování orgánů v oblasti sportu, a slib proto sama neposouvala. Poslanci ANO pak hlasovali pro sněmovní tisk 77, tedy návrh zákona projednávaný Poslaneckou sněmovnou, jehož schválená podoba rozšířila okruh sportu, na který lze poskytovat podporu, také o školní a vysokoškolský sport a zahrnula podporu vzdělávání. Senát návrh odmítl, ale poslanci ANO následně hlasovali pro setrvání na sněmovní verzi. Jde o dílčí krok ke slibu, nikoli o jeho úplné naplnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Zákon výslovně nezmiňuje univerzitní týmy ani ligy a nedokládá, zda nebo jak konkrétně získaly podporu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_04430568eb2ad06b016ab92cec05dc87d197b9d73e9ac0832a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10442,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 10439
+      },
+      "output_tokens": 1556,
+      "output_tokens_details": {
+        "reasoning_tokens": 1034
+      },
+      "total_tokens": 11998
+    },
+    "output": {
+      "promiseId": "candidate-9e06e92aa6d4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválené a přijaté znění rozšiřuje podporu sportu a odstraňuje dosavadní výjimku pro školní a vysokoškolský sport, což může podpořit i univerzitní sport, ačkoli původní navržená verze tuto změnu neobsahovala."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9e06e92aa6d4--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO předložili původní návrh, jehož část o podpoře sportu ještě univerzitní sport neřešila. Pozdější schválené znění novely zákona o podpoře sportu rozšířilo priority na pohybové aktivity a odstranilo výjimku pro školní a vysokoškolský sport z pravidel podpory. Klub ANO hlasoval pro toto znění a po zamítnutí Senátem také pro to, aby na něm Poslanecká sněmovna setrvala. Jde o posun k podpoře univerzitního sportu, novela ale výslovně nezavádí podporu univerzitních týmů a lig ani jejich propojení se vzděláváním.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Znění neurčuje zvláštní podporu univerzitních týmů a lig ani způsob jejich propojení se vzděláváním; z těchto podkladů proto nelze určit, jaký konkrétní přínos jim změna přinese."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_02090a5aa15ea825016ab92cf45f3887d19f53a9a69b726c14",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 10091,
+      "input_tokens_details": {
+        "cache_write_tokens": 7674,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 457,
+      "output_tokens_details": {
+        "reasoning_tokens": 221
+      },
+      "total_tokens": 10548
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-9e06e92aa6d4--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Použitelný posudek správně rozlišuje původní návrh od později schváleného znění. Poslanci ANO nejprve předložili návrh, který univerzitní sport neřešil, ale poté většina klubu ANO podpořila změnu zákona, jež už nevylučuje vysokoškolský sport z pravidel podpory. To může univerzitnímu sportu pomoci, ale zákon přímo nezavádí podporu univerzitních týmů, lig ani jejich vazbu na vzdělávání. Proto je správné hodnotit tento krok jako částečný posun, ne jako úplné splnění slibu."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-confirmed-single-assessor",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

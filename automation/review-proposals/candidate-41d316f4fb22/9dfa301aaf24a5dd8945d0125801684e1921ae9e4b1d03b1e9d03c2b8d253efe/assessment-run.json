@@ -1,0 +1,242 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-44-18-899Z--d0c6b58c0deb",
+  "evaluatedAt": "2026-09-27T14:44:18.899Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-41d316f4fb22/d0c6b58c0debd09a4454909327f70e44ca747a03bc640065d9f7f222f22f409b.json",
+  "packageHash": "d0c6b58c0debd09a4454909327f70e44ca747a03bc640065d9f7f222f22f409b",
+  "assessmentContentHash": "5d05ff10491d29f9f1e9f8043825eed63a93c24cd4fcdf86693d293c9bc35617",
+  "assessmentFingerprint": "9dfa301aaf24a5dd8945d0125801684e1921ae9e4b1d03b1e9d03c2b8d253efe",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-41d316f4fb22",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-41d316f4fb22",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-60",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla střetu zájmů u některých státních zaměstnanců, ale nezavádí žádné z opatření slíbených pro nemocnice ani kontrolu jejich dodavatelů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43212-1",
+          "relevant": false,
+          "reasonCz": "Úprava trestního řízení umožňuje zajišťovat majetek podezřelý z trestné činnosti, ale netýká se řízení nemocnic, jejich zakázek ani kontroly dodavatelů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí oznamování veřejných zakázek společností, jejichž skutečným majitelem je vymezený veřejný funkcionář, což částečně souvisí s kontrolou vlastníků dodavatelů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-6",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje vyloučit z veřejné zakázky některé firmy vlastněné veřejnými funkcionáři, čímž částečně souvisí s prověřováním dodavatelů nemocnic."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-41d316f4fb22--source",
+        "psp-core-2025--law-change-43343-1",
+        "psp-core-2025--law-change-43343-6",
+        "psp-core-2025--print-step-211601"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími předložili návrh, který ukládá některým veřejným funkcionářům oznamovat zakázky firem, v nichž jsou skutečnými majiteli, a umožňuje v určitých případech vyloučit takové firmy z veřejné zakázky. Tato opatření mohou částečně podpořit kontrolu vlastníků dodavatelů, ale návrh nezavádí slibovaný protikorupční program pro nemocnice. Zároveň ruší § 4b zákona o střetu zájmů, takže celkový dopad návrhu na protikorupční ochranu není jednoznačný. Jde o předložený návrh, nikoli o přijaté opatření.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh se týká veřejných zakázek obecně a neukládá nemocnicím zvláštní povinnost prověřovat vlastníky jejich dodavatelů; rozsah jeho přínosu pro tento slib je proto omezený.",
+        "Návrh současně ruší § 4b zákona o střetu zájmů a upravuje další omezení, takže jeho celkový dopad na protikorupční ochranu nemocničních zakázek není z podkladů jednoznačný."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-41d316f4fb22",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-60",
+          "relevant": false,
+          "reasonCz": "Změna upravuje pravidla střetu zájmů některých státních zaměstnanců, ale nestanoví opatření pro nemocniční dodavatele ani pro řízení nemocnic."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43212-1",
+          "relevant": false,
+          "reasonCz": "Návrh umožňuje v trestním řízení zajistit majetek zřejmě pocházející z trestné činnosti, neřeší však kontrolu nemocničních dodavatelů ani protikorupční pravidla pro nemocnice."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-1",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá oznamovat veřejné zakázky uzavřené společnostmi, jejichž skutečným majitelem je veřejný funkcionář, což se částečně týká transparentnosti vlastnictví dodavatelů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-6",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje vyloučit z veřejné zakázky společnost vlastněnou příslušným veřejným funkcionářem a vyžaduje informaci o řešení střetu zájmů, což je dílčí protikorupční opatření při zadávání zakázek."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-41d316f4fb22--source",
+        "psp-core-2025--law-change-43343-1",
+        "psp-core-2025--law-change-43343-6",
+        "psp-core-2025--print-step-211601"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími předkladateli předložili návrh změn pravidel pro střet zájmů a veřejné zakázky. Návrh počítá s oznamováním zakázek společností, jejichž skutečným majitelem je veřejný funkcionář, a umožňuje v určitých případech takovou společnost z veřejné zakázky vyloučit. Jde o dílčí krok k větší průhlednosti a omezení střetů zájmů u dodavatelů. Návrh ale nezavádí obecné prověřování vlastníků všech nemocničních dodavatelů ani ostatní slíbená opatření a doložené je jeho předložení, nikoli přijetí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Navržená pravidla se týkají zejména případů, kdy je skutečným majitelem dodavatele veřejný funkcionář; z podkladů nevyplývá, že by vyžadovala prověřování vlastníků všech firem dodávajících do nemocnic.",
+        "Podklady dokládají předložení návrhu poslanci ANO, nikoli jeho následné přijetí."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_075f8e5be3f51497016ab92ba7737487d19a29c7c328033f86",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 17814,
+      "input_tokens_details": {
+        "cache_write_tokens": 14574,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2726,
+      "output_tokens_details": {
+        "reasoning_tokens": 1922
+      },
+      "total_tokens": 20540
+    },
+    "output": {
+      "promiseId": "candidate-41d316f4fb22",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-60",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla střetu zájmů u některých státních zaměstnanců, ale nezavádí žádné z opatření slíbených pro nemocnice ani kontrolu jejich dodavatelů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43212-1",
+          "relevant": false,
+          "reasonCz": "Úprava trestního řízení umožňuje zajišťovat majetek podezřelý z trestné činnosti, ale netýká se řízení nemocnic, jejich zakázek ani kontroly dodavatelů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí oznamování veřejných zakázek společností, jejichž skutečným majitelem je vymezený veřejný funkcionář, což částečně souvisí s kontrolou vlastníků dodavatelů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-6",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje vyloučit z veřejné zakázky některé firmy vlastněné veřejnými funkcionáři, čímž částečně souvisí s prověřováním dodavatelů nemocnic."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-41d316f4fb22--source",
+        "psp-core-2025--law-change-43343-1",
+        "psp-core-2025--law-change-43343-6",
+        "psp-core-2025--print-step-211601"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími předložili návrh, který ukládá některým veřejným funkcionářům oznamovat zakázky firem, v nichž jsou skutečnými majiteli, a umožňuje v určitých případech vyloučit takové firmy z veřejné zakázky. Tato opatření mohou částečně podpořit kontrolu vlastníků dodavatelů, ale návrh nezavádí slibovaný protikorupční program pro nemocnice. Zároveň ruší § 4b zákona o střetu zájmů, takže celkový dopad návrhu na protikorupční ochranu není jednoznačný. Jde o předložený návrh, nikoli o přijaté opatření.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh se týká veřejných zakázek obecně a neukládá nemocnicím zvláštní povinnost prověřovat vlastníky jejich dodavatelů; rozsah jeho přínosu pro tento slib je proto omezený.",
+        "Návrh současně ruší § 4b zákona o střetu zájmů a upravuje další omezení, takže jeho celkový dopad na protikorupční ochranu nemocničních zakázek není z podkladů jednoznačný."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0af49e7e91c674a1016ab92bb649d087d1b94b5c5ac31fa73a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 17814,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 17811
+      },
+      "output_tokens": 2313,
+      "output_tokens_details": {
+        "reasoning_tokens": 1517
+      },
+      "total_tokens": 20127
+    },
+    "output": {
+      "promiseId": "candidate-41d316f4fb22",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-60",
+          "relevant": false,
+          "reasonCz": "Změna upravuje pravidla střetu zájmů některých státních zaměstnanců, ale nestanoví opatření pro nemocniční dodavatele ani pro řízení nemocnic."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43212-1",
+          "relevant": false,
+          "reasonCz": "Návrh umožňuje v trestním řízení zajistit majetek zřejmě pocházející z trestné činnosti, neřeší však kontrolu nemocničních dodavatelů ani protikorupční pravidla pro nemocnice."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-1",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá oznamovat veřejné zakázky uzavřené společnostmi, jejichž skutečným majitelem je veřejný funkcionář, což se částečně týká transparentnosti vlastnictví dodavatelů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-6",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje vyloučit z veřejné zakázky společnost vlastněnou příslušným veřejným funkcionářem a vyžaduje informaci o řešení střetu zájmů, což je dílčí protikorupční opatření při zadávání zakázek."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-41d316f4fb22--source",
+        "psp-core-2025--law-change-43343-1",
+        "psp-core-2025--law-change-43343-6",
+        "psp-core-2025--print-step-211601"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími předkladateli předložili návrh změn pravidel pro střet zájmů a veřejné zakázky. Návrh počítá s oznamováním zakázek společností, jejichž skutečným majitelem je veřejný funkcionář, a umožňuje v určitých případech takovou společnost z veřejné zakázky vyloučit. Jde o dílčí krok k větší průhlednosti a omezení střetů zájmů u dodavatelů. Návrh ale nezavádí obecné prověřování vlastníků všech nemocničních dodavatelů ani ostatní slíbená opatření a doložené je jeho předložení, nikoli přijetí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Navržená pravidla se týkají zejména případů, kdy je skutečným majitelem dodavatele veřejný funkcionář; z podkladů nevyplývá, že by vyžadovala prověřování vlastníků všech firem dodávajících do nemocnic.",
+        "Podklady dokládají předložení návrhu poslanci ANO, nikoli jeho následné přijetí."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

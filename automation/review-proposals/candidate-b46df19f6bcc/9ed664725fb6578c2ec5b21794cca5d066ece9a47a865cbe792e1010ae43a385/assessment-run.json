@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-50-47-869Z--2892d5d61ea5",
+  "evaluatedAt": "2026-09-27T14:50:47.869Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-b46df19f6bcc/2892d5d61ea5bfd4d35f906a061fa0b9fba1f1fb49b1151153523da1bdc2144c.json",
+  "packageHash": "2892d5d61ea5bfd4d35f906a061fa0b9fba1f1fb49b1151153523da1bdc2144c",
+  "assessmentContentHash": "846dda2f34dcad434ebadb6f8e8a7551e2f25185735239bf5026acdf64f8ddd7",
+  "assessmentFingerprint": "9ed664725fb6578c2ec5b21794cca5d066ece9a47a865cbe792e1010ae43a385",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-b46df19f6bcc",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": null,
+    "assessor-b": {
+      "promiseId": "candidate-b46df19f6bcc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-1",
+          "relevant": true,
+          "reasonCz": "Navržená změna ukládá obcím zajistit a hradit kastraci opuštěných koček a koček bez pána a opakovaně provádět program odchytu, kastrace a navrácení, avšak finanční pomoc obcím nezavádí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-b46df19f6bcc--source",
+        "psp-core-2025--law-change-43295-1",
+        "psp-core-2025--print-step-211274"
+      ],
+      "explanationCz": "Poslanci ANO spolu s poslanci dalších stran předložili návrh novely zákona na ochranu zvířat proti týrání. Návrh ukládá obcím zajistit a zaplatit kastraci opuštěných koček a koček bez pána a opakovaně provádět program odchytu, kastrace a navrácení. Tím návrh podporuje kastrační programy, ale obcím neposkytuje slíbenou finanční pomoc. Jde zatím o návrh, nikoli o přijatou změnu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Z dostupných podkladů nelze doložit, zda návrh později prošel parlamentem; v posuzovaném záznamu je pouze jeho předložení."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_06ebddafed707d9b016ab92d37504887d18be81edc80729bac",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 7919,
+      "input_tokens_details": {
+        "cache_write_tokens": 4679,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1502,
+      "output_tokens_details": {
+        "reasoning_tokens": 1159
+      },
+      "total_tokens": 9421
+    },
+    "output": {
+      "promiseId": "candidate-b46df19f6bcc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-1",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá obcím opakovaně zajišťovat kastraci opuštěných koček a koček bez pána, takže se přímo týká kastračních programů, ačkoli finanční pomoc obcím nezavádí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-b46df19f6bcc--source",
+        "psp-core-2025--law-change-43295-1",
+        "psp-core-2025--print-step-211274"
+      ],
+      "explanationCz": "Poslanci ANO spolu s poslanci dalších stran předložili poslanecký návrh zákona (sněmovní tisk 174). Navrhuje, aby obce opakovaně zajišťovaly kastraci opuštěných koček a koček bez pána a samy ji hradily. Návrh tak podporuje část slibu o kastračních programech, ale nestanoví finanční pomoc obcím, takže celý slib nenaplňuje.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Záznam dokládá předložení návrhu, nikoli jeho další projednání; balíček také nedokládá, že obce skutečně dostaly finanční pomoc."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0a7253e5e1c3b12c016ab92d40555c87d1b8f05689a3d8158b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 7919,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 7916
+      },
+      "output_tokens": 755,
+      "output_tokens_details": {
+        "reasoning_tokens": 345
+      },
+      "total_tokens": 8674
+    },
+    "output": {
+      "promiseId": "candidate-b46df19f6bcc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43295-1",
+          "relevant": true,
+          "reasonCz": "Navržená změna ukládá obcím zajistit a hradit kastraci opuštěných koček a koček bez pána a opakovaně provádět program odchytu, kastrace a navrácení, avšak finanční pomoc obcím nezavádí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-b46df19f6bcc--source",
+        "psp-core-2025--law-change-43295-1",
+        "psp-core-2025--print-step-211274"
+      ],
+      "explanationCz": "Poslanci ANO spolu s poslanci dalších stran předložili návrh novely zákona na ochranu zvířat proti týrání. Návrh ukládá obcím zajistit a zaplatit kastraci opuštěných koček a koček bez pána a opakovaně provádět program odchytu, kastrace a navrácení. Tím návrh podporuje kastrační programy, ale obcím neposkytuje slíbenou finanční pomoc. Jde zatím o návrh, nikoli o přijatou změnu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Z dostupných podkladů nelze doložit, zda návrh později prošel parlamentem; v posuzovaném záznamu je pouze jeho předložení."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_02cfab29809f2817016ab92d45153087d1a363db494144eccb",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 7462,
+      "input_tokens_details": {
+        "cache_write_tokens": 5045,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 270,
+      "output_tokens_details": {
+        "reasoning_tokens": 77
+      },
+      "total_tokens": 7732
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-b46df19f6bcc--source",
+        "psp-core-2025--law-change-43295-1",
+        "psp-core-2025--print-step-211274"
+      ],
+      "explanationCz": "K dispozici je jen jedno použitelné posouzení a správně vychází z návrhu zákona. Poslanci ANO návrh předložili spolu s poslanci dalších stran; návrh ukládá obcím kastraci toulavých koček zajistit a hradit. Podporuje tedy slíbené kastrační programy, i když obcím nezavádí zvláštní finanční pomoc. Návrh zatím nebyl přijat, proto jde o krok správným směrem, ne o úplné splnění slibu."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-confirmed-single-assessor",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

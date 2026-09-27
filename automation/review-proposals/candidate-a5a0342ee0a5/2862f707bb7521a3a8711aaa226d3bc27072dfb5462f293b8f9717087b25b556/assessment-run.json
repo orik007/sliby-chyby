@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-50-04-599Z--c05c337077b0",
+  "evaluatedAt": "2026-09-27T14:50:04.599Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-a5a0342ee0a5/c05c337077b0d3aeb75fc56a5ab04c520138079a4f21d6cfdf2d79e4e62879b9.json",
+  "packageHash": "c05c337077b0d3aeb75fc56a5ab04c520138079a4f21d6cfdf2d79e4e62879b9",
+  "assessmentContentHash": "749f25cf7c59ffc0c39c0d869af3b979771c5b14bc0563d43a231b73edd5e523",
+  "assessmentFingerprint": "2862f707bb7521a3a8711aaa226d3bc27072dfb5462f293b8f9717087b25b556",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-a5a0342ee0a5",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-a5a0342ee0a5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Změny upravují výjimky ze zadávání veřejných zakázek, ale žádná verze nemění pravomoci Úřadu pro ochranu hospodářské soutěže."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-6",
+          "relevant": true,
+          "reasonCz": "Návrh mění zákon o působnosti antimonopolního úřadu, avšak samotné vypuštění a přečíslování ustanovení neukazuje, zda jeho pravomoci rozšiřuje, nebo omezuje."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a5a0342ee0a5--source",
+        "psp-core-2025--law-change-43184-6",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Motoristé slíbili posílit pravomoci antimonopolního úřadu. Jejich poslanci předložili návrh, který mimo jiné vypouští a přečíslovává ustanovení zákona o působnosti úřadu; Motoristé pak hlasovali pro jeho schválení. Senát návrh odmítl, ale poslanci Motoristů následně hlasovali pro setrvání Sněmovny na návrhu. Z předloženého znění není zřejmé, zda tyto změny pravomoci úřadu posilují, nebo oslabují, takže nelze doložit posun ke splnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Balíček neuvádí obsah původních ustanovení, která návrh vypouští; nelze proto určit, zda jejich zrušení pravomoci úřadu rozšiřuje, omezuje, nebo se jich věcně netýká."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-a5a0342ee0a5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Změna upravuje výjimky z pravidel pro zadávání veřejných zakázek, ale v žádné verzi nemění pravomoci Úřadu pro ochranu hospodářské soutěže."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-6",
+          "relevant": true,
+          "reasonCz": "Návrh mění přímo zákon upravující působnost Úřadu pro ochranu hospodářské soutěže, avšak předložený text neuvádí obsah rušených ustanovení."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a5a0342ee0a5--source",
+        "psp-core-2025--law-change-43184-6",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě předložili návrh, který mění zákon o působnosti Úřadu pro ochranu hospodářské soutěže a ruší v něm několik ustanovení. Poslanci strany pak hlasovali pro jeho schválení a po zamítnutí Senátem také pro setrvání na návrhu. Z dostupného textu ale nelze zjistit obsah rušených ustanovení, a proto nelze určit, zda tato změna pravomoci úřadu posiluje, nebo oslabuje. Zatím tedy není doložen podstatný posun ke splnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Text návrhu uvádí, která ustanovení zákona o působnosti úřadu se ruší, nikoli však jejich obsah; bez něj nelze posoudit dopad na pravomoci úřadu ani určit, zda předložení a schválení návrhu slib naplňuje, nebo mu odporuje."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0bbbfd8f8f71a01c016ab92d07801087d1967d3f17f798a5bd",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 14599,
+      "input_tokens_details": {
+        "cache_write_tokens": 11359,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2092,
+      "output_tokens_details": {
+        "reasoning_tokens": 1528
+      },
+      "total_tokens": 16691
+    },
+    "output": {
+      "promiseId": "candidate-a5a0342ee0a5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Změny upravují výjimky ze zadávání veřejných zakázek, ale žádná verze nemění pravomoci Úřadu pro ochranu hospodářské soutěže."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-6",
+          "relevant": true,
+          "reasonCz": "Návrh mění zákon o působnosti antimonopolního úřadu, avšak samotné vypuštění a přečíslování ustanovení neukazuje, zda jeho pravomoci rozšiřuje, nebo omezuje."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a5a0342ee0a5--source",
+        "psp-core-2025--law-change-43184-6",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Motoristé slíbili posílit pravomoci antimonopolního úřadu. Jejich poslanci předložili návrh, který mimo jiné vypouští a přečíslovává ustanovení zákona o působnosti úřadu; Motoristé pak hlasovali pro jeho schválení. Senát návrh odmítl, ale poslanci Motoristů následně hlasovali pro setrvání Sněmovny na návrhu. Z předloženého znění není zřejmé, zda tyto změny pravomoci úřadu posilují, nebo oslabují, takže nelze doložit posun ke splnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Balíček neuvádí obsah původních ustanovení, která návrh vypouští; nelze proto určit, zda jejich zrušení pravomoci úřadu rozšiřuje, omezuje, nebo se jich věcně netýká."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b9b48784a2fb47c016ab92d1344b887d1913e8123614c351b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 14599,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 14596
+      },
+      "output_tokens": 1584,
+      "output_tokens_details": {
+        "reasoning_tokens": 1012
+      },
+      "total_tokens": 16183
+    },
+    "output": {
+      "promiseId": "candidate-a5a0342ee0a5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-37",
+          "relevant": false,
+          "reasonCz": "Změna upravuje výjimky z pravidel pro zadávání veřejných zakázek, ale v žádné verzi nemění pravomoci Úřadu pro ochranu hospodářské soutěže."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-6",
+          "relevant": true,
+          "reasonCz": "Návrh mění přímo zákon upravující působnost Úřadu pro ochranu hospodářské soutěže, avšak předložený text neuvádí obsah rušených ustanovení."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a5a0342ee0a5--source",
+        "psp-core-2025--law-change-43184-6",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě předložili návrh, který mění zákon o působnosti Úřadu pro ochranu hospodářské soutěže a ruší v něm několik ustanovení. Poslanci strany pak hlasovali pro jeho schválení a po zamítnutí Senátem také pro setrvání na návrhu. Z dostupného textu ale nelze zjistit obsah rušených ustanovení, a proto nelze určit, zda tato změna pravomoci úřadu posiluje, nebo oslabuje. Zatím tedy není doložen podstatný posun ke splnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Text návrhu uvádí, která ustanovení zákona o působnosti úřadu se ruší, nikoli však jejich obsah; bez něj nelze posoudit dopad na pravomoci úřadu ani určit, zda předložení a schválení návrhu slib naplňuje, nebo mu odporuje."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

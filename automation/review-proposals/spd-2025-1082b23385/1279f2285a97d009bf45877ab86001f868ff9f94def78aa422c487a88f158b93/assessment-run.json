@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T15-00-59-881Z--47d0b6183135",
+  "evaluatedAt": "2026-09-27T15:00:59.881Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-1082b23385/47d0b6183135fa2ea2c9c3b29234465480854100bbd8f57f6c7315c49292291b.json",
+  "packageHash": "47d0b6183135fa2ea2c9c3b29234465480854100bbd8f57f6c7315c49292291b",
+  "assessmentContentHash": "d8f00e5616808aa1832a511579a2de2b8c94017f731be8b12d22715ea6a94c22",
+  "assessmentFingerprint": "1279f2285a97d009bf45877ab86001f868ff9f94def78aa422c487a88f158b93",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-1082b23385",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-1082b23385",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Změna prodlužuje určitou lhůtu v zákoně o vodách ze dvou na čtyři roky, ale nijak nemění vlastnictví vody, kontrolu nad ní ani vodní soběstačnost."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu vyčleňuje prostředky na vodohospodářskou infrastrukturu a zásobování pitnou vodou, což může podpořit část slibu týkající se vodní soběstačnosti."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-1082b23385--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro rozpočet Státního fondu životního prostředí na rok 2026. Ten vyčleňuje dvě miliardy korun na podporu vodohospodářské infrastruktury a počítá také s výdaji na zásobování pitnou vodou. Tato podpora může přispět k vodní soběstačnosti, ale sama o sobě nepřevádí vodu do českého vlastnictví ani nezajišťuje její kontrolu. Jde proto o posun jen v části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet dokládá vyčlenění podpory pro vodohospodářství, nikoli to, že se tím skutečně zvýší české vlastnictví či kontrola nad vodou."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-1082b23385",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Změna pouze prodlužuje lhůtu stanovenou vodním zákonem ze dvou na čtyři roky a nijak neupravuje vlastnictví vody, kontrolu nad ní ani vodní soběstačnost."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu počítá s podporou vodohospodářské infrastruktury a zásobování pitnou vodou, což může přispět k části slibu týkající se soběstačnosti, byť se nezabývá vlastnictvím ani kontrolou."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-1082b23385--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci SPD většinově hlasovali pro rozpočet Státního fondu životního prostředí na rok 2026. Rozpočet počítá s podporou vodohospodářské infrastruktury a opatření pro zásobování obyvatel pitnou vodou, což může napomoci vodní soběstačnosti. Nevrací však vodu do českého vlastnictví ani nedokládá obnovení kontroly nad ní, takže jde jen o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet plánuje podporu infrastruktury, ale předložené podklady nedokládají její skutečné výsledky ani změnu vlastnictví či kontroly nad vodou."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_010744935bdc5fa9016ab92f95739887d1852690d65c045728",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 18552,
+      "input_tokens_details": {
+        "cache_write_tokens": 15312,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2079,
+      "output_tokens_details": {
+        "reasoning_tokens": 1652
+      },
+      "total_tokens": 20631
+    },
+    "output": {
+      "promiseId": "spd-2025-1082b23385",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Změna prodlužuje určitou lhůtu v zákoně o vodách ze dvou na čtyři roky, ale nijak nemění vlastnictví vody, kontrolu nad ní ani vodní soběstačnost."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu vyčleňuje prostředky na vodohospodářskou infrastrukturu a zásobování pitnou vodou, což může podpořit část slibu týkající se vodní soběstačnosti."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-1082b23385--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro rozpočet Státního fondu životního prostředí na rok 2026. Ten vyčleňuje dvě miliardy korun na podporu vodohospodářské infrastruktury a počítá také s výdaji na zásobování pitnou vodou. Tato podpora může přispět k vodní soběstačnosti, ale sama o sobě nepřevádí vodu do českého vlastnictví ani nezajišťuje její kontrolu. Jde proto o posun jen v části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet dokládá vyčlenění podpory pro vodohospodářství, nikoli to, že se tím skutečně zvýší české vlastnictví či kontrola nad vodou."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_06ed6e27cb0efa24016ab92f9ffc3887d182c3dd885d52678f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 18552,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 18549
+      },
+      "output_tokens": 2352,
+      "output_tokens_details": {
+        "reasoning_tokens": 1871
+      },
+      "total_tokens": 20904
+    },
+    "output": {
+      "promiseId": "spd-2025-1082b23385",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-53",
+          "relevant": false,
+          "reasonCz": "Změna pouze prodlužuje lhůtu stanovenou vodním zákonem ze dvou na čtyři roky a nijak neupravuje vlastnictví vody, kontrolu nad ní ani vodní soběstačnost."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu počítá s podporou vodohospodářské infrastruktury a zásobování pitnou vodou, což může přispět k části slibu týkající se soběstačnosti, byť se nezabývá vlastnictvím ani kontrolou."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-1082b23385--source",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci SPD většinově hlasovali pro rozpočet Státního fondu životního prostředí na rok 2026. Rozpočet počítá s podporou vodohospodářské infrastruktury a opatření pro zásobování obyvatel pitnou vodou, což může napomoci vodní soběstačnosti. Nevrací však vodu do českého vlastnictví ani nedokládá obnovení kontroly nad ní, takže jde jen o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Rozpočet plánuje podporu infrastruktury, ale předložené podklady nedokládají její skutečné výsledky ani změnu vlastnictví či kontroly nad vodou."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

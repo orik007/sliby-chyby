@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-49-34-284Z--6760e15124af",
+  "evaluatedAt": "2026-09-27T14:49:34.284Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-9c5cfec099dc/6760e15124af4704fcabd47c1a1482d0da38de2f172e27e285a6b10a0e2052de.json",
+  "packageHash": "6760e15124af4704fcabd47c1a1482d0da38de2f172e27e285a6b10a0e2052de",
+  "assessmentContentHash": "bc4e67bd858d51cc32561096be86de084601aca0b369f8d7b34393877759e8c2",
+  "assessmentFingerprint": "753b9066768548ed1138a9ce3da11fdb97804fa60e1afb62b74b127c3487548b",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-9c5cfec099dc",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-9c5cfec099dc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu SFPI zahrnuje program na odstraňování bariér v bytových domech, který může podpořit jejich obnovu, ale výslovně neuvádí společenství vlastníků ani bytová družstva."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet SFŽP počítá s podporou dostupného bydlení pro sociálně slabé v energeticky kvalitním standardu, neuvádí však obnovu bytů prostřednictvím společenství vlastníků ani družstev."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-9c5cfec099dc--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě v prvním čtení podpořili návrh rozpočtu Státního fondu podpory investic na rok 2026, který počítá také s programem na odstraňování bariér v bytových domech. Ten může souviset s jejich obnovou, návrh ale výslovně nedokládá podporu společenství vlastníků ani bytových družstev. Záznam zachycuje hlasování v prvním čtení, nikoli konečné rozhodnutí Sněmovny, takže z něj nelze doložit rozhodující posun ke slibu. Proto zůstává hodnocení beze změny.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Doložené hlasování o rozpočtu SFPI proběhlo jen v prvním čtení; v podkladech není konečné rozhodnutí Sněmovny ani jeho výsledek."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-9c5cfec099dc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu podpory investic počítá s pokračováním programů pro bytové domy, včetně programu na odstraňování bariér, které by mohly podporovat část obnovy společných částí domu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí se zaměřuje zejména na životní prostředí a vodohospodářství; zmíněná podpora dostupného bydlení nedokládá obnovu domů ve spoluvlastnictví."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-9c5cfec099dc--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Návrh rozpočtu Státního fondu podpory investic počítá s programy pro bytové domy, včetně podpory odstraňování bariér, takže by mohl přispět k části slibu. Návrh ale výslovně nedokládá, že tuto podporu získají společenství vlastníků jednotek nebo bytová družstva. Poslanci Motoristů sobě hlasovali pro rozpočet v prvním čtení, což ještě nebylo konečné rozhodnutí Poslanecké sněmovny. Z dostupných podkladů proto nelze potvrdit rozhodující krok strany ve prospěch slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Hlasování zachycuje pouze první čtení návrhu rozpočtu, nikoli konečné rozhodnutí Sněmovny; podklady tak nedokládají, jak strana rozhodla o jeho konečné podobě.",
+        "Návrh rozpočtu popisuje podporu bytových domů, ale neuvádí, zda jsou mezi oprávněnými příjemci společenství vlastníků jednotek nebo bytová družstva."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_01004ebf30eb2562016ab92cdf77ac87d1913681f896eb9f1e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 26330,
+      "input_tokens_details": {
+        "cache_write_tokens": 23090,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 3075,
+      "output_tokens_details": {
+        "reasoning_tokens": 2555
+      },
+      "total_tokens": 29405
+    },
+    "output": {
+      "promiseId": "candidate-9c5cfec099dc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu SFPI zahrnuje program na odstraňování bariér v bytových domech, který může podpořit jejich obnovu, ale výslovně neuvádí společenství vlastníků ani bytová družstva."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet SFŽP počítá s podporou dostupného bydlení pro sociálně slabé v energeticky kvalitním standardu, neuvádí však obnovu bytů prostřednictvím společenství vlastníků ani družstev."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-9c5cfec099dc--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě v prvním čtení podpořili návrh rozpočtu Státního fondu podpory investic na rok 2026, který počítá také s programem na odstraňování bariér v bytových domech. Ten může souviset s jejich obnovou, návrh ale výslovně nedokládá podporu společenství vlastníků ani bytových družstev. Záznam zachycuje hlasování v prvním čtení, nikoli konečné rozhodnutí Sněmovny, takže z něj nelze doložit rozhodující posun ke slibu. Proto zůstává hodnocení beze změny.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Doložené hlasování o rozpočtu SFPI proběhlo jen v prvním čtení; v podkladech není konečné rozhodnutí Sněmovny ani jeho výsledek."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0ae0358bfa084570016ab92cefa46887d19956743539da088c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 26330,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 26327
+      },
+      "output_tokens": 2964,
+      "output_tokens_details": {
+        "reasoning_tokens": 2386
+      },
+      "total_tokens": 29294
+    },
+    "output": {
+      "promiseId": "candidate-9c5cfec099dc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu podpory investic počítá s pokračováním programů pro bytové domy, včetně programu na odstraňování bariér, které by mohly podporovat část obnovy společných částí domu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí se zaměřuje zejména na životní prostředí a vodohospodářství; zmíněná podpora dostupného bydlení nedokládá obnovu domů ve spoluvlastnictví."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-9c5cfec099dc--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963"
+      ],
+      "explanationCz": "Návrh rozpočtu Státního fondu podpory investic počítá s programy pro bytové domy, včetně podpory odstraňování bariér, takže by mohl přispět k části slibu. Návrh ale výslovně nedokládá, že tuto podporu získají společenství vlastníků jednotek nebo bytová družstva. Poslanci Motoristů sobě hlasovali pro rozpočet v prvním čtení, což ještě nebylo konečné rozhodnutí Poslanecké sněmovny. Z dostupných podkladů proto nelze potvrdit rozhodující krok strany ve prospěch slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Hlasování zachycuje pouze první čtení návrhu rozpočtu, nikoli konečné rozhodnutí Sněmovny; podklady tak nedokládají, jak strana rozhodla o jeho konečné podobě.",
+        "Návrh rozpočtu popisuje podporu bytových domů, ale neuvádí, zda jsou mezi oprávněnými příjemci společenství vlastníků jednotek nebo bytová družstva."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

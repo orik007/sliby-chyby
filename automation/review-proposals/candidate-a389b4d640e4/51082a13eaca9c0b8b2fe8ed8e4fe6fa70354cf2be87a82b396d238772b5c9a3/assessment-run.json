@@ -1,0 +1,176 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-49-53-991Z--169cf3719c7b",
+  "evaluatedAt": "2026-09-27T14:49:53.991Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-a389b4d640e4/169cf3719c7be85d15ff51c5df05bc7b1699c6c17936095d552a147fc8f90f47.json",
+  "packageHash": "169cf3719c7be85d15ff51c5df05bc7b1699c6c17936095d552a147fc8f90f47",
+  "assessmentContentHash": "b05c1c68edf40b9cfc98e43cd33dcbe7f37a39a3136b0545956a4ecf2a352364",
+  "assessmentFingerprint": "51082a13eaca9c0b8b2fe8ed8e4fe6fa70354cf2be87a82b396d238772b5c9a3",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-a389b4d640e4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-a389b4d640e4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí slevu na studenta ve výši 4 020 Kč, která může finančně podpořit i studenty ošetřovatelství, byť neřeší jejich plat ani ubytování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a389b4d640e4--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh zákona o evidenci tržeb a souvisejících změnách, který mimo jiné zavádí slevu na studenta ve výši 4 020 Kč. Poslanci SPD pak hlasovali pro jeho schválení a po vrácení návrhu Senátem podpořili setrvání na původním znění, které slevu zachovává. Daňová sleva může finančně pomoci i studentům ošetřovatelství, ale nezajišťuje jim přiměřený plat, dotované ubytování ani výslovnou garanci sociálního zabezpečení. Jde proto o dílčí posun, nikoli o splnění celého slibu.",
+      "confidence": "high",
+      "uncertainties": []
+    },
+    "assessor-b": {
+      "promiseId": "candidate-a389b4d640e4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí studentskou slevu na dani ve výši 4 020 Kč, která může finančně podpořit také studenty ošetřovatelství, ale neřeší jejich plat ani dotované ubytování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a389b4d640e4--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda předložila daňový návrh, který zavádí slevu na dani 4 020 Kč pro oprávněné studenty. Poslanci SPD návrh podpořili při schvalování ve třetím čtení a později hlasovali pro setrvání na sněmovní verzi po vrácení návrhu Senátem. Sleva může přinést finanční podporu i studentům ošetřovatelství, ale návrh jim nezajišťuje přiměřený plat ani dotované ubytování a nezavádí zvláštní garanci jejich zabezpečení. Jde tedy o dílčí krok směrem ke slibu.",
+      "confidence": "medium",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_064ea45004a7dc08016ab92cfe959087d1b569a2ba8b7383aa",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 26975,
+      "input_tokens_details": {
+        "cache_write_tokens": 23735,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1825,
+      "output_tokens_details": {
+        "reasoning_tokens": 1382
+      },
+      "total_tokens": 28800
+    },
+    "output": {
+      "promiseId": "candidate-a389b4d640e4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí slevu na studenta ve výši 4 020 Kč, která může finančně podpořit i studenty ošetřovatelství, byť neřeší jejich plat ani ubytování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a389b4d640e4--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh zákona o evidenci tržeb a souvisejících změnách, který mimo jiné zavádí slevu na studenta ve výši 4 020 Kč. Poslanci SPD pak hlasovali pro jeho schválení a po vrácení návrhu Senátem podpořili setrvání na původním znění, které slevu zachovává. Daňová sleva může finančně pomoci i studentům ošetřovatelství, ale nezajišťuje jim přiměřený plat, dotované ubytování ani výslovnou garanci sociálního zabezpečení. Jde proto o dílčí posun, nikoli o splnění celého slibu.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_06333918d9fdf4ca016ab92d0911f487d1b74633233fbd4389",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 26975,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 26972
+      },
+      "output_tokens": 1726,
+      "output_tokens_details": {
+        "reasoning_tokens": 1316
+      },
+      "total_tokens": 28701
+    },
+    "output": {
+      "promiseId": "candidate-a389b4d640e4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-2",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí studentskou slevu na dani ve výši 4 020 Kč, která může finančně podpořit také studenty ošetřovatelství, ale neřeší jejich plat ani dotované ubytování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a389b4d640e4--source",
+        "psp-core-2025--law-change-43310-2",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda předložila daňový návrh, který zavádí slevu na dani 4 020 Kč pro oprávněné studenty. Poslanci SPD návrh podpořili při schvalování ve třetím čtení a později hlasovali pro setrvání na sněmovní verzi po vrácení návrhu Senátem. Sleva může přinést finanční podporu i studentům ošetřovatelství, ale návrh jim nezajišťuje přiměřený plat ani dotované ubytování a nezavádí zvláštní garanci jejich zabezpečení. Jde tedy o dílčí krok směrem ke slibu.",
+      "confidence": "medium",
+      "uncertainties": []
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,224 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-39-12-273Z--b338567f0242",
+  "evaluatedAt": "2026-09-27T14:39:12.273Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-c95c799806/b338567f0242bfd2aa51379e2e212a255d28327d0ef8afd28b19699f38eea246.json",
+  "packageHash": "b338567f0242bfd2aa51379e2e212a255d28327d0ef8afd28b19699f38eea246",
+  "assessmentContentHash": "b4e67ba47537951d8288df586b6bc99dc4c42dbe5201de0f4d57b48fac998035",
+  "assessmentFingerprint": "181740836cff27bfe647fd338b2dd8179c579a9a60b0fa0ad794de3f74dc4b69",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-c95c799806",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-c95c799806",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": false,
+          "reasonCz": "Změna ruší ustanovení zákona o zpracování osobních údajů, ale předložený text neukazuje, že by se týkala cenzury sociálních sítí, moderování neziskovkami nebo sledování občanů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": false,
+          "reasonCz": "Návrh umožňuje ministerstvu žádat žadatele o mezinárodní ochranu o zpřístupnění údajů z elektronických zařízení, avšak nedokládá opatření týkající se občanů ani moderování obsahu či DSA."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-c95c799806--source",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--law-change-43335-4",
+        "psp-core-2025--print-step-211537"
+      ],
+      "explanationCz": "Vláda, v níž ANO působí, předložila návrh změny azylového zákona, který by ministerstvu umožnil žádat žadatele o mezinárodní ochranu o údaje z jejich elektronických zařízení. Podklady ale neukazují, že by toto opatření dopadalo na občany, o nichž mluví slib, nebo se týkalo moderování sociálních sítí či neziskových organizací. Další návrh mění zákon o zpracování osobních údajů, ale předložený text neobjasňuje dopad rušených ustanovení na sledování občanů. Z těchto podkladů proto nelze doložit podstatný posun v plnění konkrétního slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh v azylovém zákoně se týká údajů žadatelů o mezinárodní ochranu; předložené podklady neukazují, zda nebo jak by mohl souviset se sledováním občanů.",
+        "U změny zákona o zpracování osobních údajů není z předloženého textu patrný věcný dopad rušených vět."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-c95c799806",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": false,
+          "reasonCz": "Změny zákona o zpracování osobních údajů pouze ruší uvedené části jeho ustanovení a jejich text neukazuje souvislost s cenzurou sociálních sítí, moderováním obsahu ani se šmírováním občanů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": true,
+          "reasonCz": "Návrh nově umožňuje ministerstvu žádat účastníka azylového řízení o zpřístupnění informací včetně osobních údajů z elektronického komunikačního zařízení, což se přímo dotýká slibu odmítat opatření umožňující šmírování."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-c95c799806--source",
+        "psp-core-2025--law-change-43335-4",
+        "psp-core-2025--print-step-211537"
+      ],
+      "explanationCz": "Vláda, v níž ANO působí, předložila návrh změny zákona o azylu. Návrh by ministerstvu umožnil kvůli ověřování informací v řízení o mezinárodní ochraně vyzvat účastníka, aby zpřístupnil i osobní údaje z elektronického zařízení. To se týká části slibu odmítat opatření umožňující šmírování, a proto návrh jde proti této části slibu. Jde zatím o předložený návrh, nikoli o schválené opatření.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Ustanovení se vztahuje na účastníky řízení o mezinárodní ochraně; podklady neukazují, zda nebo jak se může týkat občanů, o nichž mluví slib. Návrh se také netýká DSA ani moderování obsahu nevolenými neziskovými organizacemi."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0144b0e335952da2016ab92a6b554887d1a865e7afb6d1d15d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 17543,
+      "input_tokens_details": {
+        "cache_write_tokens": 14303,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 3334,
+      "output_tokens_details": {
+        "reasoning_tokens": 2725
+      },
+      "total_tokens": 20877
+    },
+    "output": {
+      "promiseId": "ano-2025-c95c799806",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": false,
+          "reasonCz": "Změna ruší ustanovení zákona o zpracování osobních údajů, ale předložený text neukazuje, že by se týkala cenzury sociálních sítí, moderování neziskovkami nebo sledování občanů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": false,
+          "reasonCz": "Návrh umožňuje ministerstvu žádat žadatele o mezinárodní ochranu o zpřístupnění údajů z elektronických zařízení, avšak nedokládá opatření týkající se občanů ani moderování obsahu či DSA."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-c95c799806--source",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--law-change-43335-4",
+        "psp-core-2025--print-step-211537"
+      ],
+      "explanationCz": "Vláda, v níž ANO působí, předložila návrh změny azylového zákona, který by ministerstvu umožnil žádat žadatele o mezinárodní ochranu o údaje z jejich elektronických zařízení. Podklady ale neukazují, že by toto opatření dopadalo na občany, o nichž mluví slib, nebo se týkalo moderování sociálních sítí či neziskových organizací. Další návrh mění zákon o zpracování osobních údajů, ale předložený text neobjasňuje dopad rušených ustanovení na sledování občanů. Z těchto podkladů proto nelze doložit podstatný posun v plnění konkrétního slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh v azylovém zákoně se týká údajů žadatelů o mezinárodní ochranu; předložené podklady neukazují, zda nebo jak by mohl souviset se sledováním občanů.",
+        "U změny zákona o zpracování osobních údajů není z předloženého textu patrný věcný dopad rušených vět."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_063f0f423b642dcb016ab92a7c017887d199d30b5d87b8ffce",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 17543,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 17540
+      },
+      "output_tokens": 2533,
+      "output_tokens_details": {
+        "reasoning_tokens": 2037
+      },
+      "total_tokens": 20076
+    },
+    "output": {
+      "promiseId": "ano-2025-c95c799806",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": false,
+          "reasonCz": "Změny zákona o zpracování osobních údajů pouze ruší uvedené části jeho ustanovení a jejich text neukazuje souvislost s cenzurou sociálních sítí, moderováním obsahu ani se šmírováním občanů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": true,
+          "reasonCz": "Návrh nově umožňuje ministerstvu žádat účastníka azylového řízení o zpřístupnění informací včetně osobních údajů z elektronického komunikačního zařízení, což se přímo dotýká slibu odmítat opatření umožňující šmírování."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-c95c799806--source",
+        "psp-core-2025--law-change-43335-4",
+        "psp-core-2025--print-step-211537"
+      ],
+      "explanationCz": "Vláda, v níž ANO působí, předložila návrh změny zákona o azylu. Návrh by ministerstvu umožnil kvůli ověřování informací v řízení o mezinárodní ochraně vyzvat účastníka, aby zpřístupnil i osobní údaje z elektronického zařízení. To se týká části slibu odmítat opatření umožňující šmírování, a proto návrh jde proti této části slibu. Jde zatím o předložený návrh, nikoli o schválené opatření.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Ustanovení se vztahuje na účastníky řízení o mezinárodní ochraně; podklady neukazují, zda nebo jak se může týkat občanů, o nichž mluví slib. Návrh se také netýká DSA ani moderování obsahu nevolenými neziskovými organizacemi."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_02025f9c6885f9be016ab92a8b3bbc87d1bfd1b799eec000c1",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 17750,
+      "input_tokens_details": {
+        "cache_write_tokens": 15333,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 470,
+      "output_tokens_details": {
+        "reasoning_tokens": 225
+      },
+      "total_tokens": 18220
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-c95c799806--source",
+        "psp-core-2025--law-change-43335-4",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--law-change-43184-22"
+      ],
+      "explanationCz": "Volím hodnocení assessora A. Vláda s účastí ANO předložila změnu azylového zákona, která umožňuje žádat v azylovém řízení o zpřístupnění údajů z elektronického zařízení. Týká se ale lidí v tomto řízení, zatímco slib výslovně mluví o občanech; podklady proto neukazují dostatečně přímou souvislost se slíbenou ochranou občanů před šmírováním. Druhá změna jen ruší části zákona o zpracování osobních údajů a z jejího textu nelze poznat vazbu na cenzuru sociálních sítí ani moderování obsahu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

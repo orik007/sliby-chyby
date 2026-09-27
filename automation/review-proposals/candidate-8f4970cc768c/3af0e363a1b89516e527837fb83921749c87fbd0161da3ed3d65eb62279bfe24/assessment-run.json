@@ -1,0 +1,210 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-48-10-127Z--64f47c3df00f",
+  "evaluatedAt": "2026-09-27T14:48:10.127Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-8f4970cc768c/64f47c3df00f893055180ef954fefa131842d32461b7ef3c1a3287c50aca3ee8.json",
+  "packageHash": "64f47c3df00f893055180ef954fefa131842d32461b7ef3c1a3287c50aca3ee8",
+  "assessmentContentHash": "544d803ce36daf2688b430802115f7c3d6ec8a8fce08d02ce8e176d738326f12",
+  "assessmentFingerprint": "3af0e363a1b89516e527837fb83921749c87fbd0161da3ed3d65eb62279bfe24",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-8f4970cc768c",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-8f4970cc768c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-71",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší blíže neurčenou část ustanovení zákona o vývozu dřeva a neukazuje, že by podporoval proexportní politiku nebo obchodní dohody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu stanoví pojistnou kapacitu Exportní garanční a pojišťovací společnosti ve výši 200 miliard korun, což přímo souvisí s podporou vývozu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-8f4970cc768c--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026, který stanovil pojistnou kapacitu Exportní garanční a pojišťovací společnosti na 200 miliard korun; jde o nástroj na podporu vývozu. Poslanci SPD pak hlasovali pro rozpočet ve třetím čtení, tedy při závěrečném hlasování Sněmovny o návrhu. Přesné znění, o němž hlasovali, však v podkladech chybí, takže nelze ověřit, zda tato podpora zůstala i ve schváleném rozpočtu. Podklady zároveň nedokládají postup v otázce obchodních dohod, proto je doložen pouze možný dílčí posun v proexportní politice.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Přesné znění státního rozpočtu schválené poslanci není v podkladech zveřejněno, takže nelze ověřit, zda v něm zůstala pojistná kapacita pro podporu vývozu ve výši 200 miliard korun.",
+        "Podklady dokládají opatření související s podporou vývozu, ale neukazují, zda strana jednala o otevření nových obchodních dohod."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-8f4970cc768c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-71",
+          "relevant": true,
+          "reasonCz": "Mění ustanovení zákona upravujícího vývoz dřeva, takže může zasahovat do konkrétní části proexportní politiky, ale z uvedeného znění nelze určit účinek vypuštěné části."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu stanoví pojistnou kapacitu Exportní garanční a pojišťovací společnosti, což se přímo týká podpory vývozu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-8f4970cc768c--source",
+        "psp-core-2025--law-change-43184-approved-71",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh státního rozpočtu, který stanoví pojistnou kapacitu Exportní garanční a pojišťovací společnosti na 200 miliard korun; to podporuje část slibu o aktivní proexportní politice. Poslanci SPD hlasovali pro rozpočet, ale přesné znění schválené verze není v podkladech zveřejněno. Poslanci SPD také hlasovali pro zákon, který vypouští část ustanovení o vývozu dřeva, a po zamítnutí Senátem hlasovali pro setrvání na zákoně. Není však uvedeno, jaký konkrétní účinek mělo vypuštění této části na vývoz, proto nelze tento hlas spolehlivě vyhodnotit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U změny zákona o vývozu dřeva není uveden text vypuštěné části ani její účinek, takže nelze určit, zda hlasování SPD slib podporovalo, nebo mu odporovalo.",
+        "U hlasování o státním rozpočtu je uvedeno, že přesný text schválené verze chybí; není proto možné ověřit, zda v ní zůstala pojistná kapacita 200 miliard korun."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f69302f2c198129016ab92c8d87f487d1bc7d2bfb7f31be84",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10253,
+      "input_tokens_details": {
+        "cache_write_tokens": 7013,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2901,
+      "output_tokens_details": {
+        "reasoning_tokens": 2294
+      },
+      "total_tokens": 13154
+    },
+    "output": {
+      "promiseId": "candidate-8f4970cc768c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-71",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší blíže neurčenou část ustanovení zákona o vývozu dřeva a neukazuje, že by podporoval proexportní politiku nebo obchodní dohody."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu stanoví pojistnou kapacitu Exportní garanční a pojišťovací společnosti ve výši 200 miliard korun, což přímo souvisí s podporou vývozu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-8f4970cc768c--source",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957"
+      ],
+      "explanationCz": "Vláda předložila návrh státního rozpočtu na rok 2026, který stanovil pojistnou kapacitu Exportní garanční a pojišťovací společnosti na 200 miliard korun; jde o nástroj na podporu vývozu. Poslanci SPD pak hlasovali pro rozpočet ve třetím čtení, tedy při závěrečném hlasování Sněmovny o návrhu. Přesné znění, o němž hlasovali, však v podkladech chybí, takže nelze ověřit, zda tato podpora zůstala i ve schváleném rozpočtu. Podklady zároveň nedokládají postup v otázce obchodních dohod, proto je doložen pouze možný dílčí posun v proexportní politice.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Přesné znění státního rozpočtu schválené poslanci není v podkladech zveřejněno, takže nelze ověřit, zda v něm zůstala pojistná kapacita pro podporu vývozu ve výši 200 miliard korun.",
+        "Podklady dokládají opatření související s podporou vývozu, ale neukazují, zda strana jednala o otevření nových obchodních dohod."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_07f2d3f784784987016ab92c9c89b087d1ab60d7bbaeb2a25c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10253,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 10250
+      },
+      "output_tokens": 2498,
+      "output_tokens_details": {
+        "reasoning_tokens": 1885
+      },
+      "total_tokens": 12751
+    },
+    "output": {
+      "promiseId": "candidate-8f4970cc768c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-71",
+          "relevant": true,
+          "reasonCz": "Mění ustanovení zákona upravujícího vývoz dřeva, takže může zasahovat do konkrétní části proexportní politiky, ale z uvedeného znění nelze určit účinek vypuštěné části."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu stanoví pojistnou kapacitu Exportní garanční a pojišťovací společnosti, což se přímo týká podpory vývozu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-8f4970cc768c--source",
+        "psp-core-2025--law-change-43184-approved-71",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh státního rozpočtu, který stanoví pojistnou kapacitu Exportní garanční a pojišťovací společnosti na 200 miliard korun; to podporuje část slibu o aktivní proexportní politice. Poslanci SPD hlasovali pro rozpočet, ale přesné znění schválené verze není v podkladech zveřejněno. Poslanci SPD také hlasovali pro zákon, který vypouští část ustanovení o vývozu dřeva, a po zamítnutí Senátem hlasovali pro setrvání na zákoně. Není však uvedeno, jaký konkrétní účinek mělo vypuštění této části na vývoz, proto nelze tento hlas spolehlivě vyhodnotit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U změny zákona o vývozu dřeva není uveden text vypuštěné části ani její účinek, takže nelze určit, zda hlasování SPD slib podporovalo, nebo mu odporovalo.",
+        "U hlasování o státním rozpočtu je uvedeno, že přesný text schválené verze chybí; není proto možné ověřit, zda v ní zůstala pojistná kapacita 200 miliard korun."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

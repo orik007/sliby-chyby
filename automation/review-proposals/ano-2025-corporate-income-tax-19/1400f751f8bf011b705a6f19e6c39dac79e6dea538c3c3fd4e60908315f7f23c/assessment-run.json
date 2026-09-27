@@ -1,0 +1,257 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-39-32-850Z--311aafa11479",
+  "evaluatedAt": "2026-09-27T14:39:32.850Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-corporate-income-tax-19/311aafa1147909802420a7d82cc67eb0778d93a5b88f689435cfe05c0cd57b52.json",
+  "packageHash": "311aafa1147909802420a7d82cc67eb0778d93a5b88f689435cfe05c0cd57b52",
+  "assessmentContentHash": "0a949fea43da0e3e086c114158d6890a2b523fd083932123fd7cae63a5ff98f5",
+  "assessmentFingerprint": "1400f751f8bf011b705a6f19e6c39dac79e6dea538c3c3fd4e60908315f7f23c",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-corporate-income-tax-19",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-corporate-income-tax-19",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": false,
+          "reasonCz": "Jde o návrh smlouvy o zamezení dvojímu zdanění a její úplné znění v balíčku chybí, takže dostupné podklady nedokládají změnu slíbené sazby daně z příjmů firem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Jde o návrh smlouvy o zamezení dvojímu zdanění a její úplné znění v balíčku chybí, takže dostupné podklady nedokládají změnu slíbené sazby daně z příjmů firem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43433-1",
+          "relevant": false,
+          "reasonCz": "Dostupný návrh mění pravidla mimořádné sektorové daně, ale nedokládá snížení obecné sazby daně z příjmů firem z 21 na 19 procent."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-corporate-income-tax-19--source",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--law-change-43433-1",
+        "psp-core-2025--print-step-210795",
+        "psp-core-2025--print-step-211439",
+        "psp-core-2025--print-step-212169"
+      ],
+      "explanationCz": "Slib se týká snížení obecné sazby daně z příjmů firem z 21 na 19 procent. Vláda předložila novelu zákona o daních z příjmů, jejíž dostupný text upravuje mimořádnou sektorovou daň, nikoli slíbenou sazbu. U dvou předložených smluv o zamezení dvojímu zdanění balíček neobsahuje jejich úplné znění, takže jejich možný dopad nelze ověřit. Proto není doložen podstatný posun, ale důkazy nestačí k úplnému posouzení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U vládních návrhů smluv s Keňou a Maltou balíček uvádí pouze, že dokumenty jsou ve formátu PDF/A; bez jejich úplného znění nelze ověřit, zda obsahují ustanovení vztahující se ke slíbené sazbě."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-corporate-income-tax-19",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": false,
+          "reasonCz": "Dodané znění keňské smlouvy není v podkladu dostupné, takže nelze doložit, že by měnila sazbu daně z příjmů firem nebo jinou část tohoto slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Dodané znění maltské smlouvy není v podkladu dostupné, takže nelze doložit, že by měnila sazbu daně z příjmů firem nebo jinou část tohoto slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43433-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí mimořádnou sektorovou daň se sazbou 50 % pro některé firmy zpracovávající ropu a vyrábějící ropné produkty, což jde proti snížení daňového zatížení alespoň této skupiny firem."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-corporate-income-tax-19--source",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--law-change-43433-1",
+        "psp-core-2025--print-step-210795",
+        "psp-core-2025--print-step-211439",
+        "psp-core-2025--print-step-212169"
+      ],
+      "explanationCz": "Slib požaduje snížit sazbu daně z příjmů firem z 21 % na 19 %. Vláda, v níž je ANO, předložila návrh zavádějící mimořádnou sektorovou daň se sazbou 50 % pro některé firmy zpracovávající ropu a vyrábějící ropné produkty. Návrh nesnižuje běžnou sazbu firemní daně a pro dotčené firmy jde opačným směrem než slíbené snížení. U dvou předložených smluv o zamezení dvojímu zdanění nejsou v podkladu dostupná jejich znění, takže jejich případný dopad nelze ověřit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Znění smluv s Keňou a Maltou je v podkladu uvedeno pouze jako dokument ve formátu PDF/A, bez dostupného textu; nelze proto ověřit, zda jejich ustanovení nějak souvisejí se slíbenou změnou sazby firemní daně."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f4308e8570f31cb016ab92a81351887d1bb46d585968b2c22",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 13119,
+      "input_tokens_details": {
+        "cache_write_tokens": 9879,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2890,
+      "output_tokens_details": {
+        "reasoning_tokens": 2200
+      },
+      "total_tokens": 16009
+    },
+    "output": {
+      "promiseId": "ano-2025-corporate-income-tax-19",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": false,
+          "reasonCz": "Jde o návrh smlouvy o zamezení dvojímu zdanění a její úplné znění v balíčku chybí, takže dostupné podklady nedokládají změnu slíbené sazby daně z příjmů firem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Jde o návrh smlouvy o zamezení dvojímu zdanění a její úplné znění v balíčku chybí, takže dostupné podklady nedokládají změnu slíbené sazby daně z příjmů firem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43433-1",
+          "relevant": false,
+          "reasonCz": "Dostupný návrh mění pravidla mimořádné sektorové daně, ale nedokládá snížení obecné sazby daně z příjmů firem z 21 na 19 procent."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-corporate-income-tax-19--source",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--law-change-43433-1",
+        "psp-core-2025--print-step-210795",
+        "psp-core-2025--print-step-211439",
+        "psp-core-2025--print-step-212169"
+      ],
+      "explanationCz": "Slib se týká snížení obecné sazby daně z příjmů firem z 21 na 19 procent. Vláda předložila novelu zákona o daních z příjmů, jejíž dostupný text upravuje mimořádnou sektorovou daň, nikoli slíbenou sazbu. U dvou předložených smluv o zamezení dvojímu zdanění balíček neobsahuje jejich úplné znění, takže jejich možný dopad nelze ověřit. Proto není doložen podstatný posun, ale důkazy nestačí k úplnému posouzení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U vládních návrhů smluv s Keňou a Maltou balíček uvádí pouze, že dokumenty jsou ve formátu PDF/A; bez jejich úplného znění nelze ověřit, zda obsahují ustanovení vztahující se ke slíbené sazbě."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0115b1a0b9838d57016ab92a8e837487d1834090da16c0654b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 13119,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 13116
+      },
+      "output_tokens": 3306,
+      "output_tokens_details": {
+        "reasoning_tokens": 2670
+      },
+      "total_tokens": 16425
+    },
+    "output": {
+      "promiseId": "ano-2025-corporate-income-tax-19",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": false,
+          "reasonCz": "Dodané znění keňské smlouvy není v podkladu dostupné, takže nelze doložit, že by měnila sazbu daně z příjmů firem nebo jinou část tohoto slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Dodané znění maltské smlouvy není v podkladu dostupné, takže nelze doložit, že by měnila sazbu daně z příjmů firem nebo jinou část tohoto slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43433-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí mimořádnou sektorovou daň se sazbou 50 % pro některé firmy zpracovávající ropu a vyrábějící ropné produkty, což jde proti snížení daňového zatížení alespoň této skupiny firem."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-corporate-income-tax-19--source",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--law-change-43433-1",
+        "psp-core-2025--print-step-210795",
+        "psp-core-2025--print-step-211439",
+        "psp-core-2025--print-step-212169"
+      ],
+      "explanationCz": "Slib požaduje snížit sazbu daně z příjmů firem z 21 % na 19 %. Vláda, v níž je ANO, předložila návrh zavádějící mimořádnou sektorovou daň se sazbou 50 % pro některé firmy zpracovávající ropu a vyrábějící ropné produkty. Návrh nesnižuje běžnou sazbu firemní daně a pro dotčené firmy jde opačným směrem než slíbené snížení. U dvou předložených smluv o zamezení dvojímu zdanění nejsou v podkladu dostupná jejich znění, takže jejich případný dopad nelze ověřit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Znění smluv s Keňou a Maltou je v podkladu uvedeno pouze jako dokument ve formátu PDF/A, bez dostupného textu; nelze proto ověřit, zda jejich ustanovení nějak souvisejí se slíbenou změnou sazby firemní daně."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0f9ae671922caad1016ab92a9f2a0487d1af7818f1e6d89d86",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 13533,
+      "input_tokens_details": {
+        "cache_write_tokens": 11116,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 574,
+      "output_tokens_details": {
+        "reasoning_tokens": 339
+      },
+      "total_tokens": 14107
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-corporate-income-tax-19--source",
+        "psp-core-2025--law-change-43433-1",
+        "psp-core-2025--print-step-212169",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--law-change-43318-1"
+      ],
+      "explanationCz": "Volím hodnocení A. ANO ve vládě předložilo návrh změny zákona o daních z příjmů, vedený ve Sněmovně jako tisk č. 311, ale ten zavádí zvláštní daň pro část ropných firem a nemění obecnou sazbu z 21 na 19 procent. Samotná zvláštní daň proto nedokládá ani splnění slibu, ani jeho porušení. U smluv s Keňou a Maltou navíc chybí jejich text, takže jejich případný vliv nelze ověřit."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

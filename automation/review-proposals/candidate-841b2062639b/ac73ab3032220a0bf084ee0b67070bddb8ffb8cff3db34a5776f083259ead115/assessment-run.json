@@ -1,0 +1,286 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-48-05-926Z--a8225b903141",
+  "evaluatedAt": "2026-09-27T14:48:05.926Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-841b2062639b/a8225b90314194ed54a1156ce06358db61b281760cba3ff570161df3fe988e1e.json",
+  "packageHash": "a8225b90314194ed54a1156ce06358db61b281760cba3ff570161df3fe988e1e",
+  "assessmentContentHash": "52b4d56fcdd6cbf59347bceb6f5dfd621d16f33d65ffb07784f8cbd7f9199413",
+  "assessmentFingerprint": "ac73ab3032220a0bf084ee0b67070bddb8ffb8cff3db34a5776f083259ead115",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-841b2062639b",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b"
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-841b2062639b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text pouze posouvá účinnost vyjmenovaných částí dřívějšího zákona, ale neukazuje, že se týkají některé z konkrétních změn superdávky uvedených ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Text pouze doplňuje dávku státní sociální pomoci do výčtu v zákoně o životním a existenčním minimu a nemění žádný z parametrů či postupů výslovně uvedených ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text mění termíny účinnosti některých dřívějších ustanovení, ale neukazuje, že se týkají změn parametrů, přídavků na děti, dokládání příjmů nebo přepočtu dávky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Text ruší několik číselně označených ustanovení dřívějšího zákona, ale jejich obsah neuvádí, takže nelze doložit vztah ke konkrétním závazkům ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": false,
+          "reasonCz": "Text mění ustanovení zákona o sociálních službách a související účinnost, ale neukazuje věcnou změnu dávky nebo některé z dalších oblastí uvedených ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Text se týká odkladu ustanovení zákona o dávkách pro osoby se zdravotním postižením, nikoli změn popsaných ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Text mění výpočet normativního nájemného pro dávku státní sociální pomoci, tedy konkrétní parametr této dávky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": true,
+          "reasonCz": "Text ruší vyhlášení normativního nájemného pro rok 2026, což mění podklad používaný při výpočtu dávky státní sociální pomoci."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-841b2062639b--source",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--law-change-43319-approved-3",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro vládní návrh zákona, který mění pravidla pro výpočet normativního nájemného u dávky státní sociální pomoci. Tím se mění jeden z parametrů superdávky, takže jde o dílčí posun v části slibu týkající se změny jejích parametrů. Návrh zároveň ruší vyhlášení normativního nájemného pro rok 2026; samotné zrušení ale neukazuje, zda se tím naplňuje zamýšlená změna. V předložených změnách není doloženo vyčlenění přídavků na děti, méně časté dokládání finanční situace ani přepočet dávky u rodin důchodců nejvýše po půl roce.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Zrušení vyhlášení normativního nájemného pro rok 2026 mění podklad pro výpočet dávky, ale předložené znění samo neukazuje, zda tato změna odpovídá slibu změnit nevyhovující či diskriminační parametry."
+      ]
+    },
+    "assessor-b": null
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_04550973b6cb1471016ab92c77be4087d1aa9614104c4f4527",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 25242,
+      "input_tokens_details": {
+        "cache_write_tokens": 22002,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 4424,
+      "output_tokens_details": {
+        "reasoning_tokens": 3462
+      },
+      "total_tokens": 29666
+    },
+    "output": {
+      "promiseId": "candidate-841b2062639b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text pouze posouvá účinnost vyjmenovaných částí dřívějšího zákona, ale neukazuje, že se týkají některé z konkrétních změn superdávky uvedených ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Text pouze doplňuje dávku státní sociální pomoci do výčtu v zákoně o životním a existenčním minimu a nemění žádný z parametrů či postupů výslovně uvedených ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text mění termíny účinnosti některých dřívějších ustanovení, ale neukazuje, že se týkají změn parametrů, přídavků na děti, dokládání příjmů nebo přepočtu dávky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Text ruší několik číselně označených ustanovení dřívějšího zákona, ale jejich obsah neuvádí, takže nelze doložit vztah ke konkrétním závazkům ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": false,
+          "reasonCz": "Text mění ustanovení zákona o sociálních službách a související účinnost, ale neukazuje věcnou změnu dávky nebo některé z dalších oblastí uvedených ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Text se týká odkladu ustanovení zákona o dávkách pro osoby se zdravotním postižením, nikoli změn popsaných ve slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Text mění výpočet normativního nájemného pro dávku státní sociální pomoci, tedy konkrétní parametr této dávky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": true,
+          "reasonCz": "Text ruší vyhlášení normativního nájemného pro rok 2026, což mění podklad používaný při výpočtu dávky státní sociální pomoci."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-841b2062639b--source",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--law-change-43319-approved-3",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro vládní návrh zákona, který mění pravidla pro výpočet normativního nájemného u dávky státní sociální pomoci. Tím se mění jeden z parametrů superdávky, takže jde o dílčí posun v části slibu týkající se změny jejích parametrů. Návrh zároveň ruší vyhlášení normativního nájemného pro rok 2026; samotné zrušení ale neukazuje, zda se tím naplňuje zamýšlená změna. V předložených změnách není doloženo vyčlenění přídavků na děti, méně časté dokládání finanční situace ani přepočet dávky u rodin důchodců nejvýše po půl roce.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Zrušení vyhlášení normativního nájemného pro rok 2026 mění podklad pro výpočet dávky, ale předložené znění samo neukazuje, zda tato změna odpovídá slibu změnit nevyhovující či diskriminační parametry."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0242d266fb5410dc016ab92c8e83cc87d1a607db906a0efe6a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 25242,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 25239
+      },
+      "output_tokens": 3582,
+      "output_tokens_details": {
+        "reasoning_tokens": 2576
+      },
+      "total_tokens": 28824
+    },
+    "output": {
+      "promiseId": "candidate-841b2062639b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text pouze mění data účinnosti jiných ustanovení a neukazuje, že by se týkala některé konkrétní části tohoto slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Vkládá dávku státní sociální pomoci do ustanovení zákona o životním a existenčním minimu, ale nemění parametry dávky, přídavky na děti ani dokládání či přepočet dávky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Upravuje pouze data účinnosti ustanovení jiného zákona a jeho text nespojuje tuto změnu s žádným konkrétním bodem slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Ruší očíslované body jiné novely, ale předložený text neuvádí jejich obsah ani spojení s některou částí slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-4",
+          "relevant": false,
+          "reasonCz": "Mění ustanovení zákona o sociálních službách a související termíny, nikoli některý z výslovně slíbených parametrů superdávky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43240-5",
+          "relevant": false,
+          "reasonCz": "Upravuje účinnost ustanovení týkajících se dávek pro osoby se zdravotním postižením, nikoli některou část tohoto slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Mění výpočet normativního nájemného pro dávku státní sociální pomoci, tedy jeden z parametrů superdávky."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": true,
+          "reasonCz": "Ruší dosavadní vyhlášení normativního nájemného pro výpočet dávky státní sociální pomoci v roce 2026, a tím se přímo dotýká jejích parametrů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-841b2062639b--source",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--law-change-43319-approved-3",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "ANO hlasovalo pro vládní novelu zákona o dávce státní sociální pomoci, projednávanou jako sněmovní tisk 198. Ta mění výpočet normativního nájemného, mimo jiné podle okresů, a ruší dosavadní vyhlášení jeho hodnot pro rok 2026. Jde o změnu parametrů superdávky, tedy o posun v jedné části slibu, nikoli o splnění celého závazku. Tento doložený krok sám o sobě neprokazuje vyčlenění přídavků na děti ani slíbené změny dokládání a přepočtu dávky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Doložené hlasování podporuje pouze změnu parametrů výpočtu dávky; předložené důkazy neukazují, zda byly uskutečněny další části slibu týkající se přídavků na děti, dokládání finanční situace a přepočtu dávky u rodin důchodců."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0b9053fec4370eed016ab92ca0d13887d19761091ba451660d",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 25380,
+      "input_tokens_details": {
+        "cache_write_tokens": 22963,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 519,
+      "output_tokens_details": {
+        "reasoning_tokens": 302
+      },
+      "total_tokens": 25899
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "candidate-841b2062639b--source",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Přezkoumat bylo možné pouze jedno hodnocení a to správně vychází z doložených údajů. Poslanci ANO podpořili vládní návrh na změnu pravidel státní sociální podpory, vedený ve Sněmovně jako tisk č. 198. Schválená úprava mění výpočet normativního nájemného u dávky státní sociální pomoci, tedy jeden z jejích parametrů. Nedokládá však oddělení přídavků na děti ani slíbené změny četnosti dokládání a přepočtu dávky, proto jde jen o částečný posun."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-confirmed-single-assessor",
+    "status": "moving-towards",
+    "selectedReview": "assessor-a"
+  }
+}

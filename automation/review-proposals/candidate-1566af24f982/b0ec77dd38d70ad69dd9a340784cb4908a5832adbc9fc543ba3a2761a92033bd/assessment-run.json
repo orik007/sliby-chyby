@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-41-50-526Z--d88c4b0ec106",
+  "evaluatedAt": "2026-09-27T14:41:50.526Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-1566af24f982/d88c4b0ec1062b667f0959fb0efaf8ce6a0b09d324a8c91a24a59642a83b9e09.json",
+  "packageHash": "d88c4b0ec1062b667f0959fb0efaf8ce6a0b09d324a8c91a24a59642a83b9e09",
+  "assessmentContentHash": "da83a84ad98d476fc32fa488e0b888969640c67eb69ec9c476ec773bdb48b859",
+  "assessmentFingerprint": "b0ec77dd38d70ad69dd9a340784cb4908a5832adbc9fc543ba3a2761a92033bd",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-1566af24f982",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-1566af24f982",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-65",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší odstavec 2 § 29d zákona proti praní špinavých peněz, ale neuvádí jeho obsah ani změnu pojištění vkladů či ochrany úschovních účtů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43401-3",
+          "relevant": false,
+          "reasonCz": "Návrh ruší vybrané body zákona týkajícího se jednotného evropského přístupového místa, aniž text spojuje tuto změnu s pojištěním vkladů nebo ochranou úschovních účtů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-1566af24f982--source",
+        "psp-core-2025--law-change-43184-approved-65",
+        "psp-core-2025--law-change-43401-3"
+      ],
+      "explanationCz": "ANO slíbilo zvýšit ochranu úschovních účtů a zajistit pojištění bez horního limitu pro mimořádné situace. Jeden schválený pozměňovací text ruší odstavec zákona proti praní špinavých peněz, ale dodané znění neukazuje, co tento odstavec obsahuje ani zda se týká pojištění vkladů. Jiný vládní návrh ruší body zákona o jednotném evropském přístupovém místě a výslovně pojištění vkladů neřeší. Z těchto podkladů proto nelze doložit posun ke slibu; zůstává bez ověřeného podstatného posunu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není uveden obsah rušeného odstavce § 29d, takže nelze vyloučit, že jeho zrušení má dopad na ochranu úschovních účtů nebo pojištění vkladů."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-1566af24f982",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-65",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší § 29d odst. 2 zákona proti praní špinavých peněz, ale neuvádí obsah rušeného ustanovení ani změnu pojištění vkladů či ochrany úschovních účtů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43401-3",
+          "relevant": false,
+          "reasonCz": "Návrh ruší části úpravy týkající se jednotného evropského přístupového místa, účetnictví a auditorů a jeho text se netýká úschovních účtů ani pojištění vkladů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-1566af24f982--source",
+        "psp-core-2025--law-change-43184-approved-65",
+        "psp-core-2025--law-change-43401-3"
+      ],
+      "explanationCz": "Program slibuje lepší ochranu úschovních účtů a pojištění prostředků na běžných účtech bez horního limitu pro mimořádné situace. Předložené změny zákonů takové pojištění ani tuto ochranu výslovně neupravují. U jedné změny je uvedeno pouze zrušení odstavce zákona proti praní špinavých peněz; bez jeho znění nelze zjistit, zda to slib ovlivňuje. Proto zatím není doložen podstatný posun.",
+      "confidence": "low",
+      "uncertainties": [
+        "Obsah rušeného § 29d odst. 2 zákona proti praní špinavých peněz v podkladech chybí, takže nelze spolehlivě posoudit, zda tato změna ovlivňuje ochranu úschovních účtů."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0af207ba0b7a8717016ab92b13e82887d1969b8c536ad845cb",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9314,
+      "input_tokens_details": {
+        "cache_write_tokens": 6074,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2515,
+      "output_tokens_details": {
+        "reasoning_tokens": 1981
+      },
+      "total_tokens": 11829
+    },
+    "output": {
+      "promiseId": "candidate-1566af24f982",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-65",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší odstavec 2 § 29d zákona proti praní špinavých peněz, ale neuvádí jeho obsah ani změnu pojištění vkladů či ochrany úschovních účtů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43401-3",
+          "relevant": false,
+          "reasonCz": "Návrh ruší vybrané body zákona týkajícího se jednotného evropského přístupového místa, aniž text spojuje tuto změnu s pojištěním vkladů nebo ochranou úschovních účtů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-1566af24f982--source",
+        "psp-core-2025--law-change-43184-approved-65",
+        "psp-core-2025--law-change-43401-3"
+      ],
+      "explanationCz": "ANO slíbilo zvýšit ochranu úschovních účtů a zajistit pojištění bez horního limitu pro mimořádné situace. Jeden schválený pozměňovací text ruší odstavec zákona proti praní špinavých peněz, ale dodané znění neukazuje, co tento odstavec obsahuje ani zda se týká pojištění vkladů. Jiný vládní návrh ruší body zákona o jednotném evropském přístupovém místě a výslovně pojištění vkladů neřeší. Z těchto podkladů proto nelze doložit posun ke slibu; zůstává bez ověřeného podstatného posunu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Není uveden obsah rušeného odstavce § 29d, takže nelze vyloučit, že jeho zrušení má dopad na ochranu úschovních účtů nebo pojištění vkladů."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0f286b29bcf53c77016ab92b20e54487d1abdcadd98e67124d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9314,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 9311
+      },
+      "output_tokens": 2595,
+      "output_tokens_details": {
+        "reasoning_tokens": 2136
+      },
+      "total_tokens": 11909
+    },
+    "output": {
+      "promiseId": "candidate-1566af24f982",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-65",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší § 29d odst. 2 zákona proti praní špinavých peněz, ale neuvádí obsah rušeného ustanovení ani změnu pojištění vkladů či ochrany úschovních účtů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43401-3",
+          "relevant": false,
+          "reasonCz": "Návrh ruší části úpravy týkající se jednotného evropského přístupového místa, účetnictví a auditorů a jeho text se netýká úschovních účtů ani pojištění vkladů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-1566af24f982--source",
+        "psp-core-2025--law-change-43184-approved-65",
+        "psp-core-2025--law-change-43401-3"
+      ],
+      "explanationCz": "Program slibuje lepší ochranu úschovních účtů a pojištění prostředků na běžných účtech bez horního limitu pro mimořádné situace. Předložené změny zákonů takové pojištění ani tuto ochranu výslovně neupravují. U jedné změny je uvedeno pouze zrušení odstavce zákona proti praní špinavých peněz; bez jeho znění nelze zjistit, zda to slib ovlivňuje. Proto zatím není doložen podstatný posun.",
+      "confidence": "low",
+      "uncertainties": [
+        "Obsah rušeného § 29d odst. 2 zákona proti praní špinavých peněz v podkladech chybí, takže nelze spolehlivě posoudit, zda tato změna ovlivňuje ochranu úschovních účtů."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

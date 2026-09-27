@@ -1,0 +1,225 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T15-02-38-953Z--b4b76288bfbe",
+  "evaluatedAt": "2026-09-27T15:02:38.953Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-adb64e5313/b4b76288bfbeb0d2f1705c393efa6e2abd0c5c35cfe95ad1db0e871ce45cb1a2.json",
+  "packageHash": "b4b76288bfbeb0d2f1705c393efa6e2abd0c5c35cfe95ad1db0e871ce45cb1a2",
+  "assessmentContentHash": "c64960aead42b5f4d06e5b92a661a32e6eca052e0ffb8be936e61225e1acae83",
+  "assessmentFingerprint": "a12815218e5f30fa502be5791294d63635a10629287dcdde550f8c5312ec0cb7",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-adb64e5313",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-adb64e5313",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu podpory investic financuje programy dostupného nájemního bydlení a technickou infrastrukturu pro budoucí bytovou výstavbu, takže podporuje část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí počítá s 2,2 miliardy korun na podporu dostupného bydlení pro sociálně slabé skupiny, což se týká části slibu o bytové výstavbě."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-adb64e5313--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Slib zahrnuje podporu bytové výstavby a družstevního bydlení i bezplatné převody státních pozemků pro výstavbu bytů. Rozpočty Státního fondu podpory investic a Státního fondu životního prostředí počítají s podporami nájemního a dostupného bydlení a s prostředky pro budoucí výstavbu. Poslanci SPD hlasovali pro oba rozpočty v prvním čtení, tedy před jejich konečným projednáním. Pravidla hodnocení přisuzují účinek hlasování až při závěrečném rozhodnutí Sněmovny, které zde doloženo není, takže z těchto hlasů nelze potvrdit posun ve slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené záznamy dokládají hlasy SPD pouze v prvním čtení, nikoli závěrečné rozhodnutí Sněmovny; proto z nich nelze podle pravidel hodnocení určit bodovaný účinek."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-adb64e5313",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu podpory investic zahrnuje financování dostupného nájemního bydlení a podpory infrastruktury pro bytovou výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí počítá s převodem 2,2 miliardy korun na podporu dostupného bydlení pro sociálně slabé skupiny prostřednictvím ministerstva a Státního fondu podpory investic."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-adb64e5313--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro návrh rozpočtu Státního fondu podpory investic na rok 2026, který počítá s podporou dostupného nájemního bydlení a s prostředky na infrastrukturu umožňující bytovou výstavbu. Podpořili také návrh rozpočtu Státního fondu životního prostředí, jenž vyčleňuje 2,2 miliardy korun na dostupné bydlení pro sociálně slabé skupiny. Jde o podporu části slibu, zejména bytové výstavby a dostupného bydlení. Tyto návrhy však nedokládají podporu družstevního bydlení ani bezplatné převody státních pozemků.",
+      "confidence": "medium",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0bd99f4dccbf59b3016ab92ffa82f487d1a763fcbbad18817b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 26368,
+      "input_tokens_details": {
+        "cache_write_tokens": 23128,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1500,
+      "output_tokens_details": {
+        "reasoning_tokens": 982
+      },
+      "total_tokens": 27868
+    },
+    "output": {
+      "promiseId": "spd-2025-adb64e5313",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu podpory investic financuje programy dostupného nájemního bydlení a technickou infrastrukturu pro budoucí bytovou výstavbu, takže podporuje část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí počítá s 2,2 miliardy korun na podporu dostupného bydlení pro sociálně slabé skupiny, což se týká části slibu o bytové výstavbě."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-adb64e5313--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Slib zahrnuje podporu bytové výstavby a družstevního bydlení i bezplatné převody státních pozemků pro výstavbu bytů. Rozpočty Státního fondu podpory investic a Státního fondu životního prostředí počítají s podporami nájemního a dostupného bydlení a s prostředky pro budoucí výstavbu. Poslanci SPD hlasovali pro oba rozpočty v prvním čtení, tedy před jejich konečným projednáním. Pravidla hodnocení přisuzují účinek hlasování až při závěrečném rozhodnutí Sněmovny, které zde doloženo není, takže z těchto hlasů nelze potvrdit posun ve slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené záznamy dokládají hlasy SPD pouze v prvním čtení, nikoli závěrečné rozhodnutí Sněmovny; proto z nich nelze podle pravidel hodnocení určit bodovaný účinek."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0123945951d38f90016ab93002a69487d1b6a67e57f6f10527",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 26368,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 26365
+      },
+      "output_tokens": 1687,
+      "output_tokens_details": {
+        "reasoning_tokens": 1235
+      },
+      "total_tokens": 28055
+    },
+    "output": {
+      "promiseId": "spd-2025-adb64e5313",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu podpory investic zahrnuje financování dostupného nájemního bydlení a podpory infrastruktury pro bytovou výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí počítá s převodem 2,2 miliardy korun na podporu dostupného bydlení pro sociálně slabé skupiny prostřednictvím ministerstva a Státního fondu podpory investic."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-adb64e5313--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro návrh rozpočtu Státního fondu podpory investic na rok 2026, který počítá s podporou dostupného nájemního bydlení a s prostředky na infrastrukturu umožňující bytovou výstavbu. Podpořili také návrh rozpočtu Státního fondu životního prostředí, jenž vyčleňuje 2,2 miliardy korun na dostupné bydlení pro sociálně slabé skupiny. Jde o podporu části slibu, zejména bytové výstavby a dostupného bydlení. Tyto návrhy však nedokládají podporu družstevního bydlení ani bezplatné převody státních pozemků.",
+      "confidence": "medium",
+      "uncertainties": []
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_08407e5345e527de016ab9300b6e9087d1a5e1ceadbb14d334",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 26500,
+      "input_tokens_details": {
+        "cache_write_tokens": 24083,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 350,
+      "output_tokens_details": {
+        "reasoning_tokens": 107
+      },
+      "total_tokens": 26850
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "spd-2025-adb64e5313--source",
+        "psp-core-2025--law-change-43202-1",
+        "psp-core-2025--vote-86963",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968"
+      ],
+      "explanationCz": "Volím hodnocení A. Poslanci SPD podpořili návrh rozpočtu Státního fondu podpory investic na rok 2026, vedený ve Sněmovně jako tisk č. 92, i rozpočet Státního fondu životního prostředí na rok 2026, vedený jako tisk č. 97. Oba rozpočty obsahují peníze na část bytové podpory, ale doložené hlasování proběhlo jen v prvním čtení. Nejde tedy o konečné rozhodnutí Sněmovny, z něhož by bylo možné uznat posun ve splnění slibu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

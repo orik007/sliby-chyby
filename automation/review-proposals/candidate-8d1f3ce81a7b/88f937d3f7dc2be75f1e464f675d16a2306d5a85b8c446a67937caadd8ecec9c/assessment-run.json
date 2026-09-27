@@ -1,0 +1,334 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-48-29-596Z--fb7ecaa65acb",
+  "evaluatedAt": "2026-09-27T14:48:29.596Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-8d1f3ce81a7b/fb7ecaa65acb6bb63e87bcddbdca59c7cfc2ae723c8838e8b31be86264a8bb9a.json",
+  "packageHash": "fb7ecaa65acb6bb63e87bcddbdca59c7cfc2ae723c8838e8b31be86264a8bb9a",
+  "assessmentContentHash": "9bbaabbe9e2ee4abeadaeda701d50f55bc32bb1b6ca313fa5ee65c7247143b87",
+  "assessmentFingerprint": "88f937d3f7dc2be75f1e464f675d16a2306d5a85b8c446a67937caadd8ecec9c",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-8d1f3ce81a7b",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-8d1f3ce81a7b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": true,
+          "reasonCz": "Novela mění zákon o zpracování osobních údajů, ale její text pouze ruší blíže neuvedené věty, takže nelze určit, zda se změna týká ochrany před sledováním."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje policejní pravomoci při pobytu cizinců, včetně pořizování biometrických údajů a v původní verzi i přístupu k informacím v elektronickém zařízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43283-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí ochranu před zneužívajícími soudními žalobami namířenými proti veřejnému projevu, což může být dílčím krokem proti šikanování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": false,
+          "reasonCz": "Text upravuje hlasovací lístky a elektronické petice, nikoli sledování, cenzuru sociálních sítí ani moderování obsahu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": true,
+          "reasonCz": "Návrh pro azylová řízení umožňuje ministerstvu vyzvat žadatele ke zpřístupnění informací z elektronického zařízení, což se přímo dotýká sběru osobních údajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Změny upravují správu obcí a svazků obcí a jejich text se netýká závazků uvedených ve slibu."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-8d1f3ce81a7b--source",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--law-change-43283-1",
+        "psp-core-2025--law-change-43335-4",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--print-step-211167",
+        "psp-core-2025--print-step-211537"
+      ],
+      "explanationCz": "Vláda předložila nový cizinecký zákon a poslanci ANO jej v závěrečném hlasování podpořili; schválený text upravuje policejní pořizování obrazových a biometrických údajů při kontrolách cizinců. Původní návrh navíc umožňoval přístup k informacím v elektronickém zařízení, tato pravomoc však ve schváleném textu není. Vláda také navrhla umožnit ministerstvu vyžádat si údaje z elektronického zařízení žadatele o azyl, což je zatím návrh a týká se azylových řízení. Jde o kroky související se soukromím, jejich použití je však omezeno na cizince, takže jejich vztah ke slibu o ochraně občanů není jednoznačný; vláda zároveň navrhla soudní ochranu proti zneužívajícím žalobám, která může pomáhat proti šikanování.",
+      "confidence": "low",
+      "uncertainties": [
+        "U novely zákona o zpracování osobních údajů není z dodaného textu patrné, co rušené věty stanoví; nelze proto určit, zda návrh ochranu soukromí oslabuje nebo posiluje.",
+        "Cizinecký zákon a azylová novela se týkají cizinců, nikoli výslovně občanů. Jejich dopad na tuto část slibu proto nelze spolehlivě vyhodnotit.",
+        "Dodané podklady nedokládají, zda ANO odmítlo nebo podpořilo opatření týkající se cenzury sociálních sítí podle DSA či moderování obsahu nevolenými neziskovými organizacemi."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-8d1f3ce81a7b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": true,
+          "reasonCz": "Návrh ruší ustanovení zákona o zpracování osobních údajů, takže se přímo dotýká ochrany osobních údajů, ale z předloženého znění není patrné, co rušené věty obsahují ani jaký dopad má jejich vypuštění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": false,
+          "reasonCz": "Ustanovení se týkají pravomocí cizinecké policie a ověřování totožnosti cizinců, nikoli slibu o ochraně občanů před sledováním nebo o moderování obsahu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43283-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí procesní ochranu lidí žalovaných kvůli výkonu svobody projevu a dalším veřejným aktivitám, což je skutečná část slibu týkající se odmítání omezování projevu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": false,
+          "reasonCz": "Změny volební správy upravují náhledy hlasovacích lístků a elektronické petice, nikoli sledování občanů, cenzuru sociálních sítí ani moderování obsahu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": false,
+          "reasonCz": "Změna se týká azylového řízení a umožňuje získávat údaje od jeho účastníků, nikoli ochrany občanů před sledováním nebo moderování obsahu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje fungování obcí a svazků obcí a jeho ustanovení se materiálně netýkají žádné části slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-8d1f3ce81a7b--source",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--law-change-43283-1",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--print-step-211167"
+      ],
+      "explanationCz": "Vláda předložila návrh, který má zrychlit soudní ochranu lidí žalovaných kvůli svobodě projevu a umožňuje jejich zastupování organizací chránící jejich práva; tím podporuje část slibu o ochraně svobody projevu. U jiného návrhu na změnu zákona o zpracování osobních údajů poslanci ANO hlasovali pro schválení a po jeho zamítnutí Senátem i pro setrvání na návrhu. Ten ruší některé části zákona, ale předložené znění neuvádí obsah rušených vět, takže nelze určit, zda tím ochranu osobních údajů posiluje, nebo oslabuje. Proto je doložen dílčí posun, ale celkové hodnocení zůstává nejisté.",
+      "confidence": "low",
+      "uncertainties": [
+        "U změny zákona o zpracování osobních údajů nejsou uvedeny rušené věty § 51 a § 52; bez jejich obsahu nelze posoudit dopad návrhu ani hlasů ANO na ochranu před sledováním. Jde o rozhodnutí, které má při hodnocení přednost před pouhým předložením návrhu na ochranu svobody projevu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0cbe8b078ddb1d54016ab92c85c9a087d1ac54818b54263476",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 57232,
+      "input_tokens_details": {
+        "cache_write_tokens": 53992,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 5489,
+      "output_tokens_details": {
+        "reasoning_tokens": 4300
+      },
+      "total_tokens": 62721
+    },
+    "output": {
+      "promiseId": "candidate-8d1f3ce81a7b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": true,
+          "reasonCz": "Novela mění zákon o zpracování osobních údajů, ale její text pouze ruší blíže neuvedené věty, takže nelze určit, zda se změna týká ochrany před sledováním."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje policejní pravomoci při pobytu cizinců, včetně pořizování biometrických údajů a v původní verzi i přístupu k informacím v elektronickém zařízení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43283-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí ochranu před zneužívajícími soudními žalobami namířenými proti veřejnému projevu, což může být dílčím krokem proti šikanování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": false,
+          "reasonCz": "Text upravuje hlasovací lístky a elektronické petice, nikoli sledování, cenzuru sociálních sítí ani moderování obsahu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": true,
+          "reasonCz": "Návrh pro azylová řízení umožňuje ministerstvu vyzvat žadatele ke zpřístupnění informací z elektronického zařízení, což se přímo dotýká sběru osobních údajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Změny upravují správu obcí a svazků obcí a jejich text se netýká závazků uvedených ve slibu."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-8d1f3ce81a7b--source",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--law-change-43264-18",
+        "psp-core-2025--law-change-43283-1",
+        "psp-core-2025--law-change-43335-4",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--print-step-211167",
+        "psp-core-2025--print-step-211537"
+      ],
+      "explanationCz": "Vláda předložila nový cizinecký zákon a poslanci ANO jej v závěrečném hlasování podpořili; schválený text upravuje policejní pořizování obrazových a biometrických údajů při kontrolách cizinců. Původní návrh navíc umožňoval přístup k informacím v elektronickém zařízení, tato pravomoc však ve schváleném textu není. Vláda také navrhla umožnit ministerstvu vyžádat si údaje z elektronického zařízení žadatele o azyl, což je zatím návrh a týká se azylových řízení. Jde o kroky související se soukromím, jejich použití je však omezeno na cizince, takže jejich vztah ke slibu o ochraně občanů není jednoznačný; vláda zároveň navrhla soudní ochranu proti zneužívajícím žalobám, která může pomáhat proti šikanování.",
+      "confidence": "low",
+      "uncertainties": [
+        "U novely zákona o zpracování osobních údajů není z dodaného textu patrné, co rušené věty stanoví; nelze proto určit, zda návrh ochranu soukromí oslabuje nebo posiluje.",
+        "Cizinecký zákon a azylová novela se týkají cizinců, nikoli výslovně občanů. Jejich dopad na tuto část slibu proto nelze spolehlivě vyhodnotit.",
+        "Dodané podklady nedokládají, zda ANO odmítlo nebo podpořilo opatření týkající se cenzury sociálních sítí podle DSA či moderování obsahu nevolenými neziskovými organizacemi."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_09f99f966b6ae7da016ab92ca25ac887d1a527433a82d2c01f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 57232,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 57229
+      },
+      "output_tokens": 3884,
+      "output_tokens_details": {
+        "reasoning_tokens": 2966
+      },
+      "total_tokens": 61116
+    },
+    "output": {
+      "promiseId": "candidate-8d1f3ce81a7b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": true,
+          "reasonCz": "Návrh ruší ustanovení zákona o zpracování osobních údajů, takže se přímo dotýká ochrany osobních údajů, ale z předloženého znění není patrné, co rušené věty obsahují ani jaký dopad má jejich vypuštění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-18",
+          "relevant": false,
+          "reasonCz": "Ustanovení se týkají pravomocí cizinecké policie a ověřování totožnosti cizinců, nikoli slibu o ochraně občanů před sledováním nebo o moderování obsahu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43283-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí procesní ochranu lidí žalovaných kvůli výkonu svobody projevu a dalším veřejným aktivitám, což je skutečná část slibu týkající se odmítání omezování projevu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": false,
+          "reasonCz": "Změny volební správy upravují náhledy hlasovacích lístků a elektronické petice, nikoli sledování občanů, cenzuru sociálních sítí ani moderování obsahu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-4",
+          "relevant": false,
+          "reasonCz": "Změna se týká azylového řízení a umožňuje získávat údaje od jeho účastníků, nikoli ochrany občanů před sledováním nebo moderování obsahu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje fungování obcí a svazků obcí a jeho ustanovení se materiálně netýkají žádné části slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-8d1f3ce81a7b--source",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--law-change-43283-1",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--print-step-211167"
+      ],
+      "explanationCz": "Vláda předložila návrh, který má zrychlit soudní ochranu lidí žalovaných kvůli svobodě projevu a umožňuje jejich zastupování organizací chránící jejich práva; tím podporuje část slibu o ochraně svobody projevu. U jiného návrhu na změnu zákona o zpracování osobních údajů poslanci ANO hlasovali pro schválení a po jeho zamítnutí Senátem i pro setrvání na návrhu. Ten ruší některé části zákona, ale předložené znění neuvádí obsah rušených vět, takže nelze určit, zda tím ochranu osobních údajů posiluje, nebo oslabuje. Proto je doložen dílčí posun, ale celkové hodnocení zůstává nejisté.",
+      "confidence": "low",
+      "uncertainties": [
+        "U změny zákona o zpracování osobních údajů nejsou uvedeny rušené věty § 51 a § 52; bez jejich obsahu nelze posoudit dopad návrhu ani hlasů ANO na ochranu před sledováním. Jde o rozhodnutí, které má při hodnocení přednost před pouhým předložením návrhu na ochranu svobody projevu."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0a0c8ef0f9955cf4016ab92cb75f7c87d1866fba6311954410",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 58378,
+      "input_tokens_details": {
+        "cache_write_tokens": 55961,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 609,
+      "output_tokens_details": {
+        "reasoning_tokens": 365
+      },
+      "total_tokens": 58987
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "psp-core-2025--law-change-43283-1",
+        "psp-core-2025--print-step-211167",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Volím hodnocení B. Vláda, jejíž součástí je ANO, předložila návrh na rychlejší ochranu lidí žalovaných kvůli svobodě projevu; jde o dílčí krok ve směru slíbené ochrany před omezováním projevu. Návrhy týkající se cizinců nelze bez dalšího pokládat za opatření namířená proti občanům, o nichž slib mluví. Poslanci ANO také podpořili změnu zákona o osobních údajích, ale z dodaného textu není patrné, co přesně rušená ustanovení obsahovala, a nelze proto určit její dopad."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

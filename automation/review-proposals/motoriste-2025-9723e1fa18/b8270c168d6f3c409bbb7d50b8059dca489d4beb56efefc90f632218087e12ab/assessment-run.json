@@ -1,0 +1,207 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-58-54-635Z--5f321dfc36c0",
+  "evaluatedAt": "2026-09-27T14:58:54.635Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-9723e1fa18/5f321dfc36c011fd881b422f6cc45f8e6d63f5e3273ac96b7886efd1bb538c27.json",
+  "packageHash": "5f321dfc36c011fd881b422f6cc45f8e6d63f5e3273ac96b7886efd1bb538c27",
+  "assessmentContentHash": "6b8cbd03bd8be0b794a9af3d3c8ca2a5fca722a9ab6809bf94bd0e9f3b7723cd",
+  "assessmentFingerprint": "b8270c168d6f3c409bbb7d50b8059dca489d4beb56efefc90f632218087e12ab",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-9723e1fa18",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b"
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-9723e1fa18",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Zavádí pravidla správy a zabezpečeného řízeného přístupu k datům veřejné správy, což může podpořit bezpečné nakládání s resortními daty, ale samo nezřizuje národní model umělé inteligence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Dodané znění pouze ruší blíže neurčenou poslední větu ustanovení zákona o informačních systémech veřejné správy a neukazuje souvislost s modelem umělé inteligence, jeho trénováním ani ochranou resortních dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Text mění termíny nebo ruší blíže neurčený bod dřívějšího zákona o elektronizaci veřejné správy, ale neukazuje věcnou souvislost se státním modelem umělé inteligence ani s resortními daty."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-9723e1fa18--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767"
+      ],
+      "explanationCz": "Poslanci Motoristů hlasovali pro zákon o správě dat a řízeném přístupu k datům, tedy pravidla pro nakládání s daty veřejné správy a jejich zabezpečené využívání. To může podpořit bezpečné nakládání s resortními daty, které slib zmiňuje. Zákon ale nezřizuje národní model umělé inteligence ani nestanoví jeho trénování na datech jednotlivých resortů, takže jde jen o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z dodaných podkladů nelze doložit, že pravidla pro správu a řízený přístup k datům povedou konkrétně k vytvoření modelu umělé inteligence nebo k jeho trénování resortními daty."
+      ]
+    },
+    "assessor-b": null
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_076e9f27f954f350016ab92f0dc2b887d18f678d54dd4cf061",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 32170,
+      "input_tokens_details": {
+        "cache_write_tokens": 28930,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2902,
+      "output_tokens_details": {
+        "reasoning_tokens": 2283
+      },
+      "total_tokens": 35072
+    },
+    "output": {
+      "promiseId": "motoriste-2025-9723e1fa18",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Zavádí pravidla správy a zabezpečeného řízeného přístupu k datům veřejné správy, což může podpořit bezpečné nakládání s resortními daty, ale samo nezřizuje národní model umělé inteligence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Dodané znění pouze ruší blíže neurčenou poslední větu ustanovení zákona o informačních systémech veřejné správy a neukazuje souvislost s modelem umělé inteligence, jeho trénováním ani ochranou resortních dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Text mění termíny nebo ruší blíže neurčený bod dřívějšího zákona o elektronizaci veřejné správy, ale neukazuje věcnou souvislost se státním modelem umělé inteligence ani s resortními daty."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-9723e1fa18--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767"
+      ],
+      "explanationCz": "Poslanci Motoristů hlasovali pro zákon o správě dat a řízeném přístupu k datům, tedy pravidla pro nakládání s daty veřejné správy a jejich zabezpečené využívání. To může podpořit bezpečné nakládání s resortními daty, které slib zmiňuje. Zákon ale nezřizuje národní model umělé inteligence ani nestanoví jeho trénování na datech jednotlivých resortů, takže jde jen o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z dodaných podkladů nelze doložit, že pravidla pro správu a řízený přístup k datům povedou konkrétně k vytvoření modelu umělé inteligence nebo k jeho trénování resortními daty."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0a333aae3652d826016ab92f1c139887d185f204226b9cc99e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 32170,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 32167
+      },
+      "output_tokens": 2830,
+      "output_tokens_details": {
+        "reasoning_tokens": 2245
+      },
+      "total_tokens": 35000
+    },
+    "output": {
+      "promiseId": "motoriste-2025-9723e1fa18",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Návrh stanoví pravidla správy veřejných dat a zabezpečeného řízeného přístupu k nim, což se konkrétně vztahuje k bezpečnému nakládání s resortními daty jako k jedné části slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Předložená změna pouze ruší poslední větu ustanovení o informačních systémech veřejné správy a její text nedokládá souvislost s národním modelem umělé inteligence ani s bezpečným trénováním resortními daty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Změna posouvá termíny ustanovení zákona o elektronizaci, ale její znění nedokládá, že by tato ustanovení zaváděla nebo ovlivňovala státní model umělé inteligence či ochranu dat při jeho trénování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-9723e1fa18--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767"
+      ],
+      "explanationCz": "Poslanci Motoristů hlasovali pro vládní návrh zákona o správě dat a řízeném přístupu k datům, který Poslanecká sněmovna projednávala jako tisk 54. Zákon zavádí pravidla správy veřejných dat a zabezpečeného přístupu k nim a stanoví ochranná opatření při jejich využívání. To může podpořit bezpečné nakládání s resortními daty, tedy část slibu. Samotný státní model umělé inteligence ani jeho trénování podle resortů však zákon nezavádí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z podkladů nelze doložit, že byl národní model umělé inteligence provozovaný státem vytvořen nebo že se podle slibu trénuje daty jednotlivých resortů. Zaznamenané hlasování dokládá podporu pravidel správy a ochrany dat, nikoli vznik tohoto modelu."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0605fb4c1b137788016ab92f2ac1fc87d1a0f872f33d048e97",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 31899,
+      "input_tokens_details": {
+        "cache_write_tokens": 29482,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 336,
+      "output_tokens_details": {
+        "reasoning_tokens": 137
+      },
+      "total_tokens": 32235
+    },
+    "output": {
+      "choice": "cannot-decide",
+      "citedEvidenceIds": [
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767"
+      ],
+      "explanationCz": "Použitelné hodnocení správně upozorňuje, že zákon o správě dat může pomoci s bezpečným nakládáním s daty úřadů. Zákon však nevytváří státní model umělé inteligence ani neurčuje jeho trénování na datech jednotlivých resortů. Hlasování Motoristů, o které se hodnocení opírá, nebylo konečným rozhodnutím Sněmovny o zákonu. Nelze proto z těchto podkladů spolehlivě uzavřít, že Motoristé pro splnění slibu udělali započitatelný krok."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-cannot-decide",
+    "status": null,
+    "selectedReview": null
+  }
+}

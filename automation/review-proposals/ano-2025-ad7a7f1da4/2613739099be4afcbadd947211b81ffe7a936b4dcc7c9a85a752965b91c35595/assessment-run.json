@@ -1,0 +1,206 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-38-02-362Z--cbd975b5716f",
+  "evaluatedAt": "2026-09-27T14:38:02.362Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-ad7a7f1da4/cbd975b5716f4683f3afeb91889b780ac40384caa24ea538346b10d9220c22d3.json",
+  "packageHash": "cbd975b5716f4683f3afeb91889b780ac40384caa24ea538346b10d9220c22d3",
+  "assessmentContentHash": "2078ba54d8acbb81f1e98b84d6e19fd3fccb1acc9201478e2ba88110857e5191",
+  "assessmentFingerprint": "2613739099be4afcbadd947211b81ffe7a936b4dcc7c9a85a752965b91c35595",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-ad7a7f1da4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-ad7a7f1da4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Změna umožňuje zřídit státní příspěvkovou organizaci pro obranu a upravuje mimo jiné nabývání pozemků a staveb, ale neřeší přehodnocení nákladných vojenských akvizic ani výběr efektivnějších investic."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-ad7a7f1da4--source",
+        "psp-core-2025--law-change-43174-approved-20",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Slib ANO se týká přehodnocení nákladných akvizic, například letounů F-35, a zaměření na účinnější obranné investice. Poslanci ANO hlasovali pro novelu zákona o zajišťování obrany, která mimo jiné umožňuje zřídit státní příspěvkovou organizaci a upravuje nabývání pozemků a staveb. Tyto změny však přehodnocení vojenských akvizic ani výběr obranných investic neřeší, takže z předložených podkladů nelze doložit posun ke slibu. Podklady neumožňují posoudit, zda strana v této věci jednala jinak.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček obsahuje jen změnu obranného zákona, která se netýká přehodnocování vojenských akvizic ani výběru investic; z těchto podkladů proto nelze zjistit, zda ANO podniklo jiné kroky ke splnění slibu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-ad7a7f1da4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": true,
+          "reasonCz": "Novela umožňuje při obraně státu ve zvláštních případech zaplatit za pozemky či stavby až čtyřnásobek obvyklé ceny, což se týká nákladných obranných akvizic a může jít proti důrazu slibu na efektivní investice."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-ad7a7f1da4--source",
+        "psp-core-2025--law-change-43174-approved-20",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Slib ANO požaduje přehodnocovat nákladné akvizice a soustředit se na efektivní obranné investice. Poslanci ANO hlasovali pro novelu, která ve zvláštních případech umožňuje zaplatit za pozemky a stavby určené k obraně až čtyřnásobek obvyklé ceny. Po zamítnutí návrhu Senátem, tedy horní komorou Parlamentu, poslanci ANO hlasovali také pro setrvání Sněmovny na tomto návrhu. Tím podpořili opatření, které může být v rozporu s důrazem na efektivní využívání prostředků, ale novela neukládá takto vysokou cenu skutečně zaplatit a F-35 přímo neřeší.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela pouze dovoluje sjednat za pozemky či stavby pro obranu až čtyřnásobek obvyklé ceny ve zvláštních případech; z předložených podkladů nelze určit, zda k takové platbě došlo. Text se přímo nezabývá letouny F-35 ani přehodnocením jejich akvizice."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0914d8656887a250016ab92a3624c087d1b9cae083a2a2a1c7",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8965,
+      "input_tokens_details": {
+        "cache_write_tokens": 5725,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1174,
+      "output_tokens_details": {
+        "reasoning_tokens": 680
+      },
+      "total_tokens": 10139
+    },
+    "output": {
+      "promiseId": "ano-2025-ad7a7f1da4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Změna umožňuje zřídit státní příspěvkovou organizaci pro obranu a upravuje mimo jiné nabývání pozemků a staveb, ale neřeší přehodnocení nákladných vojenských akvizic ani výběr efektivnějších investic."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-ad7a7f1da4--source",
+        "psp-core-2025--law-change-43174-approved-20",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Slib ANO se týká přehodnocení nákladných akvizic, například letounů F-35, a zaměření na účinnější obranné investice. Poslanci ANO hlasovali pro novelu zákona o zajišťování obrany, která mimo jiné umožňuje zřídit státní příspěvkovou organizaci a upravuje nabývání pozemků a staveb. Tyto změny však přehodnocení vojenských akvizic ani výběr obranných investic neřeší, takže z předložených podkladů nelze doložit posun ke slibu. Podklady neumožňují posoudit, zda strana v této věci jednala jinak.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček obsahuje jen změnu obranného zákona, která se netýká přehodnocování vojenských akvizic ani výběru investic; z těchto podkladů proto nelze zjistit, zda ANO podniklo jiné kroky ke splnění slibu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_00ff4809b7914c00016ab92a3c6e3487d1b0d8daae771b5fdd",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8965,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8962
+      },
+      "output_tokens": 2057,
+      "output_tokens_details": {
+        "reasoning_tokens": 1541
+      },
+      "total_tokens": 11022
+    },
+    "output": {
+      "promiseId": "ano-2025-ad7a7f1da4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": true,
+          "reasonCz": "Novela umožňuje při obraně státu ve zvláštních případech zaplatit za pozemky či stavby až čtyřnásobek obvyklé ceny, což se týká nákladných obranných akvizic a může jít proti důrazu slibu na efektivní investice."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-ad7a7f1da4--source",
+        "psp-core-2025--law-change-43174-approved-20",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Slib ANO požaduje přehodnocovat nákladné akvizice a soustředit se na efektivní obranné investice. Poslanci ANO hlasovali pro novelu, která ve zvláštních případech umožňuje zaplatit za pozemky a stavby určené k obraně až čtyřnásobek obvyklé ceny. Po zamítnutí návrhu Senátem, tedy horní komorou Parlamentu, poslanci ANO hlasovali také pro setrvání Sněmovny na tomto návrhu. Tím podpořili opatření, které může být v rozporu s důrazem na efektivní využívání prostředků, ale novela neukládá takto vysokou cenu skutečně zaplatit a F-35 přímo neřeší.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela pouze dovoluje sjednat za pozemky či stavby pro obranu až čtyřnásobek obvyklé ceny ve zvláštních případech; z předložených podkladů nelze určit, zda k takové platbě došlo. Text se přímo nezabývá letouny F-35 ani přehodnocením jejich akvizice."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0aedc17e60b3f5b7016ab92a46923c87d1acc997237df70920",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 9089,
+      "input_tokens_details": {
+        "cache_write_tokens": 6672,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 347,
+      "output_tokens_details": {
+        "reasoning_tokens": 136
+      },
+      "total_tokens": 9436
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-ad7a7f1da4--source",
+        "psp-core-2025--law-change-43174-approved-20",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Volím posouzení A. Poslanci ANO podpořili novelu, která upravuje fungování obranných organizací a pravidla pro nákup pozemků a staveb. Neřeší však přezkoumání nákupu letounů F-35 ani jiných drahých vojenských zakázek. Možnost ve výjimečných případech zaplatit za nemovitost vyšší cenu sama o sobě nedokládá nehospodárný nákup, proto z ní nelze vyvozovat jednání proti slibu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

@@ -1,0 +1,240 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-56-21-368Z--44150677fde2",
+  "evaluatedAt": "2026-09-27T14:56:21.368Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-ffa6a967f78e/44150677fde2ac05d06477f39cf31aaf4f70c64df9c4b6bc7094fe8af86b03b9.json",
+  "packageHash": "44150677fde2ac05d06477f39cf31aaf4f70c64df9c4b6bc7094fe8af86b03b9",
+  "assessmentContentHash": "32afeb862a479d42752220129ccb22a563ee2e14b548637de276facb40ae7f97",
+  "assessmentFingerprint": "a81bb7a363dfe84d3b6830c218bf60d8da28ad7103e81cb11908e5b0fe561795",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-ffa6a967f78e",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-ffa6a967f78e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje jednorázové vyrovnání pro úzce vymezené bývalé účastníky, nikoli zvýšení průběžné finanční či daňové podpory při měsíčním spoření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Dostupný text pouze uvádí, že dokument je ve formátu PDF, a neumožňuje doložit souvislost s podporou penzijního spoření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění státní příspěvky k penzijnímu spoření podle věku a výše měsíčního příspěvku, tedy přímo upravuje finanční podporu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-4",
+          "relevant": true,
+          "reasonCz": "Návrh ruší zákon o penzijním připojištění se státním příspěvkem, takže se dotýká dosavadního způsobu finanční podpory, byť samotný text neukazuje jeho výsledný dopad."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-ffa6a967f78e--source",
+        "psp-core-2025--law-change-43407-1",
+        "psp-core-2025--law-change-43407-4",
+        "psp-core-2025--print-step-212048"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh měnící státní příspěvky k penzijnímu spoření; nově je odstupňuje podle věku a výše měsíčního vkladu. To směřuje k úpravě finanční podpory, ale návrh současně ruší dosavadní zákon o penzijním připojištění se státním příspěvkem. Z dodaných podkladů nelze porovnat navržené částky s dosavadními ani určit výsledný dopad zrušení staršího systému, a proto není doloženo, že jde skutečně o zvýšení podpory při jakékoli měsíční úložce.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují dosavadní sazby státního příspěvku, takže nelze ověřit, zda navržené částky podporu zvyšují. Není také doložen celkový dopad zrušení dosavadního systému; hodnocení jako postup ke splnění je proto předběžné."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-ffa6a967f78e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje jednorázové vyrovnání a vrácení státního příspěvku omezené skupině účastníků, nikoli průběžnou finanční či daňovou podporu podle výše měsíčního vkladu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Předložené podklady neobsahují text smlouvy, a proto v nich není doložena konkrétní změna podpory penzijního spoření; samotné obecné téma daní k závěru o věcné souvislosti nestačí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-1",
+          "relevant": true,
+          "reasonCz": "Navržená změna stanoví státní příspěvky v různých výších podle věku a měsíčního příspěvku, takže může zvýšit finanční podporu alespoň některým střadatelům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-4",
+          "relevant": false,
+          "reasonCz": "Text pouze vypočítává starší zákony a jejich části určené ke zrušení, aniž stanoví konkrétní změnu finanční či daňové podpory podle měsíčního vkladu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-ffa6a967f78e--source",
+        "psp-core-2025--law-change-43407-1",
+        "psp-core-2025--print-step-212048",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--print-step-211439"
+      ],
+      "explanationCz": "V srpnu 2026 vláda předložila návrh novely zákona o doplňkovém penzijním spoření, který mění výši státního příspěvku podle věku a měsíčního vkladu. Například pro některé účastníky do 30 let navrhuje vyšší příspěvek, takže jde o krok k finanční části slibu, nikoli o jeho splnění. Návrh ale nedokládá zvýšení daňové podpory ani podporu při každé výši vkladu. Další předložený materiál se týká smlouvy o zamezení dvojímu zdanění, jeho obsah však v podkladech chybí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text smlouvy o zamezení dvojímu zdanění je v podkladech dostupný pouze jako PDF bez jeho obsahu; nelze proto ověřit, zda se některá její ustanovení týkají daňového zacházení s penzijním spořením."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_05f785ba466a16cf016ab92e61662487d186ba724d970d0cd2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 25047,
+      "input_tokens_details": {
+        "cache_write_tokens": 21807,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 4068,
+      "output_tokens_details": {
+        "reasoning_tokens": 3328
+      },
+      "total_tokens": 29115
+    },
+    "output": {
+      "promiseId": "candidate-ffa6a967f78e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje jednorázové vyrovnání pro úzce vymezené bývalé účastníky, nikoli zvýšení průběžné finanční či daňové podpory při měsíčním spoření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Dostupný text pouze uvádí, že dokument je ve formátu PDF, a neumožňuje doložit souvislost s podporou penzijního spoření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění státní příspěvky k penzijnímu spoření podle věku a výše měsíčního příspěvku, tedy přímo upravuje finanční podporu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-4",
+          "relevant": true,
+          "reasonCz": "Návrh ruší zákon o penzijním připojištění se státním příspěvkem, takže se dotýká dosavadního způsobu finanční podpory, byť samotný text neukazuje jeho výsledný dopad."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-ffa6a967f78e--source",
+        "psp-core-2025--law-change-43407-1",
+        "psp-core-2025--law-change-43407-4",
+        "psp-core-2025--print-step-212048"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh měnící státní příspěvky k penzijnímu spoření; nově je odstupňuje podle věku a výše měsíčního vkladu. To směřuje k úpravě finanční podpory, ale návrh současně ruší dosavadní zákon o penzijním připojištění se státním příspěvkem. Z dodaných podkladů nelze porovnat navržené částky s dosavadními ani určit výsledný dopad zrušení staršího systému, a proto není doloženo, že jde skutečně o zvýšení podpory při jakékoli měsíční úložce.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují dosavadní sazby státního příspěvku, takže nelze ověřit, zda navržené částky podporu zvyšují. Není také doložen celkový dopad zrušení dosavadního systému; hodnocení jako postup ke splnění je proto předběžné."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_04ab1d77eed2b8dc016ab92e76c36887d1be623bcc820dc022",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 25047,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 25044
+      },
+      "output_tokens": 6015,
+      "output_tokens_details": {
+        "reasoning_tokens": 5244
+      },
+      "total_tokens": 31062
+    },
+    "output": {
+      "promiseId": "candidate-ffa6a967f78e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43230-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje jednorázové vyrovnání a vrácení státního příspěvku omezené skupině účastníků, nikoli průběžnou finanční či daňovou podporu podle výše měsíčního vkladu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Předložené podklady neobsahují text smlouvy, a proto v nich není doložena konkrétní změna podpory penzijního spoření; samotné obecné téma daní k závěru o věcné souvislosti nestačí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-1",
+          "relevant": true,
+          "reasonCz": "Navržená změna stanoví státní příspěvky v různých výších podle věku a měsíčního příspěvku, takže může zvýšit finanční podporu alespoň některým střadatelům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43407-4",
+          "relevant": false,
+          "reasonCz": "Text pouze vypočítává starší zákony a jejich části určené ke zrušení, aniž stanoví konkrétní změnu finanční či daňové podpory podle měsíčního vkladu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-ffa6a967f78e--source",
+        "psp-core-2025--law-change-43407-1",
+        "psp-core-2025--print-step-212048",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--print-step-211439"
+      ],
+      "explanationCz": "V srpnu 2026 vláda předložila návrh novely zákona o doplňkovém penzijním spoření, který mění výši státního příspěvku podle věku a měsíčního vkladu. Například pro některé účastníky do 30 let navrhuje vyšší příspěvek, takže jde o krok k finanční části slibu, nikoli o jeho splnění. Návrh ale nedokládá zvýšení daňové podpory ani podporu při každé výši vkladu. Další předložený materiál se týká smlouvy o zamezení dvojímu zdanění, jeho obsah však v podkladech chybí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text smlouvy o zamezení dvojímu zdanění je v podkladech dostupný pouze jako PDF bez jeho obsahu; nelze proto ověřit, zda se některá její ustanovení týkají daňového zacházení s penzijním spořením."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

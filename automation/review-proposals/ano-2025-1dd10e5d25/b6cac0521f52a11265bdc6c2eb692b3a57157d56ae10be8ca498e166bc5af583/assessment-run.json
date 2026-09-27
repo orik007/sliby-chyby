@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-34-57-419Z--11548f926963",
+  "evaluatedAt": "2026-09-27T14:34:57.419Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-1dd10e5d25/11548f926963609e838978bd36575b997b4e96cdc592ebb32ec866fe7f166328.json",
+  "packageHash": "11548f926963609e838978bd36575b997b4e96cdc592ebb32ec866fe7f166328",
+  "assessmentContentHash": "12a45245af9763ea61fe346f01af9973aea9fa9c9cd26066a68b3a75a3a1f5f5",
+  "assessmentFingerprint": "b6cac0521f52a11265bdc6c2eb692b3a57157d56ae10be8ca498e166bc5af583",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-1dd10e5d25",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-1dd10e5d25",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43205-1",
+          "relevant": false,
+          "reasonCz": "Text stanoví celkový rozpočet fondu a obecné částky na zemědělskou politiku a národní dotace, ale nespojuje je konkrétně s podporou pěstování ovoce, zeleniny či základních plodin."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně zahrnuje podporu ozdravování polních a speciálních plodin, závlahy a restrukturalizace ovocných sadů, tedy konkrétní části slíbené podpory."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-1dd10e5d25--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro dotační programy zemědělství na rok 2026. Návrh počítá s podporou ozdravování polních a speciálních plodin i s podporou závlah a obnovy ovocných sadů. Jde o konkrétní posun v podpoře pěstování, ale doklady nepokrývají celý slib ani neprokazují zvláštní podporu zeleniny a základních plodin v jeho celém rozsahu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh uvádí také prostředky pro rostlinnou výrobu, ale doklady neupřesňují, jaká část podpory připadne na zeleninu a základní plodiny."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-1dd10e5d25",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43205-1",
+          "relevant": false,
+          "reasonCz": "Text navrhuje souhrnný rozpočet zemědělského intervenčního fondu, ale neuvádí podporu pěstování žádné ze slíbených plodin, takže samotná obecná souvislost se zemědělstvím nestačí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh zahrnuje podporu polních a speciálních plodin i konkrétní podporu závlah a obnovy ovocných sadů, tedy opatření pro část slíbeného pěstování."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-1dd10e5d25--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Návrh dotačních programů na rok 2026 počítá mimo jiné s podporou polních a speciálních plodin, závlah a obnovy ovocných sadů, což odpovídá části slibu. Poslanci ANO hlasovali pro tento návrh. Záznam o hlasování ale uvádí, že šlo o schválení v prvním čtení, nikoli o konečné rozhodnutí Sněmovny; proto z těchto podkladů nelze potvrdit rozhodující hlasování, které by podle pravidel posunulo hodnocení slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Hlasování je v podkladech označeno jako přičitatelné rozhodující hlasování, jeho kontext však uvádí schválení pouze v prvním čtení. Není proto jasné, zda dokládá takové konečné rozhodnutí Sněmovny, které lze při hodnocení započítat."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_033d1a091fc5b613016ab92974445c87d1bf9b2240e0f60fe5",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9906,
+      "input_tokens_details": {
+        "cache_write_tokens": 6666,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2304,
+      "output_tokens_details": {
+        "reasoning_tokens": 1818
+      },
+      "total_tokens": 12210
+    },
+    "output": {
+      "promiseId": "ano-2025-1dd10e5d25",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43205-1",
+          "relevant": false,
+          "reasonCz": "Text stanoví celkový rozpočet fondu a obecné částky na zemědělskou politiku a národní dotace, ale nespojuje je konkrétně s podporou pěstování ovoce, zeleniny či základních plodin."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně zahrnuje podporu ozdravování polních a speciálních plodin, závlahy a restrukturalizace ovocných sadů, tedy konkrétní části slíbené podpory."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-1dd10e5d25--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro dotační programy zemědělství na rok 2026. Návrh počítá s podporou ozdravování polních a speciálních plodin i s podporou závlah a obnovy ovocných sadů. Jde o konkrétní posun v podpoře pěstování, ale doklady nepokrývají celý slib ani neprokazují zvláštní podporu zeleniny a základních plodin v jeho celém rozsahu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh uvádí také prostředky pro rostlinnou výrobu, ale doklady neupřesňují, jaká část podpory připadne na zeleninu a základní plodiny."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_015c1ac3393a2648016ab9298163ac87d196f6fec9457116a3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9906,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 9903
+      },
+      "output_tokens": 2359,
+      "output_tokens_details": {
+        "reasoning_tokens": 1883
+      },
+      "total_tokens": 12265
+    },
+    "output": {
+      "promiseId": "ano-2025-1dd10e5d25",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43205-1",
+          "relevant": false,
+          "reasonCz": "Text navrhuje souhrnný rozpočet zemědělského intervenčního fondu, ale neuvádí podporu pěstování žádné ze slíbených plodin, takže samotná obecná souvislost se zemědělstvím nestačí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh zahrnuje podporu polních a speciálních plodin i konkrétní podporu závlah a obnovy ovocných sadů, tedy opatření pro část slíbeného pěstování."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-1dd10e5d25--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Návrh dotačních programů na rok 2026 počítá mimo jiné s podporou polních a speciálních plodin, závlah a obnovy ovocných sadů, což odpovídá části slibu. Poslanci ANO hlasovali pro tento návrh. Záznam o hlasování ale uvádí, že šlo o schválení v prvním čtení, nikoli o konečné rozhodnutí Sněmovny; proto z těchto podkladů nelze potvrdit rozhodující hlasování, které by podle pravidel posunulo hodnocení slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Hlasování je v podkladech označeno jako přičitatelné rozhodující hlasování, jeho kontext však uvádí schválení pouze v prvním čtení. Není proto jasné, zda dokládá takové konečné rozhodnutí Sněmovny, které lze při hodnocení započítat."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0c84fba5a4f02b05016ab9298e3bdc87d19dafe9202e70c5a0",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 9974,
+      "input_tokens_details": {
+        "cache_write_tokens": 9971,
+        "cached_tokens": 0
+      },
+      "output_tokens": 329,
+      "output_tokens_details": {
+        "reasoning_tokens": 160
+      },
+      "total_tokens": 10303
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Návrh dotačních programů zahrnuje podporu polních a speciálních plodin, závlah i obnovy ovocných sadů. Poslanci ANO pro něj hlasovali, ale záznam uvádí schválení v prvním čtení. Nejde tedy o konečné rozhodnutí Sněmovny, které by samo mohlo hodnocení slibu změnit. Proto je správné zatím neuzavírat, že nastal ověřený podstatný posun."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

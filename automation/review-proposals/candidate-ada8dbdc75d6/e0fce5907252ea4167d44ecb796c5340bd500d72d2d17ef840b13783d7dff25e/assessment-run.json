@@ -1,0 +1,223 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-50-35-722Z--2eb6da9eb06f",
+  "evaluatedAt": "2026-09-27T14:50:35.722Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-ada8dbdc75d6/2eb6da9eb06fb98d9f41e871851a0cba9915eaf5339725f7cfe705a99489ff0f.json",
+  "packageHash": "2eb6da9eb06fb98d9f41e871851a0cba9915eaf5339725f7cfe705a99489ff0f",
+  "assessmentContentHash": "205c5c1cddcdd6902835d27386a0b48bb61706de37465dfe97e5cf55485d1c91",
+  "assessmentFingerprint": "e0fce5907252ea4167d44ecb796c5340bd500d72d2d17ef840b13783d7dff25e",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-ada8dbdc75d6",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-ada8dbdc75d6",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43144-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet výslovně počítá s výdaji na propagaci české kinematografie a filmového průmyslu na zahraničních festivalech a trzích, což představuje část propagace české kultury v zahraničí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-1",
+          "relevant": false,
+          "reasonCz": "Dostupný text pouze uvádí, že dohoda s Uzbekistánem je k dispozici v PDF, a neobsahuje její ustanovení o propagaci české kultury."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-ada8dbdc75d6--source",
+        "psp-core-2025--law-change-43144-1",
+        "psp-core-2025--vote-86961",
+        "psp-core-2025--law-change-43203-1",
+        "psp-core-2025--print-step-210760"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro rozpočet Státního fondu audiovize na rok 2026. Ten počítá s výdaji na propagaci české kinematografie a filmového průmyslu na zahraničních festivalech a trzích, což podporuje část slibu. Samotný rozpočet ale nezavádí program propagace české kultury v širším smyslu, takže jde jen o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U vládního návrhu dohody s Uzbekistánem je v podkladech dostupná jen informace, že její český text je v PDF; jeho obsah nelze posoudit. Dohoda by mohla ovlivnit hodnocení slibu, pokud obsahuje ustanovení o kulturní spolupráci."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-ada8dbdc75d6",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43144-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu audiovize počítá s výdaji na propagaci české kinematografie a filmového průmyslu na zahraničních festivalech a trzích, což naplňuje část propagace české kultury v zahraničí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-1",
+          "relevant": false,
+          "reasonCz": "Předložený text pouze uvádí, že dohoda s Uzbekistánem je dostupná v PDF, a neobsahuje žádné ustanovení o propagaci české kultury v zahraničí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ada8dbdc75d6--source",
+        "psp-core-2025--law-change-43144-1",
+        "psp-core-2025--vote-86961"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh rozpočtu Státního fondu audiovize na rok 2026, tedy fondu podporujícího audiovizi. Návrh počítá také s výdaji na propagaci české kinematografie a filmového průmyslu na zahraničních festivalech a trzích. Tím rozpočet podporuje část slibu, ale nedokládá zavedení programu propagujícího českou kulturu v širším smyslu, jde proto o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají výdaje na propagaci české kinematografie v zahraničí, nikoli zavedení samostatného programu propagujícího českou kulturu jako celek."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0bcaa2b41d65ebc0016ab92d221ad887d1958643bb0abe66ed",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 22946,
+      "input_tokens_details": {
+        "cache_write_tokens": 19706,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1965,
+      "output_tokens_details": {
+        "reasoning_tokens": 1506
+      },
+      "total_tokens": 24911
+    },
+    "output": {
+      "promiseId": "candidate-ada8dbdc75d6",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43144-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet výslovně počítá s výdaji na propagaci české kinematografie a filmového průmyslu na zahraničních festivalech a trzích, což představuje část propagace české kultury v zahraničí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-1",
+          "relevant": false,
+          "reasonCz": "Dostupný text pouze uvádí, že dohoda s Uzbekistánem je k dispozici v PDF, a neobsahuje její ustanovení o propagaci české kultury."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-ada8dbdc75d6--source",
+        "psp-core-2025--law-change-43144-1",
+        "psp-core-2025--vote-86961",
+        "psp-core-2025--law-change-43203-1",
+        "psp-core-2025--print-step-210760"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro rozpočet Státního fondu audiovize na rok 2026. Ten počítá s výdaji na propagaci české kinematografie a filmového průmyslu na zahraničních festivalech a trzích, což podporuje část slibu. Samotný rozpočet ale nezavádí program propagace české kultury v širším smyslu, takže jde jen o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U vládního návrhu dohody s Uzbekistánem je v podkladech dostupná jen informace, že její český text je v PDF; jeho obsah nelze posoudit. Dohoda by mohla ovlivnit hodnocení slibu, pokud obsahuje ustanovení o kulturní spolupráci."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_05b484f2363e82f9016ab92d2d486087d1b75849ddc8a3e60c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 22946,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 22943
+      },
+      "output_tokens": 1674,
+      "output_tokens_details": {
+        "reasoning_tokens": 1238
+      },
+      "total_tokens": 24620
+    },
+    "output": {
+      "promiseId": "candidate-ada8dbdc75d6",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43144-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu audiovize počítá s výdaji na propagaci české kinematografie a filmového průmyslu na zahraničních festivalech a trzích, což naplňuje část propagace české kultury v zahraničí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43203-1",
+          "relevant": false,
+          "reasonCz": "Předložený text pouze uvádí, že dohoda s Uzbekistánem je dostupná v PDF, a neobsahuje žádné ustanovení o propagaci české kultury v zahraničí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ada8dbdc75d6--source",
+        "psp-core-2025--law-change-43144-1",
+        "psp-core-2025--vote-86961"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh rozpočtu Státního fondu audiovize na rok 2026, tedy fondu podporujícího audiovizi. Návrh počítá také s výdaji na propagaci české kinematografie a filmového průmyslu na zahraničních festivalech a trzích. Tím rozpočet podporuje část slibu, ale nedokládá zavedení programu propagujícího českou kulturu v širším smyslu, jde proto o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají výdaje na propagaci české kinematografie v zahraničí, nikoli zavedení samostatného programu propagujícího českou kulturu jako celek."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_02fef221dd47d51b016ab92d36371487d1be4c091076495371",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 23003,
+      "input_tokens_details": {
+        "cache_write_tokens": 20586,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 518,
+      "output_tokens_details": {
+        "reasoning_tokens": 341
+      },
+      "total_tokens": 23521
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-ada8dbdc75d6--source",
+        "psp-core-2025--law-change-43144-1",
+        "psp-core-2025--vote-86961"
+      ],
+      "explanationCz": "Volím posouzení B. Poslanci ANO podpořili rozpočet Státního fondu audiovize na rok 2026. Rozpočet zahrnuje propagaci české kinematografie a filmového průmyslu na zahraničních festivalech a trzích, takže podporuje část slíbeného cíle. Neprokazuje však zavedení samostatného programu pro českou kulturu jako celek, proto jde jen o dílčí posun."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-45-48-597Z--eaffbc860aa2",
+  "evaluatedAt": "2026-09-27T14:45:48.597Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-603f578c2140/eaffbc860aa20e2e947867285f5e37d0ba7e0dd520d3f1174e683fc7d7c7454c.json",
+  "packageHash": "eaffbc860aa20e2e947867285f5e37d0ba7e0dd520d3f1174e683fc7d7c7454c",
+  "assessmentContentHash": "302e5a9fbd399338ba71630698a73e8714aee26d404c1dcfc919e674c6b529a9",
+  "assessmentFingerprint": "adad4db81b547f640880001656b03bbedbc4b68e4fee0ecd3a3d6193cb318b0a",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-603f578c2140",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-603f578c2140",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Záznam předkládá pouze rámcovou smlouvu o přeshraniční spolupráci zdravotnické záchranné služby a neukazuje ustanovení o papírových žádankách ani sdílení zdravotnické dokumentace mezi lékaři."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Text ruší jednu větu v zákoně o informačních systémech veřejné správy, ale neuvádí nic o žádankách ani o zdravotnické dokumentaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Text mění nebo ruší časové ustanovení zákona o elektronizaci postupů orgánů veřejné moci, nikoli papírové žádanky či sdílení zdravotních záznamů mezi lékaři."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-603f578c2140--source",
+        "psp-core-2025--law-change-43110-1",
+        "psp-core-2025--law-change-43184-12",
+        "psp-core-2025--law-change-43308-4"
+      ],
+      "explanationCz": "Motoristé slíbili zrušit papírové žádanky a zavést bezpečné sdílení zdravotnické dokumentace mezi lékaři. Prověřené legislativní texty se týkají přeshraniční spolupráce zdravotnické záchranné služby a jiných oblastí elektronizace, ale nedokládají opatření k této části slibu. V dodaných podkladech proto není ověřený podstatný posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U návrhu rámcové smlouvy o přeshraniční spolupráci je uvedeno, že samotný text smlouvy je dostupný jako PDF/A, ale jeho obsah v podkladu chybí; nelze proto ověřit, zda řeší sdílení zdravotních údajů. Žádný z dodaných textů však konkrétní závazek týkající se žádánek nebo dokumentace mezi lékaři neprokazuje."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-603f578c2140",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Předložený text rámcové smlouvy o přeshraniční zdravotnické záchranné službě neobsahuje její konkrétní ustanovení a nedokládá změny žádanek ani sdílení zdravotní dokumentace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Změna ruší poslední větu ustanovení zákona o informačních systémech veřejné správy, ale její text nijak nespojuje tuto úpravu se zdravotními žádankami či dokumentací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Změna upravuje časové ustanovení zákona o elektronizaci postupů orgánů veřejné moci, nikoli podle předloženého textu papírové zdravotní žádanky nebo sdílení zdravotních záznamů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-603f578c2140--source",
+        "psp-core-2025--law-change-43110-1",
+        "psp-core-2025--law-change-43184-12",
+        "psp-core-2025--law-change-43308-4"
+      ],
+      "explanationCz": "Slib Motoristů sobě se týká zrušení papírových žádanek a bezpečného sdílení zdravotní dokumentace mezi lékaři. Předložené změny zákonů se těchto konkrétních opatření nedotýkají. U rámcové smlouvy o přeshraniční záchranné službě balíček neobsahuje vlastní text smlouvy, takže nelze ověřit, zda se slibu týká. Z dostupných podkladů proto nelze doložit podstatný posun ani spolehlivě vyhodnotit možný obsah této smlouvy.",
+      "confidence": "low",
+      "uncertainties": [
+        "Text rámcové smlouvy o přeshraniční zdravotnické záchranné službě není v podkladech obsažen; nelze proto vyloučit ani potvrdit, zda upravuje sdílení zdravotních údajů."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0b72e9cff16b2c3d016ab92c09804087d1abc1c24a600c7abf",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12261,
+      "input_tokens_details": {
+        "cache_write_tokens": 9021,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1694,
+      "output_tokens_details": {
+        "reasoning_tokens": 1136
+      },
+      "total_tokens": 13955
+    },
+    "output": {
+      "promiseId": "candidate-603f578c2140",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Záznam předkládá pouze rámcovou smlouvu o přeshraniční spolupráci zdravotnické záchranné služby a neukazuje ustanovení o papírových žádankách ani sdílení zdravotnické dokumentace mezi lékaři."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Text ruší jednu větu v zákoně o informačních systémech veřejné správy, ale neuvádí nic o žádankách ani o zdravotnické dokumentaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Text mění nebo ruší časové ustanovení zákona o elektronizaci postupů orgánů veřejné moci, nikoli papírové žádanky či sdílení zdravotních záznamů mezi lékaři."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-603f578c2140--source",
+        "psp-core-2025--law-change-43110-1",
+        "psp-core-2025--law-change-43184-12",
+        "psp-core-2025--law-change-43308-4"
+      ],
+      "explanationCz": "Motoristé slíbili zrušit papírové žádanky a zavést bezpečné sdílení zdravotnické dokumentace mezi lékaři. Prověřené legislativní texty se týkají přeshraniční spolupráce zdravotnické záchranné služby a jiných oblastí elektronizace, ale nedokládají opatření k této části slibu. V dodaných podkladech proto není ověřený podstatný posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U návrhu rámcové smlouvy o přeshraniční spolupráci je uvedeno, že samotný text smlouvy je dostupný jako PDF/A, ale jeho obsah v podkladu chybí; nelze proto ověřit, zda řeší sdílení zdravotních údajů. Žádný z dodaných textů však konkrétní závazek týkající se žádánek nebo dokumentace mezi lékaři neprokazuje."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0bc11fc67120a218016ab92c11bb1887d1814c904099d7d3bb",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12261,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 12258
+      },
+      "output_tokens": 2160,
+      "output_tokens_details": {
+        "reasoning_tokens": 1594
+      },
+      "total_tokens": 14421
+    },
+    "output": {
+      "promiseId": "candidate-603f578c2140",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Předložený text rámcové smlouvy o přeshraniční zdravotnické záchranné službě neobsahuje její konkrétní ustanovení a nedokládá změny žádanek ani sdílení zdravotní dokumentace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Změna ruší poslední větu ustanovení zákona o informačních systémech veřejné správy, ale její text nijak nespojuje tuto úpravu se zdravotními žádankami či dokumentací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Změna upravuje časové ustanovení zákona o elektronizaci postupů orgánů veřejné moci, nikoli podle předloženého textu papírové zdravotní žádanky nebo sdílení zdravotních záznamů."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-603f578c2140--source",
+        "psp-core-2025--law-change-43110-1",
+        "psp-core-2025--law-change-43184-12",
+        "psp-core-2025--law-change-43308-4"
+      ],
+      "explanationCz": "Slib Motoristů sobě se týká zrušení papírových žádanek a bezpečného sdílení zdravotní dokumentace mezi lékaři. Předložené změny zákonů se těchto konkrétních opatření nedotýkají. U rámcové smlouvy o přeshraniční záchranné službě balíček neobsahuje vlastní text smlouvy, takže nelze ověřit, zda se slibu týká. Z dostupných podkladů proto nelze doložit podstatný posun ani spolehlivě vyhodnotit možný obsah této smlouvy.",
+      "confidence": "low",
+      "uncertainties": [
+        "Text rámcové smlouvy o přeshraniční zdravotnické záchranné službě není v podkladech obsažen; nelze proto vyloučit ani potvrdit, zda upravuje sdílení zdravotních údajů."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-50-06-226Z--318459359629",
+  "evaluatedAt": "2026-09-27T14:50:06.226Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-a6fb059d4541/3184593596290d21b17a5a4fa8917afba1e14a3427653dc45b1363545e1d080f.json",
+  "packageHash": "3184593596290d21b17a5a4fa8917afba1e14a3427653dc45b1363545e1d080f",
+  "assessmentContentHash": "0475a1bca041ddeac07626c198cd00a5f7fc1e1487de8c7ae69a53aae4926972",
+  "assessmentFingerprint": "4980e5be9cea33836134b1e24910d8da1d01fe908cdebf773df404f0ade1af61",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-a6fb059d4541",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-a6fb059d4541",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": false,
+          "reasonCz": "Změna ruší větu v zákoně o zpracování osobních údajů a její text neukazuje souvislost s právem platit hotově."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-65",
+          "relevant": false,
+          "reasonCz": "Změna ruší ustanovení v zákoně proti praní špinavých peněz, ale z uvedeného textu nelze doložit, že by zajišťovala nebo omezovala právo platit hotově."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a6fb059d4541--source",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--law-change-43184-approved-65",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Motoristé ve volebním programu slíbili hájit právo platit hotově a prosazovat jeho zákonné i ústavní zajištění. Jejich poslanci se podíleli na předložení návrhu o státních zaměstnancích a většina klubu hlasovala pro něj i pro setrvání Sněmovny na návrhu po jeho zamítnutí Senátem. Změny doložené v podkladech se týkají osobních údajů a zákona proti praní špinavých peněz; jejich text neukazuje, že by hotovostní platby zajišťovaly nebo omezovaly. Proto není doložen podstatný posun ve slibu, ale podklady neumožňují spolehlivě posoudit zrušený odstavec zákona proti praní špinavých peněz.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U zrušeného odstavce 2 zákona proti praní špinavých peněz není v podkladech jeho předchozí znění, takže nelze vyloučit jeho případnou souvislost s placením v hotovosti."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-a6fb059d4541",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": false,
+          "reasonCz": "Všechny verze mění ustanovení zákona o zpracování osobních údajů, aniž by upravovaly právo platit v hotovosti nebo jeho zákonné či ústavní zaručení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-65",
+          "relevant": false,
+          "reasonCz": "Dostupné znění pouze ruší odstavec 2 v zákoně proti praní špinavých peněz a neukazuje, že by tím měnilo právo platit v hotovosti nebo jeho záruky."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a6fb059d4541--source",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--law-change-43184-approved-65"
+      ],
+      "explanationCz": "Motoristé slibují hájit právo platit v hotovosti a prosazovat jeho zákonné i ústavní zaručení. Z předložených znění se jedno týká osobních údajů a druhé ruší ustanovení zákona proti praní špinavých peněz; žádné doloženě nemění hotovostní platby ani jejich záruky. V balíčku proto není doložen podstatný posun k tomuto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U změny zákona proti praní špinavých peněz balíček uvádí pouze zrušení odstavce 2, nikoli jeho původní obsah; nelze tedy ověřit, zda toto ustanovení mělo souvislost s hotovostními platbami."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_008b2212df56fcef016ab92d0b28d087d19cb1884b2f589a61",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9599,
+      "input_tokens_details": {
+        "cache_write_tokens": 6359,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1953,
+      "output_tokens_details": {
+        "reasoning_tokens": 1414
+      },
+      "total_tokens": 11552
+    },
+    "output": {
+      "promiseId": "candidate-a6fb059d4541",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": false,
+          "reasonCz": "Změna ruší větu v zákoně o zpracování osobních údajů a její text neukazuje souvislost s právem platit hotově."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-65",
+          "relevant": false,
+          "reasonCz": "Změna ruší ustanovení v zákoně proti praní špinavých peněz, ale z uvedeného textu nelze doložit, že by zajišťovala nebo omezovala právo platit hotově."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a6fb059d4541--source",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--law-change-43184-approved-65",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Motoristé ve volebním programu slíbili hájit právo platit hotově a prosazovat jeho zákonné i ústavní zajištění. Jejich poslanci se podíleli na předložení návrhu o státních zaměstnancích a většina klubu hlasovala pro něj i pro setrvání Sněmovny na návrhu po jeho zamítnutí Senátem. Změny doložené v podkladech se týkají osobních údajů a zákona proti praní špinavých peněz; jejich text neukazuje, že by hotovostní platby zajišťovaly nebo omezovaly. Proto není doložen podstatný posun ve slibu, ale podklady neumožňují spolehlivě posoudit zrušený odstavec zákona proti praní špinavých peněz.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U zrušeného odstavce 2 zákona proti praní špinavých peněz není v podkladech jeho předchozí znění, takže nelze vyloučit jeho případnou souvislost s placením v hotovosti."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0628c774f59d47e0016ab92d15fef487d19cef9430b38aea85",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9599,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 9596
+      },
+      "output_tokens": 1467,
+      "output_tokens_details": {
+        "reasoning_tokens": 1034
+      },
+      "total_tokens": 11066
+    },
+    "output": {
+      "promiseId": "candidate-a6fb059d4541",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-22",
+          "relevant": false,
+          "reasonCz": "Všechny verze mění ustanovení zákona o zpracování osobních údajů, aniž by upravovaly právo platit v hotovosti nebo jeho zákonné či ústavní zaručení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-65",
+          "relevant": false,
+          "reasonCz": "Dostupné znění pouze ruší odstavec 2 v zákoně proti praní špinavých peněz a neukazuje, že by tím měnilo právo platit v hotovosti nebo jeho záruky."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-a6fb059d4541--source",
+        "psp-core-2025--law-change-43184-22",
+        "psp-core-2025--law-change-43184-approved-65"
+      ],
+      "explanationCz": "Motoristé slibují hájit právo platit v hotovosti a prosazovat jeho zákonné i ústavní zaručení. Z předložených znění se jedno týká osobních údajů a druhé ruší ustanovení zákona proti praní špinavých peněz; žádné doloženě nemění hotovostní platby ani jejich záruky. V balíčku proto není doložen podstatný posun k tomuto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U změny zákona proti praní špinavých peněz balíček uvádí pouze zrušení odstavce 2, nikoli jeho původní obsah; nelze tedy ověřit, zda toto ustanovení mělo souvislost s hotovostními platbami."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

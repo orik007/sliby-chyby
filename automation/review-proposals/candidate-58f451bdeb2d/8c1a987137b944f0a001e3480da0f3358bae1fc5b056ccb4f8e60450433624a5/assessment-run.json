@@ -1,0 +1,180 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-45-19-455Z--0a196dad5a8c",
+  "evaluatedAt": "2026-09-27T14:45:19.455Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-58f451bdeb2d/0a196dad5a8c55875865ef10f184a9a44b5959f302455378cccd059b69a70ceb.json",
+  "packageHash": "0a196dad5a8c55875865ef10f184a9a44b5959f302455378cccd059b69a70ceb",
+  "assessmentContentHash": "eabfda28ff42ee94a036058aedb096f6e0b19b4270313ab5a6b1fcc53d787ec7",
+  "assessmentFingerprint": "8c1a987137b944f0a001e3480da0f3358bae1fc5b056ccb4f8e60450433624a5",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-58f451bdeb2d",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-58f451bdeb2d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna upravuje rozpočtové saldo zdravotních pojišťoven a stanoví, že je závazné při určování úhrad hrazených služeb, takže se věcně dotýká mechanismu financování péče, byť paliativní péči ani její poskytovatele výslovně neřeší."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-58f451bdeb2d--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila změny pravidel rozpočtové odpovědnosti a poslanci ANO pro ně hlasovali při schvalování i pozdějších hlasováních. Změna mimo jiné stanoví, že saldo zdravotních pojišťoven je závazné při určování úhrad hrazených služeb. Text ale nezavádí rozšíření paliativní péče, nové smluvní poskytovatele ani její vyšší financování. Z dostupných podkladů nelze zjistit, zda nová pravidla skutečně zlepšila, nebo omezila financování paliativní péče.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Změna rozpočtových pravidel ovlivňuje obecné určování úhrad zdravotních služeb, ale podklady neukazují její konkrétní dopad na financování paliativní péče ani na počet jejích smluvních poskytovatelů."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-58f451bdeb2d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": false,
+          "reasonCz": "Změna upravuje obecná rozpočtová pravidla a závaznost salda zdravotních pojišťoven při stanovování úhrad, ale nepřináší opatření pro paliativní péči, její smluvní poskytovatele ani její zvláštní financování."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-58f451bdeb2d--source",
+        "psp-core-2025--law-change-43200-8"
+      ],
+      "explanationCz": "Slib ANO se týká rozšíření mobilní i stacionární paliativní péče, většího počtu smluvních poskytovatelů a jejího lepšího financování. Jediná předložená změna upravuje obecná rozpočtová pravidla a stanoví, že saldo zdravotních pojišťoven bude závazné při nastavování úhrad zdravotních služeb. Neobsahuje však opatření zaměřené na paliativní péči ani na její poskytovatele. Z těchto podkladů proto nelze doložit podstatný posun ve slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady neobsahují žádnou věcně relevantní změnu zákona pro paliativní péči; nelze z nich proto posoudit, zda strana podnikla jiné kroky, které zde nejsou zachyceny."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f5882e663df56d9016ab92be6ce2887d1be7f0fb4df4b8cbc",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 28822,
+      "input_tokens_details": {
+        "cache_write_tokens": 25582,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2907,
+      "output_tokens_details": {
+        "reasoning_tokens": 2458
+      },
+      "total_tokens": 31729
+    },
+    "output": {
+      "promiseId": "candidate-58f451bdeb2d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna upravuje rozpočtové saldo zdravotních pojišťoven a stanoví, že je závazné při určování úhrad hrazených služeb, takže se věcně dotýká mechanismu financování péče, byť paliativní péči ani její poskytovatele výslovně neřeší."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-58f451bdeb2d--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila změny pravidel rozpočtové odpovědnosti a poslanci ANO pro ně hlasovali při schvalování i pozdějších hlasováních. Změna mimo jiné stanoví, že saldo zdravotních pojišťoven je závazné při určování úhrad hrazených služeb. Text ale nezavádí rozšíření paliativní péče, nové smluvní poskytovatele ani její vyšší financování. Z dostupných podkladů nelze zjistit, zda nová pravidla skutečně zlepšila, nebo omezila financování paliativní péče.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Změna rozpočtových pravidel ovlivňuje obecné určování úhrad zdravotních služeb, ale podklady neukazují její konkrétní dopad na financování paliativní péče ani na počet jejích smluvních poskytovatelů."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_04c97c6aa3423edd016ab92bf639b887d1970a5124e9181f8e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 28822,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 28819
+      },
+      "output_tokens": 1745,
+      "output_tokens_details": {
+        "reasoning_tokens": 1380
+      },
+      "total_tokens": 30567
+    },
+    "output": {
+      "promiseId": "candidate-58f451bdeb2d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": false,
+          "reasonCz": "Změna upravuje obecná rozpočtová pravidla a závaznost salda zdravotních pojišťoven při stanovování úhrad, ale nepřináší opatření pro paliativní péči, její smluvní poskytovatele ani její zvláštní financování."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-58f451bdeb2d--source",
+        "psp-core-2025--law-change-43200-8"
+      ],
+      "explanationCz": "Slib ANO se týká rozšíření mobilní i stacionární paliativní péče, většího počtu smluvních poskytovatelů a jejího lepšího financování. Jediná předložená změna upravuje obecná rozpočtová pravidla a stanoví, že saldo zdravotních pojišťoven bude závazné při nastavování úhrad zdravotních služeb. Neobsahuje však opatření zaměřené na paliativní péči ani na její poskytovatele. Z těchto podkladů proto nelze doložit podstatný posun ve slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady neobsahují žádnou věcně relevantní změnu zákona pro paliativní péči; nelze z nich proto posoudit, zda strana podnikla jiné kroky, které zde nejsou zachyceny."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

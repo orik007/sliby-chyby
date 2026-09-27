@@ -1,0 +1,174 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-40-58-729Z--31c6607cf3f3",
+  "evaluatedAt": "2026-09-27T14:40:58.729Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-09a994fa1cb5/31c6607cf3f3355093ae21b014ceb452746d8e51e8b8da636fd487f8b12bab4d.json",
+  "packageHash": "31c6607cf3f3355093ae21b014ceb452746d8e51e8b8da636fd487f8b12bab4d",
+  "assessmentContentHash": "449fbb1da24c47f5ca51778b40c6d4f0ade0d0bc958aabf4e99838d84e6daf5a",
+  "assessmentFingerprint": "4fe9f57619837ef88a7eb03bb63ac1c49d9a29f7d759c0a6f798e35c93b49496",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-09a994fa1cb5",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-09a994fa1cb5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43357-1",
+          "relevant": true,
+          "reasonCz": "Návrh zvyšuje vyměřovací základ pro pojistné hrazené státem, a tím mění výši veřejných zdravotních odvodů, což může být v rozporu se slibem, že se celkové odvody nezvýší."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-09a994fa1cb5--source",
+        "psp-core-2025--law-change-43357-1",
+        "psp-core-2025--print-step-211660"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, předložila návrh změny zákona o pojistném na veřejné zdravotní pojištění. Návrh zvyšuje vyměřovací základ pro pojistné hrazené státem z 14 074 Kč na 18 362 Kč; nový postup se má poprvé použít pro rok 2029. Tím návrh zvyšuje částku, z níž se toto pojistné počítá, a může tak odporovat části slibu, že se celkové odvody nezvýší. Návrh ale nerozděluje pojištění na základní a variabilní složku, takže jde pouze o možný rozpor s částí slibu, nikoli o jeho úplné popření.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Není jisté, zda slibem uvedené „celkové odvody“ zahrnují také pojistné hrazené státem; návrh proto lze hodnotit jako rozpor s touto částí slibu jen částečně."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-09a994fa1cb5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43357-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění vyměřovací základ pro pojistné hrazené státem, a tím se dotýká slibu nezvýšit celkové odvody, byť nezavádí rozdělení pojištění na základní a variabilní složku."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-09a994fa1cb5--source",
+        "psp-core-2025--law-change-43357-1",
+        "psp-core-2025--print-step-211660"
+      ],
+      "explanationCz": "Vláda, v níž jsou Motoristé sobě zastoupeni, předložila návrh zákona měnícího pojistné na veřejné zdravotní pojištění. Návrh zvyšuje vyměřovací základ pro pojistné hrazené státem z 14 074 Kč na 18 362 Kč. Tím jde proti části slibu, že se celkové odvody nezvýší, a proto návrh představuje posun proti slibu. Návrh ale nezavádí slíbené rozdělení pojištění na základní a variabilní složku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh mění základ pro pojistné hrazené státem, nikoli přímo platby jednotlivých pojištěnců; podklady neupřesňují, jak se tato změna projeví na celkových odvodech v pojetí slibu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f3e5d500c9d43a2016ab92aeaf91487d1aa3456977668a182",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 6341,
+      "input_tokens_details": {
+        "cache_write_tokens": 3101,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1691,
+      "output_tokens_details": {
+        "reasoning_tokens": 1272
+      },
+      "total_tokens": 8032
+    },
+    "output": {
+      "promiseId": "candidate-09a994fa1cb5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43357-1",
+          "relevant": true,
+          "reasonCz": "Návrh zvyšuje vyměřovací základ pro pojistné hrazené státem, a tím mění výši veřejných zdravotních odvodů, což může být v rozporu se slibem, že se celkové odvody nezvýší."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-09a994fa1cb5--source",
+        "psp-core-2025--law-change-43357-1",
+        "psp-core-2025--print-step-211660"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, předložila návrh změny zákona o pojistném na veřejné zdravotní pojištění. Návrh zvyšuje vyměřovací základ pro pojistné hrazené státem z 14 074 Kč na 18 362 Kč; nový postup se má poprvé použít pro rok 2029. Tím návrh zvyšuje částku, z níž se toto pojistné počítá, a může tak odporovat části slibu, že se celkové odvody nezvýší. Návrh ale nerozděluje pojištění na základní a variabilní složku, takže jde pouze o možný rozpor s částí slibu, nikoli o jeho úplné popření.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Není jisté, zda slibem uvedené „celkové odvody“ zahrnují také pojistné hrazené státem; návrh proto lze hodnotit jako rozpor s touto částí slibu jen částečně."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_020566940f91193b016ab92af3a23487d18d264e1914d6b916",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 6341,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 6338
+      },
+      "output_tokens": 1464,
+      "output_tokens_details": {
+        "reasoning_tokens": 1032
+      },
+      "total_tokens": 7805
+    },
+    "output": {
+      "promiseId": "candidate-09a994fa1cb5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43357-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění vyměřovací základ pro pojistné hrazené státem, a tím se dotýká slibu nezvýšit celkové odvody, byť nezavádí rozdělení pojištění na základní a variabilní složku."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-09a994fa1cb5--source",
+        "psp-core-2025--law-change-43357-1",
+        "psp-core-2025--print-step-211660"
+      ],
+      "explanationCz": "Vláda, v níž jsou Motoristé sobě zastoupeni, předložila návrh zákona měnícího pojistné na veřejné zdravotní pojištění. Návrh zvyšuje vyměřovací základ pro pojistné hrazené státem z 14 074 Kč na 18 362 Kč. Tím jde proti části slibu, že se celkové odvody nezvýší, a proto návrh představuje posun proti slibu. Návrh ale nezavádí slíbené rozdělení pojištění na základní a variabilní složku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh mění základ pro pojistné hrazené státem, nikoli přímo platby jednotlivých pojištěnců; podklady neupřesňují, jak se tato změna projeví na celkových odvodech v pojetí slibu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

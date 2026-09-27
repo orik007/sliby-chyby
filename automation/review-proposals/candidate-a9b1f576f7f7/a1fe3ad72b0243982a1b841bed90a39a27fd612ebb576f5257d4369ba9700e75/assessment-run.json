@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-50-13-942Z--666b2bc9368a",
+  "evaluatedAt": "2026-09-27T14:50:13.942Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-a9b1f576f7f7/666b2bc9368a1e0f380c161dce2243c2387b9ee6ccbde1cb6f4a6a0beaa0caa5.json",
+  "packageHash": "666b2bc9368a1e0f380c161dce2243c2387b9ee6ccbde1cb6f4a6a0beaa0caa5",
+  "assessmentContentHash": "d869a79d39d6048978c524c8ae85594393ffee537987d1a36c4498406bb44dd6",
+  "assessmentFingerprint": "a1fe3ad72b0243982a1b841bed90a39a27fd612ebb576f5257d4369ba9700e75",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-a9b1f576f7f7",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-a9b1f576f7f7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Návrh i schválený text pouze mění data účinnosti ustanovení jiného zákona a neobsahují změnu částky rodičovského příspěvku ani jeho navyšování podle inflace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Návrh i schválený text posouvají data účinnosti ustanovení zákona o dávce státní sociální pomoci, ale nemění pravidla rodičovského příspěvku ani jeho valorizaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Návrh i schválený text ruší vyjmenované body jiné novely, ale jejich obsah zde není uveden a samotný text nedokládá dopad na rodičovský příspěvek či jeho navyšování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": true,
+          "reasonCz": "Návrh i schválený text zvyšují celkovou částku rodičovského příspěvku z 350 000 na 400 000 Kč, jde tedy o skutečné zvýšení příspěvku, byť bez pravidelné vazby na inflaci."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a9b1f576f7f7--source",
+        "psp-core-2025--law-change-43319-1",
+        "psp-core-2025--print-step-211452",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh na zvýšení rodičovského příspěvku z 350 000 na 400 000 Kč. Poslanci SPD pak při závěrečném hlasování podpořili zákon, který toto zvýšení schválil pro nejmladší dítě narozené nebo převzaté do péče od 1. ledna 2027. Jde o konkrétní zvýšení příspěvku, ale zákon nezavádí jeho pravidelné navyšování podle meziroční inflace. Slib je proto naplněn jen částečně.",
+      "confidence": "high",
+      "uncertainties": []
+    },
+    "assessor-b": {
+      "promiseId": "candidate-a9b1f576f7f7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text pouze posouvá účinnost očíslovaných ustanovení zákona č. 152/2025 Sb. a neukazuje, že by některé z nich upravovalo rodičovský příspěvek nebo jeho zvyšování podle inflace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text mění termíny účinnosti očíslovaných ustanovení zákona č. 152/2025 Sb., ale neprokazuje, že se týkají částky rodičovského příspěvku či jejího pravidelného navyšování podle inflace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Text ruší několik očíslovaných ustanovení zákona č. 152/2025 Sb., aniž z něj plyne, že by tato ustanovení upravovala rodičovský příspěvek nebo jeho navyšování podle inflace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": true,
+          "reasonCz": "Text mění celkovou částku rodičovského příspěvku z 350 000 na 400 000 Kč, tedy přímo upravuje jeho výši, ačkoli nezavádí pravidelné zvyšování podle inflace."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a9b1f576f7f7--source",
+        "psp-core-2025--law-change-43319-1",
+        "psp-core-2025--print-step-211452",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Vláda předložila návrh změny zákona o státní sociální podpoře, který zvyšuje celkový rodičovský příspěvek z 350 000 na 400 000 Kč pro nejmladší dítě narozené nebo převzaté do péče od 1. ledna 2027. Poslanci SPD pak návrh v Poslanecké sněmovně většinově schválili. Jde o zvýšení příspěvku, které slib posouvá, ale návrh nezavádí jeho pravidelné navyšování podle meziroční inflace.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_04914bd25e65e35f016ab92d1424e887d1a2dd953e976971fc",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 15420,
+      "input_tokens_details": {
+        "cache_write_tokens": 12180,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1557,
+      "output_tokens_details": {
+        "reasoning_tokens": 890
+      },
+      "total_tokens": 16977
+    },
+    "output": {
+      "promiseId": "candidate-a9b1f576f7f7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Návrh i schválený text pouze mění data účinnosti ustanovení jiného zákona a neobsahují změnu částky rodičovského příspěvku ani jeho navyšování podle inflace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Návrh i schválený text posouvají data účinnosti ustanovení zákona o dávce státní sociální pomoci, ale nemění pravidla rodičovského příspěvku ani jeho valorizaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Návrh i schválený text ruší vyjmenované body jiné novely, ale jejich obsah zde není uveden a samotný text nedokládá dopad na rodičovský příspěvek či jeho navyšování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": true,
+          "reasonCz": "Návrh i schválený text zvyšují celkovou částku rodičovského příspěvku z 350 000 na 400 000 Kč, jde tedy o skutečné zvýšení příspěvku, byť bez pravidelné vazby na inflaci."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a9b1f576f7f7--source",
+        "psp-core-2025--law-change-43319-1",
+        "psp-core-2025--print-step-211452",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Vláda, v níž SPD působí, předložila návrh na zvýšení rodičovského příspěvku z 350 000 na 400 000 Kč. Poslanci SPD pak při závěrečném hlasování podpořili zákon, který toto zvýšení schválil pro nejmladší dítě narozené nebo převzaté do péče od 1. ledna 2027. Jde o konkrétní zvýšení příspěvku, ale zákon nezavádí jeho pravidelné navyšování podle meziroční inflace. Slib je proto naplněn jen částečně.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0869982979c92487016ab92d1c750487d1bb126ec47967874b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 15420,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 15417
+      },
+      "output_tokens": 1668,
+      "output_tokens_details": {
+        "reasoning_tokens": 1072
+      },
+      "total_tokens": 17088
+    },
+    "output": {
+      "promiseId": "candidate-a9b1f576f7f7",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text pouze posouvá účinnost očíslovaných ustanovení zákona č. 152/2025 Sb. a neukazuje, že by některé z nich upravovalo rodičovský příspěvek nebo jeho zvyšování podle inflace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text mění termíny účinnosti očíslovaných ustanovení zákona č. 152/2025 Sb., ale neprokazuje, že se týkají částky rodičovského příspěvku či jejího pravidelného navyšování podle inflace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Text ruší několik očíslovaných ustanovení zákona č. 152/2025 Sb., aniž z něj plyne, že by tato ustanovení upravovala rodičovský příspěvek nebo jeho navyšování podle inflace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-1",
+          "relevant": true,
+          "reasonCz": "Text mění celkovou částku rodičovského příspěvku z 350 000 na 400 000 Kč, tedy přímo upravuje jeho výši, ačkoli nezavádí pravidelné zvyšování podle inflace."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a9b1f576f7f7--source",
+        "psp-core-2025--law-change-43319-1",
+        "psp-core-2025--print-step-211452",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Vláda předložila návrh změny zákona o státní sociální podpoře, který zvyšuje celkový rodičovský příspěvek z 350 000 na 400 000 Kč pro nejmladší dítě narozené nebo převzaté do péče od 1. ledna 2027. Poslanci SPD pak návrh v Poslanecké sněmovně většinově schválili. Jde o zvýšení příspěvku, které slib posouvá, ale návrh nezavádí jeho pravidelné navyšování podle meziroční inflace.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

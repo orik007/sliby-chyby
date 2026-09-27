@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-54-48-645Z--39037c58860d",
+  "evaluatedAt": "2026-09-27T14:54:48.645Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-efd1c999e79a/39037c58860ddfcd2bb944d6bbf5a662c1cf93a4a12f6513e43f49b1792f223e.json",
+  "packageHash": "39037c58860ddfcd2bb944d6bbf5a662c1cf93a4a12f6513e43f49b1792f223e",
+  "assessmentContentHash": "84a901b393e65c4f3e02c312f6227ca7c25c3343743f7b8201b5757e01223014",
+  "assessmentFingerprint": "1bf780d7d912ab0649135c4bd379e4f750ef41de5d31e93be7d0d7662956b299",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-efd1c999e79a",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-efd1c999e79a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Předložená verze výslovně zakazovala lov zvěře pod zemí včetně lovu se psy vypouštěnými pod zem, ale ve verzi schválené Sněmovnou byl tento zákaz vypuštěn."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": false,
+          "reasonCz": "Předložený text pouze rušil § 7 odst. 2 zákona o myslivosti, jehož obsah zde není uveden, takže z dodaných podkladů nelze doložit souvislost se zákazem norování; tato část byla navíc ze schváleného textu odstraněna."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-efd1c999e79a--source",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO spolu s poslanci dalších stran předložili návrh novely stavebního zákona a souvisejících předpisů, který původně zakazoval lov zvěře pod zemí včetně použití loveckých psů. Při hlasování o konečném znění v červenci však zákaz v textu schváleném Poslaneckou sněmovnou chyběl. Senát, tedy horní komora Parlamentu, návrh zamítl a Sněmovna v září setrvala na své verzi bez zákazu. Předložení návrhu tedy slib posunulo, ale pozdější rozhodnutí o znění, které zákaz neobsahovalo, znamená, že zatím není doložen podstatný posun ke splnění slibu.",
+      "confidence": "high",
+      "uncertainties": []
+    },
+    "assessor-b": {
+      "promiseId": "candidate-efd1c999e79a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Navržené znění výslovně zakazovalo lov zvěře pod zemí včetně lovu za pomoci psů, zatímco schválené znění ustanovení s tímto zákazem vypustilo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": false,
+          "reasonCz": "Navržené znění pouze ruší odstavec 2 § 7 zákona o myslivosti, ale jeho text neukazuje souvislost s norováním ani se zákazem lovu pod zemí."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-efd1c999e79a--source",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh novely zákona o ochraně přírody, který výslovně zakazoval lov zvěře pod zemí včetně lovu za pomoci psů. Při závěrečném hlasování o pozměněném návrhu zákona podpořili znění, z něhož byla ustanovení obsahující zákaz vypuštěna. Senát návrh odmítl, ale Sněmovna poté setrvala na svém znění, které zákaz rovněž neobsahovalo. Návrh zákazu tedy předložili, konečné hlasování však jeho přijetí nedokládá.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Poslanci ANO nejprve navrhli výslovný zákaz, později však hlasovali pro pozměněné znění, které jej neobsahovalo; samotné vypuštění zákazu neprokazuje, že podpořili jeho odmítnutí jako samostatného opatření."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0dd6503896bbb349016ab92e15104c87d1b5cc58337e2261a6",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 91316,
+      "input_tokens_details": {
+        "cache_write_tokens": 88076,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2550,
+      "output_tokens_details": {
+        "reasoning_tokens": 2050
+      },
+      "total_tokens": 93866
+    },
+    "output": {
+      "promiseId": "candidate-efd1c999e79a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Předložená verze výslovně zakazovala lov zvěře pod zemí včetně lovu se psy vypouštěnými pod zem, ale ve verzi schválené Sněmovnou byl tento zákaz vypuštěn."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": false,
+          "reasonCz": "Předložený text pouze rušil § 7 odst. 2 zákona o myslivosti, jehož obsah zde není uveden, takže z dodaných podkladů nelze doložit souvislost se zákazem norování; tato část byla navíc ze schváleného textu odstraněna."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-efd1c999e79a--source",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO spolu s poslanci dalších stran předložili návrh novely stavebního zákona a souvisejících předpisů, který původně zakazoval lov zvěře pod zemí včetně použití loveckých psů. Při hlasování o konečném znění v červenci však zákaz v textu schváleném Poslaneckou sněmovnou chyběl. Senát, tedy horní komora Parlamentu, návrh zamítl a Sněmovna v září setrvala na své verzi bez zákazu. Předložení návrhu tedy slib posunulo, ale pozdější rozhodnutí o znění, které zákaz neobsahovalo, znamená, že zatím není doložen podstatný posun ke splnění slibu.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b35b6782ccde3b4016ab92e24ba1c87d18a410187abe05a5e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 91316,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 91313
+      },
+      "output_tokens": 3530,
+      "output_tokens_details": {
+        "reasoning_tokens": 3018
+      },
+      "total_tokens": 94846
+    },
+    "output": {
+      "promiseId": "candidate-efd1c999e79a",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Navržené znění výslovně zakazovalo lov zvěře pod zemí včetně lovu za pomoci psů, zatímco schválené znění ustanovení s tímto zákazem vypustilo."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-25",
+          "relevant": false,
+          "reasonCz": "Navržené znění pouze ruší odstavec 2 § 7 zákona o myslivosti, ale jeho text neukazuje souvislost s norováním ani se zákazem lovu pod zemí."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-efd1c999e79a--source",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh novely zákona o ochraně přírody, který výslovně zakazoval lov zvěře pod zemí včetně lovu za pomoci psů. Při závěrečném hlasování o pozměněném návrhu zákona podpořili znění, z něhož byla ustanovení obsahující zákaz vypuštěna. Senát návrh odmítl, ale Sněmovna poté setrvala na svém znění, které zákaz rovněž neobsahovalo. Návrh zákazu tedy předložili, konečné hlasování však jeho přijetí nedokládá.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Poslanci ANO nejprve navrhli výslovný zákaz, později však hlasovali pro pozměněné znění, které jej neobsahovalo; samotné vypuštění zákazu neprokazuje, že podpořili jeho odmítnutí jako samostatného opatření."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "no-progress",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,237 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T15-02-15-490Z--f2ee4b812410",
+  "evaluatedAt": "2026-09-27T15:02:15.490Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-41b5f41099/f2ee4b812410613687c3301991b716a4922a5dfac4909697e8af81fa80da09e3.json",
+  "packageHash": "f2ee4b812410613687c3301991b716a4922a5dfac4909697e8af81fa80da09e3",
+  "assessmentContentHash": "c8b577983c68ded1dad38b67e87486d66cd939ad143726813a5987c9c7e30090",
+  "assessmentFingerprint": "75b4ec02c85dfa9361a970bcfb7c7f237052374905f140bf620d915470e0af9c",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-41b5f41099",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": "Assessment promiseId does not match the package"
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-41b5f41099",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny geologického zákona upravují postupy a ustanovení geologických prací, nikoli převody státních pozemků pro bytovou výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": true,
+          "reasonCz": "Změna zákona o majetku státu upravuje podmínky nakládání se státními pozemky, a může se tak dotýkat jejich převodů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": true,
+          "reasonCz": "Změny zákona o Státním pozemkovém úřadu zasahují do pravidel pro pozemky a jejich převody, byť výslovně nezmiňují bezúplatné převody pro bytovou výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Změna zákona o krajích upravuje vymezení stavebního zázemí, ale netýká se převodů státních pozemků pro bydlení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-41b5f41099--source",
+        "psp-core-2025--law-change-43174-18",
+        "psp-core-2025--law-change-43174-34",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci SPD předložili návrh zákona, který mimo jiné měnil pravidla pro nakládání se státním majetkem a činnost Státního pozemkového úřadu. Poslanci SPD pak hlasovali pro schválení návrhu a po jeho zamítnutí Senátem také pro to, aby na něm Poslanecká sněmovna setrvala. Tyto úpravy mohou představovat dílčí posun k převodům státních pozemků, ale text výslovně nezavádí bezúplatné převody pozemků pro bytovou výstavbu. Proto je posun hodnocen jako částečný, s nejistotou ohledně skutečného dopadu změn na slíbené převody.",
+      "confidence": "low",
+      "uncertainties": [
+        "Text změn upravuje pravidla pro nakládání se státními pozemky, ale sám výslovně nestanoví jejich bezúplatné převody pro bytovou výstavbu; bez úplného znění dotčených ustanovení nelze spolehlivě určit, zda tyto úpravy takové převody skutečně usnadňují."
+      ]
+    },
+    "assessor-b": null
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0a529e22a4c5c904016ab92fc4bb4c87d19c278dcd94461784",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 16281,
+      "input_tokens_details": {
+        "cache_write_tokens": 13041,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 3589,
+      "output_tokens_details": {
+        "reasoning_tokens": 2876
+      },
+      "total_tokens": 19870
+    },
+    "output": {
+      "promiseId": "spd-2025-41b5f41099",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny geologického zákona upravují postupy a ustanovení geologických prací, nikoli převody státních pozemků pro bytovou výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": true,
+          "reasonCz": "Změna zákona o majetku státu upravuje podmínky nakládání se státními pozemky, a může se tak dotýkat jejich převodů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": true,
+          "reasonCz": "Změny zákona o Státním pozemkovém úřadu zasahují do pravidel pro pozemky a jejich převody, byť výslovně nezmiňují bezúplatné převody pro bytovou výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Změna zákona o krajích upravuje vymezení stavebního zázemí, ale netýká se převodů státních pozemků pro bydlení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-41b5f41099--source",
+        "psp-core-2025--law-change-43174-18",
+        "psp-core-2025--law-change-43174-34",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci SPD předložili návrh zákona, který mimo jiné měnil pravidla pro nakládání se státním majetkem a činnost Státního pozemkového úřadu. Poslanci SPD pak hlasovali pro schválení návrhu a po jeho zamítnutí Senátem také pro to, aby na něm Poslanecká sněmovna setrvala. Tyto úpravy mohou představovat dílčí posun k převodům státních pozemků, ale text výslovně nezavádí bezúplatné převody pozemků pro bytovou výstavbu. Proto je posun hodnocen jako částečný, s nejistotou ohledně skutečného dopadu změn na slíbené převody.",
+      "confidence": "low",
+      "uncertainties": [
+        "Text změn upravuje pravidla pro nakládání se státními pozemky, ale sám výslovně nestanoví jejich bezúplatné převody pro bytovou výstavbu; bez úplného znění dotčených ustanovení nelze spolehlivě určit, zda tyto úpravy takové převody skutečně usnadňují."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_00cc515c7b4c9f47016ab92fd869d087d1872b3b6b240dc8a3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 16281,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 16278
+      },
+      "output_tokens": 4402,
+      "output_tokens_details": {
+        "reasoning_tokens": 3624
+      },
+      "total_tokens": 20683
+    },
+    "output": {
+      "promiseId": "spd-2025-41b5-f41099",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny zákona o geologických pracích upravují geologická řízení, nikoli převody státních pozemků pro bytovou výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-18",
+          "relevant": false,
+          "reasonCz": "Změny zákona o majetku státu se týkají vymezení zastavěných či zastavitelných ploch a zázemí stavby, ale jejich text neukazuje vazbu na bezplatné převody pozemků pro bydlení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": true,
+          "reasonCz": "Změny zákona o Státním pozemkovém úřadu upravují podmínky nakládání s pozemky, včetně změny kritéria z již zastavěného na zastavitelný pozemek, a mohou tak ovlivnit převody státních pozemků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-22",
+          "relevant": false,
+          "reasonCz": "Změna zákona o krajích se týká majetku krajů, nikoli pozemků ve vlastnictví státu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-41b5f41099--source",
+        "psp-core-2025--law-change-43174-34",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci SPD předložili se skupinou dalších poslanců návrh novely stavebního zákona, který upravuje také pravidla Státního pozemkového úřadu pro nakládání s pozemky. Jeho schválené znění mimo jiné mění kritérium „zastavěného“ pozemku na „zastavitelný“, což může rozšířit možnosti převodů pozemků. Poslanci SPD hlasovali pro návrh ve třetím čtení a po zamítnutí Senátem také pro setrvání Sněmovny na návrhu. Jde o dílčí posun, nikoli splnění celého slibu: text výslovně nezajišťuje bezplatné převody pozemků pro bytovou výstavbu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Změna pravidel Státního pozemkového úřadu může ovlivnit převody pozemků, ale dodané znění samo neříká, zda se konkrétně týká bezplatných převodů pro bytovou výstavbu."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0e51caec85c1373d016ab92fefd85487d1867745fa6292b5af",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 16170,
+      "input_tokens_details": {
+        "cache_write_tokens": 13753,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 781,
+      "output_tokens_details": {
+        "reasoning_tokens": 516
+      },
+      "total_tokens": 16951
+    },
+    "output": {
+      "choice": "cannot-decide",
+      "citedEvidenceIds": [
+        "spd-2025-41b5f41099--source",
+        "psp-core-2025--law-change-43174-18",
+        "psp-core-2025--law-change-43174-34",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci SPD předložili změnu stavebního zákona a souvisejících zákonů a v obou rozhodujících hlasováních ji podpořili. Návrh měnil také některá pravidla pro státní pozemky a pro Státní pozemkový úřad. Z předložených ukázek ale nelze spolehlivě zjistit, zda se tím skutečně rozšířily bezplatné převody státních pozemků pro bytovou výstavbu. Dostupné hodnocení tuto nejistotu samo připouští, přesto z ní vyvozuje dílčí posun, a proto jeho závěr nelze potvrdit."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-cannot-decide",
+    "status": null,
+    "selectedReview": null
+  }
+}

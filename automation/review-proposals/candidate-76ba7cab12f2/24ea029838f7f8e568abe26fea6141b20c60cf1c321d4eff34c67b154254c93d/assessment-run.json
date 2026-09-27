@@ -1,0 +1,219 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-47-19-450Z--24d97ba4004a",
+  "evaluatedAt": "2026-09-27T14:47:19.450Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-76ba7cab12f2/24d97ba4004a9e671e874915713eda5ee838563d84b83a43a51146b68d5ac73e.json",
+  "packageHash": "24d97ba4004a9e671e874915713eda5ee838563d84b83a43a51146b68d5ac73e",
+  "assessmentContentHash": "bed95595e9c79847c1d691c360baa1af9c1498facc35ba6c80bde0b22b4fc638",
+  "assessmentFingerprint": "24ea029838f7f8e568abe26fea6141b20c60cf1c321d4eff34c67b154254c93d",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-76ba7cab12f2",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-76ba7cab12f2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-35",
+          "relevant": false,
+          "reasonCz": "Změna pouze ruší část ustanovení plemenářského zákona a text nijak neupravuje vzdělávání mladých včelařů ani školní projekty o včelaření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Text dotačních programů výslovně zahrnuje podporu včelařství i program poradenství a vzdělávání, které mohou naplnit části slibu, ačkoli nezmiňuje mladé včelaře ani školy."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-76ba7cab12f2--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro dotační programy zemědělství na rok 2026, které zahrnují podporu včelařství a také poradenství a vzdělávání. Jde o dílčí posun k příslibu podpory vzdělávacích programů pro mladé včelaře a školních projektů o včelaření. Z předloženého textu ale nevyplývá, že by tyto programy byly určeny právě mladým včelařům nebo školním projektům, takže splnění celého slibu doloženo není.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text dotačních programů neuvádí, zda se program poradenství a vzdělávání vztahuje na mladé včelaře nebo školní projekty zaměřené na včelaření."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-76ba7cab12f2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-35",
+          "relevant": false,
+          "reasonCz": "Změna pouze vypouští část věty v plemenářském zákoně a neobsahuje podporu vzdělávání mladých včelařů ani školních včelařských projektů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": false,
+          "reasonCz": "Návrh uvádí obecnou podporu včelařství a samostatně zemědělské poradenství a vzdělávání, ale nespojuje je se vzděláváním mladých včelařů ani se školními projekty o včelaření."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-76ba7cab12f2--source",
+        "psp-core-2025--law-change-43184-approved-35",
+        "psp-core-2025--law-change-43206-1"
+      ],
+      "explanationCz": "ANO ve svém programu slíbilo vzdělávací programy pro mladé včelaře a školní projekty zaměřené na včelaření. Předložené materiály tento konkrétní slib nedokládají: návrh zemědělských dotací zmiňuje podporu včelařství a obecné zemědělské vzdělávání, nikoli však uvedené cílové skupiny či školní projekty. Jiná změna pouze upravuje plemenářský zákon a slibu se věcně netýká. Protože podklady neumožňují ověřit relevantní posun ani úplné plnění slibu, závěr je předběžný.",
+      "confidence": "low",
+      "uncertainties": [
+        "Dodané podklady neukazují konkrétní opatření ani rozhodující hlasování ANO zaměřené na vzdělávání mladých včelařů nebo školní projekty; nelze proto vyloučit, že taková činnost proběhla mimo předložené důkazy."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0b512c363ccd2027016ab92c576de487d1b84f865f3619827d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 11192,
+      "input_tokens_details": {
+        "cache_write_tokens": 7952,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2594,
+      "output_tokens_details": {
+        "reasoning_tokens": 2156
+      },
+      "total_tokens": 13786
+    },
+    "output": {
+      "promiseId": "candidate-76ba7cab12f2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-35",
+          "relevant": false,
+          "reasonCz": "Změna pouze ruší část ustanovení plemenářského zákona a text nijak neupravuje vzdělávání mladých včelařů ani školní projekty o včelaření."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Text dotačních programů výslovně zahrnuje podporu včelařství i program poradenství a vzdělávání, které mohou naplnit části slibu, ačkoli nezmiňuje mladé včelaře ani školy."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-76ba7cab12f2--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro dotační programy zemědělství na rok 2026, které zahrnují podporu včelařství a také poradenství a vzdělávání. Jde o dílčí posun k příslibu podpory vzdělávacích programů pro mladé včelaře a školních projektů o včelaření. Z předloženého textu ale nevyplývá, že by tyto programy byly určeny právě mladým včelařům nebo školním projektům, takže splnění celého slibu doloženo není.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text dotačních programů neuvádí, zda se program poradenství a vzdělávání vztahuje na mladé včelaře nebo školní projekty zaměřené na včelaření."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_07014a17f4dc50d1016ab92c65780087d18afbb59997c27566",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 11192,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 11189
+      },
+      "output_tokens": 2529,
+      "output_tokens_details": {
+        "reasoning_tokens": 1974
+      },
+      "total_tokens": 13721
+    },
+    "output": {
+      "promiseId": "candidate-76ba7cab12f2",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-35",
+          "relevant": false,
+          "reasonCz": "Změna pouze vypouští část věty v plemenářském zákoně a neobsahuje podporu vzdělávání mladých včelařů ani školních včelařských projektů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": false,
+          "reasonCz": "Návrh uvádí obecnou podporu včelařství a samostatně zemědělské poradenství a vzdělávání, ale nespojuje je se vzděláváním mladých včelařů ani se školními projekty o včelaření."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-76ba7cab12f2--source",
+        "psp-core-2025--law-change-43184-approved-35",
+        "psp-core-2025--law-change-43206-1"
+      ],
+      "explanationCz": "ANO ve svém programu slíbilo vzdělávací programy pro mladé včelaře a školní projekty zaměřené na včelaření. Předložené materiály tento konkrétní slib nedokládají: návrh zemědělských dotací zmiňuje podporu včelařství a obecné zemědělské vzdělávání, nikoli však uvedené cílové skupiny či školní projekty. Jiná změna pouze upravuje plemenářský zákon a slibu se věcně netýká. Protože podklady neumožňují ověřit relevantní posun ani úplné plnění slibu, závěr je předběžný.",
+      "confidence": "low",
+      "uncertainties": [
+        "Dodané podklady neukazují konkrétní opatření ani rozhodující hlasování ANO zaměřené na vzdělávání mladých včelařů nebo školní projekty; nelze proto vyloučit, že taková činnost proběhla mimo předložené důkazy."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_02cf82f615215fc2016ab92c726c3487d19a3f7107ff9e00b0",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 11292,
+      "input_tokens_details": {
+        "cache_write_tokens": 8875,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 492,
+      "output_tokens_details": {
+        "reasoning_tokens": 269
+      },
+      "total_tokens": 11784
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-76ba7cab12f2--source",
+        "psp-core-2025--law-change-43184-approved-35",
+        "psp-core-2025--law-change-43206-1"
+      ],
+      "explanationCz": "Volím druhé hodnocení, protože obecná podpora včelařství a obecné zemědělské vzdělávání ještě nejsou podporou vzdělávání mladých včelařů ani školních včelařských projektů. Návrh dotačních programů zemědělství pro rok 2026, vedený ve Sněmovně jako tisk č. 96, tyto dvě oblasti nespojuje. Druhá změna jen upravuje plemenářský zákon a vzdělávání ani školní projekty neřeší. Z podkladů proto nelze doložit podstatný krok ANO k tomuto konkrétnímu slibu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-44-11-805Z--7805b92a018a",
+  "evaluatedAt": "2026-09-27T14:44:11.805Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-3e227e40be53/7805b92a018a4808e76749c22cf24c26aac643edb76d0ed86b797d996a3a7a09.json",
+  "packageHash": "7805b92a018a4808e76749c22cf24c26aac643edb76d0ed86b797d996a3a7a09",
+  "assessmentContentHash": "33a881252931bf09ec3b54648972b0dda8a768865d0a1c5a16a98a51f8a96b45",
+  "assessmentFingerprint": "3be9be17b1c83992d3f02b81dad4e8c5837cd458c69b718e5280f6e65164b40d",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-3e227e40be53",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-3e227e40be53",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Poskytnutý text návrhu obsahuje pouze upozornění na formát PDF/A, takže z něj nelze určit žádnou úpravu doplňkového zdravotního pojištění ani jeho daňového zvýhodnění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje daňové oznamování zaplacených příspěvků na pojištění dlouhodobé péče, které je výslovně jedním z typů služeb uvedených ve slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-3e227e40be53--source",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--law-change-43422-4",
+        "psp-core-2025--print-step-211439",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, předložila návrh měnící pravidla daňového oznamování příspěvků na pojištění dlouhodobé péče. To se týká jedné oblasti, kterou slib zmiňuje, a může podpořit daňové zacházení s tímto pojištěním. Návrh však sám nezavádí nové daňové zvýhodnění ani širší možnost dobrovolného doplňkového pojištění. U dalšího daňového návrhu není v podkladech dostupné jeho věcné znění, takže nelze spolehlivě posoudit, zda se slibu týká.",
+      "confidence": "low",
+      "uncertainties": [
+        "Návrh týkající se pojištění dlouhodobé péče stanoví oznamovací povinnost, ale z poskytnutého textu není patrné, že by sám vytvářel nebo rozšiřoval daňové zvýhodnění; hodnocení jako dílčího posunu je proto nejisté.",
+        "U návrhu smlouvy s Maltou je k dispozici jen údaj, že dokument je ve formátu PDF/A, nikoli jeho věcné znění. Jeho možnou souvislost se slibem proto nelze ověřit."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-3e227e40be53",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Návrh ratifikace smlouvy o zamezení dvojímu zdanění mezi Českou republikou a Maltou se netýká dobrovolného zdravotního pojištění ani jeho daňového zvýhodnění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": false,
+          "reasonCz": "Text pouze ukládá poskytovatelům dlouhodobého pojištění oznamovat údaje správci daně, ale nemění nabídku pojištění zdravotních služeb ani jeho daňové zvýhodnění."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-3e227e40be53--source",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--law-change-43422-4",
+        "psp-core-2025--print-step-211439",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Motoristé sobě spolu s koaličními partnery předložili vládní návrh, který u pojištění dlouhodobé péče zavádí oznamování plateb správci daně. Návrh ale nezavádí ani nerozšiřuje daňové zvýhodnění dobrovolného pojištění zdravotních služeb. Další předložený návrh se týká smlouvy s Maltou o zamezení dvojímu zdanění, nikoli zdravotního pojištění. Dodané podklady proto nedokládají posun v plnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "V dodaných podkladech není žádná relevantní změna, která by zaváděla nebo rozšiřovala slíbené doplňkové zdravotní pojištění či jeho daňové zvýhodnění; z těchto podkladů proto nelze posoudit případné jiné kroky strany."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0e5b1579b100b582016ab92b9c924087d1805500a4712e1e20",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10598,
+      "input_tokens_details": {
+        "cache_write_tokens": 7358,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 2281,
+      "output_tokens_details": {
+        "reasoning_tokens": 1643
+      },
+      "total_tokens": 12879
+    },
+    "output": {
+      "promiseId": "candidate-3e227e40be53",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Poskytnutý text návrhu obsahuje pouze upozornění na formát PDF/A, takže z něj nelze určit žádnou úpravu doplňkového zdravotního pojištění ani jeho daňového zvýhodnění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje daňové oznamování zaplacených příspěvků na pojištění dlouhodobé péče, které je výslovně jedním z typů služeb uvedených ve slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-3e227e40be53--source",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--law-change-43422-4",
+        "psp-core-2025--print-step-211439",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, předložila návrh měnící pravidla daňového oznamování příspěvků na pojištění dlouhodobé péče. To se týká jedné oblasti, kterou slib zmiňuje, a může podpořit daňové zacházení s tímto pojištěním. Návrh však sám nezavádí nové daňové zvýhodnění ani širší možnost dobrovolného doplňkového pojištění. U dalšího daňového návrhu není v podkladech dostupné jeho věcné znění, takže nelze spolehlivě posoudit, zda se slibu týká.",
+      "confidence": "low",
+      "uncertainties": [
+        "Návrh týkající se pojištění dlouhodobé péče stanoví oznamovací povinnost, ale z poskytnutého textu není patrné, že by sám vytvářel nebo rozšiřoval daňové zvýhodnění; hodnocení jako dílčího posunu je proto nejisté.",
+        "U návrhu smlouvy s Maltou je k dispozici jen údaj, že dokument je ve formátu PDF/A, nikoli jeho věcné znění. Jeho možnou souvislost se slibem proto nelze ověřit."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0fd09eadcd3bf10e016ab92ba9119487d1a0b48e6d86076766",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 10598,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 10595
+      },
+      "output_tokens": 2658,
+      "output_tokens_details": {
+        "reasoning_tokens": 2114
+      },
+      "total_tokens": 13256
+    },
+    "output": {
+      "promiseId": "candidate-3e227e40be53",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Návrh ratifikace smlouvy o zamezení dvojímu zdanění mezi Českou republikou a Maltou se netýká dobrovolného zdravotního pojištění ani jeho daňového zvýhodnění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": false,
+          "reasonCz": "Text pouze ukládá poskytovatelům dlouhodobého pojištění oznamovat údaje správci daně, ale nemění nabídku pojištění zdravotních služeb ani jeho daňové zvýhodnění."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-3e227e40be53--source",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--law-change-43422-4",
+        "psp-core-2025--print-step-211439",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Motoristé sobě spolu s koaličními partnery předložili vládní návrh, který u pojištění dlouhodobé péče zavádí oznamování plateb správci daně. Návrh ale nezavádí ani nerozšiřuje daňové zvýhodnění dobrovolného pojištění zdravotních služeb. Další předložený návrh se týká smlouvy s Maltou o zamezení dvojímu zdanění, nikoli zdravotního pojištění. Dodané podklady proto nedokládají posun v plnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "V dodaných podkladech není žádná relevantní změna, která by zaváděla nebo rozšiřovala slíbené doplňkové zdravotní pojištění či jeho daňové zvýhodnění; z těchto podkladů proto nelze posoudit případné jiné kroky strany."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0a131bf2062475cf016ab92bb7c68087d1aeb3169f42edcb18",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 10822,
+      "input_tokens_details": {
+        "cache_write_tokens": 8405,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 420,
+      "output_tokens_details": {
+        "reasoning_tokens": 168
+      },
+      "total_tokens": 11242
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-3e227e40be53--source",
+        "psp-core-2025--law-change-43422-4",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--print-step-211439"
+      ],
+      "explanationCz": "Volím hodnocení B. Vládní návrh změn pracovního práva a daní, vedený ve Sněmovně jako tisk č. 300, ukládá poskytovatelům pojištění dlouhodobé péče oznamovat správci daně údaje o platbách. Nemění ale nabídku dobrovolného pojištění zdravotních služeb ani nezavádí či nerozšiřuje daňovou úlevu, kterou Motoristé sobě slibovali. Druhý návrh, smlouva s Maltou o zamezení dvojímu zdanění vedená jako tisk č. 197, se zdravotním pojištěním nesouvisí."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

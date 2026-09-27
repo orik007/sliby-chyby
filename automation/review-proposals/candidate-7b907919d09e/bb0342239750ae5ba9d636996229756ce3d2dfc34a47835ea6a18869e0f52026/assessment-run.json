@@ -1,0 +1,226 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-47-34-801Z--4a14206e7429",
+  "evaluatedAt": "2026-09-27T14:47:34.801Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-7b907919d09e/4a14206e7429654a6adfb5188b5310b5436ab6af10363c7a4ad900bc18697a11.json",
+  "packageHash": "4a14206e7429654a6adfb5188b5310b5436ab6af10363c7a4ad900bc18697a11",
+  "assessmentContentHash": "4a4df217eff80a5dc0abec7880b9eaee43e443b0a67d16d2a7238decd299de88",
+  "assessmentFingerprint": "bb0342239750ae5ba9d636996229756ce3d2dfc34a47835ea6a18869e0f52026",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-7b907919d09e",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-7b907919d09e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-64",
+          "relevant": true,
+          "reasonCz": "Mění ustanovení zákona o léčivech, a proto může zasahovat do slibované lékové bezpečnosti; z dodaného znění však není patrný věcný účinek vypuštění částí vět."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Dodaný text rozpočtu stanoví celkové příjmy, výdaje a schodek, ale neuvádí konkrétní podporu domácí výroby léčiv ani jiné opatření lékové bezpečnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43344-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje postup státu při mimořádných situacích na vnitřním trhu a krizově relevantní zboží, ale nespojuje tato opatření s výrobou léčiv ani s jejich zásobováním."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-7b907919d09e--source",
+        "psp-core-2025--law-change-43184-approved-64",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu související se zákonem o státních zaměstnancích, která vypouští části vět ze zákona o léčivech. Dodaný text ale neukazuje, jaká pravidla se tím ruší, takže nelze doložit, zda hlasování přineslo pobídky pro domácí výrobu léčiv nebo posílilo lékovou bezpečnost. Proto zatím není ověřen podstatný posun.",
+      "confidence": "low",
+      "uncertainties": [
+        "Dodaný text zachycuje pouze vypuštění částí vět z právní úpravy léčiv, nikoli obsah vypuštěných pravidel; dopad změny na dostupnost léčiv nebo domácí výrobu proto nelze posoudit."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-7b907919d09e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-64",
+          "relevant": false,
+          "reasonCz": "Změna pouze vypouští části dvou ustanovení zákona o léčivech a její text neukazuje, že by zaváděla pobídky pro domácí výrobu nebo měnila dostupnost léčiv."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Rozpočtový návrh uvádí celkové příjmy a výdaje, ale jeho předložené znění neobsahuje konkrétní podporu výroby léčiv."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43344-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje postupy při mimořádných situacích na vnitřním trhu pro vymezené krizově relevantní zboží, ale výslovně se nevztahuje k výrobě léčiv ani k jejich zásobování."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-7b907919d09e--source",
+        "psp-core-2025--law-change-43184-approved-64",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43344-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--print-step-211612"
+      ],
+      "explanationCz": "Slib požaduje zásadní pobídky pro domácí výrobu léčiv a zajištění lékové bezpečnosti. Vláda předložila návrh státního rozpočtu na rok 2026 a poslanci SPD jej podpořili, ale předložené znění neukazuje konkrétní výdaje na výrobu léčiv. Vláda také navrhla pravidla pro mimořádné situace na vnitřním trhu, ta však v dodaném textu léčiva výslovně neřeší. Z dostupných podkladů proto nelze doložit podstatný posun ve slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text rozpočtu odkazuje na přílohy s podrobnějšími údaji, jejichž konkrétní obsah zde není uveden; nelze proto ověřit, zda rozpočet obsahuje podporu domácí výroby léčiv."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_00f4f1277041ff78016ab92c5e7e4087d18dc1f486c7bb85e7",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 16796,
+      "input_tokens_details": {
+        "cache_write_tokens": 13556,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 4422,
+      "output_tokens_details": {
+        "reasoning_tokens": 3892
+      },
+      "total_tokens": 21218
+    },
+    "output": {
+      "promiseId": "candidate-7b907919d09e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-64",
+          "relevant": true,
+          "reasonCz": "Mění ustanovení zákona o léčivech, a proto může zasahovat do slibované lékové bezpečnosti; z dodaného znění však není patrný věcný účinek vypuštění částí vět."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Dodaný text rozpočtu stanoví celkové příjmy, výdaje a schodek, ale neuvádí konkrétní podporu domácí výroby léčiv ani jiné opatření lékové bezpečnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43344-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje postup státu při mimořádných situacích na vnitřním trhu a krizově relevantní zboží, ale nespojuje tato opatření s výrobou léčiv ani s jejich zásobováním."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-7b907919d09e--source",
+        "psp-core-2025--law-change-43184-approved-64",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci SPD hlasovali pro novelu související se zákonem o státních zaměstnancích, která vypouští části vět ze zákona o léčivech. Dodaný text ale neukazuje, jaká pravidla se tím ruší, takže nelze doložit, zda hlasování přineslo pobídky pro domácí výrobu léčiv nebo posílilo lékovou bezpečnost. Proto zatím není ověřen podstatný posun.",
+      "confidence": "low",
+      "uncertainties": [
+        "Dodaný text zachycuje pouze vypuštění částí vět z právní úpravy léčiv, nikoli obsah vypuštěných pravidel; dopad změny na dostupnost léčiv nebo domácí výrobu proto nelze posoudit."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_00b1b080d842efd8016ab92c74bbb487d1a77e824d6cbf1d3c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 16796,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 16793
+      },
+      "output_tokens": 3518,
+      "output_tokens_details": {
+        "reasoning_tokens": 2931
+      },
+      "total_tokens": 20314
+    },
+    "output": {
+      "promiseId": "candidate-7b907919d09e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-64",
+          "relevant": false,
+          "reasonCz": "Změna pouze vypouští části dvou ustanovení zákona o léčivech a její text neukazuje, že by zaváděla pobídky pro domácí výrobu nebo měnila dostupnost léčiv."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": false,
+          "reasonCz": "Rozpočtový návrh uvádí celkové příjmy a výdaje, ale jeho předložené znění neobsahuje konkrétní podporu výroby léčiv."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43344-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje postupy při mimořádných situacích na vnitřním trhu pro vymezené krizově relevantní zboží, ale výslovně se nevztahuje k výrobě léčiv ani k jejich zásobování."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-7b907919d09e--source",
+        "psp-core-2025--law-change-43184-approved-64",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43344-1",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--print-step-211612"
+      ],
+      "explanationCz": "Slib požaduje zásadní pobídky pro domácí výrobu léčiv a zajištění lékové bezpečnosti. Vláda předložila návrh státního rozpočtu na rok 2026 a poslanci SPD jej podpořili, ale předložené znění neukazuje konkrétní výdaje na výrobu léčiv. Vláda také navrhla pravidla pro mimořádné situace na vnitřním trhu, ta však v dodaném textu léčiva výslovně neřeší. Z dostupných podkladů proto nelze doložit podstatný posun ve slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text rozpočtu odkazuje na přílohy s podrobnějšími údaji, jejichž konkrétní obsah zde není uveden; nelze proto ověřit, zda rozpočet obsahuje podporu domácí výroby léčiv."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

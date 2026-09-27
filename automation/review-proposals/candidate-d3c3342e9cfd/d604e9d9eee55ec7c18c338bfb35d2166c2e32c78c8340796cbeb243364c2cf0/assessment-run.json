@@ -1,0 +1,259 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-53-44-332Z--272421a3a160",
+  "evaluatedAt": "2026-09-27T14:53:44.332Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-d3c3342e9cfd/272421a3a160b8774e0a1c196c69415e850aae8200af5c5b54d829eea69e3a6f.json",
+  "packageHash": "272421a3a160b8774e0a1c196c69415e850aae8200af5c5b54d829eea69e3a6f",
+  "assessmentContentHash": "bb5c2abf68f6eea75101137f02cc76305cdd81bc8fbf06d28a5c20af236a7aa0",
+  "assessmentFingerprint": "d604e9d9eee55ec7c18c338bfb35d2166c2e32c78c8340796cbeb243364c2cf0",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-d3c3342e9cfd",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-d3c3342e9cfd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Text ruší poslední větu ustanovení zákona o informačních systémech veřejné správy, ale neukazuje, že by tím měnil povinnost OSVČ mít datovou schránku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": false,
+          "reasonCz": "Návrh ruší odstavce zákona o právu na digitální služby a mění výši pokuty, avšak jeho text nezasahuje do povinnosti OSVČ provozovat datovou schránku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Text mění či ruší bod jiné novely a její termíny, ale neuvádí změnu povinnosti OSVČ mít datovou schránku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-6",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně ukládá povinnost mít zpřístupněnou datovou schránku určité skupině zprostředkovatelů taxislužby, mezi nimiž mohou být OSVČ."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d3c3342e9cfd--source",
+        "psp-core-2025--law-change-43422-6",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Volební program Motoristů sobě slibuje zrušit povinnost provozovat datovou schránku pro OSVČ. Vláda, v níž Motoristé sobě působí, předložila návrh zákona, který ukládá některým zprostředkovatelům taxislužby bez pobytu, sídla nebo organizační složky v Česku povinnost mít datovou schránku zpřístupněnou. Jde o povinnost pro užší skupinu, která může zahrnovat i OSVČ, takže návrh jde proti části slibu; zatím však jde o předložený návrh, nikoli přijatou změnu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text návrhu výslovně neříká, zda zprostředkovatel taxislužby bez pobytu, sídla nebo organizační složky v Česku je OSVČ; proto nelze tvrdit, že nová povinnost dopadá na OSVČ obecně."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-d3c3342e9cfd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší poslední větu ustanovení zákona o informačních systémech veřejné správy, ale neuvádí, že se týká datových schránek nebo povinnosti OSVČ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": false,
+          "reasonCz": "Změna ruší část ustanovení zákona o právu na digitální služby a upravuje pokutu i příslušný úřad, nikoli povinnost OSVČ provozovat datovou schránku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Text posouvá termíny a ve schválené verzi ruší jeden bod jiné novely, ale neuvádí, že se tato změna týká povinných datových schránek OSVČ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-6",
+          "relevant": true,
+          "reasonCz": "Navržené ustanovení ukládá povinnost mít zpřístupněnou datovou schránku zprostředkovatelům taxislužby bez pobytu, sídla či organizační složky v ČR, takže může zasáhnout i OSVČ."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-d3c3342e9cfd--source",
+        "psp-core-2025--law-change-43422-6",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Program Motoristů sobě slibuje zrušit povinnost provozovat datovou schránku pro OSVČ. Vláda, v níž Motoristé sobě působí, předložila návrh, který ukládá povinnost mít datovou schránku zprostředkovatelům taxislužby bez pobytu, sídla nebo organizační složky v ČR. To může jít proti slibu v případě, že mezi tyto zprostředkovatele patří OSVČ. Dodané znění ale neupřesňuje, zda se tato povinnost na OSVČ vztahuje.",
+      "confidence": "low",
+      "uncertainties": [
+        "Návrh výslovně stanoví povinnost pro zprostředkovatele taxislužby bez pobytu, sídla nebo organizační složky v ČR, ale z dodaného textu nelze určit, zda tato skupina zahrnuje OSVČ; tím zůstává nejisté, zda návrh skutečně odporuje slibu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_05b5756d5f161c64016ab92dc0451087d18fa6e549829142db",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 13301,
+      "input_tokens_details": {
+        "cache_write_tokens": 10061,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 4633,
+      "output_tokens_details": {
+        "reasoning_tokens": 3938
+      },
+      "total_tokens": 17934
+    },
+    "output": {
+      "promiseId": "candidate-d3c3342e9cfd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Text ruší poslední větu ustanovení zákona o informačních systémech veřejné správy, ale neukazuje, že by tím měnil povinnost OSVČ mít datovou schránku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": false,
+          "reasonCz": "Návrh ruší odstavce zákona o právu na digitální služby a mění výši pokuty, avšak jeho text nezasahuje do povinnosti OSVČ provozovat datovou schránku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Text mění či ruší bod jiné novely a její termíny, ale neuvádí změnu povinnosti OSVČ mít datovou schránku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-6",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně ukládá povinnost mít zpřístupněnou datovou schránku určité skupině zprostředkovatelů taxislužby, mezi nimiž mohou být OSVČ."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-d3c3342e9cfd--source",
+        "psp-core-2025--law-change-43422-6",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Volební program Motoristů sobě slibuje zrušit povinnost provozovat datovou schránku pro OSVČ. Vláda, v níž Motoristé sobě působí, předložila návrh zákona, který ukládá některým zprostředkovatelům taxislužby bez pobytu, sídla nebo organizační složky v Česku povinnost mít datovou schránku zpřístupněnou. Jde o povinnost pro užší skupinu, která může zahrnovat i OSVČ, takže návrh jde proti části slibu; zatím však jde o předložený návrh, nikoli přijatou změnu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text návrhu výslovně neříká, zda zprostředkovatel taxislužby bez pobytu, sídla nebo organizační složky v Česku je OSVČ; proto nelze tvrdit, že nová povinnost dopadá na OSVČ obecně."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_08a2a08d2f59f85f016ab92ddb4a2c87d1a6eb270b3bed8cb3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 13301,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 13298
+      },
+      "output_tokens": 3941,
+      "output_tokens_details": {
+        "reasoning_tokens": 3300
+      },
+      "total_tokens": 17242
+    },
+    "output": {
+      "promiseId": "candidate-d3c3342e9cfd",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší poslední větu ustanovení zákona o informačních systémech veřejné správy, ale neuvádí, že se týká datových schránek nebo povinnosti OSVČ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": false,
+          "reasonCz": "Změna ruší část ustanovení zákona o právu na digitální služby a upravuje pokutu i příslušný úřad, nikoli povinnost OSVČ provozovat datovou schránku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-4",
+          "relevant": false,
+          "reasonCz": "Text posouvá termíny a ve schválené verzi ruší jeden bod jiné novely, ale neuvádí, že se tato změna týká povinných datových schránek OSVČ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-6",
+          "relevant": true,
+          "reasonCz": "Navržené ustanovení ukládá povinnost mít zpřístupněnou datovou schránku zprostředkovatelům taxislužby bez pobytu, sídla či organizační složky v ČR, takže může zasáhnout i OSVČ."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-d3c3342e9cfd--source",
+        "psp-core-2025--law-change-43422-6",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Program Motoristů sobě slibuje zrušit povinnost provozovat datovou schránku pro OSVČ. Vláda, v níž Motoristé sobě působí, předložila návrh, který ukládá povinnost mít datovou schránku zprostředkovatelům taxislužby bez pobytu, sídla nebo organizační složky v ČR. To může jít proti slibu v případě, že mezi tyto zprostředkovatele patří OSVČ. Dodané znění ale neupřesňuje, zda se tato povinnost na OSVČ vztahuje.",
+      "confidence": "low",
+      "uncertainties": [
+        "Návrh výslovně stanoví povinnost pro zprostředkovatele taxislužby bez pobytu, sídla nebo organizační složky v ČR, ale z dodaného textu nelze určit, zda tato skupina zahrnuje OSVČ; tím zůstává nejisté, zda návrh skutečně odporuje slibu."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_091c8fa4053e9fcb016ab92df1a15487d1aeca47f2513b112e",
+    "model": "gpt-5.6-terra",
+    "usage": {
+      "input_tokens": 13722,
+      "input_tokens_details": {
+        "cache_write_tokens": 11305,
+        "cached_tokens": 2414
+      },
+      "output_tokens": 638,
+      "output_tokens_details": {
+        "reasoning_tokens": 433
+      },
+      "total_tokens": 14360
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "candidate-d3c3342e9cfd--source",
+        "psp-core-2025--law-change-43422-6",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Volím posouzení A. Motoristé sobě slíbili zrušit povinnost datové schránky pro OSVČ, ale vláda s jejich účastí předložila návrh, který takovou povinnost nově ukládá části zprostředkovatelů taxislužby. Tato skupina může zahrnovat osoby samostatně výdělečně činné, takže návrh jde proti alespoň části slibu. Posouzení A tuto nejistotu správně uvádí, ale přesto z ní vyvozuje odpovídající závěr pro předložený návrh."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-against",
+    "selectedReview": "assessor-a"
+  }
+}

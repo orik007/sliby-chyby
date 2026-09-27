@@ -1,0 +1,170 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-09-27T14-52-42-385Z--dd5f3f9f6c9f",
+  "evaluatedAt": "2026-09-27T14:52:42.385Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-cb5104aa25ef/dd5f3f9f6c9f2db33bcffd73164a2e11872e27e14792b45810832798648cbe3a.json",
+  "packageHash": "dd5f3f9f6c9f2db33bcffd73164a2e11872e27e14792b45810832798648cbe3a",
+  "assessmentContentHash": "a37a5df2ebe69ce12bb401732bbb84bb834b19518342e281f4254a5276db02c5",
+  "assessmentFingerprint": "a0bfc85d1db48cb1420447bc9346256c27ed87ba33b39b91bcd7d1efddba3096",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-cb5104aa25ef",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v18",
+      "contentHash": "80e6da6b9bcef625824ead3c6fa8c35fa14cfc3f0220864ddad37ab9eb1c7e5c"
+    },
+    "arbiter": {
+      "version": "arbiter-v10",
+      "contentHash": "2961ba44f39c192ce9cf2b5b01a0477f6a1329f7837f4e20eb956daf3060f564"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-cb5104aa25ef",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-64",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší část znění dvou ustanovení zákona o léčivech, ale neukazuje, že by zaváděl či měnil půlroční zásobu léčiv nebo jejich obměnu před expirací."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-cb5104aa25ef--source",
+        "psp-core-2025--law-change-43184-approved-64"
+      ],
+      "explanationCz": "SPD slíbila vytvořit půlroční zásobu nejdůležitějších léčiv a systém jejich obměny před expirací. Předložený záznam se týká změny zákona o léčivech, ale uvádí pouze zrušení části dvou ustanovení a neukazuje, že by se změna týkala zásob nebo obměny léčiv. Z dodaných podkladů proto nelze ověřit podstatný posun v plnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění rušené části ustanovení ani relevantní opatření o zásobě léčiv či jejich obměně, takže nelze určit, zda změna měla na slib nějaký dopad."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-cb5104aa25ef",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-64",
+          "relevant": false,
+          "reasonCz": "Změna pouze ruší části vět ve dvou ustanoveních zákona o léčivech a její text neřeší vytvoření půlroční zásoby ani obměnu léčiv před expirací."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-cb5104aa25ef--source",
+        "psp-core-2025--law-change-43184-approved-64"
+      ],
+      "explanationCz": "SPD slíbila vytvořit půlroční zásobu nejdůležitějších léčiv a systém jejich obměny před expirací. Jediná doložená změna zákona o léčivech ruší části dvou vět, ale její text neuvádí zásoby ani obměnu léčiv. Z předložených podkladů proto nelze ověřit podstatný posun ke slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neuvádějí úplné původní znění dotčených ustanovení, takže nelze určit, zda jejich změna nějak ovlivňuje dostupnost léčiv."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_02d287a2e9ad745d016ab92da6186487d1a1b04230856937c5",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 7362,
+      "input_tokens_details": {
+        "cache_write_tokens": 4122,
+        "cached_tokens": 3237
+      },
+      "output_tokens": 1239,
+      "output_tokens_details": {
+        "reasoning_tokens": 868
+      },
+      "total_tokens": 8601
+    },
+    "output": {
+      "promiseId": "candidate-cb5104aa25ef",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-64",
+          "relevant": false,
+          "reasonCz": "Text pouze ruší část znění dvou ustanovení zákona o léčivech, ale neukazuje, že by zaváděl či měnil půlroční zásobu léčiv nebo jejich obměnu před expirací."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-cb5104aa25ef--source",
+        "psp-core-2025--law-change-43184-approved-64"
+      ],
+      "explanationCz": "SPD slíbila vytvořit půlroční zásobu nejdůležitějších léčiv a systém jejich obměny před expirací. Předložený záznam se týká změny zákona o léčivech, ale uvádí pouze zrušení části dvou ustanovení a neukazuje, že by se změna týkala zásob nebo obměny léčiv. Z dodaných podkladů proto nelze ověřit podstatný posun v plnění slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění rušené části ustanovení ani relevantní opatření o zásobě léčiv či jejich obměně, takže nelze určit, zda změna měla na slib nějaký dopad."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0e13da801c541a62016ab92dae2fc487d189f1eabfdb116a34",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 7362,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 7359
+      },
+      "output_tokens": 1864,
+      "output_tokens_details": {
+        "reasoning_tokens": 1528
+      },
+      "total_tokens": 9226
+    },
+    "output": {
+      "promiseId": "candidate-cb5104aa25ef",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-approved-64",
+          "relevant": false,
+          "reasonCz": "Změna pouze ruší části vět ve dvou ustanoveních zákona o léčivech a její text neřeší vytvoření půlroční zásoby ani obměnu léčiv před expirací."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-cb5104aa25ef--source",
+        "psp-core-2025--law-change-43184-approved-64"
+      ],
+      "explanationCz": "SPD slíbila vytvořit půlroční zásobu nejdůležitějších léčiv a systém jejich obměny před expirací. Jediná doložená změna zákona o léčivech ruší části dvou vět, ale její text neuvádí zásoby ani obměnu léčiv. Z předložených podkladů proto nelze ověřit podstatný posun ke slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neuvádějí úplné původní znění dotčených ustanovení, takže nelze určit, zda jejich změna nějak ovlivňuje dostupnost léčiv."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}
