@@ -1,8 +1,9 @@
+import { createServer } from "node:http";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { strToU8, zipSync } from "fflate";
-import { createPspFetcher, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, pspDownloadSettings } from "../scripts/lib/psp-print-documents.mjs";
+import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, pspDownloadSettings, summarizePspRequests } from "../scripts/lib/psp-print-documents.mjs";
 import { proposalBody } from "../scripts/lib/print-parts.mjs";
 
 test("builds the official print page URL", () => {
@@ -111,9 +112,91 @@ test("the psp.cz fetcher gives up after its attempts and frees its slot", async 
   assert.deepEqual(stub.log.starts.map(({ url }) => url), [failing, failing, other]);
 });
 
-test("run-print-parts.mjs sends every psp.cz request through the shared fetcher", async () => {
+test("the psp.cz fetcher reports every attempt with its failure code or its answer", async () => {
+  const failing = "https://www.psp.cz/sqw/historie.sqw?o=10&t=1";
+  const attempts = [];
+  const fetchPsp = createPspFetcher({ concurrency: 1, retryAttempts: 2, retryDelayMs: 0, onAttempt: (attempt) => attempts.push(attempt) });
+  await withStubPsp(stubPsp({ [failing]: 1 }), () => fetchPsp(pspSource, failing, htmlOptions));
+  assert.deepEqual(attempts.map(({ url, attempt, status, bytes, error }) => ({ url, attempt, status, bytes, error })), [
+    { url: failing, attempt: 1, status: null, bytes: null, error: "UND_ERR_CONNECT_TIMEOUT" },
+    { url: failing, attempt: 2, status: 200, bytes: 13, error: null }
+  ]);
+  assert.ok(attempts.every(({ startedAt, durationMs }) => !Number.isNaN(Date.parse(startedAt)) && durationMs >= 0));
+});
+
+test("the psp.cz request log records each new connection to its host, and a refused one with its code", async () => {
+  const server = createServer((request, response) => response.end("ok"));
+  await new Promise((resolveListen) => server.listen(0, "127.0.0.1", resolveListen));
+  const { port } = server.address();
+  const closed = createServer();
+  await new Promise((resolveListen) => closed.listen(0, "127.0.0.1", resolveListen));
+  const closedPort = closed.address().port;
+  await new Promise((resolveClose) => closed.close(resolveClose));
+  const saved = [];
+  const requests = createPspRequestLog({ hostname: "127.0.0.1", onEntry: (entry) => saved.push(entry) });
+  try {
+    await (await fetch(`http://127.0.0.1:${port}/`)).text();
+    await assert.rejects(fetch(`http://127.0.0.1:${closedPort}/`));
+  } finally {
+    requests.stop();
+    server.closeAllConnections();
+    server.close();
+  }
+  assert.deepEqual(requests.entries.map(({ type, error }) => ({ type, error })), [
+    { type: "connect", error: null },
+    { type: "connect", error: "ECONNREFUSED" }
+  ]);
+  assert.deepEqual(saved, requests.entries, "each entry is handed on as soon as it is recorded");
+  const before = requests.entries.length;
+  await assert.rejects(fetch(`http://127.0.0.1:${closedPort}/`));
+  assert.equal(requests.entries.length, before, "a stopped log records nothing");
+});
+
+test("a psp.cz request summary counts failures by cause and the busiest 60 s", () => {
+  const at = (seconds) => new Date(Date.UTC(2026, 8, 27, 10, 0, 0) + seconds * 1000).toISOString();
+  const attempt = (seconds, url, error = null, status = 200) => ({ type: "attempt", url, attempt: 1, startedAt: at(seconds), durationMs: 1, status: error ? null : status, bytes: null, error });
+  const entries = [
+    attempt(0, "a"), attempt(10, "b", "UND_ERR_CONNECT_TIMEOUT"), attempt(30, "b"), attempt(50, "c", null, 503),
+    attempt(70, "d"), attempt(200, "e"),
+    { type: "connect", startedAt: at(9), durationMs: 10_000, error: "UND_ERR_CONNECT_TIMEOUT" },
+    { type: "connect", startedAt: at(29), durationMs: 40, error: null }
+  ];
+  assert.deepEqual(summarizePspRequests(entries), {
+    minutes: 3.3,
+    attempts: 6,
+    urls: 5,
+    failedAttempts: 2,
+    failedAttemptsBy: { UND_ERR_CONNECT_TIMEOUT: 1, "HTTP 503": 1 },
+    attemptsPerMinute: 1.8,
+    busiestMinuteAttempts: 4,
+    connections: 2,
+    failedConnections: 1,
+    failedConnectionsBy: { UND_ERR_CONNECT_TIMEOUT: 1 },
+    connectionsPerMinute: 0.6,
+    busiestMinuteConnections: 2
+  });
+});
+
+test("a failed download is reported only after every other request has finished", async () => {
+  const finished = [];
+  const slow = pause(30).then(() => finished.push("slow"));
+  const failing = pause(5).then(() => {
+    finished.push("failing");
+    throw new Error("download failed");
+  });
+  await assert.rejects(allSettledOrThrow([failing, slow]), /download failed/);
+  assert.deepEqual(finished, ["failing", "slow"]);
+  assert.deepEqual(await allSettledOrThrow([Promise.resolve(1), null]), [1, null]);
+});
+
+test("run-print-parts.mjs sends every psp.cz request through the shared fetcher and logs it", async () => {
   const script = await readFile(new URL("../scripts/run-print-parts.mjs", import.meta.url), "utf8");
-  assert.match(script, /const fetchPsp = createPspFetcher\(\);/);
+  assert.match(script, /const fetchPsp = createPspFetcher\(\{ \.\.\.pspDownloadSettings, onAttempt: pspRequests\.onAttempt \}\);/);
+  // Each entry is appended as it happens, so the file survives a step timeout.
+  assert.match(script, /createPspRequestLog\(\{ onEntry: \(entry\) => appendFileSync\(pspRequestFile, /);
+  assert.match(script, /finally \{\s*pspRequests\.stop\(\);/);
   assert.doesNotMatch(script, /fetchVerified|globalThis\.fetch|\bfetch\(/);
-  assert.match(script, /Math\.min\(pspDownloadSettings\.concurrency, prints\.length\)/);
+  assert.match(script, /await allSettledOrThrow\(Array\.from\(\{ length: Math\.min\(pspDownloadSettings\.concurrency, prints\.length\) \}, downloadWorker\)\)/);
+  assert.match(script, /while \(!downloadFailed && nextIndex < prints\.length\)/);
+  assert.doesNotMatch(script, /Promise\.all\(/, "a failed download never leaves another request running unseen");
 });
