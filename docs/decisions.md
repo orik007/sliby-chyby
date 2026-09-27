@@ -19,6 +19,12 @@ This document contains only the current confirmed rules. When a rule changes, re
 - An item's quote is the exact programme wording without layout artefacts; its title names the one commitment assessed, written only from facts in the quote. The canonical rule is [promise-selection.md](promise-selection.md).
 - Routing tags of a promise are assigned once when it is catalogued and reviewed in its pull request; no model tags promises.
 
+## Site changes page
+
+- The public page `/zmeny` lists changes to the site's features by date, newest first, and, separately, the features being prepared. It is linked from the footer.
+- It lists only what a visitor can use or see on the site: pages, functions, and disclosed limitations. It never lists catalogue content, score changes, or superseded rules; score changes stay in each promise's revision history.
+- Its entries are in `data/changelog.json` and validated against its schema. A pull request that adds a visitor-facing feature adds its entry; a prepared feature moves from the prepared list to a dated entry when it is released.
+
 ## Promise source archive
 
 - Preserve the original files of every catalogued source in a versioned repository archive, independent of the automation audit branch, together with their extracted text against which every quote is checked.

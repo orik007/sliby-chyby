@@ -1,6 +1,7 @@
 import systemStatusData from "../../data/system-status.json";
+import changelogData from "../../data/changelog.json";
 import policyCategoryData from "../../data/promise-categories.json";
-import { assessmentRevisionSchema, partyPeriodSchema, partySchema, periodSchema, policyCategoryDataSchema, promiseSchema, sourceSchema, systemStatusSchema, type AssessmentRevision, type AssessmentStatus, type PartyPeriod, type PolicyCategory, type PromiseRecord } from "./schema";
+import { assessmentRevisionSchema, changelogSchema, partyPeriodSchema, partySchema, periodSchema, policyCategoryDataSchema, promiseSchema, sourceSchema, systemStatusSchema, type AssessmentRevision, type AssessmentStatus, type PartyPeriod, type PolicyCategory, type PromiseRecord } from "./schema";
 import { calculateSlavaIndex } from "./scoring";
 
 function parseCollection<T>(modules: Record<string, unknown>, schema: { parse: (value: unknown) => T }): T[] {
@@ -21,6 +22,7 @@ export const statements = publishedItems.filter(({ kind }) => kind === "statemen
 const visiblePromiseIds = new Set(promises.map(({ id }) => id));
 export const assessmentRevisions = allAssessmentRevisions.filter(({ promiseId }) => visiblePromiseIds.has(promiseId));
 export const systemStatus = systemStatusSchema.parse(systemStatusData);
+export const changelog = changelogSchema.parse(changelogData);
 const policyCategoryDataParsed = policyCategoryDataSchema.parse(policyCategoryData);
 export const policyCategories = [...policyCategoryDataParsed.categories].sort((a, b) => a.order - b.order);
 const policyCategoryById = new Map(policyCategories.map((category) => [category.id, category]));

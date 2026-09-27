@@ -48,6 +48,17 @@ export const assessmentRevisionSchema = z.object({ id: z.string().min(1), promis
   if (revision.baselinePromiseSourceId && (revision.evidenceSourceIds.length !== 1 || revision.evidenceSourceIds[0] !== revision.baselinePromiseSourceId)) context.addIssue({ code: "custom", path: ["evidenceSourceIds"], message: "Baseline revisions must list only their baseline promise source" });
 });
 export const systemStatusSchema = z.object({ lastSuccessfulCollectionAt: z.iso.datetime() });
+// Site features only, newest first; content and score changes are not listed
+// (docs/decisions.md).
+export const changelogSchema = z.object({
+  released: z.array(z.object({ date: z.iso.date(), items: z.array(z.string().min(1)).min(1) })).min(1),
+  planned: z.array(z.string().min(1)),
+}).superRefine((changelog, context) => {
+  changelog.released.forEach((entry, index) => {
+    const previous = changelog.released[index - 1];
+    if (previous && previous.date <= entry.date) context.addIssue({ code: "custom", path: ["released", index, "date"], message: "Released entries must be unique dates, newest first" });
+  });
+});
 
 export type PartyPeriod = z.infer<typeof partyPeriodSchema>;
 export type PromiseRecord = z.infer<typeof promiseSchema>;
