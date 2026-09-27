@@ -49,12 +49,14 @@ function modelPrices() {
 /**
  * Estimated cost in USD of one call from the provider's reported usage and
  * the published prices in automation/model-prices.json; null when either is
- * missing. A call processed in the Flex tier is priced at that tier's rates.
+ * missing, or when the call was processed in a tier other than standard or
+ * Flex, which the table does not price.
  * A request with more input tokens than the long-context threshold is priced
  * at the long-context rates in full. It is an estimate, not the provider's
  * invoice.
  */
 export function estimateCallCost(model, usage, table = modelPrices(), serviceTier = null) {
+  if (serviceTier && !["default", "flex"].includes(serviceTier)) return null;
   const tier = serviceTier === "flex" ? table.models?.[model]?.flex : table.models?.[model];
   if (!tier || !usage) return null;
   const input = usage.input_tokens ?? 0;

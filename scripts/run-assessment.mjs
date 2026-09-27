@@ -136,7 +136,10 @@ const auditRecord = {
   },
   publicationApproved: false,
   independence: {
-    statelessParallelCalls: true,
+    // Each call is stateless (nothing is stored at the provider); B is
+    // called after A has answered, with the same request.
+    statelessCalls: true,
+    callOrder: ["assessor-a", "assessor-b"],
     assessorProviders: [rawA.provider, rawB.provider],
     assessorModels: [rawA.model, rawB.model],
     sameProvider: rawA.provider === rawB.provider,

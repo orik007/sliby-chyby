@@ -26,6 +26,7 @@ test("a Flex call is priced at the Flex rates", () => {
   const usage = { input_tokens: 1_000_000, input_tokens_details: { cached_tokens: 0 }, output_tokens: 1_000_000 };
   assert.equal(estimateCallCost("gpt-6-luna", usage, table, "flex").toFixed(4), "0.3000");
   assert.equal(estimateCallCost("gpt-6-luna", usage, table, "default").toFixed(4), "0.6000");
+  assert.equal(estimateCallCost("gpt-6-luna", usage, table, "priority"), null, "a tier the table does not price has no estimate");
 });
 
 test("the price table carries the long-context rates for every model", async () => {

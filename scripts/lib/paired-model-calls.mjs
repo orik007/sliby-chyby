@@ -144,17 +144,20 @@ export async function pairedModelCall({ subjectId, fingerprint, cache, persist, 
   const cached = fingerprintMatches(cache.entries[subjectId], fingerprint) ? cache.entries[subjectId] : null;
   const reusedA = cached?.a != null;
   const reusedB = cached?.b != null;
-  const attemptA = reusedA ? { response: { output: revalidate(cached.a), model: fingerprint.modelA }, error: null, reused: true } : await isolateInvalidOutput(callA);
+  // Saved answers are validated again before any paid call.
+  const savedA = reusedA ? revalidate(cached.a) : null;
+  const savedB = reusedB ? revalidate(cached.b) : null;
+  const attemptA = reusedA ? { response: { output: savedA, model: fingerprint.modelA }, error: null, reused: true } : await isolateInvalidOutput(callA);
   const save = async (b) => {
     cache.entries[subjectId] = { ...fingerprint, a: attemptA.response?.output ?? null, b };
     await persist(subjectId);
   };
   let attemptB;
   try {
-    attemptB = reusedB ? { response: { output: revalidate(cached.b), model: fingerprint.modelB }, error: null, reused: true } : await isolateInvalidOutput(callB);
+    attemptB = reusedB ? { response: { output: savedB, model: fingerprint.modelB }, error: null, reused: true } : await isolateInvalidOutput(callB);
   } catch (error) {
     // A transport failure of B stops the run; a new valid A is saved first.
-    if (!reusedA && !attemptA.error) await save(reusedB ? cached.b : null);
+    if (!reusedA && !attemptA.error) await save(null);
     throw error;
   }
   const reused = reusedA && reusedB;

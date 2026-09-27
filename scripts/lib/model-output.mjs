@@ -19,7 +19,7 @@ export function pairedModelRuntimeConfig(env = process.env) {
     provider: env.SLIBY_TAGGING_PROVIDER ?? "openai",
     modelA: env.SLIBY_TAGGING_MODEL_A ?? "gpt-6-luna",
     modelB: env.SLIBY_TAGGING_MODEL_B ?? "gpt-6-luna",
-    concurrency: Number(env.SLIBY_TAGGING_CONCURRENCY ?? "4")
+    concurrency: Number(env.SLIBY_TAGGING_CONCURRENCY ?? "32")
   };
 }
 

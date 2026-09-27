@@ -73,6 +73,14 @@ test("B is called only after A has answered, and a transport failure of B keeps 
   assert.deepEqual([cache.entries.s1.a, cache.entries.s1.b], [{ v: 1 }, null], "the paid answer of A is saved before the run stops");
 });
 
+test("a saved answer that no longer validates stops the pair before any paid call", async () => {
+  let calls = 0;
+  const cache = { entries: { s1: { ...fingerprint, a: null, b: { v: "old" } } } };
+  const revalidate = (output) => { if (output.v === "old") throw new Error("saved answer is invalid"); return output; };
+  await assert.rejects(() => pairedModelCall({ subjectId: "s1", fingerprint, cache, persist: async () => {}, callA: async () => { calls += 1; return answer({ v: 1 })(); }, callB: answer({ v: 2 }), revalidate }), /saved answer is invalid/);
+  assert.equal(calls, 0);
+});
+
 test("a transport failure stops the run, and finished subjects travel with the error", async () => {
   const outage = async () => { throw new Error("OpenAI Responses API failed (429): insufficient quota"); };
   await assert.rejects(() => pairedModelCall({ subjectId: "s1", fingerprint, cache: { entries: {} }, persist: async () => {}, callA: outage, callB: answer({}) }), /insufficient quota/);

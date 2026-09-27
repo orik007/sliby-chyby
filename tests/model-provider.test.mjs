@@ -106,7 +106,7 @@ test("createStructuredModelResponse gives up after repeated 429s and reports the
       }),
       /OpenAI Responses API failed \(429\)/
     );
-    assert.equal(callCount, 6, "must retry up to the fixed attempt cap, not forever");
+    assert.equal(callCount, 8, "must retry up to the fixed attempt cap, not forever");
   } finally {
     globalThis.fetch = originalFetch;
   }
@@ -254,7 +254,7 @@ test("createStructuredModelResponse falls back to the exact exponential schedule
   let callCount = 0;
   globalThis.fetch = async () => {
     callCount += 1;
-    if (callCount <= 5) {
+    if (callCount <= 7) {
       return {
         ok: false,
         status: 503,
@@ -282,8 +282,8 @@ test("createStructuredModelResponse falls back to the exact exponential schedule
       name: "fixture_schema",
       schema: { type: "object" }
     });
-    assert.equal(callCount, 6, "must exhaust all 5 retries (6 attempts total) before succeeding on the last one");
-    assert.deepEqual(capturedDelaysMs, [2000, 4000, 8000, 16000, 32000], "the fallback schedule must be exactly this exponential sequence, not just any non-zero delay");
+    assert.equal(callCount, 8, "must exhaust all 7 retries (8 attempts total) before succeeding on the last one");
+    assert.deepEqual(capturedDelaysMs, [2000, 4000, 8000, 16000, 32000, 64000, 120000], "the fallback schedule must be exactly this exponential sequence, capped at two minutes");
     assert.deepEqual(result.output, { ok: true });
   } finally {
     globalThis.fetch = originalFetch;
@@ -315,6 +315,25 @@ test("createStructuredModelResponse asks for Flex processing and retries a Flex 
     assert.deepEqual(result.output, { ok: true });
   } finally {
     globalThis.fetch = originalFetch;
+  }
+});
+
+test("a request that fails without a response is retried", async () => {
+  const originalFetch = globalThis.fetch;
+  const originalSetTimeout = globalThis.setTimeout;
+  globalThis.setTimeout = (fn) => originalSetTimeout(fn, 0);
+  let callCount = 0;
+  globalThis.fetch = async () => {
+    callCount += 1;
+    if (callCount === 1) throw new TypeError("fetch failed", { cause: { code: "UND_ERR_HEADERS_TIMEOUT" } });
+    return { ok: true, json: async () => ({ id: "resp_fixture", model: "gpt-6-luna", usage: { input_tokens: 1, output_tokens: 1 }, output: [{ content: [{ type: "output_text", text: "{}" }] }] }) };
+  };
+  try {
+    await createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6-luna", instructions: "fixture", input: {}, name: "fixture_schema", schema: { type: "object" } });
+    assert.equal(callCount, 2);
+  } finally {
+    globalThis.fetch = originalFetch;
+    globalThis.setTimeout = originalSetTimeout;
   }
 });
 
