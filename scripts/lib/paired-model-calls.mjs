@@ -135,20 +135,30 @@ function fingerprintMatches(cached, fingerprint) {
  * side is cached as soon as it exists; an invalid side is cached as null and
  * called again in the next run, which reuses the valid side. An invalid side
  * is returned as null.
+ *
+ * B is called only after A has answered: both sides send the same request
+ * when they use the same model, so B reads the provider's prompt cache and
+ * pays a tenth for the input they share. The answers stay independent.
  */
 export async function pairedModelCall({ subjectId, fingerprint, cache, persist, callA, callB, revalidate = (output) => output }) {
   const cached = fingerprintMatches(cache.entries[subjectId], fingerprint) ? cache.entries[subjectId] : null;
   const reusedA = cached?.a != null;
   const reusedB = cached?.b != null;
-  const [attemptA, attemptB] = await Promise.all([
-    reusedA ? { response: { output: revalidate(cached.a), model: fingerprint.modelA }, error: null, reused: true } : isolateInvalidOutput(callA),
-    reusedB ? { response: { output: revalidate(cached.b), model: fingerprint.modelB }, error: null, reused: true } : isolateInvalidOutput(callB)
-  ]);
-  const reused = reusedA && reusedB;
-  if (!reused && (!attemptA.error || !attemptB.error)) {
-    cache.entries[subjectId] = { ...fingerprint, a: attemptA.response?.output ?? null, b: attemptB.response?.output ?? null };
+  const attemptA = reusedA ? { response: { output: revalidate(cached.a), model: fingerprint.modelA }, error: null, reused: true } : await isolateInvalidOutput(callA);
+  const save = async (b) => {
+    cache.entries[subjectId] = { ...fingerprint, a: attemptA.response?.output ?? null, b };
     await persist(subjectId);
+  };
+  let attemptB;
+  try {
+    attemptB = reusedB ? { response: { output: revalidate(cached.b), model: fingerprint.modelB }, error: null, reused: true } : await isolateInvalidOutput(callB);
+  } catch (error) {
+    // A transport failure of B stops the run; a new valid A is saved first.
+    if (!reusedA && !attemptA.error) await save(reusedB ? cached.b : null);
+    throw error;
   }
+  const reused = reusedA && reusedB;
+  if (!reused && (!attemptA.error || !attemptB.error)) await save(attemptB.response?.output ?? null);
   const called = [attemptA, attemptB].filter((attempt) => !attempt.reused);
   return {
     a: attemptA.response?.output ?? null,

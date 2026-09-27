@@ -49,15 +49,16 @@ function modelPrices() {
 /**
  * Estimated cost in USD of one call from the provider's reported usage and
  * the published prices in automation/model-prices.json; null when either is
- * missing. A request with more input tokens than the long-context threshold
- * is priced at the long-context rates in full. It is an estimate, not the
- * provider's invoice.
+ * missing. A call processed in the Flex tier is priced at that tier's rates.
+ * A request with more input tokens than the long-context threshold is priced
+ * at the long-context rates in full. It is an estimate, not the provider's
+ * invoice.
  */
-export function estimateCallCost(model, usage, table = modelPrices()) {
-  const standard = table.models?.[model];
-  if (!standard || !usage) return null;
+export function estimateCallCost(model, usage, table = modelPrices(), serviceTier = null) {
+  const tier = serviceTier === "flex" ? table.models?.[model]?.flex : table.models?.[model];
+  if (!tier || !usage) return null;
   const input = usage.input_tokens ?? 0;
-  const price = input > (table.longContextThresholdTokens ?? Number.POSITIVE_INFINITY) && standard.longContext ? standard.longContext : standard;
+  const price = input > (table.longContextThresholdTokens ?? Number.POSITIVE_INFINITY) && tier.longContext ? tier.longContext : tier;
   const cached = usage.input_tokens_details?.cached_tokens ?? 0;
   const output = usage.output_tokens ?? 0;
   return ((input - cached) * price.input + cached * price.cachedInput + output * price.output) / 1_000_000;
@@ -69,20 +70,20 @@ let processTotal = 0;
  * Logs one paid model call and appends it to the JSONL file named by
  * SLIBY_MODEL_CALL_LOG, so the run's spend is known even after a failure.
  */
-export function logModelCall({ label, model, usage, ok = true, error = null }) {
-  const cost = estimateCallCost(model, usage);
+export function logModelCall({ label, model, usage, serviceTier = null, ok = true, error = null }) {
+  const cost = estimateCallCost(model, usage, modelPrices(), serviceTier);
   if (cost !== null) processTotal += cost;
   const tokens = usage
     ? `${usage.input_tokens ?? 0} in (${usage.input_tokens_details?.cached_tokens ?? 0} cached) / ${usage.output_tokens ?? 0} out tokens`
     : "no usage reported";
   const costText = cost === null ? "cost unknown" : `≈ $${cost.toFixed(4)}`;
-  log(`model call ${ok ? "ok" : "FAILED"} · ${model} · ${label ?? "unlabelled"} · ${tokens} · ${costText} · this process ≈ $${processTotal.toFixed(2)}${error ? ` · ${error}` : ""}`);
+  log(`model call ${ok ? "ok" : "FAILED"} · ${model}${serviceTier ? ` (${serviceTier})` : ""} · ${label ?? "unlabelled"} · ${tokens} · ${costText} · this process ≈ $${processTotal.toFixed(2)}${error ? ` · ${error}` : ""}`);
   const file = process.env.SLIBY_MODEL_CALL_LOG;
   if (!file) return;
   // Logging must never stop a paid call from being used.
   try {
     mkdirSync(dirname(resolve(file)), { recursive: true });
-    appendFileSync(resolve(file), `${JSON.stringify({ at: new Date().toISOString(), step: process.env.SLIBY_STEP ?? null, label: label ?? null, model, ok, usage: usage ?? null, estimatedCostUsd: cost, error })}\n`);
+    appendFileSync(resolve(file), `${JSON.stringify({ at: new Date().toISOString(), step: process.env.SLIBY_STEP ?? null, label: label ?? null, model, serviceTier, ok, usage: usage ?? null, estimatedCostUsd: cost, error })}\n`);
   } catch (writeError) {
     log(`could not append to the model-call log: ${writeError instanceof Error ? writeError.message : String(writeError)}`);
   }

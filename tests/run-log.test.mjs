@@ -21,6 +21,13 @@ test("a request above the long-context threshold is priced at the long-context r
   assert.equal(at(272_001).toFixed(6), ((272_001 * 4 + 1_000 * 18) / 1_000_000).toFixed(6));
 });
 
+test("a Flex call is priced at the Flex rates", () => {
+  const table = { models: { "gpt-6-luna": { input: 0.10, cachedInput: 0.01, output: 0.50, flex: { input: 0.05, cachedInput: 0.005, output: 0.25 } } } };
+  const usage = { input_tokens: 1_000_000, input_tokens_details: { cached_tokens: 0 }, output_tokens: 1_000_000 };
+  assert.equal(estimateCallCost("gpt-6-luna", usage, table, "flex").toFixed(4), "0.3000");
+  assert.equal(estimateCallCost("gpt-6-luna", usage, table, "default").toFixed(4), "0.6000");
+});
+
 test("the price table carries the long-context rates for every model", async () => {
   const table = JSON.parse(await readFile(new URL("../automation/model-prices.json", import.meta.url), "utf8"));
   assert.equal(table.longContextThresholdTokens, 272_000);
@@ -30,6 +37,11 @@ test("the price table carries the long-context rates for every model", async () 
     assert.equal(price.longContext.input, price.input * 2, model);
     assert.equal(price.longContext.cachedInput, price.cachedInput * 2, model);
     assert.equal(price.longContext.output, price.output * 1.5, model);
+    // Flex processing costs half the standard price, long context included.
+    for (const rates of [price, price.longContext]) {
+      const flex = rates === price ? price.flex : price.flex.longContext;
+      for (const key of ["input", "cachedInput", "output"]) assert.equal(flex[key], rates[key] / 2, `${model} Flex ${key}`);
+    }
   }
 });
 

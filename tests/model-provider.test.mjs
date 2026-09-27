@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
+import { createServer } from "node:http";
 import test from "node:test";
-import { createStructuredModelResponse } from "../scripts/lib/model-provider.mjs";
+import { createRequestDispatcher, createStructuredModelResponse } from "../scripts/lib/model-provider.mjs";
 
 // Stub calls never belong in a real run's spend log.
 delete process.env.SLIBY_MODEL_CALL_LOG;
@@ -287,5 +288,48 @@ test("createStructuredModelResponse falls back to the exact exponential schedule
   } finally {
     globalThis.fetch = originalFetch;
     globalThis.setTimeout = originalSetTimeout;
+  }
+});
+
+test("createStructuredModelResponse asks for Flex processing and retries a Flex timeout", async () => {
+  const originalFetch = globalThis.fetch;
+  const bodies = [];
+  globalThis.fetch = async (url, init) => {
+    bodies.push(JSON.parse(init.body));
+    if (bodies.length === 1) return { ok: false, status: 408, headers: fixtureHeaders({ "retry-after": "0" }), json: async () => ({ error: { message: "Request timed out" } }) };
+    return {
+      ok: true,
+      json: async () => ({
+        id: "resp_fixture",
+        model: "gpt-6-luna",
+        service_tier: "flex",
+        usage: { input_tokens: 10, output_tokens: 2 },
+        output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }]
+      })
+    };
+  };
+  try {
+    const result = await createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6-luna", instructions: "fixture", input: {}, name: "fixture_schema", schema: { type: "object" } });
+    assert.equal(bodies.length, 2, "a 408 is retried");
+    assert.ok(bodies.every((body) => body.service_tier === "flex"));
+    assert.deepEqual(result.output, { ok: true });
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("Node's fetch honours the request dispatcher's timeout", async () => {
+  // Each response takes 1.5 s; a dispatcher that waits 100 ms (undici checks
+  // its timeouts about every half second) gives up, one that waits 5 s gets
+  // the answer. The first proves the dispatcher is used.
+  const server = createServer((request, response) => setTimeout(() => response.end("{}"), 1_500));
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  const url = `http://127.0.0.1:${server.address().port}/`;
+  try {
+    await assert.rejects(fetch(url, { dispatcher: createRequestDispatcher(100) }), (error) => error.cause?.code === "UND_ERR_HEADERS_TIMEOUT");
+    const response = await fetch(url, { dispatcher: createRequestDispatcher(5_000) });
+    assert.deepEqual(await response.json(), {});
+  } finally {
+    server.close();
   }
 });

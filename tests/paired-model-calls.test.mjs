@@ -61,6 +61,18 @@ test("an invalid output fails only its side and keeps its cost; the valid side i
   assert.deepEqual([reused.a, reused.b, reused.reused], [{ v: 1 }, { v: 2 }, true]);
 });
 
+test("B is called only after A has answered, and a transport failure of B keeps A", async () => {
+  const events = [];
+  const timed = (side, output) => async () => { events.push(`${side} start`); await new Promise((resolve) => setTimeout(resolve, 20)); events.push(`${side} end`); return answer(output)(); };
+  await pairedModelCall({ subjectId: "s1", fingerprint, cache: { entries: {} }, persist: async () => {}, callA: timed("a", { v: 1 }), callB: timed("b", { v: 2 }) });
+  assert.deepEqual(events, ["a start", "a end", "b start", "b end"]);
+
+  const cache = { entries: {} };
+  const outage = async () => { throw new Error("OpenAI Responses API failed (503): unavailable"); };
+  await assert.rejects(() => pairedModelCall({ subjectId: "s1", fingerprint, cache, persist: async () => {}, callA: answer({ v: 1 }), callB: outage }), /unavailable/);
+  assert.deepEqual([cache.entries.s1.a, cache.entries.s1.b], [{ v: 1 }, null], "the paid answer of A is saved before the run stops");
+});
+
 test("a transport failure stops the run, and finished subjects travel with the error", async () => {
   const outage = async () => { throw new Error("OpenAI Responses API failed (429): insufficient quota"); };
   await assert.rejects(() => pairedModelCall({ subjectId: "s1", fingerprint, cache: { entries: {} }, persist: async () => {}, callA: outage, callB: answer({}) }), /insufficient quota/);
