@@ -27,8 +27,11 @@ const noteLabels: Record<ConductStep["notes"][number]["note"], string> = {
   "third-reading-rejection": "Hlasovalo se o navrženém textu upraveném pozměňovacími návrhy, který psp.cz nezveřejňuje jako celek; odkaz vede na navržený text.",
 };
 
+// Trail dates are Prague calendar dates (YYYY-MM-DD); formatting them from
+// their parts keeps the day independent of the build machine's time zone.
 export function formatDate(date: string) {
-  return new Date(date).toLocaleDateString("cs-CZ");
+  const [year, month, day] = date.split("-").map(Number);
+  return `${day}. ${month}. ${year}`;
 }
 
 export function lawChangeLabel({ headingCz, titleCz }: EvidenceTrailPrint["lawChanges"][number]) {

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { buildEvidenceTrail, createAssessmentRevision } from "../scripts/lib/evidence-trail.mjs";
+import { formatDate } from "../src/lib/evidence-trail.ts";
 import { assessmentRevisionSchema } from "../src/lib/schema.ts";
 
 // Two real candidate proposals from the audit branch (run of 27 September 2026).
@@ -65,6 +66,19 @@ test("a reviewed proposal becomes the next valid public revision with its trail"
   assert.deepEqual(assessmentRevisionSchema.parse(revision), revision);
 });
 
+test("a no-progress proposal without a relevant law change cites the promise source", async () => {
+  const { proposal, evidencePackage, auditRecord, promise } = await fixture("spd-2025-079ef4aef5");
+  const noProgress = structuredClone(auditRecord);
+  noProgress.resolution.status = "no-progress";
+  for (const verdict of noProgress.validatedAssessments["assessor-a"].changeRelevance) verdict.relevant = false;
+  const args = { evidencePackage, auditRecord: noProgress, promise, fileId: "spd-2025-079ef4aef5", revisions: [baseline(promise)], publishedAt: "2026-09-28" };
+  const revision = createAssessmentRevision({ ...args, proposal: { ...proposal, candidateStatus: "no-progress" } });
+  assert.deepEqual([revision.status, revision.evidenceSourceIds, revision.evidenceTrail, revision.proposalId], ["no-progress", [promise.primarySourceId], undefined, proposal.proposalId]);
+  assert.deepEqual(assessmentRevisionSchema.parse(revision), revision);
+  noProgress.resolution.status = "moving-towards";
+  assert.throws(() => createAssessmentRevision({ ...args, proposal: { ...proposal, candidateStatus: "moving-towards" } }), /needs an evidence trail/);
+});
+
 test("a proposal compared with an older public revision or another package is refused", async () => {
   const { proposal, evidencePackage, auditRecord, promise } = await fixture("spd-2025-079ef4aef5");
   const args = { proposal, evidencePackage, auditRecord, promise, fileId: "spd-2025-079ef4aef5", publishedAt: "2026-09-28" };
@@ -85,4 +99,8 @@ test("the public schema accepts only official psp.cz links and requires the revi
   assert.ok(proposalId);
   assert.equal(assessmentRevisionSchema.safeParse(withoutProposal).success, false);
   assert.equal(assessmentRevisionSchema.safeParse({ ...revision, evidenceTrail: undefined, evidenceSourceIds: [] }).success, false);
+});
+
+test("trail dates keep their calendar day in any time zone", () => {
+  assert.equal(formatDate("2026-07-01"), "1. 7. 2026");
 });
