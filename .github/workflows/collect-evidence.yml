@@ -1,4 +1,4 @@
-name: Collect, match, and assess confirmed promises
+name: Collect, match, and assess promises
 
 on:
   # The daily run stays paused until a manual workflow_dispatch run of this
@@ -167,8 +167,8 @@ jobs:
 
       - name: Persist model caches even on a failed run
         id: tag-cache
-        # A failed run keeps the paid promise tagging, law-change screening,
-        # and relevance checks it already did. A subject is cached only once
+        # A failed run keeps the paid law-change screening and relevance
+        # checks it already did. A subject is cached only once
         # both of its model outputs are valid, so a partial cache is always
         # safe to keep.
         if: always()
@@ -301,7 +301,7 @@ jobs:
               "## Sběr dat",
               "",
               "Tento pull request je auditní fronta. Každý běh sbírá každý zdroj celý od jeho počátečního data; sběr nemění veřejné hodnocení.",
-              `Jednotkou je změna zákona, tedy jedna část úředního textu tisku (${run.routerVersion}, taxonomie ${run.taxonomyVersion}). Ke slibu vede přímá vazba přes číslo zákona nebo shoda obou nezávislých modelů na konkrétním štítku; slib a změna zůstanou spolu, pokud je obě kontroly relevance neoznačí za nesouvisející. Samotné přiřazení nepotvrzuje jednání strany ani hodnocení.`,
+              `Jednotkou je změna zákona, tedy jedna část úředního textu tisku (${run.routerVersion}, taxonomie ${run.taxonomyVersion}). Ke slibu vede přímá vazba přes číslo zákona nebo konkrétní štítek, který změně s dostatečnou jistotou dal kterýkoli ze dvou nezávislých modelů; slib a změna zůstanou spolu, pokud je obě kontroly relevance neoznačí za nesouvisející. Samotné přiřazení nepotvrzuje jednání strany ani hodnocení.`,
               "",
               "| Zdroj | Od | Záznamů | Nejnovější záznam |",
               "| --- | --- | ---: | --- |",

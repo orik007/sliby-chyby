@@ -119,7 +119,7 @@ test("the public fallback records a valid successful collection time", async () 
 test("audit state of another pipeline generation is never restored", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
   const generation = (await readFile(new URL("../automation/pipeline-generation", import.meta.url), "utf8")).trim();
-  assert.equal(generation, "law-changes-v1");
+  assert.equal(generation, "law-changes-v2");
   assert.match(workflow, /-- automation\/topic-routing\/tag-cache\)/);
   assert.match(workflow, /audit_generation="\$\(git show "origin\/\$REVIEW_BRANCH:automation\/pipeline-generation" 2>\/dev\/null \|\| true\)"/);
   assert.match(workflow, /if \[ "\$audit_generation" != "\$\(cat automation\/pipeline-generation\)" \]; then/);

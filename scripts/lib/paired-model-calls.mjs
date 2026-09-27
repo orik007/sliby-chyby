@@ -2,7 +2,7 @@ import { randomUUID } from "node:crypto";
 import { existsSync } from "node:fs";
 import { appendFile, mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import { basename, dirname, resolve } from "node:path";
-import { ModelOutputError } from "./topic-tagger.mjs";
+import { ModelOutputError } from "./model-output.mjs";
 import { log } from "./run-log.mjs";
 
 /**

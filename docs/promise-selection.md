@@ -2,48 +2,76 @@
 
 ## Authority
 
-This is the only operational definition of a promise's lifecycle. It is a **confirmed decision**. Scoring is defined separately in [scoring.md](scoring.md); neither a score nor evidence coverage changes a promise's lifecycle state.
+This is the only operational definition of the promise catalogue: what enters it, the state of each item, and how it is quoted and titled. It is a **confirmed decision**. Scoring is defined separately in [scoring.md](scoring.md); neither a score nor evidence coverage changes an item's state.
+
+## What enters the catalogue
+
+The catalogue covers the official national election programmes of the tracked parties. Every sentence of a programme in which the party says what it will do, what it wants, what it rejects, or how something will be is catalogued. A description of the present state, a justification, criticism of others, a heading, a slogan without such content, and a sentence describing another party's or government's actions are not catalogued; they may appear in a quote as context.
+
+Statements by individual politicians, regional branches, coalition partners, advertisers, or media do not transfer to the party unless an official national party source explicitly adopts them.
 
 ## The three states
 
-Every promise has exactly one state:
+Every catalogued item has exactly one state:
 
-| State | Meaning | Public? |
-| --- | --- | --- |
-| `candidate` | A possible promise found in a source. It has not yet passed the rules below. | No |
-| `confirmed` | A verified promise of one tracked party in one electoral period. Confirmation publishes it immediately. | Yes |
-| `rejected` | The item is not a promise for this catalogue. Its rejection reason is retained. | No |
+| State | Meaning | Public? | Score |
+| --- | --- | --- | --- |
+| `promise` (slib) | A statement that attributable conduct can deliver or contradict. | Yes | Yes, and it counts in the SLAVA Index. |
+| `statement` (výrok) | An official statement of the party that no attributable conduct can deliver or contradict. | Yes, but not yet shown on the site. | None, never even `0`, and never in the SLAVA Index. |
+| `rejected` (zamítnuto) | An occurrence rejected for a technical reason only. | No | None |
 
-There is no `confirmed-but-unpublished` state. “Published promise” always means `confirmed` promise. Scores belong to confirmed public promises only and never determine lifecycle.
+There is no fourth state and no unpublished promise or statement. Every promise and statement is in `data/promises` with `kind` `promise` or `statement`; rejected occurrences are in `research/2025-election/rejected.json`.
 
-## Confirming a candidate
+## Promise or statement
 
-Confirm a candidate only when all of these are true:
+The test is one question: **can a concrete law change, vote, or government proposal be in line with it or against it?** When it can, the item is a promise, even without a number or deadline. A clear direction in a concrete area is enough (“Podpoříme výstavbu nájemních bytů”), and so is a rejection of something concrete (“Politický dialog a obchodní výměnu … s Ruskem … vylučujeme”: a vote to end the sanctions contradicts it). A commitment to a condition that a law or government step can support or undermine is also a promise (“Zavedeme jasná a stabilní daňová pravidla”); the line is drawn generously in favour of a promise. When it cannot, the item is a statement: a value, a general goal, a position without a concrete object, a foreign-policy attitude that no Chamber conduct decides, or a sentence that only describes the effect of the party's other commitments.
 
-1. Its wording comes from an official national source of the tracked party.
-2. It is a commitment to a future action, decision, conduct, or assessable outcome.
-3. It identifies a sufficiently clear object and direction without adding precision absent from the source.
-4. It can be checked later against both supporting and contradicting evidence.
-5. It is one independently assessable commitment. Split a composite statement into separate candidates before confirmation.
+## Splitting and duplicates
 
-The confirmed promise preserves the exact Czech wording, the official URL, and a precise locator such as a page, timestamp, or image region. If official pre-election wording changes, update the active promise faithfully.
+- One promise is one commitment that can be assessed independently. A sentence with commitments on different subjects is split into separate promises that share the sentence as their quote; a list of similar measures on one subject stays one promise.
+- A sentence that only states the purpose or effect of a commitment is not a separate item; the commitment's quote may include it.
+- The same commitment repeated in one programme (in the introduction, a chapter's list of priorities, and the chapter itself) is catalogued once, where it is stated most completely; its other occurrences are rejected as duplicates of it.
+- An introduction or priority line that only summarises commitments catalogued separately is rejected as such a summary.
 
-## Rejecting a candidate
+Rejection reasons are technical only, and each rejected occurrence records exactly one of these codes:
 
-Reject a candidate with a short reason when it is, for example:
+| `reason` | Meaning |
+| --- | --- |
+| `duplicate` | The item is catalogued elsewhere in the same programme; `duplicateOf` names it. |
+| `summary` | An introduction or priority line that only summarises items catalogued separately. |
+| `list-estimate` | An amount in a list of estimates, not a statement of its own. |
+| `not-party-statement` | A sentence describing someone else's actions, not the party's own statement. |
+| `truncated` | An extraction that cannot be quoted as a complete sentence. |
 
-- a slogan, value, aspiration, or vague intention rather than a commitment;
-- a personal, regional, allied-party, or third-party statement not clearly adopted by the tracked national party;
-- a duplicate promise;
-- an unresolvable attribution problem; or
-- an unusable, non-atomic statement that cannot be split faithfully.
+A vague, general, or unmeasurable statement is never rejected; it is a statement.
 
-These are rejection reasons, not additional lifecycle states. A later source can create a new candidate.
+## Quote and title
 
-## First-version attribution boundary
+- **Quote** (`originalText`): the exact wording of the programme, without the page footer, line-end word breaks, or other layout artefacts. It is one or more consecutive sentences. When a sentence depends on an earlier one for its meaning (“Navýšíme jim platy…”), the quote starts with the earlier sentence; when the commitment is only in a heading, the quote starts with the heading. A quote can therefore include a neighbouring sentence that is also part of another promise.
+- **Title** (`title`): a short Czech name of the one commitment that is assessed, written only from facts in the quote: no added precision, number, date, or evaluation. The title decides what is assessed; the quote is its source.
+- **Locator**: the PDF page where the quote begins, and the item's position in the programme (`sourceOrder`).
 
-Only clear commitments from official national party sources may be confirmed for the initial public catalogue. Statements by individual politicians, regional branches, coalition partners, advertisers, or media do not transfer to the party unless an official national party source explicitly adopts them.
+Every quote is checked against the text of the archived programme (`research/2025-election/programme-text/`, produced by `scripts/extract-programme-text.mjs` from the files in `archive/promise-sources/`).
 
-## Publication boundary
+## Coverage record
 
-Confirmation is a normal validated data change: create the public promise, its primary source, and its first score revision with value `0` together. Confirmation does not require later conduct evidence or an AI assessment. Candidates and rejected promises remain under `research/` with their source and rejection reason.
+Every passage of a programme that is not the quote of a promise, statement, or rejected occurrence is recorded in `research/2025-election/not-catalogued.json` with the reason it is not catalogued. The record is not a catalogue state: it is the evidence that no sentence was overlooked, and a test checks that the quotes and recorded passages together account for the whole text of every programme. Each passage records exactly one of these codes:
+
+| `reason` | Meaning |
+| --- | --- |
+| `heading` | A chapter or section heading, a list label, or a running header. |
+| `layout` | A page number, footer, bullet, table of contents, or other layout text. |
+| `description` | A description of the present state, of facts, or of the party itself. |
+| `justification` | A reason for a commitment, or its purpose or effect. |
+| `criticism` | Criticism of the current or a previous government or of other actors. |
+| `appeal` | An appeal to voters, a greeting, a signature, or a slogan without a commitment. |
+
+A sentence in which the party says what it will do, wants, rejects, or how something will be is never recorded here; it is a promise, a statement, or a rejected occurrence.
+
+## Category and routing tags
+
+Every promise and statement has exactly one common policy category ([decisions.md](decisions.md)). Every promise also has one or more specific routing tags, assigned once when the promise is catalogued and reviewed in the pull request that adds it ([evidence-pipeline.md](evidence-pipeline.md)). A statement has no routing tags.
+
+## Changing the catalogue
+
+A catalogue change is a normal validated data change through the release process. Adding a promise creates its public item, its tags, and its first score revision with value `0` together; adding a statement creates only its item. Score history is append-only for as long as an item is a promise. When a promise becomes a statement, its item keeps its ID and URL and its score revisions are removed, because a statement has no score. When an item becomes a rejected occurrence, it and its score revisions leave the site.

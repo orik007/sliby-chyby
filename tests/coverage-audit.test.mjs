@@ -6,7 +6,7 @@ const pspSource = { id: "psp-core-2025", name: "Chamber of Deputies open data", 
 const counts = {
   primaryRecordsInWindowCount: 10, notAttributableSkippedCount: 7, conductRecordCount: 3, lawChangeCount: 5, technicalLawChangeCount: 2, substantiveLawChangeCount: 3,
   routedLawChangeCount: 2, directLinkLawChangeCount: 1, unroutedLawChangeCount: 1, routedWithoutConductCount: 1, relevancePairCount: 4,
-  relevanceDroppedCount: 1, oversizedPackageCount: 0, invalidPromiseTaggerCount: 0, invalidScreenerCount: 1, invalidRelevanceCheckCount: 0
+  relevanceDroppedCount: 1, oversizedPackageCount: 0, invalidScreenerCount: 1, invalidRelevanceCheckCount: 0
 };
 
 function routingRun({ lawChanges = [], packages = [], completed = true } = {}) {
@@ -14,14 +14,14 @@ function routingRun({ lawChanges = [], packages = [], completed = true } = {}) {
 }
 
 const printParts = { quality: { prints: 2, printsWithProposalText: 1, printsWithoutProposalText: 1, printsWithApprovedText: 1, printsWithPassedText: 0, printsWithSenateResolution: 1, lawChanges: 5, lawChangesAddedInDebate: 1, lawChangesRemovedInDebate: 2, lawChangesWithAmendedAct: 3, titleOnlyLawChanges: 1, approvedBillsWithoutApprovedText: 1, textWarnings: 2 } };
-const promiseRegistry = { promises: [{ id: "p1", partyId: "ano", partyName: "ANO", titleCz: "Slib" }] };
+const trackedPromises = { promises: [{ id: "p1", partyId: "ano", partyName: "ANO", titleCz: "Slib" }] };
 
 test("coverage audit never converts a promise without routed records into a score", () => {
   const audit = buildCoverageAudit({
     collectorRun: { schemaVersion: "1.0.0", runId: "run-1", collectors: [{ sourceId: "psp-core-2025", collection: { mode: "full", since: "2025-10-01" }, warnings: ["Line one\nwith a | pipe"] }], records: [] },
     routingRun: routingRun(),
     printParts,
-    promiseRegistry,
+    trackedPromises,
     sourceRegistry: { sources: [pspSource] },
     proposalManifest: { proposals: [] }
   });
@@ -51,7 +51,7 @@ test("a routed promise without a kept law change, one with a package, and one wi
       ],
       packages: [{ promiseId: "p2", lawChangeCount: 1, oversized: false }, { promiseId: "p3", lawChangeCount: 1, oversized: true }]
     }),
-    promiseRegistry: { promises: [...promiseRegistry.promises, { id: "p2", partyId: "spd", partyName: "SPD", titleCz: "Slib 2" }, { id: "p3", partyId: "spd", partyName: "SPD", titleCz: "Slib 3" }] },
+    trackedPromises: { promises: [...trackedPromises.promises, { id: "p2", partyId: "spd", partyName: "SPD", titleCz: "Slib 2" }, { id: "p3", partyId: "spd", partyName: "SPD", titleCz: "Slib 3" }] },
     sourceRegistry: { sources: [] },
     proposalManifest: { proposals: [] }
   });
@@ -63,7 +63,7 @@ test("a partial routing run is refused", () => {
   assert.throws(() => buildCoverageAudit({
     collectorRun: { schemaVersion: "1.0.0", runId: "run", collectors: [], records: [] },
     routingRun: routingRun({ completed: false }),
-    promiseRegistry,
+    trackedPromises,
     sourceRegistry: { sources: [] },
     proposalManifest: { proposals: [] }
   }), /completed law-change routing run/);
@@ -73,7 +73,7 @@ test("an enabled source that was not collected is refused", () => {
   assert.throws(() => buildCoverageAudit({
     collectorRun: { schemaVersion: "1.0.0", runId: "run-3", collectors: [], records: [] },
     routingRun: routingRun(),
-    promiseRegistry,
+    trackedPromises,
     sourceRegistry: { sources: [pspSource, { ...pspSource, id: "disabled", enabled: false }] },
     proposalManifest: { proposals: [] }
   }), /Enabled source psp-core-2025 was not collected/);
@@ -83,7 +83,7 @@ test("coverage audit prefers the active human review proposal over the routing s
   const audit = buildCoverageAudit({
     collectorRun: { schemaVersion: "1.0.0", runId: "run", collectors: [], records: [] },
     routingRun: routingRun({ packages: [{ promiseId: "p1", lawChangeCount: 1, oversized: false }] }),
-    promiseRegistry,
+    trackedPromises,
     sourceRegistry: { sources: [] },
     proposalManifest: { proposals: [{ proposalId: "old", promiseId: "p1", resolutionState: "candidate", supersededByProposalId: "new" }, { proposalId: "new", promiseId: "p1", resolutionState: "human-review-required", candidateStatus: null, publicationApproved: false, supersededByProposalId: null }] }
   });

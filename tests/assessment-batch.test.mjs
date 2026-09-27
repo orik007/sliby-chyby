@@ -20,9 +20,7 @@ function evidencePackage(promiseId, asOf) {
     promise: {
       id: promiseId,
       titleCz: `Testovací slib ${promiseId}`,
-      originalTextCz: "Testovací slib.",
-      fulfillmentTest: "Ověřitelný výsledek.",
-      contradictionTest: "Ověřitelný rozpor."
+      originalTextCz: "Testovací slib."
     },
     evidence: [
       { id: "promise-source", url: "https://example.test/promise", factSummary: "Přesné znění slibu.", locator: "strana 1", publishedAt: "2025-01-01", primary: true, role: "promise-source" },
