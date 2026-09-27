@@ -28,6 +28,10 @@ const decisiveActions = new Set([
   "pozm. prijat"
 ].map(normalizeSearchText));
 
+export function isDecisiveAction(actionCz) {
+  return decisiveActions.has(normalizeSearchText(actionCz));
+}
+
 // The first print-history step of every bill in the current term.
 const submissionAction = normalizeSearchText("předložen");
 

@@ -778,6 +778,160 @@ h1 em {
   background: #f1e6c6;
 }
 
+.trail-print {
+  margin: 0 0 16px;
+  padding: 18px 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--paper-strong);
+}
+
+.trail-print h3 {
+  margin: 0 0 8px;
+  font: 800 17px/1.3 "Manrope", sans-serif;
+}
+
+.trail-print a {
+  text-underline-offset: 3px;
+}
+
+.trail-changes {
+  margin: 0 0 14px;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.trail-changes small,
+.trail-detail,
+.trail-note {
+  color: var(--muted);
+}
+
+.trail-more {
+  margin: -8px 0 14px;
+  font-size: 14px;
+}
+
+.trail-more summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.trail-more .trail-changes {
+  margin: 8px 0 0;
+}
+
+.trail {
+  margin: 0;
+  padding: 0 0 0 18px;
+  list-style: none;
+  border-left: 2px solid var(--line);
+}
+
+.trail li {
+  position: relative;
+  padding: 0 0 16px 4px;
+  display: grid;
+  gap: 3px;
+}
+
+.trail li:last-child {
+  padding-bottom: 0;
+}
+
+.trail li::before {
+  content: "";
+  position: absolute;
+  left: -25px;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--muted);
+  border-radius: 50%;
+  background: var(--paper-strong);
+}
+
+.trail li.trail-for::before {
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.trail li.trail-against::before {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.trail time {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.trail strong {
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.trail-detail,
+.trail-note {
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.trail-note {
+  font-style: italic;
+}
+
+.trail-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  font-size: 13px;
+}
+
+.history-evidence {
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+.history-evidence summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.history-evidence .history-print {
+  display: block;
+  margin-top: 10px;
+  color: white;
+  font-weight: 700;
+}
+
+.history-evidence ul {
+  margin: 6px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 6px;
+}
+
+.history-panel .history-evidence li {
+  display: block;
+  padding: 0;
+  border: 0;
+  color: #c9c7bf;
+  line-height: 1.45;
+}
+
+.history-evidence a {
+  color: white;
+  text-underline-offset: 3px;
+}
+
 .history-panel {
   position: sticky;
   top: 24px;
@@ -1047,6 +1201,10 @@ h1 em {
 }
 
 @media (max-width: 560px) {
+  .trail-print {
+    padding: 16px 14px;
+  }
+
   .site-header,
   .hero,
   .party-section,

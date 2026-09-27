@@ -173,7 +173,7 @@ export function simplifyPublicExplanation(explanation) {
 
 // The assessment whose explanation the proposal carries: the one the arbiter
 // selected, or the first valid one when both assessors agreed.
-function chosenReview(auditRecord) {
+export function chosenReview(auditRecord) {
   const reviewsByAssessor = auditRecord.validatedAssessments ?? {};
   return auditRecord.resolution.selectedReview === "assessor-b"
     ? reviewsByAssessor["assessor-b"]

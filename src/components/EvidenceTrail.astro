@@ -1,0 +1,18 @@
+---
+import { amendedActsLabel, formatDate, lawChangeLabel, stepDetails, stepLinks, stepNotes, stepTitle } from "../lib/evidence-trail";
+import type { EvidenceTrailPrint } from "../lib/schema";
+interface Props { trail: EvidenceTrailPrint[]; }
+const shownLawChanges = 3;
+---
+{Astro.props.trail.map((print) => { const [shown, hidden] = [print.lawChanges.slice(0, shownLawChanges), print.lawChanges.slice(shownLawChanges)]; const lawChangeItem = (change: EvidenceTrailPrint["lawChanges"][number]) => { const acts = amendedActsLabel(change.amendedActs); return <li>{lawChangeLabel(change)}{acts && <small> · {acts}</small>}</li>; }; return <div class="trail-print">
+  <h3><a href={print.printUrl} target="_blank" rel="noreferrer">Sněmovní tisk {print.printNumber} ↗</a></h3>
+  <ul class="trail-changes">{shown.map(lawChangeItem)}</ul>
+  {hidden.length > 0 && <details class="trail-more"><summary>a {hidden.length} dalších částí</summary><ul class="trail-changes">{hidden.map(lawChangeItem)}</ul></details>}
+  <ol class="trail">{print.steps.map((step) => <li class:list={[`trail-${step.kind}`, { "trail-for": step.kind === "vote" && step.club === "yes", "trail-against": step.kind === "vote" && step.club === "no" }]}>
+    {step.kind !== "senate-resolution" && <time datetime={step.date}>{formatDate(step.date)}</time>}
+    <strong>{stepTitle(step)}</strong>
+    {stepDetails(step).map((line) => <span class="trail-detail">{line}</span>)}
+    {stepNotes(step, print).map((note) => <span class="trail-note">{note}</span>)}
+    <span class="trail-links">{stepLinks(step, print.printUrl).map(({ label, url }) => <a href={url} target="_blank" rel="noreferrer">{label} ↗</a>)}</span>
+  </li>)}</ol>
+</div>; })}

@@ -6,7 +6,7 @@
 - Promises and statements are in `data/promises`; rejected occurrences are in `research/2025-election/rejected.json` and are never public ([promise-selection.md](promise-selection.md)).
 - Every promise has one current score revision. The default score is `0` when no documented assessment conclusion sets another score, except for a documented maintenance baseline as defined in `scoring.md`. A statement has no score revision.
 - Score revisions are append-only while the item is a promise ([promise-selection.md](promise-selection.md)). The latest revision is current.
-- Every revision lists traceable source records. The SLAVA Index is derived, never stored as an editable value ([slava-index.md](slava-index.md)).
+- Every revision cites traceable source records or an evidence trail of official records. The SLAVA Index is derived, never stored as an editable value ([slava-index.md](slava-index.md)).
 - A source is one document or record. An item references one source and an exact locator.
 
 ## Files
@@ -25,7 +25,15 @@ data/
 
 A file in `data/promises` stores one item: `id`, `slug` (its URL), `partyPeriodId`, `kind` (`promise` or `statement`), `title`, `originalText` (the exact quote), `policyCategoryId`, `primarySourceId`, `sourceLocator` (the PDF page), `sourceOrder` (its position in the programme), and `isDemo`. A promise that is a maintenance commitment ([scoring.md](scoring.md)) also stores `maintenanceBaseline`: the preserved state in Czech (`preservedStateCz`) and its primary `source` (`id`, `url`, `publishedAt`, `locator`, `factSummary`, `primary`).
 
-`AssessmentRevision` stores its score, public Czech explanation, date, and cited source IDs. A zero-default revision cites the promise source; a documented maintenance baseline or other assessment conclusion cites its supporting evidence directly.
+`AssessmentRevision` stores its score, public Czech explanation, date, and cited source IDs (`evidenceSourceIds`). A zero-default revision cites only the promise source and has no evidence trail; a documented maintenance baseline cites its supporting evidence directly.
+
+A revision made from a reviewed assessment proposal ([evidence-pipeline.md](evidence-pipeline.md), From proposal to public score) also stores the `proposalId` it was made from and, when the assessment cites relevant law changes, its `evidenceTrail`: one entry per Chamber print with the print number and its official page (`printUrl`), the cited relevant law changes of that print (`lawChangeId`, `headingCz`, `titleCz`, `amendedActs`), and the cited `steps` in order:
+
+- `submission`: date, `evidenceId`, the kind of proposal (`member-bill`, `government-bill`, `state-budget`, `treaty`), and for a member bill the official proposer label;
+- `vote`: date, `evidenceId`, the link to the vote, the official print-history stage and action, the club's result (`yes`, `no`, or `no-majority`), and the club's counts;
+- `senate-resolution`: `evidenceId`, the sub-print (`77/7`), and the link to its text. It has no date, because the package dates it only by the vote that followed it.
+
+A submission and a vote also name the version of the text they concerned (`proposed`, `approved`, `passed`), the link to that text, and `notes` naming the law changes for which the linked text is not exactly that version (`published-version-missing`, `removed`, `third-reading-rejection`). Every link points to an official psp.cz record; the trail stores no text excerpt. A revision with an evidence trail cites no other source record.
 
 `promise-categories.json` contains the controlled common policy categories with their order; each item names its category in `policyCategoryId`.
 
