@@ -132,7 +132,8 @@ test("the psp.cz request log records each new connection to its host, and a refu
   await new Promise((resolveListen) => closed.listen(0, "127.0.0.1", resolveListen));
   const closedPort = closed.address().port;
   await new Promise((resolveClose) => closed.close(resolveClose));
-  const requests = createPspRequestLog({ hostname: "127.0.0.1" });
+  const saved = [];
+  const requests = createPspRequestLog({ hostname: "127.0.0.1", onEntry: (entry) => saved.push(entry) });
   try {
     await (await fetch(`http://127.0.0.1:${port}/`)).text();
     await assert.rejects(fetch(`http://127.0.0.1:${closedPort}/`));
@@ -145,6 +146,7 @@ test("the psp.cz request log records each new connection to its host, and a refu
     { type: "connect", error: null },
     { type: "connect", error: "ECONNREFUSED" }
   ]);
+  assert.deepEqual(saved, requests.entries, "each entry is handed on as soon as it is recorded");
   const before = requests.entries.length;
   await assert.rejects(fetch(`http://127.0.0.1:${closedPort}/`));
   assert.equal(requests.entries.length, before, "a stopped log records nothing");
@@ -178,7 +180,9 @@ test("a psp.cz request summary counts failures by cause and the busiest 60 s", (
 test("run-print-parts.mjs sends every psp.cz request through the shared fetcher and logs it", async () => {
   const script = await readFile(new URL("../scripts/run-print-parts.mjs", import.meta.url), "utf8");
   assert.match(script, /const fetchPsp = createPspFetcher\(\{ \.\.\.pspDownloadSettings, onAttempt: pspRequests\.onAttempt \}\);/);
-  assert.match(script, /finally \{\s*pspRequests\.stop\(\);\s*await writeFile\(resolve\(args\.output, "psp-requests\.jsonl"\)/);
+  // Each entry is appended as it happens, so the file survives a step timeout.
+  assert.match(script, /createPspRequestLog\(\{ onEntry: \(entry\) => appendFileSync\(pspRequestFile, /);
+  assert.match(script, /finally \{\s*pspRequests\.stop\(\);/);
   assert.doesNotMatch(script, /fetchVerified|globalThis\.fetch|\bfetch\(/);
   assert.match(script, /Math\.min\(pspDownloadSettings\.concurrency, prints\.length\)/);
 });

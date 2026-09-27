@@ -50,10 +50,16 @@ const connectChannels = ["undici:client:beforeConnect", "undici:client:connected
  * connection Node's fetch opens to `hostname`, with how long connecting took
  * and why it failed. A request sent over a kept-alive connection opens none.
  * Connections are observed through Node's diagnostics channels for its
- * bundled HTTP client; `stop` ends the observation.
+ * bundled HTTP client; `stop` ends the observation. `onEntry`, when given,
+ * receives each entry as soon as it is recorded, so it can be saved before
+ * the process ends.
  */
-export function createPspRequestLog({ hostname = "www.psp.cz", now = Date.now } = {}) {
+export function createPspRequestLog({ hostname = "www.psp.cz", now = Date.now, onEntry = null } = {}) {
   const entries = [];
+  const record = (entry) => {
+    entries.push(entry);
+    onEntry?.(entry);
+  };
   // Node reports the start and the end of a connection in separate messages
   // that share only the client's connector, so starts wait in order per
   // connector; when two connections open at once, their durations may be
@@ -62,7 +68,7 @@ export function createPspRequestLog({ hostname = "www.psp.cz", now = Date.now } 
   const finish = ({ connector }, error) => {
     const startedAt = connecting.get(connector)?.shift();
     if (startedAt === undefined) return;
-    entries.push({ type: "connect", startedAt: new Date(startedAt).toISOString(), durationMs: now() - startedAt, error });
+    record({ type: "connect", startedAt: new Date(startedAt).toISOString(), durationMs: now() - startedAt, error });
   };
   const handlers = {
     "undici:client:beforeConnect": ({ connectParams, connector }) => {
@@ -76,7 +82,7 @@ export function createPspRequestLog({ hostname = "www.psp.cz", now = Date.now } 
   for (const name of connectChannels) subscribe(name, handlers[name]);
   return {
     entries,
-    onAttempt: (attempt) => entries.push({ type: "attempt", ...attempt }),
+    onAttempt: (attempt) => record({ type: "attempt", ...attempt }),
     stop: () => {
       for (const name of connectChannels) unsubscribe(name, handlers[name]);
     },

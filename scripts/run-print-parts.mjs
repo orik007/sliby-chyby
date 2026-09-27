@@ -1,4 +1,5 @@
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { appendFileSync, mkdirSync, writeFileSync } from "node:fs";
+import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
@@ -50,12 +51,6 @@ function collectPrints(records) {
   }
   return [...prints.values()].sort((left, right) => left.number - right.number);
 }
-
-// Every attempt and new connection to psp.cz is recorded in
-// psp-requests.jsonl next to the output, even when a download fails the run,
-// so the site's limits can be measured from the run artifact.
-const pspRequests = createPspRequestLog();
-const fetchPsp = createPspFetcher({ ...pspDownloadSettings, onAttempt: pspRequests.onAttempt });
 
 const htmlOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };
 const wordOptions = {
@@ -143,6 +138,17 @@ async function fetchPrintTexts(source, print, termNumber) {
 }
 
 const args = parseArgs(process.argv.slice(2));
+
+// Every attempt and new connection to psp.cz is appended to
+// psp-requests.jsonl next to the output as it happens, so the file survives
+// a failed download and a step that times out, and the site's limits can be
+// measured from the run artifact.
+mkdirSync(resolve(args.output), { recursive: true });
+const pspRequestFile = resolve(args.output, "psp-requests.jsonl");
+writeFileSync(pspRequestFile, "");
+const pspRequests = createPspRequestLog({ onEntry: (entry) => appendFileSync(pspRequestFile, `${JSON.stringify(entry)}\n`) });
+const fetchPsp = createPspFetcher({ ...pspDownloadSettings, onAttempt: pspRequests.onAttempt });
+
 const registry = validateRegistry(JSON.parse(await readFile(resolve(args.sourceRegistry), "utf8")));
 const source = registry.sources.find(({ id }) => id === "psp-core-2025");
 invariant(source?.enabled, "Enabled psp-core-2025 source is required");
@@ -181,12 +187,10 @@ async function downloadWorker() {
     tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX or DOC proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
   }
 }
-await mkdir(resolve(args.output), { recursive: true });
 try {
   await Promise.all(Array.from({ length: Math.min(pspDownloadSettings.concurrency, prints.length) }, downloadWorker));
 } finally {
   pspRequests.stop();
-  await writeFile(resolve(args.output, "psp-requests.jsonl"), pspRequests.entries.map((entry) => `${JSON.stringify(entry)}\n`).join(""));
   const usage = pspRequests.summary();
   log(`psp.cz requests: ${usage.attempts} attempts for ${usage.urls} URLs in ${usage.minutes} min (${usage.attemptsPerMinute ?? "-"}/min, at most ${usage.busiestMinuteAttempts} in any 60 s), ${usage.failedAttempts} failed ${JSON.stringify(usage.failedAttemptsBy)}; ${usage.connections} new connections (${usage.connectionsPerMinute ?? "-"}/min, at most ${usage.busiestMinuteConnections} in any 60 s), ${usage.failedConnections} failed ${JSON.stringify(usage.failedConnectionsBy)}`);
 }
