@@ -13,6 +13,7 @@ export const GET: APIRoute = ({ site, url }) => {
   const paths = [
     "/",
     "/metodika",
+    "/zmeny",
     ...summaries.map(({ party }) => `/strany/${party.slug}`),
     ...summaries.flatMap(({ party, promises }) => promises.map(({ promise }) => `/sliby/${party.slug}/${promise.slug}`)),
     ...summaries.flatMap(({ party, statements }) => statements.map(({ statement }) => `/sliby/${party.slug}/${statement.slug}`)),

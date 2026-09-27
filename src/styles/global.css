@@ -390,6 +390,14 @@ h1 em {
   text-underline-offset: 4px;
 }
 
+.site-footer-links {
+  flex-shrink: 0;
+  display: grid;
+  gap: 8px;
+  align-content: start;
+  justify-items: end;
+}
+
 .site-footer-copy {
   display: grid;
   gap: 6px;
@@ -1181,6 +1189,54 @@ h1 em {
   line-height: 1.55;
 }
 
+.changes-grid {
+  padding: 50px 0 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr);
+  gap: 60px;
+  align-items: start;
+  border-top: 1px solid var(--line);
+}
+
+.changes-grid h2 {
+  margin: 0 0 24px;
+  font: 800 28px/1.1 "Manrope", sans-serif;
+  letter-spacing: -0.03em;
+}
+
+.changes-entry {
+  padding: 20px 0;
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  gap: 20px;
+  border-top: 1px solid var(--line);
+}
+
+.changes-entry time {
+  font-weight: 700;
+}
+
+.changes-entry ul,
+.changes-planned ul {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 10px;
+  line-height: 1.55;
+}
+
+.changes-planned {
+  padding: 24px 26px;
+  border-left: 4px solid #3a6ea5;
+  border-radius: 8px;
+  color: #1f3d5c;
+  background: #dfe8f1;
+}
+
+.changes-planned h2 {
+  font-size: 22px;
+}
+
 .calculation-section {
   padding: 60px 0;
   display: grid;
@@ -1280,6 +1336,16 @@ h1 em {
 }
 
 @media (max-width: 820px) {
+  .changes-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .changes-entry {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
   .party-grid {
     grid-template-columns: 1fr;
   }
@@ -1312,6 +1378,10 @@ h1 em {
 }
 
 @media (max-width: 560px) {
+  .site-footer-links {
+    justify-items: start;
+  }
+
   .trail-print {
     padding: 16px 14px;
   }

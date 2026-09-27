@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { changelog } from "../lib/data";
+
+const dateFormatter = new Intl.DateTimeFormat("cs-CZ", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Prague" });
+const formatDate = (date: string) => dateFormatter.format(new Date(`${date}T12:00:00Z`));
+---
+<BaseLayout title="Změny na webu · Sliboměr" description="Co je na Sliboměru nového a co připravujeme.">
+  <article class="method-page"><a class="back-link" href="/">← Na přehled</a><header><p class="eyebrow">ZMĚNY NA WEBU</p><h1>Co je nového.</h1><p class="intro">Přehled nových funkcí webu a toho, co připravujeme. Změny hodnocení jednotlivých slibů najdete v historii u každého slibu.</p></header>
+    <div class="changes-grid">
+      <section aria-labelledby="released-title"><h2 id="released-title">Novinky</h2>{changelog.released.map((entry) => <div class="changes-entry"><time datetime={entry.date}>{formatDate(entry.date)}</time><ul>{entry.items.map((item) => <li>{item}</li>)}</ul></div>)}</section>
+      {changelog.planned.length > 0 && <aside class="changes-planned" aria-labelledby="planned-title"><h2 id="planned-title">Připravujeme</h2><ul>{changelog.planned.map((item) => <li>{item}</li>)}</ul></aside>}
+    </div>
+  </article>
+</BaseLayout>
