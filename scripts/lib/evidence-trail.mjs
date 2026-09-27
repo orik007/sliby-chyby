@@ -18,9 +18,11 @@ function proposalKind(facts) {
 }
 
 // Why the linked text is not exactly the one the conduct concerned
-// (docs/evidence-pipeline.md, Conduct and version), or null.
-function versionNote(concern) {
+// (docs/evidence-pipeline.md, Conduct and version), or null. A version known
+// only by the print title has no document to link.
+function versionNote(concern, document) {
   if (concern.removed) return "removed";
+  if (!document?.url) return "text-not-published";
   if (concern.publishedVersionMissing) return "published-version-missing";
   if (concern.mark === "third-reading-rejection") return "third-reading-rejection";
   return null;
@@ -48,7 +50,7 @@ function textOf(item, changes) {
   const textUrl = concerns.map(({ change, concern }) => (concern.removed ? null : change.structuredFacts.versions[version]?.document?.url ?? null)).find(Boolean) ?? null;
   const notes = new Map();
   for (const { change, concern } of concerns) {
-    const note = versionNote(concern);
+    const note = versionNote(concern, change.structuredFacts.versions[version]?.document);
     if (note) notes.set(note, [...(notes.get(note) ?? []), change.id]);
   }
   return { version, textUrl, notes: [...notes].map(([note, lawChangeIds]) => ({ note, lawChangeIds })) };
@@ -137,10 +139,11 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
  * revision, so a proposal made before a later revision is refused.
  */
 export function createAssessmentRevision({ proposal, evidencePackage, auditRecord, promise, fileId, revisions, publishedAt }) {
-  invariant(/^\d{4}-\d{2}-\d{2}$/.test(publishedAt), "The publication date must be YYYY-MM-DD");
+  invariant(/^\d{4}-\d{2}-\d{2}$/.test(publishedAt) && new Date(`${publishedAt}T00:00:00Z`).toISOString().startsWith(publishedAt), "The publication date must be a calendar date YYYY-MM-DD");
   invariant(promise.kind === "promise", `${promise.id} is not a promise`);
   invariant(proposal.promiseId === promise.id && auditRecord.promiseId === promise.id && evidencePackage.promise.id === promise.id, "The proposal belongs to another promise");
   invariant(hashEvidencePackage(evidencePackage) === proposal.packageHash && auditRecord.packageHash === proposal.packageHash, "The evidence package is not the one the proposal assessed");
+  invariant(auditRecord.assessmentFingerprint === proposal.assessmentFingerprint && auditRecord.assessmentContentHash === proposal.assessmentContentHash, "The assessment run is not the one the proposal records");
   invariant(proposal.resolutionState === "candidate" && proposal.candidateStatus === auditRecord.resolution.status, "Only a candidate proposal can become a public revision");
   const current = Math.max(0, ...revisions.filter(({ promiseId }) => promiseId === promise.id).map(({ revision }) => revision));
   invariant(proposal.publicRevisionAtEvaluation === current, `The proposal was compared with revision ${proposal.publicRevisionAtEvaluation}, but the current revision is ${current}`);

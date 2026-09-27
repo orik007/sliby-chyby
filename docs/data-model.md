@@ -33,7 +33,7 @@ A revision made from a reviewed assessment proposal ([evidence-pipeline.md](evid
 - `vote`: date, `evidenceId`, the link to the vote, the official print-history stage and action, the club's result (`yes`, `no`, or `no-majority`), and the club's counts;
 - `senate-resolution`: `evidenceId`, the sub-print (`77/7`), and the link to its text. It has no date, because the package dates it only by the vote that followed it.
 
-A submission and a vote also name the version of the text they concerned (`proposed`, `approved`, `passed`), the link to that text, and `notes` naming the law changes for which the linked text is not exactly that version (`published-version-missing`, `removed`, `third-reading-rejection`). Every link points to an official psp.cz record; the trail stores no text excerpt. A revision with an evidence trail cites no other source record.
+A submission and a vote also name the version of the text they concerned (`proposed`, `approved`, `passed`), the link to that text, and `notes` naming the law changes for which the linked text is not exactly that version (`published-version-missing`, `removed`, `text-not-published`, `third-reading-rejection`); a step without a text link always has a note. Every link points to an official psp.cz record; the trail stores no text excerpt. A revision with an evidence trail cites no other source record.
 
 `promise-categories.json` contains the controlled common policy categories with their order; each item names its category in `policyCategoryId`.
 

@@ -23,7 +23,7 @@ export const policyCategoryDataSchema = z.object({ schemaVersion: z.literal(2), 
 });
 export const sourceSchema = z.object({ id: z.string().min(1), type: z.enum(["programme", "official-record", "roll-call-vote", "article"]), title: z.string().min(1), publisher: z.string().min(1), publishedAt: z.iso.date(), url: z.url().nullable(), primary: z.boolean(), isDemo: z.boolean() });
 const officialUrlSchema = z.url().regex(/^https:\/\/(www|public)\.psp\.cz\/sqw\//, "Evidence trail links must point to official psp.cz records");
-const versionNoteSchema = z.object({ note: z.enum(["published-version-missing", "removed", "third-reading-rejection"]), lawChangeIds: z.array(z.string().min(1)).min(1) });
+const versionNoteSchema = z.object({ note: z.enum(["published-version-missing", "removed", "text-not-published", "third-reading-rejection"]), lawChangeIds: z.array(z.string().min(1)).min(1) });
 const concernedTextSchema = { version: z.enum(["proposed", "approved", "passed"]), textUrl: officialUrlSchema.nullable(), notes: z.array(versionNoteSchema) };
 const evidenceTrailStepSchema = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("submission"), date: z.iso.date(), evidenceId: z.string().min(1), proposal: z.enum(["member-bill", "government-bill", "state-budget", "treaty"]), proposerCz: z.string().min(1).nullable(), ...concernedTextSchema }).strict(),
@@ -34,6 +34,7 @@ export const evidenceTrailPrintSchema = z.object({ printNumber: z.number().int()
   const lawChangeIds = new Set(print.lawChanges.map(({ lawChangeId }) => lawChangeId));
   if (!print.steps.some(({ kind }) => kind !== "senate-resolution")) context.addIssue({ code: "custom", path: ["steps"], message: "An evidence trail print needs attributable conduct" });
   for (const [index, step] of print.steps.entries()) {
+    if (step.kind !== "senate-resolution" && step.textUrl === null && step.notes.length === 0) context.addIssue({ code: "custom", path: ["steps", index, "notes"], message: "A step without a text link must say why" });
     if (step.kind !== "senate-resolution" && step.notes.some(({ lawChangeIds: ids }) => ids.some((id) => !lawChangeIds.has(id)))) context.addIssue({ code: "custom", path: ["steps", index, "notes"], message: "A version note must name law changes of this print" });
   }
 });

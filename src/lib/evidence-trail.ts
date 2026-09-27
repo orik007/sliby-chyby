@@ -24,6 +24,7 @@ const textLabels: Record<ConductStep["version"], string> = {
 const noteLabels: Record<ConductStep["notes"][number]["note"], string> = {
   "published-version-missing": "Znění, kterého se krok týkal, psp.cz samostatně nezveřejňuje; odkaz vede na předchozí znění.",
   removed: "V tomto znění už tato část zákona nebyla.",
+  "text-not-published": "Text tohoto znění psp.cz nezveřejňuje, známý je jen název tisku.",
   "third-reading-rejection": "Hlasovalo se o navrženém textu upraveném pozměňovacími návrhy, který psp.cz nezveřejňuje jako celek; odkaz vede na navržený text.",
 };
 

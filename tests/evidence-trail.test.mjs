@@ -46,6 +46,15 @@ test("a conduct whose text psp.cz has not published links the earlier text with 
   assert.equal(trail[1].steps[0].proposal, "government-bill");
 });
 
+test("a version without a published text has no link and says why", async () => {
+  const { evidencePackage, auditRecord } = await fixture("spd-2025-079ef4aef5");
+  const titleOnly = structuredClone(evidencePackage);
+  titleOnly.evidence.find(({ id }) => id === "psp-core-2025--law-change-43184-14").structuredFacts.versions.proposed.document = null;
+  const submission = buildEvidenceTrail(titleOnly, auditRecord)[0].steps[0];
+  assert.equal(submission.textUrl, null);
+  assert.deepEqual(submission.notes, [{ note: "text-not-published", lawChangeIds: ["psp-core-2025--law-change-43184-14"] }]);
+});
+
 test("only relevant cited law changes and cited conduct enter the trail", async () => {
   const { evidencePackage, auditRecord } = await fixture("spd-2025-079ef4aef5");
   const chosen = auditRecord.validatedAssessments["assessor-a"];
@@ -87,6 +96,8 @@ test("a proposal compared with an older public revision or another package is re
   changed.asOf = "2026-09-28";
   assert.throws(() => createAssessmentRevision({ ...args, evidencePackage: changed, revisions: [baseline(promise)] }), /not the one the proposal assessed/);
   assert.throws(() => createAssessmentRevision({ ...args, proposal: { ...proposal, resolutionState: "human-review-required" }, revisions: [baseline(promise)] }), /Only a candidate/);
+  assert.throws(() => createAssessmentRevision({ ...args, auditRecord: { ...auditRecord, assessmentFingerprint: "0".repeat(64) }, revisions: [baseline(promise)] }), /not the one the proposal records/);
+  assert.throws(() => createAssessmentRevision({ ...args, publishedAt: "2026-02-31", revisions: [baseline(promise)] }), /calendar date/);
 });
 
 test("the public schema accepts only official psp.cz links and requires the reviewed proposal", async () => {
@@ -100,6 +111,9 @@ test("the public schema accepts only official psp.cz links and requires the revi
   assert.equal(assessmentRevisionSchema.safeParse(withoutProposal).success, false);
   assert.equal(assessmentRevisionSchema.safeParse({ ...revision, evidenceTrail: undefined, evidenceSourceIds: [] }).success, false);
   assert.equal(assessmentRevisionSchema.safeParse({ ...revision, evidenceSourceIds: [promise.primarySourceId] }).success, false);
+  const withoutText = structuredClone(revision);
+  withoutText.evidenceTrail[0].steps[0].textUrl = null;
+  assert.equal(assessmentRevisionSchema.safeParse(withoutText).success, false);
 });
 
 test("trail dates keep their calendar day in any time zone", () => {
