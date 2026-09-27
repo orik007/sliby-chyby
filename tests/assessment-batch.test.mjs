@@ -359,8 +359,9 @@ test("the continuation stops at a bounded number of comments and says what was l
   const listed = new Set([...[body, ...comments].join("\n").matchAll(/\(`((?:promise|human)-\d+)`\)/g)].map(([, id]) => id));
   const [, omitted] = comments.at(-1).match(/… a dalších (\d+) položek se sem nevešlo; úplný seznam je v `assessment-batch.json`/);
   assert.equal(Number(omitted), huge.length + humans.length - listed.size);
-  // The counts stay in the body, however long the list.
+  // The counts and the route table stay in the body, however long the list.
   assert.match(body, /Izolovaná selhání hodnocení, zkusí se znovu v dalším běhu: \*\*7\*\*/);
+  assert.match(body, /\| `tag:example` \| 3 \| 5 \|/);
   assert.ok(comments.every((comment) => comment.length <= 61_000));
   // A reason longer than the listed limit is cut in the list.
   assert.match(comments[0], /Velmi dlouhé vysvětlení\. [^\n]* …\n/);

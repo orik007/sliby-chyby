@@ -465,10 +465,14 @@ export function renderReviewPullRequest(summary) {
     ""
   ].join("\n");
   const routes = summary.relevanceVerdictsByRoute.filter(({ notRelevant }) => notRelevant > 0);
+  // The route table stays in the body, so it is never cut with the list; the
+  // routes with the most rejections come first.
+  const listedRoutes = 20;
   const routeTable = routes.length > 0
-    ? ["Změny zákonů, které hodnotitelé označili za nesouvisející se slibem, podle štítku nebo přímé vazby, která je ke slibu přivedla:", "", "| Cesta | Nesouvisející | Verdiktů celkem |", "| --- | ---: | ---: |",
-      ...routes.map(({ route, notRelevant, verdicts }) => `| \`${route}\` | ${notRelevant} | ${verdicts} |`), ""].join("\n")
-    : null;
+    ? ["", "Změny zákonů, které hodnotitelé označili za nesouvisející se slibem, podle štítku nebo přímé vazby, která je ke slibu přivedla:", "", "| Cesta | Nesouvisející | Verdiktů celkem |", "| --- | ---: | ---: |",
+      ...routes.slice(0, listedRoutes).map(({ route, notRelevant, verdicts }) => `| \`${route}\` | ${notRelevant} | ${verdicts} |`),
+      ...(routes.length > listedRoutes ? ["", `*… a dalších ${routes.length - listedRoutes} cest; úplný přehled je v \`assessment-batch.json\`.*`] : []), ""].join("\n")
+    : "";
 
   const sections = [
     {
@@ -476,7 +480,6 @@ export function renderReviewPullRequest(summary) {
       blocks: changes.length > 0 ? changes.map(changeBlock) : ["Žádný aktuální návrh nemění hodnocení zveřejněné na webu.\n"]
     },
     ...(attention.length > 0 ? [{ title: `### Vyžaduje lidské rozhodnutí (${attention.length})`, blocks: attention }] : []),
-    ...(routeTable ? [{ title: "### Nesouvisející změny zákonů podle cesty", blocks: [routeTable], countable: false }] : [])
   ];
 
   const intro = [
@@ -488,7 +491,8 @@ export function renderReviewPullRequest(summary) {
     "",
     `- Návrhy, které mění hodnocení na webu: **${changes.length}**`,
     `- Vyžaduje lidské rozhodnutí: **${attention.length}**`,
-    others
+    others,
+    routeTable
   ].join("\n");
   // Reserved for the note that the list continues in comments.
   const noteReserve = 400;
@@ -503,18 +507,17 @@ export function renderReviewPullRequest(summary) {
     used = 0;
   };
   // A section heading travels with its first block, so no page ends with an
-  // empty heading. Only list items count as left out; the route table does
-  // not.
-  const add = (text, { continuedTitle, countable }) => {
+  // empty heading. Every block is one list item.
+  const add = (text, continuedTitle) => {
     if (pages.length > maxContinuationComments) {
-      if (countable) omitted += 1;
+      omitted += 1;
       return;
     }
     const size = text.length + 1;
     if (used + size > budget() && page.length > 0) {
       newPage();
       if (pages.length > maxContinuationComments) {
-        if (countable) omitted += 1;
+        omitted += 1;
         return;
       }
       if (continuedTitle) {
@@ -528,7 +531,7 @@ export function renderReviewPullRequest(summary) {
   for (const section of sections) {
     section.blocks.forEach((block, index) => add(
       index === 0 ? `\n${section.title}\n\n${block}` : block,
-      { continuedTitle: index === 0 ? null : section.title, countable: section.countable !== false }
+      index === 0 ? null : section.title
     ));
   }
   if (page.length > 0 && pages.length <= maxContinuationComments) pages.push(page);
