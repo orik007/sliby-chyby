@@ -124,6 +124,8 @@ test("audit state of another pipeline generation is never restored", async () =>
   assert.match(workflow, /-- automation\/topic-routing\/tag-cache\)/);
   assert.match(workflow, /audit_generation="\$\(git show "origin\/\$REVIEW_BRANCH:automation\/pipeline-generation" 2>\/dev\/null \|\| true\)"/);
   assert.match(workflow, /if \[ "\$audit_generation" != "\$\(cat automation\/pipeline-generation\)" \]; then/);
+  // The tests read main's files, so they run before the audit state is restored.
+  assert.ok(workflow.indexOf("- name: Run deterministic tests") < workflow.indexOf("- name: Restore current audit state"));
   for (const path of ["collectors/checkpoints.json", "evidence-packages/manifest.json", "review-proposals/manifest.json"]) {
     const file = JSON.parse(await readFile(new URL(`../automation/${path}`, import.meta.url), "utf8"));
     const entries = file.sourceCheckpoints ?? file.packages ?? file.proposals;

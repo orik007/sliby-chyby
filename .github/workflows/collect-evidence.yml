@@ -87,6 +87,24 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run deterministic tests
+        # Before the audit state is restored, so the tests read main as it is.
+        # Tests never reach a paid model, and their stub calls never belong
+        # in the run's spend log.
+        env:
+          OPENAI_API_KEY: ""
+          SLIBY_MODEL_CALL_LOG: ""
+        run: npm test
+
       - name: Restore current audit state
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
@@ -127,23 +145,6 @@ jobs:
             audit_branch_tip=""
           fi
           echo "AUDIT_BRANCH_TIP=$audit_branch_tip" >> "$GITHUB_ENV"
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v5
-        with:
-          node-version: 22
-          cache: npm
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Run deterministic tests
-        # Tests never reach a paid model, and their stub calls never belong
-        # in the run's spend log.
-        env:
-          OPENAI_API_KEY: ""
-          SLIBY_MODEL_CALL_LOG: ""
-        run: npm test
 
       - name: Collect source records
         run: |
