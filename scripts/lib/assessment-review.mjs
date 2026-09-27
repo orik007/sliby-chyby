@@ -363,31 +363,59 @@ export function mergeRelevanceVerdicts(lists) {
   return [...merged.values()].sort((left, right) => right.notRelevant - left.notRelevant || left.route.localeCompare(right.route));
 }
 
-// GitHub rejects a pull request body above 65,536 characters.
-// The workflow appends a short data-collection section after this text.
+// GitHub rejects a pull request body or comment above 65,536 characters.
+// The workflow appends a short data-collection section after the body.
 const maxPullRequestBodyCharacters = 55_000;
+const maxCommentCharacters = 60_000;
+// A bound on how many comments one run may post; the list is cut beyond it.
+const maxContinuationComments = 40;
+// Model-written reasons longer than this are cut in the list; the review page
+// keeps them whole.
+const maxListedExplanationCharacters = 1_500;
+
+/** The first line of every continuation comment, so a run can find its own. */
+export const continuationMarker = "<!-- slava-review-continuation -->";
 
 // Model-written text is shown as plain text: no Markdown, HTML, mentions, or
 // issue links in the pull request.
 function inertMarkdown(text) {
   return String(text)
     .replace(/\s+/g, " ")
-    .replaceAll("@", "@\u200b")
-    .replace(/#(\d)/g, "#\u200b$1")
-    .replace(/\b(GH)-(\d)/gi, "$1\u200b-$2")
+    .replaceAll("@", "@​")
+    .replace(/#(\d)/g, "#​$1")
+    .replace(/\b(GH)-(\d)/gi, "$1​-$2")
     .replace(/[\\`*_[\]{}()<>#+!|~&:-]/g, "\\$&");
 }
 
-// What the pull request lists is defined in docs/evidence-pipeline.md, step 10.
-export function renderReviewPullRequestBody(summary) {
-  for (const [withExplanations, listLimit] of [[true, Infinity], [false, Infinity], [false, 200], [false, 50]]) {
-    const body = renderPullRequestBodyWith(summary, withExplanations, listLimit);
-    if (body.length <= maxPullRequestBodyCharacters) return body;
-  }
-  return renderPullRequestBodyWith(summary, false, 0);
+function listedExplanation(text) {
+  const flat = String(text).replace(/\s+/g, " ").trim();
+  return inertMarkdown(flat.length > maxListedExplanationCharacters ? `${flat.slice(0, maxListedExplanationCharacters)} …` : flat);
 }
 
-function renderPullRequestBodyWith(summary, withExplanations, listLimit) {
+/**
+ * How each automatic reviewer decided and why, for the review list: both
+ * assessors (null when an output was invalid) and the arbiter (null when it
+ * was not called).
+ */
+export function reviewVerdicts(auditRecord) {
+  const reviews = auditRecord.validatedAssessments ?? {};
+  const assessor = (key) => reviews[key]
+    ? { status: reviews[key].status, evidenceSufficient: reviews[key].evidenceSufficient, explanationCz: reviews[key].explanationCz }
+    : null;
+  const arbiter = auditRecord.arbiter?.output;
+  return {
+    assessorA: assessor("assessor-a"),
+    assessorB: assessor("assessor-b"),
+    arbiter: arbiter ? { choice: arbiter.choice, explanationCz: arbiter.explanationCz } : null
+  };
+}
+
+const arbiterChoices = { "assessor-a": "vybral první posudek", "assessor-b": "vybral druhý posudek", "cannot-decide": "nedokázal rozhodnout" };
+
+// What the pull request lists is defined in docs/evidence-pipeline.md, step 10.
+// The body carries the summary and as much of the list as fits; the rest
+// continues, in order, in comments that every run rewrites.
+export function renderReviewPullRequest(summary) {
   const status = (value) => value ? `${readerStatus[value].label} (${readerStatus[value].score})` : "bez hodnocení na webu";
   const heading = (item) => `${item.reviewUrl ? `[${item.promiseTitleCz}](${item.reviewUrl})` : item.promiseTitleCz} (\`${item.promiseId}\`)`;
   const notes = (item) => [
@@ -395,53 +423,112 @@ function renderPullRequestBodyWith(summary, withExplanations, listLimit) {
     ...(item.packageState === "changed" ? ["podklady se od návrhu změnily, nový návrh zatím nevznikl"] : []),
     ...(item.packageState === "withdrawn" ? ["slib už nemá žádný aktuální balíček podkladů"] : [])
   ];
-  const omitted = (count) => count > 0 ? [`*… a dalších ${count}; úplný seznam je v \`assessment-batch.json\` v artefaktu běhu.*`, ""] : [];
   const changes = summary.pendingReviews.filter(({ kind }) => kind === "score-change");
   const humanReviews = summary.pendingReviews.filter(({ kind }) => kind === "human-review");
   const oversized = summary.results.filter(({ disposition }) => disposition === "blocked-oversized");
-  const attention = [
-    ...humanReviews.map((item) => `- ${heading(item)}: ${resolutionLabels[item.resolutionReason] ?? item.resolutionReason}${notes(item).map((note) => ` (${note})`).join("")}`),
-    ...oversized.map((result) => `- ${heading(result)}: balíček je větší, než model dokáže přečíst`)
-  ];
-  const lines = [
-    "## Neveřejné návrhy změn hodnocení SLAVA",
-    "",
-    "Tento pull request ukládá automaticky připravené návrhy k lidské kontrole. Jeho sloučení **nezveřejní hodnocení ani nezmění veřejný web**. Návrh zmizí z tohoto přehledu, až hodnocení na webu změní samostatný pull request, nebo až ho nahradí novější návrh.",
-    "",
-    `### Návrhy, které mění hodnocení na webu (${changes.length}, z toho nové: ${changes.filter(({ newInRun }) => newInRun).length})`,
-    ""
-  ];
-  if (changes.length === 0) lines.push("Žádný aktuální návrh nemění hodnocení zveřejněné na webu.", "");
-  if (!withExplanations && changes.length > 0) lines.push("*Vysvětlení jsou kvůli délce jen na stránkách jednotlivých návrhů.*", "");
-  for (const item of changes.slice(0, listLimit)) {
-    lines.push(
+  const party = (item) => item.partyName ? `${item.partyName} · ` : "";
+
+  const assessorLine = (name, verdict) => verdict
+    ? `- **${name}:** ${status(verdict.status)}${verdict.evidenceSufficient === false ? ", podklady podle něj nestačí" : ""}. ${listedExplanation(verdict.explanationCz)}`
+    : `- **${name}:** výstup neprošel kontrolou, nepoužil se.`;
+  const changeBlock = (item) => {
+    const verdicts = item.verdicts;
+    return [
       `#### ${heading(item)}`,
       "",
-      `Na webu: **${status(item.publicStatus)}** → navrženo: **${status(item.candidateStatus)}**`,
+      `${party(item)}Na webu: **${status(item.publicStatus)}** → navrženo: **${status(item.candidateStatus)}** · ${resolutionLabels[item.resolutionReason] ?? item.resolutionReason}`,
       "",
-      ...(withExplanations && item.explanationCz ? [`> ${inertMarkdown(item.explanationCz)}`, ""] : []),
+      ...(verdicts
+        ? [
+          assessorLine("První hodnotitel", verdicts.assessorA),
+          assessorLine("Druhý hodnotitel", verdicts.assessorB),
+          verdicts.arbiter
+            ? `- **Třetí hodnotitel:** ${arbiterChoices[verdicts.arbiter.choice] ?? verdicts.arbiter.choice}. ${listedExplanation(verdicts.arbiter.explanationCz)}`
+            : "- **Třetí hodnotitel:** nevolán, posudky se shodly.",
+          ""
+        ]
+        : item.explanationCz ? [`> ${listedExplanation(item.explanationCz)}`, ""] : []),
       ...notes(item).map((note) => `*${note[0].toUpperCase()}${note.slice(1)}.*`).flatMap((note) => [note, ""])
-    );
-  }
-  lines.push(...omitted(changes.length - Math.min(changes.length, listLimit)));
-  if (attention.length > 0) {
-    lines.push(`### Vyžaduje lidské rozhodnutí (${attention.length})`, "", ...attention.slice(0, listLimit), "", ...omitted(attention.length - Math.min(attention.length, listLimit)));
-  }
-  lines.push(
-    "### Ostatní",
-    "",
+    ].join("\n");
+  };
+  const attention = [
+    ...humanReviews.map((item) => `- ${heading(item)}: ${party(item)}${resolutionLabels[item.resolutionReason] ?? item.resolutionReason}${notes(item).map((note) => ` (${note})`).join("")}`),
+    ...oversized.map((result) => `- ${heading(result)}: balíček je větší, než model dokáže přečíst`)
+  ];
+  const others = [
     `- Nové návrhy, které potvrzují hodnocení na webu: **${summary.confirmedCount}**`,
     `- Beze změny podkladů, bez nového volání modelů: **${summary.unchangedCount}**`,
     `- Odloženo limitem běhu (${summary.maxAssessments}): **${summary.deferredCount}**`,
     `- Izolovaná selhání hodnocení, zkusí se znovu v dalším běhu: **${summary.failedCount}**`,
     ...(summary.interruption ? [`- Běh byl přerušen chybou (${inertMarkdown(summary.interruption.message.slice(0, 300))}); nehodnoceno: **${summary.interruptedCount + summary.notAssessedAfterInterruptionCount}**. Dokončená hodnocení jsou uložena, další běh ohodnotí zbytek.`] : []),
-    ...(summary.relevanceVerdictsByRoute.some(({ notRelevant }) => notRelevant > 0)
-      ? ["", "Změny zákonů, které hodnotitelé označili za nesouvisející se slibem, podle štítku nebo přímé vazby, která je ke slibu přivedla:", "", "| Cesta | Nesouvisející | Verdiktů celkem |", "| --- | ---: | ---: |",
-        ...summary.relevanceVerdictsByRoute.filter(({ notRelevant }) => notRelevant > 0).slice(0, listLimit === Infinity ? Infinity : 20).map(({ route, notRelevant, verdicts }) => `| \`${route}\` | ${notRelevant} | ${verdicts} |`)]
-      : []),
-    "",
-    "Všechny návrhy vyžadují lidskou kontrolu a nejsou schválené ke zveřejnění. Úplný přehled všech balíčků je v `assessment-batch.json` v artefaktu běhu.",
     ""
-  );
-  return `${lines.join("\n")}\n`;
+  ].join("\n");
+  const routes = summary.relevanceVerdictsByRoute.filter(({ notRelevant }) => notRelevant > 0);
+  const routeTable = routes.length > 0
+    ? ["Změny zákonů, které hodnotitelé označili za nesouvisející se slibem, podle štítku nebo přímé vazby, která je ke slibu přivedla:", "", "| Cesta | Nesouvisející | Verdiktů celkem |", "| --- | ---: | ---: |",
+      ...routes.map(({ route, notRelevant, verdicts }) => `| \`${route}\` | ${notRelevant} | ${verdicts} |`), ""].join("\n")
+    : null;
+
+  const sections = [
+    {
+      title: `### Návrhy, které mění hodnocení na webu (${changes.length}, z toho nové: ${changes.filter(({ newInRun }) => newInRun).length})`,
+      blocks: changes.length > 0 ? changes.map(changeBlock) : ["Žádný aktuální návrh nemění hodnocení zveřejněné na webu.\n"]
+    },
+    ...(attention.length > 0 ? [{ title: `### Vyžaduje lidské rozhodnutí (${attention.length})`, blocks: attention }] : []),
+    { title: "### Ostatní", blocks: [others, ...(routeTable ? [routeTable] : [])] }
+  ];
+
+  const intro = [
+    "## Neveřejné návrhy změn hodnocení SLAVA",
+    "",
+    "Tento pull request ukládá automaticky připravené návrhy k lidské kontrole. Jeho sloučení **nezveřejní hodnocení ani nezmění veřejný web**. Návrh zmizí z tohoto přehledu, až hodnocení na webu změní samostatný pull request, nebo až ho nahradí novější návrh. U každé změny jsou verdikty obou automatických hodnotitelů a třetího hodnotitele s jejich zdůvodněním; úplný záznam je na stránce návrhu.",
+    ""
+  ].join("\n");
+  // Reserved for the note that the list continues in comments.
+  const noteReserve = 400;
+  const pages = [];
+  let page = [];
+  let used = 0;
+  let omitted = 0;
+  const budget = () => (pages.length === 0 ? maxPullRequestBodyCharacters - intro.length - noteReserve : maxCommentCharacters - 200);
+  const newPage = () => {
+    pages.push(page);
+    page = [];
+    used = 0;
+  };
+  const add = (text, continuedTitle) => {
+    if (pages.length > maxContinuationComments) {
+      omitted += 1;
+      return;
+    }
+    const size = text.length + 1;
+    if (used + size > budget() && page.length > 0) {
+      newPage();
+      if (pages.length > maxContinuationComments) {
+        omitted += 1;
+        return;
+      }
+      if (continuedTitle) {
+        page.push(`\n${continuedTitle} (pokračování)\n`);
+        used += continuedTitle.length + 16;
+      }
+    }
+    page.push(text.length > budget() ? `${text.slice(0, budget() - 20)} …\n` : text);
+    used += Math.min(size, budget());
+  };
+  for (const section of sections) {
+    add(`\n${section.title}\n`, null);
+    for (const block of section.blocks) add(block, section.title);
+  }
+  if (page.length > 0 && pages.length <= maxContinuationComments) pages.push(page);
+  if (omitted > 0) pages.at(-1).push(`*… a dalších ${omitted} položek se sem nevešlo; úplný seznam je v \`assessment-batch.json\` v artefaktu běhu a na stránkách návrhů.*\n`);
+
+  const total = pages.length;
+  const text = (blocks) => blocks.join("\n");
+  const note = total > 1
+    ? `*Přehled pokračuje v ${total - 1} ${total - 1 === 1 ? "komentáři" : "komentářích"} pod tímto pull requestem, v pořadí. Každý běh je přepíše.*\n\n`
+    : "";
+  const body = `${intro}\n${note}${text(pages[0]).replace(/^\n/, "")}\n\nVšechny návrhy vyžadují lidskou kontrolu a nejsou schválené ke zveřejnění. Úplný přehled všech balíčků je v \`assessment-batch.json\` v artefaktu běhu.\n`;
+  const comments = pages.slice(1).map((blocks, index) => `${continuationMarker}\n## Neveřejné návrhy změn hodnocení SLAVA, pokračování ${index + 2}/${total}\n\n${text(blocks).replace(/^\n/, "")}\n`);
+  return { body, comments };
 }

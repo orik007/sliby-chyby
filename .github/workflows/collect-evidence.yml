@@ -367,7 +367,25 @@ jobs:
               exit 1
             fi
           fi
-          echo "Review pull request: $PR_URL" >> "$GITHUB_STEP_SUMMARY"
+          # A list too long for the body continues in numbered comments. The
+          # previous run's continuation comments are edited in place, extra
+          # ones deleted, and missing ones added, so they stay in order and
+          # never pile up.
+          PR_NUMBER="${PR_URL##*/}"
+          mapfile -t OLD_COMMENTS < <(gh api --paginate "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" --jq '.[] | select(.body | startswith("<!-- slava-review-continuation -->")) | .id')
+          NEW_COMMENTS=(automation/runs/pipeline/github-actions/assessment-review-pr-comments/*.md)
+          [ -e "${NEW_COMMENTS[0]}" ] || NEW_COMMENTS=()
+          for index in "${!NEW_COMMENTS[@]}"; do
+            if [ "$index" -lt "${#OLD_COMMENTS[@]}" ]; then
+              gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/${OLD_COMMENTS[$index]}" -F "body=@${NEW_COMMENTS[$index]}" > /dev/null
+            else
+              gh api -X POST "repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments" -F "body=@${NEW_COMMENTS[$index]}" > /dev/null
+            fi
+          done
+          for (( index=${#NEW_COMMENTS[@]}; index<${#OLD_COMMENTS[@]}; index++ )); do
+            gh api -X DELETE "repos/$GITHUB_REPOSITORY/issues/comments/${OLD_COMMENTS[$index]}"
+          done
+          echo "Review pull request: $PR_URL (${#NEW_COMMENTS[@]} continuation comment(s))" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Report model calls and estimated spend
         if: always()

@@ -14,7 +14,8 @@ import {
   proposedPublicExplanation,
   relevanceVerdictsByRoute,
   renderHumanReviewMarkdown,
-  renderReviewPullRequestBody,
+  renderReviewPullRequest,
+  reviewVerdicts,
   validateReviewManifest
 } from "./lib/assessment-review.mjs";
 import { validateEvidencePackage } from "./lib/assessment-pipeline.mjs";
@@ -44,6 +45,7 @@ function parseArgs(args) {
     runs: "automation/runs/pipeline/github-actions/assessments",
     summary: "automation/runs/pipeline/github-actions/assessment-batch.json",
     pullRequestBody: "automation/runs/pipeline/github-actions/assessment-review-pr.md",
+    pullRequestComments: "automation/runs/pipeline/github-actions/assessment-review-pr-comments",
     publicRevisions: "data/assessment-revisions"
   };
   for (let index = 0; index < args.length; index += 1) {
@@ -54,6 +56,7 @@ function parseArgs(args) {
     else if (arg === "--runs") options.runs = args[++index];
     else if (arg === "--summary") options.summary = args[++index];
     else if (arg === "--pull-request-body") options.pullRequestBody = args[++index];
+    else if (arg === "--pull-request-comments") options.pullRequestComments = args[++index];
     else if (arg === "--public-revisions") options.publicRevisions = args[++index];
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -123,6 +126,7 @@ const proposalRoot = resolve(options.proposals);
 const runRoot = resolve(options.runs);
 const summaryPath = resolve(options.summary);
 const pullRequestBodyPath = resolve(options.pullRequestBody);
+const pullRequestCommentsPath = resolve(options.pullRequestComments);
 const relativeProposalRoot = relative(process.cwd(), proposalRoot).replaceAll("\\", "/");
 invariant(relativeProposalRoot === "automation/review-proposals", "--proposals must resolve to automation/review-proposals");
 
@@ -369,6 +373,14 @@ function explanationOf(proposal, auditRecord) {
     return null;
   }
 }
+function verdictsOf(proposal, auditRecord) {
+  try {
+    return reviewVerdicts(auditRecord);
+  } catch (error) {
+    log(`cannot read the verdicts of proposal ${proposal.proposalId}: ${error instanceof Error ? error.message : String(error)}`);
+    return null;
+  }
+}
 const newProposalIds = new Set(newProposals.map(({ proposalId }) => proposalId));
 const planByPromise = new Map(plan.map((item) => [item.promiseId, item]));
 const pendingReviews = (await Promise.all(currentManifest.proposals.filter(({ supersededByProposalId }) => !supersededByProposalId).map(async (proposal) => {
@@ -391,7 +403,9 @@ const pendingReviews = (await Promise.all(currentManifest.proposals.filter(({ su
     publicStatus: publicRevision?.status ?? null,
     candidateStatus: proposal.candidateStatus,
     resolutionReason: proposal.resolutionReason,
+    partyName: evidencePackage?.promise?.partyName ?? null,
     explanationCz: auditRecord ? explanationOf(proposal, auditRecord) : null,
+    verdicts: auditRecord ? verdictsOf(proposal, auditRecord) : null,
     reviewUrl: humanReviewUrl(proposal.humanReviewPath),
     newInRun: newProposalIds.has(proposal.proposalId),
     packageState
@@ -429,7 +443,15 @@ const summary = {
 await mkdir(resolve(summaryPath, ".."), { recursive: true });
 await mkdir(resolve(pullRequestBodyPath, ".."), { recursive: true });
 await writeFile(summaryPath, `${JSON.stringify(summary, null, 2)}\n`);
-await writeFile(pullRequestBodyPath, renderReviewPullRequestBody(summary));
+// The body and, when the list is too long for it, numbered continuation
+// comments the workflow posts in order.
+const pullRequest = renderReviewPullRequest(summary);
+await writeFile(pullRequestBodyPath, pullRequest.body);
+await rm(pullRequestCommentsPath, { recursive: true, force: true });
+await mkdir(pullRequestCommentsPath, { recursive: true });
+for (const [index, comment] of pullRequest.comments.entries()) {
+  await writeFile(resolve(pullRequestCommentsPath, `${String(index + 1).padStart(3, "0")}.md`), comment);
+}
 
 console.log(JSON.stringify({
   packageCount: summary.packageCount,
@@ -441,6 +463,7 @@ console.log(JSON.stringify({
   deferredPackageCharacters: summary.deferredPackageCharacters,
   summaryPath,
   pullRequestBodyPath,
+  pullRequestComments: pullRequest.comments.length,
   interruption,
   publicationApproved: false
 }, null, 2));

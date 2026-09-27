@@ -180,7 +180,10 @@ test("one real print runs through routing, packaging, assessment, and the review
   // The review report lists the change against the public score.
   const body = await readFile(join(root, "automation/runs/pipeline/github-actions/assessment-review-pr.md"), "utf8");
   assert.match(body, /### Návrhy, které mění hodnocení na webu \(2, z toho nové: 2\)/);
-  assert.match(body, new RegExp(`\\(\`${vatPromiseId}\`\\)\\n\\nNa webu: \\*\\*Zatím bez ověřeného podstatného posunu \\(0\\)\\*\\* → navrženo: \\*\\*Směřuje ke splnění \\(\\+1\\)\\*\\*`));
+  assert.match(body, new RegExp(`\\(\`${vatPromiseId}\`\\)\\n\\nANO 2011 · Na webu: \\*\\*Zatím bez ověřeného podstatného posunu \\(0\\)\\*\\* → navrženo: \\*\\*Směřuje ke splnění \\(\\+1\\)\\*\\* · o neshodě automatických posudků rozhodl třetí hodnotitel`));
+  // Both assessors and the arbiter are listed with their reasons.
+  assert.match(body, /- \*\*První hodnotitel:\*\* [^\n]+\n- \*\*Druhý hodnotitel:\*\* [^\n]+\n- \*\*Třetí hodnotitel:\*\* vybral (?:první|druhý) posudek\. [^\n]+/);
+  assert.deepEqual(await readdir(join(root, "automation/runs/pipeline/github-actions/assessment-review-pr-comments")), [], "a short list needs no continuation comment");
 
   // A rerun of the assessment makes no call and keeps the proposals listed.
   await run([script("run-assessment-batch.mjs"), "--packages", "automation/evidence-packages"], { cwd: root, environment: assessmentEnvironment(join(work, "assessment-again-calls.jsonl")) });
