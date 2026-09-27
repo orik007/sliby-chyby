@@ -1,8 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ScoreBar from "../../components/ScoreBar.astro";
+import StatementBadge from "../../components/StatementBadge.astro";
 import StatusBadge from "../../components/StatusBadge.astro";
-import { getCurrentPartySummaries, getPublicAssessmentExplanation, statusDetails } from "../../lib/data";
+import { getCurrentPartySummaries, getItemSource, getPublicAssessmentExplanation, policyCategories, statementExplanation, statusDetails } from "../../lib/data";
 
 export const prerender = true;
 
@@ -10,16 +11,21 @@ export function getStaticPaths() {
   return getCurrentPartySummaries().map((summary) => ({ params: { slug: summary.party.slug }, props: { summary } }));
 }
 const { summary } = Astro.props;
-const { party, partyPeriod, period, promises, index } = summary;
+const { party, partyPeriod, period, promises, statements, index } = summary;
 const counts = Object.fromEntries(Object.keys(statusDetails).map((status) => [status, promises.filter(({ assessment }) => assessment.status === status).length]));
-const categoryGroups: Array<{ category: (typeof promises)[number]["policyCategory"]; promises: typeof promises }> = [];
-for (const item of promises) {
-  const currentGroup = categoryGroups.at(-1);
-  if (currentGroup?.category.id === item.policyCategory.id) currentGroup.promises.push(item);
-  else categoryGroups.push({ category: item.policyCategory, promises: [item] });
-}
+// Statements follow the promises of their category and are shown only when
+// the visitor turns them on.
+const categoryGroups = policyCategories
+  .map((category) => ({ category, promises: promises.filter(({ policyCategory }) => policyCategory.id === category.id), statements: statements.filter(({ policyCategory }) => policyCategory.id === category.id) }))
+  .filter((group) => group.promises.length > 0 || group.statements.length > 0);
+const statementCount = (count: number) => `${count} ${count === 1 ? "výrok" : count >= 2 && count <= 4 ? "výroky" : "výroků"}`;
 ---
 <BaseLayout title={`${party.shortName} · ${index === null ? "zveřejněné sliby" : `SLAVA Index ${index}`} · Sliboměr`} description={`Předvolební sliby strany ${party.shortName} a jejich aktuální stav v období ${period.label}.`}>
   <section class="party-hero"><a class="back-link" href="/">← Všechny strany</a><div class="party-hero-grid"><div><p class="eyebrow">{period.name}</p><h1>{party.shortName}</h1><p class="intro">{promises.length === 0 ? "Pro tuto stranu zatím nemáme zveřejněné sliby." : `${promises.length} zveřejněných slibů s aktuálním stavem.`}</p></div><div class="portrait portrait-small" style={`--portrait-background: ${partyPeriod.portraitBackground}`}><img src={partyPeriod.portraitImage} alt={`Oficiální portrét: ${partyPeriod.leaderName}`} width="512" height="512" decoding="async" /></div></div><div class="party-score-panel"><ScoreBar score={index} /><div>{index === null && <p class="index-note">SLAVA Index se zobrazí po zveřejnění prvního slibu.</p>}<div class="score-breakdown">{Object.entries(statusDetails).filter(([status]) => counts[status] > 0).map(([status, detail]) => <span><b>{counts[status]}</b> {detail.label.toLowerCase()}</span>)}</div></div></div></section>
-  <section class="promise-section" aria-labelledby="promise-title"><div class="section-heading"><div><p class="eyebrow">SLEDOVANÉ SLIBY</p><h2 id="promise-title">Co slíbili a co udělali</h2></div>{promises.length > 0 && <p>Sliby jsou rozdělené do společných témat. Rozbalte řádek pro rychlé vysvětlení.</p>}</div>{promises.length > 0 ? <div class="promise-categories">{categoryGroups.map(({ category, promises: categoryPromises }) => <section class="promise-category" aria-labelledby={`category-${category.id}`}><h3 id={`category-${category.id}`}>{category.labelCz} <span>{categoryPromises.length}</span></h3><div class="promise-list">{categoryPromises.map(({ promise, assessment }) => <details class="promise-row"><summary><span class="promise-main"><strong>{promise.title}</strong></span><StatusBadge status={assessment.status} /><span class="disclosure" aria-hidden="true">+</span></summary><div class="promise-preview"><blockquote>„{promise.originalText}“</blockquote><p>{getPublicAssessmentExplanation(assessment.explanationShort)}</p><a href={`/sliby/${party.slug}/${promise.slug}`}>Celý detail a historie →</a></div></details>)}</div></section>)}</div> : <p class="empty-state">Zveřejněné sliby přidáváme po ověření původního zdroje.</p>}</section>
+  <section class="promise-section" aria-labelledby="promise-title"><div class="section-heading"><div><p class="eyebrow">SLEDOVANÉ SLIBY</p><h2 id="promise-title">Co slíbili a co udělali</h2></div>{promises.length > 0 && <p>Sliby jsou rozdělené do společných témat. Rozbalte řádek pro rychlé vysvětlení.</p>}</div>
+    {statements.length > 0 && <div class="statement-filter"><label><input type="checkbox" class="statement-toggle" /> Zobrazit i výroky ({statements.length})</label><p>Výroky strany nelze splnit ani porušit konkrétním krokem. Nemají skóre a nepočítají se do SLAVA Indexu.</p></div>}
+    {categoryGroups.length > 0 ? <div class="promise-categories">{categoryGroups.map(({ category, promises: categoryPromises, statements: categoryStatements }) => <section class:list={["promise-category", { "statement-only": categoryPromises.length === 0 }]} aria-labelledby={`category-${category.id}`}><h3 id={`category-${category.id}`}>{category.labelCz} <span>{categoryPromises.length > 0 ? <>{categoryPromises.length}{categoryStatements.length > 0 && <span class="statement-count"> + {statementCount(categoryStatements.length)}</span>}</> : statementCount(categoryStatements.length)}</span></h3><div class="promise-list">
+      {categoryPromises.map(({ promise, assessment }) => { const { source, locatorLabel, url } = getItemSource(promise); return <details class="promise-row"><summary><span class="promise-main"><strong>{promise.title}</strong></span><StatusBadge status={assessment.status} /><span class="disclosure" aria-hidden="true">+</span></summary><div class="promise-preview"><blockquote>„{promise.originalText}“</blockquote><p class="source-caption">{url ? <a href={url} target="_blank" rel="noreferrer">Zdroj: {source.title}, {locatorLabel} ↗</a> : `Zdroj: ${source.title}, ${locatorLabel}`}</p><p>{getPublicAssessmentExplanation(assessment.explanationShort)}</p><a href={`/sliby/${party.slug}/${promise.slug}`}>Celý detail a historie →</a></div></details>; })}
+      {categoryStatements.map(({ statement }) => { const { source, locatorLabel, url } = getItemSource(statement); return <details class="promise-row statement-row"><summary><span class="promise-main"><strong>{statement.title}</strong></span><StatementBadge /><span class="disclosure" aria-hidden="true">+</span></summary><div class="promise-preview"><blockquote>„{statement.originalText}“</blockquote><p class="source-caption">{url ? <a href={url} target="_blank" rel="noreferrer">Zdroj: {source.title}, {locatorLabel} ↗</a> : `Zdroj: ${source.title}, ${locatorLabel}`}</p><p>{statementExplanation}</p><a href={`/sliby/${party.slug}/${statement.slug}`}>Celý detail a zdroj →</a></div></details>; })}
+    </div></section>)}</div> : <p class="empty-state">Zveřejněné sliby přidáváme po ověření původního zdroje.</p>}</section>
 </BaseLayout>

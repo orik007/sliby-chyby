@@ -478,6 +478,50 @@ h1 em {
   gap: 42px;
 }
 
+.statement-filter {
+  margin: -8px 0 34px;
+  display: grid;
+  gap: 6px;
+}
+
+.statement-filter label {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.statement-filter input {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--ink);
+}
+
+.statement-filter p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* Statements stay hidden until the visitor turns them on. */
+.statement-only,
+.statement-row,
+.statement-count {
+  display: none;
+}
+
+.promise-section:has(.statement-toggle:checked) .statement-only,
+.promise-section:has(.statement-toggle:checked) .statement-row {
+  display: block;
+}
+
+.promise-section:has(.statement-toggle:checked) .statement-count {
+  display: inline;
+}
+
 .promise-category h3 {
   margin: 0 0 14px;
   display: flex;
@@ -563,6 +607,12 @@ h1 em {
 .status-neutral {
   color: #5f5d55;
   background: #e7e4da;
+}
+
+.status-statement {
+  color: #5f5d55;
+  background: transparent;
+  border: 1px dashed #a7a293;
 }
 
 .status-negative,
@@ -658,6 +708,20 @@ h1 em {
 .source-caption {
   color: var(--muted);
   font-size: 13px;
+}
+
+.promise-preview .source-caption {
+  margin-top: -6px;
+  font-size: 13px;
+}
+
+.promise-preview .source-caption a {
+  font-weight: 500;
+}
+
+.detail-grid-single {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 900px;
 }
 
 .source-list {
