@@ -196,9 +196,11 @@ for (const { change, route } of screenedChanges) {
 // checked in parallel (docs/evidence-pipeline.md).
 log(`relevance checks: ${pairs.length} promise and law-change pairs`);
 const tickPairs = progress("relevance checks", pairs.length, { every: 50 });
-const pairOrder = new Map(pairs.map((pair, index) => [pair, index]));
 const pairsByChange = new Map();
-for (const pair of pairs) pairsByChange.set(pair.change.changeId, [...(pairsByChange.get(pair.change.changeId) ?? []), pair]);
+for (const [index, pair] of pairs.entries()) {
+  if (!pairsByChange.has(pair.change.changeId)) pairsByChange.set(pair.change.changeId, []);
+  pairsByChange.get(pair.change.changeId).push({ index, pair });
+}
 async function checkPair(pair) {
   const brief = buildRelevanceBrief(pair.promise, pair.change);
   const fingerprint = { inputHash: sha256(relevanceInput(brief)), promptContentHash: prompts.relevance.contentHash, ...models };
@@ -217,13 +219,24 @@ async function checkPair(pair) {
   tickPairs(`${pair.promise.id} × ${pair.change.changeId}: ${result.kept ? "kept" : "dropped"}`);
   return result;
 }
-// The largest groups start first, so the longest sequence does not end the stage alone.
+// The largest groups start first, so the longest sequence does not end the
+// stage alone. Every finished pair is kept, also when the stage fails, and
+// after a failure no group starts another pair.
 const changeGroups = [...pairsByChange.values()].sort((left, right) => right.length - left.length);
-const checkedPairs = (await stage("relevance-check", changeGroups, async (group) => {
-  const results = [];
-  for (const pair of group) results.push({ index: pairOrder.get(pair), result: await checkPair(pair) });
-  return results;
-})).flat().sort((left, right) => left.index - right.index).map(({ result }) => result);
+const finishedPairs = [];
+let relevanceFailed = false;
+await stage("relevance-check", changeGroups, async (group) => {
+  for (const { index, pair } of group) {
+    if (relevanceFailed) return;
+    try {
+      finishedPairs.push({ index, result: await checkPair(pair) });
+    } catch (error) {
+      relevanceFailed = true;
+      throw error;
+    }
+  }
+});
+const checkedPairs = finishedPairs.sort((left, right) => left.index - right.index).map(({ result }) => result);
 
 // 3. One package per promise (step 7), only from a complete run.
 const outputDirectory = resolve(args.output);

@@ -385,19 +385,23 @@ test("requests wait while a model's input tokens of the last minute would exceed
   // A fake clock: each wait advances it and returns at once.
   const originalSetTimeout = globalThis.setTimeout;
   const originalNow = Date.now;
-  let clock = 1_000_000;
+  // Ten minutes ahead, so earlier tests' requests have left the window.
+  let clock = originalNow() + 600_000;
   const waits = [];
   Date.now = () => clock;
   globalThis.setTimeout = (fn, ms) => { waits.push(ms); clock += ms; return originalSetTimeout(fn, 0); };
   try {
-    const budget = tokenBudgetPerMinute("fixture-model");
-    await reserveInputTokens("fixture-model", budget - 10);
-    await reserveInputTokens("fixture-model", 10);
+    const budget = tokenBudgetPerMinute("gpt-5.6-terra");
+    await reserveInputTokens("gpt-5.6-terra", budget - 10);
+    await reserveInputTokens("gpt-5.6-terra", 10);
     assert.deepEqual(waits, [], "requests within the budget are sent at once");
-    await reserveInputTokens("fixture-model", 1);
+    await reserveInputTokens("gpt-5.6-terra", 1);
     assert.deepEqual(waits, [60_000], "the next request waits until the first leaves the minute");
-    await reserveInputTokens("fixture-model", budget * 3);
+    await reserveInputTokens("gpt-5.6-terra", budget * 3);
     assert.ok(waits.length >= 2, "a request larger than the budget waits for an empty minute");
+    const before = waits.length;
+    await reserveInputTokens("fixture-model", budget * 100);
+    assert.equal(waits.length, before, "a model without a budget is not limited");
   } finally {
     Date.now = originalNow;
     globalThis.setTimeout = originalSetTimeout;

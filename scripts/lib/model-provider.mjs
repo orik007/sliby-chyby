@@ -1,5 +1,6 @@
 import { Agent } from "undici";
-import { logModelCall } from "./run-log.mjs";
+import { charactersPerToken } from "./assessment-config.mjs";
+import { log, logModelCall } from "./run-log.mjs";
 
 // Eight attempts with a backoff capped at two minutes wait about four
 // minutes in all, so a short gap in Flex capacity does not stop a run.
@@ -34,14 +35,16 @@ function sleep(ms) {
 // usage-tier-4 limits on the OpenAI model pages (gpt-6-luna 10,000,000,
 // gpt-5.6-terra 4,000,000; cached input counts too). A process that shares
 // the account with parallel processes gets its share through
-// SLIBY_TOKEN_BUDGET_SHARE (docs/evidence-pipeline.md).
+// SLIBY_TOKEN_BUDGET_SHARE (docs/evidence-pipeline.md). A model without a
+// limit here is not limited, and the run log says so.
 const tokensPerMinute = { "gpt-6-luna": 8_000_000, "gpt-5.6-terra": 3_200_000 };
-const charactersPerToken = 2.5;
 const tokenWindows = new Map();
+const unlimitedModelsLogged = new Set();
 
 export function tokenBudgetPerMinute(model) {
+  if (!tokensPerMinute[model]) return null;
   const share = Number(process.env.SLIBY_TOKEN_BUDGET_SHARE ?? "1");
-  return Math.floor((tokensPerMinute[model] ?? 1_000_000) / (Number.isFinite(share) && share >= 1 ? share : 1));
+  return Math.floor(tokensPerMinute[model] / (Number.isFinite(share) && share >= 1 ? share : 1));
 }
 
 // Waits until the request's estimated input fits the model's budget for the
@@ -49,6 +52,11 @@ export function tokenBudgetPerMinute(model) {
 // minute and is then sent alone.
 export async function reserveInputTokens(model, tokens) {
   const budget = tokenBudgetPerMinute(model);
+  if (budget === null) {
+    if (!unlimitedModelsLogged.has(model)) log(`no token budget is set for ${model}; its requests are not limited`);
+    unlimitedModelsLogged.add(model);
+    return;
+  }
   for (;;) {
     const now = Date.now();
     const window = (tokenWindows.get(model) ?? []).filter(({ at }) => now - at < 60_000);
@@ -107,9 +115,10 @@ function backoffMs(attempt) {
 }
 
 async function fetchJsonWithRetry(url, init, { model, estimatedTokens }) {
+  // Reserved once: a retry resends input that was rejected, not consumed.
+  await reserveInputTokens(model, estimatedTokens);
   let last = null;
   for (let attempt = 1; attempt <= maxProviderAttempts; attempt += 1) {
-    await reserveInputTokens(model, estimatedTokens);
     let response;
     try {
       response = await fetch(url, { ...init, dispatcher: requestDispatcher });
@@ -176,7 +185,7 @@ export async function createStructuredModelResponse({
       text: { format: { type: "json_schema", name, strict: true, schema } },
       metadata
     })
-  }, { model, estimatedTokens: Math.ceil((instructions.length + requestInput.length) / charactersPerToken) });
+  }, { model, estimatedTokens: Math.ceil((instructions.length + requestInput.length + JSON.stringify(schema).length) / charactersPerToken) });
 
   if (!response.ok) {
     const message = `OpenAI Responses API failed (${response.status}): ${body?.error?.message ?? "unknown error"}`;
