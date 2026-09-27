@@ -22,7 +22,27 @@ export const policyCategoryDataSchema = z.object({ schemaVersion: z.literal(2), 
   }
 });
 export const sourceSchema = z.object({ id: z.string().min(1), type: z.enum(["programme", "official-record", "roll-call-vote", "article"]), title: z.string().min(1), publisher: z.string().min(1), publishedAt: z.iso.date(), url: z.url().nullable(), primary: z.boolean(), isDemo: z.boolean() });
-export const assessmentRevisionSchema = z.object({ id: z.string().min(1), promiseId: z.string().min(1), revision: z.number().int().positive(), status: assessmentStatusSchema, explanationShort: z.string().min(1), publishedAt: z.iso.date(), evidenceSourceIds: z.array(z.string().min(1)).min(1), baselinePromiseSourceId: z.string().min(1).optional(), isDemo: z.boolean() }).superRefine((revision, context) => {
+const officialUrlSchema = z.url().regex(/^https:\/\/(www|public)\.psp\.cz\/sqw\//, "Evidence trail links must point to official psp.cz records");
+const versionNoteSchema = z.object({ note: z.enum(["published-version-missing", "removed", "text-not-published", "third-reading-rejection"]), lawChangeIds: z.array(z.string().min(1)).min(1) });
+const concernedTextSchema = { version: z.enum(["proposed", "approved", "passed"]), textUrl: officialUrlSchema.nullable(), notes: z.array(versionNoteSchema) };
+const evidenceTrailStepSchema = z.discriminatedUnion("kind", [
+  z.object({ kind: z.literal("submission"), date: z.iso.date(), evidenceId: z.string().min(1), proposal: z.enum(["member-bill", "government-bill", "state-budget", "treaty"]), proposerCz: z.string().min(1).nullable(), ...concernedTextSchema }).strict(),
+  z.object({ kind: z.literal("vote"), date: z.iso.date(), evidenceId: z.string().min(1), url: officialUrlSchema, stageCz: z.string().min(1), actionCz: z.string().min(1), club: z.enum(["yes", "no", "no-majority"]), counts: z.object({ yes: z.number().int().nonnegative(), no: z.number().int().nonnegative(), abstained: z.number().int().nonnegative(), notVoting: z.number().int().nonnegative(), absent: z.number().int().nonnegative(), unknown: z.number().int().nonnegative() }).strict(), ...concernedTextSchema }).strict(),
+  z.object({ kind: z.literal("senate-resolution"), evidenceId: z.string().min(1), printPartCz: z.string().regex(/^\d+\/\d+$/), url: officialUrlSchema }).strict(),
+]);
+export const evidenceTrailPrintSchema = z.object({ printNumber: z.number().int().positive(), printUrl: officialUrlSchema, lawChanges: z.array(z.object({ lawChangeId: z.string().min(1), headingCz: z.string().min(1).nullable(), titleCz: z.string().min(1), amendedActs: z.array(z.string().regex(/^\d+\/\d{4}$/)) }).strict()).min(1), steps: z.array(evidenceTrailStepSchema).min(1) }).strict().superRefine((print, context) => {
+  const lawChangeIds = new Set(print.lawChanges.map(({ lawChangeId }) => lawChangeId));
+  if (!print.steps.some(({ kind }) => kind !== "senate-resolution")) context.addIssue({ code: "custom", path: ["steps"], message: "An evidence trail print needs attributable conduct" });
+  for (const [index, step] of print.steps.entries()) {
+    if (step.kind !== "senate-resolution" && step.textUrl === null && step.notes.length === 0) context.addIssue({ code: "custom", path: ["steps", index, "notes"], message: "A step without a text link must say why" });
+    if (step.kind !== "senate-resolution" && step.notes.some(({ lawChangeIds: ids }) => ids.some((id) => !lawChangeIds.has(id)))) context.addIssue({ code: "custom", path: ["steps", index, "notes"], message: "A version note must name law changes of this print" });
+  }
+});
+export const assessmentRevisionSchema = z.object({ id: z.string().min(1), promiseId: z.string().min(1), revision: z.number().int().positive(), status: assessmentStatusSchema, explanationShort: z.string().min(1), publishedAt: z.iso.date(), evidenceSourceIds: z.array(z.string().min(1)), evidenceTrail: z.array(evidenceTrailPrintSchema).min(1).optional(), proposalId: z.string().min(1).optional(), baselinePromiseSourceId: z.string().min(1).optional(), isDemo: z.boolean() }).superRefine((revision, context) => {
+  if (revision.evidenceSourceIds.length === 0 && !revision.evidenceTrail) context.addIssue({ code: "custom", path: ["evidenceSourceIds"], message: "A revision must cite source records or an evidence trail" });
+  if (revision.baselinePromiseSourceId && (revision.evidenceTrail || revision.proposalId)) context.addIssue({ code: "custom", path: ["evidenceTrail"], message: "Baseline revisions have no evidence trail or proposal" });
+  if (revision.evidenceTrail && revision.evidenceSourceIds.length > 0) context.addIssue({ code: "custom", path: ["evidenceSourceIds"], message: "A revision with an evidence trail cites no other source record" });
+  if (revision.evidenceTrail && !revision.proposalId) context.addIssue({ code: "custom", path: ["proposalId"], message: "An evidence trail is copied from a reviewed proposal" });
   if (revision.baselinePromiseSourceId && revision.status !== "no-progress") context.addIssue({ code: "custom", path: ["status"], message: "Baseline revisions must use no-progress" });
   if (revision.baselinePromiseSourceId && revision.revision !== 1) context.addIssue({ code: "custom", path: ["revision"], message: "Baseline revisions must be the initial revision" });
   if (revision.baselinePromiseSourceId && (revision.evidenceSourceIds.length !== 1 || revision.evidenceSourceIds[0] !== revision.baselinePromiseSourceId)) context.addIssue({ code: "custom", path: ["evidenceSourceIds"], message: "Baseline revisions must list only their baseline promise source" });
@@ -33,3 +53,5 @@ export type PartyPeriod = z.infer<typeof partyPeriodSchema>;
 export type PromiseRecord = z.infer<typeof promiseSchema>;
 export type PolicyCategory = z.infer<typeof policyCategorySchema>;
 export type AssessmentRevision = z.infer<typeof assessmentRevisionSchema>;
+export type EvidenceTrailPrint = z.infer<typeof evidenceTrailPrintSchema>;
+export type EvidenceTrailStep = EvidenceTrailPrint["steps"][number];
