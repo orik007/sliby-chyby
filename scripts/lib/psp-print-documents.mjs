@@ -1,6 +1,7 @@
+import { subscribe, unsubscribe } from "node:diagnostics_channel";
 import { unzipSync } from "fflate";
 import WordExtractor from "word-extractor";
-import { fetchVerified, invariant } from "./collector-core.mjs";
+import { fetchVerified, invariant, requestFailureCode } from "./collector-core.mjs";
 
 function decodeXml(value) {
   return value
@@ -25,18 +26,107 @@ export const pspDownloadSettings = { concurrency: 2, retryAttempts: 6, retryDela
 // Returns a fetch that sends every request through one shared limit. A
 // request takes a slot only for itself, never while holding another, so the
 // limit cannot deadlock.
-export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs } = pspDownloadSettings) {
+// `onAttempt` receives every attempt's record (see fetchVerified).
+export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, onAttempt = null } = pspDownloadSettings) {
   let active = 0;
   const waiting = [];
   return async (source, url, options) => {
     if (active >= concurrency) await new Promise((resolveTurn) => waiting.push(resolveTurn));
     active += 1;
     try {
-      return await fetchVerified(source, url, { ...options, retryAttempts, retryDelayMs });
+      return await fetchVerified(source, url, { ...options, retryAttempts, retryDelayMs, onAttempt });
     } finally {
       active -= 1;
       waiting.shift()?.();
     }
+  };
+}
+
+const connectChannels = ["undici:client:beforeConnect", "undici:client:connected", "undici:client:connectError"];
+
+/**
+ * Records how the run uses psp.cz, so its limits can be measured from the
+ * run artifact: every download attempt (passed to `onAttempt`) and every new
+ * connection Node's fetch opens to `hostname`, with how long connecting took
+ * and why it failed. A request sent over a kept-alive connection opens none.
+ * Connections are observed through Node's diagnostics channels for its
+ * bundled HTTP client; `stop` ends the observation.
+ */
+export function createPspRequestLog({ hostname = "www.psp.cz", now = Date.now } = {}) {
+  const entries = [];
+  // Node reports the start and the end of a connection in separate messages
+  // that share only the client's connector, so starts wait in order per
+  // connector; when two connections open at once, their durations may be
+  // swapped, never their count.
+  const connecting = new Map();
+  const finish = ({ connector }, error) => {
+    const startedAt = connecting.get(connector)?.shift();
+    if (startedAt === undefined) return;
+    entries.push({ type: "connect", startedAt: new Date(startedAt).toISOString(), durationMs: now() - startedAt, error });
+  };
+  const handlers = {
+    "undici:client:beforeConnect": ({ connectParams, connector }) => {
+      if (connectParams?.hostname !== hostname) return;
+      if (!connecting.has(connector)) connecting.set(connector, []);
+      connecting.get(connector).push(now());
+    },
+    "undici:client:connected": (message) => finish(message, null),
+    "undici:client:connectError": (message) => finish(message, requestFailureCode(message.error))
+  };
+  for (const name of connectChannels) subscribe(name, handlers[name]);
+  return {
+    entries,
+    onAttempt: (attempt) => entries.push({ type: "attempt", ...attempt }),
+    stop: () => {
+      for (const name of connectChannels) unsubscribe(name, handlers[name]);
+    },
+    summary: () => summarizePspRequests(entries)
+  };
+}
+
+function countBy(items, key) {
+  const counts = {};
+  for (const item of items) counts[key(item)] = (counts[key(item)] ?? 0) + 1;
+  return counts;
+}
+
+// The largest number of events that started within any 60 s.
+function busiestMinute(entries) {
+  const times = entries.map(({ startedAt }) => Date.parse(startedAt)).sort((a, b) => a - b);
+  let most = 0;
+  for (let first = 0, last = 0; last < times.length; last += 1) {
+    while (times[last] - times[first] >= 60_000) first += 1;
+    most = Math.max(most, last - first + 1);
+  }
+  return most;
+}
+
+/**
+ * Totals of a psp.cz request log: attempts and connections, how many failed
+ * and why, the most started within any 60 s, and the average per minute over
+ * the time between the first and the last start (null below one minute).
+ */
+export function summarizePspRequests(entries) {
+  const attempts = entries.filter(({ type }) => type === "attempt");
+  const connections = entries.filter(({ type }) => type === "connect");
+  const starts = entries.map(({ startedAt }) => Date.parse(startedAt));
+  const minutes = starts.length > 1 ? (Math.max(...starts) - Math.min(...starts)) / 60_000 : 0;
+  const perMinute = (count) => (minutes >= 1 ? Number((count / minutes).toFixed(1)) : null);
+  const failedAttempts = attempts.filter(({ error, status }) => error || status !== 200);
+  const failedConnections = connections.filter(({ error }) => error);
+  return {
+    minutes: Number(minutes.toFixed(1)),
+    attempts: attempts.length,
+    urls: new Set(attempts.map(({ url }) => url)).size,
+    failedAttempts: failedAttempts.length,
+    failedAttemptsBy: countBy(failedAttempts, ({ error, status }) => error ?? `HTTP ${status}`),
+    attemptsPerMinute: perMinute(attempts.length),
+    busiestMinuteAttempts: busiestMinute(attempts),
+    connections: connections.length,
+    failedConnections: failedConnections.length,
+    failedConnectionsBy: countBy(failedConnections, ({ error }) => error),
+    connectionsPerMinute: perMinute(connections.length),
+    busiestMinuteConnections: busiestMinute(connections)
   };
 }
 

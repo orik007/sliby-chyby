@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
-import { createPspFetcher, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings } from "./lib/psp-print-documents.mjs";
+import { createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings } from "./lib/psp-print-documents.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
@@ -51,7 +51,11 @@ function collectPrints(records) {
   return [...prints.values()].sort((left, right) => left.number - right.number);
 }
 
-const fetchPsp = createPspFetcher();
+// Every attempt and new connection to psp.cz is recorded in
+// psp-requests.jsonl next to the output, even when a download fails the run,
+// so the site's limits can be measured from the run artifact.
+const pspRequests = createPspRequestLog();
+const fetchPsp = createPspFetcher({ ...pspDownloadSettings, onAttempt: pspRequests.onAttempt });
 
 const htmlOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };
 const wordOptions = {
@@ -177,7 +181,15 @@ async function downloadWorker() {
     tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX or DOC proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
   }
 }
-await Promise.all(Array.from({ length: Math.min(pspDownloadSettings.concurrency, prints.length) }, downloadWorker));
+await mkdir(resolve(args.output), { recursive: true });
+try {
+  await Promise.all(Array.from({ length: Math.min(pspDownloadSettings.concurrency, prints.length) }, downloadWorker));
+} finally {
+  pspRequests.stop();
+  await writeFile(resolve(args.output, "psp-requests.jsonl"), pspRequests.entries.map((entry) => `${JSON.stringify(entry)}\n`).join(""));
+  const usage = pspRequests.summary();
+  log(`psp.cz requests: ${usage.attempts} attempts for ${usage.urls} URLs in ${usage.minutes} min (${usage.attemptsPerMinute ?? "-"}/min, at most ${usage.busiestMinuteAttempts} in any 60 s), ${usage.failedAttempts} failed ${JSON.stringify(usage.failedAttemptsBy)}; ${usage.connections} new connections (${usage.connectionsPerMinute ?? "-"}/min, at most ${usage.busiestMinuteConnections} in any 60 s), ${usage.failedConnections} failed ${JSON.stringify(usage.failedConnectionsBy)}`);
+}
 
 const result = {};
 for (const print of prints) {
@@ -214,7 +226,6 @@ const quality = {
   titleOnlyLawChanges: allChanges.filter(({ versions }) => versions.proposed && !versions.proposed.removed && versions.proposed.textCz === null).length
 };
 
-await mkdir(resolve(args.output), { recursive: true });
 await writeFile(resolve(args.output, "print-parts.json"), `${JSON.stringify({ schemaVersion: "1.0.0", quality, prints: result }, null, 2)}\n`);
 log(`law changes: ${quality.lawChanges} from ${quality.prints} prints (${quality.printsWithProposalText} with a proposal text, ${quality.printsWithApprovedText} with an approved text, ${quality.printsWithPassedText} with a passed text, ${quality.printsWithSenateResolution} with a Senate resolution, ${quality.textWarnings} text warning(s))`);
 console.log(JSON.stringify({ quality }, null, 2));

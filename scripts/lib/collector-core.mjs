@@ -112,7 +112,23 @@ function delay(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
-export async function fetchVerified(source, endpoint, { maxBytes, expectedContentTypes, retryAttempts = 4, retryDelayMs = 1_000 }) {
+/**
+ * A short, stable name for why a request failed without a response: the
+ * transport error code Node's fetch keeps in `cause` (for example
+ * `UND_ERR_CONNECT_TIMEOUT` or `ECONNRESET`), or `timeout-45s` when no answer
+ * came in time.
+ */
+export function requestFailureCode(error) {
+  if (error?.name === "AbortError") return "timeout-45s";
+  return error?.cause?.code ?? error?.code ?? (error instanceof Error ? error.message : String(error));
+}
+
+/**
+ * Downloads an allowlisted source. `onAttempt`, when given, receives one
+ * record per attempt: the URL, attempt number, start time, duration, HTTP
+ * status and size, or the failure code when there was no response.
+ */
+export async function fetchVerified(source, endpoint, { maxBytes, expectedContentTypes, retryAttempts = 4, retryDelayMs = 1_000, onAttempt = null }) {
   const requested = new URL(endpoint);
   invariant(requested.protocol === "https:", `Source ${source.id} endpoint must use HTTPS`);
   invariant(allowedHostname(requested.hostname, source.expectedHosts), `Source ${source.id} endpoint host is not allowlisted`);
@@ -124,15 +140,22 @@ export async function fetchVerified(source, endpoint, { maxBytes, expectedConten
   for (let attempt = 1; attempt <= retryAttempts; attempt += 1) {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 45_000);
+    const startedAt = Date.now();
+    let status = null;
+    const report = (fields) => onAttempt?.({ url: endpoint, attempt, startedAt: new Date(startedAt).toISOString(), durationMs: Date.now() - startedAt, status: null, bytes: null, error: null, ...fields });
     try {
       response = await fetch(endpoint, {
         headers: { "User-Agent": "SlibyChyby/0.1 (+https://github.com/orik007/sliby-chyby)" },
         redirect: "follow",
         signal: controller.signal
       });
+      status = response.status;
       if (response.ok) bytes = new Uint8Array(await response.arrayBuffer());
+      report({ status, bytes: bytes?.byteLength ?? null });
     } catch (error) {
-      const reason = error?.name === "AbortError" ? "no answer within 45 s" : (error instanceof Error ? error.message : String(error));
+      const code = requestFailureCode(error);
+      report({ status, error: code });
+      const reason = error?.name === "AbortError" ? "no answer within 45 s" : `${error instanceof Error ? error.message : String(error)}${code !== error?.message ? `, ${code}` : ""}`;
       if (attempt === retryAttempts) {
         log(`download failed after ${attempt} attempts: ${endpoint} (${reason})`);
         throw error;
