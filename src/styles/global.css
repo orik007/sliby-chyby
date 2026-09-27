@@ -478,15 +478,28 @@ h1 em {
   gap: 42px;
 }
 
+.section-aside {
+  max-width: 320px;
+  display: grid;
+  gap: 16px;
+}
+
+.section-aside > p {
+  margin: 0;
+  color: var(--muted);
+}
+
 .statement-filter {
-  margin: -8px 0 34px;
+  padding: 12px 14px;
   display: grid;
   gap: 6px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper-strong);
 }
 
 .statement-filter label {
-  width: fit-content;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   gap: 10px;
   font-weight: 700;
@@ -497,13 +510,14 @@ h1 em {
   width: 20px;
   height: 20px;
   margin: 0;
+  flex: none;
   accent-color: var(--ink);
 }
 
-.statement-filter p {
-  margin: 0;
+.statement-filter small {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.45;
 }
 
 /* Statements stay hidden until the visitor turns them on. */
@@ -1064,8 +1078,13 @@ h1 em {
     display: block;
   }
 
-  .section-heading > p {
+  .section-heading > p,
+  .section-aside {
     margin-top: 12px;
+  }
+
+  .section-aside {
+    max-width: none;
   }
 
   .party-card {
