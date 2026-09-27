@@ -74,8 +74,19 @@ test("reads the paragraphs of a Word 97-2003 proposal text with its quotation ma
   await assert.rejects(() => extractDocParagraphs(new TextEncoder().encode("not a Word file")));
 });
 
-test("print-text downloads use two requests at a time and six attempts with a 5 s back-off", () => {
-  assert.deepEqual(pspDownloadSettings, { concurrency: 2, retryAttempts: 6, retryDelayMs: 5_000 });
+test("print-text downloads use two requests at a time, six attempts with a 5 s back-off, 1.5 s between attempts, and a 3 s connect limit", () => {
+  assert.deepEqual(pspDownloadSettings, { concurrency: 2, retryAttempts: 6, retryDelayMs: 5_000, minIntervalMs: 1_500, connectTimeoutMs: 3_000 });
+});
+
+test("the psp.cz fetcher starts no two attempts, retries included, closer than its interval", async () => {
+  const failing = "https://www.psp.cz/sqw/historie.sqw?o=10&t=1";
+  const stub = stubPsp({ [failing]: 1 });
+  const fetchPsp = createPspFetcher({ concurrency: 2, retryAttempts: 2, retryDelayMs: 0, minIntervalMs: 40 });
+  const urls = [failing, ...Array.from({ length: 3 }, (_, index) => `https://www.psp.cz/sqw/historie.sqw?o=10&t=${index + 2}`)];
+  await withStubPsp(stub, () => Promise.all(urls.map((url) => fetchPsp(pspSource, url, htmlOptions))));
+  const starts = stub.log.starts.map(({ at }) => at);
+  assert.equal(starts.length, 5);
+  for (let index = 1; index < starts.length; index += 1) assert.ok(starts[index] - starts[index - 1] >= 38, `attempts ${index} and ${index + 1} started ${starts[index] - starts[index - 1]} ms apart`);
 });
 
 test("the psp.cz fetcher never keeps more requests open than its limit", async () => {

@@ -127,8 +127,11 @@ export function requestFailureCode(error) {
  * Downloads an allowlisted source. `onAttempt`, when given, receives one
  * record per attempt: the URL, attempt number, start time, duration, HTTP
  * status and size, or the failure code when there was no response.
+ * `beforeAttempt`, when given, is awaited before every attempt, retries
+ * included, so a caller can space its requests; `dispatcher` is passed to
+ * fetch, for example to set how long connecting may take.
  */
-export async function fetchVerified(source, endpoint, { maxBytes, expectedContentTypes, retryAttempts = 4, retryDelayMs = 1_000, onAttempt = null }) {
+export async function fetchVerified(source, endpoint, { maxBytes, expectedContentTypes, retryAttempts = 4, retryDelayMs = 1_000, onAttempt = null, beforeAttempt = null, dispatcher = undefined }) {
   const requested = new URL(endpoint);
   invariant(requested.protocol === "https:", `Source ${source.id} endpoint must use HTTPS`);
   invariant(allowedHostname(requested.hostname, source.expectedHosts), `Source ${source.id} endpoint host is not allowlisted`);
@@ -138,6 +141,7 @@ export async function fetchVerified(source, endpoint, { maxBytes, expectedConten
   invariant(Number.isInteger(retryAttempts) && retryAttempts > 0, "retryAttempts must be a positive integer");
   invariant(Number.isInteger(retryDelayMs) && retryDelayMs >= 0, "retryDelayMs must be a non-negative integer");
   for (let attempt = 1; attempt <= retryAttempts; attempt += 1) {
+    await beforeAttempt?.();
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 45_000);
     const startedAt = Date.now();
@@ -147,7 +151,8 @@ export async function fetchVerified(source, endpoint, { maxBytes, expectedConten
       response = await fetch(endpoint, {
         headers: { "User-Agent": "SlibyChyby/0.1 (+https://github.com/orik007/sliby-chyby)" },
         redirect: "follow",
-        signal: controller.signal
+        signal: controller.signal,
+        ...(dispatcher ? { dispatcher } : {})
       });
       status = response.status;
       if (response.ok) bytes = new Uint8Array(await response.arrayBuffer());

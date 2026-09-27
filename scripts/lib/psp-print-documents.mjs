@@ -1,5 +1,6 @@
 import { subscribe, unsubscribe } from "node:diagnostics_channel";
 import { unzipSync } from "fflate";
+import { Agent } from "undici";
 import WordExtractor from "word-extractor";
 import { fetchVerified, invariant, requestFailureCode } from "./collector-core.mjs";
 
@@ -21,20 +22,40 @@ function decodeXml(value) {
 // before each retry: 5, 10, 20, 40, and 80 s. A request keeps its slot while
 // it waits, so when psp.cz stops answering, every download pauses rather
 // than adding connections.
-export const pspDownloadSettings = { concurrency: 2, retryAttempts: 6, retryDelayMs: 5_000 };
+//
+// psp.cz closes the connection after every answer, so each request opens a
+// new one. In run 64 (27 September 2026) the first 46 connections within
+// 13 s all succeeded; afterwards about 13 in a row succeeded and then the
+// next two were dropped without an answer, again and again, 63 of 467 in
+// all, at about 46 connections a minute. That fits a limit on new
+// connections of roughly 45 to 50 a minute after an initial allowance. So a
+// new attempt, retries included, starts at least 1.5 s after the previous
+// one (at most 40 a minute), and connecting may take at most 3 s: a
+// successful connection took 0.3 s (median) and at most 0.8 s in nine of
+// ten, and a dropped one is never answered.
+export const pspDownloadSettings = { concurrency: 2, retryAttempts: 6, retryDelayMs: 5_000, minIntervalMs: 1_500, connectTimeoutMs: 3_000 };
 
 // Returns a fetch that sends every request through one shared limit. A
 // request takes a slot only for itself, never while holding another, so the
-// limit cannot deadlock.
+// limit cannot deadlock. Attempts share one schedule, so no two start less
+// than `minIntervalMs` apart.
 // `onAttempt` receives every attempt's record (see fetchVerified).
-export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, onAttempt = null } = pspDownloadSettings) {
+export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, minIntervalMs = 0, connectTimeoutMs = null, onAttempt = null } = pspDownloadSettings) {
   let active = 0;
   const waiting = [];
+  let nextStart = 0;
+  const beforeAttempt = async () => {
+    const start = Math.max(Date.now(), nextStart);
+    nextStart = start + minIntervalMs;
+    const wait = start - Date.now();
+    if (wait > 0) await new Promise((resolveWait) => setTimeout(resolveWait, wait));
+  };
+  const dispatcher = connectTimeoutMs ? new Agent({ connect: { timeout: connectTimeoutMs } }) : undefined;
   return async (source, url, options) => {
     if (active >= concurrency) await new Promise((resolveTurn) => waiting.push(resolveTurn));
     active += 1;
     try {
-      return await fetchVerified(source, url, { ...options, retryAttempts, retryDelayMs, onAttempt });
+      return await fetchVerified(source, url, { ...options, retryAttempts, retryDelayMs, onAttempt, beforeAttempt, dispatcher });
     } finally {
       active -= 1;
       waiting.shift()?.();
