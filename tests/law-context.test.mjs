@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -77,7 +77,9 @@ const act110 = {
   wordings: [{ wording: "2025-01-01", from: "2025-01-01", to: "2026-06-11" }, { wording: "2026-06-12", from: "2026-06-12", to: null }],
   structures: {
     "2025-01-01": ["dokument/norma", "dokument/norma/cast_1/hlava_5/par_52", "dokument/norma/cast_1/hlava_5/par_52/odst_1", "dokument/norma/cast_1/hlava_5/par_52/odst_2", "dokument/norma/cast_1/hlava_5/par_8"],
-    "2026-06-12": ["dokument/norma", "dokument/norma/cast_1/hlava_5/par_52", "dokument/norma/cast_1/hlava_5/par_52/odst_1", "dokument/norma/cast_1/hlava_5/par_32d", "dokument/norma/cast_1/hlava_5/par_8"]
+    // The change itself in force: § 8a it inserts exists in this later
+    // wording, and must still be named a new provision.
+    "2026-06-12": ["dokument/norma", "dokument/norma/cast_1/hlava_5/par_52", "dokument/norma/cast_1/hlava_5/par_52/odst_1", "dokument/norma/cast_1/hlava_5/par_32d", "dokument/norma/cast_1/hlava_5/par_8", "dokument/norma/cast_1/hlava_5/par_8a", "dokument/norma/cast_1/hlava_5/par_8a/odst_2"]
   },
   texts: {
     "2025-01-01/dokument/norma/cast_1/hlava_5/par_52/odst_1": ["<var>(1)</var> Úřad řídí předseda. Předseda Úřadu se považuje za služební orgán.", "6AE58D60"],
@@ -226,4 +228,22 @@ test("the list of wordings is read again for conduct on or after the day it was 
   assert.equal(await read("2025-12-30"), 1);
   // Read after the conduct: every wording in force on that day is known.
   assert.equal(await read("2025-12-31"), 0);
+});
+
+test("a cache line cut short by a stopped run is removed, and what it held is read again", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "law-context-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const file = join(directory, "2019-110.jsonl");
+  const wordings = JSON.stringify({ kind: "wordings", readOn: "2026-09-28", wordings: act110.wordings });
+  await writeFile(file, `${wordings}\n{"kind":"structure","wording":"2025-01-01","paths":["dokum`);
+  const endpoint = endpointFor(act110);
+  const reader = await readerFor(directory, endpoint);
+  assert.deepEqual(await reader.structure("110/2019", "2025-01-01"), [...act110.structures["2025-01-01"]].sort());
+  assert.equal(endpoint.calls.length, 1);
+  await createLawContextCache(directory).load("110/2019");
+  const lines = (await readFile(file, "utf8")).split("\n").filter(Boolean).map((line) => JSON.parse(line));
+  assert.deepEqual(lines.map(({ kind }) => kind), ["wordings", "structure"]);
+  // A corrupt line before the last one is never skipped silently.
+  await writeFile(file, `{"kind":"wor\n${wordings}\n`);
+  await assert.rejects(createLawContextCache(directory).load("110/2019"), /Corrupt law-context cache .* line 1/);
 });

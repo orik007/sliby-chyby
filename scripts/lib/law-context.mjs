@@ -144,17 +144,21 @@ async function resolveVersionContext(text, amendedAct, date, reader) {
       continue;
     }
     for (const target of instruction.targets) {
-      const key = target.section ? `${target.act}#${target.section}` : null;
+      const sectionKey = target.section ? `${target.act}#${target.section}` : null;
+      const paragraphKey = target.section && target.paragraph ? `${sectionKey}#${target.paragraph}` : null;
       if (target.kind === "inserted") {
-        inserted.add(key);
+        inserted.add(paragraphKey ?? sectionKey);
+        targets.push({ target: describeTarget(target), status: "new-provision" });
+        continue;
+      }
+      // A provision this change inserted earlier has no earlier text. It is
+      // decided before any later wording is searched, because once the
+      // change is in force a later wording holds the change's own text.
+      if (sectionKey && (inserted.has(sectionKey) || (paragraphKey && inserted.has(paragraphKey)))) {
         targets.push({ target: describeTarget(target), status: "new-provision" });
         continue;
       }
       const located = await locateAtDate(target, date, reader);
-      if (!located && key && inserted.has(key)) {
-        targets.push({ target: describeTarget(target), status: "new-provision" });
-        continue;
-      }
       if (!located) {
         targets.push({ target: describeTarget(target), status: "not-found" });
         continue;

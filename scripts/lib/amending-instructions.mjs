@@ -20,6 +20,9 @@ const annexPattern = new RegExp(`^(?:\\d+\\.\\s+)?(?:(?:V|Ve)\\s+)?(?:nadpisu\\s
 const annexIntroductionPattern = new RegExp(`^(?:\\d+\\.\\s+)?Přílo\\p{L}*(?:\\s+č\\.\\s*(\\d+))?.*${start}se\\s+mění\\s+takto`, "u");
 const itemPattern = new RegExp(`${start}(polož|bod)\\p{L}*\\s+(\\d+[a-z]?)`, "iu");
 const letterPattern = /^\s+písm\.\s*([a-z]{1,2})\)/u;
+// "se vkládá nový odstavec 3", "se doplňují odstavce 3 a 4": the paragraphs
+// an instruction itself inserts.
+const insertedParagraphsPattern = new RegExp(`${start}(?:vkládá|vkládají|doplňuje|doplňují)\\s+(?:se\\s+)?(?:nov\\p{L}+\\s+)?odstav\\p{L}*\\s+(\\d+)((?:\\s*(?:,|a|až)\\s*\\d+)*)`, "u");
 const divisionPattern = new RegExp(`^(?:\\d+\\.\\s+)?(?:(?:V|Ve|Za|Před|Na\\s+konci)\\s+)?(?:nadpisu\\s+)?(?:část|části|hlav|díl|oddíl|pododdíl|názvu|nadpis)`, "iu");
 const insertsParagraphPattern = new RegExp(`${start}(?:vkládá|vkládají|doplňuje|doplňují)\\s+(?:se\\s+)?(?:nov\\p{L}+\\s+)?(?:odstav|písmen|bod)`, "u");
 const insertedSectionPattern = new RegExp(`${start}(?:vkládá|vkládají|doplňuje|doplňují)\\s+(?:se\\s+)?(?:nov\\p{L}+\\s+)?§§?\\s*\\d`, "u");
@@ -95,6 +98,12 @@ function sectionTargets(head, act) {
       if (paragraphs.length === 0) targets.push({ kind: "section", act, section, paragraph: null, ...(letter ? { letter } : {}) });
       for (const paragraph of paragraphs) targets.push({ kind: "section", act, section, paragraph, ...(letter ? { letter } : {}) });
     }
+    // The paragraphs the instruction inserts have no earlier text; a later
+    // instruction that changes them names a new provision.
+    const insertedParagraphs = sections.length === 1 ? insertedParagraphsPattern.exec(head.slice(match.index + match[0].length)) : null;
+    if (insertedParagraphs) {
+      for (const paragraph of listed(insertedParagraphs[1], insertedParagraphs[2])) targets.push({ kind: "inserted", act, section: sections[0], paragraph });
+    }
   }
   return targets;
 }
@@ -150,7 +159,8 @@ export function instructionLines(text) {
  * - `section`: a § (`section`) and, when changed in place, its `paragraph`
  *   and `letter`;
  * - `neighbour`: the § after which new §§ are inserted;
- * - `inserted`: a § the instruction itself inserts (no earlier text);
+ * - `inserted`: a § (`paragraph` null) or a paragraph of a § that the
+ *   instruction itself inserts (no earlier text);
  * - `article`: an article (`article`, arabic) and its `point` or `paragraph`;
  * - `annex`: an annex (`annex`, null for the only, unnumbered one), or one
  *   `item` of it (`{ kind: "pol", number }` for a fee-schedule item,

@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import { appendFile, mkdir, readFile } from "node:fs/promises";
+import { appendFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 /**
@@ -142,14 +142,24 @@ export function createLawContextCache(directory) {
     const entry = { wordings: null, refreshed: false, structures: new Map(), texts: new Map() };
     const file = fileOf(act);
     if (existsSync(file)) {
-      for (const [index, line] of (await readFile(file, "utf8")).split("\n").entries()) {
+      const content = await readFile(file, "utf8");
+      const lines = content.split("\n");
+      const lastLine = lines.findLastIndex((line) => line.trim() !== "");
+      let validLength = content.length;
+      let offset = 0;
+      for (const [index, line] of lines.entries()) {
+        const lineStart = offset;
+        offset += line.length + 1;
         if (line.trim() === "") continue;
         let value;
         try {
           value = JSON.parse(line);
         } catch {
-          // Only a line cut short by an interrupted run is skipped; it is
-          // requested again.
+          // Only the last line can be cut short, by a run stopped mid-write;
+          // it is removed, so the next line is appended on a line of its own,
+          // and what it held is requested again.
+          if (index !== lastLine) throw new Error(`Corrupt law-context cache ${file} line ${index + 1}`);
+          validLength = lineStart;
           continue;
         }
         if (value.kind === "wordings") entry.wordings = { readOn: value.readOn, wordings: value.wordings };
@@ -157,6 +167,9 @@ export function createLawContextCache(directory) {
         else if (value.kind === "text") entry.texts.set(`${value.wording}\n${value.path}`, { text: value.text, order: value.order ?? null });
         else throw new Error(`Invalid law-context cache ${file} line ${index + 1}`);
       }
+      const repaired = content.slice(0, validLength);
+      const normalized = repaired === "" || repaired.endsWith("\n") ? repaired : `${repaired}\n`;
+      if (normalized !== content) await writeFile(file, normalized, "utf8");
     }
     acts.set(act, entry);
     return entry;

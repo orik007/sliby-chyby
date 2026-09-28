@@ -37,8 +37,17 @@ test("reads a paragraph changed in place, and the whole section when one is inse
     { kind: "section", act: "1/2000", section: "5", paragraph: "3" }
   ]);
   // Prints 83 and 250: a paragraph or letter inserted into a section.
-  assert.deepEqual(targetsOf("2. V § 20 se doplňují odstavce 3 a 4, které včetně poznámky pod čarou č. 45 znějí:", "111/1994"), [{ kind: "section", act: "111/1994", section: "20", paragraph: null }]);
-  assert.deepEqual(targetsOf("V § 22d se za odstavec 4 vkládá nový odstavec 5, který zní:", "165/2012"), [{ kind: "section", act: "165/2012", section: "22d", paragraph: null }]);
+  // The paragraphs it inserts are named as new, so a later instruction on
+  // them is not taken for a change of an earlier text.
+  assert.deepEqual(targetsOf("2. V § 20 se doplňují odstavce 3 a 4, které včetně poznámky pod čarou č. 45 znějí:", "111/1994"), [
+    { kind: "section", act: "111/1994", section: "20", paragraph: null },
+    { kind: "inserted", act: "111/1994", section: "20", paragraph: "3" },
+    { kind: "inserted", act: "111/1994", section: "20", paragraph: "4" }
+  ]);
+  assert.deepEqual(targetsOf("V § 22d se za odstavec 4 vkládá nový odstavec 5, který zní:", "165/2012"), [
+    { kind: "section", act: "165/2012", section: "22d", paragraph: null },
+    { kind: "inserted", act: "165/2012", section: "22d", paragraph: "5" }
+  ]);
   assert.deepEqual(targetsOf("§ 194 včetně nadpisu zní:", "283/2021"), [{ kind: "section", act: "283/2021", section: "194", paragraph: null }]);
 });
 
