@@ -27,7 +27,8 @@ official records only (active: Chamber of Deputies open data)
   -> complete collection of every source at 09:37 Europe/Prague
   -> only records that can be attributable conduct continue
   -> each concerned print split into law changes (one part of its official text each)
-  -> two screeners read every law change: substantive or technical, and topic tags
+  -> context of each law change: the wording of the provisions it amends on the conduct date (e-Sbírka open data, cached permanently)
+  -> two screeners read every law change with its context: substantive or technical, and topic tags
   -> routing of substantive changes to promises: direct legal-identifier links or the specific tags of either screener, matched to the promises' reviewed tags
   -> attribution: decisive club vote, member bill, or government proposal on the change's print (scoring.md)
   -> two relevance checks per promise and law change
@@ -50,6 +51,7 @@ Party websites, press releases, and the media are not evidence. The public site 
 | `automation/collectors/` | Registry of active evidence sources. |
 | `automation/attribution/` | Governing parties and their dates, with an official source. |
 | `automation/topic-routing/` | Controlled routing taxonomy, the reviewed routing tags of every promise, and the durable model caches (law-change screening, relevance checks). |
+| `automation/law-context/` | Durable cache of law-change context read from e-Sbírka, one file per act (audit state only). |
 | `automation/evidence-packages/` | Durable unpublished queue of evidence packages (one per promise) awaiting assessment. |
 | `automation/prompts/` | Active law-change screener, relevance-check, assessor, and arbiter prompts. |
 | `scripts/` | Validation, collection, print splitting, routing, packaging, assessment, and coverage-audit scripts. |
