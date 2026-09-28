@@ -160,10 +160,10 @@ test("resolves every target with one status, in the wording on the conduct date 
   // The model reads the context after the version's text, and the version
   // with the same text and no conduct names no context.
   const text = lawChangeText(withContext(change, context));
-  assert.match(text, /Version: proposed text\nZákon č\. 110\/2019 Sb\.[\s\S]*1\. V § 52[\s\S]*Context: the wording of the amended provisions in the Collection of Laws \(e-Sbírka\) in force on 2025-12-29/);
-  assert.match(text, /§ 52 zákona č\. 110\/2019 Sb\., wording effective from 2025-01-01:\n\(1\) Úřad řídí předseda/);
-  assert.match(text, /- § 32d odst\. 1: not in the wording in force on the date of the conduct; taken from a later wording/);
-  assert.doesNotMatch(text.split("Version: text approved")[1] ?? "", /Context/);
+  assert.match(text, /Version: proposed text\nZákon č\. 110\/2019 Sb\.[\s\S]*1\. V § 52[\s\S]*Context from the Collection of Laws \(e-Sbírka\): the provisions this version amends, as in force on 2025-12-29/);
+  assert.match(text, /§ 52 zákona č\. 110\/2019 Sb\. \(wording from 2025-01-01\):\n\(1\) Úřad řídí předseda/);
+  assert.match(text, /Named provisions: § 52 odst\. 1: found; § 52 odst\. 7: whole provision; § 8: found; § 8a: new; § 8a odst\. 2: new; § 32d odst\. 1: later wording \(wording from 2026-06-12\); § 99: not found; not recognised: "7\. V části třetí se hlava IV zrušuje\."\./);
+    assert.doesNotMatch(text.split("Version: text approved")[1] ?? "", /Context/);
 });
 
 test("everything read is cached for good: a second run sends no request", async (t) => {
@@ -197,7 +197,8 @@ test("locates provisions by their ELI paths only", () => {
   const paths = ["dokument/norma/cast_1/par_28", "dokument/norma/cast_1/par_28/frag_1", "dokument/novela/cast_1/cl_2", "dokument/novela/cast_1/cl_2/bod_5", "dokument/prilohy/priloha_0", "dokument/prilohy/priloha_0/cast_1/pol_18", "dokument/poznamkypodcarou/ppc_79"];
   assert.deepEqual(locateTarget(paths, { kind: "section", section: "28", paragraph: null }), { roots: ["dokument/norma/cast_1/par_28"], partial: false });
   assert.deepEqual(locateTarget(paths, { kind: "article", article: "2", point: "5", paragraph: null }), { roots: ["dokument/novela/cast_1/cl_2/bod_5"], partial: false });
-  assert.deepEqual(locateTarget(paths, { kind: "annex", annex: null, item: "18" }), { roots: ["dokument/prilohy/priloha_0/cast_1/pol_18"], partial: false });
+  assert.deepEqual(locateTarget(paths, { kind: "annex", annex: null, item: { kind: "pol", number: "18" } }), { roots: ["dokument/prilohy/priloha_0/cast_1/pol_18"], partial: false });
+  assert.equal(locateTarget(paths, { kind: "annex", annex: null, item: { kind: "pol", number: "19" } }), null);
   assert.deepEqual(locateTarget(paths, { kind: "footnote", footnote: "79" }), { roots: ["dokument/poznamkypodcarou/ppc_79"], partial: false });
   assert.equal(locateTarget(paths, { kind: "section", section: "2", paragraph: null }), null);
   assert.equal(citationOfPath("dokument/norma/cast_1/par_52/odst_1/pism_a"), "§ 52 odst. 1 písm. a)");

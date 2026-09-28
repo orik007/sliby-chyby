@@ -18,9 +18,10 @@ const annexPattern = new RegExp(`^(?:\\d+\\.\\s+)?(?:(?:V|Ve)\\s+)?(?:nadpisu\\s
 // "Příloha k zákonu č. 634/2004 Sb. … se mění takto:" introduces instructions
 // that change the items of that annex.
 const annexIntroductionPattern = new RegExp(`^(?:\\d+\\.\\s+)?Přílo\\p{L}*(?:\\s+č\\.\\s*(\\d+))?.*${start}se\\s+mění\\s+takto`, "u");
-const itemPattern = new RegExp(`${start}polož\\p{L}*\\s+(\\d+[a-z]?)`, "iu");
+const itemPattern = new RegExp(`${start}(polož|bod)\\p{L}*\\s+(\\d+[a-z]?)`, "iu");
+const letterPattern = /^\s+písm\.\s*([a-z]{1,2})\)/u;
 const divisionPattern = new RegExp(`^(?:\\d+\\.\\s+)?(?:(?:V|Ve|Za|Před|Na\\s+konci)\\s+)?(?:nadpisu\\s+)?(?:část|části|hlav|díl|oddíl|pododdíl|názvu|nadpis)`, "iu");
-const insertsParagraphPattern = new RegExp(`${start}(?:vkládá|vkládají|doplňuje|doplňují)\\s+(?:se\\s+)?(?:nov\\p{L}+\\s+)?(?:odstav|písmen|bod|vět|slov|text)`, "u");
+const insertsParagraphPattern = new RegExp(`${start}(?:vkládá|vkládají|doplňuje|doplňují)\\s+(?:se\\s+)?(?:nov\\p{L}+\\s+)?(?:odstav|písmen|bod)`, "u");
 const insertedSectionPattern = new RegExp(`${start}(?:vkládá|vkládají|doplňuje|doplňují)\\s+(?:se\\s+)?(?:nov\\p{L}+\\s+)?§§?\\s*\\d`, "u");
 const articlePattern = new RegExp(`${start}(?:čl\\.|článk\\p{L}*)\\s*([IVXLCDM]+|\\d+[a-z]?)${end}(?:\\s+(?:bod\\p{L}*)\\s+(\\d+))?(?:\\s+odst\\.\\s*(\\d+))?`, "gu");
 
@@ -88,9 +89,11 @@ function sectionTargets(head, act) {
       if (named) paragraphs = listed(named[1], named[2]);
     }
     if (insertsInto || sections.length > 1) paragraphs = [];
+    // A letter changed in place: "V § 24 odst. 24 písm. a) se slova …".
+    const letter = !insertsInto && sections.length === 1 && paragraphs.length <= 1 ? letterPattern.exec(head.slice(match.index + match[0].length))?.[1] ?? null : null;
     for (const section of sections) {
-      if (paragraphs.length === 0) targets.push({ kind: "section", act, section, paragraph: null });
-      for (const paragraph of paragraphs) targets.push({ kind: "section", act, section, paragraph });
+      if (paragraphs.length === 0) targets.push({ kind: "section", act, section, paragraph: null, ...(letter ? { letter } : {}) });
+      for (const paragraph of paragraphs) targets.push({ kind: "section", act, section, paragraph, ...(letter ? { letter } : {}) });
     }
   }
   return targets;
@@ -106,6 +109,12 @@ function articleTargets(head, act) {
     targets.push({ kind: "article", act, article: String(article), point: match[2] ?? null, paragraph: match[3] ?? null });
   }
   return targets;
+}
+
+// An item of an annex: a fee-schedule item ("položka 18", `pol_18`) or a
+// point ("bod 2", `bod_2`).
+function itemOf(match) {
+  return { kind: match[1].toLowerCase().startsWith("polož") ? "pol" : "bod", number: match[2] };
 }
 
 /**
@@ -138,12 +147,14 @@ export function instructionLines(text) {
 /**
  * The instructions of one version and their targets. Each instruction is
  * `{ textCz, targets }`. A target is `{ kind, act, … }`:
- * - `section`: a § (`section`) and, when changed in place, its `paragraph`;
+ * - `section`: a § (`section`) and, when changed in place, its `paragraph`
+ *   and `letter`;
  * - `neighbour`: the § after which new §§ are inserted;
  * - `inserted`: a § the instruction itself inserts (no earlier text);
  * - `article`: an article (`article`, arabic) and its `point` or `paragraph`;
  * - `annex`: an annex (`annex`, null for the only, unnumbered one), or one
- *   `item` of it (a fee-schedule item, "položka");
+ *   `item` of it (`{ kind: "pol", number }` for a fee-schedule item,
+ *   `{ kind: "bod", number }` for a point);
  * - `footnote`: a footnote (`footnote`).
  * An instruction without targets is one the rules do not recognise (a whole
  * part, head, or division, a title, a global replacement of words).
@@ -171,13 +182,13 @@ export function parseAmendingInstructions(text, amendedAct) {
     if (!namesSection && annexPattern.test(head)) {
       const numbered = /přílo\p{L}*\s+č\.\s*(\d+)/iu.exec(head);
       const item = itemPattern.exec(head);
-      instructions.push({ textCz, targets: [{ kind: "annex", act, annex: numbered ? numbered[1] : null, item: item ? item[1] : null }] });
+      instructions.push({ textCz, targets: [{ kind: "annex", act, annex: numbered ? numbered[1] : null, item: item ? itemOf(item) : null }] });
       continue;
     }
     // An item of the annex introduced before ("V položce 18 …").
     const item = itemPattern.exec(head);
     if (annexInView && !namesSection && item) {
-      instructions.push({ textCz, targets: [{ kind: "annex", act, annex: annexInView.annex, item: item[1] }] });
+      instructions.push({ textCz, targets: [{ kind: "annex", act, annex: annexInView.annex, item: itemOf(item) }] });
       continue;
     }
     if (!namesSection && !namesArticle && footnote) {

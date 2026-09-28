@@ -42,6 +42,13 @@ test("reads a paragraph changed in place, and the whole section when one is inse
   assert.deepEqual(targetsOf("§ 194 včetně nadpisu zní:", "283/2021"), [{ kind: "section", act: "283/2021", section: "194", paragraph: null }]);
 });
 
+test("reads a letter changed in place, and words inserted into a paragraph keep the paragraph as the target", () => {
+  // Print 124 (634/1992) and print 67 (283/2021).
+  assert.deepEqual(targetsOf("V § 24 odst. 24 písm. a) se slova „12, 17 nebo 18“ nahrazují slovy „13, 19 nebo 20“.", "634/1992"), [{ kind: "section", act: "634/1992", section: "24", paragraph: "24", letter: "a" }]);
+  assert.deepEqual(targetsOf("V § 96 odst. 1 se za slovo „ , veřejnosti“ vkládají slova „ , dotčeným orgánům“.", "283/2021"), [{ kind: "section", act: "283/2021", section: "96", paragraph: "1" }]);
+  assert.deepEqual(targetsOf("V § 47 odst. 1 se za písmeno b) vkládá nové písmeno c), které zní:", "289/1995"), [{ kind: "section", act: "289/1995", section: "47", paragraph: null }]);
+});
+
 test("names the neighbour and the new sections of an inserted section", () => {
   assert.deepEqual(targetsOf("Za § 8 se vkládají nové § 8a a 8b, které znějí:", "375/2022"), [
     { kind: "neighbour", act: "375/2022", section: "8", paragraph: null },
@@ -64,11 +71,11 @@ test("reads an article or point of an amending act", () => {
 });
 
 test("reads annexes, footnotes, and a missing § sign", () => {
-  assert.deepEqual(targetsOf("V příloze č. 3 se bod 2 zrušuje.", "634/1992"), [{ kind: "annex", act: "634/1992", annex: "3", item: null }]);
+  assert.deepEqual(targetsOf("V příloze č. 3 se bod 2 zrušuje.", "634/1992"), [{ kind: "annex", act: "634/1992", annex: "3", item: { kind: "bod", number: "2" } }]);
   // Print 67: the only annex of act 634/2004 has no number.
   assert.deepEqual(targetsOf("Příloha k zákonu č. 634/2004 Sb., o správních poplatcích, ve znění zákona č. 217/2005 Sb., se mění takto:\n1. V položce 18 se slova „a“ zrušují.\n2. Za položku 57 se vkládá nová položka 57a, která zní:", "634/2004"), [
-    { kind: "annex", act: "634/2004", annex: null, item: "18" },
-    { kind: "annex", act: "634/2004", annex: null, item: "57" }
+    { kind: "annex", act: "634/2004", annex: null, item: { kind: "pol", number: "18" } },
+    { kind: "annex", act: "634/2004", annex: null, item: { kind: "pol", number: "57" } }
   ]);
   assert.deepEqual(targetsOf("Poznámky pod čarou č. 10 a 11 se zrušují.", "283/2021"), [
     { kind: "footnote", act: "283/2021", footnote: "10" },

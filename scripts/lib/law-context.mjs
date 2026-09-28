@@ -51,8 +51,10 @@ export function locateTarget(paths, target) {
       const root = matching(new RegExp(`(?:^|/)prilohy/${annex}$`, "u"));
       if (root.length === 0) continue;
       if (!target.item) return { roots: root, partial: false };
-      const item = matching(new RegExp(`(?:^|/)prilohy/${annex}/(?:.*/)?pol_${escape(target.item)}$`, "u"));
-      return item.length > 0 ? { roots: item, partial: false } : { roots: root, partial: true };
+      // A missing item is not found; the whole annex, which can be a long
+      // fee schedule, is never supplied in its place.
+      const item = matching(new RegExp(`(?:^|/)prilohy/${annex}/(?:.*/)?${target.item.kind}_${escape(target.item.number)}$`, "u"));
+      return item.length > 0 ? { roots: item, partial: false } : null;
     }
     return null;
   }
@@ -70,9 +72,12 @@ export function locateTarget(paths, target) {
   }
   const roots = matching(new RegExp(`(?:^|/)par_${escape(target.section)}(?::\\d+)?$`, "u")).filter((path) => !path.includes("/prilohy/"));
   if (roots.length === 0) return null;
-  if (!target.paragraph) return { roots, partial: false };
-  const nested = roots.flatMap((root) => matching(new RegExp(`^${escape(root)}/odst_${escape(target.paragraph)}$`, "u")));
-  return nested.length > 0 ? { roots: nested, partial: false } : { roots, partial: true };
+  const paragraphs = target.paragraph ? roots.flatMap((root) => matching(new RegExp(`^${escape(root)}/odst_${escape(target.paragraph)}$`, "u"))) : roots;
+  if (paragraphs.length === 0) return { roots, partial: true };
+  if (!target.letter) return { roots: paragraphs, partial: false };
+  // A letter changed in place is supplied alone; without it, its paragraph.
+  const letters = paragraphs.flatMap((root) => matching(new RegExp(`^${escape(root)}/pism_${escape(target.letter)}$`, "u")));
+  return letters.length > 0 ? { roots: letters, partial: false } : { roots: paragraphs, partial: true };
 }
 
 /** A root node and every node below it, in the structure. */
@@ -101,10 +106,10 @@ export function citationOfPath(path) {
 }
 
 function describeTarget(target) {
-  if (target.kind === "annex") return `${target.annex === null ? "příloha" : `příloha č. ${target.annex}`}${target.item ? ` položka ${target.item}` : ""}`;
+  if (target.kind === "annex") return `${target.annex === null ? "příloha" : `příloha č. ${target.annex}`}${target.item ? ` ${target.item.kind === "pol" ? "položka" : "bod"} ${target.item.number}` : ""}`;
   if (target.kind === "footnote") return `poznámka pod čarou č. ${target.footnote}`;
   if (target.kind === "article") return `čl. ${romanNumerals[Number(target.article)] ?? target.article}${target.point ? ` bod ${target.point}` : ""}${target.paragraph ? ` odst. ${target.paragraph}` : ""}`;
-  return `§ ${target.section}${target.paragraph ? ` odst. ${target.paragraph}` : ""}`;
+  return `§ ${target.section}${target.paragraph ? ` odst. ${target.paragraph}` : ""}${target.letter ? ` písm. ${target.letter})` : ""}`;
 }
 
 /**
@@ -222,33 +227,48 @@ async function locateAtDate(target, date, reader) {
 }
 
 const statusLabels = {
-  found: "found in the wording in force on the date of the conduct",
-  "later-wording": "not in the wording in force on the date of the conduct; taken from a later wording (an earlier amendment, already promulgated, inserted it with a later effect)",
-  "paragraph-not-found": "the named paragraph or point does not exist in that wording; the whole provision is supplied",
-  "new-provision": "inserted by this change itself; there is no earlier text",
-  "not-found": "not in e-Sbírka, neither in the wording in force on the date of the conduct nor in any later wording",
-  "not-recognised": "the instruction names no single provision that could be supplied (for example a whole part or head, a title, or a replacement of words in the whole act)"
+  found: "found",
+  "later-wording": "later wording",
+  "paragraph-not-found": "whole provision",
+  "new-provision": "new",
+  "not-found": "not found",
+  "not-recognised": "not recognised"
 };
 
+const contextLegend = "Status of each named provision: found = in the wording on that date; later wording = missing on that date but in a later wording (an earlier amendment, already promulgated, inserted it with a later effect); whole provision = the named paragraph, letter, or point does not exist, so the enclosing provision is supplied; new = inserted by this change, no earlier text; not found = in no wording in e-Sbírka; not recognised = the instruction names no single provision (a whole part or head, a title, words in the whole act). Never guess the wording of a provision that is not supplied.";
+
 /**
- * The context of one version as the models read it: each instruction with
- * the status of its targets, then the text of every supplied provision once.
+ * The context of one version as the models read it: the provisions its
+ * instructions name, each with its status, and the text of every supplied
+ * provision once. The instructions themselves are in the version's text and
+ * are not repeated. `supplied` maps a provision already supplied for an
+ * earlier version of the same law change (by act, citation, and text) to
+ * that version's label, so an identical text is referred to, not repeated.
  */
-export function contextText(context) {
+export function contextText(context, supplied = new Map(), versionLabel = null) {
   if (!context) return null;
-  const lines = [`Context: the wording of the amended provisions in the Collection of Laws (e-Sbírka) in force on ${context.conductDate}, the date of the earliest conduct on this version. It is not evidence of conduct.`];
+  const named = [];
   for (const { instructionCz, targets } of context.instructions) {
-    lines.push(`Instruction: ${instructionCz}`);
     for (const { target, status, wording } of targets) {
-      lines.push(`- ${target ? `${target}: ` : ""}${statusLabels[status]}${wording ? ` (wording effective from ${wording})` : ""}.`);
+      const label = target
+        ? `${target}: ${statusLabels[status]}${status === "later-wording" ? ` (wording from ${wording})` : ""}`
+        : `not recognised: "${instructionCz.length > 120 ? `${instructionCz.slice(0, 119)}…` : instructionCz}"`;
+      if (!named.includes(label)) named.push(label);
     }
   }
-  const provisions = Object.values(context.provisions);
-  if (provisions.length > 0) {
-    lines.push("Supplied provisions:");
-    for (const { act, wording, citation, textCz } of provisions) {
-      lines.push(`${citation} zákona č. ${act} Sb., wording effective from ${wording}:\n${textCz || "(no text in e-Sbírka)"}`);
+  const lines = [
+    `Context from the Collection of Laws (e-Sbírka): the provisions this version amends, as in force on ${context.conductDate}, the date of the earliest conduct on it. It is not evidence of conduct. ${contextLegend}`,
+    `Named provisions: ${named.join("; ")}.`
+  ];
+  for (const { act, wording, citation, textCz } of Object.values(context.provisions)) {
+    const key = `${act}\n${citation}\n${textCz}`;
+    const heading = `${citation} zákona č. ${act} Sb. (wording from ${wording})`;
+    if (supplied.has(key)) {
+      lines.push(`${heading}: the same text as supplied for the ${supplied.get(key)}.`);
+      continue;
     }
+    if (versionLabel) supplied.set(key, versionLabel);
+    lines.push(`${heading}:\n${textCz || "(no text in e-Sbírka)"}`);
   }
   return lines.join("\n");
 }
@@ -256,12 +276,16 @@ export function contextText(context) {
 /**
  * A law change whose versions carry the context text the models read
  * (`contextCz`), so screening, relevance checks, and the evidence package,
- * and their input hashes, all include it.
+ * and their input hashes, all include it. A provision with the same text as
+ * for an earlier version is supplied once.
  */
 export function withContext(change, context) {
   const versions = {};
-  for (const [version, entry] of Object.entries(change.versions)) {
-    const text = contextText(context.versions[version]);
+  const supplied = new Map();
+  for (const version of versionKeys) {
+    const entry = change.versions[version];
+    if (!entry) continue;
+    const text = contextText(context.versions[version], supplied, versionLabels[version]);
     versions[version] = text ? { ...entry, contextCz: text } : entry;
   }
   return { ...change, versions };
