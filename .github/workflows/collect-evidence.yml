@@ -57,7 +57,7 @@ jobs:
       SLIBY_ARBITER_PROVIDER: openai
       SLIBY_ASSESSOR_MODEL_A: gpt-6-luna
       SLIBY_ASSESSOR_MODEL_B: gpt-6-luna
-      SLIBY_ARBITER_MODEL: gpt-5.6-terra
+      SLIBY_ARBITER_MODEL: gpt-6-sol
       # Parallel assessed packages. At usage tier 4 the assessor model allows
       # 10,000 requests and 10,000,000 tokens a minute, and the arbiter model
       # 4,000,000; a 429 is retried.
@@ -129,7 +129,7 @@ jobs:
             fi
             while IFS= read -r path; do
               restore_paths+=("$path")
-            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache)
+            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/law-context)
             for directory in automation/evidence-packages automation/review-proposals; do
               while IFS= read -r path; do
                 case "$path" in
@@ -160,6 +160,20 @@ jobs:
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
             --output automation/runs/pipeline/github-actions/print-parts
 
+      - name: Read law-change context from e-Sbírka
+        # The wording of the amended provisions on the conduct date, from
+        # e-Sbírka open data; only what the permanent cache lacks is requested
+        # (docs/evidence-pipeline.md, Law-change context).
+        timeout-minutes: 120
+        run: |
+          AS_OF="${AS_OF_INPUT:-$(date -u +%F)}"
+          node scripts/run-law-context.mjs \
+            --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
+            --print-parts automation/runs/pipeline/github-actions/print-parts/print-parts.json \
+            --as-of "$AS_OF" \
+            --cache automation/law-context \
+            --output automation/runs/pipeline/github-actions/law-context
+
       - name: Screen law changes, route them to promises, check relevance, and build packages
         timeout-minutes: 120
         env:
@@ -169,6 +183,7 @@ jobs:
           node scripts/run-topic-routing.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
             --print-parts automation/runs/pipeline/github-actions/print-parts/print-parts.json \
+            --law-context automation/runs/pipeline/github-actions/law-context/law-context.json \
             --tag-cache automation/topic-routing/tag-cache \
             --as-of "$AS_OF" \
             --output automation/runs/pipeline/github-actions/topic-routing
@@ -182,16 +197,19 @@ jobs:
       - name: Persist model caches even on a failed run
         id: tag-cache
         # A failed run keeps the paid law-change screening and relevance
-        # checks it already did. A subject is cached only once
-        # both of its model outputs are valid, so a partial cache is always
-        # safe to keep.
+        # checks it already did, and the law-change context it read. A
+        # subject is cached only once both of its model outputs are valid,
+        # and a context line only once its answer is complete, so a partial
+        # cache is always safe to keep.
         if: always()
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
-          if [ -d automation/topic-routing/tag-cache ]; then
-            git add automation/topic-routing/tag-cache
-          fi
+          for directory in automation/topic-routing/tag-cache automation/law-context; do
+            if [ -d "$directory" ]; then
+              git add "$directory"
+            fi
+          done
           if git diff --cached --quiet; then
             echo "created=false" >> "$GITHUB_OUTPUT"
           else
@@ -274,6 +292,7 @@ jobs:
             const assessment = JSON.parse(await readFile("automation/runs/pipeline/github-actions/assessment-batch.json", "utf8"));
             const coverage = JSON.parse(await readFile("automation/runs/pipeline/github-actions/coverage-audit.json", "utf8"));
             const checkpoints = JSON.parse(await readFile("automation/collectors/checkpoints.json", "utf8"));
+            const context = JSON.parse(await readFile("automation/runs/pipeline/github-actions/law-context/law-context.json", "utf8")).quality;
             const quality = coverage.quality;
             const lines = [
               "## Unpublished evidence pipeline",
@@ -284,6 +303,8 @@ jobs:
               `- Prints with a DOCX or DOC proposal text: ${quality.printParts.printsWithProposalText} of ${quality.printParts.prints}; with an approved / passed text: ${quality.printParts.printsWithApprovedText} / ${quality.printParts.printsWithPassedText}; returned by the Senate (rejected or amended): ${quality.printParts.printsWithSenateResolution}`,
               `- Law changes: ${quality.printParts.lawChanges} (added / removed during the debate: ${quality.printParts.lawChangesAddedInDebate} / ${quality.printParts.lawChangesRemovedInDebate})`,
               `- Approved bills without an approved text on psp.cz: ${quality.printParts.approvedBillsWithoutApprovedText}; text warnings: ${quality.printParts.textWarnings}`,
+              `- Law changes with context from e-Sbírka: ${context.lawChangesWithContext} of ${context.lawChanges} (${context.versionsWithContext} versions); targets by status: ${Object.entries(context.targetsByStatus).map(([status, count]) => `${status} ${count}`).join(", ")}`,
+              `- e-Sbírka requests: ${context.eSbirkaRequests} (${context.eSbirkaFailedRequests} failed and retried); taken from the cache: ${context.cachedWordingLists} wording lists, ${context.cachedStructures} structures, ${context.cachedTexts} texts`,
               `- Law changes screened: ${quality.lawChanges} (technical ${quality.technicalLawChanges}, substantive ${quality.substantiveLawChanges})`,
               `- Routed law changes: ${quality.routedLawChanges} (direct legal-identifier link: ${quality.directLinkLawChanges})`,
               `- Substantive law changes routed to no promise (no specific tag, or no promise holds one): ${quality.unroutedLawChanges}`,

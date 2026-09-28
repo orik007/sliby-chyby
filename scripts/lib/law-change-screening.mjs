@@ -9,8 +9,8 @@ import { versionKeys, versionLabels } from "./print-parts.mjs";
  * screening every law change (substantive or technical, and its topic tags)
  * and checking whether a routed law change is relevant to one promise.
  */
-export const screeningPromptVersion = "law-change-screener-v2";
-export const relevancePromptVersion = "relevance-check-v3";
+export const screeningPromptVersion = "law-change-screener-v3";
+export const relevancePromptVersion = "relevance-check-v4";
 
 async function loadPrompt(version, root) {
   const instructions = await readFile(resolve(root, `automation/prompts/${version}.md`), "utf8");
@@ -30,8 +30,9 @@ const printKindLabels = { 1: "government bill", 2: "member bill", 3: "state budg
 
 /**
  * The official text of one law change as a model reads it: its print, its
- * heading and title, the act it amends, and the full text and effective date
- * of every version.
+ * heading and title, the act it amends, and the full text, effective date,
+ * and context (the wording of the provisions it amends, from e-Sbírka) of
+ * every version.
  * A print-wide Senate resolution is not part of one law change and goes
  * only into the evidence package.
  */
@@ -39,6 +40,7 @@ export function lawChangeText(change) {
   // An effective date equal to that of the version before is named, not
   // repeated.
   let previousEffective = null;
+  let previousContext = null;
   const versions = versionKeys.filter((version) => change.versions[version]).map((version) => {
     const entry = change.versions[version];
     const label = `Version: ${versionLabels[version]}`;
@@ -47,8 +49,14 @@ export function lawChangeText(change) {
       : entry.effectiveCz === previousEffective?.text ? `\nEffective date of this text (účinnost): the same as in the ${versionLabels[previousEffective.version]}.`
       : `\nEffective date of this text (účinnost):\n${entry.effectiveCz}`;
     if (entry.effectiveCz) previousEffective = { version, text: entry.effectiveCz };
-    if (entry.sameAs) return `${label}\nThe same text as the ${versionLabels[entry.sameAs]}.${effective}`;
-    return entry.textCz === null ? `${label}\nNot available as a DOCX or DOC file; only the print title is known.` : `${label}\n${entry.textCz}${effective}`;
+    // The context of each version follows its text; a version with the
+    // same context as the one before names it instead of repeating it.
+    const context = !entry.contextCz ? ""
+      : entry.contextCz === previousContext?.text ? `\n\nContext: the same as for the ${versionLabels[previousContext.version]}.`
+      : `\n\n${entry.contextCz}`;
+    if (entry.contextCz) previousContext = { version, text: entry.contextCz };
+    if (entry.sameAs) return `${label}\nThe same text as the ${versionLabels[entry.sameAs]}.${effective}${context}`;
+    return entry.textCz === null ? `${label}\nNot available as a DOCX or DOC file; only the print title is known.` : `${label}\n${entry.textCz}${effective}${context}`;
   });
   return [
     `Chamber print ${change.printNumber} (${printKindLabels[change.printKindId] ?? "Chamber print"}): ${change.printTitleCz}`,

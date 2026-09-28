@@ -2,8 +2,8 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-export const assessorPromptVersion = "assessor-v18";
-export const arbiterPromptVersion = "arbiter-v10";
+export const assessorPromptVersion = "assessor-v19";
+export const arbiterPromptVersion = "arbiter-v11";
 export const scoringRulePath = "docs/scoring.md";
 
 // The assessor and arbiter models read at most 1,050,000 tokens, their
@@ -40,7 +40,7 @@ export function assessmentRuntimeConfig(env = process.env) {
     arbiterProvider: env.SLIBY_ARBITER_PROVIDER ?? "openai",
     assessorModelA: env.SLIBY_ASSESSOR_MODEL_A ?? "gpt-6-luna",
     assessorModelB: env.SLIBY_ASSESSOR_MODEL_B ?? "gpt-6-luna",
-    arbiterModel: env.SLIBY_ARBITER_MODEL ?? "gpt-5.6-terra",
+    arbiterModel: env.SLIBY_ARBITER_MODEL ?? "gpt-6-sol",
     concurrency: Number(env.SLIBY_ASSESSMENT_CONCURRENCY ?? "16")
   };
 }

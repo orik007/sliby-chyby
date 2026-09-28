@@ -1,6 +1,6 @@
 import { randomUUID } from "node:crypto";
 import { existsSync } from "node:fs";
-import { appendFile, mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";
+import { appendFile, mkdir, readdir, readFile, rename, rm, writeFile } from "node:fs/promises";
 import { basename, dirname, resolve } from "node:path";
 import { ModelOutputError } from "./model-output.mjs";
 import { log } from "./run-log.mjs";
@@ -72,6 +72,36 @@ export function cachePersister(cache) {
     chain = chain.then(async () => {
       await mkdir(dirname(cache.filePath), { recursive: true });
       await appendFile(cache.filePath, line, "utf8");
+    });
+    return chain;
+  };
+}
+
+/**
+ * A model cache kept in many journals under one directory, one per subject
+ * group (for relevance checks, one per promise, in a directory per party
+ * period), so no single file nears GitHub's file-size limit. It loads every
+ * `*.jsonl` below the directory; `fileOf(subjectId)` names the journal,
+ * relative to the directory, that a new result is appended to.
+ */
+export async function loadShardedModelCache(directory, fileOf) {
+  const entries = {};
+  const files = existsSync(directory) ? (await readdir(directory, { recursive: true })).filter((name) => name.endsWith(".jsonl")).sort() : [];
+  for (const name of files) {
+    const shard = await loadModelCache(resolve(directory, name));
+    Object.assign(entries, shard.entries);
+  }
+  return { directory, fileOf, entries };
+}
+
+export function shardedCachePersister(cache) {
+  let chain = Promise.resolve();
+  return (subjectId) => {
+    const file = resolve(cache.directory, cache.fileOf(subjectId));
+    const line = `${JSON.stringify({ subjectId, ...cache.entries[subjectId] })}\n`;
+    chain = chain.then(async () => {
+      await mkdir(dirname(file), { recursive: true });
+      await appendFile(file, line, "utf8");
     });
     return chain;
   };

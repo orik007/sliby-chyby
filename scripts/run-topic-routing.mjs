@@ -19,11 +19,11 @@ import {
   validateScreeningOutput
 } from "./lib/law-change-screening.mjs";
 import { directLegalIdentifierIndex, taxonomyHash } from "./lib/topic-taxonomy.mjs";
-import { isPotentiallyAttributable } from "./lib/attribution.mjs";
 import { buildInvertedIndex, routeLawChange } from "./lib/topic-routing.mjs";
-import { attributableConductOnChange, buildLawChangeEvidencePackage, lawChangesAtCutoff } from "./lib/topic-evidence-package.mjs";
+import { withContext } from "./lib/law-context.mjs";
+import { attributableConductOnChange, buildLawChangeEvidencePackage, conductOfRun, lawChangesOfRun } from "./lib/topic-evidence-package.mjs";
 import { loadAssessmentPrompts, maxRequestInputTokens } from "./lib/assessment-config.mjs";
-import { cachePersister, loadModelCache, mapWithConcurrency, pairedModelCall, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
+import { cachePersister, loadModelCache, loadShardedModelCache, mapWithConcurrency, pairedModelCall, shardedCachePersister, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 
 /**
@@ -44,6 +44,7 @@ function parseArgs(args) {
   const options = {
     collectorRun: null,
     printParts: null,
+    lawContext: null,
     tagCache: "automation/topic-routing/tag-cache",
     asOf: null,
     output: "automation/runs/pipeline/topic-routing",
@@ -54,6 +55,7 @@ function parseArgs(args) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];
     else if (arg === "--print-parts") options.printParts = args[++index];
+    else if (arg === "--law-context") options.lawContext = args[++index];
     else if (arg === "--tag-cache") options.tagCache = args[++index];
     else if (arg === "--as-of") options.asOf = args[++index];
     else if (arg === "--output") options.output = args[++index];
@@ -61,7 +63,7 @@ function parseArgs(args) {
     else if (arg === "--sample-changes") options.sampleChanges = Number(args[++index]);
     else throw new Error(`Unknown argument: ${arg}`);
   }
-  invariant(options.collectorRun && options.printParts, "--collector-run and --print-parts are required");
+  invariant(options.collectorRun && options.printParts && options.lawContext, "--collector-run, --print-parts, and --law-context are required");
   invariant(/^\d{4}-\d{2}-\d{2}$/.test(options.asOf ?? ""), "--as-of must use YYYY-MM-DD");
   for (const key of ["samplePromises", "sampleChanges"]) {
     invariant(options[key] === null || (Number.isInteger(options[key]) && options[key] > 0), `--${key.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)} must be a positive integer`);
@@ -72,14 +74,6 @@ function parseArgs(args) {
 function apiKeyFor(provider) {
   if (provider === "openai") return process.env.OPENAI_API_KEY;
   throw new Error(`No API-key mapping is configured for provider: ${provider}`);
-}
-
-function recordPrintIds(record) {
-  const payload = record.payload ?? {};
-  return [...new Set([
-    ...(payload.externalPrintId ? [String(payload.externalPrintId)] : []),
-    ...(payload.linkedPrints ?? []).map(({ externalPrintId }) => String(externalPrintId))
-  ])];
 }
 
 const args = parseArgs(process.argv.slice(2));
@@ -102,39 +96,34 @@ const invertedIndex = buildInvertedIndex(taxonomy, promises);
 
 const collectorRun = JSON.parse(await readFile(resolve(args.collectorRun), "utf8"));
 invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
-const cutoff = `${args.asOf}T23:59:59.999Z`;
 const trackedPartyIds = [...new Set(promises.map(({ partyId }) => partyId))].sort();
-const primaryRecordsInWindow = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff));
 // Only records that can be attributable conduct of a tracked party continue;
 // they link law changes to the party's votes and submissions.
-const conductRecords = primaryRecordsInWindow.filter((record) => isPotentiallyAttributable(record, trackedPartyIds));
-const recordsByPrintId = new Map();
-for (const record of conductRecords) {
-  for (const printId of recordPrintIds(record)) recordsByPrintId.set(printId, [...(recordsByPrintId.get(printId) ?? []), record]);
-}
-// A law change is dated by the earliest official record of its print.
-const printFirstSeenOn = new Map();
-for (const record of primaryRecordsInWindow) {
-  const date = String(record.occurredAt ?? "").slice(0, 10);
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) continue;
-  for (const printId of recordPrintIds(record)) {
-    if (!printFirstSeenOn.has(printId) || date < printFirstSeenOn.get(printId)) printFirstSeenOn.set(printId, date);
-  }
-}
-let changes = lawChangesAtCutoff(Object.entries(printParts.prints)
-  .filter(([printId]) => recordsByPrintId.has(printId))
-  .flatMap(([, print]) => print.changes), recordsByPrintId);
+const { primaryRecordsInWindow, conductRecords, recordsByPrintId, printFirstSeenOn } = conductOfRun(collectorRun, args.asOf, trackedPartyIds);
+// Every model that reads a law change also reads its context
+// (docs/evidence-pipeline.md, Law-change context).
+const lawContext = JSON.parse(await readFile(resolve(args.lawContext), "utf8"));
+invariant(lawContext?.schemaVersion === "1.0.0" && lawContext.asOf === args.asOf && lawContext.changes && typeof lawContext.changes === "object", "Invalid --law-context file, or one for another cutoff");
+let changes = lawChangesOfRun(printParts, recordsByPrintId).map((change) => {
+  const context = lawContext.changes[change.changeId];
+  invariant(context, `No law-change context for ${change.changeId}`);
+  return withContext(change, context);
+});
 if (args.sampleChanges !== null) changes = changes.slice(0, args.sampleChanges);
 
-const cachePaths = {
-  screening: resolve(args.tagCache, "law-change-screening.jsonl"),
-  relevance: resolve(args.tagCache, "relevance-checks.jsonl")
+// Relevance checks are kept in one journal per promise, in a directory per
+// party period, so no file nears GitHub's file-size limit.
+const relevanceFileOf = (subjectId) => {
+  const promiseId = subjectId.split("--")[0];
+  const partyPeriodId = promiseById.get(promiseId)?.partyPeriodId;
+  invariant(partyPeriodId, `Unknown promise of relevance check ${subjectId}`);
+  return `${partyPeriodId}/${promiseId}.jsonl`;
 };
 const caches = {
-  screening: await loadModelCache(cachePaths.screening),
-  relevance: await loadModelCache(cachePaths.relevance)
+  screening: await loadModelCache(resolve(args.tagCache, "law-change-screening.jsonl")),
+  relevance: await loadShardedModelCache(resolve(args.tagCache, "relevance-checks"), relevanceFileOf)
 };
-const persist = Object.fromEntries(Object.entries(caches).map(([key, cache]) => [key, cachePersister(cache)]));
+const persist = { screening: cachePersister(caches.screening), relevance: shardedCachePersister(caches.relevance) };
 const models = { provider: runtime.provider, modelA: runtime.modelA, modelB: runtime.modelB };
 const usage = { screening: [], relevance: [] };
 const invalid = { screening: 0, relevance: 0 };
