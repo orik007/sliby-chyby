@@ -66,8 +66,18 @@ test("names the neighbour and the new sections of an inserted section", () => {
   ]);
 });
 
-test("expands section ranges and lists", () => {
-  assert.deepEqual(targetsOf("V § 5 až 7 se slovo „ministerstvo“ nahrazuje slovem „úřad“.", "1/2000").map(({ section }) => section), ["5", "6", "7"]);
+test("keeps a range of sections whole and lists paragraph ranges", () => {
+  // A range can hold sections with letters that the text does not name, so
+  // it is matched against the structure of the act (law-context.mjs).
+  assert.deepEqual(targetsOf("V § 5 až 7 se slovo „ministerstvo“ nahrazuje slovem „úřad“.", "1/2000"), [{ kind: "section", act: "1/2000", section: "5", sectionTo: "7", paragraph: null }]);
+  assert.deepEqual(targetsOf("V § 5a až 5c se slovo „ministerstvo“ nahrazuje slovem „úřad“.", "1/2000"), [{ kind: "section", act: "1/2000", section: "5a", sectionTo: "5c", paragraph: null }]);
+  assert.deepEqual(targetsOf("V § 3, 5 až 7 se slovo „ministerstvo“ nahrazuje slovem „úřad“.", "1/2000"), [
+    { kind: "section", act: "1/2000", section: "3", paragraph: null },
+    { kind: "section", act: "1/2000", section: "5", sectionTo: "7", paragraph: null }
+  ]);
+  assert.deepEqual(targetsOf("V § 12 odst. 2 až 4 se slovo „ministerstvo“ nahrazuje slovem „úřad“.", "1/2000").map(({ paragraph }) => paragraph), ["2", "3", "4"]);
+  assert.deepEqual(targetsOf("Za § 8 se vkládají nové § 8a až 8c, které znějí:", "375/2022").at(-1), { kind: "inserted", act: "375/2022", section: "8a", sectionTo: "8c", paragraph: null });
+  assert.deepEqual(targetsOf("V poznámkách pod čarou č. 3 až 5 se slovo „ministerstvo“ nahrazuje slovem „úřad“.", "1/2000"), [{ kind: "footnote", act: "1/2000", footnote: "3", footnoteTo: "5" }]);
   assert.deepEqual(targetsOf("V § 32d odst. 2 se slova „podání žaloby“ nahrazují slovy „zahájení řízení o žalobě“.", "325/1999"), [{ kind: "section", act: "325/1999", section: "32d", paragraph: "2" }]);
 });
 

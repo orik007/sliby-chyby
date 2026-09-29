@@ -121,10 +121,13 @@ export function actEliBase(act) {
  * The cache of one act: an append-only JSON Lines journal
  * `automation/law-context/<year>-<number>.jsonl` whose lines are
  * `{ kind: "wordings", readOn, wordings }` (a later line replaces an earlier
- * one), `{ kind: "structure", wording, paths }`, and
+ * one), `{ kind: "structure", wording, paths }`,
  * `{ kind: "text", wording, path, text, order }` (text null when the node has
  * none; order is the fragment's position in the wording, a hexadecimal key
- * that sorts in document order). The structure and texts of a wording never
+ * that sorts in document order), `{ kind: "amendments", wording, acts }` (the
+ * acts whose amendments took effect in that wording), and
+ * `{ kind: "promulgated", date }` (the day the act itself was promulgated,
+ * null when e-Sbírka has no promulgated wording of it). None of these
  * change, so they are never requested or checked again (docs/decisions.md).
  * The list of an act's wordings grows when an amendment is promulgated, so
  * it is trusted only for dates before the day it was read.
@@ -139,7 +142,7 @@ export function createLawContextCache(directory) {
 
   async function load(act) {
     if (acts.has(act)) return acts.get(act);
-    const entry = { wordings: null, refreshed: false, structures: new Map(), texts: new Map() };
+    const entry = { wordings: null, refreshed: false, structures: new Map(), texts: new Map(), amendments: new Map(), promulgated: undefined };
     const file = fileOf(act);
     if (existsSync(file)) {
       const content = await readFile(file, "utf8");
@@ -165,6 +168,8 @@ export function createLawContextCache(directory) {
         if (value.kind === "wordings") entry.wordings = { readOn: value.readOn, wordings: value.wordings };
         else if (value.kind === "structure") entry.structures.set(value.wording, value.paths);
         else if (value.kind === "text") entry.texts.set(`${value.wording}\n${value.path}`, { text: value.text, order: value.order ?? null });
+        else if (value.kind === "amendments") entry.amendments.set(value.wording, value.acts);
+        else if (value.kind === "promulgated") entry.promulgated = value.date;
         else throw new Error(`Invalid law-context cache ${file} line ${index + 1}`);
       }
       const repaired = content.slice(0, validLength);
@@ -198,7 +203,7 @@ export function createLawContextCache(directory) {
  * of reading.
  */
 export function createLawContextReader({ client, cache, today = new Date().toISOString().slice(0, 10) }) {
-  const stats = { requests: 0, cachedWordings: 0, cachedStructures: 0, cachedTexts: 0 };
+  const stats = { requests: 0, cachedWordings: 0, cachedStructures: 0, cachedTexts: 0, cachedAmendments: 0, cachedPromulgations: 0 };
 
   async function wordings(act, { for: date = null, later = false } = {}) {
     const entry = await cache.load(act);
@@ -262,7 +267,54 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
     return Object.fromEntries(paths.map((path) => [path, entry.texts.get(`${wording}\n${path}`)]));
   }
 
-  return { wordings, structure, texts, stats };
+  /**
+   * The acts ("314/2025") whose amendments took effect in a wording, from the
+   * consolidation links of its nodes (`konsolidační-vazba`: `má-cíl` a node
+   * of the wording, `má-fragment-novely` a node of the amending act). A
+   * wording can have none, such as one where a later part of the act itself
+   * took effect, or one whose links e-Sbírka does not hold.
+   */
+  async function amendingActs(act, wording) {
+    const entry = await cache.load(act);
+    if (entry.amendments.has(wording)) {
+      stats.cachedAmendments += 1;
+      return entry.amendments.get(wording);
+    }
+    const root = `${actEliBase(act)}${wording}/`;
+    // Direct: the links that took effect on the wording's date (an indexed
+    // value), then only those into this wording.
+    const rows = await client.query(`${vocabulary}PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nSELECT DISTINCT ?novela WHERE { ?v s:má-účinnost-konsolidační-vazby-od "${wording}"^^xsd:date ; s:má-cíl ?c ; s:má-fragment-novely ?novela . FILTER(STRSTARTS(STR(?c), "${root}")) }`, { purpose: `amendments ${act} ${wording}` });
+    stats.requests += 1;
+    const acts = [...new Set(rows.map((row) => {
+      const [, year, number] = /\/eli\/cz\/sb\/(\d{4})\/(\d+)\//u.exec(row.novela.value) ?? [];
+      return year ? `${number}/${year}` : null;
+    }).filter(Boolean))].sort();
+    entry.amendments.set(wording, acts);
+    await cache.append(act, { kind: "amendments", wording, acts });
+    return acts;
+  }
+
+  /**
+   * The day an act was promulgated: the start of its promulgated wording
+   * (`0000-00-00`, `účinnost-znění-od`), which is the promulgation day, not
+   * the day of effect (89/2012 Sb.: 2012-03-22). Null when e-Sbírka holds no
+   * promulgated wording of the act.
+   */
+  async function promulgated(act) {
+    const entry = await cache.load(act);
+    if (entry.promulgated !== undefined) {
+      stats.cachedPromulgations += 1;
+      return entry.promulgated;
+    }
+    const rows = await client.query(`${vocabulary}SELECT ?od WHERE { <${actEliBase(act)}0000-00-00> s:účinnost-znění-od ?od }`, { purpose: `promulgated ${act}` });
+    stats.requests += 1;
+    const date = rows.map((row) => row.od.value).find((value) => /^\d{4}-\d{2}-\d{2}$/u.test(value)) ?? null;
+    entry.promulgated = date;
+    await cache.append(act, { kind: "promulgated", date });
+    return date;
+  }
+
+  return { wordings, structure, texts, amendingActs, promulgated, stats };
 }
 
 /** The text of a fragment without its XHTML markup. */

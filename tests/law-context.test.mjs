@@ -56,6 +56,15 @@ function endpointFor(act) {
   const fetchImpl = async (url, { body, headers }) => {
     const query = new URLSearchParams(body).get("query");
     calls.push(query);
+    if (query.includes("s:má-účinnost-konsolidační-vazby-od")) {
+      const wording = /vazby-od "([\d-]+)"/.exec(query)[1];
+      return answer(json((act.amendments[wording] ?? []).map((iri) => ({ novela: { value: iri } }))));
+    }
+    if (query.includes("/0000-00-00>")) {
+      const [, year, number] = /sb\/(\d{4})\/(\d+)\/0000-00-00>/.exec(query);
+      const date = act.promulgations[`${number}/${year}`];
+      return answer(json(date ? [{ od: { value: date } }] : []));
+    }
     if (query.includes("s:znění-právního-aktu")) {
       return answer(json(act.wordings.map(({ wording, from, to }) => ({ zn: { value: `https://opendata.eselpoint.gov.cz/esel-esb/eli/cz/sb/2019/110/${wording}` }, od: { value: from }, ...(to ? { do: { value: to } } : {}) }))));
     }
@@ -86,7 +95,11 @@ const act110 = {
     "2025-01-01/dokument/norma/cast_1/hlava_5/par_52/odst_2": ["(2) Funkční období je 5 let.", "6AE58DA0"],
     "2025-01-01/dokument/norma/cast_1/hlava_5/par_8": ["§ 8 text", "6AE50000"],
     "2026-06-12/dokument/norma/cast_1/hlava_5/par_32d": ["§ 32d text", "6AE60000"]
-  }
+  },
+  // The later wording was made by 300/2025 Sb., promulgated before the
+  // conduct on 2025-12-29.
+  amendments: { "2026-06-12": ["https://opendata.eselpoint.gov.cz/esel-esb/eli/cz/sb/2025/300/2026-06-12/dokument/novela/cast_1/bod_4"] },
+  promulgations: { "300/2025": "2025-09-02" }
 };
 
 async function readerFor(directory, endpoint, clock = fakeTime()) {
@@ -175,12 +188,30 @@ test("everything read is cached for good: a second run sends no request", async 
   const firstContext = await resolveLawChangeContext(change, records, await readerFor(directory, first));
   assert.ok(first.calls.length > 0);
   const lines = (await readFile(join(directory, "2019-110.jsonl"), "utf8")).trim().split("\n").map((line) => JSON.parse(line));
-  assert.deepEqual([...new Set(lines.map(({ kind }) => kind))].sort(), ["structure", "text", "wordings"]);
+  assert.deepEqual([...new Set(lines.map(({ kind }) => kind))].sort(), ["amendments", "structure", "text", "wordings"]);
+  assert.deepEqual((await readFile(join(directory, "2025-300.jsonl"), "utf8")).trim().split("\n").map((line) => JSON.parse(line)), [{ kind: "promulgated", date: "2025-09-02" }]);
   const second = endpointFor(act110);
   const reader = await readerFor(directory, second);
   assert.deepEqual(await resolveLawChangeContext(change, records, reader), firstContext);
   assert.equal(second.calls.length, 0);
   assert.equal(reader.stats.requests, 0);
+});
+
+test("a later wording is used only when its amendments were promulgated by the conduct date", async (t) => {
+  const statusOf32d = async (variant, name) => {
+    const directory = await mkdtemp(join(tmpdir(), "law-context-"));
+    t.after(() => rm(directory, { recursive: true, force: true }));
+    const context = await resolveLawChangeContext(change, records, await readerFor(directory, endpointFor({ ...act110, ...variant })));
+    return context.versions.proposed.instructions.flatMap(({ targets }) => targets).find(({ target }) => target === "§ 32d odst. 1").status;
+  };
+  // Promulgated after the conduct: its text was not known then.
+  assert.equal(await statusOf32d({ promulgations: { "300/2025": "2026-01-15" } }), "not-found");
+  // No amendment named for the wording, or no promulgated wording of it:
+  // promulgation in time cannot be shown.
+  assert.equal(await statusOf32d({ amendments: {} }), "not-found");
+  assert.equal(await statusOf32d({ promulgations: {} }), "not-found");
+  // Promulgated on the day of the conduct: already known.
+  assert.equal(await statusOf32d({ promulgations: { "300/2025": "2025-12-29" } }), "later-wording");
 });
 
 test("an empty or cut structure of an existing wording is a technical failure, not a missing provision", async (t) => {
@@ -203,6 +234,11 @@ test("locates provisions by their ELI paths only", () => {
   assert.equal(locateTarget(paths, { kind: "annex", annex: null, item: { kind: "pol", number: "19" } }), null);
   assert.deepEqual(locateTarget(paths, { kind: "footnote", footnote: "79" }), { roots: ["dokument/poznamkypodcarou/ppc_79"], partial: false });
   assert.equal(locateTarget(paths, { kind: "section", section: "2", paragraph: null }), null);
+  // A range holds every section numbered within it, with letters too.
+  const ranged = ["dokument/norma/cast_1/par_5", "dokument/norma/cast_1/par_5a", "dokument/norma/cast_1/par_5a/odst_1", "dokument/norma/cast_1/par_6", "dokument/norma/cast_1/par_7", "dokument/norma/cast_1/par_50", "dokument/prilohy/priloha_0/par_6"];
+  assert.deepEqual(locateTarget(ranged, { kind: "section", section: "5", sectionTo: "6", paragraph: null }), { roots: ["dokument/norma/cast_1/par_5", "dokument/norma/cast_1/par_5a", "dokument/norma/cast_1/par_6"], partial: false });
+  assert.deepEqual(locateTarget(ranged, { kind: "section", section: "5a", sectionTo: "5c", paragraph: null }), { roots: ["dokument/norma/cast_1/par_5a"], partial: false });
+  assert.equal(locateTarget(ranged, { kind: "section", section: "8", sectionTo: "9", paragraph: null }), null);
   assert.equal(citationOfPath("dokument/norma/cast_1/par_52/odst_1/pism_a"), "§ 52 odst. 1 písm. a)");
   assert.equal(citationOfPath("dokument/novela/cast_1/cl_2/bod_5"), "čl. II bod 5");
   assert.deepEqual(wordingOn([{ wording: "a", from: "2025-01-01", to: "2025-12-31" }, { wording: "b", from: "2026-01-01", to: null }], "2026-03-01"), { wording: "b", from: "2026-01-01", to: null });

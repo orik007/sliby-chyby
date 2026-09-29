@@ -28,6 +28,28 @@ export function conductDatesOfVersions(change, records) {
   return dates;
 }
 
+/**
+ * Compares two provision numbers such as "5", "5a", and "6": by number, then
+ * by letters ("5" < "5a" < "5b" < "5aa").
+ */
+export function compareNumbers(left, right) {
+  const [, leftNumber, leftLetters] = /^(\d+)([a-z]*)$/u.exec(left) ?? [null, "0", left];
+  const [, rightNumber, rightLetters] = /^(\d+)([a-z]*)$/u.exec(right) ?? [null, "0", right];
+  return Number(leftNumber) - Number(rightNumber) || leftLetters.length - rightLetters.length || leftLetters.localeCompare(rightLetters);
+}
+
+const inRange = (number, from, to) => compareNumbers(from, number) <= 0 && compareNumbers(number, to) <= 0;
+
+// The nodes of `kind` (`par`, `ppc`) whose number is within a range, outside
+// the annexes for §§.
+function rangeRoots(paths, kind, from, to) {
+  const pattern = new RegExp(`(?:^|/)${kind}_(\\d+[a-z]*)(?::\\d+)?$`, "u");
+  return paths.filter((path) => {
+    const number = pattern.exec(path)?.[1];
+    return number !== undefined && inRange(number, from, to) && (kind !== "par" || !path.includes("/prilohy/"));
+  });
+}
+
 /** The wording in force on a date: effective from on or before it and, if it ends, to on or after it. */
 export function wordingOn(wordings, date) {
   return wordings.find(({ from, to }) => from <= date && (to === null || date <= to)) ?? null;
@@ -39,7 +61,8 @@ export function wordingOn(wordings, date) {
  * `…/par_52/odst_1`; an article by `…/cl_2` and its point by `…/cl_2/bod_5`;
  * an annex by `…/prilohy/priloha_3` (the only, unnumbered annex is
  * `priloha_0`) and a fee-schedule item by `…/pol_18` in it; a footnote by
- * `…/poznamkypodcarou/ppc_79`. Returns `{ roots, partial }`: `partial` when
+ * `…/poznamkypodcarou/ppc_79`. A range of §§ or footnotes is every § or
+ * footnote numbered within it, including those with letters. Returns `{ roots, partial }`: `partial` when
  * the § or article exists but the named paragraph or point does not, and
  * then the whole § or article.
  */
@@ -58,6 +81,10 @@ export function locateTarget(paths, target) {
     }
     return null;
   }
+  if (target.kind === "footnote" && target.footnoteTo) {
+    const roots = rangeRoots(paths, "ppc", target.footnote, target.footnoteTo);
+    return roots.length > 0 ? { roots, partial: false } : null;
+  }
   if (target.kind === "footnote") {
     const roots = matching(new RegExp(`(?:^|/)poznamkypodcarou/ppc_${escape(target.footnote)}(?::\\d+)?$`, "u"));
     return roots.length > 0 ? { roots, partial: false } : null;
@@ -69,6 +96,10 @@ export function locateTarget(paths, target) {
     if (!child) return { roots, partial: false };
     const nested = roots.flatMap((root) => matching(new RegExp(`^${escape(root)}/${child}$`, "u")));
     return nested.length > 0 ? { roots: nested, partial: false } : { roots, partial: true };
+  }
+  if (target.sectionTo) {
+    const roots = rangeRoots(paths, "par", target.section, target.sectionTo);
+    return roots.length > 0 ? { roots, partial: false } : null;
   }
   const roots = matching(new RegExp(`(?:^|/)par_${escape(target.section)}(?::\\d+)?$`, "u")).filter((path) => !path.includes("/prilohy/"));
   if (roots.length === 0) return null;
@@ -107,7 +138,8 @@ export function citationOfPath(path) {
 
 function describeTarget(target) {
   if (target.kind === "annex") return `${target.annex === null ? "příloha" : `příloha č. ${target.annex}`}${target.item ? ` ${target.item.kind === "pol" ? "položka" : "bod"} ${target.item.number}` : ""}`;
-  if (target.kind === "footnote") return `poznámka pod čarou č. ${target.footnote}`;
+  if (target.kind === "footnote") return target.footnoteTo ? `poznámky pod čarou č. ${target.footnote} až ${target.footnoteTo}` : `poznámka pod čarou č. ${target.footnote}`;
+  if (target.sectionTo) return `§ ${target.section} až ${target.sectionTo}`;
   if (target.kind === "article") return `čl. ${romanNumerals[Number(target.article)] ?? target.article}${target.point ? ` bod ${target.point}` : ""}${target.paragraph ? ` odst. ${target.paragraph}` : ""}`;
   return `§ ${target.section}${target.paragraph ? ` odst. ${target.paragraph}` : ""}${target.letter ? ` písm. ${target.letter})` : ""}`;
 }
@@ -135,6 +167,7 @@ export async function resolveLawChangeContext(change, records, reader) {
 async function resolveVersionContext(text, amendedAct, date, reader) {
   const instructions = parseAmendingInstructions(text, amendedAct);
   const inserted = new Set();
+  const insertedRanges = [];
   const provisions = new Map();
   const resolved = [];
   for (const instruction of instructions) {
@@ -147,14 +180,18 @@ async function resolveVersionContext(text, amendedAct, date, reader) {
       const sectionKey = target.section ? `${target.act}#${target.section}` : null;
       const paragraphKey = target.section && target.paragraph ? `${sectionKey}#${target.paragraph}` : null;
       if (target.kind === "inserted") {
-        inserted.add(paragraphKey ?? sectionKey);
+        if (target.sectionTo) insertedRanges.push({ act: target.act, from: target.section, to: target.sectionTo });
+        else inserted.add(paragraphKey ?? sectionKey);
         targets.push({ target: describeTarget(target), status: "new-provision" });
         continue;
       }
       // A provision this change inserted earlier has no earlier text. It is
       // decided before any later wording is searched, because once the
       // change is in force a later wording holds the change's own text.
-      if (sectionKey && (inserted.has(sectionKey) || (paragraphKey && inserted.has(paragraphKey)))) {
+      const insertedEarlier = target.sectionTo
+        ? insertedRanges.some(({ act, from, to }) => act === target.act && inRange(target.section, from, to) && inRange(target.sectionTo, from, to))
+        : sectionKey && (inserted.has(sectionKey) || (paragraphKey && inserted.has(paragraphKey)) || insertedRanges.some(({ act, from, to }) => act === target.act && inRange(target.section, from, to)));
+      if (insertedEarlier) {
         targets.push({ target: describeTarget(target), status: "new-provision" });
         continue;
       }
@@ -213,7 +250,24 @@ async function resolveVersionContext(text, amendedAct, date, reader) {
   };
 }
 
-// The wording on the date, or the nearest later wording that holds the target.
+/**
+ * Whether every amendment that took effect in a later wording was already
+ * promulgated on the date: only then was its text known then. A wording
+ * whose amendments e-Sbírka does not name cannot be shown to be, so it is
+ * not.
+ */
+async function promulgatedBy(act, wording, date, reader) {
+  const amendments = await reader.amendingActs(act, wording);
+  if (amendments.length === 0) return false;
+  for (const amendment of amendments) {
+    const day = await reader.promulgated(amendment);
+    if (day === null || day > date) return false;
+  }
+  return true;
+}
+
+// The wording on the date, or the nearest later wording that holds the
+// target, when it and every wording before it were promulgated by the date.
 async function locateAtDate(target, date, reader) {
   const wordings = await reader.wordings(target.act, { for: date });
   const current = wordingOn(wordings, date);
@@ -223,6 +277,7 @@ async function locateAtDate(target, date, reader) {
     if (found) return { ...found, wording: current.wording, paths, later: false };
   }
   for (const later of wordings.filter(({ from }) => from > date)) {
+    if (!(await promulgatedBy(target.act, later.wording, date, reader))) return null;
     const paths = await reader.structure(target.act, later.wording);
     const found = locateTarget(paths, target);
     if (found) return { ...found, wording: later.wording, paths, later: true };
@@ -239,7 +294,7 @@ const statusLabels = {
   "not-recognised": "not recognised"
 };
 
-const contextLegend = "Status of each named provision: found = in the wording on that date; later wording = missing on that date but in a later wording (an earlier amendment, already promulgated, inserted it with a later effect); whole provision = the named paragraph, letter, or point does not exist, so the enclosing provision is supplied; new = inserted by this change, no earlier text; not found = in no wording in e-Sbírka; not recognised = the instruction names no single provision (a whole part or head, a title, words in the whole act). Never guess the wording of a provision that is not supplied.";
+const contextLegend = "Status of each named provision: found = in the wording on that date; later wording = missing on that date but in a later wording made only by amendments already promulgated on that date, with a later effect; whole provision = the named paragraph, letter, or point does not exist, so the enclosing provision is supplied; new = inserted by this change, no earlier text; not found = in no wording in e-Sbírka in force or promulgated on that date; not recognised = the instruction names no single provision (a whole part or head, a title, words in the whole act). Never guess the wording of a provision that is not supplied.";
 
 /**
  * The context of one version as the models read it: the provisions its

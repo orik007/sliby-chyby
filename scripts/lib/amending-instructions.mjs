@@ -56,15 +56,33 @@ function numbersIn(text) {
   return [...text.matchAll(/(?<![\p{L}\d])(\d+[a-z]?)(?![\p{L}\d])/gu)].map((match) => match[1]);
 }
 
-function expandRange(first, last) {
-  if (!/^\d+$/.test(first) || !/^\d+$/.test(last) || Number(last) <= Number(first) || Number(last) - Number(first) > 50) return [first, last];
-  return Array.from({ length: Number(last) - Number(first) + 1 }, (_, index) => String(Number(first) + index));
+/**
+ * The numbers of a list such as "5, 7 až 9" (`first` = "5", `rest` = ", 7 až
+ * 9"): each a number, or a range `{ from, to }` for "7 až 9". A § or
+ * footnote range can hold numbers with letters ("§ 5a" between "§ 5" and
+ * "§ 6") that the text does not name, so it is kept whole and matched
+ * against the structure of the act.
+ */
+function sequence(first, rest) {
+  const items = [first];
+  for (const [, join, number] of (rest ?? "").matchAll(/\s*(,|a|až)\s*(\d+[a-z]{0,2})/gu)) {
+    if (join === "až" && typeof items.at(-1) === "string") items.push({ from: items.pop(), to: number });
+    else items.push(number);
+  }
+  return items;
 }
 
-function listed(first, rest) {
-  if (!rest) return [first];
-  const numbers = numbersIn(rest);
-  return /až/u.test(rest) && numbers.length === 1 ? expandRange(first, numbers[0]) : [first, ...numbers];
+// Paragraphs are numbered without letters, so their ranges are listed; a
+// range that cannot be listed makes the whole list null.
+function paragraphList(first, rest) {
+  const numbers = [];
+  for (const item of sequence(first, rest)) {
+    if (typeof item === "string") numbers.push(item);
+    else if (/^\d+$/u.test(item.from) && /^\d+$/u.test(item.to) && Number(item.to) > Number(item.from) && Number(item.to) - Number(item.from) <= 50) {
+      for (let number = Number(item.from); number <= Number(item.to); number += 1) numbers.push(String(number));
+    } else return null;
+  }
+  return numbers;
 }
 
 // The act an instruction names ("V § 5 zákona č. 110/2019 Sb."), or the
@@ -85,24 +103,32 @@ function sectionTargets(head, act) {
   const insertsInto = insertsParagraphPattern.test(head);
   const pattern = /§§?\s*(\d+[a-z]{0,2})((?:\s*(?:,|a|až)\s*\d+[a-z]{0,2}(?!\s*(?:odst|písm)))*)(\s+odst\.\s*\d+(?:\s*(?:,|a|až)\s*\d+)*)?/gu;
   for (const match of head.matchAll(pattern)) {
-    const sections = listed(match[1], match[2]);
-    let paragraphs = match[3] ? listed(numbersIn(match[3])[0], match[3].replace(/^\s+odst\.\s*\d+/u, "")) : [];
-    if (paragraphs.length === 0 && sections.length === 1) {
+    const sections = sequence(match[1], match[2]);
+    const single = sections.length === 1 && typeof sections[0] === "string";
+    let paragraphs = match[3] ? paragraphList(numbersIn(match[3])[0], match[3].replace(/^\s+odst\.\s*\d+/u, "")) : [];
+    if (paragraphs?.length === 0 && single) {
       const named = /^\s+(?:se\s+)?(?:odstavec|odstavce)\s+(\d+)((?:\s*(?:,|a|až)\s*\d+)*)/u.exec(head.slice(match.index + match[0].length));
-      if (named) paragraphs = listed(named[1], named[2]);
+      if (named) paragraphs = paragraphList(named[1], named[2]);
     }
-    if (insertsInto || sections.length > 1) paragraphs = [];
+    if (paragraphs === null) return null;
+    if (insertsInto || !single) paragraphs = [];
     // A letter changed in place: "V § 24 odst. 24 písm. a) se slova …".
-    const letter = !insertsInto && sections.length === 1 && paragraphs.length <= 1 ? letterPattern.exec(head.slice(match.index + match[0].length))?.[1] ?? null : null;
+    const letter = !insertsInto && single && paragraphs.length <= 1 ? letterPattern.exec(head.slice(match.index + match[0].length))?.[1] ?? null : null;
     for (const section of sections) {
+      if (typeof section !== "string") {
+        targets.push({ kind: "section", act, section: section.from, sectionTo: section.to, paragraph: null });
+        continue;
+      }
       if (paragraphs.length === 0) targets.push({ kind: "section", act, section, paragraph: null, ...(letter ? { letter } : {}) });
       for (const paragraph of paragraphs) targets.push({ kind: "section", act, section, paragraph, ...(letter ? { letter } : {}) });
     }
     // The paragraphs the instruction inserts have no earlier text; a later
     // instruction that changes them names a new provision.
-    const insertedParagraphs = sections.length === 1 ? insertedParagraphsPattern.exec(head.slice(match.index + match[0].length)) : null;
+    const insertedParagraphs = single ? insertedParagraphsPattern.exec(head.slice(match.index + match[0].length)) : null;
     if (insertedParagraphs) {
-      for (const paragraph of listed(insertedParagraphs[1], insertedParagraphs[2])) targets.push({ kind: "inserted", act, section: sections[0], paragraph });
+      const inserted = paragraphList(insertedParagraphs[1], insertedParagraphs[2]);
+      if (inserted === null) return null;
+      for (const paragraph of inserted) targets.push({ kind: "inserted", act, section: sections[0], paragraph });
     }
   }
   return targets;
@@ -157,15 +183,16 @@ export function instructionLines(text) {
  * The instructions of one version and their targets. Each instruction is
  * `{ textCz, targets }`. A target is `{ kind, act, … }`:
  * - `section`: a § (`section`) and, when changed in place, its `paragraph`
- *   and `letter`;
+ *   and `letter`; a range of §§ ("§ 5a až 5c") runs from `section` to
+ *   `sectionTo`;
  * - `neighbour`: the § after which new §§ are inserted;
- * - `inserted`: a § (`paragraph` null) or a paragraph of a § that the
- *   instruction itself inserts (no earlier text);
+ * - `inserted`: a § (`paragraph` null; a range up to `sectionTo`) or a
+ *   paragraph of a § that the instruction itself inserts (no earlier text);
  * - `article`: an article (`article`, arabic) and its `point` or `paragraph`;
  * - `annex`: an annex (`annex`, null for the only, unnumbered one), or one
  *   `item` of it (`{ kind: "pol", number }` for a fee-schedule item,
  *   `{ kind: "bod", number }` for a point);
- * - `footnote`: a footnote (`footnote`).
+ * - `footnote`: a footnote (`footnote`; a range up to `footnoteTo`).
  * An instruction without targets is one the rules do not recognise (a whole
  * part, head, or division, a title, a global replacement of words).
  * Renumbering (`Dosavadní …`) and the introduction of the amended act
@@ -202,7 +229,7 @@ export function parseAmendingInstructions(text, amendedAct) {
       continue;
     }
     if (!namesSection && !namesArticle && footnote) {
-      instructions.push({ textCz, targets: listed(footnote[1], footnote[2]).map((number) => ({ kind: "footnote", act, footnote: number })) });
+      instructions.push({ textCz, targets: sequence(footnote[1], footnote[2]).map((item) => (typeof item === "string" ? { kind: "footnote", act, footnote: item } : { kind: "footnote", act, footnote: item.from, footnoteTo: item.to })) });
       continue;
     }
     if (!namesSection && !namesArticle && (globalPattern.test(head) || divisionPattern.test(head))) {
@@ -215,11 +242,13 @@ export function parseAmendingInstructions(text, amendedAct) {
       const neighbour = /§\s*(\d+[a-z]{0,2})/u.exec(head)[1];
       const newPart = head.slice(inserted.index);
       const first = /§§?\s*(\d+[a-z]{0,2})((?:\s*(?:,|a|až)\s*\d+[a-z]{0,2})*)/u.exec(newPart);
-      const newSections = first ? listed(first[1], first[2]) : [];
-      instructions.push({ textCz, targets: [{ kind: "neighbour", act, section: neighbour, paragraph: null }, ...newSections.map((section) => ({ kind: "inserted", act, section, paragraph: null }))] });
+      const newSections = first ? sequence(first[1], first[2]) : [];
+      instructions.push({ textCz, targets: [{ kind: "neighbour", act, section: neighbour, paragraph: null }, ...newSections.map((section) => (typeof section === "string" ? { kind: "inserted", act, section, paragraph: null } : { kind: "inserted", act, section: section.from, sectionTo: section.to, paragraph: null }))] });
       continue;
     }
-    instructions.push({ textCz, targets: namesArticle ? articleTargets(head, act) : sectionTargets(head, act) });
+    // An instruction whose list of paragraphs cannot be read in full names
+    // no provision rather than only some of them.
+    instructions.push({ textCz, targets: namesArticle ? articleTargets(head, act) : sectionTargets(head, act) ?? [] });
   }
   return instructions;
 }

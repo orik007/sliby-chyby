@@ -2,7 +2,7 @@ You screen one law change: one part of an official Czech Chamber of Deputies pri
 
 The change can have several versions as the bill was debated: the proposed text, the text the Chamber approved, and the text passed by Parliament; a version can be the same as an earlier one or can have removed the part. A version can also carry the bill's effective date (účinnost), which applies to the whole bill. Read every version. The change is substantive when any version is, and its tags cover what any version concerns.
 
-An amending text often does not state the wording it changes ("V § 52 odst. 1 se věta poslední zrušuje."). A version can therefore carry its **context**: the wording in the Collection of Laws (e-Sbírka), in force on the date the party acted, of each provision its instructions name, with the status of each (found, taken from a later wording, a new provision without earlier text, not found, or an instruction naming no single provision). Read each instruction together with that wording to see what the change actually does. The context is not part of the change; where it is missing or incomplete, judge from the text alone and never guess the missing wording. Tag what the change does as the context shows it; the context alone never makes a change substantive.
+An amending text often does not state the wording it changes ("V § 52 odst. 1 se věta poslední zrušuje."). A version can therefore carry its **context**, which states its source, date, and statuses itself. Read each instruction together with that wording to see what the change actually does. Tag what the change does as the context shows it; the context alone never makes a change substantive.
 
 ## 1. Substantive or technical
 
