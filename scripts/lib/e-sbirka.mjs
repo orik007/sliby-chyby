@@ -130,7 +130,8 @@ function dayOf(timestamp) {
 
 /**
  * The cache of one act: an append-only JSON Lines journal
- * `automation/law-context/<year>-<number>.jsonl` whose lines are
+ * `automation/law-context/<year>-<number>.jsonl` whose lines, each with
+ * `readAt` (the UTC time of the answer it holds), are
  * `{ kind: "wordings", readOn, wordings }` (a later line replaces an earlier
  * one; each wording is `{ wording, from, to, amendments }`, `amendments` the
  * acts e-Sbírka names as having taken effect in it),
@@ -209,9 +210,10 @@ export function createLawContextCache(directory) {
  * that identifier. A wording is read whole, once, and then taken from the
  * cache. The list of wordings is taken from the cache for a date before the
  * day it was read (`for`), and is otherwise read again, at most once per run
- * and act. `today` is the date of reading.
+ * and act. `today` is the date of reading; `clock` gives the time of each
+ * answer, stored with it.
  */
-export function createLawContextReader({ client, cache, today = new Date().toISOString().slice(0, 10) }) {
+export function createLawContextReader({ client, cache, today = new Date().toISOString().slice(0, 10), clock = () => new Date().toISOString() }) {
   const stats = { requests: 0, cachedWordingLists: 0, cachedWordings: 0, cachedPromulgations: 0 };
 
   async function request(path, purpose) {
@@ -227,6 +229,7 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
       return entry.wordings.wordings;
     }
     const answer = await request(`/dokumenty-sbirky/${staleUrlSegment(act)}/historie`, `wordings ${act}`);
+    const readAt = clock();
     if (answer !== null && !Array.isArray(answer.historie)) throw new ESbirkaUnavailableError(`e-Sbírka returned an unreadable history of ${act}`);
     const prefix = decodeURIComponent(staleUrlSegment(act));
     const list = [];
@@ -244,7 +247,7 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
         const day = dayOf(item.datumCasVyhlaseni);
         if (day && entry.promulgated === undefined) {
           entry.promulgated = day;
-          await cache.append(act, { kind: "promulgated", date: day });
+          await cache.append(act, { kind: "promulgated", date: day, readAt });
         }
         continue;
       }
@@ -254,7 +257,7 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
     list.sort((left, right) => left.from.localeCompare(right.from));
     entry.wordings = { readOn: today, wordings: list };
     entry.refreshed = true;
-    await cache.append(act, { kind: "wordings", readOn: today, wordings: list });
+    await cache.append(act, { kind: "wordings", readOn: today, readAt, wordings: list });
     return list;
   }
 
@@ -303,7 +306,7 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
     }
     if (!nodes.some(([, text]) => text !== null)) throw new ESbirkaUnavailableError(`e-Sbírka returned no text for the wording ${act} ${wording}`);
     entry.nodes.set(wording, nodes);
-    await cache.append(act, { kind: "wording", wording, nodes });
+    await cache.append(act, { kind: "wording", wording, readAt: clock(), nodes });
     return nodes;
   }
 
@@ -333,7 +336,7 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
     const date = answer === null ? null : dayOf(answer.datumCasVyhlaseni);
     if (answer !== null && date === null) throw new ESbirkaUnavailableError(`e-Sbírka returned no promulgation day of ${act}`);
     entry.promulgated = date;
-    await cache.append(act, { kind: "promulgated", date });
+    await cache.append(act, { kind: "promulgated", date, readAt: clock() });
     return date;
   }
 

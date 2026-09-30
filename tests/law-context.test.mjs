@@ -200,8 +200,10 @@ test("everything read is cached for good: a second run sends no request", async 
   assert.ok(first.calls.length > 0);
   const lines = (await readFile(join(directory, "2019-110.jsonl"), "utf8")).trim().split("\n").map((line) => JSON.parse(line));
   assert.deepEqual([...new Set(lines.map(({ kind }) => kind))].sort(), ["wording", "wordings"]);
+  // Every line records when its answer was read.
+  assert.ok(lines.every(({ readAt }) => !Number.isNaN(Date.parse(readAt)) && readAt.endsWith("Z")));
   assert.deepEqual(lines.find(({ kind }) => kind === "wordings").wordings[1], { wording: "2026-06-12", from: "2026-06-12", to: null, amendments: ["300/2025"] });
-  assert.deepEqual((await readFile(join(directory, "2025-300.jsonl"), "utf8")).trim().split("\n").map((line) => JSON.parse(line)), [{ kind: "promulgated", date: "2025-09-02" }]);
+  assert.deepEqual((await readFile(join(directory, "2025-300.jsonl"), "utf8")).trim().split("\n").map((line) => JSON.parse(line)).map(({ readAt, ...line }) => line), [{ kind: "promulgated", date: "2025-09-02" }]);
   const second = endpointFor(act110);
   const reader = await readerFor(directory, second);
   assert.deepEqual(await resolveLawChangeContext(change, records, reader), firstContext);
