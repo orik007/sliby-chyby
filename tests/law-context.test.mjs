@@ -18,7 +18,7 @@ function fakeTime() {
 const answer = (body, { status = 200 } = {}) => ({ ok: status === 200, status, text: async () => body });
 const notFound = () => answer(JSON.stringify({ chyby: [{ kod: "DOKUMENT_NENALEZEN", popis: "Dokument nenalezen" }] }), { status: 400 });
 
-test("sends one request at a time, at least 250 ms apart, and retries a failure after 1, 2, 4, ... 512 s", async () => {
+test("sends one request at a time, at least 250 ms apart, and retries a failure after 1, 2, 4, 8, 16 s and then 32 s", async () => {
   const clock = fakeTime();
   const statuses = [502, 429, 200];
   const requests = [];
@@ -35,7 +35,7 @@ test("sends one request at a time, at least 250 ms apart, and retries a failure 
   assert.deepEqual(await client.get("/typy-aktu", { purpose: "test" }), {});
   assert.deepEqual(requests.map(({ ok, status }) => [ok, status]), [[false, 502], [false, 429], [true, 200]]);
   assert.deepEqual(clock.sleeps, [1_000, 2_000]);
-  assert.deepEqual(eSbirkaRequestSettings.retryDelaysMs, [1, 2, 4, 8, 16, 32, 64, 128, 256, 512].map((seconds) => seconds * 1_000));
+  assert.deepEqual(eSbirkaRequestSettings.retryDelaysMs, [1, 2, 4, 8, 16, 32, 32, 32, 32, 32].map((seconds) => seconds * 1_000));
   // The next request waits for the 250 ms interval: never more than 4 a second.
   await client.get("/typy-aktu");
   assert.equal(clock.sleeps.at(-1), 250);

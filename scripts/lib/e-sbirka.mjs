@@ -15,9 +15,10 @@ export const eSbirkaRequestSettings = {
   // The API allows at most 5 requests per second per key; requests start at
   // least 250 ms apart, one at a time, so a run never exceeds 4.
   minIntervalMs: 250,
-  // A failed request is retried 10 times, after 1, 2, 4, ... 512 s (about
-  // 17 minutes in all), before the run fails.
-  retryDelaysMs: Array.from({ length: 10 }, (_, index) => 1_000 * 2 ** index),
+  // A failed request is retried 10 times, after 1, 2, 4, 8, 16 s and then
+  // 32 s each (about 3 minutes in all), before the run fails; a run can be
+  // started again, and keeps everything it cached.
+  retryDelaysMs: Array.from({ length: 10 }, (_, index) => 1_000 * 2 ** Math.min(index, 5)),
   timeoutMs: 60_000
 };
 
