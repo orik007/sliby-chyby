@@ -322,11 +322,18 @@ export function createLawContextReader({ client, cache, clock = () => new Date()
   }
 
   // Whether a cached answer read at `readAt` is out of date; one without a
-  // time of reading always is.
+  // time of reading always is. The change lists name a wording by its date
+  // of effect, and the promulgated wording (`0000-00-00`) by the day the act
+  // was promulgated, so for it that day is checked too.
   async function outdated(readAt, act, wording = null) {
     const state = await ready();
     if (!readAt) return true;
-    const times = [state.all, wording === null ? state.acts.get(act) : state.wholeActs.get(act), wording === null ? null : state.wordings.get(`${act}\n${wording}`)];
+    const keys = wording === null ? [] : [wording];
+    if (wording === promulgatedWording) {
+      const day = (await cache.load(act)).promulgated?.date;
+      if (day) keys.push(day);
+    }
+    const times = [state.all, wording === null ? state.acts.get(act) : state.wholeActs.get(act), ...keys.map((key) => state.wordings.get(`${act}\n${key}`))];
     return times.some((time) => time && readAt < time);
   }
 

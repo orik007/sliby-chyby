@@ -336,6 +336,15 @@ test("only what e-Sbírka reports changed since it was read is requested again",
   assert.deepEqual(await run({ "zmeny-zneni": [["110/2019", "2026-06-12"]] }, "2026-10-04T12:00:00.000Z"), ["%2Fsb%2F2019%2F110%2F2026-06-12/fragmenty", "%2Fsb%2F2019%2F110/historie"]);
   // A withdrawn wording counts the same.
   assert.deepEqual(await run({ "depublikovana-zneni": [["110/2019", "2025-01-01"]] }, "2026-10-05T12:00:00.000Z"), ["%2Fsb%2F2019%2F110%2F2025-01-01/fragmenty", "%2Fsb%2F2019%2F110/historie"]);
+  // The promulgated wording is listed by the act's promulgation day.
+  const promulgatedRun = async (changes, time) => {
+    const endpoint = endpointFor({ ...act110, changes, promulgations: { ...act110.promulgations, "300/2025": "2025-09-02" }, structures: { ...act110.structures }, texts: { ...act110.texts } });
+    const reader = await readerFor(directory, endpoint, { at: () => time });
+    await reader.promulgated("300/2025");
+    return endpoint.calls.filter((call) => !call.includes("zneni")).length;
+  };
+  assert.equal(await promulgatedRun({}, "2026-10-05T13:00:00.000Z"), 0);
+  assert.equal(await promulgatedRun({ "zmeny-zneni": [["300/2025", "2025-09-02"]] }, "2026-10-05T14:00:00.000Z"), 1);
   // A change list that could not name every change makes everything out of date.
   assert.deepEqual(await run({ uncounted: 1 }, "2026-10-06T12:00:00.000Z"), ["%2Fsb%2F2019%2F110%2F2025-01-01/fragmenty", "%2Fsb%2F2019%2F110%2F2026-06-12/fragmenty", "%2Fsb%2F2019%2F110/historie", "%2Fsb%2F2025%2F300"]);
   assert.deepEqual(await run({}, "2026-10-07T12:00:00.000Z"), []);
