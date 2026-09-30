@@ -3,27 +3,20 @@ import { appendFile, mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 /**
- * Reads the wording of acts from the open data of e-Sbírka, the official
- * electronic Collection of Laws, through its SPARQL endpoint, and keeps
- * everything read in a permanent per-act cache (docs/evidence-pipeline.md,
- * Law-change context). Only direct queries are sent, one at a time.
+ * Reads the wording of acts from the public REST API of e-Sbírka, the
+ * official electronic Collection of Laws, and keeps everything read in a
+ * permanent per-act cache (docs/evidence-pipeline.md, Law-change context).
+ * Requests are sent one at a time, below the API's limit of 5 per second.
  */
-export const sparqlEndpoint = "https://opendata.eselpoint.gov.cz/sparql";
-export const eliBase = "https://opendata.eselpoint.gov.cz/esel-esb/eli/cz/sb/";
-const vocabulary = "PREFIX s: <https://slovník.gov.cz/datový/sbírka/pojem/>\n";
+export const eSbirkaApi = "https://api.e-sbirka.gov.cz";
+export const apiKeyVariable = "ESEL_API_ACCESS_KEY";
 
 export const eSbirkaRequestSettings = {
-  minIntervalMs: 2_000,
+  // The API allows at most 5 requests per second per key; requests start at
+  // least 250 ms apart, one at a time, so a run never exceeds 4.
+  minIntervalMs: 250,
   retryDelaysMs: [30_000, 90_000],
-  // The endpoint returns partial results as its limit of about 60 s nears;
-  // an answer this slow is never trusted.
-  slowAnswerMs: 30_000,
-  timeoutMs: 60_000,
-  // Every node list is requested with this limit; an answer that fills it may
-  // have been cut and is a technical failure. The largest act measured (the
-  // civil code) has 10,472 nodes.
-  maxRows: 50_000,
-  textBatchSize: 100
+  timeoutMs: 60_000
 };
 
 /** A technical failure of e-Sbírka after every retry: it fails the run. */
@@ -36,42 +29,53 @@ export class ESbirkaUnavailableError extends Error {
 
 const wait = (milliseconds) => new Promise((resolveWait) => setTimeout(resolveWait, milliseconds));
 
+/** The path of an act or of one of its wordings in the API (`/sb/2025/175/2026-07-01`), encoded as one path segment. */
+export function staleUrlSegment(act, wording = null) {
+  const [number, year] = act.split("/");
+  return encodeURIComponent(`/sb/${year}/${number}${wording ? `/${wording}` : ""}`);
+}
+
 /**
- * A SPARQL client that sends one request at a time, at least
- * `minIntervalMs` apart, retries a technical failure after each delay of
- * `retryDelaysMs`, and then throws ESbirkaUnavailableError. A technical
- * failure is no answer, an HTTP error, an answer after `slowAnswerMs` or
- * more, or an answer that cannot be read. `onRequest` receives every
- * attempt (time, duration, outcome, bytes).
+ * A REST client that sends one request at a time, at least `minIntervalMs`
+ * apart, retries a technical failure after each delay of `retryDelaysMs`,
+ * and then throws ESbirkaUnavailableError. A technical failure is no answer,
+ * an HTTP error, or an answer that cannot be read; an answer that the
+ * document does not exist (`DOKUMENT_NENALEZEN`) is not one and returns
+ * null. The key is sent in the `esel-api-access-key` header. `onRequest`
+ * receives every attempt (time, duration, outcome, bytes).
  */
-export function createSparqlClient({ endpoint = sparqlEndpoint, fetchImpl = fetch, sleep = wait, now = Date.now, onRequest = () => {}, ...overrides } = {}) {
+export function createESbirkaClient({ base = eSbirkaApi, apiKey = process.env[apiKeyVariable], fetchImpl = fetch, sleep = wait, now = Date.now, onRequest = () => {}, ...overrides } = {}) {
   const settings = { ...eSbirkaRequestSettings, ...overrides };
   let chain = Promise.resolve();
   let lastStartedAt = -Infinity;
 
-  async function attempt(query, accept, purpose) {
+  async function attempt(path, purpose) {
     const pause = lastStartedAt + settings.minIntervalMs - now();
     if (pause > 0) await sleep(pause);
     lastStartedAt = now();
     const startedAt = lastStartedAt;
-    const entry = { at: new Date(startedAt).toISOString(), purpose, ok: false };
+    const entry = { at: new Date(startedAt).toISOString(), purpose, path, ok: false };
     try {
-      const response = await fetchImpl(endpoint, {
-        method: "POST",
-        headers: { accept, "content-type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({ query }).toString(),
+      const response = await fetchImpl(`${base}${path}`, {
+        headers: { accept: "application/json", "esel-api-access-key": apiKey },
         signal: AbortSignal.timeout(settings.timeoutMs)
       });
       const body = await response.text();
       entry.status = response.status;
       entry.bytes = Buffer.byteLength(body);
       entry.durationMs = now() - startedAt;
-      if (!response.ok) throw new Error(`HTTP ${response.status}`);
-      if (entry.durationMs >= settings.slowAnswerMs) throw new Error(`answer after ${entry.durationMs} ms may be partial`);
-      const parsed = accept === "text/csv" ? parseCsvColumn(body) : JSON.parse(body).results.bindings;
-      if (!Array.isArray(parsed)) throw new Error("unreadable answer");
+      const parsed = JSON.parse(body);
+      if (!response.ok) {
+        const codes = Array.isArray(parsed?.chyby) ? parsed.chyby.map(({ kod }) => kod) : [];
+        if (response.status === 400 && codes.length > 0 && codes.every((code) => code === "DOKUMENT_NENALEZEN")) {
+          entry.ok = true;
+          entry.notFound = true;
+          return null;
+        }
+        throw new Error(`HTTP ${response.status}${codes.length > 0 ? ` ${codes.join(", ")}` : ""}`);
+      }
+      if (parsed === null || typeof parsed !== "object") throw new Error("unreadable answer");
       entry.ok = true;
-      entry.rows = parsed.length;
       return parsed;
     } catch (error) {
       entry.durationMs ??= now() - startedAt;
@@ -82,58 +86,61 @@ export function createSparqlClient({ endpoint = sparqlEndpoint, fetchImpl = fetc
     }
   }
 
-  async function run(query, accept, purpose) {
+  async function run(path, purpose) {
+    if (!apiKey) throw new Error(`${apiKeyVariable} is not set; the e-Sbírka REST API needs its key`);
     let lastError;
     for (let index = 0; index <= settings.retryDelaysMs.length; index += 1) {
       if (index > 0) await sleep(settings.retryDelaysMs[index - 1]);
       try {
-        return await attempt(query, accept, purpose);
+        return await attempt(path, purpose);
       } catch (error) {
         lastError = error;
       }
     }
-    throw new ESbirkaUnavailableError(`e-Sbírka SPARQL failed after ${settings.retryDelaysMs.length + 1} attempts (${purpose}): ${lastError?.message ?? lastError}`);
+    throw new ESbirkaUnavailableError(`e-Sbírka failed after ${settings.retryDelaysMs.length + 1} attempts (${purpose}): ${lastError?.message ?? lastError}`);
   }
 
   return {
     settings,
-    query(query, { accept = "application/sparql-results+json", purpose = "query" } = {}) {
-      const result = chain.then(() => run(query, accept, purpose));
+    get(path, { purpose = "request" } = {}) {
+      const result = chain.then(() => run(path, purpose));
       chain = result.catch(() => {});
       return result;
     }
   };
 }
 
-// The only column of a SPARQL CSV answer, without its header.
-function parseCsvColumn(body) {
-  const lines = body.split(/\r?\n/u);
-  if (lines[0]?.trim() !== "\"z\"" && lines[0]?.trim() !== "z") return null;
-  return lines.slice(1).filter((line) => line.trim() !== "").map((line) => line.trim().replace(/^"(.*)"$/u, "$1"));
-}
-
 /** The identifier of the wording of an act as it was promulgated. */
 export const promulgatedWording = "0000-00-00";
 
-export function actEliBase(act) {
-  const [number, year] = act.split("/");
-  return `${eliBase}${year}/${number}/`;
+const isoDate = /^\d{4}-\d{2}-\d{2}$/u;
+
+// "585/2006" from a stale URL of the Collection of Laws ("/sb/2006/585"),
+// null for another collection.
+function actOfStaleUrl(staleUrl) {
+  const [, year, number] = /^\/sb\/(\d{4})\/(\d+)(?:\/|$)/u.exec(String(staleUrl)) ?? [];
+  return year ? `${number}/${year}` : null;
+}
+
+// The Prague calendar day of an API timestamp ("2025-06-16T12:59:44.220+02:00").
+function dayOf(timestamp) {
+  const day = String(timestamp ?? "").slice(0, 10);
+  return isoDate.test(day) ? day : null;
 }
 
 /**
  * The cache of one act: an append-only JSON Lines journal
  * `automation/law-context/<year>-<number>.jsonl` whose lines are
  * `{ kind: "wordings", readOn, wordings }` (a later line replaces an earlier
- * one), `{ kind: "structure", wording, paths }`,
- * `{ kind: "text", wording, path, text, order }` (text null when the node has
- * none; order is the fragment's position in the wording, a hexadecimal key
- * that sorts in document order), `{ kind: "amendments", wording, acts }` (the
- * acts whose amendments took effect in that wording), and
+ * one; each wording is `{ wording, from, to, amendments }`, `amendments` the
+ * acts e-Sbírka names as having taken effect in it),
+ * `{ kind: "wording", wording, nodes }` (every node of a wording in document
+ * order, each `[path, text]`, text null when the node has none), and
  * `{ kind: "promulgated", date }` (the day the act itself was promulgated,
- * null when e-Sbírka has no promulgated wording of it). None of these
- * change, so they are never requested or checked again (docs/decisions.md).
- * The list of an act's wordings grows when an amendment is promulgated, so
- * it is trusted only for dates before the day it was read.
+ * null when e-Sbírka does not hold the act). A wording and a promulgation day
+ * do not change, so they are never requested or checked again
+ * (docs/decisions.md). The list of an act's wordings grows when an amendment
+ * is promulgated, so it is trusted only for dates before the day it was read.
  */
 export function createLawContextCache(directory) {
   const acts = new Map();
@@ -145,7 +152,7 @@ export function createLawContextCache(directory) {
 
   async function load(act) {
     if (acts.has(act)) return acts.get(act);
-    const entry = { wordings: null, refreshed: false, structures: new Map(), texts: new Map(), amendments: new Map(), promulgated: undefined };
+    const entry = { wordings: null, refreshed: false, nodes: new Map(), promulgated: undefined };
     const file = fileOf(act);
     if (existsSync(file)) {
       const content = await readFile(file, "utf8");
@@ -169,9 +176,7 @@ export function createLawContextCache(directory) {
           continue;
         }
         if (value.kind === "wordings") entry.wordings = { readOn: value.readOn, wordings: value.wordings };
-        else if (value.kind === "structure") entry.structures.set(value.wording, value.paths);
-        else if (value.kind === "text") entry.texts.set(`${value.wording}\n${value.path}`, { text: value.text, order: value.order ?? null });
-        else if (value.kind === "amendments") entry.amendments.set(value.wording, value.acts);
+        else if (value.kind === "wording") entry.nodes.set(value.wording, value.nodes);
         else if (value.kind === "promulgated") entry.promulgated = value.date;
         else throw new Error(`Invalid law-context cache ${file} line ${index + 1}`);
       }
@@ -196,124 +201,119 @@ export function createLawContextCache(directory) {
 }
 
 /**
- * The wordings of acts, their structures, and node texts. A wording is
- * `{ wording, from, to }` with the ISO dates of its effect (`to` null when
- * open); the list leaves out the promulgated wording (`0000-00-00`), whose
- * structure and texts are read only when asked for by that identifier. Structures and texts are read
- * once and then taken from the cache. The list of wordings is taken from the
- * cache for a date before the day it was read (`for`), and is otherwise read
- * again, at most once per run and act; `later: true` asks for wordings after
- * the date, which a list read on or before it may lack. `today` is the date
- * of reading.
+ * The wordings of acts, their structures and node texts, and the day an act
+ * was promulgated. A wording is `{ wording, from, to, amendments }` with the
+ * ISO dates of its effect (`to` null when open) and the acts ("314/2025")
+ * e-Sbírka names as having taken effect in it; the list leaves out the
+ * promulgated wording (`0000-00-00`), which is read only when asked for by
+ * that identifier. A wording is read whole, once, and then taken from the
+ * cache. The list of wordings is taken from the cache for a date before the
+ * day it was read (`for`), and is otherwise read again, at most once per run
+ * and act. `today` is the date of reading.
  */
 export function createLawContextReader({ client, cache, today = new Date().toISOString().slice(0, 10) }) {
-  const stats = { requests: 0, cachedWordings: 0, cachedStructures: 0, cachedTexts: 0, cachedAmendments: 0, cachedPromulgations: 0 };
+  const stats = { requests: 0, cachedWordingLists: 0, cachedWordings: 0, cachedPromulgations: 0 };
 
-  async function wordings(act, { for: date = null, later = false } = {}) {
+  async function request(path, purpose) {
+    stats.requests += 1;
+    return client.get(path, { purpose });
+  }
+
+  async function wordings(act, { for: date = null } = {}) {
     const entry = await cache.load(act);
     const readAfter = entry.wordings && date !== null && date < entry.wordings.readOn;
     if (entry.wordings && (entry.refreshed || readAfter)) {
-      stats.cachedWordings += 1;
+      stats.cachedWordingLists += 1;
       return entry.wordings.wordings;
     }
-    const base = actEliBase(act);
-    // Direct: the wordings of one act by the prefix of their identifiers,
-    // restricted to wordings (a small class), never a scan of fragments.
-    const rows = await client.query(`${vocabulary}SELECT ?zn ?od ?do WHERE { ?zn a s:znění-právního-aktu ; s:účinnost-znění-od ?od . OPTIONAL { ?zn s:účinnost-znění-do ?do } FILTER(STRSTARTS(STR(?zn), "${base}")) }`, { purpose: `wordings ${act}` });
-    stats.requests += 1;
-    const list = rows
-      .map((row) => ({ wording: row.zn.value.slice(base.length), from: row.od.value, to: row.do?.value ?? null }))
-      .filter(({ wording }) => /^\d{4}-\d{2}-\d{2}$/u.test(wording) && wording !== promulgatedWording)
-      .sort((left, right) => left.from.localeCompare(right.from));
+    const answer = await request(`/dokumenty-sbirky/${staleUrlSegment(act)}/historie`, `wordings ${act}`);
+    if (answer !== null && !Array.isArray(answer.historie)) throw new ESbirkaUnavailableError(`e-Sbírka returned an unreadable history of ${act}`);
+    const prefix = decodeURIComponent(staleUrlSegment(act));
+    const list = [];
+    for (const item of answer?.historie ?? []) {
+      const wording = String(item.staleUrl ?? "").slice(prefix.length + 1);
+      if (!String(item.staleUrl).startsWith(`${prefix}/`) || !isoDate.test(wording) || !isoDate.test(item.datumUcinnostiZneniOd ?? "") || (item.datumUcinnostiZneniDo != null && !isoDate.test(item.datumUcinnostiZneniDo))) {
+        throw new ESbirkaUnavailableError(`e-Sbírka returned an unreadable wording ${item.staleUrl} in the history of ${act}`);
+      }
+      if (wording === promulgatedWording) {
+        // The history also names the day the act was promulgated.
+        const day = dayOf(item.datumCasVyhlaseni);
+        if (day && entry.promulgated === undefined) {
+          entry.promulgated = day;
+          await cache.append(act, { kind: "promulgated", date: day });
+        }
+        continue;
+      }
+      const amendments = [...new Set((item.novely ?? []).map(({ staleUrl }) => actOfStaleUrl(staleUrl)).filter(Boolean))].sort();
+      list.push({ wording, from: item.datumUcinnostiZneniOd, to: item.datumUcinnostiZneniDo ?? null, amendments });
+    }
+    list.sort((left, right) => left.from.localeCompare(right.from));
     entry.wordings = { readOn: today, wordings: list };
     entry.refreshed = true;
     await cache.append(act, { kind: "wordings", readOn: today, wordings: list });
     return list;
   }
 
-  async function structure(act, wording) {
+  /**
+   * Every node of a wording in document order, `[path, text]`, read page by
+   * page. Every page must be of the wording asked for, report the same
+   * number of pages, and all but the last be full; an existing wording has
+   * nodes and some text. Anything else is a technical failure, never cached.
+   */
+  async function nodesOf(act, wording) {
     const entry = await cache.load(act);
-    if (entry.structures.has(wording)) {
-      stats.cachedStructures += 1;
-      return entry.structures.get(wording);
+    if (entry.nodes.has(wording)) {
+      stats.cachedWordings += 1;
+      return entry.nodes.get(wording);
     }
-    const root = `${actEliBase(act)}${wording}`;
-    const { maxRows } = client.settings;
-    // The nodes of a time wording are reached from its document by their
-    // ancestors; those of the promulgated wording (`0000-00-00`) are not,
-    // and are listed by the wording itself (checked on 30 September 2026).
-    const query = wording === promulgatedWording
-      ? `${vocabulary}SELECT ?z WHERE { <${root}> s:má-fragment-znění ?z } LIMIT ${maxRows}`
-      : `${vocabulary}SELECT ?z WHERE { ?z s:má-předka+ <${root}/dokument> } LIMIT ${maxRows}`;
-    const rows = await client.query(query, { accept: "text/csv", purpose: `structure ${act} ${wording}` });
-    stats.requests += 1;
-    if (rows.length >= maxRows) throw new ESbirkaUnavailableError(`e-Sbírka structure of ${act} ${wording} filled the row limit ${maxRows} and may be cut`);
-    // An existing wording always has nodes; none means the answer is wrong.
-    if (rows.length === 0) throw new ESbirkaUnavailableError(`e-Sbírka returned no structure for the existing wording ${act} ${wording}`);
-    const paths = rows.filter((iri) => iri.startsWith(`${root}/`)).map((iri) => iri.slice(root.length + 1)).sort();
-    entry.structures.set(wording, paths);
-    await cache.append(act, { kind: "structure", wording, paths });
-    return paths;
-  }
-
-  /** The texts of exact nodes of one wording, `{ path: { text, order } }`. */
-  async function texts(act, wording, paths) {
-    const entry = await cache.load(act);
-    const root = `${actEliBase(act)}${wording}`;
-    const missing = paths.filter((path) => !entry.texts.has(`${wording}\n${path}`));
-    stats.cachedTexts += paths.length - missing.length;
-    for (let index = 0; index < missing.length; index += client.settings.textBatchSize) {
-      const batch = missing.slice(index, index + client.settings.textBatchSize);
-      const values = batch.map((path) => `<${root}/${path}>`).join(" ");
-      const rows = await client.query(`${vocabulary}SELECT ?z ?text ?order WHERE { VALUES ?z { ${values} } ?z s:obsahuje-fragment ?f . ?f s:text-fragmentu ?text . OPTIONAL { ?z s:pořadí-fragmentu-znění-právního-aktu ?order } }`, { purpose: `texts ${act} ${wording}` });
-      stats.requests += 1;
-      // A single node can have no text, but the nodes of whole provisions
-      // always have some; an answer with none means the endpoint lacks the
-      // links from nodes to their texts, as while its data were reloaded on
-      // 30 September 2026, and is never cached.
-      if (rows.length === 0) throw new ESbirkaUnavailableError(`e-Sbírka returned no text for any of ${batch.length} nodes of ${act} ${wording}`);
-      const found = new Map(rows.map((row) => [row.z.value.slice(root.length + 1), { text: plainText(row.text.value), order: row.order?.value ?? null }]));
-      for (const path of batch) {
-        const { text, order } = found.get(path) ?? { text: null, order: null };
-        entry.texts.set(`${wording}\n${path}`, { text, order });
-        await cache.append(act, { kind: "text", wording, path, text, order });
+    const segment = staleUrlSegment(act, wording);
+    const prefix = `/eli/cz${decodeURIComponent(segment)}/`;
+    const nodes = [];
+    const seen = new Set();
+    const sizes = [];
+    let pages = 1;
+    for (let page = 0; page < pages; page += 1) {
+      const answer = await request(`/dokumenty-sbirky/${segment}/fragmenty?cisloStranky=${page}`, `wording ${act} ${wording} page ${page + 1}`);
+      if (answer === null) throw new ESbirkaUnavailableError(`e-Sbírka holds no nodes of the existing wording ${act} ${wording}`);
+      if (!Array.isArray(answer.seznam) || !Number.isInteger(answer.pocetStranek) || answer.pocetStranek < 1 || (page > 0 && answer.pocetStranek !== pages)) {
+        throw new ESbirkaUnavailableError(`e-Sbírka returned an unreadable page ${page + 1} of ${act} ${wording}`);
+      }
+      pages = answer.pocetStranek;
+      sizes.push(answer.seznam.length);
+      for (const fragment of answer.seznam) {
+        const eli = String(fragment.eli ?? "");
+        if (!eli.startsWith(prefix)) throw new ESbirkaUnavailableError(`e-Sbírka returned node ${eli} for ${act} ${wording}`);
+        const path = eli.slice(prefix.length);
+        if (seen.has(path)) continue;
+        seen.add(path);
+        const text = fragment.xhtml ? plainText(fragment.xhtml) : "";
+        nodes.push([path, text === "" ? null : text]);
       }
     }
-    return Object.fromEntries(paths.map((path) => [path, entry.texts.get(`${wording}\n${path}`)]));
-  }
-
-  /**
-   * The acts ("314/2025") whose amendments took effect in a wording, from the
-   * consolidation links of its nodes (`konsolidační-vazba`: `má-cíl` a node
-   * of the wording, `má-fragment-novely` a node of the amending act). A
-   * wording can have none, such as one where a later part of the act itself
-   * took effect, or one whose links e-Sbírka does not hold.
-   */
-  async function amendingActs(act, wording) {
-    const entry = await cache.load(act);
-    if (entry.amendments.has(wording)) {
-      stats.cachedAmendments += 1;
-      return entry.amendments.get(wording);
+    if (sizes.slice(0, -1).some((size) => size === 0 || size !== sizes[0]) || sizes.at(-1) === 0 || sizes.at(-1) > sizes[0]) {
+      throw new ESbirkaUnavailableError(`e-Sbírka returned pages of ${sizes.join(", ")} nodes for ${act} ${wording}`);
     }
-    const root = `${actEliBase(act)}${wording}/`;
-    // Direct: the links that took effect on the wording's date (an indexed
-    // value), then only those into this wording.
-    const rows = await client.query(`${vocabulary}PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nSELECT DISTINCT ?novela WHERE { ?v s:má-účinnost-konsolidační-vazby-od "${wording}"^^xsd:date ; s:má-cíl ?c ; s:má-fragment-novely ?novela . FILTER(STRSTARTS(STR(?c), "${root}")) }`, { purpose: `amendments ${act} ${wording}` });
-    stats.requests += 1;
-    const acts = [...new Set(rows.map((row) => {
-      const [, year, number] = /\/eli\/cz\/sb\/(\d{4})\/(\d+)\//u.exec(row.novela.value) ?? [];
-      return year ? `${number}/${year}` : null;
-    }).filter(Boolean))].sort();
-    entry.amendments.set(wording, acts);
-    await cache.append(act, { kind: "amendments", wording, acts });
-    return acts;
+    if (!nodes.some(([, text]) => text !== null)) throw new ESbirkaUnavailableError(`e-Sbírka returned no text for the wording ${act} ${wording}`);
+    entry.nodes.set(wording, nodes);
+    await cache.append(act, { kind: "wording", wording, nodes });
+    return nodes;
+  }
+
+  /** The paths of every node of a wording, sorted. */
+  async function structure(act, wording) {
+    return (await nodesOf(act, wording)).map(([path]) => path).sort();
+  }
+
+  /** The texts of exact nodes of one wording, `{ path: { text, order } }`, order the position in the document. */
+  async function texts(act, wording, paths) {
+    const nodes = await nodesOf(act, wording);
+    const byPath = new Map(nodes.map(([path, text], order) => [path, { text, order }]));
+    return Object.fromEntries(paths.map((path) => [path, byPath.get(path) ?? { text: null, order: null }]));
   }
 
   /**
-   * The day an act was promulgated: the start of its promulgated wording
-   * (`0000-00-00`, `účinnost-znění-od`), which is the promulgation day, not
-   * the day of effect (89/2012 Sb.: 2012-03-22). Null when e-Sbírka holds no
-   * promulgated wording of the act.
+   * The day an act was promulgated (89/2012 Sb.: 2012-03-22), not the day of
+   * its effect. Null when e-Sbírka does not hold the act.
    */
   async function promulgated(act) {
     const entry = await cache.load(act);
@@ -321,15 +321,15 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
       stats.cachedPromulgations += 1;
       return entry.promulgated;
     }
-    const rows = await client.query(`${vocabulary}SELECT ?od WHERE { <${actEliBase(act)}${promulgatedWording}> s:účinnost-znění-od ?od }`, { purpose: `promulgated ${act}` });
-    stats.requests += 1;
-    const date = rows.map((row) => row.od.value).find((value) => /^\d{4}-\d{2}-\d{2}$/u.test(value)) ?? null;
+    const answer = await request(`/dokumenty-sbirky/${staleUrlSegment(act)}`, `promulgated ${act}`);
+    const date = answer === null ? null : dayOf(answer.datumCasVyhlaseni);
+    if (answer !== null && date === null) throw new ESbirkaUnavailableError(`e-Sbírka returned no promulgation day of ${act}`);
     entry.promulgated = date;
     await cache.append(act, { kind: "promulgated", date });
     return date;
   }
 
-  return { wordings, structure, texts, amendingActs, promulgated, stats };
+  return { wordings, structure, texts, promulgated, stats };
 }
 
 /** The text of a fragment without its XHTML markup. */

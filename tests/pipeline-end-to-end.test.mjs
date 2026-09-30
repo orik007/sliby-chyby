@@ -80,7 +80,7 @@ test("one real print runs through routing, packaging, assessment, and the review
   const root = join(work, "checkout");
   await checkout(root);
   // Law-change context from a cache holding exactly what print 189 needs,
-  // read from e-Sbírka on 28 September 2026: a run with a complete cache
+  // read from the e-Sbírka REST API on 30 September 2026: a run with a complete cache
   // sends no request.
   const contextOutput = join(work, "law-context");
   await cp(join(fixtures, "law-context-cache"), join(work, "law-context-cache"), { recursive: true });

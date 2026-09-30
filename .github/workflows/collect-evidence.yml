@@ -162,9 +162,11 @@ jobs:
 
       - name: Read law-change context from e-Sbírka
         # The wording of the amended provisions on the conduct date, from
-        # e-Sbírka open data; only what the permanent cache lacks is requested
-        # (docs/evidence-pipeline.md, Law-change context).
+        # the e-Sbírka REST API; only what the permanent cache lacks is
+        # requested (docs/evidence-pipeline.md, Law-change context).
         timeout-minutes: 120
+        env:
+          ESEL_API_ACCESS_KEY: ${{ secrets.ESEL_API_ACCESS_KEY }}
         run: |
           AS_OF="${AS_OF_INPUT:-$(date -u +%F)}"
           node scripts/run-law-context.mjs \
@@ -304,7 +306,7 @@ jobs:
               `- Law changes: ${quality.printParts.lawChanges} (added / removed during the debate: ${quality.printParts.lawChangesAddedInDebate} / ${quality.printParts.lawChangesRemovedInDebate})`,
               `- Approved bills without an approved text on psp.cz: ${quality.printParts.approvedBillsWithoutApprovedText}; text warnings: ${quality.printParts.textWarnings}`,
               `- Law changes with context from e-Sbírka: ${context.lawChangesWithContext} of ${context.lawChanges} (${context.versionsWithContext} versions); targets by status: ${Object.entries(context.targetsByStatus).map(([status, count]) => `${status} ${count}`).join(", ")}`,
-              `- e-Sbírka requests: ${context.eSbirkaRequests} (${context.eSbirkaFailedRequests} failed and retried); taken from the cache: ${context.cachedWordingLists} wording lists, ${context.cachedStructures} structures, ${context.cachedTexts} texts`,
+              `- e-Sbírka requests: ${context.eSbirkaRequests} (${context.eSbirkaFailedRequests} failed and retried); taken from the cache: ${context.cachedWordingLists} wording lists, ${context.cachedWordings} wordings, ${context.cachedPromulgations} promulgation days`,
               `- Law changes screened: ${quality.lawChanges} (technical ${quality.technicalLawChanges}, substantive ${quality.substantiveLawChanges})`,
               `- Routed law changes: ${quality.routedLawChanges} (direct legal-identifier link: ${quality.directLinkLawChanges})`,
               `- Substantive law changes routed to no promise (no specific tag, or no promise holds one): ${quality.unroutedLawChanges}`,

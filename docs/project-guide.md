@@ -27,7 +27,7 @@ official records only (active: Chamber of Deputies open data)
   -> complete collection of every source at 09:37 Europe/Prague
   -> only records that can be attributable conduct continue
   -> each concerned print split into law changes (one part of its official text each)
-  -> context of each law change: the wording of the provisions it amends on the conduct date (e-Sbírka open data, cached permanently)
+  -> context of each law change: the wording of the provisions it amends on the conduct date (e-Sbírka REST API, at most 5 requests per second, cached permanently)
   -> two screeners read every law change with its context: substantive or technical, and topic tags
   -> routing of substantive changes to promises: direct legal-identifier links or the specific tags of either screener, matched to the promises' reviewed tags
   -> attribution: decisive club vote, member bill, or government proposal on the change's print (scoring.md)

@@ -237,7 +237,7 @@ async function resolveVersionContext(text, amendedAct, date, reader) {
       provision.textCz = provision.nodes
         .map((path) => ({ path, ...texts[path] }))
         .filter(({ text }) => text)
-        .sort((left, right) => String(left.order ?? "").localeCompare(String(right.order ?? "")) || left.path.localeCompare(right.path, "en", { numeric: true }))
+        .sort((left, right) => (left.order ?? Infinity) - (right.order ?? Infinity) || left.path.localeCompare(right.path, "en", { numeric: true }))
         .map(({ text }) => text)
         .join("\n");
       delete provision.nodes;
@@ -257,11 +257,10 @@ async function resolveVersionContext(text, amendedAct, date, reader) {
  * one was promulgated after it (its text was not known then), `unknown` when
  * e-Sbírka names none, or not the promulgation day of one.
  */
-async function amendmentsPromulgated(act, wording, date, reader) {
-  const amendments = await reader.amendingActs(act, wording);
-  if (amendments.length === 0) return "unknown";
+async function amendmentsPromulgated(wording, date, reader) {
+  if (wording.amendments.length === 0) return "unknown";
   let unknown = false;
-  for (const amendment of amendments) {
+  for (const amendment of wording.amendments) {
     const day = await reader.promulgated(amendment);
     if (day === null) unknown = true;
     else if (day > date) return "late";
@@ -290,7 +289,7 @@ async function locateAtDate(target, date, reader) {
   let index = 0;
   let check = null;
   for (; index < later.length; index += 1) {
-    check = await amendmentsPromulgated(target.act, later[index].wording, date, reader);
+    check = await amendmentsPromulgated(later[index], date, reader);
     if (check !== "in-time") break;
     const paths = await reader.structure(target.act, later[index].wording);
     const found = locateTarget(paths, target);
@@ -300,7 +299,7 @@ async function locateAtDate(target, date, reader) {
   // known to be promulgated after the date.
   let candidate = null;
   for (let next = index; next < later.length && !candidate; next += 1) {
-    if (next > index) check = await amendmentsPromulgated(target.act, later[next].wording, date, reader);
+    if (next > index) check = await amendmentsPromulgated(later[next], date, reader);
     if (check === "late") return null;
     const paths = await reader.structure(target.act, later[next].wording);
     const found = locateTarget(paths, target);
@@ -316,7 +315,6 @@ async function locateAtDate(target, date, reader) {
     if (found) return { ...found, wording: promulgatedWording, paths, source: "promulgated", promulgatedOn };
   }
   return candidate;
-  return null;
 }
 
 const statusLabels = {
@@ -330,7 +328,7 @@ const statusLabels = {
   "not-recognised": "not recognised"
 };
 
-const contextLegend = "Status of each named provision: found = in the wording on that date; later wording = missing on that date but in a later wording made only by amendments already promulgated on that date, with a later effect; as promulgated = missing on that date, taken from the act as it was itself promulgated before that date, with a later effect, without amendments made since; later wording, promulgation not verified = missing on that date, taken from a later wording whose amendment e-Sbírka does not date, so it may not have been known on that date; whole provision = the named paragraph, letter, or point does not exist, so the enclosing provision is supplied; new = inserted by this change, no earlier text; not found = in no wording in e-Sbírka that could be used for that date; not recognised = the instruction names no single provision (a whole part or head, a title, words in the whole act). Never guess the wording of a provision that is not supplied.";
+const contextLegend = "Status of each named provision: found = in the wording on that date; later wording = missing on that date but in a later wording made only by amendments already promulgated on that date, with a later effect; as promulgated = missing on that date, taken from the act as it was itself promulgated before that date, with a later effect, without amendments made since; later wording, promulgation not verified = missing on that date, taken from a later wording whose amendment e-Sbírka does not name or date, so it may not have been known on that date; whole provision = the named paragraph, letter, or point does not exist, so the enclosing provision is supplied; new = inserted by this change, no earlier text; not found = in no wording in e-Sbírka that could be used for that date; not recognised = the instruction names no single provision (a whole part or head, a title, words in the whole act). Never guess the wording of a provision that is not supplied.";
 
 // Where a provision not in the wording on the date was taken from.
 function wordingNote(status, wording, promulgatedOn) {

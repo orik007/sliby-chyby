@@ -3,7 +3,7 @@ import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { createLawContextCache, createLawContextReader, createSparqlClient, ESbirkaUnavailableError, plainText } from "../scripts/lib/e-sbirka.mjs";
+import { createESbirkaClient, createLawContextCache, createLawContextReader, eSbirkaRequestSettings, ESbirkaUnavailableError, plainText } from "../scripts/lib/e-sbirka.mjs";
 import { citationOfPath, contextStatusCounts, contextText, locateTarget, resolveLawChangeContext, withContext, wordingOn } from "../scripts/lib/law-context.mjs";
 import { lawChangeText } from "../scripts/lib/law-change-screening.mjs";
 
@@ -15,95 +15,104 @@ function fakeTime() {
   return { now: () => time, sleep: async (ms) => { sleeps.push(ms); time += ms; }, advance: (ms) => { time += ms; }, sleeps };
 }
 
-const json = (bindings) => JSON.stringify({ head: { vars: [] }, results: { bindings } });
 const answer = (body, { status = 200 } = {}) => ({ ok: status === 200, status, text: async () => body });
+const notFound = () => answer(JSON.stringify({ chyby: [{ kod: "DOKUMENT_NENALEZEN", popis: "Dokument nenalezen" }] }), { status: 400 });
 
-test("sends one request at a time, at least 2 s apart, and retries a failure after 30 s and 90 s", async () => {
+test("sends one request at a time, at least 250 ms apart, and retries a failure after 30 s and 90 s", async () => {
   const clock = fakeTime();
-  const statuses = [502, 502, 200];
+  const statuses = [502, 429, 200];
   const requests = [];
-  const client = createSparqlClient({
+  const client = createESbirkaClient({
+    apiKey: "key",
     now: clock.now,
     sleep: clock.sleep,
     onRequest: (entry) => requests.push(entry),
-    fetchImpl: async () => answer(json([]), { status: statuses.shift() })
+    fetchImpl: async (url, { headers }) => {
+      assert.equal(headers["esel-api-access-key"], "key");
+      return answer("{}", { status: statuses.shift() });
+    }
   });
-  assert.deepEqual(await client.query("SELECT 1", { purpose: "test" }), []);
-  assert.deepEqual(requests.map(({ ok, status }) => [ok, status]), [[false, 502], [false, 502], [true, 200]]);
+  assert.deepEqual(await client.get("/typy-aktu", { purpose: "test" }), {});
+  assert.deepEqual(requests.map(({ ok, status }) => [ok, status]), [[false, 502], [false, 429], [true, 200]]);
   assert.deepEqual(clock.sleeps, [30_000, 90_000]);
-  // The next request waits for the 2 s interval.
-  await client.query("SELECT 2");
-  assert.equal(clock.sleeps.at(-1), 2_000);
+  // The next request waits for the 250 ms interval: never more than 4 a second.
+  await client.get("/typy-aktu");
+  assert.equal(clock.sleeps.at(-1), 250);
+  assert.ok(eSbirkaRequestSettings.minIntervalMs >= 200);
 });
 
-test("a technical failure after every retry is ESbirkaUnavailableError, and a slow answer is never trusted", async () => {
-  const clock = fakeTime();
-  const failing = createSparqlClient({ now: clock.now, sleep: clock.sleep, fetchImpl: async () => { throw new Error("socket hang up"); } });
-  await assert.rejects(failing.query("SELECT 1", { purpose: "wordings 1/2000" }), (error) => error instanceof ESbirkaUnavailableError && /3 attempts \(wordings 1\/2000\): socket hang up/.test(error.message));
-  // The endpoint returns partial results near its limit: an answer after
-  // 30 s counts as a failure even when it is well formed.
-  const slowClock = fakeTime();
-  const slow = createSparqlClient({ now: slowClock.now, sleep: slowClock.sleep, fetchImpl: async () => { slowClock.advance(31_000); return answer(json([])); } });
-  await assert.rejects(slow.query("SELECT 1"), /may be partial/);
-  const unreadable = createSparqlClient({ ...fakeTime(), fetchImpl: async () => answer("<html>Proxy Error</html>") });
-  await assert.rejects(unreadable.query("SELECT 1"), ESbirkaUnavailableError);
+test("a technical failure after every retry is ESbirkaUnavailableError; a missing document is not one", async () => {
+  const failing = createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: async () => { throw new Error("socket hang up"); } });
+  await assert.rejects(failing.get("/x", { purpose: "wordings 1/2000" }), (error) => error instanceof ESbirkaUnavailableError && /3 attempts \(wordings 1\/2000\): socket hang up/.test(error.message));
+  const unreadable = createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: async () => answer("<html>Proxy Error</html>") });
+  await assert.rejects(unreadable.get("/x"), ESbirkaUnavailableError);
+  const invalidKey = createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: async () => answer(JSON.stringify({ chyby: [{ kod: "NEPLATNY_API_KLIC" }] }), { status: 401 }) });
+  await assert.rejects(invalidKey.get("/x"), /HTTP 401 NEPLATNY_API_KLIC/);
+  const missing = createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: async () => notFound() });
+  assert.equal(await missing.get("/x"), null);
+  const keyless = createESbirkaClient({ apiKey: "", ...fakeTime(), fetchImpl: async () => answer("{}") });
+  await assert.rejects(keyless.get("/x"), /ESEL_API_ACCESS_KEY is not set/);
 });
 
-// A stand-in for the SPARQL endpoint holding one act, 110/2019, with two
-// wordings, answering the three queries the reader sends.
-function endpointFor(act) {
+// A stand-in for the e-Sbírka REST API holding one act, 110/2019, with two
+// wordings, answering the three requests the reader sends: the history of
+// an act, the nodes of a wording page by page, and the detail of an act.
+function endpointFor(act, { pageSize = 1000 } = {}) {
   const calls = [];
-  const fetchImpl = async (url, { body, headers }) => {
-    const query = new URLSearchParams(body).get("query");
-    calls.push(query);
-    if (query.includes("s:má-účinnost-konsolidační-vazby-od")) {
-      const wording = /vazby-od "([\d-]+)"/.exec(query)[1];
-      return answer(json((act.amendments[wording] ?? []).map((iri) => ({ novela: { value: iri } }))));
+  const fetchImpl = async (url) => {
+    const { pathname, searchParams } = new URL(url);
+    calls.push(`${pathname}${searchParams.size ? `?${searchParams}` : ""}`);
+    const [, segment, rest = ""] = /^\/dokumenty-sbirky\/([^/]+)(\/.*)?$/.exec(pathname);
+    const staleUrl = decodeURIComponent(segment);
+    const [, year, number, wording] = /^\/sb\/(\d{4})\/(\d+)(?:\/([\d-]+))?$/.exec(staleUrl);
+    const actId = `${number}/${year}`;
+    if (rest === "/historie") {
+      if (actId !== "110/2019") return notFound();
+      const promulgatedOn = act.promulgations["110/2019"];
+      return answer(JSON.stringify({
+        historie: [
+          ...act.wordings.map(({ wording: id, from, to }) => ({ staleUrl: `/sb/2019/110/${id}`, datumUcinnostiZneniOd: from, ...(to ? { datumUcinnostiZneniDo: to } : {}), novely: (act.amendments[id] ?? []).map((amendment) => ({ staleUrl: `/sb/${amendment.split("/")[1]}/${amendment.split("/")[0]}`, kodDokumentuSbirky: `${amendment} Sb.` })) })),
+          ...(promulgatedOn ? [{ staleUrl: "/sb/2019/110/0000-00-00", datumUcinnostiZneniOd: promulgatedOn, datumCasVyhlaseni: `${promulgatedOn}T00:00:00.000+02:00`, typZneni: "VYHLASENE", novely: [] }] : [])
+        ]
+      }));
     }
-    if (query.includes("/0000-00-00>") && query.includes("účinnost-znění-od")) {
-      const [, year, number] = /sb\/(\d{4})\/(\d+)\/0000-00-00>/.exec(query);
-      const date = act.promulgations[`${number}/${year}`];
-      return answer(json(date ? [{ od: { value: date } }] : []));
+    if (rest === "/fragmenty") {
+      const paths = act.structures[wording];
+      if (!paths) return notFound();
+      const page = Number(searchParams.get("cisloStranky"));
+      const pages = Math.max(1, Math.ceil(paths.length / pageSize));
+      const seznam = paths.slice(page * pageSize, (page + 1) * pageSize).map((path) => ({ eli: `/eli/cz/sb/2019/110/${act.pageWording?.[wording] ?? wording}/${path}`, xhtml: act.texts[`${wording}/${path}`] ?? "" }));
+      return answer(JSON.stringify({ seznam, pocetStranek: pages }));
     }
-    if (query.includes("s:znění-právního-aktu")) {
-      return answer(json(act.wordings.map(({ wording, from, to }) => ({ zn: { value: `https://opendata.eselpoint.gov.cz/esel-esb/eli/cz/sb/2019/110/${wording}` }, od: { value: from }, ...(to ? { do: { value: to } } : {}) }))));
-    }
-    if (query.includes("s:má-předka+") || query.includes("s:má-fragment-znění")) {
-      assert.equal(headers.accept, "text/csv");
-      const wording = /sb\/2019\/110\/([\d-]+)(?:\/dokument)?>/.exec(query)[1];
-      return answer(`"z"\n${act.structures[wording].map((path) => `"https://opendata.eselpoint.gov.cz/esel-esb/eli/cz/sb/2019/110/${wording}/${path}"`).join("\n")}\n`);
-    }
-    const rows = [...query.matchAll(/<(https:[^>]+)>/g)].map((match) => match[1]).filter((iri) => act.texts[iri.split("/sb/2019/110/")[1]]).map((iri) => {
-      const [text, order] = act.texts[iri.split("/sb/2019/110/")[1]];
-      return { z: { value: iri }, text: { value: text }, order: { value: order } };
-    });
-    return answer(json(rows));
+    const promulgatedOn = act.promulgations[actId];
+    return promulgatedOn ? answer(JSON.stringify({ staleUrl, datumCasVyhlaseni: `${promulgatedOn}T09:00:00.000+02:00` })) : notFound();
   };
   return { fetchImpl, calls };
 }
 
 const act110 = {
   wordings: [{ wording: "2025-01-01", from: "2025-01-01", to: "2026-06-11" }, { wording: "2026-06-12", from: "2026-06-12", to: null }],
+  // Every node of each wording, in document order.
   structures: {
-    "2025-01-01": ["dokument/norma", "dokument/norma/cast_1/hlava_5/par_52", "dokument/norma/cast_1/hlava_5/par_52/odst_1", "dokument/norma/cast_1/hlava_5/par_52/odst_2", "dokument/norma/cast_1/hlava_5/par_8"],
+    "2025-01-01": ["dokument", "dokument/norma", "dokument/norma/cast_1/hlava_5/par_8", "dokument/norma/cast_1/hlava_5/par_52", "dokument/norma/cast_1/hlava_5/par_52/odst_1", "dokument/norma/cast_1/hlava_5/par_52/odst_2"],
     // The change itself in force: § 8a it inserts exists in this later
     // wording, and must still be named a new provision.
-    "2026-06-12": ["dokument/norma", "dokument/norma/cast_1/hlava_5/par_52", "dokument/norma/cast_1/hlava_5/par_52/odst_1", "dokument/norma/cast_1/hlava_5/par_32d", "dokument/norma/cast_1/hlava_5/par_8", "dokument/norma/cast_1/hlava_5/par_8a", "dokument/norma/cast_1/hlava_5/par_8a/odst_2"]
+    "2026-06-12": ["dokument", "dokument/norma", "dokument/norma/cast_1/hlava_5/par_8", "dokument/norma/cast_1/hlava_5/par_8a", "dokument/norma/cast_1/hlava_5/par_8a/odst_2", "dokument/norma/cast_1/hlava_5/par_32d", "dokument/norma/cast_1/hlava_5/par_52", "dokument/norma/cast_1/hlava_5/par_52/odst_1"]
   },
   texts: {
-    "2025-01-01/dokument/norma/cast_1/hlava_5/par_52/odst_1": ["<var>(1)</var> Úřad řídí předseda. Předseda Úřadu se považuje za služební orgán.", "6AE58D60"],
-    "2025-01-01/dokument/norma/cast_1/hlava_5/par_52/odst_2": ["(2) Funkční období je 5 let.", "6AE58DA0"],
-    "2025-01-01/dokument/norma/cast_1/hlava_5/par_8": ["§ 8 text", "6AE50000"],
-    "2026-06-12/dokument/norma/cast_1/hlava_5/par_32d": ["§ 32d text", "6AE60000"]
+    "2025-01-01/dokument/norma/cast_1/hlava_5/par_52/odst_1": "<var>(1)</var> Úřad řídí předseda. Předseda Úřadu se považuje za služební orgán.",
+    "2025-01-01/dokument/norma/cast_1/hlava_5/par_52/odst_2": "(2) Funkční období je 5 let.",
+    "2025-01-01/dokument/norma/cast_1/hlava_5/par_8": "§ 8 text",
+    "2026-06-12/dokument/norma/cast_1/hlava_5/par_32d": "§ 32d text"
   },
   // The later wording was made by 300/2025 Sb., promulgated before the
   // conduct on 2025-12-29.
-  amendments: { "2026-06-12": ["https://opendata.eselpoint.gov.cz/esel-esb/eli/cz/sb/2025/300/2026-06-12/dokument/novela/cast_1/bod_4"] },
+  amendments: { "2026-06-12": ["300/2025"] },
   promulgations: { "300/2025": "2025-09-02" }
 };
 
 async function readerFor(directory, endpoint, clock = fakeTime()) {
-  const client = createSparqlClient({ now: clock.now, sleep: clock.sleep, fetchImpl: endpoint.fetchImpl });
+  const client = createESbirkaClient({ apiKey: "key", now: clock.now, sleep: clock.sleep, fetchImpl: endpoint.fetchImpl });
   return createLawContextReader({ client, cache: createLawContextCache(directory) });
 }
 
@@ -188,7 +197,8 @@ test("everything read is cached for good: a second run sends no request", async 
   const firstContext = await resolveLawChangeContext(change, records, await readerFor(directory, first));
   assert.ok(first.calls.length > 0);
   const lines = (await readFile(join(directory, "2019-110.jsonl"), "utf8")).trim().split("\n").map((line) => JSON.parse(line));
-  assert.deepEqual([...new Set(lines.map(({ kind }) => kind))].sort(), ["amendments", "structure", "text", "wordings"]);
+  assert.deepEqual([...new Set(lines.map(({ kind }) => kind))].sort(), ["wording", "wordings"]);
+  assert.deepEqual(lines.find(({ kind }) => kind === "wordings").wordings[1], { wording: "2026-06-12", from: "2026-06-12", to: null, amendments: ["300/2025"] });
   assert.deepEqual((await readFile(join(directory, "2025-300.jsonl"), "utf8")).trim().split("\n").map((line) => JSON.parse(line)), [{ kind: "promulgated", date: "2025-09-02" }]);
   const second = endpointFor(act110);
   const reader = await readerFor(directory, second);
@@ -212,7 +222,7 @@ test("a later wording is used only when its amendments were promulgated by the c
   assert.equal((await contextOf32d({ promulgations: { "300/2025": "2025-12-29" } })).target.status, "later-wording");
   // No amendment named for the later wording: the act as it was itself
   // promulgated before the conduct, when it holds the provision.
-  const promulgatedAct = { amendments: {}, promulgations: { "110/2019": "2019-04-24" }, structures: { ...act110.structures, "0000-00-00": ["dokument/norma", "dokument/norma/cast_1/hlava_5/par_32d"] }, texts: { ...act110.texts, "0000-00-00/dokument/norma/cast_1/hlava_5/par_32d": ["§ 32d as promulgated", "6AE60000"] } };
+  const promulgatedAct = { amendments: {}, promulgations: { "110/2019": "2019-04-24" }, structures: { ...act110.structures, "0000-00-00": ["dokument/norma", "dokument/norma/cast_1/hlava_5/par_32d"] }, texts: { ...act110.texts, "0000-00-00/dokument/norma/cast_1/hlava_5/par_32d": "§ 32d as promulgated" } };
   const fromAct = await contextOf32d(promulgatedAct);
   assert.equal(fromAct.target.status, "promulgated-wording");
   assert.equal(fromAct.provision.textCz, "§ 32d as promulgated");
@@ -227,20 +237,31 @@ test("a later wording is used only when its amendments were promulgated by the c
   assert.equal((await contextOf32d({ ...promulgatedAct, promulgations: { "110/2019": "2026-01-10" } })).target.status, "unverified-later-wording");
 });
 
-test("an empty or cut structure, or no text at all, is a technical failure, not a missing provision", async (t) => {
+test("a wording is read page by page, and a missing, mixed, or textless one is a technical failure, never cached", async (t) => {
   const directory = await mkdtemp(join(tmpdir(), "law-context-"));
   t.after(() => rm(directory, { recursive: true, force: true }));
-  const empty = endpointFor({ ...act110, structures: { "2025-01-01": [], "2026-06-12": [] } });
-  await assert.rejects(resolveLawChangeContext(change, records, await readerFor(directory, empty)), /no structure for the existing wording 110\/2019 2025-01-01/);
-  const cut = endpointFor(act110);
-  const clock = fakeTime();
-  const client = createSparqlClient({ now: clock.now, sleep: clock.sleep, fetchImpl: cut.fetchImpl, maxRows: 3 });
-  const reader = createLawContextReader({ client, cache: createLawContextCache(join(directory, "cut")) });
-  await assert.rejects(reader.structure("110/2019", "2025-01-01"), /filled the row limit 3/);
-  // No text for any node asked for: the links to texts are missing.
+  // Pages of two nodes: every node, in document order.
+  const paged = endpointFor(act110, { pageSize: 2 });
+  const reader = await readerFor(join(directory, "paged"), paged);
+  assert.deepEqual(await reader.structure("110/2019", "2025-01-01"), [...act110.structures["2025-01-01"]].sort());
+  assert.deepEqual(paged.calls.map((call) => call.split("?")[1]), ["cisloStranky=0", "cisloStranky=1", "cisloStranky=2"]);
+  const texts = await reader.texts("110/2019", "2025-01-01", ["dokument/norma/cast_1/hlava_5/par_52/odst_2", "dokument/norma/cast_1/hlava_5/par_99"]);
+  assert.deepEqual(texts, { "dokument/norma/cast_1/hlava_5/par_52/odst_2": { text: "(2) Funkční období je 5 let.", order: 5 }, "dokument/norma/cast_1/hlava_5/par_99": { text: null, order: null } });
+  assert.equal(paged.calls.length, 3);
+  // A wording listed in the history must exist.
+  const missing = endpointFor({ ...act110, structures: {} });
+  await assert.rejects(resolveLawChangeContext(change, records, await readerFor(join(directory, "missing"), missing)), /holds no nodes of the existing wording 110\/2019 2025-01-01/);
+  // Nodes of another wording than the one asked for.
+  const mixed = endpointFor({ ...act110, pageWording: { "2025-01-01": "2026-06-12" } });
+  await assert.rejects((await readerFor(join(directory, "mixed"), mixed)).structure("110/2019", "2025-01-01"), /returned node \/eli\/cz\/sb\/2019\/110\/2026-06-12\/dokument for 110\/2019 2025-01-01/);
+  // No text at all.
   const textless = endpointFor({ ...act110, texts: {} });
-  await assert.rejects(resolveLawChangeContext(change, records, await readerFor(join(directory, "textless"), textless)), /no text for any of \d+ nodes of 110\/2019 2025-01-01/);
-  assert.equal((await readFile(join(directory, "textless", "2019-110.jsonl"), "utf8")).includes('"kind":"text"'), false);
+  await assert.rejects(resolveLawChangeContext(change, records, await readerFor(join(directory, "textless"), textless)), /no text for the wording 110\/2019 2025-01-01/);
+  assert.equal((await readFile(join(directory, "textless", "2019-110.jsonl"), "utf8")).includes('"kind":"wording"'), false);
+  // An act e-Sbírka does not hold has no wordings and no promulgation day.
+  const unknown = await readerFor(join(directory, "unknown"), endpointFor(act110));
+  assert.deepEqual(await unknown.wordings("1/2099"), []);
+  assert.equal(await unknown.promulgated("1/2099"), null);
 });
 
 test("locates provisions by their ELI paths only", () => {
@@ -269,11 +290,11 @@ test("the list of wordings is read again for conduct on or after the day it was 
   const read = async (today) => {
     const endpoint = endpointFor(act110);
     const clock = fakeTime();
-    const client = createSparqlClient({ now: clock.now, sleep: clock.sleep, fetchImpl: endpoint.fetchImpl });
+    const client = createESbirkaClient({ apiKey: "key", now: clock.now, sleep: clock.sleep, fetchImpl: endpoint.fetchImpl });
     const reader = createLawContextReader({ client, cache: createLawContextCache(directory), today });
     await reader.wordings("110/2019", { for: "2025-12-29" });
     await reader.wordings("110/2019", { for: "2025-12-29" });
-    return endpoint.calls.filter((query) => query.includes("s:znění-právního-aktu")).length;
+    return endpoint.calls.filter((call) => call.endsWith("/historie")).length;
   };
   // Read on the day of the conduct: a wording promulgated later that day
   // could be missing, so the next run reads the list again, once.
@@ -288,14 +309,14 @@ test("a cache line cut short by a stopped run is removed, and what it held is re
   t.after(() => rm(directory, { recursive: true, force: true }));
   const file = join(directory, "2019-110.jsonl");
   const wordings = JSON.stringify({ kind: "wordings", readOn: "2026-09-28", wordings: act110.wordings });
-  await writeFile(file, `${wordings}\n{"kind":"structure","wording":"2025-01-01","paths":["dokum`);
+  await writeFile(file, `${wordings}\n{"kind":"wording","wording":"2025-01-01","nodes":[["dokum`);
   const endpoint = endpointFor(act110);
   const reader = await readerFor(directory, endpoint);
   assert.deepEqual(await reader.structure("110/2019", "2025-01-01"), [...act110.structures["2025-01-01"]].sort());
   assert.equal(endpoint.calls.length, 1);
   await createLawContextCache(directory).load("110/2019");
   const lines = (await readFile(file, "utf8")).split("\n").filter(Boolean).map((line) => JSON.parse(line));
-  assert.deepEqual(lines.map(({ kind }) => kind), ["wordings", "structure"]);
+  assert.deepEqual(lines.map(({ kind }) => kind), ["wordings", "wording"]);
   // A corrupt line before the last one is never skipped silently.
   await writeFile(file, `{"kind":"wor\n${wordings}\n`);
   await assert.rejects(createLawContextCache(directory).load("110/2019"), /Corrupt law-context cache .* line 1/);

@@ -2,7 +2,7 @@ import { appendFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { invariant } from "./lib/collector-core.mjs";
-import { createLawContextCache, createLawContextReader, createSparqlClient, ESbirkaUnavailableError } from "./lib/e-sbirka.mjs";
+import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError } from "./lib/e-sbirka.mjs";
 import { contextStatusCounts, lawContextVersion, resolveLawChangeContext } from "./lib/law-context.mjs";
 import { writeJsonAtomically } from "./lib/paired-model-calls.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
@@ -12,7 +12,7 @@ import { conductOfRun, lawChangesOfRun } from "./lib/topic-evidence-package.mjs"
 /**
  * Reads the context of every law change of the run: the wording of each
  * provision its amending instructions name, in force on the date of the
- * earliest conduct on each version, from e-Sbírka open data
+ * earliest conduct on each version, from the e-Sbírka REST API
  * (docs/evidence-pipeline.md, Law-change context). Everything read is kept
  * in the permanent per-act cache; a run requests only what the cache lacks.
  * A technical failure of e-Sbírka after every retry fails the run; a
@@ -41,7 +41,7 @@ mkdirSync(resolve(args.output), { recursive: true });
 const requestFile = resolve(args.output, "e-sbirka-requests.jsonl");
 writeFileSync(requestFile, "");
 const requests = { attempts: 0, failed: 0 };
-const client = createSparqlClient({
+const client = createESbirkaClient({
   onRequest: (entry) => {
     requests.attempts += 1;
     if (!entry.ok) {
@@ -62,7 +62,7 @@ const { promises } = await loadTrackedPromises();
 const trackedPartyIds = [...new Set(promises.map(({ partyId }) => partyId))].sort();
 const { recordsByPrintId } = conductOfRun(collectorRun, args.asOf, trackedPartyIds);
 const changes = lawChangesOfRun(printParts, recordsByPrintId);
-log(`law-change context: ${changes.length} law changes; reading the wording of the provisions they amend from e-Sbírka open data, cached ones from ${args.cache}`);
+log(`law-change context: ${changes.length} law changes; reading the wording of the provisions they amend from the e-Sbírka REST API, cached ones from ${args.cache}`);
 
 const contexts = {};
 const tick = progress("law-change context", changes.length, { every: 20 });
@@ -87,10 +87,8 @@ const quality = {
   targetsByStatus: statuses,
   eSbirkaRequests: requests.attempts,
   eSbirkaFailedRequests: requests.failed,
-  cachedWordingLists: reader.stats.cachedWordings,
-  cachedStructures: reader.stats.cachedStructures,
-  cachedTexts: reader.stats.cachedTexts,
-  cachedAmendments: reader.stats.cachedAmendments,
+  cachedWordingLists: reader.stats.cachedWordingLists,
+  cachedWordings: reader.stats.cachedWordings,
   cachedPromulgations: reader.stats.cachedPromulgations
 };
 await writeJsonAtomically(resolve(args.output, "law-context.json"), { schemaVersion: "1.0.0", contextVersion: lawContextVersion, asOf: args.asOf, quality, changes: contexts });
