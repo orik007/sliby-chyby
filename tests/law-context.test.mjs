@@ -72,6 +72,7 @@ function endpointFor(act, { pageSize = 1000 } = {}) {
       return answer(JSON.stringify({
         historie: [
           ...act.wordings.map(({ wording: id, from, to }) => ({ staleUrl: `/sb/2019/110/${id}`, datumUcinnostiZneniOd: from, ...(to ? { datumUcinnostiZneniDo: to } : {}), novely: (act.amendments[id] ?? []).map((amendment) => ({ staleUrl: `/sb/${amendment.split("/")[1]}/${amendment.split("/")[0]}`, kodDokumentuSbirky: `${amendment} Sb.` })) })),
+          { staleUrl: "/sb/2019/110/3000-01-27", typZneni: "BUDOUCI", poznamky: ["Účinnost uvedena v textové podobě"], novely: [] },
           ...(promulgatedOn ? [{ staleUrl: "/sb/2019/110/0000-00-00", datumUcinnostiZneniOd: promulgatedOn, datumCasVyhlaseni: `${promulgatedOn}T00:00:00.000+02:00`, typZneni: "VYHLASENE", novely: [] }] : [])
         ]
       }));

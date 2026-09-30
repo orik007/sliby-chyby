@@ -232,6 +232,10 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
     const list = [];
     for (const item of answer?.historie ?? []) {
       const wording = String(item.staleUrl ?? "").slice(prefix.length + 1);
+      // A future wording whose effect the act states only in words has no
+      // date of effect (e-Sbírka numbers it in the year 3000) and cannot be
+      // placed in time.
+      if (item.datumUcinnostiZneniOd == null && item.typZneni === "BUDOUCI") continue;
       if (!String(item.staleUrl).startsWith(`${prefix}/`) || !isoDate.test(wording) || !isoDate.test(item.datumUcinnostiZneniOd ?? "") || (item.datumUcinnostiZneniDo != null && !isoDate.test(item.datumUcinnostiZneniDo))) {
         throw new ESbirkaUnavailableError(`e-Sbírka returned an unreadable wording ${item.staleUrl} in the history of ${act}`);
       }
