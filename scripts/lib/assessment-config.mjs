@@ -40,7 +40,7 @@ export function assessmentRuntimeConfig(env = process.env) {
     arbiterProvider: env.SLIBY_ARBITER_PROVIDER ?? "openai",
     assessorModelA: env.SLIBY_ASSESSOR_MODEL_A ?? "gpt-6-luna",
     assessorModelB: env.SLIBY_ASSESSOR_MODEL_B ?? "gpt-6-luna",
-    arbiterModel: env.SLIBY_ARBITER_MODEL ?? "gpt-6-sol",
+    arbiterModel: env.SLIBY_ARBITER_MODEL ?? "gpt-6.1-sol",
     concurrency: Number(env.SLIBY_ASSESSMENT_CONCURRENCY ?? "16")
   };
 }

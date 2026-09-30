@@ -33,12 +33,12 @@ function sleep(ms) {
 
 // Input tokens a minute each model may use in this process: 80 % of the
 // usage-tier-4 limits on the OpenAI model pages (gpt-6-luna 10,000,000,
-// gpt-6-sol 4,000,000, verified on 28 September 2026; cached input counts
+// gpt-6.1-sol 4,000,000, verified on 30 September 2026; cached input counts
 // too). A process that shares
 // the account with parallel processes gets its share through
 // SLIBY_TOKEN_BUDGET_SHARE (docs/evidence-pipeline.md). A model without a
 // limit here is not limited, and the run log says so.
-const tokensPerMinute = { "gpt-6-luna": 8_000_000, "gpt-6-sol": 3_200_000 };
+const tokensPerMinute = { "gpt-6-luna": 8_000_000, "gpt-6.1-sol": 3_200_000 };
 const tokenWindows = new Map();
 const unlimitedModelsLogged = new Set();
 
