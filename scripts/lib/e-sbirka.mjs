@@ -1,5 +1,5 @@
 import { existsSync } from "node:fs";
-import { appendFile, mkdir, readFile, writeFile } from "node:fs/promises";
+import { appendFile, mkdir, readdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 /**
@@ -128,20 +128,49 @@ function dayOf(timestamp) {
   return isoDate.test(day) ? day : null;
 }
 
+// Reads an append-only JSON Lines journal. Only the last line can be cut
+// short, by a run stopped mid-write; it is removed, so the next line is
+// appended on a line of its own, and what it held is requested again.
+async function readJournal(file) {
+  if (!existsSync(file)) return [];
+  const content = await readFile(file, "utf8");
+  const lines = content.split("\n");
+  const lastLine = lines.findLastIndex((line) => line.trim() !== "");
+  const values = [];
+  let validLength = content.length;
+  let offset = 0;
+  for (const [index, line] of lines.entries()) {
+    const lineStart = offset;
+    offset += line.length + 1;
+    if (line.trim() === "") continue;
+    try {
+      values.push({ value: JSON.parse(line), line: index + 1 });
+    } catch {
+      if (index !== lastLine) throw new Error(`Corrupt law-context cache ${file} line ${index + 1}`);
+      validLength = lineStart;
+    }
+  }
+  const repaired = content.slice(0, validLength);
+  const normalized = repaired === "" || repaired.endsWith("\n") ? repaired : `${repaired}\n`;
+  if (normalized !== content) await writeFile(file, normalized, "utf8");
+  return values;
+}
+
+/** The journal of what e-Sbírka reported as changed, in the cache directory. */
+export const changesJournal = "changes.jsonl";
+
 /**
- * The cache of one act: an append-only JSON Lines journal
- * `automation/law-context/<year>-<number>.jsonl` whose lines, each with
- * `readAt` (the UTC time of the answer it holds), are
- * `{ kind: "wordings", readOn, wordings }` (a later line replaces an earlier
- * one; each wording is `{ wording, from, to, amendments }`, `amendments` the
- * acts e-Sbírka names as having taken effect in it),
- * `{ kind: "wording", wording, nodes }` (every node of a wording in document
- * order, each `[path, text]`, text null when the node has none), and
- * `{ kind: "promulgated", date }` (the day the act itself was promulgated,
- * null when e-Sbírka does not hold the act). A wording and a promulgation day
- * do not change, so they are never requested or checked again
- * (docs/decisions.md). The list of an act's wordings grows when an amendment
- * is promulgated, so it is trusted only for dates before the day it was read.
+ * The cache of acts in one directory. Each act has an append-only JSON Lines
+ * journal `<year>-<number>.jsonl` whose lines, each with `readAt` (the UTC
+ * time of the answer it holds), are `{ kind: "wordings", wordings }` (each
+ * wording `{ wording, from, to, amendments }`, `amendments` the acts
+ * e-Sbírka names as having taken effect in it), `{ kind: "wording", wording,
+ * nodes }` (every node of a wording in document order, each `[path, text]`,
+ * text null when the node has none), and `{ kind: "promulgated", date }` (the
+ * day the act itself was promulgated, null when e-Sbírka does not hold the
+ * act); a later line replaces an earlier one. `changes.jsonl` records each
+ * check of what e-Sbírka changed since the previous one (see
+ * createLawContextReader).
  */
 export function createLawContextCache(directory) {
   const acts = new Map();
@@ -153,53 +182,60 @@ export function createLawContextCache(directory) {
 
   async function load(act) {
     if (acts.has(act)) return acts.get(act);
-    const entry = { wordings: null, refreshed: false, nodes: new Map(), promulgated: undefined };
+    const entry = { wordings: null, nodes: new Map(), promulgated: null };
     const file = fileOf(act);
-    if (existsSync(file)) {
-      const content = await readFile(file, "utf8");
-      const lines = content.split("\n");
-      const lastLine = lines.findLastIndex((line) => line.trim() !== "");
-      let validLength = content.length;
-      let offset = 0;
-      for (const [index, line] of lines.entries()) {
-        const lineStart = offset;
-        offset += line.length + 1;
-        if (line.trim() === "") continue;
-        let value;
-        try {
-          value = JSON.parse(line);
-        } catch {
-          // Only the last line can be cut short, by a run stopped mid-write;
-          // it is removed, so the next line is appended on a line of its own,
-          // and what it held is requested again.
-          if (index !== lastLine) throw new Error(`Corrupt law-context cache ${file} line ${index + 1}`);
-          validLength = lineStart;
-          continue;
-        }
-        if (value.kind === "wordings") entry.wordings = { readOn: value.readOn, wordings: value.wordings };
-        else if (value.kind === "wording") entry.nodes.set(value.wording, value.nodes);
-        else if (value.kind === "promulgated") entry.promulgated = value.date;
-        else throw new Error(`Invalid law-context cache ${file} line ${index + 1}`);
-      }
-      const repaired = content.slice(0, validLength);
-      const normalized = repaired === "" || repaired.endsWith("\n") ? repaired : `${repaired}\n`;
-      if (normalized !== content) await writeFile(file, normalized, "utf8");
+    for (const { value, line } of await readJournal(file)) {
+      if (value.kind === "wordings") entry.wordings = { readAt: value.readAt ?? "", wordings: value.wordings };
+      else if (value.kind === "wording") entry.nodes.set(value.wording, { readAt: value.readAt ?? "", nodes: value.nodes });
+      else if (value.kind === "promulgated") entry.promulgated = { readAt: value.readAt ?? "", date: value.date };
+      else throw new Error(`Invalid law-context cache ${file} line ${line}`);
     }
     acts.set(act, entry);
     return entry;
   }
 
-  function append(act, value) {
+  async function loadChanges() {
+    return (await readJournal(resolve(directory, changesJournal))).map(({ value }) => value);
+  }
+
+  /** The earliest time any cached answer was read, or null for an empty cache. */
+  async function earliestReadAt() {
+    if (!existsSync(directory)) return null;
+    let earliest = null;
+    for (const name of (await readdir(directory)).filter((file) => /^\d{4}-\d+\.jsonl$/u.test(file)).sort()) {
+      for (const { value } of await readJournal(resolve(directory, name))) {
+        const readAt = value.readAt ?? "";
+        if (readAt !== "" && (earliest === null || readAt < earliest)) earliest = readAt;
+      }
+    }
+    return earliest;
+  }
+
+  function appendTo(file, value) {
     const line = `${JSON.stringify(value)}\n`;
     chain = chain.then(async () => {
       await mkdir(directory, { recursive: true });
-      await appendFile(fileOf(act), line, "utf8");
+      await appendFile(file, line, "utf8");
     });
     return chain;
   }
 
-  return { load, append, flush: () => chain };
+  return {
+    load,
+    loadChanges,
+    earliestReadAt,
+    append: (act, value) => appendTo(fileOf(act), value),
+    appendChanges: (value) => appendTo(resolve(directory, changesJournal), value),
+    flush: () => chain
+  };
 }
+
+// How far before the previous check the next one starts, so that no change
+// is missed between two clocks.
+const changesOverlapMs = 60 * 60 * 1000;
+// The most changes the API returns for one request ((start + 1) * pocet may
+// not exceed 10,000).
+const changesPageSize = 10_000;
 
 /**
  * The wordings of acts, their structures and node texts, and the day an act
@@ -207,27 +243,88 @@ export function createLawContextCache(directory) {
  * ISO dates of its effect (`to` null when open) and the acts ("314/2025")
  * e-Sbírka names as having taken effect in it; the list leaves out the
  * promulgated wording (`0000-00-00`), which is read only when asked for by
- * that identifier. A wording is read whole, once, and then taken from the
- * cache. The list of wordings is taken from the cache for a date before the
- * day it was read (`for`), and is otherwise read again, at most once per run
- * and act. `today` is the date of reading; `clock` gives the time of each
- * answer, stored with it.
+ * that identifier.
+ *
+ * Nothing cached is requested again unless e-Sbírka reports it changed.
+ * Before its first read, the reader asks once per run for the wordings
+ * e-Sbírka changed or withdrew since its previous check (an hour earlier, to
+ * cover the difference of clocks), and records the answer in the changes
+ * journal. A cached answer is out of date when it was read before a check
+ * that reported: for an act's list of wordings, any wording of the act; for
+ * a wording, that wording; for everything, a check that could not list every
+ * change. Only what is out of date is requested again, when it is needed.
+ * The first check of a cache starts from its earliest answer; an empty cache
+ * needs none. `clock` gives the time of each answer, stored with it.
  */
-export function createLawContextReader({ client, cache, today = new Date().toISOString().slice(0, 10), clock = () => new Date().toISOString() }) {
-  const stats = { requests: 0, cachedWordingLists: 0, cachedWordings: 0, cachedPromulgations: 0 };
+export function createLawContextReader({ client, cache, clock = () => new Date().toISOString() }) {
+  const stats = { requests: 0, cachedWordingLists: 0, cachedWordings: 0, cachedPromulgations: 0, changedWordings: 0 };
+  let changes = null;
 
   async function request(path, purpose) {
     stats.requests += 1;
     return client.get(path, { purpose });
   }
 
-  async function wordings(act, { for: date = null } = {}) {
+  // Every wording of the Collection of Laws a change list names, as
+  // [act, wording]; a wording without a date of effect names the whole act.
+  async function changedSince(kind, from) {
+    const answer = await request(`/dokumenty-sbirky/${kind}?datumCasOdberuOd=${encodeURIComponent(from)}&start=0&pocet=${changesPageSize}`, `changes ${kind} since ${from}`);
+    const list = answer?.seznamZneniPravnichPredpisu;
+    if (!Array.isArray(list) || !Number.isInteger(answer.pocetCelkem)) throw new ESbirkaUnavailableError(`e-Sbírka returned an unreadable list of ${kind}`);
+    const wordings = list
+      .filter(({ kodSbirky }) => kodSbirky === "sb")
+      .map(({ rok, cisloPredpisu, datumUcinnostiZneniOd }) => [`${cisloPredpisu}/${rok}`, isoDate.test(datumUcinnostiZneniOd ?? "") ? datumUcinnostiZneniOd : null]);
+    return { wordings, complete: answer.pocetCelkem <= list.length };
+  }
+
+  async function ready() {
+    changes ??= (async () => {
+      const journal = await cache.loadChanges();
+      const from = journal.at(-1)?.readAt ?? await cache.earliestReadAt();
+      const readAt = clock();
+      if (from === null) {
+        await cache.appendChanges({ kind: "changes", from: null, readAt, complete: true, wordings: [] });
+        journal.push({ readAt, complete: true, wordings: [] });
+      } else {
+        const since = new Date(Date.parse(from) - changesOverlapMs).toISOString();
+        const changed = await changedSince("zmeny-zneni", since);
+        const withdrawn = await changedSince("depublikovana-zneni", since);
+        const line = { kind: "changes", from: since, readAt, complete: changed.complete && withdrawn.complete, wordings: [...changed.wordings, ...withdrawn.wordings] };
+        await cache.appendChanges(line);
+        journal.push(line);
+        stats.changedWordings = line.wordings.length;
+      }
+      const latest = (map, key, time) => { if (!map.has(key) || map.get(key) < time) map.set(key, time); };
+      const state = { all: "", acts: new Map(), wholeActs: new Map(), wordings: new Map() };
+      for (const { readAt: time, complete, wordings } of journal) {
+        if (!complete && time > state.all) state.all = time;
+        for (const [act, wording] of wordings) {
+          latest(state.acts, act, time);
+          if (wording === null) latest(state.wholeActs, act, time);
+          else latest(state.wordings, `${act}\n${wording}`, time);
+        }
+      }
+      return state;
+    })();
+    return changes;
+  }
+
+  // Whether a cached answer read at `readAt` is out of date; one without a
+  // time of reading always is.
+  async function outdated(readAt, act, wording = null) {
+    const state = await ready();
+    if (!readAt) return true;
+    const times = [state.all, wording === null ? state.acts.get(act) : state.wholeActs.get(act), wording === null ? null : state.wordings.get(`${act}\n${wording}`)];
+    return times.some((time) => time && readAt < time);
+  }
+
+  async function wordings(act) {
     const entry = await cache.load(act);
-    const readAfter = entry.wordings && date !== null && date < entry.wordings.readOn;
-    if (entry.wordings && (entry.refreshed || readAfter)) {
+    if (entry.wordings && !(await outdated(entry.wordings.readAt, act))) {
       stats.cachedWordingLists += 1;
       return entry.wordings.wordings;
     }
+    await ready();
     const answer = await request(`/dokumenty-sbirky/${staleUrlSegment(act)}/historie`, `wordings ${act}`);
     const readAt = clock();
     if (answer !== null && !Array.isArray(answer.historie)) throw new ESbirkaUnavailableError(`e-Sbírka returned an unreadable history of ${act}`);
@@ -245,8 +342,8 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
       if (wording === promulgatedWording) {
         // The history also names the day the act was promulgated.
         const day = dayOf(item.datumCasVyhlaseni);
-        if (day && entry.promulgated === undefined) {
-          entry.promulgated = day;
+        if (day && entry.promulgated?.date !== day) {
+          entry.promulgated = { readAt, date: day };
           await cache.append(act, { kind: "promulgated", date: day, readAt });
         }
         continue;
@@ -255,9 +352,8 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
       list.push({ wording, from: item.datumUcinnostiZneniOd, to: item.datumUcinnostiZneniDo ?? null, amendments });
     }
     list.sort((left, right) => left.from.localeCompare(right.from));
-    entry.wordings = { readOn: today, wordings: list };
-    entry.refreshed = true;
-    await cache.append(act, { kind: "wordings", readOn: today, readAt, wordings: list });
+    entry.wordings = { readAt, wordings: list };
+    await cache.append(act, { kind: "wordings", readAt, wordings: list });
     return list;
   }
 
@@ -269,18 +365,22 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
    */
   async function nodesOf(act, wording) {
     const entry = await cache.load(act);
-    if (entry.nodes.has(wording)) {
+    const cached = entry.nodes.get(wording);
+    if (cached && !(await outdated(cached.readAt, act, wording))) {
       stats.cachedWordings += 1;
-      return entry.nodes.get(wording);
+      return cached.nodes;
     }
+    await ready();
     const segment = staleUrlSegment(act, wording);
     const prefix = `/eli/cz${decodeURIComponent(segment)}/`;
     const nodes = [];
     const seen = new Set();
     const sizes = [];
     let pages = 1;
+    let readAt = null;
     for (let page = 0; page < pages; page += 1) {
       const answer = await request(`/dokumenty-sbirky/${segment}/fragmenty?cisloStranky=${page}`, `wording ${act} ${wording} page ${page + 1}`);
+      readAt ??= clock();
       if (answer === null) throw new ESbirkaUnavailableError(`e-Sbírka holds no nodes of the existing wording ${act} ${wording}`);
       if (!Array.isArray(answer.seznam) || !Number.isInteger(answer.pocetStranek) || answer.pocetStranek < 1 || (page > 0 && answer.pocetStranek !== pages)) {
         throw new ESbirkaUnavailableError(`e-Sbírka returned an unreadable page ${page + 1} of ${act} ${wording}`);
@@ -305,8 +405,8 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
       throw new ESbirkaUnavailableError(`e-Sbírka returned pages of ${sizes.join(", ")} nodes for ${act} ${wording}`);
     }
     if (!nodes.some(([, text]) => text !== null)) throw new ESbirkaUnavailableError(`e-Sbírka returned no text for the wording ${act} ${wording}`);
-    entry.nodes.set(wording, nodes);
-    await cache.append(act, { kind: "wording", wording, readAt: clock(), nodes });
+    entry.nodes.set(wording, { readAt, nodes });
+    await cache.append(act, { kind: "wording", wording, readAt, nodes });
     return nodes;
   }
 
@@ -328,15 +428,17 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
    */
   async function promulgated(act) {
     const entry = await cache.load(act);
-    if (entry.promulgated !== undefined) {
+    if (entry.promulgated && !(await outdated(entry.promulgated.readAt, act, promulgatedWording))) {
       stats.cachedPromulgations += 1;
-      return entry.promulgated;
+      return entry.promulgated.date;
     }
+    await ready();
     const answer = await request(`/dokumenty-sbirky/${staleUrlSegment(act)}`, `promulgated ${act}`);
+    const readAt = clock();
     const date = answer === null ? null : dayOf(answer.datumCasVyhlaseni);
     if (answer !== null && date === null) throw new ESbirkaUnavailableError(`e-Sbírka returned no promulgation day of ${act}`);
-    entry.promulgated = date;
-    await cache.append(act, { kind: "promulgated", date, readAt: clock() });
+    entry.promulgated = { readAt, date };
+    await cache.append(act, { kind: "promulgated", date, readAt });
     return date;
   }
 

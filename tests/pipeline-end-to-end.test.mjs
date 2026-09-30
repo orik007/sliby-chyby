@@ -20,6 +20,7 @@ import { charactersPerToken, maxRequestInputTokens } from "../scripts/lib/assess
 const repositoryRoot = resolve(import.meta.dirname, "..");
 const fixtures = resolve(repositoryRoot, "tests/fixtures/pipeline");
 const stub = pathToFileURL(resolve(repositoryRoot, "tests/fixtures/stub-openai.mjs")).href;
+const eSbirkaStub = pathToFileURL(resolve(repositoryRoot, "tests/fixtures/stub-e-sbirka.mjs")).href;
 const script = (name) => resolve(repositoryRoot, "scripts", name);
 const vatPromiseId = "ano-2025-restaurant-nonalcoholic-vat-12";
 const dissentingModel = "stub-dissenting-model";
@@ -81,20 +82,21 @@ test("one real print runs through routing, packaging, assessment, and the review
   await checkout(root);
   // Law-change context from a cache holding exactly what print 189 needs,
   // read from the e-Sbírka REST API on 30 September 2026 (each line records
-  // when): a run with a complete cache
-  // sends no request.
+  // when): with nothing changed since, a run only checks what e-Sbírka
+  // changed (tests/fixtures/stub-e-sbirka.mjs) and reads nothing else.
   const contextOutput = join(work, "law-context");
   await cp(join(fixtures, "law-context-cache"), join(work, "law-context-cache"), { recursive: true });
-  await run([script("run-law-context.mjs"),
+  await run(["--import", eSbirkaStub, script("run-law-context.mjs"),
     "--collector-run", join(fixtures, "collector-run.json"),
     "--print-parts", join(fixtures, "print-parts.json"),
     "--as-of", "2026-09-25",
     "--cache", join(work, "law-context-cache"),
-    "--output", contextOutput], { cwd: root });
-  assert.equal(await readFile(join(contextOutput, "e-sbirka-requests.jsonl"), "utf8"), "");
+    "--output", contextOutput], { cwd: root, environment: { ESEL_API_ACCESS_KEY: "stub" } });
+  const eSbirkaRequests = (await readFile(join(contextOutput, "e-sbirka-requests.jsonl"), "utf8")).trim().split("\n").map((line) => JSON.parse(line));
+  assert.deepEqual(eSbirkaRequests.map(({ path, ok }) => [path.split("?")[0], ok]), [["/dokumenty-sbirky/zmeny-zneni", true], ["/dokumenty-sbirky/depublikovana-zneni", true]]);
   const context = await readJson(join(contextOutput, "law-context.json"));
   assert.equal(context.quality.lawChangesWithContext, 4);
-  assert.equal(context.quality.eSbirkaRequests, 0);
+  assert.equal(context.quality.eSbirkaRequests, 2);
 
   const routingOutput = join(work, "routing");
   const routingArgs = (output, log) => [["--import", stub, script("run-topic-routing.mjs"),

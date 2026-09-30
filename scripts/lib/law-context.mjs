@@ -278,7 +278,7 @@ async function amendmentsPromulgated(wording, date, reader) {
  * wording, marked unverified.
  */
 async function locateAtDate(target, date, reader) {
-  const wordings = await reader.wordings(target.act, { for: date });
+  const wordings = await reader.wordings(target.act);
   const current = wordingOn(wordings, date);
   if (current) {
     const paths = await reader.structure(target.act, current.wording);

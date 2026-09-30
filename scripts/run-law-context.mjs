@@ -89,7 +89,8 @@ const quality = {
   eSbirkaFailedRequests: requests.failed,
   cachedWordingLists: reader.stats.cachedWordingLists,
   cachedWordings: reader.stats.cachedWordings,
-  cachedPromulgations: reader.stats.cachedPromulgations
+  cachedPromulgations: reader.stats.cachedPromulgations,
+  wordingsChangedSinceLastCheck: reader.stats.changedWordings
 };
 await writeJsonAtomically(resolve(args.output, "law-context.json"), { schemaVersion: "1.0.0", contextVersion: lawContextVersion, asOf: args.asOf, quality, changes: contexts });
 log(`law-change context: ${quality.lawChangesWithContext} of ${quality.lawChanges} law changes with context; targets ${JSON.stringify(statuses)}; ${requests.attempts} e-Sbírka requests (${requests.failed} failed and retried)`);

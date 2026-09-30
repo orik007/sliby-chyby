@@ -62,6 +62,12 @@ function endpointFor(act, { pageSize = 1000 } = {}) {
   const fetchImpl = async (url) => {
     const { pathname, searchParams } = new URL(url);
     calls.push(`${pathname}${searchParams.size ? `?${searchParams}` : ""}`);
+    const feed = /^\/dokumenty-sbirky\/(zmeny-zneni|depublikovana-zneni)$/.exec(pathname)?.[1];
+    if (feed) {
+      assert.equal(searchParams.get("pocet"), "10000");
+      const listed = (act.changes?.[feed] ?? []).map(([actId, wording]) => ({ kodSbirky: "sb", rok: Number(actId.split("/")[1]), cisloPredpisu: actId.split("/")[0], ...(wording ? { datumUcinnostiZneniOd: wording } : {}) }));
+      return answer(JSON.stringify({ pocetCelkem: listed.length + (act.changes?.uncounted ?? 0), seznamZneniPravnichPredpisu: listed }));
+    }
     const [, segment, rest = ""] = /^\/dokumenty-sbirky\/([^/]+)(\/.*)?$/.exec(pathname);
     const staleUrl = decodeURIComponent(segment);
     const [, year, number, wording] = /^\/sb\/(\d{4})\/(\d+)(?:\/([\d-]+))?$/.exec(staleUrl);
@@ -113,9 +119,9 @@ const act110 = {
   promulgations: { "300/2025": "2025-09-02" }
 };
 
-async function readerFor(directory, endpoint, clock = fakeTime()) {
+async function readerFor(directory, endpoint, { clock = fakeTime(), at = () => new Date().toISOString() } = {}) {
   const client = createESbirkaClient({ apiKey: "key", now: clock.now, sleep: clock.sleep, fetchImpl: endpoint.fetchImpl });
-  return createLawContextReader({ client, cache: createLawContextCache(directory) });
+  return createLawContextReader({ client, cache: createLawContextCache(directory), clock: at });
 }
 
 const change = {
@@ -192,7 +198,7 @@ test("resolves every target with one status, in the wording on the conduct date 
     assert.doesNotMatch(text.split("Version: text approved")[1] ?? "", /Context/);
 });
 
-test("everything read is cached for good: a second run sends no request", async (t) => {
+test("everything read is cached: a second run only checks what e-Sbírka changed", async (t) => {
   const directory = await mkdtemp(join(tmpdir(), "law-context-"));
   t.after(() => rm(directory, { recursive: true, force: true }));
   const first = endpointFor(act110);
@@ -207,8 +213,13 @@ test("everything read is cached for good: a second run sends no request", async 
   const second = endpointFor(act110);
   const reader = await readerFor(directory, second);
   assert.deepEqual(await resolveLawChangeContext(change, records, reader), firstContext);
-  assert.equal(second.calls.length, 0);
-  assert.equal(reader.stats.requests, 0);
+  // Only the check of what e-Sbírka changed since the first run.
+  assert.deepEqual(second.calls.map((call) => call.split("?")[0]), ["/dokumenty-sbirky/zmeny-zneni", "/dokumenty-sbirky/depublikovana-zneni"]);
+  assert.equal(reader.stats.requests, 2);
+  const journal = (await readFile(join(directory, "changes.jsonl"), "utf8")).trim().split("\n").map((line) => JSON.parse(line));
+  // The first run, on an empty cache, only marks where checking starts.
+  assert.equal(journal[0].from, null);
+  assert.equal(journal[1].from, new Date(Date.parse(journal[0].readAt) - 3_600_000).toISOString());
 });
 
 test("a later wording is used only when its amendments were promulgated by the conduct date", async (t) => {
@@ -294,36 +305,43 @@ test("locates provisions by their ELI paths only", () => {
   assert.equal(contextText(null), null);
 });
 
-test("the list of wordings is read again for conduct on or after the day it was read, once per run", async (t) => {
+test("only what e-Sbírka reports changed since it was read is requested again", async (t) => {
   const directory = await mkdtemp(join(tmpdir(), "law-context-"));
   t.after(() => rm(directory, { recursive: true, force: true }));
-  const read = async (today) => {
-    const endpoint = endpointFor(act110);
-    const clock = fakeTime();
-    const client = createESbirkaClient({ apiKey: "key", now: clock.now, sleep: clock.sleep, fetchImpl: endpoint.fetchImpl });
-    const reader = createLawContextReader({ client, cache: createLawContextCache(directory), today });
-    await reader.wordings("110/2019", { for: "2025-12-29" });
-    await reader.wordings("110/2019", { for: "2025-12-29" });
-    return endpoint.calls.filter((call) => call.endsWith("/historie")).length;
+  // Answers are read at 10:00 on the first run and 12:00 on later ones.
+  const run = async (changes, time) => {
+    const endpoint = endpointFor({ ...act110, changes });
+    const reader = await readerFor(directory, endpoint, { at: () => time });
+    await reader.structure("110/2019", "2025-01-01");
+    await reader.structure("110/2019", "2026-06-12");
+    await reader.wordings("110/2019");
+    await reader.promulgated("300/2025");
+    return endpoint.calls.map((call) => call.replace(/\?.*/, "").replace("/dokumenty-sbirky/", "")).filter((call) => !call.includes("zneni"));
   };
-  // Read on the day of the conduct: a wording promulgated later that day
-  // could be missing, so the next run reads the list again, once.
-  assert.equal(await read("2025-12-29"), 1);
-  assert.equal(await read("2025-12-30"), 1);
-  // Read after the conduct: every wording in force on that day is known.
-  assert.equal(await read("2025-12-31"), 0);
+  assert.deepEqual(await run({}, "2026-10-01T10:00:00.000Z"), ["%2Fsb%2F2019%2F110%2F2025-01-01/fragmenty", "%2Fsb%2F2019%2F110%2F2026-06-12/fragmenty", "%2Fsb%2F2019%2F110/historie", "%2Fsb%2F2025%2F300"]);
+  // Nothing changed: everything comes from the cache.
+  assert.deepEqual(await run({}, "2026-10-02T12:00:00.000Z"), []);
+  // Another act changed: still nothing.
+  assert.deepEqual(await run({ "zmeny-zneni": [["89/2012", "2027-01-01"]] }, "2026-10-03T12:00:00.000Z"), []);
+  // A new or changed wording of the act: its list, and that wording only.
+  assert.deepEqual(await run({ "zmeny-zneni": [["110/2019", "2026-06-12"]] }, "2026-10-04T12:00:00.000Z"), ["%2Fsb%2F2019%2F110%2F2026-06-12/fragmenty", "%2Fsb%2F2019%2F110/historie"]);
+  // A withdrawn wording counts the same.
+  assert.deepEqual(await run({ "depublikovana-zneni": [["110/2019", "2025-01-01"]] }, "2026-10-05T12:00:00.000Z"), ["%2Fsb%2F2019%2F110%2F2025-01-01/fragmenty", "%2Fsb%2F2019%2F110/historie"]);
+  // A change list that could not name every change makes everything out of date.
+  assert.deepEqual(await run({ uncounted: 1 }, "2026-10-06T12:00:00.000Z"), ["%2Fsb%2F2019%2F110%2F2025-01-01/fragmenty", "%2Fsb%2F2019%2F110%2F2026-06-12/fragmenty", "%2Fsb%2F2019%2F110/historie", "%2Fsb%2F2025%2F300"]);
+  assert.deepEqual(await run({}, "2026-10-07T12:00:00.000Z"), []);
 });
 
 test("a cache line cut short by a stopped run is removed, and what it held is read again", async (t) => {
   const directory = await mkdtemp(join(tmpdir(), "law-context-"));
   t.after(() => rm(directory, { recursive: true, force: true }));
   const file = join(directory, "2019-110.jsonl");
-  const wordings = JSON.stringify({ kind: "wordings", readOn: "2026-09-28", wordings: act110.wordings });
+  const wordings = JSON.stringify({ kind: "wordings", readAt: "2026-09-28T09:00:00.000Z", wordings: act110.wordings.map((wording) => ({ ...wording, amendments: act110.amendments[wording.wording] ?? [] })) });
   await writeFile(file, `${wordings}\n{"kind":"wording","wording":"2025-01-01","nodes":[["dokum`);
   const endpoint = endpointFor(act110);
   const reader = await readerFor(directory, endpoint);
   assert.deepEqual(await reader.structure("110/2019", "2025-01-01"), [...act110.structures["2025-01-01"]].sort());
-  assert.equal(endpoint.calls.length, 1);
+  assert.equal(endpoint.calls.filter((call) => call.includes("/fragmenty")).length, 1);
   await createLawContextCache(directory).load("110/2019");
   const lines = (await readFile(file, "utf8")).split("\n").filter(Boolean).map((line) => JSON.parse(line));
   assert.deepEqual(lines.map(({ kind }) => kind), ["wordings", "wording"]);
