@@ -82,6 +82,7 @@ function endpointFor(act, { pageSize = 1000 } = {}) {
       const page = Number(searchParams.get("cisloStranky"));
       const pages = Math.max(1, Math.ceil(paths.length / pageSize));
       const seznam = paths.slice(page * pageSize, (page + 1) * pageSize).map((path) => ({ eli: `/eli/cz/sb/2019/110/${act.pageWording?.[wording] ?? wording}/${path}`, xhtml: act.texts[`${wording}/${path}`] ?? "" }));
+      if (page === 0) seznam.unshift(...(act.unnamed?.[wording] ?? []).map((xhtml) => ({ id: 7, eli: "", xhtml })));
       return answer(JSON.stringify({ seznam, pocetStranek: pages }));
     }
     const promulgatedOn = act.promulgations[actId];
@@ -254,6 +255,12 @@ test("a wording is read page by page, and a missing, mixed, or textless one is a
   // Nodes of another wording than the one asked for.
   const mixed = endpointFor({ ...act110, pageWording: { "2025-01-01": "2026-06-12" } });
   await assert.rejects((await readerFor(join(directory, "mixed"), mixed)).structure("110/2019", "2025-01-01"), /returned node \/eli\/cz\/sb\/2019\/110\/2026-06-12\/dokument for 110\/2019 2025-01-01/);
+  // A wrapping block without a path or text is skipped; a text without a
+  // path would be lost.
+  const wrapped = await readerFor(join(directory, "wrapped"), endpointFor({ ...act110, unnamed: { "2025-01-01": [""] } }));
+  assert.deepEqual(await wrapped.structure("110/2019", "2025-01-01"), [...act110.structures["2025-01-01"]].sort());
+  const unnamed = await readerFor(join(directory, "unnamed"), endpointFor({ ...act110, unnamed: { "2025-01-01": ["(1) Text"] } }));
+  await assert.rejects(unnamed.structure("110/2019", "2025-01-01"), /returned node 7 without an ELI path for 110\/2019 2025-01-01/);
   // No text at all.
   const textless = endpointFor({ ...act110, texts: {} });
   await assert.rejects(resolveLawChangeContext(change, records, await readerFor(join(directory, "textless"), textless)), /no text for the wording 110\/2019 2025-01-01/);

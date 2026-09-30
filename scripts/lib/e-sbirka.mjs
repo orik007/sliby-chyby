@@ -282,11 +282,15 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
       sizes.push(answer.seznam.length);
       for (const fragment of answer.seznam) {
         const eli = String(fragment.eli ?? "");
-        if (!eli.startsWith(prefix)) throw new ESbirkaUnavailableError(`e-Sbírka returned node ${eli} for ${act} ${wording}`);
+        const text = fragment.xhtml ? plainText(fragment.xhtml) : "";
+        // A block that wraps repealing or effect provisions has no ELI path
+        // and no text of its own; its content follows in nodes that have
+        // both. A node with text but no path would lose that text.
+        if (eli === "" && text === "") continue;
+        if (!eli.startsWith(prefix)) throw new ESbirkaUnavailableError(`e-Sbírka returned node ${eli || `${fragment.id} without an ELI path`} for ${act} ${wording}`);
         const path = eli.slice(prefix.length);
         if (seen.has(path)) continue;
         seen.add(path);
-        const text = fragment.xhtml ? plainText(fragment.xhtml) : "";
         nodes.push([path, text === "" ? null : text]);
       }
     }
