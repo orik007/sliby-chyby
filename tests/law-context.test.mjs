@@ -60,7 +60,7 @@ function endpointFor(act) {
       const wording = /vazby-od "([\d-]+)"/.exec(query)[1];
       return answer(json((act.amendments[wording] ?? []).map((iri) => ({ novela: { value: iri } }))));
     }
-    if (query.includes("/0000-00-00>")) {
+    if (query.includes("/0000-00-00>") && query.includes("účinnost-znění-od")) {
       const [, year, number] = /sb\/(\d{4})\/(\d+)\/0000-00-00>/.exec(query);
       const date = act.promulgations[`${number}/${year}`];
       return answer(json(date ? [{ od: { value: date } }] : []));
@@ -68,9 +68,9 @@ function endpointFor(act) {
     if (query.includes("s:znění-právního-aktu")) {
       return answer(json(act.wordings.map(({ wording, from, to }) => ({ zn: { value: `https://opendata.eselpoint.gov.cz/esel-esb/eli/cz/sb/2019/110/${wording}` }, od: { value: from }, ...(to ? { do: { value: to } } : {}) }))));
     }
-    if (query.includes("s:má-předka+")) {
+    if (query.includes("s:má-předka+") || query.includes("s:má-fragment-znění")) {
       assert.equal(headers.accept, "text/csv");
-      const wording = /sb\/2019\/110\/([\d-]+)\/dokument>/.exec(query)[1];
+      const wording = /sb\/2019\/110\/([\d-]+)(?:\/dokument)?>/.exec(query)[1];
       return answer(`"z"\n${act.structures[wording].map((path) => `"https://opendata.eselpoint.gov.cz/esel-esb/eli/cz/sb/2019/110/${wording}/${path}"`).join("\n")}\n`);
     }
     const rows = [...query.matchAll(/<(https:[^>]+)>/g)].map((match) => match[1]).filter((iri) => act.texts[iri.split("/sb/2019/110/")[1]]).map((iri) => {
@@ -170,7 +170,7 @@ test("resolves every target with one status, in the wording on the conduct date 
     "110/2019@2026-06-12#dokument/norma/cast_1/hlava_5/par_32d"
   ]);
   assert.deepEqual(proposed.instructions[0].targets[0].provisionIds, ["110/2019@2025-01-01#dokument/norma/cast_1/hlava_5/par_52"]);
-  assert.deepEqual(contextStatusCounts([context]), { found: 2, "later-wording": 1, "paragraph-not-found": 1, "new-provision": 2, "not-found": 1, "not-recognised": 1 });
+  assert.deepEqual(contextStatusCounts([context]), { found: 2, "later-wording": 1, "promulgated-wording": 0, "unverified-later-wording": 0, "paragraph-not-found": 1, "new-provision": 2, "not-found": 1, "not-recognised": 1 });
 
   // The model reads the context after the version's text, and the version
   // with the same text and no conduct names no context.
@@ -198,23 +198,36 @@ test("everything read is cached for good: a second run sends no request", async 
 });
 
 test("a later wording is used only when its amendments were promulgated by the conduct date", async (t) => {
-  const statusOf32d = async (variant, name) => {
+  const contextOf32d = async (variant) => {
     const directory = await mkdtemp(join(tmpdir(), "law-context-"));
     t.after(() => rm(directory, { recursive: true, force: true }));
     const context = await resolveLawChangeContext(change, records, await readerFor(directory, endpointFor({ ...act110, ...variant })));
-    return context.versions.proposed.instructions.flatMap(({ targets }) => targets).find(({ target }) => target === "§ 32d odst. 1").status;
+    const proposed = context.versions.proposed;
+    const target = proposed.instructions.flatMap(({ targets }) => targets).find(({ target: name }) => name === "§ 32d odst. 1");
+    return { target, provision: proposed.provisions[target.provisionIds?.[0]], text: contextText(proposed) };
   };
   // Promulgated after the conduct: its text was not known then.
-  assert.equal(await statusOf32d({ promulgations: { "300/2025": "2026-01-15" } }), "not-found");
-  // No amendment named for the wording, or no promulgated wording of it:
-  // promulgation in time cannot be shown.
-  assert.equal(await statusOf32d({ amendments: {} }), "not-found");
-  assert.equal(await statusOf32d({ promulgations: {} }), "not-found");
+  assert.equal((await contextOf32d({ promulgations: { "300/2025": "2026-01-15" } })).target.status, "not-found");
   // Promulgated on the day of the conduct: already known.
-  assert.equal(await statusOf32d({ promulgations: { "300/2025": "2025-12-29" } }), "later-wording");
+  assert.equal((await contextOf32d({ promulgations: { "300/2025": "2025-12-29" } })).target.status, "later-wording");
+  // No amendment named for the later wording: the act as it was itself
+  // promulgated before the conduct, when it holds the provision.
+  const promulgatedAct = { amendments: {}, promulgations: { "110/2019": "2019-04-24" }, structures: { ...act110.structures, "0000-00-00": ["dokument/norma", "dokument/norma/cast_1/hlava_5/par_32d"] }, texts: { ...act110.texts, "0000-00-00/dokument/norma/cast_1/hlava_5/par_32d": ["§ 32d as promulgated", "6AE60000"] } };
+  const fromAct = await contextOf32d(promulgatedAct);
+  assert.equal(fromAct.target.status, "promulgated-wording");
+  assert.equal(fromAct.provision.textCz, "§ 32d as promulgated");
+  assert.match(fromAct.text, /§ 32d odst\. 1: as promulgated \(promulgated on 2019-04-24\)/);
+  assert.match(fromAct.text, /§ 32d zákona č\. 110\/2019 Sb\. \(as promulgated on 2019-04-24\):\n§ 32d as promulgated/);
+  // Otherwise the later wording, marked as not verified.
+  const unverified = await contextOf32d({ amendments: {} });
+  assert.equal(unverified.target.status, "unverified-later-wording");
+  assert.match(unverified.text, /§ 32d odst\. 1: later wording, promulgation not verified \(wording from 2026-06-12\)/);
+  assert.equal((await contextOf32d({ promulgations: {} })).target.status, "unverified-later-wording");
+  // The act promulgated after the conduct is never used.
+  assert.equal((await contextOf32d({ ...promulgatedAct, promulgations: { "110/2019": "2026-01-10" } })).target.status, "unverified-later-wording");
 });
 
-test("an empty or cut structure of an existing wording is a technical failure, not a missing provision", async (t) => {
+test("an empty or cut structure, or no text at all, is a technical failure, not a missing provision", async (t) => {
   const directory = await mkdtemp(join(tmpdir(), "law-context-"));
   t.after(() => rm(directory, { recursive: true, force: true }));
   const empty = endpointFor({ ...act110, structures: { "2025-01-01": [], "2026-06-12": [] } });
@@ -224,6 +237,10 @@ test("an empty or cut structure of an existing wording is a technical failure, n
   const client = createSparqlClient({ now: clock.now, sleep: clock.sleep, fetchImpl: cut.fetchImpl, maxRows: 3 });
   const reader = createLawContextReader({ client, cache: createLawContextCache(join(directory, "cut")) });
   await assert.rejects(reader.structure("110/2019", "2025-01-01"), /filled the row limit 3/);
+  // No text for any node asked for: the links to texts are missing.
+  const textless = endpointFor({ ...act110, texts: {} });
+  await assert.rejects(resolveLawChangeContext(change, records, await readerFor(join(directory, "textless"), textless)), /no text for any of \d+ nodes of 110\/2019 2025-01-01/);
+  assert.equal((await readFile(join(directory, "textless", "2019-110.jsonl"), "utf8")).includes('"kind":"text"'), false);
 });
 
 test("locates provisions by their ELI paths only", () => {

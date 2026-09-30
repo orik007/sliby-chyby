@@ -112,6 +112,9 @@ function parseCsvColumn(body) {
   return lines.slice(1).filter((line) => line.trim() !== "").map((line) => line.trim().replace(/^"(.*)"$/u, "$1"));
 }
 
+/** The identifier of the wording of an act as it was promulgated. */
+export const promulgatedWording = "0000-00-00";
+
 export function actEliBase(act) {
   const [number, year] = act.split("/");
   return `${eliBase}${year}/${number}/`;
@@ -195,7 +198,8 @@ export function createLawContextCache(directory) {
 /**
  * The wordings of acts, their structures, and node texts. A wording is
  * `{ wording, from, to }` with the ISO dates of its effect (`to` null when
- * open); the promulgated wording is never used. Structures and texts are read
+ * open); the list leaves out the promulgated wording (`0000-00-00`), whose
+ * structure and texts are read only when asked for by that identifier. Structures and texts are read
  * once and then taken from the cache. The list of wordings is taken from the
  * cache for a date before the day it was read (`for`), and is otherwise read
  * again, at most once per run and act; `later: true` asks for wordings after
@@ -219,7 +223,7 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
     stats.requests += 1;
     const list = rows
       .map((row) => ({ wording: row.zn.value.slice(base.length), from: row.od.value, to: row.do?.value ?? null }))
-      .filter(({ wording }) => /^\d{4}-\d{2}-\d{2}$/u.test(wording) && wording !== "0000-00-00")
+      .filter(({ wording }) => /^\d{4}-\d{2}-\d{2}$/u.test(wording) && wording !== promulgatedWording)
       .sort((left, right) => left.from.localeCompare(right.from));
     entry.wordings = { readOn: today, wordings: list };
     entry.refreshed = true;
@@ -235,7 +239,13 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
     }
     const root = `${actEliBase(act)}${wording}`;
     const { maxRows } = client.settings;
-    const rows = await client.query(`${vocabulary}SELECT ?z WHERE { ?z s:má-předka+ <${root}/dokument> } LIMIT ${maxRows}`, { accept: "text/csv", purpose: `structure ${act} ${wording}` });
+    // The nodes of a time wording are reached from its document by their
+    // ancestors; those of the promulgated wording (`0000-00-00`) are not,
+    // and are listed by the wording itself (checked on 30 September 2026).
+    const query = wording === promulgatedWording
+      ? `${vocabulary}SELECT ?z WHERE { <${root}> s:má-fragment-znění ?z } LIMIT ${maxRows}`
+      : `${vocabulary}SELECT ?z WHERE { ?z s:má-předka+ <${root}/dokument> } LIMIT ${maxRows}`;
+    const rows = await client.query(query, { accept: "text/csv", purpose: `structure ${act} ${wording}` });
     stats.requests += 1;
     if (rows.length >= maxRows) throw new ESbirkaUnavailableError(`e-Sbírka structure of ${act} ${wording} filled the row limit ${maxRows} and may be cut`);
     // An existing wording always has nodes; none means the answer is wrong.
@@ -257,6 +267,11 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
       const values = batch.map((path) => `<${root}/${path}>`).join(" ");
       const rows = await client.query(`${vocabulary}SELECT ?z ?text ?order WHERE { VALUES ?z { ${values} } ?z s:obsahuje-fragment ?f . ?f s:text-fragmentu ?text . OPTIONAL { ?z s:pořadí-fragmentu-znění-právního-aktu ?order } }`, { purpose: `texts ${act} ${wording}` });
       stats.requests += 1;
+      // A single node can have no text, but the nodes of whole provisions
+      // always have some; an answer with none means the endpoint lacks the
+      // links from nodes to their texts, as while its data were reloaded on
+      // 30 September 2026, and is never cached.
+      if (rows.length === 0) throw new ESbirkaUnavailableError(`e-Sbírka returned no text for any of ${batch.length} nodes of ${act} ${wording}`);
       const found = new Map(rows.map((row) => [row.z.value.slice(root.length + 1), { text: plainText(row.text.value), order: row.order?.value ?? null }]));
       for (const path of batch) {
         const { text, order } = found.get(path) ?? { text: null, order: null };
@@ -306,7 +321,7 @@ export function createLawContextReader({ client, cache, today = new Date().toISO
       stats.cachedPromulgations += 1;
       return entry.promulgated;
     }
-    const rows = await client.query(`${vocabulary}SELECT ?od WHERE { <${actEliBase(act)}0000-00-00> s:účinnost-znění-od ?od }`, { purpose: `promulgated ${act}` });
+    const rows = await client.query(`${vocabulary}SELECT ?od WHERE { <${actEliBase(act)}${promulgatedWording}> s:účinnost-znění-od ?od }`, { purpose: `promulgated ${act}` });
     stats.requests += 1;
     const date = rows.map((row) => row.od.value).find((value) => /^\d{4}-\d{2}-\d{2}$/u.test(value)) ?? null;
     entry.promulgated = date;

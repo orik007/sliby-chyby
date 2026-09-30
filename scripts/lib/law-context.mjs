@@ -1,5 +1,6 @@
 import { versionConcerned } from "./attribution.mjs";
 import { parseAmendingInstructions } from "./amending-instructions.mjs";
+import { promulgatedWording } from "./e-sbirka.mjs";
 import { versionKeys, versionLabels, versionOfChange } from "./print-parts.mjs";
 
 /**
@@ -9,7 +10,7 @@ import { versionKeys, versionLabels, versionOfChange } from "./print-parts.mjs";
  * version, each target with exactly one status.
  */
 export const lawContextVersion = "law-context-v1";
-export const targetStatuses = ["found", "later-wording", "paragraph-not-found", "new-provision", "not-found", "not-recognised"];
+export const targetStatuses = ["found", "later-wording", "promulgated-wording", "unverified-later-wording", "paragraph-not-found", "new-provision", "not-found", "not-recognised"];
 
 const escape = (value) => value.replace(/[.*+?^${}()|[\]\\]/gu, "\\$&");
 
@@ -200,14 +201,14 @@ async function resolveVersionContext(text, amendedAct, date, reader) {
         targets.push({ target: describeTarget(target), status: "not-found" });
         continue;
       }
-      const status = located.later ? "later-wording" : located.partial ? "paragraph-not-found" : "found";
+      const status = { later: "later-wording", promulgated: "promulgated-wording", unverified: "unverified-later-wording" }[located.source] ?? (located.partial ? "paragraph-not-found" : "found");
       const ids = [];
       for (const root of located.roots) {
         const id = `${target.act}@${located.wording}#${root}`;
-        if (!provisions.has(id)) provisions.set(id, { act: target.act, wording: located.wording, path: root, citation: citationOfPath(root), nodes: nodesUnder(located.paths, [root]) });
+        if (!provisions.has(id)) provisions.set(id, { act: target.act, wording: located.wording, ...(located.promulgatedOn ? { promulgatedOn: located.promulgatedOn } : {}), path: root, citation: citationOfPath(root), nodes: nodesUnder(located.paths, [root]) });
         ids.push(id);
       }
-      targets.push({ target: describeTarget(target), status, wording: located.wording, provisionIds: ids });
+      targets.push({ target: describeTarget(target), status, wording: located.wording, ...(located.promulgatedOn ? { promulgatedOn: located.promulgatedOn } : {}), provisionIds: ids });
     }
     resolved.push({ instructionCz: instruction.textCz, targets });
   }
@@ -246,55 +247,97 @@ async function resolveVersionContext(text, amendedAct, date, reader) {
     conductDate: date,
     amendedAct,
     instructions: resolved,
-    provisions: Object.fromEntries([...provisions.entries()].map(([id, { act, wording, path, citation, textCz }]) => [id, { act, wording, path, citation, textCz }]))
+    provisions: Object.fromEntries([...provisions.entries()].map(([id, { act, wording, promulgatedOn, path, citation, textCz }]) => [id, { act, wording, ...(promulgatedOn ? { promulgatedOn } : {}), path, citation, textCz }]))
   };
 }
 
 /**
- * Whether every amendment that took effect in a later wording was already
- * promulgated on the date: only then was its text known then. A wording
- * whose amendments e-Sbírka does not name cannot be shown to be, so it is
- * not.
+ * Whether the amendments that took effect in a later wording were promulgated
+ * by the date: `in-time` when e-Sbírka names them and each was, `late` when
+ * one was promulgated after it (its text was not known then), `unknown` when
+ * e-Sbírka names none, or not the promulgation day of one.
  */
-async function promulgatedBy(act, wording, date, reader) {
+async function amendmentsPromulgated(act, wording, date, reader) {
   const amendments = await reader.amendingActs(act, wording);
-  if (amendments.length === 0) return false;
+  if (amendments.length === 0) return "unknown";
+  let unknown = false;
   for (const amendment of amendments) {
     const day = await reader.promulgated(amendment);
-    if (day === null || day > date) return false;
+    if (day === null) unknown = true;
+    else if (day > date) return "late";
   }
-  return true;
+  return unknown ? "unknown" : "in-time";
 }
 
-// The wording on the date, or the nearest later wording that holds the
-// target, when it and every wording before it were promulgated by the date.
+/**
+ * Where a target's wording is taken from (docs/evidence-pipeline.md,
+ * Law-change context): the wording on the date; else the nearest later
+ * wording made only by amendments promulgated by the date; else, when the
+ * nearest later wording that holds it cannot be shown to be (and none on
+ * the way is known to be promulgated after the date), the act as it was
+ * itself promulgated, when that was by the date and holds it, or that later
+ * wording, marked unverified.
+ */
 async function locateAtDate(target, date, reader) {
   const wordings = await reader.wordings(target.act, { for: date });
   const current = wordingOn(wordings, date);
   if (current) {
     const paths = await reader.structure(target.act, current.wording);
     const found = locateTarget(paths, target);
-    if (found) return { ...found, wording: current.wording, paths, later: false };
+    if (found) return { ...found, wording: current.wording, paths, source: "current" };
   }
-  for (const later of wordings.filter(({ from }) => from > date)) {
-    if (!(await promulgatedBy(target.act, later.wording, date, reader))) return null;
-    const paths = await reader.structure(target.act, later.wording);
+  const later = wordings.filter(({ from }) => from > date);
+  let index = 0;
+  let check = null;
+  for (; index < later.length; index += 1) {
+    check = await amendmentsPromulgated(target.act, later[index].wording, date, reader);
+    if (check !== "in-time") break;
+    const paths = await reader.structure(target.act, later[index].wording);
     const found = locateTarget(paths, target);
-    if (found) return { ...found, wording: later.wording, paths, later: true };
+    if (found) return { ...found, wording: later[index].wording, paths, source: "later" };
   }
+  // The nearest later wording that holds the target, up to the first one
+  // known to be promulgated after the date.
+  let candidate = null;
+  for (let next = index; next < later.length && !candidate; next += 1) {
+    if (next > index) check = await amendmentsPromulgated(target.act, later[next].wording, date, reader);
+    if (check === "late") return null;
+    const paths = await reader.structure(target.act, later[next].wording);
+    const found = locateTarget(paths, target);
+    if (found) candidate = { ...found, wording: later[next].wording, paths, source: "unverified" };
+  }
+  if (!candidate) return null;
+  // A part of the act itself with a later effect was public once the act
+  // was promulgated.
+  const promulgatedOn = await reader.promulgated(target.act);
+  if (promulgatedOn !== null && promulgatedOn <= date) {
+    const paths = await reader.structure(target.act, promulgatedWording);
+    const found = locateTarget(paths, target);
+    if (found) return { ...found, wording: promulgatedWording, paths, source: "promulgated", promulgatedOn };
+  }
+  return candidate;
   return null;
 }
 
 const statusLabels = {
   found: "found",
   "later-wording": "later wording",
+  "promulgated-wording": "as promulgated",
+  "unverified-later-wording": "later wording, promulgation not verified",
   "paragraph-not-found": "whole provision",
   "new-provision": "new",
   "not-found": "not found",
   "not-recognised": "not recognised"
 };
 
-const contextLegend = "Status of each named provision: found = in the wording on that date; later wording = missing on that date but in a later wording made only by amendments already promulgated on that date, with a later effect; whole provision = the named paragraph, letter, or point does not exist, so the enclosing provision is supplied; new = inserted by this change, no earlier text; not found = in no wording in e-Sbírka in force or promulgated on that date; not recognised = the instruction names no single provision (a whole part or head, a title, words in the whole act). Never guess the wording of a provision that is not supplied.";
+const contextLegend = "Status of each named provision: found = in the wording on that date; later wording = missing on that date but in a later wording made only by amendments already promulgated on that date, with a later effect; as promulgated = missing on that date, taken from the act as it was itself promulgated before that date, with a later effect, without amendments made since; later wording, promulgation not verified = missing on that date, taken from a later wording whose amendment e-Sbírka does not date, so it may not have been known on that date; whole provision = the named paragraph, letter, or point does not exist, so the enclosing provision is supplied; new = inserted by this change, no earlier text; not found = in no wording in e-Sbírka that could be used for that date; not recognised = the instruction names no single provision (a whole part or head, a title, words in the whole act). Never guess the wording of a provision that is not supplied.";
+
+// Where a provision not in the wording on the date was taken from.
+function wordingNote(status, wording, promulgatedOn) {
+  if (status === "later-wording" || status === "unverified-later-wording") return ` (wording from ${wording})`;
+  if (status === "promulgated-wording") return ` (promulgated on ${promulgatedOn})`;
+  return "";
+}
 
 /**
  * The context of one version as the models read it: the provisions its
@@ -308,9 +351,9 @@ export function contextText(context, supplied = new Map(), versionLabel = null) 
   if (!context) return null;
   const named = [];
   for (const { instructionCz, targets } of context.instructions) {
-    for (const { target, status, wording } of targets) {
+    for (const { target, status, wording, promulgatedOn } of targets) {
       const label = target
-        ? `${target}: ${statusLabels[status]}${status === "later-wording" ? ` (wording from ${wording})` : ""}`
+        ? `${target}: ${statusLabels[status]}${wordingNote(status, wording, promulgatedOn)}`
         : `not recognised: "${instructionCz.length > 120 ? `${instructionCz.slice(0, 119)}…` : instructionCz}"`;
       if (!named.includes(label)) named.push(label);
     }
@@ -319,9 +362,9 @@ export function contextText(context, supplied = new Map(), versionLabel = null) 
     `Context from the Collection of Laws (e-Sbírka): the provisions this version amends, as in force on ${context.conductDate}, the date of the earliest conduct on it. It is not evidence of conduct. ${contextLegend}`,
     `Named provisions: ${named.join("; ")}.`
   ];
-  for (const { act, wording, citation, textCz } of Object.values(context.provisions)) {
+  for (const { act, wording, promulgatedOn, citation, textCz } of Object.values(context.provisions)) {
     const key = `${act}\n${citation}\n${textCz}`;
-    const heading = `${citation} zákona č. ${act} Sb. (wording from ${wording})`;
+    const heading = `${citation} zákona č. ${act} Sb. (${wording === promulgatedWording ? `as promulgated on ${promulgatedOn}` : `wording from ${wording}`})`;
     if (supplied.has(key)) {
       lines.push(`${heading}: the same text as supplied for the ${supplied.get(key)}.`);
       continue;
