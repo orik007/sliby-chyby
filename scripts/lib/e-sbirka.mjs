@@ -67,9 +67,13 @@ export function createESbirkaClient({ base = eSbirkaApi, apiKey = process.env[ap
       entry.status = response.status;
       entry.bytes = Buffer.byteLength(body);
       entry.durationMs = now() - startedAt;
-      const parsed = JSON.parse(body);
       if (!response.ok) {
-        const codes = Array.isArray(parsed?.chyby) ? parsed.chyby.map(({ kod }) => kod) : [];
+        // An error body need not be JSON; its status alone decides.
+        let codes = [];
+        try {
+          const failure = JSON.parse(body);
+          if (Array.isArray(failure?.chyby)) codes = failure.chyby.map(({ kod }) => kod);
+        } catch {}
         if (response.status === 400 && codes.length > 0 && codes.every((code) => code === "DOKUMENT_NENALEZEN")) {
           entry.ok = true;
           entry.notFound = true;
@@ -80,6 +84,7 @@ export function createESbirkaClient({ base = eSbirkaApi, apiKey = process.env[ap
         error.final = response.status === 401 || response.status === 403;
         throw error;
       }
+      const parsed = JSON.parse(body);
       if (parsed === null || typeof parsed !== "object") throw new Error("unreadable answer");
       entry.ok = true;
       return parsed;

@@ -116,3 +116,13 @@ test("the instruction head stops at the new text", () => {
   assert.equal(instructionHead("V § 1 se na konci odstavce 5 tečka nahrazuje čárkou a doplňují se písmena e) a f), která znějí:"), "V § 1 se na konci odstavce 5 tečka nahrazuje čárkou a doplňují se písmena e) a f)");
   assert.deepEqual(instructionLines("Čl. I\nZměna zákona\nPodle § 5 lze uložit pokutu."), []);
 });
+
+test("keeps an article's letter and reads every number of a list whole", () => {
+  // Constructed instructions: an inserted article of the Constitution, whose
+  // ELI path is `cl_10a`, and a list of sections with a paragraph after it.
+  assert.deepEqual(targetsOf("V čl. 10a odst. 2 se slovo „a“ zrušuje.", "1/1993"), [{ kind: "article", act: "1/1993", article: "10a", point: null, paragraph: "2" }]);
+  assert.deepEqual(targetsOf("V § 10 a 11 odst. 1 se slovo „a“ zrušuje.", "1/2000"), [
+    { kind: "section", act: "1/2000", section: "10", paragraph: null },
+    { kind: "section", act: "1/2000", section: "11", paragraph: null }
+  ]);
+});

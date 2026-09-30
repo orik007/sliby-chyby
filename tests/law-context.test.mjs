@@ -52,6 +52,11 @@ test("a technical failure after every retry is ESbirkaUnavailableError; a missin
   const invalidKey = createESbirkaClient({ apiKey: "key", now: keyClock.now, sleep: keyClock.sleep, fetchImpl: async () => answer(JSON.stringify({ chyby: [{ kod: "NEPLATNY_API_KLIC" }] }), { status: 401 }) });
   await assert.rejects(invalidKey.get("/x"), /rejected the key \(request\): HTTP 401 NEPLATNY_API_KLIC/);
   assert.deepEqual(keyClock.sleeps, []);
+  // Also when the rejection is not JSON.
+  const htmlClock = fakeTime();
+  const htmlRejection = createESbirkaClient({ apiKey: "key", now: htmlClock.now, sleep: htmlClock.sleep, fetchImpl: async () => answer("<html>Forbidden</html>", { status: 403 }) });
+  await assert.rejects(htmlRejection.get("/x"), /rejected the key \(request\): HTTP 403/);
+  assert.deepEqual(htmlClock.sleeps, []);
   const missing = createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: async () => notFound() });
   assert.equal(await missing.get("/x"), null);
   const keyless = createESbirkaClient({ apiKey: "", ...fakeTime(), fetchImpl: async () => answer("{}") });

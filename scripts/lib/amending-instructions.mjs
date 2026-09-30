@@ -101,7 +101,9 @@ function actOf(head, amendedAct) {
 function sectionTargets(head, act) {
   const targets = [];
   const insertsInto = insertsParagraphPattern.test(head);
-  const pattern = /§§?\s*(\d+[a-z]{0,2})((?:\s*(?:,|a|až)\s*\d+[a-z]{0,2}(?!\s*(?:odst|písm)))*)(\s+odst\.\s*\d+(?:\s*(?:,|a|až)\s*\d+)*)?/gu;
+  // Every number of a list is read whole: "§ 10 a 11 odst. 1" names § 10
+  // and § 11, never § 1.
+  const pattern = /§§?\s*(\d+[a-z]{0,2})((?:\s*(?:,|a|až)\s*\d+[a-z]{0,2}(?![\da-z]))*)(\s+odst\.\s*\d+(?:\s*(?:,|a|až)\s*\d+)*)?/gu;
   for (const match of head.matchAll(pattern)) {
     const sections = sequence(match[1], match[2]);
     const single = sections.length === 1 && typeof sections[0] === "string";
@@ -139,9 +141,11 @@ function sectionTargets(head, act) {
 function articleTargets(head, act) {
   const targets = [];
   for (const match of head.matchAll(articlePattern)) {
-    const article = romanToNumber(match[1].replace(/[a-z]$/u, ""));
+    // An inserted article keeps its letter: "čl. 10a" is `cl_10a`.
+    const [, base, letter] = /^(.*?)([a-z]?)$/u.exec(match[1]);
+    const article = romanToNumber(base);
     if (article === null) continue;
-    targets.push({ kind: "article", act, article: String(article), point: match[2] ?? null, paragraph: match[3] ?? null });
+    targets.push({ kind: "article", act, article: `${article}${letter}`, point: match[2] ?? null, paragraph: match[3] ?? null });
   }
   return targets;
 }
