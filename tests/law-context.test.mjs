@@ -18,7 +18,7 @@ function fakeTime() {
 const answer = (body, { status = 200 } = {}) => ({ ok: status === 200, status, text: async () => body });
 const notFound = () => answer(JSON.stringify({ chyby: [{ kod: "DOKUMENT_NENALEZEN", popis: "Dokument nenalezen" }] }), { status: 400 });
 
-test("sends one request at a time, at least 250 ms apart, and retries a failure after 30 s and 90 s", async () => {
+test("sends one request at a time, at least 250 ms apart, and retries a failure after 1, 2, 4, ... 512 s", async () => {
   const clock = fakeTime();
   const statuses = [502, 429, 200];
   const requests = [];
@@ -34,7 +34,8 @@ test("sends one request at a time, at least 250 ms apart, and retries a failure 
   });
   assert.deepEqual(await client.get("/typy-aktu", { purpose: "test" }), {});
   assert.deepEqual(requests.map(({ ok, status }) => [ok, status]), [[false, 502], [false, 429], [true, 200]]);
-  assert.deepEqual(clock.sleeps, [30_000, 90_000]);
+  assert.deepEqual(clock.sleeps, [1_000, 2_000]);
+  assert.deepEqual(eSbirkaRequestSettings.retryDelaysMs, [1, 2, 4, 8, 16, 32, 64, 128, 256, 512].map((seconds) => seconds * 1_000));
   // The next request waits for the 250 ms interval: never more than 4 a second.
   await client.get("/typy-aktu");
   assert.equal(clock.sleeps.at(-1), 250);
@@ -43,11 +44,14 @@ test("sends one request at a time, at least 250 ms apart, and retries a failure 
 
 test("a technical failure after every retry is ESbirkaUnavailableError; a missing document is not one", async () => {
   const failing = createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: async () => { throw new Error("socket hang up"); } });
-  await assert.rejects(failing.get("/x", { purpose: "wordings 1/2000" }), (error) => error instanceof ESbirkaUnavailableError && /3 attempts \(wordings 1\/2000\): socket hang up/.test(error.message));
+  await assert.rejects(failing.get("/x", { purpose: "wordings 1/2000" }), (error) => error instanceof ESbirkaUnavailableError && /11 attempts \(wordings 1\/2000\): socket hang up/.test(error.message));
   const unreadable = createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: async () => answer("<html>Proxy Error</html>") });
   await assert.rejects(unreadable.get("/x"), ESbirkaUnavailableError);
-  const invalidKey = createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: async () => answer(JSON.stringify({ chyby: [{ kod: "NEPLATNY_API_KLIC" }] }), { status: 401 }) });
-  await assert.rejects(invalidKey.get("/x"), /HTTP 401 NEPLATNY_API_KLIC/);
+  // A rejected key is not retried.
+  const keyClock = fakeTime();
+  const invalidKey = createESbirkaClient({ apiKey: "key", now: keyClock.now, sleep: keyClock.sleep, fetchImpl: async () => answer(JSON.stringify({ chyby: [{ kod: "NEPLATNY_API_KLIC" }] }), { status: 401 }) });
+  await assert.rejects(invalidKey.get("/x"), /rejected the key \(request\): HTTP 401 NEPLATNY_API_KLIC/);
+  assert.deepEqual(keyClock.sleeps, []);
   const missing = createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: async () => notFound() });
   assert.equal(await missing.get("/x"), null);
   const keyless = createESbirkaClient({ apiKey: "", ...fakeTime(), fetchImpl: async () => answer("{}") });

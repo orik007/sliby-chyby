@@ -15,7 +15,9 @@ export const eSbirkaRequestSettings = {
   // The API allows at most 5 requests per second per key; requests start at
   // least 250 ms apart, one at a time, so a run never exceeds 4.
   minIntervalMs: 250,
-  retryDelaysMs: [30_000, 90_000],
+  // A failed request is retried 10 times, after 1, 2, 4, ... 512 s (about
+  // 17 minutes in all), before the run fails.
+  retryDelaysMs: Array.from({ length: 10 }, (_, index) => 1_000 * 2 ** index),
   timeoutMs: 60_000
 };
 
@@ -72,7 +74,10 @@ export function createESbirkaClient({ base = eSbirkaApi, apiKey = process.env[ap
           entry.notFound = true;
           return null;
         }
-        throw new Error(`HTTP ${response.status}${codes.length > 0 ? ` ${codes.join(", ")}` : ""}`);
+        const error = new Error(`HTTP ${response.status}${codes.length > 0 ? ` ${codes.join(", ")}` : ""}`);
+        // A rejected key stays rejected; waiting for it only delays the run.
+        error.final = response.status === 401 || response.status === 403;
+        throw error;
       }
       if (parsed === null || typeof parsed !== "object") throw new Error("unreadable answer");
       entry.ok = true;
@@ -95,6 +100,7 @@ export function createESbirkaClient({ base = eSbirkaApi, apiKey = process.env[ap
         return await attempt(path, purpose);
       } catch (error) {
         lastError = error;
+        if (error?.final) throw new ESbirkaUnavailableError(`e-Sbírka rejected the key (${purpose}): ${error.message}`);
       }
     }
     throw new ESbirkaUnavailableError(`e-Sbírka failed after ${settings.retryDelaysMs.length + 1} attempts (${purpose}): ${lastError?.message ?? lastError}`);
