@@ -10,6 +10,8 @@ function tagOf(text) {
   return "unknown";
 }
 
+let invalidAssessmentsLeft;
+
 function answer(name, input, model) {
   if (name === "law_change_screening") {
     // The stub takes the amendment of the Customs Administration Act for a
@@ -21,6 +23,13 @@ function answer(name, input, model) {
   if (name === "law_change_relevance") return { relevant: true, reasonCz: "Změna se týká slibu." };
   if (name === "slava_assessment") {
     const evidencePackage = input.evidencePackage;
+    // STUB_OPENAI_INVALID_ASSESSMENTS makes the first that many assessments
+    // of this process invalid (no relevance verdicts), to test retries.
+    invalidAssessmentsLeft ??= Number(process.env.STUB_OPENAI_INVALID_ASSESSMENTS ?? 0);
+    if (invalidAssessmentsLeft > 0) {
+      invalidAssessmentsLeft -= 1;
+      return { promiseId: evidencePackage.promise.id, changeRelevance: [], status: "moving-towards", evidenceSufficient: true, citedEvidenceIds: [evidencePackage.evidence[0].id], explanationCz: "Neúplný posudek.", confidence: "high", uncertainties: [] };
+    }
     const changes = evidencePackage.evidence.filter(({ role }) => role === "law-change");
     return {
       promiseId: evidencePackage.promise.id,

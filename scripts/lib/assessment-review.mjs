@@ -129,6 +129,7 @@ export function createReviewProposal({ auditRecord, proposalDirectory, supersede
 
 export const resolutionLabels = {
   "assessor-consensus": "oba automatické posudky se shodly",
+  "assessor-consensus-one-sufficient": "oba automatické posudky daly stejné hodnocení, jen jeden z nich považuje podklady za dostatečné",
   "arbiter-selection": "o neshodě automatických posudků rozhodl třetí hodnotitel",
   "arbiter-confirmed-single-assessor": "třetí hodnotitel ověřil jediný použitelný automatický posudek",
   "insufficient-evidence": "oba automatické posudky označily podklady za nedostatečné",
@@ -260,7 +261,7 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     ""
   ];
   // Only agreeing assessors reach a result without the arbiter.
-  if (["assessor-consensus", "insufficient-evidence"].includes(auditRecord.resolution.reason)) {
+  if (["assessor-consensus", "assessor-consensus-one-sufficient", "insufficient-evidence"].includes(auditRecord.resolution.reason)) {
     const consensusResult = proposed
       ? `${proposed.label} (${proposed.score})`
       : "podklady nestačí pro automatický návrh hodnocení";

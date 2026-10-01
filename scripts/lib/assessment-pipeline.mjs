@@ -186,6 +186,11 @@ export function validateArbiterOutput(output, evidencePackage) {
   return output;
 }
 
+/** The validation error of an assessor output, or null when it is valid. */
+export function assessmentOutputError(output, evidencePackage) {
+  return validateAssessmentAttempt(output, evidencePackage).error;
+}
+
 function validateAssessmentAttempt(output, evidencePackage) {
   try {
     return { review: validateAssessmentOutput(output, evidencePackage), error: null };
@@ -227,9 +232,14 @@ export function resolveAssessmentReviews(reviewA, reviewB, evidencePackage, arbi
 
   validateAssessmentOutput(reviewA, evidencePackage);
   validateAssessmentOutput(reviewB, evidencePackage);
-  const reviewsAgree = reviewA.status === reviewB.status && reviewA.evidenceSufficient === reviewB.evidenceSufficient;
-  if (reviewsAgree && !reviewA.evidenceSufficient) return { state: "human-review-required", reason: "insufficient-evidence", status: null, selectedReview: null };
-  if (reviewsAgree) return { state: "candidate", reason: "assessor-consensus", status: reviewA.status, selectedReview: "consensus" };
+  // Only a different score goes to the arbiter. With the same score, the
+  // assessment that finds the evidence sufficient carries the candidate;
+  // when neither does, a person reviews it.
+  if (reviewA.status === reviewB.status) {
+    if (reviewA.evidenceSufficient && reviewB.evidenceSufficient) return { state: "candidate", reason: "assessor-consensus", status: reviewA.status, selectedReview: "consensus" };
+    if (!reviewA.evidenceSufficient && !reviewB.evidenceSufficient) return { state: "human-review-required", reason: "insufficient-evidence", status: null, selectedReview: null };
+    return { state: "candidate", reason: "assessor-consensus-one-sufficient", status: reviewA.status, selectedReview: reviewA.evidenceSufficient ? "assessor-a" : "assessor-b" };
+  }
   if (!arbiter) return { state: "arbitration-required", reason: "assessor-disagreement", status: null, selectedReview: null };
   validateArbiterOutput(arbiter, evidencePackage);
   if (arbiter.choice === "cannot-decide") return { state: "human-review-required", reason: "arbiter-cannot-decide", status: null, selectedReview: null };

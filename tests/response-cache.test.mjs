@@ -24,3 +24,16 @@ test("a paid response is saved at once and reused for the same request, never fo
   const again = await cachedModelResponse({ directory, role: "assessor-a", keyInput: { ...keyInput, request: { model: "other" } }, request });
   assert.equal(again.call, 2);
 });
+
+test("a response the caller rejects, such as an invalid output, is never saved", async () => {
+  const directory = join(await mkdtemp(join(tmpdir(), "slava-response-cache-")), "responses");
+  let calls = 0;
+  const request = async () => ({ output: { valid: calls > 0 }, call: ++calls });
+  const keep = (response) => response.output.valid;
+  const keyInput = { assessmentFingerprint: "b".repeat(64), role: "assessor-a", request: { model: "m" } };
+  assert.equal((await cachedModelResponse({ directory, role: "assessor-a", keyInput, request, keep })).call, 1);
+  // Asked again: the invalid answer was not kept.
+  assert.equal((await cachedModelResponse({ directory, role: "assessor-a", keyInput, request, keep })).call, 2);
+  // The valid one is kept and reused.
+  assert.equal((await cachedModelResponse({ directory, role: "assessor-a", keyInput, request, keep })).call, 2);
+});

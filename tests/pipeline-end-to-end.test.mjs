@@ -239,4 +239,24 @@ test("one real print runs through routing, packaging, assessment, and the review
   });
   assert.deepEqual((await modelCalls(join(work, "long-review-calls.jsonl"))).map(({ name }) => name), ["slava_assessment", "slava_assessment"]);
   assert.deepEqual(JSON.parse(stdout).resolution, { state: "human-review-required", reason: "arbiter-input-too-large", status: null, selectedReview: null });
+
+  // An invalid assessment is asked for again, at most twice, and never
+  // saved: two invalid answers of assessor A, then a valid one that agrees
+  // with B, need no arbiter.
+  const agreeing = { ...assessmentEnvironment(join(work, "retry-calls.jsonl")), SLIBY_ASSESSOR_MODEL_B: "gpt-6-luna", SLIBY_RESPONSE_CACHE: join(work, "retry-responses"), STUB_OPENAI_INVALID_ASSESSMENTS: "2" };
+  const retried = JSON.parse((await run([script("run-assessment.mjs"), join(routingOutput, "evidence-packages", `${vatPromiseId}.json`), join(work, "retried")], { cwd: root, environment: agreeing })).stdout);
+  assert.deepEqual((await modelCalls(join(work, "retry-calls.jsonl"))).map(({ name }) => name), ["slava_assessment", "slava_assessment", "slava_assessment", "slava_assessment"]);
+  assert.deepEqual(retried.resolution, { state: "candidate", reason: "assessor-consensus", status: "moving-towards", selectedReview: "consensus" });
+  const retriedRecord = await readJson(join(retried.outputDirectory, "assessment-run.json"));
+  assert.deepEqual([retriedRecord.invalidAssessorAttempts["assessor-a"].length, retriedRecord.invalidAssessorAttempts["assessor-b"].length], [2, 0]);
+  assert.match(retriedRecord.invalidAssessorAttempts["assessor-a"][0].error, /relevance verdict/);
+  // Only the valid answers were saved for reuse.
+  assert.deepEqual((await readdir(join(work, "retry-responses"))).sort(), ["assessor-a.json", "assessor-b.json"]);
+  assert.match(await readFile(join(work, "retry-responses", "assessor-a.json"), "utf8"), /Vláda předložila/);
+
+  // Still invalid after both retries: the arbiter decides on the one valid assessment.
+  const stillInvalid = JSON.parse((await run([script("run-assessment.mjs"), join(routingOutput, "evidence-packages", `${vatPromiseId}.json`), join(work, "still-invalid")], { cwd: root, environment: { ...agreeing, STUB_OPENAI_LOG: join(work, "still-invalid-calls.jsonl"), SLIBY_RESPONSE_CACHE: join(work, "still-invalid-responses"), STUB_OPENAI_INVALID_ASSESSMENTS: "3" } })).stdout);
+  assert.deepEqual((await modelCalls(join(work, "still-invalid-calls.jsonl"))).map(({ name }) => name), ["slava_assessment", "slava_assessment", "slava_assessment", "slava_assessment", "slava_arbitration"]);
+  // The stub arbiter picks assessor A, which has no valid assessment, so a person decides.
+  assert.deepEqual(stillInvalid.resolution, { state: "human-review-required", reason: "arbiter-cannot-decide", status: null, selectedReview: null });
 });
