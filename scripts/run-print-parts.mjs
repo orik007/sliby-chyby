@@ -3,7 +3,8 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
-import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings } from "./lib/psp-print-documents.mjs";
+import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
+import { createPspDocumentRecorder } from "./lib/psp-document-hashes.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
@@ -16,15 +17,18 @@ import { loadTrackedPromises } from "./lib/published-promises.mjs";
  * their versions (docs/evidence-pipeline.md, Chamber data rules). Nothing
  * is cached, so a later text is used as soon as psp.cz publishes it. A
  * failed download fails the run; a text that psp.cz lists without a DOCX or
- * DOC file is treated as not published and reported.
+ * DOC file is treated as not published and reported. With
+ * --document-hashes, the content of every downloaded Word file is recorded
+ * under its psp.cz document ID (scripts/lib/psp-document-hashes.mjs).
  */
 function parseArgs(args) {
-  const options = { collectorRun: null, output: null, sourceRegistry: "automation/collectors/sources.json" };
+  const options = { collectorRun: null, output: null, documentHashes: null, sourceRegistry: "automation/collectors/sources.json" };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--sources") options.sourceRegistry = args[++index];
+    else if (arg === "--document-hashes") options.documentHashes = args[++index];
     else throw new Error(`Unknown argument: ${arg}`);
   }
   invariant(options.collectorRun && options.output, "--collector-run and --output are required");
@@ -65,11 +69,15 @@ const decodePage = (page) => new TextDecoder("windows-1250").decode(page.bytes);
 // never fatal. A failed download still fails the run.
 async function fetchWordText(source, url, filename, format, warnings, printNumber, version) {
   const file = await fetchPsp(source, url, wordOptions[format]);
+  let paragraphs = null;
   try {
-    return { document: { filename, url: file.finalUrl }, paragraphs: proposalBody(await extractParagraphs[format](file.bytes)) };
+    paragraphs = await extractParagraphs[format](file.bytes);
+    return { document: { filename, url: file.finalUrl }, paragraphs: proposalBody(paragraphs) };
   } catch (error) {
     warnings.push({ printNumber, kind: `unreadable-${format}`, version, detail: `${filename}: ${error instanceof Error ? error.message : String(error)}` });
     return null;
+  } finally {
+    documentRecorder?.record({ url, bytes: file.bytes, paragraphs });
   }
 }
 
@@ -142,12 +150,20 @@ const args = parseArgs(process.argv.slice(2));
 // Every attempt and new connection to psp.cz is appended to
 // psp-requests.jsonl next to the output as it happens, so the file survives
 // a failed download and a step that times out, and the site's limits can be
-// measured from the run artifact.
+// measured from the run artifact. Through a proxy (PSP_PROXY_URL), the new
+// connections recorded are those to the proxy.
 mkdirSync(resolve(args.output), { recursive: true });
 const pspRequestFile = resolve(args.output, "psp-requests.jsonl");
 writeFileSync(pspRequestFile, "");
-const pspRequests = createPspRequestLog({ onEntry: (entry) => appendFileSync(pspRequestFile, `${JSON.stringify(entry)}\n`) });
-const fetchPsp = createPspFetcher({ ...pspDownloadSettings, onAttempt: pspRequests.onAttempt });
+const proxyUrl = pspProxyUrl();
+if (proxyUrl) log("psp.cz requests go through the proxy in PSP_PROXY_URL");
+// undici reports an IPv6 host without its brackets.
+const pspRequests = createPspRequestLog({ ...(proxyUrl ? { hostname: new URL(proxyUrl).hostname.replace(/^\[(.*)\]$/, "$1") } : {}), onEntry: (entry) => appendFileSync(pspRequestFile, `${JSON.stringify(entry)}\n`) });
+const fetchPsp = createPspFetcher({ ...pspDownloadSettings, proxyUrl, onAttempt: pspRequests.onAttempt });
+// The record of the content under each psp.cz document ID, dated by the
+// run's Prague calendar date (scripts/lib/psp-document-hashes.mjs).
+const runDate = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+const documentRecorder = args.documentHashes ? createPspDocumentRecorder(resolve(args.documentHashes), runDate) : null;
 
 const registry = validateRegistry(JSON.parse(await readFile(resolve(args.sourceRegistry), "utf8")));
 const source = registry.sources.find(({ id }) => id === "psp-core-2025");
@@ -170,8 +186,8 @@ const approvedPrintIds = new Set(conductRecords.flatMap((record) => (record.payl
   .map((print) => String(print.externalPrintId))));
 log(`${prints.length} prints concern potentially attributable records; downloading their proposal texts, later texts, and Senate resolutions`);
 
-// Prints are processed two at a time and each request to psp.cz goes
-// through fetchPsp, which keeps at most two open. A failed download stops
+// Prints are processed as many at a time as fetchPsp keeps requests open
+// (pspDownloadSettings.concurrency), each request through it. A failed download stops
 // the run: a law change must never silently miss a text. After a failure no
 // worker starts another print, and the run waits for the requests still
 // open, so the request log is complete when it is closed.
@@ -196,6 +212,7 @@ async function downloadWorker() {
     tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX or DOC proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
   }
 }
+let recordError = null;
 try {
   await allSettledOrThrow(Array.from({ length: Math.min(pspDownloadSettings.concurrency, prints.length) }, downloadWorker));
 } finally {
@@ -203,7 +220,20 @@ try {
   pspRequests.stop();
   const usage = pspRequests.summary();
   log(`psp.cz requests: ${usage.attempts} attempts for ${usage.urls} URLs in ${usage.minutes} min (${usage.attemptsPerMinute ?? "-"}/min, at most ${usage.busiestMinuteAttempts} in any 60 s), ${usage.failedAttempts} failed ${JSON.stringify(usage.failedAttemptsBy)}; ${usage.connections} new connections (${usage.connectionsPerMinute ?? "-"}/min, at most ${usage.busiestMinuteConnections} in any 60 s), ${usage.failedConnections} failed ${JSON.stringify(usage.failedConnectionsBy)}`);
+  if (documentRecorder) {
+    // Saved even after a failed download; a record that cannot be saved
+    // fails the step after the download error, if any, is reported.
+    try {
+      documentRecorder.flush();
+    } catch (error) {
+      recordError = error;
+    }
+    const hashes = documentRecorder.summary();
+    const list = (ids) => (ids.length > 0 ? ` (${ids.join(", ")})` : "");
+    log(`psp.cz document IDs: ${hashes.documents} recorded, ${hashes.added} new in this run, ${hashes.fileChanged.length} with a changed file${list(hashes.fileChanged)}, ${hashes.textChanged.length} with only a changed text${list(hashes.textChanged)}`);
+  }
 }
+if (recordError) throw recordError;
 
 const result = {};
 for (const print of prints) {

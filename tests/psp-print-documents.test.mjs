@@ -1,10 +1,12 @@
 import { createServer } from "node:http";
+import { createServer as createSecureServer } from "node:https";
+import { connect } from "node:net";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { Agent } from "undici";
+import { Agent, ProxyAgent } from "undici";
 import { strToU8, zipSync } from "fflate";
-import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, pspDownloadSettings, summarizePspRequests } from "../scripts/lib/psp-print-documents.mjs";
+import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, pspDownloadSettings, pspProxyUrl, summarizePspRequests } from "../scripts/lib/psp-print-documents.mjs";
 import { proposalBody } from "../scripts/lib/print-parts.mjs";
 
 test("builds the official print page URL", () => {
@@ -76,8 +78,168 @@ test("reads the paragraphs of a Word 97-2003 proposal text with its quotation ma
   await assert.rejects(() => extractDocParagraphs(new TextEncoder().encode("not a Word file")));
 });
 
-test("print-text downloads use two requests at a time, six attempts with a 5 s back-off, 1.5 s between attempts, and a 3 s connect limit", () => {
-  assert.deepEqual(pspDownloadSettings, { concurrency: 2, retryAttempts: 6, retryDelayMs: 5_000, minIntervalMs: 1_500, connectTimeoutMs: 3_000 });
+test("psp.cz downloads use one request at a time, six attempts with a 5 s back-off, 3 s between attempts, and a 3 s connect limit", () => {
+  assert.deepEqual(pspDownloadSettings, { concurrency: 1, retryAttempts: 6, retryDelayMs: 5_000, minIntervalMs: 3_000, connectTimeoutMs: 3_000 });
+});
+
+test("the psp.cz proxy comes from PSP_PROXY_URL, and an invalid value fails without echoing it", () => {
+  assert.equal(pspProxyUrl({}), null);
+  assert.equal(pspProxyUrl({ PSP_PROXY_URL: "  " }), null);
+  assert.equal(pspProxyUrl({ PSP_PROXY_URL: "http://user:secret@192.0.2.1:8888" }), "http://user:secret@192.0.2.1:8888/");
+  for (const value of ["not a url secret", "socks5://user:secret@192.0.2.1:1080"]) {
+    assert.throws(() => pspProxyUrl({ PSP_PROXY_URL: value }), (error) => /PSP_PROXY_URL must be an http\(s\) URL with a host/.test(error.message) && !error.message.includes("secret"));
+  }
+});
+
+test("with a proxy URL the psp.cz fetcher sends every request through a proxy agent and closes it", async () => {
+  const stub = stubPsp();
+  const fetchPsp = createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0, connectTimeoutMs: 3_000, proxyUrl: "http://user:secret@192.0.2.1:8888/" });
+  await withStubPsp(stub, () => fetchPsp(pspSource, "https://www.psp.cz/sqw/historie.sqw?o=10&t=1", htmlOptions));
+  assert.ok(stub.log.dispatchers[0] instanceof ProxyAgent);
+  await fetchPsp.close();
+  assert.equal(stub.log.dispatchers[0].destroyed, true);
+});
+
+// A local stand-in for the proxy whose answer to CONNECT is `answer(request,
+// client)`; it records each tunnel request.
+async function stubProxy(answer) {
+  const tunnels = [];
+  const proxy = createServer((request, response) => response.writeHead(405).end());
+  proxy.on("connect", (request, client) => {
+    tunnels.push({ authority: request.url, authorization: request.headers["proxy-authorization"] ?? null });
+    client.on("error", () => {});
+    answer(request, client);
+  });
+  await new Promise((resolveListen) => proxy.listen(0, "127.0.0.1", resolveListen));
+  return {
+    tunnels,
+    url: `http://user:secret@127.0.0.1:${proxy.address().port}/`,
+    close: () => {
+      proxy.closeAllConnections();
+      proxy.close();
+    }
+  };
+}
+
+test("through the proxy, the fetcher gives up when psp.cz does not answer the tunnel within its connect limit", async () => {
+  // The proxy never answers CONNECT, as when psp.cz drops its connection.
+  const proxy = await stubProxy(() => {});
+  const fetchPsp = createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0, connectTimeoutMs: 300, proxyUrl: proxy.url });
+  const startedAt = Date.now();
+  try {
+    await assert.rejects(fetchPsp(pspSource, "https://www.psp.cz/sqw/historie.sqw?o=10&t=1", htmlOptions));
+    assert.ok(Date.now() - startedAt < 5_000, `gave up after ${Date.now() - startedAt} ms`);
+    assert.deepEqual(proxy.tunnels, [{ authority: "www.psp.cz:443", authorization: `Basic ${Buffer.from("user:secret").toString("base64")}` }]);
+  } finally {
+    await fetchPsp.close();
+    proxy.close();
+  }
+});
+
+test("the fetcher gives up within its connect limit when the proxy itself does not accept the connection", async () => {
+  // 10.255.255.1 is a private address nothing answers, so the TCP
+  // connection to the proxy stalls (or fails at once where it is unroutable).
+  const fetchPsp = createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0, connectTimeoutMs: 300, proxyUrl: "http://user:secret@10.255.255.1:8888/" });
+  const startedAt = Date.now();
+  try {
+    await assert.rejects(fetchPsp(pspSource, "https://www.psp.cz/sqw/historie.sqw?o=10&t=1", htmlOptions));
+    assert.ok(Date.now() - startedAt < 3_000, `gave up after ${Date.now() - startedAt} ms`);
+  } finally {
+    await fetchPsp.close();
+  }
+});
+
+test("the fetcher reaches psp.cz over HTTPS through the proxy tunnel, checking psp.cz's certificate", async () => {
+  // A local stand-in for www.psp.cz with a test certificate for that name
+  // (tests/fixtures/tls), behind a proxy that tunnels every CONNECT to it.
+  const fixture = (name) => readFile(new URL(`./fixtures/tls/${name}`, import.meta.url));
+  const [cert, key] = await Promise.all([fixture("www-psp-cz-test.crt"), fixture("www-psp-cz-test.key")]);
+  const servedNames = [];
+  const target = createSecureServer({ cert, key }, (request, response) => {
+    servedNames.push(request.socket.servername);
+    response.writeHead(200, { "content-type": "text/html" }).end("<html>psp</html>");
+  });
+  await new Promise((resolveListen) => target.listen(0, "127.0.0.1", resolveListen));
+  const proxy = await stubProxy((request, client) => {
+    const upstream = connect(target.address().port, "127.0.0.1", () => {
+      client.write("HTTP/1.1 200 Connection Established\r\n\r\n");
+      upstream.pipe(client);
+      client.pipe(upstream);
+    });
+    upstream.on("error", () => client.destroy());
+  });
+  const page = "https://www.psp.cz/sqw/historie.sqw?o=10&t=1";
+  const fetchPsp = createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0, connectTimeoutMs: 3_000, proxyUrl: proxy.url, trustedCa: cert });
+  const untrusting = createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0, connectTimeoutMs: 3_000, proxyUrl: proxy.url });
+  try {
+    const response = await fetchPsp(pspSource, page, htmlOptions);
+    assert.equal(new TextDecoder().decode(response.bytes), "<html>psp</html>");
+    assert.equal(response.finalUrl, page);
+    assert.deepEqual(servedNames, ["www.psp.cz"], "the TLS handshake through the tunnel names psp.cz");
+    assert.deepEqual(proxy.tunnels, [{ authority: "www.psp.cz:443", authorization: `Basic ${Buffer.from("user:secret").toString("base64")}` }]);
+    // A certificate psp.cz's name is not trusted for is refused through the tunnel too.
+    await assert.rejects(untrusting(pspSource, page, htmlOptions));
+  } finally {
+    await fetchPsp.close();
+    await untrusting.close();
+    proxy.close();
+    target.closeAllConnections();
+    target.close();
+  }
+});
+
+test("a proxy that refuses the credentials fails the request at once, without retries", async () => {
+  const proxy = await stubProxy((request, client) => client.end("HTTP/1.1 407 Proxy Authentication Required\r\n\r\n"));
+  const fetchPsp = createPspFetcher({ concurrency: 1, retryAttempts: 3, retryDelayMs: 1_000, connectTimeoutMs: 3_000, proxyUrl: proxy.url });
+  const startedAt = Date.now();
+  try {
+    await assert.rejects(fetchPsp(pspSource, "https://www.psp.cz/sqw/historie.sqw?o=10&t=1", htmlOptions));
+    assert.equal(proxy.tunnels.length, 1);
+    assert.ok(Date.now() - startedAt < 1_000, `gave up after ${Date.now() - startedAt} ms`);
+  } finally {
+    await fetchPsp.close();
+    proxy.close();
+  }
+});
+
+test("a proxy agent from a proxy URL makes Node's fetch tunnel through the proxy with the URL's credentials", async () => {
+  // Local stand-ins for psp.cz and the proxy. The proxy opens a tunnel
+  // (CONNECT) only with the expected Proxy-Authorization header, as the
+  // proxy on the VPS does.
+  const target = createServer((request, response) => response.end("through the proxy"));
+  await new Promise((resolveListen) => target.listen(0, "127.0.0.1", resolveListen));
+  const targetPort = target.address().port;
+  const expected = `Basic ${Buffer.from("user:secret").toString("base64")}`;
+  const tunnels = [];
+  const proxy = createServer((request, response) => response.writeHead(405).end());
+  proxy.on("connect", (request, client, head) => {
+    tunnels.push({ authority: request.url, authorization: request.headers["proxy-authorization"] ?? null });
+    if (request.headers["proxy-authorization"] !== expected) {
+      client.end("HTTP/1.1 407 Proxy Authentication Required\r\n\r\n");
+      return;
+    }
+    const upstream = connect(targetPort, "127.0.0.1", () => {
+      client.write("HTTP/1.1 200 Connection Established\r\n\r\n");
+      upstream.write(head);
+      upstream.pipe(client);
+      client.pipe(upstream);
+    });
+    client.on("error", () => upstream.destroy());
+    upstream.on("error", () => client.destroy());
+  });
+  await new Promise((resolveListen) => proxy.listen(0, "127.0.0.1", resolveListen));
+  const dispatcher = new ProxyAgent({ uri: `http://user:secret@127.0.0.1:${proxy.address().port}/` });
+  try {
+    const response = await fetch(`http://127.0.0.1:${targetPort}/test`, { dispatcher });
+    assert.equal(await response.text(), "through the proxy");
+    assert.deepEqual(tunnels, [{ authority: `127.0.0.1:${targetPort}`, authorization: expected }]);
+  } finally {
+    await dispatcher.destroy();
+    for (const server of [proxy, target]) {
+      server.closeAllConnections();
+      server.close();
+    }
+  }
 });
 
 test("the psp.cz fetcher connects through a pool with its connect limit, validates its settings, and closes the pool", async () => {
@@ -103,6 +265,14 @@ test("the psp.cz fetcher starts no two attempts, retries included, closer than i
   const starts = stub.log.starts.map(({ at }) => at);
   assert.equal(starts.length, 5);
   for (let index = 1; index < starts.length; index += 1) assert.ok(starts[index] - starts[index - 1] >= 38, `attempts ${index} and ${index + 1} started ${starts[index] - starts[index - 1]} ms apart`);
+});
+
+test("the psp.cz fetcher waits its interval before its first attempt too, so two steps never start closer", async () => {
+  const stub = stubPsp();
+  const createdAt = Date.now();
+  const fetchPsp = createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0, minIntervalMs: 40 });
+  await withStubPsp(stub, () => fetchPsp(pspSource, "https://www.psp.cz/sqw/historie.sqw?o=10&t=1", htmlOptions));
+  assert.ok(stub.log.starts[0].at - createdAt >= 38, `the first attempt started ${stub.log.starts[0].at - createdAt} ms after creation`);
 });
 
 test("the psp.cz fetcher never keeps more requests open than its limit", async () => {
@@ -218,12 +388,26 @@ test("a failed download is reported only after every other request has finished"
 
 test("run-print-parts.mjs sends every psp.cz request through the shared fetcher and logs it", async () => {
   const script = await readFile(new URL("../scripts/run-print-parts.mjs", import.meta.url), "utf8");
-  assert.match(script, /const fetchPsp = createPspFetcher\(\{ \.\.\.pspDownloadSettings, onAttempt: pspRequests\.onAttempt \}\);/);
-  // Each entry is appended as it happens, so the file survives a step timeout.
-  assert.match(script, /createPspRequestLog\(\{ onEntry: \(entry\) => appendFileSync\(pspRequestFile, /);
+  assert.match(script, /const proxyUrl = pspProxyUrl\(\);/);
+  assert.match(script, /const fetchPsp = createPspFetcher\(\{ \.\.\.pspDownloadSettings, proxyUrl, onAttempt: pspRequests\.onAttempt \}\);/);
+  // Each entry is appended as it happens, so the file survives a step
+  // timeout; through a proxy, the connections logged are those to the proxy.
+  assert.match(script, /createPspRequestLog\(\{ \.\.\.\(proxyUrl \? \{ hostname: new URL\(proxyUrl\)\.hostname\.replace\(/);
   assert.match(script, /finally \{\s*await fetchPsp\.close\(\);\s*pspRequests\.stop\(\);/);
   assert.doesNotMatch(script, /fetchVerified|globalThis\.fetch|\bfetch\(/);
   assert.match(script, /await allSettledOrThrow\(Array\.from\(\{ length: Math\.min\(pspDownloadSettings\.concurrency, prints\.length\) \}, downloadWorker\)\)/);
   assert.match(script, /while \(!downloadFailed && nextIndex < prints\.length\)/);
   assert.doesNotMatch(script, /Promise\.all\(/, "a failed download never leaves another request running unseen");
+});
+
+test("run-collectors.mjs downloads the open data one file at a time through the shared fetcher and its proxy", async () => {
+  const script = await readFile(new URL("../scripts/run-collectors.mjs", import.meta.url), "utf8");
+  assert.match(script, /const fetchPsp = createPspFetcher\(\{ \.\.\.pspDownloadSettings, proxyUrl \}\);/);
+  assert.match(script, /collectPspSource\(source, \{ since, collectedAt, governmentPeriods, fetchPsp \}\)/);
+  assert.match(script, /finally \{\s*await fetchPsp\.close\(\);/);
+  const collector = await readFile(new URL("../scripts/lib/psp-collector.mjs", import.meta.url), "utf8");
+  const collect = collector.split("export async function collectPspSource")[1];
+  assert.match(collect, /for \(const \[name, endpoint\] of endpointEntries\)/);
+  assert.match(collect, /await options\.fetchPsp\(source, endpoint, /);
+  assert.doesNotMatch(collect, /fetchVerified|Promise\.all\(/);
 });

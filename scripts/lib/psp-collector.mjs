@@ -4,7 +4,6 @@ import {
   cleanText,
   createCollectedRecord,
   deduplicateRecords,
-  fetchVerified,
   invariant
 } from "./collector-core.mjs";
 
@@ -512,18 +511,22 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
   return { records: deduplicateRecords(records), referenceData, warnings };
 }
 
+// The official files are downloaded one after the other through `fetchPsp`
+// (createPspFetcher in psp-print-documents.mjs), the same limit and proxy
+// as every other psp.cz request.
 export async function collectPspSource(source, options) {
   const endpointEntries = Object.entries(source.endpoints);
   log(`${source.id}: downloading ${endpointEntries.length} official files (${endpointEntries.map(([name]) => name).join(", ")})`);
-  const responses = await Promise.all(endpointEntries.map(async ([name, endpoint]) => {
+  const responses = [];
+  for (const [name, endpoint] of endpointEntries) {
     const startedAt = Date.now();
-    const response = await fetchVerified(source, endpoint, {
+    const response = await options.fetchPsp(source, endpoint, {
       maxBytes: 20_000_000,
       expectedContentTypes: ["zip", "octet-stream"]
     });
     log(`${source.id}: downloaded ${name} (${(response.bytes.byteLength / 1_000_000).toFixed(1)} MB in ${((Date.now() - startedAt) / 1000).toFixed(1)} s)`);
-    return [name, response];
-  }));
+    responses.push([name, response]);
+  }
   log(`${source.id}: parsing votes, members, prints, and sessions`);
   const responseByName = Object.fromEntries(responses);
   const normalized = normalizePspData({

@@ -120,7 +120,25 @@ function delay(milliseconds) {
  */
 export function requestFailureCode(error) {
   if (error?.name === "AbortError") return "timeout-45s";
+  const proxyStatus = proxyStatusOf(error);
+  if (proxyStatus) return `proxy-${proxyStatus}`;
   return error?.cause?.code ?? error?.code ?? (error instanceof Error ? error.message : String(error));
+}
+
+// The HTTP status a proxy answered a tunnel request with, which undici
+// reports only in the message of a nested cause, or null.
+function proxyStatusOf(error) {
+  for (let cause = error; cause; cause = cause.cause) {
+    const match = /Proxy response \((\d{3})\) !== 200/.exec(cause.message ?? "");
+    if (match) return match[1];
+  }
+  return null;
+}
+
+// A proxy that refuses the credentials (407) or the host (403).
+function proxyRefusalStatus(error) {
+  const status = proxyStatusOf(error);
+  return status === "403" || status === "407" ? status : null;
 }
 
 /**
@@ -161,6 +179,13 @@ export async function fetchVerified(source, endpoint, { maxBytes, expectedConten
       const code = requestFailureCode(error);
       report({ status, error: code });
       const reason = error?.name === "AbortError" ? "no answer within 45 s" : `${error instanceof Error ? error.message : String(error)}${code !== error?.message ? `, ${code}` : ""}`;
+      // A proxy that refuses the credentials or the host refuses every
+      // retry too, so the run fails at once and says why.
+      const proxyRefusal = proxyRefusalStatus(error);
+      if (proxyRefusal) {
+        log(`download failed: ${endpoint} (the proxy refused the request with HTTP ${proxyRefusal}; check its credentials and allowed hosts)`);
+        throw error;
+      }
       if (attempt === retryAttempts) {
         log(`download failed after ${attempt} attempts: ${endpoint} (${reason})`);
         throw error;

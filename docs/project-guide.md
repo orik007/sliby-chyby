@@ -52,6 +52,7 @@ Party websites, press releases, and the media are not evidence. The public site 
 | `automation/attribution/` | Governing parties and their dates, with an official source. |
 | `automation/topic-routing/` | Controlled routing taxonomy, the reviewed routing tags of every promise, and the durable model caches (law-change screening, relevance checks). |
 | `automation/law-context/` | Durable cache of law-change context read from e-Sbírka, one file per act (audit state only). |
+| `automation/psp-documents/` | Record of the content seen under each psp.cz document ID, to find out whether a file ever changes under the same ID; never used to skip a download (audit state only). |
 | `automation/evidence-packages/` | Durable unpublished queue of evidence packages (one per promise) awaiting assessment. |
 | `automation/prompts/` | Active law-change screener, relevance-check, assessor, and arbiter prompts. |
 | `scripts/` | Validation, collection, print splitting, routing, packaging, assessment, and coverage-audit scripts. |

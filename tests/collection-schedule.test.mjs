@@ -85,7 +85,7 @@ test("the audit branch is a current operational snapshot restored into main", as
   assert.match(workflow, /automation\/topic-routing\/tag-cache/);
   assert.match(workflow, /evidence-packages/);
   assert.match(workflow, /git push --force-with-lease="refs\/heads\/\$REVIEW_BRANCH:\$AUDIT_BRANCH_TIP"/);
-  assert.match(workflow, /for directory in automation\/topic-routing\/tag-cache automation\/law-context; do/);
+  assert.match(workflow, /for directory in automation\/topic-routing\/tag-cache automation\/law-context automation\/psp-documents; do/);
   assert.match(workflow, /git add "\$directory"/);
   assert.match(workflow, /git add automation\/collectors\/checkpoints\.json automation\/evidence-packages/);
   assert.doesNotMatch(workflow, /git merge --no-ff --no-commit/);
@@ -97,11 +97,14 @@ test("the model-cache persistence step survives a routing failure, but checkpoin
   const workflow = await readFile(workflowUrl, "utf8");
   const tagCacheStep = workflow.split("      - name: Persist model caches even on a failed run")[1].split("\n      - name:")[0];
   assert.match(tagCacheStep, /\n {8}if: always\(\)/);
-  assert.match(tagCacheStep, /for directory in automation\/topic-routing\/tag-cache automation\/law-context; do/);
+  assert.match(tagCacheStep, /for directory in automation\/topic-routing\/tag-cache automation\/law-context automation\/psp-documents; do/);
   const checkpointsStep = workflow.split("      - name: Persist source collection and queued evidence packages")[1].split("\n      - name:")[0];
   assert.doesNotMatch(checkpointsStep, /if: always\(\)/);
   assert.doesNotMatch(checkpointsStep, /automation\/topic-routing\/tag-cache/);
   assert.doesNotMatch(checkpointsStep, /automation\/law-context/);
+  assert.doesNotMatch(checkpointsStep, /automation\/psp-documents/);
+  const printPartsStep = workflow.split("      - name: Split official print texts into law changes")[1].split("\n      - name:")[0];
+  assert.match(printPartsStep, /--document-hashes automation\/psp-documents\/hashes\.json/);
 });
 
 test("collection and packages create a missing audit pull request without overwriting its review body", async () => {
@@ -141,7 +144,7 @@ test("audit state of another pipeline generation is never restored", async () =>
   const workflow = await readFile(workflowUrl, "utf8");
   const generation = (await readFile(new URL("../automation/pipeline-generation", import.meta.url), "utf8")).trim();
   assert.equal(generation, "law-context-v1");
-  assert.match(workflow, /-- automation\/topic-routing\/tag-cache automation\/law-context\)/);
+  assert.match(workflow, /-- automation\/topic-routing\/tag-cache automation\/law-context automation\/psp-documents\)/);
   assert.match(workflow, /audit_generation="\$\(git show "origin\/\$REVIEW_BRANCH:automation\/pipeline-generation" 2>\/dev\/null \|\| true\)"/);
   assert.match(workflow, /if \[ "\$audit_generation" != "\$\(cat automation\/pipeline-generation\)" \]; then/);
   // The tests read main's files, so they run before the audit state is restored.
