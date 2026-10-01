@@ -157,10 +157,11 @@ const pspRequestFile = resolve(args.output, "psp-requests.jsonl");
 writeFileSync(pspRequestFile, "");
 const proxyUrl = pspProxyUrl();
 if (proxyUrl) log("psp.cz requests go through the proxy in PSP_PROXY_URL");
-const pspRequests = createPspRequestLog({ ...(proxyUrl ? { hostname: new URL(proxyUrl).hostname } : {}), onEntry: (entry) => appendFileSync(pspRequestFile, `${JSON.stringify(entry)}\n`) });
+// undici reports an IPv6 host without its brackets.
+const pspRequests = createPspRequestLog({ ...(proxyUrl ? { hostname: new URL(proxyUrl).hostname.replace(/^\[(.*)\]$/, "$1") } : {}), onEntry: (entry) => appendFileSync(pspRequestFile, `${JSON.stringify(entry)}\n`) });
 const fetchPsp = createPspFetcher({ ...pspDownloadSettings, proxyUrl, onAttempt: pspRequests.onAttempt });
 // The record of the content under each psp.cz document ID, dated by the
-// run's Prague calendar date and saved after every download.
+// run's Prague calendar date (scripts/lib/psp-document-hashes.mjs).
 const runDate = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
 const documentRecorder = args.documentHashes ? createPspDocumentRecorder(resolve(args.documentHashes), runDate) : null;
 
@@ -211,6 +212,7 @@ async function downloadWorker() {
     tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX or DOC proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
   }
 }
+let recordError = null;
 try {
   await allSettledOrThrow(Array.from({ length: Math.min(pspDownloadSettings.concurrency, prints.length) }, downloadWorker));
 } finally {
@@ -219,12 +221,19 @@ try {
   const usage = pspRequests.summary();
   log(`psp.cz requests: ${usage.attempts} attempts for ${usage.urls} URLs in ${usage.minutes} min (${usage.attemptsPerMinute ?? "-"}/min, at most ${usage.busiestMinuteAttempts} in any 60 s), ${usage.failedAttempts} failed ${JSON.stringify(usage.failedAttemptsBy)}; ${usage.connections} new connections (${usage.connectionsPerMinute ?? "-"}/min, at most ${usage.busiestMinuteConnections} in any 60 s), ${usage.failedConnections} failed ${JSON.stringify(usage.failedConnectionsBy)}`);
   if (documentRecorder) {
+    // Saved even after a failed download; a record that cannot be saved
+    // fails the step after the download error, if any, is reported.
+    try {
+      documentRecorder.flush();
+    } catch (error) {
+      recordError = error;
+    }
     const hashes = documentRecorder.summary();
     const list = (ids) => (ids.length > 0 ? ` (${ids.join(", ")})` : "");
     log(`psp.cz document IDs: ${hashes.documents} recorded, ${hashes.added} new in this run, ${hashes.fileChanged.length} with a changed file${list(hashes.fileChanged)}, ${hashes.textChanged.length} with only a changed text${list(hashes.textChanged)}`);
   }
 }
-documentRecorder?.assertSaved();
+if (recordError) throw recordError;
 
 const result = {};
 for (const print of prints) {

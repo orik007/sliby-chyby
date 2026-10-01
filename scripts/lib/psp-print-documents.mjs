@@ -1,6 +1,6 @@
 import { subscribe, unsubscribe } from "node:diagnostics_channel";
 import { unzipSync } from "fflate";
-import { Agent, ProxyAgent } from "undici";
+import { Agent, Pool, ProxyAgent } from "undici";
 import WordExtractor from "word-extractor";
 import { fetchVerified, invariant, requestFailureCode } from "./collector-core.mjs";
 
@@ -69,9 +69,17 @@ export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, min
   };
   const connect = connectTimeoutMs ? { timeout: connectTimeoutMs } : undefined;
   // undici's ProxyAgent ignores `connect`: the connection to the proxy
-  // takes its limit from `proxyTls`, the one to psp.cz through the tunnel
-  // from `requestTls`.
-  const dispatcher = proxyUrl ? new ProxyAgent({ uri: proxyUrl, proxyTls: connect, requestTls: connect }) : connect ? new Agent({ connect }) : undefined;
+  // takes its limit from `proxyTls`, the TLS handshake with psp.cz through
+  // the tunnel from `requestTls`, and the proxy's own connection to psp.cz
+  // (the answer to CONNECT) from the headers timeout of the proxy client.
+  const dispatcher = proxyUrl
+    ? new ProxyAgent({
+      uri: proxyUrl,
+      proxyTls: connect,
+      requestTls: connect,
+      ...(connectTimeoutMs ? { clientFactory: (origin, options) => new Pool(origin, { ...options, headersTimeout: connectTimeoutMs }) } : {})
+    })
+    : connect ? new Agent({ connect }) : undefined;
   const fetchPsp = async (source, url, options) => {
     if (active >= concurrency) await new Promise((resolveTurn) => waiting.push(resolveTurn));
     active += 1;

@@ -3,18 +3,9 @@ import { basename, dirname, join } from "node:path";
 import { invariant, sha256 } from "./collector-core.mjs";
 import { log } from "./run-log.mjs";
 
-/**
- * Every distinct content seen under each psp.cz document ID (`idd` of
- * `orig2.sqw`), kept in the audit state to find out whether psp.cz ever
- * changes a file without giving it a new ID (docs/evidence-pipeline.md,
- * Chamber data rules). It only records; nothing is read from it to skip a
- * download.
- *
- * The file maps each ID to its observations, one per distinct pair of the
- * file's SHA-256 and the SHA-256 of its extracted paragraphs (null when the
- * file could not be read as text), with the first and last run date it was
- * seen. One observation per ID means the ID has never changed.
- */
+// The record of the content seen under each psp.cz document ID, as
+// docs/evidence-pipeline.md (Chamber data rules) defines it: per ID, its
+// observations ({fileSha256, textSha256, firstSeen, lastSeen}).
 export const pspDocumentHashesVersion = "psp-document-hashes-v1";
 
 const hexHash = /^[0-9a-f]{64}$/;
@@ -36,7 +27,12 @@ function isObservation(entry) {
 // record fails at once with its path rather than in the middle of a run.
 export function loadPspDocumentHashes(path) {
   if (!existsSync(path)) return { schemaVersion: pspDocumentHashesVersion, documents: {} };
-  const stored = JSON.parse(readFileSync(path, "utf8"));
+  let stored = null;
+  try {
+    stored = JSON.parse(readFileSync(path, "utf8"));
+  } catch {
+    // Reported below with the path.
+  }
   const documents = stored?.documents;
   invariant(stored?.schemaVersion === pspDocumentHashesVersion && documents && typeof documents === "object" && !Array.isArray(documents)
     && Object.entries(documents).every(([id, observations]) => /^\d+$/.test(id) && Array.isArray(observations) && observations.length > 0 && observations.every(isObservation)),
@@ -45,14 +41,11 @@ export function loadPspDocumentHashes(path) {
 }
 
 /**
- * Records one download, the file's bytes and, when it was read as text, its
- * paragraphs, on the run date `seenOn` (YYYY-MM-DD). The download is
- * compared with what the ID served last (the observation seen most
- * recently), so content that changes back to an earlier one is a change too.
- * Returns "new" for an ID not seen before, "file-changed" when the file
- * differs from the last one, "text-changed" when only the extracted text
- * does (which the extraction code alone can cause), "same" otherwise, and
- * null for a URL without a document ID, which is left out.
+ * Records one download (its bytes and, when it was read as text, its
+ * paragraphs) on the run date `seenOn`, compared with what the ID served
+ * last. Returns the ID, the outcome ("new", "file-changed", "text-changed",
+ * or "same"), and whether the record changed; null for a URL without a
+ * document ID, which is left out.
  */
 export function recordPspDocument(hashes, { url, bytes, paragraphs, seenOn }) {
   const id = pspDocumentId(url);
@@ -62,11 +55,12 @@ export function recordPspDocument(hashes, { url, bytes, paragraphs, seenOn }) {
   const observations = hashes.documents[id];
   if (!observations) {
     hashes.documents[id] = [{ fileSha256, textSha256, firstSeen: seenOn, lastSeen: seenOn }];
-    return "new";
+    return { id, outcome: "new", modified: true };
   }
   // On equal dates the later entry is the more recent one.
   const last = observations.reduce((latest, entry) => (entry.lastSeen >= latest.lastSeen ? entry : latest));
   const outcome = last.fileSha256 !== fileSha256 ? "file-changed" : last.textSha256 !== textSha256 ? "text-changed" : "same";
+  if (outcome === "same" && last === observations.at(-1) && last.lastSeen >= seenOn) return { id, outcome, modified: false };
   const known = observations.find((entry) => entry.fileSha256 === fileSha256 && entry.textSha256 === textSha256);
   if (known) {
     // Moved to the end, so it stays the most recent on a tie of dates.
@@ -75,7 +69,7 @@ export function recordPspDocument(hashes, { url, bytes, paragraphs, seenOn }) {
   } else {
     observations.push({ fileSha256, textSha256, firstSeen: seenOn, lastSeen: seenOn });
   }
-  return outcome;
+  return { id, outcome, modified: true };
 }
 
 // Written to a temporary file and renamed, so a run stopped mid-write
@@ -90,42 +84,51 @@ export function savePspDocumentHashes(path, hashes) {
 }
 
 /**
- * The record of one run: loads `path`, records each download and saves the
- * file at once, so a step that times out or is cancelled keeps everything
- * read until then. `summary` counts the IDs first seen in this run and
- * lists those whose file, or only whose text, changed in this run; an ID
- * whose file changed is never listed as text-only. A file that cannot be
- * saved is logged and never fails the download it describes, but
- * `assertSaved` then fails the step once the downloads are done, so an
- * incomplete record never passes as complete.
+ * The record of one run. A change is saved at most every `saveIntervalMs`
+ * and by `flush`, so a step that times out or is cancelled keeps all but its
+ * last moments, and a large record is not rewritten after every download.
+ * `summary` counts the IDs first seen in this run and lists those whose
+ * file, or only whose text, changed in this run; an ID whose file changed is
+ * never listed as text-only. A save that fails is logged and never fails
+ * the download it describes; `flush` then fails the step.
  */
-export function createPspDocumentRecorder(path, seenOn) {
+export function createPspDocumentRecorder(path, seenOn, { saveIntervalMs = 30_000, now = Date.now } = {}) {
   const hashes = loadPspDocumentHashes(path);
   const fileChanged = new Set();
   const textChanged = new Set();
   let added = 0;
+  let dirty = false;
+  let lastSave = now();
   let saveError = null;
+  const save = () => {
+    try {
+      savePspDocumentHashes(path, hashes);
+      // A later save holds everything an earlier failed one missed.
+      dirty = false;
+      saveError = null;
+    } catch (error) {
+      saveError ??= error;
+      log(`psp.cz document hashes could not be saved: ${error instanceof Error ? error.message : String(error)}`);
+    }
+    lastSave = now();
+  };
   return {
     record(download) {
-      const outcome = recordPspDocument(hashes, { ...download, seenOn });
-      const id = pspDocumentId(download.url);
+      const result = recordPspDocument(hashes, { ...download, seenOn });
+      if (!result) return null;
+      const { id, outcome, modified } = result;
       if (outcome === "new") added += 1;
       if (outcome === "file-changed") {
         fileChanged.add(id);
         textChanged.delete(id);
       }
       if (outcome === "text-changed" && !fileChanged.has(id)) textChanged.add(id);
-      if (outcome) {
-        try {
-          savePspDocumentHashes(path, hashes);
-        } catch (error) {
-          saveError ??= error;
-          log(`psp.cz document hashes could not be saved: ${error instanceof Error ? error.message : String(error)}`);
-        }
-      }
+      dirty ||= modified;
+      if (dirty && now() - lastSave >= saveIntervalMs) save();
       return outcome;
     },
-    assertSaved() {
+    flush() {
+      if (dirty) save();
       invariant(saveError === null, `psp.cz document hashes could not be saved: ${saveError?.message ?? saveError}`);
     },
     summary: () => {
