@@ -84,9 +84,10 @@ export function savePspDocumentHashes(path, hashes) {
 }
 
 /**
- * The record of one run. A change is saved at most every `saveIntervalMs`
- * and by `flush`, so a step that times out or is cancelled keeps all but its
- * last moments, and a large record is not rewritten after every download.
+ * The record of one run. A change is saved within `saveIntervalMs` (at a
+ * download or by a timer) and by `flush`, so a step that times out or is
+ * cancelled keeps all but its last moments, and a large record is not
+ * rewritten after every download.
  * `summary` counts the IDs first seen in this run and lists those whose
  * file, or only whose text, changed in this run; an ID whose file changed is
  * never listed as text-only. A save that fails is logged and never fails
@@ -100,6 +101,10 @@ export function createPspDocumentRecorder(path, seenOn, { saveIntervalMs = 30_00
   let dirty = false;
   let lastSave = now();
   let saveError = null;
+  // Also saved by a timer, so a change is kept even while the next download
+  // hangs; unref'd, so it never keeps the process alive.
+  const timer = saveIntervalMs > 0 ? setInterval(() => dirty && save(), saveIntervalMs) : null;
+  timer?.unref();
   const save = () => {
     try {
       savePspDocumentHashes(path, hashes);
@@ -128,6 +133,7 @@ export function createPspDocumentRecorder(path, seenOn, { saveIntervalMs = 30_00
       return outcome;
     },
     flush() {
+      clearInterval(timer);
       if (dirty) save();
       invariant(saveError === null, `psp.cz document hashes could not be saved: ${saveError?.message ?? saveError}`);
     },

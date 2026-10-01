@@ -70,6 +70,16 @@ test("the recorder saves a change at most once per interval and at flush, and re
   assert.equal(loadPspDocumentHashes(path).documents["3"][1].lastSeen, "2026-10-02");
 });
 
+test("a timer saves a change even when no further download comes", async () => {
+  const path = await temporaryPath();
+  const recorder = createPspDocumentRecorder(path, "2026-10-01", { saveIntervalMs: 40 });
+  recorder.record({ url: url(9), bytes: Buffer.from("a"), paragraphs: ["x"] });
+  assert.deepEqual(loadPspDocumentHashes(path).documents, {});
+  await new Promise((resolveWait) => setTimeout(resolveWait, 150));
+  assert.deepEqual(Object.keys(loadPspDocumentHashes(path).documents), ["9"]);
+  recorder.flush();
+});
+
 test("a record that cannot be saved never fails the download it describes, but fails flush", async () => {
   const directory = await mkdtemp(join(tmpdir(), "psp-documents-"));
   const recorder = createPspDocumentRecorder(join(directory, "hashes.json"), "2026-10-01", { saveIntervalMs: 0 });

@@ -49,7 +49,9 @@ export function pspProxyUrl(env = process.env) {
 // `onAttempt` receives every attempt's record (see fetchVerified). With
 // `proxyUrl`, every request goes through that proxy, and the connect limit
 // applies to the connection to the proxy and to psp.cz through it.
-export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, minIntervalMs = 0, connectTimeoutMs = null, proxyUrl = null, onAttempt = null } = pspDownloadSettings) {
+// `trustedCa` replaces the trusted certificate authorities for psp.cz behind
+// the proxy; only tests use it, for a local stand-in with a test certificate.
+export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, minIntervalMs = 0, connectTimeoutMs = null, proxyUrl = null, trustedCa = null, onAttempt = null } = pspDownloadSettings) {
   invariant(Number.isInteger(minIntervalMs) && minIntervalMs >= 0, "minIntervalMs must be a non-negative integer");
   invariant(connectTimeoutMs === null || (Number.isInteger(connectTimeoutMs) && connectTimeoutMs > 0), "connectTimeoutMs must be a positive integer or null");
   let active = 0;
@@ -76,7 +78,7 @@ export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, min
     ? new ProxyAgent({
       uri: proxyUrl,
       proxyTls: connect,
-      requestTls: connect,
+      requestTls: { ...connect, ...(trustedCa ? { ca: trustedCa } : {}) },
       ...(connectTimeoutMs ? { clientFactory: (origin, options) => new Pool(origin, { ...options, headersTimeout: connectTimeoutMs }) } : {})
     })
     : connect ? new Agent({ connect }) : undefined;

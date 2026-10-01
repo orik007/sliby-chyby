@@ -1,4 +1,5 @@
 import { createServer } from "node:http";
+import { createServer as createSecureServer } from "node:https";
 import { connect } from "node:net";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
@@ -132,6 +133,45 @@ test("through the proxy, the fetcher gives up when psp.cz does not answer the tu
   } finally {
     await fetchPsp.close();
     proxy.close();
+  }
+});
+
+test("the fetcher reaches psp.cz over HTTPS through the proxy tunnel, checking psp.cz's certificate", async () => {
+  // A local stand-in for www.psp.cz with a test certificate for that name
+  // (tests/fixtures/tls), behind a proxy that tunnels every CONNECT to it.
+  const fixture = (name) => readFile(new URL(`./fixtures/tls/${name}`, import.meta.url));
+  const [cert, key] = await Promise.all([fixture("www-psp-cz-test.crt"), fixture("www-psp-cz-test.key")]);
+  const servedNames = [];
+  const target = createSecureServer({ cert, key }, (request, response) => {
+    servedNames.push(request.socket.servername);
+    response.writeHead(200, { "content-type": "text/html" }).end("<html>psp</html>");
+  });
+  await new Promise((resolveListen) => target.listen(0, "127.0.0.1", resolveListen));
+  const proxy = await stubProxy((request, client) => {
+    const upstream = connect(target.address().port, "127.0.0.1", () => {
+      client.write("HTTP/1.1 200 Connection Established\r\n\r\n");
+      upstream.pipe(client);
+      client.pipe(upstream);
+    });
+    upstream.on("error", () => client.destroy());
+  });
+  const page = "https://www.psp.cz/sqw/historie.sqw?o=10&t=1";
+  const fetchPsp = createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0, connectTimeoutMs: 3_000, proxyUrl: proxy.url, trustedCa: cert });
+  const untrusting = createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0, connectTimeoutMs: 3_000, proxyUrl: proxy.url });
+  try {
+    const response = await fetchPsp(pspSource, page, htmlOptions);
+    assert.equal(new TextDecoder().decode(response.bytes), "<html>psp</html>");
+    assert.equal(response.finalUrl, page);
+    assert.deepEqual(servedNames, ["www.psp.cz"], "the TLS handshake through the tunnel names psp.cz");
+    assert.deepEqual(proxy.tunnels, [{ authority: "www.psp.cz:443", authorization: `Basic ${Buffer.from("user:secret").toString("base64")}` }]);
+    // A certificate psp.cz's name is not trusted for is refused through the tunnel too.
+    await assert.rejects(untrusting(pspSource, page, htmlOptions));
+  } finally {
+    await fetchPsp.close();
+    await untrusting.close();
+    proxy.close();
+    target.closeAllConnections();
+    target.close();
   }
 });
 
