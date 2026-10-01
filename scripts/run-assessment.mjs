@@ -79,21 +79,39 @@ function cachedResponse(role, request, keep) {
   return cachedModelResponse({ directory: responseCache, role, keyInput: { assessmentFingerprint, role, request }, request: () => createStructuredResponse(request, label), keep, onReuse: () => log(`${label}: reused the saved response, no new call`) });
 }
 
-// An invalid assessor output is never saved and is asked for again from the
-// same assessor, at most `assessorRetries` times, before the arbiter or a
-// later run takes it (docs/evidence-pipeline.md, Assess). The invalid
-// attempts are kept in the assessment's audit record.
+// An invalid assessor output is never saved for reuse and is asked for
+// again from the same assessor, at most `assessorRetries` times in all,
+// before the arbiter or a later run takes it (docs/evidence-pipeline.md,
+// Assess). Each invalid attempt is written next to the saved responses as
+// soon as it arrives, so a resumed run keeps it in the audit record and
+// counts it against the retries.
 const assessorRetries = 2;
+async function invalidAttemptsSaved(role) {
+  if (!responseCache) return [];
+  const path = join(responseCache, `${role}.invalid.json`);
+  return existsSync(path) ? JSON.parse(await readFile(path, "utf8")) : [];
+}
+async function saveInvalidAttempts(role, attempts) {
+  if (!responseCache) return;
+  await mkdir(responseCache, { recursive: true });
+  await writeFile(join(responseCache, `${role}.invalid.json`), `${JSON.stringify(attempts, null, 2)}\n`);
+}
 async function validAssessorResponse(role, request) {
   const isValid = (response) => assessmentOutputError(response.output, evidencePackage) === null;
-  const invalidAttempts = [];
+  const invalidAttempts = await invalidAttemptsSaved(role);
+  // Every attempt was used before the run stopped: the last one stands.
+  if (invalidAttempts.length > assessorRetries) return { response: invalidAttempts.at(-1).response, invalidAttempts: invalidAttempts.slice(0, -1) };
   let response = await cachedResponse(role, request, isValid);
-  for (let retry = 1; retry <= assessorRetries && !isValid(response); retry += 1) {
+  while (!isValid(response)) {
     const error = assessmentOutputError(response.output, evidencePackage);
-    log(`${role} ${evidencePackage.promise.id}: invalid output (${error}); asking again, retry ${retry} of ${assessorRetries}`);
     invalidAttempts.push({ error, response });
+    await saveInvalidAttempts(role, invalidAttempts);
+    if (invalidAttempts.length > assessorRetries) break;
+    log(`${role} ${evidencePackage.promise.id}: invalid output (${error}); asking again, retry ${invalidAttempts.length} of ${assessorRetries}`);
     response = await cachedResponse(role, request, isValid);
   }
+  // The last invalid response is the assessor's answer, not a retried attempt.
+  if (!isValid(response)) invalidAttempts.pop();
   return { response, invalidAttempts };
 }
 

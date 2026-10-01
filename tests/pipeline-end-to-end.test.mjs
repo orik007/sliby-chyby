@@ -1,3 +1,4 @@
+import { existsSync } from "node:fs";
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
 import { cp, mkdtemp, readFile, readdir, rm } from "node:fs/promises";
@@ -250,9 +251,15 @@ test("one real print runs through routing, packaging, assessment, and the review
   const retriedRecord = await readJson(join(retried.outputDirectory, "assessment-run.json"));
   assert.deepEqual([retriedRecord.invalidAssessorAttempts["assessor-a"].length, retriedRecord.invalidAssessorAttempts["assessor-b"].length], [2, 0]);
   assert.match(retriedRecord.invalidAssessorAttempts["assessor-a"][0].error, /relevance verdict/);
-  // Only the valid answers were saved for reuse.
-  assert.deepEqual((await readdir(join(work, "retry-responses"))).sort(), ["assessor-a.json", "assessor-b.json"]);
+  // Only the valid answers were saved for reuse; the invalid attempts are
+  // kept beside them for the audit only.
+  assert.deepEqual((await readdir(join(work, "retry-responses"))).sort(), ["assessor-a.invalid.json", "assessor-a.json", "assessor-b.json"]);
   assert.match(await readFile(join(work, "retry-responses", "assessor-a.json"), "utf8"), /Vláda předložila/);
+  // A run that stopped before writing the record keeps the invalid attempts
+  // and pays for nothing again.
+  const resumed = JSON.parse((await run([script("run-assessment.mjs"), join(routingOutput, "evidence-packages", `${vatPromiseId}.json`), join(work, "resumed")], { cwd: root, environment: { ...agreeing, STUB_OPENAI_LOG: join(work, "resumed-calls.jsonl"), STUB_OPENAI_INVALID_ASSESSMENTS: "0" } })).stdout);
+  assert.equal(existsSync(join(work, "resumed-calls.jsonl")), false);
+  assert.equal((await readJson(join(resumed.outputDirectory, "assessment-run.json"))).invalidAssessorAttempts["assessor-a"].length, 2);
 
   // Still invalid after both retries: the arbiter decides on the one valid assessment.
   const stillInvalid = JSON.parse((await run([script("run-assessment.mjs"), join(routingOutput, "evidence-packages", `${vatPromiseId}.json`), join(work, "still-invalid")], { cwd: root, environment: { ...agreeing, STUB_OPENAI_LOG: join(work, "still-invalid-calls.jsonl"), SLIBY_RESPONSE_CACHE: join(work, "still-invalid-responses"), STUB_OPENAI_INVALID_ASSESSMENTS: "3" } })).stdout);
