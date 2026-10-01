@@ -185,8 +185,8 @@ const approvedPrintIds = new Set(conductRecords.flatMap((record) => (record.payl
   .map((print) => String(print.externalPrintId))));
 log(`${prints.length} prints concern potentially attributable records; downloading their proposal texts, later texts, and Senate resolutions`);
 
-// Prints are processed two at a time and each request to psp.cz goes
-// through fetchPsp, which keeps at most two open. A failed download stops
+// Prints are processed as many at a time as fetchPsp keeps requests open
+// (pspDownloadSettings.concurrency), each request through it. A failed download stops
 // the run: a law change must never silently miss a text. After a failure no
 // worker starts another print, and the run waits for the requests still
 // open, so the request log is complete when it is closed.

@@ -15,18 +15,10 @@ function decodeXml(value) {
     .replace(/&gt;/g, ">");
 }
 
-// With four parallel requests, psp.cz intermittently refused connections
-// within the first minute in two runs (25 September 2026, connect timeouts),
-// and one URL failed all four attempts spaced 1, 2, and 4 s apart. So a
-// failed request waits longer before each retry: 5, 10, 20, 40, and 80 s. A
-// request keeps its slot while it waits, so when psp.cz stops answering,
-// every download pauses rather than adding connections.
-//
-// psp.cz closes the connection after every answer and drops new
-// connections above roughly 45 to 50 a minute (run 64). To stay far below
-// that, one request is open at a time and attempts start at least 3 s apart
-// (at most 20 a minute); docs/evidence-pipeline.md describes the limits and
-// the proxy every request goes through when PSP_PROXY_URL is set.
+// The limits of every psp.cz request, and why (docs/evidence-pipeline.md,
+// Chamber data rules). A request keeps its slot while it waits to retry, so
+// when psp.cz stops answering, every download pauses rather than adding
+// connections.
 export const pspDownloadSettings = { concurrency: 1, retryAttempts: 6, retryDelayMs: 5_000, minIntervalMs: 3_000, connectTimeoutMs: 3_000 };
 
 /**
@@ -56,7 +48,7 @@ export function pspProxyUrl(env = process.env) {
 // has settled; it never waits on an unread answer.
 // `onAttempt` receives every attempt's record (see fetchVerified). With
 // `proxyUrl`, every request goes through that proxy, and the connect limit
-// applies to the connection to the proxy.
+// applies to the connection to the proxy and to psp.cz through it.
 export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, minIntervalMs = 0, connectTimeoutMs = null, proxyUrl = null, onAttempt = null } = pspDownloadSettings) {
   invariant(Number.isInteger(minIntervalMs) && minIntervalMs >= 0, "minIntervalMs must be a non-negative integer");
   invariant(connectTimeoutMs === null || (Number.isInteger(connectTimeoutMs) && connectTimeoutMs > 0), "connectTimeoutMs must be a positive integer or null");
@@ -74,7 +66,10 @@ export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, min
     return mine;
   };
   const connect = connectTimeoutMs ? { timeout: connectTimeoutMs } : undefined;
-  const dispatcher = proxyUrl ? new ProxyAgent({ uri: proxyUrl, connect }) : connect ? new Agent({ connect }) : undefined;
+  // undici's ProxyAgent ignores `connect`: the connection to the proxy
+  // takes its limit from `proxyTls`, the one to psp.cz through the tunnel
+  // from `requestTls`.
+  const dispatcher = proxyUrl ? new ProxyAgent({ uri: proxyUrl, proxyTls: connect, requestTls: connect }) : connect ? new Agent({ connect }) : undefined;
   const fetchPsp = async (source, url, options) => {
     if (active >= concurrency) await new Promise((resolveTurn) => waiting.push(resolveTurn));
     active += 1;

@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
-import { dirname } from "node:path";
+import { basename, dirname, join } from "node:path";
 import { invariant, sha256 } from "./collector-core.mjs";
+import { log } from "./run-log.mjs";
 
 /**
  * Every distinct content seen under each psp.cz document ID (`idd` of
@@ -45,11 +46,13 @@ export function loadPspDocumentHashes(path) {
 
 /**
  * Records one download, the file's bytes and, when it was read as text, its
- * paragraphs, on the run date `seenOn` (YYYY-MM-DD). Returns "new" for an ID
- * not seen before, "file-changed" for a known ID with a file not seen before
- * under it, "text-changed" for a known file whose extracted text differs
- * (which the extraction code alone can cause), "same" otherwise, and null
- * for a URL without a document ID, which is left out.
+ * paragraphs, on the run date `seenOn` (YYYY-MM-DD). The download is
+ * compared with what the ID served last (the observation seen most
+ * recently), so content that changes back to an earlier one is a change too.
+ * Returns "new" for an ID not seen before, "file-changed" when the file
+ * differs from the last one, "text-changed" when only the extracted text
+ * does (which the extraction code alone can cause), "same" otherwise, and
+ * null for a URL without a document ID, which is left out.
  */
 export function recordPspDocument(hashes, { url, bytes, paragraphs, seenOn }) {
   const id = pspDocumentId(url);
@@ -61,30 +64,38 @@ export function recordPspDocument(hashes, { url, bytes, paragraphs, seenOn }) {
     hashes.documents[id] = [{ fileSha256, textSha256, firstSeen: seenOn, lastSeen: seenOn }];
     return "new";
   }
+  // On equal dates the later entry is the more recent one.
+  const last = observations.reduce((latest, entry) => (entry.lastSeen >= latest.lastSeen ? entry : latest));
+  const outcome = last.fileSha256 !== fileSha256 ? "file-changed" : last.textSha256 !== textSha256 ? "text-changed" : "same";
   const known = observations.find((entry) => entry.fileSha256 === fileSha256 && entry.textSha256 === textSha256);
   if (known) {
-    if (seenOn > known.lastSeen) known.lastSeen = seenOn;
-    return "same";
+    // Moved to the end, so it stays the most recent on a tie of dates.
+    observations.splice(observations.indexOf(known), 1);
+    observations.push({ ...known, lastSeen: seenOn > known.lastSeen ? seenOn : known.lastSeen });
+  } else {
+    observations.push({ fileSha256, textSha256, firstSeen: seenOn, lastSeen: seenOn });
   }
-  const fileKnown = observations.some((entry) => entry.fileSha256 === fileSha256);
-  observations.push({ fileSha256, textSha256, firstSeen: seenOn, lastSeen: seenOn });
-  return fileKnown ? "text-changed" : "file-changed";
+  return outcome;
 }
 
 // Written to a temporary file and renamed, so a run stopped mid-write
-// leaves the previous complete record.
+// leaves the previous complete record. The temporary file is named with a
+// leading dot and `.tmp`, which .gitignore keeps out of the audit state.
+// Integer-like keys keep ascending numeric order in JSON.
 export function savePspDocumentHashes(path, hashes) {
   mkdirSync(dirname(path), { recursive: true });
-  const documents = Object.fromEntries(Object.entries(hashes.documents).sort(([left], [right]) => Number(left) - Number(right)));
-  writeFileSync(`${path}.tmp`, `${JSON.stringify({ schemaVersion: pspDocumentHashesVersion, documents }, null, 2)}\n`);
-  renameSync(`${path}.tmp`, path);
+  const temporary = join(dirname(path), `.${basename(path)}.tmp`);
+  writeFileSync(temporary, `${JSON.stringify({ schemaVersion: pspDocumentHashesVersion, documents: hashes.documents }, null, 2)}\n`);
+  renameSync(temporary, path);
 }
 
 /**
  * The record of one run: loads `path`, records each download and saves the
  * file at once, so a step that times out or is cancelled keeps everything
  * read until then. `summary` counts the IDs first seen in this run and
- * lists those whose file, or only whose text, changed in this run.
+ * lists those whose file, or only whose text, changed in this run. The
+ * record is only an observation: a file that cannot be saved is logged and
+ * never fails the download it describes.
  */
 export function createPspDocumentRecorder(path, seenOn) {
   const hashes = loadPspDocumentHashes(path);
@@ -95,7 +106,13 @@ export function createPspDocumentRecorder(path, seenOn) {
       const outcome = recordPspDocument(hashes, { ...download, seenOn });
       if (outcome === "new") added += 1;
       changed[outcome]?.add(pspDocumentId(download.url));
-      if (outcome) savePspDocumentHashes(path, hashes);
+      if (outcome) {
+        try {
+          savePspDocumentHashes(path, hashes);
+        } catch (error) {
+          log(`psp.cz document hashes could not be saved: ${error instanceof Error ? error.message : String(error)}`);
+        }
+      }
       return outcome;
     },
     summary: () => {

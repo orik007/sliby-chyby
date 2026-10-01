@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, writeFile } from "node:fs/promises";
+import { mkdir, mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
@@ -24,6 +24,25 @@ test("a changed file and a text changed under the same file are told apart", () 
   assert.equal(hashes.documents["1"].length, 3);
   assert.equal(recordPspDocument(hashes, { url: url(2), bytes: Buffer.from("c"), paragraphs: null, seenOn: "2026-10-01" }), "new");
   assert.equal(hashes.documents["2"][0].textSha256, null);
+});
+
+test("content that changes back to an earlier one under the same ID is a change", () => {
+  const hashes = empty();
+  recordPspDocument(hashes, { url: url(5), bytes: Buffer.from("a"), paragraphs: ["x"], seenOn: "2026-10-01" });
+  assert.equal(recordPspDocument(hashes, { url: url(5), bytes: Buffer.from("b"), paragraphs: ["x"], seenOn: "2026-10-02" }), "file-changed");
+  assert.equal(recordPspDocument(hashes, { url: url(5), bytes: Buffer.from("a"), paragraphs: ["x"], seenOn: "2026-10-03" }), "file-changed");
+  assert.equal(recordPspDocument(hashes, { url: url(5), bytes: Buffer.from("a"), paragraphs: ["x"], seenOn: "2026-10-03" }), "same", "a second download in the same run");
+  assert.deepEqual(hashes.documents["5"].map(({ firstSeen, lastSeen }) => [firstSeen, lastSeen]), [["2026-10-02", "2026-10-02"], ["2026-10-01", "2026-10-03"]]);
+});
+
+test("a record that cannot be saved never fails the download it describes", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "psp-documents-"));
+  const path = join(directory, "hashes.json");
+  const recorder = createPspDocumentRecorder(path, "2026-10-01");
+  // A directory in the place of the temporary file makes every save fail.
+  await mkdir(join(directory, ".hashes.json.tmp"));
+  assert.equal(recorder.record({ url: url(1), bytes: Buffer.from("a"), paragraphs: ["x"] }), "new");
+  assert.deepEqual(recorder.summary(), { documents: 1, added: 1, fileChanged: [], textChanged: [] });
 });
 
 test("a file without a numeric document ID is left out of the record", () => {
