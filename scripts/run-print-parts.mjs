@@ -224,6 +224,7 @@ try {
     log(`psp.cz document IDs: ${hashes.documents} recorded, ${hashes.added} new in this run, ${hashes.fileChanged.length} with a changed file${list(hashes.fileChanged)}, ${hashes.textChanged.length} with only a changed text${list(hashes.textChanged)}`);
   }
 }
+documentRecorder?.assertSaved();
 
 const result = {};
 for (const print of prints) {

@@ -43,6 +43,22 @@ test("a record that cannot be saved never fails the download it describes", asyn
   await mkdir(join(directory, ".hashes.json.tmp"));
   assert.equal(recorder.record({ url: url(1), bytes: Buffer.from("a"), paragraphs: ["x"] }), "new");
   assert.deepEqual(recorder.summary(), { documents: 1, added: 1, fileChanged: [], textChanged: [] });
+  // Once the downloads are done, the step fails: the record is incomplete.
+  assert.throws(() => recorder.assertSaved(), /psp\.cz document hashes could not be saved/);
+  const saved = createPspDocumentRecorder(join(directory, "other.json"), "2026-10-01");
+  saved.record({ url: url(1), bytes: Buffer.from("a"), paragraphs: ["x"] });
+  saved.assertSaved();
+});
+
+test("an ID whose file changed in a run is never also listed as text-only", async () => {
+  const recorder = createPspDocumentRecorder(await temporaryPath(), "2026-10-01");
+  recorder.record({ url: url(7), bytes: Buffer.from("a"), paragraphs: ["x"] });
+  recorder.record({ url: url(7), bytes: Buffer.from("b"), paragraphs: ["x"] });
+  recorder.record({ url: url(7), bytes: Buffer.from("b"), paragraphs: ["y"] });
+  recorder.record({ url: url(8), bytes: Buffer.from("c"), paragraphs: ["x"] });
+  recorder.record({ url: url(8), bytes: Buffer.from("c"), paragraphs: ["y"] });
+  recorder.record({ url: url(8), bytes: Buffer.from("d"), paragraphs: ["y"] });
+  assert.deepEqual(recorder.summary(), { documents: 2, added: 2, fileChanged: ["7", "8"], textChanged: [] });
 });
 
 test("a file without a numeric document ID is left out of the record", () => {

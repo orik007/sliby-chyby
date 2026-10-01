@@ -164,6 +164,14 @@ test("the psp.cz fetcher starts no two attempts, retries included, closer than i
   for (let index = 1; index < starts.length; index += 1) assert.ok(starts[index] - starts[index - 1] >= 38, `attempts ${index} and ${index + 1} started ${starts[index] - starts[index - 1]} ms apart`);
 });
 
+test("the psp.cz fetcher waits its interval before its first attempt too, so two steps never start closer", async () => {
+  const stub = stubPsp();
+  const createdAt = Date.now();
+  const fetchPsp = createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0, minIntervalMs: 40 });
+  await withStubPsp(stub, () => fetchPsp(pspSource, "https://www.psp.cz/sqw/historie.sqw?o=10&t=1", htmlOptions));
+  assert.ok(stub.log.starts[0].at - createdAt >= 38, `the first attempt started ${stub.log.starts[0].at - createdAt} ms after creation`);
+});
+
 test("the psp.cz fetcher never keeps more requests open than its limit", async () => {
   const stub = stubPsp();
   const fetchPsp = createPspFetcher({ concurrency: 2, retryAttempts: 1, retryDelayMs: 0 });

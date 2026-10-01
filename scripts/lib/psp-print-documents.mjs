@@ -54,7 +54,9 @@ export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, min
   invariant(connectTimeoutMs === null || (Number.isInteger(connectTimeoutMs) && connectTimeoutMs > 0), "connectTimeoutMs must be a positive integer or null");
   let active = 0;
   const waiting = [];
-  let lastStart = -Infinity;
+  // Counted from creation, so the first attempt also waits: the requests of
+  // the step before (another process) may have just ended.
+  let lastStart = Date.now();
   let turn = Promise.resolve();
   const beforeAttempt = () => {
     const mine = turn.then(async () => {

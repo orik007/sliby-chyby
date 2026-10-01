@@ -93,31 +93,44 @@ export function savePspDocumentHashes(path, hashes) {
  * The record of one run: loads `path`, records each download and saves the
  * file at once, so a step that times out or is cancelled keeps everything
  * read until then. `summary` counts the IDs first seen in this run and
- * lists those whose file, or only whose text, changed in this run. The
- * record is only an observation: a file that cannot be saved is logged and
- * never fails the download it describes.
+ * lists those whose file, or only whose text, changed in this run; an ID
+ * whose file changed is never listed as text-only. A file that cannot be
+ * saved is logged and never fails the download it describes, but
+ * `assertSaved` then fails the step once the downloads are done, so an
+ * incomplete record never passes as complete.
  */
 export function createPspDocumentRecorder(path, seenOn) {
   const hashes = loadPspDocumentHashes(path);
-  const changed = { "file-changed": new Set(), "text-changed": new Set() };
+  const fileChanged = new Set();
+  const textChanged = new Set();
   let added = 0;
+  let saveError = null;
   return {
     record(download) {
       const outcome = recordPspDocument(hashes, { ...download, seenOn });
+      const id = pspDocumentId(download.url);
       if (outcome === "new") added += 1;
-      changed[outcome]?.add(pspDocumentId(download.url));
+      if (outcome === "file-changed") {
+        fileChanged.add(id);
+        textChanged.delete(id);
+      }
+      if (outcome === "text-changed" && !fileChanged.has(id)) textChanged.add(id);
       if (outcome) {
         try {
           savePspDocumentHashes(path, hashes);
         } catch (error) {
+          saveError ??= error;
           log(`psp.cz document hashes could not be saved: ${error instanceof Error ? error.message : String(error)}`);
         }
       }
       return outcome;
     },
+    assertSaved() {
+      invariant(saveError === null, `psp.cz document hashes could not be saved: ${saveError?.message ?? saveError}`);
+    },
     summary: () => {
       const ids = (set) => [...set].sort((left, right) => Number(left) - Number(right));
-      return { documents: Object.keys(hashes.documents).length, added, fileChanged: ids(changed["file-changed"]), textChanged: ids(changed["text-changed"]) };
+      return { documents: Object.keys(hashes.documents).length, added, fileChanged: ids(fileChanged), textChanged: ids(textChanged) };
     }
   };
 }
