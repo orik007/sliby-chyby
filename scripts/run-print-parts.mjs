@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings } from "./lib/psp-print-documents.mjs";
-import { loadPspDocumentHashes, recordPspDocument, savePspDocumentHashes, summarizePspDocumentHashes } from "./lib/psp-document-hashes.mjs";
+import { createPspDocumentRecorder } from "./lib/psp-document-hashes.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
@@ -77,7 +77,7 @@ async function fetchWordText(source, url, filename, format, warnings, printNumbe
     warnings.push({ printNumber, kind: `unreadable-${format}`, version, detail: `${filename}: ${error instanceof Error ? error.message : String(error)}` });
     return null;
   } finally {
-    if (documentHashes) recordPspDocument(documentHashes, { url, bytes: file.bytes, paragraphs, seenOn: runDate });
+    documentRecorder?.record({ url, bytes: file.bytes, paragraphs });
   }
 }
 
@@ -156,8 +156,10 @@ const pspRequestFile = resolve(args.output, "psp-requests.jsonl");
 writeFileSync(pspRequestFile, "");
 const pspRequests = createPspRequestLog({ onEntry: (entry) => appendFileSync(pspRequestFile, `${JSON.stringify(entry)}\n`) });
 const fetchPsp = createPspFetcher({ ...pspDownloadSettings, onAttempt: pspRequests.onAttempt });
-const runDate = new Date().toISOString().slice(0, 10);
-const documentHashes = args.documentHashes ? loadPspDocumentHashes(resolve(args.documentHashes)) : null;
+// The record of the content under each psp.cz document ID, dated by the
+// run's Prague calendar date and saved after every download.
+const runDate = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+const documentRecorder = args.documentHashes ? createPspDocumentRecorder(resolve(args.documentHashes), runDate) : null;
 
 const registry = validateRegistry(JSON.parse(await readFile(resolve(args.sourceRegistry), "utf8")));
 const source = registry.sources.find(({ id }) => id === "psp-core-2025");
@@ -213,11 +215,10 @@ try {
   pspRequests.stop();
   const usage = pspRequests.summary();
   log(`psp.cz requests: ${usage.attempts} attempts for ${usage.urls} URLs in ${usage.minutes} min (${usage.attemptsPerMinute ?? "-"}/min, at most ${usage.busiestMinuteAttempts} in any 60 s), ${usage.failedAttempts} failed ${JSON.stringify(usage.failedAttemptsBy)}; ${usage.connections} new connections (${usage.connectionsPerMinute ?? "-"}/min, at most ${usage.busiestMinuteConnections} in any 60 s), ${usage.failedConnections} failed ${JSON.stringify(usage.failedConnectionsBy)}`);
-  // Saved even after a failed download: every recorded file was read in full.
-  if (documentHashes) {
-    savePspDocumentHashes(resolve(args.documentHashes), documentHashes);
-    const hashes = summarizePspDocumentHashes(documentHashes);
-    log(`psp.cz document IDs: ${hashes.documents} recorded, ${hashes.fileChanged.length} with a changed file${hashes.fileChanged.length > 0 ? ` (${hashes.fileChanged.join(", ")})` : ""}, ${hashes.textChanged.length} with a changed text${hashes.textChanged.length > 0 ? ` (${hashes.textChanged.join(", ")})` : ""}`);
+  if (documentRecorder) {
+    const hashes = documentRecorder.summary();
+    const list = (ids) => (ids.length > 0 ? ` (${ids.join(", ")})` : "");
+    log(`psp.cz document IDs: ${hashes.documents} recorded, ${hashes.added} new in this run, ${hashes.fileChanged.length} with a changed file${list(hashes.fileChanged)}, ${hashes.textChanged.length} with only a changed text${list(hashes.textChanged)}`);
   }
 }
 
