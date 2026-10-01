@@ -136,6 +136,19 @@ test("through the proxy, the fetcher gives up when psp.cz does not answer the tu
   }
 });
 
+test("the fetcher gives up within its connect limit when the proxy itself does not accept the connection", async () => {
+  // 10.255.255.1 is a private address nothing answers, so the TCP
+  // connection to the proxy stalls (or fails at once where it is unroutable).
+  const fetchPsp = createPspFetcher({ concurrency: 1, retryAttempts: 1, retryDelayMs: 0, connectTimeoutMs: 300, proxyUrl: "http://user:secret@10.255.255.1:8888/" });
+  const startedAt = Date.now();
+  try {
+    await assert.rejects(fetchPsp(pspSource, "https://www.psp.cz/sqw/historie.sqw?o=10&t=1", htmlOptions));
+    assert.ok(Date.now() - startedAt < 3_000, `gave up after ${Date.now() - startedAt} ms`);
+  } finally {
+    await fetchPsp.close();
+  }
+});
+
 test("the fetcher reaches psp.cz over HTTPS through the proxy tunnel, checking psp.cz's certificate", async () => {
   // A local stand-in for www.psp.cz with a test certificate for that name
   // (tests/fixtures/tls), behind a proxy that tunnels every CONNECT to it.

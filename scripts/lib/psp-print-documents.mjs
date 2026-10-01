@@ -70,10 +70,11 @@ export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, min
     return mine;
   };
   const connect = connectTimeoutMs ? { timeout: connectTimeoutMs } : undefined;
-  // undici's ProxyAgent ignores `connect`: the connection to the proxy
-  // takes its limit from `proxyTls`, the TLS handshake with psp.cz through
-  // the tunnel from `requestTls`, and the proxy's own connection to psp.cz
-  // (the answer to CONNECT) from the headers timeout of the proxy client.
+  // undici's ProxyAgent ignores `connect`. It builds the connector to the
+  // proxy from `proxyTls` and the one to psp.cz through the tunnel from
+  // `requestTls`; both take `timeout` as their connect limit (TCP and TLS).
+  // The proxy's own connection to psp.cz (the answer to CONNECT) is bounded
+  // by the headers timeout of the proxy client.
   const dispatcher = proxyUrl
     ? new ProxyAgent({
       uri: proxyUrl,
