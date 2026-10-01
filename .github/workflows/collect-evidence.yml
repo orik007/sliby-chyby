@@ -129,7 +129,7 @@ jobs:
             fi
             while IFS= read -r path; do
               restore_paths+=("$path")
-            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/law-context)
+            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/law-context automation/psp-documents)
             for directory in automation/evidence-packages automation/review-proposals; do
               while IFS= read -r path; do
                 case "$path" in
@@ -158,6 +158,7 @@ jobs:
         run: |
           node scripts/run-print-parts.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
+            --document-hashes automation/psp-documents/hashes.json \
             --output automation/runs/pipeline/github-actions/print-parts
 
       - name: Read law-change context from e-Sbírka
@@ -199,15 +200,16 @@ jobs:
       - name: Persist model caches even on a failed run
         id: tag-cache
         # A failed run keeps the paid law-change screening and relevance
-        # checks it already did, and the law-change context it read. A
-        # subject is cached only once both of its model outputs are valid,
-        # and a context line only once its answer is complete, so a partial
-        # cache is always safe to keep.
+        # checks it already did, the law-change context it read, and the
+        # psp.cz document hashes it recorded. A subject is cached only once
+        # both of its model outputs are valid, a context line only once its
+        # answer is complete, and a hash only for a file read in full, so a
+        # partial cache is always safe to keep.
         if: always()
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
-          for directory in automation/topic-routing/tag-cache automation/law-context; do
+          for directory in automation/topic-routing/tag-cache automation/law-context automation/psp-documents; do
             if [ -d "$directory" ]; then
               git add "$directory"
             fi

@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings } from "./lib/psp-print-documents.mjs";
+import { loadPspDocumentHashes, recordPspDocument, savePspDocumentHashes, summarizePspDocumentHashes } from "./lib/psp-document-hashes.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
@@ -16,15 +17,18 @@ import { loadTrackedPromises } from "./lib/published-promises.mjs";
  * their versions (docs/evidence-pipeline.md, Chamber data rules). Nothing
  * is cached, so a later text is used as soon as psp.cz publishes it. A
  * failed download fails the run; a text that psp.cz lists without a DOCX or
- * DOC file is treated as not published and reported.
+ * DOC file is treated as not published and reported. With
+ * --document-hashes, the content of every downloaded Word file is recorded
+ * under its psp.cz document ID (scripts/lib/psp-document-hashes.mjs).
  */
 function parseArgs(args) {
-  const options = { collectorRun: null, output: null, sourceRegistry: "automation/collectors/sources.json" };
+  const options = { collectorRun: null, output: null, documentHashes: null, sourceRegistry: "automation/collectors/sources.json" };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--sources") options.sourceRegistry = args[++index];
+    else if (arg === "--document-hashes") options.documentHashes = args[++index];
     else throw new Error(`Unknown argument: ${arg}`);
   }
   invariant(options.collectorRun && options.output, "--collector-run and --output are required");
@@ -65,11 +69,15 @@ const decodePage = (page) => new TextDecoder("windows-1250").decode(page.bytes);
 // never fatal. A failed download still fails the run.
 async function fetchWordText(source, url, filename, format, warnings, printNumber, version) {
   const file = await fetchPsp(source, url, wordOptions[format]);
+  let paragraphs = null;
   try {
-    return { document: { filename, url: file.finalUrl }, paragraphs: proposalBody(await extractParagraphs[format](file.bytes)) };
+    paragraphs = await extractParagraphs[format](file.bytes);
+    return { document: { filename, url: file.finalUrl }, paragraphs: proposalBody(paragraphs) };
   } catch (error) {
     warnings.push({ printNumber, kind: `unreadable-${format}`, version, detail: `${filename}: ${error instanceof Error ? error.message : String(error)}` });
     return null;
+  } finally {
+    if (documentHashes) recordPspDocument(documentHashes, { url, bytes: file.bytes, paragraphs, seenOn: runDate });
   }
 }
 
@@ -148,6 +156,8 @@ const pspRequestFile = resolve(args.output, "psp-requests.jsonl");
 writeFileSync(pspRequestFile, "");
 const pspRequests = createPspRequestLog({ onEntry: (entry) => appendFileSync(pspRequestFile, `${JSON.stringify(entry)}\n`) });
 const fetchPsp = createPspFetcher({ ...pspDownloadSettings, onAttempt: pspRequests.onAttempt });
+const runDate = new Date().toISOString().slice(0, 10);
+const documentHashes = args.documentHashes ? loadPspDocumentHashes(resolve(args.documentHashes)) : null;
 
 const registry = validateRegistry(JSON.parse(await readFile(resolve(args.sourceRegistry), "utf8")));
 const source = registry.sources.find(({ id }) => id === "psp-core-2025");
@@ -203,6 +213,12 @@ try {
   pspRequests.stop();
   const usage = pspRequests.summary();
   log(`psp.cz requests: ${usage.attempts} attempts for ${usage.urls} URLs in ${usage.minutes} min (${usage.attemptsPerMinute ?? "-"}/min, at most ${usage.busiestMinuteAttempts} in any 60 s), ${usage.failedAttempts} failed ${JSON.stringify(usage.failedAttemptsBy)}; ${usage.connections} new connections (${usage.connectionsPerMinute ?? "-"}/min, at most ${usage.busiestMinuteConnections} in any 60 s), ${usage.failedConnections} failed ${JSON.stringify(usage.failedConnectionsBy)}`);
+  // Saved even after a failed download: every recorded file was read in full.
+  if (documentHashes) {
+    savePspDocumentHashes(resolve(args.documentHashes), documentHashes);
+    const hashes = summarizePspDocumentHashes(documentHashes);
+    log(`psp.cz document IDs: ${hashes.documents} recorded, ${hashes.fileChanged.length} with a changed file${hashes.fileChanged.length > 0 ? ` (${hashes.fileChanged.join(", ")})` : ""}, ${hashes.textChanged.length} with a changed text${hashes.textChanged.length > 0 ? ` (${hashes.textChanged.join(", ")})` : ""}`);
+  }
 }
 
 const result = {};
