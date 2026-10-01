@@ -4,6 +4,7 @@ import { basename, dirname, join, relative, resolve } from "node:path";
 import { loadEnvFile } from "node:process";
 import {
   arbiterOutputJsonSchema,
+  assessmentOutputError,
   assessmentOutputJsonSchema,
   hashAssessmentContent,
   hashAssessmentFingerprint,
@@ -73,18 +74,56 @@ async function createStructuredResponse({ provider, model, instructions, input, 
 // SLIBY_RESPONSE_CACHE (set by run-assessment-batch.mjs) keeps every paid
 // response of this assessment until the assessment is saved.
 const responseCache = process.env.SLIBY_RESPONSE_CACHE || null;
-function cachedResponse(role, request) {
+function cachedResponse(role, request, keep) {
   const label = `${role} ${evidencePackage.promise.id}`;
-  return cachedModelResponse({ directory: responseCache, role, keyInput: { assessmentFingerprint, role, request }, request: () => createStructuredResponse(request, label), onReuse: () => log(`${label}: reused the saved response, no new call`) });
+  return cachedModelResponse({ directory: responseCache, role, keyInput: { assessmentFingerprint, role, request }, request: () => createStructuredResponse(request, label), keep, onReuse: () => log(`${label}: reused the saved response, no new call`) });
+}
+
+// An invalid assessor output is never saved for reuse and is asked for
+// again from the same assessor, at most `assessorRetries` times in all,
+// before the arbiter or a later run takes it (docs/evidence-pipeline.md,
+// Assess). Each invalid attempt is written next to the saved responses as
+// soon as it arrives, so a resumed run keeps it in the audit record and
+// counts it against the retries.
+const assessorRetries = 2;
+async function invalidAttemptsSaved(role) {
+  if (!responseCache) return [];
+  const path = join(responseCache, `${role}.invalid.json`);
+  return existsSync(path) ? JSON.parse(await readFile(path, "utf8")) : [];
+}
+async function saveInvalidAttempts(role, attempts) {
+  if (!responseCache) return;
+  await mkdir(responseCache, { recursive: true });
+  await writeFile(join(responseCache, `${role}.invalid.json`), `${JSON.stringify(attempts, null, 2)}\n`);
+}
+async function validAssessorResponse(role, request) {
+  const isValid = (response) => assessmentOutputError(response.output, evidencePackage) === null;
+  const invalidAttempts = await invalidAttemptsSaved(role);
+  // Every attempt was used before the run stopped: the last one stands.
+  if (invalidAttempts.length > assessorRetries) return { response: invalidAttempts.at(-1).response, invalidAttempts: invalidAttempts.slice(0, -1) };
+  let response = await cachedResponse(role, request, isValid);
+  while (!isValid(response)) {
+    const error = assessmentOutputError(response.output, evidencePackage);
+    invalidAttempts.push({ error, response });
+    await saveInvalidAttempts(role, invalidAttempts);
+    if (invalidAttempts.length > assessorRetries) break;
+    log(`${role} ${evidencePackage.promise.id}: invalid output (${error}); asking again, retry ${invalidAttempts.length} of ${assessorRetries}`);
+    response = await cachedResponse(role, request, isValid);
+  }
+  // The last invalid response is the assessor's answer, not a retried attempt.
+  if (!isValid(response)) invalidAttempts.pop();
+  return { response, invalidAttempts };
 }
 
 const assessorInput = { packageHash, evidencePackage };
 // Assessor B is called only after A has answered: with the same model both
 // send the same request, so B reads the provider's prompt cache and pays a
-// tenth for the input they share. Each response is saved as soon as it
-// arrives, so a failure of B never loses A.
-const rawA = await cachedResponse("assessor-a", { provider: assessorProviderA, model: assessorModelA, instructions: assessorInstructions, input: assessorInput, name: "slava_assessment", schema: assessmentOutputJsonSchema });
-const rawB = await cachedResponse("assessor-b", { provider: assessorProviderB, model: assessorModelB, instructions: assessorInstructions, input: assessorInput, name: "slava_assessment", schema: assessmentOutputJsonSchema });
+// tenth for the input they share. Each valid response is saved as soon as
+// it arrives, so a failure of B never loses A.
+const assessorA = await validAssessorResponse("assessor-a", { provider: assessorProviderA, model: assessorModelA, instructions: assessorInstructions, input: assessorInput, name: "slava_assessment", schema: assessmentOutputJsonSchema });
+const assessorB = await validAssessorResponse("assessor-b", { provider: assessorProviderB, model: assessorModelB, instructions: assessorInstructions, input: assessorInput, name: "slava_assessment", schema: assessmentOutputJsonSchema });
+const rawA = assessorA.response;
+const rawB = assessorB.response;
 
 const assessmentPair = resolveAvailableAssessmentReviews(rawA.output, rawB.output, evidencePackage);
 const { reviewA, reviewB, validationErrors } = assessmentPair;
@@ -108,6 +147,13 @@ if (resolution.state === "arbitration-required") {
       input: arbiterInput,
       name: "slava_arbitration",
       schema: arbiterOutputJsonSchema
+    }, (response) => {
+      try {
+        validateArbiterOutput(response.output, evidencePackage);
+        return true;
+      } catch {
+        return false;
+      }
     });
     validateArbiterOutput(rawArbiter.output, evidencePackage);
     resolution = resolveAssessmentReviews(reviewA, reviewB, evidencePackage, rawArbiter.output);
@@ -146,6 +192,8 @@ const auditRecord = {
     sameModelId: rawA.model === rawB.model
   },
   assessorValidationErrors: validationErrors,
+  // The invalid outputs that were asked for again, each with its error.
+  invalidAssessorAttempts: { "assessor-a": assessorA.invalidAttempts, "assessor-b": assessorB.invalidAttempts },
   validatedAssessments: { "assessor-a": reviewA, "assessor-b": reviewB },
   assessorA: rawA,
   assessorB: rawB,

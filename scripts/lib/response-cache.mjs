@@ -11,9 +11,11 @@ function keyOf(keyInput) {
  * Returns a saved model response for this role and exact request, or makes
  * the request and saves its response at once (atomically). A run that stops
  * after some calls of one assessment reuses those paid responses next time.
- * Without a cache directory it only makes the request.
+ * A response that `keep` rejects, such as an invalid output, is returned
+ * but never saved, so it is requested again. Without a cache directory it
+ * only makes the request.
  */
-export async function cachedModelResponse({ directory, role, keyInput, request, onReuse = () => {} }) {
+export async function cachedModelResponse({ directory, role, keyInput, request, keep = () => true, onReuse = () => {} }) {
   if (!directory) return request();
   const path = join(directory, `${role}.json`);
   const key = keyOf(keyInput);
@@ -25,6 +27,8 @@ export async function cachedModelResponse({ directory, role, keyInput, request, 
     }
   }
   const response = await request();
+  // Only a response worth reusing is kept; an invalid one is asked for again.
+  if (!keep(response)) return response;
   await mkdir(directory, { recursive: true });
   const temporary = join(directory, `.${role}.${randomUUID()}.tmp`);
   try {

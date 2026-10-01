@@ -26,7 +26,7 @@ const runtime = { assessorProviderA: "openai", assessorProviderB: "openai", arbi
 test("loads only the active assessor and arbiter prompts", async () => {
   const prompts = await loadAssessmentPrompts();
   assert.equal(prompts.assessor.version, "assessor-v19");
-  assert.equal(prompts.arbiter.version, "arbiter-v11");
+  assert.equal(prompts.arbiter.version, "arbiter-v12");
   assert.match(prompts.assessor.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.arbiter.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.assessor.instructions, /maintenanceBaseline/);
@@ -122,4 +122,20 @@ test("the human review page never calls differing assessments a consensus when t
   assert.match(markdown, /### Odlišné posudky/);
   assert.match(markdown, /#### Druhý posudek: Směřuje proti slibu \(−1\)/);
   assert.match(markdown, /### Rozhodnutí třetího hodnotitele\n\nTřetí hodnotitel nebyl zavolán, protože balíček s oběma posudky je větší, než dokáže přečíst\./);
+});
+
+test("the human review page shows both assessments when they share a score but not the sufficiency of the evidence", () => {
+  const insufficient = { ...reviewB, evidenceSufficient: false, explanationCz: "Z podkladů není jasné, zda změna platí i pro obce." };
+  const record = {
+    validatedAssessments: { "assessor-a": reviewA, "assessor-b": insufficient },
+    arbiter: null,
+    resolution: { state: "candidate", reason: "assessor-consensus-one-sufficient", status: "moving-towards", selectedReview: "assessor-a" }
+  };
+  const proposal = { proposalId: "test-promise--jkl", candidateStatus: "moving-towards", resolutionState: "candidate", resolutionReason: "assessor-consensus-one-sufficient", supersedesProposalId: null };
+  const markdown = renderHumanReviewMarkdown({ evidencePackage, auditRecord: record, proposal });
+  assert.doesNotMatch(markdown, /Shoda hodnotitelů|dospěli ke stejnému výsledku/);
+  assert.match(markdown, /### Stejné hodnocení, rozdílný názor na podklady\n\nOba nezávislí hodnotitelé dali stejné hodnocení: \*\*Směřuje ke splnění \(\+1\)\*\*/);
+  assert.match(markdown, /#### První posudek: podklady stačí/);
+  assert.match(markdown, /#### Druhý posudek: podklady nestačí\n\nZ podkladů není jasné, zda změna platí i pro obce\./);
+  assert.doesNotMatch(markdown, /Rozhodnutí třetího hodnotitele/);
 });

@@ -129,6 +129,7 @@ export function createReviewProposal({ auditRecord, proposalDirectory, supersede
 
 export const resolutionLabels = {
   "assessor-consensus": "oba automatické posudky se shodly",
+  "assessor-consensus-one-sufficient": "oba automatické posudky daly stejné hodnocení, jen jeden z nich považuje podklady za dostatečné",
   "arbiter-selection": "o neshodě automatických posudků rozhodl třetí hodnotitel",
   "arbiter-confirmed-single-assessor": "třetí hodnotitel ověřil jediný použitelný automatický posudek",
   "insufficient-evidence": "oba automatické posudky označily podklady za nedostatečné",
@@ -259,8 +260,23 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     "- Přesný balíček posuzovaných podkladů: `evidence-package.json`",
     ""
   ];
-  // Only agreeing assessors reach a result without the arbiter.
-  if (["assessor-consensus", "insufficient-evidence"].includes(auditRecord.resolution.reason)) {
+  // The same score without the arbiter: both assessments are shown, because
+  // they disagree on whether the evidence suffices.
+  if (auditRecord.resolution.reason === "assessor-consensus-one-sufficient") {
+    lines.push(
+      "### Stejné hodnocení, rozdílný názor na podklady",
+      "",
+      `Oba nezávislí hodnotitelé dali stejné hodnocení: **${proposed.label} (${proposed.score})**. Za dostatečné ale podklady považuje jen jeden z nich a návrh nese jeho posudek.`,
+      ""
+    );
+    for (const [name, review] of reviews) {
+      lines.push(`#### ${name}: podklady ${review.evidenceSufficient ? "stačí" : "nestačí"}`, "", review.explanationCz, "");
+      if (review.uncertainties.length > 0) {
+        lines.push("Co zůstává nejisté:", "", ...review.uncertainties.map((item) => `- ${item}`), "");
+      }
+    }
+  } else if (["assessor-consensus", "insufficient-evidence"].includes(auditRecord.resolution.reason)) {
+    // Only agreeing assessors reach a result without the arbiter.
     const consensusResult = proposed
       ? `${proposed.label} (${proposed.score})`
       : "podklady nestačí pro automatický návrh hodnocení";

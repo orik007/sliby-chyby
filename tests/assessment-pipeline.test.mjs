@@ -198,15 +198,16 @@ test("two valid assessments that disagree go to the arbiter, whose choice decide
   assert.throws(() => resolveAssessmentReviews(towards, against, evidencePackage, { choice: "assessor-a", citedEvidenceIds: ["invented"], explanationCz: "Druhý posudek odpovídá předloženým podkladům." }), /invented evidence ID/);
 });
 
-test("assessments that differ only in whether the evidence suffices also go to the arbiter", () => {
+test("assessments with the same score never go to the arbiter", () => {
   const sufficient = review("no-progress");
   const insufficient = { ...review("no-progress"), evidenceSufficient: false };
-  assert.equal(resolveAssessmentReviews(sufficient, insufficient, evidencePackage).state, "arbitration-required");
-  // An arbiter that selects the assessment with insufficient evidence leaves it to a person.
-  assert.deepEqual(resolveAssessmentReviews(sufficient, insufficient, evidencePackage, { choice: "assessor-b", citedEvidenceIds: ["conduct"], explanationCz: "Druhý posudek odpovídá předloženým podkladům." }),
-    { state: "human-review-required", reason: "arbiter-selected-insufficient-evidence", status: null, selectedReview: "assessor-b" });
+  // The one that finds the evidence sufficient carries the candidate.
+  assert.deepEqual(resolveAssessmentReviews(sufficient, insufficient, evidencePackage), { state: "candidate", reason: "assessor-consensus-one-sufficient", status: "no-progress", selectedReview: "assessor-a" });
+  assert.deepEqual(resolveAssessmentReviews(insufficient, sufficient, evidencePackage), { state: "candidate", reason: "assessor-consensus-one-sufficient", status: "no-progress", selectedReview: "assessor-b" });
   // Both assessors finding the evidence insufficient needs no arbiter, but a person.
   assert.deepEqual(resolveAssessmentReviews(insufficient, { ...insufficient }, evidencePackage), { state: "human-review-required", reason: "insufficient-evidence", status: null, selectedReview: null });
+  // A different score still goes to the arbiter, whatever the evidence.
+  assert.equal(resolveAssessmentReviews(sufficient, { ...insufficient, status: "moving-towards" }, evidencePackage).state, "arbitration-required");
 });
 
 test("an assessment may cite only evidence of its package", () => {
