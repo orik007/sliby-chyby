@@ -147,6 +147,11 @@ jobs:
           echo "AUDIT_BRANCH_TIP=$audit_branch_tip" >> "$GITHUB_ENV"
 
       - name: Collect source records
+        # psp.cz refuses connections from GitHub Actions, so its requests go
+        # through the proxy in PSP_PROXY_URL (docs/evidence-pipeline.md,
+        # Chamber data rules).
+        env:
+          PSP_PROXY_URL: ${{ secrets.PSP_PROXY_URL }}
         run: |
           node scripts/run-collectors.mjs \
             --checkpoints automation/collectors/checkpoints.json \
@@ -155,6 +160,8 @@ jobs:
 
       - name: Split official print texts into law changes
         timeout-minutes: 120
+        env:
+          PSP_PROXY_URL: ${{ secrets.PSP_PROXY_URL }}
         run: |
           node scripts/run-print-parts.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \

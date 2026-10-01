@@ -4,6 +4,7 @@ import { randomUUID } from "node:crypto";
 import { emptyCollectorCheckpoints, planSourceCollections, updateCollectorCheckpoints, validateCollectorCheckpoints } from "./lib/collector-checkpoints.mjs";
 import { deduplicateRecords, invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { collectPspSource, validateGovernmentPeriods } from "./lib/psp-collector.mjs";
+import { createPspFetcher, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { log } from "./lib/run-log.mjs";
 
 function parseArgs(args) {
@@ -36,12 +37,19 @@ const plansBySourceId = new Map(collectionPlan.map((plan) => [plan.sourceId, pla
 // evidence package is ever built from part of the record history.
 const collectorResults = [];
 log(`collecting ${selected.length} active source(s): ${selected.map(({ id }) => id).join(", ")}`);
-for (const source of selected) {
-  const { since } = plansBySourceId.get(source.id);
-  log(`${source.id}: collecting everything since ${since}`);
-  const result = await collectPspSource(source, { since, collectedAt, governmentPeriods });
-  collectorResults.push(result);
-  log(`${source.id}: ${result.records.length} records, ${result.warnings.length} warnings${result.warnings.length ? `: ${result.warnings.join("; ")}` : ""}`);
+const proxyUrl = pspProxyUrl();
+if (proxyUrl) log("psp.cz requests go through the proxy in PSP_PROXY_URL");
+const fetchPsp = createPspFetcher({ ...pspDownloadSettings, proxyUrl });
+try {
+  for (const source of selected) {
+    const { since } = plansBySourceId.get(source.id);
+    log(`${source.id}: collecting everything since ${since}`);
+    const result = await collectPspSource(source, { since, collectedAt, governmentPeriods, fetchPsp });
+    collectorResults.push(result);
+    log(`${source.id}: ${result.records.length} records, ${result.warnings.length} warnings${result.warnings.length ? `: ${result.warnings.join("; ")}` : ""}`);
+  }
+} finally {
+  await fetchPsp.close();
 }
 
 async function writeCheckpointsAtomically(filePath, checkpoints) {

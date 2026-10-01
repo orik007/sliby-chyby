@@ -3,7 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
-import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings } from "./lib/psp-print-documents.mjs";
+import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { createPspDocumentRecorder } from "./lib/psp-document-hashes.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
@@ -150,12 +150,15 @@ const args = parseArgs(process.argv.slice(2));
 // Every attempt and new connection to psp.cz is appended to
 // psp-requests.jsonl next to the output as it happens, so the file survives
 // a failed download and a step that times out, and the site's limits can be
-// measured from the run artifact.
+// measured from the run artifact. Through a proxy (PSP_PROXY_URL), the new
+// connections recorded are those to the proxy.
 mkdirSync(resolve(args.output), { recursive: true });
 const pspRequestFile = resolve(args.output, "psp-requests.jsonl");
 writeFileSync(pspRequestFile, "");
-const pspRequests = createPspRequestLog({ onEntry: (entry) => appendFileSync(pspRequestFile, `${JSON.stringify(entry)}\n`) });
-const fetchPsp = createPspFetcher({ ...pspDownloadSettings, onAttempt: pspRequests.onAttempt });
+const proxyUrl = pspProxyUrl();
+if (proxyUrl) log("psp.cz requests go through the proxy in PSP_PROXY_URL");
+const pspRequests = createPspRequestLog({ ...(proxyUrl ? { hostname: new URL(proxyUrl).hostname } : {}), onEntry: (entry) => appendFileSync(pspRequestFile, `${JSON.stringify(entry)}\n`) });
+const fetchPsp = createPspFetcher({ ...pspDownloadSettings, proxyUrl, onAttempt: pspRequests.onAttempt });
 // The record of the content under each psp.cz document ID, dated by the
 // run's Prague calendar date and saved after every download.
 const runDate = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());

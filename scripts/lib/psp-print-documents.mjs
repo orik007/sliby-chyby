@@ -1,6 +1,6 @@
 import { subscribe, unsubscribe } from "node:diagnostics_channel";
 import { unzipSync } from "fflate";
-import { Agent } from "undici";
+import { Agent, ProxyAgent } from "undici";
 import WordExtractor from "word-extractor";
 import { fetchVerified, invariant, requestFailureCode } from "./collector-core.mjs";
 
@@ -17,17 +17,36 @@ function decodeXml(value) {
 
 // With four parallel requests, psp.cz intermittently refused connections
 // within the first minute in two runs (25 September 2026, connect timeouts),
-// and one URL failed all four attempts spaced 1, 2, and 4 s apart. So at
-// most two requests are open at a time, and a failed request waits longer
-// before each retry: 5, 10, 20, 40, and 80 s. A request keeps its slot while
-// it waits, so when psp.cz stops answering, every download pauses rather
-// than adding connections.
+// and one URL failed all four attempts spaced 1, 2, and 4 s apart. So a
+// failed request waits longer before each retry: 5, 10, 20, 40, and 80 s. A
+// request keeps its slot while it waits, so when psp.cz stops answering,
+// every download pauses rather than adding connections.
 //
 // psp.cz closes the connection after every answer and drops new
-// connections above a rate; the spacing and the connect limit that keep
-// the download under it, and the run that measured it, are described in
-// docs/evidence-pipeline.md.
-export const pspDownloadSettings = { concurrency: 2, retryAttempts: 6, retryDelayMs: 5_000, minIntervalMs: 1_500, connectTimeoutMs: 3_000 };
+// connections above roughly 45 to 50 a minute (run 64). To stay far below
+// that, one request is open at a time and attempts start at least 3 s apart
+// (at most 20 a minute); docs/evidence-pipeline.md describes the limits and
+// the proxy every request goes through when PSP_PROXY_URL is set.
+export const pspDownloadSettings = { concurrency: 1, retryAttempts: 6, retryDelayMs: 5_000, minIntervalMs: 3_000, connectTimeoutMs: 3_000 };
+
+/**
+ * The proxy every psp.cz request goes through, from PSP_PROXY_URL, or null
+ * when it is not set (a direct connection). Only an http(s) URL with a host
+ * is accepted. The URL carries the proxy's credentials, so it is never
+ * logged, and an invalid value fails without echoing it.
+ */
+export function pspProxyUrl(env = process.env) {
+  const value = env.PSP_PROXY_URL?.trim();
+  if (!value) return null;
+  let url = null;
+  try {
+    url = new URL(value);
+  } catch {
+    // Reported below without the value.
+  }
+  invariant(url && (url.protocol === "http:" || url.protocol === "https:") && url.hostname, "PSP_PROXY_URL must be an http(s) URL with a host");
+  return url.href;
+}
 
 // Returns a fetch that sends every request through one shared limit. A
 // request takes a slot only for itself, never while holding another, so the
@@ -35,8 +54,10 @@ export const pspDownloadSettings = { concurrency: 2, retryAttempts: 6, retryDela
 // schedule, and each starts at least `minIntervalMs` after the previous one
 // actually started. `close` releases the connection pool once every request
 // has settled; it never waits on an unread answer.
-// `onAttempt` receives every attempt's record (see fetchVerified).
-export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, minIntervalMs = 0, connectTimeoutMs = null, onAttempt = null } = pspDownloadSettings) {
+// `onAttempt` receives every attempt's record (see fetchVerified). With
+// `proxyUrl`, every request goes through that proxy, and the connect limit
+// applies to the connection to the proxy.
+export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, minIntervalMs = 0, connectTimeoutMs = null, proxyUrl = null, onAttempt = null } = pspDownloadSettings) {
   invariant(Number.isInteger(minIntervalMs) && minIntervalMs >= 0, "minIntervalMs must be a non-negative integer");
   invariant(connectTimeoutMs === null || (Number.isInteger(connectTimeoutMs) && connectTimeoutMs > 0), "connectTimeoutMs must be a positive integer or null");
   let active = 0;
@@ -52,7 +73,8 @@ export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, min
     turn = mine;
     return mine;
   };
-  const dispatcher = connectTimeoutMs ? new Agent({ connect: { timeout: connectTimeoutMs } }) : undefined;
+  const connect = connectTimeoutMs ? { timeout: connectTimeoutMs } : undefined;
+  const dispatcher = proxyUrl ? new ProxyAgent({ uri: proxyUrl, connect }) : connect ? new Agent({ connect }) : undefined;
   const fetchPsp = async (source, url, options) => {
     if (active >= concurrency) await new Promise((resolveTurn) => waiting.push(resolveTurn));
     active += 1;
