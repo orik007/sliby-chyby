@@ -415,7 +415,9 @@ export function createLawContextReader({ client, cache, clock = () => new Date()
         if (eli === "" && text === "") continue;
         if (!eli.startsWith(prefix)) throw new ESbirkaUnavailableError(`e-Sbírka returned node ${eli || `${fragment.id} without an ELI path`} for ${act} ${wording}`);
         const path = eli.slice(prefix.length);
-        if (seen.has(path)) continue;
+        // A node listed twice means a page was served twice or out of
+        // order, and another page may be missing.
+        if (seen.has(path)) throw new ESbirkaUnavailableError(`e-Sbírka returned node ${path} twice for ${act} ${wording}`);
         seen.add(path);
         nodes.push([path, text === "" ? null : text]);
       }

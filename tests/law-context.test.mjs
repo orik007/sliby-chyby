@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { existsSync } from "node:fs";
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -95,7 +96,8 @@ function endpointFor(act, { pageSize = 1000 } = {}) {
     if (rest === "/fragmenty") {
       const paths = act.structures[wording];
       if (!paths) return notFound();
-      const page = Number(searchParams.get("cisloStranky"));
+      // `repeatedPage` serves the first page again in place of later ones.
+      const page = act.repeatedPage ? 0 : Number(searchParams.get("cisloStranky"));
       const pages = Math.max(1, Math.ceil(paths.length / pageSize));
       const seznam = paths.slice(page * pageSize, (page + 1) * pageSize).map((path) => ({ eli: `/eli/cz/sb/2019/110/${act.pageWording?.[wording] ?? wording}/${path}`, xhtml: act.texts[`${wording}/${path}`] ?? "" }));
       if (page === 0) seznam.unshift(...(act.unnamed?.[wording] ?? []).map((xhtml) => ({ id: 7, eli: "", xhtml })));
@@ -203,7 +205,7 @@ test("resolves every target with one status, in the wording on the conduct date 
   const text = lawChangeText(withContext(change, context));
   assert.match(text, /Version: proposed text\nZákon č\. 110\/2019 Sb\.[\s\S]*1\. V § 52[\s\S]*Context from the Collection of Laws \(e-Sbírka\): the provisions this version amends, as in force on 2025-12-29/);
   assert.match(text, /§ 52 zákona č\. 110\/2019 Sb\. \(wording from 2025-01-01\):\n\(1\) Úřad řídí předseda/);
-  assert.match(text, /Named provisions: § 52 odst\. 1: found; § 52 odst\. 7: whole provision; § 8: found; § 8a: new; § 8a odst\. 2: new; § 32d odst\. 1: later wording \(wording from 2026-06-12\); § 99: not found; not recognised: "7\. V části třetí se hlava IV zrušuje\."\./);
+  assert.match(text, /Named provisions: § 52 odst\. 1: found; § 52 odst\. 7: whole provision; § 8: found; § 8a: new; § 8a odst\. 2: new; § 32d odst\. 1: later wording \(wording from 2026-06-12\), whole provision; § 99: not found; not recognised: "7\. V části třetí se hlava IV zrušuje\."\./);
     assert.doesNotMatch(text.split("Version: text approved")[1] ?? "", /Context/);
 });
 
@@ -229,6 +231,16 @@ test("everything read is cached: a second run only checks what e-Sbírka changed
   // The first run, on an empty cache, only marks where checking starts.
   assert.equal(journal[0].from, null);
   assert.equal(journal[1].from, new Date(Date.parse(journal[0].readAt) - 3_600_000).toISOString());
+});
+
+test("a § from a later wording without the named paragraph keeps its status and is marked whole", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "law-context-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const missingParagraph = { ...change, versions: { proposed: { ...change.versions.proposed, textCz: "Zákon č. 110/2019 Sb. se mění takto:\n1. V § 32d odst. 5 se slovo „a“ zrušuje." } } };
+  const context = await resolveLawChangeContext(missingParagraph, records, await readerFor(directory, endpointFor(act110)));
+  const [target] = context.versions.proposed.instructions[0].targets;
+  assert.deepEqual([target.status, target.partial], ["later-wording", true]);
+  assert.match(contextText(context.versions.proposed), /§ 32d odst\. 5: later wording \(wording from 2026-06-12\), whole provision/);
 });
 
 test("a later wording is used only when its amendments were promulgated by the conduct date", async (t) => {
@@ -284,6 +296,10 @@ test("a wording is read page by page, and a missing, mixed, or textless one is a
   assert.deepEqual(await wrapped.structure("110/2019", "2025-01-01"), [...act110.structures["2025-01-01"]].sort());
   const unnamed = await readerFor(join(directory, "unnamed"), endpointFor({ ...act110, unnamed: { "2025-01-01": ["(1) Text"] } }));
   await assert.rejects(unnamed.structure("110/2019", "2025-01-01"), /returned node 7 without an ELI path for 110\/2019 2025-01-01/);
+  // A page served twice: a node listed twice, and another page missing.
+  const repeated = await readerFor(join(directory, "repeated"), endpointFor({ ...act110, repeatedPage: true }, { pageSize: 2 }));
+  await assert.rejects(repeated.structure("110/2019", "2025-01-01"), /returned node dokument twice for 110\/2019 2025-01-01/);
+  assert.equal(existsSync(join(directory, "repeated", "2019-110.jsonl")) && (await readFile(join(directory, "repeated", "2019-110.jsonl"), "utf8")).includes('"kind":"wording"'), false);
   // No text at all.
   const textless = endpointFor({ ...act110, texts: {} });
   await assert.rejects(resolveLawChangeContext(change, records, await readerFor(join(directory, "textless"), textless)), /no text for the wording 110\/2019 2025-01-01/);

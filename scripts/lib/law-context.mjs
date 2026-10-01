@@ -208,7 +208,11 @@ async function resolveVersionContext(text, amendedAct, date, reader) {
         if (!provisions.has(id)) provisions.set(id, { act: target.act, wording: located.wording, ...(located.promulgatedOn ? { promulgatedOn: located.promulgatedOn } : {}), path: root, citation: citationOfPath(root), nodes: nodesUnder(located.paths, [root]) });
         ids.push(id);
       }
-      targets.push({ target: describeTarget(target), status, wording: located.wording, ...(located.promulgatedOn ? { promulgatedOn: located.promulgatedOn } : {}), provisionIds: ids });
+      // A § or article from a later or the promulgated wording that lacks the
+      // named paragraph, letter, or point keeps the status of where its text
+      // is from and is marked as the whole provision.
+      const partial = located.partial && located.source !== "current";
+      targets.push({ target: describeTarget(target), status, ...(partial ? { partial: true } : {}), wording: located.wording, ...(located.promulgatedOn ? { promulgatedOn: located.promulgatedOn } : {}), provisionIds: ids });
     }
     resolved.push({ instructionCz: instruction.textCz, targets });
   }
@@ -349,9 +353,9 @@ export function contextText(context, supplied = new Map(), versionLabel = null) 
   if (!context) return null;
   const named = [];
   for (const { instructionCz, targets } of context.instructions) {
-    for (const { target, status, wording, promulgatedOn } of targets) {
+    for (const { target, status, partial, wording, promulgatedOn } of targets) {
       const label = target
-        ? `${target}: ${statusLabels[status]}${wordingNote(status, wording, promulgatedOn)}`
+        ? `${target}: ${statusLabels[status]}${wordingNote(status, wording, promulgatedOn)}${partial ? `, ${statusLabels["paragraph-not-found"]}` : ""}`
         : `not recognised: "${instructionCz.length > 120 ? `${instructionCz.slice(0, 119)}…` : instructionCz}"`;
       if (!named.includes(label)) named.push(label);
     }
