@@ -1,7 +1,9 @@
 import { sha256 } from "./collector-core.mjs";
-import { assessableAttributionStatuses, attributionStatusForRecord, factSummary, normalizedStructuredFacts, versionConcerned } from "./attribution.mjs";
+import { assessableAttributionStatuses, attributionStatusForRecord, factSummary, isPotentiallyAttributable, normalizedStructuredFacts, versionConcerned } from "./attribution.mjs";
 import { validateEvidencePackage } from "./assessment-pipeline.mjs";
-import { changeThroughVersion, namedActsFromPrintTitle, versionKeys, versionLabels } from "./print-parts.mjs";
+import { changeThroughVersion, namedActsFromPrintTitle, versionKeys, versionLabels, versionOfChange } from "./print-parts.mjs";
+
+export { versionOfChange };
 import { estimateRequestTokens, estimateTokens, maxRequestInputTokens } from "./assessment-config.mjs";
 
 function invariant(condition, message) {
@@ -18,29 +20,46 @@ export function lawChangeEvidenceId(change) {
   return `psp-core-2025--law-change-${change.changeId}`;
 }
 
+function recordPrintIds(record) {
+  const payload = record.payload ?? {};
+  return [...new Set([
+    ...(payload.externalPrintId ? [String(payload.externalPrintId)] : []),
+    ...(payload.linkedPrints ?? []).map(({ externalPrintId }) => String(externalPrintId))
+  ])];
+}
+
 /**
- * The version of one law change a conduct concerns. When psp.cz does not
- * publish that version, the latest earlier version is used and
- * `publishedVersionMissing` names the one the conduct concerned. Returns
- * null when the law change did not yet exist in the text the conduct
- * concerned (a change added in the debate is never part of the submission).
+ * The records of a collector run up to the cutoff that the pipeline uses
+ * (docs/evidence-pipeline.md, steps 2-3): the primary records, the ones that
+ * can be attributable conduct of a tracked party, those grouped by print,
+ * and each print's earliest record date (a law change is dated by it). The
+ * law-change context and the routing step use the same records, so they
+ * work on the same law changes.
  */
-export function versionOfChange(change, concerned) {
-  if (!concerned) return null;
-  const position = versionKeys.indexOf(concerned.version);
-  for (let index = position; index >= 0; index -= 1) {
-    const version = versionKeys[index];
-    const entry = change.versions[version];
-    if (!entry) continue;
-    return {
-      version,
-      removed: entry.removed === true,
-      publishedVersionMissing: version === concerned.version || (concerned.sameAsApproved && version === "approved") ? null : concerned.version,
-      withSenateResolution: concerned.withSenateResolution,
-      mark: concerned.mark
-    };
+export function conductOfRun(collectorRun, asOf, trackedPartyIds) {
+  const cutoff = `${asOf}T23:59:59.999Z`;
+  const primaryRecordsInWindow = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff));
+  const conductRecords = primaryRecordsInWindow.filter((record) => isPotentiallyAttributable(record, trackedPartyIds));
+  const recordsByPrintId = new Map();
+  for (const record of conductRecords) {
+    for (const printId of recordPrintIds(record)) recordsByPrintId.set(printId, [...(recordsByPrintId.get(printId) ?? []), record]);
   }
-  return null;
+  const printFirstSeenOn = new Map();
+  for (const record of primaryRecordsInWindow) {
+    const date = String(record.occurredAt ?? "").slice(0, 10);
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) continue;
+    for (const printId of recordPrintIds(record)) {
+      if (!printFirstSeenOn.has(printId) || date < printFirstSeenOn.get(printId)) printFirstSeenOn.set(printId, date);
+    }
+  }
+  return { primaryRecordsInWindow, conductRecords, recordsByPrintId, printFirstSeenOn };
+}
+
+/** The law changes of a run at the cutoff: those of prints with conduct. */
+export function lawChangesOfRun(printParts, recordsByPrintId) {
+  return lawChangesAtCutoff(Object.entries(printParts.prints)
+    .filter(([printId]) => recordsByPrintId.has(printId))
+    .flatMap(([, print]) => print.changes), recordsByPrintId);
 }
 
 /**

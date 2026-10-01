@@ -43,7 +43,7 @@ test("createStructuredModelResponse retries a 429 rate-limit response and succee
       ok: true,
       json: async () => ({
         id: "resp_fixture",
-        model: "gpt-5.6-terra",
+        model: "gpt-6.1-sol",
         usage: { input_tokens: 10, output_tokens: 2 },
         output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }]
       })
@@ -53,7 +53,7 @@ test("createStructuredModelResponse retries a 429 rate-limit response and succee
     const result = await createStructuredModelResponse({
       provider: "openai",
       apiKey: "fixture-key",
-      model: "gpt-5.6-terra",
+      model: "gpt-6.1-sol",
       instructions: "fixture",
       input: {},
       name: "fixture_schema",
@@ -84,7 +84,7 @@ test("createStructuredModelResponse does not retry a non-retryable 4xx error", a
       () => createStructuredModelResponse({
         provider: "openai",
         apiKey: "fixture-key",
-        model: "gpt-5.6-terra",
+        model: "gpt-6.1-sol",
         instructions: "fixture",
         input: {},
         name: "fixture_schema",
@@ -116,7 +116,7 @@ test("createStructuredModelResponse gives up after repeated 429s and reports the
       () => createStructuredModelResponse({
         provider: "openai",
         apiKey: "fixture-key",
-        model: "gpt-5.6-terra",
+        model: "gpt-6.1-sol",
         instructions: "fixture",
         input: {},
         name: "fixture_schema",
@@ -151,7 +151,7 @@ test("createStructuredModelResponse retries a transient 5xx response and succeed
       ok: true,
       json: async () => ({
         id: "resp_fixture",
-        model: "gpt-5.6-terra",
+        model: "gpt-6.1-sol",
         usage: { input_tokens: 10, output_tokens: 2 },
         output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }]
       })
@@ -161,7 +161,7 @@ test("createStructuredModelResponse retries a transient 5xx response and succeed
     const result = await createStructuredModelResponse({
       provider: "openai",
       apiKey: "fixture-key",
-      model: "gpt-5.6-terra",
+      model: "gpt-6.1-sol",
       instructions: "fixture",
       input: {},
       name: "fixture_schema",
@@ -197,7 +197,7 @@ test("createStructuredModelResponse retries a 5xx with a non-JSON body instead o
       ok: true,
       json: async () => ({
         id: "resp_fixture",
-        model: "gpt-5.6-terra",
+        model: "gpt-6.1-sol",
         usage: { input_tokens: 10, output_tokens: 2 },
         output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }]
       })
@@ -207,7 +207,7 @@ test("createStructuredModelResponse retries a 5xx with a non-JSON body instead o
     const result = await createStructuredModelResponse({
       provider: "openai",
       apiKey: "fixture-key",
-      model: "gpt-5.6-terra",
+      model: "gpt-6.1-sol",
       instructions: "fixture",
       input: {},
       name: "fixture_schema",
@@ -240,7 +240,7 @@ test("createStructuredModelResponse honors an HTTP-date Retry-After, not just de
       ok: true,
       json: async () => ({
         id: "resp_fixture",
-        model: "gpt-5.6-terra",
+        model: "gpt-6.1-sol",
         usage: { input_tokens: 10, output_tokens: 2 },
         output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }]
       })
@@ -250,7 +250,7 @@ test("createStructuredModelResponse honors an HTTP-date Retry-After, not just de
     const result = await createStructuredModelResponse({
       provider: "openai",
       apiKey: "fixture-key",
-      model: "gpt-5.6-terra",
+      model: "gpt-6.1-sol",
       instructions: "fixture",
       input: {},
       name: "fixture_schema",
@@ -291,7 +291,7 @@ test("createStructuredModelResponse falls back to the exact exponential schedule
       ok: true,
       json: async () => ({
         id: "resp_fixture",
-        model: "gpt-5.6-terra",
+        model: "gpt-6.1-sol",
         usage: { input_tokens: 10, output_tokens: 2 },
         output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }]
       })
@@ -301,7 +301,7 @@ test("createStructuredModelResponse falls back to the exact exponential schedule
     const result = await createStructuredModelResponse({
       provider: "openai",
       apiKey: "fixture-key",
-      model: "gpt-5.6-terra",
+      model: "gpt-6.1-sol",
       instructions: "fixture",
       input: {},
       name: "fixture_schema",
@@ -391,13 +391,13 @@ test("requests wait while a model's input tokens of the last minute would exceed
   Date.now = () => clock;
   globalThis.setTimeout = (fn, ms) => { waits.push(ms); clock += ms; return originalSetTimeout(fn, 0); };
   try {
-    const budget = tokenBudgetPerMinute("gpt-5.6-terra");
-    await reserveInputTokens("gpt-5.6-terra", budget - 10);
-    await reserveInputTokens("gpt-5.6-terra", 10);
+    const budget = tokenBudgetPerMinute("gpt-6.1-sol");
+    await reserveInputTokens("gpt-6.1-sol", budget - 10);
+    await reserveInputTokens("gpt-6.1-sol", 10);
     assert.deepEqual(waits, [], "requests within the budget are sent at once");
-    await reserveInputTokens("gpt-5.6-terra", 1);
+    await reserveInputTokens("gpt-6.1-sol", 1);
     assert.deepEqual(waits, [60_000], "the next request waits until the first leaves the minute");
-    await reserveInputTokens("gpt-5.6-terra", budget * 3);
+    await reserveInputTokens("gpt-6.1-sol", budget * 3);
     assert.ok(waits.length >= 2, "a request larger than the budget waits for an empty minute");
     const before = waits.length;
     await reserveInputTokens("fixture-model", budget * 100);
@@ -415,7 +415,7 @@ test("the token budget is shared among parallel processes", () => {
     assert.equal(tokenBudgetPerMinute("gpt-6-luna"), 8_000_000);
     process.env.SLIBY_TOKEN_BUDGET_SHARE = "16";
     assert.equal(tokenBudgetPerMinute("gpt-6-luna"), 500_000);
-    assert.equal(tokenBudgetPerMinute("gpt-5.6-terra"), 200_000);
+    assert.equal(tokenBudgetPerMinute("gpt-6.1-sol"), 200_000);
   } finally {
     if (original === undefined) delete process.env.SLIBY_TOKEN_BUDGET_SHARE; else process.env.SLIBY_TOKEN_BUDGET_SHARE = original;
   }

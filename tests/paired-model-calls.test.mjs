@@ -1,9 +1,9 @@
 import assert from "node:assert/strict";
-import { appendFile, mkdtemp, readFile, writeFile } from "node:fs/promises";
+import { appendFile, mkdtemp, readdir, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { cachePersister, loadModelCache, mapWithConcurrency, pairedModelCall } from "../scripts/lib/paired-model-calls.mjs";
+import { cachePersister, loadModelCache, loadShardedModelCache, mapWithConcurrency, pairedModelCall, shardedCachePersister } from "../scripts/lib/paired-model-calls.mjs";
 import { ModelOutputError } from "../scripts/lib/model-output.mjs";
 
 const fingerprint = { inputHash: "h1", promptContentHash: "p1", provider: "openai", modelA: "a", modelB: "b" };
@@ -93,4 +93,19 @@ test("a transport failure stops the run, and finished subjects travel with the e
       return true;
     }
   );
+});
+
+test("a sharded model cache keeps one journal per subject group and loads them all", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "sharded-cache-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const fileOf = (subjectId) => `${subjectId.split("-").slice(0, 2).join("-")}/${subjectId.split("--")[0]}.jsonl`;
+  const cache = await loadShardedModelCache(directory, fileOf);
+  const persist = shardedCachePersister(cache);
+  cache.entries["ano-2025-a--43184-22"] = { inputHash: "1", a: { relevant: true } };
+  cache.entries["spd-2025-b--43184-22"] = { inputHash: "2", a: { relevant: false } };
+  await persist("ano-2025-a--43184-22");
+  await persist("spd-2025-b--43184-22");
+  assert.deepEqual((await readdir(directory, { recursive: true })).filter((name) => name.endsWith(".jsonl")).sort(), ["ano-2025/ano-2025-a.jsonl", "spd-2025/spd-2025-b.jsonl"]);
+  const reloaded = await loadShardedModelCache(directory, fileOf);
+  assert.deepEqual(reloaded.entries, cache.entries);
 });

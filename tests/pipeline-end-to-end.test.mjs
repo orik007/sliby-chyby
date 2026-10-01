@@ -20,6 +20,7 @@ import { charactersPerToken, maxRequestInputTokens } from "../scripts/lib/assess
 const repositoryRoot = resolve(import.meta.dirname, "..");
 const fixtures = resolve(repositoryRoot, "tests/fixtures/pipeline");
 const stub = pathToFileURL(resolve(repositoryRoot, "tests/fixtures/stub-openai.mjs")).href;
+const eSbirkaStub = pathToFileURL(resolve(repositoryRoot, "tests/fixtures/stub-e-sbirka.mjs")).href;
 const script = (name) => resolve(repositoryRoot, "scripts", name);
 const vatPromiseId = "ano-2025-restaurant-nonalcoholic-vat-12";
 const dissentingModel = "stub-dissenting-model";
@@ -79,10 +80,29 @@ test("one real print runs through routing, packaging, assessment, and the review
   t.after(() => rm(work, { recursive: true, force: true }));
   const root = join(work, "checkout");
   await checkout(root);
+  // Law-change context from a cache holding exactly what print 189 needs,
+  // read from the e-Sbírka REST API on 30 September 2026 (each line records
+  // when): with nothing changed since, a run only checks what e-Sbírka
+  // changed (tests/fixtures/stub-e-sbirka.mjs) and reads nothing else.
+  const contextOutput = join(work, "law-context");
+  await cp(join(fixtures, "law-context-cache"), join(work, "law-context-cache"), { recursive: true });
+  await run(["--import", eSbirkaStub, script("run-law-context.mjs"),
+    "--collector-run", join(fixtures, "collector-run.json"),
+    "--print-parts", join(fixtures, "print-parts.json"),
+    "--as-of", "2026-09-25",
+    "--cache", join(work, "law-context-cache"),
+    "--output", contextOutput], { cwd: root, environment: { ESEL_API_ACCESS_KEY: "stub" } });
+  const eSbirkaRequests = (await readFile(join(contextOutput, "e-sbirka-requests.jsonl"), "utf8")).trim().split("\n").map((line) => JSON.parse(line));
+  assert.deepEqual(eSbirkaRequests.map(({ path, ok }) => [path.split("?")[0], ok]), [["/dokumenty-sbirky/zmeny-zneni", true], ["/dokumenty-sbirky/depublikovana-zneni", true]]);
+  const context = await readJson(join(contextOutput, "law-context.json"));
+  assert.equal(context.quality.lawChangesWithContext, 4);
+  assert.equal(context.quality.eSbirkaRequests, 2);
+
   const routingOutput = join(work, "routing");
   const routingArgs = (output, log) => [["--import", stub, script("run-topic-routing.mjs"),
     "--collector-run", join(fixtures, "collector-run.json"),
     "--print-parts", join(fixtures, "print-parts.json"),
+    "--law-context", join(contextOutput, "law-context.json"),
     "--tag-cache", join(work, "tag-cache"),
     "--as-of", "2026-09-25",
     "--output", output].flat(), { cwd: root, environment: { STUB_OPENAI_LOG: log } }];
@@ -101,10 +121,13 @@ test("one real print runs through routing, packaging, assessment, and the review
     directLinks: report.counts.directLinkLawChangeCount,
     packages: report.counts.packageCount,
     invalid: report.counts.invalidScreenerCount + report.counts.invalidRelevanceCheckCount
-  }, { records: 5, skipped: 2, conduct: 3, lawChanges: 5, technical: 1, routed: 1, directLinks: 1, packages: 2, invalid: 0 });
+  }, { records: 5, skipped: 2, conduct: 3, lawChanges: 5, technical: 1, routed: 2, directLinks: 1, packages: 2, invalid: 0 });
 
-  // Only the value-added tax law change reaches promises: through the act it
-  // amends, which the VAT tag maps, to the two promises tagged with it.
+  // The value-added tax law change reaches promises through the act it
+  // amends, which the VAT tag maps, to the two promises tagged with it. The
+  // income-tax change reaches them through the VAT tag the stand-in screener
+  // gives it: its context, the wording of the income-tax provisions it
+  // amends, mentions VAT, as the context of a real change can.
   const packageFiles = (await readdir(join(routingOutput, "evidence-packages"))).sort();
   assert.equal(packageFiles.length, 2);
   const packages = await Promise.all(packageFiles.map((file) => readJson(join(routingOutput, "evidence-packages", file))));
@@ -112,8 +135,11 @@ test("one real print runs through routing, packaging, assessment, and the review
   assert.ok(vatPackage, `a package for ${vatPromiseId}`);
   for (const evidencePackage of packages) {
     const lawChanges = evidencePackage.evidence.filter(({ role }) => role === "law-change");
-    assert.deepEqual(lawChanges.map(({ structuredFacts }) => structuredFacts.changeId), ["43310-3"]);
-    assert.deepEqual(lawChanges[0].matchBasis.directLinkIdentifiers, ["cz-act-235-2004"]);
+    assert.deepEqual(lawChanges.map(({ structuredFacts }) => structuredFacts.changeId), ["43310-2", "43310-3"]);
+    assert.deepEqual(lawChanges[1].matchBasis.directLinkIdentifiers, ["cz-act-235-2004"]);
+    assert.deepEqual(lawChanges[0].matchBasis.routeBasis, ["controlled-tag"]);
+    // Every version with conduct carries its context from e-Sbírka.
+    assert.match(lawChanges[1].structuredFacts.versions.proposed.contextCz, /^Context from the Collection of Laws \(e-Sbírka\): the provisions this version amends, as in force on 2026-/);
     // The technical part, though its act is directly linked, and the records
     // that cannot be conduct are in no package.
     const ids = evidencePackage.evidence.map(({ id }) => id);
@@ -123,7 +149,7 @@ test("one real print runs through routing, packaging, assessment, and the review
 
   // The law change carries each version, with the passed text stored as the
   // approved one it re-adopted, and the Senate resolution once.
-  const [vatChange] = vatPackage.evidence.filter(({ role }) => role === "law-change");
+  const vatChange = vatPackage.evidence.find(({ role, structuredFacts }) => role === "law-change" && structuredFacts.changeId === "43310-3");
   assert.deepEqual(Object.keys(vatChange.structuredFacts.versions), ["proposed", "approved", "passed"]);
   assert.equal(vatChange.structuredFacts.versions.passed.sameAs, "approved");
   // The bill's effective date goes with each version; part six ("ÚČINNOST")

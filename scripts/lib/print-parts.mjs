@@ -427,3 +427,28 @@ export function changeThroughVersion(change, lastVersion) {
   if (kept.length === 0) return null;
   return withDerivedFields({ ...change, versions: Object.fromEntries(kept.map((version) => [version, change.versions[version]])) });
 }
+
+/**
+ * The version of one law change a conduct concerns. When psp.cz does not
+ * publish that version, the latest earlier version is used and
+ * `publishedVersionMissing` names the one the conduct concerned. Returns
+ * null when the law change did not yet exist in the text the conduct
+ * concerned (a change added in the debate is never part of the submission).
+ */
+export function versionOfChange(change, concerned) {
+  if (!concerned) return null;
+  const position = versionKeys.indexOf(concerned.version);
+  for (let index = position; index >= 0; index -= 1) {
+    const version = versionKeys[index];
+    const entry = change.versions[version];
+    if (!entry) continue;
+    return {
+      version,
+      removed: entry.removed === true,
+      publishedVersionMissing: version === concerned.version || (concerned.sameAsApproved && version === "approved") ? null : concerned.version,
+      withSenateResolution: concerned.withSenateResolution,
+      mark: concerned.mark
+    };
+  }
+  return null;
+}
