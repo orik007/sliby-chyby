@@ -132,8 +132,14 @@ async function fetchJsonWithRetry(url, init, { model, estimatedTokens }) {
     }
     const body = await parseJsonBodyOrNull(response);
     if (response.ok) {
-      if (body === null) throw new Error(`Provider request to ${url} returned a successful response with an unparseable body`);
-      return { response, body };
+      if (body !== null) return { response, body };
+      // A successful status whose body cannot be read (in run 73, a 771,000-
+      // token request's answer) is retried like a request without a response.
+      if (attempt === maxProviderAttempts) throw new Error(`Provider request to ${url} returned a successful response with an unparseable body`);
+      const delayMs = backoffMs(attempt);
+      console.warn(`Provider request to ${url} returned a successful response with an unparseable body (attempt ${attempt}/${maxProviderAttempts}); retrying in ${delayMs}ms.`);
+      await sleep(delayMs);
+      continue;
     }
     last = { response, body };
     const retryable = response.status === 408 || response.status === 429 || (response.status >= 500 && response.status < 600);
