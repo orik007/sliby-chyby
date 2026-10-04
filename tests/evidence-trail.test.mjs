@@ -139,9 +139,9 @@ test("context left out of a package is named with e-Sbírka links on the review 
     evidenceId: change.id,
     version: "proposed",
     suppliedCount: 3,
-    omittedProvisions: [
-      { act: "283/2021", wording: "2025-10-01", path: "dokument/norma/cast_3/hlava_3/par_166/odst_1", citation: "§ 166 odst. 1" },
-      { act: "283/2021", wording: "0000-00-00", path: "dokument/prilohy/priloha_1", citation: "příloha č. 1" }
+    omitted: [
+      { act: "283/2021", wording: "2025-10-01", paths: ["dokument/norma/cast_3/hlava_3/par_166/odst_1"] },
+      { act: "283/2021", wording: "0000-00-00", paths: ["dokument/prilohy/priloha_1"] }
     ]
   }];
   const packageHash = hashEvidencePackage(evidencePackage);

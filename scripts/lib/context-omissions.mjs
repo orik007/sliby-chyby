@@ -1,5 +1,5 @@
 import { promulgatedWording } from "./e-sbirka.mjs";
-import { eSbirkaProvisionUrl } from "./law-context.mjs";
+import { citationOfPath, eSbirkaProvisionUrl } from "./law-context.mjs";
 
 const versionLabelsCz = { proposed: "navržený text", approved: "text schválený Sněmovnou", passed: "text přijatý Parlamentem" };
 
@@ -24,16 +24,11 @@ export function contextOmissionLabel({ printNumber, headingCz, titleCz, version,
  */
 export function contextOmissionsOf(evidencePackage) {
   const changes = new Map(evidencePackage.evidence.filter(({ role }) => role === "law-change").map((item) => [item.id, item]));
-  return (evidencePackage.generation?.contextOmissions ?? []).flatMap(({ evidenceId, version, suppliedCount, omittedProvisions }) => {
+  return (evidencePackage.generation?.contextOmissions ?? []).flatMap(({ evidenceId, version, suppliedCount, omitted }) => {
     const change = changes.get(evidenceId);
     if (!change) throw new Error(`Context omission names ${evidenceId}, which is not in the package`);
-    const byWording = new Map();
-    for (const provision of omittedProvisions) {
-      const key = `${provision.act}@${provision.wording}`;
-      if (!byWording.has(key)) byWording.set(key, { act: provision.act, wording: provision.wording, provisions: [] });
-      byWording.get(key).provisions.push({ citationCz: provision.citation, url: eSbirkaProvisionUrl(provision) });
-    }
-    return [...byWording.values()].map(({ act, wording, provisions }) => ({
+    const byWording = omitted.map(({ act, wording, paths }) => ({ act, wording, provisions: paths.map((path) => ({ citationCz: citationOfPath(path), url: eSbirkaProvisionUrl({ act, wording, path }) })) }));
+    return byWording.map(({ act, wording, provisions }) => ({
       lawChangeId: evidenceId,
       printNumber: change.structuredFacts.printNumber,
       headingCz: change.structuredFacts.heading ?? null,

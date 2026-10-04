@@ -396,6 +396,9 @@ const pendingReviews = (await Promise.all(currentManifest.proposals.filter(({ su
   const isCandidate = proposal.resolutionState === "candidate";
   const auditRecord = isCandidate ? await readProposalFile(proposal, "assessment-run.json") : null;
   const evidencePackage = planByPromise.get(proposal.promiseId)?.evidencePackage ?? await readProposalFile(proposal, "evidence-package.json");
+  // Whether the package the proposal assessed was fitted without part of its
+  // context: the queued one only while its assessable content is the same.
+  const assessedPackage = packageState === "current" ? item.evidencePackage : await readProposalFile(proposal, "evidence-package.json");
   return {
     promiseId: proposal.promiseId,
     promiseTitleCz: evidencePackage?.promise?.titleCz ?? proposal.promiseId,
@@ -409,7 +412,7 @@ const pendingReviews = (await Promise.all(currentManifest.proposals.filter(({ su
     reviewUrl: humanReviewUrl(proposal.humanReviewPath),
     newInRun: newProposalIds.has(proposal.proposalId),
     packageState,
-    contextTrimmed: Boolean(evidencePackage?.generation?.contextOmissions)
+    contextTrimmed: Boolean(assessedPackage?.generation?.contextOmissions)
   };
 }))).filter(Boolean);
 pendingReviews.sort((left, right) => left.promiseId.localeCompare(right.promiseId));

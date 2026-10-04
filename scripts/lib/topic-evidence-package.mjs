@@ -215,11 +215,12 @@ function evidenceFromMaintenanceBaseline(baseline) {
  * context, never the text of a law change (docs/evidence-pipeline.md,
  * Package): the whole context of a law change is left out, largest first,
  * until the package fits; then its provisions are put back, shortest first,
- * while it still fits. A provision with the same text in several versions of
+ * as many as still fit. A provision with the same text in several versions of
  * a change is left out or put back in all of them, because a later version
- * refers to its text in the earlier one. Returns the package, still too large
- * when even that is not enough, and per law-change version the provisions
- * left out.
+ * refers to its text in the earlier one. Every size is measured on the whole
+ * package as it is sent, its record of what was left out
+ * (`generation.contextOmissions`) included. Returns the package, still too
+ * large when even that is not enough.
  */
 function fitContexts({ changes, contextOf, assemble, requestTokens }) {
   const contexts = changes.map(({ change }) => contextOf(change.changeId));
@@ -230,7 +231,7 @@ function fitContexts({ changes, contextOf, assemble, requestTokens }) {
       if (!changes[index].change.versions[version] || !context) continue;
       for (const [id, { act, citation, textCz }] of Object.entries(context.provisions)) {
         const key = `${act}\n${citation}\n${textCz}`;
-        if (!byKey.has(key)) byKey.set(key, { key, citation, act, textCz, occurrences: [] });
+        if (!byKey.has(key)) byKey.set(key, { key, length: citation.length + textCz.length, occurrences: [] });
         byKey.get(key).occurrences.push({ version, id });
       }
     }
@@ -245,55 +246,58 @@ function fitContexts({ changes, contextOf, assemble, requestTokens }) {
     }
     return byVersion;
   };
-  const lawChanges = () => changes.map(({ change, route }, index) => ({ change: omittedKeys[index].size > 0 ? withContext(change, contexts[index], omittedOf(index)) : change, route }));
+  // Per law-change version, the provisions left out, grouped by act and
+  // wording; their citations follow from their node paths.
+  const contextOmissions = () => changes.flatMap(({ change }, index) => {
+    const byVersion = omittedOf(index);
+    return versionKeys.filter((version) => byVersion.get(version)?.size > 0).map((version) => {
+      const provisions = contexts[index].versions[version].provisions;
+      const omitted = byVersion.get(version);
+      const byWording = new Map();
+      for (const [id, { act, wording, path }] of Object.entries(provisions)) {
+        if (!omitted.has(id)) continue;
+        const key = `${act}@${wording}`;
+        if (!byWording.has(key)) byWording.set(key, { act, wording, paths: [] });
+        byWording.get(key).paths.push(path);
+      }
+      return { evidenceId: lawChangeEvidenceId(change), version, suppliedCount: Object.keys(provisions).length - omitted.size, omitted: [...byWording.values()] };
+    });
+  });
+  const build = () => {
+    const evidencePackage = assemble(changes.map(({ change, route }, index) => ({ change: omittedKeys[index].size > 0 ? withContext(change, contexts[index], omittedOf(index)) : change, route })));
+    const omissions = contextOmissions();
+    if (omissions.length > 0) evidencePackage.generation.contextOmissions = omissions;
+    return evidencePackage;
+  };
+  const fits = (evidencePackage) => requestTokens(evidencePackage) <= maxRequestInputTokens;
   const contextSize = ({ change }) => Object.values(change.versions).reduce((sum, entry) => sum + (entry.contextCz?.length ?? 0), 0);
   const order = changes.map((item, index) => ({ index, size: contextSize(item), changeId: item.change.changeId }))
     .filter(({ index }) => groups[index].length > 0)
     .sort((left, right) => right.size - left.size || left.changeId.localeCompare(right.changeId, "en", { numeric: true }));
   let evidencePackage = assemble(changes);
   for (const { index } of order) {
-    if (requestTokens(evidencePackage) <= maxRequestInputTokens) break;
+    if (fits(evidencePackage)) break;
     for (const { key } of groups[index]) omittedKeys[index].add(key);
-    evidencePackage = assemble(lawChanges());
+    evidencePackage = build();
   }
-  // Put provisions back, shortest first, within the room left; the estimate
-  // of each is its text once, and the package is measured again after.
-  let room = maxRequestInputTokens - requestTokens(evidencePackage);
-  const candidates = omittedKeys.flatMap((keys, index) => groups[index].filter(({ key }) => keys.has(key)).map((group) => ({
-    index,
-    key: group.key,
-    tokens: estimateTokens(JSON.stringify(`\n${group.citation} zákona č. ${group.act} Sb. (wording):\n${group.textCz}`)) + group.occurrences.length * 40
-  })))
-    .sort((left, right) => left.tokens - right.tokens || changes[left.index].change.changeId.localeCompare(changes[right.index].change.changeId, "en", { numeric: true }) || left.key.localeCompare(right.key));
-  const added = [];
-  for (const candidate of candidates) {
-    if (candidate.tokens > room) break;
-    room -= candidate.tokens;
-    omittedKeys[candidate.index].delete(candidate.key);
-    added.push(candidate);
+  if (!fits(evidencePackage)) return evidencePackage;
+  // The provisions left out, shortest first; the most of them that still fit
+  // are put back, found by measuring the package (a binary search over how
+  // many, since each one put back makes the package larger).
+  const candidates = omittedKeys.flatMap((keys, index) => groups[index].filter(({ key }) => keys.has(key)).map(({ key, length }) => ({ index, key, length })))
+    .sort((left, right) => left.length - right.length || changes[left.index].change.changeId.localeCompare(changes[right.index].change.changeId, "en", { numeric: true }) || left.key.localeCompare(right.key));
+  const putBack = (count) => {
+    candidates.forEach(({ index, key }, position) => (position < count ? omittedKeys[index].delete(key) : omittedKeys[index].add(key)));
+    return build();
+  };
+  let low = 0;
+  let high = candidates.length;
+  while (low < high) {
+    const middle = Math.ceil((low + high) / 2);
+    if (fits(putBack(middle))) low = middle;
+    else high = middle - 1;
   }
-  evidencePackage = assemble(lawChanges());
-  // The estimate can be short by a few characters of separators; the last
-  // provisions put back go out again until the package fits.
-  while (requestTokens(evidencePackage) > maxRequestInputTokens && added.length > 0) {
-    const last = added.pop();
-    omittedKeys[last.index].add(last.key);
-    evidencePackage = assemble(lawChanges());
-  }
-  const contextOmissions = changes.flatMap(({ change }, index) => {
-    const byVersion = omittedOf(index);
-    return versionKeys.filter((version) => byVersion.get(version)?.size > 0).map((version) => {
-      const provisions = contexts[index].versions[version].provisions;
-      const omitted = byVersion.get(version);
-      return {
-        evidenceId: lawChangeEvidenceId(change),
-        version,
-        suppliedCount: Object.keys(provisions).length - omitted.size,
-        omittedProvisions: Object.entries(provisions).filter(([id]) => omitted.has(id)).map(([, { act, wording, path, citation }]) => ({ act, wording, path, citation }))
-      };
-    });
-  });
-  return { evidencePackage, contextOmissions };
+  return putBack(low);
 }
 
 export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash = sha256(collectorRun), asOf, assessorInstructions, contextOf = null }) {
@@ -368,15 +372,12 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
     validateEvidencePackage(evidencePackage);
     return evidencePackage;
   };
-  // The assessors receive the package with its 64-character hash, after their instructions.
-  const requestTokens = (evidencePackage) => estimateRequestTokens(assessorInstructions, { packageHash: "0".repeat(64), evidencePackage });
+  // The assessors receive the package with its 64-character hash, after
+  // their instructions; it is measured with its size fields at their widest.
+  const requestTokens = (evidencePackage) => estimateRequestTokens(assessorInstructions, { packageHash: "0".repeat(64), evidencePackage: { ...evidencePackage, generation: { ...evidencePackage.generation, estimatedTokens: 9_999_999, oversized: false } } });
   let evidencePackage = assemble(changes);
-  let contextOmissions = [];
-  if (requestTokens(evidencePackage) > maxRequestInputTokens && contextOf) {
-    ({ evidencePackage, contextOmissions } = fitContexts({ changes, contextOf, assemble, requestTokens }));
-  }
+  if (requestTokens(evidencePackage) > maxRequestInputTokens && contextOf) evidencePackage = fitContexts({ changes, contextOf, assemble, requestTokens });
   evidencePackage.generation.estimatedTokens = estimatePackageTokens(evidencePackage);
   evidencePackage.generation.oversized = requestTokens(evidencePackage) > maxRequestInputTokens;
-  if (contextOmissions.length > 0) evidencePackage.generation.contextOmissions = contextOmissions;
   return evidencePackage;
 }

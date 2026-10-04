@@ -142,7 +142,7 @@ test("a package too large with its context fits by leaving out the longest provi
   assert.ok(!proposedContext.includes(huge.slice(0, 1000)));
   assert.match(proposedContext, /§ 3 odst\. 1 zákona č\. 23\/2017 Sb\. \(wording from 2026-01-01\):\nkrátké znění/, "the shorter provisions are put back");
   assert.match(facts.versions.approved.contextCz, /§ 2 zákona č\. 23\/2017 Sb\. \(wording from 2026-01-01\): the same text as supplied for the proposed text\./);
-  assert.deepEqual(pkg.generation.contextOmissions, [{ evidenceId: lawChangeEvidenceId(change), version: "proposed", suppliedCount: 2, omittedProvisions: [{ act: "23/2017", wording: "2026-01-01", path: "dokument/norma/par_1", citation: "§ 1" }] }]);
+  assert.deepEqual(pkg.generation.contextOmissions, [{ evidenceId: lawChangeEvidenceId(change), version: "proposed", suppliedCount: 2, omitted: [{ act: "23/2017", wording: "2026-01-01", paths: ["dokument/norma/par_1"] }] }]);
 });
 
 test("the assessor instructions count towards the input limit of a package", () => {
