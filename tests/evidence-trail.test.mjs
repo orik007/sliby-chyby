@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { hashEvidencePackage } from "../scripts/lib/assessment-pipeline.mjs";
 import { buildEvidenceTrail, createAssessmentRevision } from "../scripts/lib/evidence-trail.mjs";
+import { renderHumanReviewMarkdown } from "../scripts/lib/assessment-review.mjs";
 import { formatDate } from "../src/lib/evidence-trail.ts";
 import { assessmentRevisionSchema } from "../src/lib/schema.ts";
 
@@ -128,6 +130,37 @@ test("the public schema accepts only official psp.cz links and requires the revi
   const withoutText = structuredClone(revision);
   withoutText.evidenceTrail[0].steps[0].textUrl = null;
   assert.equal(assessmentRevisionSchema.safeParse(withoutText).success, false);
+});
+
+test("context left out of a package is named with e-Sbírka links on the review page and in the public revision", async () => {
+  const { proposal, evidencePackage, auditRecord, promise } = await fixture("spd-2025-079ef4aef5");
+  const change = evidencePackage.evidence.find(({ role }) => role === "law-change");
+  evidencePackage.generation.contextOmissions = [{
+    evidenceId: change.id,
+    version: "proposed",
+    suppliedCount: 3,
+    omittedProvisions: [
+      { act: "283/2021", wording: "2025-10-01", path: "dokument/norma/cast_3/hlava_3/par_166/odst_1", citation: "§ 166 odst. 1" },
+      { act: "283/2021", wording: "0000-00-00", path: "dokument/prilohy/priloha_1", citation: "příloha č. 1" }
+    ]
+  }];
+  const packageHash = hashEvidencePackage(evidencePackage);
+  const trimmedProposal = { ...proposal, packageHash };
+  const trimmedRecord = { ...auditRecord, packageHash };
+  const revision = createAssessmentRevision({ proposal: trimmedProposal, manifestProposal: trimmedProposal, evidencePackage, auditRecord: trimmedRecord, promise, fileId: "spd-2025-079ef4aef5", revisions: [baseline(promise)], publishedAt: "2026-09-28" });
+  assert.deepEqual(revision.contextOmissions.map(({ act, wordingFrom, wordingUrl, suppliedCount, provisions }) => ({ act, wordingFrom, wordingUrl, suppliedCount, provisions })), [
+    { act: "283/2021", wordingFrom: "2025-10-01", wordingUrl: "https://e-sbirka.gov.cz/sb/2021/283/2025-10-01", suppliedCount: 3, provisions: [{ citationCz: "§ 166 odst. 1", url: "https://e-sbirka.gov.cz/sb/2021/283/2025-10-01#par_166-odst_1" }] },
+    { act: "283/2021", wordingFrom: null, wordingUrl: "https://e-sbirka.gov.cz/sb/2021/283/0000-00-00", suppliedCount: 3, provisions: [{ citationCz: "příloha č. 1", url: "https://e-sbirka.gov.cz/sb/2021/283/0000-00-00" }] }
+  ]);
+  assert.equal(revision.contextOmissions[0].lawChangeId, change.id);
+  assert.deepEqual(assessmentRevisionSchema.parse(revision), revision);
+  const elsewhere = structuredClone(revision);
+  elsewhere.contextOmissions[0].provisions[0].url = "https://example.com/par_166";
+  assert.equal(assessmentRevisionSchema.safeParse(elsewhere).success, false);
+  const review = renderHumanReviewMarkdown({ evidencePackage, auditRecord: trimmedRecord, proposal: trimmedProposal });
+  assert.match(review, /### Zkrácený kontext/);
+  assert.match(review, /\(navržený text\), zákon č\. 283\/2021 Sb\. ve znění od 1\. 10\. 2025: chybí znění 1 ustanovení, k dispozici 3\*\*: \[§ 166 odst\. 1\]\(https:\/\/e-sbirka\.gov\.cz\/sb\/2021\/283\/2025-10-01#par_166-odst_1\)/);
+  assert.match(review, /ve vyhlášeném znění: chybí znění 1 ustanovení/);
 });
 
 test("trail dates keep their calendar day in any time zone", () => {

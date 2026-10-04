@@ -349,7 +349,7 @@ function wordingNote(status, wording, promulgatedOn) {
  * earlier version of the same law change (by act, citation, and text) to
  * that version's label, so an identical text is referred to, not repeated.
  */
-export function contextText(context, supplied = new Map(), versionLabel = null) {
+export function contextText(context, supplied = new Map(), versionLabel = null, omitted = null) {
   if (!context) return null;
   const named = [];
   for (const { instructionCz, targets } of context.instructions) {
@@ -364,7 +364,12 @@ export function contextText(context, supplied = new Map(), versionLabel = null) 
     `Context from the Collection of Laws (e-Sbírka): the provisions this version amends, as in force on ${context.conductDate}, the date of the earliest conduct on it. It is not evidence of conduct. ${contextLegend}`,
     `Named provisions: ${named.join("; ")}.`
   ];
-  for (const { act, wording, promulgatedOn, citation, textCz } of Object.values(context.provisions)) {
+  const left = Object.entries(context.provisions).filter(([id]) => omitted?.has(id));
+  if (left.length > 0) {
+    lines.push(`Not supplied, because the evidence package is larger than the models can read: the wording of ${left.length} of the ${Object.keys(context.provisions).length} provisions this version's context holds (${left.map(([, { act, citation }]) => `${citation} zákona č. ${act} Sb.`).join("; ")}). Read the amending text without it; never guess their wording.`);
+  }
+  for (const [id, { act, wording, promulgatedOn, citation, textCz }] of Object.entries(context.provisions)) {
+    if (omitted?.has(id)) continue;
     const key = `${act}\n${citation}\n${textCz}`;
     const heading = `${citation} zákona č. ${act} Sb. (${wording === promulgatedWording ? `as promulgated on ${promulgatedOn}` : `wording from ${wording}`})`;
     if (supplied.has(key)) {
@@ -381,18 +386,34 @@ export function contextText(context, supplied = new Map(), versionLabel = null) 
  * A law change whose versions carry the context text the models read
  * (`contextCz`), so screening, relevance checks, and the evidence package,
  * and their input hashes, all include it. A provision with the same text as
- * for an earlier version is supplied once.
+ * for an earlier version is supplied once. `omitted` maps a version to the
+ * IDs of the provisions left out of an evidence package that would otherwise
+ * be larger than the models can read (docs/evidence-pipeline.md, Package);
+ * the context names them as not supplied.
  */
-export function withContext(change, context) {
+export function withContext(change, context, omitted = null) {
   const versions = {};
   const supplied = new Map();
   for (const version of versionKeys) {
     const entry = change.versions[version];
     if (!entry) continue;
-    const text = contextText(context.versions[version], supplied, versionLabels[version]);
+    const text = contextText(context.versions[version], supplied, versionLabels[version], omitted?.get(version) ?? null);
     versions[version] = text ? { ...entry, contextCz: text } : entry;
   }
   return { ...change, versions };
+}
+
+/**
+ * The public e-Sbírka page of a provision's wording, scrolled to the
+ * provision: the wording's page with the node path from its § as the anchor
+ * (`#par_166-odst_1`, checked on 4 October 2026). A provision outside the §§
+ * (an article or an annex) links to the top of the wording.
+ */
+export function eSbirkaProvisionUrl({ act, wording, path }) {
+  const [number, year] = act.split("/");
+  const segments = path.split("/");
+  const section = path.includes("prilohy") ? -1 : segments.findIndex((segment) => segment.startsWith("par_"));
+  return `https://e-sbirka.gov.cz/sb/${year}/${number}/${wording}${section >= 0 ? `#${segments.slice(section).join("-")}` : ""}`;
 }
 
 /** Counts of targets by status, for the audit. */

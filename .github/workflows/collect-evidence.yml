@@ -325,7 +325,7 @@ jobs:
               `- Substantive law changes routed to no promise (no specific tag, or no promise holds one): ${quality.unroutedLawChanges}`,
               `- Routed, but the party has no conduct on the print: ${quality.routedWithoutConduct}`,
               `- Promise and law-change pairs checked / dropped as not relevant: ${quality.relevancePairs} / ${quality.relevanceDropped}`,
-              `- Evidence packages: ${run.counts.packageCount} (larger than the models can read: ${quality.oversizedPackages})`,
+              `- Evidence packages: ${run.counts.packageCount} (larger than the models can read: ${quality.oversizedPackages}; fitting only without part of their context: ${quality.contextTrimmedPackages})`,
               `- Invalid model outputs: ${quality.invalidModelOutputs}`,
               `- New assessment proposals: ${assessment.newProposalCount}`,
               `- Current proposals changing the public score: ${assessment.scoreChangeCount}; left for human review: ${assessment.humanReviewCount}`,

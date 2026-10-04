@@ -1,4 +1,4 @@
-import type { EvidenceTrailPrint, EvidenceTrailStep } from "./schema";
+import type { ContextOmission, EvidenceTrailPrint, EvidenceTrailStep } from "./schema";
 
 type ConductStep = Exclude<EvidenceTrailStep, { kind: "senate-resolution" }>;
 
@@ -84,4 +84,13 @@ export function stepNotes(step: EvidenceTrailStep, print: EvidenceTrailPrint) {
 
 export function trailStepCount(trail: EvidenceTrailPrint[]) {
   return trail.reduce((count, print) => count + print.steps.length, 0);
+}
+
+export function contextOmissionTitle({ printNumber, headingCz, titleCz, version }: ContextOmission) {
+  return `Sněmovní tisk ${printNumber}: ${headingCz ? `${headingCz} – ` : ""}${titleCz} (${textLabels[version].toLowerCase()})`;
+}
+
+export function contextOmissionSummary({ act, wordingFrom, suppliedCount, provisions }: ContextOmission) {
+  const wording = wordingFrom ? `ve znění od ${formatDate(wordingFrom)}` : "ve vyhlášeném znění";
+  return `zákon č. ${act} Sb. ${wording}: bez znění ${provisions.length} ustanovení, se zněním ${suppliedCount}`;
 }

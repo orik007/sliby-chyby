@@ -326,6 +326,8 @@ test("each listed change shows both assessors and the arbiter with their reasons
 
   const consensus = renderReviewPullRequest(reviewSummary([scoreChange(2, "x", { assessorA: assessorVerdict("A."), assessorB: assessorVerdict("B."), arbiter: null })]));
   assert.match(consensus.body, /- \*\*Třetí hodnotitel:\*\* nevolán, posudky se shodly\./);
+  const trimmed = renderReviewPullRequest(reviewSummary([{ ...scoreChange(3, "x"), newInRun: false, contextTrimmed: true }]));
+  assert.match(trimmed.body, /\*Balíček se modelům vešel jen bez části kontextu; co chybělo, je na stránce návrhu\.\*/);
 });
 
 test("a list too long for the body continues, in order and complete, in comments within GitHub's limit", () => {

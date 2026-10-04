@@ -408,7 +408,8 @@ const pendingReviews = (await Promise.all(currentManifest.proposals.filter(({ su
     verdicts: auditRecord ? verdictsOf(proposal, auditRecord) : null,
     reviewUrl: humanReviewUrl(proposal.humanReviewPath),
     newInRun: newProposalIds.has(proposal.proposalId),
-    packageState
+    packageState,
+    contextTrimmed: Boolean(evidencePackage?.generation?.contextOmissions)
   };
 }))).filter(Boolean);
 pendingReviews.sort((left, right) => left.promiseId.localeCompare(right.promiseId));

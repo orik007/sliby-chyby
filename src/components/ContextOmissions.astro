@@ -1,0 +1,14 @@
+---
+import { contextOmissionTitle, contextOmissionSummary } from "../lib/evidence-trail";
+import type { ContextOmission } from "../lib/schema";
+interface Props { omissions: ContextOmission[]; }
+---
+<div class="context-omissions">
+  <strong>Omezení podkladů</strong>
+  <p>Hodnocení vycházelo z úplného textu změn zákonů. Podklady by ale byly příliš rozsáhlé, a tak u těchto změn nebylo k dispozici dosavadní znění všech ustanovení, která mění. Jejich znění najdete v e-Sbírce:</p>
+  <ul>{Astro.props.omissions.map((omission) => <li>
+    <span>{contextOmissionTitle(omission)}</span>
+    <small>{contextOmissionSummary(omission)} · <a href={omission.wordingUrl} target="_blank" rel="noreferrer">celé znění zákona ↗</a></small>
+    <details><summary>Ustanovení bez znění ({omission.provisions.length})</summary><span class="context-omission-links">{omission.provisions.map(({ citationCz, url }) => <a href={url} target="_blank" rel="noreferrer">{citationCz} ↗</a>)}</span></details>
+  </li>)}</ul>
+</div>
