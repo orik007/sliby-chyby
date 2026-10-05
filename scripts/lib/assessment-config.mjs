@@ -2,8 +2,8 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-export const assessorPromptVersion = "assessor-v19";
-export const arbiterPromptVersion = "arbiter-v12";
+export const assessorPromptVersion = "assessor-v20";
+export const arbiterPromptVersion = "arbiter-v13";
 export const scoringRulePath = "docs/scoring.md";
 
 // The assessor and arbiter models read at most 1,050,000 tokens, their

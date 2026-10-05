@@ -56,6 +56,9 @@ test("the assessor prompt states its own task: relevance, reading the package, a
     ["sharing a topic is not relevance", /sharing only the general topic is not enough/],
     ["no relevant change is insufficient evidence", /If no law change is relevant, set `evidenceSufficient` to false/],
     ["the conduct's own version", /read the version that conduct concerns \(`structuredFacts\.concernsLawChanges`\)/],
+    ["the effect of each relevant change, before and after", /For each relevant law change, also write `effectCz`/],
+    ["the effect from the two wordings, not the label", /Judge the effect from the two wordings, never from the change's title, its stated purpose/],
+    ["conduct is judged by that effect", /compare the effect you stated in step 1, not the change's label, with what the promise commits to/],
     ["the maintenance classification is supplied", /Never infer a maintenance commitment yourself/],
     ["cite only package IDs", /Select the IDs only from the supplied package/],
     ["never cite an irrelevant change", /Never cite a law change you found not relevant when `evidenceSufficient` is true/]
@@ -71,6 +74,7 @@ test("the arbiter prompt states its own task: choosing between the reviews", () 
     ["prefer the correct application of the scoring rule", /Prefer the review that applies the scoring rule at the end of these instructions correctly/],
     ["judge each conduct by the version it names", /Prefer the review that judges each conduct by the version it names/],
     ["relevance follows the full texts", /Prefer the review whose verdicts follow the full law-change texts/],
+    ["the effect follows the wordings", /Prefer the review whose effect follows the previous wording in the context and the new text/],
     ["cite only supplied IDs", /cite only supplied evidence IDs/]
   ];
   for (const [rule, pattern] of rules) assert.match(prompts.arbiter, pattern, rule);

@@ -309,7 +309,10 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     for (const change of lawChanges) {
       const cells = reviews.map(([, review]) => {
         const verdict = review.changeRelevance?.find(({ evidenceId }) => evidenceId === change.id);
-        return verdict ? `${verdict.relevant ? "ano" : "ne"}: ${verdict.reasonCz.replaceAll("|", "/")}` : "—";
+        if (!verdict) return "—";
+        // The effect of a relevant change: the rule before and after.
+        const effect = verdict.effectCz?.trim() ? `<br>Dopad: ${verdict.effectCz.trim().replaceAll("|", "/").replace(/\s*\n\s*/g, " ")}` : "";
+        return `${verdict.relevant ? "ano" : "ne"}: ${verdict.reasonCz.replaceAll("|", "/")}${effect}`;
       });
       lines.push(`| [${evidenceLabel(change).replaceAll("|", "/")}](${change.url}) | ${cells.join(" | ")} |`);
     }
