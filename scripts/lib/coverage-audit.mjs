@@ -193,7 +193,8 @@ export function renderCoverageAuditMarkdown(audit) {
       `| Law changes added / removed during the debate | ${printParts.lawChangesAddedInDebate} / ${printParts.lawChangesRemovedInDebate} |`,
       `| Law changes with an identified amended act | ${printParts.lawChangesWithAmendedAct} of ${printParts.lawChanges} |`,
       `| Approved bills without an approved text on psp.cz | ${printParts.approvedBillsWithoutApprovedText} |`,
-      `| Text warnings (a text listed without a DOCX or DOC file, a missing approved text) | ${printParts.textWarnings} |`
+      `| Prints with a voted text from the Collection of Laws (e-Sbírka), because psp.cz does not publish it | ${printParts.printsWithPromulgatedText} |`,
+      `| Text warnings (a text listed without a DOCX or DOC file, a missing approved text, an act e-Sbírka does not yet hold) | ${printParts.textWarnings} |`
     ] : []),
     `| Law changes screened | ${quality.lawChanges} |`,
     `| Technical / substantive | ${quality.technicalLawChanges} / ${quality.substantiveLawChanges} |`,

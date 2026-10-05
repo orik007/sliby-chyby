@@ -310,8 +310,9 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
       const cells = reviews.map(([, review]) => {
         const verdict = review.changeRelevance?.find(({ evidenceId }) => evidenceId === change.id);
         if (!verdict) return "—";
-        // The effect of a relevant change: the rule before and after.
-        const effect = verdict.effectCz?.trim() ? `<br>Dopad: ${verdict.effectCz.trim().replaceAll("|", "/").replace(/\s*\n\s*/g, " ")}` : "";
+        // The effect of a relevant change: the rule before and after. An
+        // effect stated for a change found not relevant is not shown.
+        const effect = verdict.relevant && verdict.effectCz?.trim() ? `<br>Dopad: ${verdict.effectCz.trim().replaceAll("|", "/").replace(/\s*\n\s*/g, " ")}` : "";
         return `${verdict.relevant ? "ano" : "ne"}: ${verdict.reasonCz.replaceAll("|", "/")}${effect}`;
       });
       lines.push(`| [${evidenceLabel(change).replaceAll("|", "/")}](${change.url}) | ${cells.join(" | ")} |`);

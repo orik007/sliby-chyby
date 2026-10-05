@@ -7,7 +7,7 @@ import { createESbirkaClient, createLawContextCache, createLawContextReader, ESb
 import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { createPspDocumentRecorder } from "./lib/psp-document-hashes.mjs";
 import { log, progress } from "./lib/run-log.mjs";
-import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersion, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
+import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
 
 /**
@@ -255,15 +255,23 @@ writeFileSync(eSbirkaRequestFile, "");
 const lawContextCache = createLawContextCache(resolve(args.cache));
 let reader = null;
 const promulgatedTexts = [];
+const eSbirkaRequests = { attempts: 0, failed: 0 };
 try {
   for (const print of prints) {
-    const { texts, warnings, promulgation, passedListed } = fetched.get(print.printId);
-    const version = promulgatedTextVersion({ texts, concerned: concernedByPrint.get(print.printId) ?? [], promulgation, senateReturned: print.senateResolutionPartNumbers.length > 0, passedListed });
-    if (!version) continue;
+    const fetchedPrint = fetched.get(print.printId);
+    const { texts, warnings, promulgation, passedListed } = fetchedPrint;
+    // What psp.cz itself publishes, for the warnings below.
+    fetchedPrint.pspVersions = Object.keys(texts);
+    const versions = promulgatedTextVersions({ texts, concerned: concernedByPrint.get(print.printId) ?? [], promulgation, senateReturned: print.senateResolutionPartNumbers.length > 0, passedListed });
+    if (versions.length === 0) continue;
     reader ??= createLawContextReader({
       client: createESbirkaClient({
         onRequest: (entry) => {
-          if (!entry.ok) log(`e-Sbírka request failed (${entry.purpose}): ${entry.error}`);
+          eSbirkaRequests.attempts += 1;
+          if (!entry.ok) {
+            eSbirkaRequests.failed += 1;
+            log(`e-Sbírka request failed (${entry.purpose}): ${entry.error}`);
+          }
           appendFileSync(eSbirkaRequestFile, `${JSON.stringify(entry)}\n`);
         }
       }),
@@ -271,13 +279,14 @@ try {
       runId: workflowRunId()
     });
     const paragraphs = await readPromulgatedParagraphs(reader, promulgation.act);
+    const label = versions.join(" and ");
     if (!paragraphs) {
-      warnings.push({ printNumber: print.number, kind: "promulgated-text-not-digitised", version, detail: `psp.cz does not publish the ${version} text, and e-Sbírka does not yet hold the text of ${promulgation.act} Sb., the act it became` });
+      for (const version of versions) warnings.push({ printNumber: print.number, kind: "promulgated-text-not-digitised", version, detail: `psp.cz does not publish the ${version} text, and e-Sbírka does not yet hold the text of ${promulgation.act} Sb., the act it became` });
       continue;
     }
-    texts[version] = { document: { filename: `Zákon č. ${promulgation.act} Sb. ve vyhlášeném znění (e-Sbírka)`, url: promulgatedTextUrl(promulgation.act) }, paragraphs: proposalBody(paragraphs), promulgatedAct: promulgation.act };
+    for (const version of versions) texts[version] = { document: { filename: `Zákon č. ${promulgation.act} Sb. ve vyhlášeném znění (e-Sbírka)`, url: promulgatedTextUrl(promulgation.act) }, paragraphs: proposalBody(paragraphs), promulgatedAct: promulgation.act };
     promulgatedTexts.push(print.number);
-    log(`print ${print.number}: the ${version} text is ${promulgation.act} Sb. as promulgated on ${promulgation.promulgatedOn}, from e-Sbírka; psp.cz does not publish it`);
+    log(`print ${print.number}: the ${label} text is ${promulgation.act} Sb. as promulgated on ${promulgation.promulgatedOn}, from e-Sbírka; psp.cz does not publish it`);
   }
 } catch (error) {
   await lawContextCache.flush();
@@ -289,8 +298,9 @@ await lawContextCache.flush();
 const result = {};
 for (const print of prints) {
   print.pageUrl = officialPrintDocumentPageUrl(source.term.number, print.number, print.partNumber);
-  const { texts, senateResolutions, warnings } = fetched.get(print.printId);
-  if ((concernedByPrint.get(print.printId) ?? []).some(({ version }) => version === "approved") && !texts.approved && !warnings.some(({ version }) => version === "approved")) {
+  const { texts, senateResolutions, warnings, pspVersions } = fetched.get(print.printId);
+  // Counted by what psp.cz publishes, also when e-Sbírka supplied the text.
+  if ((concernedByPrint.get(print.printId) ?? []).some(({ version }) => version === "approved") && !pspVersions.includes("approved") && !warnings.some(({ kind, version }) => version === "approved" && kind !== "promulgated-text-not-digitised")) {
     warnings.push({ printNumber: print.number, kind: "approved-without-approved-text", detail: "a vote on the approved text is recorded, but psp.cz lists no approved text" });
   }
   for (const warning of warnings) log(`print ${warning.printNumber}: ${warning.detail}`);
@@ -313,6 +323,8 @@ const quality = {
   printsWithPassedText: Object.values(result).filter(({ versions }) => versions.includes("passed")).length,
   printsWithSenateResolution: Object.values(result).filter(({ changes }) => changes[0]?.senateResolutions.length > 0).length,
   printsWithPromulgatedText: promulgatedTexts.length,
+  eSbirkaRequests: eSbirkaRequests.attempts,
+  eSbirkaFailedRequests: eSbirkaRequests.failed,
   approvedBillsWithoutApprovedText: Object.values(result).filter(({ warnings }) => warnings.some(({ kind }) => kind === "approved-without-approved-text")).length,
   textWarnings: Object.values(result).reduce((sum, { warnings }) => sum + warnings.length, 0),
   lawChanges: allChanges.length,

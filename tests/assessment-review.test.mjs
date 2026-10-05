@@ -90,6 +90,9 @@ test("the human review page shows each assessor's relevance verdict for every la
   // The effect of a relevant change follows its reason, on one table row.
   assert.match(markdown, /ano: Mění schvalování rozpočtu, o kterém slib mluví\.<br>Dopad: Dosud rozpočet schvalovala vláda, nově \/ Sněmovna; pravidlo se zpřísňuje\. \|/);
   assert.match(markdown, /ne: Upravuje jen dokončení zahájených řízení\. \|/);
+  const withIrrelevantEffect = structuredClone(auditRecord);
+  withIrrelevantEffect.validatedAssessments["assessor-a"].changeRelevance[1].effectCz = "Nepatří sem.";
+  assert.doesNotMatch(renderHumanReviewMarkdown({ evidencePackage, auditRecord: withIrrelevantEffect, proposal }), /Nepatří sem/);
   assert.match(markdown, /Přechodná ustanovení\]\(https:\/\/example.test\/change-2\) \| ne: Upravuje jen dokončení zahájených řízení\. \| ano: Určuje, podle kterých pravidel se řízení dokončí\.<br>Dopad: Kontext dosavadní znění neuvádí, směr nelze určit\. \|/);
 });
 

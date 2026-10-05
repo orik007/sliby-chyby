@@ -244,23 +244,24 @@ export function promulgatedTextUrl(act) {
 }
 
 /**
- * The version of a bill whose text is the act as it was promulgated, when
- * psp.cz does not publish that version and a decisive vote concerned it
- * (docs/evidence-pipeline.md, Text from the Collection of Laws), or null.
- * `concerned` lists what versionConcerned returned for the bill's votes. The
- * promulgated act is the
- * text passed by Parliament; it is the approved text only when nothing came
- * after the approval that could change it: no Senate return and no passed
- * text listed. A vote on the passed text that is the approved text, which
+ * The versions of a bill whose text is the act as it was promulgated: each
+ * that psp.cz does not publish and a decisive vote concerned
+ * (docs/evidence-pipeline.md, Text from the Collection of Laws), in version
+ * order; none for a bill that was not promulgated. `concerned` lists what
+ * versionConcerned returned for the bill's votes. The promulgated act is the
+ * text passed by Parliament; it is also the approved text only when nothing
+ * came after the approval that could change it: no Senate return and no
+ * passed text listed. A vote on the passed text that is the approved text, which
  * psp.cz publishes (`sameAsApproved`), needs none, and a vote that rejected
  * the Senate's amendments (`senateAmendmentsRejected`) concerned a text that
  * was never promulgated.
  */
-export function promulgatedTextVersion({ texts, concerned, promulgation, senateReturned, passedListed }) {
-  if (!promulgation) return null;
-  if (!texts.passed && concerned.some(({ version, sameAsApproved, senateAmendmentsRejected }) => version === "passed" && !senateAmendmentsRejected && !(sameAsApproved && texts.approved))) return "passed";
-  if (!texts.approved && !senateReturned && !passedListed && concerned.some(({ version }) => version === "approved")) return "approved";
-  return null;
+export function promulgatedTextVersions({ texts, concerned, promulgation, senateReturned, passedListed }) {
+  if (!promulgation) return [];
+  const versions = [];
+  if (!texts.approved && !senateReturned && !passedListed && concerned.some(({ version }) => version === "approved")) versions.push("approved");
+  if (!texts.passed && concerned.some(({ version, sameAsApproved, senateAmendmentsRejected }) => version === "passed" && !senateAmendmentsRejected && !(sameAsApproved && texts.approved))) versions.push("passed");
+  return versions;
 }
 
 /**
@@ -399,7 +400,7 @@ function versionOf(part, amendedAct, document, effectiveCz = null, promulgatedAc
  * The law changes of one print with their versions. `texts` maps a version
  * key to `{ document, paragraphs }` for each text psp.cz publishes, and to
  * `{ document, paragraphs, promulgatedAct }` for a version whose text is the
- * act as promulgated (promulgatedTextVersion); without
+ * act as promulgated (promulgatedTextVersions); without
  * a proposal text, the proposed version of each part carries only the print
  * title, and the parts come from the first later text. A part
  * of a later text is matched to an earlier law change by the act it amends,

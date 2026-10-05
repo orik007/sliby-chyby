@@ -11,7 +11,7 @@ import {
   promulgatedActOfHistory,
   promulgatedParagraphs,
   promulgatedTextUrl,
-  promulgatedTextVersion,
+  promulgatedTextVersions,
   proposalBody,
   proposalDocumentLink,
   splitProposalText,
@@ -333,27 +333,29 @@ test("reads the act a bill became from the end of its history page", async () =>
   assert.equal(promulgatedTextUrl("155/2026"), "https://e-sbirka.gov.cz/sb/2026/155/0000-00-00");
 });
 
-test("the promulgated act is the text of a voted version psp.cz does not publish, only where nothing could change it after", () => {
+test("the promulgated act is the text of every voted version psp.cz does not publish, only where nothing could change it after", () => {
   const promulgation = { act: "155/2026", promulgatedOn: "2026-08-28" };
   const text = { document, paragraphs: ["x"] };
-  const vote = (version, extra = {}) => ({ version, withSenateResolution: false, sameAsApproved: false, mark: null, ...extra });
-  const of = (overrides) => promulgatedTextVersion({ texts: { proposed: text, approved: text }, concerned: [vote("approved")], promulgation, senateReturned: false, passedListed: false, ...overrides });
+  const vote = (version, extra = {}) => ({ version, withSenateResolution: false, sameAsApproved: false, senateAmendmentsRejected: false, mark: null, ...extra });
+  const of = (overrides) => promulgatedTextVersions({ texts: { proposed: text, approved: text }, concerned: [vote("approved")], promulgation, senateReturned: false, passedListed: false, ...overrides });
   // A vote after the President's return concerns the passed text.
-  assert.equal(of({ concerned: [vote("approved"), vote("passed")] }), "passed");
+  assert.deepEqual(of({ concerned: [vote("approved"), vote("passed")] }), ["passed"]);
+  // Approval and a presidential return, neither text published: both are the act.
+  assert.deepEqual(of({ texts: { proposed: text }, concerned: [vote("approved"), vote("passed")] }), ["approved", "passed"]);
   // Insisting on the approved text, which psp.cz publishes, needs none.
-  assert.equal(of({ concerned: [vote("passed", { sameAsApproved: true, withSenateResolution: true })], senateReturned: true }), null);
-  assert.equal(of({ texts: { proposed: text }, concerned: [vote("passed", { sameAsApproved: true, withSenateResolution: true })], senateReturned: true }), "passed");
+  assert.deepEqual(of({ concerned: [vote("passed", { sameAsApproved: true, withSenateResolution: true })], senateReturned: true }), []);
+  assert.deepEqual(of({ texts: { proposed: text }, concerned: [vote("passed", { sameAsApproved: true, withSenateResolution: true })], senateReturned: true }), ["passed"]);
   // A state budget: approved, never returned.
-  assert.equal(of({ texts: { proposed: text } }), "approved");
+  assert.deepEqual(of({ texts: { proposed: text } }), ["approved"]);
   // After a Senate return or with a passed text listed, the act may differ from the approved text.
-  assert.equal(of({ texts: { proposed: text }, senateReturned: true }), null);
-  assert.equal(of({ texts: { proposed: text }, passedListed: true }), null);
+  assert.deepEqual(of({ texts: { proposed: text }, senateReturned: true }), []);
+  assert.deepEqual(of({ texts: { proposed: text }, passedListed: true }), []);
   // Rejecting the Senate's amendments concerned a text never promulgated.
-  assert.equal(of({ texts: { proposed: text }, concerned: [vote("passed", { withSenateResolution: true, senateAmendmentsRejected: true })], senateReturned: true }), null);
+  assert.deepEqual(of({ texts: { proposed: text }, concerned: [vote("passed", { withSenateResolution: true, senateAmendmentsRejected: true })], senateReturned: true }), []);
   // A bill that was not promulgated, or whose voted texts psp.cz publishes.
-  assert.equal(of({ texts: { proposed: text }, promulgation: null }), null);
-  assert.equal(of({}), null);
-  assert.equal(of({ concerned: [vote("proposed")] }), null);
+  assert.deepEqual(of({ texts: { proposed: text }, promulgation: null }), []);
+  assert.deepEqual(of({}), []);
+  assert.deepEqual(of({ concerned: [vote("proposed")] }), []);
 });
 
 test("an act as promulgated is split like a psp.cz text and says where it is from", async () => {
