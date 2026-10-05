@@ -3,11 +3,11 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
-import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError, promulgatedWording } from "./lib/e-sbirka.mjs";
+import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError } from "./lib/e-sbirka.mjs";
 import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { createPspDocumentRecorder } from "./lib/psp-document-hashes.mjs";
 import { log, progress } from "./lib/run-log.mjs";
-import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedParagraphs, promulgatedTextUrl, promulgatedTextVersion, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
+import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersion, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
 
 /**
@@ -269,7 +269,7 @@ try {
       }),
       cache: lawContextCache
     });
-    const paragraphs = promulgatedParagraphs(await reader.nodes(promulgation.act, promulgatedWording), promulgation.act);
+    const paragraphs = await readPromulgatedParagraphs(reader, promulgation.act);
     if (!paragraphs) {
       warnings.push({ printNumber: print.number, kind: "promulgated-text-not-digitised", version, detail: `psp.cz does not publish the ${version} text, and e-Sbírka does not yet hold the text of ${promulgation.act} Sb., the act it became` });
       continue;

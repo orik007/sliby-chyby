@@ -280,6 +280,19 @@ export function promulgatedParagraphs(nodes, act) {
   return kept.map(([, text]) => text);
 }
 
+/**
+ * The paragraphs of an act as promulgated (promulgatedParagraphs), read with
+ * a law-context reader (scripts/lib/e-sbirka.mjs), or null when e-Sbírka
+ * does not hold the act or its body. The day the act was promulgated is read
+ * first: e-Sbírka's list of changed wordings names the promulgated wording
+ * by that day, so without it a cached text, such as a notice that the act is
+ * still being digitised, would never be read again.
+ */
+export async function readPromulgatedParagraphs(reader, act) {
+  if (!(await reader.promulgated(act))) return null;
+  return promulgatedParagraphs(await reader.nodes(act, "0000-00-00"), act);
+}
+
 function normalizedTitle(title) {
   return String(title ?? "").normalize("NFC").toLocaleLowerCase("cs-CZ").replace(/\s+/g, " ").trim();
 }

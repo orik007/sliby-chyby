@@ -7,6 +7,7 @@ import test from "node:test";
 import { createESbirkaClient, createLawContextCache, createLawContextReader, eSbirkaRequestSettings, ESbirkaUnavailableError, plainText } from "../scripts/lib/e-sbirka.mjs";
 import { citationOfPath, contextStatusCounts, contextText, locateTarget, resolveLawChangeContext, withContext, wordingOn } from "../scripts/lib/law-context.mjs";
 import { lawChangeText } from "../scripts/lib/law-change-screening.mjs";
+import { readPromulgatedParagraphs } from "../scripts/lib/print-parts.mjs";
 
 // A clock and sleep that only move when the client waits, so pacing and
 // retries are checked without real time passing.
@@ -364,6 +365,23 @@ test("only what e-Sbírka reports changed since it was read is requested again",
   // A change list that could not name every change makes everything out of date.
   assert.deepEqual(await run({ uncounted: 1 }, "2026-10-06T12:00:00.000Z"), ["%2Fsb%2F2019%2F110%2F2025-01-01/fragmenty", "%2Fsb%2F2019%2F110%2F2026-06-12/fragmenty", "%2Fsb%2F2019%2F110/historie", "%2Fsb%2F2025%2F300"]);
   assert.deepEqual(await run({}, "2026-10-07T12:00:00.000Z"), []);
+});
+
+test("an act as promulgated that e-Sbírka was still digitising is read again once e-Sbírka lists it changed", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "law-context-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const digitising = { structures: { "0000-00-00": ["dokument", "dokument/prefix/frag_1"] }, texts: { "0000-00-00/dokument/prefix/frag_1": "Znění aktu … právě digitalizujeme." } };
+  const published = { structures: { "0000-00-00": ["dokument", "dokument/prefix/frag_1", "dokument/novela/cast_1", "dokument/postfix/frag_2"] }, texts: { "0000-00-00/dokument/prefix/frag_1": "ZÁKON", "0000-00-00/dokument/novela/cast_1": "ČÁST PRVNÍ", "0000-00-00/dokument/postfix/frag_2": "Babiš v. r." } };
+  const run = async (act, changes, time) => {
+    const endpoint = endpointFor({ ...act110, ...act, changes, promulgations: { "110/2019": "2026-09-15" } });
+    const reader = await readerFor(directory, endpoint, { at: () => time });
+    return { paragraphs: await readPromulgatedParagraphs(reader, "110/2019"), calls: endpoint.calls.filter((call) => !call.includes("zneni")).length };
+  };
+  assert.deepEqual(await run(digitising, {}, "2026-10-05T10:00:00.000Z"), { paragraphs: null, calls: 2 });
+  // Nothing listed as changed: the cached notice stands.
+  assert.deepEqual(await run(published, {}, "2026-10-06T10:00:00.000Z"), { paragraphs: null, calls: 0 });
+  // e-Sbírka lists the promulgated wording by the promulgation day.
+  assert.deepEqual(await run(published, { "zmeny-zneni": [["110/2019", "2026-09-15"]] }, "2026-10-07T10:00:00.000Z"), { paragraphs: ["ZÁKON", "ČÁST PRVNÍ"], calls: 2 });
 });
 
 test("a cache line cut short by a stopped run is removed, and what it held is read again", async (t) => {
