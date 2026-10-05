@@ -58,6 +58,7 @@ test("the assessor prompt states its own task: relevance, reading the package, a
     ["the conduct's own version", /read the version that conduct concerns \(`structuredFacts\.concernsLawChanges`\)/],
     ["the effect of each relevant change, before and after", /For each relevant law change, also write `effectCz`/],
     ["the effect from the two wordings, not the label", /Judge the effect from the two wordings, never from the change's title, its stated purpose/],
+    ["left-out law changes are not evidence", /`excludedLawChanges`, when present\): law changes that both assessors of an earlier assessment of this promise found not relevant[^\n]*never cite them and give them no relevance verdict/],
     ["a change amending no act states what it establishes", /A law change that amends no act \(a new act, a state budget, a treaty\) has no previous wording: state what it establishes/],
     ["conduct is judged by that effect", /compare the effect you stated in step 1, not the change's label, with what the promise commits to/],
     ["the maintenance classification is supplied", /Never infer a maintenance commitment yourself/],

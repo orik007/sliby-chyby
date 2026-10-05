@@ -328,6 +328,18 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     }
     lines.push("");
   }
+  // Law changes left out because both assessors of an earlier assessment
+  // found them not relevant (docs/evidence-pipeline.md, Package).
+  if (evidencePackage.excludedLawChanges?.length > 0) {
+    lines.push(
+      "### Vyřazené změny zákonů",
+      "",
+      "Tyto změny v balíčku nebyly, protože je oba hodnotitelé dřívějšího posouzení tohoto slibu shodně označili za nesouvisející. Vrátí se, jakmile se změní jejich text, kontext, znění slibu nebo pokyny hodnotitelů.",
+      "",
+      ...evidencePackage.excludedLawChanges.map(({ title, proposalId, reasonsCz }) => `- **${title.replaceAll("|", "/")}** (posouzení ${proposalId}): ${reasonsCz.map((reason) => reason.replace(/\s*\n\s*/g, " ")).join(" / ")}`),
+      ""
+    );
+  }
   const omissions = contextOmissionsOf(evidencePackage);
   if (omissions.length > 0) {
     lines.push(

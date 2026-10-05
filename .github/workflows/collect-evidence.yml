@@ -204,6 +204,7 @@ jobs:
             --print-parts automation/runs/pipeline/github-actions/print-parts/print-parts.json \
             --law-context automation/runs/pipeline/github-actions/law-context/law-context.json \
             --tag-cache automation/topic-routing/tag-cache \
+            --review-proposals automation/review-proposals \
             --as-of "$AS_OF" \
             --output automation/runs/pipeline/github-actions/topic-routing
 
@@ -329,7 +330,7 @@ jobs:
               `- Routed law changes: ${quality.routedLawChanges} (direct legal-identifier link: ${quality.directLinkLawChanges})`,
               `- Substantive law changes routed to no promise (no specific tag, or no promise holds one): ${quality.unroutedLawChanges}`,
               `- Routed, but the party has no conduct on the print: ${quality.routedWithoutConduct}`,
-              `- Promise and law-change pairs checked / dropped as not relevant: ${quality.relevancePairs} / ${quality.relevanceDropped}`,
+              `- Promise and law-change pairs checked / dropped as not relevant: ${quality.relevancePairs} / ${quality.relevanceDropped}; left out because both assessors of an earlier assessment found them not relevant: ${quality.excludedIrrelevant}`,
               `- Evidence packages: ${run.counts.packageCount} (larger than the models can read: ${quality.oversizedPackages}; fitting only without part of their context: ${quality.contextTrimmedPackages})`,
               `- Invalid model outputs: ${quality.invalidModelOutputs}`,
               `- New assessment proposals: ${assessment.newProposalCount}`,

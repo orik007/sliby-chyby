@@ -1,10 +1,13 @@
 import assert from "node:assert/strict";
-import { readdir } from "node:fs/promises";
+import { mkdir, mkdtemp, readdir, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import test from "node:test";
 import { arbiterPromptVersion, assessorPromptVersion, loadAssessmentPrompts } from "../scripts/lib/assessment-config.mjs";
 import { assessmentFingerprintVersion, mergeRelevanceVerdicts, reviewManifestSchemaVersion, planAssessmentInputs, relevanceVerdictsByRoute, renderHumanReviewMarkdown, validateReviewManifest } from "../scripts/lib/assessment-review.mjs";
 import { relevancePromptVersion, screeningPromptVersion } from "../scripts/lib/law-change-screening.mjs";
+import { hashAssessmentContent, hashAssessmentFingerprint } from "../scripts/lib/assessment-pipeline.mjs";
+import { loadRelevanceVerdicts, withoutIrrelevantLawChanges } from "../scripts/lib/irrelevance-verdicts.mjs";
 
 const evidencePackage = {
   schemaVersion: "1.0.0",
@@ -52,6 +55,57 @@ test("plans an unseen package for human review without publication", () => {
   });
   assert.equal(plan[0].disposition, "assess");
   assert.equal(manifest.publicationApproved, false);
+});
+
+test("a package that differs from an assessed one only by the law changes its assessors both found not relevant keeps that assessment", () => {
+  const prompts = { assessor: { version: "test", contentHash: "a".repeat(64) }, arbiter: { version: "test", contentHash: "b".repeat(64) } };
+  const entries = [{ evidenceId: "change-2", title: "90: ČÁST DRUHÁ – Přechodná ustanovení", proposalId: "test-promise--abc", reasonsCz: ["Jiné téma.", "Jiné téma."] }];
+  const conduct = { ...evidencePackage.evidence[3], structuredFacts: { concernsLawChanges: [{ evidenceId: "change-1" }, { evidenceId: "change-2" }] } };
+  const assessed = { ...evidencePackage, evidence: [...evidencePackage.evidence.slice(0, 3), conduct] };
+  const reduced = withoutIrrelevantLawChanges(assessed, entries);
+  assert.deepEqual(reduced.evidence.at(-1).structuredFacts.concernsLawChanges, [{ evidenceId: "change-1" }]);
+  const reducedContentHash = hashAssessmentContent(reduced);
+  const proposal = {
+    proposalId: "test-promise--abc", promiseId: "test-promise", assessmentFingerprint: "c".repeat(64), assessmentContentHash: hashAssessmentContent(assessed), packageHash: "d".repeat(64),
+    resolutionState: "candidate", candidateStatus: "moving-towards", evaluatedAt: "2026-10-01T00:00:00Z", publicRevisionAtEvaluation: 0, humanReviewRequired: true, publicationApproved: false,
+    path: "automation/review-proposals/test-promise/x", humanReviewPath: "automation/review-proposals/test-promise/x/review.md", supersedesProposalId: null, supersededByProposalId: null,
+    reducedAssessmentContentHash: reducedContentHash, reducedAssessmentFingerprint: hashAssessmentFingerprint({ assessmentContentHash: reducedContentHash, prompts, runtime })
+  };
+  const manifest = { schemaVersion: reviewManifestSchemaVersion, fingerprintVersion: assessmentFingerprintVersion, publicationApproved: false, proposals: [proposal] };
+  assert.equal(planAssessmentInputs({ packages: [{ path: "r.json", evidencePackage: reduced }], manifest, prompts, runtime })[0].disposition, "unchanged");
+  // Another prompt, or anything else changed, is assessed.
+  assert.equal(planAssessmentInputs({ packages: [{ path: "r.json", evidencePackage: reduced }], manifest, prompts: { ...prompts, assessor: { version: "test2", contentHash: "e".repeat(64) } }, runtime })[0].disposition, "assess");
+  const changed = withoutIrrelevantLawChanges({ ...assessed, promise: { ...assessed.promise, titleCz: "Jiný slib" } }, entries);
+  assert.equal(planAssessmentInputs({ packages: [{ path: "r.json", evidencePackage: changed }], manifest, prompts, runtime })[0].disposition, "assess");
+});
+
+test("the human review page lists the law changes left out as not relevant, with both reasons", () => {
+  const withExcluded = { ...evidencePackage, excludedLawChanges: [{ evidenceId: "change-9", title: "77: ČÁST DEVÁTÁ – Změna zákona o | myslivosti", proposalId: "test-promise--old", reasonsCz: ["Myslivost se slibu netýká.", "Jiné téma."] }] };
+  const markdown = renderHumanReviewMarkdown({ evidencePackage: withExcluded, auditRecord, proposal: { proposalId: "test-promise--abc", candidateStatus: "moving-towards", resolutionState: "candidate", resolutionReason: "assessor-consensus", supersedesProposalId: null } });
+  assert.match(markdown, /### Vyřazené změny zákonů/);
+  assert.match(markdown, /- \*\*77: ČÁST DEVÁTÁ – Změna zákona o \/ myslivosti\*\* \(posouzení test-promise--old\): Myslivost se slibu netýká\. \/ Jiné téma\./);
+  assert.doesNotMatch(renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal: { proposalId: "test-promise--abc", candidateStatus: "moving-towards", resolutionState: "candidate", resolutionReason: "assessor-consensus", supersedesProposalId: null } }), /Vyřazené změny zákonů/);
+});
+
+test("only a law change's latest verdict counts", async (t) => {
+  const root = await mkdtemp(resolve(tmpdir(), "verdicts-"));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  const prompts = { assessor: { version: "assessor-v20", contentHash: "a".repeat(64) } };
+  const lawChange = { ...evidencePackage.evidence[2], structuredFacts: { titleCz: "Přechodná ustanovení", versions: { proposed: { textCz: "Text." } } } };
+  const pkg = { ...evidencePackage, evidence: [evidencePackage.evidence[0], lawChange, evidencePackage.evidence[3]] };
+  const verdict = (relevant) => ({ changeRelevance: [{ evidenceId: "change-2", relevant, reasonCz: relevant ? "Souvisí." : "Nesouvisí.", effectCz: "" }] });
+  const proposals = [];
+  for (const [name, evaluatedAt, relevantB] of [["older", "2026-10-01T00:00:00Z", false], ["newer", "2026-10-02T00:00:00Z", true]]) {
+    const path = resolve(root, name);
+    await mkdir(path);
+    await writeFile(resolve(path, "evidence-package.json"), JSON.stringify(pkg));
+    await writeFile(resolve(path, "assessment-run.json"), JSON.stringify({ prompts, validatedAssessments: { "assessor-a": verdict(false), "assessor-b": verdict(relevantB) } }));
+    proposals.push({ proposalId: `test-promise--${name}`, promiseId: "test-promise", evaluatedAt, path });
+  }
+  const latest = [...(await loadRelevanceVerdicts({ proposals })).get("test-promise").get("change-2").values()];
+  assert.deepEqual(latest.map(({ irrelevant, entry }) => [irrelevant, entry]), [[false, null]]);
+  const onlyOlder = [...(await loadRelevanceVerdicts({ proposals: proposals.slice(0, 1) })).get("test-promise").get("change-2").values()];
+  assert.deepEqual(onlyOlder.map(({ irrelevant, entry }) => [irrelevant, entry?.proposalId]), [[true, "test-promise--older"]]);
 });
 
 const reviewA = {
