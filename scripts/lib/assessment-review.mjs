@@ -1,5 +1,6 @@
 import { assessmentStatuses, hashAssessmentContent, hashAssessmentFingerprint, hashEvidencePackage, validateEvidencePackage } from "./assessment-pipeline.mjs";
 import { contextOmissionLabel, contextOmissionsOf } from "./context-omissions.mjs";
+import { relevanceVerdictsOf } from "./irrelevance-verdicts.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -325,6 +326,19 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
       lines.push(`| [${evidenceLabel(change).replaceAll("|", "/")}](${change.url}) | ${cells.join(" | ")} |`);
     }
     lines.push("");
+    // The changes this assessment's verdicts leave out of later packages
+    // (docs/evidence-pipeline.md, Package); a package without them keeps this
+    // proposal, so this page is where they are named.
+    const leftOut = relevanceVerdictsOf({ evidencePackage, auditRecord, proposalId: proposal.proposalId }).filter(({ irrelevant }) => irrelevant);
+    if (leftOut.length > 0) {
+      const titles = new Map(lawChanges.map((change) => [change.id, evidenceLabel(change)]));
+      lines.push(
+        "Oba hodnotitelé tyto změny shodně označili za nesouvisející, proto je další balíčky tohoto slibu vynechají, dokud se nezmění jejich text, kontext, znění slibu nebo pokyny hodnotitelů:",
+        "",
+        ...leftOut.map(({ evidenceId }) => `- ${titles.get(evidenceId).replaceAll("|", "/")}`),
+        ""
+      );
+    }
   }
   // Law changes left out because both assessors of an earlier assessment
   // found them not relevant (docs/evidence-pipeline.md, Package).
