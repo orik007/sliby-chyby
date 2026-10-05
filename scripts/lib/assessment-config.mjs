@@ -9,8 +9,10 @@ export const scoringRulePath = "docs/scoring.md";
 // The assessor and arbiter models read at most 1,050,000 tokens, their
 // answer of up to 128,000 tokens included (OpenAI model documentation,
 // verified 26 September 2026), so a request can carry at most 922,000 input
-// tokens, instructions and input together; a larger one cannot be sent, is
-// reported for human review, and is never trimmed. A request above 272,000
+// tokens, instructions and input together. A larger evidence package is fitted
+// by leaving out part of its context, never its text, and only one still too
+// large without any context is reported for human review
+// (docs/evidence-pipeline.md, Package). A request above 272,000
 // input tokens is sent at the long-context price
 // (automation/model-prices.json).
 export const maxRequestInputTokens = 922_000;
