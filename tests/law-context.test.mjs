@@ -410,6 +410,13 @@ test("the steps of one workflow run share one check of what e-Sbírka changed", 
   assert.equal(await step("7-1", "2026-10-05T10:00:00.000Z"), 0, "an empty cache needs no check");
   assert.equal(await step("8-1", "2026-10-06T10:00:00.000Z"), 2);
   assert.equal(await step("8-1", "2026-10-06T10:05:00.000Z"), 0, "the next step of the same run");
+  // A later step reports the count of the shared check.
+  const reader = (runId, changes, time) => createLawContextReader({ client: createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: endpointFor({ ...act110, changes }).fetchImpl }), cache: createLawContextCache(directory), clock: () => time, runId });
+  const first = reader("9-1", { "zmeny-zneni": [["89/2012", "2027-01-01"]] }, "2026-10-06T13:00:00.000Z");
+  await first.structure("110/2019", "2025-01-01");
+  const second = reader("9-1", {}, "2026-10-06T13:05:00.000Z");
+  await second.structure("110/2019", "2025-01-01");
+  assert.deepEqual([first.stats.changedWordings, second.stats.changesCheckedEarlierInRun, second.stats.changedWordings], [1, true, 1]);
   assert.equal(await step("8-2", "2026-10-06T11:00:00.000Z"), 2, "a new attempt checks again");
   assert.equal(await step(null, "2026-10-06T12:00:00.000Z"), 2, "outside GitHub Actions every reader checks");
 });

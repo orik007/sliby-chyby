@@ -307,6 +307,7 @@ export function createLawContextReader({ client, cache, clock = () => new Date()
       const readAt = clock();
       if (runId !== null && journal.at(-1)?.runId === runId) {
         stats.changesCheckedEarlierInRun = true;
+        stats.changedWordings = journal.at(-1).wordings.length;
       } else if (from === null) {
         await cache.appendChanges({ kind: "changes", from: null, readAt, complete: true, wordings: [], runId });
         journal.push({ readAt, complete: true, wordings: [] });

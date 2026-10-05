@@ -463,9 +463,10 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [] })
         ? { sameAs: change.versions[previous].sameAs ?? previous, heading: entryVersion.heading, titleCz: entryVersion.titleCz, amendedAct: entryVersion.amendedAct, effectiveCz, document: entryVersion.document, ...(entryVersion.promulgatedAct ? { promulgatedAct: entryVersion.promulgatedAct } : {}) }
         : entryVersion;
     }
-    // A part of an earlier version that this text no longer has was removed.
+    // A part of an earlier version that this text no longer has was removed;
+    // in the act as promulgated, the entry says so (versionOfChange).
     for (const change of changes) {
-      if (!change.versions[version]) change.versions[version] = { removed: true };
+      if (!change.versions[version]) change.versions[version] = text?.promulgatedAct ? { removed: true, promulgatedAct: text.promulgatedAct } : { removed: true };
     }
   }
   // Only a print whose first text is one part takes the title's acts.

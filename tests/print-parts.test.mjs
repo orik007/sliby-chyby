@@ -381,5 +381,10 @@ test("an act as promulgated is split like a psp.cz text and says where it is fro
   const vote = (extra) => ({ version: "passed", withSenateResolution: true, sameAsApproved: false, senateAmendmentsRejected: false, mark: null, ...extra });
   assert.deepEqual(versionOfChange(change, vote({ senateAmendmentsRejected: true })), { version: "approved", removed: false, publishedVersionMissing: "passed", withSenateResolution: true, mark: null });
   assert.deepEqual(versionOfChange(change, vote({})), { version: "passed", removed: false, publishedVersionMissing: null, withSenateResolution: true, mark: null });
+  // Also for a part the act no longer has: every part of the print falls back alike.
+  const [kept, dropped] = lawChangesOfPrint({ print: { ...print85, kindId: "1" }, texts: { proposed: { document, paragraphs: [...approved.slice(0, 5), "ČÁST DRUHÁ", "Změna zákona o rozpočtových pravidlech", "Zákon č. 218/2000 Sb., o rozpočtových pravidlech, se mění takto:", "V § 1 se slovo zrušuje.", ...approved.slice(5)] }, passed: promulgated } });
+  assert.deepEqual(dropped.versions.passed, { removed: true, promulgatedAct: "155/2026" });
+  for (const part of [kept, dropped]) assert.equal(versionOfChange(part, vote({ senateAmendmentsRejected: true })).version, "proposed");
+  assert.equal(versionOfChange(dropped, vote({})).removed, true);
   assert.match(lawChangeText(change), /Version: text passed by Parliament \(psp\.cz does not publish it; this is the act as promulgated in the Collection of Laws, zákon č\. 155\/2026 Sb\., without its annexes\)\n/);
 });
