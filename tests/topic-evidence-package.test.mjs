@@ -287,7 +287,7 @@ test("a law change both assessors found not relevant is left out, and the packag
   const audit = (reviewA, reviewB, prompt = assessorPrompt) => ({ prompts: { assessor: prompt }, validatedAssessments: { "assessor-a": reviewA, "assessor-b": reviewB } });
   const verdictsOf = (auditRecord, evidencePackage = full) => {
     const byChange = new Map();
-    for (const verdict of relevanceVerdictsOf({ evidencePackage, auditRecord, proposalId: "p--1" })) byChange.set(verdict.evidenceId, new Map([[verdict.key, verdict]]));
+    for (const verdict of relevanceVerdictsOf({ evidencePackage, auditRecord, proposalId: "p--1" })) byChange.set(verdict.evidenceId, verdict);
     return new Map([[fiscalPromise.id, byChange]]);
   };
   const exclusionFrom = (verdicts, prompt = assessorPrompt) => (lawChangeItem) => exclusionOf({ verdicts, promise: fiscalPromise, lawChange: lawChangeItem, assessorPrompt: prompt });

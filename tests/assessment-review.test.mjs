@@ -7,7 +7,7 @@ import { arbiterPromptVersion, assessorPromptVersion, loadAssessmentPrompts } fr
 import { assessmentFingerprintVersion, mergeRelevanceVerdicts, reviewManifestSchemaVersion, planAssessmentInputs, relevanceVerdictsByRoute, renderHumanReviewMarkdown, validateReviewManifest } from "../scripts/lib/assessment-review.mjs";
 import { relevancePromptVersion, screeningPromptVersion } from "../scripts/lib/law-change-screening.mjs";
 import { hashAssessmentContent, hashAssessmentFingerprint } from "../scripts/lib/assessment-pipeline.mjs";
-import { loadRelevanceVerdicts, withoutIrrelevantLawChanges } from "../scripts/lib/irrelevance-verdicts.mjs";
+import { exclusionOf, loadRelevanceVerdicts, withoutIrrelevantLawChanges } from "../scripts/lib/irrelevance-verdicts.mjs";
 
 const evidencePackage = {
   schemaVersion: "1.0.0",
@@ -90,7 +90,8 @@ test("the human review page lists the law changes left out as not relevant, with
 test("only a law change's latest verdict counts", async (t) => {
   const root = await mkdtemp(resolve(tmpdir(), "verdicts-"));
   t.after(() => rm(root, { recursive: true, force: true }));
-  const prompts = { assessor: { version: "assessor-v20", contentHash: "a".repeat(64) } };
+  // The older assessment ran under one prompt, the newer one under another.
+  const promptOf = { older: { assessor: { version: "assessor-v20", contentHash: "a".repeat(64) } }, newer: { assessor: { version: "assessor-v21", contentHash: "b".repeat(64) } } };
   const lawChange = { ...evidencePackage.evidence[2], structuredFacts: { titleCz: "Přechodná ustanovení", versions: { proposed: { textCz: "Text." } } } };
   const pkg = { ...evidencePackage, evidence: [evidencePackage.evidence[0], lawChange, evidencePackage.evidence[3]] };
   const verdict = (relevant) => ({ changeRelevance: [{ evidenceId: "change-2", relevant, reasonCz: relevant ? "Souvisí." : "Nesouvisí.", effectCz: "" }] });
@@ -99,13 +100,18 @@ test("only a law change's latest verdict counts", async (t) => {
     const path = resolve(root, name);
     await mkdir(path);
     await writeFile(resolve(path, "evidence-package.json"), JSON.stringify(pkg));
-    await writeFile(resolve(path, "assessment-run.json"), JSON.stringify({ prompts, validatedAssessments: { "assessor-a": verdict(false), "assessor-b": verdict(relevantB) } }));
+    await writeFile(resolve(path, "assessment-run.json"), JSON.stringify({ prompts: promptOf[name], validatedAssessments: { "assessor-a": verdict(false), "assessor-b": verdict(relevantB) } }));
     proposals.push({ proposalId: `test-promise--${name}`, promiseId: "test-promise", evaluatedAt, path });
   }
-  const latest = [...(await loadRelevanceVerdicts({ proposals })).get("test-promise").get("change-2").values()];
-  assert.deepEqual(latest.map(({ irrelevant, entry }) => [irrelevant, entry]), [[false, null]]);
-  const onlyOlder = [...(await loadRelevanceVerdicts({ proposals: proposals.slice(0, 1) })).get("test-promise").get("change-2").values()];
-  assert.deepEqual(onlyOlder.map(({ irrelevant, entry }) => [irrelevant, entry?.proposalId]), [[true, "test-promise--older"]]);
+  const latest = (await loadRelevanceVerdicts({ proposals })).get("test-promise").get("change-2");
+  assert.deepEqual([latest.irrelevant, latest.entry], [false, null]);
+  const onlyOlder = (await loadRelevanceVerdicts({ proposals: proposals.slice(0, 1) })).get("test-promise").get("change-2");
+  assert.deepEqual([onlyOlder.irrelevant, onlyOlder.entry?.proposalId], [true, "test-promise--older"]);
+  // Back under the older prompt, the older verdict's key matches again, but
+  // the newer verdict, which found the change relevant, still decides.
+  const exclusion = (verdicts) => exclusionOf({ verdicts, promise: pkg.promise, lawChange, assessorPrompt: promptOf.older.assessor });
+  assert.equal(exclusion(await loadRelevanceVerdicts({ proposals })), null);
+  assert.equal(exclusion(await loadRelevanceVerdicts({ proposals: proposals.slice(0, 1) }))?.proposalId, "test-promise--older");
 });
 
 const reviewA = {

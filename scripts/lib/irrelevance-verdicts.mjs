@@ -64,12 +64,13 @@ export function relevanceVerdictsOf({ evidencePackage, auditRecord, proposalId }
 }
 
 /**
- * Every promise's latest relevance verdict per law change and key, from the
- * proposals in the review manifest (their archived package and assessment
- * record): `Map(promiseId -> Map(evidenceId -> Map(key -> verdict)))`, the
- * verdict of the most recently evaluated proposal that judged that change
- * with that key. Only the latest counts, so a change one assessor later found
- * relevant is never left out on an older verdict.
+ * Every promise's latest relevance verdict per law change, from the proposals
+ * in the review manifest (their archived package and assessment record):
+ * `Map(promiseId -> Map(evidenceId -> verdict))`, the verdict of the most
+ * recently evaluated proposal that judged that change, whatever its key. Only
+ * the latest counts, so a change one assessor later found relevant is never
+ * left out on an older verdict, even when what that older one judged comes
+ * back.
  */
 export async function loadRelevanceVerdicts(manifest) {
   const verdicts = new Map();
@@ -81,11 +82,7 @@ export async function loadRelevanceVerdicts(manifest) {
     const evidencePackage = JSON.parse(await readFile(packagePath, "utf8"));
     const auditRecord = JSON.parse(await readFile(auditPath, "utf8"));
     const byChange = verdicts.get(proposal.promiseId) ?? new Map();
-    for (const verdict of relevanceVerdictsOf({ evidencePackage, auditRecord, proposalId: proposal.proposalId })) {
-      const byKey = byChange.get(verdict.evidenceId) ?? new Map();
-      byKey.set(verdict.key, verdict);
-      byChange.set(verdict.evidenceId, byKey);
-    }
+    for (const verdict of relevanceVerdictsOf({ evidencePackage, auditRecord, proposalId: proposal.proposalId })) byChange.set(verdict.evidenceId, verdict);
     verdicts.set(proposal.promiseId, byChange);
   }
   return verdicts;
@@ -98,10 +95,9 @@ export async function loadRelevanceVerdicts(manifest) {
  * not relevant.
  */
 export function exclusionOf({ verdicts, promise, lawChange, assessorPrompt }) {
-  const byKey = verdicts?.get(promise.id)?.get(lawChange.id);
-  if (!byKey) return null;
-  const verdict = byKey.get(irrelevanceKey({ promise, versions: lawChange.structuredFacts.versions, assessorPrompt }));
-  return verdict?.irrelevant ? verdict.entry : null;
+  const verdict = verdicts?.get(promise.id)?.get(lawChange.id);
+  if (!verdict?.irrelevant) return null;
+  return verdict.key === irrelevanceKey({ promise, versions: lawChange.structuredFacts.versions, assessorPrompt }) ? verdict.entry : null;
 }
 
 /**
