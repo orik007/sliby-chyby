@@ -40,7 +40,8 @@ export function staleUrlSegment(act, wording = null) {
 
 /**
  * A REST client that sends one request at a time, at least `minIntervalMs`
- * apart, retries a technical failure after each delay of `retryDelaysMs`,
+ * apart and the first one at least that long after the client is created,
+ * retries a technical failure after each delay of `retryDelaysMs`,
  * and then throws ESbirkaUnavailableError. A technical failure is no answer,
  * an HTTP error, or an answer that cannot be read; an answer that the
  * document does not exist (`DOKUMENT_NENALEZEN`) is not one and returns
@@ -50,7 +51,9 @@ export function staleUrlSegment(act, wording = null) {
 export function createESbirkaClient({ base = eSbirkaApi, apiKey = process.env[apiKeyVariable], fetchImpl = fetch, sleep = wait, now = Date.now, onRequest = () => {}, ...overrides } = {}) {
   const settings = { ...eSbirkaRequestSettings, ...overrides };
   let chain = Promise.resolve();
-  let lastStartedAt = -Infinity;
+  // Counted from creation, so the first request also waits: the step before
+  // (another process with its own client) may have just sent one.
+  let lastStartedAt = now();
 
   async function attempt(path, purpose) {
     const pause = lastStartedAt + settings.minIntervalMs - now();

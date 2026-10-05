@@ -36,7 +36,9 @@ test("sends one request at a time, at least 250 ms apart, and retries a failure 
   });
   assert.deepEqual(await client.get("/typy-aktu", { purpose: "test" }), {});
   assert.deepEqual(requests.map(({ ok, status }) => [ok, status]), [[false, 502], [false, 429], [true, 200]]);
-  assert.deepEqual(clock.sleeps, [1_000, 2_000]);
+  // The first request also waits the interval: the step before, with its own
+  // client, may have just sent one.
+  assert.deepEqual(clock.sleeps, [250, 1_000, 2_000]);
   assert.deepEqual(eSbirkaRequestSettings.retryDelaysMs, [1, 2, 4, 8, 16, 32, 32, 32, 32, 32].map((seconds) => seconds * 1_000));
   // The next request waits for the 250 ms interval: never more than 4 a second.
   await client.get("/typy-aktu");
@@ -53,12 +55,13 @@ test("a technical failure after every retry is ESbirkaUnavailableError; a missin
   const keyClock = fakeTime();
   const invalidKey = createESbirkaClient({ apiKey: "key", now: keyClock.now, sleep: keyClock.sleep, fetchImpl: async () => answer(JSON.stringify({ chyby: [{ kod: "NEPLATNY_API_KLIC" }] }), { status: 401 }) });
   await assert.rejects(invalidKey.get("/x"), /rejected the key \(request\): HTTP 401 NEPLATNY_API_KLIC/);
-  assert.deepEqual(keyClock.sleeps, []);
+  // Only the interval before the first request, no retry delay.
+  assert.deepEqual(keyClock.sleeps, [250]);
   // Also when the rejection is not JSON.
   const htmlClock = fakeTime();
   const htmlRejection = createESbirkaClient({ apiKey: "key", now: htmlClock.now, sleep: htmlClock.sleep, fetchImpl: async () => answer("<html>Forbidden</html>", { status: 403 }) });
   await assert.rejects(htmlRejection.get("/x"), /rejected the key \(request\): HTTP 403/);
-  assert.deepEqual(htmlClock.sleeps, []);
+  assert.deepEqual(htmlClock.sleeps, [250]);
   const missing = createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: async () => notFound() });
   assert.equal(await missing.get("/x"), null);
   const keyless = createESbirkaClient({ apiKey: "", ...fakeTime(), fetchImpl: async () => answer("{}") });
