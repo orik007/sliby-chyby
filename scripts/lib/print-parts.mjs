@@ -223,6 +223,63 @@ export function laterTextDocxLink(html, pageUrl) {
   return match ? pspUrl(match[1], pageUrl) : null;
 }
 
+/**
+ * The act a bill became, from the line that ends its history page: “Zákon
+ * vyhlášen 28. 8. 2026 ve Sbírce zákonů v částce 155 pod číslem 155/2026
+ * Sb.” Returns `{ act, promulgatedOn }` (“155/2026”, ISO date), or null for a
+ * bill that was not promulgated.
+ */
+export function promulgatedActOfHistory(historyHtml) {
+  const text = String(historyHtml).replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/\s+/g, " ");
+  const match = /Zákon vyhlášen (\d{1,2})\. ?(\d{1,2})\. ?(\d{4}) ve Sbírce zákonů v částce \d+ pod číslem (\d+)\/(\d{4}) Sb\./u.exec(text);
+  if (!match) return null;
+  const [, day, month, year, number, actYear] = match;
+  return { act: `${number}/${actYear}`, promulgatedOn: `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}` };
+}
+
+/** The act as it was promulgated, in e-Sbírka. */
+export function promulgatedTextUrl(act) {
+  const [number, year] = act.split("/");
+  return `https://e-sbirka.gov.cz/sb/${year}/${number}/0000-00-00`;
+}
+
+/**
+ * The version of a bill whose text is the act as it was promulgated, when
+ * psp.cz does not publish that version and a decisive vote concerned it
+ * (docs/evidence-pipeline.md, Text from the Collection of Laws), or null.
+ * `concerned` lists what versionConcerned returned for the bill's votes. The
+ * promulgated act is the
+ * text passed by Parliament; it is the approved text only when nothing came
+ * after the approval that could change it: no Senate return and no passed
+ * text listed. A vote on the passed text that is the approved text, which
+ * psp.cz publishes (`sameAsApproved`), needs none.
+ */
+export function promulgatedTextVersion({ texts, concerned, promulgation, senateReturned, passedListed }) {
+  if (!promulgation) return null;
+  if (!texts.passed && concerned.some(({ version, sameAsApproved }) => version === "passed" && !(sameAsApproved && texts.approved))) return "passed";
+  if (!texts.approved && !senateReturned && !passedListed && concerned.some(({ version }) => version === "approved")) return "approved";
+  return null;
+}
+
+/**
+ * The paragraphs of an act as promulgated, from its e-Sbírka nodes in
+ * document order (`[path, text]`): every node with text but the act's
+ * number at the top, the signatures (`dokument/postfix`), and the act's own
+ * annexes (`dokument/prilohy`), in the order of a psp.cz text. e-Sbírka's
+ * text of a table runs its cells together, so an annex of figures (a state
+ * budget's) would read as wrong numbers; the proposal text of the 2026
+ * state budget (print 94) holds no annex either. An annex an amending act
+ * replaces is inside its part and kept. Null when e-Sbírka holds no body of
+ * the act, only its heading or a notice that the act is still being
+ * digitised.
+ */
+export function promulgatedParagraphs(nodes, act) {
+  const number = act.split("/")[0];
+  const kept = nodes.filter(([path, text]) => text !== null && !/^dokument\/(?:postfix|prilohy)(?:\/|$)/.test(path) && !(path.startsWith("dokument/prefix/") && text.trim() === number));
+  if (!kept.some(([path]) => !path.startsWith("dokument/prefix/"))) return null;
+  return kept.map(([, text]) => text);
+}
+
 function normalizedTitle(title) {
   return String(title ?? "").normalize("NFC").toLocaleLowerCase("cs-CZ").replace(/\s+/g, " ").trim();
 }
@@ -309,20 +366,25 @@ function latestTextVersion(change) {
   return [...versionKeys].reverse().find((version) => change.versions[version] && !change.versions[version].removed) ?? null;
 }
 
-function versionOf(part, amendedAct, document, effectiveCz = null) {
+// A version whose text is the act as promulgated names that act
+// (`promulgatedAct`); no other version has the field.
+function versionOf(part, amendedAct, document, effectiveCz = null, promulgatedAct = null) {
   return {
     heading: part.heading,
     titleCz: part.titleCz,
     textCz: part.paragraphs ? part.paragraphs.join("\n") : null,
     amendedAct,
     effectiveCz,
-    document: document ? { filename: document.filename, url: document.url } : null
+    document: document ? { filename: document.filename, url: document.url } : null,
+    ...(promulgatedAct ? { promulgatedAct } : {})
   };
 }
 
 /**
  * The law changes of one print with their versions. `texts` maps a version
- * key to `{ document, paragraphs }` for each text psp.cz publishes; without
+ * key to `{ document, paragraphs }` for each text psp.cz publishes, and to
+ * `{ document, paragraphs, promulgatedAct }` for a version whose text is the
+ * act as promulgated (promulgatedTextVersion); without
  * a proposal text, the proposed version of each part carries only the print
  * title, and the parts come from the first later text. A part
  * of a later text is matched to an earlier law change by the act it amends,
@@ -376,13 +438,13 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [] })
       // A matched change is compared with its latest text in the next version.
       change.key = entry.key;
       change.words = entry.words;
-      const entryVersion = versionOf({ ...entry.part, titleCz: entry.part.titleCz ?? print.title }, entry.amended, text?.document ?? null, effectiveCz);
+      const entryVersion = versionOf({ ...entry.part, titleCz: entry.part.titleCz ?? print.title }, entry.amended, text?.document ?? null, effectiveCz, text?.promulgatedAct ?? null);
       // A version whose text equals the latest earlier text is stored as the
       // same, so models do not read (and pay for) the text twice. The
       // effective date is the version's own.
       const previous = latestTextVersion(change);
       change.versions[version] = previous && entryVersion.textCz !== null && bodyOf(resolvedVersion(change, previous)) === bodyOf(entryVersion)
-        ? { sameAs: change.versions[previous].sameAs ?? previous, heading: entryVersion.heading, titleCz: entryVersion.titleCz, amendedAct: entryVersion.amendedAct, effectiveCz, document: entryVersion.document }
+        ? { sameAs: change.versions[previous].sameAs ?? previous, heading: entryVersion.heading, titleCz: entryVersion.titleCz, amendedAct: entryVersion.amendedAct, effectiveCz, document: entryVersion.document, ...(entryVersion.promulgatedAct ? { promulgatedAct: entryVersion.promulgatedAct } : {}) }
         : entryVersion;
     }
     // A part of an earlier version that this text no longer has was removed.

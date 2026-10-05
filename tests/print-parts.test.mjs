@@ -8,6 +8,10 @@ import {
   laterTextLinks,
   lawChangesOfPrint,
   namedActsFromPrintTitle,
+  promulgatedActOfHistory,
+  promulgatedParagraphs,
+  promulgatedTextUrl,
+  promulgatedTextVersion,
   proposalBody,
   proposalDocumentLink,
   splitProposalText,
@@ -20,7 +24,10 @@ import { lawChangeText } from "../scripts/lib/law-change-screening.mjs";
 // pages of prints 16 and 91, the later-text links of print 77's history
 // page, and print 16's approved-text page, downloaded on 24-25 September
 // 2026; the file tables of prints 57 and 87 and the Senate referral in
-// print 163's history, downloaded on 26 September 2026.
+// print 163's history, downloaded on 26 September 2026; the line that ends
+// print 90's history and the e-Sbírka nodes of 155/2026 Sb. as promulgated
+// (its heading, first and last part, and signatures) and of 166/2026 Sb.
+// (still being digitised), read on 5 October 2026.
 const fixture = (name) => readFile(new URL(`./fixtures/print-parts/${name}`, import.meta.url), "utf8");
 const print85Paragraphs = JSON.parse(await fixture("print-85-paragraphs.json"));
 const print163 = JSON.parse(await fixture("print-163-paragraphs.json"));
@@ -317,4 +324,53 @@ test("a change through a version keeps only those versions and the acts they ame
   // A change added in the approved text did not exist in the proposal.
   assert.equal(changeThroughVersion(added, "proposed"), null);
   assert.deepEqual(changeThroughVersion(added, "approved").identifiers, ["cz-act-2-2000"]);
+});
+
+test("reads the act a bill became from the end of its history page", async () => {
+  assert.deepEqual(promulgatedActOfHistory(await fixture("print-90-history-promulgated.html")), { act: "155/2026", promulgatedOn: "2026-08-28" });
+  assert.equal(promulgatedActOfHistory("<p>Návrh zákona schválen.</p>"), null);
+  assert.equal(promulgatedTextUrl("155/2026"), "https://e-sbirka.gov.cz/sb/2026/155/0000-00-00");
+});
+
+test("the promulgated act is the text of a voted version psp.cz does not publish, only where nothing could change it after", () => {
+  const promulgation = { act: "155/2026", promulgatedOn: "2026-08-28" };
+  const text = { document, paragraphs: ["x"] };
+  const vote = (version, extra = {}) => ({ version, withSenateResolution: false, sameAsApproved: false, mark: null, ...extra });
+  const of = (overrides) => promulgatedTextVersion({ texts: { proposed: text, approved: text }, concerned: [vote("approved")], promulgation, senateReturned: false, passedListed: false, ...overrides });
+  // A vote after the President's return concerns the passed text.
+  assert.equal(of({ concerned: [vote("approved"), vote("passed")] }), "passed");
+  // Insisting on the approved text, which psp.cz publishes, needs none.
+  assert.equal(of({ concerned: [vote("passed", { sameAsApproved: true, withSenateResolution: true })], senateReturned: true }), null);
+  assert.equal(of({ texts: { proposed: text }, concerned: [vote("passed", { sameAsApproved: true, withSenateResolution: true })], senateReturned: true }), "passed");
+  // A state budget: approved, never returned.
+  assert.equal(of({ texts: { proposed: text } }), "approved");
+  // After a Senate return or with a passed text listed, the act may differ from the approved text.
+  assert.equal(of({ texts: { proposed: text }, senateReturned: true }), null);
+  assert.equal(of({ texts: { proposed: text }, passedListed: true }), null);
+  // A bill that was not promulgated, or whose voted texts psp.cz publishes.
+  assert.equal(of({ texts: { proposed: text }, promulgation: null }), null);
+  assert.equal(of({}), null);
+  assert.equal(of({ concerned: [vote("proposed")] }), null);
+});
+
+test("an act as promulgated is split like a psp.cz text and says where it is from", async () => {
+  const nodes = JSON.parse(await fixture("promulgated-nodes.json"));
+  const paragraphs = promulgatedParagraphs(nodes["155/2026"], "155/2026");
+  // Without the act's number at the top and the signatures.
+  assert.deepEqual(paragraphs.slice(0, 2), ["ZÁKON", "ze dne 8. července 2026,"]);
+  assert.equal(paragraphs.some((paragraph) => /v\. r\.$/.test(paragraph)), false);
+  // The act's own annexes are left out.
+  assert.deepEqual(promulgatedParagraphs([["dokument/prefix/frag_1", "38"], ["dokument/norma/par_1", "§ 1"], ["dokument/prilohy/priloha_1", "Příloha č. 1"]], "38/2026"), ["§ 1"]);
+  // e-Sbírka holds only a notice that the act is being digitised.
+  assert.equal(promulgatedParagraphs(nodes["166/2026"], "166/2026"), null);
+  const approved = ["ČÁST PRVNÍ", "Změna zákona o Nejvyšším kontrolním úřadu", "Čl. I", "Zákon č. 166/1993 Sb., o Nejvyšším kontrolním úřadu, se mění takto:", "V § 5 odst. 2 se slova nahrazují.", "ČÁST DVANÁCTÁ", "ÚČINNOST", "Čl. XVIII", "Tento zákon nabývá účinnosti."];
+  const promulgated = { document: { filename: "Zákon č. 155/2026 Sb. ve vyhlášeném znění (e-Sbírka)", url: promulgatedTextUrl("155/2026") }, paragraphs, promulgatedAct: "155/2026" };
+  const [change, ...rest] = lawChangesOfPrint({ print: { ...print85, kindId: "1" }, texts: { proposed: { document, paragraphs: approved }, approved: { document, paragraphs: approved }, passed: promulgated } });
+  assert.equal(rest.length, 0);
+  assert.equal(change.versions.approved.sameAs, "proposed");
+  assert.equal(change.versions.approved.promulgatedAct, undefined);
+  assert.equal(change.versions.passed.promulgatedAct, "155/2026");
+  assert.equal(change.versions.passed.document.url, "https://e-sbirka.gov.cz/sb/2026/155/0000-00-00");
+  assert.match(change.versions.passed.textCz, /^ČÁST PRVNÍ\nZměna zákona o Nejvyšším kontrolním úřadu\nČl\. I\n/);
+  assert.match(lawChangeText(change), /Version: text passed by Parliament \(psp\.cz does not publish it; this is the act as promulgated in the Collection of Laws, zákon č\. 155\/2026 Sb\., without its annexes\)\n/);
 });

@@ -250,8 +250,8 @@ const changesOverlapMs = 60 * 60 * 1000;
 const changesPageSize = 10_000;
 
 /**
- * The wordings of acts, their structures and node texts, and the day an act
- * was promulgated. A wording is `{ wording, from, to, amendments }` with the
+ * The wordings of acts, their structures and nodes (`nodes`, every
+ * `[path, text]` in document order), and the day an act was promulgated. A wording is `{ wording, from, to, amendments }` with the
  * ISO dates of its effect (`to` null when open) and the acts ("314/2025")
  * e-Sbírka names as having taken effect in it; the list leaves out the
  * promulgated wording (`0000-00-00`), which is read only when asked for by
@@ -463,7 +463,7 @@ export function createLawContextReader({ client, cache, clock = () => new Date()
     return date;
   }
 
-  return { wordings, structure, texts, promulgated, stats };
+  return { wordings, structure, texts, nodes: nodesOf, promulgated, stats };
 }
 
 /** The text of a fragment without its XHTML markup. */

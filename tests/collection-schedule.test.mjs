@@ -126,12 +126,17 @@ test("checkpoints persist only after routing and queuing packages", async () => 
   assert.equal(workflow.includes("Persist successful source checkpoints"), false);
 });
 
-test("only the law-change context step receives the e-Sbírka key", async () => {
+test("only the print-text and law-change context steps receive the e-Sbírka key", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
-  const start = workflow.indexOf("      - name: Read law-change context from e-Sbírka");
-  const contextStep = workflow.slice(start, workflow.indexOf("      - name: ", start + 10));
-  assert.match(contextStep, /ESEL_API_ACCESS_KEY: \$\{\{ secrets\.ESEL_API_ACCESS_KEY \}\}/);
-  assert.equal(workflow.match(/ESEL_API_ACCESS_KEY/g).length, 2);
+  const step = (name) => {
+    const start = workflow.indexOf(`      - name: ${name}`);
+    return workflow.slice(start, workflow.indexOf("      - name: ", start + 10));
+  };
+  for (const name of ["Split official print texts into law changes", "Read law-change context from e-Sbírka"]) {
+    assert.match(step(name), /ESEL_API_ACCESS_KEY: \$\{\{ secrets\.ESEL_API_ACCESS_KEY \}\}/);
+    assert.match(step(name), /--cache automation\/law-context/);
+  }
+  assert.equal(workflow.match(/ESEL_API_ACCESS_KEY/g).length, 4);
 });
 
 test("the public fallback records a valid successful collection time", async () => {

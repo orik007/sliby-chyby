@@ -43,7 +43,9 @@ export function lawChangeText(change) {
   let previousContext = null;
   const versions = versionKeys.filter((version) => change.versions[version]).map((version) => {
     const entry = change.versions[version];
-    const label = `Version: ${versionLabels[version]}`;
+    // A text psp.cz does not publish, read from the act as promulgated
+    // (docs/evidence-pipeline.md, Text from the Collection of Laws), says so.
+    const label = `Version: ${versionLabels[version]}${entry.promulgatedAct ? ` (psp.cz does not publish it; this is the act as promulgated in the Collection of Laws, zákon č. ${entry.promulgatedAct} Sb., without its annexes)` : ""}`;
     if (entry.removed) return `${label}\nThis part is not in this text: it was removed during the debate.`;
     const effective = !entry.effectiveCz ? ""
       : entry.effectiveCz === previousEffective?.text ? `\nEffective date of this text (účinnost): the same as in the ${versionLabels[previousEffective.version]}.`

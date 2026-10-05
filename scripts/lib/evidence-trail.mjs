@@ -19,13 +19,15 @@ function proposalKind(facts) {
 }
 
 // Why the linked text is not exactly the one the conduct concerned
-// (docs/evidence-pipeline.md, Conduct and version), or null. A version known
+// (docs/evidence-pipeline.md, Conduct and version), or where it comes from
+// when psp.cz does not publish it (Text from the Collection of Laws), or null. A version known
 // only by the print title has no document to link.
-function versionNote(concern, document) {
+function versionNote(concern, entry) {
   if (concern.removed) return "removed";
-  if (!document?.url) return "text-not-published";
+  if (!entry?.document?.url) return "text-not-published";
   if (concern.publishedVersionMissing) return "published-version-missing";
   if (concern.mark === "third-reading-rejection") return "third-reading-rejection";
+  if (entry.promulgatedAct) return "promulgated-text";
   return null;
 }
 
@@ -51,7 +53,7 @@ function textOf(item, changes) {
   const textUrl = concerns.map(({ change, concern }) => (concern.removed ? null : change.structuredFacts.versions[version]?.document?.url ?? null)).find(Boolean) ?? null;
   const notes = new Map();
   for (const { change, concern } of concerns) {
-    const note = versionNote(concern, change.structuredFacts.versions[version]?.document);
+    const note = versionNote(concern, change.structuredFacts.versions[version]);
     if (note) notes.set(note, [...(notes.get(note) ?? []), change.id]);
   }
   return { version, textUrl, notes: [...notes].map(([note, lawChangeIds]) => ({ note, lawChangeIds })) };

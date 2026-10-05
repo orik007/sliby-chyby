@@ -57,6 +57,23 @@ test("a version without a published text has no link and says why", async () => 
   assert.deepEqual(submission.notes, [{ note: "text-not-published", lawChangeIds: ["psp-core-2025--law-change-43184-14"] }]);
 });
 
+test("a text psp.cz does not publish links the act as promulgated in e-Sbírka and says so", async () => {
+  const { proposal, evidencePackage, auditRecord, promise } = await fixture("spd-2025-079ef4aef5");
+  const promulgated = structuredClone(evidencePackage);
+  const passed = promulgated.evidence.find(({ id }) => id === "psp-core-2025--law-change-43184-14").structuredFacts.versions.passed;
+  Object.assign(passed, { document: { filename: "Zákon č. 155/2026 Sb. ve vyhlášeném znění (e-Sbírka)", url: "https://e-sbirka.gov.cz/sb/2026/155/0000-00-00" }, promulgatedAct: "155/2026" });
+  const insistence = buildEvidenceTrail(promulgated, auditRecord)[0].steps[3];
+  assert.equal(insistence.textUrl, "https://e-sbirka.gov.cz/sb/2026/155/0000-00-00");
+  assert.deepEqual(insistence.notes, [{ note: "promulgated-text", lawChangeIds: ["psp-core-2025--law-change-43184-14"] }]);
+  const packageHash = hashEvidencePackage(promulgated);
+  const assessed = { ...proposal, packageHash };
+  const revision = createAssessmentRevision({ proposal: assessed, manifestProposal: assessed, evidencePackage: promulgated, auditRecord: { ...auditRecord, packageHash }, promise, fileId: "spd-2025-079ef4aef5", revisions: [baseline(promise)], publishedAt: "2026-09-28" });
+  assert.equal(assessmentRevisionSchema.safeParse(revision).success, true);
+  // Only the act as promulgated, never another e-Sbírka page.
+  revision.evidenceTrail[0].steps[3].textUrl = "https://e-sbirka.gov.cz/sb/2026/155/2026-08-29";
+  assert.equal(assessmentRevisionSchema.safeParse(revision).success, false);
+});
+
 test("cited conduct on a relevant law change stays in the trail when the change itself is not cited", async () => {
   const { evidencePackage, auditRecord } = await fixture("spd-2025-079ef4aef5");
   const uncited = structuredClone(auditRecord);

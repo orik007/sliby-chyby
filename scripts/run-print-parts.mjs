@@ -3,10 +3,11 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
+import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError, promulgatedWording } from "./lib/e-sbirka.mjs";
 import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { createPspDocumentRecorder } from "./lib/psp-document-hashes.mjs";
 import { log, progress } from "./lib/run-log.mjs";
-import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
+import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedParagraphs, promulgatedTextUrl, promulgatedTextVersion, proposalBody, proposalDocumentLink } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
 
 /**
@@ -15,20 +16,24 @@ import { loadTrackedPromises } from "./lib/published-promises.mjs";
  * the text the Chamber approved, the text passed by Parliament, and any
  * Senate resolution returning it) and splits them into law changes with
  * their versions (docs/evidence-pipeline.md, Chamber data rules). Nothing
- * is cached, so a later text is used as soon as psp.cz publishes it. A
+ * is cached, so a later text is used as soon as psp.cz publishes it. When
+ * psp.cz does not publish the text a decisive vote concerned and the bill was
+ * promulgated, that version's text is the act as promulgated, read from the
+ * e-Sbírka REST API through the permanent law-context cache (--cache). A
  * failed download fails the run; a text that psp.cz lists without a DOCX or
  * DOC file is treated as not published and reported. With
  * --document-hashes, the content of every downloaded Word file is recorded
  * under its psp.cz document ID (scripts/lib/psp-document-hashes.mjs).
  */
 function parseArgs(args) {
-  const options = { collectorRun: null, output: null, documentHashes: null, sourceRegistry: "automation/collectors/sources.json" };
+  const options = { collectorRun: null, output: null, documentHashes: null, cache: "automation/law-context", sourceRegistry: "automation/collectors/sources.json" };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--sources") options.sourceRegistry = args[++index];
     else if (arg === "--document-hashes") options.documentHashes = args[++index];
+    else if (arg === "--cache") options.cache = args[++index];
     else throw new Error(`Unknown argument: ${arg}`);
   }
   invariant(options.collectorRun && options.output, "--collector-run and --output are required");
@@ -130,7 +135,8 @@ async function fetchPrintTexts(source, print, termNumber) {
     fetchPrintPageText(source, termNumber, print.number, print.partNumber, warnings, "proposed"),
     bill ? fetchPsp(source, historyUrl, htmlOptions) : null
   ]);
-  const links = historyPage ? laterTextLinks(decodePage(historyPage), historyUrl) : { approved: null, passed: null, referredToSenate: null };
+  const history = historyPage ? decodePage(historyPage) : null;
+  const links = history ? laterTextLinks(history, historyUrl) : { approved: null, passed: null, referredToSenate: null };
   // Without an approved-text page, the approved text is the sub-print with
   // the text referred to the Senate, when the history links one.
   const approvedText = links.approved
@@ -142,7 +148,7 @@ async function fetchPrintTexts(source, print, termNumber) {
     ...print.senateResolutionPartNumbers.map((partNumber) => senateResolution(source, termNumber, print, partNumber, warnings))
   ]);
   const texts = Object.fromEntries(Object.entries({ proposed: proposal, approved, passed }).filter(([, text]) => text));
-  return { texts, senateResolutions: resolutions.filter(Boolean), warnings };
+  return { texts, senateResolutions: resolutions.filter(Boolean), warnings, promulgation: history ? promulgatedActOfHistory(history) : null, passedListed: Boolean(links.passed) };
 }
 
 const args = parseArgs(process.argv.slice(2));
@@ -177,13 +183,18 @@ const { promises } = await loadTrackedPromises();
 const trackedPartyIds = [...new Set(promises.map(({ partyId }) => partyId))].sort();
 const conductRecords = collectorRun.records.filter((record) => record.primary === true && isPotentiallyAttributable(record, trackedPartyIds));
 const prints = collectPrints(conductRecords);
-// Bills with a decisive vote on their approved text (the rule of
-// versionConcerned): each should have an approved text on psp.cz, so one
-// without it shows a text psp.cz does not publish or a history page that
-// was not read.
-const approvedPrintIds = new Set(conductRecords.flatMap((record) => (record.payload?.linkedPrints ?? [])
-  .filter((print) => versionConcerned(record, print.externalPrintId)?.version === "approved")
-  .map((print) => String(print.externalPrintId))));
+// The versions the decisive votes on each print concern (the rule of
+// versionConcerned). A bill with a vote on its approved text should have an
+// approved text on psp.cz, so one without it shows a text psp.cz does not
+// publish or a history page that was not read.
+const concernedByPrint = new Map();
+for (const record of conductRecords) {
+  for (const print of record.payload?.linkedPrints ?? []) {
+    const concerned = versionConcerned(record, print.externalPrintId);
+    const printId = String(print.externalPrintId);
+    if (concerned) concernedByPrint.set(printId, [...(concernedByPrint.get(printId) ?? []), concerned]);
+  }
+}
 log(`${prints.length} prints concern potentially attributable records; downloading their proposal texts, later texts, and Senate resolutions`);
 
 // Prints are processed as many at a time as fetchPsp keeps requests open
@@ -235,11 +246,50 @@ try {
 }
 if (recordError) throw recordError;
 
+// The act as promulgated, for each version a decisive vote concerned that
+// psp.cz does not publish (docs/evidence-pipeline.md, Text from the Collection of Laws). Every
+// request to e-Sbírka is appended to e-sbirka-requests.jsonl as it happens; a
+// technical failure of e-Sbírka after every retry fails the run.
+const eSbirkaRequestFile = resolve(args.output, "e-sbirka-requests.jsonl");
+writeFileSync(eSbirkaRequestFile, "");
+const lawContextCache = createLawContextCache(resolve(args.cache));
+let reader = null;
+const promulgatedTexts = [];
+try {
+  for (const print of prints) {
+    const { texts, warnings, promulgation, passedListed } = fetched.get(print.printId);
+    const version = promulgatedTextVersion({ texts, concerned: concernedByPrint.get(print.printId) ?? [], promulgation, senateReturned: print.senateResolutionPartNumbers.length > 0, passedListed });
+    if (!version) continue;
+    reader ??= createLawContextReader({
+      client: createESbirkaClient({
+        onRequest: (entry) => {
+          if (!entry.ok) log(`e-Sbírka request failed (${entry.purpose}): ${entry.error}`);
+          appendFileSync(eSbirkaRequestFile, `${JSON.stringify(entry)}\n`);
+        }
+      }),
+      cache: lawContextCache
+    });
+    const paragraphs = promulgatedParagraphs(await reader.nodes(promulgation.act, promulgatedWording), promulgation.act);
+    if (!paragraphs) {
+      warnings.push({ printNumber: print.number, kind: "promulgated-text-not-digitised", version, detail: `psp.cz does not publish the ${version} text, and e-Sbírka does not yet hold the text of ${promulgation.act} Sb., the act it became` });
+      continue;
+    }
+    texts[version] = { document: { filename: `Zákon č. ${promulgation.act} Sb. ve vyhlášeném znění (e-Sbírka)`, url: promulgatedTextUrl(promulgation.act) }, paragraphs: proposalBody(paragraphs), promulgatedAct: promulgation.act };
+    promulgatedTexts.push(print.number);
+    log(`print ${print.number}: the ${version} text is ${promulgation.act} Sb. as promulgated on ${promulgation.promulgatedOn}, from e-Sbírka; psp.cz does not publish it`);
+  }
+} catch (error) {
+  await lawContextCache.flush();
+  if (error instanceof ESbirkaUnavailableError) log(`e-Sbírka is unavailable; the run fails: ${error.message}`);
+  throw error;
+}
+await lawContextCache.flush();
+
 const result = {};
 for (const print of prints) {
   print.pageUrl = officialPrintDocumentPageUrl(source.term.number, print.number, print.partNumber);
   const { texts, senateResolutions, warnings } = fetched.get(print.printId);
-  if (approvedPrintIds.has(print.printId) && !texts.approved && !warnings.some(({ version }) => version === "approved")) {
+  if ((concernedByPrint.get(print.printId) ?? []).some(({ version }) => version === "approved") && !texts.approved && !warnings.some(({ version }) => version === "approved")) {
     warnings.push({ printNumber: print.number, kind: "approved-without-approved-text", detail: "a vote on the approved text is recorded, but psp.cz lists no approved text" });
   }
   for (const warning of warnings) log(`print ${warning.printNumber}: ${warning.detail}`);
@@ -261,6 +311,7 @@ const quality = {
   printsWithApprovedText: Object.values(result).filter(({ versions }) => versions.includes("approved")).length,
   printsWithPassedText: Object.values(result).filter(({ versions }) => versions.includes("passed")).length,
   printsWithSenateResolution: Object.values(result).filter(({ changes }) => changes[0]?.senateResolutions.length > 0).length,
+  printsWithPromulgatedText: promulgatedTexts.length,
   approvedBillsWithoutApprovedText: Object.values(result).filter(({ warnings }) => warnings.some(({ kind }) => kind === "approved-without-approved-text")).length,
   textWarnings: Object.values(result).reduce((sum, { warnings }) => sum + warnings.length, 0),
   lawChanges: allChanges.length,
@@ -271,5 +322,5 @@ const quality = {
 };
 
 await writeFile(resolve(args.output, "print-parts.json"), `${JSON.stringify({ schemaVersion: "1.0.0", quality, prints: result }, null, 2)}\n`);
-log(`law changes: ${quality.lawChanges} from ${quality.prints} prints (${quality.printsWithProposalText} with a proposal text, ${quality.printsWithApprovedText} with an approved text, ${quality.printsWithPassedText} with a passed text, ${quality.printsWithSenateResolution} with a Senate resolution, ${quality.textWarnings} text warning(s))`);
+log(`law changes: ${quality.lawChanges} from ${quality.prints} prints (${quality.printsWithProposalText} with a proposal text, ${quality.printsWithApprovedText} with an approved text, ${quality.printsWithPassedText} with a passed text, ${quality.printsWithPromulgatedText} with a text from e-Sbírka, ${quality.printsWithSenateResolution} with a Senate resolution, ${quality.textWarnings} text warning(s))`);
 console.log(JSON.stringify({ quality }, null, 2));
