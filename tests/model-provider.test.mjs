@@ -1,5 +1,8 @@
 import assert from "node:assert/strict";
+import { mkdtemp, readFile } from "node:fs/promises";
 import { createServer } from "node:http";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import test from "node:test";
 import { createRequestDispatcher, createStructuredModelResponse, reserveInputTokens, tokenBudgetPerMinute } from "../scripts/lib/model-provider.mjs";
 
@@ -358,6 +361,41 @@ test("a request that fails without a response is retried", async () => {
     await createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6-luna", instructions: "fixture", input: {}, name: "fixture_schema", schema: { type: "object" } });
     assert.equal(callCount, 2);
   } finally {
+    globalThis.fetch = originalFetch;
+    timers.restore();
+  }
+});
+
+test("a successful response with an unparseable body is retried, and fails only after every attempt", async () => {
+  const originalFetch = globalThis.fetch;
+  const timers = instantTimers();
+  let callCount = 0;
+  const unreadable = { ok: true, status: 200, json: async () => { throw new SyntaxError("Unexpected end of JSON input"); } };
+  globalThis.fetch = async () => {
+    callCount += 1;
+    if (callCount === 1) return unreadable;
+    return { ok: true, json: async () => ({ id: "resp_fixture", model: "gpt-6-luna", usage: { input_tokens: 1, output_tokens: 1 }, output: [{ content: [{ type: "output_text", text: "{}" }] }] }) };
+  };
+  const request = () => createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6-luna", instructions: "fixture", input: {}, name: "fixture_schema", schema: { type: "object" } });
+  const callLog = join(await mkdtemp(join(tmpdir(), "model-calls-")), "calls.jsonl");
+  process.env.SLIBY_MODEL_CALL_LOG = callLog;
+  try {
+    await request();
+    assert.equal(callCount, 2);
+    // The unreadable answer may have been billed, so it is logged as a failed paid call.
+    const logged = (await readFile(callLog, "utf8")).trim().split("\n").map((line) => JSON.parse(line));
+    assert.deepEqual(logged.map(({ ok, usage }) => [ok, usage]), [[false, null], [true, { input_tokens: 1, output_tokens: 1 }]]);
+    assert.match(logged[0].error, /successful response with an unparseable body/);
+    delete process.env.SLIBY_MODEL_CALL_LOG;
+    callCount = 0;
+    globalThis.fetch = async () => {
+      callCount += 1;
+      return unreadable;
+    };
+    await assert.rejects(request, /successful response with an unparseable body/);
+    assert.ok(callCount > 2, "every attempt is used before failing");
+  } finally {
+    delete process.env.SLIBY_MODEL_CALL_LOG;
     globalThis.fetch = originalFetch;
     timers.restore();
   }

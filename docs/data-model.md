@@ -36,6 +36,8 @@ A revision made from a reviewed assessment proposal ([evidence-pipeline.md](evid
 
 A submission and a vote also name the version of the text they concerned (`proposed`, `approved`, `passed`), the link to that text, and `notes` naming the law changes for which the linked text is not exactly that version (`published-version-missing`, `removed`, `text-not-published`, `third-reading-rejection`); a step without a text link always has a note. Every link points to an official psp.cz record; the trail stores no text excerpt. A revision with an evidence trail cites no other source record.
 
+When the assessed package fit the models only without part of its context ([evidence-pipeline.md](evidence-pipeline.md), Package), the revision also stores `contextOmissions`: per law-change version and amended act, the print number, `lawChangeId`, `headingCz`, `titleCz`, `version`, the `act`, the wording's date of effect (`wordingFrom`, `null` for the act as promulgated) with a link to that wording in e-Sbírka (`wordingUrl`), the number of provisions whose wording the assessment had (`suppliedCount`), and the `provisions` it did not have, each with its citation and a link to it in that wording (`https://e-sbirka.gov.cz/sb/<year>/<number>/<wording>#<node path from the §>`). It is copied from the reviewed proposal and stores no text excerpt.
+
 `changelog.json` holds the site changes page ([decisions.md](decisions.md)): `released`, dated entries (`date`, `items` in Czech) with unique dates, newest first, and `planned`, the features being prepared in Czech.
 
 `promise-categories.json` contains the controlled common policy categories with their order; each item names its category in `policyCategoryId`.

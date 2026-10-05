@@ -14,7 +14,7 @@ import {
   validateArbiterOutput,
   validateEvidencePackage
 } from "./lib/assessment-pipeline.mjs";
-import { assessmentRuntimeConfig, estimateRequestTokens, loadAssessmentPrompts, maxRequestInputTokens } from "./lib/assessment-config.mjs";
+import { arbiterModelFor, assessmentRuntimeConfig, estimateRequestTokens, loadAssessmentPrompts, longContextInputTokens, maxRequestInputTokens } from "./lib/assessment-config.mjs";
 import { createStructuredModelResponse } from "./lib/model-provider.mjs";
 import { cachedModelResponse } from "./lib/response-cache.mjs";
 import { log } from "./lib/run-log.mjs";
@@ -140,9 +140,11 @@ if (resolution.state === "arbitration-required") {
     log(`arbiter ${evidencePackage.promise.id}: request of about ${arbiterRequestTokens} tokens exceeds ${maxRequestInputTokens}; not called, human review`);
     resolution = { state: "human-review-required", reason: "arbiter-input-too-large", status: null, selectedReview: null };
   } else {
+    const model = arbiterModelFor(runtime, arbiterRequestTokens);
+    if (model !== arbiterModel) log(`arbiter ${evidencePackage.promise.id}: request of about ${arbiterRequestTokens} tokens is above ${longContextInputTokens}; calling ${model}`);
     rawArbiter = await cachedResponse("arbiter", {
       provider: arbiterProvider,
-      model: arbiterModel,
+      model,
       instructions: arbiterInstructions,
       input: arbiterInput,
       name: "slava_arbitration",

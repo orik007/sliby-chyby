@@ -115,7 +115,7 @@ function backoffMs(attempt) {
   return Math.round(step / 2 + (Math.random() * step) / 2);
 }
 
-async function fetchJsonWithRetry(url, init, { model, estimatedTokens }) {
+async function fetchJsonWithRetry(url, init, { model, estimatedTokens, label = null, serviceTier = null }) {
   // Reserved once: a retry resends input that was rejected, not consumed.
   await reserveInputTokens(model, estimatedTokens);
   let last = null;
@@ -132,8 +132,20 @@ async function fetchJsonWithRetry(url, init, { model, estimatedTokens }) {
     }
     const body = await parseJsonBodyOrNull(response);
     if (response.ok) {
-      if (body === null) throw new Error(`Provider request to ${url} returned a successful response with an unparseable body`);
-      return { response, body };
+      if (body !== null) return { response, body };
+      // A successful status whose body cannot be read (in run 73, a 771,000-
+      // token request's answer) is retried like a request without a response.
+      // The model may have read and billed the input, so the attempt is
+      // logged as a failed paid call, its usage unknown, and the retry
+      // reserves its input in the token budget again.
+      const message = `Provider request to ${url} returned a successful response with an unparseable body`;
+      logModelCall({ label, model, usage: null, serviceTier, ok: false, error: message });
+      if (attempt === maxProviderAttempts) throw new Error(message);
+      const delayMs = backoffMs(attempt);
+      console.warn(`${message} (attempt ${attempt}/${maxProviderAttempts}); retrying in ${delayMs}ms.`);
+      await sleep(delayMs);
+      await reserveInputTokens(model, estimatedTokens);
+      continue;
     }
     last = { response, body };
     const retryable = response.status === 408 || response.status === 429 || (response.status >= 500 && response.status < 600);
@@ -186,7 +198,7 @@ export async function createStructuredModelResponse({
       text: { format: { type: "json_schema", name, strict: true, schema } },
       metadata
     })
-  }, { model, estimatedTokens: Math.ceil((instructions.length + requestInput.length + JSON.stringify(schema).length) / charactersPerToken) });
+  }, { model, estimatedTokens: Math.ceil((instructions.length + requestInput.length + JSON.stringify(schema).length) / charactersPerToken), label: logLabel, serviceTier: tier });
 
   if (!response.ok) {
     const message = `OpenAI Responses API failed (${response.status}): ${body?.error?.message ?? "unknown error"}`;

@@ -1,4 +1,5 @@
 import { assessmentStatuses, hashAssessmentContent, hashAssessmentFingerprint, hashEvidencePackage, validateEvidencePackage } from "./assessment-pipeline.mjs";
+import { contextOmissionLabel, contextOmissionsOf } from "./context-omissions.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -314,6 +315,17 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     }
     lines.push("");
   }
+  const omissions = contextOmissionsOf(evidencePackage);
+  if (omissions.length > 0) {
+    lines.push(
+      "### Zkrácený kontext",
+      "",
+      "Balíček byl větší, než modely dokážou přečíst. Text změn zákonů dostali hodnotitelé celý, u těchto změn ale neměli dosavadní znění všech ustanovení, která mění (vynechána byla nejdelší, viz `docs/evidence-pipeline.md`). Vynechaná znění jsou odkazy do e-Sbírky:",
+      "",
+      ...omissions.map((omission) => `- **${contextOmissionLabel(omission)}**: ${omission.provisions.map(({ citationCz, url }) => `[${citationCz}](${url})`).join(", ")}`),
+      ""
+    );
+  }
   const citedIds = new Set([
     ...evidencePackage.evidence.filter(({ role }) => role === "promise-source").map(({ id }) => id),
     ...reviews.flatMap(([, review]) => review.citedEvidenceIds),
@@ -437,7 +449,8 @@ export function renderReviewPullRequest(summary) {
   const notes = (item) => [
     ...(item.newInRun ? ["nový návrh z tohoto běhu"] : []),
     ...(item.packageState === "changed" ? ["podklady se od návrhu změnily, nový návrh zatím nevznikl"] : []),
-    ...(item.packageState === "withdrawn" ? ["slib už nemá žádný aktuální balíček podkladů"] : [])
+    ...(item.packageState === "withdrawn" ? ["slib už nemá žádný aktuální balíček podkladů"] : []),
+    ...(item.contextTrimmed ? ["balíček se modelům vešel jen bez části kontextu; co chybělo, je na stránce návrhu"] : [])
   ];
   const changes = summary.pendingReviews.filter(({ kind }) => kind === "score-change");
   const humanReviews = summary.pendingReviews.filter(({ kind }) => kind === "human-review");

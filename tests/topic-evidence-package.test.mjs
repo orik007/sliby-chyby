@@ -5,6 +5,7 @@ import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import { loadTrackedPromises } from "../scripts/lib/published-promises.mjs";
 import { buildLawChangeEvidencePackage, estimatePackageTokens, lawChangesAtCutoff, lawChangeEvidenceId, versionOfChange } from "../scripts/lib/topic-evidence-package.mjs";
 import { charactersPerToken, estimateTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
+import { withContext } from "../scripts/lib/law-context.mjs";
 
 const assessorInstructions = "assessor instructions";
 
@@ -97,13 +98,51 @@ test("nothing is trimmed: many law changes all stay in the package", () => {
   assert.equal(pkg.evidence.filter(({ role }) => role === "law-change").length, 40);
 });
 
-test("a package larger than the models can read is marked oversized, not trimmed", () => {
+test("a package larger than the models can read even without context is marked oversized, and its text is never trimmed", () => {
   const huge = "x".repeat(maxRequestInputTokens * charactersPerToken + 10);
   const pkg = buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: [{ change: lawChange(1, huge), route }], recordsByPrintId: new Map([["43200", [attributedVoteRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
   assert.equal(pkg.generation.oversized, true);
   assert.ok(pkg.generation.estimatedTokens > maxRequestInputTokens);
   assert.equal(pkg.evidence.find(({ role }) => role === "law-change").structuredFacts.versions.proposed.textCz, huge);
   assert.equal(estimatePackageTokens({ text: "abc" }), Math.ceil(JSON.stringify({ text: "abc" }).length / charactersPerToken));
+});
+
+test("a package too large with its context fits by leaving out the longest provisions, never the text, and names them", () => {
+  const provision = (path, citation, textCz, wording = "2026-01-01") => ({ act: "23/2017", wording, path, citation, textCz });
+  const huge = "h".repeat(maxRequestInputTokens * charactersPerToken);
+  const versionContext = (provisions) => ({
+    conductDate: "2026-02-01",
+    amendedAct: "23/2017",
+    instructions: [{ instructionCz: "V § 1 …", targets: Object.keys(provisions).map((id) => ({ target: provisions[id].citation, status: "found", wording: provisions[id].wording, provisionIds: [id] })) }],
+    provisions
+  });
+  const shared = provision("dokument/norma/par_2", "§ 2", "sdílené znění");
+  const context = {
+    versions: {
+      proposed: versionContext({ a: provision("dokument/norma/par_1", "§ 1", huge), b: shared, c: provision("dokument/norma/par_3/odst_1", "§ 3 odst. 1", "krátké znění") }),
+      approved: versionContext({ b: shared, d: { ...provision("dokument/prilohy/priloha_1", "příloha č. 1", "příloha", "0000-00-00"), promulgatedOn: "2017-02-01" } })
+    }
+  };
+  const versions = {
+    proposed: { heading: "ČÁST PRVNÍ", titleCz: "Změna zákona", textCz: "Zákon č. 23/2017 Sb. se mění takto: …", document: { filename: "t.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=1" } },
+    approved: { heading: "ČÁST PRVNÍ", titleCz: "Změna zákona", textCz: "Zákon č. 23/2017 Sb. se mění takto: … (schváleno)", document: { filename: "s.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=2" } }
+  };
+  const change = withContext(lawChange(1, undefined, versions), context);
+  const vote = attributedVoteRecord({ payload: { linkedPrints: [{ externalPrintId: "43200", printKindId: "1", historyContexts: [{ actionCz: "souhlas", stageCz: "3. čtení" }] }] } });
+  const build = (contextOf) => buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: [{ change, route }], recordsByPrintId: new Map([["43200", [vote]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15", contextOf });
+  assert.equal(build(null).generation.oversized, true, "without the contexts the package cannot be fitted");
+  const pkg = build(() => context);
+  assert.equal(pkg.generation.oversized, false);
+  assert.ok(pkg.generation.estimatedTokens <= maxRequestInputTokens);
+  const facts = pkg.evidence.find(({ role }) => role === "law-change").structuredFacts;
+  assert.equal(facts.versions.proposed.textCz, versions.proposed.textCz, "the text is never trimmed");
+  assert.equal(facts.versions.approved.textCz, versions.approved.textCz);
+  const proposedContext = facts.versions.proposed.contextCz;
+  assert.match(proposedContext, /Not supplied, because the evidence package is larger than the models can read: the wording of 1 of the 3 provisions this version's context holds \(§ 1 zákona č\. 23\/2017 Sb\.\)/);
+  assert.ok(!proposedContext.includes(huge.slice(0, 1000)));
+  assert.match(proposedContext, /§ 3 odst\. 1 zákona č\. 23\/2017 Sb\. \(wording from 2026-01-01\):\nkrátké znění/, "the shorter provisions are put back");
+  assert.match(facts.versions.approved.contextCz, /§ 2 zákona č\. 23\/2017 Sb\. \(wording from 2026-01-01\): the same text as supplied for the proposed text\./);
+  assert.deepEqual(pkg.generation.contextOmissions, [{ evidenceId: lawChangeEvidenceId(change), version: "proposed", suppliedCount: 2, omitted: [{ act: "23/2017", wording: "2026-01-01", paths: ["dokument/norma/par_1"] }] }]);
 });
 
 test("the assessor instructions count towards the input limit of a package", () => {

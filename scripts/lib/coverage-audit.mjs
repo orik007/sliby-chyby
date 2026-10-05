@@ -146,6 +146,7 @@ export function buildCoverageAudit({ collectorRun, routingRun, printParts, track
       relevancePairs: routingRun.counts.relevancePairCount,
       relevanceDropped: routingRun.counts.relevanceDroppedCount,
       oversizedPackages: routingRun.counts.oversizedPackageCount,
+      contextTrimmedPackages: routingRun.counts.contextTrimmedPackageCount,
       invalidModelOutputs: routingRun.counts.invalidScreenerCount + routingRun.counts.invalidRelevanceCheckCount,
       printParts: printParts?.quality ?? null
     },
@@ -202,6 +203,7 @@ export function renderCoverageAuditMarkdown(audit) {
     `| Routed, but the promise's party has no conduct on the print | ${quality.routedWithoutConduct} |`,
     `| Promise and law-change pairs checked / dropped as not relevant | ${quality.relevancePairs} / ${quality.relevanceDropped} |`,
     `| Packages larger than the models can read | ${quality.oversizedPackages} |`,
+    `| Packages that fit only without part of their context | ${quality.contextTrimmedPackages} |`,
     `| Invalid model outputs | ${quality.invalidModelOutputs} |`,
     "",
     "## Summary",

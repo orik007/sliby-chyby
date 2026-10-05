@@ -241,10 +241,12 @@ if (!runFailure) {
   const collectorRunHash = sha256(collectorRun);
   const assessorInstructions = (await loadAssessmentPrompts()).assessor.instructions;
   for (const [promiseId, keptChanges] of [...keptByPromise].sort(([left], [right]) => left.localeCompare(right))) {
-    const evidencePackage = buildLawChangeEvidencePackage({ promise: promiseById.get(promiseId), keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash, asOf: args.asOf, assessorInstructions });
+    const evidencePackage = buildLawChangeEvidencePackage({ promise: promiseById.get(promiseId), keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash, asOf: args.asOf, assessorInstructions, contextOf: (changeId) => lawContext.changes[changeId] });
     if (!evidencePackage) continue;
     await writeFile(resolve(packageDirectory, `${promiseId}.json`), `${JSON.stringify(evidencePackage, null, 2)}\n`, { flag: "wx" });
-    builtPackages.push({ promiseId, lawChangeCount: evidencePackage.generation.lawChangeCount, conductCount: evidencePackage.generation.conductCount, estimatedTokens: evidencePackage.generation.estimatedTokens, oversized: evidencePackage.generation.oversized });
+    builtPackages.push({ promiseId, lawChangeCount: evidencePackage.generation.lawChangeCount, conductCount: evidencePackage.generation.conductCount, estimatedTokens: evidencePackage.generation.estimatedTokens, oversized: evidencePackage.generation.oversized, contextOmissionCount: (evidencePackage.generation.contextOmissions ?? []).reduce((sum, { omitted }) => sum + omitted.reduce((count, { paths }) => count + paths.length, 0), 0) });
+    const trimmed = evidencePackage.generation.contextOmissions;
+    if (trimmed && !evidencePackage.generation.oversized) log(`${promiseId}: package fits the models only without the wording of ${builtPackages.at(-1).contextOmissionCount} provisions in the context of ${trimmed.length} law-change version(s); they are named in the package`);
     if (evidencePackage.generation.oversized) log(`${promiseId}: package of about ${evidencePackage.generation.estimatedTokens} tokens exceeds ${maxRequestInputTokens}, the most the models can read, together with the assessor instructions; it is reported for human review and not assessed`);
   }
 }
@@ -268,6 +270,7 @@ const counts = {
   relevanceDroppedCount: checkedPairs.filter(({ kept }) => !kept).length,
   packageCount: builtPackages.length,
   oversizedPackageCount: builtPackages.filter(({ oversized }) => oversized).length,
+  contextTrimmedPackageCount: builtPackages.filter(({ oversized, contextOmissionCount }) => !oversized && contextOmissionCount > 0).length,
   invalidScreenerCount: invalid.screening,
   invalidRelevanceCheckCount: invalid.relevance
 };

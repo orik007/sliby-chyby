@@ -6,7 +6,7 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import test from "node:test";
 import { pathToFileURL } from "node:url";
-import { charactersPerToken, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
+import { charactersPerToken, longContextInputTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
 
 // One real Chamber print (tisk 189, the revenue-registration bill) taken from
 // the collector and print-text runs of 25 September 2026: its six law
@@ -240,6 +240,16 @@ test("one real print runs through routing, packaging, assessment, and the review
   });
   assert.deepEqual((await modelCalls(join(work, "long-review-calls.jsonl"))).map(({ name }) => name), ["slava_assessment", "slava_assessment"]);
   assert.deepEqual(JSON.parse(stdout).resolution, { state: "human-review-required", reason: "arbiter-input-too-large", status: null, selectedReview: null });
+
+  // An arbiter request above the long-context threshold goes to the
+  // long-context arbiter model; the package's fingerprint stays the same.
+  const longEnvironment = { ...assessmentEnvironment(join(work, "long-context-calls.jsonl")), SLIBY_LONG_CONTEXT_ARBITER_MODEL: "gpt-6-luna", STUB_OPENAI_EXPLANATION_CHARS: String(longContextInputTokens * charactersPerToken / 2) };
+  const longContext = JSON.parse((await run([script("run-assessment.mjs"), join(routingOutput, "evidence-packages", `${vatPromiseId}.json`), join(work, "long-context")], { cwd: root, environment: longEnvironment })).stdout);
+  assert.deepEqual((await modelCalls(join(work, "long-context-calls.jsonl"))).map(({ name, model }) => [name, model]), [["slava_assessment", "gpt-6-luna"], ["slava_assessment", dissentingModel], ["slava_arbitration", "gpt-6-luna"]]);
+  assert.equal(longContext.assessmentFingerprint, JSON.parse(stdout).assessmentFingerprint);
+  assert.equal((await readJson(join(longContext.outputDirectory, "assessment-run.json"))).arbiter.model, "gpt-6-luna");
+  // A short arbiter request keeps the arbiter model.
+  assert.ok(calls.filter(({ name }) => name === "slava_arbitration").every(({ model }) => model === "gpt-6.1-sol"));
 
   // An invalid assessment is asked for again, at most twice, and never
   // saved: two invalid answers of assessor A, then a valid one that agrees

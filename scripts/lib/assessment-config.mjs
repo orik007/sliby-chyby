@@ -9,11 +9,14 @@ export const scoringRulePath = "docs/scoring.md";
 // The assessor and arbiter models read at most 1,050,000 tokens, their
 // answer of up to 128,000 tokens included (OpenAI model documentation,
 // verified 26 September 2026), so a request can carry at most 922,000 input
-// tokens, instructions and input together; a larger one cannot be sent, is
-// reported for human review, and is never trimmed. A request above 272,000
+// tokens, instructions and input together. A larger evidence package is fitted
+// by leaving out part of its context, never its text, and only one still too
+// large without any context is reported for human review
+// (docs/evidence-pipeline.md, Package). A request above 272,000
 // input tokens is sent at the long-context price
 // (automation/model-prices.json).
 export const maxRequestInputTokens = 922_000;
+export const longContextInputTokens = 272_000;
 
 // Run 56's 1,110 screening requests had 2.78 to 4.17 characters per billed
 // input token, the fewest in the largest legal texts, so a request is
@@ -41,8 +44,17 @@ export function assessmentRuntimeConfig(env = process.env) {
     assessorModelA: env.SLIBY_ASSESSOR_MODEL_A ?? "gpt-6-luna",
     assessorModelB: env.SLIBY_ASSESSOR_MODEL_B ?? "gpt-6-luna",
     arbiterModel: env.SLIBY_ARBITER_MODEL ?? "gpt-6.1-sol",
+    longContextArbiterModel: env.SLIBY_LONG_CONTEXT_ARBITER_MODEL || null,
     concurrency: Number(env.SLIBY_ASSESSMENT_CONCURRENCY ?? "16")
   };
+}
+
+// The arbiter of a request above the long-context threshold is
+// `longContextArbiterModel` when one is set (docs/evidence-pipeline.md,
+// Assess). It is not part of the assessment fingerprint, so setting it never
+// reassesses a package; the audit record keeps the model that answered.
+export function arbiterModelFor(runtime, requestTokens) {
+  return requestTokens > longContextInputTokens && runtime.longContextArbiterModel ? runtime.longContextArbiterModel : runtime.arbiterModel;
 }
 
 // The assessors and the arbiter each get their own prompt followed by the

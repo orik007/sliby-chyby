@@ -38,7 +38,13 @@ export const evidenceTrailPrintSchema = z.object({ printNumber: z.number().int()
     if (step.kind !== "senate-resolution" && step.notes.some(({ lawChangeIds: ids }) => ids.some((id) => !lawChangeIds.has(id)))) context.addIssue({ code: "custom", path: ["steps", index, "notes"], message: "A version note must name law changes of this print" });
   }
 });
-export const assessmentRevisionSchema = z.object({ id: z.string().min(1), promiseId: z.string().min(1), revision: z.number().int().positive(), status: assessmentStatusSchema, explanationShort: z.string().min(1), publishedAt: z.iso.date(), evidenceSourceIds: z.array(z.string().min(1)), evidenceTrail: z.array(evidenceTrailPrintSchema).min(1).optional(), proposalId: z.string().min(1).optional(), baselinePromiseSourceId: z.string().min(1).optional(), isDemo: z.boolean() }).superRefine((revision, context) => {
+// A wording of an act in e-Sbírka, optionally scrolled to one provision.
+const eSbirkaUrlSchema = z.url().regex(/^https:\/\/e-sbirka\.gov\.cz\/sb\/\d{4}\/\d+\/\d{4}-\d{2}-\d{2}(#[a-z0-9_:-]+)?$/, "Context links must point to a wording in e-Sbírka");
+// The wording of provisions an assessment did not have, because its evidence
+// package would otherwise have been too large (docs/evidence-pipeline.md, Package).
+export const contextOmissionSchema = z.object({ printNumber: z.number().int().positive(), lawChangeId: z.string().min(1), headingCz: z.string().min(1).nullable(), titleCz: z.string().min(1), version: z.enum(["proposed", "approved", "passed"]), act: z.string().regex(/^\d+\/\d{4}$/), wordingFrom: z.iso.date().nullable(), wordingUrl: eSbirkaUrlSchema, suppliedCount: z.number().int().nonnegative(), provisions: z.array(z.object({ citationCz: z.string().min(1), url: eSbirkaUrlSchema }).strict()).min(1) }).strict();
+export const assessmentRevisionSchema = z.object({ id: z.string().min(1), promiseId: z.string().min(1), revision: z.number().int().positive(), status: assessmentStatusSchema, explanationShort: z.string().min(1), publishedAt: z.iso.date(), evidenceSourceIds: z.array(z.string().min(1)), evidenceTrail: z.array(evidenceTrailPrintSchema).min(1).optional(), contextOmissions: z.array(contextOmissionSchema).min(1).optional(), proposalId: z.string().min(1).optional(), baselinePromiseSourceId: z.string().min(1).optional(), isDemo: z.boolean() }).superRefine((revision, context) => {
+  if (revision.contextOmissions && !revision.proposalId) context.addIssue({ code: "custom", path: ["contextOmissions"], message: "Context omissions are copied from a reviewed proposal" });
   if (revision.evidenceSourceIds.length === 0 && !revision.evidenceTrail) context.addIssue({ code: "custom", path: ["evidenceSourceIds"], message: "A revision must cite source records or an evidence trail" });
   if (revision.baselinePromiseSourceId && (revision.evidenceTrail || revision.proposalId)) context.addIssue({ code: "custom", path: ["evidenceTrail"], message: "Baseline revisions have no evidence trail or proposal" });
   if (revision.evidenceTrail && revision.evidenceSourceIds.length > 0) context.addIssue({ code: "custom", path: ["evidenceSourceIds"], message: "A revision with an evidence trail cites no other source record" });
@@ -66,3 +72,4 @@ export type PolicyCategory = z.infer<typeof policyCategorySchema>;
 export type AssessmentRevision = z.infer<typeof assessmentRevisionSchema>;
 export type EvidenceTrailPrint = z.infer<typeof evidenceTrailPrintSchema>;
 export type EvidenceTrailStep = EvidenceTrailPrint["steps"][number];
+export type ContextOmission = z.infer<typeof contextOmissionSchema>;

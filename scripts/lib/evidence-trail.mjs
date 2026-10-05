@@ -1,6 +1,7 @@
 import { hashEvidencePackage, validateEvidencePackage } from "./assessment-pipeline.mjs";
 import { chosenReview, proposedPublicExplanation } from "./assessment-review.mjs";
 import { isDecisiveAction } from "./attribution.mjs";
+import { contextOmissionsOf } from "./context-omissions.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -165,6 +166,7 @@ export function createAssessmentRevision({ proposal, manifestProposal, evidenceP
   const evidenceTrail = buildEvidenceTrail(evidencePackage, auditRecord);
   invariant(evidenceTrail.length > 0 || proposal.candidateStatus === "no-progress", "A score other than no progress needs an evidence trail");
   const revision = current + 1;
+  const contextOmissions = contextOmissionsOf(evidencePackage);
   return {
     id: `${fileId}--${String(revision).padStart(3, "0")}`,
     promiseId: promise.id,
@@ -174,6 +176,7 @@ export function createAssessmentRevision({ proposal, manifestProposal, evidenceP
     publishedAt,
     evidenceSourceIds: evidenceTrail.length > 0 ? [] : [promise.primarySourceId],
     ...(evidenceTrail.length > 0 ? { evidenceTrail } : {}),
+    ...(contextOmissions.length > 0 ? { contextOmissions } : {}),
     proposalId: proposal.proposalId,
     isDemo: false
   };

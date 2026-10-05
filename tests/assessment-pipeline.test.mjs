@@ -1,5 +1,7 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
+import { arbiterModelFor, assessmentRuntimeConfig, longContextInputTokens } from "../scripts/lib/assessment-config.mjs";
 import {
   assessmentOutputJsonSchema,
   hashAssessmentContent,
@@ -144,6 +146,24 @@ test("ignores concurrency when hashing assessment identity", () => {
   const first = hashAssessmentFingerprint({ assessmentContentHash: content, prompts, runtime: { ...assessmentRuntime, concurrency: 1 } });
   const second = hashAssessmentFingerprint({ assessmentContentHash: content, prompts, runtime: { ...assessmentRuntime, concurrency: 8 } });
   assert.equal(first, second);
+});
+
+test("the long-context arbiter model is used only above the threshold and never changes a fingerprint", () => {
+  const content = hashAssessmentContent(evidencePackage);
+  const withoutLong = assessmentRuntimeConfig({ SLIBY_ARBITER_MODEL: "c" });
+  const withLong = assessmentRuntimeConfig({ SLIBY_ARBITER_MODEL: "c", SLIBY_LONG_CONTEXT_ARBITER_MODEL: "small" });
+  assert.equal(
+    hashAssessmentFingerprint({ assessmentContentHash: content, prompts, runtime: withoutLong }),
+    hashAssessmentFingerprint({ assessmentContentHash: content, prompts, runtime: withLong })
+  );
+  assert.equal(arbiterModelFor(withLong, longContextInputTokens), "c");
+  assert.equal(arbiterModelFor(withLong, longContextInputTokens + 1), "small");
+  assert.equal(arbiterModelFor(withoutLong, longContextInputTokens + 1), "c");
+});
+
+test("the long-context threshold matches the price table", async () => {
+  const prices = JSON.parse(await readFile(new URL("../automation/model-prices.json", import.meta.url), "utf8"));
+  assert.equal(prices.longContextThresholdTokens, longContextInputTokens);
 });
 
 test("requires a law change in every package", () => {
