@@ -246,9 +246,8 @@ if (!runFailure) {
   const collectorRunHash = sha256(collectorRun);
   const { assessor } = await loadAssessmentPrompts();
   const assessorInstructions = assessor.instructions;
-  // The relevance verdicts of earlier assessments: a law change both
-  // assessors found not relevant is left out while what they judged is
-  // unchanged (docs/evidence-pipeline.md, Package).
+  // The relevance verdicts of earlier assessments (docs/evidence-pipeline.md,
+  // Package).
   const manifestPath = resolve(args.reviewProposals, "manifest.json");
   const verdicts = existsSync(manifestPath) ? await loadRelevanceVerdicts(validateReviewManifest(JSON.parse(await readFile(manifestPath, "utf8")))) : new Map();
   const assessorPrompt = { version: assessor.version, contentHash: assessor.contentHash };

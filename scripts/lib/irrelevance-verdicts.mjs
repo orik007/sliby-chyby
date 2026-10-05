@@ -4,13 +4,8 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 /**
- * Law changes both assessors found not relevant to a promise are left out of
- * its later packages (docs/evidence-pipeline.md, Package). A verdict applies
- * only while what it judged is unchanged: the law change's versions with
- * their text and context, the promise's title and wording, and the assessor
- * prompt with the scoring rule. Any change to these brings the law change
- * back, to be judged again. A new vote on the same text does not: relevance
- * depends on what the law change says, not on how the party voted.
+ * The assessors' relevance verdicts and the law changes they leave out of a
+ * package. The rule is in docs/evidence-pipeline.md (Package, Assess).
  */
 
 function invariant(condition, message) {
@@ -25,7 +20,7 @@ function canonicalize(value) {
   return JSON.stringify(value);
 }
 
-/** What a verdict judged, as one hash. `assessorPrompt` is `{ version, contentHash }`. */
+/** The key of a verdict (`irrelevance-key-v1`). `assessorPrompt` is `{ version, contentHash }`. */
 export function irrelevanceKey({ promise, versions, assessorPrompt }) {
   invariant(assessorPrompt?.version && /^[a-f0-9]{64}$/.test(assessorPrompt.contentHash ?? ""), "irrelevanceKey needs the assessor prompt identity");
   return createHash("sha256").update(canonicalize({
@@ -37,12 +32,9 @@ export function irrelevanceKey({ promise, versions, assessorPrompt }) {
 }
 
 /**
- * The relevance verdicts of one assessment, per law change in its package:
- * `{ evidenceId, key, irrelevant, entry }`, `irrelevant` only when both
- * assessor outputs are valid and both say not relevant, and `entry` the line
- * a later package shows for a change left out. A law change whose context
- * was trimmed in that package (`generation.contextOmissions`) was not judged
- * on its whole text and context, so it gives no verdict.
+ * The relevance verdicts of one assessment, per law change in its package
+ * except one with trimmed context: `{ evidenceId, key, irrelevant, entry }`,
+ * `entry` the line a later package shows when the change is left out.
  */
 export function relevanceVerdictsOf({ evidencePackage, auditRecord, proposalId }) {
   const reviewA = auditRecord?.validatedAssessments?.["assessor-a"] ?? null;
@@ -66,11 +58,8 @@ export function relevanceVerdictsOf({ evidencePackage, auditRecord, proposalId }
 /**
  * Every promise's latest relevance verdict per law change, from the proposals
  * in the review manifest (their archived package and assessment record):
- * `Map(promiseId -> Map(evidenceId -> verdict))`, the verdict of the most
- * recently evaluated proposal that judged that change, whatever its key. Only
- * the latest counts, so a change one assessor later found relevant is never
- * left out on an older verdict, even when what that older one judged comes
- * back.
+ * `Map(promiseId -> Map(evidenceId -> verdict))`, by the most recently
+ * evaluated proposal that judged the change.
  */
 export async function loadRelevanceVerdicts(manifest) {
   const verdicts = new Map();
@@ -88,12 +77,7 @@ export async function loadRelevanceVerdicts(manifest) {
   return verdicts;
 }
 
-/**
- * The line for a law change that is left out of this package, or null: the
- * law change's latest verdict with the key of its current text and context,
- * this promise, and the current assessor prompt says both assessors found it
- * not relevant.
- */
+/** The line for a law change left out of this package, or null. */
 export function exclusionOf({ verdicts, promise, lawChange, assessorPrompt }) {
   const verdict = verdicts?.get(promise.id)?.get(lawChange.id);
   if (!verdict?.irrelevant) return null;
@@ -101,12 +85,10 @@ export function exclusionOf({ verdicts, promise, lawChange, assessorPrompt }) {
 }
 
 /**
- * The package an assessment's own verdicts would leave: without the law
- * changes both of its assessors found not relevant, their concerns, conduct
- * that concerns none of the remaining changes, and Senate resolutions no
- * remaining change names, and with a line for each change left out. A
- * package rebuilt without them is the same as this one, so it keeps the
- * assessment (docs/evidence-pipeline.md, Assess).
+ * The package an assessment's own verdicts leave: without the given law
+ * changes, their concerns, conduct left with no concern, and Senate
+ * resolutions no remaining change names, and with a line for each change
+ * left out, as the package builder makes it.
  */
 export function withoutIrrelevantLawChanges(evidencePackage, entries) {
   if (entries.length === 0) return evidencePackage;

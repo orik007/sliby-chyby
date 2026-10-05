@@ -222,13 +222,9 @@ const maxAssessments = Number(process.env.SLIBY_MAX_ASSESSMENTS ?? "0");
 invariant(Number.isInteger(maxAssessments) && maxAssessments >= 0, "SLIBY_MAX_ASSESSMENTS must be a non-negative integer");
 const plan = planAssessmentInputs({ packages, manifest, blockedPromiseIds, prompts, runtime: assessmentRuntime });
 
-// The package this assessment's own verdicts leave: without the law changes
-// both of its assessors found not relevant. The next run builds that package,
-// which then keeps this assessment instead of being assessed again
-// (docs/evidence-pipeline.md, Assess). A package fitted by leaving out
-// context keeps that context here, while a smaller rebuilt one may fit more
-// of it; that one holds more than was assessed and is assessed again. Null
-// when they leave nothing out, or leave no law change.
+// The content hash and fingerprint of the package this assessment's own
+// verdicts leave (docs/evidence-pipeline.md, Assess); null when they leave
+// nothing out, or leave no law change.
 function reducedPackageOf(item, auditRecord) {
   const proposalId = `${item.promiseId}--${auditRecord.assessmentFingerprint.slice(0, 12)}`;
   const entries = relevanceVerdictsOf({ evidencePackage: item.evidencePackage, auditRecord, proposalId }).filter(({ irrelevant }) => irrelevant).map(({ entry }) => entry);

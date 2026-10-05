@@ -75,10 +75,8 @@ export function describeAssessmentInput(evidencePackage, prompts, runtime) {
   };
 }
 
-// A package is unchanged when an assessment has its fingerprint, or when it
-// is the package an assessment's own verdicts leave: the assessed one
-// without the law changes both of its assessors found not relevant
-// (`reducedAssessmentFingerprint`, docs/evidence-pipeline.md, Assess).
+// A package is unchanged when an assessment has its fingerprint or its
+// `reducedAssessmentFingerprint` (docs/evidence-pipeline.md, Assess).
 export function planAssessmentInputs({ packages, manifest, blockedPromiseIds = new Set(), prompts, runtime }) {
   validateReviewManifest(manifest);
   const existingFingerprints = new Set(manifest.proposals.flatMap(({ assessmentFingerprint, reducedAssessmentFingerprint }) => [assessmentFingerprint, ...(reducedAssessmentFingerprint ? [reducedAssessmentFingerprint] : [])]));
