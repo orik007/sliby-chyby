@@ -7,6 +7,7 @@ import test from "node:test";
 import { createESbirkaClient, createLawContextCache, createLawContextReader, eSbirkaRequestSettings, ESbirkaUnavailableError, plainText } from "../scripts/lib/e-sbirka.mjs";
 import { citationOfPath, contextStatusCounts, contextText, locateTarget, resolveLawChangeContext, withContext, wordingOn } from "../scripts/lib/law-context.mjs";
 import { lawChangeText } from "../scripts/lib/law-change-screening.mjs";
+import { readPromulgatedParagraphs } from "../scripts/lib/print-parts.mjs";
 
 // A clock and sleep that only move when the client waits, so pacing and
 // retries are checked without real time passing.
@@ -35,7 +36,9 @@ test("sends one request at a time, at least 250 ms apart, and retries a failure 
   });
   assert.deepEqual(await client.get("/typy-aktu", { purpose: "test" }), {});
   assert.deepEqual(requests.map(({ ok, status }) => [ok, status]), [[false, 502], [false, 429], [true, 200]]);
-  assert.deepEqual(clock.sleeps, [1_000, 2_000]);
+  // The first request also waits the interval: the step before, with its own
+  // client, may have just sent one.
+  assert.deepEqual(clock.sleeps, [250, 1_000, 2_000]);
   assert.deepEqual(eSbirkaRequestSettings.retryDelaysMs, [1, 2, 4, 8, 16, 32, 32, 32, 32, 32].map((seconds) => seconds * 1_000));
   // The next request waits for the 250 ms interval: never more than 4 a second.
   await client.get("/typy-aktu");
@@ -52,12 +55,13 @@ test("a technical failure after every retry is ESbirkaUnavailableError; a missin
   const keyClock = fakeTime();
   const invalidKey = createESbirkaClient({ apiKey: "key", now: keyClock.now, sleep: keyClock.sleep, fetchImpl: async () => answer(JSON.stringify({ chyby: [{ kod: "NEPLATNY_API_KLIC" }] }), { status: 401 }) });
   await assert.rejects(invalidKey.get("/x"), /rejected the key \(request\): HTTP 401 NEPLATNY_API_KLIC/);
-  assert.deepEqual(keyClock.sleeps, []);
+  // Only the interval before the first request, no retry delay.
+  assert.deepEqual(keyClock.sleeps, [250]);
   // Also when the rejection is not JSON.
   const htmlClock = fakeTime();
   const htmlRejection = createESbirkaClient({ apiKey: "key", now: htmlClock.now, sleep: htmlClock.sleep, fetchImpl: async () => answer("<html>Forbidden</html>", { status: 403 }) });
   await assert.rejects(htmlRejection.get("/x"), /rejected the key \(request\): HTTP 403/);
-  assert.deepEqual(htmlClock.sleeps, []);
+  assert.deepEqual(htmlClock.sleeps, [250]);
   const missing = createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: async () => notFound() });
   assert.equal(await missing.get("/x"), null);
   const keyless = createESbirkaClient({ apiKey: "", ...fakeTime(), fetchImpl: async () => answer("{}") });
@@ -364,6 +368,60 @@ test("only what e-Sbírka reports changed since it was read is requested again",
   // A change list that could not name every change makes everything out of date.
   assert.deepEqual(await run({ uncounted: 1 }, "2026-10-06T12:00:00.000Z"), ["%2Fsb%2F2019%2F110%2F2025-01-01/fragmenty", "%2Fsb%2F2019%2F110%2F2026-06-12/fragmenty", "%2Fsb%2F2019%2F110/historie", "%2Fsb%2F2025%2F300"]);
   assert.deepEqual(await run({}, "2026-10-07T12:00:00.000Z"), []);
+});
+
+test("an act as promulgated that e-Sbírka was still digitising is read again once e-Sbírka lists it changed", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "law-context-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const digitising = { structures: { "0000-00-00": ["dokument", "dokument/prefix/frag_1"] }, texts: { "0000-00-00/dokument/prefix/frag_1": "Znění aktu … právě digitalizujeme." } };
+  const published = { structures: { "0000-00-00": ["dokument", "dokument/prefix/frag_1", "dokument/novela/cast_1", "dokument/postfix/frag_2"] }, texts: { "0000-00-00/dokument/prefix/frag_1": "ZÁKON", "0000-00-00/dokument/novela/cast_1": "ČÁST PRVNÍ", "0000-00-00/dokument/postfix/frag_2": "Babiš v. r." } };
+  const run = async (act, changes, time) => {
+    const endpoint = endpointFor({ ...act110, ...act, changes, promulgations: { "110/2019": "2026-09-15" } });
+    const reader = await readerFor(directory, endpoint, { at: () => time });
+    return { paragraphs: await readPromulgatedParagraphs(reader, "110/2019"), calls: endpoint.calls.filter((call) => !call.includes("zneni")).length };
+  };
+  assert.deepEqual(await run(digitising, {}, "2026-10-05T10:00:00.000Z"), { paragraphs: null, calls: 2 });
+  // Nothing listed as changed: the cached notice stands.
+  assert.deepEqual(await run(published, {}, "2026-10-06T10:00:00.000Z"), { paragraphs: null, calls: 0 });
+  // e-Sbírka lists the promulgated wording by the promulgation day.
+  assert.deepEqual(await run(published, { "zmeny-zneni": [["110/2019", "2026-09-15"]] }, "2026-10-07T10:00:00.000Z"), { paragraphs: ["ZÁKON", "ČÁST PRVNÍ"], calls: 2 });
+});
+
+test("an act e-Sbírka did not yet hold is asked again once e-Sbírka lists any wording of it", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "law-context-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const run = async (promulgations, changes, time) => {
+    const endpoint = endpointFor({ ...act110, promulgations, changes });
+    const reader = await readerFor(directory, endpoint, { at: () => time });
+    return { day: await reader.promulgated("301/2026"), calls: endpoint.calls.filter((call) => !call.includes("zneni")).length };
+  };
+  assert.deepEqual(await run({}, {}, "2026-10-05T10:00:00.000Z"), { day: null, calls: 1 });
+  assert.deepEqual(await run({ "301/2026": "2026-10-05" }, {}, "2026-10-06T10:00:00.000Z"), { day: null, calls: 0 });
+  assert.deepEqual(await run({ "301/2026": "2026-10-05" }, { "zmeny-zneni": [["301/2026", "2026-10-05"]] }, "2026-10-07T10:00:00.000Z"), { day: "2026-10-05", calls: 1 });
+});
+
+test("the steps of one workflow run share one check of what e-Sbírka changed", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "law-context-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const step = async (runId, time) => {
+    const endpoint = endpointFor({ ...act110, changes: {} });
+    const client = createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: endpoint.fetchImpl });
+    const reader = createLawContextReader({ client, cache: createLawContextCache(directory), clock: () => time, runId });
+    await reader.structure("110/2019", "2025-01-01");
+    return endpoint.calls.filter((call) => call.includes("zneni")).length;
+  };
+  assert.equal(await step("7-1", "2026-10-05T10:00:00.000Z"), 0, "an empty cache needs no check");
+  assert.equal(await step("8-1", "2026-10-06T10:00:00.000Z"), 2);
+  assert.equal(await step("8-1", "2026-10-06T10:05:00.000Z"), 0, "the next step of the same run");
+  // A later step reports the count of the shared check.
+  const reader = (runId, changes, time) => createLawContextReader({ client: createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: endpointFor({ ...act110, changes }).fetchImpl }), cache: createLawContextCache(directory), clock: () => time, runId });
+  const first = reader("9-1", { "zmeny-zneni": [["89/2012", "2027-01-01"]] }, "2026-10-06T13:00:00.000Z");
+  await first.structure("110/2019", "2025-01-01");
+  const second = reader("9-1", {}, "2026-10-06T13:05:00.000Z");
+  await second.structure("110/2019", "2025-01-01");
+  assert.deepEqual([first.stats.changedWordings, second.stats.changesCheckedEarlierInRun, second.stats.changedWordings], [1, true, 1]);
+  assert.equal(await step("8-2", "2026-10-06T11:00:00.000Z"), 2, "a new attempt checks again");
+  assert.equal(await step(null, "2026-10-06T12:00:00.000Z"), 2, "outside GitHub Actions every reader checks");
 });
 
 test("a cache line cut short by a stopped run is removed, and what it held is read again", async (t) => {

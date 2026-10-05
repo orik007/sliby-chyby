@@ -124,6 +124,7 @@ function evidenceFromLawChange(change, route, publishedAt, senateResolutionIds) 
     const entry = change.versions[version];
     if (entry.removed) return `removed in the ${versionLabels[version]}`;
     if (entry.sameAs) return `${versionLabels[version]} (the same as the ${versionLabels[entry.sameAs]})`;
+    if (entry.promulgatedAct) return `${versionLabels[version]} (as promulgated: zákon č. ${entry.promulgatedAct} Sb.)`;
     return entry.textCz === null ? `${versionLabels[version]}: print title only` : versionLabels[version];
   };
   return {

@@ -164,12 +164,17 @@ jobs:
 
       - name: Split official print texts into law changes
         timeout-minutes: 120
+        # A voted text psp.cz does not publish is read as the act was
+        # promulgated, from e-Sbírka through the permanent cache
+        # (docs/evidence-pipeline.md, Text from the Collection of Laws).
         env:
           PSP_PROXY_URL: ${{ secrets.PSP_PROXY_URL }}
+          ESEL_API_ACCESS_KEY: ${{ secrets.ESEL_API_ACCESS_KEY }}
         run: |
           node scripts/run-print-parts.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
             --document-hashes automation/psp-documents/hashes.json \
+            --cache automation/law-context \
             --output automation/runs/pipeline/github-actions/print-parts
 
       - name: Read law-change context from e-Sbírka
@@ -317,7 +322,7 @@ jobs:
               `- Skipped, cannot be attributable conduct: ${quality.notAttributableSkipped}`,
               `- Prints with a DOCX or DOC proposal text: ${quality.printParts.printsWithProposalText} of ${quality.printParts.prints}; with an approved / passed text: ${quality.printParts.printsWithApprovedText} / ${quality.printParts.printsWithPassedText}; returned by the Senate (rejected or amended): ${quality.printParts.printsWithSenateResolution}`,
               `- Law changes: ${quality.printParts.lawChanges} (added / removed during the debate: ${quality.printParts.lawChangesAddedInDebate} / ${quality.printParts.lawChangesRemovedInDebate})`,
-              `- Approved bills without an approved text on psp.cz: ${quality.printParts.approvedBillsWithoutApprovedText}; text warnings: ${quality.printParts.textWarnings}`,
+              `- Approved bills without an approved text on psp.cz: ${quality.printParts.approvedBillsWithoutApprovedText}; prints with a voted text from e-Sbírka: ${quality.printParts.printsWithPromulgatedText} (${quality.printParts.eSbirkaRequests} e-Sbírka requests, ${quality.printParts.eSbirkaFailedRequests} failed and retried); text warnings: ${quality.printParts.textWarnings}`,
               `- Law changes with context from e-Sbírka: ${context.lawChangesWithContext} of ${context.lawChanges} (${context.versionsWithContext} versions); targets by status: ${Object.entries(context.targetsByStatus).map(([status, count]) => `${status} ${count}`).join(", ")}`,
               `- e-Sbírka requests: ${context.eSbirkaRequests} (${context.eSbirkaFailedRequests} failed and retried); taken from the cache: ${context.cachedWordingLists} wording lists, ${context.cachedWordings} wordings, ${context.cachedPromulgations} promulgation days; wordings e-Sbírka changed since the last check: ${context.wordingsChangedSinceLastCheck}`,
               `- Law changes screened: ${quality.lawChanges} (technical ${quality.technicalLawChanges}, substantive ${quality.substantiveLawChanges})`,

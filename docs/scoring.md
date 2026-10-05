@@ -40,7 +40,7 @@ The governing parties and their dates are recorded in `automation/attribution/go
 
 ## Current score
 
-The current score reflects the party's most significant attributable conduct on the promise so far. A decision (a decisive vote) outweighs a proposal; among conduct of the same weight, the most recent one decides. Earlier conduct remains visible in the append-only revision history.
+The current score reflects the party's most significant attributable conduct on the promise so far. A decision (a decisive vote) outweighs a proposal; among conduct of the same weight, the most recent one decides. When conduct of the same weight and the same date, or one decision on a measure with parts both delivering and contradicting the promise, points in both directions, the lower score applies, and the explanation names both. When a promise names a measurable target, such as an amount, a rate, or a figure for a given year, conduct that directly concerns that target (for a deficit target, the state budget for that year) decides the score before conduct that concerns only another part of the promise, whatever their weight; among conduct concerning the target, the order above applies. Earlier conduct remains visible in the append-only revision history.
 
 For each changed evidence package, apply this order:
 

@@ -33,7 +33,7 @@ function answer(name, input, model) {
     const changes = evidencePackage.evidence.filter(({ role }) => role === "law-change");
     return {
       promiseId: evidencePackage.promise.id,
-      changeRelevance: changes.map(({ id }) => ({ evidenceId: id, relevant: true, reasonCz: "Změna se týká slibu." })),
+      changeRelevance: changes.map(({ id }) => ({ evidenceId: id, relevant: true, reasonCz: "Změna se týká slibu.", effectCz: "Dosavadní pravidlo se mění; směr plyne z kontextu." })),
       // The model named in STUB_OPENAI_DISSENTING_MODEL disagrees, so the
       // arbiter is called.
       status: model === process.env.STUB_OPENAI_DISSENTING_MODEL ? "moving-against" : "moving-towards",

@@ -25,8 +25,8 @@ const runtime = { assessorProviderA: "openai", assessorProviderB: "openai", arbi
 
 test("loads only the active assessor and arbiter prompts", async () => {
   const prompts = await loadAssessmentPrompts();
-  assert.equal(prompts.assessor.version, "assessor-v19");
-  assert.equal(prompts.arbiter.version, "arbiter-v12");
+  assert.equal(prompts.assessor.version, "assessor-v20");
+  assert.equal(prompts.arbiter.version, "arbiter-v13");
   assert.match(prompts.assessor.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.arbiter.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.assessor.instructions, /maintenanceBaseline/);
@@ -57,8 +57,8 @@ test("plans an unseen package for human review without publication", () => {
 const reviewA = {
   promiseId: "test-promise",
   changeRelevance: [
-    { evidenceId: "change-1", relevant: true, reasonCz: "Mění schvalování rozpočtu, o kterém slib mluví." },
-    { evidenceId: "change-2", relevant: false, reasonCz: "Upravuje jen dokončení zahájených řízení." }
+    { evidenceId: "change-1", relevant: true, reasonCz: "Mění schvalování rozpočtu, o kterém slib mluví.", effectCz: "Dosud rozpočet schvalovala vláda, nově | Sněmovna;\npravidlo se zpřísňuje." },
+    { evidenceId: "change-2", relevant: false, reasonCz: "Upravuje jen dokončení zahájených řízení.", effectCz: "" }
   ],
   status: "moving-towards",
   evidenceSufficient: true,
@@ -67,7 +67,7 @@ const reviewA = {
   confidence: "medium",
   uncertainties: []
 };
-const reviewB = { ...reviewA, changeRelevance: [reviewA.changeRelevance[0], { evidenceId: "change-2", relevant: true, reasonCz: "Určuje, podle kterých pravidel se řízení dokončí." }] };
+const reviewB = { ...reviewA, changeRelevance: [reviewA.changeRelevance[0], { evidenceId: "change-2", relevant: true, reasonCz: "Určuje, podle kterých pravidel se řízení dokončí.", effectCz: "Kontext dosavadní znění neuvádí, směr nelze určit." }] };
 const auditRecord = {
   validatedAssessments: { "assessor-a": reviewA, "assessor-b": reviewB },
   arbiter: null,
@@ -87,7 +87,13 @@ test("the human review page shows each assessor's relevance verdict for every la
   const markdown = renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal });
   assert.match(markdown, /### Souvisí změny zákonů se slibem\?/);
   assert.match(markdown, /Změna rozpočtových pravidel\]\(https:\/\/example.test\/change-1\) \| ano: Mění schvalování rozpočtu/);
-  assert.match(markdown, /Přechodná ustanovení\]\(https:\/\/example.test\/change-2\) \| ne: Upravuje jen dokončení zahájených řízení\. \| ano: Určuje, podle kterých pravidel se řízení dokončí\. \|/);
+  // The effect of a relevant change follows its reason, on one table row.
+  assert.match(markdown, /ano: Mění schvalování rozpočtu, o kterém slib mluví\.<br>Dopad: Dosud rozpočet schvalovala vláda, nově \/ Sněmovna; pravidlo se zpřísňuje\. \|/);
+  assert.match(markdown, /ne: Upravuje jen dokončení zahájených řízení\. \|/);
+  const withIrrelevantEffect = structuredClone(auditRecord);
+  withIrrelevantEffect.validatedAssessments["assessor-a"].changeRelevance[1].effectCz = "Nepatří sem.";
+  assert.doesNotMatch(renderHumanReviewMarkdown({ evidencePackage, auditRecord: withIrrelevantEffect, proposal }), /Nepatří sem/);
+  assert.match(markdown, /Přechodná ustanovení\]\(https:\/\/example.test\/change-2\) \| ne: Upravuje jen dokončení zahájených řízení\. \| ano: Určuje, podle kterých pravidel se řízení dokončí\.<br>Dopad: Kontext dosavadní znění neuvádí, směr nelze určit\. \|/);
 });
 
 test("the human review page shows both differing assessments and the arbiter's decision", () => {

@@ -40,7 +40,8 @@ export function staleUrlSegment(act, wording = null) {
 
 /**
  * A REST client that sends one request at a time, at least `minIntervalMs`
- * apart, retries a technical failure after each delay of `retryDelaysMs`,
+ * apart and the first one at least that long after the client is created,
+ * retries a technical failure after each delay of `retryDelaysMs`,
  * and then throws ESbirkaUnavailableError. A technical failure is no answer,
  * an HTTP error, or an answer that cannot be read; an answer that the
  * document does not exist (`DOKUMENT_NENALEZEN`) is not one and returns
@@ -50,7 +51,9 @@ export function staleUrlSegment(act, wording = null) {
 export function createESbirkaClient({ base = eSbirkaApi, apiKey = process.env[apiKeyVariable], fetchImpl = fetch, sleep = wait, now = Date.now, onRequest = () => {}, ...overrides } = {}) {
   const settings = { ...eSbirkaRequestSettings, ...overrides };
   let chain = Promise.resolve();
-  let lastStartedAt = -Infinity;
+  // Counted from creation, so the first request also waits: the step before
+  // (another process with its own client) may have just sent one.
+  let lastStartedAt = now();
 
   async function attempt(path, purpose) {
     const pause = lastStartedAt + settings.minIntervalMs - now();
@@ -242,6 +245,15 @@ export function createLawContextCache(directory) {
   };
 }
 
+/**
+ * The workflow run and attempt a step belongs to (`GITHUB_RUN_ID` and
+ * `GITHUB_RUN_ATTEMPT`), or null outside GitHub Actions: the steps of one run
+ * share one check of what e-Sbírka changed (createLawContextReader).
+ */
+export function workflowRunId(env = process.env) {
+  return env.GITHUB_RUN_ID ? `${env.GITHUB_RUN_ID}-${env.GITHUB_RUN_ATTEMPT ?? "1"}` : null;
+}
+
 // How far before the previous check the next one starts, so that no change
 // is missed between two clocks.
 const changesOverlapMs = 60 * 60 * 1000;
@@ -250,8 +262,8 @@ const changesOverlapMs = 60 * 60 * 1000;
 const changesPageSize = 10_000;
 
 /**
- * The wordings of acts, their structures and node texts, and the day an act
- * was promulgated. A wording is `{ wording, from, to, amendments }` with the
+ * The wordings of acts, their structures and nodes (`nodes`, every
+ * `[path, text]` in document order), and the day an act was promulgated. A wording is `{ wording, from, to, amendments }` with the
  * ISO dates of its effect (`to` null when open) and the acts ("314/2025")
  * e-Sbírka names as having taken effect in it; the list leaves out the
  * promulgated wording (`0000-00-00`), which is read only when asked for by
@@ -266,10 +278,12 @@ const changesPageSize = 10_000;
  * a wording, that wording; for everything, a check that could not list every
  * change. Only what is out of date is requested again, when it is needed.
  * The first check of a cache starts from its earliest answer; an empty cache
- * needs none. `clock` gives the time of each answer, stored with it.
+ * needs none. A check records `runId`; a reader of the same run (another
+ * step) uses that check and makes none, so a run checks once. `clock` gives
+ * the time of each answer, stored with it.
  */
-export function createLawContextReader({ client, cache, clock = () => new Date().toISOString() }) {
-  const stats = { requests: 0, cachedWordingLists: 0, cachedWordings: 0, cachedPromulgations: 0, changedWordings: 0 };
+export function createLawContextReader({ client, cache, clock = () => new Date().toISOString(), runId = null }) {
+  const stats = { requests: 0, cachedWordingLists: 0, cachedWordings: 0, cachedPromulgations: 0, changedWordings: 0, changesCheckedEarlierInRun: false };
   let changes = null;
 
   async function request(path, purpose) {
@@ -294,14 +308,17 @@ export function createLawContextReader({ client, cache, clock = () => new Date()
       const journal = await cache.loadChanges();
       const from = journal.at(-1)?.readAt ?? await cache.earliestReadAt();
       const readAt = clock();
-      if (from === null) {
-        await cache.appendChanges({ kind: "changes", from: null, readAt, complete: true, wordings: [] });
+      if (runId !== null && journal.at(-1)?.runId === runId) {
+        stats.changesCheckedEarlierInRun = true;
+        stats.changedWordings = journal.at(-1).wordings.length;
+      } else if (from === null) {
+        await cache.appendChanges({ kind: "changes", from: null, readAt, complete: true, wordings: [], runId });
         journal.push({ readAt, complete: true, wordings: [] });
       } else {
         const since = new Date(Date.parse(from) - changesOverlapMs).toISOString();
         const changed = await changedSince("zmeny-zneni", since);
         const withdrawn = await changedSince("depublikovana-zneni", since);
-        const line = { kind: "changes", from: since, readAt, complete: changed.complete && withdrawn.complete, wordings: [...changed.wordings, ...withdrawn.wordings] };
+        const line = { kind: "changes", from: since, readAt, complete: changed.complete && withdrawn.complete, wordings: [...changed.wordings, ...withdrawn.wordings], runId };
         await cache.appendChanges(line);
         journal.push(line);
         stats.changedWordings = line.wordings.length;
@@ -324,16 +341,20 @@ export function createLawContextReader({ client, cache, clock = () => new Date()
   // Whether a cached answer read at `readAt` is out of date; one without a
   // time of reading always is. The change lists name a wording by its date
   // of effect, and the promulgated wording (`0000-00-00`) by the day the act
-  // was promulgated, so for it that day is checked too.
+  // was promulgated, so for it that day is checked too. While that day is not
+  // known (e-Sbírka did not yet hold the act), any listed wording of the act
+  // makes it out of date.
   async function outdated(readAt, act, wording = null) {
     const state = await ready();
     if (!readAt) return true;
     const keys = wording === null ? [] : [wording];
+    const times = [state.all, wording === null ? state.acts.get(act) : state.wholeActs.get(act)];
     if (wording === promulgatedWording) {
       const day = (await cache.load(act)).promulgated?.date;
       if (day) keys.push(day);
+      else times.push(state.acts.get(act));
     }
-    const times = [state.all, wording === null ? state.acts.get(act) : state.wholeActs.get(act), ...keys.map((key) => state.wordings.get(`${act}\n${key}`))];
+    times.push(...keys.map((key) => state.wordings.get(`${act}\n${key}`)));
     return times.some((time) => time && readAt < time);
   }
 
@@ -463,7 +484,7 @@ export function createLawContextReader({ client, cache, clock = () => new Date()
     return date;
   }
 
-  return { wordings, structure, texts, promulgated, stats };
+  return { wordings, structure, texts, nodes: nodesOf, promulgated, stats };
 }
 
 /** The text of a fragment without its XHTML markup. */

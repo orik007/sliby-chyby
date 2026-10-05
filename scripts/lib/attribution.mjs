@@ -55,12 +55,14 @@ export { billPrintKindIds };
  * read from the step's action and stage. `withSenateResolution` marks a vote
  * after the Senate returned the bill (rejecting it or with amendments), so
  * the Senate's resolution goes with it; `sameAsApproved` marks a vote whose
- * text is the approved one when psp.cz lists no passed text; `mark` names a
+ * text is the approved one when psp.cz lists no passed text;
+ * `senateAmendmentsRejected` marks a vote that did not adopt the text with
+ * the Senate's amendments, which is then never the act as promulgated; `mark` names a
  * vote whose exact text psp.cz does not publish. Returns null for a vote
  * whose print history does not name it as a decisive step of this print.
  */
 export function versionConcerned(record, printId) {
-  const concerned = (version, extra = {}) => ({ version, withSenateResolution: false, sameAsApproved: false, mark: null, ...extra });
+  const concerned = (version, extra = {}) => ({ version, withSenateResolution: false, sameAsApproved: false, senateAmendmentsRejected: false, mark: null, ...extra });
   if (record.kind !== "parliamentary-vote") return concerned("proposed");
   const linkedPrint = (record.payload?.linkedPrints ?? []).find((print) => String(print.externalPrintId) === String(printId));
   const context = (linkedPrint?.historyContexts ?? []).find((item) => decisiveActions.has(normalizeSearchText(item.actionCz)));
@@ -76,7 +78,7 @@ export function versionConcerned(record, printId) {
   if (afterSenate && action === "setrvano") return concerned("passed", { withSenateResolution: true, sameAsApproved: true });
   // A vote on the Senate's amendments concerns the approved text changed by
   // them: the passed text when psp.cz publishes it.
-  if (afterSenate && (action === "pozm. prijat" || action === "neprijat")) return concerned("passed", { withSenateResolution: true });
+  if (afterSenate && (action === "pozm. prijat" || action === "neprijat")) return concerned("passed", { withSenateResolution: true, senateAmendmentsRejected: action === "neprijat" });
   // After a presidential return, the vote concerns the text sent to the
   // President, which may include accepted Senate amendments.
   if (afterPresident && (action === "setrvano" || action === "neprijat")) return concerned("passed");

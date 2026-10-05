@@ -13,8 +13,8 @@ export const assessmentOutputJsonSchema = {
       items: {
         type: "object",
         additionalProperties: false,
-        required: ["evidenceId", "relevant", "reasonCz"],
-        properties: { evidenceId: { type: "string" }, relevant: { type: "boolean" }, reasonCz: { type: "string" } }
+        required: ["evidenceId", "relevant", "reasonCz", "effectCz"],
+        properties: { evidenceId: { type: "string" }, relevant: { type: "boolean" }, reasonCz: { type: "string" }, effectCz: { type: "string" } }
       }
     },
     status: { type: "string", enum: assessmentStatuses },
@@ -165,6 +165,7 @@ export function validateAssessmentOutput(output, evidencePackage) {
     invariant(lawChangeIds.includes(verdict.evidenceId), `Relevance verdict names something other than a law change in the package: ${verdict.evidenceId}`);
     invariant(typeof verdict.relevant === "boolean", `Relevance verdict for ${verdict.evidenceId} must say relevant or not`);
     invariant(typeof verdict.reasonCz === "string" && verdict.reasonCz.trim().length > 0, `Relevance verdict for ${verdict.evidenceId} needs a reason`);
+    invariant(typeof verdict.effectCz === "string" && (!verdict.relevant || verdict.effectCz.trim().length > 0), `Relevant law change ${verdict.evidenceId} needs its effect, before and after`);
   }
   invariant(new Set(verdictIds).size === verdictIds.length, "Assessment gives a law change more than one relevance verdict");
   for (const evidenceId of lawChangeIds) invariant(verdictIds.includes(evidenceId), `Assessment omits the relevance verdict for law change ${evidenceId}`);

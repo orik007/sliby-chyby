@@ -13,7 +13,7 @@ function routingRun({ lawChanges = [], packages = [], completed = true } = {}) {
   return { schemaVersion: "1.0.0", asOf: "2026-09-23", completed, counts, lawChanges, builtPackages: packages };
 }
 
-const printParts = { quality: { prints: 2, printsWithProposalText: 1, printsWithoutProposalText: 1, printsWithApprovedText: 1, printsWithPassedText: 0, printsWithSenateResolution: 1, lawChanges: 5, lawChangesAddedInDebate: 1, lawChangesRemovedInDebate: 2, lawChangesWithAmendedAct: 3, titleOnlyLawChanges: 1, approvedBillsWithoutApprovedText: 1, textWarnings: 2 } };
+const printParts = { quality: { prints: 2, printsWithProposalText: 1, printsWithoutProposalText: 1, printsWithApprovedText: 1, printsWithPassedText: 0, printsWithSenateResolution: 1, lawChanges: 5, lawChangesAddedInDebate: 1, lawChangesRemovedInDebate: 2, lawChangesWithAmendedAct: 3, titleOnlyLawChanges: 1, approvedBillsWithoutApprovedText: 1, printsWithPromulgatedText: 1, textWarnings: 2 } };
 const trackedPromises = { promises: [{ id: "p1", partyId: "ano", partyName: "ANO", titleCz: "Slib" }] };
 
 test("coverage audit never converts a promise without routed records into a score", () => {
@@ -35,6 +35,7 @@ test("coverage audit never converts a promise without routed records into a scor
   assert.match(markdown, /\| Law changes with an identified amended act \| 3 of 5 \|/);
   assert.match(markdown, /\| Law changes added \/ removed during the debate \| 1 \/ 2 \|/);
   assert.match(markdown, /\| Approved bills without an approved text on psp.cz \| 1 \|/);
+  assert.match(markdown, /\| Prints with a voted text from the Collection of Laws \(e-Sbírka\), because psp.cz does not publish it \| 1 \|/);
   assert.match(markdown, /\| Technical \/ substantive \| 2 \/ 3 \|/);
   assert.match(markdown, /\| Promise and law-change pairs checked \/ dropped as not relevant \| 4 \/ 1 \|/);
   const sourceRows = markdown.split("\n").filter((line) => line.startsWith("| Chamber of Deputies open data"));

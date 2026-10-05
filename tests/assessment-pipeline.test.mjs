@@ -35,8 +35,8 @@ function review(status) {
   return {
     promiseId: "test-promise",
     changeRelevance: [
-      { evidenceId: "change-1", relevant: true, reasonCz: "Změna upravuje přesně to, co slib žádá." },
-      { evidenceId: "change-2", relevant: false, reasonCz: "Změna se týká jiné věci." }
+      { evidenceId: "change-1", relevant: true, reasonCz: "Změna upravuje přesně to, co slib žádá.", effectCz: "Dosud limit nebyl, nově platí; povinnost se zpřísňuje." },
+      { evidenceId: "change-2", relevant: false, reasonCz: "Změna se týká jiné věci.", effectCz: "" }
     ],
     status,
     evidenceSufficient: true,
@@ -178,16 +178,24 @@ test("requires exactly one relevance verdict for every law change", () => {
   assert.throws(() => validateAssessmentOutput(omitted, evidencePackage), /omits the relevance verdict for law change change-2/);
 
   const twice = review("moving-towards");
-  twice.changeRelevance.push({ evidenceId: "change-1", relevant: false, reasonCz: "Znovu." });
+  twice.changeRelevance.push({ evidenceId: "change-1", relevant: false, reasonCz: "Znovu.", effectCz: "" });
   assert.throws(() => validateAssessmentOutput(twice, evidencePackage), /more than one relevance verdict/);
 
   const notAChange = review("moving-towards");
-  notAChange.changeRelevance.push({ evidenceId: "conduct", relevant: true, reasonCz: "Hlasování." });
+  notAChange.changeRelevance.push({ evidenceId: "conduct", relevant: true, reasonCz: "Hlasování.", effectCz: "Žádná." });
   assert.throws(() => validateAssessmentOutput(notAChange, evidencePackage), /other than a law change/);
 
   const withoutReason = review("moving-towards");
   withoutReason.changeRelevance[0].reasonCz = " ";
   assert.throws(() => validateAssessmentOutput(withoutReason, evidencePackage), /needs a reason/);
+
+  // A relevant change states its effect, before and after; an irrelevant one may leave it empty.
+  const withoutEffect = review("moving-towards");
+  withoutEffect.changeRelevance[0].effectCz = " ";
+  assert.throws(() => validateAssessmentOutput(withoutEffect, evidencePackage), /needs its effect, before and after/);
+  delete withoutEffect.changeRelevance[1].effectCz;
+  withoutEffect.changeRelevance[0].effectCz = "Před: ne. Po: ano.";
+  assert.throws(() => validateAssessmentOutput(withoutEffect, evidencePackage), /change-2 needs its effect/);
 
   // An invalid output is isolated to that assessor, like any other.
   const resolved = resolveAvailableAssessmentReviews(omitted, review("moving-towards"), evidencePackage);

@@ -23,8 +23,10 @@ export const policyCategoryDataSchema = z.object({ schemaVersion: z.literal(2), 
 });
 export const sourceSchema = z.object({ id: z.string().min(1), type: z.enum(["programme", "official-record", "roll-call-vote", "article"]), title: z.string().min(1), publisher: z.string().min(1), publishedAt: z.iso.date(), url: z.url().nullable(), primary: z.boolean(), isDemo: z.boolean() });
 const officialUrlSchema = z.url().regex(/^https:\/\/(www|public)\.psp\.cz\/sqw\//, "Evidence trail links must point to official psp.cz records");
-const versionNoteSchema = z.object({ note: z.enum(["published-version-missing", "removed", "text-not-published", "third-reading-rejection"]), lawChangeIds: z.array(z.string().min(1)).min(1) });
-const concernedTextSchema = { version: z.enum(["proposed", "approved", "passed"]), textUrl: officialUrlSchema.nullable(), notes: z.array(versionNoteSchema) };
+const versionNoteSchema = z.object({ note: z.enum(["published-version-missing", "removed", "text-not-published", "third-reading-rejection", "promulgated-text"]), lawChangeIds: z.array(z.string().min(1)).min(1) });
+// A text psp.cz does not publish links to the act as promulgated in e-Sbírka.
+const textUrlSchema = z.union([officialUrlSchema, z.url().regex(/^https:\/\/e-sbirka\.gov\.cz\/sb\/\d{4}\/\d+\/0000-00-00$/, "A text link must point to psp.cz or to an act as promulgated in e-Sbírka")]);
+const concernedTextSchema = { version: z.enum(["proposed", "approved", "passed"]), textUrl: textUrlSchema.nullable(), notes: z.array(versionNoteSchema) };
 const evidenceTrailStepSchema = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("submission"), date: z.iso.date(), evidenceId: z.string().min(1), proposal: z.enum(["member-bill", "government-bill", "state-budget", "treaty"]), proposerCz: z.string().min(1).nullable(), ...concernedTextSchema }).strict(),
   z.object({ kind: z.literal("vote"), date: z.iso.date(), evidenceId: z.string().min(1), url: officialUrlSchema, stageCz: z.string().min(1), actionCz: z.string().min(1), club: z.enum(["yes", "no", "no-majority"]), counts: z.object({ yes: z.number().int().nonnegative(), no: z.number().int().nonnegative(), abstained: z.number().int().nonnegative(), notVoting: z.number().int().nonnegative(), absent: z.number().int().nonnegative(), unknown: z.number().int().nonnegative() }).strict(), ...concernedTextSchema }).strict(),

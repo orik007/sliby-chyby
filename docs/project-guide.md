@@ -33,7 +33,7 @@ official records only (active: Chamber of Deputies open data)
   -> attribution: decisive club vote, member bill, or government proposal on the change's print (scoring.md)
   -> two relevance checks per promise and law change
   -> evidence package per promise: every kept law change in full with the party's conduct
-  -> two independent assessments with a relevance verdict per law change; an invalid output asked for again at most twice; arbiter only on different scores or one output still invalid
+  -> two independent assessments with a relevance verdict and, for a relevant change, its effect per law change; an invalid output asked for again at most twice; arbiter only on different scores or one output still invalid
   -> unpublished audit pull request with packages, proposals, coverage, and caches
   -> separate approved public-assessment pull request when a score changes
 ```
