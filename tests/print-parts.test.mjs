@@ -15,7 +15,8 @@ import {
   proposalBody,
   proposalDocumentLink,
   splitProposalText,
-  changeThroughVersion
+  changeThroughVersion,
+  versionOfChange
 } from "../scripts/lib/print-parts.mjs";
 import { lawChangeText } from "../scripts/lib/law-change-screening.mjs";
 
@@ -347,6 +348,8 @@ test("the promulgated act is the text of a voted version psp.cz does not publish
   // After a Senate return or with a passed text listed, the act may differ from the approved text.
   assert.equal(of({ texts: { proposed: text }, senateReturned: true }), null);
   assert.equal(of({ texts: { proposed: text }, passedListed: true }), null);
+  // Rejecting the Senate's amendments concerned a text never promulgated.
+  assert.equal(of({ texts: { proposed: text }, concerned: [vote("passed", { withSenateResolution: true, senateAmendmentsRejected: true })], senateReturned: true }), null);
   // A bill that was not promulgated, or whose voted texts psp.cz publishes.
   assert.equal(of({ texts: { proposed: text }, promulgation: null }), null);
   assert.equal(of({}), null);
@@ -372,5 +375,9 @@ test("an act as promulgated is split like a psp.cz text and says where it is fro
   assert.equal(change.versions.passed.promulgatedAct, "155/2026");
   assert.equal(change.versions.passed.document.url, "https://e-sbirka.gov.cz/sb/2026/155/0000-00-00");
   assert.match(change.versions.passed.textCz, /^ČÁST PRVNÍ\nZměna zákona o Nejvyšším kontrolním úřadu\nČl\. I\n/);
+  // A vote that rejected the Senate's amendments is not judged by the act, which lacks them.
+  const vote = (extra) => ({ version: "passed", withSenateResolution: true, sameAsApproved: false, senateAmendmentsRejected: false, mark: null, ...extra });
+  assert.deepEqual(versionOfChange(change, vote({ senateAmendmentsRejected: true })), { version: "approved", removed: false, publishedVersionMissing: "passed", withSenateResolution: true, mark: null });
+  assert.deepEqual(versionOfChange(change, vote({})), { version: "passed", removed: false, publishedVersionMissing: null, withSenateResolution: true, mark: null });
   assert.match(lawChangeText(change), /Version: text passed by Parliament \(psp\.cz does not publish it; this is the act as promulgated in the Collection of Laws, zákon č\. 155\/2026 Sb\., without its annexes\)\n/);
 });

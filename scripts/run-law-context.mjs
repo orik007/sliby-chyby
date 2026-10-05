@@ -2,7 +2,7 @@ import { appendFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { invariant } from "./lib/collector-core.mjs";
-import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError } from "./lib/e-sbirka.mjs";
+import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError, workflowRunId } from "./lib/e-sbirka.mjs";
 import { contextStatusCounts, lawContextVersion, resolveLawChangeContext } from "./lib/law-context.mjs";
 import { writeJsonAtomically } from "./lib/paired-model-calls.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
@@ -52,7 +52,8 @@ const client = createESbirkaClient({
   }
 });
 const cache = createLawContextCache(resolve(args.cache));
-const reader = createLawContextReader({ client, cache });
+// The print-text step of the same run may already have checked what e-Sbírka changed.
+const reader = createLawContextReader({ client, cache, runId: workflowRunId() });
 
 const collectorRun = JSON.parse(await readFile(resolve(args.collectorRun), "utf8"));
 invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");

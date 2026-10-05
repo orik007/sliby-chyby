@@ -384,6 +384,36 @@ test("an act as promulgated that e-Sbírka was still digitising is read again on
   assert.deepEqual(await run(published, { "zmeny-zneni": [["110/2019", "2026-09-15"]] }, "2026-10-07T10:00:00.000Z"), { paragraphs: ["ZÁKON", "ČÁST PRVNÍ"], calls: 2 });
 });
 
+test("an act e-Sbírka did not yet hold is asked again once e-Sbírka lists any wording of it", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "law-context-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const run = async (promulgations, changes, time) => {
+    const endpoint = endpointFor({ ...act110, promulgations, changes });
+    const reader = await readerFor(directory, endpoint, { at: () => time });
+    return { day: await reader.promulgated("301/2026"), calls: endpoint.calls.filter((call) => !call.includes("zneni")).length };
+  };
+  assert.deepEqual(await run({}, {}, "2026-10-05T10:00:00.000Z"), { day: null, calls: 1 });
+  assert.deepEqual(await run({ "301/2026": "2026-10-05" }, {}, "2026-10-06T10:00:00.000Z"), { day: null, calls: 0 });
+  assert.deepEqual(await run({ "301/2026": "2026-10-05" }, { "zmeny-zneni": [["301/2026", "2026-10-05"]] }, "2026-10-07T10:00:00.000Z"), { day: "2026-10-05", calls: 1 });
+});
+
+test("the steps of one workflow run share one check of what e-Sbírka changed", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "law-context-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const step = async (runId, time) => {
+    const endpoint = endpointFor({ ...act110, changes: {} });
+    const client = createESbirkaClient({ apiKey: "key", ...fakeTime(), fetchImpl: endpoint.fetchImpl });
+    const reader = createLawContextReader({ client, cache: createLawContextCache(directory), clock: () => time, runId });
+    await reader.structure("110/2019", "2025-01-01");
+    return endpoint.calls.filter((call) => call.includes("zneni")).length;
+  };
+  assert.equal(await step("7-1", "2026-10-05T10:00:00.000Z"), 0, "an empty cache needs no check");
+  assert.equal(await step("8-1", "2026-10-06T10:00:00.000Z"), 2);
+  assert.equal(await step("8-1", "2026-10-06T10:05:00.000Z"), 0, "the next step of the same run");
+  assert.equal(await step("8-2", "2026-10-06T11:00:00.000Z"), 2, "a new attempt checks again");
+  assert.equal(await step(null, "2026-10-06T12:00:00.000Z"), 2, "outside GitHub Actions every reader checks");
+});
+
 test("a cache line cut short by a stopped run is removed, and what it held is read again", async (t) => {
   const directory = await mkdtemp(join(tmpdir(), "law-context-"));
   t.after(() => rm(directory, { recursive: true, force: true }));

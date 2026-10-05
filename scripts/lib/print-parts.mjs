@@ -252,11 +252,13 @@ export function promulgatedTextUrl(act) {
  * text passed by Parliament; it is the approved text only when nothing came
  * after the approval that could change it: no Senate return and no passed
  * text listed. A vote on the passed text that is the approved text, which
- * psp.cz publishes (`sameAsApproved`), needs none.
+ * psp.cz publishes (`sameAsApproved`), needs none, and a vote that rejected
+ * the Senate's amendments (`senateAmendmentsRejected`) concerned a text that
+ * was never promulgated.
  */
 export function promulgatedTextVersion({ texts, concerned, promulgation, senateReturned, passedListed }) {
   if (!promulgation) return null;
-  if (!texts.passed && concerned.some(({ version, sameAsApproved }) => version === "passed" && !(sameAsApproved && texts.approved))) return "passed";
+  if (!texts.passed && concerned.some(({ version, sameAsApproved, senateAmendmentsRejected }) => version === "passed" && !senateAmendmentsRejected && !(sameAsApproved && texts.approved))) return "passed";
   if (!texts.approved && !senateReturned && !passedListed && concerned.some(({ version }) => version === "approved")) return "approved";
   return null;
 }
@@ -506,7 +508,9 @@ export function changeThroughVersion(change, lastVersion) {
 /**
  * The version of one law change a conduct concerns. When psp.cz does not
  * publish that version, the latest earlier version is used and
- * `publishedVersionMissing` names the one the conduct concerned. Returns
+ * `publishedVersionMissing` names the one the conduct concerned; so too when
+ * the version is the act as promulgated and the conduct rejected the Senate's
+ * amendments, whose text the act is not. Returns
  * null when the law change did not yet exist in the text the conduct
  * concerned (a change added in the debate is never part of the submission).
  */
@@ -516,7 +520,7 @@ export function versionOfChange(change, concerned) {
   for (let index = position; index >= 0; index -= 1) {
     const version = versionKeys[index];
     const entry = change.versions[version];
-    if (!entry) continue;
+    if (!entry || (entry.promulgatedAct && concerned.senateAmendmentsRejected)) continue;
     return {
       version,
       removed: entry.removed === true,

@@ -3,7 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
-import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError } from "./lib/e-sbirka.mjs";
+import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError, workflowRunId } from "./lib/e-sbirka.mjs";
 import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { createPspDocumentRecorder } from "./lib/psp-document-hashes.mjs";
 import { log, progress } from "./lib/run-log.mjs";
@@ -267,7 +267,8 @@ try {
           appendFileSync(eSbirkaRequestFile, `${JSON.stringify(entry)}\n`);
         }
       }),
-      cache: lawContextCache
+      cache: lawContextCache,
+      runId: workflowRunId()
     });
     const paragraphs = await readPromulgatedParagraphs(reader, promulgation.act);
     if (!paragraphs) {

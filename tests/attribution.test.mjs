@@ -114,7 +114,7 @@ test("a proposal's fact summary names its official print kind", () => {
 test("a vote concerns the text its print-history step decided on", () => {
   const vote = (actionCz, stageCz, printKindId = "1") => ({ kind: "parliamentary-vote", payload: { linkedPrints: [{ externalPrintId: "43200", printKindId, historyContexts: [{ actionCz: "přikázán", stageCz: "1. čtení" }, { actionCz, stageCz }] }] } });
   const concerned = (record) => versionConcerned(record, "43200");
-  const plain = (version, extra = {}) => ({ version, withSenateResolution: false, sameAsApproved: false, mark: null, ...extra });
+  const plain = (version, extra = {}) => ({ version, withSenateResolution: false, sameAsApproved: false, senateAmendmentsRejected: false, mark: null, ...extra });
   // Stages and actions as psp.cz names them (typ_stavu.unl, typ_akce.unl).
   assert.deepEqual(concerned({ kind: "legislative-step", payload: {} }), plain("proposed"));
   assert.deepEqual(concerned(vote("souhlas", "3. čtení")), plain("approved"));
@@ -125,7 +125,7 @@ test("a vote concerns the text its print-history step decided on", () => {
   // A vote on the Senate's amendments concerns the approved text changed by
   // them, which is the passed text.
   assert.deepEqual(concerned(vote("pozm. přijat", "Sněmovna (Senát)")), plain("passed", { withSenateResolution: true }));
-  assert.deepEqual(concerned(vote("nepřijat", "Sněmovna (Senát)")), plain("passed", { withSenateResolution: true }));
+  assert.deepEqual(concerned(vote("nepřijat", "Sněmovna (Senát)")), plain("passed", { withSenateResolution: true, senateAmendmentsRejected: true }));
   // After a presidential return, the text sent to the President may include
   // accepted Senate amendments, so the approved text is not assumed to be it.
   assert.deepEqual(concerned(vote("setrváno", "Sněmovna (Prezident)")), plain("passed"));
