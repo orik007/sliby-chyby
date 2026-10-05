@@ -76,6 +76,8 @@ export function hashAssessmentContent(evidencePackage) {
     methodologyVersion: evidencePackage.methodologyVersion,
     assessmentContext: evidencePackage.assessmentContext,
     promise: evidencePackage.promise,
+    // Only a package that leaves out a law change carries the list.
+    ...(evidencePackage.excludedLawChanges ? { excludedLawChanges: evidencePackage.excludedLawChanges } : {}),
     evidence: evidencePackage.evidence
   };
   return createHash("sha256").update(canonicalize(assessableContent)).digest("hex");
@@ -118,6 +120,16 @@ export function validateEvidencePackage(evidencePackage) {
   invariant(typeof evidencePackage.promise.originalTextCz === "string" && evidencePackage.promise.originalTextCz.length > 0, "Missing original promise text");
   invariant(typeof evidencePackage.promise.titleCz === "string" && evidencePackage.promise.titleCz.length > 0, "Missing promise title");
   invariant(Array.isArray(evidencePackage.evidence) && evidencePackage.evidence.length > 0, "Evidence package must contain evidence");
+  // Law changes left out because both assessors of an earlier assessment
+  // found them not relevant (scripts/lib/irrelevance-verdicts.mjs).
+  if (evidencePackage.excludedLawChanges !== undefined) {
+    invariant(Array.isArray(evidencePackage.excludedLawChanges) && evidencePackage.excludedLawChanges.length > 0, "excludedLawChanges must be a non-empty array when present");
+    for (const entry of evidencePackage.excludedLawChanges) {
+      invariant(typeof entry.evidenceId === "string" && typeof entry.title === "string" && typeof entry.proposalId === "string", "An excluded law change needs its evidence ID, title, and proposal");
+      invariant(Array.isArray(entry.reasonsCz) && entry.reasonsCz.length === 2 && entry.reasonsCz.every((reason) => typeof reason === "string"), `Excluded law change ${entry.evidenceId} needs both assessors' reasons`);
+      invariant(!evidencePackage.evidence.some(({ id }) => id === entry.evidenceId), `Excluded law change ${entry.evidenceId} is also in the evidence`);
+    }
+  }
 
   const ids = new Set();
   for (const evidence of evidencePackage.evidence) {

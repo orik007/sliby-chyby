@@ -23,6 +23,8 @@ import { buildInvertedIndex, routeLawChange } from "./lib/topic-routing.mjs";
 import { withContext } from "./lib/law-context.mjs";
 import { attributableConductOnChange, buildLawChangeEvidencePackage, conductOfRun, lawChangesOfRun } from "./lib/topic-evidence-package.mjs";
 import { loadAssessmentPrompts, maxRequestInputTokens } from "./lib/assessment-config.mjs";
+import { validateReviewManifest } from "./lib/assessment-review.mjs";
+import { exclusionOf, loadRelevanceVerdicts } from "./lib/irrelevance-verdicts.mjs";
 import { cachePersister, loadModelCache, loadShardedModelCache, mapWithConcurrency, pairedModelCall, shardedCachePersister, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 
@@ -46,6 +48,7 @@ function parseArgs(args) {
     printParts: null,
     lawContext: null,
     tagCache: "automation/topic-routing/tag-cache",
+    reviewProposals: "automation/review-proposals",
     asOf: null,
     output: "automation/runs/pipeline/topic-routing",
     samplePromises: null,
@@ -57,6 +60,7 @@ function parseArgs(args) {
     else if (arg === "--print-parts") options.printParts = args[++index];
     else if (arg === "--law-context") options.lawContext = args[++index];
     else if (arg === "--tag-cache") options.tagCache = args[++index];
+    else if (arg === "--review-proposals") options.reviewProposals = args[++index];
     else if (arg === "--as-of") options.asOf = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--sample-promises") options.samplePromises = Number(args[++index]);
@@ -232,6 +236,7 @@ const outputDirectory = resolve(args.output);
 const packageDirectory = resolve(outputDirectory, "evidence-packages");
 await mkdir(packageDirectory, { recursive: true });
 const builtPackages = [];
+const excludedLawChanges = [];
 if (!runFailure) {
   const keptByPromise = new Map();
   for (const pair of checkedPairs.filter(({ kept }) => kept)) {
@@ -239,10 +244,31 @@ if (!runFailure) {
   }
   log(`building evidence packages for ${keptByPromise.size} promises`);
   const collectorRunHash = sha256(collectorRun);
-  const assessorInstructions = (await loadAssessmentPrompts()).assessor.instructions;
+  const { assessor } = await loadAssessmentPrompts();
+  const assessorInstructions = assessor.instructions;
+  // The relevance verdicts of earlier assessments: a law change both
+  // assessors found not relevant is left out while what they judged is
+  // unchanged (docs/evidence-pipeline.md, Package).
+  const manifestPath = resolve(args.reviewProposals, "manifest.json");
+  const verdicts = existsSync(manifestPath) ? await loadRelevanceVerdicts(validateReviewManifest(JSON.parse(await readFile(manifestPath, "utf8")))) : new Map();
+  const assessorPrompt = { version: assessor.version, contentHash: assessor.contentHash };
   for (const [promiseId, keptChanges] of [...keptByPromise].sort(([left], [right]) => left.localeCompare(right))) {
-    const evidencePackage = buildLawChangeEvidencePackage({ promise: promiseById.get(promiseId), keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash, asOf: args.asOf, assessorInstructions, contextOf: (changeId) => lawContext.changes[changeId] });
-    if (!evidencePackage) continue;
+    const promise = promiseById.get(promiseId);
+    const excluded = [];
+    const evidencePackage = buildLawChangeEvidencePackage({
+      promise, keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash, asOf: args.asOf, assessorInstructions,
+      contextOf: (changeId) => lawContext.changes[changeId],
+      exclusionOf: (lawChange) => {
+        const entry = exclusionOf({ verdicts, promise: { id: promise.id, titleCz: promise.titleCz, originalTextCz: promise.originalTextCz }, lawChange, assessorPrompt });
+        if (entry) excluded.push(entry);
+        return entry;
+      }
+    });
+    excludedLawChanges.push(...excluded.map((entry) => ({ promiseId, ...entry })));
+    if (!evidencePackage) {
+      if (excluded.length > 0) log(`${promiseId}: no package; every law change with the party's conduct was found not relevant by both assessors of an earlier assessment`);
+      continue;
+    }
     await writeFile(resolve(packageDirectory, `${promiseId}.json`), `${JSON.stringify(evidencePackage, null, 2)}\n`, { flag: "wx" });
     builtPackages.push({ promiseId, lawChangeCount: evidencePackage.generation.lawChangeCount, conductCount: evidencePackage.generation.conductCount, estimatedTokens: evidencePackage.generation.estimatedTokens, oversized: evidencePackage.generation.oversized, contextOmissionCount: (evidencePackage.generation.contextOmissions ?? []).reduce((sum, { omitted }) => sum + omitted.reduce((count, { paths }) => count + paths.length, 0), 0) });
     const trimmed = evidencePackage.generation.contextOmissions;
@@ -271,6 +297,7 @@ const counts = {
   packageCount: builtPackages.length,
   oversizedPackageCount: builtPackages.filter(({ oversized }) => oversized).length,
   contextTrimmedPackageCount: builtPackages.filter(({ oversized, contextOmissionCount }) => !oversized && contextOmissionCount > 0).length,
+  excludedIrrelevantPairCount: excludedLawChanges.length,
   invalidScreenerCount: invalid.screening,
   invalidRelevanceCheckCount: invalid.relevance
 };
@@ -318,6 +345,9 @@ const report = {
     checkAError,
     checkBError
   })),
+  // Law changes left out because both assessors of an earlier assessment
+  // found them not relevant, with both reasons.
+  excludedLawChanges,
   builtPackages
 };
 

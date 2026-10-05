@@ -18,7 +18,8 @@ import {
   reviewVerdicts,
   validateReviewManifest
 } from "./lib/assessment-review.mjs";
-import { validateEvidencePackage } from "./lib/assessment-pipeline.mjs";
+import { hashAssessmentContent, hashAssessmentFingerprint, validateEvidencePackage } from "./lib/assessment-pipeline.mjs";
+import { relevanceVerdictsOf, withoutIrrelevantLawChanges } from "./lib/irrelevance-verdicts.mjs";
 import { loadCurrentEvidencePackages } from "./lib/evidence-package-queue.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 
@@ -220,6 +221,21 @@ const { concurrency, ...assessmentRuntime } = runtime;
 const maxAssessments = Number(process.env.SLIBY_MAX_ASSESSMENTS ?? "0");
 invariant(Number.isInteger(maxAssessments) && maxAssessments >= 0, "SLIBY_MAX_ASSESSMENTS must be a non-negative integer");
 const plan = planAssessmentInputs({ packages, manifest, blockedPromiseIds, prompts, runtime: assessmentRuntime });
+
+// The package this assessment's own verdicts leave: without the law changes
+// both of its assessors found not relevant. The next run builds that package,
+// which then keeps this assessment instead of being assessed again
+// (docs/evidence-pipeline.md, Assess). Null when they leave nothing out, or
+// leave no law change.
+function reducedPackageOf(item, auditRecord) {
+  const proposalId = `${item.promiseId}--${auditRecord.assessmentFingerprint.slice(0, 12)}`;
+  const entries = relevanceVerdictsOf({ evidencePackage: item.evidencePackage, auditRecord, proposalId }).filter(({ irrelevant }) => irrelevant).map(({ entry }) => entry);
+  if (entries.length === 0) return null;
+  const reduced = withoutIrrelevantLawChanges(item.evidencePackage, entries);
+  if (!reduced.evidence.some(({ role }) => role === "law-change")) return null;
+  const assessmentContentHash = hashAssessmentContent(reduced);
+  return { assessmentContentHash, assessmentFingerprint: hashAssessmentFingerprint({ assessmentContentHash, prompts, runtime: assessmentRuntime }) };
+}
 const newProposals = [];
 const results = [];
 
@@ -320,7 +336,7 @@ const assessed = await mapWithConcurrency(assessmentItems, concurrency, async (i
   await writeFile(resolve(proposalDirectory, "evidence-package.json"), `${JSON.stringify(item.evidencePackage, null, 2)}\n`, { flag: "wx" });
   await writeFile(resolve(proposalDirectory, "assessment-run.json"), `${JSON.stringify(auditRecord, null, 2)}\n`, { flag: "wx" });
   const previousProposal = currentReviewProposal(currentManifest, item.promiseId);
-  const proposal = createReviewProposal({ auditRecord, proposalDirectory: relativeProposalDirectory, supersedesProposalId: previousProposal?.proposalId ?? null, publicRevisionAtEvaluation: publicRevisions.get(item.promiseId)?.revision ?? 0 });
+  const proposal = createReviewProposal({ auditRecord, proposalDirectory: relativeProposalDirectory, supersedesProposalId: previousProposal?.proposalId ?? null, publicRevisionAtEvaluation: publicRevisions.get(item.promiseId)?.revision ?? 0, reduced: reducedPackageOf(item, auditRecord) });
   await writeFile(resolve(proposalDirectory, "proposal.json"), `${JSON.stringify(proposal, null, 2)}\n`, { flag: "wx" });
   await writeFile(resolve(proposalDirectory, "review.md"), renderHumanReviewMarkdown({ evidencePackage: item.evidencePackage, auditRecord, proposal }), { flag: "wx" });
   await Promise.all((activeFailuresByPromise.get(item.promiseId) ?? []).map((failure) => retireFailure(failure, {
@@ -390,15 +406,15 @@ const pendingReviews = (await Promise.all(currentManifest.proposals.filter(({ su
   const item = retryPromiseIds.has(proposal.promiseId) ? null : planByPromise.get(proposal.promiseId);
   const packageState = !item
     ? "withdrawn"
-    : item.assessmentContentHash === proposal.assessmentContentHash
+    : item.assessmentContentHash === proposal.assessmentContentHash || item.assessmentContentHash === proposal.reducedAssessmentContentHash
       ? "current"
       : "changed";
   const isCandidate = proposal.resolutionState === "candidate";
   const auditRecord = isCandidate ? await readProposalFile(proposal, "assessment-run.json") : null;
   const evidencePackage = planByPromise.get(proposal.promiseId)?.evidencePackage ?? await readProposalFile(proposal, "evidence-package.json");
   // Whether the package the proposal assessed was fitted without part of its
-  // context: the queued one only while its assessable content is the same.
-  const assessedPackage = packageState === "current" ? item.evidencePackage : await readProposalFile(proposal, "evidence-package.json");
+  // context: the queued one only while it is the very package assessed.
+  const assessedPackage = packageState === "current" && item.assessmentContentHash === proposal.assessmentContentHash ? item.evidencePackage : await readProposalFile(proposal, "evidence-package.json");
   return {
     promiseId: proposal.promiseId,
     promiseTitleCz: evidencePackage?.promise?.titleCz ?? proposal.promiseId,
