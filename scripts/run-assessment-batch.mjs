@@ -225,8 +225,10 @@ const plan = planAssessmentInputs({ packages, manifest, blockedPromiseIds, promp
 // The package this assessment's own verdicts leave: without the law changes
 // both of its assessors found not relevant. The next run builds that package,
 // which then keeps this assessment instead of being assessed again
-// (docs/evidence-pipeline.md, Assess). Null when they leave nothing out, or
-// leave no law change.
+// (docs/evidence-pipeline.md, Assess). A package fitted by leaving out
+// context keeps that context here, while a smaller rebuilt one may fit more
+// of it; that one holds more than was assessed and is assessed again. Null
+// when they leave nothing out, or leave no law change.
 function reducedPackageOf(item, auditRecord) {
   const proposalId = `${item.promiseId}--${auditRecord.assessmentFingerprint.slice(0, 12)}`;
   const entries = relevanceVerdictsOf({ evidencePackage: item.evidencePackage, auditRecord, proposalId }).filter(({ irrelevant }) => irrelevant).map(({ entry }) => entry);
