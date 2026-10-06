@@ -71,6 +71,7 @@ export function validateTagAssignmentOutput(output, taxonomy) {
 export async function requestValidatedOutput({ provider, apiKey, model, prompt, input, name, schema, metadata, logLabel, validate }) {
   const response = await createStructuredModelResponse({ provider, apiKey, model, instructions: prompt.instructions, input, name, schema, metadata, logLabel });
   try {
+    invariantValidOutput(!response.incomplete, `The answer was cut off (${response.incomplete})`);
     return {
       provider: response.provider,
       model: response.model,

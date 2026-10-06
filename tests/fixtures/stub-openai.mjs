@@ -11,6 +11,7 @@ function tagOf(text) {
 }
 
 let invalidAssessmentsLeft;
+let cutOffAssessmentsLeft;
 
 function answer(name, input, model) {
   if (name === "law_change_screening") {
@@ -56,9 +57,16 @@ globalThis.fetch = async (url, init) => {
   const body = JSON.parse(init.body);
   const name = body.text.format.name;
   const input = JSON.parse(body.input);
-  if (process.env.STUB_OPENAI_LOG) appendFileSync(process.env.STUB_OPENAI_LOG, `${JSON.stringify({ name, model: body.model, input })}\n`);
-  const output = answer(name, input, body.model);
+  if (process.env.STUB_OPENAI_LOG) appendFileSync(process.env.STUB_OPENAI_LOG, `${JSON.stringify({ name, model: body.model, maxOutputTokens: body.max_output_tokens, input })}\n`);
   const usage = { input_tokens: Math.ceil((body.instructions.length + body.input.length) / 3), output_tokens: 30 };
+  // STUB_OPENAI_CUT_OFF_ASSESSMENTS cuts off the first that many assessments
+  // of this process at the output cap: reasoning only, no answer.
+  cutOffAssessmentsLeft ??= Number(process.env.STUB_OPENAI_CUT_OFF_ASSESSMENTS ?? 0);
+  if (name === "slava_assessment" && cutOffAssessmentsLeft > 0) {
+    cutOffAssessmentsLeft -= 1;
+    return { ok: true, status: 200, headers: { get: () => null }, json: async () => ({ id: "stub", model: body.model, status: "incomplete", incomplete_details: { reason: "max_output_tokens" }, usage: { ...usage, output_tokens: body.max_output_tokens }, output: [{ type: "reasoning", summary: [] }] }) };
+  }
+  const output = answer(name, input, body.model);
   return {
     ok: true,
     status: 200,

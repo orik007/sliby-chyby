@@ -6,7 +6,7 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import test from "node:test";
 import { pathToFileURL } from "node:url";
-import { charactersPerToken, longContextInputTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
+import { charactersPerToken, longContextInputTokens, maxOutputTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
 
 // One real Chamber print (tisk 189, the revenue-registration bill) taken from
 // the collector and print-text runs of 25 September 2026: its six law
@@ -270,6 +270,14 @@ test("one real print runs through routing, packaging, assessment, and the review
   const resumed = JSON.parse((await run([script("run-assessment.mjs"), join(routingOutput, "evidence-packages", `${vatPromiseId}.json`), join(work, "resumed")], { cwd: root, environment: { ...agreeing, STUB_OPENAI_LOG: join(work, "resumed-calls.jsonl"), STUB_OPENAI_INVALID_ASSESSMENTS: "0" } })).stdout);
   assert.equal(existsSync(join(work, "resumed-calls.jsonl")), false);
   assert.equal((await readJson(join(resumed.outputDirectory, "assessment-run.json"))).invalidAssessorAttempts["assessor-a"].length, 2);
+
+  // An answer cut off at the output cap is an invalid output, asked for again.
+  const cutOff = JSON.parse((await run([script("run-assessment.mjs"), join(routingOutput, "evidence-packages", `${vatPromiseId}.json`), join(work, "cut-off")], { cwd: root, environment: { ...agreeing, STUB_OPENAI_LOG: join(work, "cut-off-calls.jsonl"), SLIBY_RESPONSE_CACHE: join(work, "cut-off-responses"), STUB_OPENAI_INVALID_ASSESSMENTS: "0", STUB_OPENAI_CUT_OFF_ASSESSMENTS: "1" } })).stdout);
+  const cutOffCalls = await modelCalls(join(work, "cut-off-calls.jsonl"));
+  assert.deepEqual(cutOffCalls.map(({ name }) => name), ["slava_assessment", "slava_assessment", "slava_assessment"]);
+  assert.ok(cutOffCalls.every(({ maxOutputTokens: cap }) => cap === maxOutputTokens), "every answer is capped");
+  assert.deepEqual(cutOff.resolution, { state: "candidate", reason: "assessor-consensus", status: "moving-towards", selectedReview: "consensus" });
+  assert.match((await readJson(join(cutOff.outputDirectory, "assessment-run.json"))).invalidAssessorAttempts["assessor-a"][0].error, /cut off \(max_output_tokens\)/);
 
   // Still invalid after both retries: the arbiter decides on the one valid assessment.
   const stillInvalid = JSON.parse((await run([script("run-assessment.mjs"), join(routingOutput, "evidence-packages", `${vatPromiseId}.json`), join(work, "still-invalid")], { cwd: root, environment: { ...agreeing, STUB_OPENAI_LOG: join(work, "still-invalid-calls.jsonl"), SLIBY_RESPONSE_CACHE: join(work, "still-invalid-responses"), STUB_OPENAI_INVALID_ASSESSMENTS: "3" } })).stdout);

@@ -97,13 +97,15 @@ async function saveInvalidAttempts(role, attempts) {
   await writeFile(join(responseCache, `${role}.invalid.json`), `${JSON.stringify(attempts, null, 2)}\n`);
 }
 async function validAssessorResponse(role, request) {
-  const isValid = (response) => assessmentOutputError(response.output, evidencePackage) === null;
+  // An answer cut off at the output cap is an invalid output too.
+  const outputError = (response) => (response.incomplete ? `The answer was cut off (${response.incomplete})` : assessmentOutputError(response.output, evidencePackage));
+  const isValid = (response) => outputError(response) === null;
   const invalidAttempts = await invalidAttemptsSaved(role);
   // Every attempt was used before the run stopped: the last one stands.
   if (invalidAttempts.length > assessorRetries) return { response: invalidAttempts.at(-1).response, invalidAttempts: invalidAttempts.slice(0, -1) };
   let response = await cachedResponse(role, request, isValid);
   while (!isValid(response)) {
-    const error = assessmentOutputError(response.output, evidencePackage);
+    const error = outputError(response);
     invalidAttempts.push({ error, response });
     await saveInvalidAttempts(role, invalidAttempts);
     if (invalidAttempts.length > assessorRetries) break;
