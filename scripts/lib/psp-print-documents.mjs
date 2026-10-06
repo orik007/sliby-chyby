@@ -18,8 +18,10 @@ function decodeXml(value) {
 // The limits of every psp.cz request, and why (docs/evidence-pipeline.md,
 // Chamber data rules). A request keeps its slot while it waits to retry, so
 // when psp.cz stops answering, every download pauses rather than adding
-// connections.
-export const pspDownloadSettings = { concurrency: 1, retryAttempts: 6, retryDelayMs: 5_000, minIntervalMs: 3_000, connectTimeoutMs: 3_000 };
+// connections. 40 attempts, the waits doubling from 5 s up to 32 s, ride out
+// an outage of about 20 minutes; run 74 failed when psp.cz stopped answering
+// for longer than the 2.5 minutes of the 6 attempts before.
+export const pspDownloadSettings = { concurrency: 1, retryAttempts: 40, retryDelayMs: 5_000, maxRetryDelayMs: 32_000, minIntervalMs: 3_000, connectTimeoutMs: 3_000 };
 
 /**
  * The proxy every psp.cz request goes through, from PSP_PROXY_URL, or null
@@ -51,7 +53,7 @@ export function pspProxyUrl(env = process.env) {
 // applies to the connection to the proxy and to psp.cz through it.
 // `trustedCa` replaces the trusted certificate authorities for psp.cz behind
 // the proxy; only tests use it, for a local stand-in with a test certificate.
-export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, minIntervalMs = 0, connectTimeoutMs = null, proxyUrl = null, trustedCa = null, onAttempt = null } = pspDownloadSettings) {
+export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, maxRetryDelayMs = Infinity, minIntervalMs = 0, connectTimeoutMs = null, proxyUrl = null, trustedCa = null, onAttempt = null } = pspDownloadSettings) {
   invariant(Number.isInteger(minIntervalMs) && minIntervalMs >= 0, "minIntervalMs must be a non-negative integer");
   invariant(connectTimeoutMs === null || (Number.isInteger(connectTimeoutMs) && connectTimeoutMs > 0), "connectTimeoutMs must be a positive integer or null");
   let active = 0;
@@ -87,7 +89,7 @@ export function createPspFetcher({ concurrency, retryAttempts, retryDelayMs, min
     if (active >= concurrency) await new Promise((resolveTurn) => waiting.push(resolveTurn));
     active += 1;
     try {
-      return await fetchVerified(source, url, { ...options, retryAttempts, retryDelayMs, onAttempt, beforeAttempt, dispatcher });
+      return await fetchVerified(source, url, { ...options, retryAttempts, retryDelayMs, maxRetryDelayMs, onAttempt, beforeAttempt, dispatcher });
     } finally {
       active -= 1;
       waiting.shift()?.();

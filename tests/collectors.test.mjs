@@ -130,6 +130,19 @@ test("waits twice as long before each further retry after a refused connection",
     assert.equal(waits.length, 3);
     // Timers never fire early; allow a millisecond of clock rounding.
     [40, 80, 160].forEach((expected, index) => assert.ok(waits[index] >= expected - 1, `wait ${index + 1} was ${waits[index]} ms, expected at least ${expected} ms`));
+
+    // A cap stops the doubling.
+    attemptTimes.length = 0;
+    await fetchVerified(officialSource, "https://news.example/api", {
+      maxBytes: 1_000,
+      expectedContentTypes: ["application/json"],
+      retryAttempts: 4,
+      retryDelayMs: 40,
+      maxRetryDelayMs: 50
+    });
+    const cappedWaits = attemptTimes.slice(1).map((time, index) => time - attemptTimes[index]);
+    assert.equal(cappedWaits.length, 3);
+    [40, 50, 50].forEach((expected, index) => assert.ok(cappedWaits[index] >= expected - 1 && cappedWaits[index] < expected + 60, `capped wait ${index + 1} was ${cappedWaits[index]} ms, expected about ${expected} ms`));
   } finally {
     globalThis.fetch = originalFetch;
   }
