@@ -278,6 +278,11 @@ test("one real print runs through routing, packaging, assessment, and the review
   assert.ok(cutOffCalls.every(({ maxOutputTokens: cap }) => cap === maxOutputTokens), "every answer is capped");
   assert.deepEqual(cutOff.resolution, { state: "candidate", reason: "assessor-consensus", status: "moving-towards", selectedReview: "consensus" });
   assert.match((await readJson(join(cutOff.outputDirectory, "assessment-run.json"))).invalidAssessorAttempts["assessor-a"][0].error, /cut off \(max_output_tokens\)/);
+  // Cut off on every attempt: the record names the cut-off, and the arbiter decides on the one valid assessment.
+  const allCutOff = JSON.parse((await run([script("run-assessment.mjs"), join(routingOutput, "evidence-packages", `${vatPromiseId}.json`), join(work, "all-cut-off")], { cwd: root, environment: { ...agreeing, STUB_OPENAI_LOG: join(work, "all-cut-off-calls.jsonl"), SLIBY_RESPONSE_CACHE: join(work, "all-cut-off-responses"), STUB_OPENAI_INVALID_ASSESSMENTS: "0", STUB_OPENAI_CUT_OFF_ASSESSMENTS: "3" } })).stdout);
+  assert.deepEqual((await modelCalls(join(work, "all-cut-off-calls.jsonl"))).map(({ name }) => name), ["slava_assessment", "slava_assessment", "slava_assessment", "slava_assessment", "slava_arbitration"]);
+  const allCutOffRecord = await readJson(join(allCutOff.outputDirectory, "assessment-run.json"));
+  assert.deepEqual(allCutOffRecord.assessorValidationErrors, { "assessor-a": "The answer was cut off (max_output_tokens)", "assessor-b": null });
 
   // Still invalid after both retries: the arbiter decides on the one valid assessment.
   const stillInvalid = JSON.parse((await run([script("run-assessment.mjs"), join(routingOutput, "evidence-packages", `${vatPromiseId}.json`), join(work, "still-invalid")], { cwd: root, environment: { ...agreeing, STUB_OPENAI_LOG: join(work, "still-invalid-calls.jsonl"), SLIBY_RESPONSE_CACHE: join(work, "still-invalid-responses"), STUB_OPENAI_INVALID_ASSESSMENTS: "3" } })).stdout);

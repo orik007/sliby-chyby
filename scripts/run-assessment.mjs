@@ -129,6 +129,8 @@ const rawB = assessorB.response;
 
 const assessmentPair = resolveAvailableAssessmentReviews(rawA.output, rawB.output, evidencePackage);
 const { reviewA, reviewB, validationErrors } = assessmentPair;
+// A cut-off answer has no output to validate; its error names the cut-off.
+for (const [role, raw] of [["assessor-a", rawA], ["assessor-b", rawB]]) if (raw.incomplete) validationErrors[role] = `The answer was cut off (${raw.incomplete})`;
 let resolution = assessmentPair.resolution;
 let rawArbiter = null;
 
@@ -159,6 +161,7 @@ if (resolution.state === "arbitration-required") {
         return false;
       }
     });
+    if (rawArbiter.incomplete) throw new Error(`The arbiter's answer was cut off (${rawArbiter.incomplete})`);
     validateArbiterOutput(rawArbiter.output, evidencePackage);
     resolution = resolveAssessmentReviews(reviewA, reviewB, evidencePackage, rawArbiter.output);
   }
