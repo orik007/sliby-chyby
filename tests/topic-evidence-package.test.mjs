@@ -269,3 +269,54 @@ test("at the cutoff a law change has only the versions its print's conduct conce
   assert.equal(beforeText.length, 1);
   assert.deepEqual(beforeText[0].identifiers, ["cz-act-23-2017"]);
 });
+
+// Issue #103: a law change both assessors found not relevant is left out of
+// later packages while what they judged is unchanged.
+test("a law change both assessors found not relevant is left out, and the package is the one the assessment's own verdicts leave", async () => {
+  const { relevanceVerdictsOf, withoutIrrelevantLawChanges, exclusionOf } = await import("../scripts/lib/irrelevance-verdicts.mjs");
+  const { hashAssessmentContent, validateEvidencePackage } = await import("../scripts/lib/assessment-pipeline.mjs");
+  const vote = attributedVoteRecord();
+  const build = (exclusion = null, changes = [lawChange(1), lawChange(2)]) => buildLawChangeEvidencePackage({
+    assessorInstructions, promise: fiscalPromise, keptChanges: changes.map((change) => ({ change, route })),
+    recordsByPrintId: new Map([["43200", [vote]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15", exclusionOf: exclusion
+  });
+  const full = build();
+  const [first, second] = full.evidence.filter(({ role }) => role === "law-change").map(({ id }) => id);
+  const assessorPrompt = { version: "assessor-v20", contentHash: "a".repeat(64) };
+  const review = (relevantSecond) => ({ changeRelevance: [{ evidenceId: first, relevant: true, reasonCz: "Souvisí.", effectCz: "Zpřísňuje." }, { evidenceId: second, relevant: relevantSecond, reasonCz: relevantSecond ? "Souvisí." : "Jiné téma.", effectCz: "" }] });
+  const audit = (reviewA, reviewB, prompt = assessorPrompt) => ({ prompts: { assessor: prompt }, validatedAssessments: { "assessor-a": reviewA, "assessor-b": reviewB } });
+  const verdictsOf = (auditRecord, evidencePackage = full) => {
+    const byChange = new Map();
+    for (const verdict of relevanceVerdictsOf({ evidencePackage, auditRecord, proposalId: "p--1" })) byChange.set(verdict.evidenceId, verdict);
+    return new Map([[fiscalPromise.id, byChange]]);
+  };
+  const exclusionFrom = (verdicts, prompt = assessorPrompt) => (lawChangeItem) => exclusionOf({ verdicts, promise: fiscalPromise, lawChange: lawChangeItem, assessorPrompt: prompt });
+
+  // Both assessors: the second change is not relevant.
+  const both = audit(review(false), review(false));
+  const entries = relevanceVerdictsOf({ evidencePackage: full, auditRecord: both, proposalId: "p--1" }).filter(({ irrelevant }) => irrelevant).map(({ entry }) => entry);
+  assert.deepEqual(entries, [{ evidenceId: second, title: full.evidence.find(({ id }) => id === second).title, proposalId: "p--1", reasonsCz: ["Jiné téma.", "Jiné téma."] }]);
+  const reduced = build(exclusionFrom(verdictsOf(both)));
+  assert.deepEqual(reduced.evidence.filter(({ role }) => role === "law-change").map(({ id }) => id), [first]);
+  assert.deepEqual(reduced.excludedLawChanges, entries);
+  assert.deepEqual(reduced.evidence.find(({ role }) => role === "conduct-evidence").structuredFacts.concernsLawChanges.map(({ evidenceId }) => evidenceId), [first]);
+  validateEvidencePackage(reduced);
+  // The rebuilt package is exactly the assessed one without the change, so
+  // it keeps the assessment instead of being assessed again.
+  assert.equal(hashAssessmentContent(reduced), hashAssessmentContent(withoutIrrelevantLawChanges(full, entries)));
+  assert.notEqual(hashAssessmentContent(reduced), hashAssessmentContent(full));
+
+  // One assessor found it relevant, or one output was invalid: kept.
+  for (const auditRecord of [audit(review(false), review(true)), audit(review(false), null)]) {
+    assert.equal(build(exclusionFrom(verdictsOf(auditRecord))).excludedLawChanges, undefined);
+  }
+  // Another assessor prompt or a changed text brings the change back.
+  assert.equal(build(exclusionFrom(verdictsOf(both), { version: "assessor-v21", contentHash: "b".repeat(64) })).excludedLawChanges, undefined);
+  assert.equal(build(exclusionFrom(verdictsOf(both)), [lawChange(1), lawChange(2, "Zákon č. 218/2000 Sb. se mění takto: jinak.")]).excludedLawChanges, undefined);
+  // A change whose context was trimmed in the assessed package gives no verdict.
+  const trimmed = { ...full, generation: { ...full.generation, contextOmissions: [{ evidenceId: second, version: "proposed", suppliedCount: 0, omitted: [] }] } };
+  assert.equal(relevanceVerdictsOf({ evidencePackage: trimmed, auditRecord: both, proposalId: "p--1" }).some(({ evidenceId }) => evidenceId === second), false);
+  // Every law change left out: no package.
+  const none = audit({ changeRelevance: review(false).changeRelevance.map((verdict) => ({ ...verdict, relevant: false })) }, { changeRelevance: review(false).changeRelevance.map((verdict) => ({ ...verdict, relevant: false })) });
+  assert.equal(build(exclusionFrom(verdictsOf(none))), null);
+});

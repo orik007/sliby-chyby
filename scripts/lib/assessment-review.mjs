@@ -1,5 +1,6 @@
 import { assessmentStatuses, hashAssessmentContent, hashAssessmentFingerprint, hashEvidencePackage, validateEvidencePackage } from "./assessment-pipeline.mjs";
 import { contextOmissionLabel, contextOmissionsOf } from "./context-omissions.mjs";
+import { relevanceVerdictsOf } from "./irrelevance-verdicts.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -38,6 +39,8 @@ export function validateReviewManifest(manifest) {
     invariant(proposal.humanReviewPath == null || proposal.humanReviewPath === `${proposal.path}/review.md`, `Review proposal ${proposal.proposalId} has an invalid humanReviewPath`);
     invariant(proposal.supersedesProposalId == null || typeof proposal.supersedesProposalId === "string", `Review proposal ${proposal.proposalId} has an invalid supersedesProposalId`);
     invariant(proposal.supersededByProposalId == null || typeof proposal.supersededByProposalId === "string", `Review proposal ${proposal.proposalId} has an invalid supersededByProposalId`);
+    invariant(proposal.reducedAssessmentContentHash == null || /^[a-f0-9]{64}$/.test(proposal.reducedAssessmentContentHash), `Review proposal ${proposal.proposalId} has an invalid reducedAssessmentContentHash`);
+    invariant(proposal.reducedAssessmentFingerprint == null || /^[a-f0-9]{64}$/.test(proposal.reducedAssessmentFingerprint), `Review proposal ${proposal.proposalId} has an invalid reducedAssessmentFingerprint`);
   }
   const proposalsById = new Map(manifest.proposals.map((proposal) => [proposal.proposalId, proposal]));
   for (const proposal of manifest.proposals) {
@@ -73,9 +76,11 @@ export function describeAssessmentInput(evidencePackage, prompts, runtime) {
   };
 }
 
+// A package is unchanged when an assessment has its fingerprint or its
+// `reducedAssessmentFingerprint` (docs/evidence-pipeline.md, Assess).
 export function planAssessmentInputs({ packages, manifest, blockedPromiseIds = new Set(), prompts, runtime }) {
   validateReviewManifest(manifest);
-  const existingFingerprints = new Set(manifest.proposals.map(({ assessmentFingerprint }) => assessmentFingerprint));
+  const existingFingerprints = new Set(manifest.proposals.flatMap(({ assessmentFingerprint, reducedAssessmentFingerprint }) => [assessmentFingerprint, ...(reducedAssessmentFingerprint ? [reducedAssessmentFingerprint] : [])]));
   const promiseIds = new Set();
   return packages
     .map(({ path, evidencePackage }) => {
@@ -93,8 +98,10 @@ export function planAssessmentInputs({ packages, manifest, blockedPromiseIds = n
 }
 
 // `publicRevisionAtEvaluation` is the promise's latest public revision number
-// when the proposal was made (0 when it has none).
-export function createReviewProposal({ auditRecord, proposalDirectory, supersedesProposalId = null, publicRevisionAtEvaluation }) {
+// when the proposal was made (0 when it has none). `reduced` is the content
+// hash and fingerprint of the package this assessment's own verdicts leave
+// (planAssessmentInputs), or null when they leave nothing out.
+export function createReviewProposal({ auditRecord, proposalDirectory, supersedesProposalId = null, publicRevisionAtEvaluation, reduced = null }) {
   invariant(Number.isInteger(publicRevisionAtEvaluation) && publicRevisionAtEvaluation >= 0, "createReviewProposal requires publicRevisionAtEvaluation");
   invariant(auditRecord?.publicationApproved === false, "Assessment audit must remain unpublished");
   invariant(["candidate", "human-review-required"].includes(auditRecord?.resolution?.state), "Assessment audit has no reviewable resolution");
@@ -124,7 +131,8 @@ export function createReviewProposal({ auditRecord, proposalDirectory, supersede
     humanReviewRequired: true,
     publicationApproved: false,
     path: proposalDirectory.replaceAll("\\", "/"),
-    humanReviewPath: `${proposalDirectory.replaceAll("\\", "/")}/review.md`
+    humanReviewPath: `${proposalDirectory.replaceAll("\\", "/")}/review.md`,
+    ...(reduced ? { reducedAssessmentContentHash: reduced.assessmentContentHash, reducedAssessmentFingerprint: reduced.assessmentFingerprint } : {})
   };
 }
 
@@ -318,6 +326,31 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
       lines.push(`| [${evidenceLabel(change).replaceAll("|", "/")}](${change.url}) | ${cells.join(" | ")} |`);
     }
     lines.push("");
+    // The changes this assessment's verdicts leave out of later packages
+    // (docs/evidence-pipeline.md, Package); a package without them keeps this
+    // proposal, so this page is where they are named.
+    const leftOut = relevanceVerdictsOf({ evidencePackage, auditRecord, proposalId: proposal.proposalId }).filter(({ irrelevant }) => irrelevant);
+    if (leftOut.length > 0) {
+      const titles = new Map(lawChanges.map((change) => [change.id, evidenceLabel(change)]));
+      lines.push(
+        "Oba hodnotitelé tyto změny shodně označili za nesouvisející, proto je další balíčky tohoto slibu vynechají, dokud se nezmění jejich text, kontext, znění slibu nebo pokyny hodnotitelů:",
+        "",
+        ...leftOut.map(({ evidenceId }) => `- ${titles.get(evidenceId).replaceAll("|", "/")}`),
+        ""
+      );
+    }
+  }
+  // Law changes left out because both assessors of an earlier assessment
+  // found them not relevant (docs/evidence-pipeline.md, Package).
+  if (evidencePackage.excludedLawChanges?.length > 0) {
+    lines.push(
+      "### Vyřazené změny zákonů",
+      "",
+      "Tyto změny v balíčku nebyly, protože je oba hodnotitelé dřívějšího posouzení tohoto slibu shodně označili za nesouvisející. Vrátí se, jakmile se změní jejich text, kontext, znění slibu nebo pokyny hodnotitelů.",
+      "",
+      ...evidencePackage.excludedLawChanges.map(({ title, proposalId, reasonsCz }) => `- **${title.replaceAll("|", "/")}** (posouzení ${proposalId}): ${reasonsCz.map((reason) => reason.replace(/\s*\n\s*/g, " ")).join(" / ")}`),
+      ""
+    );
   }
   const omissions = contextOmissionsOf(evidencePackage);
   if (omissions.length > 0) {

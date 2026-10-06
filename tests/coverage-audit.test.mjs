@@ -6,7 +6,7 @@ const pspSource = { id: "psp-core-2025", name: "Chamber of Deputies open data", 
 const counts = {
   primaryRecordsInWindowCount: 10, notAttributableSkippedCount: 7, conductRecordCount: 3, lawChangeCount: 5, technicalLawChangeCount: 2, substantiveLawChangeCount: 3,
   routedLawChangeCount: 2, directLinkLawChangeCount: 1, unroutedLawChangeCount: 1, routedWithoutConductCount: 1, relevancePairCount: 4,
-  relevanceDroppedCount: 1, oversizedPackageCount: 0, invalidScreenerCount: 1, invalidRelevanceCheckCount: 0
+  relevanceDroppedCount: 1, excludedIrrelevantPairCount: 2, oversizedPackageCount: 0, invalidScreenerCount: 1, invalidRelevanceCheckCount: 0
 };
 
 function routingRun({ lawChanges = [], packages = [], completed = true } = {}) {
@@ -38,6 +38,7 @@ test("coverage audit never converts a promise without routed records into a scor
   assert.match(markdown, /\| Prints with a voted text from the Collection of Laws \(e-Sbírka\), because psp.cz does not publish it \| 1 \|/);
   assert.match(markdown, /\| Technical \/ substantive \| 2 \/ 3 \|/);
   assert.match(markdown, /\| Promise and law-change pairs checked \/ dropped as not relevant \| 4 \/ 1 \|/);
+  assert.match(markdown, /\| Promise and law-change pairs left out because both assessors of an earlier assessment found them not relevant \| 2 \|/);
   const sourceRows = markdown.split("\n").filter((line) => line.startsWith("| Chamber of Deputies open data"));
   assert.deepEqual(sourceRows, ["| Chamber of Deputies open data | 2025-10-01 | 0 | — to — | Line one with a \\| pipe |"], "runtime warning text must stay on one escaped table row");
 });

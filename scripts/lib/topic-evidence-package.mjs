@@ -320,13 +320,19 @@ function fitContexts({ changes, contextOf, assemble, requestTokens, requestLengt
  * `keptChanges` is `[{ change, route }]`; `recordsByPrintId` holds the
  * primary records concerning each print, and `printFirstSeenOn` each print's
  * earliest record date. A caller building many packages passes the
- * collector run's hash once as `collectorRunHash`. Returns null when no kept
- * change has attributable conduct of the promise's party.
+ * collector run's hash once as `collectorRunHash`. `exclusionOf`, given a
+ * law change as `{ id, structuredFacts: { versions } }`, returns the line of
+ * a change both assessors of an earlier assessment found not relevant
+ * (scripts/lib/irrelevance-verdicts.mjs), or null; such a change and the
+ * conduct that concerns only it are left out, and the package lists it in
+ * `excludedLawChanges`. Returns null when no remaining change has
+ * attributable conduct of the promise's party.
  */
-export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash = sha256(collectorRun), asOf, assessorInstructions, contextOf = null }) {
+export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash = sha256(collectorRun), asOf, assessorInstructions, contextOf = null, exclusionOf = null }) {
   invariant(typeof asOf === "string", "buildLawChangeEvidencePackage requires asOf");
   invariant(typeof assessorInstructions === "string" && assessorInstructions.length > 0, "buildLawChangeEvidencePackage requires the assessor instructions");
   const changes = [];
+  const excludedLawChanges = [];
   const conductById = new Map();
   const concernsByRecord = new Map();
   for (const { change: fullChange, route } of [...keptChanges].sort((left, right) => left.change.printNumber - right.change.printNumber || left.change.changeId.localeCompare(right.change.changeId, "en", { numeric: true }))) {
@@ -336,6 +342,11 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
     // A later text adds nothing to judging this conduct and may not have
     // existed at the package cutoff.
     const change = changeThroughVersion(fullChange, lastVersion);
+    const excluded = exclusionOf?.({ id: lawChangeEvidenceId(change), structuredFacts: { versions: change.versions } }) ?? null;
+    if (excluded) {
+      excludedLawChanges.push(excluded);
+      continue;
+    }
     changes.push({ change, route });
     for (const { version, ...item } of conduct) {
       conductById.set(item.record.id, item);
@@ -375,6 +386,7 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
         titleCz: promise.titleCz,
         originalTextCz: promise.originalTextCz
       },
+      ...(excludedLawChanges.length > 0 ? { excludedLawChanges: [...excludedLawChanges].sort((left, right) => left.evidenceId.localeCompare(right.evidenceId, "en", { numeric: true })) } : {}),
       generation: {
         builderVersion: packageBuilderVersion,
         collectorRunId: collectorRun.runId,
