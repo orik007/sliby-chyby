@@ -145,6 +145,22 @@ export async function readRegulation({ reader, act, kind, info, governmentPeriod
   return { record: regulationRecord({ act, kind, info, heading, partyIds, paragraphs, source }), outcome: `${kind}, adopted on ${heading.adoptedOn}` };
 }
 
+// The Ministry of the Interior has 30 days to publish the text of a newly
+// promulgated act (222/2016 Sb., § 12(9)).
+const digitisationDays = 30;
+
+/**
+ * The run warning for an act whose text e-Sbírka does not hold yet: a later
+ * run reads it, and one still missing after the 30 days the law allows is
+ * flagged for a check in e-Sbírka.
+ */
+export function notYetDigitisedWarning({ act, promulgatedOn }, today) {
+  const days = Math.round((Date.parse(today) - Date.parse(promulgatedOn)) / 86_400_000);
+  return days > digitisationDays
+    ? `${act} Sb. (promulgated ${promulgatedOn}) is still not digitised in e-Sbírka ${days} days after its promulgation, past the ${digitisationDays} days of 222/2016 Sb., § 12(9); check it in e-Sbírka`
+    : `${act} Sb. (promulgated ${promulgatedOn}) is not yet digitised in e-Sbírka; a later run reads it`;
+}
+
 /** The identifier of a regulation's print-like unit (`sb-2026-178`). */
 export function regulationPrintId(act) {
   const [number, year] = act.split("/");

@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { isPotentiallyAttributable, versionConcerned } from "../scripts/lib/attribution.mjs";
 import { lawChangeOfRegulation } from "../scripts/lib/print-parts.mjs";
-import { collectRegulations, czechDate, enablingActsOf, governingPartiesOn, readRegulation, regulationHeading, regulationKindOfCitation } from "../scripts/lib/regulations.mjs";
+import { collectRegulations, czechDate, enablingActsOf, governingPartiesOn, notYetDigitisedWarning, readRegulation, regulationHeading, regulationKindOfCitation } from "../scripts/lib/regulations.mjs";
 
 // Six real acts as e-Sbírka holds them (read on 6 October 2026): their
 // citations and the heading and first nodes of their wording as promulgated.
@@ -107,4 +107,10 @@ test("a regulation's adoption is attributable conduct of every governing party a
   assert.match(change.versions.adopted.textCz, /^NAŘÍZENÍ VLÁDY\nze dne 26\. ledna 2026,/);
   assert.deepEqual(change.acts, []);
   assert.deepEqual(change.identifiers, ["cz-act-262-2006", "cz-act-234-2014"]);
+});
+
+test("an act not yet digitised is read by a later run and flagged once the 30 days for its digitisation have passed", () => {
+  assert.match(notYetDigitisedWarning({ act: "179/2026", promulgatedOn: "2026-09-30" }, "2026-10-06"), /not yet digitised in e-Sbírka; a later run reads it$/);
+  assert.match(notYetDigitisedWarning({ act: "179/2026", promulgatedOn: "2026-09-30" }, "2026-10-30"), /not yet digitised/);
+  assert.match(notYetDigitisedWarning({ act: "179/2026", promulgatedOn: "2026-09-30" }, "2026-11-01"), /still not digitised in e-Sbírka 32 days after its promulgation, past the 30 days of 222\/2016 Sb\., § 12\(9\); check it in e-Sbírka$/);
 });

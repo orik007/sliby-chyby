@@ -5,7 +5,7 @@ import { emptyCollectorCheckpoints, planSourceCollections, updateCollectorCheckp
 import { deduplicateRecords, invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { collectPspSource, validateGovernmentPeriods } from "./lib/psp-collector.mjs";
 import { createESbirkaClient, createLawContextCache, createLawContextReader, workflowRunId } from "./lib/e-sbirka.mjs";
-import { collectRegulations } from "./lib/regulations.mjs";
+import { collectRegulations, notYetDigitisedWarning } from "./lib/regulations.mjs";
 import { createPspFetcher, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { log } from "./lib/run-log.mjs";
 import { appendFileSync, mkdirSync, writeFileSync } from "node:fs";
@@ -87,7 +87,7 @@ async function collectRegulationSource(source, since) {
       }
     });
     const warnings = [
-      ...quality.notYetDigitised.map(({ act, promulgatedOn }) => `${act} Sb. (promulgated ${promulgatedOn}) is not yet digitised in e-Sbírka; a later run reads it`),
+      ...quality.notYetDigitised.map((pending) => notYetDigitisedWarning(pending, today)),
       ...quality.unreadableHeadings.map((act) => `${act} Sb.: the heading states no adoption date or issuer; not used`)
     ];
     log(`${source.id}: ${quality.actsRead} acts read, ${quality.regulations} regulations and decrees since ${since} (${quality.governmentRegulations} government regulations, ${quality.ministerialDecrees} ministerial decrees), ${quality.attributed} adopted by the government or a ministry while a tracked government governed; ${quality.adoptedBeforeGovernment} adopted earlier; other issuers ${JSON.stringify(quality.otherIssuers)}; ${reader.stats.requests} e-Sbírka requests`);
