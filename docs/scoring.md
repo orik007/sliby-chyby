@@ -30,7 +30,7 @@ Only the conduct in this table can change a score. Each row names the only offic
 | **Member bill** | Chamber print of kind “Návrh zákona” submitted by one MP or a group of MPs (print history step “předložen”) | The party's MPs formally proposed a law | Every tracked party with at least one proposing MP in its club on the submission date | `+1` | `-1` |
 | **Government proposal** | Chamber print of kind “Vládní návrh zákona”, “Státní rozpočet”, or “Mezinárodní smlouva” (step “předložen”) | The government formally proposed a law, the budget, or a treaty | Every governing party on the submission date | `+1` | `-1` |
 
-A measure that applies generally, for example to all constructions or all public expenditure, is conduct on a promise naming a specific project, place, or group only when its text or the supplied evidence connects it to that commitment; otherwise it is not conduct on that promise.
+A measure that applies generally, for example to all constructions or all public expenditure, and only makes a commitment to a specific project, place, or group possible or easier is conduct on that promise only when its text or the supplied evidence connects it to that commitment; otherwise it is not conduct on that promise. A general measure that itself delivers or contradicts the commitment for the named project, place, or group, such as a pay rise for all public employees for a promise to raise teachers' pay, is conduct on it.
 
 A vote is scored by the party's own choice on the vote date. The later fate of the measure (a Senate or presidential return, entry into force) does not change that score; only a later attributable conduct can.
 
