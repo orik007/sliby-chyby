@@ -1,10 +1,19 @@
 ---
-import { amendedActsLabel, formatDate, lawChangeLabel, moreLawChangesLabel, stepDetails, stepLinks, stepNotes, stepTitle } from "../lib/evidence-trail";
-import type { EvidenceTrailPrint } from "../lib/schema";
-interface Props { trail: EvidenceTrailPrint[]; compact?: boolean; }
+import { amendedActsLabel, formatDate, isRegulationEntry, lawChangeLabel, moreLawChangesLabel, regulationAdoptionDetails, regulationAdoptionTitle, stepDetails, stepLinks, stepNotes, stepTitle } from "../lib/evidence-trail";
+import type { EvidenceTrailEntry, EvidenceTrailPrint } from "../lib/schema";
+interface Props { trail: EvidenceTrailEntry[]; compact?: boolean; }
 const shownLawChanges = 3;
 ---
-{Astro.props.trail.map((print) => { const [shown, hidden] = [print.lawChanges.slice(0, shownLawChanges), print.lawChanges.slice(shownLawChanges)]; const lawChangeItem = (change: EvidenceTrailPrint["lawChanges"][number]) => { const acts = amendedActsLabel(change.amendedActs); return <li>{lawChangeLabel(change)}{acts && <small> · {acts}</small>}</li>; }; return <div class:list={["trail-print", { "trail-compact": Astro.props.compact }]}>
+{Astro.props.trail.map((entry) => { if (isRegulationEntry(entry)) return <div class:list={["trail-print", { "trail-compact": Astro.props.compact }]}>
+  <h3><a href={entry.textUrl} target="_blank" rel="noreferrer">{entry.citationCz} ↗</a></h3>
+  <ul class="trail-changes"><li>{entry.titleCz}</li></ul>
+  <ol class="trail"><li class="trail-adoption">
+    <time datetime={entry.adoption.date}>{formatDate(entry.adoption.date)}</time>
+    <strong>{regulationAdoptionTitle(entry)}</strong>
+    {regulationAdoptionDetails(entry).map((line) => <span class="trail-detail">{line}</span>)}
+    <span class="trail-links"><a href={entry.textUrl} target="_blank" rel="noreferrer">Text předpisu ve Sbírce zákonů ↗</a></span>
+  </li></ol>
+</div>; const print: EvidenceTrailPrint = entry; const [shown, hidden] = [print.lawChanges.slice(0, shownLawChanges), print.lawChanges.slice(shownLawChanges)]; const lawChangeItem = (change: EvidenceTrailPrint["lawChanges"][number]) => { const acts = amendedActsLabel(change.amendedActs); return <li>{lawChangeLabel(change)}{acts && <small> · {acts}</small>}</li>; }; return <div class:list={["trail-print", { "trail-compact": Astro.props.compact }]}>
   <h3><a href={print.printUrl} target="_blank" rel="noreferrer">Sněmovní tisk {print.printNumber} ↗</a></h3>
   <ul class="trail-changes">{shown.map(lawChangeItem)}</ul>
   {hidden.length > 0 && <details class="trail-more"><summary>{moreLawChangesLabel(hidden.length)}</summary><ul class="trail-changes">{hidden.map(lawChangeItem)}</ul></details>}

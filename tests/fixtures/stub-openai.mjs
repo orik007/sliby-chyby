@@ -6,6 +6,8 @@ import { appendFileSync } from "node:fs";
 
 function tagOf(text) {
   if (/DPH|daň z přidané hodnoty|235\/2004/i.test(text)) return "vat-policy";
+  // A regulation or decree of the Collection of Laws on value-added tax.
+  if (/^Collection of Laws/.test(text) && /daně z přidané hodnoty/.test(text)) return "vat-policy";
   if (/rozpočt|schodek|dluh/i.test(text)) return "deficit-and-debt";
   return "unknown";
 }

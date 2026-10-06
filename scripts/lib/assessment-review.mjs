@@ -158,9 +158,12 @@ export const readerStatus = {
 function evidenceLabel(evidence) {
   if (evidence.role === "promise-source") return "Původní volební slib";
   if (evidence.role === "senate-resolution") return "Usnesení Senátu, kterým vrátil návrh Sněmovně";
+  if (evidence.role === "law-change" && evidence.structuredFacts?.printKindId === "government-regulation") return `Nařízení vlády: ${evidence.title}`;
+  if (evidence.role === "law-change" && evidence.structuredFacts?.printKindId === "ministerial-decree") return `Vyhláška ministerstva: ${evidence.title}`;
   if (evidence.role === "law-change") return `Změna zákona v návrhu projednávaném Sněmovnou: ${evidence.structuredFacts?.titleCz ?? evidence.title}`;
   if (evidence.type === "parliamentary-vote") return "Výsledek hlasování Poslanecké sněmovny";
   if (evidence.type === "legislative-step") return "Průběh projednávání návrhu ve Sněmovně";
+  if (evidence.type === "regulation-adoption") return evidence.structuredFacts?.regulationKind === "government-regulation" ? "Přijetí nařízení vládou" : `Vydání vyhlášky: ${evidence.structuredFacts?.issuerCz ?? "ministerstvo"}`;
   return evidence.publisher;
 }
 

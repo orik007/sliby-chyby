@@ -183,7 +183,9 @@ export const changesJournal = "changes.jsonl";
  * nodes }` (every node of a wording in document order, each `[path, text]`,
  * text null when the node has none), and `{ kind: "promulgated", date }` (the
  * day the act itself was promulgated, null when e-Sbírka does not hold the
- * act); a later line replaces an earlier one. `changes.jsonl` records each
+ * act), and `{ kind: "citation", citation, title }` (the act's short
+ * citation, "Vyhláška č. 178/2026 Sb.", and its title); a later line
+ * replaces an earlier one. `changes.jsonl` records each
  * check of what e-Sbírka changed since the previous one (see
  * createLawContextReader).
  */
@@ -197,12 +199,13 @@ export function createLawContextCache(directory) {
 
   async function load(act) {
     if (acts.has(act)) return acts.get(act);
-    const entry = { wordings: null, nodes: new Map(), promulgated: null };
+    const entry = { wordings: null, nodes: new Map(), promulgated: null, citation: null };
     const file = fileOf(act);
     for (const { value, line } of await readJournal(file)) {
       if (value.kind === "wordings") entry.wordings = { readAt: value.readAt ?? "", wordings: value.wordings };
       else if (value.kind === "wording") entry.nodes.set(value.wording, { readAt: value.readAt ?? "", nodes: value.nodes });
       else if (value.kind === "promulgated") entry.promulgated = { readAt: value.readAt ?? "", date: value.date };
+      else if (value.kind === "citation") entry.citation = { readAt: value.readAt ?? "", citation: value.citation, title: value.title };
       else throw new Error(`Invalid law-context cache ${file} line ${line}`);
     }
     acts.set(act, entry);
@@ -283,7 +286,7 @@ const changesPageSize = 10_000;
  * the time of each answer, stored with it.
  */
 export function createLawContextReader({ client, cache, clock = () => new Date().toISOString(), runId = null }) {
-  const stats = { requests: 0, cachedWordingLists: 0, cachedWordings: 0, cachedPromulgations: 0, changedWordings: 0, changesCheckedEarlierInRun: false };
+  const stats = { requests: 0, cachedWordingLists: 0, cachedWordings: 0, cachedPromulgations: 0, cachedCitations: 0, changedWordings: 0, changesCheckedEarlierInRun: false };
   let changes = null;
 
   async function request(path, purpose) {
@@ -484,7 +487,34 @@ export function createLawContextReader({ client, cache, clock = () => new Date()
     return date;
   }
 
-  return { wordings, structure, texts, nodes: nodesOf, promulgated, stats };
+  /**
+   * The short citation of an act ("Nařízení vlády č. 179/2026 Sb."), which
+   * names its kind, its title, and the day it was promulgated, or null when
+   * e-Sbírka does not hold the act. What an act is never changes once it is
+   * promulgated, so a cached answer is used as long as it is not out of date;
+   * an act e-Sbírka does not hold is not cached and is asked for again.
+   */
+  async function citation(act) {
+    const entry = await cache.load(act);
+    if (entry.citation && entry.promulgated?.date && !(await outdated(entry.citation.readAt, act, promulgatedWording))) {
+      stats.cachedCitations += 1;
+      return { citation: entry.citation.citation, title: entry.citation.title, promulgatedOn: entry.promulgated.date };
+    }
+    await ready();
+    const answer = await request(`/dokumenty-sbirky/${staleUrlSegment(act)}`, `citation ${act}`);
+    if (answer === null) return null;
+    const readAt = clock();
+    const date = dayOf(answer.datumCasVyhlaseni);
+    if (date === null || typeof answer.zkracenaCitace !== "string" || answer.zkracenaCitace === "") throw new ESbirkaUnavailableError(`e-Sbírka returned no citation or promulgation day of ${act}`);
+    const title = typeof answer.nazev === "string" ? answer.nazev.trim() : "";
+    entry.promulgated = { readAt, date };
+    entry.citation = { readAt, citation: answer.zkracenaCitace, title };
+    await cache.append(act, { kind: "promulgated", date, readAt });
+    await cache.append(act, { kind: "citation", citation: answer.zkracenaCitace, title, readAt });
+    return { citation: answer.zkracenaCitace, title, promulgatedOn: date };
+  }
+
+  return { wordings, structure, texts, nodes: nodesOf, promulgated, citation, stats };
 }
 
 /** The text of a fragment without its XHTML markup. */

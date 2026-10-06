@@ -179,10 +179,12 @@ function isEffectivePart(part) {
 // The texts of a bill as the Chamber debates it (docs/evidence-pipeline.md,
 // Versions of a law change): proposed, approved by the Chamber in the third
 // reading, and passed by Parliament after a Senate or presidential return.
-export const versionKeys = ["proposed", "approved", "passed"];
+// A bill has up to the first three; a government regulation or ministerial
+// decree has only `adopted`, its text as adopted and promulgated.
+export const versionKeys = ["proposed", "approved", "passed", "adopted"];
 
 // Short English names of the versions, for model briefs and summaries.
-export const versionLabels = { proposed: "proposed text", approved: "text approved by the Chamber", passed: "text passed by Parliament" };
+export const versionLabels = { proposed: "proposed text", approved: "text approved by the Chamber", passed: "text passed by Parliament", adopted: "text as adopted" };
 
 // An absolute psp.cz URL from an href on a psp.cz page.
 function pspUrl(href, pageUrl) {
@@ -489,10 +491,33 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [] })
 // heading even when its text is stored as the same as an earlier one.
 function withDerivedFields(change) {
   const acts = uniqueNamedActs([...Object.values(change.versions).map(({ amendedAct }) => amendedAct).filter(Boolean), ...change.titleActs]);
-  const identifiers = acts.map(({ act }) => actIdentifier(act));
+  // A regulation or decree is linked to the acts it is issued under.
+  const identifiers = [...new Set([...acts.map(({ act }) => act), ...(change.enablingActs ?? [])])].map(actIdentifier);
   if (change.printKindId === "3") identifiers.push(stateBudgetIdentifier);
   const latest = change.versions[latestTextVersion(change)];
   return { ...change, heading: latest.heading, titleCz: latest.titleCz, acts, identifiers };
+}
+
+/**
+ * The one law change of a government regulation or ministerial decree, from
+ * the payload of its adoption record (scripts/lib/regulations.mjs): its whole
+ * text as adopted, the only version. It amends no act of the Chamber's kind
+ * and is linked to the acts it is issued under (`enablingActs`).
+ */
+export function lawChangeOfRegulation(payload, url) {
+  return withDerivedFields({
+    changeId: payload.externalPrintId,
+    printId: payload.externalPrintId,
+    printNumber: payload.citationCz,
+    printKindId: payload.regulationKind,
+    printTitleCz: `${payload.citationCz}, ${payload.titleCz}`,
+    printPageUrl: url,
+    addedIn: "adopted",
+    versions: { adopted: { heading: null, titleCz: payload.titleCz, textCz: payload.paragraphs.join("\n"), amendedAct: null, effectiveCz: null, document: { filename: payload.citationCz, url } } },
+    titleActs: [],
+    enablingActs: payload.enablingActs,
+    senateResolutions: []
+  });
 }
 
 /**

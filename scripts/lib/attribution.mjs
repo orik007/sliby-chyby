@@ -63,6 +63,8 @@ export { billPrintKindIds };
  */
 export function versionConcerned(record, printId) {
   const concerned = (version, extra = {}) => ({ version, withSenateResolution: false, sameAsApproved: false, senateAmendmentsRejected: false, mark: null, ...extra });
+  // A government regulation or ministerial decree is adopted in one text.
+  if (record.kind === "regulation-adoption") return concerned("adopted");
   if (record.kind !== "parliamentary-vote") return concerned("proposed");
   const linkedPrint = (record.payload?.linkedPrints ?? []).find((print) => String(print.externalPrintId) === String(printId));
   const context = (linkedPrint?.historyContexts ?? []).find((item) => decisiveActions.has(normalizeSearchText(item.actionCz)));
@@ -90,7 +92,9 @@ export const assessableAttributionStatuses = new Set([
   "verified-party-vote",
   "verified-party-no-majority",
   "verified-member-bill",
-  "verified-government-proposal"
+  "verified-government-proposal",
+  "verified-government-regulation",
+  "verified-ministerial-decree"
 ]);
 
 /**
@@ -102,7 +106,9 @@ export const assessableAttributionStatuses = new Set([
  *   submission date is among its proposers;
  * - the submission of a government proposal (bill, state budget, or
  *   international treaty), when the party was a governing party at the
- *   submission date.
+ *   submission date;
+ * - the adoption of a government regulation or a ministerial decree, when
+ *   the party was a governing party at the adoption date.
  * Anything else is unattributed and never becomes package evidence.
  */
 export function attributionStatusForRecord(record, promise) {
@@ -113,6 +119,10 @@ export function attributionStatusForRecord(record, promise) {
     if (summary.attributionStatus === "attributed") return { attributionStatus: decisive ? "verified-party-vote" : "candidate-party-vote-without-decisive-context" };
     if (summary.attributionStatus === "no-strict-majority") return { attributionStatus: decisive ? "verified-party-no-majority" : "candidate-party-vote-without-decisive-context" };
     return { attributionStatus: "unattributed" };
+  }
+  if (record.kind === "regulation-adoption" && record.payload?.proposal?.proposerPartyIds?.includes(promise.partyId)) {
+    if (record.payload.regulationKind === "government-regulation") return { attributionStatus: "verified-government-regulation" };
+    if (record.payload.regulationKind === "ministerial-decree") return { attributionStatus: "verified-ministerial-decree" };
   }
   if (record.kind === "legislative-step" && normalizeSearchText(record.payload?.actionCz) === submissionAction) {
     const proposal = record.payload?.proposal;
@@ -146,6 +156,8 @@ function partyVoteFacts(record, partyId) {
 export function normalizedStructuredFacts(record, partyId) {
   const structuredFacts = { ...record.payload };
   delete structuredFacts.individualVotes;
+  // A regulation's text is its law change's, not its conduct's.
+  delete structuredFacts.paragraphs;
   if (record.kind === "parliamentary-vote") {
     structuredFacts.relevantPartyVoteSummary = partyVoteFacts(record, partyId);
   }
@@ -163,6 +175,11 @@ function proposalLabel(payload) {
 }
 
 export function factSummary(record, partyId) {
+  if (record.kind === "regulation-adoption") {
+    const payload = record.payload;
+    const by = payload.regulationKind === "government-regulation" ? "the government" : payload.issuerCz;
+    return `The Collection of Laws records ${payload.citationCz}, ${payload.titleCz}, adopted by ${by} on ${payload.adoptedOn} and promulgated on ${payload.promulgatedOn}; governing parties on the adoption date: ${payload.proposal.proposerPartyIds.join(", ")}.`;
+  }
   if (record.kind === "legislative-step") {
     const payload = record.payload;
     const proposal = payload.proposal

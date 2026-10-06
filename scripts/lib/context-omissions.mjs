@@ -1,7 +1,7 @@
 import { promulgatedWording } from "./e-sbirka.mjs";
 import { citationOfPath, eSbirkaProvisionUrl } from "./law-context.mjs";
 
-const versionLabelsCz = { proposed: "navržený text", approved: "text schválený Sněmovnou", passed: "text přijatý Parlamentem" };
+const versionLabelsCz = { proposed: "navržený text", approved: "text schválený Sněmovnou", passed: "text přijatý Parlamentem", adopted: "přijatý text" };
 
 function dateCz(date) {
   const [year, month, day] = date.split("-").map(Number);
