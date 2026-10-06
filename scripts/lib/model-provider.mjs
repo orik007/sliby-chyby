@@ -1,5 +1,5 @@
 import { Agent } from "undici";
-import { charactersPerToken } from "./assessment-config.mjs";
+import { charactersPerToken, maxOutputTokens } from "./assessment-config.mjs";
 import { log, logModelCall } from "./run-log.mjs";
 
 // Eight attempts with a backoff capped at two minutes wait about four
@@ -196,6 +196,7 @@ export async function createStructuredModelResponse({
       instructions,
       input: requestInput,
       text: { format: { type: "json_schema", name, strict: true, schema } },
+      max_output_tokens: maxOutputTokens,
       metadata
     })
   }, { model, estimatedTokens: Math.ceil((instructions.length + requestInput.length + JSON.stringify(schema).length) / charactersPerToken), label: logLabel, serviceTier: tier });
@@ -208,6 +209,12 @@ export async function createStructuredModelResponse({
   // The response names the tier that processed it, which sets its price.
   logModelCall({ label: logLabel, model: body.model ?? model, usage: body.usage ?? null, serviceTier: body.service_tier ?? tier });
 
+  // An answer cut off at the output cap (`status: "incomplete"`) may hold
+  // only reasoning; it comes back without output, and the caller treats it
+  // as an invalid output.
+  if (body.status === "incomplete") {
+    return { provider, responseId: body.id, model: body.model ?? model, usage: body.usage ?? null, output: null, incomplete: body.incomplete_details?.reason ?? "unknown" };
+  }
   const content = body.output?.flatMap((item) => item.content ?? []) ?? [];
   const refusal = content.find((item) => item.type === "refusal")?.refusal;
   if (refusal) throw new Error(`Model refused the assessment request: ${refusal}`);

@@ -5,6 +5,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
 import { createRequestDispatcher, createStructuredModelResponse, reserveInputTokens, tokenBudgetPerMinute } from "../scripts/lib/model-provider.mjs";
+import { maxOutputTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
 
 // Stub calls never belong in a real run's spend log.
 delete process.env.SLIBY_MODEL_CALL_LOG;
@@ -344,6 +345,28 @@ test("createStructuredModelResponse asks for Flex processing and retries a Flex 
     assert.deepEqual(result.output, { ok: true });
   } finally {
     timers.restore();
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("every answer is capped, and one cut off at the cap comes back without output", async () => {
+  const originalFetch = globalThis.fetch;
+  const bodies = [];
+  globalThis.fetch = async (url, init) => {
+    bodies.push(JSON.parse(init.body));
+    return {
+      ok: true,
+      json: async () => ({ id: "resp_cut", model: "gpt-6-luna", status: "incomplete", incomplete_details: { reason: "max_output_tokens" }, usage: { input_tokens: 10, output_tokens: maxOutputTokens }, output: [{ type: "reasoning", summary: [] }] })
+    };
+  };
+  try {
+    const result = await createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6-luna", instructions: "fixture", input: {}, name: "fixture_schema", schema: { type: "object" } });
+    assert.equal(bodies[0].max_output_tokens, maxOutputTokens);
+    assert.equal(maxRequestInputTokens, 1_050_000 - maxOutputTokens);
+    assert.equal(result.output, null);
+    assert.equal(result.incomplete, "max_output_tokens");
+    assert.equal(result.responseId, "resp_cut");
+  } finally {
     globalThis.fetch = originalFetch;
   }
 });

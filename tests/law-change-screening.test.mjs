@@ -125,6 +125,17 @@ test("screening sends the taxonomy first so it can be a cached prompt prefix", a
   }
 });
 
+test("a screening answer cut off at the output cap is an invalid output, with its paid usage", async () => {
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => ({ ok: true, json: async () => ({ id: "resp_cut", model: "gpt-6-luna", status: "incomplete", incomplete_details: { reason: "max_output_tokens" }, usage: { input_tokens: 100, output_tokens: 48_000 }, output: [{ type: "reasoning", summary: [] }] }) });
+  try {
+    const prompt = await loadScreeningPrompt();
+    await assert.rejects(requestScreening({ provider: "openai", apiKey: "key", model: "gpt-6-luna", brief: buildScreeningBrief(change, taxonomy), taxonomy, prompt }), (error) => error instanceof ModelOutputError && /cut off \(max_output_tokens\)/.test(error.message) && error.usage.output_tokens === 48_000);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test("a relevance check reads the exact promise with its tests and the law-change text", async () => {
   const brief = buildRelevanceBrief(fiscalPromise, change);
   assert.equal(brief.pairId, `${fiscalPromise.id}--43200-2`);

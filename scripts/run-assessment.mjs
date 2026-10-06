@@ -97,13 +97,15 @@ async function saveInvalidAttempts(role, attempts) {
   await writeFile(join(responseCache, `${role}.invalid.json`), `${JSON.stringify(attempts, null, 2)}\n`);
 }
 async function validAssessorResponse(role, request) {
-  const isValid = (response) => assessmentOutputError(response.output, evidencePackage) === null;
+  // An answer cut off at the output cap is an invalid output too.
+  const outputError = (response) => (response.incomplete ? `The answer was cut off (${response.incomplete})` : assessmentOutputError(response.output, evidencePackage));
+  const isValid = (response) => outputError(response) === null;
   const invalidAttempts = await invalidAttemptsSaved(role);
   // Every attempt was used before the run stopped: the last one stands.
   if (invalidAttempts.length > assessorRetries) return { response: invalidAttempts.at(-1).response, invalidAttempts: invalidAttempts.slice(0, -1) };
   let response = await cachedResponse(role, request, isValid);
   while (!isValid(response)) {
-    const error = assessmentOutputError(response.output, evidencePackage);
+    const error = outputError(response);
     invalidAttempts.push({ error, response });
     await saveInvalidAttempts(role, invalidAttempts);
     if (invalidAttempts.length > assessorRetries) break;
@@ -127,6 +129,8 @@ const rawB = assessorB.response;
 
 const assessmentPair = resolveAvailableAssessmentReviews(rawA.output, rawB.output, evidencePackage);
 const { reviewA, reviewB, validationErrors } = assessmentPair;
+// A cut-off answer has no output to validate; its error names the cut-off.
+for (const [role, raw] of [["assessor-a", rawA], ["assessor-b", rawB]]) if (raw.incomplete) validationErrors[role] = `The answer was cut off (${raw.incomplete})`;
 let resolution = assessmentPair.resolution;
 let rawArbiter = null;
 
@@ -157,6 +161,7 @@ if (resolution.state === "arbitration-required") {
         return false;
       }
     });
+    if (rawArbiter.incomplete) throw new Error(`The arbiter's answer was cut off (${rawArbiter.incomplete})`);
     validateArbiterOutput(rawArbiter.output, evidencePackage);
     resolution = resolveAssessmentReviews(reviewA, reviewB, evidencePackage, rawArbiter.output);
   }

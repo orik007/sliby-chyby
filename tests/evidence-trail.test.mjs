@@ -176,6 +176,7 @@ test("context left out of a package is named with e-Sbírka links on the review 
   assert.equal(assessmentRevisionSchema.safeParse(elsewhere).success, false);
   const review = renderHumanReviewMarkdown({ evidencePackage, auditRecord: trimmedRecord, proposal: trimmedProposal });
   assert.match(review, /### Zkrácený kontext/);
+  assert.match(review, /s místem pro oba posudky, které čte třetí hodnotitel/);
   assert.match(review, /\(navržený text\), zákon č\. 283\/2021 Sb\. ve znění od 1\. 10\. 2025: chybí znění 1 ustanovení, k dispozici 3\*\*: \[§ 166 odst\. 1\]\(https:\/\/e-sbirka\.gov\.cz\/sb\/2021\/283\/2025-10-01#par_166-odst_1\)/);
   assert.match(review, /ve vyhlášeném znění: chybí znění 1 ustanovení/);
 });

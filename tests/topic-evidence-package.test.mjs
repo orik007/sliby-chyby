@@ -4,7 +4,7 @@ import { fileURLToPath } from "node:url";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import { loadTrackedPromises } from "../scripts/lib/published-promises.mjs";
 import { buildLawChangeEvidencePackage, estimatePackageTokens, lawChangesAtCutoff, lawChangeEvidenceId, versionOfChange } from "../scripts/lib/topic-evidence-package.mjs";
-import { charactersPerToken, estimateTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
+import { arbiterReviewReserveTokens, charactersPerToken, estimateTokens, maxPackageRequestTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
 import { withContext } from "../scripts/lib/law-context.mjs";
 
 const assessorInstructions = "assessor instructions";
@@ -133,16 +133,51 @@ test("a package too large with its context fits by leaving out the longest provi
   assert.equal(build(null).generation.oversized, true, "without the contexts the package cannot be fitted");
   const pkg = build(() => context);
   assert.equal(pkg.generation.oversized, false);
-  assert.ok(pkg.generation.estimatedTokens <= maxRequestInputTokens);
+  assert.ok(pkg.generation.estimatedTokens <= maxPackageRequestTokens);
   const facts = pkg.evidence.find(({ role }) => role === "law-change").structuredFacts;
   assert.equal(facts.versions.proposed.textCz, versions.proposed.textCz, "the text is never trimmed");
   assert.equal(facts.versions.approved.textCz, versions.approved.textCz);
   const proposedContext = facts.versions.proposed.contextCz;
-  assert.match(proposedContext, /Not supplied, because the evidence package is larger than the models can read: the wording of 1 of the 3 provisions this version's context holds \(§ 1 zákona č\. 23\/2017 Sb\.\)/);
+  assert.match(proposedContext, /Not supplied, because the evidence package would not otherwise fit what the models can read with room left for the arbiter to read both reviews: the wording of 1 of the 3 provisions this version's context holds \(§ 1 zákona č\. 23\/2017 Sb\.\)/);
   assert.ok(!proposedContext.includes(huge.slice(0, 1000)));
   assert.match(proposedContext, /§ 3 odst\. 1 zákona č\. 23\/2017 Sb\. \(wording from 2026-01-01\):\nkrátké znění/, "the shorter provisions are put back");
   assert.match(facts.versions.approved.contextCz, /§ 2 zákona č\. 23\/2017 Sb\. \(wording from 2026-01-01\): the same text as supplied for the proposed text\./);
   assert.deepEqual(pkg.generation.contextOmissions, [{ evidenceId: lawChangeEvidenceId(change), version: "proposed", suppliedCount: 2, omitted: [{ act: "23/2017", wording: "2026-01-01", paths: ["dokument/norma/par_1"] }] }]);
+});
+
+test("a package is fitted with room for the arbiter to read both reviews, or, when its text leaves no such room, to what the models can read", () => {
+  const provision = (path, textCz) => ({ act: "23/2017", wording: "2026-01-01", path, citation: path.replace("dokument/norma/par_", "§ "), textCz });
+  const contextWith = (provisions) => ({
+    versions: {
+      proposed: {
+        conductDate: "2026-02-01",
+        amendedAct: "23/2017",
+        instructions: [{ instructionCz: "V § 1 …", targets: Object.keys(provisions).map((id) => ({ target: provisions[id].citation, status: "found", wording: "2026-01-01", provisionIds: [id] })) }],
+        provisions
+      }
+    }
+  });
+  const build = (textTokens, contextTokens) => {
+    const versions = { proposed: { heading: "ČÁST PRVNÍ", titleCz: "Změna zákona", textCz: "t".repeat(textTokens * charactersPerToken), document: null } };
+    // Twenty provisions of the same size, so the context can be cut in steps.
+    const provisions = Object.fromEntries(Array.from({ length: 20 }, (_, index) => [`p${index}`, provision(`dokument/norma/par_${index + 1}`, "c".repeat(contextTokens / 20 * charactersPerToken))]));
+    const context = contextWith(provisions);
+    return buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: [{ change: withContext(lawChange(1, null, versions), context), route }], recordsByPrintId: new Map([["43200", [attributedVoteRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15", contextOf: () => context });
+  };
+  assert.equal(maxPackageRequestTokens, maxRequestInputTokens - arbiterReviewReserveTokens);
+  // The models could read it whole, but the arbiter could not read it with both reviews.
+  const reserved = build(maxPackageRequestTokens - 30_000, 40_000);
+  assert.ok(reserved.generation.contextOmissions.length > 0);
+  assert.ok(reserved.generation.estimatedTokens <= maxPackageRequestTokens);
+  assert.ok(reserved.generation.estimatedTokens > maxPackageRequestTokens - 5_000, "as many provisions as still fit are put back");
+  assert.equal(reserved.generation.oversized, false);
+  assert.match(reserved.evidence.find(({ role }) => role === "law-change").structuredFacts.versions.proposed.contextCz, /Not supplied, because the evidence package would not otherwise fit what the models can read with room left for the arbiter to read both reviews: the wording of \d+ of the 20 provisions/);
+  // Its text alone leaves no room for the reviews: it keeps the context the models can still read.
+  const textOnly = build(maxPackageRequestTokens + 10_000, 40_000);
+  assert.ok(textOnly.generation.contextOmissions.length > 0);
+  assert.ok(textOnly.generation.estimatedTokens > maxPackageRequestTokens + 20_000, "the context that still fits the models is kept");
+  assert.ok(textOnly.generation.estimatedTokens <= maxRequestInputTokens);
+  assert.equal(textOnly.generation.oversized, false);
 });
 
 test("the assessor instructions count towards the input limit of a package", () => {

@@ -6,17 +6,26 @@ export const assessorPromptVersion = "assessor-v20";
 export const arbiterPromptVersion = "arbiter-v13";
 export const scoringRulePath = "docs/scoring.md";
 
-// The assessor and arbiter models read at most 1,050,000 tokens, their
-// answer of up to 128,000 tokens included (OpenAI model documentation,
-// verified 26 September 2026), so a request can carry at most 922,000 input
-// tokens, instructions and input together. A larger evidence package is fitted
-// by leaving out part of its context, never its text, and only one still too
-// large without any context is reported for human review
-// (docs/evidence-pipeline.md, Package). A request above 272,000
-// input tokens is sent at the long-context price
+// The models read at most 1,050,000 tokens, their answer included (OpenAI
+// model documentation, verified 26 September 2026). Every answer is capped
+// at 48,000 tokens, its reasoning included: the longest of the 1,456
+// assessor answers of runs 72 to 75 took 20,194. A request can therefore
+// carry at most 1,002,000 input tokens, instructions and input together. A
+// larger evidence package is fitted by leaving out part of its context,
+// never its text, and only one still too large without any context is
+// reported for human review (docs/evidence-pipeline.md, Package). A request
+// above 272,000 input tokens is sent at the long-context price
 // (automation/model-prices.json).
-export const maxRequestInputTokens = 922_000;
+export const contextWindowTokens = 1_050_000;
+export const maxOutputTokens = 48_000;
+export const maxRequestInputTokens = contextWindowTokens - maxOutputTokens;
 export const longContextInputTokens = 272_000;
+
+// The arbiter reads the package with both reviews, so a package is fitted
+// with room left for them: both reviews of run 75 took at most 11,840 tokens
+// (38 law changes), and its largest packages have 58.
+export const arbiterReviewReserveTokens = 32_000;
+export const maxPackageRequestTokens = maxRequestInputTokens - arbiterReviewReserveTokens;
 
 // Run 56's 1,110 screening requests had 2.78 to 4.17 characters per billed
 // input token, the fewest in the largest legal texts, so a request is
