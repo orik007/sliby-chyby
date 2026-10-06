@@ -79,7 +79,7 @@ test("reads the paragraphs of a Word 97-2003 proposal text with its quotation ma
 });
 
 test("psp.cz downloads use one request at a time, six attempts with a 5 s back-off, 3 s between attempts, and a 3 s connect limit", () => {
-  assert.deepEqual(pspDownloadSettings, { concurrency: 1, retryAttempts: 6, retryDelayMs: 5_000, minIntervalMs: 3_000, connectTimeoutMs: 3_000 });
+  assert.deepEqual(pspDownloadSettings, { concurrency: 1, retryAttempts: 40, retryDelayMs: 5_000, maxRetryDelayMs: 32_000, minIntervalMs: 3_000, connectTimeoutMs: 3_000 });
 });
 
 test("the psp.cz proxy comes from PSP_PROXY_URL, and an invalid value fails without echoing it", () => {

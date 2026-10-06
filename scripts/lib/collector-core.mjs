@@ -149,7 +149,7 @@ function proxyRefusalStatus(error) {
  * included, so a caller can space its requests; `dispatcher` is passed to
  * fetch, for example to set how long connecting may take.
  */
-export async function fetchVerified(source, endpoint, { maxBytes, expectedContentTypes, retryAttempts = 4, retryDelayMs = 1_000, onAttempt = null, beforeAttempt = null, dispatcher = undefined }) {
+export async function fetchVerified(source, endpoint, { maxBytes, expectedContentTypes, retryAttempts = 4, retryDelayMs = 1_000, maxRetryDelayMs = Infinity, onAttempt = null, beforeAttempt = null, dispatcher = undefined }) {
   const requested = new URL(endpoint);
   invariant(requested.protocol === "https:", `Source ${source.id} endpoint must use HTTPS`);
   invariant(allowedHostname(requested.hostname, source.expectedHosts), `Source ${source.id} endpoint host is not allowlisted`);
@@ -158,6 +158,8 @@ export async function fetchVerified(source, endpoint, { maxBytes, expectedConten
   let bytes;
   invariant(Number.isInteger(retryAttempts) && retryAttempts > 0, "retryAttempts must be a positive integer");
   invariant(Number.isInteger(retryDelayMs) && retryDelayMs >= 0, "retryDelayMs must be a non-negative integer");
+  // Each wait doubles the one before, up to maxRetryDelayMs.
+  const retryDelay = (attempt) => Math.min(retryDelayMs * 2 ** (attempt - 1), maxRetryDelayMs);
   for (let attempt = 1; attempt <= retryAttempts; attempt += 1) {
     await beforeAttempt?.();
     const controller = new AbortController();
@@ -191,7 +193,7 @@ export async function fetchVerified(source, endpoint, { maxBytes, expectedConten
         throw error;
       }
       log(`download attempt ${attempt}/${retryAttempts} failed: ${endpoint} (${reason}); retrying`);
-      await delay(retryDelayMs * 2 ** (attempt - 1));
+      await delay(retryDelay(attempt));
       continue;
     } finally {
       clearTimeout(timeout);
@@ -199,7 +201,7 @@ export async function fetchVerified(source, endpoint, { maxBytes, expectedConten
     if (response.ok || !isTransientResponse(response) || attempt === retryAttempts) break;
     log(`download attempt ${attempt}/${retryAttempts} got HTTP ${response.status}: ${endpoint}; retrying`);
     await response.body?.cancel();
-    await delay(retryDelayMs * 2 ** (attempt - 1));
+    await delay(retryDelay(attempt));
   }
 
   if (!response.ok) await response.body?.cancel();
