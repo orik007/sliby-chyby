@@ -4,7 +4,7 @@ import { validateEvidencePackage } from "./assessment-pipeline.mjs";
 import { changeThroughVersion, namedActsFromPrintTitle, versionKeys, versionLabels, versionOfChange } from "./print-parts.mjs";
 
 export { versionOfChange };
-import { charactersPerToken, estimateRequestTokens, estimateTokens, maxRequestInputTokens } from "./assessment-config.mjs";
+import { charactersPerToken, estimateRequestTokens, estimateTokens, maxPackageRequestTokens, maxRequestInputTokens } from "./assessment-config.mjs";
 import { withContext } from "./law-context.mjs";
 
 function invariant(condition, message) {
@@ -202,18 +202,20 @@ function evidenceFromMaintenanceBaseline(baseline) {
 }
 
 /**
- * Fits a package that is larger than the models can read by leaving out
- * context, never the text of a law change (docs/evidence-pipeline.md,
- * Package): the whole context of a law change is left out, largest first,
- * until the package fits; then its provisions are put back, shortest first,
- * as many as still fit. A provision with the same text in several versions of
- * a change is left out or put back in all of them, because a later version
- * refers to its text in the earlier one. Every size is measured on the whole
+ * Fits a package to `limitTokens` by leaving out context, never the text of
+ * a law change (docs/evidence-pipeline.md, Package): the whole context of a
+ * law change is left out, largest first, until the package fits; then its
+ * provisions are put back, shortest first, as many as still fit. A provision
+ * with the same text in several versions of a change is left out or put back
+ * in all of them, because a later version refers to its text in the earlier
+ * one. Every size is measured on the whole
  * package as it is sent, its record of what was left out
  * (`generation.contextOmissions`) included. Returns the package, still too
  * large when even that is not enough.
  */
-function fitContexts({ changes, contextOf, assemble, requestTokens, requestLength, lengthLimit }) {
+function fitContexts({ changes, contextOf, assemble, requestTokens, requestLength, limitTokens, instructionTokens }) {
+  // The longest input, in characters, whose estimate stays within the limit.
+  const lengthLimit = Math.floor((limitTokens - instructionTokens) * charactersPerToken);
   const contexts = changes.map(({ change }) => contextOf(change.changeId));
   // Per change, its provisions by text: each with where it occurs.
   const groups = changes.map((_, index) => {
@@ -260,7 +262,7 @@ function fitContexts({ changes, contextOf, assemble, requestTokens, requestLengt
     if (omissions.length > 0) evidencePackage.generation.contextOmissions = omissions;
     return evidencePackage;
   };
-  const fits = (evidencePackage) => requestTokens(evidencePackage) <= maxRequestInputTokens;
+  const fits = (evidencePackage) => requestTokens(evidencePackage) <= limitTokens;
   const contextSize = ({ change }) => Object.values(change.versions).reduce((sum, entry) => sum + (entry.contextCz?.length ?? 0), 0);
   const order = changes.map((item, index) => ({ index, size: contextSize(item), changeId: item.change.changeId }))
     .filter(({ index }) => groups[index].length > 0)
@@ -313,10 +315,11 @@ function fitContexts({ changes, contextOf, assemble, requestTokens, requestLengt
  * One promise's evidence package: every kept law change with the full text
  * of each version and its context, and the party's attributable conduct on
  * each of their prints, naming the version of each change it concerns. No
- * law change, text, or conduct is ever left out; when the package is larger
- * than the models can read and `contextOf` gives each change's structured
- * context, part of the context is left out until it fits (`fitContexts`),
- * and the package is marked `oversized` only when even that is not enough.
+ * law change, text, or conduct is ever left out; when the package leaves no
+ * room for the arbiter to read both reviews and `contextOf` gives each
+ * change's structured context, part of the context is left out until it
+ * does (`fitContexts`), or, when even that is not enough, until the
+ * assessors can read it; it is marked `oversized` only when they cannot.
  * `keptChanges` is `[{ change, route }]`; `recordsByPrintId` holds the
  * primary records concerning each print, and `printFirstSeenOn` each print's
  * earliest record date. A caller building many packages passes the
@@ -412,10 +415,12 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
   const requestInput = (evidencePackage) => ({ packageHash: "0".repeat(64), evidencePackage: { ...evidencePackage, generation: { ...evidencePackage.generation, estimatedTokens: 9_999_999, oversized: false } } });
   const requestTokens = (evidencePackage) => estimateRequestTokens(assessorInstructions, requestInput(evidencePackage));
   const requestLength = (evidencePackage) => JSON.stringify(requestInput(evidencePackage)).length;
-  // The longest input, in characters, whose estimate stays within the limit.
-  const lengthLimit = Math.floor((maxRequestInputTokens - estimateTokens(assessorInstructions)) * charactersPerToken);
+  const fit = (limitTokens) => fitContexts({ changes, contextOf, assemble, requestTokens, requestLength, limitTokens, instructionTokens: estimateTokens(assessorInstructions) });
   let evidencePackage = assemble(changes);
-  if (requestTokens(evidencePackage) > maxRequestInputTokens && contextOf) evidencePackage = fitContexts({ changes, contextOf, assemble, requestTokens, requestLength, lengthLimit });
+  if (requestTokens(evidencePackage) > maxPackageRequestTokens && contextOf) {
+    evidencePackage = fit(maxPackageRequestTokens);
+    if (requestTokens(evidencePackage) > maxPackageRequestTokens) evidencePackage = fit(maxRequestInputTokens);
+  }
   evidencePackage.generation.estimatedTokens = estimatePackageTokens(evidencePackage);
   evidencePackage.generation.oversized = requestTokens(evidencePackage) > maxRequestInputTokens;
   return evidencePackage;

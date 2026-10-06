@@ -18,6 +18,12 @@ export const scoringRulePath = "docs/scoring.md";
 export const maxRequestInputTokens = 922_000;
 export const longContextInputTokens = 272_000;
 
+// The arbiter reads the package with both reviews, so a package is fitted
+// with room left for them: both reviews of run 75 took at most 11,840 tokens
+// (38 law changes), and its largest packages have 58.
+export const arbiterReviewReserveTokens = 40_000;
+export const maxPackageRequestTokens = maxRequestInputTokens - arbiterReviewReserveTokens;
+
 // Run 56's 1,110 screening requests had 2.78 to 4.17 characters per billed
 // input token, the fewest in the largest legal texts, so a request is
 // estimated at 2.5 characters per token to stay below the limit.
