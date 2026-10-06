@@ -366,7 +366,7 @@ export function contextText(context, supplied = new Map(), versionLabel = null, 
   ];
   const left = Object.entries(context.provisions).filter(([id]) => omitted?.has(id));
   if (left.length > 0) {
-    lines.push(`Not supplied, because the evidence package is larger than the models can read: the wording of ${left.length} of the ${Object.keys(context.provisions).length} provisions this version's context holds (${left.map(([, { act, citation }]) => `${citation} zákona č. ${act} Sb.`).join("; ")}). Read the amending text without it; never guess their wording.`);
+    lines.push(`Not supplied, because the evidence package would not otherwise fit what the models can read with room left for the arbiter to read both reviews: the wording of ${left.length} of the ${Object.keys(context.provisions).length} provisions this version's context holds (${left.map(([, { act, citation }]) => `${citation} zákona č. ${act} Sb.`).join("; ")}). Read the amending text without it; never guess their wording.`);
   }
   for (const [id, { act, wording, promulgatedOn, citation, textCz }] of Object.entries(context.provisions)) {
     if (omitted?.has(id)) continue;
@@ -388,7 +388,8 @@ export function contextText(context, supplied = new Map(), versionLabel = null, 
  * and their input hashes, all include it. A provision with the same text as
  * for an earlier version is supplied once. `omitted` maps a version to the
  * IDs of the provisions left out of an evidence package that would otherwise
- * be larger than the models can read (docs/evidence-pipeline.md, Package);
+ * leave no room for the arbiter's reviews, or be larger than the models can
+ * read (docs/evidence-pipeline.md, Package);
  * the context names them as not supplied.
  */
 export function withContext(change, context, omitted = null) {

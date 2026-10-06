@@ -138,7 +138,7 @@ test("a package too large with its context fits by leaving out the longest provi
   assert.equal(facts.versions.proposed.textCz, versions.proposed.textCz, "the text is never trimmed");
   assert.equal(facts.versions.approved.textCz, versions.approved.textCz);
   const proposedContext = facts.versions.proposed.contextCz;
-  assert.match(proposedContext, /Not supplied, because the evidence package is larger than the models can read: the wording of 1 of the 3 provisions this version's context holds \(§ 1 zákona č\. 23\/2017 Sb\.\)/);
+  assert.match(proposedContext, /Not supplied, because the evidence package would not otherwise fit what the models can read with room left for the arbiter to read both reviews: the wording of 1 of the 3 provisions this version's context holds \(§ 1 zákona č\. 23\/2017 Sb\.\)/);
   assert.ok(!proposedContext.includes(huge.slice(0, 1000)));
   assert.match(proposedContext, /§ 3 odst\. 1 zákona č\. 23\/2017 Sb\. \(wording from 2026-01-01\):\nkrátké znění/, "the shorter provisions are put back");
   assert.match(facts.versions.approved.contextCz, /§ 2 zákona č\. 23\/2017 Sb\. \(wording from 2026-01-01\): the same text as supplied for the proposed text\./);
@@ -171,6 +171,7 @@ test("a package is fitted with room for the arbiter to read both reviews, or, wh
   assert.ok(reserved.generation.estimatedTokens <= maxPackageRequestTokens);
   assert.ok(reserved.generation.estimatedTokens > maxPackageRequestTokens - 5_000, "as many provisions as still fit are put back");
   assert.equal(reserved.generation.oversized, false);
+  assert.match(reserved.evidence.find(({ role }) => role === "law-change").structuredFacts.versions.proposed.contextCz, /Not supplied, because the evidence package would not otherwise fit what the models can read with room left for the arbiter to read both reviews: the wording of \d+ of the 20 provisions/);
   // Its text alone leaves no room for the reviews: it keeps the context the models can still read.
   const textOnly = build(maxPackageRequestTokens + 10_000, 40_000);
   assert.ok(textOnly.generation.contextOmissions.length > 0);

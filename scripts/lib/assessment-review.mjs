@@ -357,7 +357,7 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     lines.push(
       "### Zkrácený kontext",
       "",
-      "Balíček byl větší, než modely dokážou přečíst. Text změn zákonů dostali hodnotitelé celý, u těchto změn ale neměli dosavadní znění všech ustanovení, která mění (vynechána byla nejdelší, viz `docs/evidence-pipeline.md`). Vynechaná znění jsou odkazy do e-Sbírky:",
+      "Celý balíček by se nevešel do toho, co modely dokážou přečíst, s místem pro oba posudky, které čte třetí hodnotitel. Text změn zákonů dostali hodnotitelé celý, u těchto změn ale neměli dosavadní znění všech ustanovení, která mění (vynechána byla nejdelší, viz `docs/evidence-pipeline.md`). Vynechaná znění jsou odkazy do e-Sbírky:",
       "",
       ...omissions.map((omission) => `- **${contextOmissionLabel(omission)}**: ${omission.provisions.map(({ citationCz, url }) => `[${citationCz}](${url})`).join(", ")}`),
       ""
