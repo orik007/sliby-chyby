@@ -153,13 +153,17 @@ jobs:
       - name: Collect source records
         # psp.cz refuses connections from GitHub Actions, so its requests go
         # through the proxy in PSP_PROXY_URL (docs/evidence-pipeline.md,
-        # Chamber data rules).
+        # Chamber data rules). Regulations and decrees are read from the
+        # e-Sbírka REST API through the permanent cache (Collection of Laws
+        # data rules).
         env:
           PSP_PROXY_URL: ${{ secrets.PSP_PROXY_URL }}
+          ESEL_API_ACCESS_KEY: ${{ secrets.ESEL_API_ACCESS_KEY }}
         run: |
           node scripts/run-collectors.mjs \
             --checkpoints automation/collectors/checkpoints.json \
             --write-checkpoints automation/collectors/checkpoints.json \
+            --law-context-cache automation/law-context \
             --output automation/runs/pipeline/github-actions/collector
 
       - name: Split official print texts into law changes

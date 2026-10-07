@@ -28,8 +28,8 @@ const runtime = { assessorProviderA: "openai", assessorProviderB: "openai", arbi
 
 test("loads only the active assessor and arbiter prompts", async () => {
   const prompts = await loadAssessmentPrompts();
-  assert.equal(prompts.assessor.version, "assessor-v20");
-  assert.equal(prompts.arbiter.version, "arbiter-v13");
+  assert.equal(prompts.assessor.version, "assessor-v21");
+  assert.equal(prompts.arbiter.version, "arbiter-v14");
   assert.match(prompts.assessor.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.arbiter.contentHash, /^[a-f0-9]{64}$/);
   assert.match(prompts.assessor.instructions, /maintenanceBaseline/);
@@ -87,7 +87,7 @@ test("the human review page lists the law changes left out as not relevant, with
   assert.doesNotMatch(renderHumanReviewMarkdown({ evidencePackage, auditRecord, proposal: { proposalId: "test-promise--abc", candidateStatus: "moving-towards", resolutionState: "candidate", resolutionReason: "assessor-consensus", supersedesProposalId: null } }), /Vyřazené změny zákonů/);
   // The page of the assessment whose verdicts leave a change out names it,
   // because a package without it keeps that assessment.
-  const bothIrrelevant = { ...auditRecord, prompts: { assessor: { version: "assessor-v20", contentHash: "a".repeat(64) } }, validatedAssessments: { "assessor-a": reviewA, "assessor-b": { ...reviewB, changeRelevance: reviewA.changeRelevance } } };
+  const bothIrrelevant = { ...auditRecord, prompts: { assessor: { version: "assessor-v21", contentHash: "a".repeat(64) } }, validatedAssessments: { "assessor-a": reviewA, "assessor-b": { ...reviewB, changeRelevance: reviewA.changeRelevance } } };
   const withVersions = { ...evidencePackage, evidence: evidencePackage.evidence.map((item) => (item.role === "law-change" ? { ...item, structuredFacts: { ...item.structuredFacts, versions: { proposed: { textCz: "Text." } } } } : item)) };
   const leaving = renderHumanReviewMarkdown({ evidencePackage: withVersions, auditRecord: bothIrrelevant, proposal: { proposalId: "test-promise--abc", candidateStatus: "moving-towards", resolutionState: "candidate", resolutionReason: "assessor-consensus", supersedesProposalId: null } });
   assert.match(leaving, /další balíčky tohoto slibu vynechají[^\n]*\n\n- Změna zákona v návrhu projednávaném Sněmovnou: Přechodná ustanovení\n/);
@@ -98,7 +98,7 @@ test("only a law change's latest verdict counts", async (t) => {
   const root = await mkdtemp(resolve(tmpdir(), "verdicts-"));
   t.after(() => rm(root, { recursive: true, force: true }));
   // The older assessment ran under one prompt, the newer one under another.
-  const promptOf = { older: { assessor: { version: "assessor-v20", contentHash: "a".repeat(64) } }, newer: { assessor: { version: "assessor-v21", contentHash: "b".repeat(64) } } };
+  const promptOf = { older: { assessor: { version: "assessor-v21", contentHash: "a".repeat(64) } }, newer: { assessor: { version: "assessor-v21", contentHash: "b".repeat(64) } } };
   const lawChange = { ...evidencePackage.evidence[2], structuredFacts: { titleCz: "Přechodná ustanovení", versions: { proposed: { textCz: "Text." } } } };
   const pkg = { ...evidencePackage, evidence: [evidencePackage.evidence[0], lawChange, evidencePackage.evidence[3]] };
   const verdict = (relevant) => ({ changeRelevance: [{ evidenceId: "change-2", relevant, reasonCz: relevant ? "Souvisí." : "Nesouvisí.", effectCz: "" }] });

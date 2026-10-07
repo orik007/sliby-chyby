@@ -2,6 +2,7 @@ import { hashEvidencePackage, validateEvidencePackage } from "./assessment-pipel
 import { chosenReview, proposedPublicExplanation } from "./assessment-review.mjs";
 import { isDecisiveAction } from "./attribution.mjs";
 import { contextOmissionsOf } from "./context-omissions.mjs";
+import { isRegulationKind } from "./regulations.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -87,7 +88,8 @@ function stepFromConduct(item, printId, changes) {
 /**
  * The public evidence trail of an assessment revision
  * (docs/evidence-pipeline.md, From proposal to public score), one entry per
- * print: the law changes of that print the chosen assessment found relevant
+ * print, then one per government regulation or ministerial decree (its
+ * adoption and its text as promulgated): the law changes of that print the chosen assessment found relevant
  * and cited, then the cited conduct on them and the cited Senate resolutions,
  * in order, each linking to its official record. Only links and facts from
  * the package are copied; no text excerpt is published. The trail is empty
@@ -105,14 +107,29 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
   // cites conduct on it, so no cited conduct is lost.
   const concerned = new Set(conduct.flatMap(({ structuredFacts }) => structuredFacts.concernsLawChanges.map(({ evidenceId }) => evidenceId)));
   const evidence = evidencePackage.evidence.filter(({ id, role }) => cited.has(id) || (role === "law-change" && concerned.has(id)));
+  // A government regulation or ministerial decree is one entry: its adoption
+  // and its text as promulgated.
+  const regulations = evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && isRegulationKind(structuredFacts.printKindId)).flatMap((change) => {
+    const adoption = conduct.find((item) => item.type === "regulation-adoption" && item.structuredFacts.concernsLawChanges.some(({ evidenceId }) => evidenceId === change.id));
+    if (!adoption) return [];
+    const facts = adoption.structuredFacts;
+    return [{
+      kind: "regulation",
+      lawChangeId: change.id,
+      citationCz: facts.citationCz,
+      titleCz: facts.titleCz,
+      textUrl: change.structuredFacts.versions.adopted.document.url,
+      adoption: { date: facts.adoptedOn, evidenceId: adoption.id, by: facts.regulationKind === "government-regulation" ? "government" : "ministry", issuerCz: facts.issuerCz }
+    }];
+  });
   const changesByPrint = new Map();
-  for (const change of evidence.filter(({ role, id }) => role === "law-change" && relevant.has(id))) {
+  for (const change of evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && !isRegulationKind(structuredFacts.printKindId))) {
     const printId = String(change.structuredFacts.externalPrintId);
     changesByPrint.set(printId, [...(changesByPrint.get(printId) ?? []), change]);
   }
   // A print whose relevant changes the assessment cites without any conduct on
   // them has no attributable step to show and is left out.
-  return [...changesByPrint].flatMap(([printId, changes]) => {
+  const prints = [...changesByPrint].flatMap(([printId, changes]) => {
     const changeIds = new Set(changes.map(({ id }) => id));
     const onPrint = conduct.filter((item) => item.structuredFacts.concernsLawChanges.some(({ evidenceId }) => changeIds.has(evidenceId)));
     if (onPrint.length === 0) return [];
@@ -138,6 +155,7 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
       steps: steps.map(({ kind, date, ...step }) => (kind === "senate-resolution" ? { kind, ...step } : { kind, date, ...step }))
     }];
   });
+  return [...prints, ...regulations];
 }
 
 /**

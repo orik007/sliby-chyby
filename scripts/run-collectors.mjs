@@ -4,16 +4,20 @@ import { randomUUID } from "node:crypto";
 import { emptyCollectorCheckpoints, planSourceCollections, updateCollectorCheckpoints, validateCollectorCheckpoints } from "./lib/collector-checkpoints.mjs";
 import { deduplicateRecords, invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { collectPspSource, validateGovernmentPeriods } from "./lib/psp-collector.mjs";
+import { createESbirkaClient, createLawContextCache, createLawContextReader, workflowRunId } from "./lib/e-sbirka.mjs";
+import { collectRegulations, notYetDigitisedWarning } from "./lib/regulations.mjs";
 import { createPspFetcher, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { log } from "./lib/run-log.mjs";
+import { appendFileSync, mkdirSync, writeFileSync } from "node:fs";
 
 function parseArgs(args) {
-  const options = { checkpoints: null, writeCheckpoints: null, output: null };
+  const options = { checkpoints: null, writeCheckpoints: null, output: null, lawContextCache: "automation/law-context" };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--checkpoints") options.checkpoints = args[++index];
     else if (arg === "--write-checkpoints") options.writeCheckpoints = args[++index];
     else if (arg === "--output") options.output = args[++index];
+    else if (arg === "--law-context-cache") options.lawContextCache = args[++index];
     else throw new Error(`Unknown argument: ${arg}`);
   }
   invariant(!options.writeCheckpoints || options.checkpoints, "--write-checkpoints requires --checkpoints");
@@ -37,19 +41,60 @@ const plansBySourceId = new Map(collectionPlan.map((plan) => [plan.sourceId, pla
 // evidence package is ever built from part of the record history.
 const collectorResults = [];
 log(`collecting ${selected.length} active source(s): ${selected.map(({ id }) => id).join(", ")}`);
+const runId = `${collectedAt.replaceAll(":", "-").replace(".", "-")}--per-source`;
+const outputDirectory = resolve(args.output ?? `automation/runs/collectors/${runId}`);
+await mkdir(outputDirectory, { recursive: true });
 const proxyUrl = pspProxyUrl();
-if (proxyUrl) log("psp.cz requests go through the proxy in PSP_PROXY_URL");
+if (proxyUrl && selected.some(({ collector }) => collector === "psp-open-data")) log("psp.cz requests go through the proxy in PSP_PROXY_URL");
 const fetchPsp = createPspFetcher({ ...pspDownloadSettings, proxyUrl });
 try {
   for (const source of selected) {
     const { since } = plansBySourceId.get(source.id);
     log(`${source.id}: collecting everything since ${since}`);
-    const result = await collectPspSource(source, { since, collectedAt, governmentPeriods, fetchPsp });
+    const result = source.collector === "psp-open-data"
+      ? await collectPspSource(source, { since, collectedAt, governmentPeriods, fetchPsp })
+      : await collectRegulationSource(source, since);
     collectorResults.push(result);
     log(`${source.id}: ${result.records.length} records, ${result.warnings.length} warnings${result.warnings.length ? `: ${result.warnings.join("; ")}` : ""}`);
   }
 } finally {
   await fetchPsp.close();
+}
+
+// Government regulations and ministerial decrees from the e-Sbírka REST API,
+// through the permanent law-context cache (docs/evidence-pipeline.md,
+// Collection of Laws data rules). Every request is appended to
+// e-sbirka-requests.jsonl as it happens, so the file survives a failed run.
+async function collectRegulationSource(source, since) {
+  const requestFile = resolve(outputDirectory, "e-sbirka-requests.jsonl");
+  writeFileSync(requestFile, "");
+  const client = createESbirkaClient({ onRequest: (entry) => appendFileSync(requestFile, `${JSON.stringify(entry)}\n`) });
+  const cache = createLawContextCache(resolve(args.lawContextCache));
+  mkdirSync(resolve(args.lawContextCache), { recursive: true });
+  const reader = createLawContextReader({ client, cache, runId: workflowRunId() });
+  const today = collectedAt.slice(0, 10);
+  let read = 0;
+  try {
+    const { records, quality } = await collectRegulations({
+      reader,
+      governmentPeriods,
+      since,
+      today,
+      source,
+      onAct: ({ act, outcome }) => {
+        read += 1;
+        if (read % 20 === 0) log(`${source.id}: ${read} regulations and decrees read (last: ${act}, ${outcome})`);
+      }
+    });
+    const warnings = [
+      ...quality.notYetDigitised.map((pending) => notYetDigitisedWarning(pending, today)),
+      ...quality.unreadableHeadings.map((act) => `${act} Sb.: the heading states no adoption date or issuer; not used`)
+    ];
+    log(`${source.id}: ${quality.actsRead} acts read, ${quality.regulations} regulations and decrees since ${since} (${quality.governmentRegulations} government regulations, ${quality.ministerialDecrees} ministerial decrees), ${quality.attributed} adopted by the government or a ministry while a tracked government governed; ${quality.adoptedBeforeGovernment} adopted earlier; other issuers ${JSON.stringify(quality.otherIssuers)}; ${reader.stats.requests} e-Sbírka requests`);
+    return { sourceId: source.id, collector: source.collector, retrievedAt: new Date().toISOString(), snapshot: null, snapshots: null, records, warnings, referenceData: { quality } };
+  } finally {
+    await cache.flush();
+  }
 }
 
 async function writeCheckpointsAtomically(filePath, checkpoints) {
@@ -65,9 +110,6 @@ async function writeCheckpointsAtomically(filePath, checkpoints) {
 }
 
 const records = deduplicateRecords(collectorResults.flatMap((result) => result.records));
-const runId = `${collectedAt.replaceAll(":", "-").replace(".", "-")}--per-source`;
-const outputDirectory = resolve(args.output ?? `automation/runs/collectors/${runId}`);
-await mkdir(outputDirectory, { recursive: true });
 const output = {
   schemaVersion: "1.0.0",
   runId,

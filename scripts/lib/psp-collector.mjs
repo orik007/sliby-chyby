@@ -206,7 +206,7 @@ export function validateGovernmentPeriods(governmentPeriods) {
   return governmentPeriods;
 }
 
-function governmentPartiesOn(governmentPeriods, date) {
+export function governmentPartiesOn(governmentPeriods, date) {
   const period = governmentPeriods.periods.find(({ from, to }) => from <= date && (to === null || date <= to));
   return period ? [...period.partyIds].sort() : [];
 }

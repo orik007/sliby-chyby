@@ -1,11 +1,12 @@
 import { sha256 } from "./collector-core.mjs";
 import { assessableAttributionStatuses, attributionStatusForRecord, factSummary, isPotentiallyAttributable, normalizedStructuredFacts, versionConcerned } from "./attribution.mjs";
 import { validateEvidencePackage } from "./assessment-pipeline.mjs";
-import { changeThroughVersion, namedActsFromPrintTitle, versionKeys, versionLabels, versionOfChange } from "./print-parts.mjs";
+import { changeThroughVersion, lawChangeOfRegulation, namedActsFromPrintTitle, versionKeys, versionLabels, versionOfChange } from "./print-parts.mjs";
 
 export { versionOfChange };
 import { charactersPerToken, estimateRequestTokens, estimateTokens, maxPackageRequestTokens, maxRequestInputTokens } from "./assessment-config.mjs";
 import { withContext } from "./law-context.mjs";
+import { isRegulationKind, regulationSourceId } from "./regulations.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -17,8 +18,18 @@ export function estimatePackageTokens(evidencePackage) {
   return estimateTokens(JSON.stringify(evidencePackage));
 }
 
+// A regulation's law change is named by its source (`sb-2026-178`).
 export function lawChangeEvidenceId(change) {
-  return `psp-core-2025--law-change-${change.changeId}`;
+  return `${isRegulation(change) ? regulationSourceId : "psp-core-2025"}--law-change-${change.changeId}`;
+}
+
+// Prints in their order, then regulations and decrees, each by its identifier.
+function printOrder(change) {
+  return isRegulation(change) ? Number.MAX_SAFE_INTEGER : change.printNumber;
+}
+
+export function isRegulation(change) {
+  return isRegulationKind(change.printKindId);
 }
 
 function recordPrintIds(record) {
@@ -39,7 +50,10 @@ function recordPrintIds(record) {
  */
 export function conductOfRun(collectorRun, asOf, trackedPartyIds) {
   const cutoff = `${asOf}T23:59:59.999Z`;
-  const primaryRecordsInWindow = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff));
+  // A regulation or decree is dated by its adoption but did not exist
+  // publicly before its promulgation, so it is in a run's window only once
+  // it was promulgated.
+  const primaryRecordsInWindow = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff) && !(record.kind === "regulation-adoption" && record.payload.promulgatedOn > asOf));
   const conductRecords = primaryRecordsInWindow.filter((record) => isPotentiallyAttributable(record, trackedPartyIds));
   const recordsByPrintId = new Map();
   for (const record of conductRecords) {
@@ -56,11 +70,21 @@ export function conductOfRun(collectorRun, asOf, trackedPartyIds) {
   return { primaryRecordsInWindow, conductRecords, recordsByPrintId, printFirstSeenOn };
 }
 
-/** The law changes of a run at the cutoff: those of prints with conduct. */
+/**
+ * The law changes of a run at the cutoff: those of prints with conduct, and
+ * the one law change of each government regulation or ministerial decree,
+ * whose adoption record carries its text.
+ */
 export function lawChangesOfRun(printParts, recordsByPrintId) {
-  return lawChangesAtCutoff(Object.entries(printParts.prints)
-    .filter(([printId]) => recordsByPrintId.has(printId))
-    .flatMap(([, print]) => print.changes), recordsByPrintId);
+  const regulationChanges = [...recordsByPrintId.values()].flat()
+    .filter(({ kind }) => kind === "regulation-adoption")
+    .map((record) => lawChangeOfRegulation(record.payload, record.url));
+  return lawChangesAtCutoff([
+    ...Object.entries(printParts.prints)
+      .filter(([printId]) => recordsByPrintId.has(printId))
+      .flatMap(([, print]) => print.changes),
+    ...[...new Map(regulationChanges.map((change) => [change.changeId, change])).values()]
+  ], recordsByPrintId);
 }
 
 /**
@@ -120,6 +144,7 @@ function evidenceFromLawChange(change, route, publishedAt, senateResolutionIds) 
   const versions = versionKeys.filter((version) => change.versions[version]);
   const latest = [...versions].reverse().find((version) => !change.versions[version].removed);
   const latestDocument = change.versions[latest].document;
+  if (isRegulation(change)) return evidenceFromRegulation(change, route, publishedAt);
   const describe = (version) => {
     const entry = change.versions[version];
     if (entry.removed) return `removed in the ${versionLabels[version]}`;
@@ -150,6 +175,44 @@ function evidenceFromLawChange(change, route, publishedAt, senateResolutionIds) 
       addedIn: change.addedIn,
       versions: change.versions,
       senateResolutionEvidenceIds: senateResolutionIds
+    },
+    sourceRecordHash: sha256(change.versions),
+    matchBasis: {
+      routeBasis: route.routeBasis,
+      matchedTagIds: route.matchedTagIds,
+      directLinkIdentifiers: route.directLinkIdentifiers
+    }
+  };
+}
+
+// A government regulation or ministerial decree: one law change, its text as
+// adopted, from the Collection of Laws.
+function evidenceFromRegulation(change, route, publishedAt) {
+  const entry = change.versions.adopted;
+  return {
+    id: lawChangeEvidenceId(change),
+    role: "law-change",
+    type: "law-change",
+    title: change.printTitleCz,
+    publisher: "Ministry of the Interior of the Czech Republic (Collection of Laws)",
+    publishedAt,
+    url: entry.document.url,
+    locator: `${change.printNumber}, whole text as promulgated`,
+    primary: true,
+    factSummary: `${change.printKindId === "government-regulation" ? "Government regulation" : "Ministerial decree"} ${change.printNumber}, ${change.titleCz}, as adopted and promulgated in the Collection of Laws${change.enablingActs.length > 0 ? `; issued under zákon č. ${change.enablingActs.join(" Sb., zákon č. ")} Sb.` : ""}. Versions: ${versionLabels.adopted}.`,
+    structuredFacts: {
+      changeId: change.changeId,
+      externalPrintId: change.printId,
+      printNumber: change.printNumber,
+      printKindId: change.printKindId,
+      printTitleCz: change.printTitleCz,
+      heading: null,
+      titleCz: change.titleCz,
+      acts: change.acts,
+      enablingActs: change.enablingActs,
+      addedIn: change.addedIn,
+      versions: change.versions,
+      senateResolutionEvidenceIds: []
     },
     sourceRecordHash: sha256(change.versions),
     matchBasis: {
@@ -338,7 +401,7 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
   const excludedLawChanges = [];
   const conductById = new Map();
   const concernsByRecord = new Map();
-  for (const { change: fullChange, route } of [...keptChanges].sort((left, right) => left.change.printNumber - right.change.printNumber || left.change.changeId.localeCompare(right.change.changeId, "en", { numeric: true }))) {
+  for (const { change: fullChange, route } of [...keptChanges].sort((left, right) => printOrder(left.change) - printOrder(right.change) || left.change.changeId.localeCompare(right.change.changeId, "en", { numeric: true }))) {
     const conduct = attributableConductOnChange(recordsByPrintId.get(fullChange.printId) ?? [], promise, fullChange);
     if (conduct.length === 0) continue;
     const lastVersion = versionKeys[Math.max(...conduct.map(({ version }) => versionKeys.indexOf(version.version)))];

@@ -5,7 +5,10 @@ import { hashEvidencePackage } from "../scripts/lib/assessment-pipeline.mjs";
 import { buildEvidenceTrail, createAssessmentRevision } from "../scripts/lib/evidence-trail.mjs";
 import { renderHumanReviewMarkdown } from "../scripts/lib/assessment-review.mjs";
 import { formatDate } from "../src/lib/evidence-trail.ts";
-import { assessmentRevisionSchema } from "../src/lib/schema.ts";
+import { assessmentRevisionSchema, evidenceTrailRegulationSchema } from "../src/lib/schema.ts";
+import { lawChangeOfRegulation } from "../scripts/lib/print-parts.mjs";
+import { loadTrackedPromises } from "../scripts/lib/published-promises.mjs";
+import { buildLawChangeEvidencePackage } from "../scripts/lib/topic-evidence-package.mjs";
 
 // Two real candidate proposals from the audit branch (run of 27 September 2026).
 async function fixture(promiseId) {
@@ -179,6 +182,29 @@ test("context left out of a package is named with e-Sbírka links on the review 
   assert.match(review, /s místem pro oba posudky, které čte třetí hodnotitel/);
   assert.match(review, /\(navržený text\), zákon č\. 283\/2021 Sb\. ve znění od 1\. 10\. 2025: chybí znění 1 ustanovení, k dispozici 3\*\*: \[§ 166 odst\. 1\]\(https:\/\/e-sbirka\.gov\.cz\/sb\/2021\/283\/2025-10-01#par_166-odst_1\)/);
   assert.match(review, /ve vyhlášeném znění: chybí znění 1 ustanovení/);
+});
+
+test("a cited ministerial decree enters the trail as its adoption with a link to its promulgated text", async () => {
+  // The real decree 145/2026 Sb. of the pipeline fixture, as the collector
+  // reads it from e-Sbírka, in the package of a promise of a governing party.
+  const run = JSON.parse(await readFile(new URL("./fixtures/pipeline/collector-run.json", import.meta.url), "utf8"));
+  const record = run.records.find(({ id }) => id === "esbirka-regulations--2026-145");
+  const change = lawChangeOfRegulation(record.payload, record.url);
+  const { promises } = await loadTrackedPromises(new URL("..", import.meta.url).pathname);
+  const promise = promises.find(({ partyId }) => partyId === "ano");
+  const evidencePackage = buildLawChangeEvidencePackage({ assessorInstructions: "assessor instructions", promise, keptChanges: [{ change, route: { routeBasis: ["specific-tag"], matchedTagIds: ["vat-policy"], directLinkIdentifiers: [] } }], recordsByPrintId: new Map([[change.printId, [record]]]), printFirstSeenOn: new Map([[change.printId, "2026-07-29"]]), collectorRun: run, asOf: "2026-09-25" });
+  const decree = evidencePackage.evidence.find(({ role }) => role === "law-change");
+  const review = { status: "moving-towards", evidenceSufficient: true, citedEvidenceIds: [decree.id, record.id], changeRelevance: [{ evidenceId: decree.id, relevant: true, reasonCz: "Vyhláška se týká slibu.", effectCz: "Mění podíly obcí a krajů." }], explanationCz: "Ministerstvo vydalo vyhlášku." };
+  const trail = buildEvidenceTrail(evidencePackage, { resolution: { state: "candidate", selectedReview: "consensus" }, validatedAssessments: { "assessor-a": review, "assessor-b": review } });
+  assert.deepEqual(trail, [{
+    kind: "regulation",
+    lawChangeId: "esbirka-regulations--law-change-sb-2026-145",
+    citationCz: "Vyhláška č. 145/2026 Sb.",
+    titleCz: record.payload.titleCz,
+    textUrl: "https://e-sbirka.gov.cz/sb/2026/145/0000-00-00",
+    adoption: { date: "2026-07-29", evidenceId: "esbirka-regulations--2026-145", by: "ministry", issuerCz: "Ministerstvo financí" }
+  }]);
+  assert.deepEqual(evidenceTrailRegulationSchema.parse(trail[0]), trail[0]);
 });
 
 test("trail dates keep their calendar day in any time zone", () => {

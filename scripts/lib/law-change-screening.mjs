@@ -9,8 +9,8 @@ import { versionKeys, versionLabels } from "./print-parts.mjs";
  * screening every law change (substantive or technical, and its topic tags)
  * and checking whether a routed law change is relevant to one promise.
  */
-export const screeningPromptVersion = "law-change-screener-v3";
-export const relevancePromptVersion = "relevance-check-v4";
+export const screeningPromptVersion = "law-change-screener-v4";
+export const relevancePromptVersion = "relevance-check-v5";
 
 async function loadPrompt(version, root) {
   const instructions = await readFile(resolve(root, `automation/prompts/${version}.md`), "utf8");
@@ -25,6 +25,7 @@ export function loadRelevancePrompt(root = process.cwd()) {
   return loadPrompt(relevancePromptVersion, root);
 }
 
+const regulationKindLabels = { "government-regulation": "government regulation (nařízení vlády) adopted by the government", "ministerial-decree": "decree (vyhláška) issued by a ministry" };
 const printKindLabels = { 1: "government bill", 2: "member bill", 3: "state budget bill", 4: "international treaty submitted by the government", 5: "other Chamber print" };
 
 
@@ -60,6 +61,15 @@ export function lawChangeText(change) {
     if (entry.sameAs) return `${label}\nThe same text as the ${versionLabels[entry.sameAs]}.${effective}${context}`;
     return entry.textCz === null ? `${label}\nNot available as a DOCX or DOC file; only the print title is known.` : `${label}\n${entry.textCz}${effective}${context}`;
   });
+  // A government regulation or ministerial decree is one law change from the
+  // Collection of Laws, linked to the acts it is issued under.
+  if (regulationKindLabels[change.printKindId]) {
+    return [
+      `Collection of Laws, ${regulationKindLabels[change.printKindId]}: ${change.printTitleCz}`,
+      ...(change.enablingActs ?? []).map((act) => `Issued under: zákon č. ${act} Sb.`),
+      ...versions
+    ].join("\n\n");
+  }
   return [
     `Chamber print ${change.printNumber} (${printKindLabels[change.printKindId] ?? "Chamber print"}): ${change.printTitleCz}`,
     change.heading ? `Part: ${change.heading} – ${change.titleCz}` : `Law change: ${change.titleCz}`,

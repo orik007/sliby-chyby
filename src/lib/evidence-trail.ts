@@ -1,4 +1,4 @@
-import type { ContextOmission, EvidenceTrailPrint, EvidenceTrailStep } from "./schema";
+import type { ContextOmission, EvidenceTrailEntry, EvidenceTrailPrint, EvidenceTrailRegulation, EvidenceTrailStep } from "./schema";
 
 type ConductStep = Exclude<EvidenceTrailStep, { kind: "senate-resolution" }>;
 
@@ -83,8 +83,22 @@ export function stepNotes(step: EvidenceTrailStep, print: EvidenceTrailPrint) {
   });
 }
 
-export function trailStepCount(trail: EvidenceTrailPrint[]) {
-  return trail.reduce((count, print) => count + print.steps.length, 0);
+export function isRegulationEntry(entry: EvidenceTrailEntry): entry is EvidenceTrailRegulation {
+  return "kind" in entry && entry.kind === "regulation";
+}
+
+export function trailStepCount(trail: EvidenceTrailEntry[]) {
+  return trail.reduce((count, entry) => count + (isRegulationEntry(entry) ? 1 : entry.steps.length), 0);
+}
+
+// A government regulation or ministerial decree: who adopted it, and that
+// the party governed on that day.
+export function regulationAdoptionTitle({ adoption }: EvidenceTrailRegulation) {
+  return adoption.by === "government" ? "Vláda přijala nařízení" : "Ministerstvo vydalo vyhlášku";
+}
+
+export function regulationAdoptionDetails({ adoption }: EvidenceTrailRegulation) {
+  return [`${adoption.by === "government" ? "Přijala vláda" : `Vydavatel: ${adoption.issuerCz}`}; strana byla v den přijetí součástí vlády.`];
 }
 
 export function contextOmissionTitle({ printNumber, headingCz, titleCz, version }: ContextOmission) {
