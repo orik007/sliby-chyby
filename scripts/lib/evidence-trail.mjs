@@ -2,6 +2,7 @@ import { hashEvidencePackage, validateEvidencePackage } from "./assessment-pipel
 import { chosenReview, proposedPublicExplanation } from "./assessment-review.mjs";
 import { isDecisiveAction } from "./attribution.mjs";
 import { contextOmissionsOf } from "./context-omissions.mjs";
+import { isRegulationKind } from "./regulations.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -106,10 +107,9 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
   // cites conduct on it, so no cited conduct is lost.
   const concerned = new Set(conduct.flatMap(({ structuredFacts }) => structuredFacts.concernsLawChanges.map(({ evidenceId }) => evidenceId)));
   const evidence = evidencePackage.evidence.filter(({ id, role }) => cited.has(id) || (role === "law-change" && concerned.has(id)));
-  const regulationKinds = new Set(["government-regulation", "ministerial-decree"]);
   // A government regulation or ministerial decree is one entry: its adoption
   // and its text as promulgated.
-  const regulations = evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && regulationKinds.has(structuredFacts.printKindId)).flatMap((change) => {
+  const regulations = evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && isRegulationKind(structuredFacts.printKindId)).flatMap((change) => {
     const adoption = conduct.find((item) => item.type === "regulation-adoption" && item.structuredFacts.concernsLawChanges.some(({ evidenceId }) => evidenceId === change.id));
     if (!adoption) return [];
     const facts = adoption.structuredFacts;
@@ -123,7 +123,7 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
     }];
   });
   const changesByPrint = new Map();
-  for (const change of evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && !regulationKinds.has(structuredFacts.printKindId))) {
+  for (const change of evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && !isRegulationKind(structuredFacts.printKindId))) {
     const printId = String(change.structuredFacts.externalPrintId);
     changesByPrint.set(printId, [...(changesByPrint.get(printId) ?? []), change]);
   }

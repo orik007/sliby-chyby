@@ -1,5 +1,6 @@
 import { createCollectedRecord, invariant } from "./collector-core.mjs";
 import { promulgatedParagraphs, promulgatedTextUrl } from "./print-parts.mjs";
+import { governmentPartiesOn } from "./psp-collector.mjs";
 
 /**
  * Government regulations and ministerial decrees from the Collection of Laws
@@ -17,6 +18,11 @@ const kindsByCitation = [
   ["Nařízení vlády č.", "government-regulation"],
   ["Vyhláška č.", "ministerial-decree"]
 ];
+
+/** Whether a law-change kind (`printKindId`) is a regulation or decree. */
+export function isRegulationKind(kind) {
+  return kindsByCitation.some(([, regulationKind]) => regulationKind === kind);
+}
 
 export function regulationKindOfCitation(citation) {
   return kindsByCitation.find(([start]) => String(citation).startsWith(start))?.[1] ?? null;
@@ -36,11 +42,12 @@ export function czechDate(text) {
  * says who issues it ("… stanoví podle § 29 odst. 2 zákona č. 266/2025 Sb., …
  * k provedení § 20 odst. 9 zákona …"): the act after each "podle" or "k
  * provedení", not the acts its amendment history names ("ve znění zákona
- * č. …").
+ * č. …"). The act may be cited as “zákona č.”, “k zákonu č.”, or “zákona
+ * České národní rady č.”.
  */
 export function enablingActsOf(sentence) {
   const acts = [];
-  for (const [, act] of String(sentence).matchAll(/(?:podle|provedení)\s+(?:(?!zákona|ve\s+znění)[\s\S]){0,240}?zákona\s+č\.\s*(\d+\/\d{4})\s*Sb\./gu)) {
+  for (const [, act] of String(sentence).matchAll(/(?:podle|provedení)\s+(?:(?!zákon[au]|ve\s+znění)[\s\S]){0,240}?zákon[au]\s+(?:(?:České\s+národní\s+rady|Federálního\s+shromáždění)\s+)?č\.\s*(\d+\/\d{4})\s*Sb\./gu)) {
     if (!acts.includes(act)) acts.push(act);
   }
   return acts;
@@ -51,7 +58,8 @@ export function enablingActsOf(sentence) {
  * the date its heading (`dokument/prefix`) states ("ze dne …"), and the
  * sentence naming who issues it ("Vláda nařizuje …", "Ministerstvo vnitra
  * stanoví …"), in the heading or, in a decree of several parts, at the start
- * of each part, whose sentences together name the acts it is issued under.
+ * of each part, ending with a colon, whose sentences together name the acts
+ * it is issued under.
  * `issuer` is `government`, `ministry` (also one acting with another
  * body), or `other`, from the first such sentence; null fields mean the
  * wording does not state them.
@@ -63,21 +71,19 @@ export function regulationHeading(nodes) {
   // by white space, and the sentence states the act it is issued under.
   const verb = /\s(?:nařizuje|stanoví)\s/u;
   // An issuing sentence names its issuer before the verb, never a passive
-  // "… se stanoví" of the text itself.
+  // "… se stanoví" of the text itself, and ends with a colon: in the acts of
+  // 15 December 2025 to 6 October 2026, all 152 issuing sentences did, and
+  // none of the 5 sentences of their provisions and annexes that also name
+  // someone who "stanoví podle" something.
   const issuerOf = (text) => text.split(verb)[0].trim();
-  // The wording can hold zero-width characters ("stanoví ​podle" in
-  // 582/2025 Sb.), which are not white space.
-  const sentences = nodes.map(([, text]) => text?.replace(/[​-‍⁠﻿]/gu, "").trim() ?? "").filter((text) => verb.test(text) && /^\p{Lu}/u.test(text) && !/\sse$/u.test(issuerOf(text)) && /\spodle\s|provedení/u.test(text));
+  // The wording can hold zero-width characters (a zero-width space before
+  // "podle" in 582/2025 Sb.), which are not white space.
+  const sentences = nodes.map(([, text]) => text?.replace(/[\u200B-\u200D\u2060\uFEFF]/gu, "").trim() ?? "").filter((text) => verb.test(text) && /^\p{Lu}/u.test(text) && !/\sse$/u.test(issuerOf(text)) && /\spodle\s|provedení/u.test(text) && text.endsWith(":"));
   const issuerCz = sentences.length > 0 ? issuerOf(sentences[0]) : null;
   const issuer = issuerCz === null ? null : /^Vláda$/u.test(issuerCz) ? "government" : /^Ministerstv/u.test(issuerCz) ? "ministry" : "other";
   return { adoptedOn, issuerCz, issuer, enablingActs: [...new Set(sentences.flatMap(enablingActsOf))] };
 }
 
-/** The governing parties on a date, from the government periods. */
-export function governingPartiesOn(governmentPeriods, date) {
-  const period = governmentPeriods.periods.find(({ from, to }) => from <= date && (to === null || date <= to));
-  return period ? [...period.partyIds].sort() : [];
-}
 
 // How many numbers in a row e-Sbírka must not hold before a year's acts are
 // taken to end: the Collection numbers its acts of a year without gaps
@@ -140,7 +146,7 @@ export async function readRegulation({ reader, act, kind, info, governmentPeriod
   const heading = regulationHeading(nodes);
   if (!heading.adoptedOn || !heading.issuer) return { reason: "unreadable-heading", outcome: "heading not readable" };
   if (heading.issuer === "other") return { reason: "other-issuer", issuerCz: heading.issuerCz, outcome: `issued by ${heading.issuerCz}` };
-  const partyIds = governingPartiesOn(governmentPeriods, heading.adoptedOn);
+  const partyIds = governmentPartiesOn(governmentPeriods, heading.adoptedOn);
   if (partyIds.length === 0) return { reason: "before-government", outcome: `adopted on ${heading.adoptedOn}, before a tracked government` };
   return { record: regulationRecord({ act, kind, info, heading, partyIds, paragraphs, source }), outcome: `${kind}, adopted on ${heading.adoptedOn}` };
 }

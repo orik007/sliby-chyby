@@ -1,6 +1,7 @@
 import { assessmentStatuses, hashAssessmentContent, hashAssessmentFingerprint, hashEvidencePackage, validateEvidencePackage } from "./assessment-pipeline.mjs";
 import { contextOmissionLabel, contextOmissionsOf } from "./context-omissions.mjs";
 import { relevanceVerdictsOf } from "./irrelevance-verdicts.mjs";
+import { isRegulationKind } from "./regulations.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -158,8 +159,8 @@ export const readerStatus = {
 function evidenceLabel(evidence) {
   if (evidence.role === "promise-source") return "Původní volební slib";
   if (evidence.role === "senate-resolution") return "Usnesení Senátu, kterým vrátil návrh Sněmovně";
-  if (evidence.role === "law-change" && evidence.structuredFacts?.printKindId === "government-regulation") return `Nařízení vlády: ${evidence.title}`;
-  if (evidence.role === "law-change" && evidence.structuredFacts?.printKindId === "ministerial-decree") return `Vyhláška ministerstva: ${evidence.title}`;
+  // A regulation's title is its citation and its title, which name its kind.
+  if (evidence.role === "law-change" && isRegulationKind(evidence.structuredFacts?.printKindId)) return `Předpis ve Sbírce zákonů: ${evidence.title}`;
   if (evidence.role === "law-change") return `Změna zákona v návrhu projednávaném Sněmovnou: ${evidence.structuredFacts?.titleCz ?? evidence.title}`;
   if (evidence.type === "parliamentary-vote") return "Výsledek hlasování Poslanecké sněmovny";
   if (evidence.type === "legislative-step") return "Průběh projednávání návrhu ve Sněmovně";

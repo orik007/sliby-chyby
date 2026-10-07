@@ -6,6 +6,7 @@ import { changeThroughVersion, lawChangeOfRegulation, namedActsFromPrintTitle, v
 export { versionOfChange };
 import { charactersPerToken, estimateRequestTokens, estimateTokens, maxPackageRequestTokens, maxRequestInputTokens } from "./assessment-config.mjs";
 import { withContext } from "./law-context.mjs";
+import { isRegulationKind, regulationSourceId } from "./regulations.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -19,7 +20,7 @@ export function estimatePackageTokens(evidencePackage) {
 
 // A regulation's law change is named by its source (`sb-2026-178`).
 export function lawChangeEvidenceId(change) {
-  return `${isRegulation(change) ? "esbirka-regulations" : "psp-core-2025"}--law-change-${change.changeId}`;
+  return `${isRegulation(change) ? regulationSourceId : "psp-core-2025"}--law-change-${change.changeId}`;
 }
 
 // Prints in their order, then regulations and decrees, each by its identifier.
@@ -28,7 +29,7 @@ function printOrder(change) {
 }
 
 export function isRegulation(change) {
-  return change.printKindId === "government-regulation" || change.printKindId === "ministerial-decree";
+  return isRegulationKind(change.printKindId);
 }
 
 function recordPrintIds(record) {
@@ -49,7 +50,10 @@ function recordPrintIds(record) {
  */
 export function conductOfRun(collectorRun, asOf, trackedPartyIds) {
   const cutoff = `${asOf}T23:59:59.999Z`;
-  const primaryRecordsInWindow = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff));
+  // A regulation or decree is dated by its adoption but did not exist
+  // publicly before its promulgation, so it is in a run's window only once
+  // it was promulgated.
+  const primaryRecordsInWindow = collectorRun.records.filter((record) => record.primary === true && (!record.occurredAt || record.occurredAt <= cutoff) && !(record.kind === "regulation-adoption" && record.payload.promulgatedOn > asOf));
   const conductRecords = primaryRecordsInWindow.filter((record) => isPotentiallyAttributable(record, trackedPartyIds));
   const recordsByPrintId = new Map();
   for (const record of conductRecords) {

@@ -98,7 +98,7 @@ export function regulationAdoptionTitle({ adoption }: EvidenceTrailRegulation) {
 }
 
 export function regulationAdoptionDetails({ adoption }: EvidenceTrailRegulation) {
-  return [`${adoption.by === "government" ? "Přijala vláda" : `Vydalo ${adoption.issuerCz}`}; strana byla v den přijetí součástí vlády.`];
+  return [`${adoption.by === "government" ? "Přijala vláda" : `Vydavatel: ${adoption.issuerCz}`}; strana byla v den přijetí součástí vlády.`];
 }
 
 export function contextOmissionTitle({ printNumber, headingCz, titleCz, version }: ContextOmission) {
