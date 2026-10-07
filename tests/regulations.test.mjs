@@ -4,6 +4,7 @@ import test from "node:test";
 import { isPotentiallyAttributable, versionConcerned } from "../scripts/lib/attribution.mjs";
 import { lawChangeOfRegulation } from "../scripts/lib/print-parts.mjs";
 import { conductOfRun } from "../scripts/lib/topic-evidence-package.mjs";
+import { validateReaderFacingCzech } from "../scripts/lib/assessment-pipeline.mjs";
 import { governmentPartiesOn } from "../scripts/lib/psp-collector.mjs";
 import { collectRegulations, czechDate, enablingActsOf, notYetDigitisedWarning, readRegulation, regulationHeading, regulationKindOfCitation } from "../scripts/lib/regulations.mjs";
 
@@ -133,4 +134,11 @@ test("a regulation is in a run's window only once it was promulgated, though it 
   // 16/2026 was adopted on 26 January and promulgated on 10 February 2026.
   assert.equal(conductOfRun(run, "2026-02-01", ["ano"]).conductRecords.length, 0);
   assert.equal(conductOfRun(run, "2026-02-10", ["ano"]).conductRecords.length, 1);
+});
+
+test("the attribution statuses of regulations never pass as public Czech prose", () => {
+  for (const status of ["verified-government-regulation", "verified-ministerial-decree"]) {
+    assert.throws(() => validateReaderFacingCzech(`Vláda přijala nařízení (${status}).`), /internal or unexplained language/);
+  }
+  assert.equal(validateReaderFacingCzech("Vláda přijala nařízení."), "Vláda přijala nařízení.");
 });
