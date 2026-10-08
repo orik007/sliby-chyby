@@ -14,7 +14,7 @@ import {
   validateArbiterOutput,
   validateEvidencePackage
 } from "./lib/assessment-pipeline.mjs";
-import { arbiterModelFor, assessmentRuntimeConfig, estimateRequestTokens, loadAssessmentPrompts, longContextInputTokens, maxRequestInputTokens } from "./lib/assessment-config.mjs";
+import { arbiterFor, assessmentRuntimeConfig, estimateRequestTokens, loadAssessmentPrompts, longContextInputTokens, maxRequestInputTokens } from "./lib/assessment-config.mjs";
 import { createStructuredModelResponse } from "./lib/model-provider.mjs";
 import { cachedModelResponse } from "./lib/response-cache.mjs";
 import { log } from "./lib/run-log.mjs";
@@ -57,11 +57,12 @@ function apiKeyFor(provider) {
 const assessorInstructions = prompts.assessor.instructions;
 const arbiterInstructions = prompts.arbiter.instructions;
 
-async function createStructuredResponse({ provider, model, instructions, input, name, schema }, logLabel = null) {
+async function createStructuredResponse({ provider, model, reasoningEffort = null, instructions, input, name, schema }, logLabel = null) {
   return createStructuredModelResponse({
     provider,
     apiKey: apiKeyFor(provider),
     model,
+    reasoningEffort,
     instructions,
     input,
     name,
@@ -144,11 +145,12 @@ if (resolution.state === "arbitration-required") {
     log(`arbiter ${evidencePackage.promise.id}: request of about ${arbiterRequestTokens} tokens exceeds ${maxRequestInputTokens}; not called, human review`);
     resolution = { state: "human-review-required", reason: "arbiter-input-too-large", status: null, selectedReview: null };
   } else {
-    const model = arbiterModelFor(runtime, arbiterRequestTokens);
-    if (model !== arbiterModel) log(`arbiter ${evidencePackage.promise.id}: request of about ${arbiterRequestTokens} tokens is above ${longContextInputTokens}; calling ${model}`);
+    const { model, reasoningEffort } = arbiterFor(runtime, arbiterRequestTokens);
+    if (model !== arbiterModel) log(`arbiter ${evidencePackage.promise.id}: request of about ${arbiterRequestTokens} tokens is above ${longContextInputTokens}; calling ${model}${reasoningEffort ? ` with ${reasoningEffort} reasoning effort` : ""}`);
     rawArbiter = await cachedResponse("arbiter", {
       provider: arbiterProvider,
       model,
+      ...(reasoningEffort ? { reasoningEffort } : {}),
       instructions: arbiterInstructions,
       input: arbiterInput,
       name: "slava_arbitration",

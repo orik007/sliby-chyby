@@ -104,15 +104,21 @@ export function validateScreeningOutput(output, taxonomy) {
   return output;
 }
 
+// The model input of a screening, as input blocks: the taxonomy first, the
+// same for every law change, so it is read from the provider's prompt cache
+// after the first screening (docs/evidence-pipeline.md). Its cache
+// fingerprint hashes the same blocks.
+export function screeningInputBlocks(brief) {
+  return [`Topic taxonomy:\n\n${brief.taxonomyDefinitions}`, `Law change ${brief.changeId}:\n\n${brief.text}`];
+}
+
 export async function requestScreening({ provider, apiKey, model, brief, taxonomy, prompt }) {
-  // The taxonomy comes first so the provider can reuse it as a cached
-  // prompt prefix across law changes.
   return requestValidatedOutput({
     provider,
     apiKey,
     model,
     prompt,
-    input: { taxonomyDefinitions: brief.taxonomyDefinitions, changeId: brief.changeId, text: brief.text },
+    inputBlocks: screeningInputBlocks(brief),
     name: "law_change_screening",
     schema: screeningSchema(taxonomy),
     metadata: { subjectId: brief.changeId, promptVersion: prompt.version },
@@ -140,11 +146,12 @@ export function buildRelevanceBrief(promise, change) {
   return { pairId: `${promise.id}--${change.changeId}`, promise: promiseText(promise), lawChange: lawChangeText(change) };
 }
 
-// The model input of a relevance check, law change first
-// (docs/evidence-pipeline.md). Its cache fingerprint hashes the same object;
-// the hash sorts keys, so the order does not change it.
-export function relevanceInput(brief) {
-  return { lawChange: brief.lawChange, promise: brief.promise };
+// The model input of a relevance check, as input blocks: the law change
+// first, the same for every promise it is checked against, so it is read
+// from the provider's prompt cache after the first check
+// (docs/evidence-pipeline.md). Its cache fingerprint hashes the same blocks.
+export function relevanceInputBlocks(brief) {
+  return [`Law change:\n\n${brief.lawChange}`, brief.promise];
 }
 
 const relevanceSchema = {
@@ -166,7 +173,7 @@ export async function requestRelevance({ provider, apiKey, model, brief, prompt 
     apiKey,
     model,
     prompt,
-    input: relevanceInput(brief),
+    inputBlocks: relevanceInputBlocks(brief),
     name: "law_change_relevance",
     schema: relevanceSchema,
     metadata: { subjectId: brief.pairId.slice(0, 64), promptVersion: prompt.version },

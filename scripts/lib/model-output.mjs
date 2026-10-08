@@ -68,8 +68,8 @@ export function validateTagAssignmentOutput(output, taxonomy) {
  * model, and usage are attached to the ModelOutputError for the run's spend
  * report instead of the paid call vanishing from it.
  */
-export async function requestValidatedOutput({ provider, apiKey, model, prompt, input, name, schema, metadata, logLabel, validate }) {
-  const response = await createStructuredModelResponse({ provider, apiKey, model, instructions: prompt.instructions, input, name, schema, metadata, logLabel });
+export async function requestValidatedOutput({ provider, apiKey, model, prompt, input, inputBlocks, name, schema, metadata, logLabel, validate }) {
+  const response = await createStructuredModelResponse({ provider, apiKey, model, instructions: prompt.instructions, input, inputBlocks, name, schema, metadata, logLabel });
   try {
     invariantValidOutput(!response.incomplete, `The answer was cut off (${response.incomplete})`);
     return {

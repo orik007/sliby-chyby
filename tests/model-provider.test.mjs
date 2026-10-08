@@ -497,3 +497,68 @@ test("Node's fetch honours the request dispatcher's timeout", async () => {
     server.close();
   }
 });
+
+test("createStructuredModelResponse sends input blocks as cache breakpoints and records a reasoning effort", async () => {
+  const originalFetch = globalThis.fetch;
+  let body = null;
+  globalThis.fetch = async (url, init) => {
+    body = JSON.parse(init.body);
+    return {
+      ok: true,
+      json: async () => ({
+        id: "resp_fixture",
+        model: "gpt-6-luna",
+        usage: { input_tokens: 10, output_tokens: 2 },
+        output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }]
+      })
+    };
+  };
+  try {
+    const result = await createStructuredModelResponse({
+      provider: "openai",
+      apiKey: "fixture-key",
+      model: "gpt-6-luna",
+      instructions: "fixture",
+      inputBlocks: ["shared law change", "one promise"],
+      reasoningEffort: "max",
+      name: "fixture_schema",
+      schema: { type: "object" }
+    });
+    assert.deepEqual(body.input, [{
+      role: "user",
+      content: [
+        { type: "input_text", text: "shared law change", prompt_cache_breakpoint: { mode: "explicit" } },
+        { type: "input_text", text: "one promise", prompt_cache_breakpoint: { mode: "explicit" } }
+      ]
+    }]);
+    assert.deepEqual(body.reasoning, { effort: "max" });
+    assert.equal(result.reasoningEffort, "max");
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("createStructuredModelResponse sends JSON input and no reasoning effort by default", async () => {
+  const originalFetch = globalThis.fetch;
+  let body = null;
+  globalThis.fetch = async (url, init) => {
+    body = JSON.parse(init.body);
+    return {
+      ok: true,
+      json: async () => ({
+        id: "resp_fixture",
+        model: "gpt-6.1-sol",
+        usage: { input_tokens: 10, output_tokens: 2 },
+        output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }]
+      })
+    };
+  };
+  try {
+    const result = await createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6.1-sol", instructions: "fixture", input: { a: 1 }, name: "fixture_schema", schema: { type: "object" } });
+    assert.equal(body.input, JSON.stringify({ a: 1 }));
+    assert.equal("reasoning" in body, false);
+    assert.equal("reasoningEffort" in result, false);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
+});

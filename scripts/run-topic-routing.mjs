@@ -12,9 +12,10 @@ import {
   isSubstantive,
   loadRelevancePrompt,
   loadScreeningPrompt,
-  relevanceInput,
+  relevanceInputBlocks,
   requestRelevance,
   requestScreening,
+  screeningInputBlocks,
   validateRelevanceOutput,
   validateScreeningOutput
 } from "./lib/law-change-screening.mjs";
@@ -148,7 +149,7 @@ log(`law-change screening: ${changes.length} law changes from ${new Set(changes.
 const tickChanges = progress("law-change screening", changes.length, { every: 20 });
 const screenedChanges = await stage("law-change-screening", changes, async (change) => {
   const brief = buildScreeningBrief(change, taxonomy);
-  const fingerprint = { inputHash: sha256(brief.text), taxonomyContentHash, promptContentHash: prompts.screening.contentHash, ...models };
+  const fingerprint = { inputHash: sha256(screeningInputBlocks(brief)), taxonomyContentHash, promptContentHash: prompts.screening.contentHash, ...models };
   const screened = await pairedModelCall({
     subjectId: change.changeId,
     fingerprint,
@@ -184,9 +185,9 @@ for (const { change, route } of screenedChanges) {
 }
 
 // 2. Relevance of each promise and law change (step 6). The pairs of one law
-// change are checked one after another, so its text is read from the
-// provider's prompt cache after the first check; different law changes are
-// checked in parallel (docs/evidence-pipeline.md).
+// change are checked one after another, so its text, a cache breakpoint of
+// its own, is read from the provider's prompt cache after the first check;
+// different law changes are checked in parallel (docs/evidence-pipeline.md).
 log(`relevance checks: ${pairs.length} promise and law-change pairs`);
 const tickPairs = progress("relevance checks", pairs.length, { every: 50 });
 const pairsByChange = new Map();
@@ -196,7 +197,7 @@ for (const [index, pair] of pairs.entries()) {
 }
 async function checkPair(pair) {
   const brief = buildRelevanceBrief(pair.promise, pair.change);
-  const fingerprint = { inputHash: sha256(relevanceInput(brief)), promptContentHash: prompts.relevance.contentHash, ...models };
+  const fingerprint = { inputHash: sha256(relevanceInputBlocks(brief)), promptContentHash: prompts.relevance.contentHash, ...models };
   const checked = await pairedModelCall({
     subjectId: brief.pairId,
     fingerprint,

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { arbiterModelFor, assessmentRuntimeConfig, longContextInputTokens } from "../scripts/lib/assessment-config.mjs";
+import { arbiterFor, assessmentRuntimeConfig, longContextInputTokens } from "../scripts/lib/assessment-config.mjs";
 import {
   assessmentOutputJsonSchema,
   hashAssessmentContent,
@@ -148,17 +148,18 @@ test("ignores concurrency when hashing assessment identity", () => {
   assert.equal(first, second);
 });
 
-test("the long-context arbiter model is used only above the threshold and never changes a fingerprint", () => {
+test("the long-context arbiter model and its reasoning effort are used only above the threshold and never change a fingerprint", () => {
   const content = hashAssessmentContent(evidencePackage);
   const withoutLong = assessmentRuntimeConfig({ SLIBY_ARBITER_MODEL: "c" });
-  const withLong = assessmentRuntimeConfig({ SLIBY_ARBITER_MODEL: "c", SLIBY_LONG_CONTEXT_ARBITER_MODEL: "small" });
+  const withLong = assessmentRuntimeConfig({ SLIBY_ARBITER_MODEL: "c", SLIBY_LONG_CONTEXT_ARBITER_MODEL: "small", SLIBY_LONG_CONTEXT_ARBITER_REASONING_EFFORT: "max" });
   assert.equal(
     hashAssessmentFingerprint({ assessmentContentHash: content, prompts, runtime: withoutLong }),
     hashAssessmentFingerprint({ assessmentContentHash: content, prompts, runtime: withLong })
   );
-  assert.equal(arbiterModelFor(withLong, longContextInputTokens), "c");
-  assert.equal(arbiterModelFor(withLong, longContextInputTokens + 1), "small");
-  assert.equal(arbiterModelFor(withoutLong, longContextInputTokens + 1), "c");
+  assert.deepEqual(arbiterFor(withLong, longContextInputTokens), { model: "c", reasoningEffort: null });
+  assert.deepEqual(arbiterFor(withLong, longContextInputTokens + 1), { model: "small", reasoningEffort: "max" });
+  assert.deepEqual(arbiterFor(withoutLong, longContextInputTokens + 1), { model: "c", reasoningEffort: null });
+  assert.throws(() => assessmentRuntimeConfig({ SLIBY_LONG_CONTEXT_ARBITER_REASONING_EFFORT: "maximum" }), /Unknown reasoning effort: maximum/);
 });
 
 test("the long-context threshold matches the price table", async () => {

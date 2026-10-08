@@ -108,7 +108,7 @@ test("a pair is dropped as not relevant only when both valid checks say so", () 
   assert.throws(() => validateRelevanceOutput({ reasonCz: "x" }), ModelOutputError);
 });
 
-test("screening sends the taxonomy first so it can be a cached prompt prefix", async () => {
+test("screening sends the taxonomy as its own cached block before the law change", async () => {
   const mock = mockResponse({ substantive: false, reasonCz: "Jen přečíslování.", tags: ["unknown"], confidence: 0.2 });
   const originalFetch = globalThis.fetch;
   globalThis.fetch = mock.fetch;
@@ -117,8 +117,12 @@ test("screening sends the taxonomy first so it can be a cached prompt prefix", a
     const result = await requestScreening({ provider: "openai", apiKey: "key", model: "gpt-6-luna", brief: buildScreeningBrief(change, taxonomy), taxonomy, prompt });
     assert.equal(result.output.substantive, false);
     assert.equal(result.usage.input_tokens, 100);
-    const input = JSON.parse(mock.body().input);
-    assert.deepEqual(Object.keys(input), ["taxonomyDefinitions", "changeId", "text"]);
+    const [message] = mock.body().input;
+    assert.equal(message.role, "user");
+    assert.deepEqual(message.content.map(({ type, prompt_cache_breakpoint }) => [type, prompt_cache_breakpoint]), [["input_text", { mode: "explicit" }], ["input_text", { mode: "explicit" }]]);
+    assert.ok(message.content[0].text.startsWith("Topic taxonomy:\n\n- id: "));
+    assert.ok(message.content[1].text.startsWith(`Law change ${change.changeId}:\n\n`));
+    assert.ok(message.content[1].text.includes(proposedText));
     assert.equal(mock.body().text.format.name, "law_change_screening");
   } finally {
     globalThis.fetch = originalFetch;
@@ -149,9 +153,13 @@ test("a relevance check reads the exact promise with its tests and the law-chang
     const result = await requestRelevance({ provider: "openai", apiKey: "key", model: "gpt-6-luna", brief, prompt: await loadRelevancePrompt() });
     assert.equal(result.output.relevant, true);
     assert.equal(mock.body().text.format.name, "law_change_relevance");
-    // The law change comes before the promise, so the checks of one change
-    // against many promises share a cached prefix.
-    assert.deepEqual(Object.keys(JSON.parse(mock.body().input)), ["lawChange", "promise"]);
+    // The law change is a cached block before the promise, so the checks of
+    // one change against many promises read it from the prompt cache.
+    const [message] = mock.body().input;
+    assert.deepEqual(message.content.map(({ text, prompt_cache_breakpoint }) => [text, prompt_cache_breakpoint]), [
+      [`Law change:\n\n${brief.lawChange}`, { mode: "explicit" }],
+      [brief.promise, { mode: "explicit" }]
+    ]);
   } finally {
     globalThis.fetch = originalFetch;
   }

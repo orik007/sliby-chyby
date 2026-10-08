@@ -45,6 +45,15 @@ export function hashText(text) {
   return createHash("sha256").update(text).digest("hex");
 }
 
+// The reasoning efforts the OpenAI Responses API accepts; which ones a model
+// supports is on its model page. Unset, a model uses its default.
+const reasoningEfforts = ["none", "minimal", "low", "medium", "high", "xhigh", "max"];
+function reasoningEffortOf(value) {
+  if (!value) return null;
+  if (!reasoningEfforts.includes(value)) throw new Error(`Unknown reasoning effort: ${value}`);
+  return value;
+}
+
 export function assessmentRuntimeConfig(env = process.env) {
   return {
     assessorProviderA: env.SLIBY_ASSESSOR_PROVIDER_A ?? "openai",
@@ -54,16 +63,20 @@ export function assessmentRuntimeConfig(env = process.env) {
     assessorModelB: env.SLIBY_ASSESSOR_MODEL_B ?? "gpt-6-luna",
     arbiterModel: env.SLIBY_ARBITER_MODEL ?? "gpt-6.1-sol",
     longContextArbiterModel: env.SLIBY_LONG_CONTEXT_ARBITER_MODEL || null,
+    longContextArbiterReasoningEffort: reasoningEffortOf(env.SLIBY_LONG_CONTEXT_ARBITER_REASONING_EFFORT),
     concurrency: Number(env.SLIBY_ASSESSMENT_CONCURRENCY ?? "16")
   };
 }
 
 // The arbiter of a request above the long-context threshold is
-// `longContextArbiterModel` when one is set (docs/evidence-pipeline.md,
-// Assess). It is not part of the assessment fingerprint, so setting it never
-// reassesses a package; the audit record keeps the model that answered.
-export function arbiterModelFor(runtime, requestTokens) {
-  return requestTokens > longContextInputTokens && runtime.longContextArbiterModel ? runtime.longContextArbiterModel : runtime.arbiterModel;
+// `longContextArbiterModel`, with `longContextArbiterReasoningEffort`, when
+// one is set (docs/evidence-pipeline.md, Assess). Neither is part of the
+// assessment fingerprint, so setting them never reassesses a package; the
+// audit record keeps the model that answered and its reasoning effort.
+export function arbiterFor(runtime, requestTokens) {
+  return requestTokens > longContextInputTokens && runtime.longContextArbiterModel
+    ? { model: runtime.longContextArbiterModel, reasoningEffort: runtime.longContextArbiterReasoningEffort }
+    : { model: runtime.arbiterModel, reasoningEffort: null };
 }
 
 // The assessors and the arbiter each get their own prompt followed by the
