@@ -58,9 +58,13 @@ function answer(name, input, model) {
 globalThis.fetch = async (url, init) => {
   const body = JSON.parse(init.body);
   const name = body.text.format.name;
-  const input = JSON.parse(body.input);
-  if (process.env.STUB_OPENAI_LOG) appendFileSync(process.env.STUB_OPENAI_LOG, `${JSON.stringify({ name, model: body.model, maxOutputTokens: body.max_output_tokens, input })}\n`);
-  const usage = { input_tokens: Math.ceil((body.instructions.length + body.input.length) / 3), output_tokens: 30 };
+  // Input blocks (screening, relevance checks) end with the text the stub
+  // reads: a screening's law change after the taxonomy, without its heading.
+  // Other input is JSON.
+  const blocks = Array.isArray(body.input) ? body.input[0].content.map(({ text }) => text) : null;
+  const input = blocks ? { text: blocks.at(-1).replace(/^Law change [^\n]*:\n\n/, "") } : JSON.parse(body.input);
+  if (process.env.STUB_OPENAI_LOG) appendFileSync(process.env.STUB_OPENAI_LOG, `${JSON.stringify({ name, model: body.model, maxOutputTokens: body.max_output_tokens, reasoningEffort: body.reasoning?.effort ?? null, input })}\n`);
+  const usage = { input_tokens: Math.ceil((body.instructions.length + (blocks ? blocks.join("") : body.input).length) / 3), output_tokens: 30 };
   // STUB_OPENAI_CUT_OFF_ASSESSMENTS cuts off the first that many assessments
   // of this process at the output cap: reasoning only, no answer.
   cutOffAssessmentsLeft ??= Number(process.env.STUB_OPENAI_CUT_OFF_ASSESSMENTS ?? 0);

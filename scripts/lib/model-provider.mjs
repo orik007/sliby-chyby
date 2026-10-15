@@ -173,6 +173,8 @@ export async function createStructuredModelResponse({
   model,
   instructions,
   input,
+  inputBlocks = null,
+  reasoningEffort = null,
   name,
   schema,
   metadata,
@@ -185,7 +187,15 @@ export async function createStructuredModelResponse({
   if (!apiKey) throw new Error("OPENAI_API_KEY is required for the OpenAI provider");
   const tier = serviceTier();
 
-  const requestInput = JSON.stringify(input);
+  // The provider writes and finds its prompt cache only at message ends and
+  // marked breakpoints, never inside one text (docs/evidence-pipeline.md,
+  // Audit and cost control). Input blocks are therefore sent as text blocks
+  // of one message, each marked as a breakpoint, so a request that shares
+  // its first block with an earlier one reads that block from the cache.
+  const requestInput = inputBlocks
+    ? [{ role: "user", content: inputBlocks.map((text) => ({ type: "input_text", text, prompt_cache_breakpoint: { mode: "explicit" } })) }]
+    : JSON.stringify(input);
+  const inputCharacters = inputBlocks ? inputBlocks.reduce((sum, text) => sum + text.length, 0) : requestInput.length;
   const { response, body } = await fetchJsonWithRetry("https://api.openai.com/v1/responses", {
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
@@ -195,11 +205,12 @@ export async function createStructuredModelResponse({
       store: false,
       instructions,
       input: requestInput,
+      ...(reasoningEffort ? { reasoning: { effort: reasoningEffort } } : {}),
       text: { format: { type: "json_schema", name, strict: true, schema } },
       max_output_tokens: maxOutputTokens,
       metadata
     })
-  }, { model, estimatedTokens: Math.ceil((instructions.length + requestInput.length + JSON.stringify(schema).length) / charactersPerToken), label: logLabel, serviceTier: tier });
+  }, { model, estimatedTokens: Math.ceil((instructions.length + inputCharacters + JSON.stringify(schema).length) / charactersPerToken), label: logLabel, serviceTier: tier });
 
   if (!response.ok) {
     const message = `OpenAI Responses API failed (${response.status}): ${body?.error?.message ?? "unknown error"}`;
@@ -213,7 +224,7 @@ export async function createStructuredModelResponse({
   // only reasoning; it comes back without output, and the caller treats it
   // as an invalid output.
   if (body.status === "incomplete") {
-    return { provider, responseId: body.id, model: body.model ?? model, usage: body.usage ?? null, output: null, incomplete: body.incomplete_details?.reason ?? "unknown" };
+    return { provider, responseId: body.id, model: body.model ?? model, ...(reasoningEffort ? { reasoningEffort } : {}), usage: body.usage ?? null, output: null, incomplete: body.incomplete_details?.reason ?? "unknown" };
   }
   const content = body.output?.flatMap((item) => item.content ?? []) ?? [];
   const refusal = content.find((item) => item.type === "refusal")?.refusal;
@@ -226,6 +237,7 @@ export async function createStructuredModelResponse({
     provider,
     responseId: body.id,
     model: body.model ?? model,
+    ...(reasoningEffort ? { reasoningEffort } : {}),
     usage: body.usage ?? null,
     output: JSON.parse(outputText)
   };
