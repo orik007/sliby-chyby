@@ -18,7 +18,8 @@ const schemas = {
   history: ["historyId", "printId", "dateTime", "voteId", "transitionId", "agendaId", "session", "resolutionNumber", "committeeReporterMpId", "chairReporterMpId", "committeeResolution", "collectionPublishedAt", "collectionPart", "collectionNumber", "note"],
   state: ["stateId", "stateTypeId", "printKindId", "description", "deadline", "deadlineTransitionId"],
   stateType: ["stateTypeId", "description"],
-  subPrint: ["printId", "partNumber", "historyId", "kindId", "shortTitle", "fullTitle"],
+  subPrint: ["printId", "partNumber", "historyId", "kindId", "shortTitle", "fullTitle", "distributedAtBefore2011", "organId", "resolutionNumber", "reporterMpId", "textUrl", "resultId", "partSuffix", "sortOrder", "distributedAt"],
+  result: ["resultId", "description"],
   transition: ["transitionId", "fromStateId", "toStateId", "actionId", "transitionType"],
   action: ["actionId", "description"],
   proposer: ["printId", "personId", "order", "type"],
@@ -92,6 +93,12 @@ function pspDateTime(value, separateTime = null) {
   }
   const normalized = value.replace(" ", "T");
   return normalized.length === 16 ? `${normalized}:00` : normalized;
+}
+
+// A result description (vysledek.unl) without diacritics and case:
+// "neutrální" is "neutralni".
+function normalizeResult(value) {
+  return String(value ?? "").normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase("cs-CZ").trim();
 }
 
 function numeric(value) {
@@ -230,6 +237,17 @@ function historyContext(history, { transitionById, actionById, stageOfState }) {
 // bill to the Chamber, a sub-print listed in tisky_za.unl.
 const senateResolutionKindId = "11";
 
+// Official print kind (druh_tisku.unl) of the government's opinion on a bill
+// it did not submit, a sub-print listed in tisky_za.unl, and the results
+// (vysledek.unl, tisky_za.id_vysledek) that state it. Only an agreement or a
+// disagreement is conduct (docs/scoring.md); a neutral opinion is not.
+const governmentOpinionKindId = "7";
+const governmentOpinionResults = { souhlas: "agrees", nesouhlas: "disagrees", "neutralni": "neutral" };
+
+function governmentOpinionUrl(termNumber, printNumber, partNumber) {
+  return `https://www.psp.cz/sqw/text/tiskt.sqw?O=${termNumber}&CT=${printNumber}&CT1=${partNumber}`;
+}
+
 export function normalizePspData({ source, since, votesEntries, membersEntries, printsEntries, sessionsEntries, governmentPeriods }) {
   validateGovernmentPeriods(governmentPeriods);
   const voteRows = parseUnl(decodeEntry(votesEntries, `hl${source.term.year}s.unl`), schemas.vote)
@@ -302,9 +320,13 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
   const stateTypeById = new Map(parseUnl(decodeEntry(printsEntries, "typ_stavu.unl"), schemas.stateType).map((row) => [row.stateTypeId, row]));
   const stageOfState = (stateId) => cleanText(stateTypeById.get(stateById.get(stateId)?.stateTypeId)?.description, 200) || null;
   const historyTables = { transitionById, actionById, stageOfState };
+  const resultById = new Map(parseUnl(decodeEntry(printsEntries, "vysledek.unl"), schemas.result).map((row) => [row.resultId, cleanText(row.description, 200)]));
   const senateResolutionParts = new Map();
+  const governmentOpinionRows = [];
   for (const row of parseUnl(decodeEntry(printsEntries, "tisky_za.unl"), schemas.subPrint)) {
-    if (row.kindId !== senateResolutionKindId || !printById.has(row.printId)) continue;
+    if (!printById.has(row.printId)) continue;
+    if (row.kindId === governmentOpinionKindId) governmentOpinionRows.push(row);
+    if (row.kindId !== senateResolutionKindId) continue;
     senateResolutionParts.set(row.printId, [...(senateResolutionParts.get(row.printId) ?? []), numeric(row.partNumber)].sort((left, right) => left - right));
   }
 
@@ -480,6 +502,43 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
         resolutionNumber: numeric(history.resolutionNumber),
         collectionNumber: numeric(history.collectionNumber),
         noteCz: cleanText(history.note, 1000) || null
+      }
+    }));
+  }
+
+  // The government's opinion on a bill it did not submit: conduct of every
+  // governing party on the day the Chamber distributed it.
+  for (const row of governmentOpinionRows) {
+    const occurredAt = pspDateTime(row.distributedAt);
+    if (!occurredAt || occurredAt.slice(0, 10) < cutoff) continue;
+    const print = printById.get(row.printId);
+    const resultCz = resultById.get(row.resultId) ?? null;
+    const opinion = governmentOpinionResults[normalizeResult(resultCz)] ?? null;
+    const distributedOn = occurredAt.slice(0, 10);
+    const printTitle = cleanText(print.fullTitle || print.shortTitle, 1000);
+    const partNumber = numeric(row.partNumber);
+    records.push(createCollectedRecord({
+      id: `${source.id}--government-opinion-${print.printId}-${partNumber}`,
+      sourceId: source.id,
+      kind: "government-opinion",
+      primary: true,
+      evidenceRole: source.evidenceRole,
+      occurredAt,
+      timeZone: "Europe/Prague",
+      title: `${print.number}/${partNumber}: Stanovisko vlády (${resultCz ?? "bez výsledku"}) — ${printTitle}`,
+      publisher: source.publisher,
+      url: governmentOpinionUrl(source.term.number, print.number, partNumber),
+      payload: {
+        externalPrintId: print.printId,
+        printKindId: print.kindId,
+        printNumber: numeric(print.number),
+        partNumber,
+        printTitleCz: printTitle,
+        printUrl: officialPrintUrl(source.term.number, print.number),
+        resultCz,
+        opinion,
+        distributedOn,
+        proposal: { kind: "government-opinion", submittedOn: distributedOn, proposerPartyIds: governmentPartiesOn(governmentPeriods, distributedOn), proposerCz: null }
       }
     }));
   }

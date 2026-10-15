@@ -13,6 +13,7 @@ import {
   promulgatedTextUrl,
   promulgatedTextVersions,
   proposalBody,
+  governmentOpinionSectionLabels,
   proposalDocumentLink,
   splitProposalText,
   changeThroughVersion,
@@ -33,6 +34,20 @@ const fixture = (name) => readFile(new URL(`./fixtures/print-parts/${name}`, imp
 const print85Paragraphs = JSON.parse(await fixture("print-85-paragraphs.json"));
 const print163 = JSON.parse(await fixture("print-163-paragraphs.json"));
 const pageUrl = (number) => `https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=${number}&CT1=0`;
+
+test("reads a government opinion's Word file from its \"Stanovisko\" section, and only for an opinion", async () => {
+  // The file table of sub-print 7/1, the government's opinion on member bill
+  // 7, downloaded on 15 October 2026: a PDF and a DOC under "Stanovisko".
+  const page = await fixture("print-7-1-files.html");
+  const url = "https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=7&CT1=1";
+  assert.deepEqual(proposalDocumentLink(page, url, governmentOpinionSectionLabels), {
+    filename: "t000701.doc",
+    url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=265860",
+    sectionLabel: "Stanovisko",
+    format: "doc"
+  });
+  assert.equal(proposalDocumentLink(page, url), null, "a proposal text is never read from an opinion's section");
+});
 
 test("reads only the proposal-text Word file from a print page, a DOCX before a DOC", async () => {
   // Print 16 also lists the RIA, the consolidated text with marked changes,

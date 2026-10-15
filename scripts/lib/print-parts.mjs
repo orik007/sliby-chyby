@@ -20,6 +20,10 @@ const proposalSectionLabels = [
   /^Text$/i
 ];
 
+// The section of a government-opinion sub-print page whose Word file is the
+// opinion.
+export const governmentOpinionSectionLabels = [/^Stanovisko$/i];
+
 export function actIdentifier(act) {
   const match = /^(\d+)\/(\d{4})$/.exec(act);
   invariant(match, `Invalid act reference: ${act}`);
@@ -114,7 +118,7 @@ export function amendedActOfPart(paragraphs) {
  * Word 97-2003 (.doc) file there. Returns null when the page has neither
  * (for example, only a PDF, which is never read).
  */
-export function proposalDocumentLink(html, pageUrl) {
+export function proposalDocumentLink(html, pageUrl, sectionLabels = proposalSectionLabels) {
   const files = String(html).split("Soubory sněmovního tisku")[1]?.split("</table>")[0] ?? "";
   let section = null;
   const found = { docx: null, doc: null };
@@ -126,7 +130,7 @@ export function proposalDocumentLink(html, pageUrl) {
     }
     const filename = cleanText(match[3], 200);
     const format = /\.(docx?)$/i.exec(filename)?.[1].toLowerCase();
-    if (!section || !format || found[format] || !proposalSectionLabels.some((label) => label.test(section))) continue;
+    if (!section || !format || found[format] || !sectionLabels.some((label) => label.test(section))) continue;
     found[format] = { filename, url: pspUrl(match[2], pageUrl), sectionLabel: section, format };
   }
   return found.docx ?? found.doc;
@@ -412,7 +416,7 @@ function versionOf(part, amendedAct, document, effectiveCz = null, promulgatedAc
  * "Účinnost" is not a law change: its text is each version's `effectiveCz`.
  * A print that is a single change also takes its title's acts.
  */
-export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [] }) {
+export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [], governmentOpinions = [] }) {
   const changes = [];
   // Without a proposal text, the proposed version of every part is known
   // only by the print title; the parts come from the first later text.
@@ -473,14 +477,16 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [] })
   }
   // Only a print whose first text is one part takes the title's acts.
   const single = changes.filter((change) => change.fromFirstText).length === 1;
-  const resolutions = senateResolutions.map(({ partNumber, document, paragraphs }) => ({
+  const subPrintText = ({ partNumber, document, paragraphs }) => ({
     partNumber,
     document: { filename: document.filename, url: document.url },
     textCz: paragraphs.join("\n")
-  }));
+  });
+  const resolutions = senateResolutions.map(subPrintText);
+  const opinions = governmentOpinions.map(subPrintText);
   return changes.map((change) => {
     const { key, words, fromFirstText, ...rest } = change;
-    return withDerivedFields({ ...rest, titleActs: single && fromFirstText ? namedActsFromPrintTitle(print.title) : [], senateResolutions: resolutions });
+    return withDerivedFields({ ...rest, titleActs: single && fromFirstText ? namedActsFromPrintTitle(print.title) : [], senateResolutions: resolutions, governmentOpinions: opinions });
   });
 }
 
@@ -516,7 +522,8 @@ export function lawChangeOfRegulation(payload, url) {
     versions: { adopted: { heading: null, titleCz: payload.titleCz, textCz: payload.paragraphs.join("\n"), amendedAct: null, effectiveCz: null, document: { filename: payload.citationCz, url } } },
     titleActs: [],
     enablingActs: payload.enablingActs,
-    senateResolutions: []
+    senateResolutions: [],
+    governmentOpinions: []
   });
 }
 

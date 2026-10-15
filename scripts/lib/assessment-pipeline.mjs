@@ -43,7 +43,7 @@ function invariant(condition, message) {
 
 const forbiddenReaderFacingPatterns = [
   /\b(?:fulfilled|moving-towards|no-progress|moving-against|acting-against)\b/i,
-  /\b(?:verified-party-vote|verified-party-no-majority|verified-member-bill|verified-government-proposal|verified-government-regulation|verified-ministerial-decree|assessmentContext|matchBasis)\b/i,
+  /\b(?:verified-party-vote|verified-party-no-majority|verified-member-bill|verified-government-proposal|verified-government-regulation|verified-ministerial-decree|verified-government-opinion|assessmentContext|matchBasis)\b/i,
   /\bevidence package\b/i,
   /sponzorsk\p{L}*\s+propojen\p{L}*/iu,
   /\btisk\s+\d+\b/iu
