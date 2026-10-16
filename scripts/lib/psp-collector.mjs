@@ -238,7 +238,9 @@ const senateResolutionKindId = "11";
 // (vysledek.unl, tisky_za.id_vysledek) that state it. Only an agreement or a
 // disagreement is conduct (docs/scoring.md); a neutral opinion is not.
 const governmentOpinionKindId = "7";
-// The descriptions are compared without diacritics and case.
+// The descriptions are compared without diacritics and case. The bill is a
+// print of kind 2 ("Návrh zákona"), never a government proposal.
+const governmentOpinionPrintKindIds = new Set(["2"]);
 const governmentOpinionResults = { souhlas: "agrees", nesouhlas: "disagrees", neutralni: "neutral" };
 
 export function normalizePspData({ source, since, votesEntries, membersEntries, printsEntries, sessionsEntries, governmentPeriods }) {
@@ -502,14 +504,17 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
   // The government's opinion on a bill it did not submit: conduct of every
   // governing party on the day the Chamber distributed it.
   for (const row of governmentOpinionRows) {
-    const occurredAt = pspDateTime(row.distributedAt);
-    if (!occurredAt || occurredAt.slice(0, 10) < cutoff) continue;
     const print = printById.get(row.printId);
     const resultCz = resultById.get(row.resultId) ?? null;
     const opinion = governmentOpinionResults[normalizeSearchText(resultCz)];
-    // Any other or a missing result is data never inspected, so it stops the
-    // run rather than quietly dropping the opinion.
+    // An opinion on a print of another kind, or with another or a missing
+    // result, is data never inspected, so it stops the run rather than being
+    // attributed or quietly dropped.
+    invariant(governmentOpinionPrintKindIds.has(print.kindId), `Government opinion ${print.number}/${row.partNumber} is on a print of unsupported kind ${print.kindId}`);
     invariant(opinion, `Government opinion ${print.number}/${row.partNumber} has an unsupported result: ${resultCz ?? "none"}`);
+    // An opinion not yet distributed by the Chamber is not yet public.
+    const occurredAt = pspDateTime(row.distributedAt);
+    if (!occurredAt || occurredAt.slice(0, 10) < cutoff) continue;
     const distributedOn = occurredAt.slice(0, 10);
     const printTitle = cleanText(print.fullTitle || print.shortTitle, 1000);
     const partNumber = numeric(row.partNumber);

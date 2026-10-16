@@ -427,20 +427,20 @@ test("PSP normalizer attributes submitted bills to proposer and government parti
 
 test("PSP normalizer records the government's opinion on a bill it did not submit", () => {
   const source = { id: "psp-core-2025", publisher: "PSP", evidenceRole: "primary-record", partyAliases: {}, term: { year: 2025, number: 10, organId: 174 } };
-  const print = (id, number) => {
+  const print = (id, number, kindId = "2") => {
     const fields = Array(24).fill(null);
-    Object.assign(fields, { 0: id, 1: "2", 2: "20", 3: number, 4: "0", 5: "2", 7: "174", 10: `Member bill ${number}`, 11: "06.11.2025", 15: `Member bill ${number}` });
+    Object.assign(fields, { 0: id, 1: kindId, 2: "20", 3: number, 4: "0", 5: "2", 7: "174", 10: `Member bill ${number}`, 11: "06.11.2025", 15: `Member bill ${number}` });
     return unl(fields);
   };
   const opinion = (printId, resultId, distributedAt) => subPrintRow({ printId, partNumber: "1", kindId: "7", shortTitle: "Stanovisko vlády", resultId, distributedAt });
-  const normalize = (subPrints) => normalizePspData({
+  const normalize = (subPrints, governmentBill = "") => normalizePspData({
     source,
     since: "2025-10-01",
     governmentPeriods,
     votesEntries: { "hl2025s.unl": entry(""), "hl2025h1.unl": entry(""), "zmatecne.unl": entry("") },
     membersEntries: { "osoby.unl": entry(""), "poslanec.unl": entry(""), "zarazeni.unl": entry(""), "organy.unl": entry("") },
     printsEntries: {
-      "tisky.unl": entry(print("701", "7") + print("702", "8") + print("703", "9") + print("704", "10")),
+      "tisky.unl": entry(print("701", "7") + print("702", "8") + print("703", "9") + print("704", "10") + governmentBill),
       "hist.unl": entry(""),
       "stavy.unl": entry(""),
       "prechody.unl": entry(""),
@@ -476,7 +476,10 @@ test("PSP normalizer records the government's opinion on a bill it did not submi
   assert.equal(status(9, "ano"), "unattributed");
   assert.equal(status(10, "ano"), "unattributed");
   assert.equal(versionConcerned(opinions[7], "701").version, "proposed");
-  // An opinion with a missing or unknown result stops the run.
+  // An opinion on a government bill, or with a missing or unknown result,
+  // stops the run, also before the cutoff.
+  assert.throws(() => normalize(opinion("705", "19", "2026-01-12 10:00"), print("705", "11", "1")), /Government opinion 11\/1 is on a print of unsupported kind 1/);
+  assert.throws(() => normalize(opinion("701", "19", "2025-09-12 10:00") + opinion("702", "99", "2025-09-12 10:00")), /Government opinion 8\/1 has an unsupported result: none/);
   assert.throws(() => normalize(opinion("701", "", "2026-01-12 10:00")), /Government opinion 7\/1 has an unsupported result: none/);
   assert.throws(() => normalize(opinion("701", "99", "2026-01-12 10:00")), /Government opinion 7\/1 has an unsupported result: none/);
 });
