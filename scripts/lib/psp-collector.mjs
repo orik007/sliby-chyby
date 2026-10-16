@@ -504,6 +504,10 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
   // The government's opinion on a bill it did not submit: conduct of every
   // governing party on the day the Chamber distributed it.
   for (const row of governmentOpinionRows) {
+    // An opinion not yet distributed by the Chamber is not yet public, and
+    // psp.cz may not have recorded its result yet.
+    const occurredAt = pspDateTime(row.distributedAt);
+    if (!occurredAt) continue;
     const print = printById.get(row.printId);
     const resultCz = resultById.get(row.resultId) ?? null;
     const opinion = governmentOpinionResults[normalizeSearchText(resultCz)];
@@ -512,9 +516,7 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     // attributed or quietly dropped.
     invariant(governmentOpinionPrintKindIds.has(print.kindId), `Government opinion ${print.number}/${row.partNumber} is on a print of unsupported kind ${print.kindId}`);
     invariant(opinion, `Government opinion ${print.number}/${row.partNumber} has an unsupported result: ${resultCz ?? "none"}`);
-    // An opinion not yet distributed by the Chamber is not yet public.
-    const occurredAt = pspDateTime(row.distributedAt);
-    if (!occurredAt || occurredAt.slice(0, 10) < cutoff) continue;
+    if (occurredAt.slice(0, 10) < cutoff) continue;
     const distributedOn = occurredAt.slice(0, 10);
     const printTitle = cleanText(print.fullTitle || print.shortTitle, 1000);
     const partNumber = numeric(row.partNumber);
@@ -539,6 +541,9 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
         resultCz,
         opinion,
         distributedOn,
+        // The bill's Senate resolutions, for a print only this opinion brings
+        // into the pipeline.
+        senateResolutionPartNumbers: senateResolutionParts.get(print.printId) ?? [],
         // The governing parties on that day, as for a regulation's adoption.
         proposal: { kind: "government-opinion", proposerPartyIds: governmentPartiesOn(governmentPeriods, distributedOn) }
       }

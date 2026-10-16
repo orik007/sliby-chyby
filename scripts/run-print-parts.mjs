@@ -13,8 +13,9 @@ import { loadTrackedPromises } from "./lib/published-promises.mjs";
 /**
  * Downloads, in every run, the official texts of every Chamber print that a
  * potentially attributable record concerns (the proposal and, for a bill,
- * the text the Chamber approved, the text passed by Parliament, and any
- * Senate resolution returning it) and splits them into law changes with
+ * the text the Chamber approved, the text passed by Parliament, any Senate
+ * resolution returning it, and the government's opinion on a bill it did
+ * not submit) and splits them into law changes with
  * their versions (docs/evidence-pipeline.md, Chamber data rules). Nothing
  * is cached, so a later text is used as soon as psp.cz publishes it. When
  * psp.cz does not publish the text a decisive vote concerned and the bill was
@@ -222,7 +223,7 @@ for (const record of conductRecords) {
     if (concerned) concernedByPrint.set(printId, [...(concernedByPrint.get(printId) ?? []), concerned]);
   }
 }
-log(`${prints.length} prints concern potentially attributable records; downloading their proposal texts, later texts, and Senate resolutions`);
+log(`${prints.length} prints concern potentially attributable records; downloading their proposal texts, later texts, Senate resolutions, and government opinions`);
 
 // Prints are processed as many at a time as fetchPsp keeps requests open
 // (pspDownloadSettings.concurrency), each request through it. A failed download stops
@@ -247,7 +248,7 @@ async function downloadWorker() {
     }
     fetched.set(print.printId, result);
     const versions = Object.keys(result.texts);
-    tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX or DOC proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
+    tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX or DOC proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}${result.governmentOpinions.length > 0 ? `, ${result.governmentOpinions.length} government opinion(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
   }
 }
 let recordError = null;

@@ -89,7 +89,8 @@ export function lawChangesOfRun(printParts, recordsByPrintId) {
 
 /**
  * The records that are the promise party's attributable conduct on a law
- * change: its decisive votes and its submission (docs/scoring.md), each with
+ * change: its decisive votes, its submission, and the government's opinion
+ * on it (docs/scoring.md), each with
  * the version of the change it concerns.
  */
 export function attributableConductOnChange(records, promise, change) {
@@ -440,13 +441,14 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
     }
   }
   const resolutionIdsOf = (change) => change.senateResolutions.map(({ partNumber }) => senateResolutionEvidenceId(change, partNumber)).filter((id) => senateResolutions.has(id));
-  const opinionTextOf = ({ record }) => {
-    if (record.kind !== "government-opinion") return null;
+  // Found once, not on every rebuild of the package.
+  const opinionTexts = new Map(conduct.filter(({ record }) => record.kind === "government-opinion").map(({ record }) => {
     const changeIds = new Set(concernsByRecord.get(record.id).map(({ changeId }) => changeId));
-    return changes.filter(({ change }) => changeIds.has(change.changeId))
+    const text = changes.filter(({ change }) => changeIds.has(change.changeId))
       .flatMap(({ change }) => change.governmentOpinions ?? [])
-      .find(({ partNumber }) => partNumber === record.payload.partNumber) ?? null;
-  };
+      .find(({ partNumber }) => partNumber === record.payload.partNumber);
+    return [record.id, text ?? null];
+  }));
   const maintenanceBaseline = promise.maintenanceBaseline
     ? { preservedStateCz: promise.maintenanceBaseline.preservedStateCz, evidenceId: promise.maintenanceBaseline.source.id }
     : null;
@@ -479,7 +481,7 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
         ...(promise.maintenanceBaseline ? [evidenceFromMaintenanceBaseline(promise.maintenanceBaseline)] : []),
         ...lawChanges.map(({ change, route }) => evidenceFromLawChange(change, route, printFirstSeenOn.get(change.printId), resolutionIdsOf(change))),
         ...senateResolutions.values(),
-        ...conduct.map((item) => evidenceFromConduct(item, promise, concernsByRecord.get(item.record.id), opinionTextOf(item)))
+        ...conduct.map((item) => evidenceFromConduct(item, promise, concernsByRecord.get(item.record.id), opinionTexts.get(item.record.id) ?? null))
       ]
     };
     validateEvidencePackage(evidencePackage);

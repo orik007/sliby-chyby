@@ -452,11 +452,16 @@ test("PSP normalizer records the government's opinion on a bill it did not submi
     },
     sessionsEntries: { "schuze.unl": entry(""), "bod_schuze.unl": entry("") }
   });
-  const result = normalize(opinion("701", "19", "2026-01-12 10:00") + opinion("702", "17", "2026-01-13 11:30") + opinion("703", "22", "2026-01-14 09:00") + opinion("704", "17", "2025-12-04 13:47"));
+  const senateResolution = subPrintRow({ printId: "701", partNumber: "2", kindId: "11", shortTitle: "Usnesení Senátu" });
+  const result = normalize(senateResolution + opinion("701", "19", "2026-01-12 10:00") + opinion("702", "17", "2026-01-13 11:30") + opinion("703", "22", "2026-01-14 09:00") + opinion("704", "17", "2025-12-04 13:47"));
   const opinions = Object.fromEntries(result.records.filter(({ kind }) => kind === "government-opinion").map((record) => [record.payload.printNumber, record]));
   assert.equal(opinions[7].id, "psp-core-2025--government-opinion-701-1");
   assert.equal(opinions[7].url, "https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=7&CT1=1");
   assert.equal(opinions[7].occurredAt, "2026-01-12T10:00:00");
+  // The bill's Senate resolutions go with the opinion, for a print that
+  // only the opinion brings into the pipeline.
+  assert.deepEqual(opinions[7].payload.senateResolutionPartNumbers, [2]);
+  assert.deepEqual(opinions[8].payload.senateResolutionPartNumbers, []);
   assert.deepEqual(
     Object.values(opinions).map(({ payload }) => [payload.printNumber, payload.resultCz, payload.opinion, payload.distributedOn, payload.proposal.proposerPartyIds]),
     [
@@ -476,6 +481,9 @@ test("PSP normalizer records the government's opinion on a bill it did not submi
   assert.equal(status(9, "ano"), "unattributed");
   assert.equal(status(10, "ano"), "unattributed");
   assert.equal(versionConcerned(opinions[7], "701").version, "proposed");
+  // An opinion not yet distributed is left out, whatever psp.cz records of
+  // it so far.
+  assert.equal(normalize(opinion("701", "", "")).records.filter(({ kind }) => kind === "government-opinion").length, 0);
   // An opinion on a government bill, or with a missing or unknown result,
   // stops the run, also before the cutoff.
   assert.throws(() => normalize(opinion("705", "19", "2026-01-12 10:00"), print("705", "11", "1")), /Government opinion 11\/1 is on a print of unsupported kind 1/);
