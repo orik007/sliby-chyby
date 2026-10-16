@@ -1,4 +1,6 @@
 import { unzipSync } from "fflate";
+import { normalizeSearchText } from "./attribution.mjs";
+import { officialPrintDocumentPageUrl } from "./psp-print-documents.mjs";
 import { log } from "./run-log.mjs";
 import {
   cleanText,
@@ -93,12 +95,6 @@ function pspDateTime(value, separateTime = null) {
   }
   const normalized = value.replace(" ", "T");
   return normalized.length === 16 ? `${normalized}:00` : normalized;
-}
-
-// A result description (vysledek.unl) without diacritics and case:
-// "neutrální" is "neutralni".
-function normalizeResult(value) {
-  return String(value ?? "").normalize("NFD").replace(/\p{Diacritic}/gu, "").toLocaleLowerCase("cs-CZ").trim();
 }
 
 function numeric(value) {
@@ -242,11 +238,8 @@ const senateResolutionKindId = "11";
 // (vysledek.unl, tisky_za.id_vysledek) that state it. Only an agreement or a
 // disagreement is conduct (docs/scoring.md); a neutral opinion is not.
 const governmentOpinionKindId = "7";
-const governmentOpinionResults = { souhlas: "agrees", nesouhlas: "disagrees", "neutralni": "neutral" };
-
-function governmentOpinionUrl(termNumber, printNumber, partNumber) {
-  return `https://www.psp.cz/sqw/text/tiskt.sqw?O=${termNumber}&CT=${printNumber}&CT1=${partNumber}`;
-}
+// The descriptions are compared without diacritics and case.
+const governmentOpinionResults = { souhlas: "agrees", nesouhlas: "disagrees", neutralni: "neutral" };
 
 export function normalizePspData({ source, since, votesEntries, membersEntries, printsEntries, sessionsEntries, governmentPeriods }) {
   validateGovernmentPeriods(governmentPeriods);
@@ -513,7 +506,10 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     if (!occurredAt || occurredAt.slice(0, 10) < cutoff) continue;
     const print = printById.get(row.printId);
     const resultCz = resultById.get(row.resultId) ?? null;
-    const opinion = governmentOpinionResults[normalizeResult(resultCz)] ?? null;
+    const opinion = governmentOpinionResults[normalizeSearchText(resultCz)];
+    // Any other or a missing result is data never inspected, so it stops the
+    // run rather than quietly dropping the opinion.
+    invariant(opinion, `Government opinion ${print.number}/${row.partNumber} has an unsupported result: ${resultCz ?? "none"}`);
     const distributedOn = occurredAt.slice(0, 10);
     const printTitle = cleanText(print.fullTitle || print.shortTitle, 1000);
     const partNumber = numeric(row.partNumber);
@@ -525,9 +521,9 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
       evidenceRole: source.evidenceRole,
       occurredAt,
       timeZone: "Europe/Prague",
-      title: `${print.number}/${partNumber}: Stanovisko vlády (${resultCz ?? "bez výsledku"}) — ${printTitle}`,
+      title: `${print.number}/${partNumber}: Stanovisko vlády (${resultCz}) — ${printTitle}`,
       publisher: source.publisher,
-      url: governmentOpinionUrl(source.term.number, print.number, partNumber),
+      url: officialPrintDocumentPageUrl(source.term.number, print.number, partNumber),
       payload: {
         externalPrintId: print.printId,
         printKindId: print.kindId,
@@ -538,7 +534,8 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
         resultCz,
         opinion,
         distributedOn,
-        proposal: { kind: "government-opinion", submittedOn: distributedOn, proposerPartyIds: governmentPartiesOn(governmentPeriods, distributedOn), proposerCz: null }
+        // The governing parties on that day, as for a regulation's adoption.
+        proposal: { kind: "government-opinion", proposerPartyIds: governmentPartiesOn(governmentPeriods, distributedOn) }
       }
     }));
   }

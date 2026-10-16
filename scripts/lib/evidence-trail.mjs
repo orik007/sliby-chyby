@@ -69,7 +69,7 @@ function stepFromConduct(item, printId, changes) {
   // The government's opinion on a bill it did not submit links to the
   // opinion's own page on psp.cz.
   if (item.type === "government-opinion") {
-    return { kind: "government-opinion", evidenceId: item.id, date: facts.distributedOn, opinion: facts.opinion, printPartCz: `${facts.printNumber}/${facts.partNumber}`, url: item.url, ...textOf(item, changes) };
+    return { kind: "government-opinion", evidenceId: item.id, date: item.publishedAt, opinion: facts.opinion, printPartCz: `${facts.printNumber}/${facts.partNumber}`, url: item.url, ...textOf(item, changes) };
   }
   invariant(item.type === "parliamentary-vote", `Unsupported conduct ${item.id}`);
   const linkedPrint = (facts.linkedPrints ?? []).find((print) => String(print.externalPrintId) === printId);

@@ -2,7 +2,7 @@ function invariant(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-function normalizeSearchText(value) {
+export function normalizeSearchText(value) {
   return String(value ?? "")
     .normalize("NFD")
     .replace(/\p{Diacritic}/gu, "")

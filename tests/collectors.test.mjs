@@ -433,7 +433,7 @@ test("PSP normalizer records the government's opinion on a bill it did not submi
     return unl(fields);
   };
   const opinion = (printId, resultId, distributedAt) => subPrintRow({ printId, partNumber: "1", kindId: "7", shortTitle: "Stanovisko vlády", resultId, distributedAt });
-  const result = normalizePspData({
+  const normalize = (subPrints) => normalizePspData({
     source,
     since: "2025-10-01",
     governmentPeriods,
@@ -446,12 +446,13 @@ test("PSP normalizer records the government's opinion on a bill it did not submi
       "prechody.unl": entry(""),
       "typ_akce.unl": entry(""),
       "typ_stavu.unl": entry(""),
-      "tisky_za.unl": entry(opinion("701", "19", "2026-01-12 10:00") + opinion("702", "17", "2026-01-13 11:30") + opinion("703", "22", "2026-01-14 09:00") + opinion("704", "17", "2025-12-04 13:47")),
+      "tisky_za.unl": entry(subPrints),
       "vysledek.unl": resultTableBytes(),
       "predkladatel.unl": entry("")
     },
     sessionsEntries: { "schuze.unl": entry(""), "bod_schuze.unl": entry("") }
   });
+  const result = normalize(opinion("701", "19", "2026-01-12 10:00") + opinion("702", "17", "2026-01-13 11:30") + opinion("703", "22", "2026-01-14 09:00") + opinion("704", "17", "2025-12-04 13:47"));
   const opinions = Object.fromEntries(result.records.filter(({ kind }) => kind === "government-opinion").map((record) => [record.payload.printNumber, record]));
   assert.equal(opinions[7].id, "psp-core-2025--government-opinion-701-1");
   assert.equal(opinions[7].url, "https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=7&CT1=1");
@@ -475,6 +476,9 @@ test("PSP normalizer records the government's opinion on a bill it did not submi
   assert.equal(status(9, "ano"), "unattributed");
   assert.equal(status(10, "ano"), "unattributed");
   assert.equal(versionConcerned(opinions[7], "701").version, "proposed");
+  // An opinion with a missing or unknown result stops the run.
+  assert.throws(() => normalize(opinion("701", "", "2026-01-12 10:00")), /Government opinion 7\/1 has an unsupported result: none/);
+  assert.throws(() => normalize(opinion("701", "99", "2026-01-12 10:00")), /Government opinion 7\/1 has an unsupported result: none/);
 });
 
 test("deduplication accepts identical records and rejects conflicting content", () => {

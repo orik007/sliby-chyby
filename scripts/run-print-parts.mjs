@@ -162,18 +162,16 @@ async function fetchPrintTexts(source, print, termNumber) {
   const approvedText = links.approved
     ? laterText(source, print, "approved", links.approved, warnings)
     : links.referredToSenate ? referredText(source, print, links.referredToSenate, warnings) : null;
-  const resolutionCount = print.senateResolutionPartNumbers.length;
-  const [approved, passed, ...subPrints] = await allSettledOrThrow([
-    approvedText,
-    links.passed ? laterText(source, print, "passed", links.passed, warnings) : null,
-    ...print.senateResolutionPartNumbers.map((partNumber) => senateResolution(source, termNumber, print, partNumber, warnings)),
-    ...print.governmentOpinionPartNumbers.map((partNumber) => governmentOpinion(source, termNumber, print, partNumber, warnings))
+  const [[approved, passed], resolutions, opinions] = await allSettledOrThrow([
+    allSettledOrThrow([approvedText, links.passed ? laterText(source, print, "passed", links.passed, warnings) : null]),
+    allSettledOrThrow(print.senateResolutionPartNumbers.map((partNumber) => senateResolution(source, termNumber, print, partNumber, warnings))),
+    allSettledOrThrow(print.governmentOpinionPartNumbers.map((partNumber) => governmentOpinion(source, termNumber, print, partNumber, warnings)))
   ]);
   const texts = Object.fromEntries(Object.entries({ proposed: proposal, approved, passed }).filter(([, text]) => text));
   return {
     texts,
-    senateResolutions: subPrints.slice(0, resolutionCount).filter(Boolean),
-    governmentOpinions: subPrints.slice(resolutionCount).filter(Boolean),
+    senateResolutions: resolutions.filter(Boolean),
+    governmentOpinions: opinions.filter(Boolean),
     warnings,
     promulgation: history ? promulgatedActOfHistory(history) : null,
     passedListed: Boolean(links.passed)

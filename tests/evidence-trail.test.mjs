@@ -217,11 +217,11 @@ test("a cited government opinion enters the trail as a step on its bill, with a 
     kind: "government-opinion",
     primary: true,
     evidenceRole: "primary-record",
-    occurredAt: "2025-12-04T13:47:00",
+    occurredAt: "2025-12-16T00:00:00",
     title: "7/1: Stanovisko vlády (souhlas) — Návrh zákona",
     publisher: "Chamber of Deputies",
     url: "https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=7&CT1=1",
-    payload: { externalPrintId: "43110", printKindId: "2", printNumber: 7, partNumber: 1, printTitleCz: "Návrh zákona", printUrl: "https://public.psp.cz/sqw/historie.sqw?o=10&t=7", resultCz: "souhlas", opinion: "agrees", distributedOn: "2025-12-16", proposal: { kind: "government-opinion", submittedOn: "2025-12-16", proposerPartyIds: ["ano", "motoriste", "spd"], proposerCz: null } }
+    payload: { externalPrintId: "43110", printKindId: "2", printNumber: 7, partNumber: 1, printTitleCz: "Návrh zákona", printUrl: "https://public.psp.cz/sqw/historie.sqw?o=10&t=7", resultCz: "souhlas", opinion: "agrees", distributedOn: "2025-12-16", proposal: { kind: "government-opinion", proposerPartyIds: ["ano", "motoriste", "spd"] } }
   });
   const change = {
     changeId: "43110-1",

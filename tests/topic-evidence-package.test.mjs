@@ -113,7 +113,7 @@ test("the government's opinion on a bill it did not submit is conduct on its pro
       resultCz,
       opinion,
       distributedOn: "2026-02-10",
-      proposal: { kind: "government-opinion", submittedOn: "2026-02-10", proposerPartyIds: [fiscalPromise.partyId], proposerCz: null }
+      proposal: { kind: "government-opinion", proposerPartyIds: [fiscalPromise.partyId] }
     }
   });
   const opinionText = { partNumber: 1, document: { filename: "t009001.doc", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=9" }, textCz: "Vláda vyslovuje nesouhlas s návrhem zákona." };
