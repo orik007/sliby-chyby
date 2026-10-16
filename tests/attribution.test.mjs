@@ -8,6 +8,7 @@ import {
   isPotentiallyAttributable,
   versionConcerned
 } from "../scripts/lib/attribution.mjs";
+import { validateReaderFacingCzech } from "../scripts/lib/assessment-pipeline.mjs";
 
 const promise = { id: "test-promise", partyId: "motoriste" };
 
@@ -138,4 +139,8 @@ test("a vote concerns the text its print-history step decided on", () => {
   // A vote linked to a print only through its agenda item is not conduct on
   // that print.
   assert.equal(versionConcerned({ kind: "parliamentary-vote", payload: { linkedPrints: [{ externalPrintId: "43200", printKindId: "1", historyContexts: [] }] } }, "43200"), null);
+});
+
+test("the attribution status of a government opinion never passes as public Czech prose", () => {
+  assert.throws(() => validateReaderFacingCzech("Vláda s návrhem souhlasila (verified-government-opinion)."), /internal or unexplained language/);
 });

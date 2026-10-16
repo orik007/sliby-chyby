@@ -20,7 +20,7 @@ const schemas = {
   history: ["historyId", "printId", "dateTime", "voteId", "transitionId", "agendaId", "session", "resolutionNumber", "committeeReporterMpId", "chairReporterMpId", "committeeResolution", "collectionPublishedAt", "collectionPart", "collectionNumber", "note"],
   state: ["stateId", "stateTypeId", "printKindId", "description", "deadline", "deadlineTransitionId"],
   stateType: ["stateTypeId", "description"],
-  subPrint: ["printId", "partNumber", "historyId", "kindId", "shortTitle", "fullTitle", "distributedAtBefore2011", "organId", "resolutionNumber", "reporterMpId", "textUrl", "resultId", "partSuffix", "sortOrder", "distributedAt"],
+  subPrint: ["printId", "partNumber", "historyId", "kindId", "shortTitle", "fullTitle", "distributedAtBefore2011", "organId", "resolutionNumber", "reporterMpId", "textUrl", "resultId", "partSuffix", "sortOrder", "distributedAt", "status"],
   result: ["resultId", "description"],
   transition: ["transitionId", "fromStateId", "toStateId", "actionId", "transitionType"],
   action: ["actionId", "description"],
@@ -229,6 +229,10 @@ function historyContext(history, { transitionById, actionById, stageOfState }) {
   };
 }
 
+// The statuses of a revoked sub-print (tisky_za.status, psp.cz open-data
+// documentation).
+const revokedSubPrintStatuses = new Set(["1", "2"]);
+
 // Official print kind (druh_tisku.unl) of a Senate resolution returning a
 // bill to the Chamber, a sub-print listed in tisky_za.unl.
 const senateResolutionKindId = "11";
@@ -319,7 +323,8 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
   const senateResolutionParts = new Map();
   const governmentOpinionRows = [];
   for (const row of parseUnl(decodeEntry(printsEntries, "tisky_za.unl"), schemas.subPrint)) {
-    if (!printById.has(row.printId)) continue;
+    // A revoked sub-print (status 1 or 2) no longer stands.
+    if (!printById.has(row.printId) || revokedSubPrintStatuses.has(row.status)) continue;
     if (row.kindId === governmentOpinionKindId) governmentOpinionRows.push(row);
     if (row.kindId !== senateResolutionKindId) continue;
     senateResolutionParts.set(row.printId, [...(senateResolutionParts.get(row.printId) ?? []), numeric(row.partNumber)].sort((left, right) => left - right));

@@ -403,6 +403,43 @@ function versionOf(part, amendedAct, document, effectiveCz = null, promulgatedAc
 }
 
 /**
+ * The Chamber prints that potentially attributable records concern: the
+ * prints of submissions and votes, and the bill of a government opinion,
+ * with the part numbers of its Senate resolutions and government opinions.
+ */
+export function collectPrints(records) {
+  const prints = new Map();
+  const add = ({ externalPrintId, printKindId, number, partNumber, titleCz, senateResolutionPartNumbers }) => {
+    if (!externalPrintId || !Number.isInteger(number)) return;
+    prints.set(String(externalPrintId), {
+      printId: String(externalPrintId),
+      kindId: printKindId ?? null,
+      number,
+      partNumber: partNumber ?? 0,
+      title: titleCz ?? "",
+      senateResolutionPartNumbers: senateResolutionPartNumbers ?? [],
+      governmentOpinionPartNumbers: []
+    });
+  };
+  // The government's opinion on a bill it did not submit is a sub-print of
+  // that bill; its record names the bill, whose own part number is 0.
+  const opinionParts = new Map();
+  for (const record of records) {
+    const payload = record.payload ?? {};
+    if (record.kind === "legislative-step") add({ ...payload, number: payload.printNumber, titleCz: payload.printTitleCz });
+    if (record.kind === "government-opinion") {
+      if (!prints.has(String(payload.externalPrintId))) add({ ...payload, number: payload.printNumber, partNumber: 0, titleCz: payload.printTitleCz });
+      opinionParts.set(String(payload.externalPrintId), [...(opinionParts.get(String(payload.externalPrintId)) ?? []), payload.partNumber]);
+    }
+    for (const linkedPrint of payload.linkedPrints ?? []) add(linkedPrint);
+  }
+  for (const [printId, parts] of opinionParts) {
+    if (prints.has(printId)) prints.get(printId).governmentOpinionPartNumbers = [...new Set(parts)].sort((left, right) => left - right);
+  }
+  return [...prints.values()].sort((left, right) => left.number - right.number);
+}
+
+/**
  * The law changes of one print with their versions. `texts` maps a version
  * key to `{ document, paragraphs }` for each text psp.cz publishes, and to
  * `{ document, paragraphs, promulgatedAct }` for a version whose text is the

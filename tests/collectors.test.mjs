@@ -212,9 +212,9 @@ function entry(text) {
 }
 
 // A row of tisky_za.unl with all its official columns (psp.cz k=1303).
-function subPrintRow({ printId, partNumber, historyId = null, kindId, shortTitle, fullTitle = shortTitle, resultId = null, distributedAt = null }) {
+function subPrintRow({ printId, partNumber, historyId = null, kindId, shortTitle, fullTitle = shortTitle, resultId = null, distributedAt = null, status = null }) {
   const fields = Array(16).fill(null);
-  Object.assign(fields, { 0: printId, 1: partNumber, 2: historyId, 3: kindId, 4: shortTitle, 5: fullTitle, 11: resultId, 14: distributedAt });
+  Object.assign(fields, { 0: printId, 1: partNumber, 2: historyId, 3: kindId, 4: shortTitle, 5: fullTitle, 11: resultId, 14: distributedAt, 15: status });
   return unl(fields);
 }
 
@@ -481,6 +481,10 @@ test("PSP normalizer records the government's opinion on a bill it did not submi
   assert.equal(status(9, "ano"), "unattributed");
   assert.equal(status(10, "ano"), "unattributed");
   assert.equal(versionConcerned(opinions[7], "701").version, "proposed");
+  // A revoked opinion or Senate resolution (status 1 or 2) no longer stands.
+  const subPrint = (printId, partNumber, kindId, resultId, distributedAt, status) => subPrintRow({ printId, partNumber, kindId, shortTitle: kindId === "7" ? "Stanovisko vlády" : "Usnesení Senátu", resultId, distributedAt, status });
+  const revoked = normalize(subPrint("702", "1", "7", "17", "2026-01-13 11:30", "2") + subPrint("701", "2", "11", null, null, "1") + subPrint("701", "3", "7", "19", "2026-01-12 10:00", null));
+  assert.deepEqual(revoked.records.filter(({ kind }) => kind === "government-opinion").map(({ payload }) => [payload.printNumber, payload.partNumber, payload.senateResolutionPartNumbers]), [[7, 3, []]]);
   // An opinion not yet distributed is left out, whatever psp.cz records of
   // it so far.
   assert.equal(normalize(opinion("701", "", "")).records.filter(({ kind }) => kind === "government-opinion").length, 0);

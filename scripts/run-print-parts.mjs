@@ -7,7 +7,7 @@ import { createESbirkaClient, createLawContextCache, createLawContextReader, ESb
 import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { createPspDocumentRecorder } from "./lib/psp-document-hashes.mjs";
 import { log, progress } from "./lib/run-log.mjs";
-import { governmentOpinionSectionLabels, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
+import { collectPrints, governmentOpinionSectionLabels, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
 
 /**
@@ -39,38 +39,6 @@ function parseArgs(args) {
   }
   invariant(options.collectorRun && options.output, "--collector-run and --output are required");
   return options;
-}
-
-function collectPrints(records) {
-  const prints = new Map();
-  const add = ({ externalPrintId, printKindId, number, partNumber, titleCz, senateResolutionPartNumbers }) => {
-    if (!externalPrintId || !Number.isInteger(number)) return;
-    prints.set(String(externalPrintId), {
-      printId: String(externalPrintId),
-      kindId: printKindId ?? null,
-      number,
-      partNumber: partNumber ?? 0,
-      title: titleCz ?? "",
-      senateResolutionPartNumbers: senateResolutionPartNumbers ?? [],
-      governmentOpinionPartNumbers: []
-    });
-  };
-  // The government's opinion on a bill it did not submit is a sub-print of
-  // that bill; its record names the bill, whose own part number is 0.
-  const opinionParts = new Map();
-  for (const record of records) {
-    const payload = record.payload ?? {};
-    if (record.kind === "legislative-step") add({ ...payload, number: payload.printNumber, titleCz: payload.printTitleCz });
-    if (record.kind === "government-opinion") {
-      if (!prints.has(String(payload.externalPrintId))) add({ ...payload, number: payload.printNumber, partNumber: 0, titleCz: payload.printTitleCz });
-      opinionParts.set(String(payload.externalPrintId), [...(opinionParts.get(String(payload.externalPrintId)) ?? []), payload.partNumber]);
-    }
-    for (const linkedPrint of payload.linkedPrints ?? []) add(linkedPrint);
-  }
-  for (const [printId, parts] of opinionParts) {
-    if (prints.has(printId)) prints.get(printId).governmentOpinionPartNumbers = [...new Set(parts)].sort((left, right) => left - right);
-  }
-  return [...prints.values()].sort((left, right) => left.number - right.number);
 }
 
 const htmlOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };

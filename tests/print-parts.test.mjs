@@ -17,6 +17,7 @@ import {
   proposalDocumentLink,
   splitProposalText,
   changeThroughVersion,
+  collectPrints,
   versionOfChange
 } from "../scripts/lib/print-parts.mjs";
 import { lawChangeText } from "../scripts/lib/law-change-screening.mjs";
@@ -402,4 +403,16 @@ test("an act as promulgated is split like a psp.cz text and says where it is fro
   for (const part of [kept, dropped]) assert.equal(versionOfChange(part, vote({ senateAmendmentsRejected: true })).version, "proposed");
   assert.equal(versionOfChange(dropped, vote({})).removed, true);
   assert.match(lawChangeText(change), /Version: text passed by Parliament \(psp\.cz does not publish it; this is the act as promulgated in the Collection of Laws, zákon č\. 155\/2026 Sb\., without its annexes\)\n/);
+});
+
+test("a government opinion brings its bill into the prints, with its part and the bill's Senate resolutions", () => {
+  const opinion = (printId, number, partNumber, senateResolutionPartNumbers = []) => ({ kind: "government-opinion", payload: { externalPrintId: printId, printKindId: "2", printNumber: number, partNumber, printTitleCz: `Návrh ${number}`, senateResolutionPartNumbers } });
+  const step = (printId, number) => ({ kind: "legislative-step", payload: { externalPrintId: printId, printKindId: "2", printNumber: number, partNumber: 0, printTitleCz: `Návrh ${number}`, senateResolutionPartNumbers: [] } });
+  const prints = collectPrints([opinion("701", 7, 1, [3]), opinion("702", 8, 2), step("702", 8), opinion("702", 8, 1)]);
+  assert.deepEqual(prints.map(({ printId, number, partNumber, senateResolutionPartNumbers, governmentOpinionPartNumbers }) => ({ printId, number, partNumber, senateResolutionPartNumbers, governmentOpinionPartNumbers })), [
+    // Only the opinion brings print 7: the bill itself is part 0.
+    { printId: "701", number: 7, partNumber: 0, senateResolutionPartNumbers: [3], governmentOpinionPartNumbers: [1] },
+    // A later record of the same print keeps its opinions.
+    { printId: "702", number: 8, partNumber: 0, senateResolutionPartNumbers: [], governmentOpinionPartNumbers: [1, 2] }
+  ]);
 });
