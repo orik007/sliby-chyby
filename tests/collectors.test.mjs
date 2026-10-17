@@ -488,12 +488,14 @@ test("PSP normalizer records the government's opinion on a bill it did not submi
   // An opinion not yet distributed is left out, whatever psp.cz records of
   // it so far.
   assert.equal(normalize(opinion("701", "", "")).records.filter(({ kind }) => kind === "government-opinion").length, 0);
-  // An opinion on a government bill, or with a missing or unknown result,
-  // stops the run, also before the cutoff.
-  assert.throws(() => normalize(opinion("705", "19", "2026-01-12 10:00"), print("705", "11", "1")), /Government opinion 11\/1 is on a print of unsupported kind 1/);
-  assert.throws(() => normalize(opinion("701", "19", "2025-09-12 10:00") + opinion("702", "99", "2025-09-12 10:00")), /Government opinion 8\/1 has an unsupported result: none/);
-  assert.throws(() => normalize(opinion("701", "", "2026-01-12 10:00")), /Government opinion 7\/1 has an unsupported result: none/);
-  assert.throws(() => normalize(opinion("701", "99", "2026-01-12 10:00")), /Government opinion 7\/1 has an unsupported result: none/);
+  // An opinion on a print of another kind is left out, and one with any
+  // other or no result is kept but is not conduct; neither stops the run,
+  // also before the cutoff.
+  assert.equal(normalize(opinion("705", "19", "2026-01-12 10:00"), print("705", "11", "1")).records.filter(({ kind }) => kind === "government-opinion").length, 0);
+  const other = normalize(opinion("701", "", "2026-01-12 10:00") + opinion("702", "99", "2026-01-12 10:00") + opinion("703", "99", "2025-09-12 10:00"));
+  const otherOpinions = other.records.filter(({ kind }) => kind === "government-opinion");
+  assert.deepEqual(otherOpinions.map(({ payload }) => [payload.printNumber, payload.resultCz, payload.opinion]), [[7, null, null], [8, null, null]]);
+  assert.equal(attributionStatusForRecord(otherOpinions[0], { partyId: "ano" }).attributionStatus, "unattributed");
 });
 
 test("deduplication accepts identical records and rejects conflicting content", () => {

@@ -34,7 +34,7 @@ Only the conduct in this table can change a score. Each row names the only offic
 
 A measure that applies generally, for example to all constructions or all public expenditure, and only makes a commitment to a specific project, place, or group possible or easier is conduct on that promise only when its text or the supplied evidence connects it to that commitment; otherwise it is not conduct on that promise. A general measure that itself delivers or contradicts the commitment for the named project, place, or group, such as a pay rise for all public employees for a promise to raise teachers' pay, is conduct on it.
 
-A decree of an authority other than a ministry, such as the Czech National Bank or the Energy Regulatory Office, is not conduct of any party. A neutral government opinion is not conduct.
+A decree of an authority other than a ministry, such as the Czech National Bank or the Energy Regulatory Office, is not conduct of any party. Only a government opinion that agrees or disagrees is conduct; any other (neutral, with comments, or none) is not.
 
 A vote is scored by the party's own choice on the vote date. The later fate of the measure (a Senate or presidential return, entry into force) does not change that score; only a later attributable conduct can.
 

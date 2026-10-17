@@ -44,7 +44,7 @@ This document contains only the current confirmed rules. When a rule changes, re
 - Evidence sources are added one at a time and only after their structure is verified against official documentation and real data, their completeness is measured, and their per-run quality checks exist. The canonical source list and data rules are in [evidence-pipeline.md](evidence-pipeline.md).
 - The sources are the Chamber of Deputies and, for government regulations and ministerial decrees, the Collection of Laws (e-Sbírka).
 - Attributable conduct is: a decisive Chamber vote (by strict majority of the party's club), a member bill (every party with a proposing MP), a government proposal (every governing party on its date), the government's agreement or disagreement with a bill it did not submit (every governing party on the day the Chamber distributed the opinion), or a government regulation or ministerial decree (every governing party on its adoption date). The canonical table is in [scoring.md](scoring.md).
-- A government proposal, opinion, regulation, or decree of a ministry is conduct of all governing parties together; a neutral government opinion is conduct of none; a decree of another authority is conduct of none. The current government of ANO 2011, SPD, and Motoristé sobě was appointed on 15 December 2025.
+- A government proposal, opinion, regulation, or decree of a ministry is conduct of all governing parties together; a government opinion that neither agrees nor disagrees is conduct of none; a decree of another authority is conduct of none. The current government of ANO 2011, SPD, and Motoristé sobě was appointed on 15 December 2025.
 
 ## Scores and index
 

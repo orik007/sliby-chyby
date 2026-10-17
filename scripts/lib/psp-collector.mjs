@@ -240,7 +240,8 @@ const senateResolutionKindId = "11";
 // Official print kind (druh_tisku.unl) of the government's opinion on a bill
 // it did not submit, a sub-print listed in tisky_za.unl, and the results
 // (vysledek.unl, tisky_za.id_vysledek) that state it. Only an agreement or a
-// disagreement is conduct (docs/scoring.md); a neutral opinion is not.
+// disagreement is conduct (docs/scoring.md); any other opinion (neutral,
+// with comments, none, or a result not recorded) is not.
 const governmentOpinionKindId = "7";
 // The descriptions are compared without diacritics and case. The bill is a
 // print of kind 2 ("Návrh zákona"), never a government proposal.
@@ -515,12 +516,14 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     if (!occurredAt) continue;
     const print = printById.get(row.printId);
     const resultCz = resultById.get(row.resultId) ?? null;
-    const opinion = governmentOpinionResults[normalizeSearchText(resultCz)];
-    // An opinion on a print of another kind, or with another or a missing
-    // result, is data never inspected, so it stops the run rather than being
-    // attributed or quietly dropped.
-    invariant(governmentOpinionPrintKindIds.has(print.kindId), `Government opinion ${print.number}/${row.partNumber} is on a print of unsupported kind ${print.kindId}`);
-    invariant(opinion, `Government opinion ${print.number}/${row.partNumber} has an unsupported result: ${resultCz ?? "none"}`);
+    // An opinion on a print of another kind is left out, and one with any
+    // other result is kept as not conduct; both are logged, never fatal.
+    if (!governmentOpinionPrintKindIds.has(print.kindId)) {
+      log(`${source.id}: government opinion ${print.number}/${row.partNumber} is on a print of kind ${print.kindId}, not a bill it did not submit; left out`);
+      continue;
+    }
+    const opinion = governmentOpinionResults[normalizeSearchText(resultCz)] ?? null;
+    if (!opinion) log(`${source.id}: government opinion ${print.number}/${row.partNumber} has the result ${resultCz ?? "none"}; not conduct`);
     if (occurredAt.slice(0, 10) < cutoff) continue;
     const distributedOn = occurredAt.slice(0, 10);
     const printTitle = cleanText(print.fullTitle || print.shortTitle, 1000);
@@ -533,7 +536,7 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
       evidenceRole: source.evidenceRole,
       occurredAt,
       timeZone: "Europe/Prague",
-      title: `${print.number}/${partNumber}: Stanovisko vlády (${resultCz}) — ${printTitle}`,
+      title: `${print.number}/${partNumber}: Stanovisko vlády (${resultCz ?? "bez výsledku"}) — ${printTitle}`,
       publisher: source.publisher,
       url: officialPrintDocumentPageUrl(source.term.number, print.number, partNumber),
       payload: {
