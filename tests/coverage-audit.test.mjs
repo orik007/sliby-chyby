@@ -13,7 +13,7 @@ function routingRun({ lawChanges = [], packages = [], completed = true } = {}) {
   return { schemaVersion: "1.0.0", asOf: "2026-09-23", completed, counts, lawChanges, builtPackages: packages };
 }
 
-const printParts = { quality: { prints: 2, printsWithProposalText: 1, printsWithoutProposalText: 1, printsWithApprovedText: 1, printsWithPassedText: 0, printsWithSenateResolution: 1, lawChanges: 5, lawChangesAddedInDebate: 1, lawChangesRemovedInDebate: 2, lawChangesWithAmendedAct: 3, titleOnlyLawChanges: 1, approvedBillsWithoutApprovedText: 1, printsWithPromulgatedText: 1, textWarnings: 2 } };
+const printParts = { quality: { prints: 2, printsWithProposalText: 1, printsWithoutProposalText: 1, printsWithApprovedText: 1, printsWithPassedText: 0, printsWithSenateResolution: 1, governmentOpinions: 3, governmentOpinionsWithoutText: 1, lawChanges: 5, lawChangesAddedInDebate: 1, lawChangesRemovedInDebate: 2, lawChangesWithAmendedAct: 3, titleOnlyLawChanges: 1, approvedBillsWithoutApprovedText: 1, printsWithPromulgatedText: 1, textWarnings: 2 } };
 const trackedPromises = { promises: [{ id: "p1", partyId: "ano", partyName: "ANO", titleCz: "Slib" }] };
 
 test("coverage audit never converts a promise without routed records into a score", () => {

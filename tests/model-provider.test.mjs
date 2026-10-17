@@ -547,14 +547,16 @@ test("createStructuredModelResponse sends JSON input and no reasoning effort by 
       ok: true,
       json: async () => ({
         id: "resp_fixture",
-        model: "gpt-6.1-sol",
+        model: "gpt-6-luna",
         usage: { input_tokens: 10, output_tokens: 2 },
         output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }]
       })
     };
   };
   try {
-    const result = await createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6.1-sol", instructions: "fixture", input: { a: 1 }, name: "fixture_schema", schema: { type: "object" } });
+    // gpt-6-luna: the budget test above leaves gpt-6.1-sol's window full
+    // for more than ten minutes of the real clock.
+    const result = await createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6-luna", instructions: "fixture", input: { a: 1 }, name: "fixture_schema", schema: { type: "object" } });
     assert.equal(body.input, JSON.stringify({ a: 1 }));
     assert.equal("reasoning" in body, false);
     assert.equal("reasoningEffort" in result, false);

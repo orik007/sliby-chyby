@@ -7,14 +7,15 @@ import { createESbirkaClient, createLawContextCache, createLawContextReader, ESb
 import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { createPspDocumentRecorder } from "./lib/psp-document-hashes.mjs";
 import { log, progress } from "./lib/run-log.mjs";
-import { laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
+import { collectPrints, governmentOpinionSectionLabels, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
 
 /**
  * Downloads, in every run, the official texts of every Chamber print that a
  * potentially attributable record concerns (the proposal and, for a bill,
- * the text the Chamber approved, the text passed by Parliament, and any
- * Senate resolution returning it) and splits them into law changes with
+ * the text the Chamber approved, the text passed by Parliament, any Senate
+ * resolution returning it, and the government's opinion on a bill it did
+ * not submit) and splits them into law changes with
  * their versions (docs/evidence-pipeline.md, Chamber data rules). Nothing
  * is cached, so a later text is used as soon as psp.cz publishes it. When
  * psp.cz does not publish the text a decisive vote concerned and the bill was
@@ -38,27 +39,6 @@ function parseArgs(args) {
   }
   invariant(options.collectorRun && options.output, "--collector-run and --output are required");
   return options;
-}
-
-function collectPrints(records) {
-  const prints = new Map();
-  const add = ({ externalPrintId, printKindId, number, partNumber, titleCz, senateResolutionPartNumbers }) => {
-    if (!externalPrintId || !Number.isInteger(number)) return;
-    prints.set(String(externalPrintId), {
-      printId: String(externalPrintId),
-      kindId: printKindId ?? null,
-      number,
-      partNumber: partNumber ?? 0,
-      title: titleCz ?? "",
-      senateResolutionPartNumbers: senateResolutionPartNumbers ?? []
-    });
-  };
-  for (const record of records) {
-    const payload = record.payload ?? {};
-    if (record.kind === "legislative-step") add({ ...payload, number: payload.printNumber, titleCz: payload.printTitleCz });
-    for (const linkedPrint of payload.linkedPrints ?? []) add(linkedPrint);
-  }
-  return [...prints.values()].sort((left, right) => left.number - right.number);
 }
 
 const htmlOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };
@@ -89,13 +69,13 @@ async function fetchWordText(source, url, filename, format, warnings, printNumbe
 // The Word file listed in a print page's proposal-text section: the
 // proposal itself (part 0), a Senate resolution sub-print ("Text"), or the
 // sub-print with the text referred to the Senate ("Text").
-async function fetchPageText(source, pageUrl, printNumber, warnings, version) {
-  const link = proposalDocumentLink(decodePage(await fetchPsp(source, pageUrl, htmlOptions)), pageUrl);
+async function fetchPageText(source, pageUrl, printNumber, warnings, version, sectionLabels = undefined) {
+  const link = proposalDocumentLink(decodePage(await fetchPsp(source, pageUrl, htmlOptions)), pageUrl, sectionLabels);
   return link ? fetchWordText(source, link.url, link.filename, link.format, warnings, printNumber, version) : null;
 }
 
-function fetchPrintPageText(source, termNumber, printNumber, partNumber, warnings, version) {
-  return fetchPageText(source, officialPrintDocumentPageUrl(termNumber, printNumber, partNumber), printNumber, warnings, version);
+function fetchPrintPageText(source, termNumber, printNumber, partNumber, warnings, version, sectionLabels = undefined) {
+  return fetchPageText(source, officialPrintDocumentPageUrl(termNumber, printNumber, partNumber), printNumber, warnings, version, sectionLabels);
 }
 
 // The names psp.cz gives the later-text pages, used to trace a version.
@@ -127,6 +107,15 @@ async function senateResolution(source, termNumber, print, partNumber, warnings)
   return resolution ? { partNumber, ...resolution } : null;
 }
 
+// The government's opinion on a bill it did not submit: the Word file of the
+// sub-print's "Stanovisko" section. Without one, the opinion is still
+// conduct, assessed by its result, and reported.
+async function governmentOpinion(source, termNumber, print, partNumber, warnings) {
+  const opinion = await fetchPrintPageText(source, termNumber, print.number, partNumber, warnings, "government-opinion", governmentOpinionSectionLabels);
+  if (!opinion) warnings.push({ printNumber: print.number, kind: "government-opinion-without-text", detail: `the government opinion ${print.number}/${partNumber} has no readable DOCX or DOC text` });
+  return opinion ? { partNumber, ...opinion } : null;
+}
+
 async function fetchPrintTexts(source, print, termNumber) {
   const warnings = [];
   const bill = billPrintKindIds.has(String(print.kindId));
@@ -142,13 +131,20 @@ async function fetchPrintTexts(source, print, termNumber) {
   const approvedText = links.approved
     ? laterText(source, print, "approved", links.approved, warnings)
     : links.referredToSenate ? referredText(source, print, links.referredToSenate, warnings) : null;
-  const [approved, passed, ...resolutions] = await allSettledOrThrow([
-    approvedText,
-    links.passed ? laterText(source, print, "passed", links.passed, warnings) : null,
-    ...print.senateResolutionPartNumbers.map((partNumber) => senateResolution(source, termNumber, print, partNumber, warnings))
+  const [[approved, passed], resolutions, opinions] = await allSettledOrThrow([
+    allSettledOrThrow([approvedText, links.passed ? laterText(source, print, "passed", links.passed, warnings) : null]),
+    allSettledOrThrow(print.senateResolutionPartNumbers.map((partNumber) => senateResolution(source, termNumber, print, partNumber, warnings))),
+    allSettledOrThrow(print.governmentOpinionPartNumbers.map((partNumber) => governmentOpinion(source, termNumber, print, partNumber, warnings)))
   ]);
   const texts = Object.fromEntries(Object.entries({ proposed: proposal, approved, passed }).filter(([, text]) => text));
-  return { texts, senateResolutions: resolutions.filter(Boolean), warnings, promulgation: history ? promulgatedActOfHistory(history) : null, passedListed: Boolean(links.passed) };
+  return {
+    texts,
+    senateResolutions: resolutions.filter(Boolean),
+    governmentOpinions: opinions.filter(Boolean),
+    warnings,
+    promulgation: history ? promulgatedActOfHistory(history) : null,
+    passedListed: Boolean(links.passed)
+  };
 }
 
 const args = parseArgs(process.argv.slice(2));
@@ -195,7 +191,7 @@ for (const record of conductRecords) {
     if (concerned) concernedByPrint.set(printId, [...(concernedByPrint.get(printId) ?? []), concerned]);
   }
 }
-log(`${prints.length} prints concern potentially attributable records; downloading their proposal texts, later texts, and Senate resolutions`);
+log(`${prints.length} prints concern potentially attributable records; downloading their proposal texts, later texts, Senate resolutions, and government opinions`);
 
 // Prints are processed as many at a time as fetchPsp keeps requests open
 // (pspDownloadSettings.concurrency), each request through it. A failed download stops
@@ -220,7 +216,7 @@ async function downloadWorker() {
     }
     fetched.set(print.printId, result);
     const versions = Object.keys(result.texts);
-    tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX or DOC proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
+    tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX or DOC proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}${result.governmentOpinions.length > 0 ? `, ${result.governmentOpinions.length} government opinion(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
   }
 }
 let recordError = null;
@@ -298,7 +294,7 @@ await lawContextCache.flush();
 const result = {};
 for (const print of prints) {
   print.pageUrl = officialPrintDocumentPageUrl(source.term.number, print.number, print.partNumber);
-  const { texts, senateResolutions, warnings, pspVersions } = fetched.get(print.printId);
+  const { texts, senateResolutions, governmentOpinions, warnings, pspVersions } = fetched.get(print.printId);
   // Counted by what psp.cz publishes, also when e-Sbírka supplied the text.
   if ((concernedByPrint.get(print.printId) ?? []).some(({ version }) => version === "approved") && !pspVersions.includes("approved") && !warnings.some(({ kind, version }) => version === "approved" && kind !== "promulgated-text-not-digitised")) {
     warnings.push({ printNumber: print.number, kind: "approved-without-approved-text", detail: "a vote on the approved text is recorded, but psp.cz lists no approved text" });
@@ -310,7 +306,7 @@ for (const print of prints) {
     titleCz: print.title,
     versions: Object.keys(texts),
     warnings,
-    changes: lawChangesOfPrint({ print, texts, senateResolutions })
+    changes: lawChangesOfPrint({ print, texts, senateResolutions, governmentOpinions })
   };
 }
 
@@ -322,6 +318,10 @@ const quality = {
   printsWithApprovedText: Object.values(result).filter(({ versions }) => versions.includes("approved")).length,
   printsWithPassedText: Object.values(result).filter(({ versions }) => versions.includes("passed")).length,
   printsWithSenateResolution: Object.values(result).filter(({ changes }) => changes[0]?.senateResolutions.length > 0).length,
+  // The government's opinions on bills it did not submit that are conduct,
+  // and those of them psp.cz lists without a readable Word file.
+  governmentOpinions: prints.reduce((sum, { governmentOpinionPartNumbers }) => sum + governmentOpinionPartNumbers.length, 0),
+  governmentOpinionsWithoutText: Object.values(result).reduce((sum, { warnings }) => sum + warnings.filter(({ kind }) => kind === "government-opinion-without-text").length, 0),
   printsWithPromulgatedText: promulgatedTexts.length,
   eSbirkaRequests: eSbirkaRequests.attempts,
   eSbirkaFailedRequests: eSbirkaRequests.failed,
@@ -335,5 +335,5 @@ const quality = {
 };
 
 await writeFile(resolve(args.output, "print-parts.json"), `${JSON.stringify({ schemaVersion: "1.0.0", quality, prints: result }, null, 2)}\n`);
-log(`law changes: ${quality.lawChanges} from ${quality.prints} prints (${quality.printsWithProposalText} with a proposal text, ${quality.printsWithApprovedText} with an approved text, ${quality.printsWithPassedText} with a passed text, ${quality.printsWithPromulgatedText} with a text from e-Sbírka, ${quality.printsWithSenateResolution} with a Senate resolution, ${quality.textWarnings} text warning(s))`);
+log(`law changes: ${quality.lawChanges} from ${quality.prints} prints (${quality.printsWithProposalText} with a proposal text, ${quality.printsWithApprovedText} with an approved text, ${quality.printsWithPassedText} with a passed text, ${quality.printsWithPromulgatedText} with a text from e-Sbírka, ${quality.printsWithSenateResolution} with a Senate resolution, ${quality.governmentOpinions} government opinion(s) of which ${quality.governmentOpinionsWithoutText} without a text, ${quality.textWarnings} text warning(s))`);
 console.log(JSON.stringify({ quality }, null, 2));

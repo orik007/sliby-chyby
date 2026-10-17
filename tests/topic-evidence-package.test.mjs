@@ -92,6 +92,45 @@ test("a package holds every kept law change in full and the party's conduct on i
   assert.equal(pkg.generation.oversized, false);
 });
 
+test("the government's opinion on a bill it did not submit is conduct on its proposed version, with its text", () => {
+  const opinionRecord = (opinion, resultCz) => createCollectedRecord({
+    id: `psp-core-2025--government-opinion-43200-1-${opinion}`,
+    sourceId: "psp-core-2025",
+    kind: "government-opinion",
+    primary: true,
+    evidenceRole: "primary-record",
+    occurredAt: "2026-02-10T10:00:00",
+    title: `90/1: Stanovisko vlády (${resultCz}) — Návrh zákona`,
+    publisher: "Chamber of Deputies",
+    url: "https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=90&CT1=1",
+    payload: {
+      externalPrintId: "43200",
+      printKindId: "2",
+      printNumber: 90,
+      partNumber: 1,
+      printTitleCz: "Návrh zákona",
+      printUrl: "https://public.psp.cz/sqw/historie.sqw?o=10&t=90",
+      resultCz,
+      opinion,
+      distributedOn: "2026-02-10",
+      proposal: { kind: "government-opinion", proposerPartyIds: [fiscalPromise.partyId] }
+    }
+  });
+  const opinionText = { partNumber: 1, document: { filename: "t009001.doc", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=9" }, textCz: "Vláda vyslovuje nesouhlas s návrhem zákona." };
+  const change = { ...lawChange(1), printKindId: "2", governmentOpinions: [opinionText] };
+  const build = (records) => buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: [{ change, route }], recordsByPrintId: new Map([["43200", records]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
+  const pkg = build([opinionRecord("disagrees", "nesouhlas")]);
+  const [conduct] = pkg.evidence.filter(({ role }) => role === "conduct-evidence");
+  assert.equal(conduct.matchBasis.attributionStatus, "verified-government-opinion");
+  assert.equal(conduct.structuredFacts.opinion, "disagrees");
+  assert.equal(conduct.structuredFacts.textCz, opinionText.textCz);
+  assert.deepEqual(conduct.structuredFacts.document, opinionText.document);
+  assert.deepEqual(conduct.structuredFacts.concernsLawChanges.map(({ version }) => version), ["proposed"]);
+  assert.match(conduct.factSummary, /^The government disagrees with print 90/);
+  // A neutral opinion is not conduct, so it alone gives no package.
+  assert.equal(build([opinionRecord("neutral", "neutrální")]), null);
+});
+
 test("nothing is trimmed: many law changes all stay in the package", () => {
   const keptChanges = Array.from({ length: 40 }, (_, index) => ({ change: { ...lawChange(index + 1), heading: `ČÁST ${index + 1}` }, route }));
   const pkg = buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges, recordsByPrintId: new Map([["43200", [attributedVoteRecord()]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
@@ -317,7 +356,7 @@ test("a law change both assessors found not relevant is left out, and the packag
   });
   const full = build();
   const [first, second] = full.evidence.filter(({ role }) => role === "law-change").map(({ id }) => id);
-  const assessorPrompt = { version: "assessor-v21", contentHash: "a".repeat(64) };
+  const assessorPrompt = { version: "assessor-v22", contentHash: "a".repeat(64) };
   const review = (relevantSecond) => ({ changeRelevance: [{ evidenceId: first, relevant: true, reasonCz: "Souvisí.", effectCz: "Zpřísňuje." }, { evidenceId: second, relevant: relevantSecond, reasonCz: relevantSecond ? "Souvisí." : "Jiné téma.", effectCz: "" }] });
   const audit = (reviewA, reviewB, prompt = assessorPrompt) => ({ prompts: { assessor: prompt }, validatedAssessments: { "assessor-a": reviewA, "assessor-b": reviewB } });
   const verdictsOf = (auditRecord, evidencePackage = full) => {
@@ -346,7 +385,7 @@ test("a law change both assessors found not relevant is left out, and the packag
     assert.equal(build(exclusionFrom(verdictsOf(auditRecord))).excludedLawChanges, undefined);
   }
   // Another assessor prompt or a changed text brings the change back.
-  assert.equal(build(exclusionFrom(verdictsOf(both), { version: "assessor-v21", contentHash: "b".repeat(64) })).excludedLawChanges, undefined);
+  assert.equal(build(exclusionFrom(verdictsOf(both), { version: "assessor-v22", contentHash: "b".repeat(64) })).excludedLawChanges, undefined);
   assert.equal(build(exclusionFrom(verdictsOf(both)), [lawChange(1), lawChange(2, "Zákon č. 218/2000 Sb. se mění takto: jinak.")]).excludedLawChanges, undefined);
   // A change whose context was trimmed in the assessed package gives no verdict.
   const trimmed = { ...full, generation: { ...full.generation, contextOmissions: [{ evidenceId: second, version: "proposed", suppliedCount: 0, omitted: [] }] } };

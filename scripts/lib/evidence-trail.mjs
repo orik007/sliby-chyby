@@ -10,7 +10,7 @@ function invariant(condition, message) {
 
 // Official print kinds (tisky.zip druh_tisku.unl) of a government proposal.
 const governmentProposalKinds = { 1: "government-bill", 3: "state-budget", 4: "treaty" };
-const stepOrder = { submission: 0, "senate-resolution": 1, vote: 2 };
+const stepOrder = { submission: 0, "government-opinion": 1, "senate-resolution": 2, vote: 3 };
 
 function proposalKind(facts) {
   if (facts.proposal.kind === "member-bill") return "member-bill";
@@ -36,6 +36,7 @@ function printUrlOf(printId, conduct) {
   for (const item of conduct) {
     const facts = item.structuredFacts;
     if (item.type === "legislative-step" && String(facts.externalPrintId) === printId) return item.url;
+    if (item.type === "government-opinion" && String(facts.externalPrintId) === printId) return facts.printUrl;
     const linked = (facts.linkedPrints ?? []).find((print) => String(print.externalPrintId) === printId);
     if (linked?.url) return linked.url;
   }
@@ -64,6 +65,11 @@ function stepFromConduct(item, printId, changes) {
   const facts = item.structuredFacts;
   if (item.type === "legislative-step") {
     return { kind: "submission", evidenceId: item.id, date: facts.proposal.submittedOn, proposal: proposalKind(facts), proposerCz: facts.proposal.proposerCz ?? null, ...textOf(item, changes) };
+  }
+  // The government's opinion on a bill it did not submit links to the
+  // opinion's own page on psp.cz.
+  if (item.type === "government-opinion") {
+    return { kind: "government-opinion", evidenceId: item.id, date: item.publishedAt, opinion: facts.opinion, printPartCz: `${facts.printNumber}/${facts.partNumber}`, url: item.url, ...textOf(item, changes) };
   }
   invariant(item.type === "parliamentary-vote", `Unsupported conduct ${item.id}`);
   const linkedPrint = (facts.linkedPrints ?? []).find((print) => String(print.externalPrintId) === printId);

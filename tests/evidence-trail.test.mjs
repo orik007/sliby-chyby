@@ -4,8 +4,9 @@ import test from "node:test";
 import { hashEvidencePackage } from "../scripts/lib/assessment-pipeline.mjs";
 import { buildEvidenceTrail, createAssessmentRevision } from "../scripts/lib/evidence-trail.mjs";
 import { renderHumanReviewMarkdown } from "../scripts/lib/assessment-review.mjs";
-import { formatDate } from "../src/lib/evidence-trail.ts";
-import { assessmentRevisionSchema, evidenceTrailRegulationSchema } from "../src/lib/schema.ts";
+import { formatDate, stepLinks, stepTitle } from "../src/lib/evidence-trail.ts";
+import { assessmentRevisionSchema, evidenceTrailPrintSchema, evidenceTrailRegulationSchema } from "../src/lib/schema.ts";
+import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
 import { lawChangeOfRegulation } from "../scripts/lib/print-parts.mjs";
 import { loadTrackedPromises } from "../scripts/lib/published-promises.mjs";
 import { buildLawChangeEvidencePackage } from "../scripts/lib/topic-evidence-package.mjs";
@@ -205,6 +206,49 @@ test("a cited ministerial decree enters the trail as its adoption with a link to
     adoption: { date: "2026-07-29", evidenceId: "esbirka-regulations--2026-145", by: "ministry", issuerCz: "Ministerstvo financí" }
   }]);
   assert.deepEqual(evidenceTrailRegulationSchema.parse(trail[0]), trail[0]);
+});
+
+test("a cited government opinion enters the trail as a step on its bill, with a link to the opinion and the proposed text", async () => {
+  const { promises } = await loadTrackedPromises(new URL("..", import.meta.url).pathname);
+  const promise = promises.find(({ partyId }) => partyId === "ano");
+  const record = createCollectedRecord({
+    id: "psp-core-2025--government-opinion-43110-1",
+    sourceId: "psp-core-2025",
+    kind: "government-opinion",
+    primary: true,
+    evidenceRole: "primary-record",
+    occurredAt: "2025-12-16T00:00:00",
+    title: "7/1: Stanovisko vlády (souhlas) — Návrh zákona",
+    publisher: "Chamber of Deputies",
+    url: "https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=7&CT1=1",
+    payload: { externalPrintId: "43110", printKindId: "2", printNumber: 7, partNumber: 1, printTitleCz: "Návrh zákona", printUrl: "https://public.psp.cz/sqw/historie.sqw?o=10&t=7", resultCz: "souhlas", opinion: "agrees", distributedOn: "2025-12-16", proposal: { kind: "government-opinion", proposerPartyIds: ["ano", "motoriste", "spd"] } }
+  });
+  const change = {
+    changeId: "43110-1",
+    printId: "43110",
+    printNumber: 7,
+    printKindId: "2",
+    printTitleCz: "Návrh zákona",
+    printPageUrl: "https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=7&CT1=0",
+    addedIn: "proposed",
+    heading: null,
+    titleCz: "Návrh zákona",
+    acts: [],
+    titleActs: [],
+    identifiers: [],
+    versions: { proposed: { heading: null, titleCz: "Návrh zákona", textCz: "Zákon …", document: { filename: "t000700.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=1" } } },
+    senateResolutions: [],
+    governmentOpinions: [{ partNumber: 1, document: { filename: "t000701.doc", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=265860" }, textCz: "Vláda souhlasí." }]
+  };
+  const evidencePackage = buildLawChangeEvidencePackage({ assessorInstructions: "assessor instructions", promise, keptChanges: [{ change, route: { routeBasis: ["specific-tag"], matchedTagIds: ["vat-policy"], directLinkIdentifiers: [] } }], recordsByPrintId: new Map([["43110", [record]]]), printFirstSeenOn: new Map([["43110", "2025-12-16"]]), collectorRun: { schemaVersion: "1.0.0", runId: "fixture", records: [record] }, asOf: "2026-09-25" });
+  const bill = evidencePackage.evidence.find(({ role }) => role === "law-change");
+  const review = { status: "moving-towards", evidenceSufficient: true, citedEvidenceIds: [bill.id, record.id], changeRelevance: [{ evidenceId: bill.id, relevant: true, reasonCz: "Návrh se týká slibu.", effectCz: "Zavádí pravidlo." }], explanationCz: "Vláda s návrhem souhlasila." };
+  const [print] = buildEvidenceTrail(evidencePackage, { resolution: { state: "candidate", selectedReview: "consensus" }, validatedAssessments: { "assessor-a": review, "assessor-b": review } });
+  assert.equal(print.printUrl, "https://public.psp.cz/sqw/historie.sqw?o=10&t=7");
+  assert.deepEqual(print.steps, [{ kind: "government-opinion", date: "2025-12-16", evidenceId: record.id, opinion: "agrees", printPartCz: "7/1", url: record.url, version: "proposed", textUrl: "https://www.psp.cz/sqw/text/orig2.sqw?idd=1", notes: [] }]);
+  assert.deepEqual(evidenceTrailPrintSchema.parse(print), print);
+  assert.equal(stepTitle(print.steps[0]), "Vláda s návrhem souhlasila");
+  assert.deepEqual(stepLinks(print.steps[0], print.printUrl).map(({ label }) => label), ["Stanovisko vlády (tisk 7/1)", "Navržený text"]);
 });
 
 test("trail dates keep their calendar day in any time zone", () => {

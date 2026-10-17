@@ -26,7 +26,7 @@ export function loadRelevancePrompt(root = process.cwd()) {
 }
 
 const regulationKindLabels = { "government-regulation": "government regulation (nařízení vlády) adopted by the government", "ministerial-decree": "decree (vyhláška) issued by a ministry" };
-const printKindLabels = { 1: "government bill", 2: "member bill", 3: "state budget bill", 4: "international treaty submitted by the government", 5: "other Chamber print" };
+const printKindLabels = { 1: "government bill", 2: "bill submitted by members, the Senate, or a regional assembly", 3: "state budget bill", 4: "international treaty submitted by the government", 5: "other Chamber print" };
 
 
 /**

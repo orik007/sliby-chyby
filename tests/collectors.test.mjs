@@ -9,6 +9,7 @@ import {
   validateRegistry
 } from "../scripts/lib/collector-core.mjs";
 import { derivePartyVoteSummaries, normalizePspData, parseUnl } from "../scripts/lib/psp-collector.mjs";
+import { attributionStatusForRecord, versionConcerned } from "../scripts/lib/attribution.mjs";
 
 const governmentPeriods = {
   schemaVersion: "1.0.0",
@@ -210,6 +211,18 @@ function entry(text) {
   return strToU8(text);
 }
 
+// A row of tisky_za.unl with all its official columns (psp.cz k=1303).
+function subPrintRow({ printId, partNumber, historyId = null, kindId, shortTitle, fullTitle = shortTitle, resultId = null, distributedAt = null, status = null }) {
+  const fields = Array(16).fill(null);
+  Object.assign(fields, { 0: printId, 1: partNumber, 2: historyId, 3: kindId, 4: shortTitle, 5: fullTitle, 11: resultId, 14: distributedAt, 15: status });
+  return unl(fields);
+}
+
+// vysledek.unl as published in windows-1250, the results of a government
+// opinion; "á" and "í" have the same bytes in latin1.
+const resultTable = unl(["17", "nesouhlas"]) + unl(["19", "souhlas"]) + unl(["22", "neutrální"]);
+const resultTableBytes = () => Buffer.from(resultTable, "latin1");
+
 test("PSP normalizer joins votes, prints, and club membership at vote date", () => {
   const source = {
     id: "psp-core-2025",
@@ -241,7 +254,8 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
     "prechody.unl": entry(unl(["10", "10", "20", "5", "1"])),
     "typ_akce.unl": entry(unl(["5", "Chamber approved bill"])),
     "typ_stavu.unl": entry(unl(["5", "3. cteni"]) + unl(["6", "Odesilano do Senatu"])),
-    "tisky_za.unl": entry(unl(["700", "2", "801", "11", "Usnesení Senátu k tisku 189/0", "Usnesení Senátu"]) + unl(["700", "1", "801", "12", "Zákon ze Senátu", "Zákon ze Senátu"])),
+    "tisky_za.unl": entry(subPrintRow({ printId: "700", partNumber: "2", historyId: "801", kindId: "11", shortTitle: "Usnesení Senátu k tisku 189/0", fullTitle: "Usnesení Senátu" }) + subPrintRow({ printId: "700", partNumber: "1", historyId: "801", kindId: "12", shortTitle: "Zákon ze Senátu" })),
+    "vysledek.unl": resultTableBytes(),
     "predkladatel.unl": entry("")
   };
 
@@ -306,6 +320,7 @@ function agendaFixture({ historyAgendaId = "5001" } = {}) {
     "typ_akce.unl": entry(unl(["6", "setrvano"])),
     "typ_stavu.unl": entry(unl(["6", "Snemovna (Senat)"])),
     "tisky_za.unl": entry(""),
+    "vysledek.unl": resultTableBytes(),
     "predkladatel.unl": entry("")
   };
   // PSP files are windows-1250; the fixture stays ASCII so UTF-8 bytes decode identically.
@@ -397,6 +412,7 @@ test("PSP normalizer attributes submitted bills to proposer and government parti
       "typ_akce.unl": entry(unl(["7", "předložen"])),
       "typ_stavu.unl": entry(""),
       "tisky_za.unl": entry(""),
+      "vysledek.unl": resultTableBytes(),
       "predkladatel.unl": entry(unl(["701", "1", "1", "0"]) + unl(["701", "2", "2", "0"]) + unl(["704", "2", "1", "0"]))
     },
     sessionsEntries: { "schuze.unl": entry(""), "bod_schuze.unl": entry("") }
@@ -407,6 +423,79 @@ test("PSP normalizer attributes submitted bills to proposer and government parti
   assert.equal(proposalOf(90).kind, "government-proposal");
   assert.deepEqual(proposalOf(94).proposerPartyIds, [], "a proposal of the government before 15 December 2025 is not conduct of the current governing parties");
   assert.deepEqual(proposalOf(15).proposerPartyIds, []);
+});
+
+test("PSP normalizer records the government's opinion on a bill it did not submit", () => {
+  const source = { id: "psp-core-2025", publisher: "PSP", evidenceRole: "primary-record", partyAliases: {}, term: { year: 2025, number: 10, organId: 174 } };
+  const print = (id, number, kindId = "2") => {
+    const fields = Array(24).fill(null);
+    Object.assign(fields, { 0: id, 1: kindId, 2: "20", 3: number, 4: "0", 5: "2", 7: "174", 10: `Member bill ${number}`, 11: "06.11.2025", 15: `Member bill ${number}` });
+    return unl(fields);
+  };
+  const opinion = (printId, resultId, distributedAt) => subPrintRow({ printId, partNumber: "1", kindId: "7", shortTitle: "Stanovisko vlády", resultId, distributedAt });
+  const normalize = (subPrints, governmentBill = "") => normalizePspData({
+    source,
+    since: "2025-10-01",
+    governmentPeriods,
+    votesEntries: { "hl2025s.unl": entry(""), "hl2025h1.unl": entry(""), "zmatecne.unl": entry("") },
+    membersEntries: { "osoby.unl": entry(""), "poslanec.unl": entry(""), "zarazeni.unl": entry(""), "organy.unl": entry("") },
+    printsEntries: {
+      "tisky.unl": entry(print("701", "7") + print("702", "8") + print("703", "9") + print("704", "10") + governmentBill),
+      "hist.unl": entry(""),
+      "stavy.unl": entry(""),
+      "prechody.unl": entry(""),
+      "typ_akce.unl": entry(""),
+      "typ_stavu.unl": entry(""),
+      "tisky_za.unl": entry(subPrints),
+      "vysledek.unl": resultTableBytes(),
+      "predkladatel.unl": entry("")
+    },
+    sessionsEntries: { "schuze.unl": entry(""), "bod_schuze.unl": entry("") }
+  });
+  const senateResolution = subPrintRow({ printId: "701", partNumber: "2", kindId: "11", shortTitle: "Usnesení Senátu" });
+  const result = normalize(senateResolution + opinion("701", "19", "2026-01-12 10:00") + opinion("702", "17", "2026-01-13 11:30") + opinion("703", "22", "2026-01-14 09:00") + opinion("704", "17", "2025-12-04 13:47"));
+  const opinions = Object.fromEntries(result.records.filter(({ kind }) => kind === "government-opinion").map((record) => [record.payload.printNumber, record]));
+  assert.equal(opinions[7].id, "psp-core-2025--government-opinion-701-1");
+  assert.equal(opinions[7].url, "https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=7&CT1=1");
+  assert.equal(opinions[7].occurredAt, "2026-01-12T10:00:00");
+  // The bill's Senate resolutions go with the opinion, for a print that
+  // only the opinion brings into the pipeline.
+  assert.deepEqual(opinions[7].payload.senateResolutionPartNumbers, [2]);
+  assert.deepEqual(opinions[8].payload.senateResolutionPartNumbers, []);
+  assert.deepEqual(
+    Object.values(opinions).map(({ payload }) => [payload.printNumber, payload.resultCz, payload.opinion, payload.distributedOn, payload.proposal.proposerPartyIds]),
+    [
+      [7, "souhlas", "agrees", "2026-01-12", ["ano", "motoriste", "spd"]],
+      [8, "nesouhlas", "disagrees", "2026-01-13", ["ano", "motoriste", "spd"]],
+      [9, "neutrální", "neutral", "2026-01-14", ["ano", "motoriste", "spd"]],
+      // An opinion of the government before 15 December 2025 is not
+      // conduct of the current governing parties.
+      [10, "nesouhlas", "disagrees", "2025-12-04", []]
+    ]
+  );
+  // An agreement or a disagreement is conduct of every governing party; a
+  // neutral opinion and an earlier government's opinion are not.
+  const status = (printNumber, partyId) => attributionStatusForRecord(opinions[printNumber], { partyId }).attributionStatus;
+  assert.equal(status(7, "spd"), "verified-government-opinion");
+  assert.equal(status(8, "ano"), "verified-government-opinion");
+  assert.equal(status(9, "ano"), "unattributed");
+  assert.equal(status(10, "ano"), "unattributed");
+  assert.equal(versionConcerned(opinions[7], "701").version, "proposed");
+  // A revoked opinion or Senate resolution (status 1 or 2) no longer stands.
+  const subPrint = (printId, partNumber, kindId, resultId, distributedAt, status) => subPrintRow({ printId, partNumber, kindId, shortTitle: kindId === "7" ? "Stanovisko vlády" : "Usnesení Senátu", resultId, distributedAt, status });
+  const revoked = normalize(subPrint("702", "1", "7", "17", "2026-01-13 11:30", "2") + subPrint("701", "2", "11", null, null, "1") + subPrint("701", "3", "7", "19", "2026-01-12 10:00", null));
+  assert.deepEqual(revoked.records.filter(({ kind }) => kind === "government-opinion").map(({ payload }) => [payload.printNumber, payload.partNumber, payload.senateResolutionPartNumbers]), [[7, 3, []]]);
+  // An opinion not yet distributed is left out, whatever psp.cz records of
+  // it so far.
+  assert.equal(normalize(opinion("701", "", "")).records.filter(({ kind }) => kind === "government-opinion").length, 0);
+  // An opinion on a print of another kind is left out, and one with any
+  // other or no result is kept but is not conduct; neither stops the run,
+  // also before the cutoff.
+  assert.equal(normalize(opinion("705", "19", "2026-01-12 10:00"), print("705", "11", "1")).records.filter(({ kind }) => kind === "government-opinion").length, 0);
+  const other = normalize(opinion("701", "", "2026-01-12 10:00") + opinion("702", "99", "2026-01-12 10:00") + opinion("703", "99", "2025-09-12 10:00"));
+  const otherOpinions = other.records.filter(({ kind }) => kind === "government-opinion");
+  assert.deepEqual(otherOpinions.map(({ payload }) => [payload.printNumber, payload.resultCz, payload.opinion]), [[7, null, null], [8, null, null]]);
+  assert.equal(attributionStatusForRecord(otherOpinions[0], { partyId: "ano" }).attributionStatus, "unattributed");
 });
 
 test("deduplication accepts identical records and rejects conflicting content", () => {

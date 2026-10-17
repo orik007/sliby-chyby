@@ -103,7 +103,8 @@ const collectorRun = JSON.parse(await readFile(resolve(args.collectorRun), "utf8
 invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
 const trackedPartyIds = [...new Set(promises.map(({ partyId }) => partyId))].sort();
 // Only records that can be attributable conduct of a tracked party continue;
-// they link law changes to the party's votes and submissions.
+// they link law changes to the party's votes, submissions, and the
+// government's opinions.
 const { primaryRecordsInWindow, conductRecords, recordsByPrintId, printFirstSeenOn } = conductOfRun(collectorRun, args.asOf, trackedPartyIds);
 // Every model that reads a law change also reads its context
 // (docs/evidence-pipeline.md, Law-change context).

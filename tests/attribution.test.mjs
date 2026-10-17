@@ -8,6 +8,7 @@ import {
   isPotentiallyAttributable,
   versionConcerned
 } from "../scripts/lib/attribution.mjs";
+import { validateReaderFacingCzech } from "../scripts/lib/assessment-pipeline.mjs";
 
 const promise = { id: "test-promise", partyId: "motoriste" };
 
@@ -78,7 +79,7 @@ test("only the submission step of a bill is a proposal", () => {
   assert.equal(attributionStatusForRecord(step, promise).attributionStatus, "unattributed");
 });
 
-test("only Chamber votes, legislative steps, and adoptions of regulations can be collected, and only six statuses are assessable", () => {
+test("only Chamber votes, legislative steps, government opinions, and adoptions of regulations can be collected, and only seven statuses are assessable", () => {
   assert.throws(() => createCollectedRecord({
     id: "party--post",
     sourceId: "party-news",
@@ -91,7 +92,7 @@ test("only Chamber votes, legislative steps, and adoptions of regulations can be
     url: "https://party.example/post",
     payload: {}
   }), /Unknown record kind/);
-  assert.deepEqual([...assessableAttributionStatuses].sort(), ["verified-government-proposal", "verified-government-regulation", "verified-member-bill", "verified-ministerial-decree", "verified-party-no-majority", "verified-party-vote"]);
+  assert.deepEqual([...assessableAttributionStatuses].sort(), ["verified-government-opinion", "verified-government-proposal", "verified-government-regulation", "verified-member-bill", "verified-ministerial-decree", "verified-party-no-majority", "verified-party-vote"]);
 });
 
 test("only records that can be attributable conduct of a tracked party are routed", () => {
@@ -138,4 +139,8 @@ test("a vote concerns the text its print-history step decided on", () => {
   // A vote linked to a print only through its agenda item is not conduct on
   // that print.
   assert.equal(versionConcerned({ kind: "parliamentary-vote", payload: { linkedPrints: [{ externalPrintId: "43200", printKindId: "1", historyContexts: [] }] } }, "43200"), null);
+});
+
+test("the attribution status of a government opinion never passes as public Czech prose", () => {
+  assert.throws(() => validateReaderFacingCzech("Vláda s návrhem souhlasila (verified-government-opinion)."), /internal or unexplained language/);
 });

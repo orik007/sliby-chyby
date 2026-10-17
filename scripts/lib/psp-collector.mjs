@@ -1,4 +1,6 @@
 import { unzipSync } from "fflate";
+import { normalizeSearchText } from "./attribution.mjs";
+import { officialPrintDocumentPageUrl } from "./psp-print-documents.mjs";
 import { log } from "./run-log.mjs";
 import {
   cleanText,
@@ -18,7 +20,8 @@ const schemas = {
   history: ["historyId", "printId", "dateTime", "voteId", "transitionId", "agendaId", "session", "resolutionNumber", "committeeReporterMpId", "chairReporterMpId", "committeeResolution", "collectionPublishedAt", "collectionPart", "collectionNumber", "note"],
   state: ["stateId", "stateTypeId", "printKindId", "description", "deadline", "deadlineTransitionId"],
   stateType: ["stateTypeId", "description"],
-  subPrint: ["printId", "partNumber", "historyId", "kindId", "shortTitle", "fullTitle"],
+  subPrint: ["printId", "partNumber", "historyId", "kindId", "shortTitle", "fullTitle", "distributedAtBefore2011", "organId", "resolutionNumber", "reporterMpId", "textUrl", "resultId", "partSuffix", "sortOrder", "distributedAt", "status"],
+  result: ["resultId", "description"],
   transition: ["transitionId", "fromStateId", "toStateId", "actionId", "transitionType"],
   action: ["actionId", "description"],
   proposer: ["printId", "personId", "order", "type"],
@@ -226,9 +229,23 @@ function historyContext(history, { transitionById, actionById, stageOfState }) {
   };
 }
 
+// The statuses of a revoked sub-print (tisky_za.status, psp.cz open-data
+// documentation).
+const revokedSubPrintStatuses = new Set(["1", "2"]);
+
 // Official print kind (druh_tisku.unl) of a Senate resolution returning a
 // bill to the Chamber, a sub-print listed in tisky_za.unl.
 const senateResolutionKindId = "11";
+
+// Official print kind (druh_tisku.unl) of the government's opinion on a bill
+// it did not submit, a sub-print listed in tisky_za.unl, and the results
+// (vysledek.unl, tisky_za.id_vysledek) that state it. Which opinions are
+// conduct is defined in docs/scoring.md.
+const governmentOpinionKindId = "7";
+// The descriptions are compared without diacritics and case. The bill is a
+// print of kind 2 ("Návrh zákona"), never a government proposal.
+const governmentOpinionPrintKindIds = new Set(["2"]);
+const governmentOpinionResults = { souhlas: "agrees", nesouhlas: "disagrees", neutralni: "neutral" };
 
 export function normalizePspData({ source, since, votesEntries, membersEntries, printsEntries, sessionsEntries, governmentPeriods }) {
   validateGovernmentPeriods(governmentPeriods);
@@ -302,9 +319,14 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
   const stateTypeById = new Map(parseUnl(decodeEntry(printsEntries, "typ_stavu.unl"), schemas.stateType).map((row) => [row.stateTypeId, row]));
   const stageOfState = (stateId) => cleanText(stateTypeById.get(stateById.get(stateId)?.stateTypeId)?.description, 200) || null;
   const historyTables = { transitionById, actionById, stageOfState };
+  const resultById = new Map(parseUnl(decodeEntry(printsEntries, "vysledek.unl"), schemas.result).map((row) => [row.resultId, cleanText(row.description, 200)]));
   const senateResolutionParts = new Map();
+  const governmentOpinionRows = [];
   for (const row of parseUnl(decodeEntry(printsEntries, "tisky_za.unl"), schemas.subPrint)) {
-    if (row.kindId !== senateResolutionKindId || !printById.has(row.printId)) continue;
+    // A revoked sub-print (status 1 or 2) no longer stands.
+    if (!printById.has(row.printId) || revokedSubPrintStatuses.has(row.status)) continue;
+    if (row.kindId === governmentOpinionKindId) governmentOpinionRows.push(row);
+    if (row.kindId !== senateResolutionKindId) continue;
     senateResolutionParts.set(row.printId, [...(senateResolutionParts.get(row.printId) ?? []), numeric(row.partNumber)].sort((left, right) => left - right));
   }
 
@@ -480,6 +502,57 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
         resolutionNumber: numeric(history.resolutionNumber),
         collectionNumber: numeric(history.collectionNumber),
         noteCz: cleanText(history.note, 1000) || null
+      }
+    }));
+  }
+
+  // The government's opinion on a bill it did not submit: conduct of every
+  // governing party on the day the Chamber distributed it.
+  for (const row of governmentOpinionRows) {
+    // An opinion not yet distributed by the Chamber is not yet public, and
+    // psp.cz may not have recorded its result yet.
+    const occurredAt = pspDateTime(row.distributedAt);
+    if (!occurredAt) continue;
+    const print = printById.get(row.printId);
+    const resultCz = resultById.get(row.resultId) ?? null;
+    // An opinion on a print of another kind is left out, and one with any
+    // other result is kept as not conduct; both are logged, never fatal.
+    if (!governmentOpinionPrintKindIds.has(print.kindId)) {
+      log(`${source.id}: government opinion ${print.number}/${row.partNumber} is on a print of kind ${print.kindId}, not a bill it did not submit; left out`);
+      continue;
+    }
+    const opinion = governmentOpinionResults[normalizeSearchText(resultCz)] ?? null;
+    if (!opinion) log(`${source.id}: government opinion ${print.number}/${row.partNumber} has the result ${resultCz ?? (row.resultId ? `id ${row.resultId}, not in vysledek.unl` : "none")}; not conduct`);
+    if (occurredAt.slice(0, 10) < cutoff) continue;
+    const distributedOn = occurredAt.slice(0, 10);
+    const printTitle = cleanText(print.fullTitle || print.shortTitle, 1000);
+    const partNumber = numeric(row.partNumber);
+    records.push(createCollectedRecord({
+      id: `${source.id}--government-opinion-${print.printId}-${partNumber}`,
+      sourceId: source.id,
+      kind: "government-opinion",
+      primary: true,
+      evidenceRole: source.evidenceRole,
+      occurredAt,
+      timeZone: "Europe/Prague",
+      title: `${print.number}/${partNumber}: Stanovisko vlády (${resultCz ?? "bez výsledku"}) — ${printTitle}`,
+      publisher: source.publisher,
+      url: officialPrintDocumentPageUrl(source.term.number, print.number, partNumber),
+      payload: {
+        externalPrintId: print.printId,
+        printKindId: print.kindId,
+        printNumber: numeric(print.number),
+        partNumber,
+        printTitleCz: printTitle,
+        printUrl: officialPrintUrl(source.term.number, print.number),
+        resultCz,
+        opinion,
+        distributedOn,
+        // The bill's Senate resolutions, for a print only this opinion brings
+        // into the pipeline.
+        senateResolutionPartNumbers: senateResolutionParts.get(print.printId) ?? [],
+        // The governing parties on that day, as for a regulation's adoption.
+        proposal: { kind: "government-opinion", proposerPartyIds: governmentPartiesOn(governmentPeriods, distributedOn) }
       }
     }));
   }

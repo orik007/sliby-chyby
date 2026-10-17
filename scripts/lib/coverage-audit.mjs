@@ -191,6 +191,8 @@ export function renderCoverageAuditMarkdown(audit) {
       `| Prints without a DOCX or DOC proposal text (only a PDF or none) | ${printParts.printsWithoutProposalText} |`,
       `| Prints with a text approved by the Chamber / passed by Parliament | ${printParts.printsWithApprovedText} / ${printParts.printsWithPassedText} |`,
       `| Prints returned by the Senate (rejected or amended) | ${printParts.printsWithSenateResolution} |`,
+      `| Government opinions on bills it did not submit (agreeing or disagreeing) | ${printParts.governmentOpinions} |`,
+      `| Government opinions without a readable text | ${printParts.governmentOpinionsWithoutText} |`,
       `| Law changes added / removed during the debate | ${printParts.lawChangesAddedInDebate} / ${printParts.lawChangesRemovedInDebate} |`,
       `| Law changes with an identified amended act | ${printParts.lawChangesWithAmendedAct} of ${printParts.lawChanges} |`,
       `| Approved bills without an approved text on psp.cz | ${printParts.approvedBillsWithoutApprovedText} |`,

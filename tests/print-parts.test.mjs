@@ -13,9 +13,11 @@ import {
   promulgatedTextUrl,
   promulgatedTextVersions,
   proposalBody,
+  governmentOpinionSectionLabels,
   proposalDocumentLink,
   splitProposalText,
   changeThroughVersion,
+  collectPrints,
   versionOfChange
 } from "../scripts/lib/print-parts.mjs";
 import { lawChangeText } from "../scripts/lib/law-change-screening.mjs";
@@ -33,6 +35,20 @@ const fixture = (name) => readFile(new URL(`./fixtures/print-parts/${name}`, imp
 const print85Paragraphs = JSON.parse(await fixture("print-85-paragraphs.json"));
 const print163 = JSON.parse(await fixture("print-163-paragraphs.json"));
 const pageUrl = (number) => `https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=${number}&CT1=0`;
+
+test("reads a government opinion's Word file from its \"Stanovisko\" section, and only for an opinion", async () => {
+  // The file table of sub-print 7/1, the government's opinion on member bill
+  // 7, downloaded on 15 October 2026: a PDF and a DOC under "Stanovisko".
+  const page = await fixture("print-7-1-files.html");
+  const url = "https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=7&CT1=1";
+  assert.deepEqual(proposalDocumentLink(page, url, governmentOpinionSectionLabels), {
+    filename: "t000701.doc",
+    url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=265860",
+    sectionLabel: "Stanovisko",
+    format: "doc"
+  });
+  assert.equal(proposalDocumentLink(page, url), null, "a proposal text is never read from an opinion's section");
+});
 
 test("reads only the proposal-text Word file from a print page, a DOCX before a DOC", async () => {
   // Print 16 also lists the RIA, the consolidated text with marked changes,
@@ -387,4 +403,16 @@ test("an act as promulgated is split like a psp.cz text and says where it is fro
   for (const part of [kept, dropped]) assert.equal(versionOfChange(part, vote({ senateAmendmentsRejected: true })).version, "proposed");
   assert.equal(versionOfChange(dropped, vote({})).removed, true);
   assert.match(lawChangeText(change), /Version: text passed by Parliament \(psp\.cz does not publish it; this is the act as promulgated in the Collection of Laws, zákon č\. 155\/2026 Sb\., without its annexes\)\n/);
+});
+
+test("a government opinion brings its bill into the prints, with its part and the bill's Senate resolutions", () => {
+  const opinion = (printId, number, partNumber, senateResolutionPartNumbers = []) => ({ kind: "government-opinion", payload: { externalPrintId: printId, printKindId: "2", printNumber: number, partNumber, printTitleCz: `Návrh ${number}`, senateResolutionPartNumbers } });
+  const step = (printId, number) => ({ kind: "legislative-step", payload: { externalPrintId: printId, printKindId: "2", printNumber: number, partNumber: 0, printTitleCz: `Návrh ${number}`, senateResolutionPartNumbers: [] } });
+  const prints = collectPrints([opinion("701", 7, 1, [3]), opinion("702", 8, 2), step("702", 8), opinion("702", 8, 1)]);
+  assert.deepEqual(prints.map(({ printId, number, partNumber, senateResolutionPartNumbers, governmentOpinionPartNumbers }) => ({ printId, number, partNumber, senateResolutionPartNumbers, governmentOpinionPartNumbers })), [
+    // Only the opinion brings print 7: the bill itself is part 0.
+    { printId: "701", number: 7, partNumber: 0, senateResolutionPartNumbers: [3], governmentOpinionPartNumbers: [1] },
+    // A later record of the same print keeps its opinions.
+    { printId: "702", number: 8, partNumber: 0, senateResolutionPartNumbers: [], governmentOpinionPartNumbers: [1, 2] }
+  ]);
 });

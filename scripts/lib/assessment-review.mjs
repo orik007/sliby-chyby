@@ -164,6 +164,7 @@ function evidenceLabel(evidence) {
   if (evidence.role === "law-change") return `Změna zákona v návrhu projednávaném Sněmovnou: ${evidence.structuredFacts?.titleCz ?? evidence.title}`;
   if (evidence.type === "parliamentary-vote") return "Výsledek hlasování Poslanecké sněmovny";
   if (evidence.type === "legislative-step") return "Průběh projednávání návrhu ve Sněmovně";
+  if (evidence.type === "government-opinion") return `Stanovisko vlády k návrhu zákona, který nepředložila (${evidence.structuredFacts?.resultCz ?? "výsledek neuveden"})`;
   if (evidence.type === "regulation-adoption") return evidence.structuredFacts?.regulationKind === "government-regulation" ? "Přijetí nařízení vládou" : `Vydání vyhlášky: ${evidence.structuredFacts?.issuerCz ?? "ministerstvo"}`;
   return evidence.publisher;
 }

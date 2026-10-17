@@ -51,14 +51,21 @@ export function amendedActsLabel(acts: string[]) {
   return `mění ${acts.length === 1 ? "zákon" : "zákony"} č. ${acts.map((act) => `${act} Sb.`).join(", ")}`;
 }
 
+const opinionLabels: Record<Extract<EvidenceTrailStep, { kind: "government-opinion" }>["opinion"], string> = {
+  agrees: "Vláda s návrhem souhlasila",
+  disagrees: "Vláda s návrhem nesouhlasila",
+};
+
 export function stepTitle(step: EvidenceTrailStep) {
   if (step.kind === "submission") return proposalLabels[step.proposal];
   if (step.kind === "vote") return clubLabels[step.club];
+  if (step.kind === "government-opinion") return opinionLabels[step.opinion];
   return "Senát vrátil návrh Sněmovně";
 }
 
 export function stepDetails(step: EvidenceTrailStep) {
   if (step.kind === "submission") return [step.proposal === "member-bill" ? `Navrhovatelé: ${step.proposerCz ?? "poslanci"}; mezi nimi je alespoň jeden poslanec klubu strany.` : "Strana byla v den předložení součástí vlády."];
+  if (step.kind === "government-opinion") return ["Stanovisko vlády k návrhu zákona, který vláda nepředložila; strana byla v den jeho rozeslání ve Sněmovně součástí vlády."];
   if (step.kind === "vote") {
     const { yes, no, abstained, notVoting, absent, unknown } = step.counts;
     const counts = [`pro: ${yes}`, `proti: ${no}`, ...(abstained ? [`zdrželi se: ${abstained}`] : []), ...(notVoting ? [`nehlasovali: ${notVoting}`] : []), ...(absent ? [`nepřítomni: ${absent}`] : []), ...(unknown ? [`neznámý záznam: ${unknown}`] : [])];
@@ -71,6 +78,7 @@ export function stepLinks(step: EvidenceTrailStep, printUrl: string) {
   if (step.kind === "senate-resolution") return [{ label: `Usnesení Senátu (tisk ${step.printPartCz})`, url: step.url }];
   const text = step.textUrl ? [{ label: textLabels[step.version], url: step.textUrl }] : [];
   if (step.kind === "vote") return [{ label: "Výsledek hlasování", url: step.url }, ...text];
+  if (step.kind === "government-opinion") return [{ label: `Stanovisko vlády (tisk ${step.printPartCz})`, url: step.url }, ...text];
   return [{ label: "Průběh projednávání", url: printUrl }, ...text];
 }
 

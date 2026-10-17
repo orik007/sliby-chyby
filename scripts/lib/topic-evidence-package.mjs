@@ -89,7 +89,8 @@ export function lawChangesOfRun(printParts, recordsByPrintId) {
 
 /**
  * The records that are the promise party's attributable conduct on a law
- * change: its decisive votes and its submission (docs/scoring.md), each with
+ * change: its decisive votes, its submission, and the government's opinion
+ * on it (docs/scoring.md), each with
  * the version of the change it concerns.
  */
 export function attributableConductOnChange(records, promise, change) {
@@ -223,7 +224,12 @@ function evidenceFromRegulation(change, route, publishedAt) {
   };
 }
 
-function evidenceFromConduct({ record, attributionStatus }, promise, concerns) {
+// The government's opinion on a bill it did not submit carries its own text
+// (docs/evidence-pipeline.md, Package), null when psp.cz publishes none.
+function evidenceFromConduct({ record, attributionStatus }, promise, concerns, opinionText = null) {
+  const opinion = record.kind === "government-opinion"
+    ? { textCz: opinionText?.textCz ?? null, document: opinionText?.document ?? null }
+    : {};
   return {
     id: record.id,
     role: "conduct-evidence",
@@ -235,7 +241,7 @@ function evidenceFromConduct({ record, attributionStatus }, promise, concerns) {
     locator: `normalized collector record ${record.id}`,
     primary: record.primary,
     factSummary: factSummary(record, promise.partyId),
-    structuredFacts: { ...normalizedStructuredFacts(record, promise.partyId), concernsLawChanges: concerns },
+    structuredFacts: { ...normalizedStructuredFacts(record, promise.partyId), ...opinion, concernsLawChanges: concerns },
     sourceRecordHash: record.contentHash,
     matchBasis: { attributionStatus }
   };
@@ -435,6 +441,14 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
     }
   }
   const resolutionIdsOf = (change) => change.senateResolutions.map(({ partNumber }) => senateResolutionEvidenceId(change, partNumber)).filter((id) => senateResolutions.has(id));
+  // Found once, not on every rebuild of the package.
+  const opinionTexts = new Map(conduct.filter(({ record }) => record.kind === "government-opinion").map(({ record }) => {
+    const changeIds = new Set(concernsByRecord.get(record.id).map(({ changeId }) => changeId));
+    const text = changes.filter(({ change }) => changeIds.has(change.changeId))
+      .flatMap(({ change }) => change.governmentOpinions ?? [])
+      .find(({ partNumber }) => partNumber === record.payload.partNumber);
+    return [record.id, text ?? null];
+  }));
   const maintenanceBaseline = promise.maintenanceBaseline
     ? { preservedStateCz: promise.maintenanceBaseline.preservedStateCz, evidenceId: promise.maintenanceBaseline.source.id }
     : null;
@@ -467,7 +481,7 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
         ...(promise.maintenanceBaseline ? [evidenceFromMaintenanceBaseline(promise.maintenanceBaseline)] : []),
         ...lawChanges.map(({ change, route }) => evidenceFromLawChange(change, route, printFirstSeenOn.get(change.printId), resolutionIdsOf(change))),
         ...senateResolutions.values(),
-        ...conduct.map((item) => evidenceFromConduct(item, promise, concernsByRecord.get(item.record.id)))
+        ...conduct.map((item) => evidenceFromConduct(item, promise, concernsByRecord.get(item.record.id), opinionTexts.get(item.record.id) ?? null))
       ]
     };
     validateEvidencePackage(evidencePackage);

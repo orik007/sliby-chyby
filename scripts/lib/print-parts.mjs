@@ -20,6 +20,10 @@ const proposalSectionLabels = [
   /^Text$/i
 ];
 
+// The section of a government-opinion sub-print page whose Word file is the
+// opinion.
+export const governmentOpinionSectionLabels = [/^Stanovisko$/i];
+
 export function actIdentifier(act) {
   const match = /^(\d+)\/(\d{4})$/.exec(act);
   invariant(match, `Invalid act reference: ${act}`);
@@ -114,7 +118,7 @@ export function amendedActOfPart(paragraphs) {
  * Word 97-2003 (.doc) file there. Returns null when the page has neither
  * (for example, only a PDF, which is never read).
  */
-export function proposalDocumentLink(html, pageUrl) {
+export function proposalDocumentLink(html, pageUrl, sectionLabels = proposalSectionLabels) {
   const files = String(html).split("Soubory sněmovního tisku")[1]?.split("</table>")[0] ?? "";
   let section = null;
   const found = { docx: null, doc: null };
@@ -126,7 +130,7 @@ export function proposalDocumentLink(html, pageUrl) {
     }
     const filename = cleanText(match[3], 200);
     const format = /\.(docx?)$/i.exec(filename)?.[1].toLowerCase();
-    if (!section || !format || found[format] || !proposalSectionLabels.some((label) => label.test(section))) continue;
+    if (!section || !format || found[format] || !sectionLabels.some((label) => label.test(section))) continue;
     found[format] = { filename, url: pspUrl(match[2], pageUrl), sectionLabel: section, format };
   }
   return found.docx ?? found.doc;
@@ -399,6 +403,43 @@ function versionOf(part, amendedAct, document, effectiveCz = null, promulgatedAc
 }
 
 /**
+ * The Chamber prints that potentially attributable records concern: the
+ * prints of submissions and votes, and the bill of a government opinion,
+ * with the part numbers of its Senate resolutions and government opinions.
+ */
+export function collectPrints(records) {
+  const prints = new Map();
+  const add = ({ externalPrintId, printKindId, number, partNumber, titleCz, senateResolutionPartNumbers }) => {
+    if (!externalPrintId || !Number.isInteger(number)) return;
+    prints.set(String(externalPrintId), {
+      printId: String(externalPrintId),
+      kindId: printKindId ?? null,
+      number,
+      partNumber: partNumber ?? 0,
+      title: titleCz ?? "",
+      senateResolutionPartNumbers: senateResolutionPartNumbers ?? [],
+      governmentOpinionPartNumbers: []
+    });
+  };
+  // The government's opinion on a bill it did not submit is a sub-print of
+  // that bill; its record names the bill, whose own part number is 0.
+  const opinionParts = new Map();
+  for (const record of records) {
+    const payload = record.payload ?? {};
+    if (record.kind === "legislative-step") add({ ...payload, number: payload.printNumber, titleCz: payload.printTitleCz });
+    if (record.kind === "government-opinion") {
+      if (!prints.has(String(payload.externalPrintId))) add({ ...payload, number: payload.printNumber, partNumber: 0, titleCz: payload.printTitleCz });
+      opinionParts.set(String(payload.externalPrintId), [...(opinionParts.get(String(payload.externalPrintId)) ?? []), payload.partNumber]);
+    }
+    for (const linkedPrint of payload.linkedPrints ?? []) add(linkedPrint);
+  }
+  for (const [printId, parts] of opinionParts) {
+    if (prints.has(printId)) prints.get(printId).governmentOpinionPartNumbers = [...new Set(parts)].sort((left, right) => left - right);
+  }
+  return [...prints.values()].sort((left, right) => left.number - right.number);
+}
+
+/**
  * The law changes of one print with their versions. `texts` maps a version
  * key to `{ document, paragraphs }` for each text psp.cz publishes, and to
  * `{ document, paragraphs, promulgatedAct }` for a version whose text is the
@@ -412,7 +453,7 @@ function versionOf(part, amendedAct, document, effectiveCz = null, promulgatedAc
  * "Účinnost" is not a law change: its text is each version's `effectiveCz`.
  * A print that is a single change also takes its title's acts.
  */
-export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [] }) {
+export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [], governmentOpinions = [] }) {
   const changes = [];
   // Without a proposal text, the proposed version of every part is known
   // only by the print title; the parts come from the first later text.
@@ -473,14 +514,16 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [] })
   }
   // Only a print whose first text is one part takes the title's acts.
   const single = changes.filter((change) => change.fromFirstText).length === 1;
-  const resolutions = senateResolutions.map(({ partNumber, document, paragraphs }) => ({
+  const subPrintText = ({ partNumber, document, paragraphs }) => ({
     partNumber,
     document: { filename: document.filename, url: document.url },
     textCz: paragraphs.join("\n")
-  }));
+  });
+  const resolutions = senateResolutions.map(subPrintText);
+  const opinions = governmentOpinions.map(subPrintText);
   return changes.map((change) => {
     const { key, words, fromFirstText, ...rest } = change;
-    return withDerivedFields({ ...rest, titleActs: single && fromFirstText ? namedActsFromPrintTitle(print.title) : [], senateResolutions: resolutions });
+    return withDerivedFields({ ...rest, titleActs: single && fromFirstText ? namedActsFromPrintTitle(print.title) : [], senateResolutions: resolutions, governmentOpinions: opinions });
   });
 }
 
@@ -516,7 +559,8 @@ export function lawChangeOfRegulation(payload, url) {
     versions: { adopted: { heading: null, titleCz: payload.titleCz, textCz: payload.paragraphs.join("\n"), amendedAct: null, effectiveCz: null, document: { filename: payload.citationCz, url } } },
     titleActs: [],
     enablingActs: payload.enablingActs,
-    senateResolutions: []
+    senateResolutions: [],
+    governmentOpinions: []
   });
 }
 
