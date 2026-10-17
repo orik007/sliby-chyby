@@ -9,8 +9,8 @@ import { versionKeys, versionLabels } from "./print-parts.mjs";
  * screening every law change (substantive or technical, and its topic tags)
  * and checking whether a routed law change is relevant to one promise.
  */
-export const screeningPromptVersion = "law-change-screener-v4";
-export const relevancePromptVersion = "relevance-check-v5";
+export const screeningPromptVersion = "law-change-screener-v5";
+export const relevancePromptVersion = "relevance-check-v6";
 
 async function loadPrompt(version, root) {
   const instructions = await readFile(resolve(root, `automation/prompts/${version}.md`), "utf8");
@@ -61,6 +61,11 @@ export function lawChangeText(change) {
     if (entry.sameAs) return `${label}\nThe same text as the ${versionLabels[entry.sameAs]}.${effective}${context}`;
     return entry.textCz === null ? `${label}\nNot available as a DOCX or DOC file; only the print title is known.` : `${label}\n${entry.textCz}${effective}${context}`;
   });
+  // A government resolution is one law change: the resolution and its
+  // annexes, as the government adopted them.
+  if (change.printKindId === "government-resolution") {
+    return [`Government resolution (usnesení vlády) adopted by the government: ${change.printTitleCz}`, ...versions].join("\n\n");
+  }
   // A government regulation or ministerial decree is one law change from the
   // Collection of Laws, linked to the acts it is issued under.
   if (regulationKindLabels[change.printKindId]) {

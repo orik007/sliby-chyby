@@ -63,8 +63,9 @@ export { billPrintKindIds };
  */
 export function versionConcerned(record, printId) {
   const concerned = (version, extra = {}) => ({ version, withSenateResolution: false, sameAsApproved: false, senateAmendmentsRejected: false, mark: null, ...extra });
-  // A government regulation or ministerial decree is adopted in one text.
-  if (record.kind === "regulation-adoption") return concerned("adopted");
+  // A government regulation, ministerial decree, or government resolution is
+  // adopted in one text.
+  if (record.kind === "regulation-adoption" || record.kind === "government-resolution") return concerned("adopted");
   // A submission, and the government's opinion on a bill it did not
   // submit, concern the proposed text.
   if (record.kind !== "parliamentary-vote") return concerned("proposed");
@@ -97,7 +98,8 @@ export const assessableAttributionStatuses = new Set([
   "verified-government-proposal",
   "verified-government-regulation",
   "verified-ministerial-decree",
-  "verified-government-opinion"
+  "verified-government-opinion",
+  "verified-government-resolution"
 ]);
 
 /**
@@ -114,7 +116,9 @@ export const assessableAttributionStatuses = new Set([
  *   the party was a governing party at the adoption date;
  * - the government's agreement or disagreement with a bill it did not
  *   submit, when the party was a governing party on the day the Chamber
- *   distributed the opinion; a neutral opinion is not conduct.
+ *   distributed the opinion; a neutral opinion is not conduct;
+ * - a government resolution, when the party was a governing party on its
+ *   adoption date.
  * Anything else is unattributed and never becomes package evidence.
  */
 export function attributionStatusForRecord(record, promise) {
@@ -132,6 +136,9 @@ export function attributionStatusForRecord(record, promise) {
   }
   if (record.kind === "government-opinion" && ["agrees", "disagrees"].includes(record.payload?.opinion) && record.payload.proposal?.proposerPartyIds?.includes(promise.partyId)) {
     return { attributionStatus: "verified-government-opinion" };
+  }
+  if (record.kind === "government-resolution" && record.payload?.proposal?.proposerPartyIds?.includes(promise.partyId)) {
+    return { attributionStatus: "verified-government-resolution" };
   }
   if (record.kind === "legislative-step" && normalizeSearchText(record.payload?.actionCz) === submissionAction) {
     const proposal = record.payload?.proposal;
@@ -165,7 +172,8 @@ function partyVoteFacts(record, partyId) {
 export function normalizedStructuredFacts(record, partyId) {
   const structuredFacts = { ...record.payload };
   delete structuredFacts.individualVotes;
-  // A regulation's text is its law change's, not its conduct's.
+  // A regulation's or resolution's text is its law change's, not its
+  // conduct's.
   delete structuredFacts.paragraphs;
   if (record.kind === "parliamentary-vote") {
     structuredFacts.relevantPartyVoteSummary = partyVoteFacts(record, partyId);
@@ -189,6 +197,10 @@ export function factSummary(record, partyId) {
   if (record.kind === "government-opinion") {
     const payload = record.payload;
     return `The government ${opinionLabels[payload.opinion]} print ${payload.printNumber}, ${payload.printTitleCz}, a bill it did not submit (opinion “${payload.resultCz}”, sub-print ${payload.printNumber}/${payload.partNumber}, distributed by the Chamber on ${payload.distributedOn}); governing parties on that day: ${payload.proposal.proposerPartyIds.join(", ")}.`;
+  }
+  if (record.kind === "government-resolution") {
+    const payload = record.payload;
+    return `The government adopted ${payload.numberCz}${payload.titleCz ? ` (${payload.titleCz})` : ""} on ${payload.adoptedOn}; governing parties on that day: ${payload.proposal.proposerPartyIds.join(", ")}.`;
   }
   if (record.kind === "regulation-adoption") {
     const payload = record.payload;

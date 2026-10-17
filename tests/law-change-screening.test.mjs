@@ -54,12 +54,12 @@ function mockResponse(output, usage = { input_tokens: 100, output_tokens: 20 }) 
 
 test("the screening and relevance prompts state the conservative rules", async () => {
   const screening = await loadScreeningPrompt();
-  assert.equal(screening.version, "law-change-screener-v4");
+  assert.equal(screening.version, "law-change-screener-v5");
   assert.doesNotMatch(screening.instructions, /excerpt|supportingExcerpts/i, "screeners quote nothing");
   assert.match(screening.instructions, /When in doubt, the change is substantive/);
   assert.match(screening.instructions, /even one number/);
   const relevance = await loadRelevancePrompt();
-  assert.equal(relevance.version, "relevance-check-v5");
+  assert.equal(relevance.version, "relevance-check-v6");
   assert.match(relevance.instructions, /When in doubt, answer relevant/);
   assert.match(relevance.instructions, /its title names the one commitment assessed/);
 });

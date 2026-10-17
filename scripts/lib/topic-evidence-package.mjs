@@ -1,12 +1,13 @@
 import { sha256 } from "./collector-core.mjs";
 import { assessableAttributionStatuses, attributionStatusForRecord, factSummary, isPotentiallyAttributable, normalizedStructuredFacts, versionConcerned } from "./attribution.mjs";
 import { validateEvidencePackage } from "./assessment-pipeline.mjs";
-import { changeThroughVersion, lawChangeOfRegulation, namedActsFromPrintTitle, versionKeys, versionLabels, versionOfChange } from "./print-parts.mjs";
+import { changeThroughVersion, lawChangeOfRegulation, lawChangeOfResolution, namedActsFromPrintTitle, versionKeys, versionLabels, versionOfChange } from "./print-parts.mjs";
 
 export { versionOfChange };
 import { charactersPerToken, estimateRequestTokens, estimateTokens, maxPackageRequestTokens, maxRequestInputTokens } from "./assessment-config.mjs";
 import { withContext } from "./law-context.mjs";
 import { isRegulationKind, regulationSourceId } from "./regulations.mjs";
+import { resolutionKind, resolutionSourceId } from "./government-resolutions.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -18,18 +19,24 @@ export function estimatePackageTokens(evidencePackage) {
   return estimateTokens(JSON.stringify(evidencePackage));
 }
 
-// A regulation's law change is named by its source (`sb-2026-178`).
+// A regulation's or resolution's law change is named by its source
+// (`sb-2026-178`, `uv-2026-330`).
 export function lawChangeEvidenceId(change) {
-  return `${isRegulation(change) ? regulationSourceId : "psp-core-2025"}--law-change-${change.changeId}`;
+  return `${isRegulation(change) ? regulationSourceId : isResolution(change) ? resolutionSourceId : "psp-core-2025"}--law-change-${change.changeId}`;
 }
 
-// Prints in their order, then regulations and decrees, each by its identifier.
+// Prints in their order, then regulations and decrees, then government
+// resolutions, each by its identifier.
 function printOrder(change) {
-  return isRegulation(change) ? Number.MAX_SAFE_INTEGER : change.printNumber;
+  return isRegulation(change) || isResolution(change) ? Number.MAX_SAFE_INTEGER : change.printNumber;
 }
 
 export function isRegulation(change) {
   return isRegulationKind(change.printKindId);
+}
+
+export function isResolution(change) {
+  return change.printKindId === resolutionKind;
 }
 
 function recordPrintIds(record) {
@@ -72,13 +79,13 @@ export function conductOfRun(collectorRun, asOf, trackedPartyIds) {
 
 /**
  * The law changes of a run at the cutoff: those of prints with conduct, and
- * the one law change of each government regulation or ministerial decree,
- * whose adoption record carries its text.
+ * the one law change of each government regulation, ministerial decree, and
+ * government resolution, whose record carries its text.
  */
 export function lawChangesOfRun(printParts, recordsByPrintId) {
   const regulationChanges = [...recordsByPrintId.values()].flat()
-    .filter(({ kind }) => kind === "regulation-adoption")
-    .map((record) => lawChangeOfRegulation(record.payload, record.url));
+    .filter(({ kind }) => kind === "regulation-adoption" || kind === resolutionKind)
+    .map((record) => (record.kind === resolutionKind ? lawChangeOfResolution : lawChangeOfRegulation)(record.payload, record.url));
   return lawChangesAtCutoff([
     ...Object.entries(printParts.prints)
       .filter(([printId]) => recordsByPrintId.has(printId))
@@ -146,6 +153,7 @@ function evidenceFromLawChange(change, route, publishedAt, senateResolutionIds) 
   const latest = [...versions].reverse().find((version) => !change.versions[version].removed);
   const latestDocument = change.versions[latest].document;
   if (isRegulation(change)) return evidenceFromRegulation(change, route, publishedAt);
+  if (isResolution(change)) return evidenceFromResolution(change, route, publishedAt);
   const describe = (version) => {
     const entry = change.versions[version];
     if (entry.removed) return `removed in the ${versionLabels[version]}`;
@@ -211,6 +219,43 @@ function evidenceFromRegulation(change, route, publishedAt) {
       titleCz: change.titleCz,
       acts: change.acts,
       enablingActs: change.enablingActs,
+      addedIn: change.addedIn,
+      versions: change.versions,
+      senateResolutionEvidenceIds: []
+    },
+    sourceRecordHash: sha256(change.versions),
+    matchBasis: {
+      routeBasis: route.routeBasis,
+      matchedTagIds: route.matchedTagIds,
+      directLinkIdentifiers: route.directLinkIdentifiers
+    }
+  };
+}
+
+// A government resolution: one law change, its text as adopted (the
+// resolution and its annexes), from the Government Office's portal zVlády.
+function evidenceFromResolution(change, route, publishedAt) {
+  const entry = change.versions.adopted;
+  return {
+    id: lawChangeEvidenceId(change),
+    role: "law-change",
+    type: "law-change",
+    title: change.printTitleCz,
+    publisher: "Government Office of the Czech Republic (zVlády)",
+    publishedAt,
+    url: entry.document.url,
+    locator: `${change.printNumber}, whole text with its annexes`,
+    primary: true,
+    factSummary: `${change.printNumber}${entry.titleCz !== change.printNumber ? `, on the material “${entry.titleCz}”` : ""}, as adopted by the government. Versions: ${versionLabels.adopted}.`,
+    structuredFacts: {
+      changeId: change.changeId,
+      externalPrintId: change.printId,
+      printNumber: change.printNumber,
+      printKindId: change.printKindId,
+      printTitleCz: change.printTitleCz,
+      heading: null,
+      titleCz: change.titleCz,
+      acts: change.acts,
       addedIn: change.addedIn,
       versions: change.versions,
       senateResolutionEvidenceIds: []

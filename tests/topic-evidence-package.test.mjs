@@ -356,7 +356,7 @@ test("a law change both assessors found not relevant is left out, and the packag
   });
   const full = build();
   const [first, second] = full.evidence.filter(({ role }) => role === "law-change").map(({ id }) => id);
-  const assessorPrompt = { version: "assessor-v22", contentHash: "a".repeat(64) };
+  const assessorPrompt = { version: "assessor-v23", contentHash: "a".repeat(64) };
   const review = (relevantSecond) => ({ changeRelevance: [{ evidenceId: first, relevant: true, reasonCz: "Souvisí.", effectCz: "Zpřísňuje." }, { evidenceId: second, relevant: relevantSecond, reasonCz: relevantSecond ? "Souvisí." : "Jiné téma.", effectCz: "" }] });
   const audit = (reviewA, reviewB, prompt = assessorPrompt) => ({ prompts: { assessor: prompt }, validatedAssessments: { "assessor-a": reviewA, "assessor-b": reviewB } });
   const verdictsOf = (auditRecord, evidencePackage = full) => {
@@ -385,7 +385,7 @@ test("a law change both assessors found not relevant is left out, and the packag
     assert.equal(build(exclusionFrom(verdictsOf(auditRecord))).excludedLawChanges, undefined);
   }
   // Another assessor prompt or a changed text brings the change back.
-  assert.equal(build(exclusionFrom(verdictsOf(both), { version: "assessor-v22", contentHash: "b".repeat(64) })).excludedLawChanges, undefined);
+  assert.equal(build(exclusionFrom(verdictsOf(both), { version: "assessor-v23", contentHash: "b".repeat(64) })).excludedLawChanges, undefined);
   assert.equal(build(exclusionFrom(verdictsOf(both)), [lawChange(1), lawChange(2, "Zákon č. 218/2000 Sb. se mění takto: jinak.")]).excludedLawChanges, undefined);
   // A change whose context was trimmed in the assessed package gives no verdict.
   const trimmed = { ...full, generation: { ...full.generation, contextOmissions: [{ evidenceId: second, version: "proposed", suppliedCount: 0, omitted: [] }] } };

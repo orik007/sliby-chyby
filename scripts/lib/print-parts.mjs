@@ -184,7 +184,8 @@ function isEffectivePart(part) {
 // Versions of a law change): proposed, approved by the Chamber in the third
 // reading, and passed by Parliament after a Senate or presidential return.
 // A bill has up to the first three; a government regulation or ministerial
-// decree has only `adopted`, its text as adopted and promulgated.
+// decree has only `adopted`, its text as adopted and promulgated, and so
+// has a government resolution, its text as adopted.
 export const versionKeys = ["proposed", "approved", "passed", "adopted"];
 
 // Short English names of the versions, for model briefs and summaries.
@@ -559,6 +560,29 @@ export function lawChangeOfRegulation(payload, url) {
     versions: { adopted: { heading: null, titleCz: payload.titleCz, textCz: payload.paragraphs.join("\n"), amendedAct: null, effectiveCz: null, document: { filename: payload.citationCz, url } } },
     titleActs: [],
     enablingActs: payload.enablingActs,
+    senateResolutions: [],
+    governmentOpinions: []
+  });
+}
+
+/**
+ * The one law change of a government resolution, from the payload of its
+ * record (scripts/lib/government-resolutions.mjs): its text as adopted, the
+ * resolution and its annexes, the only version. It amends no act and is
+ * linked to none, so it is routed only by tags.
+ */
+export function lawChangeOfResolution(payload, url) {
+  return withDerivedFields({
+    changeId: payload.externalPrintId,
+    printId: payload.externalPrintId,
+    printNumber: payload.numberCz,
+    printKindId: "government-resolution",
+    printTitleCz: `${payload.numberCz}${payload.titleCz ? `, ${payload.titleCz}` : ""}`,
+    printPageUrl: url,
+    addedIn: "adopted",
+    versions: { adopted: { heading: null, titleCz: payload.titleCz ?? payload.numberCz, textCz: payload.paragraphs.join("\n"), amendedAct: null, effectiveCz: null, document: { filename: payload.numberCz, url } } },
+    titleActs: [],
+    enablingActs: [],
     senateResolutions: [],
     governmentOpinions: []
   });

@@ -6,18 +6,20 @@ import { deduplicateRecords, invariant, validateRegistry } from "./lib/collector
 import { collectPspSource, validateGovernmentPeriods } from "./lib/psp-collector.mjs";
 import { createESbirkaClient, createLawContextCache, createLawContextReader, workflowRunId } from "./lib/e-sbirka.mjs";
 import { collectRegulations, notYetDigitisedWarning } from "./lib/regulations.mjs";
+import { createGovernmentOfficeFetcher, createResolutionCache, readEklepTypes, readResolutions, resolutionRecords } from "./lib/government-resolutions.mjs";
 import { createPspFetcher, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { log } from "./lib/run-log.mjs";
 import { appendFileSync, mkdirSync, writeFileSync } from "node:fs";
 
 function parseArgs(args) {
-  const options = { checkpoints: null, writeCheckpoints: null, output: null, lawContextCache: "automation/law-context" };
+  const options = { checkpoints: null, writeCheckpoints: null, output: null, lawContextCache: "automation/law-context", resolutionCache: "automation/government-resolutions" };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--checkpoints") options.checkpoints = args[++index];
     else if (arg === "--write-checkpoints") options.writeCheckpoints = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--law-context-cache") options.lawContextCache = args[++index];
+    else if (arg === "--resolution-cache") options.resolutionCache = args[++index];
     else throw new Error(`Unknown argument: ${arg}`);
   }
   invariant(!options.writeCheckpoints || options.checkpoints, "--write-checkpoints requires --checkpoints");
@@ -53,7 +55,9 @@ try {
     log(`${source.id}: collecting everything since ${since}`);
     const result = source.collector === "psp-open-data"
       ? await collectPspSource(source, { since, collectedAt, governmentPeriods, fetchPsp })
-      : await collectRegulationSource(source, since);
+      : source.collector === "zvlady-resolutions"
+        ? await collectResolutionSource(source, since)
+        : await collectRegulationSource(source, since);
     collectorResults.push(result);
     log(`${source.id}: ${result.records.length} records, ${result.warnings.length} warnings${result.warnings.length ? `: ${result.warnings.join("; ")}` : ""}`);
   }
@@ -95,6 +99,42 @@ async function collectRegulationSource(source, since) {
   } finally {
     await cache.flush();
   }
+}
+
+// Government resolutions from the Government Office's portal zVlády,
+// through the permanent resolution cache (docs/evidence-pipeline.md,
+// Government resolution data rules). A resolution that only approves a
+// government proposal or opinion is found by the eKLEP links of the
+// Chamber's prints, so the Chamber's source is collected first. Every
+// request is appended to government-resolutions-requests.jsonl as it
+// happens.
+async function collectResolutionSource(source, since) {
+  const psp = collectorResults.find(({ collector }) => collector === "psp-open-data");
+  invariant(psp?.referenceData?.eklepLinks, `${source.id} needs the Chamber's eKLEP links, collected before it`);
+  const requestFile = resolve(outputDirectory, "government-resolutions-requests.jsonl");
+  writeFileSync(requestFile, "");
+  const fetcher = createGovernmentOfficeFetcher({ onRequest: (entry) => appendFileSync(requestFile, `${JSON.stringify(entry)}\n`) });
+  const today = collectedAt.slice(0, 10);
+  let read = 0;
+  const { resolutions, quality: readQuality } = await readResolutions({
+    fetcher,
+    cache: createResolutionCache(resolve(args.resolutionCache)),
+    firstResolution: source.firstResolution,
+    today,
+    onResolution: ({ resolution, outcome }) => {
+      read += 1;
+      if (read % 20 === 0) log(`${source.id}: ${read} resolutions read from the portal (last: ${resolution}, ${outcome})`);
+    }
+  });
+  const eklepTypes = await readEklepTypes({ fetcher, fromYear: Number(since.slice(0, 4)), today });
+  const { records, quality } = resolutionRecords({ resolutions, eklepLinks: psp.referenceData.eklepLinks, eklepTypes, governmentPeriods, source });
+  const warnings = [
+    ...readQuality.gaps.map((resolution) => `${resolution}: not held between two held resolutions; read again in the next run`),
+    ...readQuality.unexpectedPages.map((resolution) => `${resolution}: published without a Word file of the resolution; not used`),
+    ...quality.unreadable.map((resolution) => `${resolution}: the Word file of the resolution cannot be read as text; not used`)
+  ];
+  log(`${source.id}: ${resolutions.length} published resolutions (${readQuality.fromCache} from the cache, ${readQuality.fromPortal} read from the portal), ${readQuality.classified.length} classified; left out as duplicates ${JSON.stringify(quality.duplicates)}; ${quality.beforeGovernment} adopted before a tracked government; ${quality.used} used; ${fetcher.stats.requests} requests to the Government Office, ${fetcher.stats.retried} retried`);
+  return { sourceId: source.id, collector: source.collector, retrievedAt: new Date().toISOString(), snapshot: null, snapshots: null, records, warnings, referenceData: { quality: { ...readQuality, ...quality, requests: fetcher.stats.requests, retried: fetcher.stats.retried } } };
 }
 
 async function writeCheckpointsAtomically(filePath, checkpoints) {

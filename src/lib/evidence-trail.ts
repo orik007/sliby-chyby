@@ -1,4 +1,4 @@
-import type { ContextOmission, EvidenceTrailEntry, EvidenceTrailPrint, EvidenceTrailRegulation, EvidenceTrailStep } from "./schema";
+import type { ContextOmission, EvidenceTrailEntry, EvidenceTrailPrint, EvidenceTrailRegulation, EvidenceTrailResolution, EvidenceTrailStep } from "./schema";
 
 type ConductStep = Exclude<EvidenceTrailStep, { kind: "senate-resolution" }>;
 
@@ -95,8 +95,12 @@ export function isRegulationEntry(entry: EvidenceTrailEntry): entry is EvidenceT
   return "kind" in entry && entry.kind === "regulation";
 }
 
+export function isResolutionEntry(entry: EvidenceTrailEntry): entry is EvidenceTrailResolution {
+  return "kind" in entry && entry.kind === "resolution";
+}
+
 export function trailStepCount(trail: EvidenceTrailEntry[]) {
-  return trail.reduce((count, entry) => count + (isRegulationEntry(entry) ? 1 : entry.steps.length), 0);
+  return trail.reduce((count, entry) => count + (isRegulationEntry(entry) || isResolutionEntry(entry) ? 1 : entry.steps.length), 0);
 }
 
 // A government regulation or ministerial decree: who adopted it, and that

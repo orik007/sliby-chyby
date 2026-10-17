@@ -5,9 +5,9 @@ import { hashEvidencePackage } from "../scripts/lib/assessment-pipeline.mjs";
 import { buildEvidenceTrail, createAssessmentRevision } from "../scripts/lib/evidence-trail.mjs";
 import { renderHumanReviewMarkdown } from "../scripts/lib/assessment-review.mjs";
 import { formatDate, stepLinks, stepTitle } from "../src/lib/evidence-trail.ts";
-import { assessmentRevisionSchema, evidenceTrailPrintSchema, evidenceTrailRegulationSchema } from "../src/lib/schema.ts";
+import { assessmentRevisionSchema, evidenceTrailPrintSchema, evidenceTrailRegulationSchema, evidenceTrailResolutionSchema } from "../src/lib/schema.ts";
 import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
-import { lawChangeOfRegulation } from "../scripts/lib/print-parts.mjs";
+import { lawChangeOfRegulation, lawChangeOfResolution } from "../scripts/lib/print-parts.mjs";
 import { loadTrackedPromises } from "../scripts/lib/published-promises.mjs";
 import { buildLawChangeEvidencePackage } from "../scripts/lib/topic-evidence-package.mjs";
 
@@ -206,6 +206,30 @@ test("a cited ministerial decree enters the trail as its adoption with a link to
     adoption: { date: "2026-07-29", evidenceId: "esbirka-regulations--2026-145", by: "ministry", issuerCz: "Ministerstvo financí" }
   }]);
   assert.deepEqual(evidenceTrailRegulationSchema.parse(trail[0]), trail[0]);
+});
+
+test("a cited government resolution enters the trail as its adoption with a link to its page in zVlády", async () => {
+  // The real resolution 158/2026 of the pipeline fixture, as the collector
+  // reads it from zVlády, in the package of a promise of a governing party.
+  const run = JSON.parse(await readFile(new URL("./fixtures/pipeline/collector-run.json", import.meta.url), "utf8"));
+  const record = run.records.find(({ id }) => id === "zvlady-resolutions--2026-158");
+  const change = lawChangeOfResolution(record.payload, record.url);
+  const { promises } = await loadTrackedPromises(new URL("..", import.meta.url).pathname);
+  const promise = promises.find(({ partyId }) => partyId === "spd");
+  const evidencePackage = buildLawChangeEvidencePackage({ assessorInstructions: "assessor instructions", promise, keptChanges: [{ change, route: { routeBasis: ["specific-tag"], matchedTagIds: ["vat-policy"], directLinkIdentifiers: [] } }], recordsByPrintId: new Map([[change.printId, [record]]]), printFirstSeenOn: new Map([[change.printId, "2026-03-09"]]), collectorRun: run, asOf: "2026-09-25" });
+  const resolution = evidencePackage.evidence.find(({ role }) => role === "law-change");
+  const review = { status: "moving-towards", evidenceSufficient: true, citedEvidenceIds: [resolution.id, record.id], changeRelevance: [{ evidenceId: resolution.id, relevant: true, reasonCz: "Usnesení se týká slibu.", effectCz: "Vláda souhlasí s účastí na výstavě." }], explanationCz: "Vláda přijala usnesení." };
+  const trail = buildEvidenceTrail(evidencePackage, { resolution: { state: "candidate", selectedReview: "consensus" }, validatedAssessments: { "assessor-a": review, "assessor-b": review } });
+  assert.deepEqual(trail, [{
+    kind: "resolution",
+    lawChangeId: "zvlady-resolutions--law-change-uv-2026-158",
+    numberCz: "Usnesení vlády č. 158/2026",
+    titleCz: "O zajištění účasti České republiky na Mezinárodní specializované výstavě EXPO 2027 v Bělehradě",
+    pageUrl: "https://odok.gov.cz/portal/zvlady/usneseni/2026/158/",
+    adoption: { date: "2026-03-09", evidenceId: "zvlady-resolutions--2026-158" }
+  }]);
+  assert.deepEqual(evidenceTrailResolutionSchema.parse(trail[0]), trail[0]);
+  assert.equal(evidenceTrailResolutionSchema.safeParse({ ...trail[0], pageUrl: "https://example.com/usneseni/2026/158/" }).success, false);
 });
 
 test("a cited government opinion enters the trail as a step on its bill, with a link to the opinion and the proposed text", async () => {

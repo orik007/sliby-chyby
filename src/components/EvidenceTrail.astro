@@ -1,10 +1,19 @@
 ---
-import { amendedActsLabel, formatDate, isRegulationEntry, lawChangeLabel, moreLawChangesLabel, regulationAdoptionDetails, regulationAdoptionTitle, stepDetails, stepLinks, stepNotes, stepTitle } from "../lib/evidence-trail";
+import { amendedActsLabel, formatDate, isRegulationEntry, isResolutionEntry, lawChangeLabel, moreLawChangesLabel, regulationAdoptionDetails, regulationAdoptionTitle, stepDetails, stepLinks, stepNotes, stepTitle } from "../lib/evidence-trail";
 import type { EvidenceTrailEntry, EvidenceTrailPrint } from "../lib/schema";
 interface Props { trail: EvidenceTrailEntry[]; compact?: boolean; }
 const shownLawChanges = 3;
 ---
-{Astro.props.trail.map((entry) => { if (isRegulationEntry(entry)) return <div class:list={["trail-print", { "trail-compact": Astro.props.compact }]}>
+{Astro.props.trail.map((entry) => { if (isResolutionEntry(entry)) return <div class:list={["trail-print", { "trail-compact": Astro.props.compact }]}>
+  <h3><a href={entry.pageUrl} target="_blank" rel="noreferrer">{entry.numberCz} ↗</a></h3>
+  <ul class="trail-changes"><li>{entry.titleCz}</li></ul>
+  <ol class="trail"><li class="trail-adoption">
+    <time datetime={entry.adoption.date}>{formatDate(entry.adoption.date)}</time>
+    <strong>Vláda přijala usnesení</strong>
+    <span class="trail-detail">Strana byla v den přijetí součástí vlády.</span>
+    <span class="trail-links"><a href={entry.pageUrl} target="_blank" rel="noreferrer">Usnesení a jeho přílohy na portálu vlády ↗</a></span>
+  </li></ol>
+</div>; if (isRegulationEntry(entry)) return <div class:list={["trail-print", { "trail-compact": Astro.props.compact }]}>
   <h3><a href={entry.textUrl} target="_blank" rel="noreferrer">{entry.citationCz} ↗</a></h3>
   <ul class="trail-changes"><li>{entry.titleCz}</li></ul>
   <ol class="trail"><li class="trail-adoption">

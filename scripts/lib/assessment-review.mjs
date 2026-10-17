@@ -161,10 +161,12 @@ function evidenceLabel(evidence) {
   if (evidence.role === "senate-resolution") return "Usnesení Senátu, kterým vrátil návrh Sněmovně";
   // A regulation's title is its citation and its title, which name its kind.
   if (evidence.role === "law-change" && isRegulationKind(evidence.structuredFacts?.printKindId)) return `Předpis ve Sbírce zákonů: ${evidence.title}`;
+  if (evidence.role === "law-change" && evidence.structuredFacts?.printKindId === "government-resolution") return `Text usnesení vlády: ${evidence.title}`;
   if (evidence.role === "law-change") return `Změna zákona v návrhu projednávaném Sněmovnou: ${evidence.structuredFacts?.titleCz ?? evidence.title}`;
   if (evidence.type === "parliamentary-vote") return "Výsledek hlasování Poslanecké sněmovny";
   if (evidence.type === "legislative-step") return "Průběh projednávání návrhu ve Sněmovně";
   if (evidence.type === "government-opinion") return `Stanovisko vlády k návrhu zákona, který nepředložila (${evidence.structuredFacts?.resultCz ?? "výsledek neuveden"})`;
+  if (evidence.type === "government-resolution") return "Přijetí usnesení vládou";
   if (evidence.type === "regulation-adoption") return evidence.structuredFacts?.regulationKind === "government-regulation" ? "Přijetí nařízení vládou" : `Vydání vyhlášky: ${evidence.structuredFacts?.issuerCz ?? "ministerstvo"}`;
   return evidence.publisher;
 }

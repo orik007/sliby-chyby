@@ -2,8 +2,8 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
-export const assessorPromptVersion = "assessor-v22";
-export const arbiterPromptVersion = "arbiter-v15";
+export const assessorPromptVersion = "assessor-v23";
+export const arbiterPromptVersion = "arbiter-v16";
 export const scoringRulePath = "docs/scoring.md";
 
 // The models read at most 1,050,000 tokens, their answer included (OpenAI

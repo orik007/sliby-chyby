@@ -122,7 +122,7 @@ test("one real print runs through routing, packaging, assessment, and the review
     directLinks: report.counts.directLinkLawChangeCount,
     packages: report.counts.packageCount,
     invalid: report.counts.invalidScreenerCount + report.counts.invalidRelevanceCheckCount
-  }, { records: 6, skipped: 2, conduct: 4, lawChanges: 6, technical: 1, routed: 3, directLinks: 1, packages: 2, invalid: 0 });
+  }, { records: 7, skipped: 2, conduct: 5, lawChanges: 7, technical: 1, routed: 4, directLinks: 1, packages: 2, invalid: 0 });
 
   // The value-added tax law change reaches promises through the act it
   // amends, which the VAT tag maps, to the two promises tagged with it. The
@@ -136,7 +136,7 @@ test("one real print runs through routing, packaging, assessment, and the review
   assert.ok(vatPackage, `a package for ${vatPromiseId}`);
   for (const evidencePackage of packages) {
     const lawChanges = evidencePackage.evidence.filter(({ role }) => role === "law-change");
-    assert.deepEqual(lawChanges.map(({ structuredFacts }) => structuredFacts.changeId), ["43310-2", "43310-3", "sb-2026-145"]);
+    assert.deepEqual(lawChanges.map(({ structuredFacts }) => structuredFacts.changeId), ["43310-2", "43310-3", "sb-2026-145", "uv-2026-158"]);
     assert.deepEqual(lawChanges[1].matchBasis.directLinkIdentifiers, ["cz-act-235-2004"]);
     // A ministerial decree of the Collection of Laws (145/2026 Sb., on the
     // municipalities' and regions' shares of VAT revenue, adopted by the
@@ -152,6 +152,19 @@ test("one real print runs through routing, packaging, assessment, and the review
     assert.equal(adoption.matchBasis.attributionStatus, "verified-ministerial-decree");
     assert.deepEqual(adoption.structuredFacts.concernsLawChanges.map(({ evidenceId, version }) => [evidenceId, version]), [[decree.id, "adopted"]]);
     assert.equal(adoption.structuredFacts.paragraphs, undefined, "the decree's text is its law change's, not its conduct's");
+    // A government resolution (158/2026, on the Czech Republic's part in
+    // EXPO 2027, adopted on 9 March 2026) is one law change, its text as
+    // adopted, and it is conduct of every governing party on that day.
+    const resolution = lawChanges[3];
+    assert.equal(resolution.id, "zvlady-resolutions--law-change-uv-2026-158");
+    assert.deepEqual(Object.keys(resolution.structuredFacts.versions), ["adopted"]);
+    assert.match(resolution.structuredFacts.versions.adopted.textCz, /^USNESENÍ\nVLÁDY ČESKÉ REPUBLIKY\nze dne 9\. března 2026 č\. 158\n/);
+    assert.equal(resolution.structuredFacts.versions.adopted.contextCz, undefined);
+    assert.equal(resolution.url, "https://odok.gov.cz/portal/zvlady/usneseni/2026/158/");
+    const resolutionAdoption = evidencePackage.evidence.find(({ id }) => id === "zvlady-resolutions--2026-158");
+    assert.equal(resolutionAdoption.matchBasis.attributionStatus, "verified-government-resolution");
+    assert.deepEqual(resolutionAdoption.structuredFacts.concernsLawChanges.map(({ evidenceId, version }) => [evidenceId, version]), [[resolution.id, "adopted"]]);
+    assert.equal(resolutionAdoption.structuredFacts.paragraphs, undefined, "the resolution's text is its law change's, not its conduct's");
     assert.deepEqual(lawChanges[0].matchBasis.routeBasis, ["controlled-tag"]);
     // Every version with conduct carries its context from e-Sbírka.
     assert.match(lawChanges[1].structuredFacts.versions.proposed.contextCz, /^Context from the Collection of Laws \(e-Sbírka\): the provisions this version amends, as in force on 2026-/);
@@ -176,7 +189,7 @@ test("one real print runs through routing, packaging, assessment, and the review
 
   // Each conduct is attributed to the party and concerns the version it decided on.
   const conduct = Object.fromEntries(vatPackage.evidence.filter(({ role }) => role === "conduct-evidence").map((item) => [item.id, item]));
-  assert.deepEqual(Object.keys(conduct).sort(), ["esbirka-regulations--2026-145", "psp-core-2025--print-step-211390", "psp-core-2025--vote-88356", "psp-core-2025--vote-88456"]);
+  assert.deepEqual(Object.keys(conduct).sort(), ["esbirka-regulations--2026-145", "psp-core-2025--print-step-211390", "psp-core-2025--vote-88356", "psp-core-2025--vote-88456", "zvlady-resolutions--2026-158"]);
   const concern = (id) => conduct[id].structuredFacts.concernsLawChanges[0];
   assert.equal(conduct["psp-core-2025--print-step-211390"].matchBasis.attributionStatus, "verified-government-proposal");
   assert.equal(concern("psp-core-2025--print-step-211390").version, "proposed");

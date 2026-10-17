@@ -25,6 +25,9 @@ const schemas = {
   transition: ["transitionId", "fromStateId", "toStateId", "actionId", "transitionType"],
   action: ["actionId", "description"],
   proposer: ["printId", "personId", "order", "type"],
+  // The eKLEP materials of prints and sub-prints (psp.cz k=1303,
+  // tisk_eklep.unl and tz_eklep.unl).
+  eklepLink: ["pid", "ovaNumber", "ovaYear", "isPublic", "printId", "partNumber"],
   // schuze.zip; only the leading columns this collector reads are declared.
   session: ["sessionId", "organId", "number", "from", "to", "updatedAt", "isInvitation"],
   agendaItem: ["agendaItemId", "sessionId", "printId", "typeId", "number", "fullTitle", "fullSuffix", "note", "stateId", "isInvitation"]
@@ -557,7 +560,24 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     }));
   }
 
+  // The eKLEP material of each print and sub-print of the term, by which a
+  // government resolution that only approves a government proposal or
+  // opinion is found (docs/evidence-pipeline.md, Government resolution data
+  // rules).
+  const subPrintKinds = new Map(parseUnl(decodeEntry(printsEntries, "tisky_za.unl"), schemas.subPrint)
+    .filter((row) => printById.has(row.printId))
+    .map((row) => [`${row.printId}/${row.partNumber}`, row.kindId]));
+  const eklepLinks = [
+    ...parseUnl(decodeEntry(printsEntries, "tisk_eklep.unl"), schemas.eklepLink)
+      .filter((row) => printById.has(row.printId))
+      .map((row) => ({ pid: row.pid, kind: "print", printId: row.printId, printKindId: printById.get(row.printId).kindId })),
+    ...parseUnl(decodeEntry(printsEntries, "tz_eklep.unl"), schemas.eklepLink)
+      .filter((row) => subPrintKinds.has(`${row.printId}/${row.partNumber}`))
+      .map((row) => ({ pid: row.pid, kind: "sub-print", printId: row.printId, partNumber: row.partNumber, printKindId: subPrintKinds.get(`${row.printId}/${row.partNumber}`) }))
+  ];
+
   const referenceData = {
+    eklepLinks,
     clubs: [...clubs.values()].map((club) => ({
       externalClubId: club.organId,
       abbreviation: club.abbreviation,
