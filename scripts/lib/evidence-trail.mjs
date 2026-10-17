@@ -3,6 +3,7 @@ import { chosenReview, proposedPublicExplanation } from "./assessment-review.mjs
 import { isDecisiveAction } from "./attribution.mjs";
 import { contextOmissionsOf } from "./context-omissions.mjs";
 import { isRegulationKind } from "./regulations.mjs";
+import { resolutionKind } from "./government-resolutions.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -130,8 +131,8 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
     }];
   });
   // A government resolution is one entry: its adoption and its page.
-  const resolutions = evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && structuredFacts.printKindId === "government-resolution").flatMap((change) => {
-    const adoption = conduct.find((item) => item.type === "government-resolution" && item.structuredFacts.concernsLawChanges.some(({ evidenceId }) => evidenceId === change.id));
+  const resolutions = evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && structuredFacts.printKindId === resolutionKind).flatMap((change) => {
+    const adoption = conduct.find((item) => item.type === resolutionKind && item.structuredFacts.concernsLawChanges.some(({ evidenceId }) => evidenceId === change.id));
     if (!adoption) return [];
     const facts = adoption.structuredFacts;
     return [{
@@ -144,7 +145,7 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
     }];
   });
   const changesByPrint = new Map();
-  for (const change of evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && !isRegulationKind(structuredFacts.printKindId) && structuredFacts.printKindId !== "government-resolution")) {
+  for (const change of evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && !isRegulationKind(structuredFacts.printKindId) && structuredFacts.printKindId !== resolutionKind)) {
     const printId = String(change.structuredFacts.externalPrintId);
     changesByPrint.set(printId, [...(changesByPrint.get(printId) ?? []), change]);
   }

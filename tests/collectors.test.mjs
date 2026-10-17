@@ -256,8 +256,9 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
     "typ_stavu.unl": entry(unl(["5", "3. cteni"]) + unl(["6", "Odesilano do Senatu"])),
     "tisky_za.unl": entry(subPrintRow({ printId: "700", partNumber: "2", historyId: "801", kindId: "11", shortTitle: "Usnesení Senátu k tisku 189/0", fullTitle: "Usnesení Senátu" }) + subPrintRow({ printId: "700", partNumber: "1", historyId: "801", kindId: "12", shortTitle: "Zákon ze Senátu" })),
     // The eKLEP materials of the print and of a sub-print; a print of
-    // another term is not this term's (psp.cz k=1303).
-    "tisk_eklep.unl": entry(unl(["KORNDS2HT779", "425", "26", "1", "700", "0"]) + unl(["ALBSA98GU3XD", "1076", "16", "1", "40391", "0"])),
+    // another term is not this term's, and a row of tisk_eklep.unl with a
+    // sub-print number is not the print's (psp.cz k=1303).
+    "tisk_eklep.unl": entry(unl(["KORNDS2HT779", "425", "26", "1", "700", "0"]) + unl(["ALBSA98GU3XD", "1076", "16", "1", "40391", "0"]) + unl(["ALBSAU8D7MPB", "1327", "17", "1", "700", "1"])),
     "tz_eklep.unl": entry(unl(["KORNDPDDEYDL", "1078", "25", "1", "700", "2"])),
     "vysledek.unl": resultTableBytes(),
     "predkladatel.unl": entry("")
@@ -426,8 +427,6 @@ test("PSP normalizer attributes submitted bills to proposer and government parti
       "tisky_za.unl": entry(""),
       "tisk_eklep.unl": entry(""),
       "tz_eklep.unl": entry(""),
-    "tisk_eklep.unl": entry(""),
-    "tz_eklep.unl": entry(""),
       "vysledek.unl": resultTableBytes(),
       "predkladatel.unl": entry(unl(["701", "1", "1", "0"]) + unl(["701", "2", "2", "0"]) + unl(["704", "2", "1", "0"]))
     },

@@ -258,6 +258,9 @@ test("one real print runs through routing, packaging, assessment, and the review
   assert.equal(audit.stateCounts["review-candidate"], 2);
   assert.equal(audit.stateCounts["no-routed-law-change"], audit.promiseCount - 2);
   assert.ok(audit.promises.every(({ scoreInferred, publicationApproved }) => scoreInferred === false && publicationApproved === false));
+  // It reports the government resolutions' figures.
+  assert.equal(audit.quality.resolutions.used, 1);
+  assert.match(await readFile(join(work, "coverage-audit.md"), "utf8"), /\| Government resolutions adopted before a tracked government \/ used \| 0 \/ 1 \|/);
 
   // Reviews too long for the arbiter's input limit: the arbiter is never
   // called and the disagreement goes to human review.

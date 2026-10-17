@@ -131,6 +131,7 @@ async function collectResolutionSource(source, since) {
   const warnings = [
     ...readQuality.gaps.map((resolution) => `${resolution}: not held between two held resolutions; read again in the next run`),
     ...readQuality.unexpectedPages.map((resolution) => `${resolution}: published without a Word file of the resolution; not used`),
+    ...readQuality.unreadableFiles.map((file) => `${file}: the Word file cannot be read as text; the resolution is not used and is read again in the next run`),
     ...quality.unreadable.map((resolution) => `${resolution}: the Word file of the resolution cannot be read as text; not used`)
   ];
   log(`${source.id}: ${resolutions.length} published resolutions (${readQuality.fromCache} from the cache, ${readQuality.fromPortal} read from the portal), ${readQuality.classified.length} classified; left out as duplicates ${JSON.stringify(quality.duplicates)}; ${quality.beforeGovernment} adopted before a tracked government; ${quality.used} used; ${fetcher.stats.requests} requests to the Government Office, ${fetcher.stats.retried} retried`);

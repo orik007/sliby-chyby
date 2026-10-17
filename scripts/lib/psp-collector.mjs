@@ -569,7 +569,7 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     .map((row) => [`${row.printId}/${row.partNumber}`, row.kindId]));
   const eklepLinks = [
     ...parseUnl(decodeEntry(printsEntries, "tisk_eklep.unl"), schemas.eklepLink)
-      .filter((row) => printById.has(row.printId))
+      .filter((row) => printById.has(row.printId) && row.partNumber === "0")
       .map((row) => ({ pid: row.pid, kind: "print", printId: row.printId, printKindId: printById.get(row.printId).kindId })),
     ...parseUnl(decodeEntry(printsEntries, "tz_eklep.unl"), schemas.eklepLink)
       .filter((row) => subPrintKinds.has(`${row.printId}/${row.partNumber}`))

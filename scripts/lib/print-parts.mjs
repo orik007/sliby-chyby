@@ -1,4 +1,5 @@
 import { cleanText, invariant } from "./collector-core.mjs";
+import { resolutionKind } from "./government-resolutions.mjs";
 
 /**
  * Splits a Chamber print's official texts into law changes, the unit the
@@ -576,7 +577,7 @@ export function lawChangeOfResolution(payload, url) {
     changeId: payload.externalPrintId,
     printId: payload.externalPrintId,
     printNumber: payload.numberCz,
-    printKindId: "government-resolution",
+    printKindId: resolutionKind,
     printTitleCz: `${payload.numberCz}${payload.titleCz ? `, ${payload.titleCz}` : ""}`,
     printPageUrl: url,
     addedIn: "adopted",

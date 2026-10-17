@@ -43,8 +43,13 @@ export function resolutionNumberCz(year, number) {
 }
 
 // The Government Office's firewall answers a client that does not say who it
-// is with a page of exactly this many bytes.
-const firewallBlockBytes = 323;
+// is with HTTP 200 and a short page with this title (323 bytes, seen on 17
+// October 2026).
+const firewallBlockTitle = "<title>Požadavek byl zablokován</title>";
+
+function isFirewallBlock({ bytes }) {
+  return bytes !== undefined && bytes.byteLength < 4_096 && new TextDecoder("utf-8").decode(bytes).includes(firewallBlockTitle);
+}
 
 /** A request the Government Office's firewall blocked; never retried. */
 export class GovernmentOfficeBlockedError extends Error {}
@@ -100,8 +105,8 @@ export function createGovernmentOfficeFetcher({
   async function get(url, { purpose }) {
     for (let attemptNumber = 0; ; attemptNumber += 1) {
       const answer = await attempt(url, purpose, attemptNumber);
-      if (answer.bytes?.byteLength === firewallBlockBytes) {
-        throw new GovernmentOfficeBlockedError(`The Government Office's firewall blocked ${url} (a ${firewallBlockBytes}-byte answer); the run stops`);
+      if (isFirewallBlock(answer)) {
+        throw new GovernmentOfficeBlockedError(`The Government Office's firewall blocked ${url} (“Požadavek byl zablokován”); the run stops`);
       }
       const transient = answer.error !== undefined || [429, 502, 503, 504].includes(answer.status);
       if (!transient) return answer;
@@ -220,8 +225,9 @@ const missingInARow = 3;
 /**
  * Reads every resolution from `firstResolution` ("1013/2025") to the last
  * one held: from the cache when it is there, otherwise its page and Word
- * files, which are cached at once. A classified resolution and a number not
- * yet held are read again in every run. Reading stops with an error once
+ * files, which are cached at once. A classified resolution, a number not
+ * yet held, and a resolution with a Word file that cannot be read as text are
+ * read again in every run. Reading stops with an error once
  * `budgetMs` has passed, so a long first collection continues in the next
  * run.
  */
@@ -230,7 +236,7 @@ export async function readResolutions({ fetcher, cache, firstResolution, today, 
   const [firstNumber, firstYear] = firstResolution.split("/").map(Number);
   const startedAt = now();
   const resolutions = [];
-  const quality = { fromCache: 0, fromPortal: 0, classified: [], gaps: [], unexpectedPages: [] };
+  const quality = { fromCache: 0, fromPortal: 0, classified: [], gaps: [], unexpectedPages: [], unreadableFiles: [] };
   for (let year = firstYear; year <= Number(today.slice(0, 4)); year += 1) {
     const missing = [];
     for (let number = year === firstYear ? firstNumber : 1; missing.length < missingInARow; number += 1) {
@@ -273,6 +279,14 @@ export async function readResolutions({ fetcher, cache, firstResolution, today, 
         const answer = await fetcher.get(file.url, { purpose: `resolution ${file.label}` });
         invariant(answer.status === 200, `${file.url} answered HTTP ${answer.status}`);
         files.push({ ...file, sha256: sha256(answer.bytes), paragraphs: await wordParagraphs(answer.bytes, file.format) });
+      }
+      // A Word file that cannot be read as text is not cached, so a later
+      // run, perhaps with a better reader, tries it again.
+      const unreadable = files.filter(({ url, paragraphs }) => url && paragraphs === null);
+      if (unreadable.length > 0) {
+        quality.unreadableFiles.push(...unreadable.map(({ label }) => `${number}/${year} (${label})`));
+        onResolution({ resolution: `${number}/${year}`, outcome: "a Word file cannot be read as text" });
+        continue;
       }
       const entry = { year, number, readAt: new Date(now()).toISOString(), adoptedOn: parsed.adoptedOn, titleCz: parsed.titleCz, ova: parsed.ova, pid: parsed.pid, files };
       await cache.put(entry);
@@ -318,13 +332,13 @@ export async function readEklepTypes({ fetcher, fromYear, today }) {
 /**
  * Why a resolution only approves what another row of the conduct table
  * records, or null: its material's PID is linked by the Chamber to a
- * government proposal or a government opinion (`eklepLinks`, from
- * tisk_eklep.unl and tz_eklep.unl), or eKLEP names its type as a draft
- * regulation or bill.
+ * government proposal or a government opinion (`eklepLinks`, the links of
+ * tisk_eklep.unl and tz_eklep.unl by PID), or eKLEP names its type as a
+ * draft regulation or bill.
  */
 export function duplicateOf(pid, { eklepLinks, eklepTypes }) {
   if (!pid) return null;
-  for (const link of eklepLinks.filter((candidate) => candidate.pid === pid)) {
+  for (const link of eklepLinks.get(pid) ?? []) {
     if (link.kind === "print" && proposalPrintKinds[link.printKindId]) return proposalPrintKinds[link.printKindId];
     if (link.kind === "sub-print" && link.printKindId === governmentOpinionSubPrintKind) return "government-opinion";
   }
@@ -355,8 +369,9 @@ export function resolutionParagraphs(entry) {
 export function resolutionRecords({ resolutions, eklepLinks, eklepTypes, governmentPeriods, source }) {
   const quality = { duplicates: {}, unreadable: [], beforeGovernment: 0, used: 0 };
   const records = [];
+  const linksByPid = Map.groupBy(eklepLinks, ({ pid }) => pid);
   for (const entry of resolutions) {
-    const duplicate = duplicateOf(entry.pid, { eklepLinks, eklepTypes });
+    const duplicate = duplicateOf(entry.pid, { eklepLinks: linksByPid, eklepTypes });
     if (duplicate) {
       quality.duplicates[duplicate] = (quality.duplicates[duplicate] ?? 0) + 1;
       continue;

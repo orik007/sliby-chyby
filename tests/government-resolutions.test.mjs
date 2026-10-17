@@ -51,7 +51,11 @@ test("requests take turns at least 6 s apart, a lost connection is retried, and 
   let clock = 0;
   const waits = [];
   const sleep = async (ms) => { waits.push(ms); clock += ms; };
-  const answers = [new TypeError("fetch failed", { cause: { code: "ECONNRESET" } }), new Response("ok", { status: 200 }), new Response("x".repeat(323), { status: 200 })];
+  // The firewall's answer to a client that does not say who it is, as seen
+  // on 17 October 2026 (HTTP 200, 323 bytes).
+  const block = "<html><head><title>Požadavek byl zablokován</title></head><body>Požadovaná URL byla zablokována. Obraťte se na správce systému.<br><br>Na adresu <b>administrator@vlada.cz</b> pošlete zprávu, kam zkopírujete ID zablokovaného požadavku.<br><br>ID zablokovaného požadavku je: <5079556984121549320></body></html>";
+  assert.equal(new TextEncoder().encode(block).byteLength, 323);
+  const answers = [new TypeError("fetch failed", { cause: { code: "ECONNRESET" } }), new Response("x".repeat(323), { status: 200 }), new Response(block, { status: 200 })];
   const log = [];
   const fetcher = createGovernmentOfficeFetcher({
     now: () => clock,
@@ -63,6 +67,7 @@ test("requests take turns at least 6 s apart, a lost connection is retried, and 
       return next;
     }
   });
+  // Another answer of 323 bytes is no block.
   const answer = await fetcher.get("https://odok.gov.cz/portal/zvlady/usneseni/2026/1/", { purpose: "resolution page" });
   assert.equal(answer.status, 200);
   // The retry waits 1 s and then the rest of the 6 s since the last request.
@@ -130,6 +135,19 @@ test("resolutions are read until three numbers in a row are not held, cached at 
   assert.deepEqual(second.resolutions, read.resolutions);
 });
 
+test("a resolution whose Word file cannot be read as text is reported and read again in the next run", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "resolutions-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const pages = { "2026-158": await page("2026-158") };
+  const files = { "https://odok.gov.cz/portal/services/download/attachment/2026/158/docx/": new TextEncoder().encode("not a DOCX") };
+  const first = await portal(pages, files);
+  const read = await readResolutions({ fetcher: first.fetcher, cache: createResolutionCache(directory), firstResolution: "158/2026", today: "2026-10-17" });
+  assert.deepEqual([read.resolutions, read.quality.unreadableFiles], [[], ["158/2026 (Usnesení)"]]);
+  const again = await portal(pages, files);
+  await readResolutions({ fetcher: again.fetcher, cache: createResolutionCache(directory), firstResolution: "158/2026", today: "2026-10-17" });
+  assert.ok(again.requests.includes("https://odok.gov.cz/portal/services/download/attachment/2026/158/docx/"));
+});
+
 test("reading stops with an error once its time is up, keeping what it cached", async (t) => {
   const directory = await mkdtemp(join(tmpdir(), "resolutions-"));
   t.after(() => rm(directory, { recursive: true, force: true }));
@@ -156,7 +174,7 @@ test("a resolution that only approves a government proposal, opinion, or regulat
     { pid: "SENATE", kind: "sub-print", printKindId: "11" }
   ];
   const eklepTypes = new Map([["NNV1", "NNV"], ["NZ1", "NZ"], ["SNZ1", "SNZ"], ["NV1", "NV"]]);
-  const of = (pid) => duplicateOf(pid, { eklepLinks, eklepTypes });
+  const of = (pid) => duplicateOf(pid, { eklepLinks: Map.groupBy(eklepLinks, ({ pid: linked }) => linked), eklepTypes });
   assert.deepEqual(["KORNDS2HT779", "TREATY", "KORNDPDDEYDL", "NNV1", "NZ1", "SNZ1"].map(of), ["government-bill", "treaty", "government-opinion", "regulation", "government-bill", "government-opinion"]);
   // A state fund's budget and a Senate resolution are not conduct; a decree
   // is not the government's; a material without a PID is no duplicate.
