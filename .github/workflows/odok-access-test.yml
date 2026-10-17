@@ -1,0 +1,53 @@
+name: odok access test (temporary)
+
+on:
+  push:
+    branches:
+      - claude/government-resolutions
+    paths:
+      - .github/workflows/odok-access-test.yml
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Probe odok.gov.cz politely (one request at a time, at least 3 s apart)
+        run: |
+          cat > probe.mjs <<'JS'
+          const UA = "Slibomer/1.0 (+https://slibomer.cz)";
+          const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+          let last = 0;
+          async function get(url) {
+            const wait = last + 3000 - Date.now();
+            if (wait > 0) await sleep(wait);
+            last = Date.now();
+            const started = Date.now();
+            const res = await fetch(url, { headers: { "user-agent": UA }, redirect: "follow" });
+            const body = Buffer.from(await res.arrayBuffer());
+            const line = { url, status: res.status, bytes: body.length, type: res.headers.get("content-type"), ms: Date.now() - started, finalUrl: res.url };
+            console.log(JSON.stringify(line));
+            if (body.length === 323) { console.log("Blocked by the WAF (323-byte answer); stopping."); process.exit(1); }
+            return { res, body };
+          }
+          const base = "https://odok.gov.cz";
+          for (const [year, no] of [[2025, 1013], [2026, 1], [2026, 330], [2026, 660], [2026, 661]]) {
+            const { res, body } = await get(`${base}/portal/zvlady/usneseni/${year}/${no}/`);
+            if (res.status !== 200) continue;
+            const html = body.toString("utf8");
+            const links = [...new Set([...html.matchAll(/href="(\/portal\/services\/download\/attachment\/[^"]+)"/g)].map((m) => m[1]))];
+            console.log(`  attachments: ${JSON.stringify(links)}`);
+            const pid = html.match(/PID\s*<\/[^>]+>\s*<[^>]+>\s*([A-Z0-9]{12})/);
+            console.log(`  PID: ${pid ? pid[1] : "not found by this probe"}`);
+            const word = links.find((l) => /\/(docx|doc)\/$/.test(l));
+            if (word) await get(base + word);
+          }
+          await get("https://www.odok.gov.cz/opendata/dataset/odok/requests_2026.json");
+          JS
+          node probe.mjs
