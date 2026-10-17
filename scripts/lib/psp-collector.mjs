@@ -239,9 +239,8 @@ const senateResolutionKindId = "11";
 
 // Official print kind (druh_tisku.unl) of the government's opinion on a bill
 // it did not submit, a sub-print listed in tisky_za.unl, and the results
-// (vysledek.unl, tisky_za.id_vysledek) that state it. Only an agreement or a
-// disagreement is conduct (docs/scoring.md); any other opinion (neutral,
-// with comments, none, or a result not recorded) is not.
+// (vysledek.unl, tisky_za.id_vysledek) that state it. Which opinions are
+// conduct is defined in docs/scoring.md.
 const governmentOpinionKindId = "7";
 // The descriptions are compared without diacritics and case. The bill is a
 // print of kind 2 ("Návrh zákona"), never a government proposal.
@@ -523,7 +522,7 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
       continue;
     }
     const opinion = governmentOpinionResults[normalizeSearchText(resultCz)] ?? null;
-    if (!opinion) log(`${source.id}: government opinion ${print.number}/${row.partNumber} has the result ${resultCz ?? "none"}; not conduct`);
+    if (!opinion) log(`${source.id}: government opinion ${print.number}/${row.partNumber} has the result ${resultCz ?? (row.resultId ? `id ${row.resultId}, not in vysledek.unl` : "none")}; not conduct`);
     if (occurredAt.slice(0, 10) < cutoff) continue;
     const distributedOn = occurredAt.slice(0, 10);
     const printTitle = cleanText(print.fullTitle || print.shortTitle, 1000);
