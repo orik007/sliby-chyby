@@ -1,0 +1,82 @@
+name: odok crawl test (temporary)
+
+on:
+  push:
+    branches:
+      - claude/government-resolutions
+    paths:
+      - .github/workflows/odok-access-test.yml
+
+permissions:
+  contents: write
+
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Crawl the current government's resolutions (one request at a time, at least 6 s apart)
+        run: |
+          mkdir -p out/pages out/files
+          cat > crawl.mjs <<'JS'
+          import { appendFileSync, existsSync, writeFileSync } from "node:fs";
+          const UA = "Slibomer/1.0 (+https://slibomer.cz)";
+          const MIN_GAP = 6000;
+          const BACKOFF = [1, 2, 4, 8, 16, 32, 32, 32, 32, 32].map((s) => s * 1000);
+          const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+          let last = 0;
+          const log = (o) => { const line = JSON.stringify({ t: new Date().toISOString(), ...o }); console.log(line); appendFileSync("out/requests.jsonl", line + "\n"); };
+          async function get(url) {
+            for (let attempt = 0; ; attempt++) {
+              const wait = last + MIN_GAP - Date.now();
+              if (wait > 0) await sleep(wait);
+              last = Date.now();
+              const started = Date.now();
+              let status, body, error;
+              try {
+                const res = await fetch(url, { headers: { "user-agent": UA }, signal: AbortSignal.timeout(60000) });
+                status = res.status;
+                body = Buffer.from(await res.arrayBuffer());
+              } catch (e) { error = String(e.cause?.code ?? e.name ?? e); }
+              log({ url, attempt, status, bytes: body?.length, error, ms: Date.now() - started });
+              if (body?.length === 323) { console.log("WAF block (323-byte answer); stopping."); process.exit(2); }
+              const retry = error !== undefined || status === 429 || status === 502 || status === 503 || status === 504;
+              if (!retry) return { status, body };
+              if (attempt >= BACKOFF.length) { console.log(`Giving up on ${url}`); process.exit(3); }
+              await sleep(BACKOFF[attempt]);
+            }
+          }
+          const base = "https://odok.gov.cz";
+          for (const [year, start] of [[2025, 1013], [2026, 1]]) {
+            let misses = 0;
+            for (let no = start; misses < 3; no++) {
+              const { status, body } = await get(`${base}/portal/zvlady/usneseni/${year}/${no}/`);
+              if (status !== 200) { misses++; if (misses === 1) writeFileSync(`out/pages/miss-${year}-${no}.html`, body); continue; }
+              misses = 0;
+              writeFileSync(`out/pages/${year}-${no}.html`, body);
+              const links = [...new Set([...body.toString("utf8").matchAll(/href="(\/portal\/services\/download\/attachment\/[^"]+)"/g)].map((m) => m[1]))];
+              for (const link of links.filter((l) => /\/(docx|doc)\/$/.test(l))) {
+                const name = link.replace("/portal/services/download/attachment/", "").replace(/\/$/, "").replaceAll("/", "-");
+                if (existsSync(`out/files/${name}`)) continue;
+                const file = await get(base + link);
+                if (file.status === 200) writeFileSync(`out/files/${name}`, file.body);
+              }
+            }
+          }
+          for (const year of [2025, 2026]) {
+            const { status, body } = await get(`https://www.odok.gov.cz/opendata/dataset/odok/requests_${year}.json`);
+            if (status === 200) writeFileSync(`out/requests_${year}.json`, body);
+          }
+          JS
+          node crawl.mjs
+      - name: Save the result to a data branch
+        if: always()
+        run: |
+          cd out
+          git init -q -b claude/odok-crawl-data
+          git -c user.name=github-actions -c user.email=github-actions@users.noreply.github.com add -A
+          git -c user.name=github-actions -c user.email=github-actions@users.noreply.github.com commit -q -m "odok crawl test result"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" claude/odok-crawl-data
