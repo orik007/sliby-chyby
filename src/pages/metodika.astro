@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { statusDetails } from "../lib/data";
+import governmentPeriods from "../../automation/attribution/government-periods.json";
 
 const scaleGroups = [
   { title: "Výsledek", statuses: ["fulfilled", "acting-against"] as const },
@@ -27,13 +28,16 @@ const exampleMaximum = examplePromiseCount * 2;
 const exampleIndex = Math.round((examplePoints / exampleMaximum) * 100);
 // What can change a promise's score, in the order of docs/scoring.md,
 // Attributable conduct.
+const currentGovernment = governmentPeriods.periods.find((period) => period.to === null);
+if (!currentGovernment) throw new Error("government-periods.json has no current government");
+const governmentFrom = new Intl.DateTimeFormat("cs-CZ", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(currentGovernment.from));
 const chamber = { label: "Poslanecká sněmovna", url: "https://www.psp.cz/sqw/hp.sqw?k=1300" };
 const conductRows = [
   {
     title: "Rozhodující hlasování ve Sněmovně",
     source: chamber,
     what: "Hlasování, kterým Sněmovna o zákoně, státním rozpočtu nebo mezinárodní smlouvě rozhodla.",
-    who: "Straně, jejíž poslanecký klub tak hlasoval většinou všech svých členů.",
+    who: "Straně podle toho, jak hlasovala většina všech členů jejího poslaneckého klubu v den hlasování.",
     points: "Přijetí opatření, které splňuje nebo popírá celý slib: ±2, jen jeho část: ±1. Zamítnutí opatření, které slib splňuje: −2, jen jeho část: −1. Zamítnutí opatření proti slibu: +1. Klub nedal většinu opatření, které slib splňuje: −1.",
   },
   {
@@ -53,7 +57,7 @@ const conductRows = [
   {
     title: "Stanovisko vlády k návrhu zákona",
     source: chamber,
-    what: "Souhlas nebo nesouhlas vlády s návrhem zákona, který nepředložila. Neutrální stanovisko se nepočítá.",
+    what: "Souhlas nebo nesouhlas vlády s návrhem zákona, který nepředložila. Jiné stanovisko, například neutrální nebo s připomínkami, ani chybějící stanovisko se nepočítá.",
     who: "Všem vládním stranám v den, kdy Sněmovna stanovisko rozeslala.",
     points: "±1",
   },
@@ -67,7 +71,7 @@ const conductRows = [
   {
     title: "Usnesení vlády",
     source: { label: "zVlády, portál Úřadu vlády", url: "https://odok.gov.cz/portal/zvlady/" },
-    what: "Zveřejněné usnesení vlády. Usnesení, které jen schvaluje vládní návrh zákona, stanovisko nebo nařízení, se nepočítá podruhé.",
+    what: "Zveřejněné usnesení vlády. Usnesení, které jen schvaluje vládní návrh zákona, rozpočtu nebo smlouvy, stanovisko vlády nebo nařízení, se nepočítá podruhé.",
     who: "Všem vládním stranám v den přijetí.",
     points: "Rozhodnutí, ke kterému už nemusí nic dalšího nastat: ±2 za celý slib, ±1 za část. Jinak, i v pochybnostech, je to návrh: ±1.",
   },
@@ -90,11 +94,11 @@ const formatNumber = (value: number) => `${value > 0 ? "+" : value < 0 ? "−" :
   </section>
   <section id="zdroje" class="method-sources" aria-labelledby="sources-title">
     <h2 id="sources-title">Co hodnocení slibu ovlivní</h2>
-    <p class="scale-intro">Skóre slibu může změnit jen jednání strany zachycené v těchto úředních záznamech. Weby stran, tiskové zprávy ani média důkazem nejsou. Kroky vlády počítáme vládním stranám od jmenování současné vlády ANO 2011, SPD a Motoristů sobě 15. prosince 2025; kroky dřívějších vlád se jim nepočítají.</p>
+    <p class="scale-intro">Skóre slibu může změnit jen jednání strany zachycené v těchto úředních záznamech. Weby stran, tiskové zprávy ani média důkazem nejsou. Kroky vlády počítáme vládním stranám od jmenování současné vlády ANO 2011, SPD a Motoristů sobě {governmentFrom}; kroky dřívějších vlád se jim nepočítají.</p>
     <div class="source-cards">
       {conductRows.map((row) => <article class="source-card"><h3>{row.title}</h3><dl><div><dt>Zdroj</dt><dd><a href={row.source.url}>{row.source.label}</a></dd></div><div><dt>Co to je</dt><dd>{row.what}</dd></div><div><dt>Komu se počítá</dt><dd>{row.who}</dd></div><div><dt>Body</dt><dd>{row.points}</dd></div></dl></article>)}
     </div>
-    <p class="methodology-note">Rozhodnutí má přednost před návrhem. Mezi jednáními stejné váhy rozhoduje to poslední. Každé jednání posuzujeme podle textu, kterého se týkalo, a v detailu slibu odkazujeme na jeho úřední záznam.</p>
+    <p class="methodology-note">Rozhodnutí má přednost před návrhem. Mezi jednáními stejné váhy rozhoduje to poslední, ale jen v rozsahu, kterého se týká. Když jednání stejné váhy ze stejného dne ukazují opačnými směry, platí nižší skóre. Když slib jmenuje měřitelný cíl, například výši schodku v daném roce, rozhoduje nejdřív jednání o tomto cíli. Každé jednání posuzujeme podle textu, kterého se týkalo, a v detailu slibu odkazujeme na jeho úřední záznam.</p>
   </section>
   <section class="calculation-section" aria-labelledby="calculation-title">
     <div class="calculation-copy"><p class="eyebrow">VÝPOČET</p><h2 id="calculation-title">−100 až +100 bodů</h2><p>Sečteme aktuální hodnocení všech slibů a vydělíme je jejich maximálním možným bodovým ziskem.</p><code>součet bodů ÷ (2 × počet slibů) × 100</code></div>
