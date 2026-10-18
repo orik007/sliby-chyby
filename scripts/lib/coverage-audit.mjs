@@ -149,7 +149,10 @@ export function buildCoverageAudit({ collectorRun, routingRun, printParts, track
       oversizedPackages: routingRun.counts.oversizedPackageCount,
       contextTrimmedPackages: routingRun.counts.contextTrimmedPackageCount,
       invalidModelOutputs: routingRun.counts.invalidScreenerCount + routingRun.counts.invalidRelevanceCheckCount,
-      printParts: printParts?.quality ?? null
+      printParts: printParts?.quality ?? null,
+      // The government resolutions' figures (docs/evidence-pipeline.md,
+      // Government resolution data rules, Quality).
+      resolutions: collectorRun.collectors.find(({ collector }) => collector === "zvlady-resolutions")?.referenceData?.quality ?? null
     },
     stateCounts,
     parties,
@@ -198,6 +201,16 @@ export function renderCoverageAuditMarkdown(audit) {
       `| Approved bills without an approved text on psp.cz | ${printParts.approvedBillsWithoutApprovedText} |`,
       `| Prints with a voted text from the Collection of Laws (e-Sbírka), because psp.cz does not publish it | ${printParts.printsWithPromulgatedText} |`,
       `| Text warnings (a text listed without a DOCX or DOC file, a missing approved text, an act e-Sbírka does not yet hold) | ${printParts.textWarnings} |`
+    ] : []),
+    ...(quality.resolutions ? [
+      `| Government resolutions read from the cache / from the portal | ${quality.resolutions.fromCache} / ${quality.resolutions.fromPortal} |`,
+      `| Classified government resolutions | ${quality.resolutions.classified.length} |`,
+      `| Government resolutions left out as only approving a government proposal, opinion, or regulation | ${Object.values(quality.resolutions.duplicates).reduce((sum, count) => sum + count, 0)} (${Object.entries(quality.resolutions.duplicates).map(([kind, count]) => `${kind} ${count}`).join(", ") || "none"}) |`,
+      `| Government resolutions without a readable text (no file of their own, or a file to read again) | ${quality.resolutions.unexpectedPages.length + quality.resolutions.unreadableFiles.length} |`,
+      `| Government resolutions held back until their year's eKLEP open data is published | ${quality.resolutions.heldWithoutEklep} |`,
+      `| Government resolutions held back because an annex is only a PDF or XLS file | ${quality.resolutions.heldUnreadAnnex.length} |`,
+      `| Government resolutions adopted before a tracked government / used | ${quality.resolutions.beforeGovernment} / ${quality.resolutions.used} |`,
+      `| Requests to the Government Office / retried | ${quality.resolutions.requests} / ${quality.resolutions.retried} |`
     ] : []),
     `| Law changes screened | ${quality.lawChanges} |`,
     `| Technical / substantive | ${quality.technicalLawChanges} / ${quality.substantiveLawChanges} |`,

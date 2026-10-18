@@ -255,6 +255,11 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
     "typ_akce.unl": entry(unl(["5", "Chamber approved bill"])),
     "typ_stavu.unl": entry(unl(["5", "3. cteni"]) + unl(["6", "Odesilano do Senatu"])),
     "tisky_za.unl": entry(subPrintRow({ printId: "700", partNumber: "2", historyId: "801", kindId: "11", shortTitle: "Usnesení Senátu k tisku 189/0", fullTitle: "Usnesení Senátu" }) + subPrintRow({ printId: "700", partNumber: "1", historyId: "801", kindId: "12", shortTitle: "Zákon ze Senátu" })),
+    // The eKLEP materials of the print and of a sub-print; a print of
+    // another term is not this term's, and a row of tisk_eklep.unl with a
+    // sub-print number is not the print's (psp.cz k=1303).
+    "tisk_eklep.unl": entry(unl(["KORNDS2HT779", "425", "26", "1", "700", "0"]) + unl(["ALBSA98GU3XD", "1076", "16", "1", "40391", "0"]) + unl(["ALBSAU8D7MPB", "1327", "17", "1", "700", "1"])),
+    "tz_eklep.unl": entry(unl(["KORNDPDDEYDL", "1078", "25", "1", "700", "2"])),
     "vysledek.unl": resultTableBytes(),
     "predkladatel.unl": entry("")
   };
@@ -279,6 +284,12 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
   assert.deepEqual(vote.payload.linkedPrints[0].senateResolutionPartNumbers, [2]);
   assert.deepEqual(step.payload.senateResolutionPartNumbers, [2]);
   assert.equal(vote.primary, true);
+  // The eKLEP materials of this term's print and sub-print, with their kinds,
+  // by which a government resolution approving them is found.
+  assert.deepEqual(result.referenceData.eklepLinks, [
+    { pid: "KORNDS2HT779", kind: "print", printId: "700", printKindId: "1" },
+    { pid: "KORNDPDDEYDL", kind: "sub-print", printId: "700", partNumber: "2", printKindId: "11" }
+  ]);
 });
 
 function agendaFixture({ historyAgendaId = "5001" } = {}) {
@@ -320,6 +331,8 @@ function agendaFixture({ historyAgendaId = "5001" } = {}) {
     "typ_akce.unl": entry(unl(["6", "setrvano"])),
     "typ_stavu.unl": entry(unl(["6", "Snemovna (Senat)"])),
     "tisky_za.unl": entry(""),
+    "tisk_eklep.unl": entry(""),
+    "tz_eklep.unl": entry(""),
     "vysledek.unl": resultTableBytes(),
     "predkladatel.unl": entry("")
   };
@@ -412,6 +425,8 @@ test("PSP normalizer attributes submitted bills to proposer and government parti
       "typ_akce.unl": entry(unl(["7", "předložen"])),
       "typ_stavu.unl": entry(""),
       "tisky_za.unl": entry(""),
+      "tisk_eklep.unl": entry(""),
+      "tz_eklep.unl": entry(""),
       "vysledek.unl": resultTableBytes(),
       "predkladatel.unl": entry(unl(["701", "1", "1", "0"]) + unl(["701", "2", "2", "0"]) + unl(["704", "2", "1", "0"]))
     },
@@ -447,6 +462,8 @@ test("PSP normalizer records the government's opinion on a bill it did not submi
       "typ_akce.unl": entry(""),
       "typ_stavu.unl": entry(""),
       "tisky_za.unl": entry(subPrints),
+      "tisk_eklep.unl": entry(""),
+      "tz_eklep.unl": entry(""),
       "vysledek.unl": resultTableBytes(),
       "predkladatel.unl": entry("")
     },

@@ -3,6 +3,7 @@ import { chosenReview, proposedPublicExplanation } from "./assessment-review.mjs
 import { isDecisiveAction } from "./attribution.mjs";
 import { contextOmissionsOf } from "./context-omissions.mjs";
 import { isRegulationKind } from "./regulations.mjs";
+import { resolutionKind } from "./government-resolution-kind.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -95,7 +96,8 @@ function stepFromConduct(item, printId, changes) {
  * The public evidence trail of an assessment revision
  * (docs/evidence-pipeline.md, From proposal to public score), one entry per
  * print, then one per government regulation or ministerial decree (its
- * adoption and its text as promulgated): the law changes of that print the chosen assessment found relevant
+ * adoption and its text as promulgated), then one per government resolution
+ * (its adoption and its page): the law changes of that print the chosen assessment found relevant
  * and cited, then the cited conduct on them and the cited Senate resolutions,
  * in order, each linking to its official record. Only links and facts from
  * the package are copied; no text excerpt is published. The trail is empty
@@ -128,8 +130,22 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
       adoption: { date: facts.adoptedOn, evidenceId: adoption.id, by: facts.regulationKind === "government-regulation" ? "government" : "ministry", issuerCz: facts.issuerCz }
     }];
   });
+  // A government resolution is one entry: its adoption and its page.
+  const resolutions = evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && structuredFacts.printKindId === resolutionKind).flatMap((change) => {
+    const adoption = conduct.find((item) => item.type === resolutionKind && item.structuredFacts.concernsLawChanges.some(({ evidenceId }) => evidenceId === change.id));
+    if (!adoption) return [];
+    const facts = adoption.structuredFacts;
+    return [{
+      kind: "resolution",
+      lawChangeId: change.id,
+      numberCz: facts.numberCz,
+      titleCz: facts.titleCz ?? facts.numberCz,
+      pageUrl: adoption.url,
+      adoption: { date: facts.adoptedOn, evidenceId: adoption.id }
+    }];
+  });
   const changesByPrint = new Map();
-  for (const change of evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && !isRegulationKind(structuredFacts.printKindId))) {
+  for (const change of evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && !isRegulationKind(structuredFacts.printKindId) && structuredFacts.printKindId !== resolutionKind)) {
     const printId = String(change.structuredFacts.externalPrintId);
     changesByPrint.set(printId, [...(changesByPrint.get(printId) ?? []), change]);
   }
@@ -161,7 +177,7 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
       steps: steps.map(({ kind, date, ...step }) => (kind === "senate-resolution" ? { kind, ...step } : { kind, date, ...step }))
     }];
   });
-  return [...prints, ...regulations];
+  return [...prints, ...regulations, ...resolutions];
 }
 
 /**

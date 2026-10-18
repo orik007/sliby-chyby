@@ -146,7 +146,12 @@ function dayOf(timestamp) {
 // Reads an append-only JSON Lines journal. Only the last line can be cut
 // short, by a run stopped mid-write; it is removed, so the next line is
 // appended on a line of its own, and what it held is requested again.
-async function readJournal(file) {
+/**
+ * The values of an append-only JSON-lines journal, each with its line
+ * number. A last line cut off by a stopped run is dropped and the file
+ * repaired; any other unreadable line fails.
+ */
+export async function readJournal(file) {
   if (!existsSync(file)) return [];
   const content = await readFile(file, "utf8");
   const lines = content.split("\n");
@@ -161,7 +166,7 @@ async function readJournal(file) {
     try {
       values.push({ value: JSON.parse(line), line: index + 1 });
     } catch {
-      if (index !== lastLine) throw new Error(`Corrupt law-context cache ${file} line ${index + 1}`);
+      if (index !== lastLine) throw new Error(`Corrupt cache journal ${file} line ${index + 1}`);
       validLength = lineStart;
     }
   }

@@ -439,5 +439,5 @@ test("a cache line cut short by a stopped run is removed, and what it held is re
   assert.deepEqual(lines.map(({ kind }) => kind), ["wordings", "wording"]);
   // A corrupt line before the last one is never skipped silently.
   await writeFile(file, `{"kind":"wor\n${wordings}\n`);
-  await assert.rejects(createLawContextCache(directory).load("110/2019"), /Corrupt law-context cache .* line 1/);
+  await assert.rejects(createLawContextCache(directory).load("110/2019"), /Corrupt cache journal .* line 1/);
 });

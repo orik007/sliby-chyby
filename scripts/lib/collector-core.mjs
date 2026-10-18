@@ -38,6 +38,9 @@ export function cleanText(value, maxLength = Number.POSITIVE_INFINITY) {
   return `${text.slice(0, Math.max(0, maxLength - 1)).trimEnd()}…`;
 }
 
+// The coverage mode of each collector type.
+const coverageModes = { "psp-open-data": "term-snapshot", "e-sbirka-regulations": "collection-of-laws", "zvlady-resolutions": "government-resolutions" };
+
 export function validateRegistry(registry) {
   invariant(registry?.schemaVersion === "1.0.0", "Unsupported collector registry schemaVersion");
   invariant(Array.isArray(registry.sources), "Collector registry must contain sources");
@@ -46,13 +49,14 @@ export function validateRegistry(registry) {
     invariant(typeof source.id === "string" && source.id.length > 0, "Collector source is missing id");
     invariant(!ids.has(source.id), `Duplicate collector source id: ${source.id}`);
     ids.add(source.id);
-    invariant(["psp-open-data", "e-sbirka-regulations"].includes(source.collector), `Unknown collector type: ${source.collector}`);
+    invariant(["psp-open-data", "e-sbirka-regulations", "zvlady-resolutions"].includes(source.collector), `Unknown collector type: ${source.collector}`);
     invariant(source.primary === true && source.evidenceRole === "primary-record", `Source ${source.id} must be a primary official record; media, press releases, and party websites are not evidence sources`);
     invariant(typeof source.enabled === "boolean", `Source ${source.id} is missing enabled`);
     invariant(/^\d{4}-\d{2}-\d{2}$/.test(source.bootstrapFrom), `Source ${source.id} needs bootstrapFrom in YYYY-MM-DD format`);
     invariant(/^\d{4}-\d{2}-\d{2}$/.test(source.verifiedAt), `Source ${source.id} has invalid verifiedAt`);
     invariant(/^https:\/\//.test(source.verificationUrl), `Source ${source.id} needs an HTTPS verificationUrl`);
-    invariant(source.coverage?.mode === (source.collector === "psp-open-data" ? "term-snapshot" : "collection-of-laws"), `Source ${source.id} needs a supported coverage mode`);
+    invariant(source.coverage?.mode === coverageModes[source.collector], `Source ${source.id} needs a supported coverage mode`);
+    invariant(source.collector !== "zvlady-resolutions" || /^\d+\/\d{4}$/u.test(source.firstResolution ?? ""), `Source ${source.id} needs firstResolution as <number>/<year>`);
     invariant(typeof source.coverage?.note === "string" && source.coverage.note.length > 0, `Source ${source.id} needs a coverage note`);
     invariant(Array.isArray(source.expectedHosts) && source.expectedHosts.length > 0, `Source ${source.id} needs expectedHosts`);
   }
@@ -63,7 +67,7 @@ export function validateCollectedRecord(record) {
   invariant(record?.schemaVersion === "1.0.0", "Collected record has an unsupported schemaVersion");
   invariant(typeof record.id === "string" && record.id.length > 0, "Collected record is missing id");
   invariant(typeof record.sourceId === "string" && record.sourceId.length > 0, "Collected record is missing sourceId");
-  invariant(["parliamentary-vote", "legislative-step", "regulation-adoption", "government-opinion"].includes(record.kind), `Unknown record kind: ${record.kind}`);
+  invariant(["parliamentary-vote", "legislative-step", "regulation-adoption", "government-opinion", "government-resolution"].includes(record.kind), `Unknown record kind: ${record.kind}`);
   invariant(typeof record.primary === "boolean", `Record ${record.id} is missing primary`);
   invariant(/^https:\/\//.test(record.url), `Record ${record.id} must use an HTTPS URL`);
   invariant(typeof record.title === "string" && record.title.length > 0, `Record ${record.id} is missing title`);

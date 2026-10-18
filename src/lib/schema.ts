@@ -44,7 +44,10 @@ export const evidenceTrailPrintSchema = z.object({ printNumber: z.number().int()
 // A government regulation or ministerial decree an assessment relied on: its
 // adoption, attributed to every governing party, and its text as promulgated.
 export const evidenceTrailRegulationSchema = z.object({ kind: z.literal("regulation"), lawChangeId: z.string().min(1), citationCz: z.string().regex(/^(Nařízení vlády|Vyhláška) č\. \d+\/\d{4} Sb\.$/), titleCz: z.string().min(1), textUrl: z.url().regex(/^https:\/\/e-sbirka\.gov\.cz\/sb\/\d{4}\/\d+\/0000-00-00$/, "A regulation links to its text as promulgated in e-Sbírka"), adoption: z.object({ date: z.iso.date(), evidenceId: z.string().min(1), by: z.enum(["government", "ministry"]), issuerCz: z.string().min(1) }).strict() }).strict();
-export const evidenceTrailEntrySchema = z.union([evidenceTrailPrintSchema, evidenceTrailRegulationSchema]);
+// A government resolution an assessment relied on: its adoption, attributed
+// to every governing party, and its page in the government's zVlády portal.
+export const evidenceTrailResolutionSchema = z.object({ kind: z.literal("resolution"), lawChangeId: z.string().min(1), numberCz: z.string().regex(/^Usnesení vlády č\. \d+\/\d{4}$/), titleCz: z.string().min(1), pageUrl: z.url().regex(/^https:\/\/odok\.gov\.cz\/portal\/zvlady\/usneseni\/\d{4}\/\d+\/$/, "A resolution links to its page in zVlády"), adoption: z.object({ date: z.iso.date(), evidenceId: z.string().min(1) }).strict() }).strict();
+export const evidenceTrailEntrySchema = z.union([evidenceTrailPrintSchema, evidenceTrailRegulationSchema, evidenceTrailResolutionSchema]);
 // A wording of an act in e-Sbírka, optionally scrolled to one provision.
 const eSbirkaUrlSchema = z.url().regex(/^https:\/\/e-sbirka\.gov\.cz\/sb\/\d{4}\/\d+\/\d{4}-\d{2}-\d{2}(#[a-z0-9_:-]+)?$/, "Context links must point to a wording in e-Sbírka");
 // The wording of provisions an assessment did not have, because its evidence
@@ -79,6 +82,7 @@ export type PolicyCategory = z.infer<typeof policyCategorySchema>;
 export type AssessmentRevision = z.infer<typeof assessmentRevisionSchema>;
 export type EvidenceTrailPrint = z.infer<typeof evidenceTrailPrintSchema>;
 export type EvidenceTrailRegulation = z.infer<typeof evidenceTrailRegulationSchema>;
+export type EvidenceTrailResolution = z.infer<typeof evidenceTrailResolutionSchema>;
 export type EvidenceTrailEntry = z.infer<typeof evidenceTrailEntrySchema>;
 export type EvidenceTrailStep = EvidenceTrailPrint["steps"][number];
 export type ContextOmission = z.infer<typeof contextOmissionSchema>;

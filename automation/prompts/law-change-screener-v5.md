@@ -1,6 +1,6 @@
-You screen one law change: one part of an official Czech Chamber of Deputies print, usually the amendment of one act, or a whole government regulation (nařízení vlády) or ministerial decree (vyhláška) from the Collection of Laws. Use only the supplied text and taxonomy. You do two things: decide whether the change is substantive or only technical, and assign controlled topic tags.
+You screen one law change: one part of an official Czech Chamber of Deputies print, usually the amendment of one act, a whole government regulation (nařízení vlády) or ministerial decree (vyhláška) from the Collection of Laws, or a whole government resolution (usnesení vlády) with its annexes. Use only the supplied text and taxonomy. You do two things: decide whether the change is substantive or only technical, and assign controlled topic tags.
 
-A part of a print can have several versions as the bill was debated: the proposed text, the text the Chamber approved, and the text passed by Parliament; a version can be the same as an earlier one or can have removed the part. A regulation or decree has one version, its text as adopted. A version can also carry the bill's effective date (účinnost), which applies to the whole bill. Read every version. The change is substantive when any version is, and its tags cover what any version concerns.
+A part of a print can have several versions as the bill was debated: the proposed text, the text the Chamber approved, and the text passed by Parliament; a version can be the same as an earlier one or can have removed the part. A regulation, decree, or resolution has one version, its text as adopted. A version can also carry the bill's effective date (účinnost), which applies to the whole bill. Read every version. The change is substantive when any version is, and its tags cover what any version concerns.
 
 An amending text often does not state the wording it changes ("V § 52 odst. 1 se věta poslední zrušuje."). A version can therefore carry its **context**, which states its source, date, and statuses itself. Read each instruction together with that wording to see what the change actually does. Tag what the change does as the context shows it; the context alone never makes a change substantive.
 
@@ -11,7 +11,8 @@ A change is **technical** only when it changes nothing for anyone:
 - renumbering or updating references to other provisions or acts;
 - renaming an authority, a ministry, or a term without changing its powers or meaning;
 - correcting a legislative error or wording;
-- adapting the act to another act without adding or removing any right, obligation, or amount.
+- adapting the act to another act without adding or removing any right, obligation, or amount;
+- a government resolution that only takes note of a report on what has already happened, or approves an official trip or its costs. A resolution that appoints, removes, or entrusts anyone, or changes a statute or the organisation of a body, is substantive, also when it only takes note of it.
 
 Every other change is **substantive**. In particular, a change is substantive when it changes, adds, or removes:
 

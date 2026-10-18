@@ -52,6 +52,25 @@
       "verificationUrl": "https://e-sbirka.gov.cz/restful-api",
       "expectedHosts": ["api.e-sbirka.gov.cz"],
       "attribution": "Source: e-Sbírka, Ministry of the Interior of the Czech Republic; include processing date."
+    },
+    {
+      "id": "zvlady-resolutions",
+      "name": "Government resolutions — zVlády portal of the Government Office",
+      "publisher": "Government Office of the Czech Republic",
+      "collector": "zvlady-resolutions",
+      "enabled": true,
+      "primary": true,
+      "evidenceRole": "primary-record",
+      "bootstrapFrom": "2025-12-15",
+      "firstResolution": "1013/2025",
+      "coverage": {
+        "mode": "government-resolutions",
+        "note": "Each run reads every government resolution from firstResolution, the first of the current government, to the last one held: from the permanent resolution cache, or one request at a time from the zVlády portal. A resolution that only approves a government proposal, opinion, or regulation is left out, found by its material's PID in the Chamber's eKLEP links and the eKLEP open data, read in every run."
+      },
+      "verifiedAt": "2026-10-17",
+      "verificationUrl": "https://odok.gov.cz/portal/katalog/stranky/opendata/",
+      "expectedHosts": ["odok.gov.cz", "www.odok.gov.cz"],
+      "attribution": "Source: Government Office of the Czech Republic, zVlády and eKLEP open data; include processing date."
     }
   ]
 }

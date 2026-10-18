@@ -135,7 +135,7 @@ jobs:
             fi
             while IFS= read -r path; do
               restore_paths+=("$path")
-            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/law-context automation/psp-documents)
+            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/law-context automation/psp-documents automation/government-resolutions)
             for directory in automation/evidence-packages automation/review-proposals; do
               while IFS= read -r path; do
                 case "$path" in
@@ -157,7 +157,12 @@ jobs:
         # through the proxy in PSP_PROXY_URL (docs/evidence-pipeline.md,
         # Chamber data rules). Regulations and decrees are read from the
         # e-Sbírka REST API through the permanent cache (Collection of Laws
-        # data rules).
+        # data rules), and government resolutions from zVlády through theirs
+        # (Government resolution data rules). Reading resolutions stops after
+        # 120 minutes and fails the run before any paid step; the next run
+        # continues from the cache. The step limit leaves 30 minutes for the
+        # other sources and keeps the job within its own limit.
+        timeout-minutes: 150
         env:
           PSP_PROXY_URL: ${{ secrets.PSP_PROXY_URL }}
           ESEL_API_ACCESS_KEY: ${{ secrets.ESEL_API_ACCESS_KEY }}
@@ -166,6 +171,7 @@ jobs:
             --checkpoints automation/collectors/checkpoints.json \
             --write-checkpoints automation/collectors/checkpoints.json \
             --law-context-cache automation/law-context \
+            --resolution-cache automation/government-resolutions \
             --output automation/runs/pipeline/github-actions/collector
 
       - name: Split official print texts into law changes
@@ -223,16 +229,17 @@ jobs:
       - name: Persist model caches even on a failed run
         id: tag-cache
         # A failed run keeps the paid law-change screening and relevance
-        # checks it already did, the law-change context it read, and the
-        # psp.cz document hashes it recorded. A subject is cached only once
-        # both of its model outputs are valid, a context line only once its
-        # answer is complete, and a hash only for a file read in full, so a
-        # partial cache is always safe to keep.
+        # checks it already did, the law-change context it read, the psp.cz
+        # document hashes it recorded, and the government resolutions it
+        # read. A subject is cached only once both of its model outputs are
+        # valid, a context line only once its answer is complete, a hash
+        # only for a file read in full, and a resolution only once its page
+        # and files are read, so a partial cache is always safe to keep.
         if: always()
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
-          for directory in automation/topic-routing/tag-cache automation/law-context automation/psp-documents; do
+          for directory in automation/topic-routing/tag-cache automation/law-context automation/psp-documents automation/government-resolutions; do
             if [ -d "$directory" ]; then
               git add "$directory"
             fi
