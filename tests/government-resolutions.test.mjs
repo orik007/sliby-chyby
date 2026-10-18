@@ -40,7 +40,6 @@ test("a resolution's page states its date, files, and material; a classified one
   });
   const doc = parseResolutionPage(await page("2025-1017"), { year: 2025, number: 1017 });
   assert.deepEqual([doc.adoptedOn, doc.ova, doc.pid, doc.files[0].format], ["2025-12-16", "1083/25", "ALBSDPEG2HYX", "doc"]);
-  // An annex published only as a spreadsheet has no Word file.
   // An annex published only as a spreadsheet is read from its XLSX file.
   assert.deepEqual(parseResolutionPage(await page("2026-17"), { year: 2026, number: 17 }).files[1], { label: "Příloha č. 1", format: "xlsx", url: "https://odok.gov.cz/portal/services/download/attachment/2026/17/1/xlsx/", formats: ["xlsx"] });
   const classified = parseResolutionPage(await page("2026-64"), { year: 2026, number: 64 });
@@ -48,6 +47,9 @@ test("a resolution's page states its date, files, and material; a classified one
   // An annex listed without any file is kept, so its absence can be named.
   const emptyAnnex = (await page("2026-17")).replace(/href="\/portal\/services\/download\/attachment\/2026\/17\/1\/xlsx\/"[^>]*>XLSX<\/a>/u, "");
   assert.deepEqual(parseResolutionPage(emptyAnnex, { year: 2026, number: 17 }).files[1], { label: "Příloha č. 1", format: null, url: null, formats: [] });
+  // The resolution itself is read only from a Word file, never a workbook.
+  const workbookOnly = (await page("2026-17")).replace(/attachment\/2026\/17\/docx\//gu, "attachment/2026/17/xlsx/");
+  assert.deepEqual(parseResolutionPage(workbookOnly, { year: 2026, number: 17 }).files[0], { label: "Usnesení", format: null, url: null, formats: ["xlsx", "pdf"] });
   const html = await page("2026-158");
   assert.throws(() => parseResolutionPage(html, { year: 2026, number: 159 }), /names resolution 158/);
   assert.throws(() => parseResolutionPage(html, { year: 2025, number: 158 }), /is dated in 2026/);
@@ -91,6 +93,15 @@ test("a request redirected away from the Government Office fails, and a lost con
   const failing = createGovernmentOfficeFetcher({ sleep: async () => {}, minIntervalMs: 0, retryDelaysMs: [1, 1], fetchImpl: async () => { attempts += 1; return new Response("", { status: 503 }); } });
   await assert.rejects(failing.get("https://odok.gov.cz/", { purpose: "test" }), /failed after 3 attempts: HTTP 503/);
   assert.equal(attempts, 3);
+  // An answer larger than the limit stops as soon as it passes it, without
+  // a retry.
+  const log = [];
+  let pulled = 0;
+  const endless = new ReadableStream({ pull: (controller) => { pulled += 1; controller.enqueue(new Uint8Array(1_000)); } });
+  const large = createGovernmentOfficeFetcher({ sleep: async () => {}, minIntervalMs: 0, maxBytes: 2_500, onRequest: (entry) => log.push(entry), fetchImpl: async () => new Response(endless, { status: 200 }) });
+  await assert.rejects(large.get("https://odok.gov.cz/", { purpose: "test" }), /larger than 2500 bytes/);
+  assert.ok(pulled <= 5);
+  assert.deepEqual(log.map(({ error }) => error), ["too-large"]);
 });
 
 // A portal with these pages and Word files; every other number answers the
@@ -258,6 +269,11 @@ test("an XLSX annex is read row by row, as the workbook stores its cells", async
     "xl/worksheets/sheet1.xml": strToU8(sheet('<c r="A1" t="s"><v>0</v></c><c r="B1" s="1"><v>45706</v></c><c r="C1" s="2"><v>45706</v></c><c r="D1" s="3"><v>0.5</v></c><c r="E1" s="4"><v>0.75</v></c><c r="F1" s="5"><v>45706.5</v></c><c r="G1" s="4"><v>45706.5</v></c><c r="H1" s="6"><v>1.5</v></c>')),
     "xl/worksheets/sheet2.xml": strToU8(sheet('<c r="B1"><v>3448599.9999999991</v></c><c r="C1"/><c r="D1"><f>B1*2</f><v>6897200</v></c><c r="F1" t="inlineStr"><is><t>dar</t></is></c>'))
   });
+  // An archive that would expand past the limit fails before it is
+  // decompressed.
+  const bomb = zipSync({ "xl/workbook.xml": new Uint8Array(41_000_000) }, { level: 9 });
+  assert.ok(bomb.byteLength < 100_000);
+  assert.throws(() => extractXlsxRows(bomb), /exceeds the uncompressed size limit/);
   assert.deepEqual(extractXlsxRows(workbook), ["List: Lety", "Brusel & Mnichov | 2025-02-18 | 2025-02-18 | 12:00:00 | 18:00:00 | 2025-02-18 12:00:00 | 12:00:00 | 36:00:00", "List: Dary", "3448600 |  | 6897200 |  | dar"]);
 });
 

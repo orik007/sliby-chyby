@@ -55,6 +55,29 @@ function isFirewallBlock({ bytes }) {
 /** A request the Government Office's firewall blocked; never retried. */
 export class GovernmentOfficeBlockedError extends Error {}
 
+class ResponseTooLargeError extends Error {}
+
+// The bytes of an answer, read as they arrive and given up as soon as they
+// pass `maxBytes`, so an oversized file is never held whole in memory.
+async function boundedBody(response, maxBytes) {
+  if (!response.body) return new Uint8Array(0);
+  const chunks = [];
+  let length = 0;
+  for await (const chunk of response.body) {
+    length += chunk.byteLength;
+    // Leaving the loop cancels the rest of the stream.
+    if (length > maxBytes) throw new ResponseTooLargeError();
+    chunks.push(chunk);
+  }
+  const bytes = new Uint8Array(length);
+  let offset = 0;
+  for (const chunk of chunks) {
+    bytes.set(chunk, offset);
+    offset += chunk.byteLength;
+  }
+  return bytes;
+}
+
 /**
  * Requests to the Government Office, one at a time and at least
  * `minIntervalMs` apart (docs/evidence-pipeline.md, Government resolution
@@ -91,15 +114,18 @@ export function createGovernmentOfficeFetcher({
     let bytes;
     try {
       response = await fetchImpl(url, { headers: { "user-agent": governmentOfficeUserAgent }, redirect: "follow", signal: AbortSignal.timeout(timeoutMs) });
-      bytes = new Uint8Array(await response.arrayBuffer());
+      bytes = await boundedBody(response, maxBytes);
     } catch (error) {
+      if (error instanceof ResponseTooLargeError) {
+        onRequest({ ...entry, status: response.status, error: "too-large", ms: now() - startedAt });
+        throw new Error(`${url} is larger than ${maxBytes} bytes`);
+      }
       const code = error?.name === "TimeoutError" || error?.name === "AbortError" ? `timeout-${timeoutMs / 1_000}s` : error?.cause?.code ?? error?.code ?? String(error?.message ?? error);
       onRequest({ ...entry, error: code, ms: now() - startedAt });
       return { error: code };
     }
     onRequest({ ...entry, status: response.status, bytes: bytes.byteLength, ms: now() - startedAt });
     invariant(allowedHosts.has(new URL(response.url || url).hostname), `The Government Office redirected ${url} outside its hosts: ${response.url}`);
-    invariant(bytes.byteLength <= maxBytes, `${url} is larger than ${maxBytes} bytes`);
     return { status: response.status, bytes };
   }
 
@@ -136,7 +162,8 @@ function textOf(html) {
 /**
  * What a resolution's page states (docs/evidence-pipeline.md, Government
  * resolution data rules, Page): its number and adoption date, each file under
- * “Soubory” (its label and the file read, `docx`, `doc`, or `xlsx`), and its material's
+ * “Soubory” (its label and the file read: `docx` or `doc`, or for an annex
+ * also `xlsx`), and its material's
  * title, reference number (`ova`), and eKLEP identifier (`pid`). A page with
  * no files whose title is a reference number of the Government Office is
  * `classified`.
@@ -160,9 +187,11 @@ export function parseResolutionPage(html, { year, number }) {
   for (const { label, value } of rows) {
     if (label !== "Usnesení" && !/^Příloha č\. \d+$/u.test(label)) continue;
     const links = [...value.matchAll(/href="(\/portal\/services\/download\/attachment\/[^"]+\/([a-z]+)\/)"/gu)].map(([, path, format]) => ({ format, url: `${portalOrigin}${path}` }));
-    // The file read: the Word file, or else an XLSX workbook (an annex that
-    // is a table); a PDF or an XLS file is never read.
-    const readable = ["docx", "doc", "xlsx"].map((format) => links.filter((link) => link.format === format)).find((found) => found.length > 0) ?? [];
+    // The file read: the Word file, or else, for an annex (a table), an XLSX
+    // workbook; a PDF or an XLS file is never read, and the resolution itself
+    // is read only from its Word file.
+    const readFormats = label === "Usnesení" ? ["docx", "doc"] : ["docx", "doc", "xlsx"];
+    const readable = readFormats.map((format) => links.filter((link) => link.format === format)).find((found) => found.length > 0) ?? [];
     invariant(readable.length <= 1, `The page of resolution ${number}/${year} lists several ${readable[0]?.format} files for “${label}”`);
     files.push({ label, format: readable[0]?.format ?? null, url: readable[0]?.url ?? null, formats: links.map(({ format }) => format) });
   }

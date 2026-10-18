@@ -13,10 +13,21 @@ import { invariant } from "./collector-core.mjs";
  * its date (YYYY-MM-DD), time (HH:MM:SS), or both.
  */
 export function extractXlsxRows(bytes) {
-  const entries = unzipSync(bytes);
+  // The limits are checked from the archive's directory before anything is
+  // decompressed, so a small archive cannot expand without bound.
+  let count = 0;
+  let size = 0;
+  const entries = unzipSync(bytes, {
+    filter: (file) => {
+      count += 1;
+      size += file.originalSize;
+      invariant(count < 5_000, "XLSX archive has an unsafe entry count");
+      invariant(size <= 40_000_000, "XLSX archive exceeds the uncompressed size limit");
+      return true;
+    }
+  });
   const names = Object.keys(entries);
-  invariant(names.length > 0 && names.length < 5_000, "XLSX archive has an unsafe entry count");
-  invariant(Object.values(entries).reduce((sum, entry) => sum + entry.byteLength, 0) <= 40_000_000, "XLSX archive exceeds the uncompressed size limit");
+  invariant(names.length > 0, "XLSX archive is empty");
   const read = (name) => {
     const actual = names.find((candidate) => candidate.toLowerCase() === name.toLowerCase());
     return actual ? new TextDecoder("utf-8", { fatal: true }).decode(entries[actual]) : null;
