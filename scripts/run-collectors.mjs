@@ -127,12 +127,12 @@ async function collectResolutionSource(source, since) {
     }
   });
   const { types: eklepTypes, notYetPublished } = await readEklepTypes({ fetcher, fromYear: Number(since.slice(0, 4)), today });
-  const { records, quality } = resolutionRecords({ resolutions, eklepLinks: psp.referenceData.eklepLinks, eklepTypes, governmentPeriods, source });
+  const { records, quality } = resolutionRecords({ resolutions, eklepLinks: psp.referenceData.eklepLinks, eklepTypes, eklepYearsMissing: notYetPublished, governmentPeriods, source });
   const warnings = [
     ...readQuality.gaps.map((resolution) => `${resolution}: not held between two held resolutions; read again in the next run`),
     ...readQuality.unexpectedPages.map((resolution) => `${resolution}: published without a Word file of the resolution; not used`),
     ...readQuality.unreadableFiles.map((file) => `${file}: the Word file cannot be read as text; the resolution is not used and is read again in the next run`),
-    ...notYetPublished.map((year) => `the eKLEP open data of ${year} is not yet published; its drafts are not yet known as duplicates`)
+    ...notYetPublished.map((year) => `the eKLEP open data of ${year} is not yet published; ${quality.heldWithoutEklep} resolutions adopted in ${year} are held back until it is`)
   ];
   log(`${source.id}: ${resolutions.length} published resolutions (${readQuality.fromCache} from the cache, ${readQuality.fromPortal} read from the portal), ${readQuality.classified.length} classified; left out as duplicates ${JSON.stringify(quality.duplicates)}; ${quality.beforeGovernment} adopted before a tracked government; ${quality.used} used; ${fetcher.stats.requests} requests to the Government Office, ${fetcher.stats.retried} retried`);
   return { sourceId: source.id, collector: source.collector, retrievedAt: new Date().toISOString(), snapshot: null, snapshots: null, records, warnings, referenceData: { quality: { ...readQuality, ...quality, requests: fetcher.stats.requests, retried: fetcher.stats.retried } } };

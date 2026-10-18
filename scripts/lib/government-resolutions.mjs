@@ -371,13 +371,19 @@ export function resolutionParagraphs(entry) {
 /**
  * The records of the resolutions read: those that are not duplicates of
  * other conduct and were adopted while a tracked government governed; with
- * the run's quality figures.
+ * the run's quality figures. A resolution adopted in a year whose eKLEP open
+ * data is not yet published (`eklepYearsMissing`) is held back, because
+ * whether it only approves a draft regulation or bill is not yet known.
  */
-export function resolutionRecords({ resolutions, eklepLinks, eklepTypes, governmentPeriods, source }) {
-  const quality = { duplicates: {}, beforeGovernment: 0, used: 0 };
+export function resolutionRecords({ resolutions, eklepLinks, eklepTypes, eklepYearsMissing = [], governmentPeriods, source }) {
+  const quality = { duplicates: {}, heldWithoutEklep: 0, beforeGovernment: 0, used: 0 };
   const records = [];
   const linksByPid = Map.groupBy(eklepLinks, ({ pid }) => pid);
   for (const entry of resolutions) {
+    if (eklepYearsMissing.includes(Number(entry.adoptedOn.slice(0, 4)))) {
+      quality.heldWithoutEklep += 1;
+      continue;
+    }
     const duplicate = duplicateOf(entry.pid, { eklepLinks: linksByPid, eklepTypes });
     if (duplicate) {
       quality.duplicates[duplicate] = (quality.duplicates[duplicate] ?? 0) + 1;

@@ -206,7 +206,9 @@ test("the text names an annex it cannot read, and only resolutions that are no d
   const withAnnex = entry({ files: [entry().files[0], { label: "Příloha č. 1", format: "docx", formats: ["docx"], url: "u", sha256: "b".repeat(64), paragraphs: ["Statut"] }] });
   assert.deepEqual(resolutionParagraphs(withAnnex), ["Vláda", "souhlasí s převodem", "Příloha č. 1", "Statut"]);
   const { records, quality } = resolutionRecords({ resolutions: [entry(), entry({ number: 1012, year: 2025, adoptedOn: "2025-12-10" }), entry({ number: 330, pid: "NZ1" })], eklepLinks: [], eklepTypes: new Map([["NZ1", "NZ"]]), governmentPeriods, source });
-  assert.deepEqual(quality, { duplicates: { "government-bill": 1 }, beforeGovernment: 1, used: 1 });
+  assert.deepEqual(quality, { duplicates: { "government-bill": 1 }, heldWithoutEklep: 0, beforeGovernment: 1, used: 1 });
+  // Without the eKLEP open data of 2026, its resolutions wait.
+  assert.deepEqual(resolutionRecords({ resolutions: [entry()], eklepLinks: [], eklepTypes: new Map(), eklepYearsMissing: [2026], governmentPeriods, source }).quality, { duplicates: {}, heldWithoutEklep: 1, beforeGovernment: 0, used: 0 });
   assert.equal(records.length, 1);
 });
 
