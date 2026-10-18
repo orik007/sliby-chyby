@@ -26,8 +26,8 @@ function proposalKind(facts) {
 // only by the print title has no document to link.
 function versionNote(concern, entry) {
   if (concern.removed) return "removed";
-  if (concern.mark === "amendment" || concern.mark === "amendment-vote") return "amended-proposal";
   if (!entry?.document?.url) return "text-not-published";
+  if (concern.mark === "amendment" || concern.mark === "amendment-vote") return "amended-proposal";
   if (concern.publishedVersionMissing) return "published-version-missing";
   if (concern.mark === "third-reading-rejection") return "third-reading-rejection";
   if (entry.promulgatedAct) return "promulgated-text";

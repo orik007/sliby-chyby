@@ -1,7 +1,7 @@
-import { cleanText, invariant } from "./collector-core.mjs";
+import { cleanText, czechMonths, invariant } from "./collector-core.mjs";
 import { normalizeSearchText } from "./attribution.mjs";
-import { pspUrl } from "./print-parts.mjs";
-import { extractDocParagraphs, extractDocxNumberedParagraphs, extractDocxParagraphs } from "./psp-print-documents.mjs";
+import { listedFiles } from "./print-parts.mjs";
+import { extractDocParagraphs, extractDocxNumberedParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl } from "./psp-print-documents.mjs";
 import { extractXlsxRows } from "./xlsx-rows.mjs";
 
 /**
@@ -30,12 +30,10 @@ export function stenoTurnUrl(termYear, sessionNumber, turnNumber) {
   return `https://www.psp.cz/eknih/${termYear}ps/stenprot/${session}schuz/s${session}${String(turnNumber).padStart(3, "0")}.htm`;
 }
 
-const months = { ledna: 1, února: 2, března: 3, dubna: 4, května: 5, června: 6, července: 7, srpna: 8, září: 9, října: 10, listopadu: 11, prosince: 12 };
-
 // "4. března 2026" or "4. 3. 2026" as an ISO date, or null.
 function czechDate(text) {
   const named = /(\d{1,2})\.\s*(ledna|února|března|dubna|května|června|července|srpna|září|října|listopadu|prosince)\s+(\d{4})/u.exec(text);
-  if (named) return `${named[3]}-${String(months[named[2]]).padStart(2, "0")}-${named[1].padStart(2, "0")}`;
+  if (named) return `${named[3]}-${String(czechMonths[named[2]]).padStart(2, "0")}-${named[1].padStart(2, "0")}`;
   const numeric = /(\d{1,2})\.\s*(\d{1,2})\.\s*(\d{4})/.exec(text);
   return numeric ? `${numeric[3]}-${numeric[2].padStart(2, "0")}-${numeric[1].padStart(2, "0")}` : null;
 }
@@ -153,18 +151,18 @@ const academicTitles = /\b(?:Ph\.\s?D\.|LL\.M\.|MBA|CSc\.|DiS\.|Mgr\.|Ing\.|Bc\.
 export function proposersOfHeading(paragraphs, candidates) {
   const start = paragraphs.findIndex((paragraph) => /^\s*Pozměňovací\s*návrh/iu.test(paragraph));
   if (start < 0 || start > 20) return { personIds: [], unmatched: [], heading: null };
+  // The heading ends where it names what the amendment is to ("k vládnímu
+  // návrhu", "K návrhu", "[k návrhu poslanců …]"), also within a paragraph,
+  // or at a paragraph with the bill's title; a name never holds the word "k"
+  // or "zákon".
   let heading = "";
   for (const paragraph of paragraphs.slice(start, start + 6)) {
-    // The heading ends before what the amendment is to, or the title of
-    // the bill, which a name never holds.
-    if (heading && (/^\s*\[?[Kk]e?\s/u.test(paragraph) || /zákon|tisk|^\s*(?:Vládní|Návrh|ST)\b/iu.test(paragraph))) break;
-    heading += ` ${paragraph}`;
+    const before = paragraph.split(/(?:^|\s)\[?[Kk]e?\s/u)[0];
+    if (heading && /zákon|tisk|^\s*(?:Vládní|Návrh|ST)\b/iu.test(before)) break;
+    heading += ` ${before}`;
+    if (before !== paragraph) break;
   }
-  // The names end where the heading names what the amendment is to ("k
-  // vládnímu návrhu", "K návrhu", "k pozměňovacímu návrhu"); a name never
-  // holds the word "k".
   const names = heading
-    .split(/\s\[?[Kk]e?\s/u)[0]
     .replace(academicTitles, " ")
     .replace(/(?:pozměňovací\s*návrhy?|poslan\p{L}*|skupiny|paní|pana|kolegyň\p{L}*|kolegů|[():])/giu, " ");
   const parts = names.split(/[,;]\s*|\s+a\s+/u).map((part) => part.trim()).filter((part) => part.length > 3 && !/^dalších$/u.test(part));
@@ -229,16 +227,23 @@ export function partsNamedInAmendment(paragraphs) {
 }
 
 /**
- * The results the stenographic record announces in one turn (`html` of its
- * page): each vote ID with the text spoken since the previous announcement.
- * A result is announced as a link to the vote ("Hlasování číslo 85,
- * přihlášeno …"); a later link to the same vote, in a remark about it, is no
- * announcement.
+ * The results the stenographic record announces in consecutive turns of one
+ * day (`pages`: `{ url, html }` in order, or the HTML of one turn): each vote
+ * ID with the text spoken since the previous announcement, also in an
+ * earlier turn, and the URL of the turn that announces it. A result is
+ * announced as a link to the vote ("Hlasování číslo 85, přihlášeno …"); a
+ * later link to the same vote, in a remark about it, is no announcement.
  */
-export function stenoAnnouncements(html) {
-  const start = html.indexOf("main-content");
-  const end = html.indexOf("Související odkazy", start);
-  const body = html.slice(start >= 0 ? start : 0, end > start ? end : undefined);
+export function stenoAnnouncements(pages) {
+  const turns = (typeof pages === "string" ? [{ url: null, html: pages }] : pages).map(({ url, html }) => {
+    const start = html.indexOf("main-content");
+    const end = html.indexOf("Související odkazy", start);
+    return { url, body: html.slice(start >= 0 ? start : 0, end > start ? end : undefined) };
+  });
+  const body = turns.map(({ body: text }) => text).join("\n");
+  // Where each turn's text begins in the joined text.
+  const starts = turns.map((_, index) => turns.slice(0, index).reduce((sum, { body: text }) => sum + text.length + 1, 0));
+  const urlAt = (position) => turns[starts.findLastIndex((start) => start <= position)]?.url ?? null;
   const announcements = [];
   let previous = 0;
   for (const match of body.matchAll(/<a href="\/sqw\/hlasy\.sqw\?G=(\d+)"[^>]*>\s*[Hh]lasování(?:\s|&nbsp;)+(?:číslo(?:\s|&nbsp;)+)?\d+<\/a>[^<]{0,40}?přihlášen/gu)) {
@@ -247,7 +252,7 @@ export function stenoAnnouncements(html) {
       const paragraphEnd = before.indexOf("</p>");
       if (paragraphEnd >= 0) before = before.slice(paragraphEnd + 4);
     }
-    announcements.push({ voteId: match[1], textCz: plainText(before) });
+    announcements.push({ voteId: match[1], textCz: plainText(before), url: urlAt(match.index) });
     previous = match.index + match[0].length;
   }
   return announcements;
@@ -276,7 +281,7 @@ const speakerPattern = /(?=(?:Poslan(?:ec|kyně)|Místopředsed\p{L}*(?: PSP)?|P
 // case-sensitively, so a word such as "na" is never a label.
 const labelPattern = /(?:(?<![\p{L}\d])(?:[Nn]ávrh\p{L}*|[Oo]značením|[Bb]od\p{L}*|[Pp]ísmen\p{L}*|[Hh]lasovat|[Hh]lasujeme|[Hh]lasuje)\s+(?:\(návrh\)\s*)?|\(návrh\)\s*)([A-Z][a-z]?(?:[.-]?\s?\d+(?:\.\d+)*)?)(?![\p{L}\d])(?:,?\s*varianta\s*(\d+))?/gu;
 const documentNumberPattern = /(?:sněmovní\p{L}*\s+dokument\p{L}*|\(dokument\p{L}*\)|dokument\p{L}*|SD)\s*(?:číslo\s*)?(\d{2,4})\b/giu;
-const budgetItemPattern = /[Pp]ořadov\p{L}+\s+čísl\p{L}+\s+(\d+)/u;
+const budgetItemPattern = /[Pp]ořadov\p{L}+\s+čísl\p{L}+\s+(\d+)/gu;
 // A vote on the procedure or a counter-proposal to it is no amendment vote.
 // "procedura", "proceduře", "proceduru".
 const procedurePattern = /procedu[rř]|o protinávrhu|zpochybnění hlasování/iu;
@@ -288,6 +293,14 @@ const procedurePattern = /procedu[rř]|o protinávrhu|zpochybnění hlasování/
  * the item in its table; `procedural` when the chair put the procedure or an
  * objection to the vote.
  */
+// A label as the summary keys it: the letter and the number of its part
+// without a separator ("D.1", "D 1", "D-1" are "D1"); a point within a part
+// keeps its dot ("A2.62", "D1.2").
+function normalizedLabel(label) {
+  const [, letter, rest] = /^([A-Z][a-z]?)[.\s-]*(.*)$/u.exec(label.trim()) ?? [];
+  return `${letter}${rest.replace(/\s/gu, "")}`;
+}
+
 export function voteReference(textCz) {
   const tail = textCz.slice(-900);
   if (procedurePattern.test(tail.slice(-260))) return { procedural: true, label: null, variant: null, documentNumber: null, budgetItem: null, tail };
@@ -297,11 +310,11 @@ export function voteReference(textCz) {
     const spoken = utterance.split(" : ").slice(1).join(" : ") || utterance;
     const found = [...spoken.matchAll(labelPattern)].filter(([, candidate]) => !/^(?:PSP|ČR|EU|SD)$/u.test(candidate));
     if (found.length > 0) {
-      label = found.at(-1)[1].replace(/[\s.-]/gu, "");
+      label = normalizedLabel(found.at(-1)[1]);
       variant = found.at(-1)[2] ?? null;
       // The record corrects a label the rapporteur misspoke: "E3 (správně: F3)".
-      const corrected = /\(správně:\s*([A-Z][a-z]?\d*(?:\.\d+)*)\)/u.exec(spoken.slice(found.at(-1).index));
-      if (corrected) label = corrected[1].replace(/\./gu, "");
+      const corrected = /\(správně:\s*([A-Z][a-z]?[.-]?\s?\d*(?:\.\d+)*)\)/u.exec(spoken.slice(found.at(-1).index));
+      if (corrected) label = normalizedLabel(corrected[1]);
       break;
     }
   }
@@ -311,7 +324,7 @@ export function voteReference(textCz) {
     label,
     variant,
     documentNumber: documents.at(-1)?.[1] ?? null,
-    budgetItem: budgetItemPattern.exec(tail.slice(-700))?.[1] ?? null,
+    budgetItem: [...tail.slice(-700).matchAll(budgetItemPattern)].at(-1)?.[1] ?? null,
     tail
   };
 }
@@ -351,7 +364,9 @@ export function linkVoteToAmendment(reference, items, { budget = false } = {}) {
     if (!item) return { linked: false, reason: "label-not-in-summary" };
     if (item.committee) return { linked: false, reason: "committee-amendment" };
     if (number && !/^[A-Z][a-z]?\d+$/u.test(reference.label)) return { linked: false, reason: "point-of-amendment" };
-    const document = number ? item.parts[`${letter}${number}`] ?? (item.documentNumbers.length === 1 ? item.documentNumbers[0] : null) : item.documentNumbers.length === 1 ? item.documentNumbers[0] : null;
+    // A labelled part must be one the summary lists with its document; a
+    // letter alone stands for its amendment only when that is one document.
+    const document = number ? item.parts[`${letter}${number}`] ?? null : item.documentNumbers.length === 1 ? item.documentNumbers[0] : null;
     if (!document) return { linked: false, reason: number ? "part-not-in-summary" : "amendment-of-several-documents" };
     label = reference.label;
     documentNumbers = [document];
@@ -366,26 +381,6 @@ export function linkVoteToAmendment(reference, items, { budget = false } = {}) {
   const passage = fold(reference.tail.slice(-700));
   if (!presenterSurnames(item).some((surname) => passage.includes(surnameStem(surname)))) return { linked: false, reason: "presenter-not-named" };
   return { linked: true, label, variant: reference.variant, documentNumbers, presenterCz: item.presenterCz };
-}
-
-/**
- * The files a psp.cz page lists under "Soubory sněmovního tisku" or
- * "Soubory sněmovního dokumentu": each with the section it is listed in
- * ("Text"), its name, URL, and lower-case extension.
- */
-export function listedFiles(html, pageUrl) {
-  const files = String(html).split(/Soubory sněmovního (?:tisku|dokumentu)/u)[1]?.split("</table>")[0] ?? "";
-  const listed = [];
-  let section = null;
-  for (const match of files.matchAll(/<th\b[^>]*>([\s\S]*?)<\/th>|<a\b[^>]*href=["']([^"']*orig2\.sqw[^"']*)["'][^>]*>([^<]+)<\/a>/giu)) {
-    if (match[1] !== undefined) {
-      section = cleanText(match[1].replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " "), 200);
-      continue;
-    }
-    const filename = cleanText(match[3], 200);
-    listed.push({ section, filename, url: pspUrl(match[2], pageUrl), format: /\.([a-z]+)$/iu.exec(filename)?.[1].toLowerCase() ?? null });
-  }
-  return listed;
 }
 
 // The extractions the document cache keeps, named with their version
@@ -424,9 +419,9 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
   const readFile = (url, extraction, extract) => documentCache.read(url, extraction, extract, async () => (await fetchPsp(source, url, fileOptions)).bytes);
 
   // 1. The amendments each summary lists.
-  const itemsByPrint = new Map();
+  const itemsBySummary = new Map();
   for (const summary of plan.summaries) {
-    const pageUrl = officialSubPrintPageUrl(source.term.number, summary.printNumber, summary.partNumber);
+    const pageUrl = officialPrintDocumentPageUrl(source.term.number, summary.printNumber, summary.partNumber);
     const files = listedFiles(decodePage(await fetchPsp(source, pageUrl, htmlOptions)), pageUrl).filter(({ section }) => /^Text$/iu.test(section ?? ""));
     const budget = summary.printKindId === "3";
     const file = budget ? files.find(({ format }) => format === "xlsx" || format === "xlsm") : files.find(({ format }) => format === "docx");
@@ -442,13 +437,13 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
     for (const item of items) item.presentedOn ??= summary.presentedOn;
     quality.amendmentItems += items.length;
     quality.committeeItems += items.filter(({ committee }) => committee).length;
-    itemsByPrint.set(summary.printId, { summary, items, budget });
+    itemsBySummary.set(`${summary.printId}/${summary.partNumber}`, { summary, items, budget });
   }
 
   // 2. The text and proposers of each listed document.
   const amendments = [];
   const listedNumbers = new Set();
-  for (const { summary, items } of itemsByPrint.values()) {
+  for (const { summary, items } of itemsBySummary.values()) {
     for (const item of items.filter(({ committee }) => !committee)) {
       for (const number of item.documentNumbers) {
         if (listedNumbers.has(number)) continue;
@@ -476,7 +471,7 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
         quality.proposerNames += heading.personIds.length + heading.unmatched.length;
         quality.proposerNamesUnmatched += heading.unmatched.length;
         if (heading.unmatched.length > 0) warnings.push(`SD ${number}: proposer names not matched to an MP in a club on ${presentedOn}: ${heading.unmatched.join("; ")}`);
-        const partyIds = [...new Set(personIds.flatMap((personId) => candidates.filter((candidate) => candidate.personId === personId).map(({ partyId }) => partyId)).filter(Boolean))].sort();
+        const partyIds = [...new Set(personIds.flatMap((personId) => candidates.find((candidate) => candidate.personId === personId)?.partyIds ?? []))].sort();
         const label = Object.entries(item.parts).filter(([, part]) => part === number).map(([key]) => key)[0] ?? item.label;
         amendments.push({
           documentNumber: number,
@@ -501,7 +496,8 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
     }
   }
   quality.amendments = amendments.length;
-  quality.documentsNotListed = [...plan.documents.values()].filter(({ number, printId }) => itemsByPrint.has(printId) && !listedNumbers.has(number)).length;
+  const printsWithSummary = new Set(plan.summaries.map(({ printId }) => printId));
+  quality.documentsNotListed = [...plan.documents.values()].filter(({ number, printId }) => printsWithSummary.has(printId) && !listedNumbers.has(number)).length;
   const amendmentByNumber = new Map(amendments.map((amendment) => [amendment.documentNumber, amendment]));
 
   // 3. The amendment each vote was on, from the stenographic record.
@@ -511,18 +507,26 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
     vote.minutes = minutesOf(vote.time);
     for (const turn of turnsOfVote(vote)) neededTurns.set(`${turn.session}:${turn.turn}`, turn);
   }
+  // The turns of one day are read in order as one text, so a passage that
+  // begins in one turn and is announced in the next stays whole.
   const announcements = new Map();
-  for (const turn of [...neededTurns.values()].sort((left, right) => left.session - right.session || left.turn - right.turn)) {
-    const url = stenoTurnUrl(source.term.year, turn.session, turn.turn);
-    quality.stenoTurnsRead += 1;
-    for (const announcement of stenoAnnouncements(decodePage(await fetchPsp(source, url, htmlOptions)))) {
-      if (!announcements.has(announcement.voteId)) announcements.set(announcement.voteId, { ...announcement, url });
+  const turnsByDay = new Map();
+  for (const turn of neededTurns.values()) turnsByDay.set(`${turn.session}:${turn.date}`, [...(turnsByDay.get(`${turn.session}:${turn.date}`) ?? []), turn]);
+  for (const turns of turnsByDay.values()) {
+    const pages = [];
+    for (const turn of turns.sort((left, right) => left.turn - right.turn)) {
+      const url = stenoTurnUrl(source.term.year, turn.session, turn.turn);
+      quality.stenoTurnsRead += 1;
+      pages.push({ url, html: decodePage(await fetchPsp(source, url, htmlOptions)) });
+    }
+    for (const announcement of stenoAnnouncements(pages)) {
+      if (!announcements.has(announcement.voteId)) announcements.set(announcement.voteId, announcement);
     }
   }
   const voteLinks = new Map();
   for (const vote of plan.amendmentVotes) {
     const announcement = announcements.get(vote.voteId);
-    const print = itemsByPrint.get(vote.printId);
+    const print = itemsBySummary.get(`${vote.printId}/${vote.summaryPartNumber}`);
     const link = !announcement ? { linked: false, reason: "no-steno" } : linkVoteToAmendment(voteReference(announcement.textCz), print?.items ?? [], { budget: print?.budget ?? false });
     const linkedAmendments = link.linked ? link.documentNumbers.map((number) => amendmentByNumber.get(number)) : [];
     if (link.linked && linkedAmendments.some((amendment) => !amendment)) {
@@ -546,9 +550,4 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
     });
   }
   return { amendments, voteLinks, warnings, quality };
-}
-
-/** The page of a sub-print, such as a summary of amendments. */
-export function officialSubPrintPageUrl(termNumber, printNumber, partNumber) {
-  return `https://www.psp.cz/sqw/text/tiskt.sqw?O=${termNumber}&CT=${printNumber}&CT1=${partNumber}`;
 }

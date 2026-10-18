@@ -1,6 +1,9 @@
 import { createHash } from "node:crypto";
 import { log } from "./run-log.mjs";
 
+// The Czech month names in the genitive ("23. září 2026"), by number.
+export const czechMonths = { ledna: 1, února: 2, března: 3, dubna: 4, května: 5, června: 6, července: 7, srpna: 8, září: 9, října: 10, listopadu: 11, prosince: 12 };
+
 export function invariant(condition, message) {
   if (!condition) throw new Error(message);
 }

@@ -651,28 +651,37 @@ function planAmendments({ source, printById, historyRows, amendmentSummaryRows, 
   const candidatesByDate = new Map();
   const candidatesOn = (date) => {
     if (!candidatesByDate.has(date)) {
-      candidatesByDate.set(date, [...membershipsByPerson].flatMap(([personId, memberships]) => memberships.filter((membership) => activeOn(membership, date)).map((membership) => ({
-        personId,
-        givenName: people.get(personId)?.givenName ?? "",
-        surname: people.get(personId)?.surname ?? "",
-        partyId: source.partyAliases[clubs.get(membership.entityId)?.abbreviation] ?? null
-      }))));
+      // One entry per MP; on the day one club membership ends and the next
+      // starts, both count, as for a member bill's proposers.
+      candidatesByDate.set(date, [...membershipsByPerson].flatMap(([personId, memberships]) => {
+        const active = memberships.filter((membership) => activeOn(membership, date));
+        if (active.length === 0) return [];
+        return [{
+          personId,
+          givenName: people.get(personId)?.givenName ?? "",
+          surname: people.get(personId)?.surname ?? "",
+          partyIds: [...new Set(active.map((membership) => source.partyAliases[clubs.get(membership.entityId)?.abbreviation]).filter(Boolean))]
+        }];
+      }));
     }
     return candidatesByDate.get(date);
   };
   // A vote can be on an amendment when it is on the agenda item of a bill
   // with a summary, on or after the day the summary was distributed, and is
   // not a decisive step of that bill.
-  const summaryOfPrint = new Map(summaries.map((summary) => [summary.printId, summary]));
   const amendmentVotes = [];
   for (const vote of recentVotes) {
     const agendaItem = agendaItemByKey.get(`${vote.session}:${Number(vote.agenda)}`);
-    const summary = agendaItem ? summaryOfPrint.get(agendaItem.printId) : null;
     const date = pspDate(vote.date);
-    if (!summary || !date || date < summary.distributedOn) continue;
+    // A bill sent back to the second reading has a later summary; a vote
+    // is on the amendments of the latest one distributed by its day.
+    const summary = agendaItem && date
+      ? summaries.filter(({ printId, distributedOn }) => printId === agendaItem.printId && distributedOn <= date).sort((left, right) => right.distributedOn.localeCompare(left.distributedOn) || right.partNumber - left.partNumber)[0] ?? null
+      : null;
+    if (!summary) continue;
     const decisive = (historyByVote.get(vote.id) ?? []).some((history) => history.printId === summary.printId && isDecisiveAction(historyContext(history, historyTables).actionCz));
     if (decisive) continue;
-    amendmentVotes.push({ voteId: vote.id, printId: summary.printId, sessionNumber: numeric(vote.session), date, time: vote.time });
+    amendmentVotes.push({ voteId: vote.id, printId: summary.printId, summaryPartNumber: summary.partNumber, sessionNumber: numeric(vote.session), date, time: vote.time });
   }
   const stenoTurns = stenoEntries
     ? parseUnl(decodeEntry(stenoEntries, "steno.unl"), schemas.stenoTurn)

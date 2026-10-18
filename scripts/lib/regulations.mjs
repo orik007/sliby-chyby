@@ -1,4 +1,4 @@
-import { createCollectedRecord, invariant } from "./collector-core.mjs";
+import { createCollectedRecord, czechMonths as months, invariant } from "./collector-core.mjs";
 import { promulgatedParagraphs, promulgatedTextUrl } from "./print-parts.mjs";
 import { governmentPartiesOn } from "./psp-collector.mjs";
 
@@ -27,8 +27,6 @@ export function isRegulationKind(kind) {
 export function regulationKindOfCitation(citation) {
   return kindsByCitation.find(([start]) => String(citation).startsWith(start))?.[1] ?? null;
 }
-
-const months = { ledna: 1, února: 2, března: 3, dubna: 4, května: 5, června: 6, července: 7, srpna: 8, září: 9, října: 10, listopadu: 11, prosince: 12 };
 
 /** The ISO date of a Czech date in words ("ze dne 23. září 2026,"), or null. */
 export function czechDate(text) {

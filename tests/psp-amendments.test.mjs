@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { strToU8, zipSync } from "fflate";
 import { extractDocxNumberedParagraphs } from "../scripts/lib/psp-print-documents.mjs";
-import { budgetAmendmentItems, linkVoteToAmendment, listedFiles, partsNamedInAmendment, proposersOfHeading, stenoAnnouncements, stenoTurnUrl, summaryOfAmendments, voteReference } from "../scripts/lib/psp-amendments.mjs";
+import { listedFiles } from "../scripts/lib/print-parts.mjs";
+import { budgetAmendmentItems, linkVoteToAmendment, partsNamedInAmendment, proposersOfHeading, stenoAnnouncements, stenoTurnUrl, summaryOfAmendments, voteReference } from "../scripts/lib/psp-amendments.mjs";
 
 // A DOCX file whose amendment headings are numbered by their style, as in
 // the summaries psp.cz publishes (numbering.xml, style "Oznaenpozmn").
@@ -164,4 +165,28 @@ test("lists the files of a parliamentary document's page", () => {
     { section: "Text", filename: "31012-47100.pdf", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=281266", format: "pdf" },
     { section: "Text", filename: "31012-47100.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=281265", format: "docx" }
   ]);
+});
+
+test("never links a vote to more than the record names (review findings)", () => {
+  const reference = (text) => voteReference(`Poslankyně Zuzana Ožanová : ${text} Místopředseda PSP Patrik Nacher : Zahajuji hlasování. Kdo je pro? Kdo je proti?`);
+  const single = [{ label: "D", presenterCz: "Poslanec Boris Šťastný", committee: false, documentNumbers: ["1306"], parts: { D1: "1306", D12: "1399" } }];
+  // A point of a part keeps its dot and is never linked.
+  assert.deepEqual(linkVoteToAmendment(reference("Pozměňovací návrh D1.2, kolega Šťastný."), single), { linked: false, reason: "point-of-amendment" });
+  assert.equal(voteReference("Poslanec X : pozměňovací návrh D.1, kolega Šťastný. Zahajuji hlasování.").label, "D1");
+  // A part the summary does not list is not the whole amendment.
+  assert.deepEqual(linkVoteToAmendment(reference("Pozměňovací návrh D7, kolega Šťastný."), single), { linked: false, reason: "part-not-in-summary" });
+  // The budget item named last decides.
+  const budget = [{ label: "16", presenterCz: "P. Hladík", committee: false, documentNumbers: ["492"], parts: {} }, { label: "17", presenterCz: "B. Niemiec", committee: false, documentNumbers: ["493"], parts: {} }];
+  assert.deepEqual(linkVoteToAmendment(voteReference("Poslanec Vladimír Pikora : Pořadové číslo 16 jsme odhlasovali, pan Hladík. Nyní pořadové číslo 17, pan Niemiec. Zahajuji hlasování."), budget, { budget: true }).documentNumbers, ["493"]);
+});
+
+test("reads the names before \"k\" in the same paragraph, and a passage across turns", () => {
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh", "poslankyně Michaely Šebelové k vládnímu návrhu zákona o daních"], candidates).personIds, ["6763"]);
+  const turn = (body) => `<div id="main-content">${body}</div><div>Související odkazy</div>`;
+  const [announcement] = stenoAnnouncements([
+    { url: "https://www.psp.cz/eknih/2025ps/stenprot/027schuz/s027016.htm", html: turn("<p>Poslankyně Zuzana Ožanová : Bod sedmdesát čtyři, (návrh) R3, (dokument) 1216, Filip Turek.</p>") },
+    { url: "https://www.psp.cz/eknih/2025ps/stenprot/027schuz/s027017.htm", html: turn('<p>Místopředseda PSP Patrik Nacher : Zahajuji hlasování.</p><p><a href="/sqw/hlasy.sqw?G=88220" id="h85">Hlasování číslo&nbsp;85</a>, přihlášeno 172&nbsp;poslanců.</p>') }
+  ]);
+  assert.match(announcement.textCz, /\(návrh\) R3, \(dokument\) 1216, Filip Turek/);
+  assert.equal(announcement.url, "https://www.psp.cz/eknih/2025ps/stenprot/027schuz/s027017.htm");
 });

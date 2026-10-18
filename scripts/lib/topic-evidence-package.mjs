@@ -85,6 +85,12 @@ function isAmendmentConduct(record) {
   return record.kind === "member-amendment" || (record.kind === "parliamentary-vote" && Boolean(record.payload?.amendmentVote));
 }
 
+// The bill an amendment, or a vote on it, amends; a vote record also names
+// other prints linked to it.
+function amendedPrintId(record) {
+  return String(record.kind === "member-amendment" ? record.payload.externalPrintId : record.payload.amendmentVote.externalPrintId);
+}
+
 // The parliamentary documents of the amendments a conduct concerns.
 function amendmentDocumentNumbers(record) {
   if (record.kind === "member-amendment") return [record.payload.documentNumber];
@@ -113,7 +119,7 @@ export function withAmendments(changes, recordsByPrintId, amendmentRecords) {
   return changes.map((change) => {
     const printPartHeadings = headingsByPrint.get(change.printId) ?? [];
     const numbers = new Set((recordsByPrintId.get(change.printId) ?? [])
-      .filter((record) => isAmendmentConduct(record) && amendmentConcernsChange(record, change, printPartHeadings))
+      .filter((record) => isAmendmentConduct(record) && amendedPrintId(record) === String(change.printId) && amendmentConcernsChange(record, change, printPartHeadings))
       .flatMap(amendmentDocumentNumbers));
     const amendments = [...numbers].sort((left, right) => Number(left) - Number(right)).map((number) => amendmentByNumber.get(number)).filter(Boolean).map(({ payload }) => ({
       documentNumber: payload.documentNumber,
@@ -158,7 +164,7 @@ export function attributableConductOnChange(records, promise, change) {
     .map((record) => ({ record, attributionStatus: attributionStatusForRecord(record, promise).attributionStatus }))
     .filter(({ attributionStatus }) => assessableAttributionStatuses.has(attributionStatus))
     // An amendment, and a vote on it, concern only the parts it amends.
-    .filter(({ record }) => !isAmendmentConduct(record) || amendmentConcernsChange(record, change, change.printPartHeadings ?? []))
+    .filter(({ record }) => !isAmendmentConduct(record) || (amendedPrintId(record) === String(change.printId) && amendmentConcernsChange(record, change, change.printPartHeadings ?? [])))
     .map((item) => ({ ...item, version: versionOfChange(change, versionConcerned(item.record, change.printId)) }))
     .filter(({ version }) => version !== null);
 }
