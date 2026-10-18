@@ -155,35 +155,55 @@ export function proposersOfHeading(paragraphs, candidates) {
   if (start < 0 || start > 20) return { personIds: [], unmatched: [], heading: null };
   let heading = "";
   for (const paragraph of paragraphs.slice(start, start + 6)) {
-    if (heading && /^\s*(?:k|ke)\s/u.test(paragraph)) break;
+    // The heading ends before what the amendment is to, or the title of
+    // the bill, which a name never holds.
+    if (heading && (/^\s*\[?[Kk]e?\s/u.test(paragraph) || /zákon|tisk|^\s*(?:Vládní|Návrh|ST)\b/iu.test(paragraph))) break;
     heading += ` ${paragraph}`;
   }
+  // The names end where the heading names what the amendment is to ("k
+  // vládnímu návrhu", "K návrhu", "k pozměňovacímu návrhu"); a name never
+  // holds the word "k".
   const names = heading
-    .split(/\s+k\s+(?:vládnímu|návrhu|poslaneckému|senátnímu|návrh|tisku|sněmovnímu)/u)[0]
+    .split(/\s\[?[Kk]e?\s/u)[0]
     .replace(academicTitles, " ")
-    .replace(/(?:pozměňovací\s*návrhy?|poslan\p{L}*|skupiny|paní|pana|kolegyň\p{L}*|kolegů|[():])/giu, " ")
-    .split(/Vládní návrh|Sněmovní tisk|\(sněmovní/u)[0];
-  const parts = names.split(/,\s*|\s+a\s+/u).map((part) => part.trim()).filter((part) => part.length > 3);
+    .replace(/(?:pozměňovací\s*návrhy?|poslan\p{L}*|skupiny|paní|pana|kolegyň\p{L}*|kolegů|[():])/giu, " ");
+  const parts = names.split(/[,;]\s*|\s+a\s+/u).map((part) => part.trim()).filter((part) => part.length > 3 && !/^dalších$/u.test(part));
   const personIds = new Set();
   const unmatched = [];
+  const sharedStart = (left, right) => {
+    let length = 0;
+    while (length < left.length && left[length] === right[length]) length += 1;
+    return length;
+  };
   for (const part of parts) {
-    const words = part.match(/\p{Lu}[\p{L}-]+/gu) ?? [];
-    if (words.length < 2) {
+    // "Michaely Šebelové", "M. Jurečky", "Zdenky Crkvenjaš Němečkové": a
+    // given name or its initial, then the surname, of one or two words.
+    // A name ends at the first word in lower case, where a heading that
+    // runs on into the text continues.
+    const words = part.split(/\s+(?=\p{Ll})/u)[0].match(/\p{Lu}[\p{L}-]*\.?/gu) ?? [];
+    if (words.length < 2 || words.length > 4) {
       unmatched.push(part);
       continue;
     }
-    const given = fold(words[0]);
-    const surname = words.at(-1);
-    let hits = candidates.filter((candidate) => {
-      const stem = surnameStem(String(candidate.surname).split(/\s+/).at(-1));
-      return fold(surname).startsWith(stem);
-    });
-    for (const length of [2, 3, 4]) {
-      if (hits.length <= 1) break;
-      const narrowed = hits.filter((candidate) => fold(candidate.givenName).slice(0, length) === given.slice(0, length));
-      if (narrowed.length > 0) hits = narrowed;
-    }
-    if (hits.length === 1) personIds.add(hits[0].personId);
+    const initial = /\.$/u.test(words[0]);
+    const given = fold(words[0].replace(/\.$/u, ""));
+    const surnames = words.slice(1).map(fold);
+    // Every MP whose surname's case-independent start this form has, best
+    // first: the longer shared start of the surname, then of the given name,
+    // then the given name of the closer length ("Věry" is Věra, not
+    // Veronika); a tie matches nobody.
+    const hits = candidates
+      .map((candidate) => {
+        const candidateSurnames = String(candidate.surname).split(/\s+/u).map(fold);
+        const candidateGiven = fold(candidate.givenName);
+        const pairs = surnames.flatMap((surname) => candidateSurnames.filter((candidateSurname) => surname.startsWith(surnameStem(candidateSurname))).map((candidateSurname) => sharedStart(surname, candidateSurname)));
+        const givenShared = initial ? (candidateGiven.startsWith(given) ? 2 : 0) : sharedStart(given, candidateGiven);
+        return { candidate, matches: pairs.length > 0, score: [Math.max(0, ...pairs), givenShared, initial ? 0 : -Math.abs(given.length - candidateGiven.length)] };
+      })
+      .filter(({ matches, score }) => matches && score[1] >= (initial ? 1 : 2))
+      .sort((left, right) => right.score[0] - left.score[0] || right.score[1] - left.score[1] || right.score[2] - left.score[2]);
+    const same = (left, right) => left.score.every((value, index) => value === right.score[index]);
+    if (hits.length > 0 && (hits.length === 1 || !same(hits[0], hits[1]))) personIds.add(hits[0].candidate.personId);
     else unmatched.push(part);
   }
   return { personIds: [...personIds].sort(), unmatched, heading: cleanText(heading, 1000) };

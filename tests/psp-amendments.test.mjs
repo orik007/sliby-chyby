@@ -89,6 +89,26 @@ test("matches the proposers its heading names in the genitive to the MPs in a cl
   assert.deepEqual(split, { personIds: [], unmatched: ["Jana Neznámého"], heading: "Pozměňovací návrh poslance Jana Neznámého" });
 });
 
+test("tells MPs with similar names apart and stops at what the amendment is to", () => {
+  const mps = [
+    { personId: "6214", givenName: "Věra", surname: "Kovářová" },
+    { personId: "7013", givenName: "Veronika", surname: "Kovářová" },
+    { personId: "6538", givenName: "Martin", surname: "Kupka" },
+    { personId: "7021", givenName: "Martin", surname: "Kupec" },
+    { personId: "7030", givenName: "Marian", surname: "Jurečka" },
+    { personId: "7040", givenName: "Zdenka", surname: "Němečková Crkvenjaš" },
+    { personId: "7050", givenName: "Radek", surname: "Vondráček" }
+  ];
+  const heading = (text) => proposersOfHeading(["Pozměňovací návrh", text, "k návrhu zákona"], mps);
+  assert.deepEqual(heading("poslanců Věry Kovářové, Martina Kupky a dalších").personIds, ["6214", "6538"]);
+  assert.deepEqual(heading("poslanců M. Jurečky; Zdenky Crkvenjaš Němečkové").personIds, ["7030", "7040"]);
+  // The proposers of the bill after "k návrhu poslanců" are not the
+  // amendment's.
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh k pozměňovacímu návrhu výboru", "[k návrhu poslanců Radka Vondráčka na vydání zákona]"], mps).personIds, []);
+  // A heading that runs on into the text ends at its first word in lower case.
+  assert.deepEqual(heading("poslankyně Veroniky Kovářové Odstranění závazného stanoviska").personIds, ["7013"]);
+});
+
 test("names the bill's parts an amendment amends as their headings write them", () => {
   assert.deepEqual(partsNamedInAmendment(["1. V části první čl. I se bod 4 zrušuje.", "2. V části dvacáté druhé se doplňuje bod 3.", "Za část třetí se vkládá …", "Část pátá zní:"]), ["ČÁST DVACÁTÁ DRUHÁ", "ČÁST PRVNÍ", "ČÁST PÁTÁ", "ČÁST TŘETÍ"]);
   assert.deepEqual(partsNamedInAmendment(["V čl. I bodu 3 se slova …"]), []);
