@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { statusDetails } from "../lib/data";
+import governmentPeriods from "../../automation/attribution/government-periods.json";
 
 const scaleGroups = [
   { title: "Výsledek", statuses: ["fulfilled", "acting-against"] as const },
@@ -25,6 +26,56 @@ const examplePoints = exampleRows.reduce((sum, row) => sum + row.count * statusD
 const examplePromiseCount = exampleRows.reduce((sum, row) => sum + row.count, 0);
 const exampleMaximum = examplePromiseCount * 2;
 const exampleIndex = Math.round((examplePoints / exampleMaximum) * 100);
+// What can change a promise's score, in the order of docs/scoring.md,
+// Attributable conduct.
+const currentGovernment = governmentPeriods.periods.find((period) => period.to === null);
+if (!currentGovernment) throw new Error("government-periods.json has no current government");
+const governmentFrom = new Intl.DateTimeFormat("cs-CZ", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(currentGovernment.from));
+const chamber = { label: "Poslanecká sněmovna", url: "https://www.psp.cz/sqw/hp.sqw?k=1300" };
+const conductRows = [
+  {
+    title: "Rozhodující hlasování ve Sněmovně",
+    source: chamber,
+    what: "Hlasování, kterým Sněmovna o zákoně, státním rozpočtu nebo mezinárodní smlouvě rozhodla.",
+    who: "Straně podle toho, jak hlasovala většina všech členů jejího poslaneckého klubu v den hlasování.",
+    points: "Přijetí opatření, které splňuje nebo popírá celý slib: ±2, jen jeho část: ±1. Zamítnutí opatření, které slib splňuje: −2, jen jeho část: −1. Zamítnutí opatření proti slibu: +1. Klub nedal většinu opatření, které slib splňuje: −1.",
+  },
+  {
+    title: "Poslanecký návrh zákona",
+    source: chamber,
+    what: "Návrh zákona, který Sněmovně předložili poslanci.",
+    who: "Každé straně, jejíž poslanec je mezi navrhovateli.",
+    points: "±1",
+  },
+  {
+    title: "Vládní návrh zákona, rozpočtu nebo smlouvy",
+    source: chamber,
+    what: "Návrh zákona, státního rozpočtu nebo mezinárodní smlouvy, který Sněmovně předložila vláda.",
+    who: "Všem vládním stranám v den předložení.",
+    points: "±1",
+  },
+  {
+    title: "Stanovisko vlády k návrhu zákona",
+    source: chamber,
+    what: "Souhlas nebo nesouhlas vlády s návrhem zákona, který nepředložila. Jiné stanovisko, například neutrální nebo s připomínkami, ani chybějící stanovisko se nepočítá.",
+    who: "Všem vládním stranám v den, kdy Sněmovna stanovisko rozeslala.",
+    points: "±1",
+  },
+  {
+    title: "Nařízení vlády a vyhláška ministerstva",
+    source: { label: "e-Sbírka", url: "https://e-sbirka.gov.cz" },
+    what: "Závazný předpis, který přijala vláda nebo vydalo ministerstvo. Vyhlášky jiných úřadů, například České národní banky, se nepočítají.",
+    who: "Všem vládním stranám v den přijetí.",
+    points: "±2 za celý slib, ±1 za část slibu.",
+  },
+  {
+    title: "Usnesení vlády",
+    source: { label: "zVlády, portál Úřadu vlády", url: "https://odok.gov.cz/portal/zvlady/" },
+    what: "Zveřejněné usnesení vlády. Usnesení, které jen schvaluje vládní návrh zákona, rozpočtu nebo smlouvy, stanovisko vlády nebo nařízení, se nepočítá podruhé.",
+    who: "Všem vládním stranám v den přijetí.",
+    points: "Rozhodnutí, ke kterému už nemusí nic dalšího nastat: ±2 za celý slib, ±1 za část. Jinak, i v pochybnostech, je to návrh: ±1.",
+  },
+];
 const formatScore = (score: number) => `${score > 0 ? "+" : score < 0 ? "−" : ""}${Math.abs(score)} ${Math.abs(score) === 1 ? "bod" : "body"}`;
 const formatNumber = (value: number) => `${value > 0 ? "+" : value < 0 ? "−" : ""}${Math.abs(value)}`;
 ---
@@ -38,9 +89,16 @@ const formatNumber = (value: number) => `${value > 0 ? "+" : value < 0 ? "−" :
     </div>
     <p class="methodology-note"><strong>Pokud strana prokazatelně jedná proti svým slibům, dostává záporné body.</strong> Zatím bez ověřeného podstatného posunu a jednání proti slibu tak nejsou totéž.</p>
     <p class="methodology-note"><strong>Návrh znamená ±1, rozhodnutí o celém slibu ±2.</strong> Slib zůstává na nule, dokud nemáme ověřené jednání strany jedním směrem. Samotný uplynulý čas skóre nemění. Hlasování hodnotíme podle toho, jak strana hlasovala, bez ohledu na další osud zákona.</p>
-    <p class="methodology-note"><strong>Hodnotíme jen úřední záznamy:</strong> hlasování ve Sněmovně a návrhy, které jí předložili poslanci nebo vláda (zákony, státní rozpočet a mezinárodní smlouvy). Weby stran, tiskové zprávy ani média důkazem nejsou.</p>
-    <p class="methodology-note" id="novely"><strong>U novel zatím nevidíme dosavadní znění zákona.</strong> Novelu posuzujeme podle jejího textu. Když něco ruší nebo nahrazuje, její text často říká jen „§ 10a se zrušuje“, ale ne, co v tomto ustanovení stálo. Proto nemusíme vždy poznat, zda novela pravidla zpřísňuje, nebo uvolňuje. Například zrušení stropu strukturálního schodku 1,25 % HDP pro rok 2027 v zákoně o pravidlech rozpočtové odpovědnosti se ze samotného textu novely vyčíst nedá. Nových zákonů a státního rozpočtu se to netýká, jejich celý text posuzujeme přímo. <strong>Na nápravě pracujeme:</strong> k novelám doplníme dosavadní znění zákona z e-Sbírky, oficiální elektronické Sbírky zákonů, a dotčené sliby pak posoudíme znovu.</p>
+    <p class="methodology-note" id="novely"><strong>U novel posuzujeme i dosavadní znění zákona.</strong> Text novely často říká jen „§ 10a se zrušuje“, ale ne, co v tomto ustanovení stálo. Ke každé novele proto přikládáme znění ustanovení, která mění, jak platila v den jednání, které posuzujeme (předložení, stanoviska vlády nebo hlasování), z e-Sbírky, oficiální elektronické Sbírky zákonů. Tak poznáme, zda novela pravidla zpřísňuje, nebo uvolňuje. Když by podklady byly příliš rozsáhlé a některé znění v nich chybělo, detail slibu to uvede s odkazy do e-Sbírky. Když Sněmovna nezveřejní znění, o kterém hlasovala, a návrh se stal zákonem, posuzujeme jeho text vyhlášený ve Sbírce zákonů. Neplatí to pro hlasování, kterým Sněmovna odmítla pozměňovací návrhy Senátu, protože se týkalo jiného znění.</p>
     <p class="methodology-note" id="vyroky"><strong>Výroky nehodnotíme.</strong> Program obsahuje i výroky, které nelze splnit ani porušit konkrétním zákonem, hlasováním nebo návrhem vlády, například obecné hodnoty a cíle. Na stránce strany je lze zobrazit, ale nemají skóre a nepočítají se do SLAVA Indexu.</p>
+  </section>
+  <section id="zdroje" class="method-sources" aria-labelledby="sources-title">
+    <h2 id="sources-title">Co hodnocení slibu ovlivní</h2>
+    <p class="scale-intro">Skóre slibu může změnit jen jednání strany zachycené v těchto úředních záznamech. Weby stran, tiskové zprávy ani média důkazem nejsou. Kroky vlády počítáme vládním stranám od jmenování současné vlády ANO 2011, SPD a Motoristů sobě {governmentFrom}; kroky dřívějších vlád se jim nepočítají.</p>
+    <div class="source-cards">
+      {conductRows.map((row) => <article class="source-card"><h3>{row.title}</h3><dl><div><dt>Zdroj</dt><dd><a href={row.source.url}>{row.source.label}</a></dd></div><div><dt>Co to je</dt><dd>{row.what}</dd></div><div><dt>Komu se počítá</dt><dd>{row.who}</dd></div><div><dt>Body</dt><dd>{row.points}</dd></div></dl></article>)}
+    </div>
+    <p class="methodology-note">Rozhodnutí má přednost před návrhem. Mezi jednáními stejné váhy rozhoduje to poslední, ale jen v rozsahu, kterého se týká. Když jednání stejné váhy ze stejného dne ukazují opačnými směry, platí nižší skóre. Když slib jmenuje měřitelný cíl, například výši schodku v daném roce, rozhoduje nejdřív jednání o tomto cíli. Každé jednání posuzujeme podle textu, kterého se týkalo, a v detailu slibu odkazujeme na jeho úřední záznam.</p>
   </section>
   <section class="calculation-section" aria-labelledby="calculation-title">
     <div class="calculation-copy"><p class="eyebrow">VÝPOČET</p><h2 id="calculation-title">−100 až +100 bodů</h2><p>Sečteme aktuální hodnocení všech slibů a vydělíme je jejich maximálním možným bodovým ziskem.</p><code>součet bodů ÷ (2 × počet slibů) × 100</code></div>

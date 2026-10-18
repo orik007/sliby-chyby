@@ -777,6 +777,7 @@ h1 em {
 
 .detail-block h2,
 .method-scale h2,
+.method-sources h2,
 .calculation-section h2 {
   margin-bottom: 18px;
   font: 800 clamp(28px, 4vw, 44px)/1.05 "Manrope", sans-serif;
@@ -1173,20 +1174,28 @@ h1 em {
   gap: 12px;
 }
 
+.scale-group,
+.source-card {
+  border: 1px solid var(--line);
+  background: rgba(255, 253, 246, 0.55);
+}
+
 .scale-group {
   padding: 14px;
-  border: 1px solid var(--line);
   border-radius: 20px;
-  background: rgba(255, 253, 246, 0.55);
+}
+
+.scale-group-title,
+.source-card dt {
+  color: var(--muted);
+  font: 700 11px/1.2 "Manrope", sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
 }
 
 .scale-group-title {
   margin: 0 0 10px;
   padding: 3px 5px;
-  color: var(--muted);
-  font: 700 11px/1.2 "Manrope", sans-serif;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
 }
 
 .scale-pair {
@@ -1279,6 +1288,41 @@ h1 em {
 
 .changes-planned h2 {
   font-size: 22px;
+}
+
+.method-sources {
+  padding: 50px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.source-cards {
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+  gap: 12px;
+}
+
+.source-card {
+  padding: 20px;
+  border-radius: 16px;
+}
+
+.source-card h3 {
+  margin: 0 0 14px;
+  font: 800 18px/1.25 "Manrope", sans-serif;
+}
+
+.source-card dl {
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+
+
+.source-card dd {
+  margin: 3px 0 0;
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 .calculation-section {
