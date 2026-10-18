@@ -356,7 +356,7 @@ test("a law change both assessors found not relevant is left out, and the packag
   });
   const full = build();
   const [first, second] = full.evidence.filter(({ role }) => role === "law-change").map(({ id }) => id);
-  const assessorPrompt = { version: "assessor-v23", contentHash: "a".repeat(64) };
+  const assessorPrompt = { version: "assessor-v24", contentHash: "a".repeat(64) };
   const review = (relevantSecond) => ({ changeRelevance: [{ evidenceId: first, relevant: true, reasonCz: "Souvisí.", effectCz: "Zpřísňuje." }, { evidenceId: second, relevant: relevantSecond, reasonCz: relevantSecond ? "Souvisí." : "Jiné téma.", effectCz: "" }] });
   const audit = (reviewA, reviewB, prompt = assessorPrompt) => ({ prompts: { assessor: prompt }, validatedAssessments: { "assessor-a": reviewA, "assessor-b": reviewB } });
   const verdictsOf = (auditRecord, evidencePackage = full) => {
@@ -385,7 +385,7 @@ test("a law change both assessors found not relevant is left out, and the packag
     assert.equal(build(exclusionFrom(verdictsOf(auditRecord))).excludedLawChanges, undefined);
   }
   // Another assessor prompt or a changed text brings the change back.
-  assert.equal(build(exclusionFrom(verdictsOf(both), { version: "assessor-v23", contentHash: "b".repeat(64) })).excludedLawChanges, undefined);
+  assert.equal(build(exclusionFrom(verdictsOf(both), { version: "assessor-v24", contentHash: "b".repeat(64) })).excludedLawChanges, undefined);
   assert.equal(build(exclusionFrom(verdictsOf(both)), [lawChange(1), lawChange(2, "Zákon č. 218/2000 Sb. se mění takto: jinak.")]).excludedLawChanges, undefined);
   // A change whose context was trimmed in the assessed package gives no verdict.
   const trimmed = { ...full, generation: { ...full.generation, contextOmissions: [{ evidenceId: second, version: "proposed", suppliedCount: 0, omitted: [] }] } };
@@ -393,4 +393,62 @@ test("a law change both assessors found not relevant is left out, and the packag
   // Every law change left out: no package.
   const none = audit({ changeRelevance: review(false).changeRelevance.map((verdict) => ({ ...verdict, relevant: false })) }, { changeRelevance: review(false).changeRelevance.map((verdict) => ({ ...verdict, relevant: false })) });
   assert.equal(build(exclusionFrom(verdictsOf(none))), null);
+});
+
+function amendmentRecord(number, { parts = ["ČÁST PRVNÍ"], proposerPartyIds = [fiscalPromise.partyId] } = {}) {
+  return createCollectedRecord({
+    id: `psp-core-2025--amendment-${number}`,
+    sourceId: "psp-core-2025",
+    kind: "member-amendment",
+    primary: true,
+    evidenceRole: "primary-record",
+    occurredAt: "2026-05-13T00:00:00",
+    title: `SD ${number}: Pozměňovací návrh C1 k tisku 90 — Vládní návrh zákona`,
+    publisher: "Chamber of Deputies",
+    url: `https://www.psp.cz/sqw/sd.sqw?cd=${number}&o=10`,
+    payload: {
+      documentNumber: String(number),
+      externalPrintId: "43200",
+      printKindId: "1",
+      printNumber: 90,
+      printTitleCz: "Vládní návrh zákona",
+      printUrl: "https://public.psp.cz/sqw/historie.sqw?o=10&t=90",
+      label: "C1",
+      presenterCz: "Poslankyně Jana Murová",
+      presentedOn: "2026-05-13",
+      parts,
+      document: { filename: `${number}.docx`, url: `https://www.psp.cz/sqw/text/orig2.sqw?idd=${number}0` },
+      pageUrl: `https://www.psp.cz/sqw/sd.sqw?cd=${number}&o=10`,
+      paragraphs: ["Pozměňovací návrh poslankyně Jany Murové", "1. V části první čl. I se bod 4 zrušuje."],
+      proposal: { kind: "member-amendment", proposerPartyIds, proposerPersonIds: ["1"], unmatchedProposerNames: [] }
+    }
+  });
+}
+
+test("an amendment and a vote on it are conduct on the parts it amends, with its text once", async () => {
+  const { conductOfRun, lawChangesOfRun } = await import("../scripts/lib/topic-evidence-package.mjs");
+  const submitted = amendmentRecord(774);
+  // Another party's amendment, on which the party's club voted.
+  const othersAmendment = amendmentRecord(775, { parts: [], proposerPartyIds: [] });
+  const amendmentVote = attributedVoteRecord({ id: "psp--amendment-vote", occurredAt: "2026-05-15T10:00:00", payload: { linkedPrints: [{ externalPrintId: "43200", printKindId: "1", linkBasis: "agenda-item", historyContexts: [] }], amendmentVote: { externalPrintId: "43200", printNumber: 90, documentNumbers: ["775"], label: "D", variant: null, presenterCz: "Poslanec Karel Haas", parts: [], stenoUrl: "https://www.psp.cz/eknih/2025ps/stenprot/017schuz/s017010.htm" } } });
+  const run = { ...collectorRun, records: [submitted, othersAmendment, amendmentVote] };
+  const { recordsByPrintId, amendmentRecords } = conductOfRun(run, "2026-06-15", [fiscalPromise.partyId]);
+  assert.deepEqual(recordsByPrintId.get("43200").map(({ id }) => id).sort(), ["psp--amendment-vote", "psp-core-2025--amendment-774"]);
+  const printParts = { prints: { 43200: { changes: [lawChange(1), lawChange(2)] } } };
+  const changes = lawChangesOfRun(printParts, recordsByPrintId, amendmentRecords);
+  // The submitted amendment names part one; the voted one names no part.
+  assert.deepEqual(changes.map(({ amendments }) => amendments.map(({ documentNumber }) => documentNumber)), [["774", "775"], ["775"]]);
+  const pkg = buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: changes.map((change) => ({ change, route })), recordsByPrintId, printFirstSeenOn, collectorRun: run, asOf: "2026-06-15" });
+  const conduct = pkg.evidence.filter(({ role }) => role === "conduct-evidence");
+  assert.deepEqual(conduct.map(({ matchBasis }) => matchBasis.attributionStatus), ["verified-member-amendment", "verified-party-amendment-vote"]);
+  assert.deepEqual(conduct[0].structuredFacts.concernsLawChanges.map(({ changeId, version, mark }) => [changeId, version, mark]), [["43200-1", "proposed", "amendment"]]);
+  assert.deepEqual(conduct[1].structuredFacts.concernsLawChanges.map(({ changeId, mark }) => [changeId, mark]), [["43200-1", "amendment-vote"], ["43200-2", "amendment-vote"]]);
+  assert.equal(conduct[0].structuredFacts.paragraphs, undefined, "an amendment's text is its own evidence, not its conduct's");
+  assert.deepEqual(conduct.map(({ structuredFacts }) => structuredFacts.amendmentEvidenceIds), [["psp-core-2025--amendment-text-774"], ["psp-core-2025--amendment-text-775"]]);
+  const texts = pkg.evidence.filter(({ role }) => role === "amendment");
+  assert.deepEqual(texts.map(({ id }) => id), ["psp-core-2025--amendment-text-774", "psp-core-2025--amendment-text-775"]);
+  assert.match(texts[0].structuredFacts.textCz, /bod 4 zrušuje/);
+  // A law change lists its amendments by the hash of their text, which an
+  // earlier verdict's key holds.
+  assert.deepEqual(pkg.evidence.find(({ id }) => id === lawChangeEvidenceId(lawChange(2))).structuredFacts.amendments.map(({ documentNumber }) => documentNumber), ["775"]);
 });

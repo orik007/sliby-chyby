@@ -66,11 +66,16 @@ export function versionConcerned(record, printId) {
   // A government regulation, ministerial decree, or government resolution is
   // adopted in one text.
   if (record.kind === "regulation-adoption" || record.kind === "government-resolution") return concerned("adopted");
+  // An amendment is judged against the proposed text it amends; psp.cz
+  // publishes no text of the bill as amended in the second reading.
+  if (record.kind === "member-amendment") return concerned("proposed", { mark: "amendment" });
   // A submission, and the government's opinion on a bill it did not
   // submit, concern the proposed text.
   if (record.kind !== "parliamentary-vote") return concerned("proposed");
   const linkedPrint = (record.payload?.linkedPrints ?? []).find((print) => String(print.externalPrintId) === String(printId));
   const context = (linkedPrint?.historyContexts ?? []).find((item) => decisiveActions.has(normalizeSearchText(item.actionCz)));
+  // A vote on an amendment concerns the proposed text with that amendment.
+  if (!context && record.payload?.amendmentVote && String(record.payload.amendmentVote.externalPrintId) === String(printId)) return concerned("proposed", { mark: "amendment-vote" });
   // A vote is conduct on a print only when that print's own history names it
   // as a decisive step; a print linked only through the agenda item is not.
   if (!context) return null;
@@ -99,8 +104,26 @@ export const assessableAttributionStatuses = new Set([
   "verified-government-regulation",
   "verified-ministerial-decree",
   "verified-government-opinion",
-  "verified-government-resolution"
+  "verified-government-resolution",
+  "verified-member-amendment",
+  "verified-party-amendment-vote"
 ]);
+
+/**
+ * Whether an amendment, or a vote on it, concerns a law change of its print
+ * (docs/evidence-pipeline.md, Amendment data rules): the parts it names
+ * ("v části první") are the law changes whose proposed part heading is one of
+ * them; when it names none of the print's parts, it concerns every law
+ * change of the print. `printPartHeadings` are the proposed part headings of
+ * all law changes of the print.
+ */
+export function amendmentConcernsChange(record, change, printPartHeadings) {
+  const parts = record.kind === "member-amendment" ? record.payload?.parts : record.payload?.amendmentVote?.parts;
+  if (!parts || parts.length === 0) return true;
+  const named = parts.filter((part) => printPartHeadings.includes(part));
+  if (named.length === 0) return true;
+  return named.includes(change.versions?.proposed?.heading?.toLocaleUpperCase("cs-CZ") ?? null);
+}
 
 /**
  * Deterministically decides whether a routed record is attributable conduct
@@ -118,7 +141,11 @@ export const assessableAttributionStatuses = new Set([
  *   submit, when the party was a governing party on the day the Chamber
  *   distributed the opinion; a neutral opinion is not conduct;
  * - a government resolution, when the party was a governing party on its
- *   adoption date.
+ *   adoption date;
+ * - an amendment an MP presented in the second reading, when an MP of the
+ *   party's club on that day is among its proposers;
+ * - a vote on such an amendment, when the party's club supported it or did
+ *   not support it by strict majority.
  * Anything else is unattributed and never becomes package evidence.
  */
 export function attributionStatusForRecord(record, promise) {
@@ -126,6 +153,8 @@ export function attributionStatusForRecord(record, promise) {
     const summary = (record.payload?.partyVoteSummaries ?? []).find(({ partyId }) => partyId === promise.partyId);
     if (!summary) return { attributionStatus: "unattributed" };
     const decisive = hasVerifiedVoteContext(record);
+    // On an amendment, a club without a strict majority is no conduct.
+    if (!decisive && record.payload?.amendmentVote) return { attributionStatus: summary.attributionStatus === "attributed" ? "verified-party-amendment-vote" : "unattributed" };
     if (summary.attributionStatus === "attributed") return { attributionStatus: decisive ? "verified-party-vote" : "candidate-party-vote-without-decisive-context" };
     if (summary.attributionStatus === "no-strict-majority") return { attributionStatus: decisive ? "verified-party-no-majority" : "candidate-party-vote-without-decisive-context" };
     return { attributionStatus: "unattributed" };
@@ -139,6 +168,9 @@ export function attributionStatusForRecord(record, promise) {
   }
   if (record.kind === "government-resolution" && record.payload?.proposal?.proposerPartyIds?.includes(promise.partyId)) {
     return { attributionStatus: "verified-government-resolution" };
+  }
+  if (record.kind === "member-amendment" && record.payload?.proposal?.proposerPartyIds?.includes(promise.partyId)) {
+    return { attributionStatus: "verified-member-amendment" };
   }
   if (record.kind === "legislative-step" && normalizeSearchText(record.payload?.actionCz) === submissionAction) {
     const proposal = record.payload?.proposal;
@@ -194,6 +226,10 @@ function proposalLabel(payload) {
 const opinionLabels = { agrees: "agrees with", disagrees: "disagrees with" };
 
 export function factSummary(record, partyId) {
+  if (record.kind === "member-amendment") {
+    const payload = record.payload;
+    return `MPs presented amendment ${payload.label} (parliamentary document ${payload.documentNumber}, presented by ${payload.presenterCz}) to print ${payload.printNumber}, ${payload.printTitleCz}, in the second reading on ${payload.presentedOn}; parties with a proposing MP: ${payload.proposal.proposerPartyIds.join(", ") || "none tracked"}.`;
+  }
   if (record.kind === "government-opinion") {
     const payload = record.payload;
     return `The government ${opinionLabels[payload.opinion]} print ${payload.printNumber}, ${payload.printTitleCz}, a bill it did not submit (opinion “${payload.resultCz}”, sub-print ${payload.printNumber}/${payload.partNumber}, distributed by the Chamber on ${payload.distributedOn}); governing parties on that day: ${payload.proposal.proposerPartyIds.join(", ")}.`;
@@ -217,9 +253,11 @@ export function factSummary(record, partyId) {
   if (record.kind === "parliamentary-vote") {
     const party = partyVoteFacts(record, partyId);
     const partyText = party
-      ? ` Under the strict-majority rule, ${partyId} has status ${party.attributionStatus}${party.majorityChoice ? ` with majority choice ${party.majorityChoice}` : ""} (${party.counts.yes} yes, ${party.counts.no} no, threshold ${party.strictMajorityThreshold}, ${party.eligibleMemberCount} eligible members).`
+      ? ` Under the strict-majority rule, ${partyId} has status ${party.attributionStatus}${party.majorityChoice ? ` with majority choice ${party.majorityChoice}${party.majorityChoice === "no" ? " (did not support it: voted no, abstained, or was registered and did not vote)" : ""}` : ""} (${party.counts.yes} yes, ${party.counts.no} no, ${party.counts.abstained} abstained, ${party.counts.notVoting} registered without voting, threshold ${party.strictMajorityThreshold}, ${party.eligibleMemberCount} eligible members).`
       : ` No vote summary for ${partyId} is present.`;
-    return `The official roll-call record reports ${record.payload.counts.yes} votes yes and ${record.payload.counts.no} votes no.${partyText}`;
+    const amendment = record.payload.amendmentVote;
+    const on = amendment ? ` The vote was on amendment ${amendment.label}${amendment.variant ? `, variant ${amendment.variant}` : ""} (parliamentary document ${amendment.documentNumbers.join(", ")}, presented by ${amendment.presenterCz}) to print ${amendment.printNumber}, as the stenographic record states.` : "";
+    return `The official roll-call record reports ${record.payload.counts.yes} votes yes and ${record.payload.counts.no} votes no.${on}${partyText}`;
   }
   return record.title;
 }

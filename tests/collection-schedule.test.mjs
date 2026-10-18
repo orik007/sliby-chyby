@@ -105,7 +105,9 @@ test("the model-cache persistence step survives a routing failure, but checkpoin
   assert.doesNotMatch(checkpointsStep, /automation\/psp-documents/);
   assert.doesNotMatch(checkpointsStep, /automation\/government-resolutions/);
   const printPartsStep = workflow.split("      - name: Split official print texts into law changes")[1].split("\n      - name:")[0];
-  assert.match(printPartsStep, /--document-hashes automation\/psp-documents\/hashes\.json/);
+  assert.match(printPartsStep, /--document-cache automation\/psp-documents/);
+  const collectStep = workflow.split("      - name: Collect source records")[1].split("\n      - name:")[0];
+  assert.match(collectStep, /--document-cache automation\/psp-documents/);
 });
 
 test("collection and packages create a missing audit pull request without overwriting its review body", async () => {
@@ -142,7 +144,7 @@ test("only the collection, print-text, and law-change context steps receive the 
   assert.match(step("Collect source records"), /--resolution-cache automation\/government-resolutions/);
   // Reading resolutions stops after 120 minutes; the step limit leaves room
   // for the other sources.
-  assert.match(step("Collect source records"), /timeout-minutes: 150/);
+  assert.match(step("Collect source records"), /timeout-minutes: 210/);
   assert.equal(workflow.match(/ESEL_API_ACCESS_KEY/g).length, 6);
 });
 

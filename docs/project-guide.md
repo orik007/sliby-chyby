@@ -23,16 +23,16 @@ official party source (election programme, archived with its extracted text)
   -> every statement of what the party will do, wants, or rejects, quoted exactly and titled
   -> promise (public, scored, reviewed routing tags), statement (public, no score), or rejected occurrence (technical reason, not public)
 
-official records only (active: Chamber of Deputies open data; government regulations and ministerial decrees from the Collection of Laws; government resolutions from the Government Office's zVlády portal)
+official records only (active: Chamber of Deputies open data with its amendments and stenographic record; government regulations and ministerial decrees from the Collection of Laws; government resolutions from the Government Office's zVlády portal)
   -> complete collection of every source at 09:37 Europe/Prague
   -> only records that can be attributable conduct continue
   -> each concerned print split into law changes (one part of its official text each); each regulation, decree, or government resolution one law change
   -> context of each law change: the wording of the provisions it amends on the conduct date (e-Sbírka REST API, at most 5 requests per second, cached permanently)
-  -> two screeners read every law change with its context: substantive or technical, and topic tags
+  -> two screeners read every law change with its context and the amendments to it: substantive or technical, and topic tags
   -> routing of substantive changes to promises: direct legal-identifier links or the specific tags of either screener, matched to the promises' reviewed tags
-  -> attribution: decisive club vote, member bill, government proposal, or the government's opinion on the change's print, the adoption of a regulation or decree, or a government resolution (scoring.md)
+  -> attribution: decisive club vote, member bill, government proposal, amendment, club vote on an amendment, or the government's opinion on the change's print, the adoption of a regulation or decree, or a government resolution (scoring.md)
   -> two relevance checks per promise and law change
-  -> evidence package per promise: every kept law change in full with the party's conduct, without the law changes both assessors of an earlier assessment found not relevant while what they judged is unchanged
+  -> evidence package per promise: every kept law change in full with the party's conduct and the texts of the amendments it concerns, without the law changes both assessors of an earlier assessment found not relevant while what they judged is unchanged
   -> two independent assessments with a relevance verdict and, for a relevant change, its effect per law change; an invalid output asked for again at most twice; arbiter only on different scores or one output still invalid
   -> unpublished audit pull request with packages, proposals, coverage, and caches
   -> separate approved public-assessment pull request when a score changes
@@ -53,7 +53,7 @@ Party websites, press releases, and the media are not evidence. The public site 
 | `automation/topic-routing/` | Controlled routing taxonomy, the reviewed routing tags of every promise, and the durable model caches (law-change screening, relevance checks). |
 | `automation/law-context/` | Durable cache of law-change context read from e-Sbírka, one file per act (audit state only). |
 | `automation/government-resolutions/` | Durable cache of the government resolutions read from zVlády, one file per year (audit state only). |
-| `automation/psp-documents/` | Record of the content seen under each psp.cz document ID, to find out whether a file ever changes under the same ID; never used to skip a download (audit state only). |
+| `automation/psp-documents/` | Durable cache of the text of every psp.cz document file read, one file per document ID, with its SHA-256; a sample is checked again in every run (audit state only). |
 | `automation/evidence-packages/` | Durable unpublished queue of evidence packages (one per promise) awaiting assessment. |
 | `automation/prompts/` | Active law-change screener, relevance-check, assessor, and arbiter prompts. |
 | `scripts/` | Validation, collection, print splitting, routing, packaging, assessment, and coverage-audit scripts. |

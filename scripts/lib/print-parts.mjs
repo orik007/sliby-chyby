@@ -193,7 +193,7 @@ export const versionKeys = ["proposed", "approved", "passed", "adopted"];
 export const versionLabels = { proposed: "proposed text", approved: "text approved by the Chamber", passed: "text passed by Parliament", adopted: "text as adopted" };
 
 // An absolute psp.cz URL from an href on a psp.cz page.
-function pspUrl(href, pageUrl) {
+export function pspUrl(href, pageUrl) {
   const url = new URL(href.replace(/&amp;/g, "&"), pageUrl);
   invariant(url.protocol === "https:" && url.hostname === "www.psp.cz", `Official print document redirected outside the PSP allowlist: ${url}`);
   return url.href;
@@ -406,7 +406,8 @@ function versionOf(part, amendedAct, document, effectiveCz = null, promulgatedAc
 
 /**
  * The Chamber prints that potentially attributable records concern: the
- * prints of submissions and votes, and the bill of a government opinion,
+ * prints of submissions and votes, the bill of an amendment, and the bill of
+ * a government opinion,
  * with the part numbers of its Senate resolutions and government opinions.
  */
 export function collectPrints(records) {
@@ -429,6 +430,8 @@ export function collectPrints(records) {
   for (const record of records) {
     const payload = record.payload ?? {};
     if (record.kind === "legislative-step") add({ ...payload, number: payload.printNumber, titleCz: payload.printTitleCz });
+    // An amendment names the bill it amends, whose own part number is 0.
+    if (record.kind === "member-amendment" && !prints.has(String(payload.externalPrintId))) add({ ...payload, number: payload.printNumber, partNumber: 0, titleCz: payload.printTitleCz });
     if (record.kind === "government-opinion") {
       if (!prints.has(String(payload.externalPrintId))) add({ ...payload, number: payload.printNumber, partNumber: 0, titleCz: payload.printTitleCz });
       opinionParts.set(String(payload.externalPrintId), [...(opinionParts.get(String(payload.externalPrintId)) ?? []), payload.partNumber]);

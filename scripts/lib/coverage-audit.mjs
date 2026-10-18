@@ -152,7 +152,8 @@ export function buildCoverageAudit({ collectorRun, routingRun, printParts, track
       printParts: printParts?.quality ?? null,
       // The government resolutions' figures (docs/evidence-pipeline.md,
       // Government resolution data rules, Quality).
-      resolutions: collectorRun.collectors.find(({ collector }) => collector === "zvlady-resolutions")?.referenceData?.quality ?? null
+      resolutions: collectorRun.collectors.find(({ collector }) => collector === "zvlady-resolutions")?.referenceData?.quality ?? null,
+      amendments: collectorRun.collectors.find(({ collector }) => collector === "psp-open-data")?.referenceData?.amendmentQuality ?? null
     },
     stateCounts,
     parties,
@@ -211,6 +212,16 @@ export function renderCoverageAuditMarkdown(audit) {
       `| Government resolutions held back because an annex is only a PDF or XLS file | ${quality.resolutions.heldUnreadAnnex.length} |`,
       `| Government resolutions adopted before a tracked government / used | ${quality.resolutions.beforeGovernment} / ${quality.resolutions.used} |`,
       `| Requests to the Government Office / retried | ${quality.resolutions.requests} / ${quality.resolutions.retried} |`
+    ] : []),
+    ...(quality.amendments ? [
+      `| Summaries of the amendments of the second reading / without a readable file | ${quality.amendments.summaries} / ${quality.amendments.summariesWithoutFile} |`,
+      `| Amendments listed (committee amendments among them) | ${quality.amendments.amendmentItems} (${quality.amendments.committeeItems}) |`,
+      `| Parliamentary documents listed / not a written amendment in sd.zip / without a readable text | ${quality.amendments.documentsListed} / ${quality.amendments.documentsNotInOpenData} / ${quality.amendments.documentsWithoutText} |`,
+      `| Amendments used / written amendments to a bill with a summary that it does not list | ${quality.amendments.amendments} / ${quality.amendments.documentsNotListed} |`,
+      `| Proposer names in the amendments' headings / not matched to an MP | ${quality.amendments.proposerNames} / ${quality.amendments.proposerNamesUnmatched} |`,
+      `| Votes that can be on an amendment / linked to it by the stenographic record | ${quality.amendments.votes} / ${quality.amendments.votesLinked} |`,
+      `| Votes not linked, by reason | ${Object.entries(quality.amendments.votesNotLinked).map(([reason, count]) => `${reason} ${count}`).join(", ") || "none"} |`,
+      `| Turns of the stenographic record read | ${quality.amendments.stenoTurnsRead} |`
     ] : []),
     `| Law changes screened | ${quality.lawChanges} |`,
     `| Technical / substantive | ${quality.technicalLawChanges} / ${quality.substantiveLawChanges} |`,

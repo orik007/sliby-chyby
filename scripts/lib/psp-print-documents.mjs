@@ -239,6 +239,110 @@ export function extractDocxParagraphs(bytes) {
   return paragraphs;
 }
 
+// A list number in the format of its level (numbering.xml numFmt).
+function formatListNumber(value, format) {
+  const letters = (upper) => {
+    let text = "";
+    for (let rest = value; rest > 0; rest = Math.floor((rest - 1) / 26)) text = String.fromCharCode(65 + ((rest - 1) % 26)) + text;
+    return upper ? text : text.toLowerCase();
+  };
+  const roman = () => {
+    let text = "";
+    let rest = value;
+    for (const [amount, symbol] of [[1000, "m"], [900, "cm"], [500, "d"], [400, "cd"], [100, "c"], [90, "xc"], [50, "l"], [40, "xl"], [10, "x"], [9, "ix"], [5, "v"], [4, "iv"], [1, "i"]]) {
+      for (; rest >= amount; rest -= amount) text += symbol;
+    }
+    return text;
+  };
+  if (format === "upperLetter") return letters(true);
+  if (format === "lowerLetter") return letters(false);
+  if (format === "upperRoman") return roman().toUpperCase();
+  if (format === "lowerRoman") return roman();
+  if (format === "none" || format === "bullet") return "";
+  return String(value);
+}
+
+/**
+ * The paragraphs of a DOCX file with the number Word shows before each one
+ * that is in a numbered list (`{ label, text }`; `label` is "" when there is
+ * none). The number is not text of the document: Word computes it from
+ * numbering.xml, for a paragraph's own numbering or that of its style (and
+ * the styles it is based on), counting per list and level and starting each
+ * level again after a higher one. The labels of the amendments in a
+ * summary of amendments ("A.", "D.1") are such numbers
+ * (docs/evidence-pipeline.md, Amendment data rules). Paragraphs are read as
+ * extractDocxParagraphs reads them; a numbered paragraph without text is
+ * kept, because its number still counts.
+ */
+export function extractDocxNumberedParagraphs(bytes) {
+  const entries = unzipSync(bytes);
+  const names = Object.keys(entries);
+  invariant(names.length > 0 && names.length < 5_000, "DOCX archive has an unsafe entry count");
+  const totalBytes = Object.values(entries).reduce((sum, entry) => sum + entry.byteLength, 0);
+  invariant(totalBytes <= 40_000_000, "DOCX archive exceeds the uncompressed size limit");
+  const read = (name) => {
+    const actual = names.find((candidate) => candidate.toLowerCase() === name);
+    return actual ? new TextDecoder("utf-8", { fatal: true }).decode(entries[actual]) : "";
+  };
+  const xml = read("word/document.xml");
+  invariant(xml, "DOCX archive is missing word/document.xml");
+  const numberingXml = read("word/numbering.xml");
+  const stylesXml = read("word/styles.xml");
+  const attribute = (fragment, name) => new RegExp(`<w:${name}\\b[^>]*\\bw:val="([^"]*)"`).exec(fragment)?.[1] ?? null;
+  // abstractNumId -> level -> { start, format, text, style }
+  const abstractLevels = new Map();
+  for (const [, abstractId, abstract] of numberingXml.matchAll(/<w:abstractNum\b[^>]*\bw:abstractNumId="(\d+)"[^>]*>([\s\S]*?)<\/w:abstractNum>/g)) {
+    const levels = new Map();
+    for (const level of abstract.matchAll(/<w:lvl\b[^>]*\bw:ilvl="(\d+)"[^>]*>([\s\S]*?)<\/w:lvl>/g)) {
+      levels.set(Number(level[1]), { start: Number(attribute(level[2], "start") ?? 1), format: attribute(level[2], "numFmt") ?? "decimal", text: attribute(level[2], "lvlText") ?? "", style: attribute(level[2], "pStyle") });
+    }
+    abstractLevels.set(abstractId, levels);
+  }
+  const abstractOfNum = new Map([...numberingXml.matchAll(/<w:num\b[^>]*\bw:numId="(\d+)"[^>]*>([\s\S]*?)<\/w:num>/g)].map((match) => [match[1], attribute(match[2], "abstractNumId")]));
+  const styles = new Map([...stylesXml.matchAll(/<w:style\b[^>]*\bw:styleId="([^"]+)"[^>]*>([\s\S]*?)<\/w:style>/g)].map((match) => [match[1], { numId: attribute(match[2], "numId"), level: attribute(match[2], "ilvl"), basedOn: attribute(match[2], "basedOn") }]));
+  // The list of a style: its own, or that of the style it is based on.
+  const styleNumbering = (styleId, depth = 0) => {
+    const style = styles.get(styleId);
+    if (!style || depth > 10) return null;
+    if (!style.numId) return styleNumbering(style.basedOn, depth + 1);
+    const levels = abstractLevels.get(abstractOfNum.get(style.numId)) ?? new Map();
+    const level = style.level !== null ? Number(style.level) : [...levels].find(([, { style: levelStyle }]) => levelStyle === styleId)?.[0] ?? 0;
+    return { numId: style.numId, level };
+  };
+  const counters = new Map();
+  const paragraphs = [];
+  for (const [, content] of xml.matchAll(/<w:p\b[^>]*>([\s\S]*?)<\/w:p>/gi)) {
+    const properties = /<w:pPr>([\s\S]*?)<\/w:pPr>/.exec(content)?.[1] ?? "";
+    const ownNumId = attribute(properties, "numId");
+    const styleId = attribute(properties, "pStyle");
+    const fromStyle = styleNumbering(styleId);
+    const numbering = ownNumId !== null
+      ? { numId: ownNumId, level: attribute(properties, "ilvl") !== null ? Number(attribute(properties, "ilvl")) : fromStyle?.numId === ownNumId ? fromStyle.level : 0 }
+      : fromStyle;
+    let label = "";
+    const abstractId = numbering && numbering.numId !== "0" ? abstractOfNum.get(numbering.numId) : null;
+    const levels = abstractId !== null && abstractId !== undefined ? abstractLevels.get(abstractId) : null;
+    if (levels) {
+      const count = counters.get(abstractId) ?? new Map();
+      counters.set(abstractId, count);
+      const level = levels.get(numbering.level) ?? { start: 1, format: "decimal", text: "" };
+      count.set(numbering.level, (count.get(numbering.level) ?? level.start - 1) + 1);
+      for (const deeper of [...count.keys()]) if (deeper > numbering.level) count.delete(deeper);
+      label = level.text.replace(/%(\d)/g, (_, position) => {
+        const index = Number(position) - 1;
+        const other = levels.get(index) ?? { start: 1, format: "decimal" };
+        return formatListNumber(count.get(index) ?? other.start, other.format);
+      });
+    }
+    const fragments = [];
+    for (const token of content.matchAll(/<w:t\b[^>]*>([\s\S]*?)<\/w:t>|<w:tab\b[^>]*\/?\s*>|<w:br\b[^>]*\/?\s*>/gi)) fragments.push(token[1] !== undefined ? decodeXml(token[1]) : " ");
+    const text = fragments.join("").replace(/\s+/g, " ").trim();
+    if (text || label) paragraphs.push({ label: label.trim(), text });
+  }
+  invariant(paragraphs.some(({ text }) => text), "Official DOCX document contains no readable paragraphs");
+  return paragraphs;
+}
+
 /**
  * The paragraphs of a Word 97-2003 (.doc) file, which psp.cz lists for some
  * prints instead of a DOCX. Quotation marks are kept as written
