@@ -7,7 +7,7 @@ export { versionOfChange };
 import { charactersPerToken, estimateRequestTokens, estimateTokens, maxPackageRequestTokens, maxRequestInputTokens } from "./assessment-config.mjs";
 import { withContext } from "./law-context.mjs";
 import { isRegulationKind, regulationSourceId } from "./regulations.mjs";
-import { resolutionKind, resolutionSourceId } from "./government-resolutions.mjs";
+import { resolutionKind, resolutionSourceId } from "./government-resolution-kind.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);

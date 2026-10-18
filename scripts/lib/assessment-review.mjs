@@ -2,7 +2,7 @@ import { assessmentStatuses, hashAssessmentContent, hashAssessmentFingerprint, h
 import { contextOmissionLabel, contextOmissionsOf } from "./context-omissions.mjs";
 import { relevanceVerdictsOf } from "./irrelevance-verdicts.mjs";
 import { isRegulationKind } from "./regulations.mjs";
-import { resolutionKind } from "./government-resolutions.mjs";
+import { resolutionKind } from "./government-resolution-kind.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);

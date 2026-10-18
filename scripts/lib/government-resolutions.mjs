@@ -17,8 +17,8 @@ import { governmentPartiesOn } from "./psp-collector.mjs";
  * (docs/scoring.md), and carries its text, from which it is one law change.
  */
 
-export const resolutionSourceId = "zvlady-resolutions";
-export const resolutionKind = "government-resolution";
+export { resolutionKind, resolutionSourceId } from "./government-resolution-kind.mjs";
+import { resolutionKind, resolutionSourceId } from "./government-resolution-kind.mjs";
 
 const portalOrigin = "https://odok.gov.cz";
 const allowedHosts = new Set(["odok.gov.cz", "www.odok.gov.cz"]);
@@ -313,11 +313,20 @@ const governmentOpinionSubPrintKind = "7";
  * The eKLEP type of each material (`requests[].pid`, `requests[].type.id`)
  * in the official open data of each year from `fromYear` to the current one
  * (schema material_schema_v2.json), read in every run because it changes.
+ * The current year's file can be missing early in a year (requests_2027.json
+ * answered HTTP 404 on 18 October 2026); it is then named in
+ * `notYetPublished`.
  */
 export async function readEklepTypes({ fetcher, fromYear, today }) {
   const types = new Map();
-  for (let year = fromYear; year <= Number(today.slice(0, 4)); year += 1) {
+  const notYetPublished = [];
+  const currentYear = Number(today.slice(0, 4));
+  for (let year = fromYear; year <= currentYear; year += 1) {
     const answer = await fetcher.get(eklepRequestsUrl(year), { purpose: "eKLEP open data" });
+    if (year === currentYear && answer.status === 404) {
+      notYetPublished.push(year);
+      continue;
+    }
     invariant(answer.status === 200, `The eKLEP open data of ${year} answered HTTP ${answer.status}`);
     const data = JSON.parse(new TextDecoder("utf-8").decode(answer.bytes));
     invariant(Array.isArray(data?.requests), `The eKLEP open data of ${year} has no requests`);
@@ -326,7 +335,7 @@ export async function readEklepTypes({ fetcher, fromYear, today }) {
       types.set(request.pid, request.type.id);
     }
   }
-  return types;
+  return { types, notYetPublished };
 }
 
 /**
@@ -347,27 +356,25 @@ export function duplicateOf(pid, { eklepLinks, eklepTypes }) {
 
 /**
  * The text of a resolution: the resolution, then each annex after its label.
- * An annex published without a Word file, or whose file cannot be read, is
- * named with its formats instead, so the models know it is not there. Null
- * when the resolution's own file cannot be read.
+ * An annex published without a Word file is named with its formats instead,
+ * so the models know it is not there. A cached resolution has every Word
+ * file read (readResolutions).
  */
 export function resolutionParagraphs(entry) {
-  const own = entry.files.find(({ label }) => label === "Usnesení");
-  if (!own?.paragraphs) return null;
-  return entry.files.flatMap(({ label, format, formats, paragraphs }) => {
+  return entry.files.flatMap(({ label, formats, paragraphs }) => {
     if (label === "Usnesení") return paragraphs;
     if (paragraphs) return [label, ...paragraphs];
-    return [`${label}: not read; ${format ? `its ${format.toUpperCase()} file cannot be read as text` : `published only as ${formats.map((name) => name.toUpperCase()).join(" and ")}`}.`];
+    return [`${label}: not read; published only as ${formats.map((name) => name.toUpperCase()).join(" and ")}.`];
   });
 }
 
 /**
  * The records of the resolutions read: those that are not duplicates of
- * other conduct, have a readable text, and were adopted while a tracked
- * government governed; with the run's quality figures.
+ * other conduct and were adopted while a tracked government governed; with
+ * the run's quality figures.
  */
 export function resolutionRecords({ resolutions, eklepLinks, eklepTypes, governmentPeriods, source }) {
-  const quality = { duplicates: {}, unreadable: [], beforeGovernment: 0, used: 0 };
+  const quality = { duplicates: {}, beforeGovernment: 0, used: 0 };
   const records = [];
   const linksByPid = Map.groupBy(eklepLinks, ({ pid }) => pid);
   for (const entry of resolutions) {
@@ -376,18 +383,13 @@ export function resolutionRecords({ resolutions, eklepLinks, eklepTypes, governm
       quality.duplicates[duplicate] = (quality.duplicates[duplicate] ?? 0) + 1;
       continue;
     }
-    const paragraphs = resolutionParagraphs(entry);
-    if (paragraphs === null) {
-      quality.unreadable.push(`${entry.number}/${entry.year}`);
-      continue;
-    }
     const partyIds = governmentPartiesOn(governmentPeriods, entry.adoptedOn);
     if (partyIds.length === 0) {
       quality.beforeGovernment += 1;
       continue;
     }
     quality.used += 1;
-    records.push(resolutionRecord({ entry, partyIds, paragraphs, source }));
+    records.push(resolutionRecord({ entry, partyIds, paragraphs: resolutionParagraphs(entry), source }));
   }
   return { records, quality };
 }

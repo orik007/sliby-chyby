@@ -3,7 +3,7 @@ import { chosenReview, proposedPublicExplanation } from "./assessment-review.mjs
 import { isDecisiveAction } from "./attribution.mjs";
 import { contextOmissionsOf } from "./context-omissions.mjs";
 import { isRegulationKind } from "./regulations.mjs";
-import { resolutionKind } from "./government-resolutions.mjs";
+import { resolutionKind } from "./government-resolution-kind.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);

@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { hashText } from "./assessment-config.mjs";
 import { invariantValidOutput, requestValidatedOutput, tagAssignmentSchema, taxonomyDefinitionsText, validateTagAssignmentOutput } from "./model-output.mjs";
 import { versionKeys, versionLabels } from "./print-parts.mjs";
-import { resolutionKind } from "./government-resolutions.mjs";
+import { resolutionKind } from "./government-resolution-kind.mjs";
 
 /**
  * The two cheap-model checks on law changes (docs/evidence-pipeline.md):

@@ -1,5 +1,5 @@
 import { cleanText, invariant } from "./collector-core.mjs";
-import { resolutionKind } from "./government-resolutions.mjs";
+import { resolutionKind } from "./government-resolution-kind.mjs";
 
 /**
  * Splits a Chamber print's official texts into law changes, the unit the

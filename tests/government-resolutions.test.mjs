@@ -156,11 +156,16 @@ test("reading stops with an error once its time is up, keeping what it cached", 
   await assert.rejects(readResolutions({ fetcher, cache: createResolutionCache(directory), firstResolution: "1/2026", today: "2026-10-17", budgetMs: 10, now: () => (clock += 6) }), /stopped after 0 minutes at 2\/2026.*run the workflow again/);
 });
 
-test("the eKLEP open data gives each material's type, and a malformed file fails", async () => {
+test("the eKLEP open data gives each material's type, the current year's file may be missing, and a malformed file fails", async () => {
   const data = (requests) => new TextEncoder().encode(JSON.stringify({ requests }));
   const answers = { "https://www.odok.gov.cz/opendata/dataset/odok/requests_2025.json": data([{ pid: "KORNDPDDEYDL", type: { id: "PNZ", name: "Návrh zákona předložený PS" } }]), "https://www.odok.gov.cz/opendata/dataset/odok/requests_2026.json": data([{ pid: "KORNDQ2CQRQP", type: { id: "NNV", name: "Návrh nařízení vlády" } }]) };
-  const fetcher = createGovernmentOfficeFetcher({ minIntervalMs: 0, sleep: async () => {}, fetchImpl: async (url) => new Response(answers[url], { status: 200 }) });
-  assert.deepEqual([...await readEklepTypes({ fetcher, fromYear: 2025, today: "2026-10-17" })], [["KORNDPDDEYDL", "PNZ"], ["KORNDQ2CQRQP", "NNV"]]);
+  // A year's file not yet published answers HTTP 404, as requests_2027.json
+  // did on 18 October 2026.
+  const fetcher = createGovernmentOfficeFetcher({ minIntervalMs: 0, sleep: async () => {}, fetchImpl: async (url) => new Response(answers[url] ?? "{}", { status: answers[url] ? 200 : 404 }) });
+  const read = await readEklepTypes({ fetcher, fromYear: 2025, today: "2026-10-17" });
+  assert.deepEqual([[...read.types], read.notYetPublished], [[["KORNDPDDEYDL", "PNZ"], ["KORNDQ2CQRQP", "NNV"]], []]);
+  assert.deepEqual((await readEklepTypes({ fetcher, fromYear: 2026, today: "2027-01-01" })).notYetPublished, [2027]);
+  await assert.rejects(readEklepTypes({ fetcher, fromYear: 2024, today: "2026-10-17" }), /The eKLEP open data of 2024 answered HTTP 404/);
   answers["https://www.odok.gov.cz/opendata/dataset/odok/requests_2026.json"] = data([{ pid: "X" }]);
   await assert.rejects(readEklepTypes({ fetcher, fromYear: 2026, today: "2026-10-17" }), /without a PID or type/);
 });
@@ -196,14 +201,12 @@ const entry = (overrides = {}) => ({
   ...overrides
 });
 
-test("the text names an annex it cannot read, and a resolution without its own text is not used", () => {
+test("the text names an annex it cannot read, and only resolutions that are no duplicates, adopted by a tracked government, are used", () => {
   assert.deepEqual(resolutionParagraphs(entry()), ["Vláda", "souhlasí s převodem", "Příloha č. 1: not read; published only as XLSX."]);
   const withAnnex = entry({ files: [entry().files[0], { label: "Příloha č. 1", format: "docx", formats: ["docx"], url: "u", sha256: "b".repeat(64), paragraphs: ["Statut"] }] });
   assert.deepEqual(resolutionParagraphs(withAnnex), ["Vláda", "souhlasí s převodem", "Příloha č. 1", "Statut"]);
-  const unreadable = entry({ files: [{ ...entry().files[0], paragraphs: null }] });
-  assert.equal(resolutionParagraphs(unreadable), null);
-  const { records, quality } = resolutionRecords({ resolutions: [entry(), unreadable, entry({ number: 1012, year: 2025, adoptedOn: "2025-12-10" }), entry({ number: 330, pid: "NZ1" })], eklepLinks: [], eklepTypes: new Map([["NZ1", "NZ"]]), governmentPeriods, source });
-  assert.deepEqual(quality, { duplicates: { "government-bill": 1 }, unreadable: ["17/2026"], beforeGovernment: 1, used: 1 });
+  const { records, quality } = resolutionRecords({ resolutions: [entry(), entry({ number: 1012, year: 2025, adoptedOn: "2025-12-10" }), entry({ number: 330, pid: "NZ1" })], eklepLinks: [], eklepTypes: new Map([["NZ1", "NZ"]]), governmentPeriods, source });
+  assert.deepEqual(quality, { duplicates: { "government-bill": 1 }, beforeGovernment: 1, used: 1 });
   assert.equal(records.length, 1);
 });
 

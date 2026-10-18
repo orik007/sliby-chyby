@@ -161,7 +161,6 @@ jobs:
         # (Government resolution data rules). Reading resolutions stops after
         # 120 minutes and fails the run before any paid step; the next run
         # continues from the cache.
-        timeout-minutes: 150
         env:
           PSP_PROXY_URL: ${{ secrets.PSP_PROXY_URL }}
           ESEL_API_ACCESS_KEY: ${{ secrets.ESEL_API_ACCESS_KEY }}
