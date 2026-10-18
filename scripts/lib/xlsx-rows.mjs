@@ -48,7 +48,9 @@ export function extractXlsxRows(bytes) {
         return { column, text: cellText(attributes, inner, { strings, dateStyles, date1904 }) };
       }).filter(({ text }) => text !== "");
     }).filter((cells) => cells.length > 0);
-    const firstColumn = Math.min(...rows.flatMap((cells) => cells.map(({ column }) => column)));
+    // A loop, not Math.min(...cells), so a large sheet cannot exceed the
+    // number of arguments a call takes.
+    const firstColumn = rows.reduce((first, cells) => cells.reduce((least, { column }) => Math.min(least, column), first), Infinity);
     for (const cells of rows) {
       const positions = Array(cells.at(-1).column - firstColumn + 1).fill("");
       for (const { column, text } of cells) positions[column - firstColumn] = text;
@@ -90,13 +92,14 @@ function sharedStrings(xml) {
   return [...xml.matchAll(/<si>([\s\S]*?)<\/si>/gu)].map(([, item]) => runText(item));
 }
 
-// The built-in number formats that show a date, a time, or both
-// (ECMA-376, 18.8.30).
-const builtInDateFormats = new Map([[14, "date"], [15, "date"], [16, "date"], [17, "date"], [18, "time"], [19, "time"], [20, "time"], [21, "time"], [22, "date-time"], [45, "time"], [46, "time"], [47, "time"]]);
+// The built-in number formats that show a date, a time of day, an elapsed
+// time (46, [h]:mm:ss), or a date with a time (ECMA-376, 18.8.30).
+const builtInDateFormats = new Map([[14, "date"], [15, "date"], [16, "date"], [17, "date"], [18, "time"], [19, "time"], [20, "time"], [21, "time"], [22, "date-time"], [45, "time"], [46, "elapsed"], [47, "time"]]);
 
 // The kind of each cell style whose number format shows a date or a time: a
 // built-in one, or a custom one with a day or year (a date), an hour or
-// second (a time), or both, outside quoted text; a month alone is a date.
+// second (a time of day, or an elapsed time when in brackets, [h]), or both,
+// outside quoted text; a month alone is a date.
 function dateStyleKinds(xml) {
   if (xml === null) return new Map();
   const custom = new Map([...xml.matchAll(/<numFmt\b([^>]*)\/?>/gu)].map(([, attributes]) => [Number(attributeOf(attributes, "numFmtId")), decodeXml(attributeOf(attributes, "formatCode") ?? "")]));
@@ -106,7 +109,9 @@ function dateStyleKinds(xml) {
     const code = custom.get(id).replace(/"[^"]*"|\[(?![hms]+\])[^\]]*\]|\\./giu, "");
     const date = /[dy]/iu.test(code) || (/m/iu.test(code) && !/[hs]/iu.test(code));
     const time = /[hs]/iu.test(code);
-    return date && time ? "date-time" : date ? "date" : time ? "time" : null;
+    if (date) return time ? "date-time" : "date";
+    if (time) return /\[[hms]+\]/iu.test(code) ? "elapsed" : "time";
+    return null;
   };
   const cellXfs = /<cellXfs\b[^>]*>([\s\S]*?)<\/cellXfs>/u.exec(xml)?.[1] ?? "";
   const kinds = new Map();
@@ -135,13 +140,14 @@ function cellText(attributes, inner, { strings, dateStyles, date1904 }) {
 // A date serial of the 1900 system counts days from 30 December 1899
 // (keeping Excel's day for 29 February 1900 out of real dates from March
 // 1900 on); of the 1904 system, from 1 January 1904. Its fraction is the time
-// of day, to the second; a time format shows the whole serial as hours.
+// of day, to the second; an elapsed time shows the whole serial as hours.
 function serialDateTime(serial, kind, date1904) {
   const epoch = date1904 ? Date.UTC(1904, 0, 1) : Date.UTC(1899, 11, 30);
   const seconds = Math.round(serial * 86_400);
   const date = new Date(epoch + Math.floor(seconds / 86_400) * 86_400_000).toISOString().slice(0, 10);
   const clock = (total) => [Math.floor(total / 3_600), Math.floor(total / 60) % 60, total % 60].map((part) => String(part).padStart(2, "0")).join(":");
   if (kind === "date") return date;
-  if (kind === "time") return clock(seconds);
+  if (kind === "elapsed") return clock(seconds);
+  if (kind === "time") return clock(seconds % 86_400);
   return `${date} ${clock(seconds % 86_400)}`;
 }

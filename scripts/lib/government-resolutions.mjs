@@ -298,7 +298,10 @@ export async function readResolutions({ fetcher, cache, firstResolution, today, 
         continue;
       }
       const entry = { year, number, readAt: new Date(now()).toISOString(), adoptedOn: parsed.adoptedOn, titleCz: parsed.titleCz, ova: parsed.ova, pid: parsed.pid, files };
-      await cache.put(entry);
+      // A resolution with an annex in no format that is read (a PDF or XLS
+      // file, or none) is read again in every run, so it is used once a
+      // readable file appears (resolutionRecords holds it back until then).
+      if (isWhollyRead(entry)) await cache.put(entry);
       quality.fromPortal += 1;
       resolutions.push(entry);
       onResolution({ resolution: `${number}/${year}`, outcome: "read" });

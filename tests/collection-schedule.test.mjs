@@ -140,8 +140,9 @@ test("only the collection, print-text, and law-change context steps receive the 
   assert.match(step("Collect source records"), /ESEL_API_ACCESS_KEY: \$\{\{ secrets\.ESEL_API_ACCESS_KEY \}\}/);
   assert.match(step("Collect source records"), /--law-context-cache automation\/law-context/);
   assert.match(step("Collect source records"), /--resolution-cache automation\/government-resolutions/);
-  // The collectors' own limits end the step, so it has no step timeout.
-  assert.doesNotMatch(step("Collect source records"), /timeout-minutes/);
+  // Reading resolutions stops after 120 minutes; the step limit leaves room
+  // for the other sources.
+  assert.match(step("Collect source records"), /timeout-minutes: 150/);
   assert.equal(workflow.match(/ESEL_API_ACCESS_KEY/g).length, 6);
 });
 

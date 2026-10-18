@@ -154,6 +154,20 @@ test("a resolution whose Word file cannot be read as text is reported and read a
   assert.ok(again.requests.includes("https://odok.gov.cz/portal/services/download/attachment/2026/158/docx/"));
 });
 
+test("a resolution with an annex in no format that is read is returned but not cached, so a later run reads it again", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "resolutions-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const pdfAnnex = (await page("2026-17")).replace("/2026/17/1/xlsx/", "/2026/17/1/pdf/").replace(">XLSX<", ">PDF<");
+  const files = { "https://odok.gov.cz/portal/services/download/attachment/2026/17/docx/": docx(["USNESENÍ", "Vláda", "souhlasí s převodem"]) };
+  const first = await portal({ "2026-17": pdfAnnex }, files);
+  const read = await readResolutions({ fetcher: first.fetcher, cache: createResolutionCache(directory), firstResolution: "17/2026", today: "2026-10-17" });
+  assert.deepEqual(read.resolutions.map(({ number, files: entryFiles }) => [number, entryFiles[1].formats, entryFiles[1].paragraphs]), [[17, ["pdf"], null]]);
+  const again = await portal({ "2026-17": pdfAnnex }, files);
+  const second = await readResolutions({ fetcher: again.fetcher, cache: createResolutionCache(directory), firstResolution: "17/2026", today: "2026-10-17" });
+  assert.equal(second.quality.fromCache, 0);
+  assert.ok(again.requests.includes("https://odok.gov.cz/portal/zvlady/usneseni/2026/17/"));
+});
+
 test("reading stops with an error once its time is up, keeping what it cached", async (t) => {
   const directory = await mkdtemp(join(tmpdir(), "resolutions-"));
   t.after(() => rm(directory, { recursive: true, force: true }));
@@ -231,7 +245,8 @@ test("an XLSX annex is read row by row, as the workbook stores its cells", async
     "číslo pozemku | katastrální území | vlastnické právo | příslušnost hospodařit | druh pozemku | výměra (m2) | důvod akvizice pozemku",
     "417/30 | Dřenice u Chebu | Česká republika | Státní pozemkový úřad | orná půda | 3148 | umístění zeleného izolačního pásu"
   ]);
-  // A date-formatted number is its date and a time-formatted one its time, a
+  // A date-formatted number is its date, a time-formatted one its time of
+  // day (also when it holds a date), an elapsed time ([h]) its hours, a
   // number loses its floating-point noise, a formula gives its value, an
   // empty cell keeps its position, and several sheets are named.
   const sheet = (cells) => `<worksheet><sheetData><row r="1">${cells}</row></sheetData></worksheet>`;
@@ -239,11 +254,11 @@ test("an XLSX annex is read row by row, as the workbook stores its cells", async
     "xl/workbook.xml": strToU8('<workbook><sheets><sheet name="Lety" sheetId="1" r:id="rId1"/><sheet name="Dary" sheetId="2" r:id="rId2"/></sheets></workbook>'),
     "xl/_rels/workbook.xml.rels": strToU8('<Relationships><Relationship Id="rId1" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Target="worksheets/sheet2.xml"/></Relationships>'),
     "xl/sharedStrings.xml": strToU8("<sst><si><t>Brusel &amp; Mnichov</t></si></sst>"),
-    "xl/styles.xml": strToU8('<styleSheet><numFmts><numFmt numFmtId="164" formatCode="d\\.m\\.yyyy"/><numFmt numFmtId="165" formatCode="h:mm"/></numFmts><cellXfs><xf numFmtId="0"/><xf numFmtId="14"/><xf numFmtId="164"/><xf numFmtId="20"/><xf numFmtId="165"/><xf numFmtId="22"/></cellXfs></styleSheet>'),
-    "xl/worksheets/sheet1.xml": strToU8(sheet('<c r="A1" t="s"><v>0</v></c><c r="B1" s="1"><v>45706</v></c><c r="C1" s="2"><v>45706</v></c><c r="D1" s="3"><v>0.5</v></c><c r="E1" s="4"><v>0.75</v></c><c r="F1" s="5"><v>45706.5</v></c>')),
+    "xl/styles.xml": strToU8('<styleSheet><numFmts><numFmt numFmtId="164" formatCode="d\\.m\\.yyyy"/><numFmt numFmtId="165" formatCode="h:mm"/><numFmt numFmtId="166" formatCode="[h]:mm"/></numFmts><cellXfs><xf numFmtId="0"/><xf numFmtId="14"/><xf numFmtId="164"/><xf numFmtId="20"/><xf numFmtId="165"/><xf numFmtId="22"/><xf numFmtId="166"/></cellXfs></styleSheet>'),
+    "xl/worksheets/sheet1.xml": strToU8(sheet('<c r="A1" t="s"><v>0</v></c><c r="B1" s="1"><v>45706</v></c><c r="C1" s="2"><v>45706</v></c><c r="D1" s="3"><v>0.5</v></c><c r="E1" s="4"><v>0.75</v></c><c r="F1" s="5"><v>45706.5</v></c><c r="G1" s="4"><v>45706.5</v></c><c r="H1" s="6"><v>1.5</v></c>')),
     "xl/worksheets/sheet2.xml": strToU8(sheet('<c r="B1"><v>3448599.9999999991</v></c><c r="C1"/><c r="D1"><f>B1*2</f><v>6897200</v></c><c r="F1" t="inlineStr"><is><t>dar</t></is></c>'))
   });
-  assert.deepEqual(extractXlsxRows(workbook), ["List: Lety", "Brusel & Mnichov | 2025-02-18 | 2025-02-18 | 12:00:00 | 18:00:00 | 2025-02-18 12:00:00", "List: Dary", "3448600 |  | 6897200 |  | dar"]);
+  assert.deepEqual(extractXlsxRows(workbook), ["List: Lety", "Brusel & Mnichov | 2025-02-18 | 2025-02-18 | 12:00:00 | 18:00:00 | 2025-02-18 12:00:00 | 12:00:00 | 36:00:00", "List: Dary", "3448600 |  | 6897200 |  | dar"]);
 });
 
 test("a resolution is conduct of every governing party on its adoption day, and one law change with one version", () => {

@@ -123,7 +123,7 @@ async function collectResolutionSource(source, since) {
     today,
     onResolution: ({ resolution, outcome }) => {
       read += 1;
-      if (read % 20 === 0) log(`${source.id}: ${read} resolutions read from the portal (last: ${resolution}, ${outcome})`);
+      if (read % 20 === 0) log(`${source.id}: ${read} resolution pages read from the portal (last: ${resolution}, ${outcome})`);
     }
   });
   const { types: eklepTypes, notYetPublished } = await readEklepTypes({ fetcher, fromYear: Number(since.slice(0, 4)), today });
