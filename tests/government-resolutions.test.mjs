@@ -43,6 +43,9 @@ test("a resolution's page states its date, files, and material; a classified one
   assert.deepEqual(parseResolutionPage(await page("2026-17"), { year: 2026, number: 17 }).files[1], { label: "Příloha č. 1", format: null, url: null, formats: ["xlsx"] });
   const classified = parseResolutionPage(await page("2026-64"), { year: 2026, number: 64 });
   assert.deepEqual([classified.classified, classified.titleCz, classified.files], [true, "čj. V14/2026-UVCR", []]);
+  // An annex listed without any file is kept, so its absence can be named.
+  const emptyAnnex = (await page("2026-17")).replace(/href="\/portal\/services\/download\/attachment\/2026\/17\/1\/xlsx\/"[^>]*>XLSX<\/a>/u, "");
+  assert.deepEqual(parseResolutionPage(emptyAnnex, { year: 2026, number: 17 }).files[1], { label: "Příloha č. 1", format: null, url: null, formats: [] });
   const html = await page("2026-158");
   assert.throws(() => parseResolutionPage(html, { year: 2026, number: 159 }), /names resolution 158/);
 });
@@ -205,6 +208,8 @@ test("the text names an annex it cannot read, and only resolutions that are no d
   assert.deepEqual(resolutionParagraphs(entry()), ["Vláda", "souhlasí s převodem", "Příloha č. 1: not read; published only as XLSX."]);
   const withAnnex = entry({ files: [entry().files[0], { label: "Příloha č. 1", format: "docx", formats: ["docx"], url: "u", sha256: "b".repeat(64), paragraphs: ["Statut"] }] });
   assert.deepEqual(resolutionParagraphs(withAnnex), ["Vláda", "souhlasí s převodem", "Příloha č. 1", "Statut"]);
+  const withoutFile = entry({ files: [entry().files[0], { label: "Příloha č. 1", format: null, formats: [], url: null, sha256: null, paragraphs: null }] });
+  assert.deepEqual(resolutionParagraphs(withoutFile).at(-1), "Příloha č. 1: not read; published without any file.");
   const { records, quality } = resolutionRecords({ resolutions: [entry(), entry({ number: 1012, year: 2025, adoptedOn: "2025-12-10" }), entry({ number: 330, pid: "NZ1" })], eklepLinks: [], eklepTypes: new Map([["NZ1", "NZ"]]), governmentPeriods, source });
   assert.deepEqual(quality, { duplicates: { "government-bill": 1 }, heldWithoutEklep: 0, beforeGovernment: 1, used: 1 });
   // Without the eKLEP open data of 2026, its resolutions wait.

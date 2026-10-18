@@ -171,7 +171,9 @@ export function parseResolutionPage(html, { year, number }) {
     ova: valueOf("Čj. OVA"),
     pid: valueOf("PID"),
     classified,
-    files: files.filter(({ formats }) => formats.length > 0)
+    // An annex is kept even without a file, so the text can name it; an
+    // empty row of the resolution itself is a classified page's.
+    files: files.filter(({ label, formats }) => formats.length > 0 || label !== "Usnesení")
   };
 }
 
@@ -364,7 +366,7 @@ export function resolutionParagraphs(entry) {
   return entry.files.flatMap(({ label, formats, paragraphs }) => {
     if (label === "Usnesení") return paragraphs;
     if (paragraphs) return [label, ...paragraphs];
-    return [`${label}: not read; published only as ${formats.map((name) => name.toUpperCase()).join(" and ")}.`];
+    return [`${label}: not read; ${formats.length > 0 ? `published only as ${formats.map((name) => name.toUpperCase()).join(" and ")}` : "published without any file"}.`];
   });
 }
 
