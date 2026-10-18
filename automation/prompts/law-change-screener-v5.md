@@ -12,7 +12,7 @@ A change is **technical** only when it changes nothing for anyone:
 - renaming an authority, a ministry, or a term without changing its powers or meaning;
 - correcting a legislative error or wording;
 - adapting the act to another act without adding or removing any right, obligation, or amount;
-- a government resolution that only takes note of a report or information, approves an official trip or its costs, or changes the deadline of a task the government set itself.
+- a government resolution that only takes note of a report on what has already happened, approves an official trip or its costs, or changes the deadline of a task the government set itself. A resolution that appoints, removes, or entrusts anyone, or changes a statute or the organisation of a body, is substantive, also when it only takes note of it.
 
 Every other change is **substantive**. In particular, a change is substantive when it changes, adds, or removes:
 
