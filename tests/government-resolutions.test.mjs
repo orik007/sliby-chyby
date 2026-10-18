@@ -50,6 +50,7 @@ test("a resolution's page states its date, files, and material; a classified one
   assert.deepEqual(parseResolutionPage(emptyAnnex, { year: 2026, number: 17 }).files[1], { label: "Příloha č. 1", format: null, url: null, formats: [] });
   const html = await page("2026-158");
   assert.throws(() => parseResolutionPage(html, { year: 2026, number: 159 }), /names resolution 158/);
+  assert.throws(() => parseResolutionPage(html, { year: 2025, number: 158 }), /is dated in 2026/);
 });
 
 test("requests take turns at least 6 s apart, a lost connection is retried, and a firewall block stops at once", async () => {

@@ -145,6 +145,9 @@ export function parseResolutionPage(html, { year, number }) {
   const heading = /Usnesení vlády č\.\s*(\d+)\s+ze dne\s*<a[^>]*>\s*(\d{1,2})\.\s*(\d{1,2})\.\s*(\d{4})\s*<\/a>/u.exec(html);
   invariant(heading, `The page of resolution ${number}/${year} states no number and date`);
   invariant(Number(heading[1]) === Number(number), `The page of resolution ${number}/${year} names resolution ${heading[1]}`);
+  // A year's resolutions are adopted in that year (all 695 pages of 17
+  // October 2026 agreed).
+  invariant(Number(heading[4]) === Number(year), `The page of resolution ${number}/${year} is dated in ${heading[4]}`);
   const adoptedOn = `${heading[4]}-${heading[3].padStart(2, "0")}-${heading[2].padStart(2, "0")}`;
   const rows = [...html.matchAll(/<div class="row odok-row">\s*<label[^>]*>([\s\S]*?)<\/label>\s*<div class="col-12 col-md-8">([\s\S]*?)<\/div>\s*<\/div>/gu)]
     .map(([, label, value]) => ({ label: textOf(label), value }));
