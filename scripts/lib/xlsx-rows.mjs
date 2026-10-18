@@ -5,10 +5,12 @@ import { invariant } from "./collector-core.mjs";
  * The rows of an XLSX workbook as text lines (docs/evidence-pipeline.md,
  * Government resolution data rules, Text): each sheet in workbook order,
  * named when there are several, and each non-empty row as its cells joined
- * by " | ". A cell is what the workbook stores for it: a string, a number
+ * by " | ", from the sheet's first used column to the row's last cell, an
+ * empty cell kept as an empty position so every value stays under its
+ * column. A cell is what the workbook stores for it: a string, a number
  * without binary floating-point noise (3448599.9999999991 is 3448600), the
- * value a formula last computed, or, for a number in a date format, its
- * date (YYYY-MM-DD).
+ * value a formula last computed, or, for a number in a date or time format,
+ * its date (YYYY-MM-DD), time (HH:MM:SS), or both.
  */
 export function extractXlsxRows(bytes) {
   const entries = unzipSync(bytes);
@@ -30,21 +32,36 @@ export function extractXlsxRows(bytes) {
   invariant(sheets.length > 0, "XLSX workbook has no sheets");
   const date1904 = /<workbookPr\b[^>]*date1904="(?:1|true)"/u.test(workbook);
   const strings = sharedStrings(read("xl/sharedStrings.xml"));
-  const dateStyles = dateStyleIndexes(read("xl/styles.xml"));
+  const dateStyles = dateStyleKinds(read("xl/styles.xml"));
   const lines = [];
   for (const sheet of sheets) {
     const xml = read(sheet.path);
     invariant(xml !== null, `XLSX archive is missing ${sheet.path}`);
     if (sheets.length > 1) lines.push(`List: ${sheet.name}`);
-    for (const [, row] of xml.matchAll(/<row\b[^>]*>([\s\S]*?)<\/row>/gu)) {
-      const cells = [...row.matchAll(/<c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/gu)]
-        .map(([, attributes, inner = ""]) => cellText(attributes, inner, { strings, dateStyles, date1904 }))
-        .filter((text) => text !== "");
-      if (cells.length > 0) lines.push(cells.join(" | "));
+    // Each cell at its column: from its reference (`C5`), or, when the
+    // workbook gives none, after the cell before it.
+    const rows = [...xml.matchAll(/<row\b[^>]*>([\s\S]*?)<\/row>/gu)].map(([, row]) => {
+      let column = 0;
+      return [...row.matchAll(/<c\b([^>]*?)(?:\/>|>([\s\S]*?)<\/c>)/gu)].map(([, attributes, inner = ""]) => {
+        const reference = /^([A-Z]+)\d+$/u.exec(attributeOf(attributes, "r") ?? "");
+        column = reference ? columnNumber(reference[1]) : column + 1;
+        return { column, text: cellText(attributes, inner, { strings, dateStyles, date1904 }) };
+      }).filter(({ text }) => text !== "");
+    }).filter((cells) => cells.length > 0);
+    const firstColumn = Math.min(...rows.flatMap((cells) => cells.map(({ column }) => column)));
+    for (const cells of rows) {
+      const positions = Array(cells.at(-1).column - firstColumn + 1).fill("");
+      for (const { column, text } of cells) positions[column - firstColumn] = text;
+      lines.push(positions.join(" | "));
     }
   }
   invariant(lines.length > 0, "XLSX workbook contains no readable cells");
   return lines;
+}
+
+// The number of a column from its letters (A is 1, AA is 27).
+function columnNumber(letters) {
+  return [...letters].reduce((number, letter) => number * 26 + letter.charCodeAt(0) - 64, 0);
 }
 
 function attributeOf(attributes, name) {
@@ -73,21 +90,31 @@ function sharedStrings(xml) {
   return [...xml.matchAll(/<si>([\s\S]*?)<\/si>/gu)].map(([, item]) => runText(item));
 }
 
-// The built-in number formats that show a date (ECMA-376, 18.8.30).
-const builtInDateFormats = new Set([14, 15, 16, 17, 18, 19, 20, 21, 22, 45, 46, 47]);
+// The built-in number formats that show a date, a time, or both
+// (ECMA-376, 18.8.30).
+const builtInDateFormats = new Map([[14, "date"], [15, "date"], [16, "date"], [17, "date"], [18, "time"], [19, "time"], [20, "time"], [21, "time"], [22, "date-time"], [45, "time"], [46, "time"], [47, "time"]]);
 
-// The cell styles whose number format shows a date: a built-in date format,
-// or a custom one with a day, month, or year outside quoted text.
-function dateStyleIndexes(xml) {
-  if (xml === null) return new Set();
+// The kind of each cell style whose number format shows a date or a time: a
+// built-in one, or a custom one with a day or year (a date), an hour or
+// second (a time), or both, outside quoted text; a month alone is a date.
+function dateStyleKinds(xml) {
+  if (xml === null) return new Map();
   const custom = new Map([...xml.matchAll(/<numFmt\b([^>]*)\/?>/gu)].map(([, attributes]) => [Number(attributeOf(attributes, "numFmtId")), decodeXml(attributeOf(attributes, "formatCode") ?? "")]));
-  const isDate = (id) => builtInDateFormats.has(id) || (custom.has(id) && /[dmy]/iu.test(custom.get(id).replace(/"[^"]*"|\[[^\]]*\]|\\./gu, "")));
+  const kindOf = (id) => {
+    if (builtInDateFormats.has(id)) return builtInDateFormats.get(id);
+    if (!custom.has(id)) return null;
+    const code = custom.get(id).replace(/"[^"]*"|\[(?![hms]+\])[^\]]*\]|\\./giu, "");
+    const date = /[dy]/iu.test(code) || (/m/iu.test(code) && !/[hs]/iu.test(code));
+    const time = /[hs]/iu.test(code);
+    return date && time ? "date-time" : date ? "date" : time ? "time" : null;
+  };
   const cellXfs = /<cellXfs\b[^>]*>([\s\S]*?)<\/cellXfs>/u.exec(xml)?.[1] ?? "";
-  const indexes = new Set();
+  const kinds = new Map();
   [...cellXfs.matchAll(/<xf\b([^>]*)\/?>/gu)].forEach(([, attributes], index) => {
-    if (isDate(Number(attributeOf(attributes, "numFmtId")))) indexes.add(index);
+    const kind = kindOf(Number(attributeOf(attributes, "numFmtId")));
+    if (kind) kinds.set(index, kind);
   });
-  return indexes;
+  return kinds;
 }
 
 function cellText(attributes, inner, { strings, dateStyles, date1904 }) {
@@ -100,14 +127,21 @@ function cellText(attributes, inner, { strings, dateStyles, date1904 }) {
   if (type === "b") return value === "1" ? "TRUE" : "FALSE";
   const number = Number(value);
   if (!Number.isFinite(number)) return decodeXml(value).trim();
-  if (dateStyles.has(Number(attributeOf(attributes, "s") ?? 0))) return serialDate(number, date1904);
+  const kind = dateStyles.get(Number(attributeOf(attributes, "s") ?? 0));
+  if (kind) return serialDateTime(number, kind, date1904);
   return String(Number(number.toPrecision(15)));
 }
 
-// A date serial of the 1900 system counts from 30 December 1899 (keeping
-// Excel's day for 29 February 1900 out of real dates from March 1900 on); of
-// the 1904 system, from 1 January 1904.
-function serialDate(serial, date1904) {
+// A date serial of the 1900 system counts days from 30 December 1899
+// (keeping Excel's day for 29 February 1900 out of real dates from March
+// 1900 on); of the 1904 system, from 1 January 1904. Its fraction is the time
+// of day, to the second; a time format shows the whole serial as hours.
+function serialDateTime(serial, kind, date1904) {
   const epoch = date1904 ? Date.UTC(1904, 0, 1) : Date.UTC(1899, 11, 30);
-  return new Date(epoch + Math.floor(serial) * 86_400_000).toISOString().slice(0, 10);
+  const seconds = Math.round(serial * 86_400);
+  const date = new Date(epoch + Math.floor(seconds / 86_400) * 86_400_000).toISOString().slice(0, 10);
+  const clock = (total) => [Math.floor(total / 3_600), Math.floor(total / 60) % 60, total % 60].map((part) => String(part).padStart(2, "0")).join(":");
+  if (kind === "date") return date;
+  if (kind === "time") return clock(seconds);
+  return `${date} ${clock(seconds % 86_400)}`;
 }

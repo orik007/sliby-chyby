@@ -221,25 +221,28 @@ test("an XLSX annex is read row by row, as the workbook stores its cells", async
   // The real annex of 207/2026 (land for the Cheb business park), as zVlády
   // published it on 17 October 2026.
   const rows = extractXlsxRows(await readFile(new URL("./fixtures/government-resolutions/2026-207-annex-1.xlsx", import.meta.url)));
+  // The heading stands in the last column, so it keeps the empty positions
+  // before it.
   assert.deepEqual(rows.slice(0, 5), [
-    "Příloha",
-    "usnesení vlády",
-    "ze dne 30. března 2026 č. 207",
+    " |  |  |  |  |  | Příloha",
+    " |  |  |  |  |  | usnesení vlády",
+    " |  |  |  |  |  | ze dne 30. března 2026 č. 207",
     "číslo pozemku | katastrální území | vlastnické právo | příslušnost hospodařit | druh pozemku | výměra (m2) | důvod akvizice pozemku",
     "417/30 | Dřenice u Chebu | Česká republika | Státní pozemkový úřad | orná půda | 3148 | umístění zeleného izolačního pásu"
   ]);
-  // A date-formatted number is its date, a number loses its floating-point
-  // noise, a formula gives its value, and several sheets are named.
+  // A date-formatted number is its date and a time-formatted one its time, a
+  // number loses its floating-point noise, a formula gives its value, an
+  // empty cell keeps its position, and several sheets are named.
   const sheet = (cells) => `<worksheet><sheetData><row r="1">${cells}</row></sheetData></worksheet>`;
   const workbook = zipSync({
     "xl/workbook.xml": strToU8('<workbook><sheets><sheet name="Lety" sheetId="1" r:id="rId1"/><sheet name="Dary" sheetId="2" r:id="rId2"/></sheets></workbook>'),
     "xl/_rels/workbook.xml.rels": strToU8('<Relationships><Relationship Id="rId1" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Target="worksheets/sheet2.xml"/></Relationships>'),
     "xl/sharedStrings.xml": strToU8("<sst><si><t>Brusel &amp; Mnichov</t></si></sst>"),
-    "xl/styles.xml": strToU8('<styleSheet><numFmts><numFmt numFmtId="164" formatCode="d\.m\.yyyy"/></numFmts><cellXfs><xf numFmtId="0"/><xf numFmtId="14"/><xf numFmtId="164"/></cellXfs></styleSheet>'),
-    "xl/worksheets/sheet1.xml": strToU8(sheet('<c r="A1" t="s"><v>0</v></c><c r="B1" s="1"><v>45706</v></c><c r="C1" s="2"><v>45706</v></c>')),
-    "xl/worksheets/sheet2.xml": strToU8(sheet('<c r="A1"><v>3448599.9999999991</v></c><c r="B1"><f>A1*2</f><v>6897200</v></c><c r="C1" t="inlineStr"><is><t>dar</t></is></c>'))
+    "xl/styles.xml": strToU8('<styleSheet><numFmts><numFmt numFmtId="164" formatCode="d\\.m\\.yyyy"/><numFmt numFmtId="165" formatCode="h:mm"/></numFmts><cellXfs><xf numFmtId="0"/><xf numFmtId="14"/><xf numFmtId="164"/><xf numFmtId="20"/><xf numFmtId="165"/><xf numFmtId="22"/></cellXfs></styleSheet>'),
+    "xl/worksheets/sheet1.xml": strToU8(sheet('<c r="A1" t="s"><v>0</v></c><c r="B1" s="1"><v>45706</v></c><c r="C1" s="2"><v>45706</v></c><c r="D1" s="3"><v>0.5</v></c><c r="E1" s="4"><v>0.75</v></c><c r="F1" s="5"><v>45706.5</v></c>')),
+    "xl/worksheets/sheet2.xml": strToU8(sheet('<c r="B1"><v>3448599.9999999991</v></c><c r="C1"/><c r="D1"><f>B1*2</f><v>6897200</v></c><c r="F1" t="inlineStr"><is><t>dar</t></is></c>'))
   });
-  assert.deepEqual(extractXlsxRows(workbook), ["List: Lety", "Brusel & Mnichov | 2025-02-18 | 2025-02-18", "List: Dary", "3448600 | 6897200 | dar"]);
+  assert.deepEqual(extractXlsxRows(workbook), ["List: Lety", "Brusel & Mnichov | 2025-02-18 | 2025-02-18 | 12:00:00 | 18:00:00 | 2025-02-18 12:00:00", "List: Dary", "3448600 |  | 6897200 |  | dar"]);
 });
 
 test("a resolution is conduct of every governing party on its adoption day, and one law change with one version", () => {
