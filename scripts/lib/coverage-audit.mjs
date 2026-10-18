@@ -208,6 +208,7 @@ export function renderCoverageAuditMarkdown(audit) {
       `| Government resolutions left out as only approving a government proposal, opinion, or regulation | ${Object.values(quality.resolutions.duplicates).reduce((sum, count) => sum + count, 0)} (${Object.entries(quality.resolutions.duplicates).map(([kind, count]) => `${kind} ${count}`).join(", ") || "none"}) |`,
       `| Government resolutions without a readable text (its own file, or a Word file to read again) | ${quality.resolutions.unexpectedPages.length + quality.resolutions.unreadableFiles.length} |`,
       `| Government resolutions held back until their year's eKLEP open data is published | ${quality.resolutions.heldWithoutEklep} |`,
+      `| Government resolutions held back because an annex is only a PDF or XLS file | ${quality.resolutions.heldUnreadAnnex.length} |`,
       `| Government resolutions adopted before a tracked government / used | ${quality.resolutions.beforeGovernment} / ${quality.resolutions.used} |`,
       `| Requests to the Government Office / retried | ${quality.resolutions.requests} / ${quality.resolutions.retried} |`
     ] : []),

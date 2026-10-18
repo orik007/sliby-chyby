@@ -4,6 +4,7 @@ import { resolve } from "node:path";
 import { cleanText, createCollectedRecord, invariant, sha256 } from "./collector-core.mjs";
 import { readJournal } from "./e-sbirka.mjs";
 import { extractDocParagraphs, extractDocxParagraphs } from "./psp-print-documents.mjs";
+import { extractXlsxRows } from "./xlsx-rows.mjs";
 import { governmentPartiesOn } from "./psp-collector.mjs";
 
 /**
@@ -135,7 +136,7 @@ function textOf(html) {
 /**
  * What a resolution's page states (docs/evidence-pipeline.md, Government
  * resolution data rules, Page): its number and adoption date, each file under
- * “Soubory” (its label and its Word file, `docx` or `doc`), and its material's
+ * “Soubory” (its label and the file read, `docx`, `doc`, or `xlsx`), and its material's
  * title, reference number (`ova`), and eKLEP identifier (`pid`). A page with
  * no files whose title is a reference number of the Government Office is
  * `classified`.
@@ -156,9 +157,11 @@ export function parseResolutionPage(html, { year, number }) {
   for (const { label, value } of rows) {
     if (label !== "Usnesení" && !/^Příloha č\. \d+$/u.test(label)) continue;
     const links = [...value.matchAll(/href="(\/portal\/services\/download\/attachment\/[^"]+\/([a-z]+)\/)"/gu)].map(([, path, format]) => ({ format, url: `${portalOrigin}${path}` }));
-    const word = links.filter(({ format }) => format === "docx" || format === "doc");
-    invariant(word.length <= 1, `The page of resolution ${number}/${year} lists several Word files for “${label}”`);
-    files.push({ label, format: word[0]?.format ?? null, url: word[0]?.url ?? null, formats: links.map(({ format }) => format) });
+    // The file read: the Word file, or else an XLSX workbook (an annex that
+    // is a table); a PDF or an XLS file is never read.
+    const readable = ["docx", "doc", "xlsx"].map((format) => links.filter((link) => link.format === format)).find((found) => found.length > 0) ?? [];
+    invariant(readable.length <= 1, `The page of resolution ${number}/${year} lists several ${readable[0]?.format} files for “${label}”`);
+    files.push({ label, format: readable[0]?.format ?? null, url: readable[0]?.url ?? null, formats: links.map(({ format }) => format) });
   }
   invariant(files.some(({ label }) => label === "Usnesení"), `The page of resolution ${number}/${year} lists no resolution file row`);
   const titleCz = valueOf("Název materiálu");
@@ -212,8 +215,9 @@ export function createResolutionCache(directory) {
   };
 }
 
-async function wordParagraphs(bytes, format) {
+async function fileParagraphs(bytes, format) {
   try {
+    if (format === "xlsx") return extractXlsxRows(bytes);
     return format === "docx" ? extractDocxParagraphs(bytes) : await extractDocParagraphs(bytes);
   } catch {
     return null;
@@ -228,7 +232,7 @@ const missingInARow = 3;
  * Reads every resolution from `firstResolution` ("1013/2025") to the last
  * one held: from the cache when it is there, otherwise its page and Word
  * files, which are cached at once. A classified resolution, a number not
- * yet held, and a resolution with a Word file that cannot be read as text are
+ * yet held, and a resolution with a file that cannot be read as text are
  * read again in every run. Reading stops with an error once
  * `budgetMs` has passed, so a long first collection continues in the next
  * run.
@@ -280,14 +284,14 @@ export async function readResolutions({ fetcher, cache, firstResolution, today, 
         }
         const answer = await fetcher.get(file.url, { purpose: `resolution ${file.label}` });
         invariant(answer.status === 200, `${file.url} answered HTTP ${answer.status}`);
-        files.push({ ...file, sha256: sha256(answer.bytes), paragraphs: await wordParagraphs(answer.bytes, file.format) });
+        files.push({ ...file, sha256: sha256(answer.bytes), paragraphs: await fileParagraphs(answer.bytes, file.format) });
       }
-      // A Word file that cannot be read as text is not cached, so a later
+      // A file that cannot be read as text is not cached, so a later
       // run, perhaps with a better reader, tries it again.
       const unreadable = files.filter(({ url, paragraphs }) => url && paragraphs === null);
       if (unreadable.length > 0) {
         quality.unreadableFiles.push(...unreadable.map(({ label }) => `${number}/${year} (${label})`));
-        onResolution({ resolution: `${number}/${year}`, outcome: "a Word file cannot be read as text" });
+        onResolution({ resolution: `${number}/${year}`, outcome: "a file cannot be read as text" });
         continue;
       }
       const entry = { year, number, readAt: new Date(now()).toISOString(), adoptedOn: parsed.adoptedOn, titleCz: parsed.titleCz, ova: parsed.ova, pid: parsed.pid, files };
@@ -358,16 +362,15 @@ export function duplicateOf(pid, { eklepLinks, eklepTypes }) {
 
 /**
  * The text of a resolution: the resolution, then each annex after its label.
- * An annex published without a Word file is named with its formats instead,
- * so the models know it is not there. A cached resolution has every Word
- * file read (readResolutions).
+ * Only a resolution whose every file was read has one (resolutionRecords).
  */
 export function resolutionParagraphs(entry) {
-  return entry.files.flatMap(({ label, formats, paragraphs }) => {
-    if (label === "Usnesení") return paragraphs;
-    if (paragraphs) return [label, ...paragraphs];
-    return [`${label}: not read; ${formats.length > 0 ? `published only as ${formats.map((name) => name.toUpperCase()).join(" and ")}` : "published without any file"}.`];
-  });
+  return entry.files.flatMap(({ label, paragraphs }) => (label === "Usnesení" ? paragraphs : [label, ...paragraphs]));
+}
+
+/** Whether every file of a resolution, its annexes included, was read. */
+export function isWhollyRead(entry) {
+  return entry.files.every(({ paragraphs }) => Array.isArray(paragraphs));
 }
 
 /**
@@ -375,10 +378,12 @@ export function resolutionParagraphs(entry) {
  * other conduct and were adopted while a tracked government governed; with
  * the run's quality figures. A resolution adopted in a year whose eKLEP open
  * data is not yet published (`eklepYearsMissing`) is held back, because
- * whether it only approves a draft regulation or bill is not yet known.
+ * whether it only approves a draft regulation or bill is not yet known. So
+ * is one with an annex published only in a format that is not read (a PDF or
+ * an XLS file), because what it approves may be in that annex.
  */
 export function resolutionRecords({ resolutions, eklepLinks, eklepTypes, eklepYearsMissing = [], governmentPeriods, source }) {
-  const quality = { duplicates: {}, heldWithoutEklep: 0, beforeGovernment: 0, used: 0 };
+  const quality = { duplicates: {}, heldWithoutEklep: 0, heldUnreadAnnex: [], beforeGovernment: 0, used: 0 };
   const records = [];
   const linksByPid = Map.groupBy(eklepLinks, ({ pid }) => pid);
   for (const entry of resolutions) {
@@ -394,6 +399,10 @@ export function resolutionRecords({ resolutions, eklepLinks, eklepTypes, eklepYe
     const partyIds = governmentPartiesOn(governmentPeriods, entry.adoptedOn);
     if (partyIds.length === 0) {
       quality.beforeGovernment += 1;
+      continue;
+    }
+    if (!isWhollyRead(entry)) {
+      quality.heldUnreadAnnex.push(`${entry.number}/${entry.year}`);
       continue;
     }
     quality.used += 1;
@@ -423,7 +432,7 @@ function resolutionRecord({ entry, partyIds, paragraphs, source }) {
       adoptedOn: entry.adoptedOn,
       ova: entry.ova,
       pid: entry.pid,
-      files: entry.files.map(({ label, format, formats, url, sha256: hash, paragraphs: text }) => ({ label, format, formats, url, sha256: hash, read: text !== null })),
+      files: entry.files.map(({ label, format, formats, url, sha256: hash }) => ({ label, format, formats, url, sha256: hash })),
       proposal: { kind: resolutionKind, proposerPartyIds: partyIds },
       paragraphs
     }

@@ -8,6 +8,7 @@ import { attributionStatusForRecord, isPotentiallyAttributable, versionConcerned
 import { lawChangeOfResolution } from "../scripts/lib/print-parts.mjs";
 import { lawChangeText } from "../scripts/lib/law-change-screening.mjs";
 import { GovernmentOfficeBlockedError, createGovernmentOfficeFetcher, createResolutionCache, duplicateOf, parseResolutionPage, readEklepTypes, readResolutions, resolutionParagraphs, resolutionRecords } from "../scripts/lib/government-resolutions.mjs";
+import { extractXlsxRows } from "../scripts/lib/xlsx-rows.mjs";
 
 // The bodies of five real zVlády pages (read on 17 October 2026): 1013/2025,
 // the current government's first, with an annex; 1017/2025, with a DOC file;
@@ -40,7 +41,8 @@ test("a resolution's page states its date, files, and material; a classified one
   const doc = parseResolutionPage(await page("2025-1017"), { year: 2025, number: 1017 });
   assert.deepEqual([doc.adoptedOn, doc.ova, doc.pid, doc.files[0].format], ["2025-12-16", "1083/25", "ALBSDPEG2HYX", "doc"]);
   // An annex published only as a spreadsheet has no Word file.
-  assert.deepEqual(parseResolutionPage(await page("2026-17"), { year: 2026, number: 17 }).files[1], { label: "Příloha č. 1", format: null, url: null, formats: ["xlsx"] });
+  // An annex published only as a spreadsheet is read from its XLSX file.
+  assert.deepEqual(parseResolutionPage(await page("2026-17"), { year: 2026, number: 17 }).files[1], { label: "Příloha č. 1", format: "xlsx", url: "https://odok.gov.cz/portal/services/download/attachment/2026/17/1/xlsx/", formats: ["xlsx"] });
   const classified = parseResolutionPage(await page("2026-64"), { year: 2026, number: 64 });
   assert.deepEqual([classified.classified, classified.titleCz, classified.files], [true, "čj. V14/2026-UVCR", []]);
   // An annex listed without any file is kept, so its absence can be named.
@@ -199,22 +201,45 @@ const entry = (overrides = {}) => ({
   pid: "KORNDLZCWVE9",
   files: [
     { label: "Usnesení", format: "docx", formats: ["docx", "pdf"], url: "https://odok.gov.cz/portal/services/download/attachment/2026/17/docx/", sha256: "a".repeat(64), paragraphs: ["Vláda", "souhlasí s převodem"] },
-    { label: "Příloha č. 1", format: null, formats: ["xlsx"], url: null, sha256: null, paragraphs: null }
+    { label: "Příloha č. 1", format: "xlsx", formats: ["xlsx"], url: "https://odok.gov.cz/portal/services/download/attachment/2026/17/1/xlsx/", sha256: "b".repeat(64), paragraphs: ["Poř. | číslo | katastrální území", "1 | S006376/24 | Božetice"] }
   ],
   ...overrides
 });
 
-test("the text names an annex it cannot read, and only resolutions that are no duplicates, adopted by a tracked government, are used", () => {
-  assert.deepEqual(resolutionParagraphs(entry()), ["Vláda", "souhlasí s převodem", "Příloha č. 1: not read; published only as XLSX."]);
-  const withAnnex = entry({ files: [entry().files[0], { label: "Příloha č. 1", format: "docx", formats: ["docx"], url: "u", sha256: "b".repeat(64), paragraphs: ["Statut"] }] });
-  assert.deepEqual(resolutionParagraphs(withAnnex), ["Vláda", "souhlasí s převodem", "Příloha č. 1", "Statut"]);
-  const withoutFile = entry({ files: [entry().files[0], { label: "Příloha č. 1", format: null, formats: [], url: null, sha256: null, paragraphs: null }] });
-  assert.deepEqual(resolutionParagraphs(withoutFile).at(-1), "Příloha č. 1: not read; published without any file.");
-  const { records, quality } = resolutionRecords({ resolutions: [entry(), entry({ number: 1012, year: 2025, adoptedOn: "2025-12-10" }), entry({ number: 330, pid: "NZ1" })], eklepLinks: [], eklepTypes: new Map([["NZ1", "NZ"]]), governmentPeriods, source });
-  assert.deepEqual(quality, { duplicates: { "government-bill": 1 }, heldWithoutEklep: 0, beforeGovernment: 1, used: 1 });
-  // Without the eKLEP open data of 2026, its resolutions wait.
-  assert.deepEqual(resolutionRecords({ resolutions: [entry()], eklepLinks: [], eklepTypes: new Map(), eklepYearsMissing: [2026], governmentPeriods, source }).quality, { duplicates: {}, heldWithoutEklep: 1, beforeGovernment: 0, used: 0 });
+test("the text has every annex after its label; a resolution with an annex that is not read is held back", () => {
+  assert.deepEqual(resolutionParagraphs(entry()), ["Vláda", "souhlasí s převodem", "Příloha č. 1", "Poř. | číslo | katastrální území", "1 | S006376/24 | Božetice"]);
+  // 179/2026: its annex 1, a committee's statute, is published only as a PDF.
+  const pdfOnly = entry({ number: 179, files: [entry().files[0], { label: "Příloha č. 1", format: null, formats: ["pdf"], url: null, sha256: null, paragraphs: null }] });
+  const { records, quality } = resolutionRecords({ resolutions: [entry(), pdfOnly, entry({ number: 1012, year: 2025, adoptedOn: "2025-12-10" }), entry({ number: 330, pid: "NZ1" })], eklepLinks: [], eklepTypes: new Map([["NZ1", "NZ"]]), governmentPeriods, source });
+  assert.deepEqual(quality, { duplicates: { "government-bill": 1 }, heldWithoutEklep: 0, heldUnreadAnnex: ["179/2026"], beforeGovernment: 1, used: 1 });
   assert.equal(records.length, 1);
+  // Without the eKLEP open data of 2026, its resolutions wait.
+  assert.deepEqual(resolutionRecords({ resolutions: [entry()], eklepLinks: [], eklepTypes: new Map(), eklepYearsMissing: [2026], governmentPeriods, source }).quality, { duplicates: {}, heldWithoutEklep: 1, heldUnreadAnnex: [], beforeGovernment: 0, used: 0 });
+});
+
+test("an XLSX annex is read row by row, as the workbook stores its cells", async () => {
+  // The real annex of 207/2026 (land for the Cheb business park), as zVlády
+  // published it on 17 October 2026.
+  const rows = extractXlsxRows(await readFile(new URL("./fixtures/government-resolutions/2026-207-annex-1.xlsx", import.meta.url)));
+  assert.deepEqual(rows.slice(0, 5), [
+    "Příloha",
+    "usnesení vlády",
+    "ze dne 30. března 2026 č. 207",
+    "číslo pozemku | katastrální území | vlastnické právo | příslušnost hospodařit | druh pozemku | výměra (m2) | důvod akvizice pozemku",
+    "417/30 | Dřenice u Chebu | Česká republika | Státní pozemkový úřad | orná půda | 3148 | umístění zeleného izolačního pásu"
+  ]);
+  // A date-formatted number is its date, a number loses its floating-point
+  // noise, a formula gives its value, and several sheets are named.
+  const sheet = (cells) => `<worksheet><sheetData><row r="1">${cells}</row></sheetData></worksheet>`;
+  const workbook = zipSync({
+    "xl/workbook.xml": strToU8('<workbook><sheets><sheet name="Lety" sheetId="1" r:id="rId1"/><sheet name="Dary" sheetId="2" r:id="rId2"/></sheets></workbook>'),
+    "xl/_rels/workbook.xml.rels": strToU8('<Relationships><Relationship Id="rId1" Target="worksheets/sheet1.xml"/><Relationship Id="rId2" Target="worksheets/sheet2.xml"/></Relationships>'),
+    "xl/sharedStrings.xml": strToU8("<sst><si><t>Brusel &amp; Mnichov</t></si></sst>"),
+    "xl/styles.xml": strToU8('<styleSheet><numFmts><numFmt numFmtId="164" formatCode="d\.m\.yyyy"/></numFmts><cellXfs><xf numFmtId="0"/><xf numFmtId="14"/><xf numFmtId="164"/></cellXfs></styleSheet>'),
+    "xl/worksheets/sheet1.xml": strToU8(sheet('<c r="A1" t="s"><v>0</v></c><c r="B1" s="1"><v>45706</v></c><c r="C1" s="2"><v>45706</v></c>')),
+    "xl/worksheets/sheet2.xml": strToU8(sheet('<c r="A1"><v>3448599.9999999991</v></c><c r="B1"><f>A1*2</f><v>6897200</v></c><c r="C1" t="inlineStr"><is><t>dar</t></is></c>'))
+  });
+  assert.deepEqual(extractXlsxRows(workbook), ["List: Lety", "Brusel & Mnichov | 2025-02-18 | 2025-02-18", "List: Dary", "3448600 | 6897200 | dar"]);
 });
 
 test("a resolution is conduct of every governing party on its adoption day, and one law change with one version", () => {
@@ -224,11 +249,11 @@ test("a resolution is conduct of every governing party on its adoption day, and 
   assert.equal(record.url, "https://odok.gov.cz/portal/zvlady/usneseni/2026/17/");
   assert.equal(record.occurredAt, "2026-01-12T00:00:00");
   assert.deepEqual(record.payload.proposal, { kind: "government-resolution", proposerPartyIds: ["ano", "motoriste", "spd"] });
-  assert.deepEqual(record.payload.files.map(({ label, read }) => [label, read]), [["Usnesení", true], ["Příloha č. 1", false]]);
+  assert.deepEqual(record.payload.files.map(({ label, format }) => [label, format]), [["Usnesení", "docx"], ["Příloha č. 1", "xlsx"]]);
   assert.equal(attributionStatusForRecord(record, { partyId: "spd" }).attributionStatus, "verified-government-resolution");
   assert.equal(isPotentiallyAttributable(record, ["ano"]), true);
   assert.equal(versionConcerned(record, "uv-2026-17").version, "adopted");
   const change = lawChangeOfResolution(record.payload, record.url);
   assert.deepEqual([change.changeId, change.printNumber, Object.keys(change.versions), change.identifiers], ["uv-2026-17", "Usnesení vlády č. 17/2026", ["adopted"], []]);
-  assert.match(lawChangeText(change), /^Government resolution \(usnesení vlády\) adopted by the government: Usnesení vlády č\. 17\/2026, Žádost o souhlas vlády s převodem nepotřebného majetku\n\nVersion: text as adopted\nVláda\nsouhlasí s převodem\nPříloha č\. 1: not read; published only as XLSX\.$/);
+  assert.match(lawChangeText(change), /^Government resolution \(usnesení vlády\) adopted by the government: Usnesení vlády č\. 17\/2026, Žádost o souhlas vlády s převodem nepotřebného majetku\n\nVersion: text as adopted\nVláda\nsouhlasí s převodem\nPříloha č\. 1\nPoř\. \| číslo \| katastrální území\n1 \| S006376\/24 \| Božetice$/);
 });
