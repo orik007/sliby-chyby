@@ -546,12 +546,7 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache,
   const neededTurns = new Map();
   for (const vote of plan.amendmentVotes) {
     vote.minutes = minutesOf(vote.time);
-    for (const turn of turnsOfVote(vote)) {
-      const key = `${turn.session}:${turn.turn}`;
-      const needed = neededTurns.get(key) ?? { ...turn, printIds: new Set() };
-      needed.printIds.add(String(vote.printId));
-      neededTurns.set(key, needed);
-    }
+    for (const turn of turnsOfVote(vote)) neededTurns.set(`${turn.session}:${turn.turn}`, turn);
   }
   // Consecutive turns of one day are read in order as one text, so a passage
   // that begins in one turn and is announced in the next stays whole; a gap
@@ -562,8 +557,10 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache,
     for (const turn of turns) {
       const url = stenoTurnUrl(source.term.year, turn.session, turn.turn);
       quality.stenoTurnsRead += 1;
-      // A turn is kept when every vote it is read for is on a closed print.
-      turnPages.push({ url, html: await readPspPage(pages, url, [...turn.printIds]) });
+      // A turn is read in every run: whether psp.cz changes a published turn
+      // (when it is authorised) is not known (docs/evidence-pipeline.md,
+      // Chamber data rules, Closed prints).
+      turnPages.push({ url, html: await readPspPage(pages, url, []) });
     }
     for (const announcement of stenoAnnouncements(turnPages)) {
       if (!announcements.has(announcement.voteId)) announcements.set(announcement.voteId, announcement);

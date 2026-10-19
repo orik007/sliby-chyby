@@ -24,8 +24,8 @@ test("reads a page of a closed print once and every page of an open print in eve
   };
   const first = createPspPageCache(directory, "2026-10-19");
   assert.equal(await first.read({ url: url(1), keep: true, download: download("closed") }), '<div id="main-content">closed</div>');
-  // A page that is not kept is read whole, as before.
-  assert.equal(await first.read({ url: url(2), keep: false, download: download("open") }), html("open"));
+  // Every page is read as its content, also one that is not kept.
+  assert.equal(await first.read({ url: url(2), keep: false, download: download("open") }), '<div id="main-content">open</div>');
   const second = createPspPageCache(directory, "2026-10-20");
   assert.match(await second.read({ url: url(1), keep: true, download: download("other") }), /closed/);
   assert.match(await second.read({ url: url(2), keep: false, download: download("open again") }), /open again/);
@@ -50,9 +50,14 @@ test("keeps a page only when every print it is read for is closed", async () => 
   const pageCache = createPspPageCache(directory, "2026-10-19");
   const pages = { pageCache, closedPrintIds: new Set(["43174"]), fetchPsp: async () => page("turn"), source: {} };
   await readPspPage(pages, url(1), ["43174", 43200]);
-  assert.equal(pageCache.stats.kept, 0);
+  // A turn of the stenographic record is read for no print and never kept.
+  await readPspPage(pages, url(3), []);
+  assert.deepEqual({ kept: pageCache.stats.kept, open: pageCache.stats.open }, { kept: 0, open: 2 });
   await readPspPage(pages, url(2), [43174]);
   assert.equal(pageCache.stats.kept, 1);
+  // A page whose reader found nothing is read again next time.
+  await readPspPage(pages, url(4), [43174], () => false);
+  assert.deepEqual({ kept: pageCache.stats.kept, notKept: pageCache.stats.notKept }, { kept: 1, notKept: 1 });
 });
 
 test("checks the pages checked longest ago, not those read that day, and fails when one's content changed, not its menu", async () => {

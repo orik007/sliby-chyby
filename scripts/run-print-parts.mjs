@@ -125,7 +125,7 @@ async function fetchPrintTexts(source, print, termNumber) {
   const historyUrl = officialPrintHistoryUrl(termNumber, print.number);
   const [proposal, history] = await allSettledOrThrow([
     fetchPrintPageText(source, termNumber, print, print.partNumber, warnings, "proposed"),
-    bill ? readPage(source, historyUrl, print.printId) : null
+    bill ? readPage(source, historyUrl, print.printId, (content) => new RegExp(`<h1>Sněmovní tisk <a [^>]*>${print.number}</a`, "iu").test(content)) : null
   ]);
   const links = history ? laterTextLinks(history, historyUrl) : { approved: null, passed: null, referredToSenate: null };
   // Without an approved-text page, the approved text is the sub-print with
@@ -241,7 +241,7 @@ try {
   // The kept pages checked longest ago are downloaded again; one whose
   // content changed fails the run.
   const checkedPages = await pageCache.checkSample((url) => fetchPsp(source, url, pspPageOptions), pageSampleSize);
-  log(`psp.cz page cache: ${pageCache.size()} pages of closed prints, ${pageCache.stats.fromCache} read from it, ${pageCache.stats.kept} read and kept in this run, ${pageCache.stats.downloaded - pageCache.stats.kept} pages of open prints read, ${checkedPages.length} checked again and unchanged`);
+  log(`psp.cz page cache: ${pageCache.size()} pages of closed prints, ${pageCache.stats.fromCache} read from it, ${pageCache.stats.kept} read and kept in this run, ${pageCache.stats.notKept} of closed prints read but not kept (incomplete or not found), ${pageCache.stats.open} pages of open prints read, ${checkedPages.length} checked again and unchanged`);
 } finally {
   await fetchPsp.close();
   pspRequests.stop();

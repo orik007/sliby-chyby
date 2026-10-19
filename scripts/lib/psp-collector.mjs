@@ -795,7 +795,8 @@ export async function collectPspSource(source, options) {
   const plan = normalized.amendmentPlan;
   log(`${source.id}: reading ${plan.summaries.length} summaries of amendments, the written amendments they list, and the stenographic record of ${plan.amendmentVotes.length} votes that can be on an amendment`);
   const amendments = await collectAmendments({ source, plan, fetchPsp: options.fetchPsp, documentCache: options.documentCache, pageCache: options.pageCache, closedPrintIds: new Set(normalized.referenceData.closedPrintIds) });
-  log(`${source.id}: pages of closed prints: ${options.pageCache.stats.fromCache} read from the page cache, ${options.pageCache.stats.kept} read and kept; ${options.pageCache.stats.downloaded - options.pageCache.stats.kept} pages of open prints read`);
+  const pageStats = options.pageCache.stats;
+  log(`${source.id}: pages of closed prints: ${pageStats.fromCache} read from the page cache, ${pageStats.kept} read and kept, ${pageStats.notKept} read but not kept (incomplete or not found); ${pageStats.open} pages of open prints and turns of the stenographic record read`);
   const q = amendments.quality;
   log(`${source.id}: ${q.amendments} amendments presented with a readable text (${q.documentsListed} documents listed in ${q.summaries} summaries, ${q.documentsNotInOpenData} not in sd.zip, ${q.documentsWithoutText} without a readable text; ${q.documentsNotListed} written amendments not listed); proposer names ${q.proposerNames}, ${q.proposerNamesUnmatched} not matched; ${q.votesLinked} of ${q.votes} votes linked to their amendment, not linked ${JSON.stringify(q.votesNotLinked)}; ${q.stenoTurnsRead} turns of the stenographic record read`);
   const records = [
