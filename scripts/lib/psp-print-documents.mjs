@@ -298,7 +298,20 @@ export function extractDocxNumberedParagraphs(bytes) {
     }
     abstractLevels.set(abstractId, levels);
   }
-  const abstractOfNum = new Map([...numberingXml.matchAll(/<w:num\b[^>]*\bw:numId="(\d+)"[^>]*>([\s\S]*?)<\/w:num>/g)].map((match) => [match[1], attribute(match[2], "abstractNumId")]));
+  const abstractOfNum = new Map();
+  // numId -> level -> start, for a list Word restarted ("Restart at A"): a
+  // num of the same abstract with a start override. Lists of one abstract
+  // share their numbers; the first paragraph of a restarted one sets its
+  // level to the override, and the lists of the abstract count on from it.
+  const startOverrides = new Map();
+  for (const [, numId, num] of numberingXml.matchAll(/<w:num\b[^>]*\bw:numId="(\d+)"[^>]*>([\s\S]*?)<\/w:num>/g)) {
+    abstractOfNum.set(numId, attribute(num, "abstractNumId"));
+    const overrides = new Map([...num.matchAll(/<w:lvlOverride\b[^>]*\bw:ilvl="(\d+)"[^>]*>([\s\S]*?)<\/w:lvlOverride>/g)].flatMap(([, level, override]) => {
+      const start = attribute(override, "startOverride") ?? attribute(override, "start");
+      return start !== null ? [[Number(level), Number(start)]] : [];
+    }));
+    if (overrides.size > 0) startOverrides.set(numId, overrides);
+  }
   const styles = new Map([...stylesXml.matchAll(/<w:style\b[^>]*\bw:styleId="([^"]+)"[^>]*>([\s\S]*?)<\/w:style>/g)].map((match) => [match[1], { numId: attribute(match[2], "numId"), level: attribute(match[2], "ilvl"), basedOn: attribute(match[2], "basedOn") }]));
   // The list of a style: its own, or that of the style it is based on.
   const styleNumbering = (styleId, depth = 0) => {
@@ -310,6 +323,7 @@ export function extractDocxNumberedParagraphs(bytes) {
     return { numId: style.numId, level };
   };
   const counters = new Map();
+  const restarted = new Set();
   const paragraphs = [];
   for (const [, content] of xml.matchAll(/<w:p\b[^>]*>([\s\S]*?)<\/w:p>/gi)) {
     const properties = /<w:pPr>([\s\S]*?)<\/w:pPr>/.exec(content)?.[1] ?? "";
@@ -326,6 +340,12 @@ export function extractDocxNumberedParagraphs(bytes) {
       const count = counters.get(abstractId) ?? new Map();
       counters.set(abstractId, count);
       const level = levels.get(numbering.level) ?? { start: 1, format: "decimal", text: "" };
+      const restart = startOverrides.get(numbering.numId)?.get(numbering.level);
+      const restartKey = `${numbering.numId}:${numbering.level}`;
+      if (restart !== undefined && !restarted.has(restartKey)) {
+        restarted.add(restartKey);
+        count.set(numbering.level, restart - 1);
+      }
       count.set(numbering.level, (count.get(numbering.level) ?? level.start - 1) + 1);
       for (const deeper of [...count.keys()]) if (deeper > numbering.level) count.delete(deeper);
       label = level.text.replace(/%(\d)/g, (_, position) => {

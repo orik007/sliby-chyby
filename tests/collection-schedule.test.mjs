@@ -18,7 +18,7 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.match(workflow, /SLIBY_TAGGING_CONCURRENCY: \$\{\{ inputs\.tagging_concurrency \|\| '24' \}\}/);
   assert.match(workflow, /SLIBY_SERVICE_TIER: flex/);
   assert.match(workflow, /SLIBY_ASSESSMENT_CONCURRENCY: \$\{\{ inputs\.assessment_concurrency \|\| '16' \}\}/);
-  assert.match(workflow, /timeout-minutes: 300/);
+  assert.match(workflow, /timeout-minutes: 360/);
   assert.match(workflow, /Persist source collection and queued evidence packages/);
   assert.match(workflow, /Queue evidence packages/);
   assert.doesNotMatch(workflow, /enrich/i);
@@ -40,7 +40,7 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   // source subset can produce a package from part of the record history.
   assert.doesNotMatch(workflow, /inputs\.since|inputs\.sources|--since|--source /);
   // The paid steps stop before the job limit, so the saving steps always run.
-  assert.match(workflow, /timeout-minutes: 300/);
+  assert.match(workflow, /timeout-minutes: 360/);
   assert.match(workflow, /- name: Screen law changes, route them to promises, check relevance, and build packages\n        timeout-minutes: 120/);
   assert.match(workflow, /- name: Split official print texts into law changes\n        timeout-minutes: 120/);
   assert.match(workflow, /- name: Assess only new or changed packages\n        id: assess\n        timeout-minutes: 120/);

@@ -42,13 +42,20 @@ test("downloads again the files checked longest ago and fails when one changed",
   for (const id of [3, 1, 2]) await cache.read(url(id), "v1", () => "text", async () => bytesOf(`file ${id}`));
   const later = createPspDocumentCache(directory, "2026-10-19");
   assert.deepEqual(await later.checkSample(async (fileUrl) => bytesOf(`file ${pspDocumentId(fileUrl)}`), 2), ["1", "2"]);
-  // The next check starts with the one checked longest ago.
+  // A second run on the same day checks again, from the one checked longest
+  // ago.
+  const sameDay = createPspDocumentCache(directory, "2026-10-19");
+  assert.deepEqual(await sameDay.checkSample(async (fileUrl) => bytesOf(`file ${pspDocumentId(fileUrl)}`), 2), ["3", "1"]);
   const next = createPspDocumentCache(directory, "2026-10-20");
-  await assert.rejects(next.checkSample(async () => bytesOf("another file"), 1), /psp\.cz document 3 changed under the same ID/);
+  await assert.rejects(next.checkSample(async () => bytesOf("another file"), 1), /psp\.cz document 1 changed under the same ID/);
 });
 
 test("refuses a damaged cache entry before anything is read", async () => {
   const directory = await mkdtemp(join(tmpdir(), "psp-documents-"));
   await writeFile(join(directory, "5.json"), "{}\n");
+  assert.throws(() => createPspDocumentCache(directory, "2026-10-18"), /Invalid psp\.cz document cache entry/);
+  // So is an extraction that is neither a text nor a reason.
+  const entry = { schemaVersion: "psp-document-cache-v1", id: "5", url: url(5), fileSha256: "a".repeat(64), byteLength: 1, readOn: "2026-10-18", checkedOn: "2026-10-18", extractions: { "lines-v1": { value: null, error: null } } };
+  await writeFile(join(directory, "5.json"), `${JSON.stringify(entry)}\n`);
   assert.throws(() => createPspDocumentCache(directory, "2026-10-18"), /Invalid psp\.cz document cache entry/);
 });

@@ -3,16 +3,16 @@ import test from "node:test";
 import { strToU8, zipSync } from "fflate";
 import { extractDocxNumberedParagraphs } from "../scripts/lib/psp-print-documents.mjs";
 import { listedFiles } from "../scripts/lib/print-parts.mjs";
-import { budgetAmendmentItems, linkVoteToAmendment, partsNamedInAmendment, proposersOfHeading, stenoAnnouncements, stenoTurnUrl, summaryOfAmendments, voteReference } from "../scripts/lib/psp-amendments.mjs";
+import { budgetAmendmentItems, consecutiveTurns, linkVoteToAmendment, partsNamedInAmendment, proposersOfHeading, stenoAnnouncements, stenoTurnUrl, summaryOfAmendments, voteReference } from "../scripts/lib/psp-amendments.mjs";
 
 // A DOCX file whose amendment headings are numbered by their style, as in
 // the summaries psp.cz publishes (numbering.xml, style "Oznaenpozmn").
 function summaryDocx(paragraphs) {
-  const body = paragraphs.map(({ style, text }) => `<w:p>${style ? `<w:pPr><w:pStyle w:val="${style}"/></w:pPr>` : ""}<w:r><w:t xml:space="preserve">${text}</w:t></w:r></w:p>`).join("");
+  const body = paragraphs.map(({ style, numId, text }) => `<w:p>${style || numId ? `<w:pPr>${style ? `<w:pStyle w:val="${style}"/>` : ""}${numId ? `<w:numPr><w:ilvl w:val="0"/><w:numId w:val="${numId}"/></w:numPr>` : ""}</w:pPr>` : ""}<w:r><w:t xml:space="preserve">${text}</w:t></w:r></w:p>`).join("");
   return zipSync({
     "word/document.xml": strToU8(`<?xml version="1.0"?><w:document xmlns:w="w"><w:body>${body}</w:body></w:document>`),
     "word/styles.xml": strToU8(`<w:styles><w:style w:type="paragraph" w:styleId="Oznaenpozmn"><w:pPr><w:numPr><w:numId w:val="2"/></w:numPr></w:pPr></w:style><w:style w:type="paragraph" w:styleId="Podnavrh"><w:pPr><w:numPr><w:ilvl w:val="1"/><w:numId w:val="2"/></w:numPr></w:pPr></w:style></w:styles>`),
-    "word/numbering.xml": strToU8(`<w:numbering><w:abstractNum w:abstractNumId="11"><w:lvl w:ilvl="0"><w:start w:val="1"/><w:numFmt w:val="upperLetter"/><w:pStyle w:val="Oznaenpozmn"/><w:lvlText w:val="%1."/></w:lvl><w:lvl w:ilvl="1"><w:start w:val="1"/><w:numFmt w:val="decimal"/><w:lvlText w:val="%1%2."/></w:lvl></w:abstractNum><w:num w:numId="2"><w:abstractNumId w:val="11"/></w:num></w:numbering>`)
+    "word/numbering.xml": strToU8(`<w:numbering><w:abstractNum w:abstractNumId="11"><w:lvl w:ilvl="0"><w:start w:val="1"/><w:numFmt w:val="upperLetter"/><w:pStyle w:val="Oznaenpozmn"/><w:lvlText w:val="%1."/></w:lvl><w:lvl w:ilvl="1"><w:start w:val="1"/><w:numFmt w:val="decimal"/><w:lvlText w:val="%1%2."/></w:lvl></w:abstractNum><w:num w:numId="2"><w:abstractNumId w:val="11"/></w:num><w:num w:numId="38"><w:abstractNumId w:val="11"/><w:lvlOverride w:ilvl="0"><w:startOverride w:val="3"/></w:lvlOverride></w:num></w:numbering>`)
   });
 }
 
@@ -28,6 +28,18 @@ test("reads Word's list numbers, which the summary's labels are", () => {
     { style: "Oznaenpozmn", text: "Poslanec Jan Papajanovský" }
   ]));
   assert.deepEqual(paragraphs.map(({ label }) => label), ["A.", "", "B.", "", "B1.", "", "B2.", "C."]);
+});
+
+test("a list Word restarted sets its level, and the lists of its definition count on from it (summary of print 115)", () => {
+  const paragraphs = extractDocxNumberedParagraphs(summaryDocx([
+    { style: "Oznaenpozmn", text: "Poslanec Václav Pláteník" },
+    { text: "B.Poslanec Aleš Juchelka - SD 1422" },
+    { style: "Oznaenpozmn", numId: "38", text: "Poslankyně Taťána Malá – SD 1932" },
+    { style: "Oznaenpozmn", text: "Poslankyně Barbora Urbanová" },
+    { style: "Oznaenpozmn", numId: "38", text: "Poslanec Karel Dvořák" }
+  ]));
+  // The restart applies once, at the first paragraph of its list.
+  assert.deepEqual(paragraphs.map(({ label }) => label), ["A.", "", "C.", "D.", "E."]);
 });
 
 test("lists each amendment of a summary with who presented it, when, and its documents and parts", () => {
@@ -56,6 +68,13 @@ test("lists each amendment of a summary with who presented it, when, and its doc
   assert.deepEqual(items[3].parts, { Aa1: "1236" });
   // A part's document precedes its label here.
   assert.deepEqual(items[4].parts, { B1: "505", B2: "589" });
+  // A part line that names a committee is still a part, not a heading.
+  const [item] = summaryOfAmendments([
+    { label: "D.", text: "Poslanec Boris Šťastný" },
+    { label: "", text: "D.1 SD 1306 – ve znění usnesení rozpočtového výboru" },
+    { label: "", text: "D.2 SD 1308" }
+  ]);
+  assert.deepEqual({ committee: item.committee, parts: item.parts }, { committee: false, parts: { D1: "1306", D2: "1308" } });
 });
 
 test("reads a state budget's amendments from the rows of its table", () => {
@@ -189,4 +208,10 @@ test("reads the names before \"k\" in the same paragraph, and a passage across t
   ]);
   assert.match(announcement.textCz, /\(návrh\) R3, \(dokument\) 1216, Filip Turek/);
   assert.equal(announcement.url, "https://www.psp.cz/eknih/2025ps/stenprot/027schuz/s027017.htm");
+});
+
+test("reads only consecutive turns of one day as one text", () => {
+  const turn = (session, date, number) => ({ session, date, turn: number });
+  const runs = consecutiveTurns([turn(27, "2026-06-11", 41), turn(27, "2026-06-11", 5), turn(27, "2026-06-11", 40), turn(27, "2026-06-11", 6), turn(27, "2026-06-12", 7), turn(28, "2026-06-12", 8)]);
+  assert.deepEqual(runs.map((run) => run.map(({ session, turn: number }) => `${session}:${number}`)), [["27:5", "27:6"], ["27:40", "27:41"], ["27:7"], ["28:8"]]);
 });

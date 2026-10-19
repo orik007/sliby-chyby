@@ -17,6 +17,26 @@ import { invariant, sha256 } from "./collector-core.mjs";
  */
 export const pspDocumentCacheVersion = "psp-document-cache-v1";
 
+// The extractions the cache keeps, named with their version: a changed
+// extractor must change its name, so every file is read again.
+export const pspDocumentExtractions = {
+  docxParagraphs: "docx-paragraphs-v1",
+  docParagraphs: "doc-paragraphs-v1",
+  docxNumberedParagraphs: "docx-numbered-paragraphs-v2",
+  xlsxRows: "xlsx-rows-v1"
+};
+
+// The download options of each kind of file the cache holds, and of any of
+// them, for a file checked again without knowing its kind. An XLSM is a
+// macro-enabled workbook ("application/vnd.ms-excel.sheet.macroEnabled.12").
+const fileContentTypes = {
+  docx: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"],
+  doc: ["application/msword", "application/octet-stream"],
+  xlsx: ["openxmlformats-officedocument", "application/vnd.ms-excel", "application/octet-stream", "application/zip"]
+};
+export const pspDocumentFileOptions = Object.fromEntries(Object.entries(fileContentTypes).map(([format, expectedContentTypes]) => [format, { maxBytes: 20_000_000, expectedContentTypes }]));
+export const anyPspDocumentFileOptions = { maxBytes: 20_000_000, expectedContentTypes: [...new Set(Object.values(fileContentTypes).flat())] };
+
 const isoDate = /^\d{4}-\d{2}-\d{2}$/;
 
 // The numeric document ID of an orig2.sqw URL, or null without one.
@@ -28,7 +48,9 @@ export function pspDocumentId(url) {
 function validEntry(entry, id) {
   return entry?.schemaVersion === pspDocumentCacheVersion && entry.id === id && /^[0-9a-f]{64}$/.test(entry.fileSha256 ?? "")
     && Number.isInteger(entry.byteLength) && isoDate.test(entry.readOn ?? "") && isoDate.test(entry.checkedOn ?? "")
-    && typeof entry.url === "string" && entry.extractions && typeof entry.extractions === "object";
+    && typeof entry.url === "string" && entry.extractions && typeof entry.extractions === "object" && !Array.isArray(entry.extractions)
+    && Object.values(entry.extractions).every((result) => result && typeof result === "object" && "value" in result
+      && (result.error === null ? result.value !== null : typeof result.error === "string" && result.value === null));
 }
 
 // Written to a temporary file and renamed, so a run stopped mid-write keeps
@@ -108,7 +130,6 @@ export function createPspDocumentCache(directory, today) {
     },
     async checkSample(download, sampleSize) {
       const sample = [...entries.values()]
-        .filter(({ checkedOn }) => checkedOn < today)
         .sort((left, right) => left.checkedOn.localeCompare(right.checkedOn) || Number(left.id) - Number(right.id))
         .slice(0, sampleSize);
       for (const entry of sample) {

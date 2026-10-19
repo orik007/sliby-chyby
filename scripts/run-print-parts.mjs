@@ -5,7 +5,7 @@ import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from ".
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError, workflowRunId } from "./lib/e-sbirka.mjs";
 import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
-import { createPspDocumentCache } from "./lib/psp-document-cache.mjs";
+import { anyPspDocumentFileOptions, createPspDocumentCache, pspDocumentExtractions, pspDocumentFileOptions } from "./lib/psp-document-cache.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { collectPrints, governmentOpinionSectionLabels, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
@@ -43,21 +43,15 @@ function parseArgs(args) {
 }
 
 const htmlOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };
-const wordOptions = {
-  docx: { maxBytes: 20_000_000, expectedContentTypes: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"] },
-  doc: { maxBytes: 20_000_000, expectedContentTypes: ["application/msword", "application/octet-stream"] }
-};
 const extractParagraphs = { docx: extractDocxParagraphs, doc: extractDocParagraphs };
-// The extractions the document cache keeps, named with their version: a
-// changed extractor must change its name, so every file is read again.
-const extractionNames = { docx: "docx-paragraphs-v1", doc: "doc-paragraphs-v1" };
+const extractionNames = { docx: pspDocumentExtractions.docxParagraphs, doc: pspDocumentExtractions.docParagraphs };
 const decodePage = (page) => new TextDecoder("windows-1250").decode(page.bytes);
 
 // A downloaded DOCX or DOC file that cannot be read as text (for example a
 // scanned image) is treated like a text that is not published: reported,
 // never fatal. A failed download still fails the run.
 async function fetchWordText(source, url, filename, format, warnings, printNumber, version) {
-  const { value: paragraphs, error } = await documentCache.read(url, extractionNames[format], extractParagraphs[format], async () => (await fetchPsp(source, url, wordOptions[format])).bytes);
+  const { value: paragraphs, error } = await documentCache.read(url, extractionNames[format], extractParagraphs[format], async () => (await fetchPsp(source, url, pspDocumentFileOptions[format])).bytes);
   if (error) {
     warnings.push({ printNumber, kind: `unreadable-${format}`, version, detail: `${filename}: ${error}` });
     return null;
@@ -225,7 +219,7 @@ try {
   await allSettledOrThrow(Array.from({ length: Math.min(pspDownloadSettings.concurrency, prints.length) }, downloadWorker));
   // The files checked longest ago are downloaded again; one that changed
   // under its ID fails the run.
-  const checked = await documentCache.checkSample(async (url) => (await fetchPsp(source, url, { maxBytes: 20_000_000, expectedContentTypes: [...new Set([...wordOptions.docx.expectedContentTypes, ...wordOptions.doc.expectedContentTypes, "spreadsheetml"])] })).bytes, documentSampleSize);
+  const checked = await documentCache.checkSample(async (url) => (await fetchPsp(source, url, anyPspDocumentFileOptions)).bytes, documentSampleSize);
   log(`psp.cz document cache: ${documentCache.size()} files, ${documentCache.stats.fromCache} texts read from it, ${documentCache.stats.downloaded} downloaded in this run, ${checked.length} checked again and unchanged`);
 } finally {
   await fetchPsp.close();

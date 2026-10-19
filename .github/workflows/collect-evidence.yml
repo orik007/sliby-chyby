@@ -44,7 +44,9 @@ jobs:
     # The two paid steps have their own, shorter limits. A step that reaches
     # its limit fails like any other error, so the always() steps still save
     # the paid work already written to disk; the job limit is never reached.
-    timeout-minutes: 300
+    # It is GitHub's longest, so a collection that uses its whole step limit
+    # still leaves the later steps 150 minutes.
+    timeout-minutes: 360
     environment:
       name: assessment
       deployment: false

@@ -97,6 +97,13 @@ function amendmentDocumentNumbers(record) {
   return record.payload?.amendmentVote?.documentNumbers ?? [];
 }
 
+// The amendments that concern a law change, by document and text hash: no
+// evidence ID, because the package holds the text only of the amendments the
+// party's conduct names.
+function amendmentHashes(change) {
+  return (change.amendments ?? []).map(({ documentNumber, textCz }) => ({ documentNumber, textSha256: sha256(textCz) }));
+}
+
 export function amendmentEvidenceId(documentNumber) {
   return `psp-core-2025--amendment-text-${documentNumber}`;
 }
@@ -121,7 +128,7 @@ export function withAmendments(changes, recordsByPrintId, amendmentRecords) {
     const numbers = new Set((recordsByPrintId.get(change.printId) ?? [])
       .filter((record) => isAmendmentConduct(record) && amendedPrintId(record) === String(change.printId) && amendmentConcernsChange(record, change, printPartHeadings))
       .flatMap(amendmentDocumentNumbers));
-    const amendments = [...numbers].sort((left, right) => Number(left) - Number(right)).map((number) => amendmentByNumber.get(number)).filter(Boolean).map(({ payload }) => ({
+    const amendments = [...numbers].sort((left, right) => Number(left) - Number(right)).map((number) => amendmentByNumber.get(number)).filter(Boolean).map(({ payload, url }) => ({
       documentNumber: payload.documentNumber,
       label: payload.label,
       presenterCz: payload.presenterCz,
@@ -129,7 +136,7 @@ export function withAmendments(changes, recordsByPrintId, amendmentRecords) {
       proposerPartyIds: payload.proposal.proposerPartyIds,
       parts: payload.parts,
       document: payload.document,
-      pageUrl: payload.pageUrl ?? null,
+      pageUrl: url,
       textCz: payload.paragraphs.join("\n")
     }));
     return { ...change, printPartHeadings, amendments };
@@ -247,7 +254,7 @@ function evidenceFromLawChange(change, route, publishedAt, senateResolutionIds) 
       senateResolutionEvidenceIds: senateResolutionIds,
       // The amendments that concern this change, by the hash of their text,
       // so a verdict on the change no longer holds when they change.
-      ...(change.amendments?.length > 0 ? { amendments: change.amendments.map(({ documentNumber, textCz }) => ({ evidenceId: amendmentEvidenceId(documentNumber), documentNumber, textSha256: sha256(textCz) })) } : {})
+      ...(change.amendments?.length > 0 ? { amendments: amendmentHashes(change) } : {})
     },
     sourceRecordHash: sha256(change.versions),
     matchBasis: {
@@ -544,8 +551,7 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
     // A later text adds nothing to judging this conduct and may not have
     // existed at the package cutoff.
     const change = changeThroughVersion(fullChange, lastVersion);
-    const amendmentHashes = (change.amendments ?? []).map(({ documentNumber, textCz }) => ({ evidenceId: amendmentEvidenceId(documentNumber), documentNumber, textSha256: sha256(textCz) }));
-    const excluded = exclusionOf?.({ id: lawChangeEvidenceId(change), structuredFacts: { versions: change.versions, ...(amendmentHashes.length > 0 ? { amendments: amendmentHashes } : {}) } }) ?? null;
+    const excluded = exclusionOf?.({ id: lawChangeEvidenceId(change), structuredFacts: { versions: change.versions, ...(change.amendments?.length > 0 ? { amendments: amendmentHashes(change) } : {}) } }) ?? null;
     if (excluded) {
       excludedLawChanges.push(excluded);
       continue;

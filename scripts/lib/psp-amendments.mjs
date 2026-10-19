@@ -2,6 +2,7 @@ import { cleanText, czechMonths, invariant } from "./collector-core.mjs";
 import { normalizeSearchText } from "./attribution.mjs";
 import { listedFiles } from "./print-parts.mjs";
 import { extractDocParagraphs, extractDocxNumberedParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl } from "./psp-print-documents.mjs";
+import { pspDocumentExtractions, pspDocumentFileOptions } from "./psp-document-cache.mjs";
 import { extractXlsxRows } from "./xlsx-rows.mjs";
 
 /**
@@ -64,7 +65,8 @@ export function summaryOfAmendments(paragraphs) {
     const line = `${label ? `${label} ` : ""}${text}`.replace(/\s+/g, " ").trim();
     const heading = itemHeadingPattern.exec(line);
     if (!heading && presentationPattern.test(line)) presentedOn = czechDate(line) ?? presentedOn;
-    if (heading && (itemHeadingStartPattern.test(heading[2]) || /výbor/u.test(heading[2]))) {
+    // A labelled part ("D.1 SD 1306 … výboru") is never a heading.
+    if (heading && (itemHeadingStartPattern.test(heading[2]) || (/výbor/u.test(heading[2]) && !/^\d/u.test(heading[2])))) {
       const presenterCz = heading[2].replace(/\s*[–-]\s*SD\s*\d+.*$/u, "").trim();
       const committee = !/^Poslan/u.test(presenterCz) && /výbor|usnesení/iu.test(presenterCz);
       current = {
@@ -383,18 +385,24 @@ export function linkVoteToAmendment(reference, items, { budget = false } = {}) {
   return { linked: true, label, variant: reference.variant, documentNumbers, presenterCz: item.presenterCz };
 }
 
-// The extractions the document cache keeps, named with their version
-// (scripts/lib/psp-document-cache.mjs).
-export const amendmentExtractions = {
-  summary: "docx-numbered-paragraphs-v1",
-  budget: "xlsx-rows-v1",
-  docx: "docx-paragraphs-v1",
-  doc: "doc-paragraphs-v1"
-};
-
 const htmlOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };
-const fileOptions = { maxBytes: 20_000_000, expectedContentTypes: ["openxmlformats-officedocument", "application/octet-stream", "application/zip", "application/msword", "application/vnd.ms-excel"] };
 const decodePage = (page) => new TextDecoder("windows-1250").decode(page.bytes);
+
+/**
+ * Turns of the stenographic record (`{ session, date, turn }`) in runs of
+ * consecutive turns of one day, in order: a passage may run on from one turn
+ * of a run into the next, never across a turn not read.
+ */
+export function consecutiveTurns(turns) {
+  const runs = [];
+  const sorted = [...turns].sort((left, right) => left.session - right.session || left.date.localeCompare(right.date) || left.turn - right.turn);
+  for (const turn of sorted) {
+    const last = runs.at(-1)?.at(-1);
+    if (last && last.session === turn.session && last.date === turn.date && last.turn + 1 === turn.turn) runs.at(-1).push(turn);
+    else runs.push([turn]);
+  }
+  return runs;
+}
 
 // The minutes since midnight of a vote's "HH:MM".
 function minutesOf(time) {
@@ -416,7 +424,7 @@ function minutesOf(time) {
 export async function collectAmendments({ source, plan, fetchPsp, documentCache }) {
   const warnings = [];
   const quality = { summaries: plan.summaries.length, summariesWithoutFile: 0, amendmentItems: 0, committeeItems: 0, documentsListed: 0, documentsNotInOpenData: 0, documentsWithoutText: 0, amendments: 0, proposerNames: 0, proposerNamesUnmatched: 0, documentsNotListed: 0, votes: plan.amendmentVotes.length, votesLinked: 0, votesNotLinked: {}, stenoTurnsRead: 0 };
-  const readFile = (url, extraction, extract) => documentCache.read(url, extraction, extract, async () => (await fetchPsp(source, url, fileOptions)).bytes);
+  const readFile = (url, format, extraction, extract) => documentCache.read(url, extraction, extract, async () => (await fetchPsp(source, url, pspDocumentFileOptions[format === "xlsm" ? "xlsx" : format])).bytes);
 
   // 1. The amendments each summary lists.
   const itemsBySummary = new Map();
@@ -427,7 +435,7 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
     const file = budget ? files.find(({ format }) => format === "xlsx" || format === "xlsm") : files.find(({ format }) => format === "docx");
     let items = [];
     if (file) {
-      const { value, error } = await readFile(file.url, budget ? amendmentExtractions.budget : amendmentExtractions.summary, budget ? extractXlsxRows : extractDocxNumberedParagraphs);
+      const { value, error } = await readFile(file.url, file.format, budget ? pspDocumentExtractions.xlsxRows : pspDocumentExtractions.docxNumberedParagraphs, budget ? extractXlsxRows : extractDocxNumberedParagraphs);
       if (error) warnings.push(`summary ${summary.printNumber}/${summary.partNumber}: ${file.filename} cannot be read (${error}); its amendments are not used`);
       else items = budget ? budgetAmendmentItems(value) : summaryOfAmendments(value);
     } else {
@@ -442,12 +450,14 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
 
   // 2. The text and proposers of each listed document.
   const amendments = [];
+  // Keyed by print and document, so a document a summary of another print
+  // names is still read for its own print.
   const listedNumbers = new Set();
   for (const { summary, items } of itemsBySummary.values()) {
     for (const item of items.filter(({ committee }) => !committee)) {
       for (const number of item.documentNumbers) {
-        if (listedNumbers.has(number)) continue;
-        listedNumbers.add(number);
+        if (listedNumbers.has(`${summary.printNumber}/${number}`)) continue;
+        listedNumbers.add(`${summary.printNumber}/${number}`);
         quality.documentsListed += 1;
         const document = plan.documents.get(number);
         if (!document || document.printNumber !== summary.printNumber) {
@@ -458,7 +468,7 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
         const pageUrl = amendmentDocumentPageUrl(source.term.number, number);
         const files = listedFiles(decodePage(await fetchPsp(source, pageUrl, htmlOptions)), pageUrl);
         const file = files.find(({ format }) => format === "docx") ?? files.find(({ format }) => format === "doc");
-        const read = file ? await readFile(file.url, amendmentExtractions[file.format], file.format === "docx" ? extractDocxParagraphs : extractDocParagraphs) : null;
+        const read = file ? await readFile(file.url, file.format, file.format === "docx" ? pspDocumentExtractions.docxParagraphs : pspDocumentExtractions.docParagraphs, file.format === "docx" ? extractDocxParagraphs : extractDocParagraphs) : null;
         if (!read || read.error) {
           quality.documentsWithoutText += 1;
           warnings.push(`SD ${number}: ${file ? `${file.filename} cannot be read (${read.error})` : "no DOCX or DOC file"}; not used`);
@@ -497,7 +507,7 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
   }
   quality.amendments = amendments.length;
   const printsWithSummary = new Set(plan.summaries.map(({ printId }) => printId));
-  quality.documentsNotListed = [...plan.documents.values()].filter(({ number, printId }) => printsWithSummary.has(printId) && !listedNumbers.has(number)).length;
+  quality.documentsNotListed = [...plan.documents.values()].filter(({ number, printId, printNumber }) => printsWithSummary.has(printId) && !listedNumbers.has(`${printNumber}/${number}`)).length;
   const amendmentByNumber = new Map(amendments.map((amendment) => [amendment.documentNumber, amendment]));
 
   // 3. The amendment each vote was on, from the stenographic record.
@@ -507,14 +517,13 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
     vote.minutes = minutesOf(vote.time);
     for (const turn of turnsOfVote(vote)) neededTurns.set(`${turn.session}:${turn.turn}`, turn);
   }
-  // The turns of one day are read in order as one text, so a passage that
-  // begins in one turn and is announced in the next stays whole.
+  // Consecutive turns of one day are read in order as one text, so a passage
+  // that begins in one turn and is announced in the next stays whole; a gap
+  // of turns not read starts a new text, so no passage spans it.
   const announcements = new Map();
-  const turnsByDay = new Map();
-  for (const turn of neededTurns.values()) turnsByDay.set(`${turn.session}:${turn.date}`, [...(turnsByDay.get(`${turn.session}:${turn.date}`) ?? []), turn]);
-  for (const turns of turnsByDay.values()) {
+  for (const turns of consecutiveTurns([...neededTurns.values()])) {
     const pages = [];
-    for (const turn of turns.sort((left, right) => left.turn - right.turn)) {
+    for (const turn of turns) {
       const url = stenoTurnUrl(source.term.year, turn.session, turn.turn);
       quality.stenoTurnsRead += 1;
       pages.push({ url, html: decodePage(await fetchPsp(source, url, htmlOptions)) });
