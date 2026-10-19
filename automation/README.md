@@ -10,6 +10,7 @@ The workflow and its rules are defined only in [docs/evidence-pipeline.md](../do
 | `topic-routing/` | Routing taxonomy and the reviewed routing tags of every promise; the model caches (law-change screening, relevance checks) live on the audit branch. |
 | `law-context/` | Cache of the law-change context read from e-Sbírka, one file per act (audit branch). |
 | `psp-documents/` | Text of each psp.cz document file read, under its document ID; a file is downloaded only when its ID is new (audit branch). |
+| `psp-pages/` | Content of each psp.cz page read for closed prints only, read once (audit branch). |
 | `evidence-packages/` | Unpublished queue of evidence packages, one per promise (audit branch). |
 | `review-proposals/` | Unpublished assessment proposals for human review (audit branch). |
 | `prompts/` | Active law-change screener, relevance-check, assessor, and arbiter prompts. |

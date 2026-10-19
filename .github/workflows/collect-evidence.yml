@@ -142,7 +142,7 @@ jobs:
                 automation/psp-documents/*) [[ "$path" =~ ^automation/psp-documents/[0-9]+\.json$ ]] && restore_paths+=("$path") ;;
                 *) restore_paths+=("$path") ;;
               esac
-            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/law-context automation/psp-documents automation/government-resolutions)
+            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/law-context automation/psp-documents automation/psp-pages automation/government-resolutions)
             for directory in automation/evidence-packages automation/review-proposals; do
               while IFS= read -r path; do
                 case "$path" in
@@ -183,6 +183,7 @@ jobs:
             --law-context-cache automation/law-context \
             --resolution-cache automation/government-resolutions \
             --document-cache automation/psp-documents \
+            --page-cache automation/psp-pages \
             --output automation/runs/pipeline/github-actions/collector
 
       - name: Split official print texts into law changes
@@ -197,6 +198,7 @@ jobs:
           node scripts/run-print-parts.mjs \
             --collector-run automation/runs/pipeline/github-actions/collector/collector-run.json \
             --document-cache automation/psp-documents \
+            --page-cache automation/psp-pages \
             --cache automation/law-context \
             --output automation/runs/pipeline/github-actions/print-parts
 
@@ -241,7 +243,8 @@ jobs:
         id: tag-cache
         # A failed run keeps the paid law-change screening and relevance
         # checks it already did, the law-change context it read, the psp.cz
-        # document texts it read, and the government resolutions it read. A
+        # document texts and the pages of closed prints it read, and the
+        # government resolutions it read. A
         # subject is cached only once both of its model outputs are valid, a
         # context line only once its answer is complete, a document only
         # once its file is read in full, and a resolution only once its page
@@ -250,7 +253,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
-          for directory in automation/topic-routing/tag-cache automation/law-context automation/psp-documents automation/government-resolutions; do
+          for directory in automation/topic-routing/tag-cache automation/law-context automation/psp-documents automation/psp-pages automation/government-resolutions; do
             if [ -d "$directory" ]; then
               git add "$directory"
             fi
