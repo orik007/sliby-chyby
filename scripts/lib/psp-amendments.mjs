@@ -1,7 +1,7 @@
 import { cleanText, czechMonths, invariant } from "./collector-core.mjs";
 import { normalizeSearchText } from "./attribution.mjs";
 import { listedFiles } from "./print-parts.mjs";
-import { decodePspPage, extractDocParagraphs, extractDocxNumberedParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, pspPageOptions } from "./psp-print-documents.mjs";
+import { extractDocParagraphs, extractDocxNumberedParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, pspPageOptions } from "./psp-print-documents.mjs";
 import { pspDocumentExtractions, pspDocumentFileOptions } from "./psp-document-cache.mjs";
 import { extractXlsxRows } from "./xlsx-rows.mjs";
 
@@ -435,16 +435,20 @@ function minutesOf(time) {
  * Returns the amendments (one per presented document with a readable text),
  * the link of each vote to its amendment, warnings, and quality figures.
  */
-export async function collectAmendments({ source, plan, fetchPsp, documentCache }) {
+export async function collectAmendments({ source, plan, fetchPsp, documentCache, pageCache }) {
   const warnings = [];
   const quality = { summaries: plan.summaries.length, summariesWithoutFile: 0, amendmentItems: 0, committeeItems: 0, itemsWithoutPresenter: 0, documentsListed: 0, documentsNotInOpenData: 0, documentsWithoutText: 0, amendments: 0, proposerNames: 0, proposerNamesUnmatched: 0, documentsNotListed: 0, votes: plan.amendmentVotes.length, votesLinked: 0, votesNotLinked: {}, stenoTurnsRead: 0 };
+  // A page read only for closed prints is read once and kept
+  // (scripts/lib/psp-page-cache.mjs).
+  const closed = (printId) => plan.closedPrintIds.has(String(printId));
+  const readPage = (url, keep) => pageCache.content(url, keep, () => fetchPsp(source, url, pspPageOptions));
   const readFile = (url, format, extraction, extract) => documentCache.read(url, extraction, extract, async () => (await fetchPsp(source, url, pspDocumentFileOptions[format === "xlsm" ? "xlsx" : format])).bytes);
 
   // 1. The amendments each summary lists.
   const itemsBySummary = new Map();
   for (const summary of plan.summaries) {
     const pageUrl = officialPrintDocumentPageUrl(source.term.number, summary.printNumber, summary.partNumber);
-    const files = listedFiles(decodePspPage(await fetchPsp(source, pageUrl, pspPageOptions)), pageUrl).filter(({ section }) => /^Text$/iu.test(section ?? ""));
+    const files = listedFiles(await readPage(pageUrl, closed(summary.printId)), pageUrl).filter(({ section }) => /^Text$/iu.test(section ?? ""));
     const budget = summary.printKindId === "3";
     const file = budget ? files.find(({ format }) => format === "xlsx" || format === "xlsm") : files.find(({ format }) => format === "docx");
     let items = [];
@@ -487,7 +491,7 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
           continue;
         }
         const pageUrl = amendmentDocumentPageUrl(source.term.number, number);
-        const files = listedFiles(decodePspPage(await fetchPsp(source, pageUrl, pspPageOptions)), pageUrl);
+        const files = listedFiles(await readPage(pageUrl, closed(summary.printId)), pageUrl);
         const file = files.find(({ format }) => format === "docx") ?? files.find(({ format }) => format === "doc");
         const read = file ? await readFile(file.url, file.format, file.format === "docx" ? pspDocumentExtractions.docxParagraphs : pspDocumentExtractions.docParagraphs, file.format === "docx" ? extractDocxParagraphs : extractDocParagraphs) : null;
         if (!read || read.error) {
@@ -536,7 +540,12 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
   const neededTurns = new Map();
   for (const vote of plan.amendmentVotes) {
     vote.minutes = minutesOf(vote.time);
-    for (const turn of turnsOfVote(vote)) neededTurns.set(`${turn.session}:${turn.turn}`, turn);
+    for (const turn of turnsOfVote(vote)) {
+      const key = `${turn.session}:${turn.turn}`;
+      const needed = neededTurns.get(key) ?? { ...turn, printIds: new Set() };
+      needed.printIds.add(String(vote.printId));
+      neededTurns.set(key, needed);
+    }
   }
   // Consecutive turns of one day are read in order as one text, so a passage
   // that begins in one turn and is announced in the next stays whole; a gap
@@ -547,7 +556,8 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
     for (const turn of turns) {
       const url = stenoTurnUrl(source.term.year, turn.session, turn.turn);
       quality.stenoTurnsRead += 1;
-      pages.push({ url, html: decodePspPage(await fetchPsp(source, url, pspPageOptions)) });
+      // A turn is kept when every vote it is read for is on a closed print.
+      pages.push({ url, html: await readPage(url, [...turn.printIds].every(closed)) });
     }
     for (const announcement of stenoAnnouncements(pages)) {
       if (!announcements.has(announcement.voteId)) announcements.set(announcement.voteId, announcement);

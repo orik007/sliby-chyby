@@ -256,10 +256,10 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
   const printsEntries = {
     "tisky.unl": entry(unl(printFields)),
     "hist.unl": entry(unl(historyFields)),
-    "stavy.unl": entry(unl(["20", "6", "1", "Approved", null, null]) + unl(["10", "5", "1", "Before vote", null, null])),
+    "stavy.unl": entry(unl(["20", "64", "1", "Approved", null, null]) + unl(["10", "5", "1", "Before vote", null, null])),
     "prechody.unl": entry(unl(["10", "10", "20", "5", "1"])),
     "typ_akce.unl": entry(unl(["5", "Chamber approved bill"])),
-    "typ_stavu.unl": entry(unl(["5", "3. cteni"]) + unl(["6", "Odesilano do Senatu"])),
+    "typ_stavu.unl": entry(unl(["5", "3. cteni"]) + unl(["6", "KONEC"]) + unl(["64", "Odesilano do Senatu"])),
     "tisky_za.unl": entry(subPrintRow({ printId: "700", partNumber: "2", historyId: "801", kindId: "11", shortTitle: "Usnesení Senátu k tisku 189/0", fullTitle: "Usnesení Senátu" }) + subPrintRow({ printId: "700", partNumber: "1", historyId: "801", kindId: "12", shortTitle: "Zákon ze Senátu" })),
     // The eKLEP materials of the print and of a sub-print; a print of
     // another term is not this term's, and a row of tisk_eklep.unl with a
@@ -332,10 +332,10 @@ function agendaFixture({ historyAgendaId = "5001" } = {}) {
   const printsEntries = {
     "tisky.unl": entry(print("701", "68", "Vladni navrh zakona, kterym se meni zakon c. 23/2017 Sb., o pravidlech rozpoctove odpovednosti") + print("702", "90", "Unrelated bill")),
     "hist.unl": entry(unl(historyFields)),
-    "stavy.unl": entry(unl(["20", "6", "1", "Approved", null, null])),
+    "stavy.unl": entry(unl(["20", "14", "1", "Approved", null, null])),
     "prechody.unl": entry(unl(["11", "20", "20", "6", "1"])),
     "typ_akce.unl": entry(unl(["6", "setrvano"])),
-    "typ_stavu.unl": entry(unl(["6", "Snemovna (Senat)"])),
+    "typ_stavu.unl": entry(unl(["6", "KONEC"]) + unl(["14", "Snemovna (Senat)"])),
     "tisky_za.unl": entry(""),
     "tisk_eklep.unl": entry(""),
     "tz_eklep.unl": entry(""),
@@ -429,7 +429,7 @@ test("PSP normalizer attributes submitted bills to proposer and government parti
       "stavy.unl": entry(unl(["20", "1", "1", "Submitted", null, null])),
       "prechody.unl": entry(unl(["1", "20", "20", "7", "1"])),
       "typ_akce.unl": entry(unl(["7", "předložen"])),
-      "typ_stavu.unl": entry(""),
+      "typ_stavu.unl": entry(unl(["6", "KONEC"])),
       "tisky_za.unl": entry(""),
       "tisk_eklep.unl": entry(""),
       "tz_eklep.unl": entry(""),
@@ -466,7 +466,7 @@ test("PSP normalizer records the government's opinion on a bill it did not submi
       "stavy.unl": entry(""),
       "prechody.unl": entry(""),
       "typ_akce.unl": entry(""),
-      "typ_stavu.unl": entry(""),
+      "typ_stavu.unl": entry(unl(["6", "KONEC"])),
       "tisky_za.unl": entry(subPrints),
       "tisk_eklep.unl": entry(""),
       "tz_eklep.unl": entry(""),

@@ -9,11 +9,12 @@ import { collectRegulations, notYetDigitisedWarning } from "./lib/regulations.mj
 import { createGovernmentOfficeFetcher, createResolutionCache, readEklepTypes, readResolutions, resolutionRecords } from "./lib/government-resolutions.mjs";
 import { createPspFetcher, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { createPspDocumentCache } from "./lib/psp-document-cache.mjs";
+import { createPspPageCache } from "./lib/psp-page-cache.mjs";
 import { log } from "./lib/run-log.mjs";
 import { appendFileSync, mkdirSync, writeFileSync } from "node:fs";
 
 function parseArgs(args) {
-  const options = { checkpoints: null, writeCheckpoints: null, output: null, lawContextCache: "automation/law-context", resolutionCache: "automation/government-resolutions", documentCache: "automation/psp-documents" };
+  const options = { checkpoints: null, writeCheckpoints: null, output: null, lawContextCache: "automation/law-context", resolutionCache: "automation/government-resolutions", documentCache: "automation/psp-documents", pageCache: "automation/psp-pages" };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--checkpoints") options.checkpoints = args[++index];
@@ -22,6 +23,7 @@ function parseArgs(args) {
     else if (arg === "--law-context-cache") options.lawContextCache = args[++index];
     else if (arg === "--resolution-cache") options.resolutionCache = args[++index];
     else if (arg === "--document-cache") options.documentCache = args[++index];
+    else if (arg === "--page-cache") options.pageCache = args[++index];
     else throw new Error(`Unknown argument: ${arg}`);
   }
   invariant(!options.writeCheckpoints || options.checkpoints, "--write-checkpoints requires --checkpoints");
@@ -55,12 +57,14 @@ const fetchPsp = createPspFetcher({ ...pspDownloadSettings, proxyUrl });
 // (scripts/lib/psp-document-cache.mjs), dated by the run's Prague date.
 const runDate = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date(collectedAt));
 const documentCache = createPspDocumentCache(resolve(args.documentCache), runDate);
+// The pages of closed prints read so far (scripts/lib/psp-page-cache.mjs).
+const pageCache = createPspPageCache(resolve(args.pageCache), runDate);
 try {
   for (const source of selected) {
     const { since } = plansBySourceId.get(source.id);
     log(`${source.id}: collecting everything since ${since}`);
     const result = source.collector === "psp-open-data"
-      ? await collectPspSource(source, { since, collectedAt, governmentPeriods, fetchPsp, documentCache })
+      ? await collectPspSource(source, { since, collectedAt, governmentPeriods, fetchPsp, documentCache, pageCache })
       : source.collector === "zvlady-resolutions"
         ? await collectResolutionSource(source, since)
         : await collectRegulationSource(source, since);
