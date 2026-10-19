@@ -432,7 +432,8 @@ function minutesOf(time) {
  * second reading, the parliamentary documents of sd.zip, the MPs in a club
  * on a date (`candidatesOn`), the votes on the agenda item of a bill after
  * its summary was distributed, and the turns of the stenographic record.
- * Every page is read in every run; every file through `documentCache`.
+ * A page of a closed print is read once through `pageCache`, every other page
+ * and every turn in every run; every file through `documentCache`.
  * Returns the amendments (one per presented document with a readable text),
  * the link of each vote to its amendment, warnings, and quality figures.
  */
