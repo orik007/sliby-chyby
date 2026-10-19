@@ -160,11 +160,14 @@ export const readerStatus = {
 function evidenceLabel(evidence) {
   if (evidence.role === "promise-source") return "Původní volební slib";
   if (evidence.role === "senate-resolution") return "Usnesení Senátu, kterým vrátil návrh Sněmovně";
+  if (evidence.role === "amendment") return `Text pozměňovacího návrhu ${evidence.structuredFacts?.label ?? ""} (sněmovní dokument ${evidence.structuredFacts?.documentNumber ?? "neuveden"})`;
   // A regulation's title is its citation and its title, which name its kind.
   if (evidence.role === "law-change" && isRegulationKind(evidence.structuredFacts?.printKindId)) return `Předpis ve Sbírce zákonů: ${evidence.title}`;
   if (evidence.role === "law-change" && evidence.structuredFacts?.printKindId === resolutionKind) return `Text usnesení vlády: ${evidence.title}`;
   if (evidence.role === "law-change") return `Změna zákona v návrhu projednávaném Sněmovnou: ${evidence.structuredFacts?.titleCz ?? evidence.title}`;
+  if (evidence.type === "parliamentary-vote" && evidence.structuredFacts?.amendmentVote) return `Hlasování Poslanecké sněmovny o pozměňovacím návrhu ${evidence.structuredFacts.amendmentVote.label}`;
   if (evidence.type === "parliamentary-vote") return "Výsledek hlasování Poslanecké sněmovny";
+  if (evidence.type === "member-amendment") return `Pozměňovací návrh poslanců ${evidence.structuredFacts?.label ?? ""} ve druhém čtení`;
   if (evidence.type === "legislative-step") return "Průběh projednávání návrhu ve Sněmovně";
   if (evidence.type === "government-opinion") return `Stanovisko vlády k návrhu zákona, který nepředložila (${evidence.structuredFacts?.resultCz ?? "výsledek neuveden"})`;
   if (evidence.type === resolutionKind) return "Přijetí usnesení vládou";

@@ -103,14 +103,16 @@ const collectorRun = JSON.parse(await readFile(resolve(args.collectorRun), "utf8
 invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
 const trackedPartyIds = [...new Set(promises.map(({ partyId }) => partyId))].sort();
 // Only records that can be attributable conduct of a tracked party continue;
-// they link law changes to the party's votes, submissions, and the
-// government's opinions.
-const { primaryRecordsInWindow, conductRecords, recordsByPrintId, printFirstSeenOn } = conductOfRun(collectorRun, args.asOf, trackedPartyIds);
+// they link law changes to the party's votes, submissions, amendments, and
+// the government's opinions.
+const { primaryRecordsInWindow, conductRecords, recordsByPrintId, printFirstSeenOn, amendmentRecords } = conductOfRun(collectorRun, args.asOf, trackedPartyIds);
 // Every model that reads a law change also reads its context
 // (docs/evidence-pipeline.md, Law-change context).
 const lawContext = JSON.parse(await readFile(resolve(args.lawContext), "utf8"));
 invariant(lawContext?.schemaVersion === "1.0.0" && lawContext.asOf === args.asOf && lawContext.changes && typeof lawContext.changes === "object", "Invalid --law-context file, or one for another cutoff");
-let changes = lawChangesOfRun(printParts, recordsByPrintId).map((change) => {
+// Each law change carries the amendments that concern it, which the
+// screeners and relevance checks read with it (docs/evidence-pipeline.md).
+let changes = lawChangesOfRun(printParts, recordsByPrintId, amendmentRecords).map((change) => {
   const context = lawContext.changes[change.changeId];
   invariant(context, `No law-change context for ${change.changeId}`);
   return withContext(change, context);

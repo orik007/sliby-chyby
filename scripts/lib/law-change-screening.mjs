@@ -10,8 +10,8 @@ import { resolutionKind } from "./government-resolution-kind.mjs";
  * screening every law change (substantive or technical, and its topic tags)
  * and checking whether a routed law change is relevant to one promise.
  */
-export const screeningPromptVersion = "law-change-screener-v5";
-export const relevancePromptVersion = "relevance-check-v6";
+export const screeningPromptVersion = "law-change-screener-v6";
+export const relevancePromptVersion = "relevance-check-v7";
 
 async function loadPrompt(version, root) {
   const instructions = await readFile(resolve(root, `automation/prompts/${version}.md`), "utf8");
@@ -34,7 +34,7 @@ const printKindLabels = { 1: "government bill", 2: "bill submitted by members, t
  * The official text of one law change as a model reads it: its print, its
  * heading and title, the act it amends, and the full text, effective date,
  * and context (the wording of the provisions it amends, from e-Sbírka) of
- * every version.
+ * every version, then the amendments to it presented in the second reading.
  * A print-wide Senate resolution is not part of one law change and goes
  * only into the evidence package.
  */
@@ -76,12 +76,17 @@ export function lawChangeText(change) {
       ...versions
     ].join("\n\n");
   }
+  // The amendments MPs presented to the proposed text that concern this
+  // part follow its versions (docs/evidence-pipeline.md, Amendment data
+  // rules): each amends the bill's text, not the act.
+  const amendments = (change.amendments ?? []).map((amendment) => `Amendment ${amendment.label} (parliamentary document ${amendment.documentNumber}), presented in the second reading on ${amendment.presentedOn} by ${amendment.presenterCz}; it amends the proposed text of the bill:\n${amendment.textCz}`);
   return [
     `Chamber print ${change.printNumber} (${printKindLabels[change.printKindId] ?? "Chamber print"}): ${change.printTitleCz}`,
     change.heading ? `Part: ${change.heading} – ${change.titleCz}` : `Law change: ${change.titleCz}`,
     ...(change.addedIn !== "proposed" ? ["This part was added during the debate; it is not in the proposed text."] : []),
     ...change.acts.map(({ act, name }) => `Amended act: zákon č. ${act} Sb.${name ? `, ${name}` : ""}`),
-    ...versions
+    ...versions,
+    ...amendments
   ].join("\n\n");
 }
 

@@ -1,6 +1,9 @@
 import { createHash } from "node:crypto";
 import { log } from "./run-log.mjs";
 
+// The Czech month names in the genitive ("23. září 2026"), by number.
+export const czechMonths = { ledna: 1, února: 2, března: 3, dubna: 4, května: 5, června: 6, července: 7, srpna: 8, září: 9, října: 10, listopadu: 11, prosince: 12 };
+
 export function invariant(condition, message) {
   if (!condition) throw new Error(message);
 }
@@ -67,7 +70,7 @@ export function validateCollectedRecord(record) {
   invariant(record?.schemaVersion === "1.0.0", "Collected record has an unsupported schemaVersion");
   invariant(typeof record.id === "string" && record.id.length > 0, "Collected record is missing id");
   invariant(typeof record.sourceId === "string" && record.sourceId.length > 0, "Collected record is missing sourceId");
-  invariant(["parliamentary-vote", "legislative-step", "regulation-adoption", "government-opinion", "government-resolution"].includes(record.kind), `Unknown record kind: ${record.kind}`);
+  invariant(["parliamentary-vote", "legislative-step", "regulation-adoption", "government-opinion", "government-resolution", "member-amendment"].includes(record.kind), `Unknown record kind: ${record.kind}`);
   invariant(typeof record.primary === "boolean", `Record ${record.id} is missing primary`);
   invariant(/^https:\/\//.test(record.url), `Record ${record.id} must use an HTTPS URL`);
   invariant(typeof record.title === "string" && record.title.length > 0, `Record ${record.id} is missing title`);

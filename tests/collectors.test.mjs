@@ -162,7 +162,7 @@ test("UNL parser respects escaped delimiters and null fields", () => {
   assert.deepEqual(rows, [{ id: "1", text: "escaped|pipe", empty: null }]);
 });
 
-test("requires a strict majority of all club members for a party direction", () => {
+test("requires a strict majority of all club members for a party direction, abstaining or not voting counting as not supporting", () => {
   const vote = (externalMpId, choiceCode) => ({
     externalMpId,
     choiceCode,
@@ -176,7 +176,7 @@ test("requires a strict majority of all club members for a party direction", () 
   assert.equal(attributed.strictMajorityThreshold, 3);
   assert.equal(attributed.majorityChoice, "yes");
   assert.equal(attributed.attributionStatus, "attributed");
-  assert.equal(attributed.ruleVersion, "party-vote-strict-majority-v3");
+  assert.equal(attributed.ruleVersion, "party-vote-strict-majority-v4");
 
   const insufficientSupport = derivePartyVoteSummaries([
     vote("1", "A"), vote("2", "A"), vote("3", "N"), vote("4", "C"), vote("5", "@")
@@ -190,11 +190,17 @@ test("requires a strict majority of all club members for a party direction", () 
   assert.equal(absentMajority.majorityChoice, null);
   assert.equal(absentMajority.attributionStatus, "no-strict-majority");
 
-  const noDirectionalVotes = derivePartyVoteSummaries([
+  // Abstaining (C, K) or not voting while registered (F) has the effect of
+  // voting no: the club did not support the measure.
+  const abstainedMajority = derivePartyVoteSummaries([
     vote("1", "C"), vote("2", "F"), vote("3", "@")
   ])[0];
-  assert.equal(noDirectionalVotes.majorityChoice, null);
-  assert.equal(noDirectionalVotes.attributionStatus, "no-strict-majority");
+  assert.equal(abstainedMajority.majorityChoice, "no");
+  assert.equal(abstainedMajority.attributionStatus, "attributed");
+  const mixedNotSupported = derivePartyVoteSummaries([
+    vote("1", "A"), vote("2", "N"), vote("3", "K"), vote("4", "F"), vote("5", "@")
+  ])[0];
+  assert.equal(mixedNotSupported.majorityChoice, "no");
 
   const voided = derivePartyVoteSummaries([
     vote("1", "A"), vote("2", "A"), vote("3", "A")

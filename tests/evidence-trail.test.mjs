@@ -6,7 +6,7 @@ import { buildEvidenceTrail, createAssessmentRevision } from "../scripts/lib/evi
 import { renderHumanReviewMarkdown } from "../scripts/lib/assessment-review.mjs";
 import { formatDate, stepLinks, stepTitle } from "../src/lib/evidence-trail.ts";
 import { assessmentRevisionSchema, evidenceTrailPrintSchema, evidenceTrailRegulationSchema, evidenceTrailResolutionSchema } from "../src/lib/schema.ts";
-import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
+import { createCollectedRecord, sha256 } from "../scripts/lib/collector-core.mjs";
 import { lawChangeOfRegulation, lawChangeOfResolution } from "../scripts/lib/print-parts.mjs";
 import { loadTrackedPromises } from "../scripts/lib/published-promises.mjs";
 import { buildLawChangeEvidencePackage } from "../scripts/lib/topic-evidence-package.mjs";
@@ -277,4 +277,54 @@ test("a cited government opinion enters the trail as a step on its bill, with a 
 
 test("trail dates keep their calendar day in any time zone", () => {
   assert.equal(formatDate("2026-07-01"), "1. 7. 2026");
+});
+
+test("a cited amendment and a vote on it enter the trail on their bill, with the document, the vote, and the stenographic record", async () => {
+  const { promises } = await loadTrackedPromises(new URL("..", import.meta.url).pathname);
+  const promise = promises.find(({ partyId }) => partyId === "ano");
+  const amendment = createCollectedRecord({
+    id: "psp-core-2025--amendment-1306",
+    sourceId: "psp-core-2025",
+    kind: "member-amendment",
+    primary: true,
+    evidenceRole: "primary-record",
+    occurredAt: "2026-06-11T00:00:00",
+    title: "SD 1306: Pozměňovací návrh D1 k tisku 67 — Návrh zákona",
+    publisher: "Chamber of Deputies",
+    url: "https://www.psp.cz/sqw/sd.sqw?cd=1306&o=10",
+    payload: { documentNumber: "1306", externalPrintId: "43174", printKindId: "2", printNumber: 67, printTitleCz: "Návrh zákona", printUrl: "https://public.psp.cz/sqw/historie.sqw?o=10&t=67", label: "D1", presenterCz: "Poslanec Boris Šťastný", presentedOn: "2026-06-11", parts: [], document: { filename: "31306.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=900" }, pageUrl: "https://www.psp.cz/sqw/sd.sqw?cd=1306&o=10", paragraphs: ["Pozměňovací návrh poslance Borise Šťastného", "1. V čl. I se bod 3 zrušuje."], proposal: { kind: "member-amendment", proposerPartyIds: ["ano"], proposerPersonIds: ["1"], unmatchedProposerNames: [] } }
+  });
+  const vote = createCollectedRecord({
+    id: "psp-core-2025--vote-88146",
+    sourceId: "psp-core-2025",
+    kind: "parliamentary-vote",
+    primary: true,
+    evidenceRole: "primary-record",
+    occurredAt: "2026-07-10T11:55:00",
+    title: "Novela z. - stavební zákon",
+    publisher: "Chamber of Deputies",
+    url: "https://public.psp.cz/sqw/hlasy.sqw?g=88146",
+    payload: { externalVoteId: "88146", counts: { yes: 120, no: 30 }, linkedPrints: [{ externalPrintId: "43174", printKindId: "2", linkBasis: "agenda-item", historyContexts: [] }], amendmentVote: { externalPrintId: "43174", printNumber: 67, documentNumbers: ["1306"], label: "D1", variant: null, presenterCz: "Poslanec Boris Šťastný", parts: [], stenoUrl: "https://www.psp.cz/eknih/2025ps/stenprot/027schuz/s027018.htm" }, partyVoteSummaries: [{ partyId: "ano", attributionStatus: "attributed", majorityChoice: "no", counts: { yes: 2, no: 10, abstained: 60, notVoting: 0, absent: 8, unknown: 0 }, strictMajorityThreshold: 41, eligibleMemberCount: 80 }] }
+  });
+  const change = {
+    changeId: "43174-1", printId: "43174", printNumber: 67, printKindId: "2", printTitleCz: "Návrh zákona", printPageUrl: "https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=67&CT1=0", addedIn: "proposed", heading: null, titleCz: "Návrh zákona", acts: [], titleActs: [], identifiers: [],
+    versions: { proposed: { heading: null, titleCz: "Návrh zákona", textCz: "Zákon …", document: { filename: "t006700.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=2" } } },
+    senateResolutions: [],
+    printPartHeadings: [],
+    amendments: [{ documentNumber: "1306", label: "D1", presenterCz: "Poslanec Boris Šťastný", presentedOn: "2026-06-11", proposerPartyIds: ["ano"], parts: [], document: { filename: "31306.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=900" }, pageUrl: "https://www.psp.cz/sqw/sd.sqw?cd=1306&o=10", textCz: "1. V čl. I se bod 3 zrušuje.", textSha256: sha256("1. V čl. I se bod 3 zrušuje.") }]
+  };
+  const records = [amendment, vote];
+  const evidencePackage = buildLawChangeEvidencePackage({ assessorInstructions: "assessor instructions", promise, keptChanges: [{ change, route: { routeBasis: ["specific-tag"], matchedTagIds: ["vat-policy"], directLinkIdentifiers: [] } }], recordsByPrintId: new Map([["43174", records]]), printFirstSeenOn: new Map([["43174", "2025-12-12"]]), collectorRun: { schemaVersion: "1.0.0", runId: "fixture", records }, asOf: "2026-09-25" });
+  const bill = evidencePackage.evidence.find(({ role }) => role === "law-change");
+  const review = { status: "moving-against", evidenceSufficient: true, citedEvidenceIds: [bill.id, amendment.id, vote.id], changeRelevance: [{ evidenceId: bill.id, relevant: true, reasonCz: "Návrh se týká slibu.", effectCz: "Ruší pravidlo." }], explanationCz: "Poslanci strany návrh podali." };
+  const [print] = buildEvidenceTrail(evidencePackage, { resolution: { state: "candidate", selectedReview: "consensus" }, validatedAssessments: { "assessor-a": review, "assessor-b": review } });
+  assert.equal(print.printUrl, "https://public.psp.cz/sqw/historie.sqw?o=10&t=67");
+  const note = [{ note: "amended-proposal", lawChangeIds: [bill.id] }];
+  assert.deepEqual(print.steps, [
+    { kind: "amendment", date: "2026-06-11", evidenceId: amendment.id, labelCz: "D1", documentNumber: 1306, presenterCz: "Poslanec Boris Šťastný", url: amendment.url, version: "proposed", textUrl: "https://www.psp.cz/sqw/text/orig2.sqw?idd=2", notes: note },
+    { kind: "amendment-vote", date: "2026-07-10", evidenceId: vote.id, url: vote.url, labelCz: "D1", documentNumbers: [1306], presenterCz: "Poslanec Boris Šťastný", stenoUrl: "https://www.psp.cz/eknih/2025ps/stenprot/027schuz/s027018.htm", club: "no", counts: { yes: 2, no: 10, abstained: 60, notVoting: 0, absent: 8, unknown: 0 }, version: "proposed", textUrl: "https://www.psp.cz/sqw/text/orig2.sqw?idd=2", notes: note }
+  ]);
+  assert.deepEqual(evidenceTrailPrintSchema.parse(print), print);
+  assert.deepEqual(print.steps.map(stepTitle), ["Podání pozměňovacího návrhu D1", "Klub strany pozměňovací návrh nepodpořil"]);
+  assert.deepEqual(stepLinks(print.steps[1], print.printUrl).map(({ label }) => label), ["Výsledek hlasování", "Stenozáznam s označením návrhu", "Navržený text"]);
 });

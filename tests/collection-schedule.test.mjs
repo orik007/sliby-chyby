@@ -18,7 +18,7 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.match(workflow, /SLIBY_TAGGING_CONCURRENCY: \$\{\{ inputs\.tagging_concurrency \|\| '24' \}\}/);
   assert.match(workflow, /SLIBY_SERVICE_TIER: flex/);
   assert.match(workflow, /SLIBY_ASSESSMENT_CONCURRENCY: \$\{\{ inputs\.assessment_concurrency \|\| '16' \}\}/);
-  assert.match(workflow, /timeout-minutes: 300/);
+  assert.match(workflow, /timeout-minutes: 360/);
   assert.match(workflow, /Persist source collection and queued evidence packages/);
   assert.match(workflow, /Queue evidence packages/);
   assert.doesNotMatch(workflow, /enrich/i);
@@ -40,7 +40,7 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   // source subset can produce a package from part of the record history.
   assert.doesNotMatch(workflow, /inputs\.since|inputs\.sources|--since|--source /);
   // The paid steps stop before the job limit, so the saving steps always run.
-  assert.match(workflow, /timeout-minutes: 300/);
+  assert.match(workflow, /timeout-minutes: 360/);
   assert.match(workflow, /- name: Screen law changes, route them to promises, check relevance, and build packages\n        timeout-minutes: 120/);
   assert.match(workflow, /- name: Split official print texts into law changes\n        timeout-minutes: 120/);
   assert.match(workflow, /- name: Assess only new or changed packages\n        id: assess\n        timeout-minutes: 120/);
@@ -105,7 +105,9 @@ test("the model-cache persistence step survives a routing failure, but checkpoin
   assert.doesNotMatch(checkpointsStep, /automation\/psp-documents/);
   assert.doesNotMatch(checkpointsStep, /automation\/government-resolutions/);
   const printPartsStep = workflow.split("      - name: Split official print texts into law changes")[1].split("\n      - name:")[0];
-  assert.match(printPartsStep, /--document-hashes automation\/psp-documents\/hashes\.json/);
+  assert.match(printPartsStep, /--document-cache automation\/psp-documents/);
+  const collectStep = workflow.split("      - name: Collect source records")[1].split("\n      - name:")[0];
+  assert.match(collectStep, /--document-cache automation\/psp-documents/);
 });
 
 test("collection and packages create a missing audit pull request without overwriting its review body", async () => {
@@ -142,7 +144,7 @@ test("only the collection, print-text, and law-change context steps receive the 
   assert.match(step("Collect source records"), /--resolution-cache automation\/government-resolutions/);
   // Reading resolutions stops after 120 minutes; the step limit leaves room
   // for the other sources.
-  assert.match(step("Collect source records"), /timeout-minutes: 150/);
+  assert.match(step("Collect source records"), /timeout-minutes: 210/);
   assert.equal(workflow.match(/ESEL_API_ACCESS_KEY/g).length, 6);
 });
 

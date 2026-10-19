@@ -1,6 +1,7 @@
 import { unzipSync } from "fflate";
-import { normalizeSearchText } from "./attribution.mjs";
+import { isDecisiveAction, normalizeSearchText } from "./attribution.mjs";
 import { officialPrintDocumentPageUrl } from "./psp-print-documents.mjs";
+import { amendmentDocumentType, amendmentSummaryKindId, collectAmendments } from "./psp-amendments.mjs";
 import { log } from "./run-log.mjs";
 import {
   cleanText,
@@ -30,6 +31,12 @@ const schemas = {
   eklepLink: ["pid", "ovaNumber", "ovaYear", "isPublic", "printId", "partNumber"],
   // schuze.zip; only the leading columns this collector reads are declared.
   session: ["sessionId", "organId", "number", "from", "to", "updatedAt", "isInvitation"],
+  // sd.zip (psp.cz k=1309): the parliamentary documents, among them the
+  // written amendments.
+  parliamentaryDocument: ["documentId", "termOrganId", "number", "type", "titleCz", "proposerText", "printNumber", "personId", "endedAt"],
+  // steno.zip (psp.cz k=1310): the turns of the stenographic record, with
+  // their minutes since midnight.
+  stenoTurn: ["stenoId", "organId", "session", "turn", "date", "day", "fromMinute", "toMinute"],
   agendaItem: ["agendaItemId", "sessionId", "printId", "typeId", "number", "fullTitle", "fullSuffix", "note", "stateId", "isInvitation"]
 };
 
@@ -150,9 +157,13 @@ export function derivePartyVoteSummaries(individualVotes, { voteTypeCode = "N", 
     const eligibleMemberCount = members.size;
     const directionalVoteCount = counts.yes + counts.no;
     const strictMajorityThreshold = Math.floor(eligibleMemberCount / 2) + 1;
+    // A measure needs the votes of more than half of the members present
+    // (Constitution, Art. 39(2)), so abstaining or not voting while
+    // registered has the same effect as voting no: a club whose members did
+    // so by strict majority did not support it (docs/scoring.md).
     let majorityChoice = null;
     if (counts.yes >= strictMajorityThreshold) majorityChoice = "yes";
-    else if (counts.no >= strictMajorityThreshold) majorityChoice = "no";
+    else if (counts.no + counts.abstained + counts.notVoting >= strictMajorityThreshold) majorityChoice = "no";
 
     let attributionStatus = majorityChoice ? "attributed" : "no-strict-majority";
     if (voidedByOfficialRecord) attributionStatus = "voided-vote";
@@ -166,7 +177,7 @@ export function derivePartyVoteSummaries(individualVotes, { voteTypeCode = "N", 
       counts,
       majorityChoice: attributionStatus === "attributed" ? majorityChoice : null,
       attributionStatus,
-      ruleVersion: "party-vote-strict-majority-v3"
+      ruleVersion: "party-vote-strict-majority-v4"
     };
   });
 }
@@ -250,7 +261,7 @@ const governmentOpinionKindId = "7";
 const governmentOpinionPrintKindIds = new Set(["2"]);
 const governmentOpinionResults = { souhlas: "agrees", nesouhlas: "disagrees", neutralni: "neutral" };
 
-export function normalizePspData({ source, since, votesEntries, membersEntries, printsEntries, sessionsEntries, governmentPeriods }) {
+export function normalizePspData({ source, since, votesEntries, membersEntries, printsEntries, sessionsEntries, documentsEntries = null, stenoEntries = null, governmentPeriods }) {
   validateGovernmentPeriods(governmentPeriods);
   const voteRows = parseUnl(decodeEntry(votesEntries, `hl${source.term.year}s.unl`), schemas.vote)
     .filter((row) => row.organId === String(source.term.organId));
@@ -325,10 +336,12 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
   const resultById = new Map(parseUnl(decodeEntry(printsEntries, "vysledek.unl"), schemas.result).map((row) => [row.resultId, cleanText(row.description, 200)]));
   const senateResolutionParts = new Map();
   const governmentOpinionRows = [];
+  const amendmentSummaryRows = [];
   for (const row of parseUnl(decodeEntry(printsEntries, "tisky_za.unl"), schemas.subPrint)) {
     // A revoked sub-print (status 1 or 2) no longer stands.
     if (!printById.has(row.printId) || revokedSubPrintStatuses.has(row.status)) continue;
     if (row.kindId === governmentOpinionKindId) governmentOpinionRows.push(row);
+    if (row.kindId === amendmentSummaryKindId) amendmentSummaryRows.push(row);
     if (row.kindId !== senateResolutionKindId) continue;
     senateResolutionParts.set(row.printId, [...(senateResolutionParts.get(row.printId) ?? []), numeric(row.partNumber)].sort((left, right) => left - right));
   }
@@ -601,7 +614,130 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     })
   };
 
-  return { records: deduplicateRecords(records), referenceData, warnings };
+  const amendmentPlan = planAmendments({ source, printById, historyRows, amendmentSummaryRows, recentVotes, agendaItemByKey, historyByVote, historyTables, documentsEntries, stenoEntries, membershipsByPerson, clubs, people });
+  return { records: deduplicateRecords(records), referenceData, warnings, amendmentPlan };
+}
+
+// What the amendments of the term are read from (collectAmendments in
+// psp-amendments.mjs, docs/evidence-pipeline.md, Amendment data rules): the
+// summaries of the amendments presented in the second reading, the written
+// amendments of sd.zip, the MPs in a club on a date, the votes that can be on
+// an amendment, and the turns of the stenographic record.
+function planAmendments({ source, printById, historyRows, amendmentSummaryRows, recentVotes, agendaItemByKey, historyByVote, historyTables, documentsEntries, stenoEntries, membershipsByPerson, clubs, people }) {
+  const historyById = new Map(historyRows.map((row) => [row.historyId, row]));
+  const printByNumber = new Map([...printById.values()].filter((print) => print.partNumber === "0").map((print) => [print.number, print]));
+  // A summary is distributed after the second reading; the history step it
+  // follows dates the presentation when the summary itself states no date.
+  const summaries = amendmentSummaryRows.filter((row) => pspDateTime(row.distributedAt)).map((row) => {
+    const print = printById.get(row.printId);
+    return {
+      printId: row.printId,
+      printKindId: print.kindId,
+      printNumber: numeric(print.number),
+      printTitleCz: cleanText(print.fullTitle || print.shortTitle, 1000),
+      partNumber: numeric(row.partNumber),
+      distributedOn: pspDateTime(row.distributedAt).slice(0, 10),
+      presentedOn: (pspDateTime(historyById.get(row.historyId)?.dateTime) ?? pspDateTime(row.distributedAt)).slice(0, 10)
+    };
+  });
+  const documents = new Map();
+  if (documentsEntries) {
+    for (const row of parseUnl(decodeEntry(documentsEntries, "sd_dokument.unl"), schemas.parliamentaryDocument)) {
+      if (row.termOrganId !== String(source.term.organId) || row.type !== amendmentDocumentType) continue;
+      const print = printByNumber.get(row.printNumber);
+      documents.set(row.number, { number: row.number, printNumber: numeric(row.printNumber), printId: print?.printId ?? null, personId: row.personId, submittedOn: pspDateTime(row.endedAt)?.slice(0, 10) ?? null });
+    }
+  }
+  const candidatesByDate = new Map();
+  const candidatesOn = (date) => {
+    if (!candidatesByDate.has(date)) {
+      // One entry per MP; on the day one club membership ends and the next
+      // starts, both count, as for a member bill's proposers.
+      candidatesByDate.set(date, [...membershipsByPerson].flatMap(([personId, memberships]) => {
+        const active = memberships.filter((membership) => activeOn(membership, date));
+        if (active.length === 0) return [];
+        return [{
+          personId,
+          givenName: people.get(personId)?.givenName ?? "",
+          surname: people.get(personId)?.surname ?? "",
+          partyIds: [...new Set(active.map((membership) => source.partyAliases[clubs.get(membership.entityId)?.abbreviation]).filter(Boolean))]
+        }];
+      }));
+    }
+    return candidatesByDate.get(date);
+  };
+  // A vote can be on an amendment when it is on the agenda item of a bill
+  // with a summary, on or after the day the summary was distributed, and is
+  // not a decisive step of any bill.
+  const amendmentVotes = [];
+  for (const vote of recentVotes) {
+    const agendaItem = agendaItemByKey.get(`${vote.session}:${Number(vote.agenda)}`);
+    const date = pspDate(vote.date);
+    // A bill sent back to the second reading has a later summary; a vote
+    // is on the amendments of the latest one distributed by its day.
+    const summary = agendaItem && date
+      ? summaries.filter(({ printId, distributedOn }) => printId === agendaItem.printId && distributedOn <= date).sort((left, right) => right.distributedOn.localeCompare(left.distributedOn) || right.partNumber - left.partNumber)[0] ?? null
+      : null;
+    if (!summary) continue;
+    // A vote decisive on any print it is linked to is that print's decisive
+    // vote, never an amendment vote (attribution.mjs checks every linked
+    // print the same way).
+    const decisive = (historyByVote.get(vote.id) ?? []).some((history) => isDecisiveAction(historyContext(history, historyTables).actionCz));
+    if (decisive) continue;
+    amendmentVotes.push({ voteId: vote.id, printId: summary.printId, summaryPartNumber: summary.partNumber, sessionNumber: numeric(vote.session), date, time: vote.time });
+  }
+  const stenoTurns = stenoEntries
+    ? parseUnl(decodeEntry(stenoEntries, "steno.unl"), schemas.stenoTurn)
+      .filter((row) => row.organId === String(source.term.organId))
+      .map((row) => ({ session: numeric(row.session), turn: numeric(row.turn), date: row.date?.slice(0, 10) ?? null, from: numeric(row.fromMinute), to: numeric(row.toMinute) }))
+    : [];
+  return { summaries, documents, candidatesOn, amendmentVotes, stenoTurns };
+}
+
+const amendmentKind = "member-amendment";
+
+/**
+ * The record of one amendment an MP submitted and presented in the second
+ * reading: conduct of every tracked party with a proposing MP in its club on
+ * the day it was presented (docs/scoring.md). Its text is its law changes'
+ * reading of it, so it goes into the package as its own evidence.
+ */
+function amendmentRecord(source, amendment) {
+  return createCollectedRecord({
+    id: `${source.id}--amendment-${amendment.documentNumber}`,
+    sourceId: source.id,
+    kind: amendmentKind,
+    primary: true,
+    evidenceRole: source.evidenceRole,
+    occurredAt: `${amendment.presentedOn}T00:00:00`,
+    timeZone: "Europe/Prague",
+    title: `SD ${amendment.documentNumber}: Pozměňovací návrh ${amendment.label} k tisku ${amendment.printNumber} — ${amendment.printTitleCz}`,
+    publisher: source.publisher,
+    url: amendment.pageUrl,
+    payload: {
+      documentNumber: amendment.documentNumber,
+      externalPrintId: amendment.externalPrintId,
+      printKindId: amendment.printKindId,
+      printNumber: amendment.printNumber,
+      printTitleCz: amendment.printTitleCz,
+      printUrl: officialPrintUrl(source.term.number, amendment.printNumber),
+      summaryPartNumber: amendment.summaryPartNumber,
+      label: amendment.label,
+      presenterCz: amendment.presenterCz,
+      presentedOn: amendment.presentedOn,
+      submittedOn: amendment.submittedOn,
+      parts: amendment.parts,
+      document: amendment.document,
+      paragraphs: amendment.paragraphs,
+      proposal: { kind: amendmentKind, proposerPartyIds: amendment.proposerPartyIds, proposerPersonIds: amendment.proposerPersonIds, unmatchedProposerNames: amendment.unmatchedProposerNames }
+    }
+  });
+}
+
+// A vote record with the amendment the vote was on (collectAmendments).
+function withAmendmentVote(record, link) {
+  const { schemaVersion, contentHash, ...fields } = record;
+  return createCollectedRecord({ ...fields, payload: { ...record.payload, amendmentVote: link } });
 }
 
 // The official files are downloaded one after the other through `fetchPsp`
@@ -620,7 +756,7 @@ export async function collectPspSource(source, options) {
     log(`${source.id}: downloaded ${name} (${(response.bytes.byteLength / 1_000_000).toFixed(1)} MB in ${((Date.now() - startedAt) / 1000).toFixed(1)} s)`);
     responses.push([name, response]);
   }
-  log(`${source.id}: parsing votes, members, prints, and sessions`);
+  log(`${source.id}: parsing votes, members, prints, sessions, parliamentary documents, and the stenographic record`);
   const responseByName = Object.fromEntries(responses);
   const normalized = normalizePspData({
     source,
@@ -629,8 +765,22 @@ export async function collectPspSource(source, options) {
     membersEntries: archiveEntries(responseByName.members.bytes, `${source.id}:members`),
     printsEntries: archiveEntries(responseByName.prints.bytes, `${source.id}:prints`),
     sessionsEntries: archiveEntries(responseByName.sessions.bytes, `${source.id}:sessions`),
+    documentsEntries: archiveEntries(responseByName.documents.bytes, `${source.id}:documents`),
+    stenoEntries: archiveEntries(responseByName.steno.bytes, `${source.id}:steno`),
     governmentPeriods: options.governmentPeriods
   });
+  // The amendments and the votes on them (docs/evidence-pipeline.md,
+  // Amendment data rules), through the same psp.cz limit and the document
+  // cache.
+  const plan = normalized.amendmentPlan;
+  log(`${source.id}: reading ${plan.summaries.length} summaries of amendments, the written amendments they list, and the stenographic record of ${plan.amendmentVotes.length} votes that can be on an amendment`);
+  const amendments = await collectAmendments({ source, plan, fetchPsp: options.fetchPsp, documentCache: options.documentCache });
+  const q = amendments.quality;
+  log(`${source.id}: ${q.amendments} amendments presented with a readable text (${q.documentsListed} documents listed in ${q.summaries} summaries, ${q.documentsNotInOpenData} not in sd.zip, ${q.documentsWithoutText} without a readable text; ${q.documentsNotListed} written amendments not listed); proposer names ${q.proposerNames}, ${q.proposerNamesUnmatched} not matched; ${q.votesLinked} of ${q.votes} votes linked to their amendment, not linked ${JSON.stringify(q.votesNotLinked)}; ${q.stenoTurnsRead} turns of the stenographic record read`);
+  const records = [
+    ...normalized.records.map((record) => (record.kind === "parliamentary-vote" && amendments.voteLinks.has(record.payload.externalVoteId) ? withAmendmentVote(record, amendments.voteLinks.get(record.payload.externalVoteId)) : record)),
+    ...amendments.amendments.filter(({ presentedOn }) => presentedOn >= (options.since ?? "0000-00-00")).map((amendment) => amendmentRecord(source, amendment))
+  ];
   return {
     sourceId: source.id,
     collector: source.collector,
@@ -642,8 +792,8 @@ export async function collectPspSource(source, options) {
       etag: response.etag,
       contentHash: response.contentHash
     }])),
-    records: normalized.records,
-    warnings: normalized.warnings,
-    referenceData: normalized.referenceData
+    records: deduplicateRecords(records),
+    warnings: [...normalized.warnings, ...amendments.warnings],
+    referenceData: { ...normalized.referenceData, amendmentQuality: amendments.quality }
   };
 }

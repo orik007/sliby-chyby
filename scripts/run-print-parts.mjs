@@ -4,8 +4,8 @@ import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError, workflowRunId } from "./lib/e-sbirka.mjs";
-import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
-import { createPspDocumentRecorder } from "./lib/psp-document-hashes.mjs";
+import { allSettledOrThrow, createPspFetcher, createPspRequestLog, decodePspPage, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspPageOptions, pspProxyUrl } from "./lib/psp-print-documents.mjs";
+import { anyPspDocumentFileOptions, createPspDocumentCache, pspDocumentExtractions, pspDocumentFileOptions } from "./lib/psp-document-cache.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { collectPrints, governmentOpinionSectionLabels, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
@@ -22,18 +22,19 @@ import { loadTrackedPromises } from "./lib/published-promises.mjs";
  * promulgated, that version's text is the act as promulgated, read from the
  * e-Sbírka REST API through the permanent law-context cache (--cache). A
  * failed download fails the run; a text that psp.cz lists without a DOCX or
- * DOC file is treated as not published and reported. With
- * --document-hashes, the content of every downloaded Word file is recorded
- * under its psp.cz document ID (scripts/lib/psp-document-hashes.mjs).
+ * DOC file is treated as not published and reported. A Word file under a
+ * psp.cz document ID does not change, so its text is read from the document
+ * cache (--document-cache, scripts/lib/psp-document-cache.mjs) once it was
+ * downloaded; only the pages that list the files are read in every run.
  */
 function parseArgs(args) {
-  const options = { collectorRun: null, output: null, documentHashes: null, cache: "automation/law-context", sourceRegistry: "automation/collectors/sources.json" };
+  const options = { collectorRun: null, output: null, documentCache: "automation/psp-documents", cache: "automation/law-context", sourceRegistry: "automation/collectors/sources.json" };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--sources") options.sourceRegistry = args[++index];
-    else if (arg === "--document-hashes") options.documentHashes = args[++index];
+    else if (arg === "--document-cache") options.documentCache = args[++index];
     else if (arg === "--cache") options.cache = args[++index];
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -41,36 +42,26 @@ function parseArgs(args) {
   return options;
 }
 
-const htmlOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };
-const wordOptions = {
-  docx: { maxBytes: 20_000_000, expectedContentTypes: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"] },
-  doc: { maxBytes: 20_000_000, expectedContentTypes: ["application/msword", "application/octet-stream"] }
-};
 const extractParagraphs = { docx: extractDocxParagraphs, doc: extractDocParagraphs };
-const decodePage = (page) => new TextDecoder("windows-1250").decode(page.bytes);
+const extractionNames = { docx: pspDocumentExtractions.docxParagraphs, doc: pspDocumentExtractions.docParagraphs };
 
 // A downloaded DOCX or DOC file that cannot be read as text (for example a
 // scanned image) is treated like a text that is not published: reported,
 // never fatal. A failed download still fails the run.
 async function fetchWordText(source, url, filename, format, warnings, printNumber, version) {
-  const file = await fetchPsp(source, url, wordOptions[format]);
-  let paragraphs = null;
-  try {
-    paragraphs = await extractParagraphs[format](file.bytes);
-    return { document: { filename, url: file.finalUrl }, paragraphs: proposalBody(paragraphs) };
-  } catch (error) {
-    warnings.push({ printNumber, kind: `unreadable-${format}`, version, detail: `${filename}: ${error instanceof Error ? error.message : String(error)}` });
+  const { value: paragraphs, error } = await documentCache.read(url, extractionNames[format], extractParagraphs[format], async () => (await fetchPsp(source, url, pspDocumentFileOptions[format])).bytes);
+  if (error) {
+    warnings.push({ printNumber, kind: `unreadable-${format}`, version, detail: `${filename}: ${error}` });
     return null;
-  } finally {
-    documentRecorder?.record({ url, bytes: file.bytes, paragraphs });
   }
+  return { document: { filename, url }, paragraphs: proposalBody(paragraphs) };
 }
 
 // The Word file listed in a print page's proposal-text section: the
 // proposal itself (part 0), a Senate resolution sub-print ("Text"), or the
 // sub-print with the text referred to the Senate ("Text").
 async function fetchPageText(source, pageUrl, printNumber, warnings, version, sectionLabels = undefined) {
-  const link = proposalDocumentLink(decodePage(await fetchPsp(source, pageUrl, htmlOptions)), pageUrl, sectionLabels);
+  const link = proposalDocumentLink(decodePspPage(await fetchPsp(source, pageUrl, pspPageOptions)), pageUrl, sectionLabels);
   return link ? fetchWordText(source, link.url, link.filename, link.format, warnings, printNumber, version) : null;
 }
 
@@ -82,7 +73,7 @@ function fetchPrintPageText(source, termNumber, printNumber, partNumber, warning
 const laterTextNames = { approved: (number) => `Schválený text tisku ${number} (DOCX)`, passed: (number) => `Text tisku ${number} přijatý Parlamentem (DOCX)` };
 
 async function laterText(source, print, version, url, warnings) {
-  const docxUrl = laterTextDocxLink(decodePage(await fetchPsp(source, url, htmlOptions)), url);
+  const docxUrl = laterTextDocxLink(decodePspPage(await fetchPsp(source, url, pspPageOptions)), url);
   if (!docxUrl) {
     warnings.push({ printNumber: print.number, kind: "later-text-without-docx", version, detail: `the ${version} text is listed without a DOCX file` });
     return null;
@@ -122,9 +113,9 @@ async function fetchPrintTexts(source, print, termNumber) {
   const historyUrl = officialPrintHistoryUrl(termNumber, print.number);
   const [proposal, historyPage] = await allSettledOrThrow([
     fetchPrintPageText(source, termNumber, print.number, print.partNumber, warnings, "proposed"),
-    bill ? fetchPsp(source, historyUrl, htmlOptions) : null
+    bill ? fetchPsp(source, historyUrl, pspPageOptions) : null
   ]);
-  const history = historyPage ? decodePage(historyPage) : null;
+  const history = historyPage ? decodePspPage(historyPage) : null;
   const links = history ? laterTextLinks(history, historyUrl) : { approved: null, passed: null, referredToSenate: null };
   // Without an approved-text page, the approved text is the sub-print with
   // the text referred to the Senate, when the history links one.
@@ -162,10 +153,13 @@ if (proxyUrl) log("psp.cz requests go through the proxy in PSP_PROXY_URL");
 // undici reports an IPv6 host without its brackets.
 const pspRequests = createPspRequestLog({ ...(proxyUrl ? { hostname: new URL(proxyUrl).hostname.replace(/^\[(.*)\]$/, "$1") } : {}), onEntry: (entry) => appendFileSync(pspRequestFile, `${JSON.stringify(entry)}\n`) });
 const fetchPsp = createPspFetcher({ ...pspDownloadSettings, proxyUrl, onAttempt: pspRequests.onAttempt });
-// The record of the content under each psp.cz document ID, dated by the
-// run's Prague calendar date (scripts/lib/psp-document-hashes.mjs).
+// The text of every psp.cz Word file read so far, under its document ID,
+// dated by the run's Prague calendar date (scripts/lib/psp-document-cache.mjs).
 const runDate = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
-const documentRecorder = args.documentHashes ? createPspDocumentRecorder(resolve(args.documentHashes), runDate) : null;
+const documentCache = createPspDocumentCache(resolve(args.documentCache), runDate);
+// The files checked again in every run, oldest check first
+// (docs/evidence-pipeline.md, Chamber data rules).
+const documentSampleSize = 20;
 
 const registry = validateRegistry(JSON.parse(await readFile(resolve(args.sourceRegistry), "utf8")));
 const source = registry.sources.find(({ id }) => id === "psp-core-2025");
@@ -219,28 +213,18 @@ async function downloadWorker() {
     tick(`print ${print.number}: ${versions.length > 0 ? versions.join(", ") : "no DOCX or DOC proposal text, title only"}${result.senateResolutions.length > 0 ? `, ${result.senateResolutions.length} Senate resolution(s)` : ""}${result.governmentOpinions.length > 0 ? `, ${result.governmentOpinions.length} government opinion(s)` : ""}, ${((Date.now() - startedAt) / 1000).toFixed(1)} s`);
   }
 }
-let recordError = null;
 try {
   await allSettledOrThrow(Array.from({ length: Math.min(pspDownloadSettings.concurrency, prints.length) }, downloadWorker));
+  // The files checked longest ago are downloaded again; one that changed
+  // under its ID fails the run.
+  const checked = await documentCache.checkSample(async (url) => (await fetchPsp(source, url, anyPspDocumentFileOptions)).bytes, documentSampleSize);
+  log(`psp.cz document cache: ${documentCache.size()} files, ${documentCache.stats.fromCache} texts read from it, ${documentCache.stats.downloaded} downloaded in this run, ${checked.length} checked again and unchanged`);
 } finally {
   await fetchPsp.close();
   pspRequests.stop();
   const usage = pspRequests.summary();
   log(`psp.cz requests: ${usage.attempts} attempts for ${usage.urls} URLs in ${usage.minutes} min (${usage.attemptsPerMinute ?? "-"}/min, at most ${usage.busiestMinuteAttempts} in any 60 s), ${usage.failedAttempts} failed ${JSON.stringify(usage.failedAttemptsBy)}; ${usage.connections} new connections (${usage.connectionsPerMinute ?? "-"}/min, at most ${usage.busiestMinuteConnections} in any 60 s), ${usage.failedConnections} failed ${JSON.stringify(usage.failedConnectionsBy)}`);
-  if (documentRecorder) {
-    // Saved even after a failed download; a record that cannot be saved
-    // fails the step after the download error, if any, is reported.
-    try {
-      documentRecorder.flush();
-    } catch (error) {
-      recordError = error;
-    }
-    const hashes = documentRecorder.summary();
-    const list = (ids) => (ids.length > 0 ? ` (${ids.join(", ")})` : "");
-    log(`psp.cz document IDs: ${hashes.documents} recorded, ${hashes.added} new in this run, ${hashes.fileChanged.length} with a changed file${list(hashes.fileChanged)}, ${hashes.textChanged.length} with only a changed text${list(hashes.textChanged)}`);
-  }
 }
-if (recordError) throw recordError;
 
 // The act as promulgated, for each version a decisive vote concerned that
 // psp.cz does not publish (docs/evidence-pipeline.md, Text from the Collection of Laws). Every

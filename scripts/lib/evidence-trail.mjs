@@ -11,7 +11,7 @@ function invariant(condition, message) {
 
 // Official print kinds (tisky.zip druh_tisku.unl) of a government proposal.
 const governmentProposalKinds = { 1: "government-bill", 3: "state-budget", 4: "treaty" };
-const stepOrder = { submission: 0, "government-opinion": 1, "senate-resolution": 2, vote: 3 };
+const stepOrder = { submission: 0, "government-opinion": 1, amendment: 2, "amendment-vote": 3, "senate-resolution": 4, vote: 5 };
 
 function proposalKind(facts) {
   if (facts.proposal.kind === "member-bill") return "member-bill";
@@ -27,6 +27,7 @@ function proposalKind(facts) {
 function versionNote(concern, entry) {
   if (concern.removed) return "removed";
   if (!entry?.document?.url) return "text-not-published";
+  if (concern.mark === "amendment" || concern.mark === "amendment-vote") return "amended-proposal";
   if (concern.publishedVersionMissing) return "published-version-missing";
   if (concern.mark === "third-reading-rejection") return "third-reading-rejection";
   if (entry.promulgatedAct) return "promulgated-text";
@@ -37,7 +38,7 @@ function printUrlOf(printId, conduct) {
   for (const item of conduct) {
     const facts = item.structuredFacts;
     if (item.type === "legislative-step" && String(facts.externalPrintId) === printId) return item.url;
-    if (item.type === "government-opinion" && String(facts.externalPrintId) === printId) return facts.printUrl;
+    if ((item.type === "government-opinion" || item.type === "member-amendment") && String(facts.externalPrintId) === printId) return facts.printUrl;
     const linked = (facts.linkedPrints ?? []).find((print) => String(print.externalPrintId) === printId);
     if (linked?.url) return linked.url;
   }
@@ -72,7 +73,32 @@ function stepFromConduct(item, printId, changes) {
   if (item.type === "government-opinion") {
     return { kind: "government-opinion", evidenceId: item.id, date: item.publishedAt, opinion: facts.opinion, printPartCz: `${facts.printNumber}/${facts.partNumber}`, url: item.url, ...textOf(item, changes) };
   }
+  // An amendment links to its parliamentary document on psp.cz.
+  if (item.type === "member-amendment") {
+    return { kind: "amendment", evidenceId: item.id, date: facts.presentedOn, labelCz: facts.label, documentNumber: Number(facts.documentNumber), presenterCz: facts.presenterCz, url: item.url, ...textOf(item, changes) };
+  }
   invariant(item.type === "parliamentary-vote", `Unsupported conduct ${item.id}`);
+  // A vote on an amendment links to the vote and to the passage of the
+  // stenographic record that names the amendment.
+  if (facts.amendmentVote) {
+    const club = facts.relevantPartyVoteSummary;
+    invariant(club?.attributionStatus === "attributed", `Amendment vote ${item.id} has no club majority`);
+    const { yes, no, abstained, notVoting, absent, unknown } = club.counts;
+    const amendment = facts.amendmentVote;
+    return {
+      kind: "amendment-vote",
+      evidenceId: item.id,
+      date: item.publishedAt,
+      url: item.url,
+      labelCz: amendment.variant ? `${amendment.label}, varianta ${amendment.variant}` : amendment.label,
+      documentNumbers: amendment.documentNumbers.map(Number),
+      presenterCz: amendment.presenterCz,
+      stenoUrl: amendment.stenoUrl,
+      club: club.majorityChoice,
+      counts: { yes, no, abstained, notVoting, absent, unknown },
+      ...textOf(item, changes)
+    };
+  }
   const linkedPrint = (facts.linkedPrints ?? []).find((print) => String(print.externalPrintId) === printId);
   const context = (linkedPrint?.historyContexts ?? []).find(({ actionCz }) => isDecisiveAction(actionCz));
   invariant(context, `Vote ${item.id} has no decisive history step on print ${printId}`);

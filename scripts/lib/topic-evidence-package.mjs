@@ -1,5 +1,5 @@
 import { sha256 } from "./collector-core.mjs";
-import { assessableAttributionStatuses, attributionStatusForRecord, factSummary, isPotentiallyAttributable, normalizedStructuredFacts, versionConcerned } from "./attribution.mjs";
+import { amendmentConcernsChange, assessableAttributionStatuses, attributionStatusForRecord, factSummary, isPotentiallyAttributable, normalizedStructuredFacts, versionConcerned } from "./attribution.mjs";
 import { validateEvidencePackage } from "./assessment-pipeline.mjs";
 import { changeThroughVersion, lawChangeOfRegulation, lawChangeOfResolution, namedActsFromPrintTitle, versionKeys, versionLabels, versionOfChange } from "./print-parts.mjs";
 
@@ -74,7 +74,73 @@ export function conductOfRun(collectorRun, asOf, trackedPartyIds) {
       if (!printFirstSeenOn.has(printId) || date < printFirstSeenOn.get(printId)) printFirstSeenOn.set(printId, date);
     }
   }
-  return { primaryRecordsInWindow, conductRecords, recordsByPrintId, printFirstSeenOn };
+  // Every amendment presented by the cutoff, also one that is no tracked
+  // party's conduct: a vote on it can be.
+  const amendmentRecords = primaryRecordsInWindow.filter(({ kind }) => kind === "member-amendment");
+  return { primaryRecordsInWindow, conductRecords, recordsByPrintId, printFirstSeenOn, amendmentRecords };
+}
+
+// The conduct on an amendment: its submission, or a vote on it.
+function isAmendmentConduct(record) {
+  return record.kind === "member-amendment" || (record.kind === "parliamentary-vote" && Boolean(record.payload?.amendmentVote));
+}
+
+// The bill an amendment, or a vote on it, amends; a vote record also names
+// other prints linked to it.
+function amendedPrintId(record) {
+  return String(record.kind === "member-amendment" ? record.payload.externalPrintId : record.payload.amendmentVote.externalPrintId);
+}
+
+// The parliamentary documents of the amendments a conduct concerns.
+function amendmentDocumentNumbers(record) {
+  if (record.kind === "member-amendment") return [record.payload.documentNumber];
+  return record.payload?.amendmentVote?.documentNumbers ?? [];
+}
+
+// The amendments that concern a law change, by document and text hash: no
+// evidence ID, because the package holds the text only of the amendments the
+// party's conduct names.
+function amendmentHashes(change) {
+  return (change.amendments ?? []).map(({ documentNumber, textSha256 }) => ({ documentNumber, textSha256 }));
+}
+
+export function amendmentEvidenceId(documentNumber) {
+  return `psp-core-2025--amendment-text-${documentNumber}`;
+}
+
+/**
+ * Each law change with the amendments that concern it
+ * (docs/evidence-pipeline.md, Amendment data rules): those with conduct of a
+ * tracked party on its print (their submission or a vote on them) whose
+ * parts are the change's, or that name none of the print's parts, each with
+ * its text from its record. `printPartHeadings` lists the proposed part
+ * headings of the print, by which an amendment is matched to its part.
+ */
+export function withAmendments(changes, recordsByPrintId, amendmentRecords) {
+  const amendmentByNumber = new Map(amendmentRecords.map((record) => [record.payload.documentNumber, record]));
+  const headingsByPrint = new Map();
+  for (const change of changes) {
+    const heading = change.versions?.proposed?.heading?.toLocaleUpperCase("cs-CZ");
+    if (heading) headingsByPrint.set(change.printId, [...(headingsByPrint.get(change.printId) ?? []), heading]);
+  }
+  return changes.map((change) => {
+    const printPartHeadings = headingsByPrint.get(change.printId) ?? [];
+    const numbers = new Set((recordsByPrintId.get(change.printId) ?? [])
+      .filter((record) => isAmendmentConduct(record) && amendedPrintId(record) === String(change.printId) && amendmentConcernsChange(record, change, printPartHeadings))
+      .flatMap(amendmentDocumentNumbers));
+    const amendments = [...numbers].sort((left, right) => Number(left) - Number(right)).map((number) => amendmentByNumber.get(number)).filter(Boolean).map(({ payload, url }) => ({
+      documentNumber: payload.documentNumber,
+      label: payload.label,
+      presenterCz: payload.presenterCz,
+      presentedOn: payload.presentedOn,
+      proposerPartyIds: payload.proposal.proposerPartyIds,
+      parts: payload.parts,
+      document: payload.document,
+      pageUrl: url,
+      textCz: payload.paragraphs.join("\n")
+    })).map((amendment) => ({ ...amendment, textSha256: sha256(amendment.textCz) }));
+    return { ...change, printPartHeadings, amendments };
+  });
 }
 
 /**
@@ -82,16 +148,16 @@ export function conductOfRun(collectorRun, asOf, trackedPartyIds) {
  * the one law change of each government regulation, ministerial decree, and
  * government resolution, whose record carries its text.
  */
-export function lawChangesOfRun(printParts, recordsByPrintId) {
+export function lawChangesOfRun(printParts, recordsByPrintId, amendmentRecords = []) {
   const regulationChanges = [...recordsByPrintId.values()].flat()
     .filter(({ kind }) => kind === "regulation-adoption" || kind === resolutionKind)
     .map((record) => (record.kind === resolutionKind ? lawChangeOfResolution : lawChangeOfRegulation)(record.payload, record.url));
-  return lawChangesAtCutoff([
+  return withAmendments(lawChangesAtCutoff([
     ...Object.entries(printParts.prints)
       .filter(([printId]) => recordsByPrintId.has(printId))
       .flatMap(([, print]) => print.changes),
     ...[...new Map(regulationChanges.map((change) => [change.changeId, change])).values()]
-  ], recordsByPrintId);
+  ], recordsByPrintId), recordsByPrintId, amendmentRecords);
 }
 
 /**
@@ -104,6 +170,8 @@ export function attributableConductOnChange(records, promise, change) {
   return records
     .map((record) => ({ record, attributionStatus: attributionStatusForRecord(record, promise).attributionStatus }))
     .filter(({ attributionStatus }) => assessableAttributionStatuses.has(attributionStatus))
+    // An amendment, and a vote on it, concern only the parts it amends.
+    .filter(({ record }) => !isAmendmentConduct(record) || (amendedPrintId(record) === String(change.printId) && amendmentConcernsChange(record, change, change.printPartHeadings ?? [])))
     .map((item) => ({ ...item, version: versionOfChange(change, versionConcerned(item.record, change.printId)) }))
     .filter(({ version }) => version !== null);
 }
@@ -183,7 +251,10 @@ function evidenceFromLawChange(change, route, publishedAt, senateResolutionIds) 
       acts: change.acts,
       addedIn: change.addedIn,
       versions: change.versions,
-      senateResolutionEvidenceIds: senateResolutionIds
+      senateResolutionEvidenceIds: senateResolutionIds,
+      // The amendments that concern this change, by the hash of their text,
+      // so a verdict on the change no longer holds when they change.
+      ...(change.amendments?.length > 0 ? { amendments: amendmentHashes(change) } : {})
     },
     sourceRecordHash: sha256(change.versions),
     matchBasis: {
@@ -270,11 +341,13 @@ function evidenceFromResolution(change, route, publishedAt) {
 }
 
 // The government's opinion on a bill it did not submit carries its own text
-// (docs/evidence-pipeline.md, Package), null when psp.cz publishes none.
+// (docs/evidence-pipeline.md, Package), null when psp.cz publishes none. An
+// amendment and a vote on it name the amendment's text, a package item of
+// its own.
 function evidenceFromConduct({ record, attributionStatus }, promise, concerns, opinionText = null) {
   const opinion = record.kind === "government-opinion"
     ? { textCz: opinionText?.textCz ?? null, document: opinionText?.document ?? null }
-    : {};
+    : isAmendmentConduct(record) ? { amendmentEvidenceIds: amendmentDocumentNumbers(record).map(amendmentEvidenceId) } : {};
   return {
     id: record.id,
     role: "conduct-evidence",
@@ -308,6 +381,25 @@ function evidenceFromSenateResolution(change, resolution, publishedAt) {
     factSummary: `The Senate's resolution on print ${change.printNumber}, rejecting the bill or returning it with amendments, as published by the Chamber of Deputies (sub-print ${change.printNumber}/${resolution.partNumber}).`,
     structuredFacts: { externalPrintId: change.printId, printNumber: change.printNumber, partNumber: resolution.partNumber, textCz: resolution.textCz },
     sourceRecordHash: sha256(resolution.textCz)
+  };
+}
+
+// The text of an amendment presented in the second reading, once per
+// package, from its parliamentary document; dated by its presentation.
+function evidenceFromAmendment(change, amendment) {
+  return {
+    id: amendmentEvidenceId(amendment.documentNumber),
+    role: "amendment",
+    type: "amendment",
+    title: `${change.printNumber}: amendment ${amendment.label} (SD ${amendment.documentNumber}), presented by ${amendment.presenterCz}`,
+    publisher: "Chamber of Deputies of the Parliament of the Czech Republic",
+    publishedAt: amendment.presentedOn,
+    url: amendment.document.url,
+    locator: amendment.document.filename,
+    primary: true,
+    factSummary: `Amendment ${amendment.label} to print ${change.printNumber}, parliamentary document ${amendment.documentNumber}, presented in the second reading on ${amendment.presentedOn} by ${amendment.presenterCz}; it amends the text of the bill, not the act itself${amendment.parts.length > 0 ? `, and names ${amendment.parts.join(", ")}` : ""}.`,
+    structuredFacts: { externalPrintId: change.printId, printNumber: change.printNumber, documentNumber: amendment.documentNumber, label: amendment.label, presenterCz: amendment.presenterCz, presentedOn: amendment.presentedOn, proposerPartyIds: amendment.proposerPartyIds, parts: amendment.parts, pageUrl: amendment.pageUrl, textCz: amendment.textCz },
+    sourceRecordHash: amendment.textSha256
   };
 }
 
@@ -459,7 +551,7 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
     // A later text adds nothing to judging this conduct and may not have
     // existed at the package cutoff.
     const change = changeThroughVersion(fullChange, lastVersion);
-    const excluded = exclusionOf?.({ id: lawChangeEvidenceId(change), structuredFacts: { versions: change.versions } }) ?? null;
+    const excluded = exclusionOf?.({ id: lawChangeEvidenceId(change), structuredFacts: { versions: change.versions, ...(change.amendments?.length > 0 ? { amendments: amendmentHashes(change) } : {}) } }) ?? null;
     if (excluded) {
       excludedLawChanges.push(excluded);
       continue;
@@ -486,6 +578,17 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
     }
   }
   const resolutionIdsOf = (change) => change.senateResolutions.map(({ partNumber }) => senateResolutionEvidenceId(change, partNumber)).filter((id) => senateResolutions.has(id));
+  // The text of each amendment a conduct in the package names, once.
+  const amendments = new Map();
+  for (const { record } of conduct) {
+    for (const number of isAmendmentConduct(record) ? amendmentDocumentNumbers(record) : []) {
+      const id = amendmentEvidenceId(number);
+      if (amendments.has(id)) continue;
+      const owner = changes.find(({ change }) => (change.amendments ?? []).some(({ documentNumber }) => documentNumber === number));
+      invariant(owner, `Conduct ${record.id} names amendment SD ${number}, whose text no law change of the package holds`);
+      amendments.set(id, evidenceFromAmendment(owner.change, owner.change.amendments.find(({ documentNumber }) => documentNumber === number)));
+    }
+  }
   // Found once, not on every rebuild of the package.
   const opinionTexts = new Map(conduct.filter(({ record }) => record.kind === "government-opinion").map(({ record }) => {
     const changeIds = new Set(concernsByRecord.get(record.id).map(({ changeId }) => changeId));
@@ -526,6 +629,7 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
         ...(promise.maintenanceBaseline ? [evidenceFromMaintenanceBaseline(promise.maintenanceBaseline)] : []),
         ...lawChanges.map(({ change, route }) => evidenceFromLawChange(change, route, printFirstSeenOn.get(change.printId), resolutionIdsOf(change))),
         ...senateResolutions.values(),
+        ...amendments.values(),
         ...conduct.map((item) => evidenceFromConduct(item, promise, concernsByRecord.get(item.record.id), opinionTexts.get(item.record.id) ?? null))
       ]
     };

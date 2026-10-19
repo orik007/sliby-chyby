@@ -9,10 +9,17 @@ const proposalLabels: Record<Extract<EvidenceTrailStep, { kind: "submission" }>[
   treaty: "Předložení mezinárodní smlouvy vládou",
 };
 
+// A club did not support a measure when most of its members voted no,
+// abstained, or were present and did not vote, which has the same effect.
 const clubLabels: Record<Extract<EvidenceTrailStep, { kind: "vote" }>["club"], string> = {
   yes: "Klub strany hlasoval pro",
-  no: "Klub strany hlasoval proti",
+  no: "Klub strany návrh nepodpořil",
   "no-majority": "Klub strany nedal většinu hlasů pro ani proti",
+};
+
+const amendmentClubLabels: Record<Extract<EvidenceTrailStep, { kind: "amendment-vote" }>["club"], string> = {
+  yes: "Klub strany hlasoval pro pozměňovací návrh",
+  no: "Klub strany pozměňovací návrh nepodpořil",
 };
 
 const textLabels: Record<ConductStep["version"], string> = {
@@ -27,6 +34,7 @@ const noteLabels: Record<ConductStep["notes"][number]["note"], string> = {
   "text-not-published": "Text tohoto znění psp.cz nezveřejňuje, známý je jen název tisku.",
   "third-reading-rejection": "Hlasovalo se o navrženém textu upraveném pozměňovacími návrhy, který psp.cz nezveřejňuje jako celek; odkaz vede na navržený text.",
   "promulgated-text": "Toto znění psp.cz nezveřejňuje; odkaz vede na zákon, jak byl vyhlášen ve Sbírce zákonů (e-Sbírka).",
+  "amended-proposal": "Pozměňovací návrh mění navržený text; odkaz vede na navržený text, pozměňovací návrh je odkázán zvlášť.",
 };
 
 // Data dates are calendar dates (YYYY-MM-DD); formatting them from their
@@ -59,6 +67,8 @@ const opinionLabels: Record<Extract<EvidenceTrailStep, { kind: "government-opini
 export function stepTitle(step: EvidenceTrailStep) {
   if (step.kind === "submission") return proposalLabels[step.proposal];
   if (step.kind === "vote") return clubLabels[step.club];
+  if (step.kind === "amendment") return `Podání pozměňovacího návrhu ${step.labelCz}`;
+  if (step.kind === "amendment-vote") return amendmentClubLabels[step.club];
   if (step.kind === "government-opinion") return opinionLabels[step.opinion];
   return "Senát vrátil návrh Sněmovně";
 }
@@ -66,10 +76,12 @@ export function stepTitle(step: EvidenceTrailStep) {
 export function stepDetails(step: EvidenceTrailStep) {
   if (step.kind === "submission") return [step.proposal === "member-bill" ? `Navrhovatelé: ${step.proposerCz ?? "poslanci"}; mezi nimi je alespoň jeden poslanec klubu strany.` : "Strana byla v den předložení součástí vlády."];
   if (step.kind === "government-opinion") return ["Stanovisko vlády k návrhu zákona, který vláda nepředložila; strana byla v den jeho rozeslání ve Sněmovně součástí vlády."];
-  if (step.kind === "vote") {
+  if (step.kind === "amendment") return [`Pozměňovací návrh přednesl ve druhém čtení ${step.presenterCz}; mezi jeho předkladateli je alespoň jeden poslanec klubu strany.`];
+  if (step.kind === "vote" || step.kind === "amendment-vote") {
     const { yes, no, abstained, notVoting, absent, unknown } = step.counts;
     const counts = [`pro: ${yes}`, `proti: ${no}`, ...(abstained ? [`zdrželi se: ${abstained}`] : []), ...(notVoting ? [`nehlasovali: ${notVoting}`] : []), ...(absent ? [`nepřítomni: ${absent}`] : []), ...(unknown ? [`neznámý záznam: ${unknown}`] : [])];
-    return [`Rozhodnutí Sněmovny: ${step.stageCz}, ${step.actionCz}`, `Poslanci klubu strany: ${counts.join(" · ")}`];
+    const decision = step.kind === "vote" ? `Rozhodnutí Sněmovny: ${step.stageCz}, ${step.actionCz}` : `Hlasování o pozměňovacím návrhu ${step.labelCz} (${step.presenterCz}) ve třetím čtení`;
+    return [decision, `Poslanci klubu strany: ${counts.join(" · ")}`];
   }
   return [];
 }
@@ -78,6 +90,8 @@ export function stepLinks(step: EvidenceTrailStep, printUrl: string) {
   if (step.kind === "senate-resolution") return [{ label: `Usnesení Senátu (tisk ${step.printPartCz})`, url: step.url }];
   const text = step.textUrl ? [{ label: textLabels[step.version], url: step.textUrl }] : [];
   if (step.kind === "vote") return [{ label: "Výsledek hlasování", url: step.url }, ...text];
+  if (step.kind === "amendment") return [{ label: `Pozměňovací návrh (sněmovní dokument ${step.documentNumber})`, url: step.url }, ...text];
+  if (step.kind === "amendment-vote") return [{ label: "Výsledek hlasování", url: step.url }, { label: "Stenozáznam s označením návrhu", url: step.stenoUrl }, ...text];
   if (step.kind === "government-opinion") return [{ label: `Stanovisko vlády (tisk ${step.printPartCz})`, url: step.url }, ...text];
   return [{ label: "Průběh projednávání", url: printUrl }, ...text];
 }

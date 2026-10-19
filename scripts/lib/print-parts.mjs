@@ -120,21 +120,29 @@ export function amendedActOfPart(paragraphs) {
  * (for example, only a PDF, which is never read).
  */
 export function proposalDocumentLink(html, pageUrl, sectionLabels = proposalSectionLabels) {
-  const files = String(html).split("Soubory sněmovního tisku")[1]?.split("</table>")[0] ?? "";
+  const files = listedFiles(html, pageUrl).filter(({ section, format }) => section && (format === "docx" || format === "doc") && sectionLabels.some((label) => label.test(section)));
+  const link = files.find(({ format }) => format === "docx") ?? files.find(({ format }) => format === "doc");
+  return link ? { filename: link.filename, url: link.url, sectionLabel: link.section, format: link.format } : null;
+}
+
+/**
+ * The files a psp.cz page lists under "Soubory sněmovního tisku" or
+ * "Soubory sněmovního dokumentu": each with the section it is listed in
+ * ("Text"), its name, URL, and lower-case extension.
+ */
+export function listedFiles(html, pageUrl) {
+  const files = String(html).split(/Soubory sněmovního (?:tisku|dokumentu)/u)[1]?.split("</table>")[0] ?? "";
+  const listed = [];
   let section = null;
-  const found = { docx: null, doc: null };
-  const pattern = /<th\b[^>]*>([\s\S]*?)<\/th>|<a\b[^>]*href=["']([^"']*orig2\.sqw[^"']*)["'][^>]*>([^<]+)<\/a>/gi;
-  for (const match of files.matchAll(pattern)) {
+  for (const match of files.matchAll(/<th\b[^>]*>([\s\S]*?)<\/th>|<a\b[^>]*href=["']([^"']*orig2\.sqw[^"']*)["'][^>]*>([^<]+)<\/a>/giu)) {
     if (match[1] !== undefined) {
       section = cleanText(match[1].replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " "), 200);
       continue;
     }
     const filename = cleanText(match[3], 200);
-    const format = /\.(docx?)$/i.exec(filename)?.[1].toLowerCase();
-    if (!section || !format || found[format] || !sectionLabels.some((label) => label.test(section))) continue;
-    found[format] = { filename, url: pspUrl(match[2], pageUrl), sectionLabel: section, format };
+    listed.push({ section, filename, url: pspUrl(match[2], pageUrl), format: /\.([a-z]+)$/iu.exec(filename)?.[1].toLowerCase() ?? null });
   }
-  return found.docx ?? found.doc;
+  return listed;
 }
 
 // "ČÁST PRVNÍ", "ČÁST DVACÁTÁ TŘETÍ", "ČÁST STO DVACÁTÁ PRVNÍ", "Část
@@ -193,7 +201,7 @@ export const versionKeys = ["proposed", "approved", "passed", "adopted"];
 export const versionLabels = { proposed: "proposed text", approved: "text approved by the Chamber", passed: "text passed by Parliament", adopted: "text as adopted" };
 
 // An absolute psp.cz URL from an href on a psp.cz page.
-function pspUrl(href, pageUrl) {
+export function pspUrl(href, pageUrl) {
   const url = new URL(href.replace(/&amp;/g, "&"), pageUrl);
   invariant(url.protocol === "https:" && url.hostname === "www.psp.cz", `Official print document redirected outside the PSP allowlist: ${url}`);
   return url.href;
@@ -406,7 +414,8 @@ function versionOf(part, amendedAct, document, effectiveCz = null, promulgatedAc
 
 /**
  * The Chamber prints that potentially attributable records concern: the
- * prints of submissions and votes, and the bill of a government opinion,
+ * prints of submissions and votes, the bill of an amendment, and the bill of
+ * a government opinion,
  * with the part numbers of its Senate resolutions and government opinions.
  */
 export function collectPrints(records) {
@@ -429,6 +438,8 @@ export function collectPrints(records) {
   for (const record of records) {
     const payload = record.payload ?? {};
     if (record.kind === "legislative-step") add({ ...payload, number: payload.printNumber, titleCz: payload.printTitleCz });
+    // An amendment names the bill it amends, whose own part number is 0.
+    if (record.kind === "member-amendment" && !prints.has(String(payload.externalPrintId))) add({ ...payload, number: payload.printNumber, partNumber: 0, titleCz: payload.printTitleCz });
     if (record.kind === "government-opinion") {
       if (!prints.has(String(payload.externalPrintId))) add({ ...payload, number: payload.printNumber, partNumber: 0, titleCz: payload.printTitleCz });
       opinionParts.set(String(payload.externalPrintId), [...(opinionParts.get(String(payload.externalPrintId)) ?? []), payload.partNumber]);

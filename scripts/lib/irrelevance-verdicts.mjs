@@ -20,13 +20,19 @@ function canonicalize(value) {
   return JSON.stringify(value);
 }
 
-/** The key of a verdict (`irrelevance-key-v1`). `assessorPrompt` is `{ version, contentHash }`. */
-export function irrelevanceKey({ promise, versions, assessorPrompt }) {
+/**
+ * The key of a verdict (`irrelevance-key-v1`). `assessorPrompt` is `{
+ * version, contentHash }`; `amendments`, the hashes of the texts of the
+ * amendments that concern the change, is part of the key only when there are
+ * any, so the key of a change without amendments is unchanged.
+ */
+export function irrelevanceKey({ promise, versions, amendments = [], assessorPrompt }) {
   invariant(assessorPrompt?.version && /^[a-f0-9]{64}$/.test(assessorPrompt.contentHash ?? ""), "irrelevanceKey needs the assessor prompt identity");
   return createHash("sha256").update(canonicalize({
     keyVersion: "irrelevance-key-v1",
     promise: { titleCz: promise.titleCz, originalTextCz: promise.originalTextCz },
     versions,
+    ...(amendments.length > 0 ? { amendments } : {}),
     assessor: { version: assessorPrompt.version, contentHash: assessorPrompt.contentHash }
   })).digest("hex");
 }
@@ -48,7 +54,7 @@ export function relevanceVerdictsOf({ evidencePackage, auditRecord, proposalId }
     const irrelevant = verdictA?.relevant === false && verdictB?.relevant === false;
     return {
       evidenceId: change.id,
-      key: irrelevanceKey({ promise: evidencePackage.promise, versions: change.structuredFacts.versions, assessorPrompt }),
+      key: irrelevanceKey({ promise: evidencePackage.promise, versions: change.structuredFacts.versions, amendments: change.structuredFacts.amendments ?? [], assessorPrompt }),
       irrelevant,
       entry: irrelevant ? { evidenceId: change.id, title: change.title, proposalId, reasonsCz: [verdictA.reasonCz, verdictB.reasonCz] } : null
     };
@@ -81,21 +87,21 @@ export async function loadRelevanceVerdicts(manifest) {
 export function exclusionOf({ verdicts, promise, lawChange, assessorPrompt }) {
   const verdict = verdicts?.get(promise.id)?.get(lawChange.id);
   if (!verdict?.irrelevant) return null;
-  return verdict.key === irrelevanceKey({ promise, versions: lawChange.structuredFacts.versions, assessorPrompt }) ? verdict.entry : null;
+  return verdict.key === irrelevanceKey({ promise, versions: lawChange.structuredFacts.versions, amendments: lawChange.structuredFacts.amendments ?? [], assessorPrompt }) ? verdict.entry : null;
 }
 
 /**
  * The package an assessment's own verdicts leave: without the given law
- * changes, their concerns, conduct left with no concern, and Senate
- * resolutions no remaining change names, and with a line for each change
- * left out, as the package builder makes it.
+ * changes, their concerns, conduct left with no concern, Senate resolutions
+ * no remaining change names, and amendment texts no remaining conduct names,
+ * and with a line for each change left out, as the package builder makes it.
  */
 export function withoutIrrelevantLawChanges(evidencePackage, entries) {
   if (entries.length === 0) return evidencePackage;
   const left = new Set(entries.map(({ evidenceId }) => evidenceId));
   const lawChanges = evidencePackage.evidence.filter(({ role, id }) => role === "law-change" && !left.has(id));
   const resolutionIds = new Set(lawChanges.flatMap(({ structuredFacts }) => structuredFacts.senateResolutionEvidenceIds ?? []));
-  const evidence = evidencePackage.evidence.flatMap((item) => {
+  const kept = evidencePackage.evidence.flatMap((item) => {
     if (item.role === "law-change") return left.has(item.id) ? [] : [item];
     if (item.role === "senate-resolution") return resolutionIds.has(item.id) ? [item] : [];
     if (item.role === "conduct-evidence") {
@@ -104,6 +110,8 @@ export function withoutIrrelevantLawChanges(evidencePackage, entries) {
     }
     return [item];
   });
+  const amendmentIds = new Set(kept.filter(({ role }) => role === "conduct-evidence").flatMap(({ structuredFacts }) => structuredFacts.amendmentEvidenceIds ?? []));
+  const evidence = kept.filter((item) => item.role !== "amendment" || amendmentIds.has(item.id));
   const excludedLawChanges = [...(evidencePackage.excludedLawChanges ?? []), ...entries].sort((leftEntry, rightEntry) => leftEntry.evidenceId.localeCompare(rightEntry.evidenceId, "en", { numeric: true }));
   return { ...evidencePackage, excludedLawChanges, evidence };
 }

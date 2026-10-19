@@ -79,7 +79,7 @@ test("only the submission step of a bill is a proposal", () => {
   assert.equal(attributionStatusForRecord(step, promise).attributionStatus, "unattributed");
 });
 
-test("only Chamber votes, legislative steps, government opinions, adoptions of regulations, and government resolutions can be collected, and only eight statuses are assessable", () => {
+test("only Chamber votes, legislative steps, government opinions, adoptions of regulations, government resolutions, and amendments can be collected, and only ten statuses are assessable", () => {
   assert.throws(() => createCollectedRecord({
     id: "party--post",
     sourceId: "party-news",
@@ -92,7 +92,7 @@ test("only Chamber votes, legislative steps, government opinions, adoptions of r
     url: "https://party.example/post",
     payload: {}
   }), /Unknown record kind/);
-  assert.deepEqual([...assessableAttributionStatuses].sort(), ["verified-government-opinion", "verified-government-proposal", "verified-government-regulation", "verified-government-resolution", "verified-member-bill", "verified-ministerial-decree", "verified-party-no-majority", "verified-party-vote"]);
+  assert.deepEqual([...assessableAttributionStatuses].sort(), ["verified-government-opinion", "verified-government-proposal", "verified-government-regulation", "verified-government-resolution", "verified-member-amendment", "verified-member-bill", "verified-ministerial-decree", "verified-party-amendment-vote", "verified-party-no-majority", "verified-party-vote"]);
 });
 
 test("only records that can be attributable conduct of a tracked party are routed", () => {
