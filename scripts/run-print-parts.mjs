@@ -6,7 +6,7 @@ import { invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError, workflowRunId } from "./lib/e-sbirka.mjs";
 import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspPageOptions, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { anyPspDocumentFileOptions, createPspDocumentCache, pspDocumentExtractions, pspDocumentFileOptions } from "./lib/psp-document-cache.mjs";
-import { createPspPageCache } from "./lib/psp-page-cache.mjs";
+import { createPspPageCache, readPspPage } from "./lib/psp-page-cache.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { collectPrints, governmentOpinionSectionLabels, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
@@ -62,17 +62,18 @@ async function fetchWordText(source, url, filename, format, warnings, printNumbe
   return { document: { filename, url }, paragraphs: proposalBody(paragraphs) };
 }
 
-// A page of a closed print is read once and kept; every other page is read
-// in every run (scripts/lib/psp-page-cache.mjs).
-function readPage(source, url, printId) {
-  return pageCache.content(url, closedPrintIds.has(String(printId)), () => fetchPsp(source, url, pspPageOptions));
+// A page of a closed print is read once and kept, when its reader found
+// what it reads; every other page is read in every run
+// (scripts/lib/psp-page-cache.mjs).
+function readPage(source, url, printId, complete = undefined) {
+  return readPspPage({ pageCache, closedPrintIds, fetchPsp, source }, url, [printId], complete);
 }
 
 // The Word file listed in a print page's proposal-text section: the
 // proposal itself (part 0), a Senate resolution sub-print ("Text"), or the
 // sub-print with the text referred to the Senate ("Text").
 async function fetchPageText(source, pageUrl, printId, printNumber, warnings, version, sectionLabels = undefined) {
-  const link = proposalDocumentLink(await readPage(source, pageUrl, printId), pageUrl, sectionLabels);
+  const link = proposalDocumentLink(await readPage(source, pageUrl, printId, (content) => Boolean(proposalDocumentLink(content, pageUrl, sectionLabels))), pageUrl, sectionLabels);
   return link ? fetchWordText(source, link.url, link.filename, link.format, warnings, printNumber, version) : null;
 }
 
@@ -84,7 +85,7 @@ function fetchPrintPageText(source, termNumber, print, partNumber, warnings, ver
 const laterTextNames = { approved: (number) => `Schválený text tisku ${number} (DOCX)`, passed: (number) => `Text tisku ${number} přijatý Parlamentem (DOCX)` };
 
 async function laterText(source, print, version, url, warnings) {
-  const docxUrl = laterTextDocxLink(await readPage(source, url, print.printId), url);
+  const docxUrl = laterTextDocxLink(await readPage(source, url, print.printId, (content) => Boolean(laterTextDocxLink(content, url))), url);
   if (!docxUrl) {
     warnings.push({ printNumber: print.number, kind: "later-text-without-docx", version, detail: `the ${version} text is listed without a DOCX file` });
     return null;
@@ -122,11 +123,10 @@ async function fetchPrintTexts(source, print, termNumber) {
   const warnings = [];
   const bill = billPrintKindIds.has(String(print.kindId));
   const historyUrl = officialPrintHistoryUrl(termNumber, print.number);
-  const [proposal, historyPage] = await allSettledOrThrow([
+  const [proposal, history] = await allSettledOrThrow([
     fetchPrintPageText(source, termNumber, print, print.partNumber, warnings, "proposed"),
     bill ? readPage(source, historyUrl, print.printId) : null
   ]);
-  const history = historyPage;
   const links = history ? laterTextLinks(history, historyUrl) : { approved: null, passed: null, referredToSenate: null };
   // Without an approved-text page, the approved text is the sub-print with
   // the text referred to the Senate, when the history links one.

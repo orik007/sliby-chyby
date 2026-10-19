@@ -135,11 +135,12 @@ jobs:
             if git cat-file -e "origin/$REVIEW_BRANCH:automation/collectors/checkpoints.json" 2>/dev/null; then
               restore_paths+=(automation/collectors/checkpoints.json)
             fi
-            # Only the document cache's own entries (<idd>.json) are restored, so
-            # a file it no longer uses leaves the audit state.
+            # Only the document and page caches' own entries (<id>.json) are
+            # restored, so a file they no longer use leaves the audit state.
             while IFS= read -r path; do
               case "$path" in
                 automation/psp-documents/*) [[ "$path" =~ ^automation/psp-documents/[0-9]+\.json$ ]] && restore_paths+=("$path") ;;
+                automation/psp-pages/*) [[ "$path" =~ ^automation/psp-pages/[0-9a-f]{32}\.json$ ]] && restore_paths+=("$path") ;;
                 *) restore_paths+=("$path") ;;
               esac
             done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/law-context automation/psp-documents automation/psp-pages automation/government-resolutions)

@@ -3,15 +3,15 @@ import { isDecisiveAction, normalizeSearchText } from "./attribution.mjs";
 import { officialPrintDocumentPageUrl } from "./psp-print-documents.mjs";
 import { amendmentDocumentType, amendmentSummaryKindId, collectAmendments } from "./psp-amendments.mjs";
 import { log } from "./run-log.mjs";
-
-// typ_stavu.unl: the state type "KONEC", the end of a print's debate.
-const closedStateTypeId = "6";
 import {
   cleanText,
   createCollectedRecord,
   deduplicateRecords,
   invariant
 } from "./collector-core.mjs";
+
+// typ_stavu.unl: the state type "KONEC", the end of a print's debate.
+const closedStateTypeId = "6";
 
 const schemas = {
   vote: ["id", "organId", "session", "number", "agenda", "date", "time", "yes", "no", "abstained", "notVoting", "registered", "quorum", "voteType", "result", "longTitle", "shortTitle"],
@@ -592,15 +592,7 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
       .map((row) => ({ pid: row.pid, kind: "sub-print", printId: row.printId, partNumber: row.partNumber, printKindId: subPrintKinds.get(`${row.printId}/${row.partNumber}`) }))
   ];
 
-  // The prints whose debate has ended: their state is of the type "KONEC"
-  // (typ_stavu.unl), which no print of any term has left (docs/
-  // evidence-pipeline.md, Chamber data rules, Closed prints).
-  const closedStateType = stateTypeById.get(closedStateTypeId);
-  invariant(closedStateType && normalizeSearchText(closedStateType.description) === "konec", `psp.cz state type ${closedStateTypeId} is no longer "KONEC"`);
-  const closedPrintIds = [...printById.values()]
-    .filter((print) => stateById.get(print.stateId)?.stateTypeId === closedStateTypeId)
-    .map(({ printId }) => printId)
-    .sort((left, right) => Number(left) - Number(right));
+  const closedPrintIds = closedPrintIdsOf({ printById, stateById, stateTypeById });
 
   const referenceData = {
     eklepLinks,
@@ -628,7 +620,7 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
     })
   };
 
-  const amendmentPlan = planAmendments({ source, closedPrintIds: new Set(closedPrintIds), printById, historyRows, amendmentSummaryRows, recentVotes, agendaItemByKey, historyByVote, historyTables, documentsEntries, stenoEntries, membershipsByPerson, clubs, people });
+  const amendmentPlan = planAmendments({ source, printById, historyRows, amendmentSummaryRows, recentVotes, agendaItemByKey, historyByVote, historyTables, documentsEntries, stenoEntries, membershipsByPerson, clubs, people });
   return { records: deduplicateRecords(records), referenceData, warnings, amendmentPlan };
 }
 
@@ -637,7 +629,7 @@ export function normalizePspData({ source, since, votesEntries, membersEntries, 
 // summaries of the amendments presented in the second reading, the written
 // amendments of sd.zip, the MPs in a club on a date, the votes that can be on
 // an amendment, and the turns of the stenographic record.
-function planAmendments({ source, closedPrintIds, printById, historyRows, amendmentSummaryRows, recentVotes, agendaItemByKey, historyByVote, historyTables, documentsEntries, stenoEntries, membershipsByPerson, clubs, people }) {
+function planAmendments({ source, printById, historyRows, amendmentSummaryRows, recentVotes, agendaItemByKey, historyByVote, historyTables, documentsEntries, stenoEntries, membershipsByPerson, clubs, people }) {
   const historyById = new Map(historyRows.map((row) => [row.historyId, row]));
   const printByNumber = new Map([...printById.values()].filter((print) => print.partNumber === "0").map((print) => [print.number, print]));
   // A summary is distributed after the second reading; the history step it
@@ -705,7 +697,21 @@ function planAmendments({ source, closedPrintIds, printById, historyRows, amendm
       .filter((row) => row.organId === String(source.term.organId))
       .map((row) => ({ session: numeric(row.session), turn: numeric(row.turn), date: row.date?.slice(0, 10) ?? null, from: numeric(row.fromMinute), to: numeric(row.toMinute) }))
     : [];
-  return { summaries, documents, candidatesOn, amendmentVotes, stenoTurns, closedPrintIds };
+  return { summaries, documents, candidatesOn, amendmentVotes, stenoTurns };
+}
+
+/**
+ * The prints whose debate has ended: their state is of the type "KONEC"
+ * (typ_stavu.unl), which no print of any term has left
+ * (docs/evidence-pipeline.md, Chamber data rules, Closed prints).
+ */
+export function closedPrintIdsOf({ printById, stateById, stateTypeById }) {
+  const closedStateType = stateTypeById.get(closedStateTypeId);
+  invariant(closedStateType && normalizeSearchText(closedStateType.description) === "konec", `psp.cz state type ${closedStateTypeId} is no longer "KONEC"`);
+  return [...printById.values()]
+    .filter((print) => stateById.get(print.stateId)?.stateTypeId === closedStateTypeId)
+    .map(({ printId }) => printId)
+    .sort((left, right) => Number(left) - Number(right));
 }
 
 const amendmentKind = "member-amendment";
@@ -788,7 +794,7 @@ export async function collectPspSource(source, options) {
   // cache.
   const plan = normalized.amendmentPlan;
   log(`${source.id}: reading ${plan.summaries.length} summaries of amendments, the written amendments they list, and the stenographic record of ${plan.amendmentVotes.length} votes that can be on an amendment`);
-  const amendments = await collectAmendments({ source, plan, fetchPsp: options.fetchPsp, documentCache: options.documentCache, pageCache: options.pageCache });
+  const amendments = await collectAmendments({ source, plan, fetchPsp: options.fetchPsp, documentCache: options.documentCache, pageCache: options.pageCache, closedPrintIds: new Set(normalized.referenceData.closedPrintIds) });
   log(`${source.id}: pages of closed prints: ${options.pageCache.stats.fromCache} read from the page cache, ${options.pageCache.stats.kept} read and kept; ${options.pageCache.stats.downloaded - options.pageCache.stats.kept} pages of open prints read`);
   const q = amendments.quality;
   log(`${source.id}: ${q.amendments} amendments presented with a readable text (${q.documentsListed} documents listed in ${q.summaries} summaries, ${q.documentsNotInOpenData} not in sd.zip, ${q.documentsWithoutText} without a readable text; ${q.documentsNotListed} written amendments not listed); proposer names ${q.proposerNames}, ${q.proposerNamesUnmatched} not matched; ${q.votesLinked} of ${q.votes} votes linked to their amendment, not linked ${JSON.stringify(q.votesNotLinked)}; ${q.stenoTurnsRead} turns of the stenographic record read`);

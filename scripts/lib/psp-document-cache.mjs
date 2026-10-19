@@ -1,5 +1,4 @@
-import { existsSync, mkdirSync, readdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { isoDate, loadCacheEntries, oldestChecked, saveCacheEntry } from "./audit-cache-entries.mjs";
 import { invariant, sha256 } from "./collector-core.mjs";
 
 /**
@@ -37,8 +36,6 @@ const fileContentTypes = {
 export const pspDocumentFileOptions = Object.fromEntries(Object.entries(fileContentTypes).map(([format, expectedContentTypes]) => [format, { maxBytes: 20_000_000, expectedContentTypes }]));
 export const anyPspDocumentFileOptions = { maxBytes: 20_000_000, expectedContentTypes: [...new Set(Object.values(fileContentTypes).flat())] };
 
-const isoDate = /^\d{4}-\d{2}-\d{2}$/;
-
 // The numeric document ID of an orig2.sqw URL, or null without one.
 export function pspDocumentId(url) {
   const id = new URL(url).searchParams.get("idd");
@@ -51,16 +48,6 @@ function validEntry(entry, id) {
     && typeof entry.url === "string" && entry.extractions && typeof entry.extractions === "object" && !Array.isArray(entry.extractions)
     && Object.values(entry.extractions).every((result) => result && typeof result === "object" && "value" in result
       && (result.error === null ? result.value !== null : typeof result.error === "string" && result.value === null));
-}
-
-// Written to a temporary file and renamed, so a run stopped mid-write keeps
-// the previous complete entry. The temporary file is named with a leading dot
-// and `.tmp`, which .gitignore keeps out of the audit state.
-function save(directory, entry) {
-  mkdirSync(directory, { recursive: true });
-  const temporary = join(directory, `.${entry.id}.json.tmp`);
-  writeFileSync(temporary, `${JSON.stringify(entry)}\n`);
-  renameSync(temporary, join(directory, `${entry.id}.json`));
 }
 
 /**
@@ -77,21 +64,7 @@ function save(directory, entry) {
  */
 export function createPspDocumentCache(directory, today) {
   invariant(isoDate.test(today), "The document cache needs the run date");
-  const entries = new Map();
-  if (existsSync(directory)) {
-    for (const name of readdirSync(directory)) {
-      if (!/^\d+\.json$/.test(name)) continue;
-      const id = name.slice(0, -".json".length);
-      let entry = null;
-      try {
-        entry = JSON.parse(readFileSync(join(directory, name), "utf8"));
-      } catch {
-        // Reported below with the path.
-      }
-      invariant(validEntry(entry, id), `Invalid psp.cz document cache entry: ${join(directory, name)}`);
-      entries.set(id, entry);
-    }
-  }
+  const entries = loadCacheEntries(directory, /^\d+$/, validEntry, "psp.cz document cache");
   const stats = { fromCache: 0, downloaded: 0, checked: 0 };
   const verified = (entry, bytes) => {
     const fileSha256 = sha256(bytes);
@@ -125,17 +98,15 @@ export function createPspDocumentCache(directory, today) {
       const entry = cached ?? { schemaVersion: pspDocumentCacheVersion, id, url, fileSha256: sha256(bytes), byteLength: bytes.byteLength, readOn: today, checkedOn: today, extractions: {} };
       entry.extractions[extraction] = result;
       entries.set(id, entry);
-      save(directory, entry);
+      saveCacheEntry(directory, entry);
       return { ...result, downloaded: true, bytes };
     },
     async checkSample(download, sampleSize) {
-      const sample = [...entries.values()]
-        .sort((left, right) => left.checkedOn.localeCompare(right.checkedOn) || Number(left.id) - Number(right.id))
-        .slice(0, sampleSize);
+      const sample = oldestChecked(entries, sampleSize);
       for (const entry of sample) {
         verified(entry, await download(entry.url));
         entry.checkedOn = today;
-        save(directory, entry);
+        saveCacheEntry(directory, entry);
         stats.checked += 1;
       }
       return sample.map(({ id }) => id);

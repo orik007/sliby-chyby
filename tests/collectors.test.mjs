@@ -8,7 +8,7 @@ import {
   fetchVerified,
   validateRegistry
 } from "../scripts/lib/collector-core.mjs";
-import { derivePartyVoteSummaries, normalizePspData, parseUnl } from "../scripts/lib/psp-collector.mjs";
+import { closedPrintIdsOf, derivePartyVoteSummaries, normalizePspData, parseUnl } from "../scripts/lib/psp-collector.mjs";
 import { attributionStatusForRecord, versionConcerned } from "../scripts/lib/attribution.mjs";
 
 const governmentPeriods = {
@@ -292,6 +292,8 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
   assert.equal(vote.primary, true);
   // The eKLEP materials of this term's print and sub-print, with their kinds,
   // by which a government resolution approving them is found.
+  // The print's state is not of the type "KONEC".
+  assert.deepEqual(result.referenceData.closedPrintIds, []);
   assert.deepEqual(result.referenceData.eklepLinks, [
     { pid: "KORNDS2HT779", kind: "print", printId: "700", printKindId: "1" },
     { pid: "KORNDPDDEYDL", kind: "sub-print", printId: "700", partNumber: "2", printKindId: "11" }
@@ -538,4 +540,12 @@ test("deduplication accepts identical records and rejects conflicting content", 
   assert.equal(deduplicateRecords([first, structuredClone(first)]).length, 1);
   const second = createCollectedRecord({ ...base, title: "Changed title" });
   assert.throws(() => deduplicateRecords([first, second]), /Conflicting records/);
+});
+
+test("a print is closed only in a state of the type KONEC", () => {
+  const stateTypeById = new Map([["6", { stateTypeId: "6", description: "KONEC" }], ["11", { stateTypeId: "11", description: "Sbírka zákonů" }]]);
+  const stateById = new Map([["21", { stateId: "21", stateTypeId: "6" }], ["20", { stateId: "20", stateTypeId: "11" }]]);
+  const printById = new Map([["43174", { printId: "43174", stateId: "21" }], ["43001", { printId: "43001", stateId: "21" }], ["43200", { printId: "43200", stateId: "20" }]]);
+  assert.deepEqual(closedPrintIdsOf({ printById, stateById, stateTypeById }), ["43001", "43174"]);
+  assert.throws(() => closedPrintIdsOf({ printById, stateById, stateTypeById: new Map([["6", { description: "Sněmovna" }]]) }), /no longer "KONEC"/);
 });
