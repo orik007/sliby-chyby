@@ -199,6 +199,13 @@ test("never links a vote to more than the record names (review findings)", () =>
   // The budget item named last decides.
   const budget = [{ label: "16", presenterCz: "P. Hladík", committee: false, documentNumbers: ["492"], parts: {} }, { label: "17", presenterCz: "B. Niemiec", committee: false, documentNumbers: ["493"], parts: {} }];
   assert.deepEqual(linkVoteToAmendment(voteReference("Poslanec Vladimír Pikora : Pořadové číslo 16 jsme odhlasovali, pan Hladík. Nyní pořadové číslo 17, pan Niemiec. Zahajuji hlasování."), budget, { budget: true }).documentNumbers, ["493"]);
+  // The presenter is named by a case form of the whole surname, not by a
+  // shorter shared start.
+  const novak = [{ label: "G", presenterCz: "Poslanec Marek Novák", committee: false, documentNumbers: ["795"], parts: {} }];
+  assert.deepEqual(linkVoteToAmendment(reference("Pozměňovací návrh G, kolega Novotný."), novak), { linked: false, reason: "presenter-not-named" });
+  assert.equal(linkVoteToAmendment(reference("Pozměňovací návrh G pana kolegy Nováka."), novak).linked, true);
+  const kupec = [{ label: "H", presenterCz: "Poslanec Ivan Kupec", committee: false, documentNumbers: ["800"], parts: {} }];
+  assert.equal(linkVoteToAmendment(reference("Návrh H kolegy Kupce."), kupec).linked, true);
 });
 
 test("reads the names before \"k\" in the same paragraph, and a passage across turns", () => {

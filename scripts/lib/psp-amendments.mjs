@@ -334,6 +334,18 @@ export function voteReference(textCz) {
   };
 }
 
+// Whether a word of a passage (folded) is a case form of a surname: it starts
+// with the whole surname less its last letter ("Novák": "Nováka",
+// "Novákovi"; "Malá": "Malé", "Malou"), or less its last two when the
+// surname ends in a vowel and a consonant that the vowel drops from
+// ("Havlíček": "Havlíčka"; "Kupec": "Kupce"; "Havel": "Havla"). A shorter
+// shared start ("Nov…" of "Novotný") is another name.
+function isFormOfSurname(word, surname) {
+  const folded = fold(surname);
+  const stem = folded.slice(0, Math.max(3, folded.length - (/e[ckln]$/u.test(folded) ? 2 : 1)));
+  return word.startsWith(stem);
+}
+
 // The surnames of an item's presenters: "Poslanec Oto Klempíř" or, for a
 // budget item, "P. Hladík, B. Niemiec".
 function presenterSurnames(item) {
@@ -384,7 +396,8 @@ export function linkVoteToAmendment(reference, items, { budget = false } = {}) {
     return { linked: false, reason: "no-label" };
   }
   const passage = fold(reference.tail.slice(-700));
-  if (!presenterSurnames(item).some((surname) => passage.includes(surnameStem(surname)))) return { linked: false, reason: "presenter-not-named" };
+  const words = passage.split(/[^a-z0-9]+/u);
+  if (!presenterSurnames(item).some((surname) => words.some((word) => isFormOfSurname(word, surname)))) return { linked: false, reason: "presenter-not-named" };
   return { linked: true, label, variant: reference.variant, documentNumbers, presenterCz: item.presenterCz };
 }
 
