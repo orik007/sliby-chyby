@@ -756,8 +756,8 @@ function withAmendmentVote(record, link) {
 export async function collectPspSource(source, options) {
   const endpointEntries = Object.entries(source.endpoints);
   log(`${source.id}: downloading ${endpointEntries.length} official files (${endpointEntries.map(([name]) => name).join(", ")})`);
-  // A damaged or failed archive is taken from its last valid copy
-  // (scripts/lib/psp-open-data-archive.mjs).
+  // A damaged file of an archive is taken from its last valid copy when it
+  // has the same size and CRC-32 (scripts/lib/psp-open-data-archive.mjs).
   const archives = {};
   const openData = {};
   for (const [name, endpoint] of endpointEntries) {
@@ -766,13 +766,10 @@ export async function collectPspSource(source, options) {
       maxBytes: 20_000_000,
       expectedContentTypes: ["zip", "octet-stream"]
     }));
-    const entries = result.entries;
-    const totalBytes = Object.values(entries).reduce((sum, entry) => sum + entry.byteLength, 0);
-    invariant(totalBytes < 150_000_000, `Archive ${source.id}:${name} exceeds the uncompressed size limit`);
-    archives[name] = { entries, response: result.response };
+    archives[name] = { entries: result.entries, response: result.response };
     openData[name] = { origin: result.origin, note: result.note };
     if (result.note) log(`${source.id}: ${result.note}`);
-    log(`${source.id}: ${result.origin === "stand-in" ? "used the last valid copy of" : "downloaded"} ${name}${result.response ? ` (${(result.response.bytes.byteLength / 1_000_000).toFixed(1)} MB in ${((Date.now() - startedAt) / 1000).toFixed(1)} s)` : ""}`);
+    log(`${source.id}: downloaded ${name} (${(result.response.bytes.byteLength / 1_000_000).toFixed(1)} MB in ${((Date.now() - startedAt) / 1000).toFixed(1)} s)`);
   }
   log(`${source.id}: parsing votes, members, prints, sessions, parliamentary documents, and the stenographic record`);
   const normalized = normalizePspData({
@@ -804,13 +801,13 @@ export async function collectPspSource(source, options) {
     sourceId: source.id,
     collector: source.collector,
     retrievedAt: options.collectedAt,
-    snapshots: Object.fromEntries(Object.entries(archives).map(([name, { response }]) => [name, response ? {
+    snapshots: Object.fromEntries(Object.entries(archives).map(([name, { response }]) => [name, {
       url: response.finalUrl,
       contentType: response.contentType,
       lastModified: response.lastModified,
       etag: response.etag,
       contentHash: response.contentHash
-    } : null])),
+    }])),
     records: deduplicateRecords(records),
     warnings: [...Object.values(openData).map(({ note }) => note).filter(Boolean), ...normalized.warnings, ...amendments.warnings],
     referenceData: { ...normalized.referenceData, amendmentQuality: amendments.quality, openData }

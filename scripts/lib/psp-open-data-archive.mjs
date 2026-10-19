@@ -10,8 +10,6 @@ import { invariant, sha256 } from "./collector-core.mjs";
  * rules, Open-data files).
  */
 export const openDataArchiveVersion = "psp-open-data-archive-v1";
-// The age in days of a last valid copy that may stand in for a whole archive.
-export const maxStandInAgeDays = 7;
 
 /**
  * Every file of a ZIP archive by its central directory: `{ name, crc, size,
@@ -62,74 +60,51 @@ function fileData(bytes, view, { method, crc, size, compressedSize, localOffset 
   }
 }
 
-function daysBetween(from, to) {
-  return Math.round((Date.parse(`${to}T00:00:00Z`) - Date.parse(`${from}T00:00:00Z`)) / 86_400_000);
-}
-
 /**
  * The archives in `directory` on the run date `today`. `resolve(name,
- * download)` returns `{ entries, origin, note }`: the files of the archive
- * `download()` returns when every one of them is valid, and that archive is
- * saved as the last valid copy (`origin` "downloaded"); otherwise each
- * damaged file taken from the last valid copy when that copy holds a file
- * of the same name, CRC-32, and size, the same content ("repaired"); otherwise
- * the whole last valid copy, when it is at most `maxStandInAgeDays` old
- * ("stand-in"), also when the download fails. Anything else fails.
+ * download)` returns `{ entries, origin, note, response }` for the archive
+ * `download()` returns (a failed download fails, as before): its files when
+ * every one of them is valid, and that archive is saved as the last valid
+ * copy (`origin` "downloaded"); otherwise each damaged file taken from the
+ * last valid copy when that copy holds a file of the same name, CRC-32, and
+ * size, which is the same content ("repaired"). Anything else fails.
  */
 export function createOpenDataArchiveCache(directory, today) {
   const paths = (name) => ({ archive: join(directory, `${name}.zip`), record: join(directory, `${name}.json`) });
+  // A copy whose record does not match it (a run stopped while saving it) is
+  // no copy.
   const stored = (name) => {
     const { archive, record } = paths(name);
     if (!existsSync(archive) || !existsSync(record)) return null;
     const meta = JSON.parse(readFileSync(record, "utf8"));
     const bytes = new Uint8Array(readFileSync(archive));
-    invariant(meta.schemaVersion === openDataArchiveVersion && meta.sha256 === sha256(bytes) && /^\d{4}-\d{2}-\d{2}$/.test(meta.retrievedOn ?? ""), `Invalid last valid copy of the open-data archive ${name}: ${record}`);
+    if (meta.schemaVersion !== openDataArchiveVersion || meta.sha256 !== sha256(bytes)) return null;
     const files = readArchive(bytes);
-    invariant(files.every(({ data }) => data), `The last valid copy of the open-data archive ${name} is damaged: ${archive}`);
-    return { meta, files };
+    return files.every(({ data }) => data) ? { meta, files } : null;
   };
   const save = (name, bytes, url) => {
     mkdirSync(directory, { recursive: true });
     const { archive, record } = paths(name);
     writeFileSync(`${archive}.tmp`, bytes);
+    writeFileSync(`${record}.tmp`, `${JSON.stringify({ schemaVersion: openDataArchiveVersion, name, url, retrievedOn: today, sha256: sha256(bytes) })}\n`);
     renameSync(`${archive}.tmp`, archive);
-    writeFileSync(record, `${JSON.stringify({ schemaVersion: openDataArchiveVersion, name, url, retrievedOn: today, sha256: sha256(bytes) })}\n`);
+    renameSync(`${record}.tmp`, record);
   };
   const entriesOf = (files) => Object.fromEntries(files.map(({ name, data }) => [name, data]));
   return {
     async resolve(name, download) {
-      let response = null;
-      let failure = null;
-      try {
-        response = await download();
-      } catch (error) {
-        failure = error;
-      }
-      let files = null;
-      if (response) {
-        try {
-          files = readArchive(response.bytes);
-        } catch (error) {
-          failure = error;
-        }
-      }
-      if (files && files.every(({ data }) => data)) {
+      const response = await download();
+      const files = readArchive(response.bytes);
+      invariant(files.reduce((sum, { size }) => sum + size, 0) < 150_000_000, `Archive ${name} exceeds the uncompressed size limit`);
+      if (files.every(({ data }) => data)) {
         save(name, response.bytes, response.finalUrl);
         return { entries: entriesOf(files), origin: "downloaded", note: null, response };
       }
+      const damaged = files.filter(({ data }) => !data).map(({ name: fileName }) => fileName);
       const copy = stored(name);
-      const damaged = files ? files.filter(({ data }) => !data).map(({ name: fileName }) => fileName) : null;
-      if (files && copy) {
-        const repaired = files.map((file) => file.data ? file : { ...file, data: copy.files.find((kept) => kept.name === file.name && kept.crc === file.crc && kept.size === file.size)?.data ?? null });
-        if (repaired.every(({ data }) => data)) {
-          return { entries: entriesOf(repaired), origin: "repaired", note: `${name}: ${damaged.join(", ")} damaged in today's archive; taken from the valid copy of ${copy.meta.retrievedOn}, which has the same CRC-32 and size`, response };
-        }
-      }
-      const reason = failure ? `could not be read (${failure instanceof Error ? failure.message : String(failure)})` : `has damaged files (${damaged.join(", ")})`;
-      invariant(copy, `The open-data archive ${name} ${reason}, and there is no valid copy to use`);
-      const age = daysBetween(copy.meta.retrievedOn, today);
-      invariant(age <= maxStandInAgeDays, `The open-data archive ${name} ${reason}, and its last valid copy, of ${copy.meta.retrievedOn}, is ${age} days old (at most ${maxStandInAgeDays})`);
-      return { entries: entriesOf(copy.files), origin: "stand-in", note: `${name}: today's archive ${reason}; the whole valid copy of ${copy.meta.retrievedOn} is used`, response: null, storedUrl: copy.meta.url };
+      const repaired = files.map((file) => file.data ? file : { ...file, data: copy?.files.find((kept) => kept.name === file.name && kept.crc === file.crc && kept.size === file.size)?.data ?? null });
+      invariant(repaired.every(({ data }) => data), `The open-data archive ${name} has damaged files (${damaged.join(", ")}), and ${copy ? `its last valid copy, of ${copy.meta.retrievedOn}, has no file of the same size and CRC-32 for ${repaired.filter(({ data }) => !data).map(({ name: fileName }) => fileName).join(", ")}` : "there is no valid copy of it"}`);
+      return { entries: entriesOf(repaired), origin: "repaired", note: `${name}: ${damaged.join(", ")} damaged in today's archive; taken from the valid copy of ${copy.meta.retrievedOn}, which has the same CRC-32 and size`, response };
     }
   };
 }
