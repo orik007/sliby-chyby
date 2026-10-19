@@ -6,7 +6,7 @@ import { buildEvidenceTrail, createAssessmentRevision } from "../scripts/lib/evi
 import { renderHumanReviewMarkdown } from "../scripts/lib/assessment-review.mjs";
 import { formatDate, stepLinks, stepTitle } from "../src/lib/evidence-trail.ts";
 import { assessmentRevisionSchema, evidenceTrailPrintSchema, evidenceTrailRegulationSchema, evidenceTrailResolutionSchema } from "../src/lib/schema.ts";
-import { createCollectedRecord } from "../scripts/lib/collector-core.mjs";
+import { createCollectedRecord, sha256 } from "../scripts/lib/collector-core.mjs";
 import { lawChangeOfRegulation, lawChangeOfResolution } from "../scripts/lib/print-parts.mjs";
 import { loadTrackedPromises } from "../scripts/lib/published-promises.mjs";
 import { buildLawChangeEvidencePackage } from "../scripts/lib/topic-evidence-package.mjs";
@@ -311,7 +311,7 @@ test("a cited amendment and a vote on it enter the trail on their bill, with the
     versions: { proposed: { heading: null, titleCz: "Návrh zákona", textCz: "Zákon …", document: { filename: "t006700.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=2" } } },
     senateResolutions: [],
     printPartHeadings: [],
-    amendments: [{ documentNumber: "1306", label: "D1", presenterCz: "Poslanec Boris Šťastný", presentedOn: "2026-06-11", proposerPartyIds: ["ano"], parts: [], document: { filename: "31306.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=900" }, pageUrl: "https://www.psp.cz/sqw/sd.sqw?cd=1306&o=10", textCz: "1. V čl. I se bod 3 zrušuje." }]
+    amendments: [{ documentNumber: "1306", label: "D1", presenterCz: "Poslanec Boris Šťastný", presentedOn: "2026-06-11", proposerPartyIds: ["ano"], parts: [], document: { filename: "31306.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=900" }, pageUrl: "https://www.psp.cz/sqw/sd.sqw?cd=1306&o=10", textCz: "1. V čl. I se bod 3 zrušuje.", textSha256: sha256("1. V čl. I se bod 3 zrušuje.") }]
   };
   const records = [amendment, vote];
   const evidencePackage = buildLawChangeEvidencePackage({ assessorInstructions: "assessor instructions", promise, keptChanges: [{ change, route: { routeBasis: ["specific-tag"], matchedTagIds: ["vat-policy"], directLinkIdentifiers: [] } }], recordsByPrintId: new Map([["43174", records]]), printFirstSeenOn: new Map([["43174", "2025-12-12"]]), collectorRun: { schemaVersion: "1.0.0", runId: "fixture", records }, asOf: "2026-09-25" });

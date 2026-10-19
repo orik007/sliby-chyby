@@ -215,7 +215,7 @@ export function renderCoverageAuditMarkdown(audit) {
     ] : []),
     ...(quality.amendments ? [
       `| Summaries of the amendments of the second reading / without a readable file | ${quality.amendments.summaries} / ${quality.amendments.summariesWithoutFile} |`,
-      `| Amendments listed (committee amendments among them) | ${quality.amendments.amendmentItems} (${quality.amendments.committeeItems}) |`,
+      `| Amendments listed (committee amendments among them) / naming no presenter | ${quality.amendments.amendmentItems} (${quality.amendments.committeeItems}) / ${quality.amendments.itemsWithoutPresenter ?? 0} |`,
       `| Parliamentary documents listed / not a written amendment in sd.zip / without a readable text | ${quality.amendments.documentsListed} / ${quality.amendments.documentsNotInOpenData} / ${quality.amendments.documentsWithoutText} |`,
       `| Amendments used / written amendments to a bill with a summary that it does not list | ${quality.amendments.amendments} / ${quality.amendments.documentsNotListed} |`,
       `| Proposer names in the amendments' headings / not matched to an MP | ${quality.amendments.proposerNames} / ${quality.amendments.proposerNamesUnmatched} |`,

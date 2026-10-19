@@ -262,6 +262,11 @@ function formatListNumber(value, format) {
   return String(value);
 }
 
+// The download options of a psp.cz HTML page, and its text: psp.cz serves
+// its pages in windows-1250.
+export const pspPageOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };
+export const decodePspPage = (page) => new TextDecoder("windows-1250").decode(page.bytes);
+
 /**
  * The paragraphs of a DOCX file with the number Word shows before each one
  * that is in a numbered list (`{ label, text }`; `label` is "" when there is

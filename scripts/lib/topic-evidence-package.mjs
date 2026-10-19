@@ -101,7 +101,7 @@ function amendmentDocumentNumbers(record) {
 // evidence ID, because the package holds the text only of the amendments the
 // party's conduct names.
 function amendmentHashes(change) {
-  return (change.amendments ?? []).map(({ documentNumber, textCz }) => ({ documentNumber, textSha256: sha256(textCz) }));
+  return (change.amendments ?? []).map(({ documentNumber, textSha256 }) => ({ documentNumber, textSha256 }));
 }
 
 export function amendmentEvidenceId(documentNumber) {
@@ -138,7 +138,7 @@ export function withAmendments(changes, recordsByPrintId, amendmentRecords) {
       document: payload.document,
       pageUrl: url,
       textCz: payload.paragraphs.join("\n")
-    }));
+    })).map((amendment) => ({ ...amendment, textSha256: sha256(amendment.textCz) }));
     return { ...change, printPartHeadings, amendments };
   });
 }
@@ -399,7 +399,7 @@ function evidenceFromAmendment(change, amendment) {
     primary: true,
     factSummary: `Amendment ${amendment.label} to print ${change.printNumber}, parliamentary document ${amendment.documentNumber}, presented in the second reading on ${amendment.presentedOn} by ${amendment.presenterCz}; it amends the text of the bill, not the act itself${amendment.parts.length > 0 ? `, and names ${amendment.parts.join(", ")}` : ""}.`,
     structuredFacts: { externalPrintId: change.printId, printNumber: change.printNumber, documentNumber: amendment.documentNumber, label: amendment.label, presenterCz: amendment.presenterCz, presentedOn: amendment.presentedOn, proposerPartyIds: amendment.proposerPartyIds, parts: amendment.parts, pageUrl: amendment.pageUrl, textCz: amendment.textCz },
-    sourceRecordHash: sha256(amendment.textCz)
+    sourceRecordHash: amendment.textSha256
   };
 }
 

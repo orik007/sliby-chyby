@@ -43,9 +43,9 @@ jobs:
     runs-on: ubuntu-latest
     # The two paid steps have their own, shorter limits. A step that reaches
     # its limit fails like any other error, so the always() steps still save
-    # the paid work already written to disk; the job limit is never reached.
-    # It is GitHub's longest, so a collection that uses its whole step limit
-    # still leaves the later steps 150 minutes.
+    # the paid work already written to disk. The job limit is GitHub's
+    # longest; the step limits together exceed it, so a run in which every
+    # step runs long is cancelled at the job limit instead.
     timeout-minutes: 360
     environment:
       name: assessment
@@ -135,8 +135,13 @@ jobs:
             if git cat-file -e "origin/$REVIEW_BRANCH:automation/collectors/checkpoints.json" 2>/dev/null; then
               restore_paths+=(automation/collectors/checkpoints.json)
             fi
+            # Only the document cache's own entries (<idd>.json) are restored, so
+            # a file it no longer uses leaves the audit state.
             while IFS= read -r path; do
-              restore_paths+=("$path")
+              case "$path" in
+                automation/psp-documents/*) [[ "$path" =~ ^automation/psp-documents/[0-9]+\.json$ ]] && restore_paths+=("$path") ;;
+                *) restore_paths+=("$path") ;;
+              esac
             done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/law-context automation/psp-documents automation/government-resolutions)
             for directory in automation/evidence-packages automation/review-proposals; do
               while IFS= read -r path; do
@@ -162,7 +167,7 @@ jobs:
         # data rules), and government resolutions from zVlády through theirs
         # (Government resolution data rules). The Chamber's amendments read
         # the summaries, the amendments' pages, and the stenographic record
-        # at 20 requests a minute, about 35 minutes, and each file once
+        # at 20 requests a minute, about 45 minutes, and each file once
         # (Amendment data rules). Reading resolutions then stops after 120
         # minutes and fails the run before any paid step; the next run
         # continues from the cache. The step limit leaves room for the
@@ -236,10 +241,10 @@ jobs:
         id: tag-cache
         # A failed run keeps the paid law-change screening and relevance
         # checks it already did, the law-change context it read, the psp.cz
-        # document hashes it recorded, and the government resolutions it
-        # read. A subject is cached only once both of its model outputs are
-        # valid, a context line only once its answer is complete, a hash
-        # only for a file read in full, and a resolution only once its page
+        # document texts it read, and the government resolutions it read. A
+        # subject is cached only once both of its model outputs are valid, a
+        # context line only once its answer is complete, a document only
+        # once its file is read in full, and a resolution only once its page
         # and files are read, so a partial cache is always safe to keep.
         if: always()
         env:

@@ -668,7 +668,7 @@ function planAmendments({ source, printById, historyRows, amendmentSummaryRows, 
   };
   // A vote can be on an amendment when it is on the agenda item of a bill
   // with a summary, on or after the day the summary was distributed, and is
-  // not a decisive step of that bill.
+  // not a decisive step of any bill.
   const amendmentVotes = [];
   for (const vote of recentVotes) {
     const agendaItem = agendaItemByKey.get(`${vote.session}:${Number(vote.agenda)}`);
@@ -679,7 +679,10 @@ function planAmendments({ source, printById, historyRows, amendmentSummaryRows, 
       ? summaries.filter(({ printId, distributedOn }) => printId === agendaItem.printId && distributedOn <= date).sort((left, right) => right.distributedOn.localeCompare(left.distributedOn) || right.partNumber - left.partNumber)[0] ?? null
       : null;
     if (!summary) continue;
-    const decisive = (historyByVote.get(vote.id) ?? []).some((history) => history.printId === summary.printId && isDecisiveAction(historyContext(history, historyTables).actionCz));
+    // A vote decisive on any print it is linked to is that print's decisive
+    // vote, never an amendment vote (attribution.mjs checks every linked
+    // print the same way).
+    const decisive = (historyByVote.get(vote.id) ?? []).some((history) => isDecisiveAction(historyContext(history, historyTables).actionCz));
     if (decisive) continue;
     amendmentVotes.push({ voteId: vote.id, printId: summary.printId, summaryPartNumber: summary.partNumber, sessionNumber: numeric(vote.session), date, time: vote.time });
   }

@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError, workflowRunId } from "./lib/e-sbirka.mjs";
-import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspProxyUrl } from "./lib/psp-print-documents.mjs";
+import { allSettledOrThrow, createPspFetcher, createPspRequestLog, decodePspPage, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspPageOptions, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { anyPspDocumentFileOptions, createPspDocumentCache, pspDocumentExtractions, pspDocumentFileOptions } from "./lib/psp-document-cache.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { collectPrints, governmentOpinionSectionLabels, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
@@ -42,10 +42,8 @@ function parseArgs(args) {
   return options;
 }
 
-const htmlOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };
 const extractParagraphs = { docx: extractDocxParagraphs, doc: extractDocParagraphs };
 const extractionNames = { docx: pspDocumentExtractions.docxParagraphs, doc: pspDocumentExtractions.docParagraphs };
-const decodePage = (page) => new TextDecoder("windows-1250").decode(page.bytes);
 
 // A downloaded DOCX or DOC file that cannot be read as text (for example a
 // scanned image) is treated like a text that is not published: reported,
@@ -63,7 +61,7 @@ async function fetchWordText(source, url, filename, format, warnings, printNumbe
 // proposal itself (part 0), a Senate resolution sub-print ("Text"), or the
 // sub-print with the text referred to the Senate ("Text").
 async function fetchPageText(source, pageUrl, printNumber, warnings, version, sectionLabels = undefined) {
-  const link = proposalDocumentLink(decodePage(await fetchPsp(source, pageUrl, htmlOptions)), pageUrl, sectionLabels);
+  const link = proposalDocumentLink(decodePspPage(await fetchPsp(source, pageUrl, pspPageOptions)), pageUrl, sectionLabels);
   return link ? fetchWordText(source, link.url, link.filename, link.format, warnings, printNumber, version) : null;
 }
 
@@ -75,7 +73,7 @@ function fetchPrintPageText(source, termNumber, printNumber, partNumber, warning
 const laterTextNames = { approved: (number) => `Schválený text tisku ${number} (DOCX)`, passed: (number) => `Text tisku ${number} přijatý Parlamentem (DOCX)` };
 
 async function laterText(source, print, version, url, warnings) {
-  const docxUrl = laterTextDocxLink(decodePage(await fetchPsp(source, url, htmlOptions)), url);
+  const docxUrl = laterTextDocxLink(decodePspPage(await fetchPsp(source, url, pspPageOptions)), url);
   if (!docxUrl) {
     warnings.push({ printNumber: print.number, kind: "later-text-without-docx", version, detail: `the ${version} text is listed without a DOCX file` });
     return null;
@@ -115,9 +113,9 @@ async function fetchPrintTexts(source, print, termNumber) {
   const historyUrl = officialPrintHistoryUrl(termNumber, print.number);
   const [proposal, historyPage] = await allSettledOrThrow([
     fetchPrintPageText(source, termNumber, print.number, print.partNumber, warnings, "proposed"),
-    bill ? fetchPsp(source, historyUrl, htmlOptions) : null
+    bill ? fetchPsp(source, historyUrl, pspPageOptions) : null
   ]);
-  const history = historyPage ? decodePage(historyPage) : null;
+  const history = historyPage ? decodePspPage(historyPage) : null;
   const links = history ? laterTextLinks(history, historyUrl) : { approved: null, passed: null, referredToSenate: null };
   // Without an approved-text page, the approved text is the sub-print with
   // the text referred to the Senate, when the history links one.

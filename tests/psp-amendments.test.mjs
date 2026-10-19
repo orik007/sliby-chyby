@@ -132,6 +132,8 @@ test("tells MPs with similar names apart and stops at what the amendment is to",
 test("names the bill's parts an amendment amends as their headings write them", () => {
   assert.deepEqual(partsNamedInAmendment(["1. V části první čl. I se bod 4 zrušuje.", "2. V části dvacáté druhé se doplňuje bod 3.", "Za část třetí se vkládá …", "Část pátá zní:"]), ["ČÁST DVACÁTÁ DRUHÁ", "ČÁST PRVNÍ", "ČÁST PÁTÁ", "ČÁST TŘETÍ"]);
   assert.deepEqual(partsNamedInAmendment(["V čl. I bodu 3 se slova …"]), []);
+  // An ordinal in the accusative ("za část druhou", SD 589).
+  assert.deepEqual(partsNamedInAmendment(["Za část druhou se vkládá část třetí, která zní:", "3. Za část čtyřicátou první se vkládá nová část čtyřicátá druhá"]), ["ČÁST DRUHÁ", "ČÁST TŘETÍ", "ČÁST ČTYŘICÁTÁ DRUHÁ", "ČÁST ČTYŘICÁTÁ PRVNÍ"]);
 });
 
 // A turn of the stenographic record as psp.cz publishes it (s027017.htm,

@@ -1,7 +1,7 @@
 import { cleanText, czechMonths, invariant } from "./collector-core.mjs";
 import { normalizeSearchText } from "./attribution.mjs";
 import { listedFiles } from "./print-parts.mjs";
-import { extractDocParagraphs, extractDocxNumberedParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl } from "./psp-print-documents.mjs";
+import { decodePspPage, extractDocParagraphs, extractDocxNumberedParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, pspPageOptions } from "./psp-print-documents.mjs";
 import { pspDocumentExtractions, pspDocumentFileOptions } from "./psp-document-cache.mjs";
 import { extractXlsxRows } from "./xlsx-rows.mjs";
 
@@ -31,9 +31,11 @@ export function stenoTurnUrl(termYear, sessionNumber, turnNumber) {
   return `https://www.psp.cz/eknih/${termYear}ps/stenprot/${session}schuz/s${session}${String(turnNumber).padStart(3, "0")}.htm`;
 }
 
+const namedDatePattern = new RegExp(`(\\d{1,2})\\.\\s*(${Object.keys(czechMonths).join("|")})\\s+(\\d{4})`, "u");
+
 // "4. března 2026" or "4. 3. 2026" as an ISO date, or null.
 function czechDate(text) {
-  const named = /(\d{1,2})\.\s*(ledna|února|března|dubna|května|června|července|srpna|září|října|listopadu|prosince)\s+(\d{4})/u.exec(text);
+  const named = namedDatePattern.exec(text);
   if (named) return `${named[3]}-${String(czechMonths[named[2]]).padStart(2, "0")}-${named[1].padStart(2, "0")}`;
   const numeric = /(\d{1,2})\.\s*(\d{1,2})\.\s*(\d{4})/.exec(text);
   return numeric ? `${numeric[3]}-${numeric[2].padStart(2, "0")}-${numeric[1].padStart(2, "0")}` : null;
@@ -209,20 +211,21 @@ export function proposersOfHeading(paragraphs, candidates) {
   return { personIds: [...personIds].sort(), unmatched, heading: cleanText(heading, 1000) };
 }
 
-// "V části první", "části dvacáté druhé", "Část třetí zní": the parts of the
-// bill an amendment names, as the bill's part headings write them ("ČÁST
-// PRVNÍ"). The ordinal is feminine; its case ending -é is -á in a heading.
-// A unit ordinal follows only a tens ordinal ("dvacáté druhé"), so a verb
-// after the ordinal ("části třetí zní") is never taken for one.
-const unitOrdinal = "(?:první|druh[éáý]|třetí|čtvrt[éáý]|pát[éáý]|šest[éáý]|sedm[éáý]|osm[éáý]|devát[éáý])";
-const tensOrdinal = "(?:dvacát|třicát|čtyřicát|padesát|šedesát|sedmdesát|osmdesát|devadesát)[éáý]";
-const partReferencePattern = new RegExp(`(?<!\\p{L})[Čč]ást(?:i|í)?\\s+((?:sto\\s+)?(?:${tensOrdinal}(?:\\s+${unitOrdinal})?|\\p{Ll}+[éíá]))(?!\\p{L})`, "gu");
+// "V části první", "části dvacáté druhé", "Část třetí zní", "za část
+// druhou": the parts of the bill an amendment names, as the bill's part
+// headings write them ("ČÁST PRVNÍ"). The ordinal is feminine; its case
+// ending -é (genitive) or -ou (accusative) is -á in a heading. A unit ordinal
+// follows only a tens ordinal ("dvacáté druhé"), so a verb after the ordinal
+// ("části třetí zní") is never taken for one.
+const unitOrdinal = "(?:první|druh(?:[éáý]|ou)|třetí|čtvrt(?:[éáý]|ou)|pát(?:[éáý]|ou)|šest(?:[éáý]|ou)|sedm(?:[éáý]|ou)|osm(?:[éáý]|ou)|devát(?:[éáý]|ou))";
+const tensOrdinal = "(?:dvacát|třicát|čtyřicát|padesát|šedesát|sedmdesát|osmdesát|devadesát)(?:[éáý]|ou)";
+const partReferencePattern = new RegExp(`(?<!\\p{L})[Čč]ást(?:i|í)?\\s+((?:sto\\s+)?(?:${tensOrdinal}(?:\\s+${unitOrdinal})?|\\p{Ll}+(?:[éíá]|ou)))(?!\\p{L})`, "gu");
 
 export function partsNamedInAmendment(paragraphs) {
   const parts = new Set();
   for (const paragraph of paragraphs) {
     for (const [, ordinal] of paragraph.matchAll(partReferencePattern)) {
-      parts.add(`ČÁST ${ordinal.split(/\s+/).map((word) => word.replace(/é$/u, "á")).join(" ").toLocaleUpperCase("cs-CZ")}`);
+      parts.add(`ČÁST ${ordinal.split(/\s+/).map((word) => word.replace(/(?:é|ou)$/u, "á")).join(" ").toLocaleUpperCase("cs-CZ")}`);
     }
   }
   return [...parts].sort();
@@ -385,8 +388,6 @@ export function linkVoteToAmendment(reference, items, { budget = false } = {}) {
   return { linked: true, label, variant: reference.variant, documentNumbers, presenterCz: item.presenterCz };
 }
 
-const htmlOptions = { maxBytes: 2_000_000, expectedContentTypes: ["text/html"] };
-const decodePage = (page) => new TextDecoder("windows-1250").decode(page.bytes);
 
 /**
  * Turns of the stenographic record (`{ session, date, turn }`) in runs of
@@ -423,14 +424,14 @@ function minutesOf(time) {
  */
 export async function collectAmendments({ source, plan, fetchPsp, documentCache }) {
   const warnings = [];
-  const quality = { summaries: plan.summaries.length, summariesWithoutFile: 0, amendmentItems: 0, committeeItems: 0, documentsListed: 0, documentsNotInOpenData: 0, documentsWithoutText: 0, amendments: 0, proposerNames: 0, proposerNamesUnmatched: 0, documentsNotListed: 0, votes: plan.amendmentVotes.length, votesLinked: 0, votesNotLinked: {}, stenoTurnsRead: 0 };
+  const quality = { summaries: plan.summaries.length, summariesWithoutFile: 0, amendmentItems: 0, committeeItems: 0, itemsWithoutPresenter: 0, documentsListed: 0, documentsNotInOpenData: 0, documentsWithoutText: 0, amendments: 0, proposerNames: 0, proposerNamesUnmatched: 0, documentsNotListed: 0, votes: plan.amendmentVotes.length, votesLinked: 0, votesNotLinked: {}, stenoTurnsRead: 0 };
   const readFile = (url, format, extraction, extract) => documentCache.read(url, extraction, extract, async () => (await fetchPsp(source, url, pspDocumentFileOptions[format === "xlsm" ? "xlsx" : format])).bytes);
 
   // 1. The amendments each summary lists.
   const itemsBySummary = new Map();
   for (const summary of plan.summaries) {
     const pageUrl = officialPrintDocumentPageUrl(source.term.number, summary.printNumber, summary.partNumber);
-    const files = listedFiles(decodePage(await fetchPsp(source, pageUrl, htmlOptions)), pageUrl).filter(({ section }) => /^Text$/iu.test(section ?? ""));
+    const files = listedFiles(decodePspPage(await fetchPsp(source, pageUrl, pspPageOptions)), pageUrl).filter(({ section }) => /^Text$/iu.test(section ?? ""));
     const budget = summary.printKindId === "3";
     const file = budget ? files.find(({ format }) => format === "xlsx" || format === "xlsm") : files.find(({ format }) => format === "docx");
     let items = [];
@@ -455,6 +456,13 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
   const listedNumbers = new Set();
   for (const { summary, items } of itemsBySummary.values()) {
     for (const item of items.filter(({ committee }) => !committee)) {
+      // An amendment is presented by someone; a row that names nobody is no
+      // presented amendment and is reported.
+      if (!item.presenterCz) {
+        quality.itemsWithoutPresenter += 1;
+        warnings.push(`summary ${summary.printNumber}/${summary.partNumber}: amendment ${item.label} names no presenter; not used`);
+        continue;
+      }
       for (const number of item.documentNumbers) {
         if (listedNumbers.has(`${summary.printNumber}/${number}`)) continue;
         listedNumbers.add(`${summary.printNumber}/${number}`);
@@ -466,7 +474,7 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
           continue;
         }
         const pageUrl = amendmentDocumentPageUrl(source.term.number, number);
-        const files = listedFiles(decodePage(await fetchPsp(source, pageUrl, htmlOptions)), pageUrl);
+        const files = listedFiles(decodePspPage(await fetchPsp(source, pageUrl, pspPageOptions)), pageUrl);
         const file = files.find(({ format }) => format === "docx") ?? files.find(({ format }) => format === "doc");
         const read = file ? await readFile(file.url, file.format, file.format === "docx" ? pspDocumentExtractions.docxParagraphs : pspDocumentExtractions.docParagraphs, file.format === "docx" ? extractDocxParagraphs : extractDocParagraphs) : null;
         if (!read || read.error) {
@@ -526,7 +534,7 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache 
     for (const turn of turns) {
       const url = stenoTurnUrl(source.term.year, turn.session, turn.turn);
       quality.stenoTurnsRead += 1;
-      pages.push({ url, html: decodePage(await fetchPsp(source, url, htmlOptions)) });
+      pages.push({ url, html: decodePspPage(await fetchPsp(source, url, pspPageOptions)) });
     }
     for (const announcement of stenoAnnouncements(pages)) {
       if (!announcements.has(announcement.voteId)) announcements.set(announcement.voteId, announcement);
