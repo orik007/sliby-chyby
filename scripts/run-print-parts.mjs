@@ -4,8 +4,9 @@ import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError, workflowRunId } from "./lib/e-sbirka.mjs";
-import { allSettledOrThrow, createPspFetcher, createPspRequestLog, decodePspPage, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspPageOptions, pspProxyUrl } from "./lib/psp-print-documents.mjs";
+import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspPageOptions, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { anyPspDocumentFileOptions, createPspDocumentCache, pspDocumentExtractions, pspDocumentFileOptions } from "./lib/psp-document-cache.mjs";
+import { createPspPageCache, readPspPage } from "./lib/psp-page-cache.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 import { collectPrints, governmentOpinionSectionLabels, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
@@ -16,8 +17,9 @@ import { loadTrackedPromises } from "./lib/published-promises.mjs";
  * the text the Chamber approved, the text passed by Parliament, any Senate
  * resolution returning it, and the government's opinion on a bill it did
  * not submit) and splits them into law changes with
- * their versions (docs/evidence-pipeline.md, Chamber data rules). Nothing
- * is cached, so a later text is used as soon as psp.cz publishes it. When
+ * their versions (docs/evidence-pipeline.md, Chamber data rules). No page of
+ * an open print is cached, so a later text is used as soon as psp.cz
+ * publishes it. When
  * psp.cz does not publish the text a decisive vote concerned and the bill was
  * promulgated, that version's text is the act as promulgated, read from the
  * e-Sbírka REST API through the permanent law-context cache (--cache). A
@@ -25,16 +27,19 @@ import { loadTrackedPromises } from "./lib/published-promises.mjs";
  * DOC file is treated as not published and reported. A Word file under a
  * psp.cz document ID does not change, so its text is read from the document
  * cache (--document-cache, scripts/lib/psp-document-cache.mjs) once it was
- * downloaded; only the pages that list the files are read in every run.
+ * downloaded. A page of a closed print is read from the page cache
+ * (--page-cache, scripts/lib/psp-page-cache.mjs) once it was downloaded;
+ * every other page is read in every run.
  */
 function parseArgs(args) {
-  const options = { collectorRun: null, output: null, documentCache: "automation/psp-documents", cache: "automation/law-context", sourceRegistry: "automation/collectors/sources.json" };
+  const options = { collectorRun: null, output: null, documentCache: "automation/psp-documents", pageCache: "automation/psp-pages", cache: "automation/law-context", sourceRegistry: "automation/collectors/sources.json" };
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--collector-run") options.collectorRun = args[++index];
     else if (arg === "--output") options.output = args[++index];
     else if (arg === "--sources") options.sourceRegistry = args[++index];
     else if (arg === "--document-cache") options.documentCache = args[++index];
+    else if (arg === "--page-cache") options.pageCache = args[++index];
     else if (arg === "--cache") options.cache = args[++index];
     else throw new Error(`Unknown argument: ${arg}`);
   }
@@ -57,23 +62,30 @@ async function fetchWordText(source, url, filename, format, warnings, printNumbe
   return { document: { filename, url }, paragraphs: proposalBody(paragraphs) };
 }
 
+// A page of a closed print is read once and kept, when its reader found
+// what it reads; every other page is read in every run
+// (scripts/lib/psp-page-cache.mjs).
+function readPage(source, url, printId, complete = undefined) {
+  return readPspPage({ pageCache, closedPrintIds, fetchPsp, source }, url, [printId], complete);
+}
+
 // The Word file listed in a print page's proposal-text section: the
 // proposal itself (part 0), a Senate resolution sub-print ("Text"), or the
 // sub-print with the text referred to the Senate ("Text").
-async function fetchPageText(source, pageUrl, printNumber, warnings, version, sectionLabels = undefined) {
-  const link = proposalDocumentLink(decodePspPage(await fetchPsp(source, pageUrl, pspPageOptions)), pageUrl, sectionLabels);
+async function fetchPageText(source, pageUrl, printId, printNumber, warnings, version, sectionLabels = undefined) {
+  const link = proposalDocumentLink(await readPage(source, pageUrl, printId, (content) => Boolean(proposalDocumentLink(content, pageUrl, sectionLabels))), pageUrl, sectionLabels);
   return link ? fetchWordText(source, link.url, link.filename, link.format, warnings, printNumber, version) : null;
 }
 
-function fetchPrintPageText(source, termNumber, printNumber, partNumber, warnings, version, sectionLabels = undefined) {
-  return fetchPageText(source, officialPrintDocumentPageUrl(termNumber, printNumber, partNumber), printNumber, warnings, version, sectionLabels);
+function fetchPrintPageText(source, termNumber, print, partNumber, warnings, version, sectionLabels = undefined) {
+  return fetchPageText(source, officialPrintDocumentPageUrl(termNumber, print.number, partNumber), print.printId, print.number, warnings, version, sectionLabels);
 }
 
 // The names psp.cz gives the later-text pages, used to trace a version.
 const laterTextNames = { approved: (number) => `Schválený text tisku ${number} (DOCX)`, passed: (number) => `Text tisku ${number} přijatý Parlamentem (DOCX)` };
 
 async function laterText(source, print, version, url, warnings) {
-  const docxUrl = laterTextDocxLink(decodePspPage(await fetchPsp(source, url, pspPageOptions)), url);
+  const docxUrl = laterTextDocxLink(await readPage(source, url, print.printId, (content) => Boolean(laterTextDocxLink(content, url))), url);
   if (!docxUrl) {
     warnings.push({ printNumber: print.number, kind: "later-text-without-docx", version, detail: `the ${version} text is listed without a DOCX file` });
     return null;
@@ -85,7 +97,7 @@ async function laterText(source, print, version, url, warnings) {
 // text referred to the Senate. A sub-print without a readable Word file is
 // reported like a later text without one.
 async function referredText(source, print, url, warnings) {
-  const text = await fetchPageText(source, url, print.number, warnings, "approved");
+  const text = await fetchPageText(source, url, print.printId, print.number, warnings, "approved");
   if (!text && !warnings.some(({ version }) => version === "approved")) {
     warnings.push({ printNumber: print.number, kind: "later-text-without-docx", version: "approved", detail: "the approved text (the sub-print referred to the Senate) is listed without a DOCX or DOC file" });
   }
@@ -93,7 +105,7 @@ async function referredText(source, print, url, warnings) {
 }
 
 async function senateResolution(source, termNumber, print, partNumber, warnings) {
-  const resolution = await fetchPrintPageText(source, termNumber, print.number, partNumber, warnings, "senate-resolution");
+  const resolution = await fetchPrintPageText(source, termNumber, print, partNumber, warnings, "senate-resolution");
   if (!resolution) warnings.push({ printNumber: print.number, kind: "senate-resolution-without-text", detail: `the Senate resolution ${print.number}/${partNumber} has no readable DOCX or DOC text` });
   return resolution ? { partNumber, ...resolution } : null;
 }
@@ -102,7 +114,7 @@ async function senateResolution(source, termNumber, print, partNumber, warnings)
 // sub-print's "Stanovisko" section. Without one, the opinion is still
 // conduct, assessed by its result, and reported.
 async function governmentOpinion(source, termNumber, print, partNumber, warnings) {
-  const opinion = await fetchPrintPageText(source, termNumber, print.number, partNumber, warnings, "government-opinion", governmentOpinionSectionLabels);
+  const opinion = await fetchPrintPageText(source, termNumber, print, partNumber, warnings, "government-opinion", governmentOpinionSectionLabels);
   if (!opinion) warnings.push({ printNumber: print.number, kind: "government-opinion-without-text", detail: `the government opinion ${print.number}/${partNumber} has no readable DOCX or DOC text` });
   return opinion ? { partNumber, ...opinion } : null;
 }
@@ -111,11 +123,10 @@ async function fetchPrintTexts(source, print, termNumber) {
   const warnings = [];
   const bill = billPrintKindIds.has(String(print.kindId));
   const historyUrl = officialPrintHistoryUrl(termNumber, print.number);
-  const [proposal, historyPage] = await allSettledOrThrow([
-    fetchPrintPageText(source, termNumber, print.number, print.partNumber, warnings, "proposed"),
-    bill ? fetchPsp(source, historyUrl, pspPageOptions) : null
+  const [proposal, history] = await allSettledOrThrow([
+    fetchPrintPageText(source, termNumber, print, print.partNumber, warnings, "proposed"),
+    bill ? readPage(source, historyUrl, print.printId, (content) => new RegExp(`<h1>Sněmovní tisk <a [^>]*>${print.number}</a`, "iu").test(content)) : null
   ]);
-  const history = historyPage ? decodePspPage(historyPage) : null;
   const links = history ? laterTextLinks(history, historyUrl) : { approved: null, passed: null, referredToSenate: null };
   // Without an approved-text page, the approved text is the sub-print with
   // the text referred to the Senate, when the history links one.
@@ -157,15 +168,23 @@ const fetchPsp = createPspFetcher({ ...pspDownloadSettings, proxyUrl, onAttempt:
 // dated by the run's Prague calendar date (scripts/lib/psp-document-cache.mjs).
 const runDate = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Prague", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
 const documentCache = createPspDocumentCache(resolve(args.documentCache), runDate);
-// The files checked again in every run, oldest check first
-// (docs/evidence-pipeline.md, Chamber data rules).
+// The pages of closed prints read so far (scripts/lib/psp-page-cache.mjs).
+const pageCache = createPspPageCache(resolve(args.pageCache), runDate);
+// The files and the kept pages checked again in every run, oldest check
+// first (docs/evidence-pipeline.md, Chamber data rules).
 const documentSampleSize = 20;
+const pageSampleSize = 20;
 
 const registry = validateRegistry(JSON.parse(await readFile(resolve(args.sourceRegistry), "utf8")));
 const source = registry.sources.find(({ id }) => id === "psp-core-2025");
 invariant(source?.enabled, "Enabled psp-core-2025 source is required");
 const collectorRun = JSON.parse(await readFile(resolve(args.collectorRun), "utf8"));
 invariant(collectorRun?.schemaVersion === "1.0.0" && Array.isArray(collectorRun.records), "Invalid collector run");
+// The prints whose debate has ended, from the Chamber's open data of this
+// collection (scripts/lib/psp-collector.mjs).
+const closedPrintIdList = collectorRun.collectors?.find(({ collector }) => collector === "psp-open-data")?.referenceData?.closedPrintIds;
+invariant(Array.isArray(closedPrintIdList), "The collector run has no closed prints of the Chamber");
+const closedPrintIds = new Set(closedPrintIdList.map(String));
 
 // Only prints that a potentially attributable record concerns can carry
 // attributable conduct; the texts of all other prints are never fetched.
@@ -219,6 +238,10 @@ try {
   // under its ID fails the run.
   const checked = await documentCache.checkSample(async (url) => (await fetchPsp(source, url, anyPspDocumentFileOptions)).bytes, documentSampleSize);
   log(`psp.cz document cache: ${documentCache.size()} files, ${documentCache.stats.fromCache} texts read from it, ${documentCache.stats.downloaded} downloaded in this run, ${checked.length} checked again and unchanged`);
+  // The kept pages checked longest ago are downloaded again; one whose
+  // content changed fails the run.
+  const checkedPages = await pageCache.checkSample((url) => fetchPsp(source, url, pspPageOptions), pageSampleSize);
+  log(`psp.cz page cache: ${pageCache.size()} pages of closed prints, ${pageCache.stats.fromCache} read from it, ${pageCache.stats.kept} read and kept in this run, ${pageCache.stats.notKept} of closed prints read but not kept (incomplete or not found), ${pageCache.stats.open} pages of open prints read, ${checkedPages.length} checked again and unchanged`);
 } finally {
   await fetchPsp.close();
   pspRequests.stop();

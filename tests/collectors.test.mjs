@@ -8,7 +8,7 @@ import {
   fetchVerified,
   validateRegistry
 } from "../scripts/lib/collector-core.mjs";
-import { derivePartyVoteSummaries, normalizePspData, parseUnl } from "../scripts/lib/psp-collector.mjs";
+import { closedPrintIdsOf, derivePartyVoteSummaries, normalizePspData, parseUnl } from "../scripts/lib/psp-collector.mjs";
 import { attributionStatusForRecord, versionConcerned } from "../scripts/lib/attribution.mjs";
 
 const governmentPeriods = {
@@ -256,10 +256,10 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
   const printsEntries = {
     "tisky.unl": entry(unl(printFields)),
     "hist.unl": entry(unl(historyFields)),
-    "stavy.unl": entry(unl(["20", "6", "1", "Approved", null, null]) + unl(["10", "5", "1", "Before vote", null, null])),
+    "stavy.unl": entry(unl(["20", "64", "1", "Approved", null, null]) + unl(["10", "5", "1", "Before vote", null, null])),
     "prechody.unl": entry(unl(["10", "10", "20", "5", "1"])),
     "typ_akce.unl": entry(unl(["5", "Chamber approved bill"])),
-    "typ_stavu.unl": entry(unl(["5", "3. cteni"]) + unl(["6", "Odesilano do Senatu"])),
+    "typ_stavu.unl": entry(unl(["5", "3. cteni"]) + unl(["6", "KONEC"]) + unl(["64", "Odesilano do Senatu"])),
     "tisky_za.unl": entry(subPrintRow({ printId: "700", partNumber: "2", historyId: "801", kindId: "11", shortTitle: "Usnesení Senátu k tisku 189/0", fullTitle: "Usnesení Senátu" }) + subPrintRow({ printId: "700", partNumber: "1", historyId: "801", kindId: "12", shortTitle: "Zákon ze Senátu" })),
     // The eKLEP materials of the print and of a sub-print; a print of
     // another term is not this term's, and a row of tisk_eklep.unl with a
@@ -292,6 +292,8 @@ test("PSP normalizer joins votes, prints, and club membership at vote date", () 
   assert.equal(vote.primary, true);
   // The eKLEP materials of this term's print and sub-print, with their kinds,
   // by which a government resolution approving them is found.
+  // The print's state is not of the type "KONEC".
+  assert.deepEqual(result.referenceData.closedPrintIds, []);
   assert.deepEqual(result.referenceData.eklepLinks, [
     { pid: "KORNDS2HT779", kind: "print", printId: "700", printKindId: "1" },
     { pid: "KORNDPDDEYDL", kind: "sub-print", printId: "700", partNumber: "2", printKindId: "11" }
@@ -332,10 +334,10 @@ function agendaFixture({ historyAgendaId = "5001" } = {}) {
   const printsEntries = {
     "tisky.unl": entry(print("701", "68", "Vladni navrh zakona, kterym se meni zakon c. 23/2017 Sb., o pravidlech rozpoctove odpovednosti") + print("702", "90", "Unrelated bill")),
     "hist.unl": entry(unl(historyFields)),
-    "stavy.unl": entry(unl(["20", "6", "1", "Approved", null, null])),
+    "stavy.unl": entry(unl(["20", "14", "1", "Approved", null, null])),
     "prechody.unl": entry(unl(["11", "20", "20", "6", "1"])),
     "typ_akce.unl": entry(unl(["6", "setrvano"])),
-    "typ_stavu.unl": entry(unl(["6", "Snemovna (Senat)"])),
+    "typ_stavu.unl": entry(unl(["6", "KONEC"]) + unl(["14", "Snemovna (Senat)"])),
     "tisky_za.unl": entry(""),
     "tisk_eklep.unl": entry(""),
     "tz_eklep.unl": entry(""),
@@ -429,7 +431,7 @@ test("PSP normalizer attributes submitted bills to proposer and government parti
       "stavy.unl": entry(unl(["20", "1", "1", "Submitted", null, null])),
       "prechody.unl": entry(unl(["1", "20", "20", "7", "1"])),
       "typ_akce.unl": entry(unl(["7", "předložen"])),
-      "typ_stavu.unl": entry(""),
+      "typ_stavu.unl": entry(unl(["6", "KONEC"])),
       "tisky_za.unl": entry(""),
       "tisk_eklep.unl": entry(""),
       "tz_eklep.unl": entry(""),
@@ -466,7 +468,7 @@ test("PSP normalizer records the government's opinion on a bill it did not submi
       "stavy.unl": entry(""),
       "prechody.unl": entry(""),
       "typ_akce.unl": entry(""),
-      "typ_stavu.unl": entry(""),
+      "typ_stavu.unl": entry(unl(["6", "KONEC"])),
       "tisky_za.unl": entry(subPrints),
       "tisk_eklep.unl": entry(""),
       "tz_eklep.unl": entry(""),
@@ -538,4 +540,12 @@ test("deduplication accepts identical records and rejects conflicting content", 
   assert.equal(deduplicateRecords([first, structuredClone(first)]).length, 1);
   const second = createCollectedRecord({ ...base, title: "Changed title" });
   assert.throws(() => deduplicateRecords([first, second]), /Conflicting records/);
+});
+
+test("a print is closed only in a state of the type KONEC", () => {
+  const stateTypeById = new Map([["6", { stateTypeId: "6", description: "KONEC" }], ["11", { stateTypeId: "11", description: "Sbírka zákonů" }]]);
+  const stateById = new Map([["21", { stateId: "21", stateTypeId: "6" }], ["20", { stateId: "20", stateTypeId: "11" }]]);
+  const printById = new Map([["43174", { printId: "43174", stateId: "21" }], ["43001", { printId: "43001", stateId: "21" }], ["43200", { printId: "43200", stateId: "20" }]]);
+  assert.deepEqual(closedPrintIdsOf({ printById, stateById, stateTypeById }), ["43001", "43174"]);
+  assert.throws(() => closedPrintIdsOf({ printById, stateById, stateTypeById: new Map([["6", { description: "Sněmovna" }]]) }), /no longer "KONEC"/);
 });
