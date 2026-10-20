@@ -760,15 +760,19 @@ export async function collectPspSource(source, options) {
   // has the same size and CRC-32 (scripts/lib/psp-open-data-archive.mjs).
   const archives = {};
   const openData = {};
+  const notes = [];
   for (const [name, endpoint] of endpointEntries) {
     const startedAt = Date.now();
-    const result = await options.openDataArchives.resolve(name, () => options.fetchPsp(source, endpoint, {
+    const result = await options.openDataArchives.resolve(`${source.id}-${name}`, () => options.fetchPsp(source, endpoint, {
       maxBytes: 20_000_000,
       expectedContentTypes: ["zip", "octet-stream"]
     }));
     archives[name] = { entries: result.entries, response: result.response };
-    openData[name] = { origin: result.origin, note: result.note };
-    if (result.note) log(`${source.id}: ${result.note}`);
+    openData[name] = { origin: result.origin, ...(result.copy ? { copy: result.copy } : {}) };
+    if (result.note) {
+      notes.push(result.note);
+      log(`${source.id}: ${result.note}`);
+    }
     log(`${source.id}: downloaded ${name} (${(result.response.bytes.byteLength / 1_000_000).toFixed(1)} MB in ${((Date.now() - startedAt) / 1000).toFixed(1)} s)`);
   }
   log(`${source.id}: parsing votes, members, prints, sessions, parliamentary documents, and the stenographic record`);
@@ -809,7 +813,7 @@ export async function collectPspSource(source, options) {
       contentHash: response.contentHash
     }])),
     records: deduplicateRecords(records),
-    warnings: [...Object.values(openData).map(({ note }) => note).filter(Boolean), ...normalized.warnings, ...amendments.warnings],
+    warnings: [...notes, ...normalized.warnings, ...amendments.warnings],
     referenceData: { ...normalized.referenceData, amendmentQuality: amendments.quality, openData }
   };
 }

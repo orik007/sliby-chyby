@@ -55,7 +55,7 @@ Party websites, press releases, and the media are not evidence. The public site 
 | `automation/government-resolutions/` | Durable cache of the government resolutions read from zVlády, one file per year (audit state only). |
 | `automation/psp-documents/` | Durable cache of the text of every psp.cz document file read, one file per document ID, with its SHA-256; a sample is checked again in every run (audit state only). |
 | `automation/psp-pages/` | Durable cache of the content of every psp.cz page read only for closed prints, one file per page; a sample is checked again in every run (audit state only). |
-| `automation/psp-open-data/` | Last valid copy of each Chamber open-data archive, from which a damaged file with the same size and CRC-32 is taken (audit state; the first copy of `poslanci.zip` is in the repository). |
+| `automation/psp-open-data/` | Last valid copy of each Chamber open-data archive, from which a damaged file with the same name, size, and CRC-32 is taken (GitHub Actions cache; the first copy of `poslanci.zip` is in the repository). |
 | `automation/evidence-packages/` | Durable unpublished queue of evidence packages (one per promise) awaiting assessment. |
 | `automation/prompts/` | Active law-change screener, relevance-check, assessor, and arbiter prompts. |
 | `scripts/` | Validation, collection, print splitting, routing, packaging, assessment, and coverage-audit scripts. |

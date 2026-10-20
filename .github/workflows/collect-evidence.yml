@@ -135,17 +135,15 @@ jobs:
             if git cat-file -e "origin/$REVIEW_BRANCH:automation/collectors/checkpoints.json" 2>/dev/null; then
               restore_paths+=(automation/collectors/checkpoints.json)
             fi
-            # Only the document and page caches' own entries (<id>.json) and the
-            # open-data copies are restored, so a file they no longer use
-            # leaves the audit state.
+            # Only the document and page caches' own entries (<id>.json) are
+            # restored, so a file they no longer use leaves the audit state.
             while IFS= read -r path; do
               case "$path" in
                 automation/psp-documents/*) [[ "$path" =~ ^automation/psp-documents/[0-9]+\.json$ ]] && restore_paths+=("$path") ;;
                 automation/psp-pages/*) [[ "$path" =~ ^automation/psp-pages/[0-9a-f]{32}\.json$ ]] && restore_paths+=("$path") ;;
-                automation/psp-open-data/*) [[ "$path" =~ ^automation/psp-open-data/[a-z]+\.(zip|json)$ ]] && restore_paths+=("$path") ;;
                 *) restore_paths+=("$path") ;;
               esac
-            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/law-context automation/psp-documents automation/psp-pages automation/psp-open-data automation/government-resolutions)
+            done < <(git ls-tree -r --name-only "origin/$REVIEW_BRANCH" -- automation/topic-routing/tag-cache automation/law-context automation/psp-documents automation/psp-pages automation/government-resolutions)
             for directory in automation/evidence-packages automation/review-proposals; do
               while IFS= read -r path; do
                 case "$path" in
@@ -161,6 +159,17 @@ jobs:
             audit_branch_tip=""
           fi
           echo "AUDIT_BRANCH_TIP=$audit_branch_tip" >> "$GITHUB_ENV"
+
+      - name: Restore the last valid copies of the Chamber's open data
+        # The copies live in the Actions cache, not in the audit branch,
+        # because psp.cz rebuilds every archive each night
+        # (docs/evidence-pipeline.md, Open-data files). Without a cached
+        # copy, the copy in the repository is the starting point.
+        uses: actions/cache/restore@v4
+        with:
+          path: automation/psp-open-data
+          key: psp-open-data-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: psp-open-data-
 
       - name: Collect source records
         # psp.cz refuses connections from GitHub Actions, so its requests go
@@ -189,6 +198,14 @@ jobs:
             --page-cache automation/psp-pages \
             --open-data-cache automation/psp-open-data \
             --output automation/runs/pipeline/github-actions/collector
+
+
+      - name: Save the last valid copies of the Chamber's open data
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: automation/psp-open-data
+          key: psp-open-data-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Split official print texts into law changes
         timeout-minutes: 120
@@ -247,9 +264,8 @@ jobs:
         id: tag-cache
         # A failed run keeps the paid law-change screening and relevance
         # checks it already did, the law-change context it read, the psp.cz
-        # document texts and the pages of closed prints it read, the last
-        # valid copy of each Chamber open-data archive, and the government
-        # resolutions it read. A
+        # document texts and the pages of closed prints it read, and the
+        # government resolutions it read. A
         # subject is cached only once both of its model outputs are valid, a
         # context line only once its answer is complete, a document only
         # once its file is read in full, and a resolution only once its page
@@ -258,7 +274,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
-          for directory in automation/topic-routing/tag-cache automation/law-context automation/psp-documents automation/psp-pages automation/psp-open-data automation/government-resolutions; do
+          for directory in automation/topic-routing/tag-cache automation/law-context automation/psp-documents automation/psp-pages automation/government-resolutions; do
             if [ -d "$directory" ]; then
               git add "$directory"
             fi

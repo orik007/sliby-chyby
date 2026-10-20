@@ -408,6 +408,6 @@ test("run-collectors.mjs downloads the open data one file at a time through the 
   const collector = await readFile(new URL("../scripts/lib/psp-collector.mjs", import.meta.url), "utf8");
   const collect = collector.split("export async function collectPspSource")[1];
   assert.match(collect, /for \(const \[name, endpoint\] of endpointEntries\)/);
-  assert.match(collect, /resolve\(name, \(\) => options\.fetchPsp\(source, endpoint, /);
+  assert.match(collect, /resolve\(`\$\{source\.id\}-\$\{name\}`, \(\) => options\.fetchPsp\(source, endpoint, /);
   assert.doesNotMatch(collect, /fetchVerified|Promise\.all\(/);
 });
