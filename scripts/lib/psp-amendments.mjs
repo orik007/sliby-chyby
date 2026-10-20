@@ -151,43 +151,25 @@ const academicTitles = /\b(?:Ph\.\s?D\.|LL\.M\.|MBA|CSc\.|DiS\.|Mgr\.|Ing\.|Bc\.
  * `candidates` are the MPs in a club on the submission date (`personId`,
  * `givenName`, `surname`). A name matches the one candidate whose surname
  * shares its case-independent start; among several, the given name decides.
- * Returns the matched person IDs and the names no candidate matched.
+ * Returns the matched person IDs, the names matched despite a misspelt
+ * surname (`misspelt`), and the names no candidate matched.
  */
 export function proposersOfHeading(paragraphs, candidates) {
   const start = paragraphs.findIndex((paragraph) => /^\s*Pozměňovací\s*návrh/iu.test(paragraph));
-  if (start < 0 || start > 20) return { personIds: [], unmatched: [], heading: null };
-  // The heading ends where it names what the amendment is to ("k vládnímu
-  // návrhu", "K návrhu", "[k návrhu poslanců …]"), also within a paragraph,
-  // or at a paragraph with the bill's title; a name never holds the word "k"
-  // or "zákon".
-  let heading = "";
-  for (const paragraph of paragraphs.slice(start, start + 6)) {
-    const before = paragraph.split(/(?:^|\s)\[?[Kk]e?\s/u)[0];
-    if (heading && /zákon|tisk|^\s*(?:Vládní|Návrh|ST)\b/iu.test(before)) break;
-    heading += ` ${before}`;
-    if (before !== paragraph) break;
-  }
-  const names = heading
-    .replace(academicTitles, " ")
-    .replace(/(?:pozměňovací\s*návrhy?|poslan\p{L}*|skupiny|paní|pana|kolegyň\p{L}*|kolegů|[():])/giu, " ");
-  const parts = names.split(/[,;]\s*|\s+a\s+/u).map((part) => part.trim()).filter((part) => part.length > 3 && !/^dalších$/u.test(part));
-  const personIds = new Set();
-  const unmatched = [];
+  if (start < 0 || start > 20) return { personIds: [], unmatched: [], misspelt: [], heading: null };
   const sharedStart = (left, right) => {
     let length = 0;
     while (length < left.length && left[length] === right[length]) length += 1;
     return length;
   };
-  for (const part of parts) {
-    // "Michaely Šebelové", "M. Jurečky", "Zdenky Crkvenjaš Němečkové": a
-    // given name or its initial, then the surname, of one or two words.
-    // A name ends at the first word in lower case, where a heading that
-    // runs on into the text continues.
+  // "Michaely Šebelové", "M. Jurečky", "Zdenky Crkvenjaš Němečkové": a given
+  // name or its initial, then the surname, of one or two words. A name ends at
+  // the first word in lower case, where a heading that runs on into the text
+  // continues. Returns the MP it matches (`personId`, null for none or a tie),
+  // or null when the part is no such name.
+  const exactMatch = (part) => {
     const words = part.split(/\s+(?=\p{Ll})/u)[0].match(/\p{Lu}[\p{L}-]*\.?/gu) ?? [];
-    if (words.length < 2 || words.length > 4) {
-      unmatched.push(part);
-      continue;
-    }
+    if (words.length < 2 || words.length > 4) return null;
     const initial = /\.$/u.test(words[0]);
     const given = fold(words[0].replace(/\.$/u, ""));
     const surnames = words.slice(1).map(fold);
@@ -206,10 +188,92 @@ export function proposersOfHeading(paragraphs, candidates) {
       .filter(({ matches, score }) => matches && score[1] >= (initial ? 1 : 2))
       .sort((left, right) => right.score[0] - left.score[0] || right.score[1] - left.score[1] || right.score[2] - left.score[2]);
     const same = (left, right) => left.score.every((value, index) => value === right.score[index]);
-    if (hits.length > 0 && (hits.length === 1 || !same(hits[0], hits[1]))) personIds.add(hits[0].candidate.personId);
-    else unmatched.push(part);
+    const personId = hits.length > 0 && (hits.length === 1 || !same(hits[0], hits[1])) ? hits[0].candidate.personId : null;
+    return { personId, anyHit: hits.length > 0, initial, given, surnames };
+  };
+  // The heading ends where it names what the amendment is to ("k vládnímu
+  // návrhu", "K návrhu", "[k návrhu poslanců …]"), also within a paragraph,
+  // or at a paragraph with the bill's title; a name never holds the word "k"
+  // or "zákon".
+  const namesOf = (text) => text
+    .replace(academicTitles, " ")
+    .replace(/(?<!\p{L})(?:pozměňovací\s*návrhy?|poslan\p{L}*|skupiny|paní|pana|kolegyň\p{L}*|kolegů)(?!\p{L})|[():]/giu, " ");
+  const partsOf = (text) => namesOf(text).split(/[,;]\s*|\s+a\s+/u).map((part) => part.trim()).filter(Boolean);
+  // A heading that already names someone, also in lower case, and does not
+  // end with a separator (", ", " a"), is complete at the end of its
+  // paragraph. The next paragraph still continues the list when it starts
+  // with "a" or ",", names an MP, or holds only names of two to four words
+  // that all start with a capital followed by lower case ("Karla Haase", not
+  // "ČÁST PRVNÍ" or "Čl. I") or are all in lower case, and does not end with
+  // a colon ("nově zní:"). Otherwise it is the amendment's own title or text
+  // ("Odstranění závazného stanoviska…"), which starts with a capital and
+  // goes on in lower case.
+  const complete = (text) => {
+    const names = namesOf(text).trim();
+    return /\p{L}{2,}/u.test(names) && !/(?:[,;]|\sa)$/u.test(names);
+  };
+  const onlyNames = (text) => !/:\s*$/u.test(text) && partsOf(text).every((part) => /^(?:(?:\p{Lu}\.|\p{Lu}[\p{Ll}-]+\.?)\s*){2,4}$/u.test(part) || /^(?:\p{Ll}[\p{Ll}-]*\s*){2,4}$/u.test(part));
+  const namesAnMp = (text) => partsOf(text).some((part) => exactMatch(part)?.personId);
+  let heading = "";
+  for (const paragraph of paragraphs.slice(start, start + 6)) {
+    const before = paragraph.split(/(?:^|\s)\[?[Kk]e?\s/u)[0];
+    if (heading && /zákon|tisk|^\s*(?:Vládní|Návrh|ST)\b/iu.test(before)) break;
+    if (heading && !before.trim()) break;
+    // Names that go on in a paragraph of their own are one more of the list.
+    let separator = " ";
+    if (heading && complete(heading) && !/^\s*(?:a\s|[,;])/u.test(before)) {
+      if (!onlyNames(before) && !namesAnMp(before)) break;
+      separator = ", ";
+    }
+    heading += `${separator}${before}`;
+    if (before !== paragraph) break;
   }
-  return { personIds: [...personIds].sort(), unmatched, heading: cleanText(heading, 1000) };
+  // A template's placeholder ("Poslance …xxx……") names nobody.
+  const parts = partsOf(heading).filter((part) => part.length > 3 && !/^dalších$/u.test(part) && !/^[\s….]*x{3,}[\s….]*$/iu.test(part));
+  const personIds = new Set();
+  const unmatched = [];
+  const misspelt = [];
+  for (const part of parts) {
+    const match = exactMatch(part);
+    if (!match) {
+      unmatched.push(part);
+      continue;
+    }
+    if (match.personId) {
+      personIds.add(match.personId);
+      continue;
+    }
+    // A misspelt surname ("Andrey Hoffmanové" for Andrea Hoffmannová,
+    // "Karla Hasse" for Karel Haas): the one MP whose given name has the same
+    // start (all but its last letter, at least two and at most three: "Evy"
+    // is Eva) and whose surname has the same first two letters and is at most
+    // two letters from the form, which a case ending alone already takes. It
+    // is reported, so every such match can be checked.
+    const { initial, given, surnames } = match;
+    const givenMatches = (candidateGiven) => sharedStart(given, candidateGiven) >= Math.max(2, Math.min(3, Math.min(given.length, candidateGiven.length) - 1));
+    const near = match.anyHit || initial || surnames.length !== 1 || surnames[0].length < 4 ? [] : candidates
+      .filter((candidate) => givenMatches(fold(candidate.givenName)))
+      .filter((candidate) => String(candidate.surname).split(/\s+/u).map(fold).some((surname) => surname.slice(0, 2) === surnames[0].slice(0, 2) && editDistance(surnames[0], surname) <= 2));
+    if (near.length === 1) {
+      personIds.add(near[0].personId);
+      misspelt.push({ name: part, personId: near[0].personId, givenName: near[0].givenName, surname: near[0].surname });
+    } else unmatched.push(part);
+  }
+  return { personIds: [...personIds].sort(), unmatched, misspelt, heading: cleanText(heading, 1000) };
+}
+
+// The fewest letters inserted, deleted, or replaced to turn one word into
+// the other.
+function editDistance(left, right) {
+  let previous = Array.from({ length: right.length + 1 }, (_, index) => index);
+  for (let row = 1; row <= left.length; row += 1) {
+    const current = [row];
+    for (let column = 1; column <= right.length; column += 1) {
+      current[column] = Math.min(previous[column] + 1, current[column - 1] + 1, previous[column - 1] + (left[row - 1] === right[column - 1] ? 0 : 1));
+    }
+    previous = current;
+  }
+  return previous[right.length];
 }
 
 // "V části první", "části dvacáté druhé", "Část třetí zní", "za část
@@ -439,7 +503,7 @@ function minutesOf(time) {
  */
 export async function collectAmendments({ source, plan, fetchPsp, documentCache, pageCache, closedPrintIds }) {
   const warnings = [];
-  const quality = { summaries: plan.summaries.length, summariesWithoutFile: 0, amendmentItems: 0, committeeItems: 0, itemsWithoutPresenter: 0, documentsListed: 0, documentsNotInOpenData: 0, documentsWithoutText: 0, amendments: 0, proposerNames: 0, proposerNamesUnmatched: 0, documentsNotListed: 0, votes: plan.amendmentVotes.length, votesLinked: 0, votesNotLinked: {}, stenoTurnsRead: 0 };
+  const quality = { summaries: plan.summaries.length, summariesWithoutFile: 0, amendmentItems: 0, committeeItems: 0, itemsWithoutPresenter: 0, documentsListed: 0, documentsNotInOpenData: 0, documentsWithoutText: 0, amendments: 0, proposerNames: 0, proposerNamesUnmatched: 0, proposerNamesMisspelt: 0, documentsNotListed: 0, votes: plan.amendmentVotes.length, votesLinked: 0, votesNotLinked: {}, stenoTurnsRead: 0 };
   // A page read only for closed prints is read once and kept
   // (scripts/lib/psp-page-cache.mjs).
   const pages = { pageCache, closedPrintIds, fetchPsp, source };
@@ -511,8 +575,10 @@ export async function collectAmendments({ source, plan, fetchPsp, documentCache,
         const heading = proposersOfHeading(read.value, candidates);
         const personIds = [...new Set([document.personId, ...heading.personIds])].sort();
         quality.proposerNames += heading.personIds.length + heading.unmatched.length;
+        quality.proposerNamesMisspelt += heading.misspelt.length;
         quality.proposerNamesUnmatched += heading.unmatched.length;
         if (heading.unmatched.length > 0) warnings.push(`SD ${number}: proposer names not matched to an MP in a club on ${presentedOn}: ${heading.unmatched.join("; ")}`);
+        if (heading.misspelt.length > 0) warnings.push(`SD ${number}: proposer names matched despite a misspelt surname: ${heading.misspelt.map(({ name, personId, givenName, surname }) => `${name} as ${givenName} ${surname} (${personId})`).join("; ")}`);
         const partyIds = [...new Set(personIds.flatMap((personId) => candidates.find((candidate) => candidate.personId === personId)?.partyIds ?? []))].sort();
         const label = Object.entries(item.parts).filter(([, part]) => part === number).map(([key]) => key)[0] ?? item.label;
         amendments.push({

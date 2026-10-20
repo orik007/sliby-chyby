@@ -106,7 +106,7 @@ test("matches the proposers its heading names in the genitive to the MPs in a cl
   // The heading can be split over paragraphs; a name nobody matches is
   // reported.
   const split = proposersOfHeading(["Pozměňovací návrh", "poslance Jana Neznámého", "k návrhu zákona"], candidates);
-  assert.deepEqual(split, { personIds: [], unmatched: ["Jana Neznámého"], heading: "Pozměňovací návrh poslance Jana Neznámého" });
+  assert.deepEqual(split, { personIds: [], unmatched: ["Jana Neznámého"], misspelt: [], heading: "Pozměňovací návrh poslance Jana Neznámého" });
 });
 
 test("tells MPs with similar names apart and stops at what the amendment is to", () => {
@@ -127,6 +127,53 @@ test("tells MPs with similar names apart and stops at what the amendment is to",
   assert.deepEqual(proposersOfHeading(["Pozměňovací návrh k pozměňovacímu návrhu výboru", "[k návrhu poslanců Radka Vondráčka na vydání zákona]"], mps).personIds, []);
   // A heading that runs on into the text ends at its first word in lower case.
   assert.deepEqual(heading("poslankyně Veroniky Kovářové Odstranění závazného stanoviska").personIds, ["7013"]);
+});
+
+test("ends a heading with the paragraph that completes its names, and matches a misspelt surname only to one MP", () => {
+  const mps = [
+    { personId: "6905", givenName: "Andrea", surname: "Hoffmannová" },
+    { personId: "6751", givenName: "Karel", surname: "Haas" },
+    { personId: "6214", givenName: "Věra", surname: "Kovářová" },
+    { personId: "7013", givenName: "Veronika", surname: "Kovářová" },
+    { personId: "7060", givenName: "Jan", surname: "Bartošek" }
+  ];
+  // The amendment's title and text after the heading are no names (SD 684).
+  const titled = proposersOfHeading(["Ke sněmovnímu tisku 82", "Pozměňovací návrh poslankyň Věry Kovářové, Veroniky Kovářové", "Odstranění závazného stanoviska Úřadu práce ČR a související změny", "I. V článku I se doplňují tyto body:"], mps);
+  assert.deepEqual({ personIds: titled.personIds, unmatched: titled.unmatched }, { personIds: ["6214", "7013"], unmatched: [] });
+  // A list that goes on in the next paragraph is still read whole.
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslankyně Věry Kovářové", "a poslance Jana Bartoška", "k vládnímu návrhu zákona"], mps).personIds, ["6214", "7060"]);
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslankyň Věry Kovářové, Veroniky Kovářové", "Jana Bartoška", "k vládnímu návrhu zákona"], mps).personIds, ["6214", "7013", "7060"]);
+  // A name in lower case is still reported.
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslance jana nováka", "k návrhu zákona"], mps).unmatched, ["jana nováka"]);
+  // Also when it continues the list or is followed by the amendment's title.
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslance Jana Bartoška", "jana nováka", "k návrhu zákona"], mps), { personIds: ["7060"], unmatched: ["jana nováka"], misspelt: [], heading: "Pozměňovací návrh poslance Jana Bartoška, jana nováka" });
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslance jana nováka", "Odstranění závazného stanoviska Úřadu práce ČR", "I. V článku I se doplňují tyto body:"], mps).unmatched, ["jana nováka"]);
+  // A paragraph that names an MP continues the list, also with other words;
+  // the amendment's own headings and text do not.
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslance Jana Bartoška", "Věry Kovářové a dalších členů klubu KDU-ČSL", "k návrhu zákona"], mps).personIds, ["6214", "7060"]);
+  for (const text of ["ČÁST PRVNÍ", "Čl. I", "nově zní:"]) {
+    assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslance Jana Bartoška", text, "1. V čl. I se doplňuje bod"], mps), { personIds: ["7060"], unmatched: [], misspelt: [], heading: "Pozměňovací návrh poslance Jana Bartoška" });
+  }
+  // "pana" and "paní" are removed as words, not inside a surname.
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslance Davida Kapanadze", "k návrhu zákona"], [{ personId: "7100", givenName: "David", surname: "Kapanadze" }]).personIds, ["7100"]);
+  // A template's placeholder names nobody (SD 1279).
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh", "Poslance …xxx……", "k návrhu poslanců Andreje Babiše na vydání zákona"], mps), { personIds: [], unmatched: [], misspelt: [], heading: "Pozměňovací návrh Poslance …xxx……" });
+  // Misspelt in the heading (SD 1208, SD 918), matched and reported.
+  const misspelt = proposersOfHeading(["Pozměňovací návrh", "poslankyň a poslanců", "Andrey Hoffmanové a Karla Hasse", "k vládnímu návrhu zákona"], mps);
+  assert.deepEqual(misspelt.personIds, ["6751", "6905"]);
+  assert.deepEqual(misspelt.misspelt.map(({ name, personId }) => [name, personId]), [["Andrey Hoffmanové", "6905"], ["Karla Hasse", "6751"]]);
+  // Not with another given name, another first letters of the surname
+  // ("Jana Moláře" is not Jan Kolář), more than two letters off, or two MPs.
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslance Jana Moláře", "k návrhu zákona"], [...mps, { personId: "7070", givenName: "Jan", surname: "Kolář" }]).unmatched, ["Jana Moláře"]);
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslance Karla Hasse", "k návrhu zákona"], [...mps, { personId: "7080", givenName: "Karel", surname: "Haase" }]).unmatched, ["Karla Hasse"]);
+  // A given name must share at least two letters: a lone letter without a
+  // dot is not enough.
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslance J Hasse", "k návrhu zákona"], [{ personId: "6751", givenName: "Josef", surname: "Haas" }]).unmatched, ["J Hasse"]);
+  // A short given name ("Evy" is Eva) is enough.
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslankyně Evy Fiaové", "k návrhu zákona"], [{ personId: "7090", givenName: "Eva", surname: "Fialová" }]).misspelt.map(({ personId }) => personId), ["7090"]);
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslance Petra Hasse", "k návrhu zákona"], mps).unmatched, ["Petra Hasse"]);
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslankyně Andrey Hofové", "k návrhu zákona"], mps).unmatched, ["Andrey Hofové"]);
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslankyně Michaely Opltové", "k návrhu zákona"], mps).unmatched, ["Michaely Opltové"]);
 });
 
 test("names the bill's parts an amendment amends as their headings write them", () => {

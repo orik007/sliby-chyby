@@ -219,6 +219,7 @@ export function renderCoverageAuditMarkdown(audit) {
       `| Parliamentary documents listed / not a written amendment in sd.zip / without a readable text | ${quality.amendments.documentsListed} / ${quality.amendments.documentsNotInOpenData} / ${quality.amendments.documentsWithoutText} |`,
       `| Amendments used / written amendments to a bill with a summary that it does not list | ${quality.amendments.amendments} / ${quality.amendments.documentsNotListed} |`,
       `| Proposer names in the amendments' headings / not matched to an MP | ${quality.amendments.proposerNames} / ${quality.amendments.proposerNamesUnmatched} |`,
+      `| Proposer names matched despite a misspelt surname | ${quality.amendments.proposerNamesMisspelt ?? 0} |`,
       `| Votes that can be on an amendment / linked to it by the stenographic record | ${quality.amendments.votes} / ${quality.amendments.votesLinked} |`,
       `| Votes not linked, by reason | ${Object.entries(quality.amendments.votesNotLinked).map(([reason, count]) => `${reason} ${count}`).join(", ") || "none"} |`,
       `| Turns of the stenographic record read | ${quality.amendments.stenoTurnsRead} |`
