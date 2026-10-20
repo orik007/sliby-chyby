@@ -164,22 +164,24 @@ export function proposersOfHeading(paragraphs, candidates) {
   const namesOf = (text) => text
     .replace(academicTitles, " ")
     .replace(/(?:pozměňovací\s*návrhy?|poslan\p{L}*|skupiny|paní|pana|kolegyň\p{L}*|kolegů|[():])/giu, " ");
-  // A heading that already names someone, and does not end with a separator
-  // (", ", " a"), is complete at the end of its paragraph, unless the next
-  // one continues the list ("a Karla Haase") or holds only names: the
-  // paragraph after it is otherwise the amendment's own title or text
-  // ("Odstranění závazného stanoviska…").
+  // A heading that already names someone, also in lower case, and does not
+  // end with a separator (", ", " a"), is complete at the end of its
+  // paragraph, unless the next one continues the list ("a Karla Haase") or
+  // holds only names, each of two to four words that all start with a capital
+  // or are all in lower case: the paragraph after it is otherwise the
+  // amendment's own title or text ("Odstranění závazného stanoviska…"),
+  // which starts with a capital and goes on in lower case.
   const complete = (text) => {
     const names = namesOf(text).trim();
-    return /\p{Lu}/u.test(names) && !/(?:[,;]|\sa)$/u.test(names);
+    return /\p{L}{2,}/u.test(names) && !/(?:[,;]|\sa)$/u.test(names);
   };
-  const onlyNames = (text) => namesOf(text).split(/[,;]\s*|\s+a\s+/u).map((part) => part.trim()).filter(Boolean).every((part) => /^(?:\p{Lu}[\p{L}-]*\.?\s*){2,4}$/u.test(part));
+  const onlyNames = (text) => namesOf(text).split(/[,;]\s*|\s+a\s+/u).map((part) => part.trim()).filter(Boolean).every((part) => /^(?:\p{Lu}[\p{L}-]*\.?\s*){2,4}$/u.test(part) || /^(?:\p{Ll}[\p{Ll}-]*\s*){2,4}$/u.test(part));
   let heading = "";
   for (const paragraph of paragraphs.slice(start, start + 6)) {
     const before = paragraph.split(/(?:^|\s)\[?[Kk]e?\s/u)[0];
     if (heading && /zákon|tisk|^\s*(?:Vládní|Návrh|ST)\b/iu.test(before)) break;
-    // Names that go on in a paragraph of their own are one more of the list.
     if (heading && !before.trim()) break;
+    // Names that go on in a paragraph of their own are one more of the list.
     let separator = " ";
     if (heading && complete(heading) && !/^\s*(?:a\s|[,;])/u.test(before)) {
       if (!onlyNames(before)) break;

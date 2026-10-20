@@ -145,6 +145,9 @@ test("ends a heading with the paragraph that completes its names, and matches a 
   assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslankyň Věry Kovářové, Veroniky Kovářové", "Jana Bartoška", "k vládnímu návrhu zákona"], mps).personIds, ["6214", "7013", "7060"]);
   // A name in lower case is still reported.
   assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslance jana nováka", "k návrhu zákona"], mps).unmatched, ["jana nováka"]);
+  // Also when it continues the list or is followed by the amendment's title.
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslance Jana Bartoška", "jana nováka", "k návrhu zákona"], mps), { personIds: ["7060"], unmatched: ["jana nováka"], misspelt: [], heading: "Pozměňovací návrh poslance Jana Bartoška, jana nováka" });
+  assert.deepEqual(proposersOfHeading(["Pozměňovací návrh poslance jana nováka", "Odstranění závazného stanoviska Úřadu práce ČR", "I. V článku I se doplňují tyto body:"], mps).unmatched, ["jana nováka"]);
   // A template's placeholder names nobody (SD 1279).
   assert.deepEqual(proposersOfHeading(["Pozměňovací návrh", "Poslance …xxx……", "k návrhu poslanců Andreje Babiše na vydání zákona"], mps), { personIds: [], unmatched: [], misspelt: [], heading: "Pozměňovací návrh Poslance …xxx……" });
   // Misspelt in the heading (SD 1208, SD 918), matched and reported.
