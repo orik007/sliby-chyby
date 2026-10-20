@@ -7,8 +7,8 @@ import { invariant, sha256 } from "./collector-core.mjs";
 
 /**
  * The Chamber's open-data archives and the last valid copy of each, kept in
- * the audit state under the rule in docs/evidence-pipeline.md (Chamber data
- * rules, Open-data files).
+ * the GitHub Actions cache under the rule in docs/evidence-pipeline.md
+ * (Chamber data rules, Open-data files).
  */
 export const openDataArchiveVersion = "psp-open-data-archive-v1";
 
