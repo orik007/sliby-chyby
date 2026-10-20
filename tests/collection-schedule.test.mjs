@@ -110,6 +110,12 @@ test("the model-cache persistence step survives a routing failure, but checkpoin
   const collectStep = workflow.split("      - name: Collect source records")[1].split("\n      - name:")[0];
   assert.match(collectStep, /--document-cache automation\/psp-documents/);
   assert.match(collectStep, /--page-cache automation\/psp-pages/);
+  assert.match(collectStep, /--open-data-cache automation\/psp-open-data/);
+  // The open-data copies live in the Actions cache, restored before and
+  // saved after the collection, also when it fails.
+  assert.match(workflow, /- name: Restore the last valid copies of the Chamber's open data[\s\S]*?uses: actions\/cache\/restore@v4\n        with:\n          path: automation\/psp-open-data\n          key: psp-open-data-\$\{\{ github\.run_id \}\}-\$\{\{ github\.run_attempt \}\}\n          restore-keys: psp-open-data-\n\n      - name: Collect source records/);
+  assert.match(workflow, /- name: Save the last valid copies of the Chamber's open data\n        if: always\(\)\n        uses: actions\/cache\/save@v4\n        with:\n          path: automation\/psp-open-data/);
+  assert.doesNotMatch(workflow, /git ls-tree[^\n]*automation\/psp-open-data/);
 });
 
 test("collection and packages create a missing audit pull request without overwriting its review body", async () => {

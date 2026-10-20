@@ -403,11 +403,11 @@ test("run-print-parts.mjs sends every psp.cz request through the shared fetcher 
 test("run-collectors.mjs downloads the open data one file at a time through the shared fetcher and its proxy", async () => {
   const script = await readFile(new URL("../scripts/run-collectors.mjs", import.meta.url), "utf8");
   assert.match(script, /const fetchPsp = createPspFetcher\(\{ \.\.\.pspDownloadSettings, proxyUrl \}\);/);
-  assert.match(script, /collectPspSource\(source, \{ since, collectedAt, governmentPeriods, fetchPsp, documentCache, pageCache \}\)/);
+  assert.match(script, /collectPspSource\(source, \{ since, collectedAt, governmentPeriods, fetchPsp, documentCache, pageCache, openDataArchives \}\)/);
   assert.match(script, /finally \{\s*await fetchPsp\.close\(\);/);
   const collector = await readFile(new URL("../scripts/lib/psp-collector.mjs", import.meta.url), "utf8");
   const collect = collector.split("export async function collectPspSource")[1];
   assert.match(collect, /for \(const \[name, endpoint\] of endpointEntries\)/);
-  assert.match(collect, /await options\.fetchPsp\(source, endpoint, /);
+  assert.match(collect, /resolve\(`\$\{source\.id\}-\$\{name\}`, \(\) => options\.fetchPsp\(source, endpoint, /);
   assert.doesNotMatch(collect, /fetchVerified|Promise\.all\(/);
 });

@@ -1,4 +1,3 @@
-import { unzipSync } from "fflate";
 import { isDecisiveAction, normalizeSearchText } from "./attribution.mjs";
 import { officialPrintDocumentPageUrl } from "./psp-print-documents.mjs";
 import { amendmentDocumentType, amendmentSummaryKindId, collectAmendments } from "./psp-amendments.mjs";
@@ -70,15 +69,6 @@ export function parseUnl(text, columns) {
     invariant(fields.length >= columns.length, `UNL row ${index + 1} has ${fields.length} fields; expected at least ${columns.length}`);
     return Object.fromEntries(columns.map((column, fieldIndex) => [column, fields[fieldIndex]]));
   });
-}
-
-function archiveEntries(bytes, sourceId) {
-  const entries = unzipSync(bytes);
-  const names = Object.keys(entries);
-  invariant(names.length > 0 && names.length < 100, `Archive ${sourceId} has an unsafe entry count`);
-  const totalBytes = Object.values(entries).reduce((sum, entry) => sum + entry.byteLength, 0);
-  invariant(totalBytes < 150_000_000, `Archive ${sourceId} exceeds the uncompressed size limit`);
-  return entries;
 }
 
 function decodeEntry(entries, name) {
@@ -766,27 +756,35 @@ function withAmendmentVote(record, link) {
 export async function collectPspSource(source, options) {
   const endpointEntries = Object.entries(source.endpoints);
   log(`${source.id}: downloading ${endpointEntries.length} official files (${endpointEntries.map(([name]) => name).join(", ")})`);
-  const responses = [];
+  // A damaged file of an archive is taken from its last valid copy when it
+  // has the same size and CRC-32 (scripts/lib/psp-open-data-archive.mjs).
+  const archives = {};
+  const openData = {};
+  const notes = [];
   for (const [name, endpoint] of endpointEntries) {
     const startedAt = Date.now();
-    const response = await options.fetchPsp(source, endpoint, {
+    const result = await options.openDataArchives.resolve(`${source.id}-${name}`, () => options.fetchPsp(source, endpoint, {
       maxBytes: 20_000_000,
       expectedContentTypes: ["zip", "octet-stream"]
-    });
-    log(`${source.id}: downloaded ${name} (${(response.bytes.byteLength / 1_000_000).toFixed(1)} MB in ${((Date.now() - startedAt) / 1000).toFixed(1)} s)`);
-    responses.push([name, response]);
+    }));
+    archives[name] = { entries: result.entries, response: result.response };
+    openData[name] = { origin: result.origin, ...(result.copy ? { copy: result.copy } : {}) };
+    if (result.note) {
+      notes.push(result.note);
+      log(`${source.id}: ${result.note}`);
+    }
+    log(`${source.id}: downloaded ${name} (${(result.response.bytes.byteLength / 1_000_000).toFixed(1)} MB in ${((Date.now() - startedAt) / 1000).toFixed(1)} s)`);
   }
   log(`${source.id}: parsing votes, members, prints, sessions, parliamentary documents, and the stenographic record`);
-  const responseByName = Object.fromEntries(responses);
   const normalized = normalizePspData({
     source,
     since: options.since,
-    votesEntries: archiveEntries(responseByName.votes.bytes, `${source.id}:votes`),
-    membersEntries: archiveEntries(responseByName.members.bytes, `${source.id}:members`),
-    printsEntries: archiveEntries(responseByName.prints.bytes, `${source.id}:prints`),
-    sessionsEntries: archiveEntries(responseByName.sessions.bytes, `${source.id}:sessions`),
-    documentsEntries: archiveEntries(responseByName.documents.bytes, `${source.id}:documents`),
-    stenoEntries: archiveEntries(responseByName.steno.bytes, `${source.id}:steno`),
+    votesEntries: archives.votes.entries,
+    membersEntries: archives.members.entries,
+    printsEntries: archives.prints.entries,
+    sessionsEntries: archives.sessions.entries,
+    documentsEntries: archives.documents.entries,
+    stenoEntries: archives.steno.entries,
     governmentPeriods: options.governmentPeriods
   });
   // The amendments and the votes on them (docs/evidence-pipeline.md,
@@ -807,7 +805,7 @@ export async function collectPspSource(source, options) {
     sourceId: source.id,
     collector: source.collector,
     retrievedAt: options.collectedAt,
-    snapshots: Object.fromEntries(responses.map(([name, response]) => [name, {
+    snapshots: Object.fromEntries(Object.entries(archives).map(([name, { response }]) => [name, {
       url: response.finalUrl,
       contentType: response.contentType,
       lastModified: response.lastModified,
@@ -815,7 +813,7 @@ export async function collectPspSource(source, options) {
       contentHash: response.contentHash
     }])),
     records: deduplicateRecords(records),
-    warnings: [...normalized.warnings, ...amendments.warnings],
-    referenceData: { ...normalized.referenceData, amendmentQuality: amendments.quality }
+    warnings: [...notes, ...normalized.warnings, ...amendments.warnings],
+    referenceData: { ...normalized.referenceData, amendmentQuality: amendments.quality, openData }
   };
 }

@@ -160,6 +160,17 @@ jobs:
           fi
           echo "AUDIT_BRANCH_TIP=$audit_branch_tip" >> "$GITHUB_ENV"
 
+      - name: Restore the last valid copies of the Chamber's open data
+        # The copies live in the Actions cache, not in the audit branch,
+        # because psp.cz rebuilds every archive each night
+        # (docs/evidence-pipeline.md, Open-data files). Without a cached
+        # copy, the copy in the repository is the starting point.
+        uses: actions/cache/restore@v4
+        with:
+          path: automation/psp-open-data
+          key: psp-open-data-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: psp-open-data-
+
       - name: Collect source records
         # psp.cz refuses connections from GitHub Actions, so its requests go
         # through the proxy in PSP_PROXY_URL (docs/evidence-pipeline.md,
@@ -185,7 +196,16 @@ jobs:
             --resolution-cache automation/government-resolutions \
             --document-cache automation/psp-documents \
             --page-cache automation/psp-pages \
+            --open-data-cache automation/psp-open-data \
             --output automation/runs/pipeline/github-actions/collector
+
+
+      - name: Save the last valid copies of the Chamber's open data
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: automation/psp-open-data
+          key: psp-open-data-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Split official print texts into law changes
         timeout-minutes: 120
