@@ -41,9 +41,11 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.doesNotMatch(workflow, /inputs\.since|inputs\.sources|--since|--source /);
   // The paid steps stop before the job limit, so the saving steps always run.
   assert.match(workflow, /timeout-minutes: 360/);
-  assert.match(workflow, /- name: Screen law changes, route them to promises, check relevance, and build packages\n        timeout-minutes: 120/);
+  // The paid steps get the time the job has left, less 15 minutes for saving.
+  assert.match(workflow, /steps:\n      - name: Record when the job started\n        run: echo "JOB_STARTED_AT=\$\(date \+%s\)" >> "\$GITHUB_ENV"\n/);
+  assert.match(workflow, /- name: Budget the routing step\n        id: routing-budget\n        run: node scripts\/job-time-left\.mjs --reserve 15\n\n      - name: Screen law changes, route them to promises, check relevance, and build packages\n        timeout-minutes: \$\{\{ fromJSON\(steps\.routing-budget\.outputs\.minutes\) \}\}/);
+  assert.match(workflow, /- name: Budget the assessment step\n        id: assessment-budget\n        run: node scripts\/job-time-left\.mjs --reserve 15\n\n      - name: Assess only new or changed packages\n        id: assess\n        timeout-minutes: \$\{\{ fromJSON\(steps\.assessment-budget\.outputs\.minutes\) \}\}/);
   assert.match(workflow, /- name: Split official print texts into law changes\n        timeout-minutes: 120/);
-  assert.match(workflow, /- name: Assess only new or changed packages\n        id: assess\n        timeout-minutes: 120/);
   // Finished assessments are saved even when the assessment step fails.
   assert.match(workflow, /- name: Commit new review proposals\n        id: proposals\n        if: always\(\) && steps\.assess\.outcome != 'skipped'/);
   // The review pull request text is refreshed on every run that saved its state.
