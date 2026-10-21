@@ -44,9 +44,8 @@ jobs:
     # The two paid steps have their own, shorter limits. A step that reaches
     # its limit fails like any other error, so the always() steps still save
     # the paid work already written to disk. The job limit is GitHub's
-    # longest. The routing step gets the time the job has left, less what the
-    # saving steps (and the assessment, when one is asked for) need, so it
-    # never reaches the job limit.
+    # longest; the paid steps get the time the job has left
+    # (docs/evidence-pipeline.md, Resuming).
     timeout-minutes: 360
     environment:
       name: assessment
@@ -187,7 +186,7 @@ jobs:
         # (Amendment data rules). Reading resolutions then stops after 120
         # minutes and fails the run before any paid step; the next run
         # continues from the cache. The step limit leaves room for the
-        # Chamber and e-Sbírka and keeps the job within its own limit.
+        # Chamber and e-Sbírka.
         timeout-minutes: 210
         env:
           PSP_PROXY_URL: ${{ secrets.PSP_PROXY_URL }}
@@ -245,17 +244,7 @@ jobs:
 
       - name: Budget the routing step
         id: routing-budget
-        # The job limit (360 minutes) less the time already spent, 15 minutes
-        # for saving the paid work, and the assessment step's 120 minutes when
-        # this run assesses (docs/evidence-pipeline.md, Resuming).
-        run: |
-          elapsed=$(( ($(date +%s) - JOB_STARTED_AT) / 60 ))
-          reserve=15
-          if [ "$SLIBY_MAX_ASSESSMENTS" != "0" ]; then reserve=$(( reserve + 120 )); fi
-          minutes=$(( 360 - elapsed - reserve ))
-          if [ "$minutes" -lt 5 ]; then minutes=5; fi
-          echo "minutes=$minutes" >> "$GITHUB_OUTPUT"
-          echo "The routing step may run for $minutes minutes ($elapsed spent, $reserve kept back)."
+        run: node scripts/job-time-left.mjs --reserve 15
 
       - name: Screen law changes, route them to promises, check relevance, and build packages
         timeout-minutes: ${{ fromJSON(steps.routing-budget.outputs.minutes) }}
@@ -341,9 +330,13 @@ jobs:
             gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file "$RUNNER_TEMP/evidence-package-audit-pr.md"
           fi
 
+      - name: Budget the assessment step
+        id: assessment-budget
+        run: node scripts/job-time-left.mjs --reserve 15
+
       - name: Assess only new or changed packages
         id: assess
-        timeout-minutes: 120
+        timeout-minutes: ${{ fromJSON(steps.assessment-budget.outputs.minutes) }}
         env:
           SLIBY_STEP: assessment
         run: |
