@@ -171,6 +171,38 @@ test("the firewall's rejection page is a number not held, once a held page shows
   await assert.rejects(readResolutions({ fetcher: blocked.fetcher, cache: createResolutionCache(directory), firstResolution: "158/2026", today: "2026-10-22" }), /firewall rejects the run: the page of resolution 158\/2026, which is held, was rejected too/);
 });
 
+test("every run of rejected numbers is checked: a gap between held pages and the end of each year", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "resolutions-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const held = (number, year) => page("2026-158").then((html) => html.replaceAll("č. 158", `č. ${number}`).replaceAll("/2026/158/", `/${year}/${number}/`).replace(/ze dne\s*(<a[^>]*>)\s*[\d. ]+2026/u, `ze dne $1 1. 1. ${year}`));
+  const pages = { "2025-1": await held(1, 2025), "2025-3": await held(3, 2025), "2026-1": await held(1, 2026) };
+  const files = Object.fromEntries(Object.keys(pages).map((key) => [`https://odok.gov.cz/portal/services/download/attachment/${key.replace("-", "/")}/docx/`, docx(["USNESENÍ", "Vláda", "schvaluje"])]));
+  const { fetcher, requests } = await portal(pages, files, { rejected: true });
+  const read = await readResolutions({ fetcher, cache: createResolutionCache(directory), firstResolution: "1/2025", today: "2026-10-22" });
+  assert.deepEqual(read.resolutions.map(({ year, number }) => `${number}/${year}`), ["1/2025", "3/2025", "1/2026"]);
+  assert.deepEqual(read.quality.gaps, ["2/2025"]);
+  // The gap, the end of 2025, and the end of 2026 are each checked.
+  const checks = requests.filter((url, index) => /usneseni/.test(url) && requests.indexOf(url) < index);
+  assert.deepEqual(checks.map((url) => url.replace("https://odok.gov.cz/portal/zvlady/usneseni/", "")), ["2025/1/", "2025/3/", "2026/1/"]);
+});
+
+test("a held page that answers another status when it is read to check the portal names that status", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "resolutions-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const html = await page("2026-158");
+  let served = 0;
+  const fetcher = createGovernmentOfficeFetcher({
+    minIntervalMs: 0,
+    sleep: async () => {},
+    fetchImpl: async (url) => {
+      if (url.endsWith("/docx/")) return new Response(docx(["USNESENÍ", "Vláda", "souhlasí"]), { status: 200 });
+      if (url.endsWith("/2026/158/")) return (served += 1) === 1 ? new Response(html, { status: 200 }) : new Response("Not found", { status: 404 });
+      return new Response(await page("rejected"), { status: 200 });
+    }
+  });
+  await assert.rejects(readResolutions({ fetcher, cache: createResolutionCache(directory), firstResolution: "158/2026", today: "2026-10-22" }), /resolution 158\/2026, read to check the portal, answered HTTP 404/);
+});
+
 test("a resolution whose Word file cannot be read as text is reported and read again in the next run", async (t) => {
   const directory = await mkdtemp(join(tmpdir(), "resolutions-"));
   t.after(() => rm(directory, { recursive: true, force: true }));

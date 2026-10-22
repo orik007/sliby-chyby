@@ -221,7 +221,7 @@ function isMissingNumberPage({ status, bytes }) {
 // the portal's page, for a number not yet used since 22 October 2026
 // (docs/evidence-pipeline.md, Government resolution data rules).
 function isRejectedPage({ status, bytes }) {
-  return status === 200 && bytes.byteLength < 2_000 && /<title>\s*(?:Request Rejected|Požadavek byl zablokován)\s*<\/title>/u.test(new TextDecoder().decode(bytes));
+  return status === 200 && bytes.byteLength < 4_096 && new TextDecoder("utf-8").decode(bytes).includes("<title>Request Rejected</title>");
 }
 
 /**
@@ -282,17 +282,16 @@ export async function readResolutions({ fetcher, cache, firstResolution, today, 
   const startedAt = now();
   const resolutions = [];
   const quality = { fromCache: 0, fromPortal: 0, classified: [], gaps: [], rejected: [], unexpectedPages: [], unreadableFiles: [] };
-  // The first rejected page is followed by the page of the last resolution
-  // held: when that is rejected too, the firewall rejects the run, not a
-  // number not yet used.
-  let portalChecked = false;
+  // The first rejected page of every run of numbers not held is followed by
+  // the page of the last resolution held: when that is rejected too, the
+  // firewall rejects the run, not a number not yet used.
   async function checkPortalServesPages(year, number) {
     const held = resolutions.at(-1);
     invariant(held, `The page of resolution ${number}/${year} was rejected by the Government Office's firewall before any resolution was held`);
     const page = await fetcher.get(resolutionPageUrl(held.year, held.number), { purpose: "resolution page check" });
-    invariant(!isRejectedPage(page) && page.status === 200, `The Government Office's firewall rejects the run: the page of resolution ${held.number}/${held.year}, which is held, was rejected too`);
+    invariant(!isRejectedPage(page), `The Government Office's firewall rejects the run: the page of resolution ${held.number}/${held.year}, which is held, was rejected too`);
+    invariant(page.status === 200, `The page of resolution ${held.number}/${held.year}, read to check the portal, answered HTTP ${page.status}`);
     parseResolutionPage(new TextDecoder("utf-8").decode(page.bytes), held);
-    portalChecked = true;
   }
   for (let year = firstYear; year <= Number(today.slice(0, 4)); year += 1) {
     const missing = [];
@@ -314,7 +313,7 @@ export async function readResolutions({ fetcher, cache, firstResolution, today, 
         continue;
       }
       if (isRejectedPage(page)) {
-        if (!portalChecked) await checkPortalServesPages(year, number);
+        if (missing.length === 0) await checkPortalServesPages(year, number);
         quality.rejected.push(`${number}/${year}`);
         missing.push(number);
         continue;
