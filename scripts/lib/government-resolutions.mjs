@@ -295,11 +295,14 @@ export async function readResolutions({ fetcher, cache, firstResolution, today, 
   }
   for (let year = firstYear; year <= Number(today.slice(0, 4)); year += 1) {
     const missing = [];
+    // Whether the current run of numbers not held has had its portal check.
+    let checked = false;
     for (let number = year === firstYear ? firstNumber : 1; missing.length < missingInARow; number += 1) {
       const cached = cache.get(year, number);
       if (cached) {
         if (missing.length > 0) quality.gaps.push(...missing.map((gap) => `${gap}/${year}`));
         missing.length = 0;
+        checked = false;
         quality.fromCache += 1;
         resolutions.push(cached);
         continue;
@@ -313,7 +316,8 @@ export async function readResolutions({ fetcher, cache, firstResolution, today, 
         continue;
       }
       if (isRejectedPage(page)) {
-        if (missing.length === 0) await checkPortalServesPages(year, number);
+        if (!checked) await checkPortalServesPages(year, number);
+        checked = true;
         quality.rejected.push(`${number}/${year}`);
         missing.push(number);
         continue;
@@ -321,6 +325,7 @@ export async function readResolutions({ fetcher, cache, firstResolution, today, 
       invariant(page.status === 200, `The page of resolution ${number}/${year} answered HTTP ${page.status}`);
       if (missing.length > 0) quality.gaps.push(...missing.map((gap) => `${gap}/${year}`));
       missing.length = 0;
+      checked = false;
       const parsed = parseResolutionPage(new TextDecoder("utf-8").decode(page.bytes), { year, number });
       if (parsed.classified) {
         quality.classified.push(`${number}/${year}`);

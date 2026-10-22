@@ -39,6 +39,8 @@ test("coverage audit never converts a promise without routed records into a scor
   assert.match(markdown, /\| Technical \/ substantive \| 2 \/ 3 \|/);
   assert.match(markdown, /\| Promise and law-change pairs checked \/ dropped as not relevant \| 4 \/ 1 \|/);
   assert.match(markdown, /\| Promise and law-change pairs left out because both assessors of an earlier assessment found them not relevant \| 2 \|/);
+  const withResolutions = renderCoverageAuditMarkdown({ ...audit, quality: { ...audit.quality, resolutions: { fromCache: 673, fromPortal: 2, classified: [], rejected: ["1048/2025", "1049/2025", "1050/2025"], duplicates: {}, unexpectedPages: [], unreadableFiles: [], heldWithoutEklep: 0, heldUnreadAnnex: [], beforeGovernment: 0, used: 485, requests: 33, retried: 0 } } });
+  assert.match(withResolutions, /\| Resolution numbers answered by the Government Office firewall's rejection page \(counted as not held\) \| 3 \|/);
   const sourceRows = markdown.split("\n").filter((line) => line.startsWith("| Chamber of Deputies open data"));
   assert.deepEqual(sourceRows, ["| Chamber of Deputies open data | 2025-10-01 | 0 | — to — | Line one with a \\| pipe |"], "runtime warning text must stay on one escaped table row");
 });
