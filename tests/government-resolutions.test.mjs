@@ -171,6 +171,14 @@ test("the firewall's rejection page is a number not held, once a held page shows
   await assert.rejects(readResolutions({ fetcher: blocked.fetcher, cache: createResolutionCache(directory), firstResolution: "158/2026", today: "2026-10-22" }), /firewall rejects the run: the page of resolution 158\/2026, which is held, was rejected too/);
 });
 
+test("a file the firewall rejects stops the run instead of counting as unreadable", async (t) => {
+  const directory = await mkdtemp(join(tmpdir(), "resolutions-"));
+  t.after(() => rm(directory, { recursive: true, force: true }));
+  const files = { "https://odok.gov.cz/portal/services/download/attachment/2026/158/docx/": new TextEncoder().encode(await page("rejected")) };
+  const { fetcher } = await portal({ "2026-158": await page("2026-158") }, files);
+  await assert.rejects(readResolutions({ fetcher, cache: createResolutionCache(directory), firstResolution: "158/2026", today: "2026-10-22" }), /attachment\/2026\/158\/docx\/ was rejected by the Government Office's firewall/);
+});
+
 test("every run of rejected numbers is checked: a gap between held pages and the end of each year", async (t) => {
   const directory = await mkdtemp(join(tmpdir(), "resolutions-"));
   t.after(() => rm(directory, { recursive: true, force: true }));

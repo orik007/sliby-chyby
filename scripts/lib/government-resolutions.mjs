@@ -340,6 +340,9 @@ export async function readResolutions({ fetcher, cache, firstResolution, today, 
         }
         const answer = await fetcher.get(file.url, { purpose: `resolution ${file.label}` });
         invariant(answer.status === 200, `${file.url} answered HTTP ${answer.status}`);
+        // A file the firewall rejects is not a file that cannot be read: the
+        // run stops, so the resolution is not left out.
+        invariant(!isRejectedPage(answer), `${file.url} was rejected by the Government Office's firewall`);
         files.push({ ...file, sha256: sha256(answer.bytes), paragraphs: await fileParagraphs(answer.bytes, file.format) });
       }
       // A file that cannot be read as text is not cached, so a later
