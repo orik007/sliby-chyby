@@ -217,6 +217,13 @@ function isMissingNumberPage({ status, bytes }) {
   return status === 500 && /<title>\s*ODok Portál - chyba\s*<\/title>/u.test(new TextDecoder().decode(bytes));
 }
 
+// The page the Government Office's firewall answers with HTTP 200 instead of
+// the portal's page, for a number not yet used since 22 October 2026
+// (docs/evidence-pipeline.md, Government resolution data rules).
+function isRejectedPage({ status, bytes }) {
+  return status === 200 && bytes.byteLength < 4_096 && new TextDecoder("utf-8").decode(bytes).includes("<title>Request Rejected</title>");
+}
+
 /**
  * The permanent cache of published resolutions, one append-only file per
  * year (`<year>.jsonl`); each line is written as soon as a resolution is read,
@@ -274,14 +281,28 @@ export async function readResolutions({ fetcher, cache, firstResolution, today, 
   const [firstNumber, firstYear] = firstResolution.split("/").map(Number);
   const startedAt = now();
   const resolutions = [];
-  const quality = { fromCache: 0, fromPortal: 0, classified: [], gaps: [], unexpectedPages: [], unreadableFiles: [] };
+  const quality = { fromCache: 0, fromPortal: 0, classified: [], gaps: [], rejected: [], unexpectedPages: [], unreadableFiles: [] };
+  // The first rejected page of every run of numbers not held is followed by
+  // the page of the last resolution held: when that is rejected too, the
+  // firewall rejects the run, not a number not yet used.
+  async function checkPortalServesPages(year, number) {
+    const held = resolutions.at(-1);
+    invariant(held, `The page of resolution ${number}/${year} was rejected by the Government Office's firewall before any resolution was held`);
+    const page = await fetcher.get(resolutionPageUrl(held.year, held.number), { purpose: "resolution page check" });
+    invariant(!isRejectedPage(page), `The Government Office's firewall rejects the run: the page of resolution ${held.number}/${held.year}, which is held, was rejected too`);
+    invariant(page.status === 200, `The page of resolution ${held.number}/${held.year}, read to check the portal, answered HTTP ${page.status}`);
+    parseResolutionPage(new TextDecoder("utf-8").decode(page.bytes), held);
+  }
   for (let year = firstYear; year <= Number(today.slice(0, 4)); year += 1) {
     const missing = [];
+    // Whether the current run of numbers not held has had its portal check.
+    let checked = false;
     for (let number = year === firstYear ? firstNumber : 1; missing.length < missingInARow; number += 1) {
       const cached = cache.get(year, number);
       if (cached) {
         if (missing.length > 0) quality.gaps.push(...missing.map((gap) => `${gap}/${year}`));
         missing.length = 0;
+        checked = false;
         quality.fromCache += 1;
         resolutions.push(cached);
         continue;
@@ -294,9 +315,17 @@ export async function readResolutions({ fetcher, cache, firstResolution, today, 
         missing.push(number);
         continue;
       }
+      if (isRejectedPage(page)) {
+        if (!checked) await checkPortalServesPages(year, number);
+        checked = true;
+        quality.rejected.push(`${number}/${year}`);
+        missing.push(number);
+        continue;
+      }
       invariant(page.status === 200, `The page of resolution ${number}/${year} answered HTTP ${page.status}`);
       if (missing.length > 0) quality.gaps.push(...missing.map((gap) => `${gap}/${year}`));
       missing.length = 0;
+      checked = false;
       const parsed = parseResolutionPage(new TextDecoder("utf-8").decode(page.bytes), { year, number });
       if (parsed.classified) {
         quality.classified.push(`${number}/${year}`);
@@ -316,6 +345,9 @@ export async function readResolutions({ fetcher, cache, firstResolution, today, 
         }
         const answer = await fetcher.get(file.url, { purpose: `resolution ${file.label}` });
         invariant(answer.status === 200, `${file.url} answered HTTP ${answer.status}`);
+        // A file the firewall rejects is not a file that cannot be read: the
+        // run stops, so the resolution is not left out.
+        invariant(!isRejectedPage(answer), `${file.url} was rejected by the Government Office's firewall`);
         files.push({ ...file, sha256: sha256(answer.bytes), paragraphs: await fileParagraphs(answer.bytes, file.format) });
       }
       // A file that cannot be read as text is not cached, so a later

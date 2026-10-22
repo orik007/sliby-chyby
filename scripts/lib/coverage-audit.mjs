@@ -206,6 +206,7 @@ export function renderCoverageAuditMarkdown(audit) {
     ...(quality.resolutions ? [
       `| Government resolutions read from the cache / from the portal | ${quality.resolutions.fromCache} / ${quality.resolutions.fromPortal} |`,
       `| Classified government resolutions | ${quality.resolutions.classified.length} |`,
+      `| Resolution numbers answered by the Government Office firewall's rejection page (counted as not held) | ${quality.resolutions.rejected?.length ?? 0} |`,
       `| Government resolutions left out as only approving a government proposal, opinion, or regulation | ${Object.values(quality.resolutions.duplicates).reduce((sum, count) => sum + count, 0)} (${Object.entries(quality.resolutions.duplicates).map(([kind, count]) => `${kind} ${count}`).join(", ") || "none"}) |`,
       `| Government resolutions without a readable text (no file of their own, or a file to read again) | ${quality.resolutions.unexpectedPages.length + quality.resolutions.unreadableFiles.length} |`,
       `| Government resolutions held back until their year's eKLEP open data is published | ${quality.resolutions.heldWithoutEklep} |`,
