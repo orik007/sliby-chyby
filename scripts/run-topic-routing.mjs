@@ -26,7 +26,7 @@ import { attributableConductOnChange, buildLawChangeEvidencePackage, conductOfRu
 import { loadAssessmentPrompts, maxRequestInputTokens } from "./lib/assessment-config.mjs";
 import { validateReviewManifest } from "./lib/assessment-review.mjs";
 import { exclusionOf, loadRelevanceVerdicts } from "./lib/irrelevance-verdicts.mjs";
-import { cachePersister, loadModelCache, loadShardedModelCache, mapWithConcurrency, pairedModelCall, shardedCachePersister, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
+import { cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, shardedCachePersister, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 
 /**
@@ -137,20 +137,13 @@ const usage = { screening: [], relevance: [] };
 const invalid = { screening: 0, relevance: 0 };
 let runFailure = null;
 
-async function stage(name, items, worker, onDone) {
-  if (runFailure) return [];
-  try {
-    return await mapWithConcurrency(items, runtime.concurrency, worker, onDone);
-  } catch (error) {
-    runFailure = { stage: name, message: error.message };
-    return error.partialResults ?? [];
-  }
+function fail(stageName, error) {
+  if (runFailure) return;
+  runFailure = { stage: stageName, message: error instanceof Error ? error.message : String(error) };
+  log(`stopping: ${runFailure.message}`);
 }
 
-// 1. Screening and routing of every law change (steps 4 and 5).
-log(`law-change screening: ${changes.length} law changes from ${new Set(changes.map(({ printId }) => printId)).size} prints with attributable conduct`);
-const tickChanges = progress("law-change screening", changes.length, { every: 20 });
-const screenedChanges = await stage("law-change-screening", changes, async (change) => {
+async function screenChange(change) {
   const brief = buildScreeningBrief(change, taxonomy);
   const fingerprint = { inputHash: sha256(screeningInputBlocks(brief)), taxonomyContentHash, promptContentHash: prompts.screening.contentHash, ...models };
   const screened = await pairedModelCall({
@@ -169,13 +162,13 @@ const screenedChanges = await stage("law-change-screening", changes, async (chan
     ? routeLawChange({ taxonomy, change, screenerA: screened.a, screenerB: screened.b, invertedIndex, directIdIndex })
     : { changeId: change.changeId, disposition: "technical", reason: "both-screeners-technical", routedTo: [] };
   return { change, substantive, route, screenerA: screened.a, screenerB: screened.b, screenerAError: screened.errorA, screenerBError: screened.errorB };
-}, ({ change, route }) => tickChanges(`${change.changeId} (${change.titleCz.slice(0, 60)}): ${route.disposition}${route.routedTo.length > 0 ? ` to ${route.routedTo.length} promise(s)` : ""}`));
+}
 
 // A promise and a routed law change continue only when the promise's party
 // has attributable conduct on the change's print.
-const pairs = [];
 let routedWithoutConductCount = 0;
-for (const { change, route } of screenedChanges) {
+function pairsOf({ change, route }) {
+  const pairs = [];
   for (const target of route.routedTo) {
     const promise = promiseById.get(target.promiseId);
     if (!promise) continue;
@@ -185,18 +178,21 @@ for (const { change, route } of screenedChanges) {
     }
     pairs.push({ promise, change, route: target });
   }
+  return pairs;
 }
 
-// 2. Relevance of each promise and law change (step 6). The pairs of one law
-// change are checked one after another, so its text, a cache breakpoint of
-// its own, is read from the provider's prompt cache after the first check;
-// different law changes are checked in parallel (docs/evidence-pipeline.md).
-log(`relevance checks: ${pairs.length} promise and law-change pairs`);
-const tickPairs = progress("relevance checks", pairs.length, { every: 50 });
-const pairsByChange = new Map();
-for (const [index, pair] of pairs.entries()) {
-  if (!pairsByChange.has(pair.change.changeId)) pairsByChange.set(pair.change.changeId, []);
-  pairsByChange.get(pair.change.changeId).push({ index, pair });
+// The number of pairs is known only once every law change is screened, so
+// the progress line says how many are known so far until then.
+let pairCount = 0;
+let screeningComplete = false;
+let checkedPairCount = 0;
+let pairsLoggedAt = Date.now();
+function tickPairs(detail) {
+  checkedPairCount += 1;
+  if (checkedPairCount % 50 === 0 || Date.now() - pairsLoggedAt >= 30_000 || (screeningComplete && checkedPairCount === pairCount)) {
+    log(`relevance checks: ${checkedPairCount}/${pairCount}${screeningComplete ? "" : " known so far"} (last: ${detail})`);
+    pairsLoggedAt = Date.now();
+  }
 }
 async function checkPair(pair) {
   const brief = buildRelevanceBrief(pair.promise, pair.change);
@@ -216,24 +212,79 @@ async function checkPair(pair) {
   tickPairs(`${pair.promise.id} × ${pair.change.changeId}: ${result.kept ? "kept" : "dropped"}`);
   return result;
 }
-// The largest groups start first, so the longest sequence does not end the
-// stage alone. Every finished pair is kept, also when the stage fails, and
-// after a failure no group starts another pair.
-const changeGroups = [...pairsByChange.values()].sort((left, right) => right.length - left.length);
+
+// 1. Screening and routing of every law change (steps 4 and 5) and 2. the
+// relevance of each promise and law change (step 6) share one pool of
+// workers. A worker screens the next law change while any is left, and
+// otherwise checks the pairs of a screened one, so a law change's checks
+// start as soon as it is screened and slow last screening calls never leave
+// the pool idle (docs/evidence-pipeline.md). The pairs of one law change are
+// checked one after another, so its text, a cache breakpoint of its own, is
+// read from the provider's prompt cache after the first check; different law
+// changes are checked in parallel, the largest group ready first, so the
+// longest sequence does not end the step alone. Every finished result is
+// kept, also when the step fails, and after a failure nothing new starts.
+log(`law-change screening: ${changes.length} law changes from ${new Set(changes.map(({ printId }) => printId)).size} prints with attributable conduct`);
+const tickChanges = progress("law-change screening", changes.length, { every: 20 });
+const screenedByIndex = new Array(changes.length);
+const readyGroups = [];
 const finishedPairs = [];
-let relevanceFailed = false;
-await stage("relevance-check", changeGroups, async (group) => {
-  for (const { index, pair } of group) {
-    if (relevanceFailed) return;
-    try {
-      finishedPairs.push({ index, result: await checkPair(pair) });
-    } catch (error) {
-      relevanceFailed = true;
-      throw error;
+let nextChange = 0;
+let screeningInFlight = 0;
+let screeningDone = null;
+function waitForScreening() {
+  screeningDone ??= Promise.withResolvers();
+  return screeningDone.promise;
+}
+async function runWorker() {
+  while (!runFailure) {
+    if (nextChange < changes.length) {
+      const changeIndex = nextChange;
+      nextChange += 1;
+      screeningInFlight += 1;
+      try {
+        const screened = await screenChange(changes[changeIndex]);
+        screenedByIndex[changeIndex] = screened;
+        const { change, route } = screened;
+        tickChanges(`${change.changeId} (${change.titleCz.slice(0, 60)}): ${route.disposition}${route.routedTo.length > 0 ? ` to ${route.routedTo.length} promise(s)` : ""}`);
+        const group = pairsOf(screened).map((pair, position) => ({ changeIndex, position, pair }));
+        pairCount += group.length;
+        if (group.length > 0) readyGroups.push(group);
+      } catch (error) {
+        fail("law-change-screening", error);
+      } finally {
+        screeningInFlight -= 1;
+        if (nextChange >= changes.length && screeningInFlight === 0 && !runFailure) {
+          screeningComplete = true;
+          log(`relevance checks: ${pairCount} promise and law-change pairs, ${checkedPairCount} already checked`);
+        }
+        screeningDone?.resolve();
+        screeningDone = null;
+      }
+      continue;
     }
+    if (readyGroups.length > 0) {
+      readyGroups.sort((left, right) => right.length - left.length || left[0].changeIndex - right[0].changeIndex);
+      for (const entry of readyGroups.shift()) {
+        if (runFailure) return;
+        try {
+          finishedPairs.push({ ...entry, result: await checkPair(entry.pair) });
+        } catch (error) {
+          fail("relevance-check", error);
+          return;
+        }
+      }
+      continue;
+    }
+    if (screeningInFlight === 0) return;
+    await waitForScreening();
   }
-});
-const checkedPairs = finishedPairs.sort((left, right) => left.index - right.index).map(({ result }) => result);
+}
+await Promise.all(Array.from({ length: Math.min(runtime.concurrency, Math.max(changes.length, 1)) }, runWorker));
+const screenedChanges = screenedByIndex.filter(Boolean);
+const checkedPairs = finishedPairs
+  .sort((left, right) => left.changeIndex - right.changeIndex || left.position - right.position)
+  .map(({ result }) => result);
 
 // 3. One package per promise (step 7), only from a complete run.
 const outputDirectory = resolve(args.output);
@@ -294,7 +345,7 @@ const counts = {
   directLinkLawChangeCount: screenedChanges.filter(({ route }) => route.routedTo.some(({ routeBasis }) => routeBasis.includes("direct-structural-link"))).length,
   unroutedLawChangeCount: screenedChanges.filter(({ route }) => route.disposition === "unrouted").length,
   routedWithoutConductCount,
-  relevancePairCount: pairs.length,
+  relevancePairCount: pairCount,
   relevanceKeptCount: checkedPairs.filter(({ kept }) => kept).length,
   relevanceDroppedCount: checkedPairs.filter(({ kept }) => !kept).length,
   packageCount: builtPackages.length,

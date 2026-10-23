@@ -26,7 +26,7 @@ const script = (name) => resolve(repositoryRoot, "scripts", name);
 const vatPromiseId = "ano-2025-restaurant-nonalcoholic-vat-12";
 const dissentingModel = "stub-dissenting-model";
 
-async function run(args, { cwd, environment = {} }) {
+async function run(args, { cwd, environment = {}, expectedCode = 0 }) {
   const child = spawn(process.execPath, args, {
     cwd,
     // Only these settings reach the scripts, and the checkout has no .env:
@@ -42,7 +42,7 @@ async function run(args, { cwd, environment = {} }) {
     child.on("error", reject);
     child.on("exit", resolveExit);
   });
-  assert.equal(code, 0, stderr);
+  assert.equal(code, expectedCode, stderr);
   return { stdout, stderr };
 }
 
@@ -321,4 +321,66 @@ test("one real print runs through routing, packaging, assessment, and the review
   assert.deepEqual((await modelCalls(join(work, "still-invalid-calls.jsonl"))).map(({ name }) => name), ["slava_assessment", "slava_assessment", "slava_assessment", "slava_assessment", "slava_arbitration"]);
   // The stub arbiter picks assessor A, which has no valid assessment, so a person decides.
   assert.deepEqual(stillInvalid.resolution, { state: "human-review-required", reason: "arbiter-cannot-decide", status: null, selectedReview: null });
+});
+
+// The law-change context of print 189 and the routing of it, with the stand-in
+// model provider set by `environment`.
+async function routePrint189(work, environment, expectedCode = 0) {
+  const root = join(work, "checkout");
+  await checkout(root);
+  const contextOutput = join(work, "law-context");
+  await cp(join(fixtures, "law-context-cache"), join(work, "law-context-cache"), { recursive: true });
+  await run(["--import", eSbirkaStub, script("run-law-context.mjs"),
+    "--collector-run", join(fixtures, "collector-run.json"),
+    "--print-parts", join(fixtures, "print-parts.json"),
+    "--as-of", "2026-09-25",
+    "--cache", join(work, "law-context-cache"),
+    "--output", contextOutput], { cwd: root, environment: { ESEL_API_ACCESS_KEY: "stub" } });
+  const log = join(work, "routing-calls.jsonl");
+  await run(["--import", stub, script("run-topic-routing.mjs"),
+    "--collector-run", join(fixtures, "collector-run.json"),
+    "--print-parts", join(fixtures, "print-parts.json"),
+    "--law-context", join(contextOutput, "law-context.json"),
+    "--tag-cache", join(work, "tag-cache"),
+    "--as-of", "2026-09-25",
+    "--output", join(work, "routing")], { cwd: root, environment: { STUB_OPENAI_LOG: log, ...environment }, expectedCode });
+  return { calls: await modelCalls(log), report: await readJson(join(work, "routing", "topic-routing-report.json")) };
+}
+
+test("relevance checks run while a law change is still being screened", { timeout: 120_000 }, async (t) => {
+  const work = await mkdtemp(join(tmpdir(), "slava-pipeline-"));
+  t.after(() => rm(work, { recursive: true, force: true }));
+  // The screening of the technical law change (the Customs Administration
+  // Act) answers slowly; the other law changes' relevance checks do not wait
+  // for it.
+  const slow = "Změna zákona o Celní správě České republiky";
+  const { calls, report } = await routePrint189(work, { STUB_OPENAI_SLOW_SCREENING: slow });
+  const slowCalls = calls.flatMap((call, index) => (call.name === "law_change_screening" && call.input.text.includes(slow) ? [index] : []));
+  assert.equal(slowCalls.length, 2);
+  const relevanceCalls = calls.flatMap((call, index) => (call.name === "law_change_relevance" ? [index] : []));
+  assert.ok(relevanceCalls.length > 0);
+  assert.ok(relevanceCalls.some((index) => index > slowCalls[0] && index < slowCalls[1]), "a relevance check ran between the slow screening's two calls");
+  assert.equal(report.completed, true);
+  assert.equal(report.counts.packageCount, 2);
+  assert.equal(report.relevanceChecks.length, report.counts.relevancePairCount);
+});
+
+test("a failed relevance check stops the run and keeps every finished result", { timeout: 120_000 }, async (t) => {
+  const work = await mkdtemp(join(tmpdir(), "slava-pipeline-"));
+  t.after(() => rm(work, { recursive: true, force: true }));
+  const { calls, report } = await routePrint189(work, { STUB_OPENAI_FAIL_RELEVANCE_AFTER: "4", SLIBY_TAGGING_CONCURRENCY: "1" }, 1);
+  assert.equal(report.completed, false);
+  assert.equal(report.failure.stage, "relevance-check");
+  assert.match(report.failure.message, /Stub refusal/);
+  assert.equal(report.counts.packageCount, 0);
+  // One worker: every law change is screened first, then two pairs are
+  // checked (two calls each), and the fifth call fails.
+  assert.equal(report.counts.screenedLawChangeCount, report.counts.lawChangeCount);
+  assert.equal(report.relevanceChecks.length, 2);
+  assert.equal(calls.filter(({ name }) => name === "law_change_relevance").length, 5);
+  const cached = (await readdir(join(work, "tag-cache", "relevance-checks"), { recursive: true })).filter((name) => name.endsWith(".jsonl"));
+  const lines = (await Promise.all(cached.map((name) => readFile(join(work, "tag-cache", "relevance-checks", name), "utf8")))).join("").split("\n").filter(Boolean);
+  // Each check is saved as soon as it answers, so a pair has a line per check.
+  assert.equal(lines.length, 4);
+  assert.equal(new Set(lines.map((line) => JSON.parse(line).subjectId)).size, 2);
 });
