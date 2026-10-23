@@ -32,6 +32,8 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.match(workflow, /collectorRun\.collectors\.map/);
   assert.doesNotMatch(workflow, /^      GH_TOKEN:/m);
   assert.match(workflow, /persist-credentials: false/);
+  // The run artifact is kept for 7 days (docs/evidence-pipeline.md, Run log).
+  assert.match(workflow, /name: evidence-pipeline-\$\{\{ github\.run_id \}\}[\s\S]*?retention-days: 7\n/);
   assert.match(workflow, /uses: actions\/checkout@v5\n        with:\n          ref: main/);
   assert.equal([...workflow.matchAll(/GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/g)].length, 6);
   assert.match(workflow, /- name: Restore current audit state[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
