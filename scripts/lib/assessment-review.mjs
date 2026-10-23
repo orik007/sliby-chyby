@@ -245,7 +245,7 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
   const lines = [
     `# ${evidencePackage.promise.titleCz}`,
     "",
-    "> Neveřejný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.",
+    "> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.",
     "",
     "## Návrh pro veřejný web",
     "",
@@ -560,7 +560,7 @@ export function renderReviewPullRequest(summary) {
   ];
 
   const intro = [
-    "## Neveřejné návrhy změn hodnocení SLAVA",
+    "## Nezveřejněné návrhy změn hodnocení SLAVA",
     "",
     "Tento pull request ukládá automaticky připravené návrhy k lidské kontrole. Jeho sloučení **nezveřejní hodnocení ani nezmění veřejný web**. Návrh zmizí z tohoto přehledu, až hodnocení na webu změní samostatný pull request, nebo až ho nahradí novější návrh. U každé změny jsou verdikty obou automatických hodnotitelů a třetího hodnotitele s jejich zdůvodněním; úplný záznam je na stránce návrhu.",
     "",
@@ -620,6 +620,6 @@ export function renderReviewPullRequest(summary) {
     ? `*Přehled pokračuje v ${total - 1} ${total - 1 === 1 ? "komentáři" : "komentářích"} pod tímto pull requestem, v pořadí. Každý běh je přepíše.*\n\n`
     : "";
   const body = `${intro}\n${note}${text(pages[0]).replace(/^\n/, "")}\n\nVšechny návrhy vyžadují lidskou kontrolu a nejsou schválené ke zveřejnění. Úplný přehled všech balíčků je v \`assessment-batch.json\` v artefaktu běhu.\n`;
-  const comments = pages.slice(1).map((blocks, index) => `${continuationMarker}\n## Neveřejné návrhy změn hodnocení SLAVA, pokračování ${index + 2}/${total}\n\n${text(blocks).replace(/^\n/, "")}\n`);
+  const comments = pages.slice(1).map((blocks, index) => `${continuationMarker}\n## Nezveřejněné návrhy změn hodnocení SLAVA, pokračování ${index + 2}/${total}\n\n${text(blocks).replace(/^\n/, "")}\n`);
   return { body, comments };
 }

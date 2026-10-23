@@ -319,7 +319,7 @@ jobs:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
         run: |
           cat > "$RUNNER_TEMP/evidence-package-audit-pr.md" <<'EOF'
-          ## Neveřejný audit sběru a balíčků podkladů
+          ## Audit sběru a balíčků podkladů (nezveřejněné na webu)
 
           Tento pull request uchovává úspěšný technický sběr, uložené výsledky levných modelů a balíčky podkladů. Balíčky čekají na dva nezávislé posudky; samy nemění veřejná data, skóre ani stav zveřejnění.
 
@@ -327,7 +327,7 @@ jobs:
           EOF
           PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVIEW_BRANCH" --base main --state open --json number --jq '.[0].number')"
           if [ -z "$PR_NUMBER" ]; then
-            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file "$RUNNER_TEMP/evidence-package-audit-pr.md"
+            gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Audit sběru dat a nezveřejněných návrhů SLAVA" --body-file "$RUNNER_TEMP/evidence-package-audit-pr.md"
           fi
 
       - name: Budget the assessment step
@@ -458,10 +458,10 @@ jobs:
             exit 0
           fi
           if [ -n "$PR_NUMBER" ]; then
-            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md
+            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --title "Audit sběru dat a nezveřejněných návrhů SLAVA" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md
             PR_URL="$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json url --jq '.url')"
           else
-            if PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Audit sběru dat a neveřejných návrhů SLAVA" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md 2>/tmp/slava-pr-error)"; then
+            if PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVIEW_BRANCH" --title "Audit sběru dat a nezveřejněných návrhů SLAVA" --body-file automation/runs/pipeline/github-actions/assessment-review-pr.md 2>/tmp/slava-pr-error)"; then
               :
             else
               echo "::error::The audit branch was updated but GitHub Actions could not create the required review pull request."
