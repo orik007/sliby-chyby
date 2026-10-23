@@ -97,6 +97,20 @@ function parseRetryAfterMs(headerValue) {
   return Number.isFinite(dateMs) ? Math.max(0, dateMs - Date.now()) : null;
 }
 
+// Why the provider refused a request, from its error body (`error.type`,
+// `error.code`, and the start of `error.message`, or an error or message
+// given as plain text), so a run's log tells a rate limit from unavailable
+// Flex capacity or an exhausted quota (docs/evidence-pipeline.md, Audit and
+// cost control). Account identifiers and key fragments are left out of the
+// public log.
+function providerErrorSummary(body) {
+  const error = typeof body?.error === "object" && body.error !== null ? body.error : {};
+  const text = [error.message, body?.error, body?.message].find((value) => typeof value === "string" && value);
+  const kind = [error.type, error.code].filter((part) => typeof part === "string" && part).join("/");
+  const message = text ? text.replace(/\b(?:org|proj|user)[-_][A-Za-z0-9]{6,}|\bsk-[A-Za-z0-9_-]{6,}/g, "[id]").replace(/\s+/g, " ").slice(0, 200) : "unknown error";
+  return kind ? `${kind}: ${message}` : message;
+}
+
 /**
  * A 408 (a Flex request that timed out), 429 (rate limit, or Flex capacity
  * unavailable, which is not charged), or 5xx (transient provider-side
@@ -154,7 +168,7 @@ async function fetchJsonWithRetry(url, init, { model, estimatedTokens, label = n
     const retryAfterMs = parseRetryAfterMs(retryAfterHeader);
     // Retry-After is a lower bound (docs/evidence-pipeline.md).
     const delayMs = Math.max(retryAfterMs ?? 0, backoffMs(attempt));
-    console.warn(`Provider request to ${url} failed with ${response.status} (attempt ${attempt}/${maxProviderAttempts}); retrying in ${delayMs}ms.`);
+    console.warn(`Provider request to ${url} failed with ${response.status} (${providerErrorSummary(body)}; Retry-After ${retryAfterHeader ?? "none"}) (attempt ${attempt}/${maxProviderAttempts}); retrying in ${delayMs}ms.`);
     await sleep(delayMs);
   }
   return last;
@@ -213,7 +227,8 @@ export async function createStructuredModelResponse({
   }, { model, estimatedTokens: Math.ceil((instructions.length + inputCharacters + JSON.stringify(schema).length) / charactersPerToken), label: logLabel, serviceTier: tier });
 
   if (!response.ok) {
-    const message = `OpenAI Responses API failed (${response.status}): ${body?.error?.message ?? "unknown error"}`;
+    const retryAfter = typeof response.headers?.get === "function" ? response.headers.get("retry-after") : null;
+    const message = `OpenAI Responses API failed (${response.status}): ${providerErrorSummary(body)}; Retry-After ${retryAfter ?? "none"}`;
     logModelCall({ label: logLabel, model, usage: null, serviceTier: tier, ok: false, error: message });
     throw new Error(message);
   }
