@@ -102,6 +102,37 @@ test("createStructuredModelResponse does not retry a non-retryable 4xx error", a
   }
 });
 
+test("a refused request's warning names the provider's reason and Retry-After, without account identifiers", async () => {
+  const timers = instantTimers();
+  const originalFetch = globalThis.fetch;
+  const originalWarn = console.warn;
+  const warnings = [];
+  console.warn = (line) => warnings.push(line);
+  let callCount = 0;
+  globalThis.fetch = async () => {
+    callCount += 1;
+    if (callCount === 1) {
+      return {
+        ok: false,
+        status: 429,
+        headers: fixtureHeaders({ "retry-after": "300" }),
+        json: async () => ({ error: { type: "requests", code: "rate_limit_exceeded", message: "Rate limit reached for gpt-6-luna in organization org-AbC123 on tokens per min (TPM): Limit 10000000." } })
+      };
+    }
+    return { ok: true, json: async () => ({ id: "resp_fixture", model: "gpt-6.1-sol", usage: { input_tokens: 10, output_tokens: 2 }, output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }] }) };
+  };
+  try {
+    await createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6.1-sol", instructions: "fixture", input: {}, name: "fixture_schema", schema: { type: "object" } });
+    assert.equal(warnings.length, 1);
+    assert.match(warnings[0], /failed with 429 \(requests\/rate_limit_exceeded: Rate limit reached for gpt-6-luna in organization \[id\] on tokens per min \(TPM\): Limit 10000000\.; Retry-After 300\) \(attempt 1\/8\); retrying in 300000ms\./);
+    assert.doesNotMatch(warnings[0], /org-AbC123/);
+  } finally {
+    timers.restore();
+    console.warn = originalWarn;
+    globalThis.fetch = originalFetch;
+  }
+});
+
 test("createStructuredModelResponse gives up after repeated 429s and reports the last failure", async () => {
   const originalFetch = globalThis.fetch;
   const timers = instantTimers();

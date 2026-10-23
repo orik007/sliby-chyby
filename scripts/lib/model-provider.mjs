@@ -97,6 +97,18 @@ function parseRetryAfterMs(headerValue) {
   return Number.isFinite(dateMs) ? Math.max(0, dateMs - Date.now()) : null;
 }
 
+// Why the provider refused a request, from its error body (`error.type`,
+// `error.code`, and the start of `error.message`), so a run's log tells a
+// rate limit from unavailable Flex capacity or an exhausted quota
+// (docs/evidence-pipeline.md, Audit and cost control). Organisation and
+// project identifiers are left out of the public log.
+function refusalReason(body, retryAfterHeader) {
+  const error = body?.error ?? {};
+  const kind = [error.type, error.code].filter((part) => typeof part === "string" && part).join("/") || "no error type";
+  const message = typeof error.message === "string" ? error.message.replace(/\b(?:org|proj)[-_][A-Za-z0-9]+/g, "[id]").replace(/\s+/g, " ").slice(0, 200) : "no message";
+  return `${kind}: ${message}; Retry-After ${retryAfterHeader ?? "none"}`;
+}
+
 /**
  * A 408 (a Flex request that timed out), 429 (rate limit, or Flex capacity
  * unavailable, which is not charged), or 5xx (transient provider-side
@@ -154,7 +166,7 @@ async function fetchJsonWithRetry(url, init, { model, estimatedTokens, label = n
     const retryAfterMs = parseRetryAfterMs(retryAfterHeader);
     // Retry-After is a lower bound (docs/evidence-pipeline.md).
     const delayMs = Math.max(retryAfterMs ?? 0, backoffMs(attempt));
-    console.warn(`Provider request to ${url} failed with ${response.status} (attempt ${attempt}/${maxProviderAttempts}); retrying in ${delayMs}ms.`);
+    console.warn(`Provider request to ${url} failed with ${response.status} (${refusalReason(body, retryAfterHeader)}) (attempt ${attempt}/${maxProviderAttempts}); retrying in ${delayMs}ms.`);
     await sleep(delayMs);
   }
   return last;
