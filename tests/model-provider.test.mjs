@@ -111,7 +111,7 @@ test("a refused request's warning names the provider's reason and Retry-After, w
   let callCount = 0;
   globalThis.fetch = async () => {
     callCount += 1;
-    if (callCount === 1) {
+    if (callCount === 1 || callCount < 0) {
       return {
         ok: false,
         status: 429,
@@ -126,6 +126,9 @@ test("a refused request's warning names the provider's reason and Retry-After, w
     assert.equal(warnings.length, 1);
     assert.match(warnings[0], /failed with 429 \(requests\/rate_limit_exceeded: Rate limit reached for gpt-6-luna in organization \[id\] on tokens per min \(TPM\): Limit 10000000\.; Retry-After 300\) \(attempt 1\/8\); retrying in 300000ms\./);
     assert.doesNotMatch(warnings[0], /org-AbC123/);
+    // Nor does the error of a request refused for good.
+    callCount = -10;
+    await assert.rejects(createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6.1-sol", instructions: "fixture", input: {}, name: "fixture_schema", schema: { type: "object" } }), (error) => /failed \(429\): requests\/rate_limit_exceeded: Rate limit reached for gpt-6-luna in organization \[id\]/.test(error.message) && !/org-AbC123/.test(error.message));
   } finally {
     timers.restore();
     console.warn = originalWarn;
