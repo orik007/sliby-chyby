@@ -111,6 +111,15 @@ function providerErrorSummary(body) {
   return kind ? `${kind}: ${message}` : message;
 }
 
+// A refusal for billing: exhausted credit or a spend or usage limit, which
+// the provider answers with 429 and which no retry can lift (OpenAI error
+// codes, docs/evidence-pipeline.md, Audit and cost control).
+const billingErrorCodes = new Set(["credit_balance_exhausted", "organization_spend_limit_exceeded", "project_spend_limit_exceeded", "organization_usage_limit_exceeded"]);
+export function isBillingRefusal(body) {
+  const error = typeof body?.error === "object" && body.error !== null ? body.error : {};
+  return error.type === "insufficient_quota" || billingErrorCodes.has(error.code);
+}
+
 /**
  * A 408 (a Flex request that timed out), 429 (rate limit, or Flex capacity
  * unavailable, which is not charged), or 5xx (transient provider-side
@@ -119,8 +128,9 @@ function providerErrorSummary(body) {
  * incremental daily run -- so it is retried with backoff instead of failing
  * the caller's entire run on the first hit, and so is a request that fails
  * without a response (the dispatcher's timeout or a dropped connection).
- * Any other 4xx (bad request, invalid key, ...) is not retried: retrying it
- * would just waste the backoff delay on an error that will never succeed.
+ * Any other 4xx (bad request, invalid key, ...) and a billing refusal are
+ * not retried: retrying them would just waste the backoff delay on an error
+ * that will never succeed.
  */
 // Equal jitter: between half and all of the exponential step, so parallel
 // requests rejected together do not retry together.
@@ -162,7 +172,7 @@ async function fetchJsonWithRetry(url, init, { model, estimatedTokens, label = n
       continue;
     }
     last = { response, body };
-    const retryable = response.status === 408 || response.status === 429 || (response.status >= 500 && response.status < 600);
+    const retryable = (response.status === 408 || response.status === 429 || (response.status >= 500 && response.status < 600)) && !isBillingRefusal(body);
     if (!retryable || attempt === maxProviderAttempts) return last;
     const retryAfterHeader = typeof response.headers?.get === "function" ? response.headers.get("retry-after") : null;
     const retryAfterMs = parseRetryAfterMs(retryAfterHeader);
@@ -228,7 +238,8 @@ export async function createStructuredModelResponse({
 
   if (!response.ok) {
     const retryAfter = typeof response.headers?.get === "function" ? response.headers.get("retry-after") : null;
-    const message = `OpenAI Responses API failed (${response.status}): ${providerErrorSummary(body)}; Retry-After ${retryAfter ?? "none"}`;
+    const billing = isBillingRefusal(body) ? " (a billing refusal: credit or a spend or usage limit must be raised; not retried)" : "";
+    const message = `OpenAI Responses API failed (${response.status})${billing}: ${providerErrorSummary(body)}; Retry-After ${retryAfter ?? "none"}`;
     logModelCall({ label: logLabel, model, usage: null, serviceTier: tier, ok: false, error: message });
     throw new Error(message);
   }
