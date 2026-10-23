@@ -107,41 +107,6 @@ export function shardedCachePersister(cache) {
   };
 }
 
-/**
- * Processes a bounded number of subjects at once. A transport or quota
- * failure (anything but a ModelOutputError, which pairedModelCall isolates)
- * stops the pool, since every later call would most likely fail the same
- * way; the subjects already finished are real, paid results and travel on
- * the thrown error as `partialResults`.
- */
-export async function mapWithConcurrency(items, concurrency, worker, onDone = () => {}) {
-  const results = new Array(items.length);
-  let nextIndex = 0;
-  let firstError = null;
-  async function runWorker() {
-    while (nextIndex < items.length && !firstError) {
-      const index = nextIndex;
-      nextIndex += 1;
-      try {
-        results[index] = await worker(items[index]);
-        onDone(results[index]);
-      } catch (error) {
-        firstError = error;
-        log(`stopping: ${error instanceof Error ? error.message : String(error)}`);
-      }
-    }
-  }
-  await Promise.all(Array.from({ length: Math.min(concurrency, items.length) }, runWorker));
-  if (firstError) {
-    const completedCount = results.filter((result) => result !== undefined).length;
-    const aborted = new Error(`Aborted after ${completedCount}/${items.length} item(s): ${firstError.message}`);
-    aborted.cause = firstError;
-    aborted.partialResults = results.filter((result) => result !== undefined);
-    throw aborted;
-  }
-  return results;
-}
-
 async function isolateInvalidOutput(call) {
   try {
     return { response: await call(), error: null };

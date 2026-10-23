@@ -3,7 +3,7 @@ import { appendFile, mkdtemp, readdir, readFile, rm, writeFile } from "node:fs/p
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { cachePersister, loadModelCache, loadShardedModelCache, mapWithConcurrency, pairedModelCall, shardedCachePersister } from "../scripts/lib/paired-model-calls.mjs";
+import { cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, shardedCachePersister } from "../scripts/lib/paired-model-calls.mjs";
 import { ModelOutputError } from "../scripts/lib/model-output.mjs";
 
 const fingerprint = { inputHash: "h1", promptContentHash: "p1", provider: "openai", modelA: "a", modelB: "b" };
@@ -82,17 +82,9 @@ test("a saved answer that no longer validates stops the pair before any paid cal
   assert.equal(calls, 0);
 });
 
-test("a transport failure stops the run, and finished subjects travel with the error", async () => {
+test("a transport failure stops the pair", async () => {
   const outage = async () => { throw new Error("OpenAI Responses API failed (429): insufficient quota"); };
   await assert.rejects(() => pairedModelCall({ subjectId: "s1", fingerprint, cache: { entries: {} }, persist: async () => {}, callA: outage, callB: answer({}) }), /insufficient quota/);
-  await assert.rejects(
-    () => mapWithConcurrency([1, 2, 3], 1, async (item) => { if (item === 2) throw new Error("quota"); return item; }),
-    (error) => {
-      assert.deepEqual(error.partialResults, [1]);
-      assert.match(error.message, /Aborted after 1\/3 item\(s\): quota/);
-      return true;
-    }
-  );
 });
 
 test("a sharded model cache keeps one journal per subject group and loads them all", async (t) => {

@@ -14,6 +14,7 @@ function tagOf(text) {
 
 let invalidAssessmentsLeft;
 let cutOffAssessmentsLeft;
+let relevanceCallsLeft;
 
 function answer(name, input, model) {
   if (name === "law_change_screening") {
@@ -71,6 +72,20 @@ globalThis.fetch = async (url, init) => {
   if (name === "slava_assessment" && cutOffAssessmentsLeft > 0) {
     cutOffAssessmentsLeft -= 1;
     return { ok: true, status: 200, headers: { get: () => null }, json: async () => ({ id: "stub", model: body.model, status: "incomplete", incomplete_details: { reason: "max_output_tokens" }, usage: { ...usage, output_tokens: body.max_output_tokens }, output: [{ type: "reasoning", summary: [] }] }) };
+  }
+  // STUB_OPENAI_SLOW_SCREENING delays the answer to every screening of a law
+  // change whose text matches it by 2 s, so a test can show what runs while
+  // a screening is slow.
+  if (name === "law_change_screening" && process.env.STUB_OPENAI_SLOW_SCREENING && new RegExp(process.env.STUB_OPENAI_SLOW_SCREENING).test(input.text)) {
+    await new Promise((resolveDelay) => setTimeout(resolveDelay, 2_000));
+  }
+  // STUB_OPENAI_FAIL_RELEVANCE_AFTER refuses every relevance check after the
+  // first that many of this process with a provider error that is not
+  // retried, so a test can stop a run part-way.
+  if (name === "law_change_relevance" && process.env.STUB_OPENAI_FAIL_RELEVANCE_AFTER) {
+    relevanceCallsLeft ??= Number(process.env.STUB_OPENAI_FAIL_RELEVANCE_AFTER);
+    if (relevanceCallsLeft === 0) return { ok: false, status: 400, headers: { get: () => null }, json: async () => ({ error: { type: "invalid_request_error", message: "Stub refusal." } }) };
+    relevanceCallsLeft -= 1;
   }
   const output = answer(name, input, body.model);
   return {
