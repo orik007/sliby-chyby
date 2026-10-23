@@ -185,6 +185,7 @@ function pairsOf({ change, route }) {
 // the progress line says how many are known so far until then.
 let pairCount = 0;
 let screeningComplete = false;
+let screeningFailed = false;
 let checkedPairCount = 0;
 let pairsLoggedAt = Date.now();
 function tickPairs(detail) {
@@ -214,16 +215,10 @@ async function checkPair(pair) {
 }
 
 // 1. Screening and routing of every law change (steps 4 and 5) and 2. the
-// relevance of each promise and law change (step 6) share one pool of
-// workers. A worker screens the next law change while any is left, and
-// otherwise checks the pairs of a screened one, so a law change's checks
-// start as soon as it is screened and slow last screening calls never leave
-// the pool idle (docs/evidence-pipeline.md). The pairs of one law change are
-// checked one after another, so its text, a cache breakpoint of its own, is
-// read from the provider's prompt cache after the first check; different law
-// changes are checked in parallel, the largest group ready first, so the
-// longest sequence does not end the step alone. Every finished result is
-// kept, also when the step fails, and after a failure nothing new starts.
+// relevance of each promise and law change (step 6), in one pool of workers
+// (docs/evidence-pipeline.md, Audit and cost control): a worker screens while
+// a law change is left to screen, then checks the pairs of one law change
+// after another, the group with the most pairs first.
 log(`law-change screening: ${changes.length} law changes from ${new Set(changes.map(({ printId }) => printId)).size} prints with attributable conduct`);
 const tickChanges = progress("law-change screening", changes.length, { every: 20 });
 const screenedByIndex = new Array(changes.length);
@@ -251,10 +246,11 @@ async function runWorker() {
         pairCount += group.length;
         if (group.length > 0) readyGroups.push(group);
       } catch (error) {
+        screeningFailed = true;
         fail("law-change-screening", error);
       } finally {
         screeningInFlight -= 1;
-        if (nextChange >= changes.length && screeningInFlight === 0 && !runFailure) {
+        if (nextChange >= changes.length && screeningInFlight === 0 && !screeningFailed) {
           screeningComplete = true;
           log(`relevance checks: ${pairCount} promise and law-change pairs, ${checkedPairCount} already checked`);
         }

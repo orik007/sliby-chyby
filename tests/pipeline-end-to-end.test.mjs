@@ -351,10 +351,10 @@ test("relevance checks run while a law change is still being screened", { timeou
   const work = await mkdtemp(join(tmpdir(), "slava-pipeline-"));
   t.after(() => rm(work, { recursive: true, force: true }));
   // The screening of the technical law change (the Customs Administration
-  // Act) answers slowly; the other law changes' relevance checks do not wait
-  // for it.
+  // Act) answers slowly; with two workers, the other one screens every other
+  // law change and checks their pairs without waiting for it.
   const slow = "Změna zákona o Celní správě České republiky";
-  const { calls, report } = await routePrint189(work, { STUB_OPENAI_SLOW_SCREENING: slow });
+  const { calls, report } = await routePrint189(work, { STUB_OPENAI_SLOW_SCREENING: slow, SLIBY_TAGGING_CONCURRENCY: "2" });
   const slowCalls = calls.flatMap((call, index) => (call.name === "law_change_screening" && call.input.text.includes(slow) ? [index] : []));
   assert.equal(slowCalls.length, 2);
   const relevanceCalls = calls.flatMap((call, index) => (call.name === "law_change_relevance" ? [index] : []));
