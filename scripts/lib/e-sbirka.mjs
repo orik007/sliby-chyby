@@ -6,14 +6,14 @@ import { resolve } from "node:path";
  * Reads the wording of acts from the public REST API of e-Sbírka, the
  * official electronic Collection of Laws, and keeps everything read in a
  * permanent per-act cache (docs/evidence-pipeline.md, Law-change context).
- * Requests are sent one at a time, below the API's limit of 5 per second.
+ * Requests are sent one at a time, at most 4 a second (docs/decisions.md).
  */
 export const eSbirkaApi = "https://api.e-sbirka.gov.cz";
 export const apiKeyVariable = "ESEL_API_ACCESS_KEY";
 
 export const eSbirkaRequestSettings = {
-  // The API allows at most 5 requests per second per key; requests start at
-  // least 250 ms apart, one at a time, so a run never exceeds 4.
+  // Requests start at least 250 ms apart, one at a time, so a run never
+  // sends more than 4 a second (docs/decisions.md).
   minIntervalMs: 250,
   // A failed request is retried 10 times, after 1, 2, 4, 8, 16 s and then
   // 32 s each (about 3 minutes in all), before the run fails; a run can be
