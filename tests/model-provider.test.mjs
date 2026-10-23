@@ -4,7 +4,7 @@ import { createServer } from "node:http";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { createRequestDispatcher, createStructuredModelResponse, reserveInputTokens, tokenBudgetPerMinute } from "../scripts/lib/model-provider.mjs";
+import { createRequestDispatcher, createStructuredModelResponse, isBillingRefusal, reserveInputTokens, tokenBudgetPerMinute } from "../scripts/lib/model-provider.mjs";
 import { maxOutputTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
 
 // Stub calls never belong in a real run's spend log.
@@ -595,6 +595,39 @@ test("createStructuredModelResponse sends JSON input and no reasoning effort by 
     assert.equal("reasoning" in body, false);
     assert.equal("reasoningEffort" in result, false);
   } finally {
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("a billing refusal is not retried and says so", async () => {
+  const timers = instantTimers();
+  const originalFetch = globalThis.fetch;
+  // A model without a token budget, so the earlier tests' reservations in
+  // this process cannot make it wait.
+  const bodies = [
+    { error: { type: "insufficient_quota", code: "credit_balance_exhausted", message: "Your organization has no prepaid credits remaining." } },
+    { error: { type: "insufficient_quota", message: "You exceeded your current quota." } },
+    { error: { type: "requests", code: "project_spend_limit_exceeded", message: "Project spend limit reached." } }
+  ];
+  let callCount = 0;
+  try {
+    for (const body of bodies) {
+      callCount = 0;
+      globalThis.fetch = async () => {
+        callCount += 1;
+        return { ok: false, status: 429, headers: fixtureHeaders({}), json: async () => body };
+      };
+      await assert.rejects(
+        createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "fixture-unbudgeted-model", instructions: "fixture", input: {}, name: "fixture_schema", schema: { type: "object" } }),
+        /OpenAI Responses API failed \(429\) \(a billing refusal: credit or a spend limit must be raised; not retried\)/
+      );
+      assert.equal(callCount, 1);
+    }
+    assert.deepEqual(timers.delays, []);
+    assert.equal(isBillingRefusal({ error: { type: "requests", code: "rate_limit_exceeded" } }), false);
+    assert.equal(isBillingRefusal(null), false);
+  } finally {
+    timers.restore();
     globalThis.fetch = originalFetch;
   }
 });
