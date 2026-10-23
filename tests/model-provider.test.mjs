@@ -607,7 +607,9 @@ test("a billing refusal is not retried and says so", async () => {
   const bodies = [
     { error: { type: "insufficient_quota", code: "credit_balance_exhausted", message: "Your organization has no prepaid credits remaining." } },
     { error: { type: "insufficient_quota", message: "You exceeded your current quota." } },
-    { error: { type: "requests", code: "project_spend_limit_exceeded", message: "Project spend limit reached." } }
+    { error: { type: "requests", code: "project_spend_limit_exceeded", message: "Project spend limit reached." } },
+    { error: { type: "requests", code: "organization_spend_limit_exceeded", message: "Organization spend limit reached." } },
+    { error: { type: "requests", code: "organization_usage_limit_exceeded", message: "Organization usage limit reached." } }
   ];
   let callCount = 0;
   try {
@@ -619,7 +621,7 @@ test("a billing refusal is not retried and says so", async () => {
       };
       await assert.rejects(
         createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "fixture-unbudgeted-model", instructions: "fixture", input: {}, name: "fixture_schema", schema: { type: "object" } }),
-        /OpenAI Responses API failed \(429\) \(a billing refusal: credit or a spend limit must be raised; not retried\)/
+        /OpenAI Responses API failed \(429\) \(a billing refusal: credit or a spend or usage limit must be raised; not retried\)/
       );
       assert.equal(callCount, 1);
     }

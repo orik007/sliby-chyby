@@ -238,7 +238,7 @@ export async function createStructuredModelResponse({
 
   if (!response.ok) {
     const retryAfter = typeof response.headers?.get === "function" ? response.headers.get("retry-after") : null;
-    const billing = isBillingRefusal(body) ? " (a billing refusal: credit or a spend limit must be raised; not retried)" : "";
+    const billing = isBillingRefusal(body) ? " (a billing refusal: credit or a spend or usage limit must be raised; not retried)" : "";
     const message = `OpenAI Responses API failed (${response.status})${billing}: ${providerErrorSummary(body)}; Retry-After ${retryAfter ?? "none"}`;
     logModelCall({ label: logLabel, model, usage: null, serviceTier: tier, ok: false, error: message });
     throw new Error(message);
