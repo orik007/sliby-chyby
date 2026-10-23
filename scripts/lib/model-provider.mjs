@@ -227,7 +227,8 @@ export async function createStructuredModelResponse({
   }, { model, estimatedTokens: Math.ceil((instructions.length + inputCharacters + JSON.stringify(schema).length) / charactersPerToken), label: logLabel, serviceTier: tier });
 
   if (!response.ok) {
-    const message = `OpenAI Responses API failed (${response.status}): ${providerErrorSummary(body)}`;
+    const retryAfter = typeof response.headers?.get === "function" ? response.headers.get("retry-after") : null;
+    const message = `OpenAI Responses API failed (${response.status}): ${providerErrorSummary(body)}; Retry-After ${retryAfter ?? "none"}`;
     logModelCall({ label: logLabel, model, usage: null, serviceTier: tier, ok: false, error: message });
     throw new Error(message);
   }

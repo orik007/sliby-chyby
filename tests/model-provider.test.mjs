@@ -160,7 +160,7 @@ test("createStructuredModelResponse gives up after repeated 429s and reports the
         name: "fixture_schema",
         schema: { type: "object" }
       }),
-      /OpenAI Responses API failed \(429\)/
+      /OpenAI Responses API failed \(429\): Rate limit reached; Retry-After 0$/
     );
     assert.equal(callCount, 8, "must retry up to the fixed attempt cap, not forever");
     // A Retry-After of 0 does not shorten the backoff.
