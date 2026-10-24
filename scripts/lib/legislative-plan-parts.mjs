@@ -63,6 +63,15 @@ function annexParts(paragraphs, start, end, annexHeading) {
       else if (rows.length > 0) rows.at(-1).end = index + 1;
       index += 1;
     }
+    // The last row ends with its last column, a flag "ano" or "ne"; what
+    // follows it before a relating table or the next table stays in the
+    // annex's rest.
+    const last = rows.at(-1);
+    if (last) {
+      let end = last.end;
+      while (end > last.start + 2 && !/^(?:ano|ne)$/iu.test(paragraphs[end - 1])) end -= 1;
+      if (end > last.start + 2) last.end = end;
+    }
     // The rows are numbered 1, 2, 3, …; otherwise the table is not read as
     // one, and the resolution is one law change.
     if (rows.some(({ number }, position) => Number(number) !== position + 1)) return undefined;

@@ -453,6 +453,8 @@ test("a treaty is divided at its part, chapter, annex, appendix, and protocol he
   assert.deepEqual(changes.map(({ changeId, heading }) => [changeId, heading]), [["43453-1", null], ["43453-2", "PREAMBULE"], ["43453-3", "ČÁST II"], ["43453-4", "KAPITOLA 2"], ["43453-5", "Dodatek VI-A"], ["43453-6", "PROTOKOL"]]);
   // A treaty amends no act, even when a paragraph reads like an amendment.
   assert.deepEqual(changes.flatMap(({ acts }) => acts), []);
-  // A treaty without such headings is one law change.
+  // A treaty without such headings is one law change, and takes no act from
+  // its title either.
+  assert.deepEqual(lawChangesOfPrint({ print: { ...print, title: "Vládní návrh smlouvy, kterou se mění zákon č. 111/1998 Sb., o vysokých školách" }, texts: { proposed: { document, paragraphs: ["Smlouva", "Článek 1", "Strany se dohodly."] } } }).map(({ acts, identifiers }) => [acts, identifiers]), [[[], []]]);
   assert.deepEqual(lawChangesOfPrint({ print, texts: { proposed: { document, paragraphs: ["Smlouva mezi Českou republikou a Slovenskou republikou", "Článek 1", "Strany se dohodly."] } } }).map(({ changeId }) => changeId), ["43453-1"]);
 });

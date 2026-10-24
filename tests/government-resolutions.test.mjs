@@ -427,6 +427,12 @@ test("the plan of legislative work is divided into the resolution, each task wit
   // A table whose rows are not numbered 1, 2, 3, … is not read as one: the
   // resolution is one law change.
   assert.deepEqual(lawChangesOfResolution({ ...payload, paragraphs: paragraphs.map((paragraph, index) => (index === fifth ? "7" : paragraph)) }, "https://odok.gov.cz/").map(({ changeId }) => changeId), ["uv-2026-175"]);
+  // A note after the last row of a table stays in the annex's rest.
+  const lastRowEnd = paragraphs.indexOf("Vztah výše uvedených úkolů k právu EU") - 1;
+  assert.equal(paragraphs[lastRowEnd], "ne");
+  const noted = lawChangesOfResolution({ ...payload, paragraphs: [...paragraphs.slice(0, lastRowEnd + 1), "Poznámka: termíny jsou orientační.", ...paragraphs.slice(lastRowEnd + 1)] }, "https://odok.gov.cz/");
+  assert.equal(noted[6].versions.adopted.textCz.split("\n").at(-1), "ne");
+  assert.ok(noted[1].versions.adopted.textCz.split("\n").includes("Poznámka: termíny jsou orientační."));
   // The same text under another title is one law change.
   assert.deepEqual(lawChangesOfResolution({ ...payload, titleCz: "Zpráva o plnění úkolů" }, "https://odok.gov.cz/").map(({ changeId }) => changeId), ["uv-2026-175"]);
 });

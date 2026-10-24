@@ -568,8 +568,9 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [], g
       if (!change.versions[version]) change.versions[version] = text?.promulgatedAct ? { removed: true, promulgatedAct: text.promulgatedAct } : { removed: true };
     }
   }
-  // Only a print whose first text is one part takes the title's acts.
-  const single = changes.filter((change) => change.fromFirstText).length === 1;
+  // Only a print whose first text is one part takes the title's acts; a
+  // treaty amends no act.
+  const single = String(print.kindId) !== treatyPrintKindId && changes.filter((change) => change.fromFirstText).length === 1;
   const subPrintText = ({ partNumber, document, paragraphs }) => ({
     partNumber,
     document: { filename: document.filename, url: document.url },
