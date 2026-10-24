@@ -232,7 +232,7 @@ test("a cited government resolution enters the trail as its adoption with a link
   assert.equal(evidenceTrailResolutionSchema.safeParse({ ...trail[0], pageUrl: "https://example.com/usneseni/2026/158/" }).success, false);
 });
 
-test("two cited parts of one government resolution enter the trail as one adoption", async () => {
+test("each cited part of a government resolution enters the trail with its adoption and the part it is", async () => {
   const run = JSON.parse(await readFile(new URL("./fixtures/pipeline/collector-run.json", import.meta.url), "utf8"));
   const record = run.records.find(({ id }) => id === "zvlady-resolutions--2026-158");
   const [whole] = lawChangesOfResolution(record.payload, record.url);
@@ -245,7 +245,8 @@ test("two cited parts of one government resolution enter the trail as one adopti
   assert.deepEqual(changes.map(({ title }) => title), ["Usnesení vlády č. 158/2026, O zajištění účasti České republiky na Mezinárodní specializované výstavě EXPO 2027 v Bělehradě – Příloha č. 1", "Usnesení vlády č. 158/2026, O zajištění účasti České republiky na Mezinárodní specializované výstavě EXPO 2027 v Bělehradě – Příloha č. 2"]);
   const review = { status: "moving-towards", evidenceSufficient: true, citedEvidenceIds: [...changes.map(({ id }) => id), record.id], changeRelevance: changes.map(({ id }) => ({ evidenceId: id, relevant: true, reasonCz: "Usnesení se týká slibu.", effectCz: "Vláda souhlasí s účastí na výstavě." })), explanationCz: "Vláda přijala usnesení." };
   const trail = buildEvidenceTrail(evidencePackage, { resolution: { state: "candidate", selectedReview: "consensus" }, validatedAssessments: { "assessor-a": review, "assessor-b": review } });
-  assert.deepEqual(trail.map(({ kind, lawChangeId }) => [kind, lawChangeId]), [["resolution", "zvlady-resolutions--law-change-uv-2026-158-1"]]);
+  assert.deepEqual(trail.map(({ lawChangeId, titleCz, adoption }) => [lawChangeId, titleCz, adoption.evidenceId]), [1, 2].map((number) => [`zvlady-resolutions--law-change-uv-2026-158-${number}`, `O zajištění účasti České republiky na Mezinárodní specializované výstavě EXPO 2027 v Bělehradě – Příloha č. ${number}`, "zvlady-resolutions--2026-158"]));
+  for (const entry of trail) assert.deepEqual(evidenceTrailResolutionSchema.parse(entry), entry);
 });
 
 test("a cited government opinion enters the trail as a step on its bill, with a link to the opinion and the proposed text", async () => {

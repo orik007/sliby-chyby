@@ -187,8 +187,9 @@ const treatyPrintKindId = "4";
 // INVESTICE ODDÍL A …", "PŘÍLOHA 2-A HARMONOGRAM …", "Dodatek I-B-2 …"),
 // after the document reference some texts repeat on their pages
 // ("EU/MX/MGA/cs"), and a footnote mark the extracted text joins to a
-// heading ("ČÁST II2").
-const treatyHeadingPattern = /^(?:[A-Z]{2,}(?:\/[A-Z0-9]+)+\/[a-z]{2}\s+)?(ČÁST [IVX]+|KAPITOLA \d+|PŘÍLOHA [0-9IVX]+(?:-[A-Z0-9]+)*|Dodatek [0-9IVX]+(?:-[A-Z0-9]+)+|PROTOKOL|SPOLEČNÉ PROHLÁŠENÍ|PREAMBULE)\d*(?=\s+\p{Lu}|$)/u;
+// part's Roman numeral ("ČÁST II2"; after an Arabic number it cannot be told
+// from the number).
+const treatyHeadingPattern = /^(?:[A-Z]{2,}(?:\/[A-Z0-9]+)+\/[a-z]{2}\s+)?(ČÁST [IVX]+(?=\d*\s)|KAPITOLA \d+|PŘÍLOHA [0-9IVX]+(?:-[A-Z0-9]+)*|Dodatek [0-9IVX]+(?:-[A-Z0-9]+)+|PROTOKOL|SPOLEČNÉ PROHLÁŠENÍ|PREAMBULE)(?:(?<=ČÁST [IVX]+)\d*)?(?=\s+\p{Lu}|$)/u;
 
 /**
  * Divides a treaty's text into its parts at the headings that start a

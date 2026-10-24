@@ -7,7 +7,7 @@ export { versionOfChange };
 import { charactersPerToken, estimateRequestTokens, estimateTokens, maxPackageRequestTokens, maxRequestInputTokens } from "./assessment-config.mjs";
 import { withContext } from "./law-context.mjs";
 import { isRegulationKind, regulationSourceId } from "./regulations.mjs";
-import { resolutionKind, resolutionSourceId } from "./government-resolution-kind.mjs";
+import { resolutionKind, resolutionPartName, resolutionSourceId } from "./government-resolution-kind.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -304,15 +304,15 @@ function evidenceFromRegulation(change, route, publishedAt) {
   };
 }
 
-// A government resolution: one law change, its text as adopted (the
-// resolution and its annexes), from the Government Office's portal zVlády.
+// A government resolution, or a part of one: one law change, its text as
+// adopted, from the Government Office's portal zVlády.
 function evidenceFromResolution(change, route, publishedAt) {
   const entry = change.versions.adopted;
   return {
     id: lawChangeEvidenceId(change),
     role: "law-change",
     type: "law-change",
-    title: `${change.printTitleCz}${change.heading ? ` – ${change.heading}` : ""}`,
+    title: `${change.printTitleCz}${resolutionPartName(change)}`,
     publisher: "Government Office of the Czech Republic (zVlády)",
     publishedAt,
     url: entry.document.url,

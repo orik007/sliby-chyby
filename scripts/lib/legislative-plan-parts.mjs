@@ -11,27 +11,18 @@ import { invariant } from "./collector-core.mjs";
  *
  * The text is the resolution's paragraphs as read from zVlády: a table cell
  * per paragraph. Returns the parts in document order, each `{ heading,
- * titleCz, paragraphs }`, or null when the text has no table of tasks.
+ * titleCz, paragraphs }`, or null when the text has no table of tasks or a
+ * table whose rows are not numbered 1, 2, 3, …, so it is read whole.
  */
 export const legislativePlanTitlePattern = /pl[áa]n\p{L}*\s+legislativních\s+prací\s+vlády/iu;
 
 const annexPattern = /^Příloha č\. (\d+)$/u;
 const relationPattern = /^Vztah výše uvedených úkolů k /u;
+// The heading of a list of tables: by ministry or by period, of a year.
+const listingPattern = /^(?:Resortní|Časové) členění/u;
 const numberPattern = /^\d+$/u;
-
-// "PV předseda vlády", "MSp-LRV ministr spravedlnosti a …": the first word of
-// each line after "Přehled použitých zkratek" up to the table's explanations.
-function submitterAbbreviations(paragraphs, start, end) {
-  const listAt = paragraphs.slice(start, end).findIndex((paragraph) => paragraph === "Přehled použitých zkratek");
-  if (listAt < 0) return new Set();
-  const abbreviations = new Set();
-  for (let index = start + listAt + 1; index < end; index += 1) {
-    const match = /^(\S+) \S/u.exec(paragraphs[index]);
-    if (!match || paragraphs[index] === "Vysvětlivky k tabulce") break;
-    abbreviations.add(match[1]);
-  }
-  return abbreviations;
-}
+// A submitter's abbreviation: one word ("PV", "MSp-LRV", "ÚOHS").
+const submitterPattern = /^\p{Lu}[\p{L}-]{0,11}$/u;
 
 // A table of tasks starts with its header row: "č.", "předkladatel", and the
 // other column names, up to the first row.
@@ -39,19 +30,27 @@ function isTableHeader(paragraphs, index) {
   return paragraphs[index] === "č." && paragraphs[index + 1] === "předkladatel";
 }
 
+// The title of an annex: the first of its opening paragraphs that does not
+// repeat its heading or name the resolution ("usnesení vlády", "ze dne …").
+function annexTitle(paragraphs, start, heading) {
+  return paragraphs.slice(start + 1, start + 8).find((paragraph) => paragraph !== heading && !/^(?:usnesení vlády|ze dne )/iu.test(paragraph)) ?? heading;
+}
+
 function annexParts(paragraphs, start, end, annexHeading) {
-  const abbreviations = submitterAbbreviations(paragraphs, start, end);
-  const isRowStart = (index) => numberPattern.test(paragraphs[index]) && abbreviations.has(paragraphs[index + 1]);
+  const isRowStart = (index) => numberPattern.test(paragraphs[index]) && submitterPattern.test(paragraphs[index + 1] ?? "");
   // Each table is headed by the paragraph before its header row: a ministry
   // ("Ministr dopravy") or a period ("březen 2026").
   const tables = [];
   for (let index = start + 1; index < end; index += 1) if (isTableHeader(paragraphs, index)) tables.push(index - 1);
   if (tables.length === 0) return null;
   const used = new Set();
-  const seenRows = new Set();
+  const tasksByRow = new Map();
   const tasks = [];
   for (const [tableIndex, headingAt] of tables.entries()) {
-    const tableEnd = tables[tableIndex + 1] ?? end;
+    // A table runs to the next table's heading, without the heading of the
+    // list that begins there ("Časové členění").
+    let tableEnd = tables[tableIndex + 1] ?? end;
+    while (tableEnd > headingAt && listingPattern.test(paragraphs[tableEnd - 1])) tableEnd -= 1;
     let firstRow = headingAt + 2;
     while (firstRow < tableEnd && !isRowStart(firstRow)) firstRow += 1;
     const header = paragraphs.slice(headingAt, firstRow);
@@ -63,47 +62,56 @@ function annexParts(paragraphs, start, end, annexHeading) {
       else if (rows.length > 0) rows.at(-1).end = index + 1;
       index += 1;
     }
-    // Each relating table: its title, three column names, then entries
-    // "k č." a task number, the task, and what it relates to.
+    // The rows are numbered 1, 2, 3, …; otherwise the table is not read as
+    // one, and the resolution is one law change.
+    if (rows.some(({ number }, position) => Number(number) !== position + 1)) return undefined;
+    // Each relating table: its title and column names, then entries: a task
+    // number, the task, and what it relates to.
     const relations = new Map();
     while (index < tableEnd && relationPattern.test(paragraphs[index])) {
       const titleAt = index;
-      index += 4;
+      index += 1;
+      while (index < tableEnd && !numberPattern.test(paragraphs[index]) && !relationPattern.test(paragraphs[index])) index += 1;
+      const columns = paragraphs.slice(titleAt, index);
       let entry = null;
       while (index < tableEnd && !relationPattern.test(paragraphs[index])) {
         if (numberPattern.test(paragraphs[index])) {
           entry = { number: paragraphs[index], indexes: [index] };
-          relations.set(entry.number, [...(relations.get(entry.number) ?? []), { titleAt, entry }]);
+          relations.set(entry.number, [...(relations.get(entry.number) ?? []), { columns, entry }]);
         } else if (entry) entry.indexes.push(index);
         index += 1;
       }
     }
     for (const row of rows) {
       const rowIndexes = Array.from({ length: row.end - row.start }, (_, offset) => row.start + offset);
-      // The same task listed again, without its number, is read once.
-      const key = paragraphs.slice(row.start + 1, row.end).join("\n");
       const related = relations.get(row.number) ?? [];
-      if (seenRows.has(key) && related.length === 0) {
-        for (const at of rowIndexes) used.add(at);
+      const relatedParagraphs = related.flatMap(({ columns, entry }) => [...columns, ...entry.indexes.map((at) => paragraphs[at])]);
+      for (const at of [...rowIndexes, ...related.flatMap(({ entry }) => entry.indexes)]) used.add(at);
+      // The same task listed again, without its number, is read once; what
+      // the later listing relates it to joins the task.
+      const key = paragraphs.slice(row.start + 1, row.end).join("\n");
+      const earlier = tasksByRow.get(key);
+      if (earlier) {
+        earlier.paragraphs.push(...relatedParagraphs);
         continue;
       }
-      seenRows.add(key);
-      const relatedParagraphs = related.flatMap(({ titleAt, entry }) => [...paragraphs.slice(titleAt, titleAt + 4), ...entry.indexes.map((at) => paragraphs[at])]);
-      for (const at of [...rowIndexes, ...related.flatMap(({ entry }) => entry.indexes)]) used.add(at);
-      // The task's name follows the submitters, each one word ("MPO", "ÚOHS").
+      // The task's name follows the submitters, each one word.
       const titleAt = rowIndexes.find((at) => at > row.start && /\s/u.test(paragraphs[at]));
-      tasks.push({
+      const task = {
         heading: `${annexHeading}, ${paragraphs[headingAt]}, úkol č. ${row.number}`,
         titleCz: titleAt === undefined ? null : paragraphs[titleAt],
         paragraphs: [...header, ...paragraphs.slice(row.start, row.end), ...relatedParagraphs]
-      });
+      };
+      tasksByRow.set(key, task);
+      tasks.push(task);
     }
   }
   // Every other paragraph of the annex (its title, contents, abbreviations,
-  // the tables' headings and headers) is one more part, so no text is lost.
+  // the headings and header rows of its tables, and the numbers of tasks read
+  // once) is one more part, so no text is lost.
   const rest = [];
   for (let index = start; index < end; index += 1) if (!used.has(index)) rest.push(paragraphs[index]);
-  return [{ heading: annexHeading, titleCz: paragraphs.slice(start + 1, start + 8).find((paragraph) => paragraph !== paragraphs[start] && !/^(?:usnesení vlády|ze dne )/u.test(paragraph)) ?? annexHeading, paragraphs: rest }, ...tasks];
+  return [{ heading: annexHeading, titleCz: annexTitle(paragraphs, start, annexHeading), paragraphs: rest }, ...tasks];
 }
 
 export function legislativePlanParts(paragraphs) {
@@ -122,8 +130,9 @@ export function legislativePlanParts(paragraphs) {
     const end = annexStarts[position + 1]?.index ?? paragraphs.length;
     const heading = `Příloha č. ${number}`;
     const split = annexParts(paragraphs, index, end, heading);
+    if (split === undefined) return null;
     if (split) tasks += split.length - 1;
-    parts.push(...(split ?? [{ heading, titleCz: paragraphs.slice(index + 1, index + 8).find((paragraph) => paragraph !== paragraphs[index] && !/^(?:usnesení vlády|ze dne )/u.test(paragraph)) ?? heading, paragraphs: paragraphs.slice(index, end) }]));
+    parts.push(...(split ?? [{ heading, titleCz: annexTitle(paragraphs, index, heading), paragraphs: paragraphs.slice(index, end) }]));
   }
   return tasks > 0 ? parts.filter(({ paragraphs: partParagraphs }) => partParagraphs.length > 0) : null;
 }

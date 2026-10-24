@@ -7,6 +7,7 @@ import { strToU8, zipSync } from "fflate";
 import { attributionStatusForRecord, isPotentiallyAttributable, versionConcerned } from "../scripts/lib/attribution.mjs";
 import { lawChangesOfResolution } from "../scripts/lib/print-parts.mjs";
 import { lawChangeText } from "../scripts/lib/law-change-screening.mjs";
+import { resolutionPartName } from "../scripts/lib/government-resolution-kind.mjs";
 import { GovernmentOfficeBlockedError, createGovernmentOfficeFetcher, createResolutionCache, duplicateOf, parseResolutionPage, readEklepTypes, readResolutions, resolutionParagraphs, resolutionRecords } from "../scripts/lib/government-resolutions.mjs";
 import { extractXlsxRows } from "../scripts/lib/xlsx-rows.mjs";
 
@@ -414,6 +415,17 @@ test("the plan of legislative work is divided into the resolution, each task wit
   // An annex without a table of numbered tasks is one part.
   assert.equal(text(changes[8])[3], "PŘEHLED IMPLEMENTAČNÍCH PRACÍ VLÁDY NA ZBÝVAJÍCÍ ČÁST ROKU 2026");
   assert.match(lawChangeText(changes[2]), /^Government resolution \(usnesení vlády\) adopted by the government: Usnesení vlády č\. 175\/2026, Návrh Plánu legislativních prací vlády[^\n]*\n\nPart of the resolution: Příloha č\. 1, Předseda vlády, úkol č\. 1 – Návrh zákona, kterým se mění zákon č\. 256\/2004 Sb\./);
+  // A part is named by its heading and its own title.
+  assert.equal(resolutionPartName(changes[2]), " – Příloha č. 1, Předseda vlády, úkol č. 1: Návrh zákona, kterým se mění zákon č. 256/2004 Sb., o podnikání na kapitálovém trhu, ve znění pozdějších předpisů, a některé další zákony");
+  assert.equal(resolutionPartName(changes[0]), " – Usnesení");
+  // A row whose submitter the abbreviations do not list is a task of its own.
+  const fifth = paragraphs.indexOf("5");
+  assert.equal(paragraphs[fifth + 1], "PV");
+  const unlisted = lawChangesOfResolution({ ...payload, paragraphs: paragraphs.map((paragraph, index) => (index === fifth + 1 ? "ÚOHS" : paragraph)) }, "https://odok.gov.cz/");
+  assert.equal(unlisted[6].heading, "Příloha č. 1, Předseda vlády, úkol č. 5");
+  // A table whose rows are not numbered 1, 2, 3, … is not read as one: the
+  // resolution is one law change.
+  assert.deepEqual(lawChangesOfResolution({ ...payload, paragraphs: paragraphs.map((paragraph, index) => (index === fifth ? "7" : paragraph)) }, "https://odok.gov.cz/").map(({ changeId }) => changeId), ["uv-2026-175"]);
   // The same text under another title is one law change.
   assert.deepEqual(lawChangesOfResolution({ ...payload, titleCz: "Zpráva o plnění úkolů" }, "https://odok.gov.cz/").map(({ changeId }) => changeId), ["uv-2026-175"]);
 });

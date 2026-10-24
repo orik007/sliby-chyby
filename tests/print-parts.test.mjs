@@ -440,6 +440,8 @@ test("a treaty is divided at its part, chapter, annex, appendix, and protocol he
     ["Dodatek VI-A", "VÝHRADY TÝKAJÍCÍ SE FINANČNÍCH SLUŽEB SEZNAM EU", 1],
     ["PROTOKOL", "O PREVENCI A POTÍRÁNÍ KORUPCE", 1]
   ]);
+  // A footnote mark is told from the number only after a Roman numeral.
+  assert.deepEqual(splitTreatyText(["KAPITOLA 12 OBCHOD SE ZBOŽÍM ČLÁNEK 12.1 Cíl"]).map(({ heading, titleCz }) => [heading, titleCz]), [["KAPITOLA 12", "OBCHOD SE ZBOŽÍM"]]);
   // No text is lost or reordered.
   assert.deepEqual(parts.flatMap(({ paragraphs: partParagraphs }) => partParagraphs), paragraphs);
   const document = { filename: "331.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=1" };
