@@ -3,7 +3,7 @@ import { mkdtemp, readdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { createPspPageCache, pspPageContent, readPspPage } from "../scripts/lib/psp-page-cache.mjs";
+import { createPspPageCache, pspPageContent, readPspPage, withoutEurovocDescriptors } from "../scripts/lib/psp-page-cache.mjs";
 
 const url = (number) => `https://www.psp.cz/sqw/sd.sqw?cd=${number}&o=10`;
 // A psp.cz page, as the fetcher returns it.
@@ -70,6 +70,25 @@ test("checks the pages checked longest ago, not those read that day, and fails w
   assert.equal(checked.length, 1);
   const next = createPspPageCache(directory, "2026-10-21");
   await assert.rejects(next.checkSample(async () => page("SD 9"), 2), /psp\.cz page of a closed print changed/);
+});
+
+test("a check ignores the EUROVOC descriptors psp.cz adds to a history page later, and nothing else", async () => {
+  // Print 167 of term 10: its history page read on 20 October 2026, and on 24
+  // October 2026 with its descriptors added (the end of its content).
+  const before = 'zákonů v částce 91 pod číslem <a href="sbirka.sqw?O=10&T=167">91/2026</a> Sb.</p>            <sqw_flush> <p><b><a href="historie.sqw?o=10&t=167&snzp=1">Navržené změny předpisů</a></b> (1)';
+  const after = 'zákonů v částce 91 pod číslem <a href="sbirka.sqw?O=10&T=167">91/2026</a> Sb.</p>            <sqw_flush> <br><br><b>Deskriptory EUROVOCu:</b> <a href="tisky.sqw?et=283178">digitalizace dokumentů</a>, <a href="tisky.sqw?et=326678">elektronická správa dokumentů</a>, <a href="tisky.sqw?et=7747">informační systém</a>, <a href="tisky.sqw?et=9672">stavební právo</a>, <a href="tisky.sqw?et=104979">územní plánování</a><p><p><b><a href="historie.sqw?o=10&t=167&snzp=1">Navržené změny předpisů</a></b> (1)';
+  assert.equal(withoutEurovocDescriptors(after), before);
+  // Print 94: descriptors at the very end of its content.
+  assert.equal(withoutEurovocDescriptors('</table> <br><br><b>Deskriptory EUROVOCu:</b> <a href="tisky.sqw?et=340817">návrh rozpočtu</a>, <a href="tisky.sqw?et=9017">státní rozpočet</a><p><div class="clear"></div>'), '</table> <div class="clear"></div>');
+  const historyUrl = "https://www.psp.cz/sqw/historie.sqw?o=10&t=167";
+  const directory = await mkdtemp(join(tmpdir(), "psp-pages-"));
+  await createPspPageCache(directory, "2026-10-20").read({ url: historyUrl, keep: true, download: async () => page(before) });
+  assert.deepEqual(await createPspPageCache(directory, "2026-10-24").checkSample(async () => page(after), 1), [historyUrl]);
+  // Kept with its descriptors, then read with others: still the same page.
+  const changedDescriptors = after.replace("územní plánování", "stavební řízení");
+  assert.deepEqual(await createPspPageCache(directory, "2026-10-25").checkSample(async () => page(changedDescriptors), 1), [historyUrl]);
+  // Any other change still fails.
+  await assert.rejects(createPspPageCache(directory, "2026-10-26").checkSample(async () => page(after.replace("91/2026", "92/2026")), 1), /psp\.cz page of a closed print changed/);
 });
 
 test("refuses a damaged page cache entry", async () => {
