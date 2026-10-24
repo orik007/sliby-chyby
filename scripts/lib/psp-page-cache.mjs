@@ -16,6 +16,15 @@ export function pspPageContent(html) {
   return start >= 0 && end > start ? html.slice(start, end) : null;
 }
 
+// psp.cz adds a print's EUROVOC descriptors to its history page later (print
+// 167 of term 10: not on 20 October 2026, on 24 October 2026). No reader reads
+// them, so a check compares a kept page without them (docs/evidence-pipeline.md,
+// Closed prints).
+const eurovocDescriptors = /<br><br><b>Deskriptory EUROVOCu:<\/b>[^<]*(?:<a [^>]*>[^<]*<\/a>[^<]*)*<p>/u;
+export function withoutEurovocDescriptors(content) {
+  return content.replace(eurovocDescriptors, "");
+}
+
 // "Sněmovní dokument nebyl nalezen.", "Dokument nebyl nalezen." (checked on
 // 19 October 2026).
 const notFoundPattern = /okument nebyl nalezen\./u;
@@ -38,7 +47,8 @@ function validEntry(entry, id) {
  * saved at once when `keep` and `complete(content)` (its reader found in it
  * what it reads). A kept page read without `keep` is removed.
  * `checkSample(download, sampleSize)` downloads the pages checked longest
- * ago and fails on the first one whose content changed.
+ * ago and fails on the first one whose content changed in anything but its
+ * EUROVOC descriptors.
  */
 export function createPspPageCache(directory, today) {
   invariant(isoDate.test(today), "The page cache needs the run date");
@@ -80,7 +90,7 @@ export function createPspPageCache(directory, today) {
       const sample = oldestChecked(entries, sampleSize, ({ readOn }) => readOn < today);
       for (const entry of sample) {
         const content = pspPageContent(decodePspPage(await download(entry.url)));
-        invariant(content !== null && sha256(content) === entry.contentSha256, `psp.cz page of a closed print changed (${entry.url}): the rule that a closed print's pages do not change (docs/evidence-pipeline.md) no longer holds`);
+        invariant(content !== null && withoutEurovocDescriptors(content) === withoutEurovocDescriptors(entry.content), `psp.cz page of a closed print changed (${entry.url}): the rule that a closed print's pages do not change (docs/evidence-pipeline.md) no longer holds`);
         entry.checkedOn = today;
         saveCacheEntry(directory, entry);
         stats.checked += 1;
