@@ -1,0 +1,249 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-43-37-972Z--b677045bb27d",
+  "evaluatedAt": "2026-10-02T05:43:37.972Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-a0a332c7ba/b677045bb27d89740f906188c46e6c7a95b3c55a962c0869e67f206639a1bf0e.json",
+  "packageHash": "b677045bb27d89740f906188c46e6c7a95b3c55a962c0869e67f206639a1bf0e",
+  "assessmentContentHash": "5d3108a72b6cc7eb12413b24e5b32bb4737b4f35925efb5a501e30ed2ce51c9b",
+  "assessmentFingerprint": "de48f93ec733ed00d68554b1215f46e47c946b2948be5f5163ccdf9bc381a536",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-a0a332c7ba",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-a0a332c7ba",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna činí saldo zdravotních pojišťoven závazným pro určování úhrad hrazených služeb, a tím přímo zasahuje do nastavování plateb poskytovatelům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": true,
+          "reasonCz": "U dlouhodobého pojištění cizinců vyžaduje pojistné plnění za vymezenou zdravotní péči alespoň ve výši hrazené z veřejného pojištění, což se týká úhrad poskytovatelům."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-a0a332c7ba--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--law-change-43264-1",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona o pobytu cizinců, který u dlouhodobého pojištění cizinců stanoví, že pojistné plnění za určitou péči u poskytovatele nesmí být nižší než úhrada z veřejného zdravotního pojištění. Poslanci SPD návrh v závěrečném hlasování podpořili, čímž prosadili dílčí pravidlo pro úhrady poskytovatelům. Nezaručuje však úhradu všech obvyklých nákladů ani přiměřený zisk z investic, jak slib požaduje. SPD také podpořila změnu, která činí saldo zdravotních pojišťoven závazným pro určování výše úhrad.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Pravidlo o saldu zdravotních pojišťoven může omezovat výši úhrad poskytovatelům, ale předložené znění samo nestanoví, že úhrady budou nižší než obvyklé náklady, ani neukazuje konkrétní dopad na jejich výši.",
+        "U pozdějšího hlasování o rozpočtovém zákoně není přesné znění schválené po prezidentském vrácení zveřejněno; dostupné podklady proto neumožňují úplně ověřit, zda se ustanovení o zdravotních pojišťovnách v této verzi změnilo."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-a0a332c7ba",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna stanoví, že saldo zdravotních pojišťoven bude závazné při určování úhrad hrazených služeb, a tím přímo ovlivňuje podmínky úhrad poskytovatelům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": false,
+          "reasonCz": "Upravuje soukromé dlouhodobé zdravotní pojištění cizinců, nikoli povinnost zdravotních pojišťoven hradit náklady jejich smluvním poskytovatelům v obvyklých cenách."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-a0a332c7ba--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila změnu zákona o rozpočtové odpovědnosti a poslanci SPD hlasovali pro její schválení i pro pozdější setrvání na návrhu po vrácení Senátem. Změna stanoví, že saldo zdravotních pojišťoven bude závazné pro ministerstvo při určování úhrad péče, hodnot bodu, záloh a regulačních omezení. Tato rozpočtová podmínka může být v napětí se slibem hradit poskytovatelům obvyklé náklady včetně přiměřeného zisku, ale text dostupný pro posouzení nestanoví přímo snížení konkrétních úhrad. Proto je doložen posun proti části slibu, nikoli jeho úplné popření.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U hlasování po vrácení návrhu prezidentem není zveřejněno přesné znění textu, o němž se hlasovalo; závěr proto vychází z dříve schváleného znění. Nelze ověřit, zda se rozhodnutý text v relevantní části změnil."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_08118d44afd93689016abf44472a2087d1a8e25a752e9f3e58",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 70511,
+      "input_tokens_details": {
+        "cache_write_tokens": 67187,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 3589,
+      "output_tokens_details": {
+        "reasoning_tokens": 2845
+      },
+      "total_tokens": 74100
+    },
+    "output": {
+      "promiseId": "spd-2025-a0a332c7ba",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna činí saldo zdravotních pojišťoven závazným pro určování úhrad hrazených služeb, a tím přímo zasahuje do nastavování plateb poskytovatelům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": true,
+          "reasonCz": "U dlouhodobého pojištění cizinců vyžaduje pojistné plnění za vymezenou zdravotní péči alespoň ve výši hrazené z veřejného pojištění, což se týká úhrad poskytovatelům."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-a0a332c7ba--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--law-change-43264-1",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona o pobytu cizinců, který u dlouhodobého pojištění cizinců stanoví, že pojistné plnění za určitou péči u poskytovatele nesmí být nižší než úhrada z veřejného zdravotního pojištění. Poslanci SPD návrh v závěrečném hlasování podpořili, čímž prosadili dílčí pravidlo pro úhrady poskytovatelům. Nezaručuje však úhradu všech obvyklých nákladů ani přiměřený zisk z investic, jak slib požaduje. SPD také podpořila změnu, která činí saldo zdravotních pojišťoven závazným pro určování výše úhrad.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Pravidlo o saldu zdravotních pojišťoven může omezovat výši úhrad poskytovatelům, ale předložené znění samo nestanoví, že úhrady budou nižší než obvyklé náklady, ani neukazuje konkrétní dopad na jejich výši.",
+        "U pozdějšího hlasování o rozpočtovém zákoně není přesné znění schválené po prezidentském vrácení zveřejněno; dostupné podklady proto neumožňují úplně ověřit, zda se ustanovení o zdravotních pojišťovnách v této verzi změnilo."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_00f9534570449862016abf4461bdec87d19bd935b88e15fb1e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 70511,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 70508
+      },
+      "output_tokens": 4714,
+      "output_tokens_details": {
+        "reasoning_tokens": 4091
+      },
+      "total_tokens": 75225
+    },
+    "output": {
+      "promiseId": "spd-2025-a0a332c7ba",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna stanoví, že saldo zdravotních pojišťoven bude závazné při určování úhrad hrazených služeb, a tím přímo ovlivňuje podmínky úhrad poskytovatelům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-1",
+          "relevant": false,
+          "reasonCz": "Upravuje soukromé dlouhodobé zdravotní pojištění cizinců, nikoli povinnost zdravotních pojišťoven hradit náklady jejich smluvním poskytovatelům v obvyklých cenách."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-a0a332c7ba--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila změnu zákona o rozpočtové odpovědnosti a poslanci SPD hlasovali pro její schválení i pro pozdější setrvání na návrhu po vrácení Senátem. Změna stanoví, že saldo zdravotních pojišťoven bude závazné pro ministerstvo při určování úhrad péče, hodnot bodu, záloh a regulačních omezení. Tato rozpočtová podmínka může být v napětí se slibem hradit poskytovatelům obvyklé náklady včetně přiměřeného zisku, ale text dostupný pro posouzení nestanoví přímo snížení konkrétních úhrad. Proto je doložen posun proti části slibu, nikoli jeho úplné popření.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U hlasování po vrácení návrhu prezidentem není zveřejněno přesné znění textu, o němž se hlasovalo; závěr proto vychází z dříve schváleného znění. Nelze ověřit, zda se rozhodnutý text v relevantní části změnil."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0d2d72f5e2e52c36016abf4482922487d1abaec5f237136476",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 70887,
+      "input_tokens_details": {
+        "cache_write_tokens": 68405,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 373,
+      "output_tokens_details": {
+        "reasoning_tokens": 86
+      },
+      "total_tokens": 71260
+    },
+    "output": {
+      "choice": "cannot-decide",
+      "citedEvidenceIds": [
+        "spd-2025-a0a332c7ba--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--law-change-43264-1",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Ani jedno hodnocení dostatečně neopírá svůj závěr o doložené změny. Poslanci SPD podpořili pravidlo, které váže nastavení úhrad péče na vládou schválený výsledek hospodaření zdravotních pojišťoven, ale z textu neplyne, že úhrady musí být nižší než slíbené obvyklé náklady. Podpořili také pravidla zdravotního pojištění cizinců, ta však stanoví minimální plnění podle veřejného pojištění, nikoli podle obvyklých nákladů poskytovatelů a přiměřeného zisku. První hodnocení proto zaměňuje jiné pravidlo úhrad za dílčí splnění slibu a druhé zaměňuje možné omezení úhrad za doložený krok proti slibu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-cannot-decide",
+    "status": null,
+    "selectedReview": null
+  }
+}

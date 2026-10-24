@@ -1,0 +1,186 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-40-54-588Z--10c4adf190ab",
+  "evaluatedAt": "2026-10-02T01:40:54.588Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-020d38d46bf4/10c4adf190ab783c1719cf18b63f63029e7c0a054b5fb5ddfd2423dc7c8cea27.json",
+  "packageHash": "10c4adf190ab783c1719cf18b63f63029e7c0a054b5fb5ddfd2423dc7c8cea27",
+  "assessmentContentHash": "6d443e77dccaec88d5164d9a9e4c1fff21b91172450ff2363d064265ed7fc85b",
+  "assessmentFingerprint": "a838ecc36ce8fdd2d191a5e17f6d41fa989b5d1f6c2652931d66f7c40488e23f",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-020d38d46bf4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-020d38d46bf4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší blíže neurčenou část novely energetického zákona, ale z dodaného znění nelze zjistit, zda se týká státního obchodníka nebo přímého prodeje energie; samotná souvislost s energetikou nestačí."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-020d38d46bf4--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Slib Motoristů se týká založení státního obchodníka s energiemi, pokud ČEZ zůstane obchodovanou společností. Jediná zachycená změna ruší část dřívější novely energetického zákona, ale není doloženo, co tato část upravovala. Poslanci Motoristů hlasovali pro schválení návrhu a později také pro setrvání Sněmovny na návrhu po jeho zamítnutí Senátem. Bez znění rušené části nelze říci, zda tato hlasování slib podporovala, nebo mu odporovala, takže podstatný posun není ověřen.",
+      "confidence": "low",
+      "uncertainties": [
+        "Dodaný text neuvádí obsah rušené části novely energetického zákona; nelze proto určit dopad hlasování Motoristů na možnost založit státního obchodníka s energiemi nebo prodávat energii přímo."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-020d38d46bf4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválený text ruší část novely energetického zákona, což může mít význam pro obchodování s energiemi, ale bez znění rušené části nelze určit, zda se týká státního obchodníka."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-020d38d46bf4--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Motoristé sobě slíbili iniciovat státního obchodníka s energiemi, pokud vláda ponechá ČEZ obchodovaný na burze. Jejich poslanci hlasovali pro novelu stavebního zákona, která ruší část dřívější změny energetického zákona; Senát návrh zamítl a Sněmovna na něm následně setrvala. Z dostupného znění ale není patrné, co rušená část energetického zákona obsahovala, ani zda vláda rozhodla ponechat ČEZ na burze. Nelze proto ověřit, že hlasování slib posunulo nebo mu odporovalo.",
+      "confidence": "low",
+      "uncertainties": [
+        "Znění rušené části novely energetického zákona není v podkladech uvedeno, takže nelze posoudit, zda její zrušení ovlivňuje možnost zřídit státního obchodníka s energiemi.",
+        "Podklady neuvádějí, zda vláda rozhodla ponechat ČEZ obchodovaný na burze, což je podmínkou slibu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0441db19b8f3f220016abf0b89dc8487d1b354987b98e2a602",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8679,
+      "input_tokens_details": {
+        "cache_write_tokens": 5355,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2128,
+      "output_tokens_details": {
+        "reasoning_tokens": 1719
+      },
+      "total_tokens": 10807
+    },
+    "output": {
+      "promiseId": "candidate-020d38d46bf4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší blíže neurčenou část novely energetického zákona, ale z dodaného znění nelze zjistit, zda se týká státního obchodníka nebo přímého prodeje energie; samotná souvislost s energetikou nestačí."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-020d38d46bf4--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Slib Motoristů se týká založení státního obchodníka s energiemi, pokud ČEZ zůstane obchodovanou společností. Jediná zachycená změna ruší část dřívější novely energetického zákona, ale není doloženo, co tato část upravovala. Poslanci Motoristů hlasovali pro schválení návrhu a později také pro setrvání Sněmovny na návrhu po jeho zamítnutí Senátem. Bez znění rušené části nelze říci, zda tato hlasování slib podporovala, nebo mu odporovala, takže podstatný posun není ověřen.",
+      "confidence": "low",
+      "uncertainties": [
+        "Dodaný text neuvádí obsah rušené části novely energetického zákona; nelze proto určit dopad hlasování Motoristů na možnost založit státního obchodníka s energiemi nebo prodávat energii přímo."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0dc1c039d145e78a016abf0b9839e087d1a949e3b05b407895",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 8679,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 8676
+      },
+      "output_tokens": 2258,
+      "output_tokens_details": {
+        "reasoning_tokens": 1821
+      },
+      "total_tokens": 10937
+    },
+    "output": {
+      "promiseId": "candidate-020d38d46bf4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Schválený text ruší část novely energetického zákona, což může mít význam pro obchodování s energiemi, ale bez znění rušené části nelze určit, zda se týká státního obchodníka."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-020d38d46bf4--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Motoristé sobě slíbili iniciovat státního obchodníka s energiemi, pokud vláda ponechá ČEZ obchodovaný na burze. Jejich poslanci hlasovali pro novelu stavebního zákona, která ruší část dřívější změny energetického zákona; Senát návrh zamítl a Sněmovna na něm následně setrvala. Z dostupného znění ale není patrné, co rušená část energetického zákona obsahovala, ani zda vláda rozhodla ponechat ČEZ na burze. Nelze proto ověřit, že hlasování slib posunulo nebo mu odporovalo.",
+      "confidence": "low",
+      "uncertainties": [
+        "Znění rušené části novely energetického zákona není v podkladech uvedeno, takže nelze posoudit, zda její zrušení ovlivňuje možnost zřídit státního obchodníka s energiemi.",
+        "Podklady neuvádějí, zda vláda rozhodla ponechat ČEZ obchodovaný na burze, což je podmínkou slibu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

@@ -1,0 +1,1143 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T17-58-47-018Z--d234c7885137",
+  "evaluatedAt": "2026-10-06T17:58:47.018Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-737424d257/d234c7885137ea1e453b21fadda6b60909771ca3766b385a640e1bc625bcbeae.json",
+  "packageHash": "d234c7885137ea1e453b21fadda6b60909771ca3766b385a640e1bc625bcbeae",
+  "assessmentContentHash": "d987b5c608f09d18b37d9e79b57d71a38007393537dbe8387f088e7d603086d0",
+  "assessmentFingerprint": "f44879b686074136b4f0aa4a82249a1f0648c2f0e0659086abb52638091b664c",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-737424d257",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0c61298640e99e57016ac5358a0fa887d29f0d546d94e30559",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 788843,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 788840
+            },
+            "output_tokens": 10144,
+            "output_tokens_details": {
+              "reasoning_tokens": 6938
+            },
+            "total_tokens": 798987
+          },
+          "output": {
+            "promiseId": "ano-2025-737424d257",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Mění přímo pravidla územního plánování a povolování výstavby, výslovně podporuje bydlení a revitalizaci nevyužitých ploch.",
+                "effectCz": "Předchozí znění mezi úkoly plánování řadilo cílenou revitalizaci znehodnocených či zanedbaných ploch a obecně požadovalo posuzovat veřejné zájmy při povolování. Schválený text výslovněji upřednostňuje rozvoj bydlení, nejlepší využití zastavitelného území a revitalizaci nevyužitých ploch; nově také dává přednost podmínkám a zmírňujícím opatřením před zamítnutím záměru. Upravuje i postupy povolování a některé stavební požadavky tak, že odstraňuje část překážek; v ustanoveních, která text nově zavádí a k nimž balíček nedodává předchozí znění, nelze změnu přesně porovnat."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": false,
+                "reasonCz": "Mění rozdělení působnosti mezi ústředními orgány, nikoli pravidla výstavby bytů na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": false,
+                "reasonCz": "Upravuje požární ochranu staveb, ale balíček ji nespojuje s výstavbou bytů na zanedbaných či opuštěných pozemcích.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": false,
+                "reasonCz": "Mění pravidla památkové péče, bez doložené vazby na bytovou výstavbu na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": false,
+                "reasonCz": "Upravuje geologické práce a jejich návaznost na povolování záměrů, ale text ji nespojuje s bydlením na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": true,
+                "reasonCz": "Mění pravidla ochrany přírody při povolování staveb a výslovně stanoví jednodušší posuzování záměrů v již vymezeném zastavitelném území.",
+                "effectCz": "Dříve se krajinný ráz neposuzoval jen v zastavěném území nebo zastavitelných plochách, pro které plán výslovně stanovil uspořádání a podmínky ochrany dohodnuté s orgánem ochrany přírody. Nové ustanovení pro kvalifikované záměry v zastavitelném území předpokládá přípustnost a v některých případech odstraňuje opětovné posouzení krajinného rázu; tím uvolňuje část překážek povolování. Nové ustanovení nemá v balíčku předchozí znění, takže přesný rozsah změny těchto pravidel nelze plně ověřit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Upravuje, jak se při záborech zemědělské půdy zohledňuje využití volných a nedostatečně využitých pozemků a povolují stavební záměry.",
+                "effectCz": "Předchozí znění dávalo přednost nezastavěným a nedostatečně využitým pozemkům v zastavěném území nebo v zastavitelných plochách; schválené znění používá pojem zastavitelné území a zachovává přednostní využití volných či nedostatečně využitých pozemků. Změna této priority tedy není zjevně přísnější pro opětovné využití takových pozemků. Dále nové pravidlo stanoví, že některé zásady ochrany zemědělské půdy se neposuzují v zastavitelném území, koridoru či ploše těžby vymezených v územně plánovací dokumentaci na základě stanoviska příslušného orgánu; to uvolňuje část omezení při následném povolování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-15",
+                "relevant": false,
+                "reasonCz": "Mění územní vymezení pro pravidla silničního provozu a ochranná pásma komunikací, nikoli bytovou výstavbu na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-19",
+                "relevant": false,
+                "reasonCz": "Mění postupy integrovaného záchranného systému, bez doložené souvislosti s výstavbou bytů na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": false,
+                "reasonCz": "Upravuje ochranu veřejného zdraví při stavebních záměrech, ale balíček ji nespojuje s konkrétním slibem výstavby na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": false,
+                "reasonCz": "Upravuje převážně energetická zařízení a energetické sítě, nikoli bytovou výstavbu na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": false,
+                "reasonCz": "Mění posuzování vlivů na životní prostředí, avšak bez doložené přímé vazby na bytovou výstavbu na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": false,
+                "reasonCz": "Upravuje povolování vodohospodářských záměrů, ale text nespojuje změny s bydlením na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-26",
+                "relevant": false,
+                "reasonCz": "Mění pravidla pozemkových úprav a užití termínu zastavitelné území, ale neřeší bytovou výstavbu na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": false,
+                "reasonCz": "Mění organizaci a působnost vyvlastňovacích úřadů, nikoli pravidla výstavby na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": false,
+                "reasonCz": "Upravuje povolování z hlediska ochrany ovzduší, ale balíček nepropojuje tuto část přímo s výstavbou bytů na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-36",
+                "relevant": false,
+                "reasonCz": "Mění prevenci závažných havárií, bez doložené vazby na bytovou výstavbu na zanedbaných či opuštěných pozemcích.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": false,
+                "reasonCz": "Upravuje nakládání s odpady při stavebních záměrech, ale text ji nespojuje s bytovou výstavbou na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-40",
+                "relevant": false,
+                "reasonCz": "Týká se zvláštních stavebních postupů pro záměry související s válkou na Ukrajině, nikoli obecně bytů na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+                "relevant": false,
+                "reasonCz": "Upravuje podklady pro digitální evidenci technické infrastruktury, nikoli pravidla bytové výstavby na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+                "relevant": false,
+                "reasonCz": "Mění pravidla týkající se hlavního města Prahy a svazků obcí, ne podmínky pro výstavbu bytů na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+                "relevant": false,
+                "reasonCz": "Upravuje odkazy a pravidla pro vodovody a kanalizace, bez doložené vazby na slíbenou bytovou výstavbu na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+                "relevant": false,
+                "reasonCz": "Mění správní poplatky za stavební a nestavební záměry, ale změny nejsou v balíčku propojeny s bydlením na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+                "relevant": false,
+                "reasonCz": "Upravuje povinné informační kontejnery pro stavby, nikoli konkrétní překážky bytové výstavby na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Ruší vybrané zákony a prováděcí vyhlášky, ale samo toto ustanovení nedokládá konkrétní změnu vztahující se k výstavbě bytů na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43202-1",
+                "relevant": false,
+                "reasonCz": "Rozpočet podporuje nájemní bydlení a pokračující program brownfieldů, ale nedokládá, že by prostředky na revitalizaci brownfieldů byly určeny na bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43207-1",
+                "relevant": false,
+                "reasonCz": "Rozpočet vyčleňuje prostředky na dostupné bydlení, avšak nepropojuje tuto podporu s výstavbou bytů na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43288-1",
+                "relevant": false,
+                "reasonCz": "Prodlužuje přechodné období stavebního zákona, ale text nedokládá, že by tato změna konkrétně odstraňovala překážky bytové výstavby na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-11",
+                "relevant": false,
+                "reasonCz": "Ruší některá pravidla o informačních kontejnerech, nikoli pravidla pro výstavbu bytů na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-1",
+                "relevant": false,
+                "reasonCz": "Předložené změny obecního zřízení se netýkají bytové výstavby na brownfieldech.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-6",
+                "relevant": false,
+                "reasonCz": "Předložené změny zákona o hlavním městě Praze upravují účast městských částí a svazky obcí, nikoli výstavbu bytů na brownfieldech.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "ano-2025-737424d257--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-8",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15"
+            ],
+            "explanationCz": "ANO předložilo poslanecký návrh novely stavebního zákona, který poslanci projednávali jako sněmovní tisk 67, a hlasovalo pro něj. Návrh zdůrazňuje bydlení a revitalizaci nevyužitých ploch a uvolňuje některé překážky při povolování záměrů v zastavitelném území. Senát návrh zamítl, ale 9. září Sněmovna setrvala na svém znění a poslanci ANO hlasovali pro toto rozhodnutí. Jde o ověřitelný posun k odstranění části překážek, nikoli o důkaz, že se byty na brownfieldech skutečně začaly stavět.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Předložené podklady dokládají legislativní krok k usnadnění výstavby, nikoli uskutečněnou výstavbu bytů na konkrétních brownfieldech; proto nelze doložit splnění celého slibu."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-737424d257",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změna stavebního zákona výslovně podporuje bydlení a revitalizaci nevyužitých ploch a upravuje povolování záměrů, takže může odstranit část překážek pro bytovou výstavbu na brownfieldech.",
+          "effectCz": "Dříve územní plánování mělo podporovat hospodárné využití zastavěného území zejména cílenou revitalizací znehodnocených nebo zanedbaných ploch; nově má preferovat co nejlepší a nejpestřejší využití zastavitelného území a vytvářet podmínky pro bydlení i revitalizaci nevyužitých ploch, což závazek k revitalizaci posiluje, ale samo o sobě nestanoví konkrétní bytovou výstavbu na brownfieldu. Nové pravidlo přednostně ukládá podmínky, kompenzační či zmírňující opatření před zákazem rozvoje; oproti dodanému dřívějšímu znění, které tuto výslovnou podmínku neobsahovalo, omezuje možnost záměr nepovolit. Nová úprava dále předpokládá přípustnost stavebního záměru v zastavitelném území, pokud odpovídá územnímu plánu a požadavkům na výstavbu, a stanoví, že některé environmentální podmínky, včetně krajinného rázu a odnětí zemědělské půdy, se v takto předem vymezeném území znovu neposuzují; jde o uvolnění povolovacích překážek. U stavby v prolukách se za stanovených okolností některé požadavky na výstavbu neuplatní a část požadavků lze splnit příspěvkem na společné řešení, což rovněž snižuje některé povinnosti, avšak podklady nedokládají, že se tato pravidla vztahují konkrétně na brownfieldy. Přesné srovnání některých nově upravených pojmů a dílčích ustanovení nelze z poskytnutého kontextu určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Změny zákona o ústředních orgánech mění působnost a organizační uspořádání státu, ale nedokládají věcnou změnu pravidel pro bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Úpravy předpisů požární ochrany se týkají požárních pravidel a posuzování staveb obecně; balíček je nespojuje s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Změny památkové péče upravují ochranu památek a postupy v chráněných územích, nikoli konkrétně výstavbu bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny zákona o geologických pracích se týkají vyjádření k záměrům a nejsou v balíčku propojeny s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změny ochrany přírody upravují pravidla pro druhy, chráněná území a orgány ochrany přírody, ale jejich text nepropojuje tato pravidla s brownfieldy ani bytovou výstavbou na nich.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny ochrany zemědělské půdy se týkají zejména povolování záměrů na zemědělské půdě a text je nespojuje s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": false,
+          "reasonCz": "Změny zákona o pozemních komunikacích převážně nahrazují pojmy zastavěného a zastavitelného území a nezavádějí pravidla pro bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Změna zákona o integrovaném záchranném systému upravuje související správní postupy, nikoli závazek k výstavbě bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Změny ochrany veřejného zdraví upravují správní úkony a hygienické požadavky obecně, bez doložené vazby na bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Změny energetického zákona upravují energetická zařízení, soustavy a související instituty, nikoli konkrétně výstavbu bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změny posuzování vlivů na životní prostředí upravují obecné postupy EIA a text je nespojuje s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona upravují vodní povolení a příslušné správní postupy obecně, bez doložené vazby na brownfieldy či bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Změny zákona o pozemkových úpravách upravují pozemkové úpravy a související pojmy, ale nepropojují je s výstavbou bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Změna zákona o vyvlastnění upravuje příslušnost vyvlastňovacích úřadů a sama neřeší odstranění překážek bytové výstavby na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změny zákona o ochraně ovzduší upravují stanoviska a správní postupy, nikoli konkrétně výstavbu bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Změna prevence závažných havárií se týká objektů s nebezpečnými látkami a bezpečnostních podmínek, nikoli závazku týkajícího se brownfieldů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změna zákona o odpadech upravuje posuzování nakládání s odpady při záměrech obecně, ale nespojuje je s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Změna zvláštních postupů pro Ukrajinu pouze upravuje pojem zastavitelného území v tomto zvláštním režimu a nedokládá vliv na bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+          "relevant": false,
+          "reasonCz": "Doplnění pravidla o dokumentaci zaměření dokončené stavby slouží zápisu údajů do digitální technické mapy a neřeší bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+          "relevant": false,
+          "reasonCz": "Změna zákona o hlavním městě Praze upravuje účast městských částí v řízeních, ale její text nepropojuje pravidlo s brownfieldy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Změna zákona o vodovodech a kanalizacích upravuje související pojmy a prováděcí předpis, nikoli výstavbu bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": false,
+          "reasonCz": "Změna správních poplatků upravuje poplatky za povolování staveb obecně, ale balíček ji nespojuje s konkrétními brownfieldy ani bytovou výstavbou na nich.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": false,
+          "reasonCz": "Změna zákona o správě informací o stavbě se týká informačních kontejnerů a dokumentace, nikoli věcných pravidel pro bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení ruší různé právní předpisy a jejich části, ale nedokládá konkrétní změnu pro bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu Státního fondu podpory investic popisuje pokračování podpory brownfieldů, ale jde mimo jiné o revitalizaci pro jiné než hospodářské využití a nedokládá financování bytové výstavby na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí uvádí podporu dostupného bydlení, ale nepropojuje ji s výstavbou bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": false,
+          "reasonCz": "Návrh prodlužuje přechodné období pro informační systémy stavební správy, ale text jej nespojuje s bytovou výstavbou na brownfieldech ani s odstraněním jejích překážek.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": false,
+          "reasonCz": "Změna zákona o správě informací o stavbě ruší vybrané požadavky na informační kontejnery, ale nedokládá spojení s výstavbou bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh upravuje rejstřík svazků obcí a jejich organizaci, nikoli pravidla pro bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Změna zákona o hlavním městě Praze se týká rejstříku svazků obcí a odměňování zastupitelů, bez doložené vazby na brownfieldy.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-737424d257--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími předkladateli navrhli změnu stavebního zákona, která výslovně podporuje revitalizaci nevyužitých ploch a bydlení. Poslanci ANO pak návrh schválili; poté, co jej Senát zamítl, Sněmovna na návrhu setrvala. Nová pravidla dávají přednost mírnějším podmínkám a opatřením před zákazem rozvoje a zjednodušují některé kroky při povolování v zastavitelném území. To posouvá slib k naplnění, ale doklady nepotvrzují, že už byly na brownfieldech postaveny byty.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček dokládá změny pravidel, nikoli konkrétní povolenou nebo dokončenou bytovou výstavbu na brownfieldu; nelze proto říci, že byly odblokovány konkrétní lokality.",
+        "Některá nová pravidla jsou obecná a dodané podklady neukazují, jak budou v praxi použita na jednotlivých zanedbaných či opuštěných pozemcích."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-737424d257",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Mění pravidla územního plánování a povolování výstavby a výslovně nově zdůrazňuje využívání nevyužitých území a revitalizaci zanedbaných ploch.",
+          "effectCz": "Dosavadní stavební zákon řadil mezi úkoly plánování hospodárné využívání zastavěného území a cílenou revitalizaci znehodnocených či zanedbaných ploch; nově zdůrazňuje co nejlepší využití zastavitelného území, rozvoj bydlení a revitalizaci nevyužitých ploch, což směřuje k většímu využití takových pozemků. Dříve se požadavky na výstavbu uplatňovaly za stanovených výjimek; nově zákon výslovně počítá s jejich technickou, funkční a ekonomickou proveditelností, připouští společné řešení některých požadavků příspěvkem obci a v určitých případech požadavky neuplatní, takže povolovací překážky zmírňuje. Změny tedy usnadňují využití nevyužitých a zanedbaných ploch pro výstavbu, ale samy nezajišťují, že na konkrétních brownfieldech vzniknou byty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Mění organizaci ústředních a krajských úřadů, ale text ji nespojuje s využitím zanedbaných pozemků ani s výstavbou bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Upravuje pravidla a působnost při požární ochraně staveb, nikoli využití brownfieldů pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Mění památkovou péči a posuzování záměrů v památkově chráněných územích, bez spojení s výstavbou bytů na zanedbaných pozemcích.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Mění postupy podle zákona o geologických pracích, ale neposkytuje pravidlo pro bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Upravuje ochranu přírody a krajinného rázu obecně a nedokládá konkrétní vazbu na zanedbané pozemky určené pro byty.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Mění ochranu zemědělského půdního fondu a pravidla pro odnětí půdy, nikoli pravidla pro využití brownfieldů k bytové výstavbě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": false,
+          "reasonCz": "Mění pojmy a pravidla týkající se pozemních komunikací, nikoli bytové výstavby na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Upravuje integrovaný záchranný systém a související postupy, které text nespojuje s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Mění hygienické požadavky a působnost úřadů, ale bez konkrétní vazby na využití zanedbaných pozemků pro bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Upravuje energetická pravidla a některé pojmy územního plánování, avšak text je nespojuje s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Mění posuzování vlivů na životní prostředí, ale nepředstavuje pravidlo zaměřené na výstavbu bytů na zanedbaných pozemcích.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Převádí některá vodoprávní rozhodnutí do řízení o záměru, ale text je nespojuje s brownfieldy ani s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Mění pravidla pozemkových úprav a pojmy zastavitelného území, ale nepropojuje je s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Mění příslušnost vyvlastňovacích úřadů, nikoli pravidla pro výstavbu bytů na zanedbaných pozemcích.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Upravuje povolování z hlediska ochrany ovzduší, bez doložené vazby na výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Mění pravidla prevence závažných havárií, ale nespojuje je s využitím zanedbaných pozemků pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Upravuje pravidla nakládání s odpady při záměrech, nikoli bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Mění zvláštní postupy související s válkou na Ukrajině, bez vazby na slibovanou bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+          "relevant": false,
+          "reasonCz": "Doplňuje pravidlo pro zápis údajů o dokončených stavbách do digitální technické mapy, ale neřeší dostupnost brownfieldů pro bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+          "relevant": false,
+          "reasonCz": "Mění některá pravidla hlavního města Prahy, ale text je nespojuje s výstavbou bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Mění pravidla pro vodovody a kanalizace, nikoli přímo využití zanedbaných pozemků pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": false,
+          "reasonCz": "Mění správní poplatky, ale nepředstavuje pravidlo navázané na výstavbu bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": false,
+          "reasonCz": "Upravuje informační modely a datové kontejnery staveb, bez konkrétní vazby na využití brownfieldů pro bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Ruší vyjmenované zákony a vyhlášky, ale změna sama nestanoví pravidlo pro výstavbu bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet pokračuje v podpoře programů brownfieldů, ale popisovaný program se zaměřuje na nehospodářské využití a nedokládá podporu bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet počítá s podporou dostupného bydlení, ale text nepropojuje tyto prostředky s výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": false,
+          "reasonCz": "Návrh prodlužuje přechodné období pro stavební informační systémy, ale neřeší využití zanedbaných pozemků pro bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": false,
+          "reasonCz": "Mění požadavky na informační kontejnery staveb, bez konkrétní vazby na bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Mění pravidla pro svazky obcí a jejich orgány, ale neobsahuje opatření spojené s výstavbou bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Mění pravidla hlavního města Prahy a městských částí, nikoli slibovanou výstavbu bytů na brownfieldech.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-737424d257--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími předkladateli navrhli změny stavebního zákona a po zamítnutí návrhu Senátem hlasovali pro to, aby na něm Poslanecká sněmovna setrvala. Změny mezi úkoly územního plánování výslovně řadí revitalizaci nevyužitých ploch a zdůrazňují rozvoj bydlení; zároveň v některých případech zmírňují požadavky na výstavbu. Jde tedy o právní krok, který může usnadnit využití zanedbaných pozemků, ale sám nedokládá, že na konkrétních brownfieldech vznikly byty. Proto je doložen jen částečný posun ke slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady dokládají návrh a hlasování, nikoli skutečnou výstavbu bytů na konkrétních brownfieldech; také neukazují, zda se změny po hlasování staly účinným právem."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_00fe2deb7b5580c7016ac53515990887d2885c9a1f7be7f080",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 788843,
+      "input_tokens_details": {
+        "cache_write_tokens": 784873,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 7554,
+      "output_tokens_details": {
+        "reasoning_tokens": 3721
+      },
+      "total_tokens": 796397
+    },
+    "output": {
+      "promiseId": "ano-2025-737424d257",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změna stavebního zákona výslovně podporuje bydlení a revitalizaci nevyužitých ploch a upravuje povolování záměrů, takže může odstranit část překážek pro bytovou výstavbu na brownfieldech.",
+          "effectCz": "Dříve územní plánování mělo podporovat hospodárné využití zastavěného území zejména cílenou revitalizací znehodnocených nebo zanedbaných ploch; nově má preferovat co nejlepší a nejpestřejší využití zastavitelného území a vytvářet podmínky pro bydlení i revitalizaci nevyužitých ploch, což závazek k revitalizaci posiluje, ale samo o sobě nestanoví konkrétní bytovou výstavbu na brownfieldu. Nové pravidlo přednostně ukládá podmínky, kompenzační či zmírňující opatření před zákazem rozvoje; oproti dodanému dřívějšímu znění, které tuto výslovnou podmínku neobsahovalo, omezuje možnost záměr nepovolit. Nová úprava dále předpokládá přípustnost stavebního záměru v zastavitelném území, pokud odpovídá územnímu plánu a požadavkům na výstavbu, a stanoví, že některé environmentální podmínky, včetně krajinného rázu a odnětí zemědělské půdy, se v takto předem vymezeném území znovu neposuzují; jde o uvolnění povolovacích překážek. U stavby v prolukách se za stanovených okolností některé požadavky na výstavbu neuplatní a část požadavků lze splnit příspěvkem na společné řešení, což rovněž snižuje některé povinnosti, avšak podklady nedokládají, že se tato pravidla vztahují konkrétně na brownfieldy. Přesné srovnání některých nově upravených pojmů a dílčích ustanovení nelze z poskytnutého kontextu určit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Změny zákona o ústředních orgánech mění působnost a organizační uspořádání státu, ale nedokládají věcnou změnu pravidel pro bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Úpravy předpisů požární ochrany se týkají požárních pravidel a posuzování staveb obecně; balíček je nespojuje s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Změny památkové péče upravují ochranu památek a postupy v chráněných územích, nikoli konkrétně výstavbu bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny zákona o geologických pracích se týkají vyjádření k záměrům a nejsou v balíčku propojeny s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změny ochrany přírody upravují pravidla pro druhy, chráněná území a orgány ochrany přírody, ale jejich text nepropojuje tato pravidla s brownfieldy ani bytovou výstavbou na nich.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny ochrany zemědělské půdy se týkají zejména povolování záměrů na zemědělské půdě a text je nespojuje s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": false,
+          "reasonCz": "Změny zákona o pozemních komunikacích převážně nahrazují pojmy zastavěného a zastavitelného území a nezavádějí pravidla pro bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Změna zákona o integrovaném záchranném systému upravuje související správní postupy, nikoli závazek k výstavbě bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Změny ochrany veřejného zdraví upravují správní úkony a hygienické požadavky obecně, bez doložené vazby na bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Změny energetického zákona upravují energetická zařízení, soustavy a související instituty, nikoli konkrétně výstavbu bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změny posuzování vlivů na životní prostředí upravují obecné postupy EIA a text je nespojuje s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona upravují vodní povolení a příslušné správní postupy obecně, bez doložené vazby na brownfieldy či bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Změny zákona o pozemkových úpravách upravují pozemkové úpravy a související pojmy, ale nepropojují je s výstavbou bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Změna zákona o vyvlastnění upravuje příslušnost vyvlastňovacích úřadů a sama neřeší odstranění překážek bytové výstavby na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změny zákona o ochraně ovzduší upravují stanoviska a správní postupy, nikoli konkrétně výstavbu bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Změna prevence závažných havárií se týká objektů s nebezpečnými látkami a bezpečnostních podmínek, nikoli závazku týkajícího se brownfieldů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změna zákona o odpadech upravuje posuzování nakládání s odpady při záměrech obecně, ale nespojuje je s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Změna zvláštních postupů pro Ukrajinu pouze upravuje pojem zastavitelného území v tomto zvláštním režimu a nedokládá vliv na bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+          "relevant": false,
+          "reasonCz": "Doplnění pravidla o dokumentaci zaměření dokončené stavby slouží zápisu údajů do digitální technické mapy a neřeší bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+          "relevant": false,
+          "reasonCz": "Změna zákona o hlavním městě Praze upravuje účast městských částí v řízeních, ale její text nepropojuje pravidlo s brownfieldy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Změna zákona o vodovodech a kanalizacích upravuje související pojmy a prováděcí předpis, nikoli výstavbu bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": false,
+          "reasonCz": "Změna správních poplatků upravuje poplatky za povolování staveb obecně, ale balíček ji nespojuje s konkrétními brownfieldy ani bytovou výstavbou na nich.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": false,
+          "reasonCz": "Změna zákona o správě informací o stavbě se týká informačních kontejnerů a dokumentace, nikoli věcných pravidel pro bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení ruší různé právní předpisy a jejich části, ale nedokládá konkrétní změnu pro bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu Státního fondu podpory investic popisuje pokračování podpory brownfieldů, ale jde mimo jiné o revitalizaci pro jiné než hospodářské využití a nedokládá financování bytové výstavby na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí uvádí podporu dostupného bydlení, ale nepropojuje ji s výstavbou bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": false,
+          "reasonCz": "Návrh prodlužuje přechodné období pro informační systémy stavební správy, ale text jej nespojuje s bytovou výstavbou na brownfieldech ani s odstraněním jejích překážek.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": false,
+          "reasonCz": "Změna zákona o správě informací o stavbě ruší vybrané požadavky na informační kontejnery, ale nedokládá spojení s výstavbou bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh upravuje rejstřík svazků obcí a jejich organizaci, nikoli pravidla pro bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Změna zákona o hlavním městě Praze se týká rejstříku svazků obcí a odměňování zastupitelů, bez doložené vazby na brownfieldy.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-737424d257--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími předkladateli navrhli změnu stavebního zákona, která výslovně podporuje revitalizaci nevyužitých ploch a bydlení. Poslanci ANO pak návrh schválili; poté, co jej Senát zamítl, Sněmovna na návrhu setrvala. Nová pravidla dávají přednost mírnějším podmínkám a opatřením před zákazem rozvoje a zjednodušují některé kroky při povolování v zastavitelném území. To posouvá slib k naplnění, ale doklady nepotvrzují, že už byly na brownfieldech postaveny byty.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček dokládá změny pravidel, nikoli konkrétní povolenou nebo dokončenou bytovou výstavbu na brownfieldu; nelze proto říci, že byly odblokovány konkrétní lokality.",
+        "Některá nová pravidla jsou obecná a dodané podklady neukazují, jak budou v praxi použita na jednotlivých zanedbaných či opuštěných pozemcích."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0548861ba8f25140016ac53647555887d2871145b1c0584bc8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 788843,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 788840
+      },
+      "output_tokens": 8920,
+      "output_tokens_details": {
+        "reasoning_tokens": 5646
+      },
+      "total_tokens": 797763
+    },
+    "output": {
+      "promiseId": "ano-2025-737424d257",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Mění pravidla územního plánování a povolování výstavby a výslovně nově zdůrazňuje využívání nevyužitých území a revitalizaci zanedbaných ploch.",
+          "effectCz": "Dosavadní stavební zákon řadil mezi úkoly plánování hospodárné využívání zastavěného území a cílenou revitalizaci znehodnocených či zanedbaných ploch; nově zdůrazňuje co nejlepší využití zastavitelného území, rozvoj bydlení a revitalizaci nevyužitých ploch, což směřuje k většímu využití takových pozemků. Dříve se požadavky na výstavbu uplatňovaly za stanovených výjimek; nově zákon výslovně počítá s jejich technickou, funkční a ekonomickou proveditelností, připouští společné řešení některých požadavků příspěvkem obci a v určitých případech požadavky neuplatní, takže povolovací překážky zmírňuje. Změny tedy usnadňují využití nevyužitých a zanedbaných ploch pro výstavbu, ale samy nezajišťují, že na konkrétních brownfieldech vzniknou byty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Mění organizaci ústředních a krajských úřadů, ale text ji nespojuje s využitím zanedbaných pozemků ani s výstavbou bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Upravuje pravidla a působnost při požární ochraně staveb, nikoli využití brownfieldů pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Mění památkovou péči a posuzování záměrů v památkově chráněných územích, bez spojení s výstavbou bytů na zanedbaných pozemcích.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Mění postupy podle zákona o geologických pracích, ale neposkytuje pravidlo pro bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Upravuje ochranu přírody a krajinného rázu obecně a nedokládá konkrétní vazbu na zanedbané pozemky určené pro byty.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Mění ochranu zemědělského půdního fondu a pravidla pro odnětí půdy, nikoli pravidla pro využití brownfieldů k bytové výstavbě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-15",
+          "relevant": false,
+          "reasonCz": "Mění pojmy a pravidla týkající se pozemních komunikací, nikoli bytové výstavby na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Upravuje integrovaný záchranný systém a související postupy, které text nespojuje s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Mění hygienické požadavky a působnost úřadů, ale bez konkrétní vazby na využití zanedbaných pozemků pro bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Upravuje energetická pravidla a některé pojmy územního plánování, avšak text je nespojuje s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Mění posuzování vlivů na životní prostředí, ale nepředstavuje pravidlo zaměřené na výstavbu bytů na zanedbaných pozemcích.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Převádí některá vodoprávní rozhodnutí do řízení o záměru, ale text je nespojuje s brownfieldy ani s bytovou výstavbou.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Mění pravidla pozemkových úprav a pojmy zastavitelného území, ale nepropojuje je s bytovou výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": false,
+          "reasonCz": "Mění příslušnost vyvlastňovacích úřadů, nikoli pravidla pro výstavbu bytů na zanedbaných pozemcích.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Upravuje povolování z hlediska ochrany ovzduší, bez doložené vazby na výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Mění pravidla prevence závažných havárií, ale nespojuje je s využitím zanedbaných pozemků pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Upravuje pravidla nakládání s odpady při záměrech, nikoli bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Mění zvláštní postupy související s válkou na Ukrajině, bez vazby na slibovanou bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+          "relevant": false,
+          "reasonCz": "Doplňuje pravidlo pro zápis údajů o dokončených stavbách do digitální technické mapy, ale neřeší dostupnost brownfieldů pro bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-23",
+          "relevant": false,
+          "reasonCz": "Mění některá pravidla hlavního města Prahy, ale text je nespojuje s výstavbou bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Mění pravidla pro vodovody a kanalizace, nikoli přímo využití zanedbaných pozemků pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-38",
+          "relevant": false,
+          "reasonCz": "Mění správní poplatky, ale nepředstavuje pravidlo navázané na výstavbu bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": false,
+          "reasonCz": "Upravuje informační modely a datové kontejnery staveb, bez konkrétní vazby na využití brownfieldů pro bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Ruší vyjmenované zákony a vyhlášky, ale změna sama nestanoví pravidlo pro výstavbu bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43202-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet pokračuje v podpoře programů brownfieldů, ale popisovaný program se zaměřuje na nehospodářské využití a nedokládá podporu bytové výstavby.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet počítá s podporou dostupného bydlení, ale text nepropojuje tyto prostředky s výstavbou na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": false,
+          "reasonCz": "Návrh prodlužuje přechodné období pro stavební informační systémy, ale neřeší využití zanedbaných pozemků pro bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": false,
+          "reasonCz": "Mění požadavky na informační kontejnery staveb, bez konkrétní vazby na bytovou výstavbu na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-1",
+          "relevant": false,
+          "reasonCz": "Mění pravidla pro svazky obcí a jejich orgány, ale neobsahuje opatření spojené s výstavbou bytů na brownfieldech.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Mění pravidla hlavního města Prahy a městských částí, nikoli slibovanou výstavbu bytů na brownfieldech.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-737424d257--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími předkladateli navrhli změny stavebního zákona a po zamítnutí návrhu Senátem hlasovali pro to, aby na něm Poslanecká sněmovna setrvala. Změny mezi úkoly územního plánování výslovně řadí revitalizaci nevyužitých ploch a zdůrazňují rozvoj bydlení; zároveň v některých případech zmírňují požadavky na výstavbu. Jde tedy o právní krok, který může usnadnit využití zanedbaných pozemků, ale sám nedokládá, že na konkrétních brownfieldech vznikly byty. Proto je doložen jen částečný posun ke slibu.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady dokládají návrh a hlasování, nikoli skutečnou výstavbu bytů na konkrétních brownfieldech; také neukazují, zda se změny po hlasování staly účinným právem."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,793 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-40-09-657Z--6df35d217b21",
+  "evaluatedAt": "2026-10-02T05:40:09.657Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-7c06e60aa6/6df35d217b21b6ef72488a1927919a242c10b2ca590e45feb4b108c09a7e7d07.json",
+  "packageHash": "6df35d217b21b6ef72488a1927919a242c10b2ca590e45feb4b108c09a7e7d07",
+  "assessmentContentHash": "d828b5831b5703945c610270a69b0d81873f5f4b05d6ce2bb0496d4c931d7c65",
+  "assessmentFingerprint": "c6ca622a139ef2f5df11c7b2f13001be4828ba088440e655fd92e33bed4dac09",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-7c06e60aa6",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_03bb90b5363a3957016abf4313e3dc87d193a43fd107816997",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 759177,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 759174
+            },
+            "output_tokens": 13348,
+            "output_tokens_details": {
+              "reasoning_tokens": 10765
+            },
+            "total_tokens": 772525
+          },
+          "output": {
+            "promiseId": "motoriste-2025-7c06e60aa6",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43132-1",
+                "relevant": false,
+                "reasonCz": "Změny upravují elektronické zpracování návrhů právních předpisů a rozpočtových zákonů, nikoli centralizaci státní digitální infrastruktury nebo umístění občanských dat."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43161-1",
+                "relevant": true,
+                "reasonCz": "Návrh zavádí národní katalog dat, který propojuje popisy dat z informačních systémů veřejné správy, a tím upravuje dílčí část státní datové infrastruktury."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Schválený text výslovně umožňuje sloučit informační systémy stavební správy a vést je jako jeden společný systém, což je konkrétní dílčí krok k centralizaci."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": false,
+                "reasonCz": "Tato část mění nakládání s odpady a příslušnost stavebních úřadů, nikoli digitální infrastrukturu nebo ukládání občanských dat."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-3",
+                "relevant": true,
+                "reasonCz": "Původní návrh vytvářel informační systém pro evidenci pracovních míst a úřednických zkoušek, tedy jednu úzce vymezenou část státní digitální infrastruktury."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+                "relevant": true,
+                "reasonCz": "Schválený text umožňuje centrální evidenci organizačních struktur a obsazovaných pracovních míst státních zaměstnanců, což se týká dílčí části státní digitální infrastruktury."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-1",
+                "relevant": true,
+                "reasonCz": "Schválené změny pracují s informačním systémem podpory bydlení a elektronickým vedením souvisejících údajů, tedy s dílčí státní digitální službou."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-1",
+                "relevant": true,
+                "reasonCz": "Schválené změny zavádějí elektronické podávání a elektronické vedení spisu u části dávek, což je konkrétní dílčí součást digitalizace státní správy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-2",
+                "relevant": false,
+                "reasonCz": "Text ruší dřívější novelizační body, ale neuvádí, jaké konkrétní digitální systémy nebo pravidla tyto body mění, takže jejich dopad na slib nelze doložit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-14",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje obecná procesní pravidla pro cizinecká řízení, nikoli centralizaci digitální infrastruktury nebo umístění dat."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-16",
+                "relevant": false,
+                "reasonCz": "Tato část stanoví povinnosti a přestupky související s pobytem cizinců, ale sama neupravuje vznik ani centralizaci informační infrastruktury."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-17",
+                "relevant": true,
+                "reasonCz": "Návrh zřizuje integrovaný informační systém pro cizineckou agendu a digitální účty, tedy konkrétní část státní digitální infrastruktury."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-19",
+                "relevant": true,
+                "reasonCz": "Přechodná ustanovení přímo upravují spuštění a přechod na integrovaný cizinecký informační systém."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": true,
+                "reasonCz": "Návrh upravuje elektronická potvrzení údajů a jejich ověřování pro digitální peněženku, což je dílčí součást státní digitální infrastruktury."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-2",
+                "relevant": true,
+                "reasonCz": "Návrh upravuje elektronickou identifikaci prostřednictvím digitální peněženky a úlohy Agentury při jejím zajištění."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-1",
+                "relevant": false,
+                "reasonCz": "Změny cestovních dokladů upravují hlavně jejich vydávání, evidenci a předávání, ale nedokládají centralizaci státní digitální infrastruktury ani ukládání dat v ČR."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-2",
+                "relevant": false,
+                "reasonCz": "Změny občanských průkazů upravují jejich vydávání a předávání, nikoli centralizaci státní digitální infrastruktury nebo umístění dat."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-4",
+                "relevant": false,
+                "reasonCz": "Návrh odstraňuje z registru obyvatel některé údaje pro elektronickou identifikaci, ale text nedokládá, že by tím občanská data opouštěla ČR nebo se rušila jejich centralizace."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-1",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje dočasnou ochranu a registraci vozidel, nikoli centralizaci státní digitální infrastruktury nebo ukládání dat občanů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43395-1",
+                "relevant": true,
+                "reasonCz": "Návrh výslovně svěřuje správu informačního systému základního modelu vystavěného prostředí centrálnímu úřadu, což se týká dílčí státní datové infrastruktury."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43415-1",
+                "relevant": false,
+                "reasonCz": "Návrh upravuje registraci a technický provoz vozidel, nikoli centralizaci státní digitální infrastruktury nebo umístění občanských dat."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "motoriste-2025-7c06e60aa6--source",
+              "psp-core-2025--law-change-43161-1",
+              "psp-core-2025--vote-86767",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--law-change-43183-3",
+              "psp-core-2025--law-change-43183-approved-3",
+              "psp-core-2025--print-step-210647",
+              "psp-core-2025--vote-87958",
+              "psp-core-2025--vote-88449",
+              "psp-core-2025--law-change-43189-1",
+              "psp-core-2025--print-step-210686",
+              "psp-core-2025--vote-87617",
+              "psp-core-2025--law-change-43239-1",
+              "psp-core-2025--vote-87387",
+              "psp-core-2025--law-change-43264-17",
+              "psp-core-2025--law-change-43264-19",
+              "psp-core-2025--print-step-211048",
+              "psp-core-2025--vote-88522",
+              "psp-core-2025--law-change-43275-1",
+              "psp-core-2025--law-change-43275-2",
+              "psp-core-2025--print-step-211101",
+              "psp-core-2025--law-change-43395-1",
+              "psp-core-2025--print-step-211959"
+            ],
+            "explanationCz": "Nejnovější rozhodující hlasování se týkalo vládního návrhu cizineckého zákona, tedy předpisu upravujícího pobyt cizinců (sněmovní tisk 144). Schválený text vytváří integrovaný státní informační systém pro cizineckou agendu, ale při konečném hlasování 11. září 2026 hlasovalo pro návrh jen šest ze třinácti poslanců Motoristů, takže klub neposkytl potřebnou většinu. Šlo o dílčí krok v centralizaci, a jeho nepodpoření proto znamená směřování proti části slibu. Dříve poslanci strany hlasovali pro změnu stavebního zákona, která umožňuje sloučit informační systémy stavební správy a provozovat je jako jeden společný systém. Strana také podpořila další návrhy týkající se státních datových katalogů a digitálních služeb.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Doklady se týkají především jednotlivých státních informačních systémů; neukazují, zda jsou všechna data občanů skutečně ukládána v České republice ani zda byla centralizace napříč státem dokončena.",
+              "Kromě pozdějšího nedostatečného počtu hlasů pro cizinecký zákon existují i podpůrné kroky: poslanci Motoristů hlasovali pro změnu stavebního zákona se společným informačním systémem a pro jiné dílčí digitální návrhy."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-7c06e60aa6",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43132-1",
+          "relevant": false,
+          "reasonCz": "Změna pravidel pro elektronické vyhlašování právních předpisů neupravuje centralizaci státní digitální infrastruktury ani umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Zřizuje národní katalog dat, který propojuje místní katalogy a datové slovníky veřejné správy, což představuje dílčí krok k propojenější správě státních dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení schváleného znění dovoluje sdružit více informačních systémů veřejné správy do jednoho společného systému, tedy centralizovat alespoň jejich část."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla odpadového hospodářství a neřeší centralizaci státní digitální infrastruktury ani uložení občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-3",
+          "relevant": false,
+          "reasonCz": "Navržený systém se týkal personálních údajů státních zaměstnanců a byl ze schváleného znění odstraněn; neřeší slibované občanské údaje ani centralizaci infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+          "relevant": false,
+          "reasonCz": "Schválená část upravuje působnost v oblasti státní služby, ale necentralizuje digitální infrastrukturu ani nestanoví ukládání občanských dat v ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Změny podpory bydlení se netýkají centralizace státní digitální infrastruktury ani umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje rodičovský příspěvek a příslušná řízení, nikoli centralizaci státní digitální infrastruktury nebo ukládání občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Změna souvisejícího zákona o dávkách neobsahuje opatření, které by centralizovalo státní digitální infrastrukturu nebo určovalo umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Procesní pravidla pro cizinecké řízení sama o sobě neslučují informační systémy ani neurčují, kde se ukládají občanská data."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje povinnosti a přestupky, nikoli centralizaci digitální infrastruktury nebo ukládání dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Zřizuje integrovaný informační systém pro cizineckou agendu a elektronické úkony, čímž se týká dílčí centralizace státní digitální infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": true,
+          "reasonCz": "Upravuje přechod na nový integrovaný cizinecký systém a jeho účty, takže je součástí zavádění této dílčí státní digitální infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": false,
+          "reasonCz": "Navrhuje pravidla pro elektronická potvrzení a digitální peněženku, nikoli centralizaci státní infrastruktury nebo uložení občanských dat v ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": false,
+          "reasonCz": "Změny elektronické identifikace umožňují nové digitální ověřování, ale necentralizují státní infrastrukturu ani neurčují umístění dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Úprava vydávání cestovních dokladů se netýká centralizace státní digitální infrastruktury ani ukládání všech občanských dat v ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": false,
+          "reasonCz": "Změny občanských průkazů upravují jejich vydávání a evidenci, nikoli centralizaci digitální infrastruktury státu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Změna pravidel základních registrů odstraňuje některé údaje pro elektronickou identifikaci, ale netýká se slibované centralizace infrastruktury ani umístění všech občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje dočasnou ochranu a evidenci ukrajinských vozidel, nikoli centralizaci státní digitální infrastruktury či uložení občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": false,
+          "reasonCz": "Navrhovaná organizační změna zeměměřických orgánů a správa digitální mapy veřejné správy nesměřují k centralizaci infrastruktury občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Změny evidence silničních vozidel a technických prohlídek nesměřují k centralizaci digitální infrastruktury státu ani k ukládání občanských dat v ČR."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-7c06e60aa6--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--law-change-43264-19",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili novelu stavebního zákona, tedy pravidel pro povolování staveb; její schválené znění umožňuje sloučit více informačních systémů veřejné správy do jednoho a strana ji po vrácení Senátem znovu podpořila. Strana podpořila také zákon o správě dat, který zřizuje národní katalog propojující katalogy a datové slovníky veřejné správy. Nový cizinecký zákon vytváří integrovaný informační systém pro cizineckou agendu, ale pro něj hlasovalo jen 6 z 13 poslanců Motoristů, tedy méně než potřebná většina klubu. Proto nejnovější rozhodné hlasování znamená nepodpoření opatření, které přináší jen dílčí krok k centralizaci.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dřívější podpora novely stavebního zákona a zákona o správě dat jde směrem k dílčí centralizaci, zatímco při hlasování o cizineckém zákoně klub Motoristů nezískal většinu pro. Podle pravidla rozhoduje novější hlasování o cizineckém zákoně.",
+        "Žádný z poskytnutých návrhů výslovně neurčuje, že všechna data občanů musí být ukládána v ČR; zákon o správě dat upravuje katalogy a správu dat, nikoli místo jejich fyzického uložení."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-7c06e60aa6",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43132-1",
+          "relevant": false,
+          "reasonCz": "Upravuje výjimky a přechodná pravidla pro elektronickou tvorbu a vyhlašování právních předpisů, nikoli centralizaci digitální infrastruktury státu ani ukládání občanských dat v ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Zavádí národní katalog dat a propojuje popisy dat veřejné správy, což může přispět k centralizaci správy státních dat, byť neřeší jejich umístění v ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Upravuje digitální infrastrukturu veřejné správy a výslovně umožňuje spojit více informačních systémů do jednoho společného systému."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Mění nakládání s odpady při povolování staveb, ale neřeší centralizaci informačních systémů ani ukládání občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-3",
+          "relevant": false,
+          "reasonCz": "Navrhovaný systém evidoval pracovní místa a služební poměry zaměstnanců správních úřadů, nikoli občanská data nebo obecnou státní digitální infrastrukturu; v textu schváleném Sněmovnou byla tato část odstraněna."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+          "relevant": false,
+          "reasonCz": "Schválená část umožňuje systémy pro personální agendu správních úřadů, ale neřeší centralizaci obecné digitální infrastruktury státu ani data občanů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Mění pravidla podpory bydlení a související správní postupy, ale nepředkládá věcnou úpravu centralizace státních systémů nebo umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": false,
+          "reasonCz": "Mění pravidla rodičovského příspěvku a jeho elektronického vyřizování, ale neukládá propojení státních systémů ani umístění dat v ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Ruší vybraná přechodná ustanovení k digitalizaci dávek, ale neurčuje centralizaci digitální infrastruktury státu ani umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Upravuje procesní pravidla řízení podle cizineckého zákona, nikoli centralizaci digitální infrastruktury nebo umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": false,
+          "reasonCz": "Stanovuje povinnosti cizinců a související přestupky, ale neřeší centralizaci státních informačních systémů ani umístění dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Vytváří integrovaný cizinecký agendový systém pro digitální služby, podání a související záznamy, tedy konkrétní část státní digitální infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": false,
+          "reasonCz": "Obsahuje přechodná a závěrečná pravidla k novému cizineckému zákonu, nikoli konkrétní úpravu centralizace systémů nebo umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Zavádí pravidla pro digitální potvrzení atributů a jejich využití prostřednictvím evropské digitální peněženky, což je dílčí součást digitální infrastruktury veřejné správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje možnosti elektronické identifikace prostřednictvím digitální peněženky, což může tvořit část státní digitální infrastruktury, přestože neřeší umístění dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Upravuje vydávání a správu cestovních dokladů, ale nepředkládá změnu týkající se centralizace digitální infrastruktury nebo uložení dat v ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": false,
+          "reasonCz": "Upravuje občanské průkazy a související agendu, ale text nestanoví centralizaci systémů ani místo ukládání občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Odstraňuje vybrané autentizační údaje ze základních registrů, ale neříká, že by občanská data byla přesunuta mimo ČR, ani neurčuje celkovou míru centralizace infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Zavádí pravidla týkající se dočasné ochrany a vozidel se značkou Ukrajiny, nikoli centralizaci státní digitální infrastruktury nebo umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": true,
+          "reasonCz": "Převádí správu informačního systému digitální mapy veřejné správy a systému základního modelu vystavěného prostředí na ústřední úřad, což je dílčí krok k centralizaci státních systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Mění registraci a provoz silničních vozidel a postupy technických kontrol, ale neřeší centralizaci digitální infrastruktury ani umístění občanských dat."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-7c06e60aa6--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43395-1",
+        "psp-core-2025--print-step-211959"
+      ],
+      "explanationCz": "Motoristé slíbili dokončit centralizaci digitální infrastruktury státu a ukládat všechna data občanů v ČR. Poslanci strany podpořili novelu stavebního zákona, tedy zákona upravujícího povolování staveb, která umožňuje spojovat více informačních systémů do jednoho společného; podpořili také zákon o správě dat, jenž zavádí národní katalog dat. Vláda navíc předložila návrhy na digitální identitu a správu digitálních map, což jsou dílčí kroky, nikoli splnění celého slibu. Při konečném hlasování Poslanecké sněmovny, dolní komory Parlamentu, o zákoně o vstupu a pobytu cizinců, který vytváří integrovaný informační systém pro cizineckou agendu, hlasovalo pro jen 6 z 13 poslanců Motoristů; návrh přesto Sněmovna přijala. Nejnovější rozhodné jednání tak znamená nepodpoření opatření přispívajícího k části slibu, přičemž dostupné důkazy neukazují, zda jsou všechna občanská data ukládána v ČR.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Motoristé dříve většinově podpořili stavební zákon, který umožňuje spojovat informační systémy, ale u pozdějšího zákona zavádějícího integrovaný cizinecký systém jejich poslanci většinovou podporu nevyjádřili; obě jednání jsou proto v důkazech zachována.",
+        "Důkazy popisují kroky k centralizaci některých státních systémů, ale neprokazují, zda a kde se ukládají všechna data občanů."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_09df1bff7f6c375b016abf42d1b1c487d18c917f98cd99970e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 759177,
+      "input_tokens_details": {
+        "cache_write_tokens": 755853,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 9449,
+      "output_tokens_details": {
+        "reasoning_tokens": 7428
+      },
+      "total_tokens": 768626
+    },
+    "output": {
+      "promiseId": "motoriste-2025-7c06e60aa6",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43132-1",
+          "relevant": false,
+          "reasonCz": "Změna pravidel pro elektronické vyhlašování právních předpisů neupravuje centralizaci státní digitální infrastruktury ani umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Zřizuje národní katalog dat, který propojuje místní katalogy a datové slovníky veřejné správy, což představuje dílčí krok k propojenější správě státních dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Ustanovení schváleného znění dovoluje sdružit více informačních systémů veřejné správy do jednoho společného systému, tedy centralizovat alespoň jejich část."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla odpadového hospodářství a neřeší centralizaci státní digitální infrastruktury ani uložení občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-3",
+          "relevant": false,
+          "reasonCz": "Navržený systém se týkal personálních údajů státních zaměstnanců a byl ze schváleného znění odstraněn; neřeší slibované občanské údaje ani centralizaci infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+          "relevant": false,
+          "reasonCz": "Schválená část upravuje působnost v oblasti státní služby, ale necentralizuje digitální infrastrukturu ani nestanoví ukládání občanských dat v ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Změny podpory bydlení se netýkají centralizace státní digitální infrastruktury ani umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje rodičovský příspěvek a příslušná řízení, nikoli centralizaci státní digitální infrastruktury nebo ukládání občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Změna souvisejícího zákona o dávkách neobsahuje opatření, které by centralizovalo státní digitální infrastrukturu nebo určovalo umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Procesní pravidla pro cizinecké řízení sama o sobě neslučují informační systémy ani neurčují, kde se ukládají občanská data."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje povinnosti a přestupky, nikoli centralizaci digitální infrastruktury nebo ukládání dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Zřizuje integrovaný informační systém pro cizineckou agendu a elektronické úkony, čímž se týká dílčí centralizace státní digitální infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": true,
+          "reasonCz": "Upravuje přechod na nový integrovaný cizinecký systém a jeho účty, takže je součástí zavádění této dílčí státní digitální infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": false,
+          "reasonCz": "Navrhuje pravidla pro elektronická potvrzení a digitální peněženku, nikoli centralizaci státní infrastruktury nebo uložení občanských dat v ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": false,
+          "reasonCz": "Změny elektronické identifikace umožňují nové digitální ověřování, ale necentralizují státní infrastrukturu ani neurčují umístění dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Úprava vydávání cestovních dokladů se netýká centralizace státní digitální infrastruktury ani ukládání všech občanských dat v ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": false,
+          "reasonCz": "Změny občanských průkazů upravují jejich vydávání a evidenci, nikoli centralizaci digitální infrastruktury státu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Změna pravidel základních registrů odstraňuje některé údaje pro elektronickou identifikaci, ale netýká se slibované centralizace infrastruktury ani umístění všech občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje dočasnou ochranu a evidenci ukrajinských vozidel, nikoli centralizaci státní digitální infrastruktury či uložení občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": false,
+          "reasonCz": "Navrhovaná organizační změna zeměměřických orgánů a správa digitální mapy veřejné správy nesměřují k centralizaci infrastruktury občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Změny evidence silničních vozidel a technických prohlídek nesměřují k centralizaci digitální infrastruktury státu ani k ukládání občanských dat v ČR."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-7c06e60aa6--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--law-change-43264-19",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili novelu stavebního zákona, tedy pravidel pro povolování staveb; její schválené znění umožňuje sloučit více informačních systémů veřejné správy do jednoho a strana ji po vrácení Senátem znovu podpořila. Strana podpořila také zákon o správě dat, který zřizuje národní katalog propojující katalogy a datové slovníky veřejné správy. Nový cizinecký zákon vytváří integrovaný informační systém pro cizineckou agendu, ale pro něj hlasovalo jen 6 z 13 poslanců Motoristů, tedy méně než potřebná většina klubu. Proto nejnovější rozhodné hlasování znamená nepodpoření opatření, které přináší jen dílčí krok k centralizaci.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dřívější podpora novely stavebního zákona a zákona o správě dat jde směrem k dílčí centralizaci, zatímco při hlasování o cizineckém zákoně klub Motoristů nezískal většinu pro. Podle pravidla rozhoduje novější hlasování o cizineckém zákoně.",
+        "Žádný z poskytnutých návrhů výslovně neurčuje, že všechna data občanů musí být ukládána v ČR; zákon o správě dat upravuje katalogy a správu dat, nikoli místo jejich fyzického uložení."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0ad05c654335aada016abf436ddcc887d1a74b0acb8c921109",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 759177,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 759174
+      },
+      "output_tokens": 11728,
+      "output_tokens_details": {
+        "reasoning_tokens": 9493
+      },
+      "total_tokens": 770905
+    },
+    "output": {
+      "promiseId": "motoriste-2025-7c06e60aa6",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43132-1",
+          "relevant": false,
+          "reasonCz": "Upravuje výjimky a přechodná pravidla pro elektronickou tvorbu a vyhlašování právních předpisů, nikoli centralizaci digitální infrastruktury státu ani ukládání občanských dat v ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Zavádí národní katalog dat a propojuje popisy dat veřejné správy, což může přispět k centralizaci správy státních dat, byť neřeší jejich umístění v ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Upravuje digitální infrastrukturu veřejné správy a výslovně umožňuje spojit více informačních systémů do jednoho společného systému."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Mění nakládání s odpady při povolování staveb, ale neřeší centralizaci informačních systémů ani ukládání občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-3",
+          "relevant": false,
+          "reasonCz": "Navrhovaný systém evidoval pracovní místa a služební poměry zaměstnanců správních úřadů, nikoli občanská data nebo obecnou státní digitální infrastrukturu; v textu schváleném Sněmovnou byla tato část odstraněna."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43183-approved-3",
+          "relevant": false,
+          "reasonCz": "Schválená část umožňuje systémy pro personální agendu správních úřadů, ale neřeší centralizaci obecné digitální infrastruktury státu ani data občanů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Mění pravidla podpory bydlení a související správní postupy, ale nepředkládá věcnou úpravu centralizace státních systémů nebo umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": false,
+          "reasonCz": "Mění pravidla rodičovského příspěvku a jeho elektronického vyřizování, ale neukládá propojení státních systémů ani umístění dat v ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Ruší vybraná přechodná ustanovení k digitalizaci dávek, ale neurčuje centralizaci digitální infrastruktury státu ani umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Upravuje procesní pravidla řízení podle cizineckého zákona, nikoli centralizaci digitální infrastruktury nebo umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": false,
+          "reasonCz": "Stanovuje povinnosti cizinců a související přestupky, ale neřeší centralizaci státních informačních systémů ani umístění dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Vytváří integrovaný cizinecký agendový systém pro digitální služby, podání a související záznamy, tedy konkrétní část státní digitální infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": false,
+          "reasonCz": "Obsahuje přechodná a závěrečná pravidla k novému cizineckému zákonu, nikoli konkrétní úpravu centralizace systémů nebo umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Zavádí pravidla pro digitální potvrzení atributů a jejich využití prostřednictvím evropské digitální peněženky, což je dílčí součást digitální infrastruktury veřejné správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje možnosti elektronické identifikace prostřednictvím digitální peněženky, což může tvořit část státní digitální infrastruktury, přestože neřeší umístění dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Upravuje vydávání a správu cestovních dokladů, ale nepředkládá změnu týkající se centralizace digitální infrastruktury nebo uložení dat v ČR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": false,
+          "reasonCz": "Upravuje občanské průkazy a související agendu, ale text nestanoví centralizaci systémů ani místo ukládání občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Odstraňuje vybrané autentizační údaje ze základních registrů, ale neříká, že by občanská data byla přesunuta mimo ČR, ani neurčuje celkovou míru centralizace infrastruktury."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Zavádí pravidla týkající se dočasné ochrany a vozidel se značkou Ukrajiny, nikoli centralizaci státní digitální infrastruktury nebo umístění občanských dat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": true,
+          "reasonCz": "Převádí správu informačního systému digitální mapy veřejné správy a systému základního modelu vystavěného prostředí na ústřední úřad, což je dílčí krok k centralizaci státních systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Mění registraci a provoz silničních vozidel a postupy technických kontrol, ale neřeší centralizaci digitální infrastruktury ani umístění občanských dat."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-7c06e60aa6--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43395-1",
+        "psp-core-2025--print-step-211959"
+      ],
+      "explanationCz": "Motoristé slíbili dokončit centralizaci digitální infrastruktury státu a ukládat všechna data občanů v ČR. Poslanci strany podpořili novelu stavebního zákona, tedy zákona upravujícího povolování staveb, která umožňuje spojovat více informačních systémů do jednoho společného; podpořili také zákon o správě dat, jenž zavádí národní katalog dat. Vláda navíc předložila návrhy na digitální identitu a správu digitálních map, což jsou dílčí kroky, nikoli splnění celého slibu. Při konečném hlasování Poslanecké sněmovny, dolní komory Parlamentu, o zákoně o vstupu a pobytu cizinců, který vytváří integrovaný informační systém pro cizineckou agendu, hlasovalo pro jen 6 z 13 poslanců Motoristů; návrh přesto Sněmovna přijala. Nejnovější rozhodné jednání tak znamená nepodpoření opatření přispívajícího k části slibu, přičemž dostupné důkazy neukazují, zda jsou všechna občanská data ukládána v ČR.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Motoristé dříve většinově podpořili stavební zákon, který umožňuje spojovat informační systémy, ale u pozdějšího zákona zavádějícího integrovaný cizinecký systém jejich poslanci většinovou podporu nevyjádřili; obě jednání jsou proto v důkazech zachována.",
+        "Důkazy popisují kroky k centralizaci některých státních systémů, ale neprokazují, zda a kde se ukládají všechna data občanů."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

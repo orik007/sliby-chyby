@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-41-41-005Z--c49b0e9053f0",
+  "evaluatedAt": "2026-10-02T05:41:41.005Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-2e4d93d9af/c49b0e9053f03b37fdfd80a51e5e0a3ad667d2648376f05873164d63f720bf96.json",
+  "packageHash": "c49b0e9053f03b37fdfd80a51e5e0a3ad667d2648376f05873164d63f720bf96",
+  "assessmentContentHash": "bc154830808b8af39b304e368d3297e01e8f01df39ade8907125690aedf91f56",
+  "assessmentFingerprint": "084a2dfc2469c11716f37af158ea8929e2c9a1d1ba89ceca0602397e742eb730",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-2e4d93d9af",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-2e4d93d9af",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna stanoví, že finanční saldo zdravotních pojišťoven je závazné při určování výše úhrad, a tím může omezovat jejich každoroční navýšení podle inflace."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-2e4d93d9af--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "SPD slíbilo každoroční zvýšení úhrad podle indexu spotřebitelských cen. Vláda, v níž SPD působí, předložila návrh, podle něhož je saldo zdravotních pojišťoven závazné při stanovování úhrad; poslanci SPD pak hlasovali pro návrh v dalších rozhodujících hlasováních. Toto omezení může jít proti pravidelnému navyšování podle inflace, a proto jde o postup proti části slibu. U posledního hlasování po vrácení zákona prezidentem ale přesné znění schváleného textu není v podkladech zveřejněno.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Závazné saldo zdravotních pojišťoven může omezovat zvýšení úhrad podle inflace, ale dodané znění výslovně neříká, zda každoroční valorizaci podle indexu spotřebitelských cen vylučuje.",
+        "U hlasování po vrácení zákona prezidentem není zveřejněno přesné znění, o němž se hlasovalo; nelze proto ověřit, zda příslušné pravidlo pro úhrady zůstalo beze změny."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-2e4d93d9af",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": false,
+          "reasonCz": "Změna váže stanovení úhrad mimo jiné na saldo zdravotních pojišťoven, ale žádná její verze nezavádí každoroční valorizaci úhradové vyhlášky podle spotřebitelských cen."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-2e4d93d9af--source",
+        "psp-core-2025--law-change-43200-8"
+      ],
+      "explanationCz": "SPD slíbila každoroční valorizaci úhradové vyhlášky podle indexu spotřebitelských cen. Jediná změna zákona v balíčku se týká rozpočtové odpovědnosti a mimo jiné stanoví, že saldo zdravotních pojišťoven bude závazné při určování úhrad; pravidlo o valorizaci podle inflace ale neobsahuje. Předložené podklady proto nedokládají podstatný posun k tomuto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček obsahuje jen jednu změnu zákona a nedokládá další případné kroky SPD k zavedení každoroční valorizace úhrad podle spotřebitelských cen."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f8ea8bbf025f9bf016abf43f0bfb087d18caa3260a3707c8b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 42556,
+      "input_tokens_details": {
+        "cache_write_tokens": 39232,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2520,
+      "output_tokens_details": {
+        "reasoning_tokens": 1974
+      },
+      "total_tokens": 45076
+    },
+    "output": {
+      "promiseId": "spd-2025-2e4d93d9af",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Změna stanoví, že finanční saldo zdravotních pojišťoven je závazné při určování výše úhrad, a tím může omezovat jejich každoroční navýšení podle inflace."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-2e4d93d9af--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "SPD slíbilo každoroční zvýšení úhrad podle indexu spotřebitelských cen. Vláda, v níž SPD působí, předložila návrh, podle něhož je saldo zdravotních pojišťoven závazné při stanovování úhrad; poslanci SPD pak hlasovali pro návrh v dalších rozhodujících hlasováních. Toto omezení může jít proti pravidelnému navyšování podle inflace, a proto jde o postup proti části slibu. U posledního hlasování po vrácení zákona prezidentem ale přesné znění schváleného textu není v podkladech zveřejněno.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Závazné saldo zdravotních pojišťoven může omezovat zvýšení úhrad podle inflace, ale dodané znění výslovně neříká, zda každoroční valorizaci podle indexu spotřebitelských cen vylučuje.",
+        "U hlasování po vrácení zákona prezidentem není zveřejněno přesné znění, o němž se hlasovalo; nelze proto ověřit, zda příslušné pravidlo pro úhrady zůstalo beze změny."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_00ce863dd56f28fc016abf44034d5887d181d3bd0eb1a642d0",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 42556,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 42553
+      },
+      "output_tokens": 1475,
+      "output_tokens_details": {
+        "reasoning_tokens": 1103
+      },
+      "total_tokens": 44031
+    },
+    "output": {
+      "promiseId": "spd-2025-2e4d93d9af",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": false,
+          "reasonCz": "Změna váže stanovení úhrad mimo jiné na saldo zdravotních pojišťoven, ale žádná její verze nezavádí každoroční valorizaci úhradové vyhlášky podle spotřebitelských cen."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-2e4d93d9af--source",
+        "psp-core-2025--law-change-43200-8"
+      ],
+      "explanationCz": "SPD slíbila každoroční valorizaci úhradové vyhlášky podle indexu spotřebitelských cen. Jediná změna zákona v balíčku se týká rozpočtové odpovědnosti a mimo jiné stanoví, že saldo zdravotních pojišťoven bude závazné při určování úhrad; pravidlo o valorizaci podle inflace ale neobsahuje. Předložené podklady proto nedokládají podstatný posun k tomuto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček obsahuje jen jednu změnu zákona a nedokládá další případné kroky SPD k zavedení každoroční valorizace úhrad podle spotřebitelských cen."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0fc8162dd8fc219c016abf440ddf8887d1882510296641536c",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 42521,
+      "input_tokens_details": {
+        "cache_write_tokens": 40039,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 348,
+      "output_tokens_details": {
+        "reasoning_tokens": 120
+      },
+      "total_tokens": 42869
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "spd-2025-2e4d93d9af--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--vote-87430"
+      ],
+      "explanationCz": "Volím druhé hodnocení, protože podklady nedokládají krok ke splnění slibu ani jasný krok proti němu. Poslanci SPD podpořili návrh změn veřejných rozpočtů, který váže výši úhrad za zdravotní péči na plánovaný rozdíl mezi příjmy a výdaji zdravotních pojišťoven. Z dodaného znění ale neplyne, že toto pravidlo brání každoročnímu zvýšení úhrad podle inflace, a samo takové zvyšování nezavádí. První hodnocení proto označuje postup za odporující slibu jen na základě možného omezení, nikoli doloženého rozporu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

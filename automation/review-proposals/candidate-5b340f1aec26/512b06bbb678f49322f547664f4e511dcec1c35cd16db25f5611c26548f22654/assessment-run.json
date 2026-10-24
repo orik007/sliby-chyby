@@ -1,0 +1,218 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T18-47-39-271Z--7eb11592a98f",
+  "evaluatedAt": "2026-10-06T18:47:39.271Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-5b340f1aec26/7eb11592a98f7add7735e950188d6b70d10dd8f3bd8a3963eb35d2b87a6ed976.json",
+  "packageHash": "7eb11592a98f7add7735e950188d6b70d10dd8f3bd8a3963eb35d2b87a6ed976",
+  "assessmentContentHash": "d9ad75ad589669abff2218b551af5debba157bfd70815e0f9432988c43b2b468",
+  "assessmentFingerprint": "512b06bbb678f49322f547664f4e511dcec1c35cd16db25f5611c26548f22654",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-5b340f1aec26",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-5b340f1aec26",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Schválená novela obsahuje pravidlo pro požadavky na výstavbu vyplývající z práva EU, které může v některých případech zmírnit jejich uplatnění, a proto se týká části slibu o výjimce z implementace evropských směrnic.",
+          "effectCz": "Dříve stavební zákon ukládal dodržovat požadavky na výstavbu stanovené zákonem a prováděcími předpisy; výjimky v § 137 odst. 4 se týkaly vyjmenovaných situací, například změn dokončených staveb. Navržené znění i schválené znění, nově jako § 137 odst. 8, stanoví, že mírnější minimální úroveň požadavku podle práva EU postačí a že vnitrostátní požadavek v prováděcím předpisu je směrný, dovoluje-li právo EU výjimku. Jde tedy o uvolnění povinnosti v případech, kdy takovou možnost připouští samo právo EU; ustanovení však nezavádí opt-out ani odklad provedení směrnice EPBD a výslovně se na ni nevztahuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Ustanovení ruší vyjmenované zákony, jejich části a vyhlášky, ale jeho text nestanoví výjimku ani odklad povinností pro bezemisní budovy nebo směrnice typu EPBD.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-5b340f1aec26--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů společně s poslanci ANO a SPD předložili návrh novely stavebního zákona; Poslanecká sněmovna je komora Parlamentu, která o něm hlasovala. Novela připouští mírnější požadavky na výstavbu, pokud je stanoví právo EU, a tam, kde právo EU dovoluje výjimku, činí odpovídající požadavek ve vnitrostátním prováděcím předpisu pouze směrným. Motoristé hlasovali pro schválení návrhu i pro jeho přijetí poté, co jej Senát odmítl, takže tento krok posouvá slib směrem k jeho části týkající se výjimky. Nejde ale o výslovný opt-out ani odklad směrnice EPBD a novela tak celý slib nedodává.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text novely stanoví obecnou možnost uplatnit výjimku, kterou dovoluje právo EU, ale výslovně nezmiňuje EPBD ani konkrétní pravidla pro bezemisní budovy; z balíčku proto nelze určit, zda se toto pravidlo na příslušné požadavky EPBD skutečně použije."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-5b340f1aec26",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně mění obecná pravidla energetických požadavků na stavby a stanoví, jak se uplatní minima a výjimky plynoucí z práva EU, což může ovlivnit povinnosti spojené s energetickými požadavky na budovy.",
+          "effectCz": "Před změnou ukládal § 137 dodržovat stavební požadavky a při jejich uplatnění připouštěl výjimky jen v určených případech; nově se mají požadavky vykládat s ohledem na technickou, funkční a ekonomickou proveditelnost a při nižším minimu či výjimce podle práva EU se vnitrostátní požadavek považuje za splněný nebo směrný, takže tato část pravidel je volnější. § 150 dosud požadoval co nejnižší spotřebu energie a energetickou účinnost; doplnění proveditelnosti požadavky zmírňuje. U povinností vlastníků nebytových budov podle § 167 písm. g) a h) dosud stačila technická proveditelnost, nově se přidává také ekonomická, takže povinnosti lze uplatnit méně často. Změna nestanoví opt-out ani odklad implementace směrnic typu EPBD; jde jen o dílčí uvolnění pravidel a využití výjimek, které připouští právo EU."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší několik částí jiných právních předpisů a vyhlášek, ale dodané znění ani kontext neukazují, že by se některá z rušených částí týkala směrnic EPBD nebo pravidel pro bezemisní budovy.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-5b340f1aec26--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě předložili spolu s poslanci dalších stran návrh novely stavebního zákona, který mimo jiné zavádí volnější uplatňování některých energetických požadavků na budovy a zohledňuje výjimky podle práva EU. Klub Motoristů sobě návrh podpořil při schválení Sněmovnou v červenci i při jejím následném setrvání na původním znění po zamítnutí Senátem. Tato pravidla mohou zmírnit část povinností, ale novela výslovně nezajišťuje opt-out ani odklad implementace směrnic typu EPBD. Jde proto o dílčí posun směrem k cíli slibu, nikoli o jeho splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela nezmiňuje EPBD ani povinnou výstavbu budov s nulovými emisemi; její obecná pravidla pro výjimky a energetické požadavky proto dokládají jen dílčí posun, nikoli opt-out nebo odklad implementace slíbených směrnic."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0083156b2a8a1989016ac541d1aeb487d2998bd3185fd0fa65",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 287269,
+      "input_tokens_details": {
+        "cache_write_tokens": 283299,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 3902,
+      "output_tokens_details": {
+        "reasoning_tokens": 3025
+      },
+      "total_tokens": 291171
+    },
+    "output": {
+      "promiseId": "candidate-5b340f1aec26",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Schválená novela obsahuje pravidlo pro požadavky na výstavbu vyplývající z práva EU, které může v některých případech zmírnit jejich uplatnění, a proto se týká části slibu o výjimce z implementace evropských směrnic.",
+          "effectCz": "Dříve stavební zákon ukládal dodržovat požadavky na výstavbu stanovené zákonem a prováděcími předpisy; výjimky v § 137 odst. 4 se týkaly vyjmenovaných situací, například změn dokončených staveb. Navržené znění i schválené znění, nově jako § 137 odst. 8, stanoví, že mírnější minimální úroveň požadavku podle práva EU postačí a že vnitrostátní požadavek v prováděcím předpisu je směrný, dovoluje-li právo EU výjimku. Jde tedy o uvolnění povinnosti v případech, kdy takovou možnost připouští samo právo EU; ustanovení však nezavádí opt-out ani odklad provedení směrnice EPBD a výslovně se na ni nevztahuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Ustanovení ruší vyjmenované zákony, jejich části a vyhlášky, ale jeho text nestanoví výjimku ani odklad povinností pro bezemisní budovy nebo směrnice typu EPBD.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-5b340f1aec26--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů společně s poslanci ANO a SPD předložili návrh novely stavebního zákona; Poslanecká sněmovna je komora Parlamentu, která o něm hlasovala. Novela připouští mírnější požadavky na výstavbu, pokud je stanoví právo EU, a tam, kde právo EU dovoluje výjimku, činí odpovídající požadavek ve vnitrostátním prováděcím předpisu pouze směrným. Motoristé hlasovali pro schválení návrhu i pro jeho přijetí poté, co jej Senát odmítl, takže tento krok posouvá slib směrem k jeho části týkající se výjimky. Nejde ale o výslovný opt-out ani odklad směrnice EPBD a novela tak celý slib nedodává.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text novely stanoví obecnou možnost uplatnit výjimku, kterou dovoluje právo EU, ale výslovně nezmiňuje EPBD ani konkrétní pravidla pro bezemisní budovy; z balíčku proto nelze určit, zda se toto pravidlo na příslušné požadavky EPBD skutečně použije."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_04635c8d77dc9cf2016ac5420da86c87d2a5113fd985d2457c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 287269,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 287266
+      },
+      "output_tokens": 4461,
+      "output_tokens_details": {
+        "reasoning_tokens": 3624
+      },
+      "total_tokens": 291730
+    },
+    "output": {
+      "promiseId": "candidate-5b340f1aec26",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně mění obecná pravidla energetických požadavků na stavby a stanoví, jak se uplatní minima a výjimky plynoucí z práva EU, což může ovlivnit povinnosti spojené s energetickými požadavky na budovy.",
+          "effectCz": "Před změnou ukládal § 137 dodržovat stavební požadavky a při jejich uplatnění připouštěl výjimky jen v určených případech; nově se mají požadavky vykládat s ohledem na technickou, funkční a ekonomickou proveditelnost a při nižším minimu či výjimce podle práva EU se vnitrostátní požadavek považuje za splněný nebo směrný, takže tato část pravidel je volnější. § 150 dosud požadoval co nejnižší spotřebu energie a energetickou účinnost; doplnění proveditelnosti požadavky zmírňuje. U povinností vlastníků nebytových budov podle § 167 písm. g) a h) dosud stačila technická proveditelnost, nově se přidává také ekonomická, takže povinnosti lze uplatnit méně často. Změna nestanoví opt-out ani odklad implementace směrnic typu EPBD; jde jen o dílčí uvolnění pravidel a využití výjimek, které připouští právo EU."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší několik částí jiných právních předpisů a vyhlášek, ale dodané znění ani kontext neukazují, že by se některá z rušených částí týkala směrnic EPBD nebo pravidel pro bezemisní budovy.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-5b340f1aec26--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě předložili spolu s poslanci dalších stran návrh novely stavebního zákona, který mimo jiné zavádí volnější uplatňování některých energetických požadavků na budovy a zohledňuje výjimky podle práva EU. Klub Motoristů sobě návrh podpořil při schválení Sněmovnou v červenci i při jejím následném setrvání na původním znění po zamítnutí Senátem. Tato pravidla mohou zmírnit část povinností, ale novela výslovně nezajišťuje opt-out ani odklad implementace směrnic typu EPBD. Jde proto o dílčí posun směrem k cíli slibu, nikoli o jeho splnění.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela nezmiňuje EPBD ani povinnou výstavbu budov s nulovými emisemi; její obecná pravidla pro výjimky a energetické požadavky proto dokládají jen dílčí posun, nikoli opt-out nebo odklad implementace slíbených směrnic."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

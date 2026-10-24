@@ -1,0 +1,182 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T20-07-09-421Z--c82c85dc59a1",
+  "evaluatedAt": "2026-10-06T20:07:09.421Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-a89d8f6af005/c82c85dc59a17591f9b1380bad93f4d4fca1b8f2618a4eaf44387641b69423e1.json",
+  "packageHash": "c82c85dc59a17591f9b1380bad93f4d4fca1b8f2618a4eaf44387641b69423e1",
+  "assessmentContentHash": "2c8701641199c753e58b79fad3707346bb115bc9270a9b3488320417eb6f2bb9",
+  "assessmentFingerprint": "d1cdca420039c2f0a6d015bbe9a407b25f34336eb04237613ef4b02a57c17dd7",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-a89d8f6af005",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-a89d8f6af005",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43388-1",
+          "relevant": true,
+          "reasonCz": "Úmluva výslovně uvádí zachování a ochranu autonomie vysokých škol, což odpovídá části slibu, i když neřeší změnu jejich řízení.",
+          "effectCz": "Jde o mezinárodní úmluvu, která nemění dřívější znění českého zákona; stanoví pravidla pro uznávání zahraničního vysokoškolského vzdělání a mezi své cíle řadí respektování, zachování a ochranu autonomie vysokých škol. Tím odpovídá části slibu o zachování akademické autonomie, ale nemění kompetence orgánů škol ani jejich řízení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a89d8f6af005--source",
+        "psp-core-2025--law-change-43388-1",
+        "psp-core-2025--print-step-211949"
+      ],
+      "explanationCz": "Vláda, v níž ANO působí, předložila Parlamentu návrh na ratifikaci globální úmluvy UNESCO o uznávání vysokoškolských kvalifikací. Úmluva mezi své cíle řadí respektování a ochranu autonomie vysokých škol. Tím se návrh týká části slibu o zachování akademické autonomie, ale neřeší zjednodušení řízení ani rozdělení pravomocí mezi orgány škol.",
+      "confidence": "high",
+      "uncertainties": [
+        "Jde pouze o předložený návrh na ratifikaci; balíček nedokládá jeho schválení ani skutečný dopad úmluvy na autonomii českých vysokých škol."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-a89d8f6af005",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43388-1",
+          "relevant": true,
+          "reasonCz": "Úmluva se týká hlavně uznávání zahraničních kvalifikací, ale výslovně mezi své cíle řadí respektování, zachování a ochranu autonomie vysokých škol, což souvisí s částí slibu o zachování akademické autonomie.",
+          "effectCz": "Jde o návrh mezinárodní smlouvy, nikoli změnu zákona, takže balíček neuvádí předchozí znění měněného ustanovení. Vláda navrhuje ratifikovat rámec pro uznávání vysokoškolských kvalifikací, jehož cíle zahrnují ochranu autonomie vysokých škol; to podporuje část slibu o zachování autonomie, ale nemění rozdělení pravomocí v řízení škol ani samo nezjednodušuje jejich řízení či reakce na potřeby společnosti a trhu práce."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a89d8f6af005--source",
+        "psp-core-2025--law-change-43388-1",
+        "psp-core-2025--print-step-211949"
+      ],
+      "explanationCz": "Vláda ANO předložila Parlamentu návrh na ratifikaci mezinárodní úmluvy o uznávání vysokoškolských kvalifikací. Úmluva mezi své cíle výslovně řadí respektování, zachování a ochranu autonomie vysokých škol. Tím návrh podporuje část slibu týkající se autonomie, ale nemění rozdělení pravomocí ani řízení škol, takže jde pouze o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text úmluvy uvádí ochranu autonomie jako cíl, ale balíček neukazuje, jak by se tento cíl konkrétně promítl do českých pravidel řízení vysokých škol."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_02672391c3ffb15b016ac554ac56a087d2a0b1e41105dfed01",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 18695,
+      "input_tokens_details": {
+        "cache_write_tokens": 14725,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 1363,
+      "output_tokens_details": {
+        "reasoning_tokens": 938
+      },
+      "total_tokens": 20058
+    },
+    "output": {
+      "promiseId": "candidate-a89d8f6af005",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43388-1",
+          "relevant": true,
+          "reasonCz": "Úmluva výslovně uvádí zachování a ochranu autonomie vysokých škol, což odpovídá části slibu, i když neřeší změnu jejich řízení.",
+          "effectCz": "Jde o mezinárodní úmluvu, která nemění dřívější znění českého zákona; stanoví pravidla pro uznávání zahraničního vysokoškolského vzdělání a mezi své cíle řadí respektování, zachování a ochranu autonomie vysokých škol. Tím odpovídá části slibu o zachování akademické autonomie, ale nemění kompetence orgánů škol ani jejich řízení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a89d8f6af005--source",
+        "psp-core-2025--law-change-43388-1",
+        "psp-core-2025--print-step-211949"
+      ],
+      "explanationCz": "Vláda, v níž ANO působí, předložila Parlamentu návrh na ratifikaci globální úmluvy UNESCO o uznávání vysokoškolských kvalifikací. Úmluva mezi své cíle řadí respektování a ochranu autonomie vysokých škol. Tím se návrh týká části slibu o zachování akademické autonomie, ale neřeší zjednodušení řízení ani rozdělení pravomocí mezi orgány škol.",
+      "confidence": "high",
+      "uncertainties": [
+        "Jde pouze o předložený návrh na ratifikaci; balíček nedokládá jeho schválení ani skutečný dopad úmluvy na autonomii českých vysokých škol."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_070e24b3ebef7809016ac554c5794487d29a88f3e07a8495d4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 18695,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 18692
+      },
+      "output_tokens": 2419,
+      "output_tokens_details": {
+        "reasoning_tokens": 1897
+      },
+      "total_tokens": 21114
+    },
+    "output": {
+      "promiseId": "candidate-a89d8f6af005",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43388-1",
+          "relevant": true,
+          "reasonCz": "Úmluva se týká hlavně uznávání zahraničních kvalifikací, ale výslovně mezi své cíle řadí respektování, zachování a ochranu autonomie vysokých škol, což souvisí s částí slibu o zachování akademické autonomie.",
+          "effectCz": "Jde o návrh mezinárodní smlouvy, nikoli změnu zákona, takže balíček neuvádí předchozí znění měněného ustanovení. Vláda navrhuje ratifikovat rámec pro uznávání vysokoškolských kvalifikací, jehož cíle zahrnují ochranu autonomie vysokých škol; to podporuje část slibu o zachování autonomie, ale nemění rozdělení pravomocí v řízení škol ani samo nezjednodušuje jejich řízení či reakce na potřeby společnosti a trhu práce."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a89d8f6af005--source",
+        "psp-core-2025--law-change-43388-1",
+        "psp-core-2025--print-step-211949"
+      ],
+      "explanationCz": "Vláda ANO předložila Parlamentu návrh na ratifikaci mezinárodní úmluvy o uznávání vysokoškolských kvalifikací. Úmluva mezi své cíle výslovně řadí respektování, zachování a ochranu autonomie vysokých škol. Tím návrh podporuje část slibu týkající se autonomie, ale nemění rozdělení pravomocí ani řízení škol, takže jde pouze o dílčí posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text úmluvy uvádí ochranu autonomie jako cíl, ale balíček neukazuje, jak by se tento cíl konkrétně promítl do českých pravidel řízení vysokých škol."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

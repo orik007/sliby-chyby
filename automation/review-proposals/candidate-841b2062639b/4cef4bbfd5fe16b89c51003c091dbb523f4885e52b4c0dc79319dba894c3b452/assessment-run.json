@@ -1,0 +1,460 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T18-59-10-702Z--f62a404091bc",
+  "evaluatedAt": "2026-10-06T18:59:10.702Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-841b2062639b/f62a404091bce35caadead2ca0fb1d72ccf7805bfa399d293c61b990f9b501a1.json",
+  "packageHash": "f62a404091bce35caadead2ca0fb1d72ccf7805bfa399d293c61b990f9b501a1",
+  "assessmentContentHash": "da236ce74e0450fc95d581a47fd542c3746aca3aa4de5867f14deaaaee427486",
+  "assessmentFingerprint": "4cef4bbfd5fe16b89c51003c091dbb523f4885e52b4c0dc79319dba894c3b452",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-841b2062639b",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_007cf7eeaf5e3a89016ac543bc2dc087d2a086b73147f17f88",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 28119,
+            "input_tokens_details": {
+              "cache_write_tokens": 24149,
+              "cached_tokens": 3967
+            },
+            "output_tokens": 4986,
+            "output_tokens_details": {
+              "reasoning_tokens": 3623
+            },
+            "total_tokens": 33105
+          },
+          "output": {
+            "promiseId": "candidate-841b2062639b",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-1",
+                "relevant": false,
+                "reasonCz": "Změna určuje, zda se dávka státní sociální pomoci započítá jako příjem při výpočtu životního a existenčního minima, nikoli parametry samotné superdávky ani její oddělení od přídavků na děti či četnost přepočtu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-3",
+                "relevant": false,
+                "reasonCz": "Návrh mění termíny účinnosti blíže neurčených ustanovení souvisejícího zákona, ale podklady neukazují, že tato ustanovení upravují některou konkrétní část slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-1",
+                "relevant": false,
+                "reasonCz": "Změna posouvá termíny přechodu dosavadních příjemců na novou dávku, ale sama nemění přídavek na děti, parametry superdávky ani dokládání a přepočet uvedené ve slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-2",
+                "relevant": false,
+                "reasonCz": "Změna upravuje započítávání dávky státní sociální pomoci při výpočtu životního a existenčního minima, nikoli parametry superdávky, oddělení přídavků na děti nebo četnost dokládání a přepočtu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+                "relevant": true,
+                "reasonCz": "Změna přímo upravuje některé parametry dávky státní sociální pomoci, včetně uznání zranitelnosti rodičů a výpočtu normativního nájemného, a může tak naplnit část slibu o úpravě parametrů superdávky.",
+                "effectCz": "Dosud byl za zranitelného považován osamělý rodič pečující o dítě mladší 7 let; hranice se zvyšuje na 15 let, čímž se okruh těchto osob rozšiřuje. Dříve se při výpočtu normativního nájemného používaly kategorie obcí podle počtu obyvatel, nově se použijí okresy; samotný přesun mezi územními kategoriemi nemá z podkladů určitelný jednotný dopad na výši dávky. Dříve mohlo být normativní nájemné pro domácnost s více členy nižší než pro domácnost o jednoho člena menší; nově se v takovém případě srovná na částku pro menší domácnost, a obdobná ochrana se zavádí pro domácnosti tvořené zranitelnými osobami. Tato pojistka zvyšuje nárok oproti dosavadnímu výpočtu v případech, kdy by větší domácnost dostala nižší částku; celkový dopad změny územního členění na nárok určit nelze."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+                "relevant": true,
+                "reasonCz": "Ruší oznámení stanovující normativní nájemné pro rok 2026, které ovlivňuje výpočet části dávky státní sociální pomoci, a tím se týká jejích parametrů.",
+                "effectCz": "Ruší se oznámení Ministerstva práce a sociálních věcí č. 526/2025 Sb. o normativním nájemném pro rok 2026; podklady neuvádějí jeho konkrétní částky ani částky, které je nahradí. Změna tedy přímo zasahuje do podkladu pro výpočet dávky, ale zda nárok nebo částku zpřísňuje či uvolňuje, nelze z poskytnutých údajů určit."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-841b2062639b--source",
+              "psp-core-2025--law-change-43319-approved-2",
+              "psp-core-2025--law-change-43319-approved-3",
+              "psp-core-2025--vote-88130"
+            ],
+            "explanationCz": "Poslanci ANO hlasovali pro vládní novelu projednávanou jako sněmovní tisk 198, tedy návrh zákona předložený Poslanecké sněmovně. Novela rozšiřuje vymezení zranitelných osamělých rodičů a brání tomu, aby normativní nájemné pro větší domácnost bylo nižší než pro bezprostředně menší domácnost. Zároveň mění způsob územního výpočtu a ruší dosavadní oznámení o normativním nájemném pro rok 2026, u něhož podklady neuvádějí konkrétní částky ani výsledný dopad. Jde o dílčí posun v úpravě parametrů superdávky; doložené jednání neřeší oddělení přídavků na děti ani četnost dokládání a přepočtu u rodin důchodců.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Z podkladů nelze určit, zda změna výpočtu podle okresů nebo zrušení oznámení o normativním nájemném pro rok 2026 zvýší, nebo sníží dávku; konkrétní částky nejsou uvedeny.",
+              "V předložených relevantních změnách není doloženo oddělení přídavků na děti, snížení četnosti dokládání finanční situace ani omezení přepočtu u rodin důchodců na nejvýše půl roku."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_031350d2d474688d016ac54449bd3887d28052ac2cdae2bf93",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 28119,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 28116
+            },
+            "output_tokens": 6611,
+            "output_tokens_details": {
+              "reasoning_tokens": 5390
+            },
+            "total_tokens": 34730
+          },
+          "output": {
+            "promiseId": "candidate-841b2062639b",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-1",
+                "relevant": false,
+                "reasonCz": "Změna vyjímá dávku státní sociální pomoci z určitého výpočtu započitatelných příjmů, ale nemění parametry této dávky ani žádnou další část slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-3",
+                "relevant": false,
+                "reasonCz": "Text mění termíny účinnosti blíže neurčených ustanovení souvisejícího zákona, avšak podklady neukazují jejich obsah ani spojení s konkrétní částí slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-1",
+                "relevant": false,
+                "reasonCz": "Změna posouvá termíny vzniku nároku na novou dávku a vydání rozhodnutí, ale nepřesouvá přídavky na děti mimo ni ani nemění další slíbené parametry.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-2",
+                "relevant": false,
+                "reasonCz": "Změna vyjímá dávku státní sociální pomoci z určitého výpočtu započitatelných příjmů, ale neupravuje slíbené parametry superdávky ani další části slibu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+                "relevant": true,
+                "reasonCz": "Text přímo mění pravidla pro výpočet dávky státní sociální pomoci, včetně vymezení zranitelných osob a normativního nájemného.",
+                "effectCz": "Dosavadní § 7 odst. 1 písm. e) zahrnoval osamělého rodiče pečujícího o dítě mladší 7 let; změna hranici zvyšuje na 15 let, a tím rozšiřuje okruh osob považovaných za zranitelné. Dosud se částky podle § 23, § 28 a § 29 odvíjely od kategorií obcí; nově se mají odvíjet od konkrétního okresu, ale bez údajů o nájemném nelze určit, zda a komu se částky zvýší či sníží. Nové odstavce § 28 a § 29 stanoví, že pokud by normativní nájemné pro domácnost s více členy vyšlo nižší než pro domácnost s bezprostředně menším počtem členů, určí se ve výši částky pro menší domácnost; v těchto případech se tedy normativní nájemné zvyšuje oproti vypočtené nižší částce."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+                "relevant": true,
+                "reasonCz": "Text ruší vyhlášené normativní nájemné pro dávku státní sociální pomoci na rok 2026, tedy přímo zasahuje do jejího parametru.",
+                "effectCz": "Ustanovení ruší sdělení Ministerstva práce a sociálních věcí č. 526/2025 Sb. s účinností od 1. října 2026. Jde o zrušení již vyhlášených hodnot pro rok 2026; tento text sám nestanoví náhradní částky a podklady neumožňují určit, zda se nárok nebo jeho výše tímto změní."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "candidate-841b2062639b--source",
+              "psp-core-2025--law-change-43319-approved-2",
+              "psp-core-2025--law-change-43319-approved-3",
+              "psp-core-2025--vote-88130"
+            ],
+            "explanationCz": "Poslanci ANO hlasovali pro vládní novelu zákona o dávce státní sociální pomoci, projednávanou jako sněmovní tisk 198. Změna rozšiřuje vymezení zranitelných rodičů a upravuje výpočet normativního nájemného, včetně nového pravidla pro domácnosti s více členy. Jde o krok měnící parametry dávky, tedy o možný dílčí posun ke slibu. Podklady ale neukazují, zda šlo právě o parametry označené ve slibu za nevyhovující a diskriminační, ani nedokládají kroky k oddělení přídavků na děti, méně častému dokládání či půlročnímu přepočtu u rodin důchodců.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Není doloženo, zda změněné parametry normativního nájemného a vymezení zranitelných osob odpovídají právě těm parametrům, které slib označuje za nevyhovující a diskriminační.",
+              "Dodané podklady nedokládají kroky k vyčlenění přídavků na děti, snížení frekvence dokládání finanční situace ani přepočtu dávky u rodin důchodců nejvýše po šesti měsících."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-841b2062639b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-1",
+          "relevant": false,
+          "reasonCz": "Změna upravuje, zda se dávka státní sociální pomoci započítá jako příjem podle zákona o životním a existenčním minimu, nikoli některý ze závazků týkajících se parametrů superdávky, přídavků na děti či přepočtu a dokládání.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Změna posouvá účinnost vyjmenovaných ustanovení navazujícího zákona na 1. června 2028, ale text balíčku neuvádí, čeho se tato ustanovení věcně týkají, takže jejich vztah ke konkrétním částem slibu nelze doložit.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-1",
+          "relevant": false,
+          "reasonCz": "Změna posouvá přechod na dávku státní sociální pomoci z dubna na červenec 2026 a lhůty pro rozhodnutí, ale neupravuje žádnou z konkrétně slíbených změn.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Změna vyjímá dávku státní sociální pomoci ze započitatelných příjmů podle zákona o životním a existenčním minimu, což není některý z výslovně slíbených kroků ani doložená změna parametru samotné superdávky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Změna přímo upravuje parametry dávky státní sociální pomoci, a může tak naplňovat obecnou část slibu o změně parametrů superdávky.",
+          "effectCz": "U rodiče pečujícího o dítě do 4 let a u osamělého rodiče pečujícího o dítě do 7 let se hranice pro osamělého rodiče rozšiřuje na dítě do 15 let, čímž se rozšiřuje okruh osob splňujících tuto podmínku. U nájemních normativů se dosavadní členění podle kategorií obcí nahrazuje členěním podle okresů; změna geografického členění sama o sobě z dodaného textu neznamená obecné zpřísnění ani uvolnění nároku. Nově se zároveň stanoví, že normativní nájemné pro domácnost s více členy nemůže být nižší než pro domácnost s bezprostředně nižším počtem členů; tato pojistka zvyšuje spodní hranici podpory pro dotčené větší domácnosti. Celkově jde o úpravu několika parametrů dávky, avšak balíček nedokládá, že právě tyto parametry slib označuje za nevyhovující či diskriminační."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": false,
+          "reasonCz": "Změna ruší vyhlášení nájemních normativů pro rok 2026, ale sama nestanoví nový parametr dávky ani žádný ze slíbených kroků.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-841b2062639b--source",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Slib vedle oddělení přídavků na děti a úprav dokládání a přepočtu obsahuje také obecný závazek změnit parametry superdávky. Poslanci ANO hlasovali pro vládní novelu, která mimo jiné rozšířila věkovou hranici pro osamělého rodiče a upravila výpočet nájemních normativů; u větších domácností zavedla pojistku proti nižšímu normativu než u menší domácnosti. Tím se mění některé parametry dávky, takže jde o dílčí posun v obecné části slibu. Důkazy ale nedokládají oddělení přídavků na děti ani slíbené změny četnosti dokládání a přepočtu dávek důchodcovských rodin.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček neukazuje, zda změněné parametry jsou právě těmi, které slib označuje za nevyhovující a diskriminační; proto lze doložit změnu parametrů dávky, nikoli úplné naplnění této části slibu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-841b2062639b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-1",
+          "relevant": false,
+          "reasonCz": "Změna určuje, zda se dávka státní sociální pomoci započítá mezi příjmy podle zákona o životním a existenčním minimu, ale nemění parametry superdávky ani další výslovně slíbené části.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text posouvá účinnost ustanovení souvisejícího zákona, ale z dodaného znění a kontextu nelze určit, že by se změna týkala některé konkrétní části slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-1",
+          "relevant": false,
+          "reasonCz": "Změna posouvá termíny přiznávání a vyřizování nové dávky, nikoli slíbené nastavení jejích parametrů, oddělení přídavků na děti nebo četnost dokládání a přepočtu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje započítávání dávky státní sociální pomoci do příjmů pro účely životního minima, nikoli některou z výslovně slíbených úprav superdávky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Mění podmínky a pravidla výpočtu částek dávky státní sociální pomoci, a proto se týká slibu změnit její nevyhovující parametry.",
+          "effectCz": "Dosavadní hranice pro osamělého rodiče pečujícího o dítě se mění z věku dítěte pod 7 let na věk pod 15 let, čímž se rozšiřuje okruh zranitelných osob. Rozdělení obcí podle počtu obyvatel pro určení nákladů na bydlení se nahrazuje určením podle okresů; kontext neumožňuje určit, zda tato změna konkrétní částky zvyšuje, nebo snižuje. Nově se stanoví, že normativní nájemné pro domácnost s více členy nesmí být nižší než pro domácnost s bezprostředně menším počtem členů; pro dotčené větší domácnosti tedy částku zvyšuje nebo zachovává. Změna pravidel výpočtu je skutečným posunem v parametrech dávky, ale z podkladů nelze ověřit, zda jde právě o parametry označené ve slibu za nevyhovující či diskriminační."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": true,
+          "reasonCz": "Ruší vyhlášení částek normativního nájemného pro rok 2026, které vstupují do výpočtu dávky, takže mění nastavení její výše.",
+          "effectCz": "Ruší se sdělení ministerstva, kterým byly vyhlášeny částky normativního nájemného a normativního nájemného pro zranitelné domácnosti pro rok 2026. Tato část zákona sama nové částky nestanoví a podklady neuvádějí hodnoty rušených částek ani přímé srovnání s novými hodnotami; směr dopadu na výši dávky proto nelze určit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-841b2062639b--source",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--law-change-43319-approved-3",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro vládní novelu zákona o dávce státní sociální pomoci, tedy dávky označované jako superdávka. Novela rozšířila věkovou hranici pro posuzování osamělých rodičů a změnila zeměpisné členění i některá pravidla výpočtu nákladů na bydlení. Tím se mění část parametrů dávky, takže jde o posun k první části slibu. Z podkladů ale nevyplývá, že tyto změny řeší právě parametry označené za nevyhovující či diskriminační, a nedokládají oddělení přídavků na děti ani slíbené snížení četnosti dokládání a přepočtu dávky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, zda změny parametrů schválené v novele odpovídají právě parametrům, které strana ve slibu označila za nevyhovující a diskriminační.",
+        "V podkladech není doloženo oddělení přídavků na děti ani snížení četnosti dokládání finanční situace či přepočtu dávky u rodin důchodců.",
+        "Novela ruší vyhlášené částky normativního nájemného pro rok 2026, ale dodané podklady neobsahují částky potřebné k určení dopadu této změny na výši dávky."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0bfe697af8e492b2016ac544052f3087d296ecdb2813638f55",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 28119,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 28116
+      },
+      "output_tokens": 4840,
+      "output_tokens_details": {
+        "reasoning_tokens": 3698
+      },
+      "total_tokens": 32959
+    },
+    "output": {
+      "promiseId": "candidate-841b2062639b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-1",
+          "relevant": false,
+          "reasonCz": "Změna upravuje, zda se dávka státní sociální pomoci započítá jako příjem podle zákona o životním a existenčním minimu, nikoli některý ze závazků týkajících se parametrů superdávky, přídavků na děti či přepočtu a dokládání.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Změna posouvá účinnost vyjmenovaných ustanovení navazujícího zákona na 1. června 2028, ale text balíčku neuvádí, čeho se tato ustanovení věcně týkají, takže jejich vztah ke konkrétním částem slibu nelze doložit.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-1",
+          "relevant": false,
+          "reasonCz": "Změna posouvá přechod na dávku státní sociální pomoci z dubna na červenec 2026 a lhůty pro rozhodnutí, ale neupravuje žádnou z konkrétně slíbených změn.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Změna vyjímá dávku státní sociální pomoci ze započitatelných příjmů podle zákona o životním a existenčním minimu, což není některý z výslovně slíbených kroků ani doložená změna parametru samotné superdávky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Změna přímo upravuje parametry dávky státní sociální pomoci, a může tak naplňovat obecnou část slibu o změně parametrů superdávky.",
+          "effectCz": "U rodiče pečujícího o dítě do 4 let a u osamělého rodiče pečujícího o dítě do 7 let se hranice pro osamělého rodiče rozšiřuje na dítě do 15 let, čímž se rozšiřuje okruh osob splňujících tuto podmínku. U nájemních normativů se dosavadní členění podle kategorií obcí nahrazuje členěním podle okresů; změna geografického členění sama o sobě z dodaného textu neznamená obecné zpřísnění ani uvolnění nároku. Nově se zároveň stanoví, že normativní nájemné pro domácnost s více členy nemůže být nižší než pro domácnost s bezprostředně nižším počtem členů; tato pojistka zvyšuje spodní hranici podpory pro dotčené větší domácnosti. Celkově jde o úpravu několika parametrů dávky, avšak balíček nedokládá, že právě tyto parametry slib označuje za nevyhovující či diskriminační."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": false,
+          "reasonCz": "Změna ruší vyhlášení nájemních normativů pro rok 2026, ale sama nestanoví nový parametr dávky ani žádný ze slíbených kroků.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-841b2062639b--source",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Slib vedle oddělení přídavků na děti a úprav dokládání a přepočtu obsahuje také obecný závazek změnit parametry superdávky. Poslanci ANO hlasovali pro vládní novelu, která mimo jiné rozšířila věkovou hranici pro osamělého rodiče a upravila výpočet nájemních normativů; u větších domácností zavedla pojistku proti nižšímu normativu než u menší domácnosti. Tím se mění některé parametry dávky, takže jde o dílčí posun v obecné části slibu. Důkazy ale nedokládají oddělení přídavků na děti ani slíbené změny četnosti dokládání a přepočtu dávek důchodcovských rodin.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček neukazuje, zda změněné parametry jsou právě těmi, které slib označuje za nevyhovující a diskriminační; proto lze doložit změnu parametrů dávky, nikoli úplné naplnění této části slibu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_09f5469bb1558078016ac544bb03d087d29930c9612331b4bf",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 28119,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 28116
+      },
+      "output_tokens": 4315,
+      "output_tokens_details": {
+        "reasoning_tokens": 3056
+      },
+      "total_tokens": 32434
+    },
+    "output": {
+      "promiseId": "candidate-841b2062639b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-1",
+          "relevant": false,
+          "reasonCz": "Změna určuje, zda se dávka státní sociální pomoci započítá mezi příjmy podle zákona o životním a existenčním minimu, ale nemění parametry superdávky ani další výslovně slíbené části.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text posouvá účinnost ustanovení souvisejícího zákona, ale z dodaného znění a kontextu nelze určit, že by se změna týkala některé konkrétní části slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-1",
+          "relevant": false,
+          "reasonCz": "Změna posouvá termíny přiznávání a vyřizování nové dávky, nikoli slíbené nastavení jejích parametrů, oddělení přídavků na děti nebo četnost dokládání a přepočtu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje započítávání dávky státní sociální pomoci do příjmů pro účely životního minima, nikoli některou z výslovně slíbených úprav superdávky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-2",
+          "relevant": true,
+          "reasonCz": "Mění podmínky a pravidla výpočtu částek dávky státní sociální pomoci, a proto se týká slibu změnit její nevyhovující parametry.",
+          "effectCz": "Dosavadní hranice pro osamělého rodiče pečujícího o dítě se mění z věku dítěte pod 7 let na věk pod 15 let, čímž se rozšiřuje okruh zranitelných osob. Rozdělení obcí podle počtu obyvatel pro určení nákladů na bydlení se nahrazuje určením podle okresů; kontext neumožňuje určit, zda tato změna konkrétní částky zvyšuje, nebo snižuje. Nově se stanoví, že normativní nájemné pro domácnost s více členy nesmí být nižší než pro domácnost s bezprostředně menším počtem členů; pro dotčené větší domácnosti tedy částku zvyšuje nebo zachovává. Změna pravidel výpočtu je skutečným posunem v parametrech dávky, ale z podkladů nelze ověřit, zda jde právě o parametry označené ve slibu za nevyhovující či diskriminační."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43319-approved-3",
+          "relevant": true,
+          "reasonCz": "Ruší vyhlášení částek normativního nájemného pro rok 2026, které vstupují do výpočtu dávky, takže mění nastavení její výše.",
+          "effectCz": "Ruší se sdělení ministerstva, kterým byly vyhlášeny částky normativního nájemného a normativního nájemného pro zranitelné domácnosti pro rok 2026. Tato část zákona sama nové částky nestanoví a podklady neuvádějí hodnoty rušených částek ani přímé srovnání s novými hodnotami; směr dopadu na výši dávky proto nelze určit."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-841b2062639b--source",
+        "psp-core-2025--law-change-43319-approved-2",
+        "psp-core-2025--law-change-43319-approved-3",
+        "psp-core-2025--vote-88130"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro vládní novelu zákona o dávce státní sociální pomoci, tedy dávky označované jako superdávka. Novela rozšířila věkovou hranici pro posuzování osamělých rodičů a změnila zeměpisné členění i některá pravidla výpočtu nákladů na bydlení. Tím se mění část parametrů dávky, takže jde o posun k první části slibu. Z podkladů ale nevyplývá, že tyto změny řeší právě parametry označené za nevyhovující či diskriminační, a nedokládají oddělení přídavků na děti ani slíbené snížení četnosti dokládání a přepočtu dávky.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, zda změny parametrů schválené v novele odpovídají právě parametrům, které strana ve slibu označila za nevyhovující a diskriminační.",
+        "V podkladech není doloženo oddělení přídavků na děti ani snížení četnosti dokládání finanční situace či přepočtu dávky u rodin důchodců.",
+        "Novela ruší vyhlášené částky normativního nájemného pro rok 2026, ale dodané podklady neobsahují částky potřebné k určení dopadu této změny na výši dávky."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-29-27-032Z--8e35c51d8966",
+  "evaluatedAt": "2026-10-02T01:29:27.032Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-2e25b9cf31/8e35c51d8966d6f061117446ca07341f53e87c43c7070c0e7bb3cbce0fb07861.json",
+  "packageHash": "8e35c51d8966d6f061117446ca07341f53e87c43c7070c0e7bb3cbce0fb07861",
+  "assessmentContentHash": "035eaf39d50710d82b78e328c4da33e78cedfd98ba9a9164a7c04b12b635b21b",
+  "assessmentFingerprint": "60717fbead280d6c254919a1ed7f0aff110e98ea55eae3e6af13fe5ee86103ef",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-2e25b9cf31",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-2e25b9cf31",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválené znění zařazuje výstavbu nového areálu fakultní nemocnice mezi strategické stavby zdravotnické infrastruktury, na které se vztahují postupy pro rychlejší přípravu a povolování, ale samo nezajišťuje konkrétní pražský projekt ani financování PPP."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-2e25b9cf31--source",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími předložili původní návrh novely, jehož tehdejší znění ještě zvláštní kategorii fakultních nemocnic neobsahovalo. Při hlasování o novele i při následném hlasování po jejím zamítnutí Senátem poslanci ANO většinově hlasovali pro. Schválené znění zařazuje výstavbu nového areálu fakultní nemocnice mezi strategické zdravotnické stavby, které mají využívat postupy pro rychlejší přípravu a povolování. Jde o dílčí posun: doložená novela sama nepřipravuje konkrétní pražskou nemocnici nahrazující Bulovku a Královské Vinohrady ani neurčuje použití PPP.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady nedokládají, že už vznikl konkrétní projekt pražské nemocnice nebo že bylo zvoleno financování PPP; novela má nabýt účinnosti 1. ledna 2027."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-2e25b9cf31",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválená verze řadí výstavbu nového areálu fakultní nemocnice mezi strategické zdravotnické stavby, a může tak podpořit přípravu a povolování části slíbeného projektu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-2e25b9cf31--source",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími poslanci předložili návrh novely zákona o urychlení výstavby strategicky významné infrastruktury; jeho původní text zvláštní kategorii fakultních nemocnic neobsahoval. Sněmovna následně schválila doplnění, které mezi strategické zdravotnické stavby řadí i výstavbu nového areálu fakultní nemocnice, a poslanci ANO návrh podpořili; zákon má urychlit přípravu a povolování těchto staveb. Po zamítnutí Senátem poslanci ANO podpořili setrvání na schváleném znění. Jde o dílčí krok: text nezavazuje k výstavbě konkrétní pražské nemocnice místo Bulovky a Královských Vinohrad ani nezavádí financování formou PPP.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady nedokládají přípravu konkrétního projektu pražské nemocnice, nahrazení areálů Bulovky a Královských Vinohrad ani využití partnerství veřejného a soukromého sektoru."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_090dfaaedfee6ca6016abf08b7d6ec87d1802bc94f63e04401",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 35846,
+      "input_tokens_details": {
+        "cache_write_tokens": 32522,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2711,
+      "output_tokens_details": {
+        "reasoning_tokens": 2189
+      },
+      "total_tokens": 38557
+    },
+    "output": {
+      "promiseId": "ano-2025-2e25b9cf31",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválené znění zařazuje výstavbu nového areálu fakultní nemocnice mezi strategické stavby zdravotnické infrastruktury, na které se vztahují postupy pro rychlejší přípravu a povolování, ale samo nezajišťuje konkrétní pražský projekt ani financování PPP."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-2e25b9cf31--source",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími předložili původní návrh novely, jehož tehdejší znění ještě zvláštní kategorii fakultních nemocnic neobsahovalo. Při hlasování o novele i při následném hlasování po jejím zamítnutí Senátem poslanci ANO většinově hlasovali pro. Schválené znění zařazuje výstavbu nového areálu fakultní nemocnice mezi strategické zdravotnické stavby, které mají využívat postupy pro rychlejší přípravu a povolování. Jde o dílčí posun: doložená novela sama nepřipravuje konkrétní pražskou nemocnici nahrazující Bulovku a Královské Vinohrady ani neurčuje použití PPP.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady nedokládají, že už vznikl konkrétní projekt pražské nemocnice nebo že bylo zvoleno financování PPP; novela má nabýt účinnosti 1. ledna 2027."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_03d2f10eb8c5db69016abf08dd675c87d1bc189ae2a53a3b59",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 35846,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 35843
+      },
+      "output_tokens": 2257,
+      "output_tokens_details": {
+        "reasoning_tokens": 1779
+      },
+      "total_tokens": 38103
+    },
+    "output": {
+      "promiseId": "ano-2025-2e25b9cf31",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválená verze řadí výstavbu nového areálu fakultní nemocnice mezi strategické zdravotnické stavby, a může tak podpořit přípravu a povolování části slíbeného projektu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-2e25b9cf31--source",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO spolu s dalšími poslanci předložili návrh novely zákona o urychlení výstavby strategicky významné infrastruktury; jeho původní text zvláštní kategorii fakultních nemocnic neobsahoval. Sněmovna následně schválila doplnění, které mezi strategické zdravotnické stavby řadí i výstavbu nového areálu fakultní nemocnice, a poslanci ANO návrh podpořili; zákon má urychlit přípravu a povolování těchto staveb. Po zamítnutí Senátem poslanci ANO podpořili setrvání na schváleném znění. Jde o dílčí krok: text nezavazuje k výstavbě konkrétní pražské nemocnice místo Bulovky a Královských Vinohrad ani nezavádí financování formou PPP.",
+      "confidence": "high",
+      "uncertainties": [
+        "Podklady nedokládají přípravu konkrétního projektu pražské nemocnice, nahrazení areálů Bulovky a Královských Vinohrad ani využití partnerství veřejného a soukromého sektoru."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,820 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T18-42-51-445Z--af61a0375c9f",
+  "evaluatedAt": "2026-10-06T18:42:51.445Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-2f77936163ea/af61a0375c9f476ecb24bf4514a617ad5b0ef40ca0898504f761fef12e4c486e.json",
+  "packageHash": "af61a0375c9f476ecb24bf4514a617ad5b0ef40ca0898504f761fef12e4c486e",
+  "assessmentContentHash": "7f930ce8de3f7490eab4789f81c2389603dda5ef69d42d3800892e7cf51da804",
+  "assessmentFingerprint": "70af250bfefed3a7d0b093920ee85d92be553fee82943314bc0c0d51bb67cfe1",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-2f77936163ea",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment cites law change psp-core-2025--law-change-43275-2 it found not relevant",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_07cfeadbe8eb85cf016ac5401ea73c87d29bf3914f8138c9b5",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 751739,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 751736
+            },
+            "output_tokens": 9466,
+            "output_tokens_details": {
+              "reasoning_tokens": 7048
+            },
+            "total_tokens": 761205
+          },
+          "output": {
+            "promiseId": "candidate-2f77936163ea",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43161-1",
+                "relevant": true,
+                "reasonCz": "Návrh vytváří celostátní datový katalog a pravidla pro popis a správu dat veřejné správy, což je skutečná, byť jen dílčí část slibu o centralizované správě dat.",
+                "effectCz": "Jde o nový zákon, takže nemá předchozí znění, s nímž by bylo možné změnu porovnat. Zavádí národní katalog dat, který propojuje obsah místních katalogů a datových slovníků, a ukládá některým správcům povinnosti popisovat data a datová rozhraní metadaty. Tím vytváří podmínky pro jednotnější správu a sdílení dat, ale sám nezavádí povinnost, aby občan údaje zadal jednou a úřady si je automaticky předávaly; slib naplňuje pouze zčásti."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": false,
+                "reasonCz": "Upravuje stavební řízení a informační systémy pro územní plánování a stavebnictví, ale nedokládá centrální správu údajů občanů ani jejich opakované předávání mezi úřady.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": false,
+                "reasonCz": "Mění nakládání s odpady při stavebních záměrech, nikoli předávání údajů občanů mezi úřady.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-1",
+                "relevant": false,
+                "reasonCz": "Upravuje podmínky poradenství a podpory bydlení, nikoli centrální správu dat či zásadu jednorázového zadávání údajů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-1",
+                "relevant": false,
+                "reasonCz": "Upravuje rodičovský příspěvek a jeho vyřizování, ale dodaný text neukazuje systém, který by zajistil opakované předávání údajů mezi úřady.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-2",
+                "relevant": false,
+                "reasonCz": "Ruší některé budoucí změny pravidel státní sociální podpory, ale věcně neřeší centralizovanou správu a předávání dat občanů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-14",
+                "relevant": false,
+                "reasonCz": "Upravuje procesní pravidla pro řízení s cizinci a samo o sobě nedokládá naplnění slibu ve vztahu k údajům občanů a úřadů obecně.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-16",
+                "relevant": false,
+                "reasonCz": "Stanoví povinnosti při hlášení pobytu cizinců, nikoli centrální správu údajů, které občané předávají veřejné správě.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-17",
+                "relevant": false,
+                "reasonCz": "Zřizuje informační systém a cizinecké účty pro agendu pobytu cizinců, ale jde o zvláštní systém pro jinou skupinu a slib o obecné výměně údajů občanů tím nedokládá.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-19",
+                "relevant": false,
+                "reasonCz": "Obsahuje přechodná a zrušovací ustanovení k cizineckému zákonu, která nedokládají naplnění slibu o údajích občanů a jejich předávání mezi úřady.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": true,
+                "reasonCz": "Návrh umožňuje používat elektronická potvrzení údajů z veřejných zdrojů v digitální peněžence, což může usnadnit opakované prokazování údajů při jednání s úřady.",
+                "effectCz": "Dosavadní § 12 upravoval ověřování platnosti elektronických podpisů a pečetí; návrh jej nahrazuje pravidly pro online prokazování skutečností elektronickými potvrzeními atributů, včetně potvrzení vydaných veřejným sektorem, a zavádí i související ustanovení pro použití peněženky za osobní přítomnosti. U nově vložených ustanovení předchozí znění v balíčku uvedeno není, takže změnu jejich povinností oproti dřívějšku nelze určit. Návrh rozšiřuje možnosti digitálního prokazování údajů, ale neukládá úřadům, aby si údaje občanů samy předávaly; slib proto podporuje pouze nepřímo a částečně."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-2",
+                "relevant": false,
+                "reasonCz": "Rozšiřuje možnosti elektronického prokazování totožnosti digitální peněženkou, ale samo neupravuje správu ani předávání údajů, které slib řeší.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-1",
+                "relevant": false,
+                "reasonCz": "Týká se vydávání a evidence cestovních dokladů a nepředstavuje obecnou úpravu předávání údajů občanů mezi úřady.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-2",
+                "relevant": false,
+                "reasonCz": "Mění pravidla pro občanské průkazy, nikoli centralizovanou správu údajů nebo jejich předávání mezi úřady.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-4",
+                "relevant": false,
+                "reasonCz": "Ruší vybrané údaje a související pravidla v základních registrech týkající se elektronické autentizace, ale netýká se slíbeného předávání občanských údajů mezi úřady.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43311-1",
+                "relevant": false,
+                "reasonCz": "Zavádí nástroj pro elektronické petice, což není centrální správa ani předávání údajů občanů mezi úřady.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-1",
+                "relevant": false,
+                "reasonCz": "Upravuje opatření pro osoby s dočasnou ochranou a jejich vozidla, nikoli obecnou výměnu občanských údajů mezi úřady.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43395-1",
+                "relevant": false,
+                "reasonCz": "Mění organizaci zeměměřických a katastrálních orgánů a správu mapových systémů, ale nepředstavuje slíbené předávání osobních údajů občanů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43415-1",
+                "relevant": false,
+                "reasonCz": "Upravuje registraci a správu údajů o vozidlech, nikoli systém, který by občanům umožnil zadat osobní údaje jednou pro opakované použití úřady.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-2f77936163ea--source",
+              "psp-core-2025--law-change-43161-1",
+              "psp-core-2025--vote-86767",
+              "psp-core-2025--law-change-43275-1",
+              "psp-core-2025--law-change-43275-2",
+              "psp-core-2025--print-step-211101"
+            ],
+            "explanationCz": "Poslanci Motoristů hlasovali pro návrh zákona o správě dat, který počítá s národním katalogem dat a jednotnějším popisem údajů veřejné správy. Vláda také předložila návrh, který má umožnit prokazovat některé údaje elektronickými potvrzeními v digitální peněžence. Jde o dílčí kroky k lepšímu využívání dat, nikoli o zavedení systému, v němž občan zadá údaje jednou a úřady si je automaticky předají. Proto je doložen posun směrem ke slibu, ne jeho úplné naplnění.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Z dodaných podkladů není doloženo, že už funguje obecný systém automatického předávání údajů občanů mezi úřady; návrh zákona o správě dat vytváří katalog a pravidla pro správu dat, ale výslovně takové předávání nenařizuje."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-2f77936163ea",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí národní katalog dat a pravidla pro správu, popis a sdílení dat veřejné správy, což je část infrastruktury, kterou slib požaduje.",
+          "effectCz": "Jde o nový zákon, takže předchozí znění pravidel v balíčku není; zavádí místní katalogy, metadata a datová rozhraní spravovaných informačních systémů a jejich propojení v národním katalogu, čímž vytváří společnou datovou infrastrukturu, ale neukládá obecnou povinnost, aby občan údaje poskytl jednou a úřady si je vždy předaly."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změna stavebního zákona upravuje společný geoportál a výslovně umožňuje spojovat informační systémy veřejné správy, takže přispívá k části slibu týkající se centralizace.",
+          "effectCz": "Před změnou § 267 vyjmenovával několik samostatných stavebních informačních systémů; nově může Úřad více systémů sdružit a vést jako jeden společný systém, což centralizaci umožňuje, nikoli nařizuje. Předchozí § 59 vyžadoval elektronické dokumenty a jednotný standard jen pro vybrané části, zatímco nově se územně plánovací dokumentace, studie, vymezení území a opatření vyhotovují a vydávají v jednotném strojově čitelném standardu, což sjednocení dat rozšiřuje. Dříve § 269 zveřejňoval v geoportálu vybrané části dokumentací a vymezení území; nově se tam zveřejňují územně plánovací podklady, dokumentace, vymezení území a opatření, tedy širší soubor informací. Změna tak posiluje společnou digitální infrastrukturu, ale sama nezajišťuje, že občan zadá údaje pouze jednou a úřady si je automaticky předají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla odpadového hospodářství u staveb, nikoli centralizovanou správu dat ani předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Návrh se týká poradenské a bytové podpory a změn její evidence, ne obecného systému sdílení údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": false,
+          "reasonCz": "Změna upravuje rodičovský příspěvek a proces jeho vyřizování, ale nedokládá centrální sdílení dat mezi úřady podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Ruší části dřívější právní úpravy dávkové agendy, avšak nedotýká se podstaty slibu o předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Upravuje procesní pravidla pro pobytová řízení cizinců, nikoli systém předávání údajů mezi úřady pro občany, o němž slib mluví.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": false,
+          "reasonCz": "Stanoví povinnosti a přestupky související s pobytem cizinců, ne centralizovanou správu dat podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": false,
+          "reasonCz": "Vytváří informační systém pro agendu cizinců, ale nedokládá obecné předávání údajů mezi úřady pro občany podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": false,
+          "reasonCz": "Přechodná a závěrečná ustanovení cizineckého zákona nesměřují k naplnění slibu o centrální správě údajů občanů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": false,
+          "reasonCz": "Elektronická potvrzení atributů umožňují prokazovat údaje digitálně, ale návrh necentralizuje data úřadů ani nezavádí jejich vzájemné předávání.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": false,
+          "reasonCz": "Úprava elektronické identifikace řeší ověření totožnosti a digitální peněženku, nikoli sdílení údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Změna se týká vydávání a evidence cestovních dokladů, nikoli obecného systému správy a předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": false,
+          "reasonCz": "Změna občanských průkazů řeší jejich žádosti, vydávání a evidenci, nikoli naplnění slibu o předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Odstraňuje údaje sloužící k elektronické identifikaci z registru obyvatel, ale nejde o údaje, které by úřady podle slibu měly předávat při vyřizování agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje volební lístky a elektronické petice, nikoli správu a předávání údajů veřejné správy podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje opatření pro osoby z Ukrajiny a evidenci vozidel, ne systém předávání údajů mezi úřady podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje zeměměřické orgány a informační systémy pro mapy a vystavěné prostředí, nikoli předávání občanských údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Změny registru vozidel a postupů při jeho správě se netýkají obecného systému předávání údajů mezi úřady.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2f77936163ea--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona o správě dat, který zavádí národní katalog a společná pravidla pro popis a sdílení dat veřejné správy; poslanci Motoristů hlasovali pro jeho návrh. Poslanci Motoristů také předložili s dalšími poslanci novelu stavebního zákona, jež umožňuje spojit více informačních systémů do jednoho společného systému. Po zamítnutí návrhu Senátem Sněmovna při dalším hlasování rozhodla na jeho přijetí trvat a Motoristé hlasovali pro. Jde o dílčí krok směrem k centralizaci, ale doložené návrhy nezajišťují, že občan zadá údaje jednou a úřady si je automaticky předají.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z podkladů nelze doložit, že společný informační systém už funguje nebo že se údaje občanů mezi úřady skutečně automaticky předávají; doložena je právní a institucionální možnost jejich centralizace.",
+        "Senát návrh novely stavebního zákona zamítl, poté však Sněmovna hlasovala pro setrvání na návrhu; podklady neuvádějí jeho další legislativní osud."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-2f77936163ea",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Nový zákon upravuje správu dat ve veřejné správě a zavádí společný národní katalog, takže jde o část infrastruktury pro centrálnější správu dat.",
+          "effectCz": "Jde o nový zákon, proto nemá předchozí znění, s nímž by bylo možné změnu porovnat. Zřizuje národní katalog dat, který propojuje metadata z lokálních katalogů a datové slovníky veřejné správy; tím vytváří dílčí základ pro sdílení a sjednocení správy dat, ale nezavádí povinnost, aby občan údaje zadal jednou a úřady si je samy předávaly."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla územního plánování a stavebního řízení, ale její ustanovení neřeší předávání údajů občana mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změny pravidel odpadového hospodářství při povolování staveb neumožňují naplnit ani část slibu o předávání občanských údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Změna podpory bydlení upravuje nárok na poradenství a přechodná pravidla, nikoli centrální správu a předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje rodičovský příspěvek a jeho elektronické vyřizování, ale nezavádí předávání údajů mezi úřady podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Tato část mění účinnost ustanovení o dávkách státní sociální podpory a nesměřuje k centrální správě ani sdílení dat mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Ustanovení o procesních pravidlech pro cizince sama nezřizují systém správy dat ani neupravují předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": false,
+          "reasonCz": "Tato část stanoví povinnosti a přestupky cizinců, nikoli centrální správu dat nebo předávání jejich údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Zavádí integrovaný informační systém pro cizineckou agendu, cizinecké účty a digitální služby, což je konkrétní dílčí příklad centrální správy údajů ve veřejné správě.",
+          "effectCz": "Jde o ustanovení nového zákona, takže nemá předchozí znění. Návrh zřizuje integrovaný cizinecký agendový systém, který eviduje údaje a umožňuje digitální úkony a přístup více institucím; jde o dílčí posun k centrální správě a sdílení dat, ale jen v cizinecké agendě a bez obecného principu, že občan zadá údaje jednou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": false,
+          "reasonCz": "Přechodná ustanovení k novému cizineckému zákonu nejsou sama o sobě změnou obecného systému sdílení údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí možnost prokazovat skutečnosti elektronickými potvrzeními atributů z veřejné správy, což může omezit opakované dokládání některých údajů.",
+          "effectCz": "Podle dodaného kontextu § 12 dříve upravoval pouze ověřování platnosti elektronického podpisu a pečeti. Návrh jej nahrazuje pravidly pro prokazování skutečností elektronickými potvrzeními atributů, včetně potvrzení veřejného sektoru; tím usnadňuje opakované elektronické prokázání údaje, ale neukládá úřadům, aby si údaje předávaly samy, ani nevytváří obecný centrální systém."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje elektronickou identifikaci a peněženku, ale sama nezajišťuje správu ani předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Změny vydávání a evidence cestovních dokladů se netýkají principu předávání údajů občana mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": false,
+          "reasonCz": "Změny občanských průkazů řeší jejich vydávání a evidenci, nikoli centrální sdílení údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Rušení údajů v základním registru souvisejících s elektronickou identifikací není změnou zaměřenou na předávání údajů mezi úřady podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": false,
+          "reasonCz": "Nástroj pro elektronické petice a grafický kód na hlasovacích lístcích neřeší centrální správu údajů občanů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro ukrajinská vozidla a dočasnou ochranu neřeší slibovaný systém předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění organizaci zeměměřických a katastrálních orgánů a správu mapových systémů, nikoli přenos údajů občanů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Změny registrace silničních vozidel a technických prohlídek se netýkají slibu o centrálním předávání údajů občanů mezi úřady.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2f77936163ea--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--print-step-211101"
+      ],
+      "explanationCz": "Poslanci Motoristů podpořili návrh zákona o správě dat, který zavádí národní katalogy a sjednocuje popis dat veřejné správy; jde však jen o část slibu, nikoli o předávání údajů občanů mezi úřady. Vláda také předložila návrh cizineckého zákona s integrovaným systémem pro cizineckou agendu. Při závěrečném hlasování o tomto návrhu hlasovalo pro jen 6 z 13 poslanců Motoristů, takže klub nedal většinovou podporu opatření, které by slib posunulo alespoň v této dílčí oblasti. Vláda rovněž navrhla elektronická potvrzení údajů z veřejné správy, ale toto opatření samo nezavazuje úřady k jejich vzájemnému předávání.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dřívější většinová podpora zákona o správě dat mířila jen na národní katalogy a standardizaci údajů, nikoli na celý slib. Závěrečné hlasování o cizineckém zákonu skončilo bez většinové podpory klubu Motoristů; dopad systému se navíc vztahuje pouze na cizineckou agendu.",
+        "Elektronická potvrzení atributů mohou usnadnit opakované prokazování údajů, ale návrh nedokládá, že by úřady údaje předávaly samy bez dalšího úkonu občana."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0c242b815df16a32016ac53f87dd1c87d29a9976b16213f2bd",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 751739,
+      "input_tokens_details": {
+        "cache_write_tokens": 747769,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 8354,
+      "output_tokens_details": {
+        "reasoning_tokens": 6164
+      },
+      "total_tokens": 760093
+    },
+    "output": {
+      "promiseId": "candidate-2f77936163ea",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí národní katalog dat a pravidla pro správu, popis a sdílení dat veřejné správy, což je část infrastruktury, kterou slib požaduje.",
+          "effectCz": "Jde o nový zákon, takže předchozí znění pravidel v balíčku není; zavádí místní katalogy, metadata a datová rozhraní spravovaných informačních systémů a jejich propojení v národním katalogu, čímž vytváří společnou datovou infrastrukturu, ale neukládá obecnou povinnost, aby občan údaje poskytl jednou a úřady si je vždy předaly."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změna stavebního zákona upravuje společný geoportál a výslovně umožňuje spojovat informační systémy veřejné správy, takže přispívá k části slibu týkající se centralizace.",
+          "effectCz": "Před změnou § 267 vyjmenovával několik samostatných stavebních informačních systémů; nově může Úřad více systémů sdružit a vést jako jeden společný systém, což centralizaci umožňuje, nikoli nařizuje. Předchozí § 59 vyžadoval elektronické dokumenty a jednotný standard jen pro vybrané části, zatímco nově se územně plánovací dokumentace, studie, vymezení území a opatření vyhotovují a vydávají v jednotném strojově čitelném standardu, což sjednocení dat rozšiřuje. Dříve § 269 zveřejňoval v geoportálu vybrané části dokumentací a vymezení území; nově se tam zveřejňují územně plánovací podklady, dokumentace, vymezení území a opatření, tedy širší soubor informací. Změna tak posiluje společnou digitální infrastrukturu, ale sama nezajišťuje, že občan zadá údaje pouze jednou a úřady si je automaticky předají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla odpadového hospodářství u staveb, nikoli centralizovanou správu dat ani předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Návrh se týká poradenské a bytové podpory a změn její evidence, ne obecného systému sdílení údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": false,
+          "reasonCz": "Změna upravuje rodičovský příspěvek a proces jeho vyřizování, ale nedokládá centrální sdílení dat mezi úřady podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Ruší části dřívější právní úpravy dávkové agendy, avšak nedotýká se podstaty slibu o předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Upravuje procesní pravidla pro pobytová řízení cizinců, nikoli systém předávání údajů mezi úřady pro občany, o němž slib mluví.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": false,
+          "reasonCz": "Stanoví povinnosti a přestupky související s pobytem cizinců, ne centralizovanou správu dat podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": false,
+          "reasonCz": "Vytváří informační systém pro agendu cizinců, ale nedokládá obecné předávání údajů mezi úřady pro občany podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": false,
+          "reasonCz": "Přechodná a závěrečná ustanovení cizineckého zákona nesměřují k naplnění slibu o centrální správě údajů občanů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": false,
+          "reasonCz": "Elektronická potvrzení atributů umožňují prokazovat údaje digitálně, ale návrh necentralizuje data úřadů ani nezavádí jejich vzájemné předávání.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": false,
+          "reasonCz": "Úprava elektronické identifikace řeší ověření totožnosti a digitální peněženku, nikoli sdílení údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Změna se týká vydávání a evidence cestovních dokladů, nikoli obecného systému správy a předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": false,
+          "reasonCz": "Změna občanských průkazů řeší jejich žádosti, vydávání a evidenci, nikoli naplnění slibu o předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Odstraňuje údaje sloužící k elektronické identifikaci z registru obyvatel, ale nejde o údaje, které by úřady podle slibu měly předávat při vyřizování agend.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje volební lístky a elektronické petice, nikoli správu a předávání údajů veřejné správy podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje opatření pro osoby z Ukrajiny a evidenci vozidel, ne systém předávání údajů mezi úřady podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje zeměměřické orgány a informační systémy pro mapy a vystavěné prostředí, nikoli předávání občanských údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Změny registru vozidel a postupů při jeho správě se netýkají obecného systému předávání údajů mezi úřady.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2f77936163ea--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Vláda předložila návrh zákona o správě dat, který zavádí národní katalog a společná pravidla pro popis a sdílení dat veřejné správy; poslanci Motoristů hlasovali pro jeho návrh. Poslanci Motoristů také předložili s dalšími poslanci novelu stavebního zákona, jež umožňuje spojit více informačních systémů do jednoho společného systému. Po zamítnutí návrhu Senátem Sněmovna při dalším hlasování rozhodla na jeho přijetí trvat a Motoristé hlasovali pro. Jde o dílčí krok směrem k centralizaci, ale doložené návrhy nezajišťují, že občan zadá údaje jednou a úřady si je automaticky předají.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z podkladů nelze doložit, že společný informační systém už funguje nebo že se údaje občanů mezi úřady skutečně automaticky předávají; doložena je právní a institucionální možnost jejich centralizace.",
+        "Senát návrh novely stavebního zákona zamítl, poté však Sněmovna hlasovala pro setrvání na návrhu; podklady neuvádějí jeho další legislativní osud."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0c5d1878791d63b0016ac540a9e3ec87d2a039cca5274e21e8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 751739,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 751736
+      },
+      "output_tokens": 7328,
+      "output_tokens_details": {
+        "reasoning_tokens": 5103
+      },
+      "total_tokens": 759067
+    },
+    "output": {
+      "promiseId": "candidate-2f77936163ea",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Nový zákon upravuje správu dat ve veřejné správě a zavádí společný národní katalog, takže jde o část infrastruktury pro centrálnější správu dat.",
+          "effectCz": "Jde o nový zákon, proto nemá předchozí znění, s nímž by bylo možné změnu porovnat. Zřizuje národní katalog dat, který propojuje metadata z lokálních katalogů a datové slovníky veřejné správy; tím vytváří dílčí základ pro sdílení a sjednocení správy dat, ale nezavádí povinnost, aby občan údaje zadal jednou a úřady si je samy předávaly."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla územního plánování a stavebního řízení, ale její ustanovení neřeší předávání údajů občana mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změny pravidel odpadového hospodářství při povolování staveb neumožňují naplnit ani část slibu o předávání občanských údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Změna podpory bydlení upravuje nárok na poradenství a přechodná pravidla, nikoli centrální správu a předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje rodičovský příspěvek a jeho elektronické vyřizování, ale nezavádí předávání údajů mezi úřady podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": false,
+          "reasonCz": "Tato část mění účinnost ustanovení o dávkách státní sociální podpory a nesměřuje k centrální správě ani sdílení dat mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Ustanovení o procesních pravidlech pro cizince sama nezřizují systém správy dat ani neupravují předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": false,
+          "reasonCz": "Tato část stanoví povinnosti a přestupky cizinců, nikoli centrální správu dat nebo předávání jejich údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Zavádí integrovaný informační systém pro cizineckou agendu, cizinecké účty a digitální služby, což je konkrétní dílčí příklad centrální správy údajů ve veřejné správě.",
+          "effectCz": "Jde o ustanovení nového zákona, takže nemá předchozí znění. Návrh zřizuje integrovaný cizinecký agendový systém, který eviduje údaje a umožňuje digitální úkony a přístup více institucím; jde o dílčí posun k centrální správě a sdílení dat, ale jen v cizinecké agendě a bez obecného principu, že občan zadá údaje jednou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": false,
+          "reasonCz": "Přechodná ustanovení k novému cizineckému zákonu nejsou sama o sobě změnou obecného systému sdílení údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí možnost prokazovat skutečnosti elektronickými potvrzeními atributů z veřejné správy, což může omezit opakované dokládání některých údajů.",
+          "effectCz": "Podle dodaného kontextu § 12 dříve upravoval pouze ověřování platnosti elektronického podpisu a pečeti. Návrh jej nahrazuje pravidly pro prokazování skutečností elektronickými potvrzeními atributů, včetně potvrzení veřejného sektoru; tím usnadňuje opakované elektronické prokázání údaje, ale neukládá úřadům, aby si údaje předávaly samy, ani nevytváří obecný centrální systém."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje elektronickou identifikaci a peněženku, ale sama nezajišťuje správu ani předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Změny vydávání a evidence cestovních dokladů se netýkají principu předávání údajů občana mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": false,
+          "reasonCz": "Změny občanských průkazů řeší jejich vydávání a evidenci, nikoli centrální sdílení údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Rušení údajů v základním registru souvisejících s elektronickou identifikací není změnou zaměřenou na předávání údajů mezi úřady podle slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": false,
+          "reasonCz": "Nástroj pro elektronické petice a grafický kód na hlasovacích lístcích neřeší centrální správu údajů občanů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro ukrajinská vozidla a dočasnou ochranu neřeší slibovaný systém předávání údajů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43395-1",
+          "relevant": false,
+          "reasonCz": "Návrh mění organizaci zeměměřických a katastrálních orgánů a správu mapových systémů, nikoli přenos údajů občanů mezi úřady.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Změny registrace silničních vozidel a technických prohlídek se netýkají slibu o centrálním předávání údajů občanů mezi úřady.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-2f77936163ea--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--print-step-211101"
+      ],
+      "explanationCz": "Poslanci Motoristů podpořili návrh zákona o správě dat, který zavádí národní katalogy a sjednocuje popis dat veřejné správy; jde však jen o část slibu, nikoli o předávání údajů občanů mezi úřady. Vláda také předložila návrh cizineckého zákona s integrovaným systémem pro cizineckou agendu. Při závěrečném hlasování o tomto návrhu hlasovalo pro jen 6 z 13 poslanců Motoristů, takže klub nedal většinovou podporu opatření, které by slib posunulo alespoň v této dílčí oblasti. Vláda rovněž navrhla elektronická potvrzení údajů z veřejné správy, ale toto opatření samo nezavazuje úřady k jejich vzájemnému předávání.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dřívější většinová podpora zákona o správě dat mířila jen na národní katalogy a standardizaci údajů, nikoli na celý slib. Závěrečné hlasování o cizineckém zákonu skončilo bez většinové podpory klubu Motoristů; dopad systému se navíc vztahuje pouze na cizineckou agendu.",
+        "Elektronická potvrzení atributů mohou usnadnit opakované prokazování údajů, ale návrh nedokládá, že by úřady údaje předávaly samy bez dalšího úkonu občana."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_03f5a38b4add158e016ac5410f419087d2a05d973e0a32508c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 755081,
+      "input_tokens_details": {
+        "cache_write_tokens": 752169,
+        "cached_tokens": 2909
+      },
+      "output_tokens": 1495,
+      "output_tokens_details": {
+        "reasoning_tokens": 1231
+      },
+      "total_tokens": 756576
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "candidate-2f77936163ea--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Slib míří na společný systém, který by úřadům předávání údajů usnadnil, a na to, aby lidé zadávali své údaje jen jednou. Novela stavebního zákona výslovně umožňuje spojit více informačních systémů do jednoho; poslanci Motoristů hlasovali pro a po zamítnutí Senátem Sněmovna při dalším hlasování na návrhu trvala. To je konkrétní, ale jen dílčí krok: návrh sám nezajišťuje, že občané údaje zadají jednou a úřady si je automaticky předají. Assessor A tuto možnost správně uznal jako součást slibu, zatímco assessor B ji přehlédl."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-towards",
+    "selectedReview": "assessor-a"
+  }
+}

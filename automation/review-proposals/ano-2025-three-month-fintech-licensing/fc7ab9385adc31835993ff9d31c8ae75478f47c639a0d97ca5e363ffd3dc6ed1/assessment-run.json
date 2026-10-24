@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-40-48-780Z--a48a953d9d47",
+  "evaluatedAt": "2026-10-02T01:40:48.780Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-three-month-fintech-licensing/a48a953d9d473a3cc955201c5a0b065a3eeb19197a8c8851d508842287463c2c.json",
+  "packageHash": "a48a953d9d473a3cc955201c5a0b065a3eeb19197a8c8851d508842287463c2c",
+  "assessmentContentHash": "02ebec663d1165693a56e601dbd1c670bc4be0cfd504f5fea627e335004c8966",
+  "assessmentFingerprint": "fc7ab9385adc31835993ff9d31c8ae75478f47c639a0d97ca5e363ffd3dc6ed1",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-three-month-fintech-licensing",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-three-month-fintech-licensing",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení novely dávají České národní bance až 12 měsíců na rozhodnutí o některých žádostech o oprávnění nebankovního poskytovatele spotřebitelského úvěru, což může zasáhnout část fintech firem a je delší než slibované tři měsíce."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-three-month-fintech-licensing--source",
+        "psp-core-2025--law-change-43266-1",
+        "psp-core-2025--print-step-211051",
+        "psp-core-2025--vote-88519"
+      ],
+      "explanationCz": "Vláda ANO předložila návrh novely zákona o spotřebitelském úvěru. Její přechodné ustanovení umožňuje, aby Česká národní banka rozhodovala o některých žádostech o oprávnění nebankovního poskytovatele spotřebitelského úvěru až 12 měsíců. Poslanci ANO pak při závěrečném hlasování Sněmovny novelu podpořili. Tato lhůta jde proti slibu tříměsíčního rozhodnutí, avšak jen v části oblasti fintechu; novela nestanoví takovou lhůtu pro všechny fintechové ani kryptofirmy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, kolik fintechových či kryptofirem spadá mezi nebankovní poskytovatele spotřebitelského úvěru ani nakolik se jich dotknou žádosti podle přechodného ustanovení; doložený rozpor se proto týká jen této omezené kategorie."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-three-month-fintech-licensing",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1",
+          "relevant": true,
+          "reasonCz": "Návrh stanoví až dvanáctiměsíční lhůtu pro rozhodnutí České národní banky o určitých žádostech o oprávnění poskytovatelů spotřebitelských úvěrů, což se může týkat části fintech firem a je v rozporu se slíbenou tříměsíční lhůtou."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-three-month-fintech-licensing--source",
+        "psp-core-2025--law-change-43266-1",
+        "psp-core-2025--print-step-211051",
+        "psp-core-2025--vote-88519"
+      ],
+      "explanationCz": "Vláda předložila novelu zákona o spotřebitelském úvěru, kterou poslanci ANO v závěrečném hlasování podpořili. Novela stanoví, že u některých žádostí o oprávnění nebankovních poskytovatelů spotřebitelských úvěrů může rozhodnutí České národní banky trvat až 12 měsíců, což je delší než slíbené tři měsíce. Jde o omezený přechodný režim pro určité žádosti, nikoli o lhůtu pro všechny fintechové či kryptoměnové licence. Proto lze doložit možný postup proti části slibu, ale ne jeho obecné porušení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, zda se dotčená kategorie poskytovatelů spotřebitelských úvěrů překrývá s firmami, které slib označuje jako fintech; jde proto jen o možný rozpor u části fintech licencí.",
+        "Dvanáctiměsíční lhůta se podle textu týká žádostí v přechodném režimu, nikoli všech žádostí o licenci, a podklady neobjasňují, jaký dopad má na běžné fintechové nebo kryptoměnové licence."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_057617b7fd1f8785016abf0b84408487d1ab470a48856b3302",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 98159,
+      "input_tokens_details": {
+        "cache_write_tokens": 94835,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1780,
+      "output_tokens_details": {
+        "reasoning_tokens": 1288
+      },
+      "total_tokens": 99939
+    },
+    "output": {
+      "promiseId": "ano-2025-three-month-fintech-licensing",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení novely dávají České národní bance až 12 měsíců na rozhodnutí o některých žádostech o oprávnění nebankovního poskytovatele spotřebitelského úvěru, což může zasáhnout část fintech firem a je delší než slibované tři měsíce."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-three-month-fintech-licensing--source",
+        "psp-core-2025--law-change-43266-1",
+        "psp-core-2025--print-step-211051",
+        "psp-core-2025--vote-88519"
+      ],
+      "explanationCz": "Vláda ANO předložila návrh novely zákona o spotřebitelském úvěru. Její přechodné ustanovení umožňuje, aby Česká národní banka rozhodovala o některých žádostech o oprávnění nebankovního poskytovatele spotřebitelského úvěru až 12 měsíců. Poslanci ANO pak při závěrečném hlasování Sněmovny novelu podpořili. Tato lhůta jde proti slibu tříměsíčního rozhodnutí, avšak jen v části oblasti fintechu; novela nestanoví takovou lhůtu pro všechny fintechové ani kryptofirmy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, kolik fintechových či kryptofirem spadá mezi nebankovní poskytovatele spotřebitelského úvěru ani nakolik se jich dotknou žádosti podle přechodného ustanovení; doložený rozpor se proto týká jen této omezené kategorie."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0409e75f24787773016abf0b904b9c87d19f964765eacf38cd",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 98159,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 98156
+      },
+      "output_tokens": 2494,
+      "output_tokens_details": {
+        "reasoning_tokens": 1940
+      },
+      "total_tokens": 100653
+    },
+    "output": {
+      "promiseId": "ano-2025-three-month-fintech-licensing",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1",
+          "relevant": true,
+          "reasonCz": "Návrh stanoví až dvanáctiměsíční lhůtu pro rozhodnutí České národní banky o určitých žádostech o oprávnění poskytovatelů spotřebitelských úvěrů, což se může týkat části fintech firem a je v rozporu se slíbenou tříměsíční lhůtou."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-three-month-fintech-licensing--source",
+        "psp-core-2025--law-change-43266-1",
+        "psp-core-2025--print-step-211051",
+        "psp-core-2025--vote-88519"
+      ],
+      "explanationCz": "Vláda předložila novelu zákona o spotřebitelském úvěru, kterou poslanci ANO v závěrečném hlasování podpořili. Novela stanoví, že u některých žádostí o oprávnění nebankovních poskytovatelů spotřebitelských úvěrů může rozhodnutí České národní banky trvat až 12 měsíců, což je delší než slíbené tři měsíce. Jde o omezený přechodný režim pro určité žádosti, nikoli o lhůtu pro všechny fintechové či kryptoměnové licence. Proto lze doložit možný postup proti části slibu, ale ne jeho obecné porušení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neukazují, zda se dotčená kategorie poskytovatelů spotřebitelských úvěrů překrývá s firmami, které slib označuje jako fintech; jde proto jen o možný rozpor u části fintech licencí.",
+        "Dvanáctiměsíční lhůta se podle textu týká žádostí v přechodném režimu, nikoli všech žádostí o licenci, a podklady neobjasňují, jaký dopad má na běžné fintechové nebo kryptoměnové licence."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-against",
+    "selectedReview": "assessor-a"
+  }
+}

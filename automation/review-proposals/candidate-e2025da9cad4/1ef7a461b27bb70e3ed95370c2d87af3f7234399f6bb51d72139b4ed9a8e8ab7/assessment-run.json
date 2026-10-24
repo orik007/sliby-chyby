@@ -1,0 +1,228 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-31-58-778Z--dba3339b1a6a",
+  "evaluatedAt": "2026-10-02T05:31:58.778Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-e2025da9cad4/dba3339b1a6acb07a7a7806f5d0058db336c22e61e810f27bc77ced5b22c08e7.json",
+  "packageHash": "dba3339b1a6acb07a7a7806f5d0058db336c22e61e810f27bc77ced5b22c08e7",
+  "assessmentContentHash": "5ed07410463a0982f3c350239c77009e56b6f12c0744697de42581633eb0c7af",
+  "assessmentFingerprint": "1ef7a461b27bb70e3ed95370c2d87af3f7234399f6bb51d72139b4ed9a8e8ab7",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-e2025da9cad4",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-e2025da9cad4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-2",
+          "relevant": false,
+          "reasonCz": "Navržené změny trestního řádu upravují zejména trestní řízení a podmínky výkonu obecně prospěšných prací, nikoli navazující integrační programy ani snižování recidivy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-6",
+          "relevant": false,
+          "reasonCz": "Navržené změny probačních programů pro mladistvé se týkají hlavně pojištění a výkonu činností, ale nezavádějí ani nerozšiřují programy pro integraci do společnosti."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-e2025da9cad4--source",
+        "psp-core-2025--law-change-43221-2",
+        "psp-core-2025--law-change-43221-6",
+        "psp-core-2025--print-step-210821"
+      ],
+      "explanationCz": "ANO slíbilo snižovat recidivu pomocí navazujících programů pro integraci do společnosti. V podkladech je vládní návrh zákona předložený vládou, v níž ANO působí, který upravuje trestní řízení a pravidla pro některé probační programy, zejména jejich pojištění a výkon. Tyto změny však nedokládají zavedení ani rozšíření slíbených integračních programů nebo konkrétní kroky ke snížení recidivy. Proto nelze doložit podstatný posun v plnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady zachycují předložení vládního návrhu, ale jeho ustanovení se podle dodaných textů týkají především pojištění a výkonu činností; není doloženo, zda se tyto změny promítnou do dostupnosti integračních programů nebo recidivy."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-e2025da9cad4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-2",
+          "relevant": true,
+          "reasonCz": "Navržená úprava trestního řádu stanoví pravidla pro výkon probačních programů zahrnujících obecně prospěšnou činnost, a tím se přímo dotýká jejich provádění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-6",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje probační programy pro mladistvé, včetně jejich výkonu a podmínek pro poskytovatele, což se týká programů podporujících začlenění do společnosti."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e2025da9cad4--source",
+        "psp-core-2025--law-change-43221-2",
+        "psp-core-2025--law-change-43221-6",
+        "psp-core-2025--print-step-210821"
+      ],
+      "explanationCz": "Vláda, v níž je ANO, předložila návrh zákona upravující trestní právo a soudnictví ve věcech mládeže. Návrh stanoví pravidla pro výkon probačních programů zahrnujících obecně prospěšnou činnost a upravuje probační programy pro mladistvé, které mohou rozvíjet jejich sociální dovednosti a zázemí. Jde o dílčí posun směrem k programům podporujícím začlenění, nikoli o doložené zavedení návazných programů ani prokázané snížení recidivy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh také vyžaduje pojištění u poskytovatelů některých programů; podklady neukazují, zda to omezí jejich dostupnost, a návrh nestanoví návaznost programů ani měřitelný účinek na recidivu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_00f625438501a23f016abf41aab21087d184b4e148bcc124ce",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 21631,
+      "input_tokens_details": {
+        "cache_write_tokens": 18307,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2246,
+      "output_tokens_details": {
+        "reasoning_tokens": 1703
+      },
+      "total_tokens": 23877
+    },
+    "output": {
+      "promiseId": "candidate-e2025da9cad4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-2",
+          "relevant": false,
+          "reasonCz": "Navržené změny trestního řádu upravují zejména trestní řízení a podmínky výkonu obecně prospěšných prací, nikoli navazující integrační programy ani snižování recidivy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-6",
+          "relevant": false,
+          "reasonCz": "Navržené změny probačních programů pro mladistvé se týkají hlavně pojištění a výkonu činností, ale nezavádějí ani nerozšiřují programy pro integraci do společnosti."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-e2025da9cad4--source",
+        "psp-core-2025--law-change-43221-2",
+        "psp-core-2025--law-change-43221-6",
+        "psp-core-2025--print-step-210821"
+      ],
+      "explanationCz": "ANO slíbilo snižovat recidivu pomocí navazujících programů pro integraci do společnosti. V podkladech je vládní návrh zákona předložený vládou, v níž ANO působí, který upravuje trestní řízení a pravidla pro některé probační programy, zejména jejich pojištění a výkon. Tyto změny však nedokládají zavedení ani rozšíření slíbených integračních programů nebo konkrétní kroky ke snížení recidivy. Proto nelze doložit podstatný posun v plnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady zachycují předložení vládního návrhu, ale jeho ustanovení se podle dodaných textů týkají především pojištění a výkonu činností; není doloženo, zda se tyto změny promítnou do dostupnosti integračních programů nebo recidivy."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_01874d5d5e2ca98d016abf41b8bd3c87d1913cb616152844f3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 21631,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 21628
+      },
+      "output_tokens": 1952,
+      "output_tokens_details": {
+        "reasoning_tokens": 1416
+      },
+      "total_tokens": 23583
+    },
+    "output": {
+      "promiseId": "candidate-e2025da9cad4",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-2",
+          "relevant": true,
+          "reasonCz": "Navržená úprava trestního řádu stanoví pravidla pro výkon probačních programů zahrnujících obecně prospěšnou činnost, a tím se přímo dotýká jejich provádění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-6",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje probační programy pro mladistvé, včetně jejich výkonu a podmínek pro poskytovatele, což se týká programů podporujících začlenění do společnosti."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e2025da9cad4--source",
+        "psp-core-2025--law-change-43221-2",
+        "psp-core-2025--law-change-43221-6",
+        "psp-core-2025--print-step-210821"
+      ],
+      "explanationCz": "Vláda, v níž je ANO, předložila návrh zákona upravující trestní právo a soudnictví ve věcech mládeže. Návrh stanoví pravidla pro výkon probačních programů zahrnujících obecně prospěšnou činnost a upravuje probační programy pro mladistvé, které mohou rozvíjet jejich sociální dovednosti a zázemí. Jde o dílčí posun směrem k programům podporujícím začlenění, nikoli o doložené zavedení návazných programů ani prokázané snížení recidivy.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh také vyžaduje pojištění u poskytovatelů některých programů; podklady neukazují, zda to omezí jejich dostupnost, a návrh nestanoví návaznost programů ani měřitelný účinek na recidivu."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_01ff903e6fe2f080016abf41c4bdf487d18d9dea33c39fd1a1",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 21739,
+      "input_tokens_details": {
+        "cache_write_tokens": 19257,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 596,
+      "output_tokens_details": {
+        "reasoning_tokens": 303
+      },
+      "total_tokens": 22335
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-e2025da9cad4--source",
+        "psp-core-2025--law-change-43221-2",
+        "psp-core-2025--law-change-43221-6",
+        "psp-core-2025--print-step-210821"
+      ],
+      "explanationCz": "Volím druhé hodnocení, protože návrh mění fungování programů, které pomáhají mladistvým začlenit se do společnosti a vyhnout se dalším trestným činům. Vláda s účastí ANO předložila návrh změn trestních zákonů, vedený ve Sněmovně jako tisk č. 111. Návrh upravuje dohled nad účastí v těchto programech a počítá s úhradou pojištění jejich poskytovatelům. První hodnocení příliš úzce vyžaduje zavedení nebo rozšíření programů, ačkoli dílčím krokem může být i zlepšení podmínek jejich fungování. Jde však jen o návrh: návaznost programů, dopad na jejich dostupnost ani skutečné snížení opakované trestné činnosti zatím doloženy nejsou."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

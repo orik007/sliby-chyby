@@ -1,0 +1,184 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-46-53-465Z--1f6804a762d9",
+  "evaluatedAt": "2026-10-02T01:46:53.465Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-5d2672336f99/1f6804a762d900b3fcff191ece175acaa808b551aaa52ef2bdc27964f67b6728.json",
+  "packageHash": "1f6804a762d900b3fcff191ece175acaa808b551aaa52ef2bdc27964f67b6728",
+  "assessmentContentHash": "ed3d927e6d17a5c6b6486f276a8118d83bf2b28c91f52beda8536fce7ff96f1e",
+  "assessmentFingerprint": "6f35c9a0987b437df6c63c86cf4cbb2f126fb29fa495bdff922c10c43d01585e",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-5d2672336f99",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-5d2672336f99",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a přijatá změna rozšiřuje zákonné priority o pohybové aktivity, zvláštní důraz na děti a trenéry a vymezuje trenéra, ale nezavádí projekty pro školky a školy uvedené ve slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-5d2672336f99--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Původní poslanecký návrh v části týkající se podpory sportu měnil jen pravomoci vedení Národní sportovní agentury. Při projednávání se ale zákonná část rozšířila: mezi priority zařadila pohybové aktivity se zvláštním důrazem na děti, mládež a trenéry a nově vymezila trenéra. Poslanci ANO hlasovali pro tuto podobu zákona v červenci a po zamítnutí Senátem pro její přijetí hlasovali znovu v září. Jde o posun k podpoře pohybu a trenérů, zákon však nezavádí konkrétní projekty „Trenéři do školek“ a „Trenéři do škol“, takže slib plní jen zčásti.",
+      "confidence": "high",
+      "uncertainties": []
+    },
+    "assessor-b": {
+      "promiseId": "candidate-5d2672336f99",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválené a přijaté znění rozšiřuje podporu pohybových aktivit se zvláštním důrazem na děti a trenéry a vymezuje trenéra podle odborné způsobilosti, ale nezavádí výslovně pohyb v mateřských školách ani uvedené projekty."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-5d2672336f99--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro změnu zákona o podpoře sportu, která mezi priority řadí pohybové aktivity všech generací, zejména dětí a mládeže, a trenéry; také stanoví, kdo se pro účely zákona považuje za trenéra. Senát návrh odmítl, ale Poslanecká sněmovna poté hlasovala pro setrvání na svém znění. Jde o posun k podpoře pohybu dětí a kvalifikovaných trenérů, nikoli však o doložené zavedení projektů „Trenéři do školek“ a „Trenéři do škol“ ani o výslovnou podporu pravidelného pohybu už v mateřských školách.",
+      "confidence": "high",
+      "uncertainties": [
+        "Předložené změny nedokládají konkrétní zavedení projektů „Trenéři do školek“ a „Trenéři do škol“ ani opatření výslovně zaměřené na pravidelný pohyb v mateřských školách."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f689001ff6f5afe016abf0cf4e53887d1b42e65e72a9e07aa",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12499,
+      "input_tokens_details": {
+        "cache_write_tokens": 9175,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1749,
+      "output_tokens_details": {
+        "reasoning_tokens": 1282
+      },
+      "total_tokens": 14248
+    },
+    "output": {
+      "promiseId": "candidate-5d2672336f99",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená a přijatá změna rozšiřuje zákonné priority o pohybové aktivity, zvláštní důraz na děti a trenéry a vymezuje trenéra, ale nezavádí projekty pro školky a školy uvedené ve slibu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-5d2672336f99--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Původní poslanecký návrh v části týkající se podpory sportu měnil jen pravomoci vedení Národní sportovní agentury. Při projednávání se ale zákonná část rozšířila: mezi priority zařadila pohybové aktivity se zvláštním důrazem na děti, mládež a trenéry a nově vymezila trenéra. Poslanci ANO hlasovali pro tuto podobu zákona v červenci a po zamítnutí Senátem pro její přijetí hlasovali znovu v září. Jde o posun k podpoře pohybu a trenérů, zákon však nezavádí konkrétní projekty „Trenéři do školek“ a „Trenéři do škol“, takže slib plní jen zčásti.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_06a19cb87126584c016abf0d00a02087d1abd2ab73a0ab7772",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12499,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 12496
+      },
+      "output_tokens": 1792,
+      "output_tokens_details": {
+        "reasoning_tokens": 1330
+      },
+      "total_tokens": 14291
+    },
+    "output": {
+      "promiseId": "candidate-5d2672336f99",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválené a přijaté znění rozšiřuje podporu pohybových aktivit se zvláštním důrazem na děti a trenéry a vymezuje trenéra podle odborné způsobilosti, ale nezavádí výslovně pohyb v mateřských školách ani uvedené projekty."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-5d2672336f99--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro změnu zákona o podpoře sportu, která mezi priority řadí pohybové aktivity všech generací, zejména dětí a mládeže, a trenéry; také stanoví, kdo se pro účely zákona považuje za trenéra. Senát návrh odmítl, ale Poslanecká sněmovna poté hlasovala pro setrvání na svém znění. Jde o posun k podpoře pohybu dětí a kvalifikovaných trenérů, nikoli však o doložené zavedení projektů „Trenéři do školek“ a „Trenéři do škol“ ani o výslovnou podporu pravidelného pohybu už v mateřských školách.",
+      "confidence": "high",
+      "uncertainties": [
+        "Předložené změny nedokládají konkrétní zavedení projektů „Trenéři do školek“ a „Trenéři do škol“ ani opatření výslovně zaměřené na pravidelný pohyb v mateřských školách."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

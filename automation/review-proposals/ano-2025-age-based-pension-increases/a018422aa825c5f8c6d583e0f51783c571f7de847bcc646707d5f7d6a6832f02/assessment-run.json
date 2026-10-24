@@ -1,0 +1,194 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-35-53-904Z--673a9c6ebd44",
+  "evaluatedAt": "2026-10-02T01:35:53.904Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-age-based-pension-increases/673a9c6ebd44e40c552c8494f64c393319a9cd6dc04fb1db776ca8390ee25c56.json",
+  "packageHash": "673a9c6ebd44e40c552c8494f64c393319a9cd6dc04fb1db776ca8390ee25c56",
+  "assessmentContentHash": "124d5a46cd53ef90eb0dbe03c130aa71493798b47f612dcf3b510f7f1e5b3b33",
+  "assessmentFingerprint": "a018422aa825c5f8c6d583e0f51783c571f7de847bcc646707d5f7d6a6832f02",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-age-based-pension-increases",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-age-based-pension-increases",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Navržená změna důchodového zákona upravuje věkové zvýšení důchodů o 500 Kč při dosažení věku 80, 85, 90 a 95 let, a proto přímo naplňuje část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla pro oznamování a administrativní zpracování zvýšení důchodů, nikoli věkové hranice ani slíbené částky."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-age-based-pension-increases--source",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Vláda, v níž ANO působí, předložila návrh změny zákona o důchodovém pojištění. Ten navrhuje zvýšit důchod o 500 Kč při dosažení 80, 85, 90 a 95 let, takže posouvá věkové valorizace směrem ke slibu. Návrh ale výslovně neuvádí slíbených dalších 2 000 Kč od 95 let, a jde zatím o předložený návrh, nikoli schválený zákon.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh stanoví zvýšení o 500 Kč při každé věkové hranici; není výslovně rozepsáno, jak se tyto přírůstky skládají u lidí, kteří dosáhli více hranic. Znění slibu o dalších 2 000 Kč od 95 let proto není z návrhu možné považovat za naplněné."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-age-based-pension-increases",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje věkové zvýšení důchodů o 500 Kč v 80, 85, 90 a 95 letech, takže přímo stanovuje částky odpovídající slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": false,
+          "reasonCz": "Mění pouze administrativní pravidla pro oznamování zvýšení důchodů, nikoli věkové hranice ani výši slíbených valorizací."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-age-based-pension-increases--source",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Vláda předložila návrh novely zákona o důchodovém pojištění. Návrh počítá se zvýšením o 500 Kč při dosažení 80, 85, 90 a 95 let, takže se tato zvýšení postupně sčítají na 500, 1 000, 1 500 a 2 000 Kč měsíčně. Navržený rozpis odpovídá částkám uvedeným ve slibu. Jde zatím o předložený návrh, nikoli o přijatý zákon, proto jde o posun směrem ke splnění.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0e9a5c3d566afcd0016abf0a496bb887d1a68f102b61ffc510",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 18894,
+      "input_tokens_details": {
+        "cache_write_tokens": 15570,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2441,
+      "output_tokens_details": {
+        "reasoning_tokens": 1924
+      },
+      "total_tokens": 21335
+    },
+    "output": {
+      "promiseId": "ano-2025-age-based-pension-increases",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Navržená změna důchodového zákona upravuje věkové zvýšení důchodů o 500 Kč při dosažení věku 80, 85, 90 a 95 let, a proto přímo naplňuje část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla pro oznamování a administrativní zpracování zvýšení důchodů, nikoli věkové hranice ani slíbené částky."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-age-based-pension-increases--source",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Vláda, v níž ANO působí, předložila návrh změny zákona o důchodovém pojištění. Ten navrhuje zvýšit důchod o 500 Kč při dosažení 80, 85, 90 a 95 let, takže posouvá věkové valorizace směrem ke slibu. Návrh ale výslovně neuvádí slíbených dalších 2 000 Kč od 95 let, a jde zatím o předložený návrh, nikoli schválený zákon.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh stanoví zvýšení o 500 Kč při každé věkové hranici; není výslovně rozepsáno, jak se tyto přírůstky skládají u lidí, kteří dosáhli více hranic. Znění slibu o dalších 2 000 Kč od 95 let proto není z návrhu možné považovat za naplněné."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0ca2d078c58d1745016abf0a63ef3487d1a7e2b3f19f4fc461",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 18894,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 18891
+      },
+      "output_tokens": 1894,
+      "output_tokens_details": {
+        "reasoning_tokens": 1462
+      },
+      "total_tokens": 20788
+    },
+    "output": {
+      "promiseId": "ano-2025-age-based-pension-increases",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje věkové zvýšení důchodů o 500 Kč v 80, 85, 90 a 95 letech, takže přímo stanovuje částky odpovídající slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": false,
+          "reasonCz": "Mění pouze administrativní pravidla pro oznamování zvýšení důchodů, nikoli věkové hranice ani výši slíbených valorizací."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-age-based-pension-increases--source",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Vláda předložila návrh novely zákona o důchodovém pojištění. Návrh počítá se zvýšením o 500 Kč při dosažení 80, 85, 90 a 95 let, takže se tato zvýšení postupně sčítají na 500, 1 000, 1 500 a 2 000 Kč měsíčně. Navržený rozpis odpovídá částkám uvedeným ve slibu. Jde zatím o předložený návrh, nikoli o přijatý zákon, proto jde o posun směrem ke splnění.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}
