@@ -156,10 +156,13 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
       adoption: { date: facts.adoptedOn, evidenceId: adoption.id, by: facts.regulationKind === "government-regulation" ? "government" : "ministry", issuerCz: facts.issuerCz }
     }];
   });
-  // A government resolution is one entry: its adoption and its page.
+  // A government resolution is one entry: its adoption and its page, also
+  // when several of its parts are relevant.
+  const adoptions = new Set();
   const resolutions = evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && structuredFacts.printKindId === resolutionKind).flatMap((change) => {
     const adoption = conduct.find((item) => item.type === resolutionKind && item.structuredFacts.concernsLawChanges.some(({ evidenceId }) => evidenceId === change.id));
-    if (!adoption) return [];
+    if (!adoption || adoptions.has(adoption.id)) return [];
+    adoptions.add(adoption.id);
     const facts = adoption.structuredFacts;
     return [{
       kind: "resolution",

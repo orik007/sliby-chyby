@@ -1,7 +1,7 @@
 import { sha256 } from "./collector-core.mjs";
 import { amendmentConcernsChange, assessableAttributionStatuses, attributionStatusForRecord, factSummary, isPotentiallyAttributable, normalizedStructuredFacts, versionConcerned } from "./attribution.mjs";
 import { validateEvidencePackage } from "./assessment-pipeline.mjs";
-import { changeThroughVersion, lawChangeOfRegulation, lawChangeOfResolution, namedActsFromPrintTitle, versionKeys, versionLabels, versionOfChange } from "./print-parts.mjs";
+import { changeThroughVersion, lawChangeOfRegulation, lawChangesOfResolution, namedActsFromPrintTitle, versionKeys, versionLabels, versionOfChange } from "./print-parts.mjs";
 
 export { versionOfChange };
 import { charactersPerToken, estimateRequestTokens, estimateTokens, maxPackageRequestTokens, maxRequestInputTokens } from "./assessment-config.mjs";
@@ -144,14 +144,15 @@ export function withAmendments(changes, recordsByPrintId, amendmentRecords) {
 }
 
 /**
- * The law changes of a run at the cutoff: those of prints with conduct, and
- * the one law change of each government regulation, ministerial decree, and
- * government resolution, whose record carries its text.
+ * The law changes of a run at the cutoff: those of prints with conduct, the
+ * one law change of each government regulation and ministerial decree, and
+ * the law changes of each government resolution, whose record carries its
+ * text.
  */
 export function lawChangesOfRun(printParts, recordsByPrintId, amendmentRecords = []) {
   const regulationChanges = [...recordsByPrintId.values()].flat()
     .filter(({ kind }) => kind === "regulation-adoption" || kind === resolutionKind)
-    .map((record) => (record.kind === resolutionKind ? lawChangeOfResolution : lawChangeOfRegulation)(record.payload, record.url));
+    .flatMap((record) => (record.kind === resolutionKind ? lawChangesOfResolution(record.payload, record.url) : [lawChangeOfRegulation(record.payload, record.url)]));
   return withAmendments(lawChangesAtCutoff([
     ...Object.entries(printParts.prints)
       .filter(([printId]) => recordsByPrintId.has(printId))
@@ -311,20 +312,20 @@ function evidenceFromResolution(change, route, publishedAt) {
     id: lawChangeEvidenceId(change),
     role: "law-change",
     type: "law-change",
-    title: change.printTitleCz,
+    title: `${change.printTitleCz}${change.heading ? ` – ${change.heading}` : ""}`,
     publisher: "Government Office of the Czech Republic (zVlády)",
     publishedAt,
     url: entry.document.url,
-    locator: `${change.printNumber}, whole text with its annexes`,
+    locator: `${change.printNumber}, ${change.heading ?? "whole text with its annexes"}`,
     primary: true,
-    factSummary: `${change.printNumber}${entry.titleCz !== change.printNumber ? `, on the material “${entry.titleCz}”` : ""}, as adopted by the government. Versions: ${versionLabels.adopted}.`,
+    factSummary: `${change.printNumber}${change.heading ? `, part “${change.heading}”` : ""}${entry.titleCz !== change.printNumber ? `, on “${entry.titleCz}”` : ""}, as adopted by the government. Versions: ${versionLabels.adopted}.`,
     structuredFacts: {
       changeId: change.changeId,
       externalPrintId: change.printId,
       printNumber: change.printNumber,
       printKindId: change.printKindId,
       printTitleCz: change.printTitleCz,
-      heading: null,
+      heading: change.heading,
       titleCz: change.titleCz,
       acts: change.acts,
       addedIn: change.addedIn,

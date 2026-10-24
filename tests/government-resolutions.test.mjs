@@ -5,7 +5,7 @@ import { join } from "node:path";
 import test from "node:test";
 import { strToU8, zipSync } from "fflate";
 import { attributionStatusForRecord, isPotentiallyAttributable, versionConcerned } from "../scripts/lib/attribution.mjs";
-import { lawChangeOfResolution } from "../scripts/lib/print-parts.mjs";
+import { lawChangesOfResolution } from "../scripts/lib/print-parts.mjs";
 import { lawChangeText } from "../scripts/lib/law-change-screening.mjs";
 import { GovernmentOfficeBlockedError, createGovernmentOfficeFetcher, createResolutionCache, duplicateOf, parseResolutionPage, readEklepTypes, readResolutions, resolutionParagraphs, resolutionRecords } from "../scripts/lib/government-resolutions.mjs";
 import { extractXlsxRows } from "../scripts/lib/xlsx-rows.mjs";
@@ -367,7 +367,53 @@ test("a resolution is conduct of every governing party on its adoption day, and 
   assert.equal(attributionStatusForRecord(record, { partyId: "spd" }).attributionStatus, "verified-government-resolution");
   assert.equal(isPotentiallyAttributable(record, ["ano"]), true);
   assert.equal(versionConcerned(record, "uv-2026-17").version, "adopted");
-  const change = lawChangeOfResolution(record.payload, record.url);
+  const [change] = lawChangesOfResolution(record.payload, record.url);
   assert.deepEqual([change.changeId, change.printNumber, Object.keys(change.versions), change.identifiers], ["uv-2026-17", "Usnesení vlády č. 17/2026", ["adopted"], []]);
   assert.match(lawChangeText(change), /^Government resolution \(usnesení vlády\) adopted by the government: Usnesení vlády č\. 17\/2026, Žádost o souhlas vlády s převodem nepotřebného majetku\n\nVersion: text as adopted\nVláda\nsouhlasí s převodem\nPříloha č\. 1\nPoř\. \| číslo \| katastrální území\n1 \| S006376\/24 \| Božetice$/);
+});
+
+test("the plan of legislative work is divided into the resolution, each task with what relates to it, and the rest of each annex", async () => {
+  // Resolution 175/2026 as read from zVlády on 24 October 2026: the
+  // resolution, annex 1 up to the first ministry's tables (the prime
+  // minister's five tasks, with the tables relating them to EU law and to the
+  // programme), the start of the same annex's list by month (two of those
+  // tasks again, and one of another ministry), and the start of annex 3.
+  const paragraphs = (await readFile(new URL("./fixtures/government-resolutions/plan-175-excerpt.txt", import.meta.url), "utf8")).trimEnd().split("\n");
+  const payload = { externalPrintId: "uv-2026-175", numberCz: "Usnesení vlády č. 175/2026", titleCz: "Návrh Plánu legislativních prací vlády na zbývající část roku 2026 a návrh Výhledu legislativních prací vlády na léta 2027 až 2029", paragraphs };
+  const changes = lawChangesOfResolution(payload, "https://odok.gov.cz/portal/zvlady/usneseni/2026/175/");
+  assert.deepEqual(changes.map(({ changeId, heading }) => [changeId, heading]), [
+    ["uv-2026-175-1", "Usnesení"],
+    ["uv-2026-175-2", "Příloha č. 1"],
+    ["uv-2026-175-3", "Příloha č. 1, Předseda vlády, úkol č. 1"],
+    ["uv-2026-175-4", "Příloha č. 1, Předseda vlády, úkol č. 2"],
+    ["uv-2026-175-5", "Příloha č. 1, Předseda vlády, úkol č. 3"],
+    ["uv-2026-175-6", "Příloha č. 1, Předseda vlády, úkol č. 4"],
+    ["uv-2026-175-7", "Příloha č. 1, Předseda vlády, úkol č. 5"],
+    ["uv-2026-175-8", "Příloha č. 1, březen 2026, úkol č. 3"],
+    ["uv-2026-175-9", "Příloha č. 3"]
+  ]);
+  const text = (change) => change.versions.adopted.textCz.split("\n");
+  assert.equal(text(changes[0])[6], "schvaluje Plán legislativních prací vlády na zbývající část roku 2026, uvedený v příloze č. 1 tohoto usnesení;");
+  // A task: its table's heading and header row, its row, and its entries in
+  // the tables relating it to EU law; the name follows the submitters, also
+  // one the abbreviations do not list ("ÚOHS").
+  const task = text(changes[2]);
+  assert.deepEqual(task.slice(0, 3), ["Předseda vlády", "č.", "předkladatel"]);
+  assert.deepEqual(task.slice(10, 13), ["1", "PV", "VÚV"]);
+  assert.equal(changes[2].titleCz, "Návrh zákona, kterým se mění zákon č. 256/2004 Sb., o podnikání na kapitálovém trhu, ve znění pozdějších předpisů, a některé další zákony");
+  assert.ok(task.includes("Vztah výše uvedených úkolů k právu EU"));
+  assert.ok(task.includes("Směrnice Evropského parlamentu a Rady (EU) 2022/2381 ze dne 23. listopadu 2022 o zlepšení genderové vyváženosti mezi členy orgánů kotovaných společností a o souvisejících opatřeních."));
+  assert.equal(changes[5].titleCz, "Návrh zákona, kterým se mění některé zákony v oblasti působnosti Úřadu pro ochranu hospodářské soutěže");
+  // The prime minister's tasks 1 and 2, listed again by month in the same
+  // words, are read once; a task first listed there is a part of its own.
+  assert.equal(changes.filter(({ titleCz }) => titleCz.startsWith("Návrh zákona, kterým se mění zákon č. 256/2004 Sb.")).length, 1);
+  assert.match(changes[7].titleCz, /^Návrh zákona o umělé inteligenci/);
+  // Every paragraph is in a part, but the numbers of the rows read once.
+  const inParts = new Set(changes.flatMap(text));
+  assert.deepEqual([...new Set(paragraphs)].filter((paragraph) => !inParts.has(paragraph)), []);
+  // An annex without a table of numbered tasks is one part.
+  assert.equal(text(changes[8])[3], "PŘEHLED IMPLEMENTAČNÍCH PRACÍ VLÁDY NA ZBÝVAJÍCÍ ČÁST ROKU 2026");
+  assert.match(lawChangeText(changes[2]), /^Government resolution \(usnesení vlády\) adopted by the government: Usnesení vlády č\. 175\/2026, Návrh Plánu legislativních prací vlády[^\n]*\n\nPart of the resolution: Příloha č\. 1, Předseda vlády, úkol č\. 1 – Návrh zákona, kterým se mění zákon č\. 256\/2004 Sb\./);
+  // The same text under another title is one law change.
+  assert.deepEqual(lawChangesOfResolution({ ...payload, titleCz: "Zpráva o plnění úkolů" }, "https://odok.gov.cz/").map(({ changeId }) => changeId), ["uv-2026-175"]);
 });

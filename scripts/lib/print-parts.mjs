@@ -1,5 +1,6 @@
 import { cleanText, invariant } from "./collector-core.mjs";
 import { resolutionKind } from "./government-resolution-kind.mjs";
+import { legislativePlanParts, legislativePlanTitlePattern } from "./legislative-plan-parts.mjs";
 
 /**
  * Splits a Chamber print's official texts into law changes, the unit the
@@ -179,6 +180,39 @@ export function splitProposalText(paragraphs) {
 
 // Print kinds divided into parts (docs/evidence-pipeline.md, Law changes).
 const partedPrintKindIds = new Set(["1", "2"]);
+const treatyPrintKindId = "4";
+
+// A heading that starts a paragraph of a treaty: a part, chapter, annex,
+// appendix, protocol, joint declaration, or the preamble ("KAPITOLA 10
+// INVESTICE ODDÍL A …", "PŘÍLOHA 2-A HARMONOGRAM …", "Dodatek I-B-2 …"),
+// after the document reference some texts repeat on their pages
+// ("EU/MX/MGA/cs"), and a footnote mark the extracted text joins to a
+// heading ("ČÁST II2").
+const treatyHeadingPattern = /^(?:[A-Z]{2,}(?:\/[A-Z0-9]+)+\/[a-z]{2}\s+)?(ČÁST [IVX]+|KAPITOLA \d+|PŘÍLOHA [0-9IVX]+(?:-[A-Z0-9]+)*|Dodatek [0-9IVX]+(?:-[A-Z0-9]+)+|PROTOKOL|SPOLEČNÉ PROHLÁŠENÍ|PREAMBULE)\d*(?=\s+\p{Lu}|$)/u;
+
+/**
+ * Divides a treaty's text into its parts at the headings that start a
+ * paragraph (treatyHeadingPattern); the text before the first heading is a
+ * part of its own. A heading's title is the run of upper-case words after it.
+ * A treaty without such headings is one part.
+ */
+export function splitTreatyText(paragraphs) {
+  const body = proposalBody(paragraphs);
+  const starts = body.map((paragraph, index) => (treatyHeadingPattern.test(paragraph) ? index : -1)).filter((index) => index >= 0);
+  if (starts.length === 0) return [{ heading: null, titleCz: null, paragraphs: body }];
+  const bounds = starts[0] > 0 ? [0, ...starts] : starts;
+  return bounds.map((start, index) => {
+    const match = treatyHeadingPattern.exec(body[start]);
+    const rest = match ? body[start].slice(match[0].length).trim() : "";
+    const title = /^[\p{Lu}\d][\p{Lu}\d ,.–-]*?(?=\s+(?:ODDÍL|ČLÁNEK|Článek)\b|\s+\p{Lu}?\p{Ll}|$)/u.exec(rest)?.[0]
+      ?? /^[\p{Lu}\d][\p{Lu}\d ,.–-]*/u.exec(rest)?.[0].split(/\s+(?:ODDÍL|ČLÁNEK)\b/u)[0];
+    return {
+      heading: match ? match[1] : null,
+      titleCz: title?.trim().slice(0, 200) || null,
+      paragraphs: body.slice(start, bounds[index + 1] ?? body.length)
+    };
+  });
+}
 
 // The part of a bill that states when it takes effect ("ČÁST … ÚČINNOST").
 // It is not a law change; its text belongs to every law change of the same
@@ -475,9 +509,12 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [], g
   for (const version of versionKeys) {
     const text = texts[version] ?? null;
     if (!text && !(version === "proposed" && !firstText)) continue;
+    const treaty = String(print.kindId) === treatyPrintKindId;
     const parts = !text
       ? [{ heading: null, titleCz: null, paragraphs: null }]
-      : partedPrintKindIds.has(String(print.kindId)) ? splitProposalText(text.paragraphs) : [{ heading: null, titleCz: null, paragraphs: proposalBody(text.paragraphs) }];
+      : partedPrintKindIds.has(String(print.kindId)) ? splitProposalText(text.paragraphs)
+      : treaty ? splitTreatyText(text.paragraphs)
+      : [{ heading: null, titleCz: null, paragraphs: proposalBody(text.paragraphs) }];
     // The effective-date text of this version, without the part heading and
     // title; null when the text has no effective-date part.
     const effectiveParts = parts.filter(isEffectivePart);
@@ -485,7 +522,8 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [], g
     // A part keeps its position in the text, so its change ID does not
     // depend on whether an effective-date part precedes it.
     const entries = parts.map((part, position) => ({ part, position })).filter(({ part }) => !isEffectivePart(part)).map(({ part, position }) => {
-      const amended = part.paragraphs ? amendedActOfPart(part.paragraphs) : null;
+      // A treaty amends no act (Law-change context).
+      const amended = part.paragraphs && !treaty ? amendedActOfPart(part.paragraphs) : null;
       return { part, position, amended, key: partKey(part, amended), words: part.paragraphs ? partWords(part.paragraphs) : new Set() };
     });
     const matched = matchParts(entries, changes);
@@ -578,26 +616,32 @@ export function lawChangeOfRegulation(payload, url) {
 }
 
 /**
- * The one law change of a government resolution, from the payload of its
- * record (scripts/lib/government-resolutions.mjs): its text as adopted, the
- * resolution and its annexes, the only version. It amends no act and is
+ * The law changes of a government resolution, from the payload of its record
+ * (scripts/lib/government-resolutions.mjs): its text as adopted, the
+ * resolution and its annexes, the only version. A resolution on the plan of
+ * the government's legislative work is divided into the resolution, each task
+ * of its annexes, and the rest of each annex (legislative-plan-parts.mjs);
+ * any other resolution is one law change. A resolution amends no act and is
  * linked to none, so it is routed only by tags.
  */
-export function lawChangeOfResolution(payload, url) {
-  return withDerivedFields({
-    changeId: payload.externalPrintId,
+export function lawChangesOfResolution(payload, url) {
+  const parts = legislativePlanTitlePattern.test(payload.titleCz ?? "") ? legislativePlanParts(payload.paragraphs) : null;
+  const change = (changeId, heading, titleCz, paragraphs) => withDerivedFields({
+    changeId,
     printId: payload.externalPrintId,
     printNumber: payload.numberCz,
     printKindId: resolutionKind,
     printTitleCz: `${payload.numberCz}${payload.titleCz ? `, ${payload.titleCz}` : ""}`,
     printPageUrl: url,
     addedIn: "adopted",
-    versions: { adopted: { heading: null, titleCz: payload.titleCz ?? payload.numberCz, textCz: payload.paragraphs.join("\n"), amendedAct: null, effectiveCz: null, document: { filename: payload.numberCz, url } } },
+    versions: { adopted: { heading, titleCz, textCz: paragraphs.join("\n"), amendedAct: null, effectiveCz: null, document: { filename: payload.numberCz, url } } },
     titleActs: [],
     enablingActs: [],
     senateResolutions: [],
     governmentOpinions: []
   });
+  if (!parts) return [change(payload.externalPrintId, null, payload.titleCz ?? payload.numberCz, payload.paragraphs)];
+  return parts.map((part, index) => change(`${payload.externalPrintId}-${index + 1}`, part.heading, part.titleCz ?? payload.titleCz ?? payload.numberCz, part.paragraphs));
 }
 
 /**
