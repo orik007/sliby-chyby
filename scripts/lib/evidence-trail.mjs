@@ -167,7 +167,7 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
       kind: "resolution",
       lawChangeId: change.id,
       numberCz: facts.numberCz,
-      titleCz: `${facts.titleCz ?? facts.numberCz}${resolutionPartName({ printTitleCz: `${facts.numberCz}, ${facts.titleCz ?? ""}`, heading: change.structuredFacts.heading, titleCz: change.structuredFacts.titleCz })}`,
+      titleCz: `${facts.titleCz ?? facts.numberCz}${resolutionPartName(change.structuredFacts)}`,
       pageUrl: adoption.url,
       adoption: { date: facts.adoptedOn, evidenceId: adoption.id }
     }];

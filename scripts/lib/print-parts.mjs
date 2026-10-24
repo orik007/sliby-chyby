@@ -189,7 +189,7 @@ const treatyPrintKindId = "4";
 // ("EU/MX/MGA/cs"), and a footnote mark the extracted text joins to a
 // part's Roman numeral ("ČÁST II2"; after an Arabic number it cannot be told
 // from the number).
-const treatyHeadingPattern = /^(?:[A-Z]{2,}(?:\/[A-Z0-9]+)+\/[a-z]{2}\s+)?(ČÁST [IVX]+(?=\d*\s)|KAPITOLA \d+|PŘÍLOHA [0-9IVX]+(?:-[A-Z0-9]+)*|Dodatek [0-9IVX]+(?:-[A-Z0-9]+)+|PROTOKOL|SPOLEČNÉ PROHLÁŠENÍ|PREAMBULE)(?:(?<=ČÁST [IVX]+)\d*)?(?=\s+\p{Lu}|$)/u;
+const treatyHeadingPattern = /^(?:[A-Z]{2,}(?:\/[A-Z0-9]+)+\/[a-z]{2}\s+)?(ČÁST [IVX]+(?=\d*(?:\s|$))|KAPITOLA \d+|PŘÍLOHA [0-9IVX]+(?:-[A-Z0-9]+)*|Dodatek [0-9IVX]+(?:-[A-Z0-9]+)+|PROTOKOL|SPOLEČNÉ PROHLÁŠENÍ|PREAMBULE)(?:(?<=ČÁST [IVX]+)\d*)?(?=\s+\p{Lu}|$)/u;
 
 /**
  * Divides a treaty's text into its parts at the headings that start a
@@ -205,8 +205,12 @@ export function splitTreatyText(paragraphs) {
   return bounds.map((start, index) => {
     const match = treatyHeadingPattern.exec(body[start]);
     const rest = match ? body[start].slice(match[0].length).trim() : "";
+    // The title ends before a section or article heading or a word in lower
+    // case; a run that ends inside a capitalised word drops that word.
+    const run = /^[\p{Lu}\d][\p{Lu}\d ,.–-]*/u.exec(rest)?.[0] ?? "";
+    const whole = /^\p{Ll}/u.test(rest.slice(run.length)) ? run.replace(/\S+$/u, "") : run;
     const title = /^[\p{Lu}\d][\p{Lu}\d ,.–-]*?(?=\s+(?:ODDÍL|ČLÁNEK|Článek)\b|\s+\p{Lu}?\p{Ll}|$)/u.exec(rest)?.[0]
-      ?? /^[\p{Lu}\d][\p{Lu}\d ,.–-]*/u.exec(rest)?.[0].split(/\s+(?:ODDÍL|ČLÁNEK)\b/u)[0];
+      ?? whole.split(/\s+(?:ODDÍL|ČLÁNEK)\b/u)[0];
     return {
       heading: match ? match[1] : null,
       titleCz: title?.trim().slice(0, 200) || null,

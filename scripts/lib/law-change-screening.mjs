@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { hashText } from "./assessment-config.mjs";
 import { invariantValidOutput, requestValidatedOutput, tagAssignmentSchema, taxonomyDefinitionsText, validateTagAssignmentOutput } from "./model-output.mjs";
 import { versionKeys, versionLabels } from "./print-parts.mjs";
-import { resolutionKind } from "./government-resolution-kind.mjs";
+import { resolutionKind, resolutionPartName } from "./government-resolution-kind.mjs";
 
 /**
  * The two cheap-model checks on law changes (docs/evidence-pipeline.md):
@@ -68,7 +68,7 @@ export function lawChangeText(change) {
   if (change.printKindId === resolutionKind) {
     return [
       `Government resolution (usnesení vlády) adopted by the government: ${change.printTitleCz}`,
-      ...(change.heading ? [`Part of the resolution: ${change.heading}${change.titleCz ? ` – ${change.titleCz}` : ""}`] : []),
+      ...(change.heading ? [`Part of the resolution:${resolutionPartName(change).slice(2)}`] : []),
       ...versions
     ].join("\n\n");
   }

@@ -21,8 +21,9 @@ const relationPattern = /^Vztah výše uvedených úkolů k /u;
 // The heading of a list of tables: by ministry or by period, of a year.
 const listingPattern = /^(?:Resortní|Časové) členění/u;
 const numberPattern = /^\d+$/u;
-// A submitter's abbreviation: one word ("PV", "MSp-LRV", "ÚOHS").
-const submitterPattern = /^\p{Lu}[\p{L}-]{0,11}$/u;
+// A submitter's abbreviation: one word of at least two capitals ("PV",
+// "MSp-LRV", "ÚOHS"), never a cell such as "Ne".
+const submitterPattern = /^\p{Lu}{2}[\p{L}-]{0,10}$/u;
 
 // A table of tasks starts with its header row: "č.", "předkladatel", and the
 // other column names, up to the first row.
@@ -75,7 +76,9 @@ function annexParts(paragraphs, start, end, annexHeading) {
       const columns = paragraphs.slice(titleAt, index);
       let entry = null;
       while (index < tableEnd && !relationPattern.test(paragraphs[index])) {
-        if (numberPattern.test(paragraphs[index])) {
+        // An entry starts with the number of one of the table's tasks; any
+        // other number ("2027") is a cell of the entry.
+        if (numberPattern.test(paragraphs[index]) && rows.some(({ number }) => number === paragraphs[index])) {
           entry = { number: paragraphs[index], indexes: [index] };
           relations.set(entry.number, [...(relations.get(entry.number) ?? []), { columns, entry }]);
         } else if (entry) entry.indexes.push(index);
@@ -86,11 +89,12 @@ function annexParts(paragraphs, start, end, annexHeading) {
       const rowIndexes = Array.from({ length: row.end - row.start }, (_, offset) => row.start + offset);
       const related = relations.get(row.number) ?? [];
       const relatedParagraphs = related.flatMap(({ columns, entry }) => [...columns, ...entry.indexes.map((at) => paragraphs[at])]);
-      for (const at of [...rowIndexes, ...related.flatMap(({ entry }) => entry.indexes)]) used.add(at);
-      // The same task listed again, without its number, is read once; what
-      // the later listing relates it to joins the task.
+      // The same task listed again, without its number, is read once: its
+      // number stays in the annex's rest, and what the later listing relates
+      // it to joins the task.
       const key = paragraphs.slice(row.start + 1, row.end).join("\n");
       const earlier = tasksByRow.get(key);
+      for (const at of [...(earlier ? rowIndexes.slice(1) : rowIndexes), ...related.flatMap(({ entry }) => entry.indexes)]) used.add(at);
       if (earlier) {
         earlier.paragraphs.push(...relatedParagraphs);
         continue;

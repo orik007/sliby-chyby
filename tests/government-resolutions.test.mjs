@@ -409,12 +409,13 @@ test("the plan of legislative work is divided into the resolution, each task wit
   // words, are read once; a task first listed there is a part of its own.
   assert.equal(changes.filter(({ titleCz }) => titleCz.startsWith("Návrh zákona, kterým se mění zákon č. 256/2004 Sb.")).length, 1);
   assert.match(changes[7].titleCz, /^Návrh zákona o umělé inteligenci/);
-  // Every paragraph is in a part, but the numbers of the rows read once.
+  // Every paragraph is in a part; the number of a task listed again stays
+  // in its annex's rest.
   const inParts = new Set(changes.flatMap(text));
   assert.deepEqual([...new Set(paragraphs)].filter((paragraph) => !inParts.has(paragraph)), []);
   // An annex without a table of numbered tasks is one part.
   assert.equal(text(changes[8])[3], "PŘEHLED IMPLEMENTAČNÍCH PRACÍ VLÁDY NA ZBÝVAJÍCÍ ČÁST ROKU 2026");
-  assert.match(lawChangeText(changes[2]), /^Government resolution \(usnesení vlády\) adopted by the government: Usnesení vlády č\. 175\/2026, Návrh Plánu legislativních prací vlády[^\n]*\n\nPart of the resolution: Příloha č\. 1, Předseda vlády, úkol č\. 1 – Návrh zákona, kterým se mění zákon č\. 256\/2004 Sb\./);
+  assert.match(lawChangeText(changes[2]), /^Government resolution \(usnesení vlády\) adopted by the government: Usnesení vlády č\. 175\/2026, Návrh Plánu legislativních prací vlády[^\n]*\n\nPart of the resolution: Příloha č\. 1, Předseda vlády, úkol č\. 1: Návrh zákona, kterým se mění zákon č\. 256\/2004 Sb\./);
   // A part is named by its heading and its own title.
   assert.equal(resolutionPartName(changes[2]), " – Příloha č. 1, Předseda vlády, úkol č. 1: Návrh zákona, kterým se mění zákon č. 256/2004 Sb., o podnikání na kapitálovém trhu, ve znění pozdějších předpisů, a některé další zákony");
   assert.equal(resolutionPartName(changes[0]), " – Usnesení");

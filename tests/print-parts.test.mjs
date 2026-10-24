@@ -442,6 +442,9 @@ test("a treaty is divided at its part, chapter, annex, appendix, and protocol he
   ]);
   // A footnote mark is told from the number only after a Roman numeral.
   assert.deepEqual(splitTreatyText(["KAPITOLA 12 OBCHOD SE ZBOŽÍM ČLÁNEK 12.1 Cíl"]).map(({ heading, titleCz }) => [heading, titleCz]), [["KAPITOLA 12", "OBCHOD SE ZBOŽÍM"]]);
+  // A heading alone in its paragraph starts a part, and a title in mixed
+  // case is not cut to a letter.
+  assert.deepEqual(splitTreatyText(["Dohoda", "ČÁST II", "OBCHOD", "Dodatek I-B-2 Harmonogram Mexika"]).map(({ heading, titleCz, paragraphs: partParagraphs }) => [heading, titleCz, partParagraphs.length]), [[null, null, 1], ["ČÁST II", null, 2], ["Dodatek I-B-2", null, 1]]);
   // No text is lost or reordered.
   assert.deepEqual(parts.flatMap(({ paragraphs: partParagraphs }) => partParagraphs), paragraphs);
   const document = { filename: "331.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=1" };
