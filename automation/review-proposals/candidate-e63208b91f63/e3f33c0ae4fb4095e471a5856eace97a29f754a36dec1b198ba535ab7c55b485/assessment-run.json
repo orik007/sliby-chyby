@@ -1,0 +1,388 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-32-34-654Z--b0a266603a50",
+  "evaluatedAt": "2026-10-02T05:32:34.654Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-e63208b91f63/b0a266603a501446b3c60345155057d6768cbbb17a5118e264fd5971dfb256be.json",
+  "packageHash": "b0a266603a501446b3c60345155057d6768cbbb17a5118e264fd5971dfb256be",
+  "assessmentContentHash": "5c08357a6056d29756f244b8f863e1adaa1dca60b5f81ec04c79f75d0a37163d",
+  "assessmentFingerprint": "e3f33c0ae4fb4095e471a5856eace97a29f754a36dec1b198ba535ab7c55b485",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-e63208b91f63",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment cites duplicate evidence IDs",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_03783b9fcc4bd346016abf41b7820887d184a1f67c74b496a4",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 51167,
+            "input_tokens_details": {
+              "cache_write_tokens": 47843,
+              "cached_tokens": 3321
+            },
+            "output_tokens": 3416,
+            "output_tokens_details": {
+              "reasoning_tokens": 2312
+            },
+            "total_tokens": 54583
+          },
+          "output": {
+            "promiseId": "candidate-e63208b91f63",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43221-1",
+                "relevant": true,
+                "reasonCz": "Návrh mění pravidla pro podmíněné propuštění u trestných činů obchodování s lidmi, a tím se přímo dotýká výkonu trestu i délky pobytu ve vězení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43221-2",
+                "relevant": true,
+                "reasonCz": "Návrh stanoví pravidla pro bezpečnější výkon obecně prospěšných prací a upravuje některé možnosti zastavení stíhání obětí vykořisťování, což se týká alternativních a spravedlivějších postupů v trestním řízení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43221-6",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje a upravuje obecně prospěšnou činnost a její výkon u mladistvých, což přímo souvisí s alternativním trestáním a návratem pachatelů do společnosti."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43225-1",
+                "relevant": true,
+                "reasonCz": "Návrh omezuje možnost uložit nepodmíněné vězení za zanedbání povinné výživy, takže přímo mění použití vězeňského trestu a může přispět k účelnějšímu využití kapacit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43294-1",
+                "relevant": false,
+                "reasonCz": "Návrh upravuje tresty za týrání osob a zvířat, ale jeho ustanovení nepředstavují konkrétní změnu kapacit věznic ani obecného výkonu trestu ve smyslu slibu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43329-2",
+                "relevant": false,
+                "reasonCz": "Navržené změny trestního řádu se týkají rtuti a souvisejících procesních nástrojů, nikoli kapacit věznic nebo spravedlivějšího výkonu trestu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-7",
+                "relevant": false,
+                "reasonCz": "Návrh zpřísňuje tresty za některé trestné činy spojené s překračováním hranic, ale nepředstavuje konkrétní opatření k optimalizaci vězeňských kapacit ani výkonu trestu obecně."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-e63208b91f63--source",
+              "psp-core-2025--law-change-43221-1",
+              "psp-core-2025--law-change-43221-2",
+              "psp-core-2025--law-change-43221-6",
+              "psp-core-2025--law-change-43225-1",
+              "psp-core-2025--print-step-210821",
+              "psp-core-2025--law-change-43225-1",
+              "psp-core-2025--print-step-210844"
+            ],
+            "explanationCz": "Vláda předložila návrh změn trestního zákoníku a trestního řádu, který mimo jiné upravuje bezpečnější výkon obecně prospěšných prací a trestání mladistvých. Poslanci Motoristů spolu s dalšími poslanci také předložili návrh, který omezuje nepodmíněné vězení za zanedbání povinné výživy. Tyto návrhy mohou podpořit využívání alternativ k vězení a účelnější výkon trestu, takže jde o dílčí posun ke slibu. Z podkladů ale nevyplývá, že by návrhy byly schváleny.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Návrh vlády současně mění podmínky podmíněného propuštění u některých trestných činů obchodování s lidmi; z podkladů nelze určit, jak se tato změna promítne do délky věznění ani zda je v souladu s cílem spravedlivějšího výkonu trestu."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-e63208b91f63",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění trestní sazby a podmínky podmíněného propuštění u některých trestných činů obchodování s lidmi, takže zasahuje do výkonu trestu a může ovlivnit dobu pobytu ve vězení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-2",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje výkon obecně prospěšných prací, včetně povinností poskytovatelů a pojištění, což se týká alternativního výkonu trestu a jeho podmínek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-6",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje a upravuje možnosti obecně prospěšné a společensky prospěšné činnosti u mladistvých, tedy neodnětí svobody a nápravy pachatele."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-1",
+          "relevant": true,
+          "reasonCz": "Návrh omezuje možnost uložit nepodmíněné vězení za základní podobu zanedbání povinné výživy, což přímo mění využití vězeňského trestu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43294-1",
+          "relevant": false,
+          "reasonCz": "Návrh zpřísňuje tresty za týrání zvířat a zanedbání péče o ně, ale nedotýká se kapacit věznic ani způsobu či účelu výkonu trestu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-2",
+          "relevant": false,
+          "reasonCz": "Navržené změny trestního řádu se týkají rtuti a souvisejících procesních úkonů, nikoli vězeňských kapacit nebo výkonu trestu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": false,
+          "reasonCz": "Návrh mění tresty za trestné činy související s nedovoleným překročením hranic, ale nejde o opatření k uspořádání vězeňských kapacit ani k výkonu trestu obecně."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e63208b91f63--source",
+        "psp-core-2025--law-change-43221-1",
+        "psp-core-2025--law-change-43221-2",
+        "psp-core-2025--law-change-43221-6",
+        "psp-core-2025--law-change-43225-1",
+        "psp-core-2025--print-step-210821",
+        "psp-core-2025--print-step-210844"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, předložila návrh upravující výkon obecně prospěšných prací a některé možnosti trestání mladistvých; posunuje tak pravidla neodnětí svobody a nápravy pachatelů. Poslanci Motoristů se také podíleli na předložení návrhu, který omezuje nepodmíněné vězení za základní podobu zanedbání povinné výživy, což může přispět k menšímu využívání věznic. Jde však o návrhy, nikoli o doložené přijaté změny, a dokládají jen dílčí posun ke slibu. Vládní návrh zároveň mění pravidla podmíněného propuštění u některých závažných trestných činů.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Vládní návrh mění zařazení některých trestných činů obchodování s lidmi pro účely podmíněného propuštění; z podkladů nelze přesně určit, jak se změna projeví na délce pobytu ve vězení, a může být v napětí s cílem optimalizovat kapacity.",
+        "U návrhu k zanedbání povinné výživy se vedle omezení nepodmíněného vězení mění také vymezení trestného činu; podklady neukazují jeho celkový dopad na počet osob ve věznicích."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-e63208b91f63",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-1",
+          "relevant": false,
+          "reasonCz": "Navržené změny trestního zákoníku upravují zejména trestné činy obchodování s lidmi a pornografie, nikoli kapacity věznic ani výkon trestu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-2",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje výkon obecně prospěšných prací včetně pracovních podmínek a pojištění, což se týká spravedlivějšího výkonu trestu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-6",
+          "relevant": true,
+          "reasonCz": "Návrh mění pravidla probačních programů a obecně prospěšných prací u mladistvých, tedy část výkonu trestních opatření a jejich nápravných účelů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-1",
+          "relevant": true,
+          "reasonCz": "Návrh omezuje ukládání nepodmíněného vězení za zanedbání výživy a mění trestní sazby, což se může projevit na využívání vězeňských kapacit i spravedlivějším trestání."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43294-1",
+          "relevant": false,
+          "reasonCz": "Návrh zpřísňuje tresty za týrání osob a zvířat, ale nepředkládá změnu kapacit věznic ani pravidel výkonu trestu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-2",
+          "relevant": false,
+          "reasonCz": "Navržené změny trestního řádu se týkají rtuti a souvisejících úkonů v trestním řízení, nikoli kapacit věznic nebo výkonu trestu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": false,
+          "reasonCz": "Návrh mění tresty a skutkové podstaty související s překračováním hranic a neoprávněným pobytem, nikoli však kapacity věznic ani způsob výkonu trestu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e63208b91f63--source",
+        "psp-core-2025--law-change-43221-2",
+        "psp-core-2025--print-step-210821",
+        "psp-core-2025--law-change-43221-6",
+        "psp-core-2025--law-change-43225-1",
+        "psp-core-2025--print-step-210844"
+      ],
+      "explanationCz": "Vláda předložila Poslanecké sněmovně návrh změn trestního řádu, který upravuje například pracovní podmínky a pojištění při výkonu obecně prospěšných prací; další jeho část zavádí související pojistná pravidla také pro programy mladistvých. Poslanci Motoristů sobě s dalšími poslanci navrhli omezit ukládání nepodmíněného vězení za zanedbání výživy a změnit trestní sazby tohoto činu. Tyto návrhy mohou přispět ke spravedlivějšímu výkonu trestu a menšímu využívání vězení, ale předložené návrhy samy ještě nedokládají uskutečněnou změnu. Jde proto o dílčí posun, nikoli o splnění celého slibu.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f0d32ace86e6b6b016abf41cc6de487d1bf309b8598ec24d6",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 51167,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 51164
+      },
+      "output_tokens": 4155,
+      "output_tokens_details": {
+        "reasoning_tokens": 2997
+      },
+      "total_tokens": 55322
+    },
+    "output": {
+      "promiseId": "candidate-e63208b91f63",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění trestní sazby a podmínky podmíněného propuštění u některých trestných činů obchodování s lidmi, takže zasahuje do výkonu trestu a může ovlivnit dobu pobytu ve vězení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-2",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje výkon obecně prospěšných prací, včetně povinností poskytovatelů a pojištění, což se týká alternativního výkonu trestu a jeho podmínek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-6",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje a upravuje možnosti obecně prospěšné a společensky prospěšné činnosti u mladistvých, tedy neodnětí svobody a nápravy pachatele."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-1",
+          "relevant": true,
+          "reasonCz": "Návrh omezuje možnost uložit nepodmíněné vězení za základní podobu zanedbání povinné výživy, což přímo mění využití vězeňského trestu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43294-1",
+          "relevant": false,
+          "reasonCz": "Návrh zpřísňuje tresty za týrání zvířat a zanedbání péče o ně, ale nedotýká se kapacit věznic ani způsobu či účelu výkonu trestu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-2",
+          "relevant": false,
+          "reasonCz": "Navržené změny trestního řádu se týkají rtuti a souvisejících procesních úkonů, nikoli vězeňských kapacit nebo výkonu trestu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": false,
+          "reasonCz": "Návrh mění tresty za trestné činy související s nedovoleným překročením hranic, ale nejde o opatření k uspořádání vězeňských kapacit ani k výkonu trestu obecně."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e63208b91f63--source",
+        "psp-core-2025--law-change-43221-1",
+        "psp-core-2025--law-change-43221-2",
+        "psp-core-2025--law-change-43221-6",
+        "psp-core-2025--law-change-43225-1",
+        "psp-core-2025--print-step-210821",
+        "psp-core-2025--print-step-210844"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, předložila návrh upravující výkon obecně prospěšných prací a některé možnosti trestání mladistvých; posunuje tak pravidla neodnětí svobody a nápravy pachatelů. Poslanci Motoristů se také podíleli na předložení návrhu, který omezuje nepodmíněné vězení za základní podobu zanedbání povinné výživy, což může přispět k menšímu využívání věznic. Jde však o návrhy, nikoli o doložené přijaté změny, a dokládají jen dílčí posun ke slibu. Vládní návrh zároveň mění pravidla podmíněného propuštění u některých závažných trestných činů.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Vládní návrh mění zařazení některých trestných činů obchodování s lidmi pro účely podmíněného propuštění; z podkladů nelze přesně určit, jak se změna projeví na délce pobytu ve vězení, a může být v napětí s cílem optimalizovat kapacity.",
+        "U návrhu k zanedbání povinné výživy se vedle omezení nepodmíněného vězení mění také vymezení trestného činu; podklady neukazují jeho celkový dopad na počet osob ve věznicích."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_01a821b9efd58241016abf41e678a487d19356a1213d5d7db7",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 51167,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 51164
+      },
+      "output_tokens": 1908,
+      "output_tokens_details": {
+        "reasoning_tokens": 1034
+      },
+      "total_tokens": 53075
+    },
+    "output": {
+      "promiseId": "candidate-e63208b91f63",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-1",
+          "relevant": false,
+          "reasonCz": "Navržené změny trestního zákoníku upravují zejména trestné činy obchodování s lidmi a pornografie, nikoli kapacity věznic ani výkon trestu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-2",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje výkon obecně prospěšných prací včetně pracovních podmínek a pojištění, což se týká spravedlivějšího výkonu trestu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43221-6",
+          "relevant": true,
+          "reasonCz": "Návrh mění pravidla probačních programů a obecně prospěšných prací u mladistvých, tedy část výkonu trestních opatření a jejich nápravných účelů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43225-1",
+          "relevant": true,
+          "reasonCz": "Návrh omezuje ukládání nepodmíněného vězení za zanedbání výživy a mění trestní sazby, což se může projevit na využívání vězeňských kapacit i spravedlivějším trestání."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43294-1",
+          "relevant": false,
+          "reasonCz": "Návrh zpřísňuje tresty za týrání osob a zvířat, ale nepředkládá změnu kapacit věznic ani pravidel výkonu trestu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43329-2",
+          "relevant": false,
+          "reasonCz": "Navržené změny trestního řádu se týkají rtuti a souvisejících úkonů v trestním řízení, nikoli kapacit věznic nebo výkonu trestu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-7",
+          "relevant": false,
+          "reasonCz": "Návrh mění tresty a skutkové podstaty související s překračováním hranic a neoprávněným pobytem, nikoli však kapacity věznic ani způsob výkonu trestu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e63208b91f63--source",
+        "psp-core-2025--law-change-43221-2",
+        "psp-core-2025--print-step-210821",
+        "psp-core-2025--law-change-43221-6",
+        "psp-core-2025--law-change-43225-1",
+        "psp-core-2025--print-step-210844"
+      ],
+      "explanationCz": "Vláda předložila Poslanecké sněmovně návrh změn trestního řádu, který upravuje například pracovní podmínky a pojištění při výkonu obecně prospěšných prací; další jeho část zavádí související pojistná pravidla také pro programy mladistvých. Poslanci Motoristů sobě s dalšími poslanci navrhli omezit ukládání nepodmíněného vězení za zanedbání výživy a změnit trestní sazby tohoto činu. Tyto návrhy mohou přispět ke spravedlivějšímu výkonu trestu a menšímu využívání vězení, ale předložené návrhy samy ještě nedokládají uskutečněnou změnu. Jde proto o dílčí posun, nikoli o splnění celého slibu.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

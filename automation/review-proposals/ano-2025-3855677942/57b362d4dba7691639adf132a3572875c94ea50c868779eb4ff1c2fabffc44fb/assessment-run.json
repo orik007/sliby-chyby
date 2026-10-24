@@ -1,0 +1,506 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-33-46-861Z--be4cc29f6cea",
+  "evaluatedAt": "2026-10-02T01:33:46.861Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-3855677942/be4cc29f6cea5a631574655639d6ab8610bb6ba4de529f48c7c29e8f7eb3e3af.json",
+  "packageHash": "be4cc29f6cea5a631574655639d6ab8610bb6ba4de529f48c7c29e8f7eb3e3af",
+  "assessmentContentHash": "66a1a34d0f1bff067f1da08a1c961b683d4f5205f93f1932df37965127055d59",
+  "assessmentFingerprint": "57b362d4dba7691639adf132a3572875c94ea50c868779eb4ff1c2fabffc44fb",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-3855677942",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0cf1d518c4c76a5e016abf0954d6cc87d1a420727696eef40b",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 464250,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 464247
+            },
+            "output_tokens": 8007,
+            "output_tokens_details": {
+              "reasoning_tokens": 6576
+            },
+            "total_tokens": 472257
+          },
+          "output": {
+            "promiseId": "ano-2025-3855677942",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Změny stavebního zákona nově upravují povolování jaderných zařízení, a mohou tak usnadnit uskutečnění části slibu týkající se dalších jaderných bloků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": true,
+                "reasonCz": "Novela energetického zákona zavádí kapacitní mechanismus, o jehož podmínkách rozhoduje ministerstvo, což může představovat dílčí nástroj státního vlivu na energetický trh."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Změny vodního zákona svěřují stavebním úřadům rozhodování o povoleních a souvisejících úkonech u některých energetických staveb, tedy i části povolovacího rámce pro energetické projekty."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": true,
+                "reasonCz": "Úprava pravidel pro strategickou infrastrukturu výslovně zahrnuje energetické a jaderné stavby a může usnadnit realizaci části energetických projektů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Ustanovení ruší části dřívějších novel, ale dodaný text neuvádí obsah rušených částí, takže jejich věcný dopad na slib nelze doložit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-2",
+                "relevant": true,
+                "reasonCz": "Schválená verze rozpočtových pravidel umožňuje zvýšit výdajový rámec také kvůli výstavbě energetických staveb, což se týká části slibu o investicích do energetiky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+                "relevant": true,
+                "reasonCz": "Tato část schválené novely vytváří možnost financovat výstavbu nízkouhlíkové výrobny návratnými prostředky státu, což se může týkat části slibu o jaderných investicích."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43284-1",
+                "relevant": true,
+                "reasonCz": "Návrh dává vládě možnost regulovat ceny pohonných hmot při mimořádné tržní situaci, což je dílčí, byť ne přímý nástroj ovlivnění cen energie."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43284-2",
+                "relevant": true,
+                "reasonCz": "Změna zákona o cenách upravuje způsob vyhlašování vládní regulace cen pohonných hmot, a tím provádí cenový nástroj popsaný v související části návrhu."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "ano-2025-3855677942--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-21",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-32",
+              "psp-core-2025--law-change-43174-approved-56",
+              "psp-core-2025--law-change-43200-2",
+              "psp-core-2025--law-change-43200-approved-9",
+              "psp-core-2025--law-change-43284-1",
+              "psp-core-2025--law-change-43284-2",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--senate-resolution-43200-6",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--print-step-210731",
+              "psp-core-2025--vote-87430",
+              "psp-core-2025--vote-88105",
+              "psp-core-2025--vote-88416",
+              "psp-core-2025--print-step-211168",
+              "psp-core-2025--vote-87163"
+            ],
+            "explanationCz": "Poslanci ANO předložili návrh na změnu stavebního zákona, tedy sněmovní tisk 67, který mimo jiné upravuje povolování jaderných a dalších energetických staveb. Po odmítnutí návrhu Senátem poslanci ANO hlasovali pro to, aby na něm Sněmovna setrvala; podpořili také vládní návrhy umožňující státní financování nízkouhlíkové výrobny a regulaci cen pohonných hmot v mimořádné situaci. Jde o dílčí kroky k jaderným investicím a k většímu vlivu na některé energetické ceny, nikoli o získání stoprocentní kontroly nad ČEZ nebo výkup jeho akcií. Není také doloženo, zda jedna z rušených částí dřívější novely energetického zákona zasahuje do slibu.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Dodaný záznam o zrušovacím ustanovení neuvádí obsah části dřívější novely energetického zákona, kterou ruší; její případný dopad na státní kontrolu ČEZ nebo energetické ceny proto nelze posoudit.",
+              "Důkazy nedokládají získání stoprocentní kontroly státu nad ČEZ ani výkup jeho akcií; návratné státní financování výstavby nízkouhlíkové výrobny je samostatný nástroj a není dokladem takového výkupu.",
+              "Vládní návrh se týká regulace cen pohonných hmot, nikoli výslovně cen elektřiny či plynu, takže jeho souvislost se slibovaným vlivem na ceny energií je pouze dílčí."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-3855677942",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Novela stavebního zákona mění pravidla povolování, včetně energetických staveb, ale neřeší vlastnictví akcií ani získání kontroly nad skupinou ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Změny energetického zákona upravují mimo jiné energetický trh a kapacitní mechanismus, nikoli nabytí stoprocentního vlastnického podílu státu v ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona upravují povolování a správu vodních děl, nikoli vlastnictví nebo kontrolu skupiny ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro strategickou infrastrukturu zahrnují také energetické stavby, ale nepřevádějí ani nenabývají akcie ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení vypočítává rušené předpisy a jejich části, ale nedokládá změnu vlastnictví ČEZ ani státní odkup jeho akcií."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Změna rozpočtových pravidel umožňuje určité výdaje na infrastrukturu, ale neupravuje koupi akcií ani kontrolu státu nad skupinou ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": false,
+          "reasonCz": "Změna zákona o nízkouhlíkové energetice stanoví návratné státní financování výstavby nízkouhlíkové výrobny, nikoli převzetí kontroly nad ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-1",
+          "relevant": false,
+          "reasonCz": "Návrh se týká regulace cen pohonných hmot v mimořádné situaci, nikoli získání státní kontroly nad skupinou ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-2",
+          "relevant": false,
+          "reasonCz": "Změny zákona o cenách upravují vydávání cenových výměrů pro pohonné hmoty, nikoli vlastnictví akcií ČEZ."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-3855677942--source",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Slibem je získat stoprocentní kontrolu státu nad skupinou ČEZ, nikoli pouze urychlit výstavbu energetických zdrojů. Poslanci ANO předložili a podpořili změny stavebních pravidel, které se týkají povolování energetických projektů. Vláda ANO také navrhla změny rozpočtových pravidel a poslanci ANO je podpořili; související ustanovení umožňuje státní financování výstavby nízkouhlíkové výrobny. Tyto kroky se však netýkají nabytí akcií ČEZ ani odkupu akcií společností ČEZ. Proto balíček nedokládá podstatný posun ke konkrétnímu závazku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodané podklady neobsahují záznam o tom, zda stát akcie ČEZ koupil nebo zda je společnost ČEZ sama vykoupila; nelze proto ověřit případný krok mimo zachycené legislativní návrhy."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-3855677942",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela převádí povolování staveb jaderných zařízení na ústřední stavební úřad a označuje veřejnou infrastrukturu a vyhrazené stavby za veřejný zájem, což se věcně týká silnější státní kontroly nad energetickými projekty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Změny energetického zákona upravují mimo jiné technické a regulatorní otázky trhu, ale nedokládají větší státní kontrolu nad ČEZ ani krizový vliv na ceny energií."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona se týkají vodoprávních řízení a vodních děl, nikoli kontroly skupiny ČEZ, investic do jaderných bloků ani cen energií."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změny urychlují povolování strategické infrastruktury, ale jejich znění nedokládá změnu vlastnictví ČEZ ani větší státní kontrolu nad jeho projekty či cenami energií."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Ruší se blíže neurčená část dřívější novely energetického zákona, jejíž obsah zde není doložen, takže nelze prokázat materiální dopad na slib."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválená změna rozpočtových pravidel umožňuje navýšit rozpočtové výdaje na stavby pro energetickou bezpečnost, a tím se týká investiční části slibu o dalších energetických zdrojích."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Novela stanoví možnost financovat výstavbu nízkouhlíkové výrobny návratnými půjčkami z účtu podřízeného státní pokladně, což přímo souvisí s investicemi do jaderných zdrojů, nikoli však s odkupem akcií ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-1",
+          "relevant": true,
+          "reasonCz": "Návrh dává vládě pravomoc regulovat ceny pohonných hmot při mimořádné tržní situaci, což je dílčí státní vliv na ceny energií, i když se netýká cen elektřiny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-2",
+          "relevant": true,
+          "reasonCz": "Navazující změna zákona o cenách umožňuje vyhlašovat cenové výměry vlády nařízením a upravuje jejich účinnost, čímž podporuje její dílčí možnost regulovat ceny pohonných hmot."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-3855677942--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--law-change-43284-1",
+        "psp-core-2025--law-change-43284-2",
+        "psp-core-2025--print-step-211168",
+        "psp-core-2025--vote-87163"
+      ],
+      "explanationCz": "Poslanci ANO předložili a podpořili novelu stavebního zákona, která svěřuje povolování jaderných staveb ústřednímu úřadu; jde o dílčí posílení státní kontroly nad energetickými projekty. Vláda také navrhla a poslanci ANO podpořili rozpočtové změny a možnost poskytovat návratné půjčky na výstavbu nízkouhlíkového zdroje, což posouvá investiční část slibu. Další vládní návrh umožnil regulovat ceny pohonných hmot při mimořádné situaci, nikoli však přímo ceny elektřiny. Tyto kroky nedokládají získání stoprocentní kontroly nad ČEZ ani odkup akcií společností ČEZ, takže jde jen o částečný posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené kroky dokládají dílčí změny v povolování, financování energetických zdrojů a regulaci cen pohonných hmot, ale nedokládají, že stát získal všechny akcie ČEZ nebo že by výkup provedla společnost ČEZ."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_02dfcb39850b92cc016abf08ddde8c87d18583e76f81469c60",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 464250,
+      "input_tokens_details": {
+        "cache_write_tokens": 460926,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 9735,
+      "output_tokens_details": {
+        "reasoning_tokens": 8705
+      },
+      "total_tokens": 473985
+    },
+    "output": {
+      "promiseId": "ano-2025-3855677942",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Novela stavebního zákona mění pravidla povolování, včetně energetických staveb, ale neřeší vlastnictví akcií ani získání kontroly nad skupinou ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Změny energetického zákona upravují mimo jiné energetický trh a kapacitní mechanismus, nikoli nabytí stoprocentního vlastnického podílu státu v ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona upravují povolování a správu vodních děl, nikoli vlastnictví nebo kontrolu skupiny ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro strategickou infrastrukturu zahrnují také energetické stavby, ale nepřevádějí ani nenabývají akcie ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení vypočítává rušené předpisy a jejich části, ale nedokládá změnu vlastnictví ČEZ ani státní odkup jeho akcií."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": false,
+          "reasonCz": "Změna rozpočtových pravidel umožňuje určité výdaje na infrastrukturu, ale neupravuje koupi akcií ani kontrolu státu nad skupinou ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": false,
+          "reasonCz": "Změna zákona o nízkouhlíkové energetice stanoví návratné státní financování výstavby nízkouhlíkové výrobny, nikoli převzetí kontroly nad ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-1",
+          "relevant": false,
+          "reasonCz": "Návrh se týká regulace cen pohonných hmot v mimořádné situaci, nikoli získání státní kontroly nad skupinou ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-2",
+          "relevant": false,
+          "reasonCz": "Změny zákona o cenách upravují vydávání cenových výměrů pro pohonné hmoty, nikoli vlastnictví akcií ČEZ."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-3855677942--source",
+        "psp-core-2025--law-change-43174-21",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Slibem je získat stoprocentní kontrolu státu nad skupinou ČEZ, nikoli pouze urychlit výstavbu energetických zdrojů. Poslanci ANO předložili a podpořili změny stavebních pravidel, které se týkají povolování energetických projektů. Vláda ANO také navrhla změny rozpočtových pravidel a poslanci ANO je podpořili; související ustanovení umožňuje státní financování výstavby nízkouhlíkové výrobny. Tyto kroky se však netýkají nabytí akcií ČEZ ani odkupu akcií společností ČEZ. Proto balíček nedokládá podstatný posun ke konkrétnímu závazku.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodané podklady neobsahují záznam o tom, zda stát akcie ČEZ koupil nebo zda je společnost ČEZ sama vykoupila; nelze proto ověřit případný krok mimo zachycené legislativní návrhy."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0e3e6afbec6d0f9a016abf09aa694087d1966d478d1239bba6",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 464250,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 464247
+      },
+      "output_tokens": 5956,
+      "output_tokens_details": {
+        "reasoning_tokens": 4660
+      },
+      "total_tokens": 470206
+    },
+    "output": {
+      "promiseId": "ano-2025-3855677942",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela převádí povolování staveb jaderných zařízení na ústřední stavební úřad a označuje veřejnou infrastrukturu a vyhrazené stavby za veřejný zájem, což se věcně týká silnější státní kontroly nad energetickými projekty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Změny energetického zákona upravují mimo jiné technické a regulatorní otázky trhu, ale nedokládají větší státní kontrolu nad ČEZ ani krizový vliv na ceny energií."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona se týkají vodoprávních řízení a vodních děl, nikoli kontroly skupiny ČEZ, investic do jaderných bloků ani cen energií."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změny urychlují povolování strategické infrastruktury, ale jejich znění nedokládá změnu vlastnictví ČEZ ani větší státní kontrolu nad jeho projekty či cenami energií."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Ruší se blíže neurčená část dřívější novely energetického zákona, jejíž obsah zde není doložen, takže nelze prokázat materiální dopad na slib."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválená změna rozpočtových pravidel umožňuje navýšit rozpočtové výdaje na stavby pro energetickou bezpečnost, a tím se týká investiční části slibu o dalších energetických zdrojích."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-approved-9",
+          "relevant": true,
+          "reasonCz": "Novela stanoví možnost financovat výstavbu nízkouhlíkové výrobny návratnými půjčkami z účtu podřízeného státní pokladně, což přímo souvisí s investicemi do jaderných zdrojů, nikoli však s odkupem akcií ČEZ."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-1",
+          "relevant": true,
+          "reasonCz": "Návrh dává vládě pravomoc regulovat ceny pohonných hmot při mimořádné tržní situaci, což je dílčí státní vliv na ceny energií, i když se netýká cen elektřiny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43284-2",
+          "relevant": true,
+          "reasonCz": "Navazující změna zákona o cenách umožňuje vyhlašovat cenové výměry vlády nařízením a upravuje jejich účinnost, čímž podporuje její dílčí možnost regulovat ceny pohonných hmot."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-3855677942--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--law-change-43284-1",
+        "psp-core-2025--law-change-43284-2",
+        "psp-core-2025--print-step-211168",
+        "psp-core-2025--vote-87163"
+      ],
+      "explanationCz": "Poslanci ANO předložili a podpořili novelu stavebního zákona, která svěřuje povolování jaderných staveb ústřednímu úřadu; jde o dílčí posílení státní kontroly nad energetickými projekty. Vláda také navrhla a poslanci ANO podpořili rozpočtové změny a možnost poskytovat návratné půjčky na výstavbu nízkouhlíkového zdroje, což posouvá investiční část slibu. Další vládní návrh umožnil regulovat ceny pohonných hmot při mimořádné situaci, nikoli však přímo ceny elektřiny. Tyto kroky nedokládají získání stoprocentní kontroly nad ČEZ ani odkup akcií společností ČEZ, takže jde jen o částečný posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené kroky dokládají dílčí změny v povolování, financování energetických zdrojů a regulaci cen pohonných hmot, ale nedokládají, že stát získal všechny akcie ČEZ nebo že by výkup provedla společnost ČEZ."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_09fd2b98b0f0e0a7016abf09ee290887d1b879b81765bb22b2",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 465718,
+      "input_tokens_details": {
+        "cache_write_tokens": 463236,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 312,
+      "output_tokens_details": {
+        "reasoning_tokens": 51
+      },
+      "total_tokens": 466030
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-3855677942--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43200-approved-9",
+        "psp-core-2025--law-change-43284-1",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Volím první hodnocení, protože ANO slíbilo získat stoprocentní kontrolu státu nad skupinou ČEZ výkupem akcií samotnou společností. Poslanci ANO podpořili změny povolování energetických staveb, ale tím stát nezískává větší podíl ani úplnou kontrolu nad ČEZ. Druhé hodnocení započítává také financování jaderných zdrojů a regulaci cen pohonných hmot, které tento konkrétní závazek neposouvají. Dodané podklady proto neprokazují podstatný posun ve slíbeném převzetí ČEZ; nevylučují však kroky, které v nich nejsou zachyceny."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-a"
+  }
+}

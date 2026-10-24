@@ -1,0 +1,258 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-42-54-223Z--821e96e4502e",
+  "evaluatedAt": "2026-10-02T01:42:54.223Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-1c7d23a59bb0/821e96e4502eb3027ffa9082e7a82bb86db9ad15dd6da933af8e0d9da42c2614.json",
+  "packageHash": "821e96e4502eb3027ffa9082e7a82bb86db9ad15dd6da933af8e0d9da42c2614",
+  "assessmentContentHash": "e45729c89355ea919ebcd48ca4bac9c6117e1d457c7ab5044e1d3b6296941a4d",
+  "assessmentFingerprint": "8a4a3454cf1210d301101ebaaf48dbbc195ccf0ae86666f29ae43800eeed2011",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-1c7d23a59bb0",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-1c7d23a59bb0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Návrh se týká přeshraniční spolupráce zdravotnické záchranné služby, ale dodaný text neuvádí konkrétní opatření k organizaci nemocniční péče ani k rozložení kapacit mezi nemocnicemi."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-5",
+          "relevant": false,
+          "reasonCz": "Změny upravují řízený přístup ke zdravotnickým datům, nikoli organizaci nemocniční péče nebo rozmístění nemocničních kapacit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválená verze zařazuje vymezené velké projekty lůžkové zdravotní péče mezi strategické stavby, což může usnadnit rozvoj nemocniční infrastruktury, byť přímo nerozděluje kapacity mezi nemocnicemi."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": true,
+          "reasonCz": "Schválená verze umožňuje ministerstvu obrany zřídit státní organizaci poskytující zdravotní služby vojákům, a tím se částečně dotýká organizace péče, ale neřeší rozložení kapacit nemocnic."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-1c7d23a59bb0--source",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-approved-20",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh novely stavebního zákona, který mezi strategické stavby zařadil také některé velké projekty lůžkové zdravotní péče a umožnil ministerstvu obrany zřídit organizaci poskytující zdravotní služby vojákům. Po zamítnutí návrhu Senátem Poslanecká sněmovna v září 2026 na svém původním textu setrvala; ANO pro to hlasovalo. Jde o dílčí krok, který může podpořit nemocniční infrastrukturu a organizaci péče, ale samotný návrh nezajišťuje rovnoměrnější rozdělení kapacit mezi nemocnicemi.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, že byla některá nemocniční kapacita skutečně přidána nebo přesunuta; návrh pouze stanoví strategický režim pro vymezené projekty.",
+        "Možnost zřídit organizaci pro zdravotní služby vojákům sama o sobě nedokládá, že organizace vznikla nebo že změnila kapacity nemocnic."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-1c7d23a59bb0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": true,
+          "reasonCz": "Dohoda výslovně upravuje přeshraniční spolupráci zdravotnické záchranné služby, tedy organizaci části zdravotní péče, její konkrétní ustanovení však v podkladech nejsou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-5",
+          "relevant": false,
+          "reasonCz": "Změny upravují řízený přístup ke zdravotnickým datům, nikoli organizaci nemocniční péče ani rozložení kapacit mezi nemocnicemi."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválené znění zařazuje mezi strategické stavby některé výstavby, rozšíření či obnovy nemocnic a velké projekty lůžkové péče, což může podpořit část slibu o nemocničních kapacitách."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Umožnění zřídit organizaci ministerstva obrany pro zdravotní služby vojákům neurčuje nemocniční investice ani rovnoměrnější rozložení kapacit nemocnic."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-1c7d23a59bb0--source",
+        "psp-core-2025--law-change-43110-1",
+        "psp-core-2025--vote-87271",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu stavebního zákona, která mezi strategické stavby nově řadí také výstavbu, podstatné rozšíření či komplexní obnovu fakultních nemocnic a velké projekty lůžkové péče ve vysoce specializovaných centrech. Tím se některé nemocniční investice dostávají do zvláštního režimu pro přípravu a povolování staveb, což může přispět k rozvoji části kapacit, ale nezajišťuje jejich rovnoměrné rozložení. Původní poslanecký návrh tuto nemocniční část neobsahoval; objevila se až ve znění, pro které ANO hlasovalo. ANO také hlasovalo pro souhlas s ratifikací česko-slovenské dohody o spolupráci zdravotnické záchranné služby, její konkrétní ustanovení ale podklady neobsahují.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady uvádějí název česko-slovenské dohody o spolupráci zdravotnické záchranné služby, ale ne její konkrétní ustanovení; přesný účinek hlasování ANO na organizaci péče proto nelze ověřit.",
+        "Z textu lze doložit zvláštní režim pro vymezené nemocniční investice, nikoli to, že se nemocniční kapacity skutečně zvýšily nebo rovnoměrněji rozdělily."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_021fc95132444648016abf0bddb6fc87d1a5c975d7e9c045f2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 51274,
+      "input_tokens_details": {
+        "cache_write_tokens": 47950,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 3692,
+      "output_tokens_details": {
+        "reasoning_tokens": 2895
+      },
+      "total_tokens": 54966
+    },
+    "output": {
+      "promiseId": "candidate-1c7d23a59bb0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Návrh se týká přeshraniční spolupráce zdravotnické záchranné služby, ale dodaný text neuvádí konkrétní opatření k organizaci nemocniční péče ani k rozložení kapacit mezi nemocnicemi."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-5",
+          "relevant": false,
+          "reasonCz": "Změny upravují řízený přístup ke zdravotnickým datům, nikoli organizaci nemocniční péče nebo rozmístění nemocničních kapacit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválená verze zařazuje vymezené velké projekty lůžkové zdravotní péče mezi strategické stavby, což může usnadnit rozvoj nemocniční infrastruktury, byť přímo nerozděluje kapacity mezi nemocnicemi."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": true,
+          "reasonCz": "Schválená verze umožňuje ministerstvu obrany zřídit státní organizaci poskytující zdravotní služby vojákům, a tím se částečně dotýká organizace péče, ale neřeší rozložení kapacit nemocnic."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-1c7d23a59bb0--source",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-approved-20",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh novely stavebního zákona, který mezi strategické stavby zařadil také některé velké projekty lůžkové zdravotní péče a umožnil ministerstvu obrany zřídit organizaci poskytující zdravotní služby vojákům. Po zamítnutí návrhu Senátem Poslanecká sněmovna v září 2026 na svém původním textu setrvala; ANO pro to hlasovalo. Jde o dílčí krok, který může podpořit nemocniční infrastrukturu a organizaci péče, ale samotný návrh nezajišťuje rovnoměrnější rozdělení kapacit mezi nemocnicemi.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, že byla některá nemocniční kapacita skutečně přidána nebo přesunuta; návrh pouze stanoví strategický režim pro vymezené projekty.",
+        "Možnost zřídit organizaci pro zdravotní služby vojákům sama o sobě nedokládá, že organizace vznikla nebo že změnila kapacity nemocnic."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_015dc9fe88f25489016abf0bf4a23087d19943a3b41ded9a93",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 51274,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 51271
+      },
+      "output_tokens": 6410,
+      "output_tokens_details": {
+        "reasoning_tokens": 5607
+      },
+      "total_tokens": 57684
+    },
+    "output": {
+      "promiseId": "candidate-1c7d23a59bb0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": true,
+          "reasonCz": "Dohoda výslovně upravuje přeshraniční spolupráci zdravotnické záchranné služby, tedy organizaci části zdravotní péče, její konkrétní ustanovení však v podkladech nejsou."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-5",
+          "relevant": false,
+          "reasonCz": "Změny upravují řízený přístup ke zdravotnickým datům, nikoli organizaci nemocniční péče ani rozložení kapacit mezi nemocnicemi."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválené znění zařazuje mezi strategické stavby některé výstavby, rozšíření či obnovy nemocnic a velké projekty lůžkové péče, což může podpořit část slibu o nemocničních kapacitách."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-20",
+          "relevant": false,
+          "reasonCz": "Umožnění zřídit organizaci ministerstva obrany pro zdravotní služby vojákům neurčuje nemocniční investice ani rovnoměrnější rozložení kapacit nemocnic."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-1c7d23a59bb0--source",
+        "psp-core-2025--law-change-43110-1",
+        "psp-core-2025--vote-87271",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro novelu stavebního zákona, která mezi strategické stavby nově řadí také výstavbu, podstatné rozšíření či komplexní obnovu fakultních nemocnic a velké projekty lůžkové péče ve vysoce specializovaných centrech. Tím se některé nemocniční investice dostávají do zvláštního režimu pro přípravu a povolování staveb, což může přispět k rozvoji části kapacit, ale nezajišťuje jejich rovnoměrné rozložení. Původní poslanecký návrh tuto nemocniční část neobsahoval; objevila se až ve znění, pro které ANO hlasovalo. ANO také hlasovalo pro souhlas s ratifikací česko-slovenské dohody o spolupráci zdravotnické záchranné služby, její konkrétní ustanovení ale podklady neobsahují.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady uvádějí název česko-slovenské dohody o spolupráci zdravotnické záchranné služby, ale ne její konkrétní ustanovení; přesný účinek hlasování ANO na organizaci péče proto nelze ověřit.",
+        "Z textu lze doložit zvláštní režim pro vymezené nemocniční investice, nikoli to, že se nemocniční kapacity skutečně zvýšily nebo rovnoměrněji rozdělily."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-towards",
+    "selectedReview": "assessor-a"
+  }
+}

@@ -1,0 +1,231 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-27-35-379Z--7f8188120dbf",
+  "evaluatedAt": "2026-10-02T01:27:35.379Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-08b31bfa70/7f8188120dbf697179b2f2a6d452668b0d2abf9d6a9d47e21fdbfa3e8229adf7.json",
+  "packageHash": "7f8188120dbf697179b2f2a6d452668b0d2abf9d6a9d47e21fdbfa3e8229adf7",
+  "assessmentContentHash": "084d56062dbf3429153a258f6f0bd45d99d8912e62da123ff6cdcea9513c54bd",
+  "assessmentFingerprint": "a0c92b5e1475c60f311c4761d02aedb3720b1a6e4b9f7cefb6df726203d58ef0",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-08b31bfa70",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-08b31bfa70",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Předložená část smlouvy o přeshraniční spolupráci zdravotnických záchranných služeb neobsahuje pravidla o placení zdravotní péče ani o nadstandardech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně stanoví, že cizinec ve výkonu trestu hradí zdravotní služby poskytnuté na jeho žádost nad zákonem vymezený rozsah, což se týká placené péče nad stanovenou úroveň."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-08b31bfa70--source",
+        "psp-core-2025--law-change-43264-13",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Vláda předložila a poslanci ANO následně podpořili zákon o vstupu a pobytu cizinců, který upravuje pobyt cizinců v Česku. Zákon stanoví, že cizinec ve výkonu trestu hradí zdravotní služby poskytnuté na vlastní žádost nad zákonem vymezený rozsah. Tím zachovává placenou péči nad stanovenou úrovní, což jde proti části slibu odmítající placené nadstandardy. Dopad je omezen na cizince v této zvláštní situaci, a proto nejde o popření celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Ustanovení se týká cizinců ve výkonu trestu a péče nad zákonem vymezený rozsah, nikoli obecného systému zdravotnictví; není jisté, zda slib míří i na takto omezené případy placené péče."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-08b31bfa70",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Jde o rámcovou smlouvu o přeshraniční spolupráci zdravotnických záchranných služeb, nikoli o placené nadstandardní zdravotní služby; vlastní text smlouvy v podkladu chybí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": false,
+          "reasonCz": "Ustanovení o zdravotních službách upravují rozsah a hrazení péče pro zajištěné cizince a osoby v přijímacím středisku, nikoli placené nadstandardy zdravotní péče obecně."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-08b31bfa70--source",
+        "psp-core-2025--law-change-43110-1",
+        "psp-core-2025--law-change-43264-13",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-87271",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "ANO slíbilo odmítnout placené zdravotnictví prostřednictvím nadstandardů. Dodané záznamy se týkají přeshraniční záchranné služby a cizineckého zákona; jeho zdravotní ustanovení řeší hrazení péče u cizinců v zajištění či přijímacím středisku, nikoli nadstandardy. ANO předložilo cizinecký zákon a hlasovalo pro něj, ale posuzovaná část nedokládá krok k tomuto slibu ani proti němu. Proto není ověřen podstatný posun a podklady pro závěr nestačí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text rámcové smlouvy o přeshraniční záchranné službě v podkladu chybí, takže nelze posoudit její podrobnosti; její popsaný předmět však nesměřuje k placeným nadstandardům."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_06a11636fa65db42016abf0841e24087d1afcaa2497abea12f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 67087,
+      "input_tokens_details": {
+        "cache_write_tokens": 63763,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1752,
+      "output_tokens_details": {
+        "reasoning_tokens": 1251
+      },
+      "total_tokens": 68839
+    },
+    "output": {
+      "promiseId": "ano-2025-08b31bfa70",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Předložená část smlouvy o přeshraniční spolupráci zdravotnických záchranných služeb neobsahuje pravidla o placení zdravotní péče ani o nadstandardech."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně stanoví, že cizinec ve výkonu trestu hradí zdravotní služby poskytnuté na jeho žádost nad zákonem vymezený rozsah, což se týká placené péče nad stanovenou úroveň."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-08b31bfa70--source",
+        "psp-core-2025--law-change-43264-13",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Vláda předložila a poslanci ANO následně podpořili zákon o vstupu a pobytu cizinců, který upravuje pobyt cizinců v Česku. Zákon stanoví, že cizinec ve výkonu trestu hradí zdravotní služby poskytnuté na vlastní žádost nad zákonem vymezený rozsah. Tím zachovává placenou péči nad stanovenou úrovní, což jde proti části slibu odmítající placené nadstandardy. Dopad je omezen na cizince v této zvláštní situaci, a proto nejde o popření celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Ustanovení se týká cizinců ve výkonu trestu a péče nad zákonem vymezený rozsah, nikoli obecného systému zdravotnictví; není jisté, zda slib míří i na takto omezené případy placené péče."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0b1f1a38141a8fbf016abf085f306887d1a7c335cf81ff1b91",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 67087,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 67084
+      },
+      "output_tokens": 2297,
+      "output_tokens_details": {
+        "reasoning_tokens": 1722
+      },
+      "total_tokens": 69384
+    },
+    "output": {
+      "promiseId": "ano-2025-08b31bfa70",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43110-1",
+          "relevant": false,
+          "reasonCz": "Jde o rámcovou smlouvu o přeshraniční spolupráci zdravotnických záchranných služeb, nikoli o placené nadstandardní zdravotní služby; vlastní text smlouvy v podkladu chybí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": false,
+          "reasonCz": "Ustanovení o zdravotních službách upravují rozsah a hrazení péče pro zajištěné cizince a osoby v přijímacím středisku, nikoli placené nadstandardy zdravotní péče obecně."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "ano-2025-08b31bfa70--source",
+        "psp-core-2025--law-change-43110-1",
+        "psp-core-2025--law-change-43264-13",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-87271",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "ANO slíbilo odmítnout placené zdravotnictví prostřednictvím nadstandardů. Dodané záznamy se týkají přeshraniční záchranné služby a cizineckého zákona; jeho zdravotní ustanovení řeší hrazení péče u cizinců v zajištění či přijímacím středisku, nikoli nadstandardy. ANO předložilo cizinecký zákon a hlasovalo pro něj, ale posuzovaná část nedokládá krok k tomuto slibu ani proti němu. Proto není ověřen podstatný posun a podklady pro závěr nestačí.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text rámcové smlouvy o přeshraniční záchranné službě v podkladu chybí, takže nelze posoudit její podrobnosti; její popsaný předmět však nesměřuje k placeným nadstandardům."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0323ff9913a62d56016abf087e054487d1a525df0c129f4209",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 67245,
+      "input_tokens_details": {
+        "cache_write_tokens": 67242,
+        "cached_tokens": 0
+      },
+      "output_tokens": 476,
+      "output_tokens_details": {
+        "reasoning_tokens": 230
+      },
+      "total_tokens": 67721
+    },
+    "output": {
+      "choice": "assessor-a",
+      "citedEvidenceIds": [
+        "ano-2025-08b31bfa70--source",
+        "psp-core-2025--law-change-43264-13",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Volím první hodnocení, protože slib ANO odmítá placené nadstandardy bez výjimky pro určitou skupinu pacientů. Pro návrh zákona o vstupu a pobytu cizinců, vedený ve Sněmovně jako tisk č. 144, hlasovalo 59 z 80 poslanců ANO. Schválený text stanoví, že cizinci například ve vězení sami hradí péči poskytnutou na jejich žádost nad vymezený rozsah. Druhé hodnocení tuto placenou péči pomíjí kvůli omezenému okruhu pacientů; ten ale odůvodňuje závěr, že rozhodnutí odporuje pouze části slibu, nikoli jeho úplné vyloučení z hodnocení."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-against",
+    "selectedReview": "assessor-a"
+  }
+}

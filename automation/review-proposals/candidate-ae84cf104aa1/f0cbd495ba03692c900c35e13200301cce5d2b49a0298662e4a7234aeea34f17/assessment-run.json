@@ -1,0 +1,258 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-54-44-958Z--2ee16540d888",
+  "evaluatedAt": "2026-10-02T01:54:44.958Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-ae84cf104aa1/2ee16540d888531fffa4644e792f3017469605d52dcb501b9de1757913cede95.json",
+  "packageHash": "2ee16540d888531fffa4644e792f3017469605d52dcb501b9de1757913cede95",
+  "assessmentContentHash": "87ad2d1698980ef2c0ac761f941ef77a304fea10564bdbdb3d0fb632cedfb594",
+  "assessmentFingerprint": "f0cbd495ba03692c900c35e13200301cce5d2b49a0298662e4a7234aeea34f17",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-ae84cf104aa1",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-ae84cf104aa1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Novela mění pravidla, z nichž se odvozuje výdajový rámec státního rozpočtu, a tím může ovlivnit prostor pro snižování schodku, sama však jeho snížení nenařizuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu přímo stanoví schodek pro rok 2026, tedy výsledek, jehož snižování slib výslovně řeší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43446-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu přímo stanoví schodek pro rok 2027, takže lze posoudit, zda vládní návrh směřuje k jeho snížení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ae84cf104aa1--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43446-1",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--print-step-212249"
+      ],
+      "explanationCz": "Vláda ANO předložila novelu zákona o rozpočtové odpovědnosti, která upravuje pravidla pro stanovování výdajového rámce veřejných rozpočtů. Poslanci ANO ji schválili a později hlasovali také pro její setrvání po vrácení Senátem i prezidentem; tato pravidla mohou snižování schodku částečně podpořit, sama ho ale nezaručují. ANO také hlasovalo pro rozpočet na rok 2026 se schodkem 310 miliard korun. Vláda následně navrhla pro rok 2027 schodek 386 miliard korun, což je nepříznivý signál, ale jde zatím jen o návrh a slib míří na konec volebního období.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh rozpočtu na rok 2027 počítá se schodkem vyšším o 76 miliard korun než rozpočet na rok 2026, ale zatím nejde o schválený rozpočet a podklady neukazují konečný výsledek hospodaření ani vývoj až do konce volebního období.",
+        "Přesné znění zákona o rozpočtové odpovědnosti po jeho konečném projednání po prezidentském vrácení není v balíčku zveřejněno; hodnocení hlasování vychází z uvedené schválené verze."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-ae84cf104aa1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Mění pravidla rozpočtové odpovědnosti a stanovování výdajového rámce, což může přispět k omezení schodků, ale samo o sobě jejich snížení nezaručuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu přímo stanoví schodek na rok 2026 ve výši 310 miliard korun, tedy údaj přímo se týkající rozpočtového deficitu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43446-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu přímo stanoví schodek na rok 2027 ve výši 386 miliard korun, což je relevantní pro posouzení vývoje deficitu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ae84cf104aa1--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43446-1",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--print-step-212249"
+      ],
+      "explanationCz": "Vláda, v níž ANO vládne, předložila rozpočet na rok 2026 se schodkem 310 miliard korun a poslanci ANO pro jeho schválení hlasovali. Později ANO podpořilo také novelu zákona o rozpočtové odpovědnosti, která stanoví pravidla pro výdajový rámec státu a práci s rozpočtovým saldem; jde o dílčí krok k odpovědnějšímu řízení veřejných financí. Vláda následně navrhla pro rok 2027 schodek 386 miliard korun, návrh však podle dodaných podkladů ještě nebyl schválen. Dosavadní kroky proto ukazují jen částečný posun, nikoli splnění slibu výrazně snížit schodek ke konci volebního období.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh rozpočtu na rok 2027 počítá s vyšším schodkem než rozpočet na rok 2026, ale jde zatím o návrh, nikoli o schválený rozpočet.",
+        "Podklady neukazují, jaký bude skutečný deficit ke konci volebního období; slib navíc nestanoví jeho konkrétní cílovou částku."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_09803c83e85ace0d016abf0ea34a0c87d1a58b108397e27bfb",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 47379,
+      "input_tokens_details": {
+        "cache_write_tokens": 44055,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 4177,
+      "output_tokens_details": {
+        "reasoning_tokens": 3323
+      },
+      "total_tokens": 51556
+    },
+    "output": {
+      "promiseId": "candidate-ae84cf104aa1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Novela mění pravidla, z nichž se odvozuje výdajový rámec státního rozpočtu, a tím může ovlivnit prostor pro snižování schodku, sama však jeho snížení nenařizuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu přímo stanoví schodek pro rok 2026, tedy výsledek, jehož snižování slib výslovně řeší."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43446-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu přímo stanoví schodek pro rok 2027, takže lze posoudit, zda vládní návrh směřuje k jeho snížení."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ae84cf104aa1--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43446-1",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--print-step-212249"
+      ],
+      "explanationCz": "Vláda ANO předložila novelu zákona o rozpočtové odpovědnosti, která upravuje pravidla pro stanovování výdajového rámce veřejných rozpočtů. Poslanci ANO ji schválili a později hlasovali také pro její setrvání po vrácení Senátem i prezidentem; tato pravidla mohou snižování schodku částečně podpořit, sama ho ale nezaručují. ANO také hlasovalo pro rozpočet na rok 2026 se schodkem 310 miliard korun. Vláda následně navrhla pro rok 2027 schodek 386 miliard korun, což je nepříznivý signál, ale jde zatím jen o návrh a slib míří na konec volebního období.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh rozpočtu na rok 2027 počítá se schodkem vyšším o 76 miliard korun než rozpočet na rok 2026, ale zatím nejde o schválený rozpočet a podklady neukazují konečný výsledek hospodaření ani vývoj až do konce volebního období.",
+        "Přesné znění zákona o rozpočtové odpovědnosti po jeho konečném projednání po prezidentském vrácení není v balíčku zveřejněno; hodnocení hlasování vychází z uvedené schválené verze."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_03bdb022038b3cb5016abf0ec55fbc87d190418049841bbad9",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 47379,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 47376
+      },
+      "output_tokens": 3662,
+      "output_tokens_details": {
+        "reasoning_tokens": 2845
+      },
+      "total_tokens": 51041
+    },
+    "output": {
+      "promiseId": "candidate-ae84cf104aa1",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-8",
+          "relevant": true,
+          "reasonCz": "Mění pravidla rozpočtové odpovědnosti a stanovování výdajového rámce, což může přispět k omezení schodků, ale samo o sobě jejich snížení nezaručuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43204-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu přímo stanoví schodek na rok 2026 ve výši 310 miliard korun, tedy údaj přímo se týkající rozpočtového deficitu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43446-1",
+          "relevant": true,
+          "reasonCz": "Návrh státního rozpočtu přímo stanoví schodek na rok 2027 ve výši 386 miliard korun, což je relevantní pro posouzení vývoje deficitu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-ae84cf104aa1--source",
+        "psp-core-2025--law-change-43200-8",
+        "psp-core-2025--law-change-43204-1",
+        "psp-core-2025--law-change-43446-1",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--print-step-210761",
+        "psp-core-2025--vote-86957",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--print-step-212249"
+      ],
+      "explanationCz": "Vláda, v níž ANO vládne, předložila rozpočet na rok 2026 se schodkem 310 miliard korun a poslanci ANO pro jeho schválení hlasovali. Později ANO podpořilo také novelu zákona o rozpočtové odpovědnosti, která stanoví pravidla pro výdajový rámec státu a práci s rozpočtovým saldem; jde o dílčí krok k odpovědnějšímu řízení veřejných financí. Vláda následně navrhla pro rok 2027 schodek 386 miliard korun, návrh však podle dodaných podkladů ještě nebyl schválen. Dosavadní kroky proto ukazují jen částečný posun, nikoli splnění slibu výrazně snížit schodek ke konci volebního období.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh rozpočtu na rok 2027 počítá s vyšším schodkem než rozpočet na rok 2026, ale jde zatím o návrh, nikoli o schválený rozpočet.",
+        "Podklady neukazují, jaký bude skutečný deficit ke konci volebního období; slib navíc nestanoví jeho konkrétní cílovou částku."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

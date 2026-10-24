@@ -1,0 +1,244 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-57-31-892Z--6d01c11326fa",
+  "evaluatedAt": "2026-10-02T01:57:31.892Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-c2d6b6c7e06c/6d01c11326fabd001b6016215352c3531577a70d131ca2fffc7df1937235d038.json",
+  "packageHash": "6d01c11326fabd001b6016215352c3531577a70d131ca2fffc7df1937235d038",
+  "assessmentContentHash": "c6401c1b1a89357c0f0831e628876557f8d19e4d53fa928238d0b979799e9af9",
+  "assessmentFingerprint": "9884e3d7e377c33833c51c734d94d9802cbc1ab65a76dfadf257f4679761fe75",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-c2d6b6c7e06c",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-c2d6b6c7e06c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválené znění umožňuje v letech 2026 až 2036 navýšit celkové výdaje státního rozpočtu o obranné výdaje nad 2 % HDP, což může otevřít prostor i pro posílení pozemních jednotek, ale neurčuje jejich konkrétní financování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-9",
+          "relevant": false,
+          "reasonCz": "Změna pouze stanoví, z jaké prognózy HDP se vychází při výpočtu obranných výdajů, a neobsahuje opatření k posílení pozemních jednotek ani k dokončení brigád."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43286-1",
+          "relevant": false,
+          "reasonCz": "Dohoda s Keňou upravuje obecnou obrannou spolupráci včetně výcviku a vybavení, ale nestanoví opatření k posílení českých pozemních jednotek ani k dokončení uvedených brigád."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-c2d6b6c7e06c--source",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila změnu rozpočtových pravidel, která umožňuje v letech 2026 až 2036 zvýšit státní výdaje o obranné výdaje přesahující 2 % HDP. Poslanci ANO hlasovali pro její schválení a následně také pro setrvání na návrhu po jeho vrácení Senátem i prezidentem. Tím se může rozšířit prostor pro obranné výdaje, což představuje dílčí posun k posílení pozemních jednotek. Změna ale neurčuje peníze pro pozemní síly ani nedokládá dokončení těžké mechanizované brigády či brigády rychlého nasazení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Záznam hlasování po vrácení zákona prezidentem uvádí, že přesné znění textu, o němž se hlasovalo, není zveřejněno; dostupné podklady proto neumožňují ověřit všechny jeho konečné změny.",
+        "Podklady dokládají pouze obecný prostor pro navýšení obranných výdajů, nikoli jejich přidělení pozemním jednotkám nebo konkrétní kroky k dokončení obou brigád."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-c2d6b6c7e06c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválené znění umožňuje v letech 2026–2036 zvýšit celkové výdaje státního rozpočtu o výdaje na obranu nad hranici 2 % HDP, což může vytvořit prostor pro posílení pozemních jednotek, ale neurčuje jejich financování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-9",
+          "relevant": true,
+          "reasonCz": "Změna upravuje prognózu HDP používanou při stanovení minimálních výdajů na obranu, a tím se týká finančního rámce pro obranné výdaje, nikoli přímo dokončení brigád."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43286-1",
+          "relevant": true,
+          "reasonCz": "Dohoda výslovně počítá s vojenským výcvikem a pořizováním, údržbou i opravami vojenského vybavení, což může přispět k posílení jednotek, ale nezavazuje k dokončení konkrétních brigád."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-c2d6b6c7e06c--source",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43200-9",
+        "psp-core-2025--law-change-43286-1",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--print-step-211172",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila dohodu s Keňou o obranné spolupráci, která počítá mimo jiné s výcvikem a vojenským vybavením. Vláda také navrhla změny rozpočtových pravidel a financování obrany; poslanci ANO hlasovali pro jejich schválení. Schválená pravidla umožňují zvýšit rozpočtové výdaje na obranu nad 2 % HDP, což může podpořit posílení armády, ale peníze výslovně neurčují pro pozemní jednotky. Jde proto o posun ke slibu, nikoli o důkaz, že obě brigády byly dokončeny.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda byly dodatečné obranné výdaje skutečně určeny pozemním jednotkám ani jaký je stav dokončení obou brigád.",
+        "Přesné znění zákona při posledním hlasování po vrácení prezidentem není v podkladech zveřejněno; pro toto hlasování je uvedeno dřívější schválené znění."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0755a77340533013016abf0f51800887d1b36e2a3856b3b600",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 45567,
+      "input_tokens_details": {
+        "cache_write_tokens": 42243,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2429,
+      "output_tokens_details": {
+        "reasoning_tokens": 1652
+      },
+      "total_tokens": 47996
+    },
+    "output": {
+      "promiseId": "candidate-c2d6b6c7e06c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválené znění umožňuje v letech 2026 až 2036 navýšit celkové výdaje státního rozpočtu o obranné výdaje nad 2 % HDP, což může otevřít prostor i pro posílení pozemních jednotek, ale neurčuje jejich konkrétní financování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-9",
+          "relevant": false,
+          "reasonCz": "Změna pouze stanoví, z jaké prognózy HDP se vychází při výpočtu obranných výdajů, a neobsahuje opatření k posílení pozemních jednotek ani k dokončení brigád."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43286-1",
+          "relevant": false,
+          "reasonCz": "Dohoda s Keňou upravuje obecnou obrannou spolupráci včetně výcviku a vybavení, ale nestanoví opatření k posílení českých pozemních jednotek ani k dokončení uvedených brigád."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-c2d6b6c7e06c--source",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila změnu rozpočtových pravidel, která umožňuje v letech 2026 až 2036 zvýšit státní výdaje o obranné výdaje přesahující 2 % HDP. Poslanci ANO hlasovali pro její schválení a následně také pro setrvání na návrhu po jeho vrácení Senátem i prezidentem. Tím se může rozšířit prostor pro obranné výdaje, což představuje dílčí posun k posílení pozemních jednotek. Změna ale neurčuje peníze pro pozemní síly ani nedokládá dokončení těžké mechanizované brigády či brigády rychlého nasazení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Záznam hlasování po vrácení zákona prezidentem uvádí, že přesné znění textu, o němž se hlasovalo, není zveřejněno; dostupné podklady proto neumožňují ověřit všechny jeho konečné změny.",
+        "Podklady dokládají pouze obecný prostor pro navýšení obranných výdajů, nikoli jejich přidělení pozemním jednotkám nebo konkrétní kroky k dokončení obou brigád."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_08f0beb619f8e4d4016abf0f634a6087d19569f4b3d7b86027",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 45567,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 45564
+      },
+      "output_tokens": 5548,
+      "output_tokens_details": {
+        "reasoning_tokens": 4741
+      },
+      "total_tokens": 51115
+    },
+    "output": {
+      "promiseId": "candidate-c2d6b6c7e06c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválené znění umožňuje v letech 2026–2036 zvýšit celkové výdaje státního rozpočtu o výdaje na obranu nad hranici 2 % HDP, což může vytvořit prostor pro posílení pozemních jednotek, ale neurčuje jejich financování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-9",
+          "relevant": true,
+          "reasonCz": "Změna upravuje prognózu HDP používanou při stanovení minimálních výdajů na obranu, a tím se týká finančního rámce pro obranné výdaje, nikoli přímo dokončení brigád."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43286-1",
+          "relevant": true,
+          "reasonCz": "Dohoda výslovně počítá s vojenským výcvikem a pořizováním, údržbou i opravami vojenského vybavení, což může přispět k posílení jednotek, ale nezavazuje k dokončení konkrétních brigád."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-c2d6b6c7e06c--source",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--law-change-43200-9",
+        "psp-core-2025--law-change-43286-1",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--print-step-211172",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416"
+      ],
+      "explanationCz": "Vláda předložila dohodu s Keňou o obranné spolupráci, která počítá mimo jiné s výcvikem a vojenským vybavením. Vláda také navrhla změny rozpočtových pravidel a financování obrany; poslanci ANO hlasovali pro jejich schválení. Schválená pravidla umožňují zvýšit rozpočtové výdaje na obranu nad 2 % HDP, což může podpořit posílení armády, ale peníze výslovně neurčují pro pozemní jednotky. Jde proto o posun ke slibu, nikoli o důkaz, že obě brigády byly dokončeny.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, zda byly dodatečné obranné výdaje skutečně určeny pozemním jednotkám ani jaký je stav dokončení obou brigád.",
+        "Přesné znění zákona při posledním hlasování po vrácení prezidentem není v podkladech zveřejněno; pro toto hlasování je uvedeno dřívější schválené znění."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

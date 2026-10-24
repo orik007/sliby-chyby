@@ -1,0 +1,51 @@
+# Povinné zveřejňování financování neziskových organizací
+
+> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+
+## Návrh pro veřejný web
+
+*Nevznikl žádný návrh veřejného hodnocení ani vysvětlení.*
+
+## Co má zkontrolovat reviewer
+
+- Odpovídá navržené hodnocení metodice SLAVA Indexu?
+- Je jednání správně připsáno sledované straně?
+- Je veřejné vysvětlení pochopitelné samo o sobě a říká, kdo co udělal a jak to souvisí se slibem?
+- Jsou zkratky, právní pojmy a úřední označení při prvním použití vysvětlené?
+- Dokládají uvedené zdroje všechna podstatná tvrzení a nechybí rozporný podklad?
+
+## Technické podklady pro reviewera
+
+- Výsledek automatického procesu: oba automatické posudky označily podklady za nedostatečné
+- Interní stav: bez kandidátního stavu
+- Důvod výsledku: `insufficient-evidence`
+- Úplný strojový audit: `assessment-run.json`
+- Přesný balíček posuzovaných podkladů: `evidence-package.json`
+
+### Shoda hodnotitelů
+
+Oba nezávislí hodnotitelé dospěli ke stejnému výsledku: **podklady nestačí pro automatický návrh hodnocení**.
+
+SPD slíbila připravit zákon, který neziskovým organizacím uloží zveřejňovat, kdo je financuje. Dodaná změna schválená Poslaneckou sněmovnou posouvá datum účinnosti některých ustanovení dřívějšího zákona, ale její text neukazuje, že by řešila financování nebo zveřejňování informací neziskovými organizacemi. Proto nelze doložit podstatný posun ani postup proti slibu.
+
+Co zůstává nejisté:
+
+- Dodaný kontext neuvádí obsah ustanovení, jejichž účinnost se odkládá, takže nelze ověřit, zda se jakkoli týkají financování či zveřejňování údajů neziskovými organizacemi.
+
+Úplné oddělené odpovědi obou hodnotitelů zůstávají v souboru `assessment-run.json`.
+
+### Souvisí změny zákonů se slibem?
+
+| Změna zákona | První posudek | Druhý posudek |
+| --- | --- | --- |
+| [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona, kterým se mění občanský zákoník a další související zákony](https://www.psp.cz/sqw/text/orig2.sqw?idd=280625) | ne: Změna pouze posouvá datum účinnosti některých ustanovení dřívějšího zákona, ale dodaný text ani kontext neukazují, že by se tato ustanovení týkala zveřejňování financování neziskových organizací. | ne: Text pouze posouvá termín účinnosti několika ustanovení jiné novely a dodané podklady neuvádějí jejich obsah ani spojení s povinným zveřejňováním financování neziskových organizací. |
+
+Oba hodnotitelé tyto změny shodně označili za nesouvisející, proto je další balíčky tohoto slibu vynechají, dokud se nezmění jejich text, kontext, znění slibu nebo pokyny hodnotitelů:
+
+- Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona, kterým se mění občanský zákoník a další související zákony
+
+### Zdroje použité při hodnocení
+
+- [Původní volební slib](https://spd.cz/wp-content/uploads/2025/09/Program-SPD-pro-volby-do-Poslanecke-snemovny-2025.pdf)
+- [Změna zákona v návrhu projednávaném Sněmovnou: Změna zákona, kterým se mění občanský zákoník a další související zákony](https://www.psp.cz/sqw/text/orig2.sqw?idd=280625)
+

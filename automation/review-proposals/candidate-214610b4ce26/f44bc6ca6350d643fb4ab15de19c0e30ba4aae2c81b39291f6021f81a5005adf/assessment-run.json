@@ -1,0 +1,222 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-42-53-223Z--e2b308af6ddb",
+  "evaluatedAt": "2026-10-02T01:42:53.223Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-214610b4ce26/e2b308af6ddb56808e5812de4262bf81c6a4232eee2d9f8868ae1f75fb025dc0.json",
+  "packageHash": "e2b308af6ddb56808e5812de4262bf81c6a4232eee2d9f8868ae1f75fb025dc0",
+  "assessmentContentHash": "41e1b2fa0d733ade06fef5e7eea5bfba8e8c05818d6a4419ce9b087593ec7a5d",
+  "assessmentFingerprint": "f44bc6ca6350d643fb4ab15de19c0e30ba4aae2c81b39291f6021f81a5005adf",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-214610b4ce26",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-214610b4ce26",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění termíny účinnosti ustanovení jiného zákona, ale dodaný kontext jejich věcný obsah neuvádí a text neukazuje souvislost s výší či podmínkami porodného."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Text pouze doplňuje dávku státní sociální pomoci mezi započitatelné příjmy pro výpočet životního a existenčního minima, nikoli částku nebo nárok na porodné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text posouvá termíny přechodného vyplácení jiných sociálních dávek a účinnosti souvisejících ustanovení, ale nemění porodné ani podmínky uvedené ve slibu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-214610b4ce26--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43198-2",
+        "psp-core-2025--law-change-43198-4"
+      ],
+      "explanationCz": "SPD ve svém programu slíbila porodné 30 000 Kč na první dítě, 40 000 Kč na druhé a 50 000 Kč na třetí a další dítě v pracující rodině. Předložené změny upravují započítávání jiných sociálních dávek a termíny účinnosti či přechodného vyplácení, nikoli částku nebo podmínky porodného. V předložených podkladech proto není doložen podstatný posun v plnění tohoto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Jedna změna posouvá účinnost ustanovení jiného zákona, ale dodaný kontext neuvádí jejich věcný obsah; nelze proto ověřit, zda se některé z nich porodného nepřímo dotýká. Žádná z předložených změn však neukazuje přímý zásah do slíbené částky nebo podmínek."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-214610b4ce26",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text pouze mění termíny účinnosti blíže neurčených ustanovení jiného zákona a dodané podklady neukazují, že se týkají porodného."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Změna nově řadí dávky státní sociální pomoci mezi započitatelné příjmy pro životní minimum, ale nemění výši ani podmínky porodného."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text posouvá termíny přechodných pravidel a účinnosti jiných ustanovení, ale neuvádí žádnou změnu porodného."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-214610b4ce26--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43198-2",
+        "psp-core-2025--law-change-43198-4"
+      ],
+      "explanationCz": "SPD slibuje porodné 30 000 Kč na první dítě, 40 000 Kč na druhé a 50 000 Kč na třetí a další dítě v pracujících rodinách. Předložené změny se týkají jiných pravidel sociální podpory a žádná z nich nedokládá zvýšení porodného ani změnu jeho podmínek. Proto zatím není doložen podstatný posun ve slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "U jedné změny nejsou v podkladech uvedena ustanovení, jejichž účinnost se posouvá; nelze proto vyloučit, že mají nepřímý vztah k porodnému. Podklady však neumožňují určit takový vztah ani doložit změnu porodného."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_08f5cea6d7c96fd7016abf0bfeabc887d188949bf11fc5300c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 16795,
+      "input_tokens_details": {
+        "cache_write_tokens": 13471,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1669,
+      "output_tokens_details": {
+        "reasoning_tokens": 1114
+      },
+      "total_tokens": 18464
+    },
+    "output": {
+      "promiseId": "candidate-214610b4ce26",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění termíny účinnosti ustanovení jiného zákona, ale dodaný kontext jejich věcný obsah neuvádí a text neukazuje souvislost s výší či podmínkami porodného."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Text pouze doplňuje dávku státní sociální pomoci mezi započitatelné příjmy pro výpočet životního a existenčního minima, nikoli částku nebo nárok na porodné."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text posouvá termíny přechodného vyplácení jiných sociálních dávek a účinnosti souvisejících ustanovení, ale nemění porodné ani podmínky uvedené ve slibu."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-214610b4ce26--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43198-2",
+        "psp-core-2025--law-change-43198-4"
+      ],
+      "explanationCz": "SPD ve svém programu slíbila porodné 30 000 Kč na první dítě, 40 000 Kč na druhé a 50 000 Kč na třetí a další dítě v pracující rodině. Předložené změny upravují započítávání jiných sociálních dávek a termíny účinnosti či přechodného vyplácení, nikoli částku nebo podmínky porodného. V předložených podkladech proto není doložen podstatný posun v plnění tohoto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Jedna změna posouvá účinnost ustanovení jiného zákona, ale dodaný kontext neuvádí jejich věcný obsah; nelze proto ověřit, zda se některé z nich porodného nepřímo dotýká. Žádná z předložených změn však neukazuje přímý zásah do slíbené částky nebo podmínek."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0456395fe0c07b5d016abf0c0b1d9887d1a9b108cc606060a0",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 16795,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 16792
+      },
+      "output_tokens": 1877,
+      "output_tokens_details": {
+        "reasoning_tokens": 1316
+      },
+      "total_tokens": 18672
+    },
+    "output": {
+      "promiseId": "candidate-214610b4ce26",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text pouze mění termíny účinnosti blíže neurčených ustanovení jiného zákona a dodané podklady neukazují, že se týkají porodného."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-2",
+          "relevant": false,
+          "reasonCz": "Změna nově řadí dávky státní sociální pomoci mezi započitatelné příjmy pro životní minimum, ale nemění výši ani podmínky porodného."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text posouvá termíny přechodných pravidel a účinnosti jiných ustanovení, ale neuvádí žádnou změnu porodného."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-214610b4ce26--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43198-2",
+        "psp-core-2025--law-change-43198-4"
+      ],
+      "explanationCz": "SPD slibuje porodné 30 000 Kč na první dítě, 40 000 Kč na druhé a 50 000 Kč na třetí a další dítě v pracujících rodinách. Předložené změny se týkají jiných pravidel sociální podpory a žádná z nich nedokládá zvýšení porodného ani změnu jeho podmínek. Proto zatím není doložen podstatný posun ve slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "U jedné změny nejsou v podkladech uvedena ustanovení, jejichž účinnost se posouvá; nelze proto vyloučit, že mají nepřímý vztah k porodnému. Podklady však neumožňují určit takový vztah ani doložit změnu porodného."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

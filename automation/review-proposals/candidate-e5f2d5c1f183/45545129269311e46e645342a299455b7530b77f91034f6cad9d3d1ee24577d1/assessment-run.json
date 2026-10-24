@@ -1,0 +1,682 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-34-30-801Z--310c53d697fe",
+  "evaluatedAt": "2026-10-02T05:34:30.801Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-e5f2d5c1f183/310c53d697fea7ccdaa0820e8ca91dbdaa149aa8a4eff335f990eeffbef4f951.json",
+  "packageHash": "310c53d697fea7ccdaa0820e8ca91dbdaa149aa8a4eff335f990eeffbef4f951",
+  "assessmentContentHash": "3fe269c63829914cf7a11fc81afb83f36bd5e4adbbc5d79ef40cfaee17119fa7",
+  "assessmentFingerprint": "45545129269311e46e645342a299455b7530b77f91034f6cad9d3d1ee24577d1",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-e5f2d5c1f183",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0ec4dc5f9d6fe01c016abf41b5c49487d187cab7ed4657e3af",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 538952,
+            "input_tokens_details": {
+              "cache_write_tokens": 535628,
+              "cached_tokens": 3321
+            },
+            "output_tokens": 11605,
+            "output_tokens_details": {
+              "reasoning_tokens": 9676
+            },
+            "total_tokens": 550557
+          },
+          "output": {
+            "promiseId": "candidate-e5f2d5c1f183",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43132-1",
+                "relevant": true,
+                "reasonCz": "Novela vyjímá návrhy státního rozpočtu z využívání elektronického systému pro tvorbu právních předpisů, a tím přímo omezuje použití jednoho digitálního nástroje ve veřejné správě."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Novela stavebního zákona upravuje portál stavebníka a digitální geoportál územního plánování, tedy konkrétní digitální nástroje pro výkon veřejné správy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Novela stavebního zákona upravuje portál stavebníka a digitální geoportál územního plánování, tedy konkrétní digitální nástroje pro výkon veřejné správy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-12",
+                "relevant": false,
+                "reasonCz": "Tato část mění pouze to, kdo stojí v čele poradního orgánu vlády pro informační společnost, nikoli využívání technologií ve veřejné správě."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-1",
+                "relevant": true,
+                "reasonCz": "Novela zavádí elektronické vyřizování rodičovského příspěvku před porodem, což je konkrétní rozšíření digitálního postupu při poskytování veřejné dávky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-2",
+                "relevant": true,
+                "reasonCz": "Tato část ruší některá dříve přijatá ustanovení o digitalizaci dávek, a proto přímo ovlivňuje rozsah digitálních služeb veřejné správy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-14",
+                "relevant": true,
+                "reasonCz": "Návrh zavádí elektronický účet a elektronické úkony pro agendu pobytu cizinců, čímž upravuje digitální služby veřejného sektoru."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": true,
+                "reasonCz": "Návrh umožňuje prokazovat údaje veřejné správě digitální peněženkou a upravuje podmínky pro elektronická potvrzení atributů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-2",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje pravidla pro elektronickou identifikaci o digitální peněženku, tedy o nástroj využitelný při jednání s veřejnou správou."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-3",
+                "relevant": true,
+                "reasonCz": "Návrh stanoví podmínky zápisu poskytovatelů digitálních potvrzení do seznamu, což ovlivňuje právní prostředí pro poskytování těchto technických služeb."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-4",
+                "relevant": true,
+                "reasonCz": "Návrh ruší v registru obyvatel některé údaje potřebné pro elektronickou identifikaci a autentizaci, a přímo tak zasahuje do digitální infrastruktury veřejné správy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43311-1",
+                "relevant": true,
+                "reasonCz": "Novela zavádí nástroj pro sestavování elektronických petic, tedy konkrétní digitální nástroj ve veřejné správě."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-12",
+                "relevant": true,
+                "reasonCz": "Návrh rozšiřuje možnost využívat datové schránky také na společenství obcí, čímž rozšiřuje využití digitální komunikace ve veřejné správě."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43415-1",
+                "relevant": true,
+                "reasonCz": "Návrh zavádí elektronické podávání žádostí a automatizované vyřízení vybraných úkonů v registru vozidel."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-6",
+                "relevant": true,
+                "reasonCz": "Návrh ukládá některým zahraničním zprostředkovatelům taxislužby zpřístupnit datovou schránku, a tím rozšiřuje použití digitální komunikace s veřejnou správou."
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-e5f2d5c1f183--source",
+              "psp-core-2025--law-change-43132-1",
+              "psp-core-2025--vote-86432",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--law-change-43239-1",
+              "psp-core-2025--law-change-43239-2",
+              "psp-core-2025--vote-87387",
+              "psp-core-2025--law-change-43264-14",
+              "psp-core-2025--print-step-211048",
+              "psp-core-2025--vote-88522",
+              "psp-core-2025--law-change-43275-1",
+              "psp-core-2025--law-change-43275-2",
+              "psp-core-2025--law-change-43275-3",
+              "psp-core-2025--print-step-211101",
+              "psp-core-2025--law-change-43293-4",
+              "psp-core-2025--print-step-211258",
+              "psp-core-2025--law-change-43311-1",
+              "psp-core-2025--vote-87594",
+              "psp-core-2025--law-change-43399-12",
+              "psp-core-2025--print-step-212014",
+              "psp-core-2025--law-change-43415-1",
+              "psp-core-2025--print-step-212080",
+              "psp-core-2025--law-change-43422-6",
+              "psp-core-2025--print-step-212101"
+            ],
+            "explanationCz": "Poslanci Motoristů podpořili novelu stavebního zákona, která zavádí digitální portál stavebníka a geoportál; Senát, horní komora Parlamentu, návrh nejprve odmítl a Poslanecká sněmovna, dolní komora Parlamentu, na něm poté setrvala. Podpořili také elektronické vyřizování jedné dávky a nástroj pro elektronické petice, ale dřívější plán širší digitalizace dávek byl současně zčásti zrušen. U nového cizineckého zákona, který počítá s elektronickými účty a úkony, hlasovalo pro jen 6 z 13 poslanců Motoristů, takže klub neposkytl většinovou podporu. Dříve navíc podpořili výjimku, která omezuje používání elektronického systému při přípravě státního rozpočtu. Nejnovější doložené hlasování o digitální agendě cizinců tak představuje nepodpořený krok směrem k širšímu využití technologií ve veřejné správě.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Předložené změny zavádějí nebo upravují digitální nástroje, ale neuvádějí, zda jde o české technologie či nápady; jejich soulad s touto konkrétní částí slibu proto nelze ověřit.",
+              "Účinek změn v dávkách je smíšený: jeden elektronický postup přibývá, zatímco některá dříve plánovaná ustanovení o širší digitalizaci se ruší.",
+              "Vláda také navrhla odstranit z registru obyvatel údaje používané pro elektronickou identifikaci a autentizaci; jde o doložený návrh, nikoli o konečné rozhodnutí."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-e5f2d5c1f183",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43132-1",
+          "relevant": true,
+          "reasonCz": "Návrh vyjímá státní rozpočet a některé další akty z elektronického systému tvorby právních předpisů, a může tak jít proti širšímu používání digitálních nástrojů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje digitální nástroje stavební správy, včetně portálu stavebníka, národního geoportálu a elektronických dat, a může tedy naplnit část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Mění pouze to, kdo stojí v čele poradního orgánu vlády pro informační společnost, aniž mění využívání technologií ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí elektronické podávání a vedení řízení u části rodičovského příspěvku, čímž přímo rozšiřuje digitální služby úřadů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Návrh ruší části dřívější novely, které zaváděly digitalizované řízení o dávkách, a může tak jít proti širšímu využívání digitálních služeb úřadů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje elektronické podávání, doručování a cizinecké účty ve správních řízeních, tedy konkrétní digitální komunikaci občanů s úřady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje prokazovat skutečnosti úřadům prostřednictvím digitální peněženky a elektronických potvrzení atributů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje používání digitální peněženky k elektronickému prokazování totožnosti při jednání s úřady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-3",
+          "relevant": false,
+          "reasonCz": "Stanoví poplatek za žádost poskytovatele o zápis do seznamu, ale nemění povinnost úřadů digitální nástroje používat ani způsob jejich poskytování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": true,
+          "reasonCz": "Návrh ruší údaje o elektronické identifikaci a autentizaci vedené v registru obyvatel, a může tak omezit digitální ověřování totožnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá vytvořit nástroj pro elektronické petice a zavádí digitální přístup k náhledu hlasovacího lístku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje okruh subjektů, které mohou využívat datové schránky pro elektronické úkony vůči veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje elektronicky vyřizovat úkony v registru vozidel prostřednictvím ministerského rozhraní a některé žádosti zpracovat automatizovaně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-6",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá i zahraničním zprostředkovatelům taxislužby zpřístupnit datovou schránku pro komunikaci s českými úřady."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e5f2d5c1f183--source",
+        "psp-core-2025--law-change-43132-1",
+        "psp-core-2025--vote-86432",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-4",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--law-change-43311-1",
+        "psp-core-2025--vote-87594",
+        "psp-core-2025--law-change-43399-12",
+        "psp-core-2025--print-step-212014",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080",
+        "psp-core-2025--law-change-43422-6",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Novější rozhodnutí se týká návrhu nového cizineckého zákona, tedy pravidel pro vstup a pobyt cizinců; návrh zavádí cizinecké účty a elektronické podávání žádostí. Pro návrh hlasovalo šest ze třinácti poslanců Motoristů sobě, takže jejich klub neměl většinu pro opatření rozšiřující digitální komunikaci s úřady. Dříve poslanci podpořili změnu stavebního zákona, která rozvíjí digitální portály, a vláda také předložila návrhy na používání digitální peněženky ve styku s úřady. Nejnovější hlasování však představuje krok proti části slibu, který míří na širší využívání technologií ve veřejné správě.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Poslanci Motoristů sobě podpořili i změnu stavebního zákona, která rozvíjí digitální portály; Senát návrh zamítl a poslanci poté hlasovali pro jeho přijetí znovu. Tento podpůrný krok je v rozporu s novějším nedostatečným počtem hlasů pro digitální nástroje v cizineckém řízení.",
+        "Poslanci hlasovali pro novelu sociální podpory, která současně zaváděla digitální řízení u části rodičovského příspěvku a rušila některé další plánované prvky digitalizace dávek; její celkový dopad na slib je proto smíšený.",
+        "Vláda předložila návrhy na širší používání digitální peněženky a datových schránek, ale tyto návrhy v předložených důkazech nejsou zaznamenány jako přijatá rozhodnutí."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-e5f2d5c1f183",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43132-1",
+          "relevant": true,
+          "reasonCz": "Mění, kdy se při přípravě právních předpisů používá elektronický systém jejich tvorby, takže ovlivňuje využívání digitálních nástrojů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Zavádí mimo jiné digitální podklady, geoportál územního plánování a elektronické postupy ve stavebním řízení, tedy konkrétní digitální nástroje veřejné správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Ruší pouze ustanovení o vedení poradního orgánu vlády a nemění využívání technologií ani digitálních služeb ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Upravuje vyřizování rodičovského příspěvku před porodem prostřednictvím informačního systému, a tím se týká digitalizace veřejné služby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Ruší některé dříve přijaté změny týkající se digitálního vyřizování sociálních dávek, a může tak digitalizaci této veřejné služby omezit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Navrhuje cizinecký účet a elektronické úkony v pobytových řízeních, což je konkrétní rozšíření digitálních nástrojů veřejné správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje využívání elektronických potvrzení a digitální peněženky k prokazování skutečností vůči orgánům veřejné moci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Navrhuje využívání evropské digitální peněženky k elektronickému prokazování totožnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-3",
+          "relevant": true,
+          "reasonCz": "Upravuje registraci poskytovatelů elektronických potvrzení atributů, tedy součást prostředí pro digitální služby a ověřování údajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": true,
+          "reasonCz": "Navrhuje zrušit vedení některých údajů potřebných pro elektronickou identifikaci a autentizaci, což se přímo dotýká digitálního ověřování ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje elektronický nástroj pro sestavování petic a přístup ke grafickému náhledu hlasovacího lístku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje možnost využívat datové schránky na společenství obcí, a týká se tak elektronické komunikace veřejné správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje elektronické podávání a automatizované vyřizování vybraných úkonů v registru silničních vozidel."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-6",
+          "relevant": true,
+          "reasonCz": "Navrhuje povinnost datové schránky pro některé zahraniční zprostředkovatele taxislužby, čímž rozšiřuje používání elektronické komunikace s úřady."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e5f2d5c1f183--source",
+        "psp-core-2025--law-change-43132-1",
+        "psp-core-2025--vote-86432",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--law-change-43275-3",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-4",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--law-change-43311-1",
+        "psp-core-2025--vote-87594",
+        "psp-core-2025--law-change-43399-12",
+        "psp-core-2025--print-step-212014",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080",
+        "psp-core-2025--law-change-43422-6",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Motoristé slíbili vytvořit podmínky pro širší využívání českých technologií a nápadů ve veřejné správě. Nejnověji jejich poslanci nedali většinovou podporu vládnímu návrhu cizineckého zákona, který zavádí cizinecké účty a elektronické podávání; pro návrh hlasovalo šest z třinácti poslanců strany. Jde o nepodpoření opatření, které přináší část slíbeného rozšíření digitálních služeb, proto výsledek ukazuje pohyb proti slibu. Zároveň vláda navrhla digitální peněženku a poslanci strany podpořili digitální nástroje ve stavebním řízení i elektronické petice.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Strana také podpořila změnu stavebního zákona s digitálními postupy a elektronické petice; tyto kroky směřují ke slibu, ale jsou méně významné než její nejnovější hlasování o cizineckém zákoně.",
+        "Vláda navrhla digitální peněženku a elektronická potvrzení, ale jde pouze o předložený návrh; podklady navíc neukazují, zda tyto technologie budou českého původu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0c76f28c1c5057f4016abf42008f2487d18258dc725dbb90a4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 538952,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 538949
+      },
+      "output_tokens": 8805,
+      "output_tokens_details": {
+        "reasoning_tokens": 6984
+      },
+      "total_tokens": 547757
+    },
+    "output": {
+      "promiseId": "candidate-e5f2d5c1f183",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43132-1",
+          "relevant": true,
+          "reasonCz": "Návrh vyjímá státní rozpočet a některé další akty z elektronického systému tvorby právních předpisů, a může tak jít proti širšímu používání digitálních nástrojů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje digitální nástroje stavební správy, včetně portálu stavebníka, národního geoportálu a elektronických dat, a může tedy naplnit část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Mění pouze to, kdo stojí v čele poradního orgánu vlády pro informační společnost, aniž mění využívání technologií ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí elektronické podávání a vedení řízení u části rodičovského příspěvku, čímž přímo rozšiřuje digitální služby úřadů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Návrh ruší části dřívější novely, které zaváděly digitalizované řízení o dávkách, a může tak jít proti širšímu využívání digitálních služeb úřadů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje elektronické podávání, doručování a cizinecké účty ve správních řízeních, tedy konkrétní digitální komunikaci občanů s úřady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje prokazovat skutečnosti úřadům prostřednictvím digitální peněženky a elektronických potvrzení atributů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje používání digitální peněženky k elektronickému prokazování totožnosti při jednání s úřady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-3",
+          "relevant": false,
+          "reasonCz": "Stanoví poplatek za žádost poskytovatele o zápis do seznamu, ale nemění povinnost úřadů digitální nástroje používat ani způsob jejich poskytování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": true,
+          "reasonCz": "Návrh ruší údaje o elektronické identifikaci a autentizaci vedené v registru obyvatel, a může tak omezit digitální ověřování totožnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá vytvořit nástroj pro elektronické petice a zavádí digitální přístup k náhledu hlasovacího lístku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje okruh subjektů, které mohou využívat datové schránky pro elektronické úkony vůči veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje elektronicky vyřizovat úkony v registru vozidel prostřednictvím ministerského rozhraní a některé žádosti zpracovat automatizovaně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-6",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá i zahraničním zprostředkovatelům taxislužby zpřístupnit datovou schránku pro komunikaci s českými úřady."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e5f2d5c1f183--source",
+        "psp-core-2025--law-change-43132-1",
+        "psp-core-2025--vote-86432",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-4",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--law-change-43311-1",
+        "psp-core-2025--vote-87594",
+        "psp-core-2025--law-change-43399-12",
+        "psp-core-2025--print-step-212014",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080",
+        "psp-core-2025--law-change-43422-6",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Novější rozhodnutí se týká návrhu nového cizineckého zákona, tedy pravidel pro vstup a pobyt cizinců; návrh zavádí cizinecké účty a elektronické podávání žádostí. Pro návrh hlasovalo šest ze třinácti poslanců Motoristů sobě, takže jejich klub neměl většinu pro opatření rozšiřující digitální komunikaci s úřady. Dříve poslanci podpořili změnu stavebního zákona, která rozvíjí digitální portály, a vláda také předložila návrhy na používání digitální peněženky ve styku s úřady. Nejnovější hlasování však představuje krok proti části slibu, který míří na širší využívání technologií ve veřejné správě.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Poslanci Motoristů sobě podpořili i změnu stavebního zákona, která rozvíjí digitální portály; Senát návrh zamítl a poslanci poté hlasovali pro jeho přijetí znovu. Tento podpůrný krok je v rozporu s novějším nedostatečným počtem hlasů pro digitální nástroje v cizineckém řízení.",
+        "Poslanci hlasovali pro novelu sociální podpory, která současně zaváděla digitální řízení u části rodičovského příspěvku a rušila některé další plánované prvky digitalizace dávek; její celkový dopad na slib je proto smíšený.",
+        "Vláda předložila návrhy na širší používání digitální peněženky a datových schránek, ale tyto návrhy v předložených důkazech nejsou zaznamenány jako přijatá rozhodnutí."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0f753e25b86526e1016abf423d70f487d1b86af52995b68a6d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 538952,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 538949
+      },
+      "output_tokens": 7075,
+      "output_tokens_details": {
+        "reasoning_tokens": 5165
+      },
+      "total_tokens": 546027
+    },
+    "output": {
+      "promiseId": "candidate-e5f2d5c1f183",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43132-1",
+          "relevant": true,
+          "reasonCz": "Mění, kdy se při přípravě právních předpisů používá elektronický systém jejich tvorby, takže ovlivňuje využívání digitálních nástrojů ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Zavádí mimo jiné digitální podklady, geoportál územního plánování a elektronické postupy ve stavebním řízení, tedy konkrétní digitální nástroje veřejné správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-12",
+          "relevant": false,
+          "reasonCz": "Ruší pouze ustanovení o vedení poradního orgánu vlády a nemění využívání technologií ani digitálních služeb ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Upravuje vyřizování rodičovského příspěvku před porodem prostřednictvím informačního systému, a tím se týká digitalizace veřejné služby."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Ruší některé dříve přijaté změny týkající se digitálního vyřizování sociálních dávek, a může tak digitalizaci této veřejné služby omezit."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Navrhuje cizinecký účet a elektronické úkony v pobytových řízeních, což je konkrétní rozšíření digitálních nástrojů veřejné správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje využívání elektronických potvrzení a digitální peněženky k prokazování skutečností vůči orgánům veřejné moci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Navrhuje využívání evropské digitální peněženky k elektronickému prokazování totožnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-3",
+          "relevant": true,
+          "reasonCz": "Upravuje registraci poskytovatelů elektronických potvrzení atributů, tedy součást prostředí pro digitální služby a ověřování údajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": true,
+          "reasonCz": "Navrhuje zrušit vedení některých údajů potřebných pro elektronickou identifikaci a autentizaci, což se přímo dotýká digitálního ověřování ve veřejné správě."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43311-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje elektronický nástroj pro sestavování petic a přístup ke grafickému náhledu hlasovacího lístku."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje možnost využívat datové schránky na společenství obcí, a týká se tak elektronické komunikace veřejné správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Navrhuje elektronické podávání a automatizované vyřizování vybraných úkonů v registru silničních vozidel."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-6",
+          "relevant": true,
+          "reasonCz": "Navrhuje povinnost datové schránky pro některé zahraniční zprostředkovatele taxislužby, čímž rozšiřuje používání elektronické komunikace s úřady."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-e5f2d5c1f183--source",
+        "psp-core-2025--law-change-43132-1",
+        "psp-core-2025--vote-86432",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--law-change-43275-3",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-4",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--law-change-43311-1",
+        "psp-core-2025--vote-87594",
+        "psp-core-2025--law-change-43399-12",
+        "psp-core-2025--print-step-212014",
+        "psp-core-2025--law-change-43415-1",
+        "psp-core-2025--print-step-212080",
+        "psp-core-2025--law-change-43422-6",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Motoristé slíbili vytvořit podmínky pro širší využívání českých technologií a nápadů ve veřejné správě. Nejnověji jejich poslanci nedali většinovou podporu vládnímu návrhu cizineckého zákona, který zavádí cizinecké účty a elektronické podávání; pro návrh hlasovalo šest z třinácti poslanců strany. Jde o nepodpoření opatření, které přináší část slíbeného rozšíření digitálních služeb, proto výsledek ukazuje pohyb proti slibu. Zároveň vláda navrhla digitální peněženku a poslanci strany podpořili digitální nástroje ve stavebním řízení i elektronické petice.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Strana také podpořila změnu stavebního zákona s digitálními postupy a elektronické petice; tyto kroky směřují ke slibu, ale jsou méně významné než její nejnovější hlasování o cizineckém zákoně.",
+        "Vláda navrhla digitální peněženku a elektronická potvrzení, ale jde pouze o předložený návrh; podklady navíc neukazují, zda tyto technologie budou českého původu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

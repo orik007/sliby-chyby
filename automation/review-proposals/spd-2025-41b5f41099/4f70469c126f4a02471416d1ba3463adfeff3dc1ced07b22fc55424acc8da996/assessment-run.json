@@ -1,0 +1,673 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T21-21-04-892Z--89cb4f790456",
+  "evaluatedAt": "2026-10-06T21:21:04.892Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-41b5f41099/89cb4f790456a608e295320e3f29e53979afce5d7ae57e842bd33b80279c85ad.json",
+  "packageHash": "89cb4f790456a608e295320e3f29e53979afce5d7ae57e842bd33b80279c85ad",
+  "assessmentContentHash": "286e6022d89a73de0533edfbecf64ff76249a7a7753fa88d152ceb1e68d31cdd",
+  "assessmentFingerprint": "4f70469c126f4a02471416d1ba3463adfeff3dc1ced07b22fc55424acc8da996",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-41b5f41099",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0b0661d7e72e2bde016ac5654dee3887d28ac406506279dbc1",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 568580,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 568577
+            },
+            "output_tokens": 7014,
+            "output_tokens_details": {
+              "reasoning_tokens": 5178
+            },
+            "total_tokens": 575594
+          },
+          "output": {
+            "promiseId": "spd-2025-41b5f41099",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Novela výslovně upravuje plánování a podmínky výstavby bydlení, takže může naplnit část slibu o podpoře bytové výstavby.",
+                "effectCz": "Dříve územní plánování mělo podporovat kvalitní bydlení; schválené znění navíc výslovně zdůrazňuje rozvoj bydlení a přednost co nejlepšího využití zastavitelného území. Nově také definuje stavbu pro hromadné bydlení od 10 000 m² a umožňuje u některých požadavků na výstavbu výjimky při zjevné ekonomické nepřiměřenosti či jejich plnění příspěvkem obci; oproti předchozímu znění to uvolňuje některé překážky výstavby. Jde o podporu bytové výstavby, nikoli o zvláštní pravidlo pro družstevní bydlení nebo bezplatné převody státních pozemků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": false,
+                "reasonCz": "Změna upravuje působnost ústředních orgánů a nezavádí podporu bydlení ani bezplatný převod státních pozemků.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": false,
+                "reasonCz": "Změna se týká pravidel požární ochrany staveb, nikoli podpory bydlení nebo převodů státních pozemků.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": false,
+                "reasonCz": "Změna upravuje památkovou péči a neřeší bytovou výstavbu ani převody státních pozemků pro její účely.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": false,
+                "reasonCz": "Změna upravuje ochranu přírody a související povolování, ale balíček ji nespojuje s podporou bydlení nebo převody státních pozemků pro výstavbu bytů.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": false,
+                "reasonCz": "Změna upravuje ochranu zemědělské půdy a povolování záměrů, ale neřeší bezplatné převody státních pozemků ani konkrétní podporu bytové výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-17",
+                "relevant": false,
+                "reasonCz": "Změna veterinárního zákona neobsahuje pravidlo k bydlení ani k převodům státních pozemků.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-19",
+                "relevant": false,
+                "reasonCz": "Změna pravidel integrovaného záchranného systému se netýká bytové výstavby ani státních pozemků pro bydlení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": false,
+                "reasonCz": "Změna ochrany veřejného zdraví neupravuje podporu bydlení ani bezplatné převody pozemků.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-34",
+                "relevant": false,
+                "reasonCz": "Změna pravidel hospodaření se státními pozemky se týká bezúplatných převodů pro vymezené veřejné účely, ale text ani dodané podklady je nespojují s bytovou výstavbou.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": false,
+                "reasonCz": "Změna zákona o odpadech upravuje posuzování záměrů, nikoli podporu bydlení nebo převody pozemků pro bytovou výstavbu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-40",
+                "relevant": false,
+                "reasonCz": "Změna zvláštních postupů pro výstavbu uprchlíkům neřeší příslib podpory bytové výstavby ani bezplatných převodů státních pozemků pro bydlení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Zrušovací ustanovení se týká jiných předpisů a samo nezavádí opatření k bytové výstavbě nebo převodům státních pozemků.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43207-1",
+                "relevant": true,
+                "reasonCz": "Návrh rozpočtu Státního fondu životního prostředí obsahuje konkrétní peníze na podporu dostupného bydlení.",
+                "effectCz": "Jde o rozpočet bez předchozího znění, se kterým by bylo možné částku porovnat. Pro rok 2026 navrhuje výdaj 2,2 miliardy Kč jako převod na podporu dostupného bydlení pro sociálně slabé skupiny v energeticky kvalitním standardu; tím podporuje část slibu týkající se bydlení, nikoli však výslovně družstevní bydlení ani bezplatné převody státních pozemků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43288-1",
+                "relevant": false,
+                "reasonCz": "Návrh pouze prodlužuje přechodné období pro informační systémy stavebního zákona, bez opatření na podporu bydlení nebo převodů státních pozemků.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "spd-2025-41b5f41099--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--law-change-43207-1",
+              "psp-core-2025--vote-86968"
+            ],
+            "explanationCz": "SPD spolu s dalšími poslanci předložila sněmovní tisk 67, tedy návrh změny stavebního zákona, který výslovně podporuje rozvoj bydlení a uvolňuje některé podmínky výstavby. Poslanci SPD pro návrh hlasovali a po jeho odmítnutí Senátem hlasovali také pro setrvání Sněmovny na původním znění; novela má podporu bydlení posílit, ale nepřináší zvláštní pravidla pro družstevní bydlení ani bezplatné převody pozemků. SPD rovněž podpořila rozpočet Státního fondu životního prostředí na rok 2026 s částkou 2,2 miliardy Kč určenou na podporu dostupného bydlení. Jde tedy o doložený posun v části slibu týkající se bytové výstavby, nikoli o splnění celého slibu.",
+            "confidence": "high",
+            "uncertainties": [
+              "Podklady dokládají legislativní podporu bydlení a rozpočtovou položku na dostupné bydlení, ale nedokládají, že se uskutečnily bezplatné převody státních pozemků pro bytovou výstavbu nebo že vznikla zvláštní podpora družstevního bydlení."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-41b5f41099",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela výslovně upravuje pravidla pro hromadné bydlení a doplňuje podporu bydlení mezi cíle územního plánování.",
+          "effectCz": "Dosavadní zákon zvláštní kategorii stavby pro hromadné bydlení ani výslovné prosazování podmínek pro bydlení v § 16 neobsahoval; návrh definuje hromadné bydlení jako stavbu s převažující funkcí bydlení a plochou od 10 000 m² a výslovně ukládá obcím a krajům vytvářet podmínky pro bydlení. Úkoly územního plánování nově výslovně zahrnují rozvoj bydlení a kvalitního bydlení a preferují využití zastavitelného území, což směřuje k podpoře výstavby, nikoli však k bezplatným převodům státních pozemků nebo družstevnímu bydlení. Novela zároveň vypouští dosavadní možnost regulačním plánem vymezit dům pro dostupné nájemní bydlení; jde o ústup od konkrétního nástroje podpory nájemního bydlení, ne však o výslovně slíbenou družstevní výstavbu či převod pozemků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Změny zákona o ústředních orgánech státní správy přeskupují působnost úřadů, ale nestanoví podporu bydlení ani převody státních pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Změna upravuje pravidla požární ochrany staveb, nikoli podporu bytové výstavby nebo převody pozemků pro bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Změna památkové péče se týká ochrany a povolování zásahů v památkových územích, nikoli slíbené podpory bydlení či převodů pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Novela ochrany přírody upravuje povolovací pravomoci a ochranu přírodních hodnot, ale v textu není spojena s podporou bytové výstavby ani převody pozemků pro bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny pravidel ochrany zemědělské půdy jsou obecné a text je nespojuje s bytovou výstavbou ani se slíbenými bezplatnými převody státních pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Změna veterinárního zákona upravuje podklady pro povolení staveb z hlediska veterinární péče, nikoli bytovou podporu nebo převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Změna pravidel integrovaného záchranného systému se netýká podpory bytové výstavby, družstevního bydlení ani převodů pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Změna ochrany veřejného zdraví upravuje postupy při stavebním povolování, ale neobsahuje opatření pro slíbené formy podpory bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": false,
+          "reasonCz": "Změny pravidel převodů pozemků Státního pozemkového úřadu upravují zejména terminologii a převody pro veřejně prospěšné účely, nikoli bezplatné převody státních pozemků pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změna zákona o odpadech upravuje posuzování odpadů při stavebním povolování, nikoli podporu bydlení nebo převody státních pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Úprava zvláštních stavebních postupů pro bydlení osob vysídlených z Ukrajiny neobsahuje opatření pro obecnou bytovou výstavbu, družstevní bydlení ani bezplatné převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení ruší předpisy a vyhlášky související se stavebním povolováním, ale nezavádí podporu bydlení ani převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet fondu výslovně vyčleňuje prostředky na podporu dostupného bydlení, a tím se týká části slibu o podpoře bytové výstavby.",
+          "effectCz": "Jde o návrh rozpočtu, který nemění dřívější znění zákona. Pro rok 2026 stanoví výdaj 2,2 miliardy Kč na podporu dostupného bydlení pro sociálně slabé skupiny v energeticky kvalitním standardu; jde o dílčí finanční podporu bydlení, nikoli o družstevní bydlení nebo bezplatné převody státních pozemků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": false,
+          "reasonCz": "Návrh prodlužuje přechodné období stavebního zákona, ale neobsahuje opatření týkající se bytové výstavby nebo převodů pozemků.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-41b5f41099--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci SPD předložili novelu stavebního zákona a později hlasovali pro její prosazení poté, co ji Senát zamítl. Novela výslovně přidává podporu bydlení mezi cíle územního plánování a zavádí kategorii hromadného bydlení pro stavby od 10 000 m². SPD také podpořila rozpočet Státního fondu životního prostředí, který na rok 2026 vyčleňuje 2,2 miliardy korun na podporu dostupného bydlení pro sociálně slabé skupiny. Jde o dílčí posun v podpoře bydlení; podklady však nedokládají bezplatné převody státních pozemků ani zvláštní podporu družstevního bydlení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela současně ruší možnost, aby regulační plán vymezil dům pro dostupné nájemní bydlení; tento ústup od jednoho nástroje se však netýká výslovně slíbených převodů státních pozemků ani družstevního bydlení.",
+        "Podklady dokládají hlasování pro návrhy a rozpočet, nikoli jejich následné provedení nebo uskutečnění bezplatných převodů pozemků."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-41b5f41099",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela výslovně mění pravidla územního plánování ve vztahu k bydlení a zavádí kategorii staveb pro hromadné bydlení, takže může podpořit část slibu týkající se bytové výstavby.",
+          "effectCz": "Před změnou stavební zákon neměl zvláštní kategorii hromadného bydlení a obce měly obecnou povinnost sledovat uplatňování svých plánů; nově se hromadným bydlením rozumí stavba s převažující funkcí bydlení a podlahovou plochou od 10 000 m² a obce i kraje mají výslovně prosazovat podmínky pro bydlení. Dosavadní územní plánování už počítalo s kvalitním bydlením, takže novela spíše posiluje a zpřesňuje jeho výslovnou podporu, ale nezakládá nárok na družstevní byty ani na převod pozemků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje působnost ústředních orgánů státní správy, nikoli podporu bytové výstavby, družstevního bydlení nebo převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Změna pravidel požární ochrany nestanoví opatření pro bytovou výstavbu, družstevní bydlení ani převody státních pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Změna upravuje památkovou péči a povolování zásahů v památkově chráněných lokalitách, avšak předložený text ji nespojuje s podporou bydlení nebo převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změna se týká ochrany přírody a obecných pravidel pro stavební záměry, ale její text nestanoví zvláštní podporu bytové výstavby ani převody státních pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změna upravuje ochranu zemědělské půdy obecně a předložený text ji nespojuje konkrétně s bytovou výstavbou nebo převodem státních pozemků pro bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Změna veterinárního zákona se netýká závazku podporovat bydlení ani převodů pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Změna zákona o integrovaném záchranném systému neobsahuje opatření pro bytovou výstavbu, družstevní bydlení ani převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Změna zákona o ochraně veřejného zdraví upravuje postupy při povolování staveb obecně, ale nestanoví podporu bydlení ani převody pozemků pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": true,
+          "reasonCz": "Novela mění pravidla bezúplatného převodu některých státních pozemků obcím, tedy prostředek výslovně zmíněný ve slibu, byť jej nespojuje konkrétně s bytovou výstavbou.",
+          "effectCz": "Před změnou zákon umožňoval bezúplatné převody obcím mimo jiné pro veřejně prospěšné stavby na pozemcích v zastavěném území a samostatně na pozemcích v zastavitelných plochách; po změně se tato územní pravidla slučují a text se váže na zastavitelné území. Protože dosavadní zákon už obsahoval samostatnou možnost převodu pro pozemky v zastavitelných plochách, nelze z předložených znění určit, zda se celkový okruh převodů fakticky zvětšuje, zmenšuje, nebo zůstává stejný. Novela nestanoví bezúplatný převod pro každou bytovou výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změna zákona o odpadech stanoví obecná pravidla pro stavební záměry, ale neobsahuje vazbu na slíbenou bytovou výstavbu nebo bezúplatné převody státních pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Změna upravuje zvláštní stavební postupy pro souvislost s válkou na Ukrajině, nikoli podporu bydlení nebo převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení ruší jiné právní předpisy a jejich části, ale předložený text je nespojuje s bytovou výstavbou, družstevním bydlením ani převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet fondu počítá s podporou dostupného bydlení, ale uvedená částka 2,2 miliardy Kč je určena sociálně slabým skupinám v energeticky kvalitním standardu a návrh ji nespojuje s bytovou výstavbou, družstevním bydlením nebo převody státních pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": false,
+          "reasonCz": "Návrh prodlužuje přechodné období pro stavební zákon, ale nepřináší podporu bytové výstavby, družstevního bydlení ani převodů pozemků.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-41b5f41099--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-34",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci SPD předložili společný návrh na změnu stavebního zákona a při hlasování pro něj hlasovali; po jeho zamítnutí Senátem pak podpořili setrvání Sněmovny na schváleném znění. Schválený text výslovně posiluje plánovací podporu bydlení a zavádí kategorii hromadného bydlení pro stavby s podlahovou plochou od 10 000 m². Mění také pravidla bezúplatného převodu některých státních pozemků obcím, ale neprokazuje, že takový převod bude určen pro bytovou výstavbu. Jde proto o posun k části slibu, nikoli o splnění podpory družstevního bydlení a bezplatných převodů pozemků výslovně pro výstavbu bytů.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Upravená pravidla převodu pozemků se týkají převodů obcím pro vymezené účely; podklady neukazují, zda a v jakém rozsahu zahrnou bytovou výstavbu.",
+        "Podklady dokládají hlasování o návrhu a jeho znění, nikoli uskutečněné bezúplatné převody pozemků ani konkrétní podporu družstevního bydlení."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0a3b100a5d22af7a016ac564e7758887d28c68d48ee94991f3",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 568580,
+      "input_tokens_details": {
+        "cache_write_tokens": 564610,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 7517,
+      "output_tokens_details": {
+        "reasoning_tokens": 5541
+      },
+      "total_tokens": 576097
+    },
+    "output": {
+      "promiseId": "spd-2025-41b5f41099",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela výslovně upravuje pravidla pro hromadné bydlení a doplňuje podporu bydlení mezi cíle územního plánování.",
+          "effectCz": "Dosavadní zákon zvláštní kategorii stavby pro hromadné bydlení ani výslovné prosazování podmínek pro bydlení v § 16 neobsahoval; návrh definuje hromadné bydlení jako stavbu s převažující funkcí bydlení a plochou od 10 000 m² a výslovně ukládá obcím a krajům vytvářet podmínky pro bydlení. Úkoly územního plánování nově výslovně zahrnují rozvoj bydlení a kvalitního bydlení a preferují využití zastavitelného území, což směřuje k podpoře výstavby, nikoli však k bezplatným převodům státních pozemků nebo družstevnímu bydlení. Novela zároveň vypouští dosavadní možnost regulačním plánem vymezit dům pro dostupné nájemní bydlení; jde o ústup od konkrétního nástroje podpory nájemního bydlení, ne však o výslovně slíbenou družstevní výstavbu či převod pozemků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Změny zákona o ústředních orgánech státní správy přeskupují působnost úřadů, ale nestanoví podporu bydlení ani převody státních pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Změna upravuje pravidla požární ochrany staveb, nikoli podporu bytové výstavby nebo převody pozemků pro bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Změna památkové péče se týká ochrany a povolování zásahů v památkových územích, nikoli slíbené podpory bydlení či převodů pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Novela ochrany přírody upravuje povolovací pravomoci a ochranu přírodních hodnot, ale v textu není spojena s podporou bytové výstavby ani převody pozemků pro bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny pravidel ochrany zemědělské půdy jsou obecné a text je nespojuje s bytovou výstavbou ani se slíbenými bezplatnými převody státních pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Změna veterinárního zákona upravuje podklady pro povolení staveb z hlediska veterinární péče, nikoli bytovou podporu nebo převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Změna pravidel integrovaného záchranného systému se netýká podpory bytové výstavby, družstevního bydlení ani převodů pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Změna ochrany veřejného zdraví upravuje postupy při stavebním povolování, ale neobsahuje opatření pro slíbené formy podpory bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": false,
+          "reasonCz": "Změny pravidel převodů pozemků Státního pozemkového úřadu upravují zejména terminologii a převody pro veřejně prospěšné účely, nikoli bezplatné převody státních pozemků pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změna zákona o odpadech upravuje posuzování odpadů při stavebním povolování, nikoli podporu bydlení nebo převody státních pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Úprava zvláštních stavebních postupů pro bydlení osob vysídlených z Ukrajiny neobsahuje opatření pro obecnou bytovou výstavbu, družstevní bydlení ani bezplatné převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení ruší předpisy a vyhlášky související se stavebním povolováním, ale nezavádí podporu bydlení ani převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": true,
+          "reasonCz": "Rozpočet fondu výslovně vyčleňuje prostředky na podporu dostupného bydlení, a tím se týká části slibu o podpoře bytové výstavby.",
+          "effectCz": "Jde o návrh rozpočtu, který nemění dřívější znění zákona. Pro rok 2026 stanoví výdaj 2,2 miliardy Kč na podporu dostupného bydlení pro sociálně slabé skupiny v energeticky kvalitním standardu; jde o dílčí finanční podporu bydlení, nikoli o družstevní bydlení nebo bezplatné převody státních pozemků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": false,
+          "reasonCz": "Návrh prodlužuje přechodné období stavebního zákona, ale neobsahuje opatření týkající se bytové výstavby nebo převodů pozemků.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-41b5f41099--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--law-change-43207-1",
+        "psp-core-2025--vote-86968",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci SPD předložili novelu stavebního zákona a později hlasovali pro její prosazení poté, co ji Senát zamítl. Novela výslovně přidává podporu bydlení mezi cíle územního plánování a zavádí kategorii hromadného bydlení pro stavby od 10 000 m². SPD také podpořila rozpočet Státního fondu životního prostředí, který na rok 2026 vyčleňuje 2,2 miliardy korun na podporu dostupného bydlení pro sociálně slabé skupiny. Jde o dílčí posun v podpoře bydlení; podklady však nedokládají bezplatné převody státních pozemků ani zvláštní podporu družstevního bydlení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela současně ruší možnost, aby regulační plán vymezil dům pro dostupné nájemní bydlení; tento ústup od jednoho nástroje se však netýká výslovně slíbených převodů státních pozemků ani družstevního bydlení.",
+        "Podklady dokládají hlasování pro návrhy a rozpočet, nikoli jejich následné provedení nebo uskutečnění bezplatných převodů pozemků."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0fdc9360623c7f5a016ac565b041d087d293ee3f2b18edad66",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 568580,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 568577
+      },
+      "output_tokens": 8822,
+      "output_tokens_details": {
+        "reasoning_tokens": 6539
+      },
+      "total_tokens": 577402
+    },
+    "output": {
+      "promiseId": "spd-2025-41b5f41099",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela výslovně mění pravidla územního plánování ve vztahu k bydlení a zavádí kategorii staveb pro hromadné bydlení, takže může podpořit část slibu týkající se bytové výstavby.",
+          "effectCz": "Před změnou stavební zákon neměl zvláštní kategorii hromadného bydlení a obce měly obecnou povinnost sledovat uplatňování svých plánů; nově se hromadným bydlením rozumí stavba s převažující funkcí bydlení a podlahovou plochou od 10 000 m² a obce i kraje mají výslovně prosazovat podmínky pro bydlení. Dosavadní územní plánování už počítalo s kvalitním bydlením, takže novela spíše posiluje a zpřesňuje jeho výslovnou podporu, ale nezakládá nárok na družstevní byty ani na převod pozemků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": false,
+          "reasonCz": "Změna upravuje působnost ústředních orgánů státní správy, nikoli podporu bytové výstavby, družstevního bydlení nebo převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Změna pravidel požární ochrany nestanoví opatření pro bytovou výstavbu, družstevní bydlení ani převody státních pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Změna upravuje památkovou péči a povolování zásahů v památkově chráněných lokalitách, avšak předložený text ji nespojuje s podporou bydlení nebo převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změna se týká ochrany přírody a obecných pravidel pro stavební záměry, ale její text nestanoví zvláštní podporu bytové výstavby ani převody státních pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změna upravuje ochranu zemědělské půdy obecně a předložený text ji nespojuje konkrétně s bytovou výstavbou nebo převodem státních pozemků pro bydlení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Změna veterinárního zákona se netýká závazku podporovat bydlení ani převodů pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Změna zákona o integrovaném záchranném systému neobsahuje opatření pro bytovou výstavbu, družstevní bydlení ani převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Změna zákona o ochraně veřejného zdraví upravuje postupy při povolování staveb obecně, ale nestanoví podporu bydlení ani převody pozemků pro bytovou výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-34",
+          "relevant": true,
+          "reasonCz": "Novela mění pravidla bezúplatného převodu některých státních pozemků obcím, tedy prostředek výslovně zmíněný ve slibu, byť jej nespojuje konkrétně s bytovou výstavbou.",
+          "effectCz": "Před změnou zákon umožňoval bezúplatné převody obcím mimo jiné pro veřejně prospěšné stavby na pozemcích v zastavěném území a samostatně na pozemcích v zastavitelných plochách; po změně se tato územní pravidla slučují a text se váže na zastavitelné území. Protože dosavadní zákon už obsahoval samostatnou možnost převodu pro pozemky v zastavitelných plochách, nelze z předložených znění určit, zda se celkový okruh převodů fakticky zvětšuje, zmenšuje, nebo zůstává stejný. Novela nestanoví bezúplatný převod pro každou bytovou výstavbu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změna zákona o odpadech stanoví obecná pravidla pro stavební záměry, ale neobsahuje vazbu na slíbenou bytovou výstavbu nebo bezúplatné převody státních pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-40",
+          "relevant": false,
+          "reasonCz": "Změna upravuje zvláštní stavební postupy pro souvislost s válkou na Ukrajině, nikoli podporu bydlení nebo převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení ruší jiné právní předpisy a jejich části, ale předložený text je nespojuje s bytovou výstavbou, družstevním bydlením ani převody pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43207-1",
+          "relevant": false,
+          "reasonCz": "Rozpočet fondu počítá s podporou dostupného bydlení, ale uvedená částka 2,2 miliardy Kč je určena sociálně slabým skupinám v energeticky kvalitním standardu a návrh ji nespojuje s bytovou výstavbou, družstevním bydlením nebo převody státních pozemků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43288-1",
+          "relevant": false,
+          "reasonCz": "Návrh prodlužuje přechodné období pro stavební zákon, ale nepřináší podporu bytové výstavby, družstevního bydlení ani převodů pozemků.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-41b5f41099--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-34",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci SPD předložili společný návrh na změnu stavebního zákona a při hlasování pro něj hlasovali; po jeho zamítnutí Senátem pak podpořili setrvání Sněmovny na schváleném znění. Schválený text výslovně posiluje plánovací podporu bydlení a zavádí kategorii hromadného bydlení pro stavby s podlahovou plochou od 10 000 m². Mění také pravidla bezúplatného převodu některých státních pozemků obcím, ale neprokazuje, že takový převod bude určen pro bytovou výstavbu. Jde proto o posun k části slibu, nikoli o splnění podpory družstevního bydlení a bezplatných převodů pozemků výslovně pro výstavbu bytů.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Upravená pravidla převodu pozemků se týkají převodů obcím pro vymezené účely; podklady neukazují, zda a v jakém rozsahu zahrnou bytovou výstavbu.",
+        "Podklady dokládají hlasování o návrhu a jeho znění, nikoli uskutečněné bezúplatné převody pozemků ani konkrétní podporu družstevního bydlení."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

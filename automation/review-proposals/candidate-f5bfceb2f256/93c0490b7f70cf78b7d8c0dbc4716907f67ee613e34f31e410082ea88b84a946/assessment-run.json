@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-32-53-087Z--7ec1563c71cd",
+  "evaluatedAt": "2026-10-02T05:32:53.087Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-f5bfceb2f256/7ec1563c71cd31a28bb4769539217704455f9dccc0c6c916ff5c18fd6e3507e5.json",
+  "packageHash": "7ec1563c71cd31a28bb4769539217704455f9dccc0c6c916ff5c18fd6e3507e5",
+  "assessmentContentHash": "542e1cbaa26c58493bab980a02d028f056cb01b4cbe81ba81b414e1e0e0915a5",
+  "assessmentFingerprint": "93c0490b7f70cf78b7d8c0dbc4716907f67ee613e34f31e410082ea88b84a946",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-f5bfceb2f256",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-f5bfceb2f256",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": false,
+          "reasonCz": "Balíček neobsahuje znění smlouvy, jen údaj, že dokument je ve formátu PDF/A, takže nelze doložit, že by její ustanovení měnila daňovou podporu investičního životního pojištění nebo se týkala samoregulace bank."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Balíček neobsahuje znění smlouvy, jen údaj, že dokument je ve formátu PDF/A, takže nelze doložit, že by její ustanovení měnila daňovou podporu investičního životního pojištění nebo se týkala samoregulace bank."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f5bfceb2f256--source",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--print-step-210795",
+        "psp-core-2025--print-step-211439"
+      ],
+      "explanationCz": "Vláda předložila Parlamentu dvě smlouvy o zamezení dvojímu zdanění, jednu s Keňou a druhou s Maltou. Dostupné podklady ale neobsahují jejich znění, a proto neukazují, zda některá z nich mění daňovou podporu investičního životního pojištění. Není zde doložen ani krok k samoregulaci bank v oblasti předschválených úvěrů. Proto zatím nelze ověřit podstatný posun ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Znění obou předložených smluv v podkladech chybí; bez něj nelze spolehlivě posoudit, zda jejich ustanovení souvisejí s ukončením daňové podpory investičního životního pojištění.",
+        "Podklady neuvádějí žádné jednání ANO k samoregulaci bank v oblasti předschválených úvěrů."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-f5bfceb2f256",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": false,
+          "reasonCz": "Dodané znění návrhu smlouvy s Keňou obsahuje pouze informaci, že dokument je ve formátu PDF/A, a neukazuje žádnou změnu daňové podpory investičního životního pojištění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Dodané znění návrhu smlouvy s Maltou obsahuje pouze informaci, že dokument je ve formátu PDF/A, a neukazuje žádnou změnu daňové podpory investičního životního pojištění."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f5bfceb2f256--source",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--print-step-210795",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--print-step-211439"
+      ],
+      "explanationCz": "Slib se týká ukončení daňové podpory investičního životního pojištění. Vláda předložila návrhy smluv o zamezení dvojímu zdanění s Keňou a Maltou, ale dodané znění těchto návrhů neobsahuje jejich ustanovení, pouze sdělení, že dokument je ve formátu PDF/A. Z dostupných podkladů proto nelze doložit, že by tyto návrhy daňovou podporu investičního životního pojištění měnily; žádný ověřený posun ke slibu tak není doložen.",
+      "confidence": "low",
+      "uncertainties": [
+        "U obou návrhů smluv chybí jejich skutečné znění; nelze proto ověřit, zda obsahují ustanovení související s daňovou podporou investičního životního pojištění."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0d148cdc0565a20f016abf41f43cf887d1a9f3e134f684fb96",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 7178,
+      "input_tokens_details": {
+        "cache_write_tokens": 3854,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1459,
+      "output_tokens_details": {
+        "reasoning_tokens": 872
+      },
+      "total_tokens": 8637
+    },
+    "output": {
+      "promiseId": "candidate-f5bfceb2f256",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": false,
+          "reasonCz": "Balíček neobsahuje znění smlouvy, jen údaj, že dokument je ve formátu PDF/A, takže nelze doložit, že by její ustanovení měnila daňovou podporu investičního životního pojištění nebo se týkala samoregulace bank."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Balíček neobsahuje znění smlouvy, jen údaj, že dokument je ve formátu PDF/A, takže nelze doložit, že by její ustanovení měnila daňovou podporu investičního životního pojištění nebo se týkala samoregulace bank."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f5bfceb2f256--source",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--print-step-210795",
+        "psp-core-2025--print-step-211439"
+      ],
+      "explanationCz": "Vláda předložila Parlamentu dvě smlouvy o zamezení dvojímu zdanění, jednu s Keňou a druhou s Maltou. Dostupné podklady ale neobsahují jejich znění, a proto neukazují, zda některá z nich mění daňovou podporu investičního životního pojištění. Není zde doložen ani krok k samoregulaci bank v oblasti předschválených úvěrů. Proto zatím nelze ověřit podstatný posun ke slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Znění obou předložených smluv v podkladech chybí; bez něj nelze spolehlivě posoudit, zda jejich ustanovení souvisejí s ukončením daňové podpory investičního životního pojištění.",
+        "Podklady neuvádějí žádné jednání ANO k samoregulaci bank v oblasti předschválených úvěrů."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0d87d5347ad85d86016abf41fd292487d18750ed8b60b6b0c4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 7178,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 7175
+      },
+      "output_tokens": 1326,
+      "output_tokens_details": {
+        "reasoning_tokens": 796
+      },
+      "total_tokens": 8504
+    },
+    "output": {
+      "promiseId": "candidate-f5bfceb2f256",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43215-1",
+          "relevant": false,
+          "reasonCz": "Dodané znění návrhu smlouvy s Keňou obsahuje pouze informaci, že dokument je ve formátu PDF/A, a neukazuje žádnou změnu daňové podpory investičního životního pojištění."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43318-1",
+          "relevant": false,
+          "reasonCz": "Dodané znění návrhu smlouvy s Maltou obsahuje pouze informaci, že dokument je ve formátu PDF/A, a neukazuje žádnou změnu daňové podpory investičního životního pojištění."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-f5bfceb2f256--source",
+        "psp-core-2025--law-change-43215-1",
+        "psp-core-2025--print-step-210795",
+        "psp-core-2025--law-change-43318-1",
+        "psp-core-2025--print-step-211439"
+      ],
+      "explanationCz": "Slib se týká ukončení daňové podpory investičního životního pojištění. Vláda předložila návrhy smluv o zamezení dvojímu zdanění s Keňou a Maltou, ale dodané znění těchto návrhů neobsahuje jejich ustanovení, pouze sdělení, že dokument je ve formátu PDF/A. Z dostupných podkladů proto nelze doložit, že by tyto návrhy daňovou podporu investičního životního pojištění měnily; žádný ověřený posun ke slibu tak není doložen.",
+      "confidence": "low",
+      "uncertainties": [
+        "U obou návrhů smluv chybí jejich skutečné znění; nelze proto ověřit, zda obsahují ustanovení související s daňovou podporou investičního životního pojištění."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}
