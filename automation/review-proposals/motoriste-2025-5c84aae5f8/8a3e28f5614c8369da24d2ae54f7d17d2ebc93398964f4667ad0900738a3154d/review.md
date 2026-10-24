@@ -1,6 +1,6 @@
 # Osvobození začínajících podnikatelů od daní a odvodů na 12 měsíců
 
-> Neveřejný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
 
 ## Návrh pro veřejný web
 

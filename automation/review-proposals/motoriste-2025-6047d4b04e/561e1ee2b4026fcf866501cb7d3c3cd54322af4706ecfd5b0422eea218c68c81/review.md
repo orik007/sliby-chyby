@@ -1,6 +1,6 @@
 # Zkrácení doby splácení hypotéky mladé rodiny na polovinu
 
-> Neveřejný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
 
 ## Návrh pro veřejný web
 

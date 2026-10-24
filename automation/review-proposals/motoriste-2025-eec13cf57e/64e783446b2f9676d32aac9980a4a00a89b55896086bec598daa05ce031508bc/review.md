@@ -1,6 +1,6 @@
 # Odpočty na průmyslový výzkum na úrovni sousedních zemí a zrychlené odpisy inovací
 
-> Neveřejný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
 
 ## Návrh pro veřejný web
 

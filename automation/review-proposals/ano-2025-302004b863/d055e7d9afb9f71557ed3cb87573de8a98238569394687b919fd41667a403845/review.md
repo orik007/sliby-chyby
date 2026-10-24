@@ -1,6 +1,6 @@
 # Zahájení moravských úseků VRT v roce 2027 a následně trasy RS1 Praha–Brno
 
-> Neveřejný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
 
 ## Návrh pro veřejný web
 

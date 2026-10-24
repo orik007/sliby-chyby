@@ -1,6 +1,6 @@
 # DPH jen ze zaplacených faktur až do limitů EU
 
-> Neveřejný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
 
 ## Návrh pro veřejný web
 

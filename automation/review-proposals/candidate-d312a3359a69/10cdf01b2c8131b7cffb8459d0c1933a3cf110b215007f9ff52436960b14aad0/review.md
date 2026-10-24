@@ -1,6 +1,6 @@
 # Navýšení platů a benefitů vojáků, policistů, hasičů, celníků a vězeňské služby se srovnatelnými podmínkami
 
-> Neveřejný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
+> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.
 
 ## Návrh pro veřejný web
 
