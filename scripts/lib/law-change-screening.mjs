@@ -2,8 +2,10 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { hashText } from "./assessment-config.mjs";
 import { invariantValidOutput, requestValidatedOutput, tagAssignmentSchema, taxonomyDefinitionsText, validateTagAssignmentOutput } from "./model-output.mjs";
-import { versionKeys, versionLabels } from "./print-parts.mjs";
+import { invariant } from "./collector-core.mjs";
+import { treatyPrintKindId, versionKeys, versionLabels } from "./print-parts.mjs";
 import { resolutionKind, resolutionPartName } from "./government-resolution-kind.mjs";
+import { isRegulationKind } from "./regulations.mjs";
 
 /**
  * The two cheap-model checks on law changes (docs/evidence-pipeline.md):
@@ -13,17 +15,44 @@ import { resolutionKind, resolutionPartName } from "./government-resolution-kind
 export const screeningPromptVersion = "law-change-screener-v6";
 export const relevancePromptVersion = "relevance-check-v7";
 
-async function loadPrompt(version, root) {
+// What each prompt keeps of the results of the prompt before it:
+// null, or `{ contentHash, rerun }` (docs/evidence-pipeline.md, Audit and
+// cost control).
+export const screeningPromptKeeps = null;
+export const relevancePromptKeeps = null;
+
+// The kinds of law change a prompt's `rerun` names.
+export const lawChangeKinds = ["chamber-print", "treaty", "government-resolution", "government-regulation", "ministerial-decree"];
+
+export function lawChangeKind(change) {
+  if (change.printKindId === resolutionKind || isRegulationKind(change.printKindId)) return change.printKindId;
+  return String(change.printKindId) === treatyPrintKindId ? "treaty" : "chamber-print";
+}
+
+export function validatePromptKeeps(keeps, contentHash) {
+  if (keeps === null) return keeps;
+  invariant(/^[0-9a-f]{64}$/u.test(keeps?.contentHash ?? "") && keeps.contentHash !== contentHash, "A prompt keeps the results of another prompt, named by its content hash");
+  invariant(Array.isArray(keeps.rerun) && keeps.rerun.every((kind) => lawChangeKinds.includes(kind)) && new Set(keeps.rerun).size === keeps.rerun.length, `A prompt's rerun names kinds of law change: ${lawChangeKinds.join(", ")}`);
+  return keeps;
+}
+
+async function loadPrompt(version, keeps, root) {
   const instructions = await readFile(resolve(root, `automation/prompts/${version}.md`), "utf8");
-  return { version, contentHash: hashText(instructions), instructions };
+  const contentHash = hashText(instructions);
+  return { version, contentHash, instructions, keeps: validatePromptKeeps(keeps, contentHash) };
 }
 
-export function loadScreeningPrompt(root = process.cwd()) {
-  return loadPrompt(screeningPromptVersion, root);
+export function loadScreeningPrompt(root = process.cwd(), keeps = screeningPromptKeeps) {
+  return loadPrompt(screeningPromptVersion, keeps, root);
 }
 
-export function loadRelevancePrompt(root = process.cwd()) {
-  return loadPrompt(relevancePromptVersion, root);
+export function loadRelevancePrompt(root = process.cwd(), keeps = relevancePromptKeeps) {
+  return loadPrompt(relevancePromptVersion, keeps, root);
+}
+
+/** The content hash of the earlier prompt whose result on this law change the prompt keeps, or null. */
+export function keptPromptContentHash(prompt, change) {
+  return prompt.keeps && !prompt.keeps.rerun.includes(lawChangeKind(change)) ? prompt.keeps.contentHash : null;
 }
 
 const regulationKindLabels = { "government-regulation": "government regulation (nařízení vlády) adopted by the government", "ministerial-decree": "decree (vyhláška) issued by a ministry" };

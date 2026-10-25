@@ -180,7 +180,7 @@ export function splitProposalText(paragraphs) {
 
 // Print kinds divided into parts (docs/evidence-pipeline.md, Law changes).
 const partedPrintKindIds = new Set(["1", "2"]);
-const treatyPrintKindId = "4";
+export const treatyPrintKindId = "4";
 
 // A heading that starts a paragraph of a treaty: a part, chapter, annex,
 // appendix, protocol, joint declaration, or the preamble ("KAPITOLA 10
