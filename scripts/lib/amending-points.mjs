@@ -12,8 +12,10 @@ const pointLabelPattern = /^(\d+)\.$/u;
 // A point is an instruction ("V § 1 …", "Za § 4 …"); an item of a list in the
 // quoted wording of a provision ("1. záměrů EIA,") starts in lower case.
 const pointTextPattern = /^[\p{Lu}§]/u;
-// "§ 144a", "§ 1 se".
-const sectionPattern = /§\s*(\d+)([a-z]{0,2})(?!\p{L})/gu;
+// "§ 144a", "§ 1 se", "§ 10, 12 a 30", "§ 10 až 30", "§§ 5 až 7".
+const sectionNumber = "(\\d+)([a-z]{0,2})(?!\\p{L})";
+const sectionPattern = new RegExp(`§{1,2}\\s*${sectionNumber}((?:\\s*(?:,|a|nebo|až|–|-)\\s*\\d+[a-z]{0,2}(?!\\p{L}))*)`, "gu");
+const sectionContinuationPattern = new RegExp(`\\s*(,|a|nebo|až|–|-)\\s*${sectionNumber}`, "gu");
 // "V příloze č. 1 …", "Příloha č. 3 zní:".
 const annexPointPattern = /^(?:V\s+)?[Pp]řílo[hz]/u;
 const articleHeadingPattern = /^Čl\.\s+[IVXLC]+[a-z]?$/u;
@@ -39,14 +41,28 @@ function sectionLabel(key) {
   return `§ ${Math.floor(key / 1000)}${letters}`;
 }
 
-/** The sections a text names, as section keys. */
-export function sectionKeysNamed(text) {
-  return [...text.matchAll(sectionPattern)].map(([, number, letters]) => sectionKeyOf(number, letters));
+/**
+ * The sections a text names, as ranges of section keys `[from, to]`: one
+ * section is a range of itself, and a range ("§ 10 až 30") holds every
+ * section between.
+ */
+export function sectionRangesNamed(text) {
+  const ranges = [];
+  for (const [, number, letters, continuation] of text.matchAll(sectionPattern)) {
+    const first = sectionKeyOf(number, letters);
+    ranges.push([first, first]);
+    for (const [, joint, nextNumber, nextLetters] of continuation.matchAll(sectionContinuationPattern)) {
+      const key = sectionKeyOf(nextNumber, nextLetters);
+      if (joint === "až" || joint === "–" || joint === "-") ranges.at(-1)[1] = key;
+      else ranges.push([key, key]);
+    }
+  }
+  return ranges;
 }
 
 function pointSection(paragraph) {
   if (annexPointPattern.test(paragraph)) return annexSectionKey;
-  return sectionKeysNamed(paragraph)[0] ?? null;
+  return sectionRangesNamed(paragraph)[0]?.[0] ?? null;
 }
 
 /**
@@ -134,13 +150,17 @@ export function sectionGroups(versionTexts, maxLength = sectionGroupMaxLength) {
 
 /**
  * Whether a group (`section`, or none for an undivided part) holds what an
- * amendment amends in the group's part, `named` as sectionsNamedInAmendment
- * gives it.
+ * amendment amends in the group's part: one of its instructions on the part
+ * (`instructions`, as sectionsNamedInAmendment gives them) names a section
+ * in the group's range, or one of the part's further articles for their
+ * group, or names neither, which concerns every group.
  */
-export function sectionGroupHolds(section, named) {
+export function sectionGroupHolds(section, instructions) {
   if (!section) return true;
-  const namesRest = named.articles.some((article) => section.restArticles.includes(article));
-  if (named.sections.length === 0 && !namesRest) return true;
-  if (section.rest) return namesRest;
-  return named.sections.some((key) => (section.from === null || key >= section.from) && (section.to === null || key < section.to));
+  return instructions.some(({ sections, articles }) => {
+    const namesRest = articles.some((article) => section.restArticles.includes(article));
+    if (sections.length === 0 && !namesRest) return true;
+    if (section.rest) return namesRest;
+    return sections.some(([from, to]) => (section.to === null || from < section.to) && (section.from === null || to >= section.from));
+  });
 }

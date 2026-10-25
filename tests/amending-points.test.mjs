@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { amendingPoints, annexSectionKey, sectionGroupHolds, sectionGroups, sectionKeysNamed } from "../scripts/lib/amending-points.mjs";
+import { amendingPoints, annexSectionKey, sectionGroupHolds, sectionGroups, sectionRangesNamed } from "../scripts/lib/amending-points.mjs";
 import { sectionsNamedInAmendment } from "../scripts/lib/psp-amendments.mjs";
 
 // Part one of print 67 (the Building Act) as read with its Word list numbers
@@ -67,17 +67,27 @@ test("an amendment is matched to the groups whose sections or articles its instr
     "Navrhuje se úprava § 1."
   ];
   const partOne = sectionsNamedInAmendment(amendment, "ČÁST PRVNÍ");
-  assert.deepEqual(partOne, { sections: [144001, annexSectionKey], articles: ["Čl. I"] });
-  assert.deepEqual(sectionsNamedInAmendment(amendment, "ČÁST DVACÁTÁ OSMÁ"), { sections: [28000, 28001], articles: ["Čl. XLI", "Čl. XLIa"] });
+  const one = (key) => [key, key];
+  assert.deepEqual(partOne, [{ sections: [one(144001)], articles: ["Čl. I"] }, { sections: [one(annexSectionKey)], articles: ["Čl. I"] }]);
+  assert.deepEqual(sectionsNamedInAmendment(amendment, "ČÁST DVACÁTÁ OSMÁ"), [{ sections: [one(28000), one(28001)], articles: ["Čl. XLI"] }, { sections: [], articles: ["Čl. XLI", "Čl. XLIa"] }]);
   const groups = [
     { from: null, to: 144000, rest: false, restArticles: ["Čl. II"] },
     { from: 144000, to: annexSectionKey, rest: false, restArticles: ["Čl. II"] },
     { from: annexSectionKey, to: null, rest: false, restArticles: ["Čl. II"] },
     { from: null, to: null, rest: true, restArticles: ["Čl. II"] }
   ];
-  assert.deepEqual(groups.map((section) => sectionGroupHolds(section, partOne)), [false, true, true, false]);
-  assert.deepEqual(groups.map((section) => sectionGroupHolds(section, { sections: [], articles: ["Čl. II"] })), [false, false, false, true]);
-  assert.deepEqual(groups.map((section) => sectionGroupHolds(section, { sections: [], articles: ["Čl. I"] })), [true, true, true, true], "naming neither concerns every group");
+  const holds = (instructions) => groups.map((section) => sectionGroupHolds(section, instructions));
+  assert.deepEqual(holds(partOne), [false, true, true, false]);
+  assert.deepEqual(holds([{ sections: [one(144001)], articles: ["Čl. I"] }]), [false, true, false, false]);
+  assert.deepEqual(holds([{ sections: [], articles: ["Čl. II"] }]), [false, false, false, true]);
+  // An instruction naming neither a section nor a further article
+  // ("V části první čl. I se bod 4 zrušuje.") concerns every group, also when
+  // another instruction of the amendment names a section.
+  assert.deepEqual(holds([{ sections: [], articles: ["Čl. I"] }, { sections: [one(144001)], articles: ["Čl. I"] }]), [true, true, true, true]);
+  // A range or a list of sections reaches every group it touches.
+  assert.deepEqual(holds([{ sections: sectionRangesNamed("§ 10 až 150 se zrušují"), articles: [] }]), [true, true, false, false]);
+  assert.deepEqual(holds([{ sections: sectionRangesNamed("V § 10 a 150 se"), articles: [] }]), [true, true, false, false]);
+  assert.deepEqual(sectionsNamedInAmendment(["Pozměňovací návrh", "Bod 4 se zrušuje."], "ČÁST PRVNÍ"), [{ sections: [], articles: [] }], "no instruction on the part names nothing");
   assert.equal(sectionGroupHolds(undefined, partOne), true, "an undivided part holds every amendment");
-  assert.deepEqual(sectionKeysNamed("V § 1 se, v § 144a odst. 2 a § 28aa"), [1000, 144001, 28028]);
+  assert.deepEqual(sectionRangesNamed("V § 1 se, v § 144a odst. 2 a § 28aa, §§ 5 až 7 a § 10, 12a a 30"), [one(1000), one(144001), one(28028), [5000, 7000], one(10000), one(12001), one(30000)]);
 });
