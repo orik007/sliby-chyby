@@ -3,7 +3,7 @@ import { chosenReview, proposedPublicExplanation } from "./assessment-review.mjs
 import { isDecisiveAction } from "./attribution.mjs";
 import { contextOmissionsOf } from "./context-omissions.mjs";
 import { isRegulationKind } from "./regulations.mjs";
-import { resolutionKind } from "./government-resolution-kind.mjs";
+import { resolutionKind, resolutionPartName } from "./government-resolution-kind.mjs";
 
 function invariant(condition, message) {
   if (!condition) throw new Error(message);
@@ -156,7 +156,9 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
       adoption: { date: facts.adoptedOn, evidenceId: adoption.id, by: facts.regulationKind === "government-regulation" ? "government" : "ministry", issuerCz: facts.issuerCz }
     }];
   });
-  // A government resolution is one entry: its adoption and its page.
+  // A government resolution is one entry, its adoption and its page; a part
+  // of one, such as a task of the plan of legislative work, is an entry that
+  // names the part.
   const resolutions = evidence.filter(({ role, id, structuredFacts }) => role === "law-change" && relevant.has(id) && structuredFacts.printKindId === resolutionKind).flatMap((change) => {
     const adoption = conduct.find((item) => item.type === resolutionKind && item.structuredFacts.concernsLawChanges.some(({ evidenceId }) => evidenceId === change.id));
     if (!adoption) return [];
@@ -165,7 +167,7 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
       kind: "resolution",
       lawChangeId: change.id,
       numberCz: facts.numberCz,
-      titleCz: facts.titleCz ?? facts.numberCz,
+      titleCz: `${facts.titleCz ?? facts.numberCz}${resolutionPartName(change.structuredFacts)}`,
       pageUrl: adoption.url,
       adoption: { date: facts.adoptedOn, evidenceId: adoption.id }
     }];

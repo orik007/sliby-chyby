@@ -3,7 +3,7 @@ import { resolve } from "node:path";
 import { hashText } from "./assessment-config.mjs";
 import { invariantValidOutput, requestValidatedOutput, tagAssignmentSchema, taxonomyDefinitionsText, validateTagAssignmentOutput } from "./model-output.mjs";
 import { versionKeys, versionLabels } from "./print-parts.mjs";
-import { resolutionKind } from "./government-resolution-kind.mjs";
+import { resolutionKind, resolutionPartName } from "./government-resolution-kind.mjs";
 
 /**
  * The two cheap-model checks on law changes (docs/evidence-pipeline.md):
@@ -62,10 +62,15 @@ export function lawChangeText(change) {
     if (entry.sameAs) return `${label}\nThe same text as the ${versionLabels[entry.sameAs]}.${effective}${context}`;
     return entry.textCz === null ? `${label}\nNot available as a DOCX or DOC file; only the print title is known.` : `${label}\n${entry.textCz}${effective}${context}`;
   });
-  // A government resolution is one law change: the resolution and its
-  // annexes, as the government adopted them.
+  // A government resolution is one law change, the resolution and its
+  // annexes as the government adopted them, or, for the plan of legislative
+  // work, one of its parts.
   if (change.printKindId === resolutionKind) {
-    return [`Government resolution (usnesení vlády) adopted by the government: ${change.printTitleCz}`, ...versions].join("\n\n");
+    return [
+      `Government resolution (usnesení vlády) adopted by the government: ${change.printTitleCz}`,
+      ...(change.heading ? [`Part of the resolution:${resolutionPartName(change).slice(2)}`] : []),
+      ...versions
+    ].join("\n\n");
   }
   // A government regulation or ministerial decree is one law change from the
   // Collection of Laws, linked to the acts it is issued under.

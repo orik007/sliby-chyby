@@ -16,6 +16,7 @@ import {
   governmentOpinionSectionLabels,
   proposalDocumentLink,
   splitProposalText,
+  splitTreatyText,
   changeThroughVersion,
   collectPrints,
   versionOfChange
@@ -415,4 +416,45 @@ test("a government opinion brings its bill into the prints, with its part and th
     // A later record of the same print keeps its opinions.
     { printId: "702", number: 8, partNumber: 0, senateResolutionPartNumbers: [], governmentOpinionPartNumbers: [1, 2] }
   ]);
+});
+
+test("a treaty is divided at its part, chapter, annex, appendix, and protocol headings, and amends no act", () => {
+  // The start of real paragraphs of print 331 (the EU–Mexico agreement): the
+  // title, the preamble, a part whose heading carries a footnote mark, a
+  // chapter, its next paragraph, an appendix, and the protocol.
+  const paragraphs = [
+    "EU/MX/MGA/cs DOHODA O STRATEGICKÉM PARTNERSTVÍ V OBLASTI POLITIKY, HOSPODÁŘSTVÍ A SPOLUPRÁCE MEZI EVROPSKOU UNIÍ A JEJÍMI ČLENSKÝMI STÁTY",
+    "EU/MX/MGA/cs PREAMBULE BELGICKÉ KRÁLOVSTVÍ, BULHARSKÁ REPUBLIKA, ČESKÁ REPUBLIKA, DÁNSKÉ KRÁLOVSTVÍ, SPOLKOVÁ REPUBLIKA",
+    "ČÁST II2 POLITICKÝ DIALOG A SPOLUPRÁCE KAPITOLA 1 POLITICKÝ DIALOG, MEZINÁRODNÍ MÍR A BEZPEČNOST ČLÁNEK 1.1 Politický dialog",
+    "KAPITOLA 2 SPOLUPRÁCE V MEZINÁRODNÍCH A REGIONÁLNÍCH ORGANIZACÍCH ČLÁNEK 2.1 Mezinárodní organizace 1. Strany podporují",
+    "ČLÁNEK 2.2 Regionální organizace 1. Strany spolupracují prostřednictvím výměny názorů v otázkách společného zájmu, změna zákona č. 111/1998 Sb., o vysokých školách, se mění",
+    "EU/MX/MGA/cs Dodatek VI-A VÝHRADY TÝKAJÍCÍ SE FINANČNÍCH SLUŽEB SEZNAM EU (platné ve všech členských státech, není-li uvedeno jinak)",
+    "EU/MX/MGA/cs PROTOKOL O PREVENCI A POTÍRÁNÍ KORUPCE ODDÍL A Obecná ustanovení ČLÁNEK 1 Cíle 1. Strany potvrzují"
+  ];
+  const parts = splitTreatyText(paragraphs);
+  assert.deepEqual(parts.map(({ heading, titleCz, paragraphs: partParagraphs }) => [heading, titleCz, partParagraphs.length]), [
+    [null, null, 1],
+    ["PREAMBULE", "BELGICKÉ KRÁLOVSTVÍ, BULHARSKÁ REPUBLIKA, ČESKÁ REPUBLIKA, DÁNSKÉ KRÁLOVSTVÍ, SPOLKOVÁ REPUBLIKA", 1],
+    ["ČÁST II", "POLITICKÝ DIALOG A SPOLUPRÁCE KAPITOLA 1 POLITICKÝ DIALOG, MEZINÁRODNÍ MÍR A BEZPEČNOST", 1],
+    ["KAPITOLA 2", "SPOLUPRÁCE V MEZINÁRODNÍCH A REGIONÁLNÍCH ORGANIZACÍCH", 2],
+    ["Dodatek VI-A", "VÝHRADY TÝKAJÍCÍ SE FINANČNÍCH SLUŽEB SEZNAM EU", 1],
+    ["PROTOKOL", "O PREVENCI A POTÍRÁNÍ KORUPCE", 1]
+  ]);
+  // A footnote mark is told from the number only after a Roman numeral.
+  assert.deepEqual(splitTreatyText(["KAPITOLA 12 OBCHOD SE ZBOŽÍM ČLÁNEK 12.1 Cíl"]).map(({ heading, titleCz }) => [heading, titleCz]), [["KAPITOLA 12", "OBCHOD SE ZBOŽÍM"]]);
+  // A heading alone in its paragraph starts a part, and a title in mixed
+  // case is not cut to a letter.
+  assert.deepEqual(splitTreatyText(["Dohoda", "ČÁST II", "OBCHOD", "Dodatek I-B-2 Harmonogram Mexika"]).map(({ heading, titleCz, paragraphs: partParagraphs }) => [heading, titleCz, partParagraphs.length]), [[null, null, 1], ["ČÁST II", null, 2], ["Dodatek I-B-2", null, 1]]);
+  // No text is lost or reordered.
+  assert.deepEqual(parts.flatMap(({ paragraphs: partParagraphs }) => partParagraphs), paragraphs);
+  const document = { filename: "331.docx", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=1" };
+  const print = { printId: "43453", kindId: "4", number: 331, title: "Vládní návrh, kterým se předkládá Parlamentu České republiky k vyslovení souhlasu s ratifikací Dohoda o strategickém partnerství", pageUrl: "https://www.psp.cz/sqw/text/tiskt.sqw?O=10&CT=331&CT1=0" };
+  const changes = lawChangesOfPrint({ print, texts: { proposed: { document, paragraphs } } });
+  assert.deepEqual(changes.map(({ changeId, heading }) => [changeId, heading]), [["43453-1", null], ["43453-2", "PREAMBULE"], ["43453-3", "ČÁST II"], ["43453-4", "KAPITOLA 2"], ["43453-5", "Dodatek VI-A"], ["43453-6", "PROTOKOL"]]);
+  // A treaty amends no act, even when a paragraph reads like an amendment.
+  assert.deepEqual(changes.flatMap(({ acts }) => acts), []);
+  // A treaty without such headings is one law change, and takes no act from
+  // its title either.
+  assert.deepEqual(lawChangesOfPrint({ print: { ...print, title: "Vládní návrh smlouvy, kterou se mění zákon č. 111/1998 Sb., o vysokých školách" }, texts: { proposed: { document, paragraphs: ["Smlouva", "Článek 1", "Strany se dohodly."] } } }).map(({ acts, identifiers }) => [acts, identifiers]), [[[], []]]);
+  assert.deepEqual(lawChangesOfPrint({ print, texts: { proposed: { document, paragraphs: ["Smlouva mezi Českou republikou a Slovenskou republikou", "Článek 1", "Strany se dohodly."] } } }).map(({ changeId }) => changeId), ["43453-1"]);
 });
