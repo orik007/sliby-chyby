@@ -117,6 +117,10 @@ export function lawChangeText(change) {
   return [
     `Chamber print ${change.printNumber} (${printKindLabels[change.printKindId] ?? "Chamber print"}): ${change.printTitleCz}`,
     change.heading ? `Part: ${change.heading} – ${change.titleCz}` : `Law change: ${change.titleCz}`,
+    // A group of a divided part (scripts/lib/amending-points.mjs).
+    ...(change.section ? [change.section.rest
+      ? "This law change is the part's further articles after its amending points; the points are other law changes."
+      : "This law change is one group of the part's amending points, those on the provisions its name gives; the part's other points are other law changes."] : []),
     ...(change.addedIn !== "proposed" ? ["This part was added during the debate; it is not in the proposed text."] : []),
     ...change.acts.map(({ act, name }) => `Amended act: zákon č. ${act} Sb.${name ? `, ${name}` : ""}`),
     ...versions,

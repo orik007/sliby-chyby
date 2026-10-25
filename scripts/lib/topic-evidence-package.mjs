@@ -6,6 +6,8 @@ import { changeThroughVersion, lawChangeOfRegulation, lawChangesOfResolution, na
 export { versionOfChange };
 import { charactersPerToken, estimateRequestTokens, estimateTokens, maxPackageRequestTokens, maxRequestInputTokens } from "./assessment-config.mjs";
 import { withContext } from "./law-context.mjs";
+import { sectionGroupHolds } from "./amending-points.mjs";
+import { sectionsNamedInAmendment } from "./psp-amendments.mjs";
 import { isRegulationKind, regulationSourceId } from "./regulations.mjs";
 import { resolutionKind, resolutionPartName, resolutionSourceId } from "./government-resolution-kind.mjs";
 
@@ -112,9 +114,13 @@ export function amendmentEvidenceId(documentNumber) {
  * Each law change with the amendments that concern it
  * (docs/evidence-pipeline.md, Amendment data rules): those with conduct of a
  * tracked party on its print (their submission or a vote on them) whose
- * parts are the change's, or that name none of the print's parts, each with
- * its text from its record. `printPartHeadings` lists the proposed part
- * headings of the print, by which an amendment is matched to its part.
+ * parts are the change's, or that name none of the print's parts, and, for
+ * a group of a divided part, whose instructions on the part name a section
+ * or article of the group or none (scripts/lib/amending-points.mjs), each
+ * with its text from its record. `printPartHeadings` lists the proposed part
+ * headings of the print, by which an amendment is matched to its part;
+ * `groupAmendments` says, for a group, which of its part's amendments it
+ * holds.
  */
 export function withAmendments(changes, recordsByPrintId, amendmentRecords) {
   const amendmentByNumber = new Map(amendmentRecords.map((record) => [record.payload.documentNumber, record]));
@@ -123,12 +129,25 @@ export function withAmendments(changes, recordsByPrintId, amendmentRecords) {
     const heading = change.versions?.proposed?.heading?.toLocaleUpperCase("cs-CZ");
     if (heading) headingsByPrint.set(change.printId, [...(headingsByPrint.get(change.printId) ?? []), heading]);
   }
+  // What each amendment names in a part, read once for all its groups.
+  const named = new Map();
+  const namedInPart = (number, heading) => {
+    const key = `${number}\n${heading}`;
+    if (!named.has(key)) named.set(key, sectionsNamedInAmendment(amendmentByNumber.get(number).payload.paragraphs, heading));
+    return named.get(key);
+  };
   return changes.map((change) => {
     const printPartHeadings = headingsByPrint.get(change.printId) ?? [];
-    const numbers = new Set((recordsByPrintId.get(change.printId) ?? [])
+    const partNumbers = new Set((recordsByPrintId.get(change.printId) ?? [])
       .filter((record) => isAmendmentConduct(record) && amendedPrintId(record) === String(change.printId) && amendmentConcernsChange(record, change, printPartHeadings))
       .flatMap(amendmentDocumentNumbers));
-    const amendments = [...numbers].sort((left, right) => Number(left) - Number(right)).map((number) => amendmentByNumber.get(number)).filter(Boolean).map(({ payload, url }) => ({
+    // A version known only by the print title has no heading.
+    const partHeading = Object.values(change.versions).find(({ heading }) => heading)?.heading.toLocaleUpperCase("cs-CZ") ?? null;
+    const groupAmendments = change.section
+      ? Object.fromEntries([...partNumbers].filter((number) => amendmentByNumber.has(number)).map((number) => [number, sectionGroupHolds(change.section, namedInPart(number, partHeading))]))
+      : null;
+    const numbers = groupAmendments ? [...partNumbers].filter((number) => groupAmendments[number] !== false) : [...partNumbers];
+    const amendments = numbers.sort((left, right) => Number(left) - Number(right)).map((number) => amendmentByNumber.get(number)).filter(Boolean).map(({ payload, url }) => ({
       documentNumber: payload.documentNumber,
       label: payload.label,
       presenterCz: payload.presenterCz,
@@ -139,8 +158,16 @@ export function withAmendments(changes, recordsByPrintId, amendmentRecords) {
       pageUrl: url,
       textCz: payload.paragraphs.join("\n")
     })).map((amendment) => ({ ...amendment, textSha256: sha256(amendment.textCz) }));
-    return { ...change, printPartHeadings, amendments };
+    return { ...change, printPartHeadings, amendments, ...(groupAmendments ? { groupAmendments } : {}) };
   });
+}
+
+// Whether an amendment, or a vote on one, concerns a law change that is a
+// group of a divided part: one of its amendments is the group's, or none of
+// them has a text by which to tell.
+function amendmentConcernsGroup(record, change) {
+  if (!change.groupAmendments) return true;
+  return amendmentDocumentNumbers(record).some((number) => change.groupAmendments[number] !== false);
 }
 
 /**
@@ -172,7 +199,7 @@ export function attributableConductOnChange(records, promise, change) {
     .map((record) => ({ record, attributionStatus: attributionStatusForRecord(record, promise).attributionStatus }))
     .filter(({ attributionStatus }) => assessableAttributionStatuses.has(attributionStatus))
     // An amendment, and a vote on it, concern only the parts it amends.
-    .filter(({ record }) => !isAmendmentConduct(record) || (amendedPrintId(record) === String(change.printId) && amendmentConcernsChange(record, change, change.printPartHeadings ?? [])))
+    .filter(({ record }) => !isAmendmentConduct(record) || (amendedPrintId(record) === String(change.printId) && amendmentConcernsChange(record, change, change.printPartHeadings ?? []) && amendmentConcernsGroup(record, change)))
     .map((item) => ({ ...item, version: versionOfChange(change, versionConcerned(item.record, change.printId)) }))
     .filter(({ version }) => version !== null);
 }

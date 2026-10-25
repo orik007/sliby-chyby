@@ -1,6 +1,7 @@
 import { cleanText, invariant } from "./collector-core.mjs";
 import { resolutionKind } from "./government-resolution-kind.mjs";
 import { legislativePlanParts, legislativePlanTitlePattern } from "./legislative-plan-parts.mjs";
+import { dividedPartMinLength, sectionGroupMaxLength, sectionGroups } from "./amending-points.mjs";
 
 /**
  * Splits a Chamber print's official texts into law changes, the unit the
@@ -165,21 +166,31 @@ export function proposalBody(paragraphs) {
 /**
  * Divides a proposal text into its parts. Each "ČÁST …" heading starts a
  * part whose title is the next paragraph; a text without part headings is
- * one part.
+ * one part. Each part has the index of its first paragraph (`start`).
  */
 export function splitProposalText(paragraphs) {
   const body = proposalBody(paragraphs);
   const starts = body.map((paragraph, index) => (partHeadingPattern.test(paragraph.trim()) ? index : -1)).filter((index) => index >= 0);
-  if (starts.length === 0) return [{ heading: null, titleCz: null, paragraphs: body }];
+  if (starts.length === 0) return [{ heading: null, titleCz: null, start: 0, paragraphs: body }];
   return starts.map((start, index) => ({
     heading: body[start].trim(),
     titleCz: body[start + 1]?.trim() ?? null,
+    start,
     paragraphs: body.slice(start, starts[index + 1] ?? body.length)
   }));
 }
 
+/**
+ * Whether a proposal text has a part long enough to be divided into groups
+ * of its points (scripts/lib/amending-points.mjs), for which its Word list
+ * numbers are read.
+ */
+export function hasDividedPart(paragraphs) {
+  return splitProposalText(paragraphs).some((part) => part.paragraphs.join("\n").length > dividedPartMinLength);
+}
+
 // Print kinds divided into parts (docs/evidence-pipeline.md, Law changes).
-const partedPrintKindIds = new Set(["1", "2"]);
+export const partedPrintKindIds = new Set(["1", "2"]);
 export const treatyPrintKindId = "4";
 
 // A heading that starts a paragraph of a treaty: a part, chapter, annex,
@@ -505,7 +516,7 @@ export function collectPrints(records) {
  * "Účinnost" is not a law change: its text is each version's `effectiveCz`.
  * A print that is a single change also takes its title's acts.
  */
-export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [], governmentOpinions = [] }) {
+export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [], governmentOpinions = [], division = { minLength: dividedPartMinLength, maxLength: sectionGroupMaxLength } }) {
   const changes = [];
   // Without a proposal text, the proposed version of every part is known
   // only by the print title; the parts come from the first later text.
@@ -529,7 +540,9 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [], g
     const entries = parts.map((part, position) => ({ part, position })).filter(({ part }) => !isEffectivePart(part)).map(({ part, position }) => {
       // A treaty amends no act (Law-change context).
       const amended = part.paragraphs && !treaty ? amendedActOfPart(part.paragraphs) : null;
-      return { part, position, amended, key: partKey(part, amended), words: part.paragraphs ? partWords(part.paragraphs) : new Set() };
+      // The Word list numbers of the part's paragraphs, when they were read.
+      const labels = text?.labels && part.paragraphs ? text.labels.slice(part.start, part.start + part.paragraphs.length) : null;
+      return { part, position, amended, labels, key: partKey(part, amended), words: part.paragraphs ? partWords(part.paragraphs) : new Set() };
     });
     const matched = matchParts(entries, changes);
     for (const [index, entry] of entries.entries()) {
@@ -553,6 +566,7 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [], g
       // A matched change is compared with its latest text in the next version.
       change.key = entry.key;
       change.words = entry.words;
+      if (entry.part.paragraphs) (change.texts ??= {})[version] = { paragraphs: entry.part.paragraphs, labels: entry.labels };
       const entryVersion = versionOf({ ...entry.part, titleCz: entry.part.titleCz ?? print.title }, entry.amended, text?.document ?? null, effectiveCz, text?.promulgatedAct ?? null);
       // A version whose text equals the latest earlier text is stored as the
       // same, so models do not read (and pay for) the text twice. The
@@ -578,9 +592,55 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [], g
   });
   const resolutions = senateResolutions.map(subPrintText);
   const opinions = governmentOpinions.map(subPrintText);
-  return changes.map((change) => {
-    const { key, words, fromFirstText, ...rest } = change;
-    return withDerivedFields({ ...rest, titleActs: single && fromFirstText ? namedActsFromPrintTitle(print.title) : [], senateResolutions: resolutions, governmentOpinions: opinions });
+  return changes.flatMap((change) => {
+    const { key, words, fromFirstText, texts: changeTexts, ...rest } = change;
+    const whole = { ...rest, titleActs: single && fromFirstText ? namedActsFromPrintTitle(print.title) : [], senateResolutions: resolutions, governmentOpinions: opinions };
+    return sectionGroupsOfChange(whole, changeTexts ?? {}, division).map(withDerivedFields);
+  });
+}
+
+/**
+ * A long amending part as groups of its points (docs/evidence-pipeline.md,
+ * Chamber data rules, Law changes), each a law change `${changeId}-${n}`
+ * with its range of sections (`section`), or the part itself.
+ */
+function sectionGroupsOfChange(change, texts, division) {
+  const textVersions = versionKeys.filter((version) => change.versions[version] && !change.versions[version].removed && !change.versions[version].sameAs && change.versions[version].textCz !== null);
+  const amends = Object.values(change.versions).some(({ amendedAct }) => amendedAct);
+  if (!amends || !partedPrintKindIds.has(String(change.printKindId)) || !textVersions.some((version) => change.versions[version].textCz.length > division.minLength)) return [change];
+  const groups = sectionGroups(Object.fromEntries(textVersions.map((version) => [version, texts[version] ?? { paragraphs: [], labels: null }])), division.maxLength);
+  if (!groups) return [change];
+  return groups.map((group, index) => {
+    const versions = {};
+    let addedIn = null;
+    for (const version of versionKeys) {
+      const entry = change.versions[version];
+      if (!entry) continue;
+      // A version known only by the print title is the same in every group.
+      if (!entry.removed && !entry.sameAs && entry.textCz === null) {
+        versions[version] = entry;
+        addedIn ??= version;
+        continue;
+      }
+      const source = entry.sameAs ?? version;
+      const paragraphs = entry.removed ? null : group.versions[source] ?? null;
+      if (!paragraphs) {
+        if (addedIn) versions[version] = entry.promulgatedAct ? { removed: true, promulgatedAct: entry.promulgatedAct } : { removed: true };
+        continue;
+      }
+      addedIn ??= version;
+      const { sameAs, ...own } = entry;
+      const textCz = paragraphs.join("\n");
+      // A version with the group's text of the latest earlier version is
+      // stored as the same, as for a whole part.
+      const previous = latestTextVersion({ versions });
+      const holder = previous ? versions[previous].sameAs ?? previous : null;
+      versions[version] = holder && versions[holder].textCz === textCz
+        ? { sameAs: holder, heading: own.heading, titleCz: own.titleCz, amendedAct: own.amendedAct, effectiveCz: own.effectiveCz, document: own.document, ...(own.promulgatedAct ? { promulgatedAct: own.promulgatedAct } : {}) }
+        : { ...own, textCz };
+    }
+    const groupAddedIn = versionKeys.indexOf(addedIn) > versionKeys.indexOf(change.addedIn) ? addedIn : change.addedIn;
+    return { ...change, changeId: `${change.changeId}-${index + 1}`, addedIn: groupAddedIn, section: group.section, versions };
   });
 }
 
@@ -595,7 +655,9 @@ function withDerivedFields(change) {
   const identifiers = [...new Set([...acts.map(({ act }) => act), ...(change.enablingActs ?? [])])].map(actIdentifier);
   if (change.printKindId === "3") identifiers.push(stateBudgetIdentifier);
   const latest = change.versions[latestTextVersion(change)];
-  return { ...change, heading: latest.heading, titleCz: latest.titleCz, acts, identifiers };
+  // A group of a divided part is named by its part and its sections.
+  const heading = change.section ? [latest.heading, change.section.labelCz].filter(Boolean).join(", ") : latest.heading;
+  return { ...change, heading, titleCz: latest.titleCz, acts, identifiers };
 }
 
 /**

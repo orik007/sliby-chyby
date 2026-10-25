@@ -458,3 +458,50 @@ test("a treaty is divided at its part, chapter, annex, appendix, and protocol he
   assert.deepEqual(lawChangesOfPrint({ print: { ...print, title: "Vládní návrh smlouvy, kterou se mění zákon č. 111/1998 Sb., o vysokých školách" }, texts: { proposed: { document, paragraphs: ["Smlouva", "Článek 1", "Strany se dohodly."] } } }).map(({ acts, identifiers }) => [acts, identifiers]), [[[], []]]);
   assert.deepEqual(lawChangesOfPrint({ print, texts: { proposed: { document, paragraphs: ["Smlouva mezi Českou republikou a Slovenskou republikou", "Článek 1", "Strany se dohodly."] } } }).map(({ changeId }) => changeId), ["43453-1"]);
 });
+
+test("a long amending part is divided into groups of its points by section, the same in every version", async () => {
+  // Part one of print 67, as in tests/amending-points.test.mjs, with its
+  // Word list numbers; the lengths are lowered to divide the excerpt.
+  const excerpt = JSON.parse(await readFile(new URL("./fixtures/print-67-part-one-excerpt.json", import.meta.url), "utf8"));
+  const texts = Object.fromEntries(Object.entries(excerpt).map(([version, paragraphs]) => [version, {
+    document: { filename: `${version}.docx`, url: `https://www.psp.cz/sqw/text/orig2.sqw?idd=${version === "proposed" ? 266187 : 280389}` },
+    paragraphs: paragraphs.map(({ text }) => text),
+    labels: paragraphs.map(({ label }) => label)
+  }]));
+  const print67 = { printId: "43174", number: 67, kindId: "2", title: "Návrh poslanců na vydání zákona, kterým se mění zákon č. 283/2021 Sb., stavební zákon", pageUrl: pageUrl(67) };
+  const division = { minLength: 10_000, maxLength: 4000 };
+  const changes = lawChangesOfPrint({ print: print67, texts, division });
+  assert.deepEqual(changes.map(({ changeId, heading, acts }) => [changeId, heading, acts.map(({ act }) => act)]), [
+    ["43174-1-1", "ČÁST PRVNÍ, body k § 1", ["283/2021"]],
+    ["43174-1-2", "ČÁST PRVNÍ, body k § 2 až § 11", ["283/2021"]],
+    ["43174-1-3", "ČÁST PRVNÍ, body k § 12", ["283/2021"]],
+    ["43174-1-4", "ČÁST PRVNÍ, Čl. II", ["283/2021"]]
+  ]);
+  for (const change of changes) {
+    assert.deepEqual(Object.keys(change.versions), ["proposed", "approved"]);
+    // The part's heading stays the versions' own, by which amendments are matched.
+    assert.equal(change.versions.proposed.heading, "ČÁST PRVNÍ");
+    assert.equal(change.titleCz, "Změna stavebního zákona");
+  }
+  assert.match(changes[0].versions.approved.textCz, /^ČÁST PRVNÍ\nZměna stavebního zákona\nČl\. I\nZákon č\. 283\/2021 Sb\.[^\n]*\n1\. V nadpisu § 1 /);
+  assert.match(lawChangeText(changes[1]), /Part: ČÁST PRVNÍ, body k § 2 až § 11 – Změna stavebního zákona\n\nThis law change is one group of the part's amending points/);
+  assert.match(lawChangeText(changes[3]), /Part: ČÁST PRVNÍ, Čl\. II – Změna stavebního zákona\n\nThis law change is the part's further articles after its amending points/);
+  // A bill without part headings names a group by its sections only.
+  const withoutHeading = (paragraphs) => paragraphs.slice(2);
+  const unparted = lawChangesOfPrint({ print: print67, texts: Object.fromEntries(Object.entries(texts).map(([version, text]) => [version, { ...text, paragraphs: withoutHeading(text.paragraphs), labels: withoutHeading(text.labels) }])), division });
+  assert.deepEqual(unparted.map(({ heading }) => heading), ["body k § 1", "body k § 2 až § 11", "body k § 12", "Čl. II"]);
+  // Without a proposal text, every group is proposed by the print title.
+  const titleOnly = lawChangesOfPrint({ print: print67, texts: { approved: texts.approved }, division });
+  assert.equal(titleOnly.length, 4);
+  for (const change of titleOnly) {
+    assert.equal(change.addedIn, "proposed");
+    assert.deepEqual(change.versions.proposed, { heading: null, titleCz: print67.title, textCz: null, amendedAct: null, effectiveCz: null, document: null });
+  }
+  // A part within the length, or with a version read without its numbers,
+  // stays one law change, as without the numbers.
+  const whole = lawChangesOfPrint({ print: print67, texts });
+  assert.deepEqual(whole.map(({ changeId, heading }) => [changeId, heading]), [["43174-1", "ČÁST PRVNÍ"]]);
+  const unnumbered = lawChangesOfPrint({ print: print67, texts: { ...texts, approved: { ...texts.approved, labels: null } }, division });
+  const { labels: ignored, ...plainApproved } = texts.approved;
+  assert.deepEqual(unnumbered, lawChangesOfPrint({ print: print67, texts: { proposed: texts.proposed, approved: plainApproved } }));
+});

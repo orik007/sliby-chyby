@@ -4,11 +4,11 @@ import { resolve } from "node:path";
 import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from "./lib/attribution.mjs";
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError, workflowRunId } from "./lib/e-sbirka.mjs";
-import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspPageOptions, pspProxyUrl } from "./lib/psp-print-documents.mjs";
+import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxNumberedParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspPageOptions, pspProxyUrl } from "./lib/psp-print-documents.mjs";
 import { anyPspDocumentFileOptions, createPspDocumentCache, pspDocumentExtractions, pspDocumentFileOptions } from "./lib/psp-document-cache.mjs";
 import { createPspPageCache, readPspPage } from "./lib/psp-page-cache.mjs";
 import { log, progress } from "./lib/run-log.mjs";
-import { collectPrints, governmentOpinionSectionLabels, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
+import { collectPrints, governmentOpinionSectionLabels, hasDividedPart, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, partedPrintKindIds, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
 
 /**
@@ -59,7 +59,24 @@ async function fetchWordText(source, url, filename, format, warnings, printNumbe
     warnings.push({ printNumber, kind: `unreadable-${format}`, version, detail: `${filename}: ${error}` });
     return null;
   }
-  return { document: { filename, url }, paragraphs: proposalBody(paragraphs) };
+  return { document: { filename, url }, format, paragraphs: proposalBody(paragraphs) };
+}
+
+// Each DOCX text of a bill with a part long enough to be divided into
+// groups of its points, in any of its texts, also has its Word list numbers
+// (`labels`, one per paragraph), read once more from the file and kept
+// (docs/evidence-pipeline.md, Chamber data rules, Law changes). A file whose
+// numbered reading is not the same text is reported.
+async function withPointLabels(source, print, text, version, warnings) {
+  if (!text || text.format !== "docx") return text;
+  const { url } = text.document;
+  const { value, error } = await documentCache.read(url, pspDocumentExtractions.docxNumberedParagraphs, extractDocxNumberedParagraphs, async () => (await fetchPsp(source, url, pspDocumentFileOptions.docx)).bytes);
+  const numbered = value?.slice(0, text.paragraphs.length) ?? [];
+  if (error || numbered.length !== text.paragraphs.length || numbered.some(({ text: paragraph }, index) => paragraph !== text.paragraphs[index])) {
+    warnings.push({ printNumber: print.number, kind: "point-numbers-unreadable", version, detail: `${text.document.filename}: ${error ?? "its numbered reading differs from its text"}; its parts are not divided` });
+    return text;
+  }
+  return { ...text, labels: numbered.map(({ label }) => label) };
 }
 
 // A page of a closed print is read once and kept, when its reader found
@@ -138,7 +155,10 @@ async function fetchPrintTexts(source, print, termNumber) {
     allSettledOrThrow(print.senateResolutionPartNumbers.map((partNumber) => senateResolution(source, termNumber, print, partNumber, warnings))),
     allSettledOrThrow(print.governmentOpinionPartNumbers.map((partNumber) => governmentOpinion(source, termNumber, print, partNumber, warnings)))
   ]);
-  const texts = Object.fromEntries(Object.entries({ proposed: proposal, approved, passed }).filter(([, text]) => text));
+  const read = Object.entries({ proposed: proposal, approved, passed });
+  const divided = partedPrintKindIds.has(String(print.kindId)) && read.some(([, text]) => text && hasDividedPart(text.paragraphs));
+  const labelled = divided ? await allSettledOrThrow(read.map(async ([version, text]) => [version, await withPointLabels(source, print, text, version, warnings)])) : read;
+  const texts = Object.fromEntries(labelled.filter(([, text]) => text));
   return {
     texts,
     senateResolutions: resolutions.filter(Boolean),

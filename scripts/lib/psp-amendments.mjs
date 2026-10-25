@@ -4,6 +4,7 @@ import { listedFiles } from "./print-parts.mjs";
 import { extractDocParagraphs, extractDocxNumberedParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl } from "./psp-print-documents.mjs";
 import { pspDocumentExtractions, pspDocumentFileOptions } from "./psp-document-cache.mjs";
 import { readPspPage } from "./psp-page-cache.mjs";
+import { annexSectionKey, sectionRangesNamed } from "./amending-points.mjs";
 import { extractXlsxRows } from "./xlsx-rows.mjs";
 
 /**
@@ -294,6 +295,37 @@ export function partsNamedInAmendment(paragraphs) {
     }
   }
   return [...parts].sort();
+}
+
+// "V části první čl. I …", "1) Za část druhou …", "Část třetí zní:".
+const partInstructionPattern = /^(?:[\p{Lu}\d]{1,4}[.)]\s*)*(?:(?:V|Ve|Za|Před|K)\s+část(?:i|í|ou)?|Část\p{L}*)\s/u;
+const articlePattern = /(?<!\p{L})čl\.\s*([IVXLC]+[a-z]?)(?!\p{L})/giu;
+
+/**
+ * An amendment's instructions on one part of the bill (`heading`, "ČÁST
+ * PRVNÍ", or null for a bill without parts, whose whole text is one
+ * instruction; none found is one naming nothing), each with the sections (as ranges of section keys, the
+ * annexes included) and the articles ("Čl. II") it names, by which the
+ * amendment is matched to the groups of a divided part
+ * (scripts/lib/amending-points.mjs, sectionGroupHolds).
+ */
+export function sectionsNamedInAmendment(paragraphs, heading) {
+  const instructions = heading === null ? [{ sections: [], articles: [] }] : [];
+  let current = instructions[0] ?? null;
+  for (const paragraph of paragraphs) {
+    if (/^Odůvodnění(?!\p{L})/u.test(paragraph.trim())) break;
+    if (heading !== null && partInstructionPattern.test(paragraph)) {
+      current = partsNamedInAmendment([paragraph]).includes(heading) ? { sections: [], articles: [] } : null;
+      if (current) instructions.push(current);
+    }
+    if (!current) continue;
+    current.sections.push(...sectionRangesNamed(paragraph));
+    if (/(?<!\p{L})přílo[hz]/iu.test(paragraph)) current.sections.push([annexSectionKey, annexSectionKey]);
+    for (const [, article] of paragraph.matchAll(articlePattern)) current.articles.push(`Čl. ${article.replace(/^[ivxlc]+/, (numeral) => numeral.toUpperCase())}`);
+  }
+  // An amendment without an instruction starting on the part is read as
+  // one naming nothing, which concerns every group.
+  return instructions.length > 0 ? instructions : [{ sections: [], articles: [] }];
 }
 
 /**

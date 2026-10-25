@@ -26,7 +26,7 @@ official party source (election programme, archived with its extracted text)
 official records only (active: Chamber of Deputies open data with its amendments and stenographic record; government regulations and ministerial decrees from the Collection of Laws; government resolutions from the Government Office's zVlády portal)
   -> complete collection of every source at 09:37 Europe/Prague
   -> only records that can be attributable conduct continue
-  -> each concerned print split into law changes (one part of its official text each, a treaty at its chapters and annexes); each regulation, decree, or government resolution one law change, the plan of legislative work one per task
+  -> each concerned print split into law changes (one part of its official text each, a treaty at its chapters and annexes, a long amending part in groups of its points by the sections they amend); each regulation, decree, or government resolution one law change, the plan of legislative work one per task
   -> context of each law change: the wording of the provisions it amends on the conduct date (e-Sbírka REST API, at most 4 requests per second, cached permanently)
   -> two screeners read every law change with its context and the amendments to it: substantive or technical, and topic tags
   -> routing of substantive changes to promises: direct legal-identifier links or the specific tags of either screener, matched to the promises' reviewed tags
