@@ -356,7 +356,7 @@ test("a law change both assessors found not relevant is left out, and the packag
   });
   const full = build();
   const [first, second] = full.evidence.filter(({ role }) => role === "law-change").map(({ id }) => id);
-  const assessorPrompt = { version: "assessor-v25", contentHash: "a".repeat(64) };
+  const assessorPrompt = { version: "assessor-v26", contentHash: "a".repeat(64) };
   const review = (relevantSecond) => ({ changeRelevance: [{ evidenceId: first, relevant: true, reasonCz: "Souvisí.", effectCz: "Zpřísňuje." }, { evidenceId: second, relevant: relevantSecond, reasonCz: relevantSecond ? "Souvisí." : "Jiné téma.", effectCz: "" }] });
   const audit = (reviewA, reviewB, prompt = assessorPrompt) => ({ prompts: { assessor: prompt }, validatedAssessments: { "assessor-a": reviewA, "assessor-b": reviewB } });
   const verdictsOf = (auditRecord, evidencePackage = full) => {
@@ -385,7 +385,7 @@ test("a law change both assessors found not relevant is left out, and the packag
     assert.equal(build(exclusionFrom(verdictsOf(auditRecord))).excludedLawChanges, undefined);
   }
   // Another assessor prompt or a changed text brings the change back.
-  assert.equal(build(exclusionFrom(verdictsOf(both), { version: "assessor-v25", contentHash: "b".repeat(64) })).excludedLawChanges, undefined);
+  assert.equal(build(exclusionFrom(verdictsOf(both), { version: "assessor-v26", contentHash: "b".repeat(64) })).excludedLawChanges, undefined);
   assert.equal(build(exclusionFrom(verdictsOf(both)), [lawChange(1), lawChange(2, "Zákon č. 218/2000 Sb. se mění takto: jinak.")]).excludedLawChanges, undefined);
   // A change whose context was trimmed in the assessed package gives no verdict.
   const trimmed = { ...full, generation: { ...full.generation, contextOmissions: [{ evidenceId: second, version: "proposed", suppliedCount: 0, omitted: [] }] } };
@@ -395,7 +395,7 @@ test("a law change both assessors found not relevant is left out, and the packag
   assert.equal(build(exclusionFrom(verdictsOf(none))), null);
 });
 
-function amendmentRecord(number, { parts = ["ČÁST PRVNÍ"], proposerPartyIds = [fiscalPromise.partyId] } = {}) {
+function amendmentRecord(number, { parts = ["ČÁST PRVNÍ"], proposerPartyIds = [fiscalPromise.partyId], paragraphs = ["Pozměňovací návrh poslankyně Jany Murové", "1. V části první čl. I se bod 4 zrušuje."] } = {}) {
   return createCollectedRecord({
     id: `psp-core-2025--amendment-${number}`,
     sourceId: "psp-core-2025",
@@ -419,7 +419,7 @@ function amendmentRecord(number, { parts = ["ČÁST PRVNÍ"], proposerPartyIds =
       parts,
       document: { filename: `${number}.docx`, url: `https://www.psp.cz/sqw/text/orig2.sqw?idd=${number}0` },
       pageUrl: `https://www.psp.cz/sqw/sd.sqw?cd=${number}&o=10`,
-      paragraphs: ["Pozměňovací návrh poslankyně Jany Murové", "1. V části první čl. I se bod 4 zrušuje."],
+      paragraphs,
       proposal: { kind: "member-amendment", proposerPartyIds, proposerPersonIds: ["1"], unmatchedProposerNames: [] }
     }
   });
@@ -451,4 +451,24 @@ test("an amendment and a vote on it are conduct on the parts it amends, with its
   // A law change lists its amendments by the hash of their text, which an
   // earlier verdict's key holds.
   assert.deepEqual(pkg.evidence.find(({ id }) => id === lawChangeEvidenceId(lawChange(2))).structuredFacts.amendments.map(({ documentNumber }) => documentNumber), ["775"]);
+});
+
+test("an amendment of a divided part, and a vote on it, concern the groups whose sections it names", async () => {
+  const { attributableConductOnChange, conductOfRun, lawChangesOfRun } = await import("../scripts/lib/topic-evidence-package.mjs");
+  const onSection = (number, section) => amendmentRecord(number, { paragraphs: ["Pozměňovací návrh", `V části první čl. I se za bod 4 vkládá nový bod 5, který zní:`, `„5. V § ${section} se odstavec 2 zrušuje.“.`] });
+  const early = onSection(774, "5");
+  const late = onSection(775, "50a");
+  // It names a point, not a section: it concerns every group of the part.
+  const anywhere = amendmentRecord(776);
+  const vote = attributedVoteRecord({ id: "psp--amendment-vote", occurredAt: "2026-05-15T10:00:00", payload: { linkedPrints: [{ externalPrintId: "43200", printKindId: "1", linkBasis: "agenda-item", historyContexts: [] }], amendmentVote: { externalPrintId: "43200", printNumber: 90, documentNumbers: ["775"], label: "D", variant: null, presenterCz: "Poslanec Karel Haas", parts: ["ČÁST PRVNÍ"], stenoUrl: "https://www.psp.cz/eknih/2025ps/stenprot/017schuz/s017010.htm" } } });
+  const run = { ...collectorRun, records: [early, late, anywhere, vote] };
+  const { recordsByPrintId, amendmentRecords } = conductOfRun(run, "2026-06-15", [fiscalPromise.partyId]);
+  // Part one divided at § 20 (scripts/lib/amending-points.mjs).
+  const group = (index, from, to) => ({ ...lawChange(1), changeId: `43200-1-${index}`, heading: `ČÁST PRVNÍ, body k § ${index}`, section: { labelCz: `body k § ${index}`, from, to, rest: false, restArticles: [] } });
+  const printParts = { prints: { 43200: { changes: [group(1, null, 20000), group(2, 20000, null), lawChange(2)] } } };
+  const changes = lawChangesOfRun(printParts, recordsByPrintId, amendmentRecords);
+  assert.deepEqual(changes.map(({ amendments }) => amendments.map(({ documentNumber }) => documentNumber)), [["774", "776"], ["775", "776"], []]);
+  const conductOn = (change) => attributableConductOnChange(recordsByPrintId.get("43200"), fiscalPromise, change).map(({ record }) => record.id).sort();
+  assert.deepEqual(conductOn(changes[0]), ["psp-core-2025--amendment-774", "psp-core-2025--amendment-776"]);
+  assert.deepEqual(conductOn(changes[1]), ["psp--amendment-vote", "psp-core-2025--amendment-775", "psp-core-2025--amendment-776"]);
 });

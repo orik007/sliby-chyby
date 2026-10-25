@@ -4,6 +4,7 @@ import { listedFiles } from "./print-parts.mjs";
 import { extractDocParagraphs, extractDocxNumberedParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl } from "./psp-print-documents.mjs";
 import { pspDocumentExtractions, pspDocumentFileOptions } from "./psp-document-cache.mjs";
 import { readPspPage } from "./psp-page-cache.mjs";
+import { annexSectionKey, sectionKeysNamed } from "./amending-points.mjs";
 import { extractXlsxRows } from "./xlsx-rows.mjs";
 
 /**
@@ -294,6 +295,31 @@ export function partsNamedInAmendment(paragraphs) {
     }
   }
   return [...parts].sort();
+}
+
+// "V části první čl. I …", "1) Za část druhou …", "Část třetí zní:".
+const partInstructionPattern = /^(?:[\p{Lu}\d]{1,4}[.)]\s*)*(?:(?:V|Ve|Za|Před|K)\s+část(?:i|í|ou)?|Část\p{L}*)\s/u;
+const articlePattern = /(?<!\p{L})čl\.\s*([IVXLC]+[a-z]?)(?!\p{L})/giu;
+
+/**
+ * The sections and articles ("Čl. II") an amendment's instructions on one
+ * part of the bill name (`heading`, "ČÁST PRVNÍ", or null for a bill
+ * without parts), by which it is matched to the groups of a divided part
+ * (scripts/lib/amending-points.mjs, sectionGroupHolds).
+ */
+export function sectionsNamedInAmendment(paragraphs, heading) {
+  const sections = new Set();
+  const articles = new Set();
+  let inPart = heading === null;
+  for (const paragraph of paragraphs) {
+    if (/^Odůvodnění(?!\p{L})/u.test(paragraph.trim())) break;
+    if (heading !== null && partInstructionPattern.test(paragraph)) inPart = partsNamedInAmendment([paragraph]).includes(heading);
+    if (!inPart) continue;
+    for (const key of sectionKeysNamed(paragraph)) sections.add(key);
+    if (/(?<!\p{L})přílo[hz]/iu.test(paragraph)) sections.add(annexSectionKey);
+    for (const [, article] of paragraph.matchAll(articlePattern)) articles.add(`Čl. ${article.replace(/^[ivxlc]+/, (numeral) => numeral.toUpperCase())}`);
+  }
+  return { sections: [...sections].sort((left, right) => left - right), articles: [...articles].sort() };
 }
 
 /**
