@@ -144,6 +144,19 @@ function cachedEntry(cached, fingerprint, keepFromPromptContentHash, revalidate)
 }
 
 /**
+ * A prompt that keeps the results of an earlier prompt fails the run at once
+ * when the cache holds results but no complete pair made or kept under that
+ * prompt and none made or kept under the current one: its hash is wrong, and
+ * every result would be sent again. An empty cache has nothing to keep.
+ */
+export function assertKeptPromptCached(cache, promptContentHash, keptPromptContentHash, label) {
+  const entries = Object.values(cache.entries);
+  const under = (hash) => (entry) => entry.promptContentHash === hash || entry.keptUnderPromptContentHash === hash;
+  if (entries.length === 0 || entries.some(under(promptContentHash)) || entries.some((entry) => entry.a != null && entry.b != null && under(keptPromptContentHash)(entry))) return;
+  throw new Error(`The ${label} prompt keeps the results of prompt ${keptPromptContentHash}, which made or kept no complete cached pair`);
+}
+
+/**
  * Two independent calls on one subject. `fingerprint` must cover everything
  * that could change a response (the input hash, the prompt and taxonomy
  * hashes, the provider, and both models); a cached side is reused only when

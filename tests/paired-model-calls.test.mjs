@@ -3,7 +3,7 @@ import { appendFile, mkdtemp, readdir, readFile, rm, writeFile } from "node:fs/p
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, shardedCachePersister } from "../scripts/lib/paired-model-calls.mjs";
+import { assertKeptPromptCached, cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, shardedCachePersister } from "../scripts/lib/paired-model-calls.mjs";
 import { ModelOutputError } from "../scripts/lib/model-output.mjs";
 
 const fingerprint = { inputHash: "h1", promptContentHash: "p1", provider: "openai", modelA: "a", modelB: "b" };
@@ -132,6 +132,17 @@ test("a pair made under the prompt the current one keeps is reused and saved as 
   const replaced = await pairedModelCall({ subjectId: "s1", fingerprint: { ...next, inputHash: "h3" }, cache: reloaded, persist: async () => {}, callA: counted({ v: 12 }), callB: counted({ v: 13 }) });
   assert.equal(replaced.reused, false);
   assert.deepEqual([reloaded.entries.s1.promptContentHash, reloaded.entries.s1.keptUnderPromptContentHash], ["p2", undefined]);
+});
+
+test("a prompt that keeps the results of a prompt with no complete cached pair fails, unless the cache is empty or already under the current prompt", () => {
+  const check = (entries) => () => assertKeptPromptCached({ entries }, "p3", "p2", "screener-v3");
+  assert.doesNotThrow(check({}), "an empty cache has nothing to keep");
+  assert.doesNotThrow(check({ s1: { promptContentHash: "p2", a: {}, b: {} } }));
+  assert.doesNotThrow(check({ s1: { promptContentHash: "p1", keptUnderPromptContentHash: "p2", a: {}, b: {} } }));
+  assert.doesNotThrow(check({ s1: { promptContentHash: "p1", keptUnderPromptContentHash: "p3", a: {}, b: {} } }), "every result already kept under the current prompt");
+  assert.doesNotThrow(check({ s1: { promptContentHash: "p3", a: {}, b: null } }));
+  assert.throws(check({ s1: { promptContentHash: "p1", a: {}, b: {} } }), /screener-v3 prompt keeps the results of prompt p2, which made or kept no complete cached pair/);
+  assert.throws(check({ s1: { promptContentHash: "p2", a: {}, b: null } }), /no complete cached pair/, "a pair with an invalid side keeps nothing");
 });
 
 test("a sharded model cache keeps one journal per subject group and loads them all", async (t) => {

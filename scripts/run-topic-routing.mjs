@@ -27,7 +27,7 @@ import { attributableConductOnChange, buildLawChangeEvidencePackage, conductOfRu
 import { loadAssessmentPrompts, maxRequestInputTokens } from "./lib/assessment-config.mjs";
 import { validateReviewManifest } from "./lib/assessment-review.mjs";
 import { exclusionOf, loadRelevanceVerdicts } from "./lib/irrelevance-verdicts.mjs";
-import { cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, shardedCachePersister, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
+import { assertKeptPromptCached, cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, shardedCachePersister, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 
 /**
@@ -133,13 +133,8 @@ const caches = {
   relevance: await loadShardedModelCache(resolve(args.tagCache, "relevance-checks"), relevanceFileOf)
 };
 const persist = { screening: cachePersister(caches.screening), relevance: shardedCachePersister(caches.relevance) };
-// A prompt that keeps the results of a prompt no cached result was made or
-// kept under would send everything again: its hash is wrong.
 for (const [stageName, prompt] of Object.entries(prompts)) {
-  const entries = Object.values(caches[stageName].entries);
-  if (prompt.keeps && entries.length > 0 && !entries.some(({ promptContentHash, keptUnderPromptContentHash }) => [promptContentHash, keptUnderPromptContentHash].includes(prompt.keeps.contentHash))) {
-    throw new Error(`The ${prompt.version} prompt keeps the results of prompt ${prompt.keeps.contentHash}, which made or kept no cached result`);
-  }
+  if (prompt.keeps) assertKeptPromptCached(caches[stageName], prompt.contentHash, prompt.keeps.contentHash, prompt.version);
 }
 const models = { provider: runtime.provider, modelA: runtime.modelA, modelB: runtime.modelB };
 const usage = { screening: [], relevance: [] };
