@@ -485,6 +485,11 @@ test("a long amending part is divided into groups of its points by section, the 
   }
   assert.match(changes[0].versions.approved.textCz, /^ČÁST PRVNÍ\nZměna stavebního zákona\nČl\. I\nZákon č\. 283\/2021 Sb\.[^\n]*\n1\. V nadpisu § 1 /);
   assert.match(lawChangeText(changes[1]), /Part: ČÁST PRVNÍ, body k § 2 až § 11 – Změna stavebního zákona\n\nThis law change is one group of the part's amending points/);
+  assert.match(lawChangeText(changes[3]), /Part: ČÁST PRVNÍ, Čl\. II – Změna stavebního zákona\n\nThis law change is the part's further articles after its amending points/);
+  // A bill without part headings names a group by its sections only.
+  const withoutHeading = (paragraphs) => paragraphs.slice(2);
+  const unparted = lawChangesOfPrint({ print: print67, texts: Object.fromEntries(Object.entries(texts).map(([version, text]) => [version, { ...text, paragraphs: withoutHeading(text.paragraphs), labels: withoutHeading(text.labels) }])), division });
+  assert.deepEqual(unparted.map(({ heading }) => heading), ["body k § 1", "body k § 2 až § 11", "body k § 12", "Čl. II"]);
   // Without a proposal text, every group is proposed by the print title.
   const titleOnly = lawChangesOfPrint({ print: print67, texts: { approved: texts.approved }, division });
   assert.equal(titleOnly.length, 4);

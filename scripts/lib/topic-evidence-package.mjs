@@ -141,7 +141,8 @@ export function withAmendments(changes, recordsByPrintId, amendmentRecords) {
     const partNumbers = new Set((recordsByPrintId.get(change.printId) ?? [])
       .filter((record) => isAmendmentConduct(record) && amendedPrintId(record) === String(change.printId) && amendmentConcernsChange(record, change, printPartHeadings))
       .flatMap(amendmentDocumentNumbers));
-    const partHeading = Object.values(change.versions).find(({ heading }) => heading !== undefined)?.heading?.toLocaleUpperCase("cs-CZ") ?? null;
+    // A version known only by the print title has no heading.
+    const partHeading = Object.values(change.versions).find(({ heading }) => heading)?.heading.toLocaleUpperCase("cs-CZ") ?? null;
     const groupAmendments = change.section
       ? Object.fromEntries([...partNumbers].filter((number) => amendmentByNumber.has(number)).map((number) => [number, sectionGroupHolds(change.section, namedInPart(number, partHeading))]))
       : null;

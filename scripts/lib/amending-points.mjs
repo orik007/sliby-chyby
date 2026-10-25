@@ -121,8 +121,11 @@ export function sectionGroups(versionTexts, maxLength = sectionGroupMaxLength) {
   const hasRest = read.some(({ rest }) => rest.length > 0);
   if (starts.length + (hasRest ? 1 : 0) < 2) return null;
   const groupOf = (section) => Math.max(0, starts.findLastIndex((start) => bySection(section, start) >= 0));
-  const restVersions = Object.fromEntries(read.filter(({ rest }) => rest.length > 0).map(({ version, opening, rest }) => [version, [...opening.slice(0, 2), ...rest]]));
-  const restArticles = [...new Set(Object.values(restVersions).flat().map((paragraph) => paragraph.trim()).filter((paragraph) => articleHeadingPattern.test(paragraph)))];
+  // The further articles open with the part's heading and title, what
+  // precedes its amending article.
+  const headingOf = (opening) => opening.slice(0, Math.max(0, opening.findIndex((paragraph) => articleHeadingPattern.test(paragraph.trim()))));
+  const restVersions = Object.fromEntries(read.filter(({ rest }) => rest.length > 0).map(({ version, opening, rest }) => [version, [...headingOf(opening), ...rest]]));
+  const restArticles = [...new Set(read.flatMap(({ rest }) => rest).map((paragraph) => paragraph.trim()).filter((paragraph) => articleHeadingPattern.test(paragraph)))];
   const sections = [...new Set(read.flatMap(({ points }) => points.map(({ section }) => section)))].filter((section) => section !== null).sort(bySection);
   const groups = starts.map((start, index) => {
     const named = sections.filter((section) => groupOf(section) === index);

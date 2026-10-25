@@ -656,7 +656,7 @@ function withDerivedFields(change) {
   if (change.printKindId === "3") identifiers.push(stateBudgetIdentifier);
   const latest = change.versions[latestTextVersion(change)];
   // A group of a divided part is named by its part and its sections.
-  const heading = change.section ? `${latest.heading}, ${change.section.labelCz}` : latest.heading;
+  const heading = change.section ? [latest.heading, change.section.labelCz].filter(Boolean).join(", ") : latest.heading;
   return { ...change, heading, titleCz: latest.titleCz, acts, identifiers };
 }
 
