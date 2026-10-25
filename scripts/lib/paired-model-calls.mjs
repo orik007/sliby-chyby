@@ -26,8 +26,10 @@ export async function writeJsonAtomically(filePath, value) {
 /**
  * A model cache is an append-only JSON Lines journal: each line is one
  * accepted result `{ subjectId, ...entry }`, and a later line for the same
- * subject replaces an earlier one. Appending keeps every paid result on disk
- * the moment it exists without rewriting the whole cache.
+ * subject replaces an earlier one, except a line that only names the prompt
+ * that kept the result (`{ subjectId, keptUnderPromptContentHash }`), which
+ * is added to it. Appending keeps every paid result on disk the moment it
+ * exists without rewriting the whole cache.
  */
 export async function loadModelCache(filePath) {
   const entries = {};
@@ -53,7 +55,10 @@ export async function loadModelCache(filePath) {
       }
       if (typeof value?.subjectId !== "string") throw new Error(`Invalid model cache ${filePath} line ${index + 1}`);
       const { subjectId, ...entry } = value;
-      entries[subjectId] = entry;
+      if (Object.keys(entry).join() === "keptUnderPromptContentHash") {
+        if (!entries[subjectId]) throw new Error(`Invalid model cache ${filePath} line ${index + 1}: a kept result that is not in the cache`);
+        entries[subjectId] = { ...entries[subjectId], ...entry };
+      } else entries[subjectId] = entry;
     }
     const repaired = content.slice(0, validLength);
     const normalized = repaired === "" || repaired.endsWith("\n") ? repaired : `${repaired}\n`;
@@ -67,8 +72,8 @@ export async function loadModelCache(filePath) {
 
 export function cachePersister(cache) {
   let chain = Promise.resolve();
-  return (subjectId) => {
-    const line = `${JSON.stringify({ subjectId, ...cache.entries[subjectId] })}\n`;
+  return (subjectId, record = { subjectId, ...cache.entries[subjectId] }) => {
+    const line = `${JSON.stringify(record)}\n`;
     chain = chain.then(async () => {
       await mkdir(dirname(cache.filePath), { recursive: true });
       await appendFile(cache.filePath, line, "utf8");
@@ -96,9 +101,9 @@ export async function loadShardedModelCache(directory, fileOf) {
 
 export function shardedCachePersister(cache) {
   let chain = Promise.resolve();
-  return (subjectId) => {
+  return (subjectId, record = { subjectId, ...cache.entries[subjectId] }) => {
     const file = resolve(cache.directory, cache.fileOf(subjectId));
-    const line = `${JSON.stringify({ subjectId, ...cache.entries[subjectId] })}\n`;
+    const line = `${JSON.stringify(record)}\n`;
     chain = chain.then(async () => {
       await mkdir(dirname(file), { recursive: true });
       await appendFile(file, line, "utf8");
@@ -118,15 +123,46 @@ async function isolateInvalidOutput(call) {
   }
 }
 
-function fingerprintMatches(cached, fingerprint) {
-  return Boolean(cached) && Object.entries(fingerprint).every(([key, value]) => cached[key] === value);
+// A cached entry matches when all of the fingerprint but the prompt hash
+// does, and it was made or kept under the current prompt, or it is a pair
+// made or last kept under the prompt the current one keeps for this subject.
+function cachedEntry(cached, fingerprint, keepFromPromptContentHash, revalidate) {
+  if (!cached) return null;
+  const { promptContentHash, ...rest } = fingerprint;
+  if (!Object.entries(rest).every(([key, value]) => cached[key] === value)) return null;
+  if (cached.promptContentHash === promptContentHash || cached.keptUnderPromptContentHash === promptContentHash) return { entry: cached, kept: false };
+  if (!keepFromPromptContentHash || (cached.keptUnderPromptContentHash ?? cached.promptContentHash) !== keepFromPromptContentHash || cached.a == null || cached.b == null) return null;
+  // A kept pair that the current output rules reject is asked for again.
+  try {
+    revalidate(cached.a);
+    revalidate(cached.b);
+  } catch (error) {
+    if (error instanceof ModelOutputError) return null;
+    throw error;
+  }
+  return { entry: cached, kept: true };
+}
+
+/**
+ * A prompt that keeps the results of an earlier prompt fails the run at once
+ * when the cache holds results but no complete pair made or kept under that
+ * prompt and none made or kept under the current one: its hash is wrong, and
+ * every result would be sent again. An empty cache has nothing to keep.
+ */
+export function assertKeptPromptCached(cache, promptContentHash, keptPromptContentHash, label) {
+  const entries = Object.values(cache.entries);
+  const under = (hash) => (entry) => entry.promptContentHash === hash || entry.keptUnderPromptContentHash === hash;
+  if (entries.length === 0 || entries.some(under(promptContentHash)) || entries.some((entry) => entry.a != null && entry.b != null && under(keptPromptContentHash)(entry))) return;
+  throw new Error(`The ${label} prompt keeps the results of prompt ${keptPromptContentHash}, which made or kept no complete cached pair`);
 }
 
 /**
  * Two independent calls on one subject. `fingerprint` must cover everything
  * that could change a response (the input hash, the prompt and taxonomy
  * hashes, the provider, and both models); a cached side is reused only when
- * all of it matches, and is validated again with `revalidate`. Each valid
+ * all of it matches, and is validated again with `revalidate`; a pair of the
+ * earlier prompt `keepFromPromptContentHash` is reused as
+ * docs/evidence-pipeline.md (Audit and cost control) states. Each valid
  * side is cached as soon as it exists; an invalid side is cached as null and
  * called again in the next run, which reuses the valid side. An invalid side
  * is returned as null.
@@ -135,8 +171,9 @@ function fingerprintMatches(cached, fingerprint) {
  * when they use the same model, so B reads the provider's prompt cache and
  * pays a tenth for the input they share. The answers stay independent.
  */
-export async function pairedModelCall({ subjectId, fingerprint, cache, persist, callA, callB, revalidate = (output) => output }) {
-  const cached = fingerprintMatches(cache.entries[subjectId], fingerprint) ? cache.entries[subjectId] : null;
+export async function pairedModelCall({ subjectId, fingerprint, cache, persist, callA, callB, revalidate = (output) => output, keepFromPromptContentHash = null }) {
+  const match = cachedEntry(cache.entries[subjectId], fingerprint, keepFromPromptContentHash, revalidate);
+  const cached = match?.entry ?? null;
   const reusedA = cached?.a != null;
   const reusedB = cached?.b != null;
   // Saved answers are validated again before any paid call.
@@ -153,6 +190,11 @@ export async function pairedModelCall({ subjectId, fingerprint, cache, persist, 
   if (savedEarly) await save(null);
   const attemptB = reusedB ? { response: { output: savedB, model: fingerprint.modelB }, error: null, reused: true } : await isolateInvalidOutput(callB);
   const reused = reusedA && reusedB;
+  // A kept pair is saved as one short line naming the prompt that kept it.
+  if (match?.kept) {
+    cache.entries[subjectId] = { ...cached, keptUnderPromptContentHash: fingerprint.promptContentHash };
+    await persist(subjectId, { subjectId, keptUnderPromptContentHash: fingerprint.promptContentHash });
+  }
   if (!reused && (!attemptA.error || !attemptB.error) && !(savedEarly && attemptB.error)) await save(attemptB.response?.output ?? null);
   const called = [attemptA, attemptB].filter((attempt) => !attempt.reused);
   return {
@@ -164,7 +206,11 @@ export async function pairedModelCall({ subjectId, fingerprint, cache, persist, 
     modelB: attemptB.response?.model ?? attemptB.model ?? fingerprint.modelB,
     usageByModel: called.map((attempt) => attempt.response ?? attempt).filter((entry) => entry.usage).map(({ model, usage }) => ({ model, usage })),
     invalidCount: (attemptA.error ? 1 : 0) + (attemptB.error ? 1 : 0),
-    reused
+    reused,
+    // The prompt that made the answers, and whether this call kept them
+    // from an earlier prompt.
+    madeUnderPromptContentHash: reused ? cached.promptContentHash : fingerprint.promptContentHash,
+    keptFromEarlierPrompt: Boolean(match?.kept)
   };
 }
 

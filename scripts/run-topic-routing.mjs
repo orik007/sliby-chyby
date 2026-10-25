@@ -10,6 +10,7 @@ import {
   buildScreeningBrief,
   isKeptByRelevance,
   isSubstantive,
+  keptPromptContentHash,
   loadRelevancePrompt,
   loadScreeningPrompt,
   relevanceInputBlocks,
@@ -26,7 +27,7 @@ import { attributableConductOnChange, buildLawChangeEvidencePackage, conductOfRu
 import { loadAssessmentPrompts, maxRequestInputTokens } from "./lib/assessment-config.mjs";
 import { validateReviewManifest } from "./lib/assessment-review.mjs";
 import { exclusionOf, loadRelevanceVerdicts } from "./lib/irrelevance-verdicts.mjs";
-import { cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, shardedCachePersister, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
+import { assertKeptPromptCached, cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, shardedCachePersister, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 
 /**
@@ -132,9 +133,14 @@ const caches = {
   relevance: await loadShardedModelCache(resolve(args.tagCache, "relevance-checks"), relevanceFileOf)
 };
 const persist = { screening: cachePersister(caches.screening), relevance: shardedCachePersister(caches.relevance) };
+for (const [stageName, prompt] of Object.entries(prompts)) {
+  if (prompt.keeps) assertKeptPromptCached(caches[stageName], prompt.contentHash, prompt.keeps.contentHash, prompt.version);
+}
 const models = { provider: runtime.provider, modelA: runtime.modelA, modelB: runtime.modelB };
 const usage = { screening: [], relevance: [] };
 const invalid = { screening: 0, relevance: 0 };
+// Results made under an earlier prompt that the current one keeps.
+const fromEarlierPrompt = { screening: 0, relevance: 0 };
 let runFailure = null;
 
 function fail(stageName, error) {
@@ -153,15 +159,18 @@ async function screenChange(change) {
     persist: persist.screening,
     callA: () => requestScreening({ provider: runtime.provider, apiKey, model: runtime.modelA, brief, taxonomy, prompt: prompts.screening }),
     callB: () => requestScreening({ provider: runtime.provider, apiKey, model: runtime.modelB, brief, taxonomy, prompt: prompts.screening }),
-    revalidate: (output) => validateScreeningOutput(output, taxonomy)
+    revalidate: (output) => validateScreeningOutput(output, taxonomy),
+    keepFromPromptContentHash: keptPromptContentHash(prompts.screening, change)
   });
   usage.screening.push(...screened.usageByModel);
   invalid.screening += screened.invalidCount;
+  const screeningPrompt = screened.madeUnderPromptContentHash === prompts.screening.contentHash ? null : screened.madeUnderPromptContentHash;
+  if (screeningPrompt) fromEarlierPrompt.screening += 1;
   const substantive = isSubstantive(screened.a, screened.b);
   const route = substantive
     ? routeLawChange({ taxonomy, change, screenerA: screened.a, screenerB: screened.b, invertedIndex, directIdIndex })
     : { changeId: change.changeId, disposition: "technical", reason: "both-screeners-technical", routedTo: [] };
-  return { change, substantive, route, screenerA: screened.a, screenerB: screened.b, screenerAError: screened.errorA, screenerBError: screened.errorB };
+  return { change, substantive, route, screeningPrompt, screenerA: screened.a, screenerB: screened.b, screenerAError: screened.errorA, screenerBError: screened.errorB };
 }
 
 // A promise and a routed law change continue only when the promise's party
@@ -205,11 +214,14 @@ async function checkPair(pair) {
     persist: persist.relevance,
     callA: () => requestRelevance({ provider: runtime.provider, apiKey, model: runtime.modelA, brief, prompt: prompts.relevance }),
     callB: () => requestRelevance({ provider: runtime.provider, apiKey, model: runtime.modelB, brief, prompt: prompts.relevance }),
-    revalidate: validateRelevanceOutput
+    revalidate: validateRelevanceOutput,
+    keepFromPromptContentHash: keptPromptContentHash(prompts.relevance, pair.change)
   });
   usage.relevance.push(...checked.usageByModel);
   invalid.relevance += checked.invalidCount;
-  const result = { ...pair, kept: isKeptByRelevance(checked.a, checked.b), checkA: checked.a, checkB: checked.b, checkAError: checked.errorA, checkBError: checked.errorB };
+  const relevancePrompt = checked.madeUnderPromptContentHash === prompts.relevance.contentHash ? null : checked.madeUnderPromptContentHash;
+  if (relevancePrompt) fromEarlierPrompt.relevance += 1;
+  const result = { ...pair, kept: isKeptByRelevance(checked.a, checked.b), relevancePrompt, checkA: checked.a, checkB: checked.b, checkAError: checked.errorA, checkBError: checked.errorB };
   tickPairs(`${pair.promise.id} × ${pair.change.changeId}: ${result.kept ? "kept" : "dropped"}`);
   return result;
 }
@@ -349,7 +361,9 @@ const counts = {
   contextTrimmedPackageCount: builtPackages.filter(({ oversized, contextOmissionCount }) => !oversized && contextOmissionCount > 0).length,
   excludedIrrelevantPairCount: excludedLawChanges.length,
   invalidScreenerCount: invalid.screening,
-  invalidRelevanceCheckCount: invalid.relevance
+  invalidRelevanceCheckCount: invalid.relevance,
+  screeningFromEarlierPromptCount: fromEarlierPrompt.screening,
+  relevanceCheckFromEarlierPromptCount: fromEarlierPrompt.relevance
 };
 
 const report = {
@@ -357,7 +371,7 @@ const report = {
   routerVersion: "law-change-routing-v1",
   taxonomyVersion: taxonomy.taxonomyVersion,
   taxonomyContentHash,
-  prompts: Object.fromEntries(Object.entries(prompts).map(([key, prompt]) => [key, { version: prompt.version, contentHash: prompt.contentHash }])),
+  prompts: Object.fromEntries(Object.entries(prompts).map(([key, prompt]) => [key, { version: prompt.version, contentHash: prompt.contentHash, keeps: prompt.keeps }])),
   runtime: { ...models, concurrency: runtime.concurrency },
   asOf: args.asOf,
   publicationApproved: false,
@@ -369,7 +383,7 @@ const report = {
   sample: args.samplePromises !== null || args.sampleChanges !== null ? { samplePromises: args.samplePromises, sampleChanges: args.sampleChanges } : null,
   counts,
   tokenUsageByStage: Object.fromEntries(Object.entries(usage).map(([key, entries]) => [key, usageTotalsByModel(entries)])),
-  lawChanges: screenedChanges.map(({ change, substantive, route, screenerA, screenerB, screenerAError, screenerBError }) => ({
+  lawChanges: screenedChanges.map(({ change, substantive, route, screeningPrompt, screenerA, screenerB, screenerAError, screenerBError }) => ({
     changeId: change.changeId,
     printNumber: change.printNumber,
     heading: change.heading,
@@ -382,9 +396,11 @@ const report = {
     screenerB,
     screenerAError,
     screenerBError,
+    // The prompt that made the screening, when it is not the current one.
+    ...(screeningPrompt ? { madeUnderPromptContentHash: screeningPrompt } : {}),
     route
   })),
-  relevanceChecks: checkedPairs.map(({ promise, change, kept, checkA, checkB, checkAError, checkBError, route }) => ({
+  relevanceChecks: checkedPairs.map(({ promise, change, kept, relevancePrompt, checkA, checkB, checkAError, checkBError, route }) => ({
     promiseId: promise.id,
     changeId: change.changeId,
     routeBasis: route.routeBasis,
@@ -393,7 +409,8 @@ const report = {
     checkA,
     checkB,
     checkAError,
-    checkBError
+    checkBError,
+    ...(relevancePrompt ? { madeUnderPromptContentHash: relevancePrompt } : {})
   })),
   // Law changes left out because both assessors of an earlier assessment
   // found them not relevant, with both reasons.

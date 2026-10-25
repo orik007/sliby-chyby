@@ -7,6 +7,8 @@ import {
   buildScreeningBrief,
   isKeptByRelevance,
   isSubstantive,
+  keptPromptContentHash,
+  lawChangeKind,
   lawChangeText,
   loadRelevancePrompt,
   loadScreeningPrompt,
@@ -62,6 +64,23 @@ test("the screening and relevance prompts state the conservative rules", async (
   assert.equal(relevance.version, "relevance-check-v7");
   assert.match(relevance.instructions, /When in doubt, answer relevant/);
   assert.match(relevance.instructions, /its title names the one commitment assessed/);
+});
+
+test("a prompt keeps the earlier prompt's results except on the kinds of law change it names", async () => {
+  const current = await loadScreeningPrompt();
+  assert.equal(current.keeps, null, "the active prompts keep no earlier results");
+  assert.equal(keptPromptContentHash(current, change), null);
+  const earlier = "a".repeat(64);
+  const prompt = await loadScreeningPrompt(undefined, { contentHash: earlier, rerun: ["government-resolution", "treaty"] });
+  assert.equal(keptPromptContentHash(prompt, change), earlier, "a bill's result is kept");
+  assert.equal(keptPromptContentHash(prompt, { ...change, printKindId: "4" }), null, "a treaty is screened again");
+  assert.equal(keptPromptContentHash(prompt, { ...change, printKindId: "government-resolution" }), null);
+  assert.equal(keptPromptContentHash(prompt, { ...change, printKindId: "ministerial-decree" }), earlier);
+  assert.deepEqual(["1", "2", "3", "5", 4, "government-regulation"].map((printKindId) => lawChangeKind({ printKindId })), ["chamber-print", "chamber-print", "chamber-print", "chamber-print", "treaty", "government-regulation"]);
+  await assert.rejects(() => loadScreeningPrompt(undefined, { contentHash: current.contentHash, rerun: [] }), /another prompt/);
+  await assert.rejects(() => loadScreeningPrompt(undefined, { contentHash: "x", rerun: [] }), /another prompt/);
+  await assert.rejects(() => loadScreeningPrompt(undefined, { contentHash: earlier, rerun: ["resolution"] }), /kinds of law change/);
+  await assert.rejects(() => loadRelevancePrompt(undefined, { contentHash: earlier }), /kinds of law change/);
 });
 
 test("a model reads every version of the law change with its print, heading, amended act, and never the print-wide Senate resolution", () => {
