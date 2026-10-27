@@ -4,7 +4,7 @@ import { mkdtemp, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { estimateCallCost, logModelCall, progress } from "../scripts/lib/run-log.mjs";
+import { assertSpendWithinLimit, estimateCallCost, logModelCall, progress, spendInModelCallLog } from "../scripts/lib/run-log.mjs";
 
 test("a call's estimated cost uses uncached input, cached input, and output prices", () => {
   const table = { models: { "gpt-6-luna": { input: 0.10, cachedInput: 0.01, output: 0.50 } } };
@@ -95,4 +95,19 @@ test("log lines never reach stdout, which carries a script's machine-readable re
   assert.equal(child.status, 0, child.stderr);
   assert.deepEqual(JSON.parse(child.stdout), { ok: true });
   assert.match(child.stderr, /progress/);
+});
+
+test("a run stops paid calls once its estimated spend, earlier steps included, reaches its limit", async () => {
+  const { mkdtemp, writeFile } = await import("node:fs/promises");
+  const { tmpdir } = await import("node:os");
+  const { join } = await import("node:path");
+  const file = join(await mkdtemp(join(tmpdir(), "slava-spend-")), "model-calls.jsonl");
+  await writeFile(file, `${JSON.stringify({ estimatedCostUsd: 0.75 })}\n${JSON.stringify({ estimatedCostUsd: null })}\n${JSON.stringify({ estimatedCostUsd: 0.5 })}\n{"cut`);
+  assert.equal(spendInModelCallLog(file), 1.25, "a call of unknown cost or a line cut short adds nothing");
+  assert.equal(spendInModelCallLog(join(file, "missing")), 0);
+  assert.doesNotThrow(() => assertSpendWithinLimit({}, 100), "no limit without one");
+  assert.doesNotThrow(() => assertSpendWithinLimit({ SLIBY_MAX_SPEND_USD: "" }, 100));
+  assert.doesNotThrow(() => assertSpendWithinLimit({ SLIBY_MAX_SPEND_USD: "5" }, 4.99));
+  assert.throws(() => assertSpendWithinLimit({ SLIBY_MAX_SPEND_USD: "5" }, 5), /reached its limit, \$5\.00 of \$5\.00 \(max_spend_usd\)/);
+  assert.throws(() => assertSpendWithinLimit({ SLIBY_MAX_SPEND_USD: "five" }, 0), /must be a positive number/);
 });

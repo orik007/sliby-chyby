@@ -1,6 +1,6 @@
 import { Agent } from "undici";
 import { charactersPerToken, maxOutputTokens } from "./assessment-config.mjs";
-import { log, logModelCall } from "./run-log.mjs";
+import { assertSpendWithinLimit, log, logModelCall } from "./run-log.mjs";
 
 // Eight attempts with a backoff capped at two minutes wait about four
 // minutes in all, so a short gap in Flex capacity does not stop a run.
@@ -209,6 +209,7 @@ export async function createStructuredModelResponse({
   }
 
   if (!apiKey) throw new Error("OPENAI_API_KEY is required for the OpenAI provider");
+  assertSpendWithinLimit();
   const tier = serviceTier();
 
   // The provider writes and finds its prompt cache only at message ends and

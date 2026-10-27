@@ -73,6 +73,45 @@ export function estimateCallCost(model, usage, table = modelPrices(), serviceTie
 
 let processTotal = 0;
 
+/** The estimated spend of the calls a model-call log (SLIBY_MODEL_CALL_LOG) records. */
+export function spendInModelCallLog(file) {
+  if (!file) return 0;
+  let content;
+  try {
+    content = readFileSync(resolve(file), "utf8");
+  } catch {
+    return 0;
+  }
+  return content.split("\n").filter((line) => line.trim() !== "").reduce((sum, line) => {
+    try {
+      return sum + (JSON.parse(line).estimatedCostUsd ?? 0);
+    } catch {
+      return sum;
+    }
+  }, 0);
+}
+
+// What the earlier steps of this run spent, read when this process starts.
+const earlierStepsSpend = spendInModelCallLog(process.env.SLIBY_MODEL_CALL_LOG);
+
+/** The estimated model spend of this run so far: its earlier steps' and this process's. */
+export function runSpendUsd() {
+  return earlierStepsSpend + processTotal;
+}
+
+/**
+ * Stops a paid call once the run's estimated spend has reached its limit,
+ * SLIBY_MAX_SPEND_USD (docs/evidence-pipeline.md, Audit and cost control);
+ * no limit when it is empty.
+ */
+export function assertSpendWithinLimit(env = process.env, spent = runSpendUsd()) {
+  const value = env.SLIBY_MAX_SPEND_USD ?? "";
+  if (value === "") return;
+  const limit = Number(value);
+  if (!(limit > 0)) throw new Error(`SLIBY_MAX_SPEND_USD must be a positive number of USD, not "${value}"`);
+  if (spent >= limit) throw new Error(`The run's estimated model spend reached its limit, $${spent.toFixed(2)} of $${limit.toFixed(2)} (max_spend_usd); no further paid call is made`);
+}
+
 /**
  * Logs one paid model call and appends it to the JSONL file named by
  * SLIBY_MODEL_CALL_LOG, so the run's spend is known even after a failure.
