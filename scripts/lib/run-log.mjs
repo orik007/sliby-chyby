@@ -1,4 +1,4 @@
-import { appendFileSync, mkdirSync, readFileSync } from "node:fs";
+import { appendFileSync, closeSync, mkdirSync, openSync, readFileSync, readSync, statSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 
 // Plain progress lines for the GitHub Actions log: every step says what it is
@@ -72,6 +72,76 @@ export function estimateCallCost(model, usage, table = modelPrices(), serviceTie
 }
 
 let processTotal = 0;
+
+/** The estimated spend of the calls a model-call log (SLIBY_MODEL_CALL_LOG) records. */
+export function spendInModelCallLog(file) {
+  if (!file) return 0;
+  let content;
+  try {
+    content = readFileSync(resolve(file), "utf8");
+  } catch {
+    return 0;
+  }
+  return content.split("\n").filter((line) => line.trim() !== "").reduce((sum, line) => {
+    try {
+      return sum + (JSON.parse(line).estimatedCostUsd ?? 0);
+    } catch {
+      return sum;
+    }
+  }, 0);
+}
+
+// The run's model-call log, read on from where it was read last: every
+// process of the run (its steps, and the parallel assessments of a step)
+// appends to it, so it holds what they all spent.
+const runLog = { offset: 0, total: 0 };
+function runLogSpend(file) {
+  let size;
+  try {
+    size = statSync(resolve(file)).size;
+  } catch {
+    return runLog.total;
+  }
+  if (size <= runLog.offset) return runLog.total;
+  const handle = openSync(resolve(file), "r");
+  try {
+    const bytes = Buffer.alloc(size - runLog.offset);
+    readSync(handle, bytes, 0, bytes.length, runLog.offset);
+    // Only whole lines count; a line still being written is read next time.
+    const text = bytes.toString("utf8");
+    const end = text.lastIndexOf("\n") + 1;
+    for (const line of text.slice(0, end).split("\n")) {
+      if (line.trim() === "") continue;
+      try {
+        runLog.total += JSON.parse(line).estimatedCostUsd ?? 0;
+      } catch {
+        // A damaged line adds nothing.
+      }
+    }
+    runLog.offset += Buffer.byteLength(text.slice(0, end), "utf8");
+  } finally {
+    closeSync(handle);
+  }
+  return runLog.total;
+}
+
+/** The estimated model spend of this run so far, by every process of it; this process's alone without a model-call log. */
+export function runSpendUsd(file = process.env.SLIBY_MODEL_CALL_LOG) {
+  return file ? runLogSpend(file) : processTotal;
+}
+
+/**
+ * Stops a paid call once the run's estimated spend has reached its limit,
+ * SLIBY_MAX_SPEND_USD (docs/evidence-pipeline.md, Audit and cost control);
+ * no limit when it is empty.
+ */
+export function assertSpendWithinLimit(env = process.env, spent = runSpendUsd()) {
+  const value = env.SLIBY_MAX_SPEND_USD ?? "";
+  if (value === "") return;
+  const limit = Number(value);
+  if (!Number.isFinite(limit) || limit <= 0) throw new Error(`SLIBY_MAX_SPEND_USD must be a positive number of USD, not "${value}"`);
+  if (spent >= limit) throw new Error(`The run's estimated model spend reached its limit, $${spent.toFixed(2)} of $${limit.toFixed(2)} (max_spend_usd); no further paid call is made`);
+}
 
 /**
  * Logs one paid model call and appends it to the JSONL file named by

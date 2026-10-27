@@ -18,6 +18,11 @@ on:
         required: true
         default: "0"
         type: string
+      max_spend_usd:
+        description: Stop the run's paid model calls once their estimated spend reaches this many USD; leave empty for no limit
+        required: false
+        default: ""
+        type: string
       tagging_concurrency:
         description: Parallel tagged subjects (each makes its 2 API calls one after the other); leave empty for 24
         required: false
@@ -73,6 +78,9 @@ jobs:
       # A hard cap on packages sent to the paid assessors per run. A run
       # without the input (the schedule) assesses none until a cap is set.
       SLIBY_MAX_ASSESSMENTS: ${{ inputs.max_assessments || '0' }}
+      # Paid calls stop once the run's estimated spend, every step together,
+      # reaches this many USD; the run then fails and keeps what it paid for.
+      SLIBY_MAX_SPEND_USD: ${{ inputs.max_spend_usd || '' }}
       # Every paid model call is appended here (tokens and estimated cost), so
       # the run's spend is known even when it fails.
       SLIBY_MODEL_CALL_LOG: automation/runs/pipeline/github-actions/model-calls.jsonl
@@ -110,10 +118,11 @@ jobs:
       - name: Run deterministic tests
         # Before the audit state is restored, so the tests read main as it is.
         # Tests never reach a paid model, and their stub calls never belong
-        # in the run's spend log.
+        # in the run's spend log or count against its spend limit.
         env:
           OPENAI_API_KEY: ""
           SLIBY_MODEL_CALL_LOG: ""
+          SLIBY_MAX_SPEND_USD: ""
         run: npm test
 
       - name: Restore current audit state

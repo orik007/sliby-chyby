@@ -14,12 +14,14 @@ import { isRegulationKind } from "./regulations.mjs";
  */
 export const screeningPromptVersion = "law-change-screener-v6";
 export const relevancePromptVersion = "relevance-check-v7";
+export const amendmentRelevancePromptVersion = "amendment-relevance-v1";
 
 // What each prompt keeps of the results of the prompt before it:
 // null, or `{ contentHash, rerun }` (docs/evidence-pipeline.md, Audit and
 // cost control).
 export const screeningPromptKeeps = null;
 export const relevancePromptKeeps = null;
+export const amendmentRelevancePromptKeeps = null;
 
 // The kinds of law change a prompt's `rerun` names.
 export const lawChangeKinds = ["chamber-print", "treaty", "government-resolution", "government-regulation", "ministerial-decree"];
@@ -48,6 +50,10 @@ export function loadScreeningPrompt(root = process.cwd(), keeps = screeningPromp
 
 export function loadRelevancePrompt(root = process.cwd(), keeps = relevancePromptKeeps) {
   return loadPrompt(relevancePromptVersion, keeps, root);
+}
+
+export function loadAmendmentRelevancePrompt(root = process.cwd(), keeps = amendmentRelevancePromptKeeps) {
+  return loadPrompt(amendmentRelevancePromptVersion, keeps, root);
 }
 
 /** The content hash of the earlier prompt whose result on this law change the prompt keeps, or null. */
@@ -232,8 +238,42 @@ export async function requestRelevance({ provider, apiKey, model, brief, prompt 
 }
 
 /**
- * A promise and law change are kept when at least one check says relevant,
- * or when a check output is invalid; both must say "not relevant" to drop it.
+ * The check of one promise and one amendment its package would hold
+ * (docs/evidence-pipeline.md, step 6): the amendment's text first, the same
+ * for every promise, so it is read from the provider's prompt cache after
+ * the first promise, then the promise.
+ */
+export function buildAmendmentRelevanceBrief(promise, { documentNumber, amendment, printNumber, printTitleCz }) {
+  return {
+    pairId: `${promise.id}--amendment-${documentNumber}`,
+    promise: promiseText(promise),
+    amendment: `Amendment ${amendment.label} (parliamentary document ${documentNumber}) to Chamber print ${printNumber}: ${printTitleCz}, presented in the second reading on ${amendment.presentedOn} by ${amendment.presenterCz}; it amends the proposed text of the bill:\n${amendment.textCz}`
+  };
+}
+
+export function amendmentRelevanceInputBlocks(brief) {
+  return [brief.amendment, brief.promise];
+}
+
+export async function requestAmendmentRelevance({ provider, apiKey, model, brief, prompt }) {
+  return requestValidatedOutput({
+    provider,
+    apiKey,
+    model,
+    prompt,
+    inputBlocks: amendmentRelevanceInputBlocks(brief),
+    name: "amendment_relevance",
+    schema: relevanceSchema,
+    metadata: { subjectId: brief.pairId.slice(0, 64), promptVersion: prompt.version },
+    logLabel: `amendment relevance ${brief.pairId}`,
+    validate: validateRelevanceOutput
+  });
+}
+
+/**
+ * A promise and law change, or amendment, are kept when at least one check
+ * says relevant, or when a check output is invalid; both must say "not
+ * relevant" to drop it.
  */
 export function isKeptByRelevance(checkA, checkB) {
   return !checkA || !checkB || checkA.relevant || checkB.relevant;

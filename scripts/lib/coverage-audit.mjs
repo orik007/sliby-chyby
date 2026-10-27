@@ -148,7 +148,7 @@ export function buildCoverageAudit({ collectorRun, routingRun, printParts, track
       excludedIrrelevant: routingRun.counts.excludedIrrelevantPairCount,
       oversizedPackages: routingRun.counts.oversizedPackageCount,
       contextTrimmedPackages: routingRun.counts.contextTrimmedPackageCount,
-      invalidModelOutputs: routingRun.counts.invalidScreenerCount + routingRun.counts.invalidRelevanceCheckCount,
+      invalidModelOutputs: routingRun.counts.invalidScreenerCount + routingRun.counts.invalidRelevanceCheckCount + (routingRun.counts.invalidAmendmentRelevanceCheckCount ?? 0),
       printParts: printParts?.quality ?? null,
       // The government resolutions' figures (docs/evidence-pipeline.md,
       // Government resolution data rules, Quality).

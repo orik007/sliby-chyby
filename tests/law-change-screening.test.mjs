@@ -7,7 +7,10 @@ import {
   buildScreeningBrief,
   isKeptByRelevance,
   isSubstantive,
+  amendmentRelevanceInputBlocks,
+  buildAmendmentRelevanceBrief,
   keptPromptContentHash,
+  loadAmendmentRelevancePrompt,
   lawChangeKind,
   lawChangeText,
   loadRelevancePrompt,
@@ -182,4 +185,18 @@ test("a relevance check reads the exact promise with its tests and the law-chang
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test("an amendment is checked against a promise with its text first, the same for every promise", async () => {
+  const prompt = await loadAmendmentRelevancePrompt();
+  assert.equal(prompt.version, "amendment-relevance-v1");
+  assert.match(prompt.instructions, /When in doubt, answer relevant/);
+  const item = { documentNumber: "1054", printNumber: 67, printTitleCz: "Návrh zákona, kterým se mění stavební zákon", amendment: { label: "Z1", presentedOn: "2026-04-15", presenterCz: "Poslanec Marian Jurečka", textCz: "V části první čl. I se za bod 331 vkládá nový bod X332." } };
+  const brief = buildAmendmentRelevanceBrief(fiscalPromise, item);
+  assert.equal(brief.pairId, `${fiscalPromise.id}--amendment-1054`);
+  const [amendmentBlock, promiseBlock] = amendmentRelevanceInputBlocks(brief);
+  assert.equal(amendmentBlock, "Amendment Z1 (parliamentary document 1054) to Chamber print 67: Návrh zákona, kterým se mění stavební zákon, presented in the second reading on 2026-04-15 by Poslanec Marian Jurečka; it amends the proposed text of the bill:\nV části první čl. I se za bod 331 vkládá nový bod X332.");
+  assert.match(promiseBlock, /^Promise \(the commitment assessed\): /);
+  const other = registry.promises.find(({ id }) => id !== fiscalPromise.id);
+  assert.equal(amendmentRelevanceInputBlocks(buildAmendmentRelevanceBrief(other, item))[0], amendmentBlock);
 });
