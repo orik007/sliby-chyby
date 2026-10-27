@@ -598,7 +598,7 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
   const concernsByRecord = new Map();
   for (const { change: fullChange, route } of [...keptChanges].sort((left, right) => printOrder(left.change) - printOrder(right.change) || left.change.changeId.localeCompare(right.change.changeId, "en", { numeric: true }))) {
     const conduct = attributableConductOnChange(recordsByPrintId.get(fullChange.printId) ?? [], promise, fullChange)
-      .filter(({ record }) => !isAmendmentConduct(record) || amendmentDocumentNumbers(record).some(amendmentKept));
+      .filter(({ record }) => !isAmendmentConduct(record) || amendmentDocumentNumbers(record).length === 0 || amendmentDocumentNumbers(record).some(amendmentKept));
     if (conduct.length === 0) continue;
     const lastVersion = versionKeys[Math.max(...conduct.map(({ version }) => versionKeys.indexOf(version.version)))];
     // A later text adds nothing to judging this conduct and may not have

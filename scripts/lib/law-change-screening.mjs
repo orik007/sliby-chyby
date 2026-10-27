@@ -238,10 +238,6 @@ export async function requestRelevance({ provider, apiKey, model, brief, prompt 
 }
 
 /**
- * A promise and law change are kept when at least one check says relevant,
- * or when a check output is invalid; both must say "not relevant" to drop it.
- */
-/**
  * The check of one promise and one amendment its package would hold
  * (docs/evidence-pipeline.md, step 6): the amendment's text first, the same
  * for every promise, so it is read from the provider's prompt cache after
@@ -274,6 +270,11 @@ export async function requestAmendmentRelevance({ provider, apiKey, model, brief
   });
 }
 
+/**
+ * A promise and law change, or amendment, are kept when at least one check
+ * says relevant, or when a check output is invalid; both must say "not
+ * relevant" to drop it.
+ */
 export function isKeptByRelevance(checkA, checkB) {
   return !checkA || !checkB || checkA.relevant || checkB.relevant;
 }

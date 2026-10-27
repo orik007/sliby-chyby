@@ -118,10 +118,11 @@ jobs:
       - name: Run deterministic tests
         # Before the audit state is restored, so the tests read main as it is.
         # Tests never reach a paid model, and their stub calls never belong
-        # in the run's spend log.
+        # in the run's spend log or count against its spend limit.
         env:
           OPENAI_API_KEY: ""
           SLIBY_MODEL_CALL_LOG: ""
+          SLIBY_MAX_SPEND_USD: ""
         run: npm test
 
       - name: Restore current audit state

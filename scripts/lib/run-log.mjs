@@ -1,4 +1,4 @@
-import { appendFileSync, mkdirSync, readFileSync } from "node:fs";
+import { appendFileSync, closeSync, mkdirSync, openSync, readFileSync, readSync, statSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 
 // Plain progress lines for the GitHub Actions log: every step says what it is
@@ -91,12 +91,43 @@ export function spendInModelCallLog(file) {
   }, 0);
 }
 
-// What the earlier steps of this run spent, read when this process starts.
-const earlierStepsSpend = spendInModelCallLog(process.env.SLIBY_MODEL_CALL_LOG);
+// The run's model-call log, read on from where it was read last: every
+// process of the run (its steps, and the parallel assessments of a step)
+// appends to it, so it holds what they all spent.
+const runLog = { offset: 0, total: 0 };
+function runLogSpend(file) {
+  let size;
+  try {
+    size = statSync(resolve(file)).size;
+  } catch {
+    return runLog.total;
+  }
+  if (size <= runLog.offset) return runLog.total;
+  const handle = openSync(resolve(file), "r");
+  try {
+    const bytes = Buffer.alloc(size - runLog.offset);
+    readSync(handle, bytes, 0, bytes.length, runLog.offset);
+    // Only whole lines count; a line still being written is read next time.
+    const text = bytes.toString("utf8");
+    const end = text.lastIndexOf("\n") + 1;
+    for (const line of text.slice(0, end).split("\n")) {
+      if (line.trim() === "") continue;
+      try {
+        runLog.total += JSON.parse(line).estimatedCostUsd ?? 0;
+      } catch {
+        // A damaged line adds nothing.
+      }
+    }
+    runLog.offset += Buffer.byteLength(text.slice(0, end), "utf8");
+  } finally {
+    closeSync(handle);
+  }
+  return runLog.total;
+}
 
-/** The estimated model spend of this run so far: its earlier steps' and this process's. */
-export function runSpendUsd() {
-  return earlierStepsSpend + processTotal;
+/** The estimated model spend of this run so far, by every process of it; this process's alone without a model-call log. */
+export function runSpendUsd(file = process.env.SLIBY_MODEL_CALL_LOG) {
+  return file ? runLogSpend(file) : processTotal;
 }
 
 /**

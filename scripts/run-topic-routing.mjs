@@ -352,6 +352,7 @@ if (!runFailure) {
     }
   }));
 }
+checkedAmendments.sort((left, right) => left.promise.id.localeCompare(right.promise.id) || Number(left.item.documentNumber) - Number(right.item.documentNumber));
 const droppedAmendments = new Map();
 for (const { promise, item, kept } of checkedAmendments) if (!kept) droppedAmendments.set(promise.id, new Set([...(droppedAmendments.get(promise.id) ?? []), item.documentNumber]));
 
