@@ -393,10 +393,10 @@ function evidenceFromResolution(change, route, publishedAt) {
 // (docs/evidence-pipeline.md, Package), null when psp.cz publishes none. An
 // amendment and a vote on it name the amendment's text, a package item of
 // its own.
-function evidenceFromConduct({ record, attributionStatus }, promise, concerns, opinionText = null) {
+function evidenceFromConduct({ record, attributionStatus }, promise, concerns, opinionText = null, amendmentNumbers = amendmentDocumentNumbers(record)) {
   const opinion = record.kind === "government-opinion"
     ? { textCz: opinionText?.textCz ?? null, document: opinionText?.document ?? null }
-    : isAmendmentConduct(record) ? { amendmentEvidenceIds: amendmentDocumentNumbers(record).map(amendmentEvidenceId) } : {};
+    : isAmendmentConduct(record) ? { amendmentEvidenceIds: amendmentNumbers.map(amendmentEvidenceId) } : {};
   return {
     id: record.id,
     role: "conduct-evidence",
@@ -631,10 +631,15 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
     }
   }
   const resolutionIdsOf = (change) => change.senateResolutions.map(({ partNumber }) => senateResolutionEvidenceId(change, partNumber)).filter((id) => senateResolutions.has(id));
-  // The text of each amendment a conduct in the package names, once.
+  // The text of each kept amendment a conduct in the package names, once; a
+  // vote on several amendments names only those kept.
+  const keptNumbersOf = (record) => {
+    const numbers = amendmentDocumentNumbers(record);
+    return numbers.length === 0 ? numbers : numbers.filter(amendmentKept);
+  };
   const amendments = new Map();
   for (const { record } of conduct) {
-    for (const number of isAmendmentConduct(record) ? amendmentDocumentNumbers(record) : []) {
+    for (const number of isAmendmentConduct(record) ? keptNumbersOf(record) : []) {
       const id = amendmentEvidenceId(number);
       if (amendments.has(id)) continue;
       const owner = changes.find(({ change }) => (change.amendments ?? []).some(({ documentNumber }) => documentNumber === number));
@@ -683,7 +688,7 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
         ...lawChanges.map(({ change, route }) => evidenceFromLawChange(change, route, printFirstSeenOn.get(change.printId), resolutionIdsOf(change))),
         ...senateResolutions.values(),
         ...amendments.values(),
-        ...conduct.map((item) => evidenceFromConduct(item, promise, concernsByRecord.get(item.record.id), opinionTexts.get(item.record.id) ?? null))
+        ...conduct.map((item) => evidenceFromConduct(item, promise, concernsByRecord.get(item.record.id), opinionTexts.get(item.record.id) ?? null, isAmendmentConduct(item.record) ? keptNumbersOf(item.record) : []))
       ]
     };
     validateEvidencePackage(evidencePackage);

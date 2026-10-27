@@ -6,7 +6,7 @@ const pspSource = { id: "psp-core-2025", name: "Chamber of Deputies open data", 
 const counts = {
   primaryRecordsInWindowCount: 10, notAttributableSkippedCount: 7, conductRecordCount: 3, lawChangeCount: 5, technicalLawChangeCount: 2, substantiveLawChangeCount: 3,
   routedLawChangeCount: 2, directLinkLawChangeCount: 1, unroutedLawChangeCount: 1, routedWithoutConductCount: 1, relevancePairCount: 4,
-  relevanceDroppedCount: 1, excludedIrrelevantPairCount: 2, oversizedPackageCount: 0, invalidScreenerCount: 1, invalidRelevanceCheckCount: 0
+  relevanceDroppedCount: 1, excludedIrrelevantPairCount: 2, oversizedPackageCount: 0, invalidScreenerCount: 1, invalidRelevanceCheckCount: 0, invalidAmendmentRelevanceCheckCount: 2
 };
 
 function routingRun({ lawChanges = [], packages = [], completed = true } = {}) {
@@ -29,7 +29,7 @@ test("coverage audit never converts a promise without routed records into a scor
   assert.equal(audit.promises[0].scoreInferred, false);
   assert.equal(audit.publicationApproved, false);
   assert.equal(audit.quality.notAttributableSkipped, 7);
-  assert.equal(audit.quality.invalidModelOutputs, 1);
+  assert.equal(audit.quality.invalidModelOutputs, 3);
   const markdown = renderCoverageAuditMarkdown(audit);
   assert.match(markdown, /No routed law change is not zero points/);
   assert.match(markdown, /\| Law changes with an identified amended act \| 3 of 5 \|/);

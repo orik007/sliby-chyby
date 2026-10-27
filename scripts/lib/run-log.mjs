@@ -139,7 +139,7 @@ export function assertSpendWithinLimit(env = process.env, spent = runSpendUsd())
   const value = env.SLIBY_MAX_SPEND_USD ?? "";
   if (value === "") return;
   const limit = Number(value);
-  if (!(limit > 0)) throw new Error(`SLIBY_MAX_SPEND_USD must be a positive number of USD, not "${value}"`);
+  if (!Number.isFinite(limit) || limit <= 0) throw new Error(`SLIBY_MAX_SPEND_USD must be a positive number of USD, not "${value}"`);
   if (spent >= limit) throw new Error(`The run's estimated model spend reached its limit, $${spent.toFixed(2)} of $${limit.toFixed(2)} (max_spend_usd); no further paid call is made`);
 }
 

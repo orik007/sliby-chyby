@@ -109,7 +109,7 @@ test("a run stops paid calls once its estimated spend, earlier steps included, r
   assert.doesNotThrow(() => assertSpendWithinLimit({ SLIBY_MAX_SPEND_USD: "" }, 100));
   assert.doesNotThrow(() => assertSpendWithinLimit({ SLIBY_MAX_SPEND_USD: "5" }, 4.99));
   assert.throws(() => assertSpendWithinLimit({ SLIBY_MAX_SPEND_USD: "5" }, 5), /reached its limit, \$5\.00 of \$5\.00 \(max_spend_usd\)/);
-  assert.throws(() => assertSpendWithinLimit({ SLIBY_MAX_SPEND_USD: "five" }, 0), /must be a positive number/);
+  for (const value of ["five", "0", "-1", "Infinity", "1e309"]) assert.throws(() => assertSpendWithinLimit({ SLIBY_MAX_SPEND_USD: value }, 0), /must be a positive number/, value);
   // The run's spend is read on from the log as every process appends to it;
   // a line still being written counts once it is whole.
   const { runSpendUsd } = await import("../scripts/lib/run-log.mjs");
