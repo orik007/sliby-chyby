@@ -472,3 +472,20 @@ test("an amendment of a divided part, and a vote on it, concern the groups whose
   assert.deepEqual(conductOn(changes[0]), ["psp-core-2025--amendment-774", "psp-core-2025--amendment-776"]);
   assert.deepEqual(conductOn(changes[1]), ["psp--amendment-vote", "psp-core-2025--amendment-775", "psp-core-2025--amendment-776"]);
 });
+
+test("an amendment both checks found not relevant to the promise leaves its package with the conduct on it", async () => {
+  const { amendmentsOfPackage, conductOfRun, lawChangesOfRun } = await import("../scripts/lib/topic-evidence-package.mjs");
+  const relevant = amendmentRecord(774);
+  const unrelated = amendmentRecord(775);
+  const vote = attributedVoteRecord({ id: "psp--amendment-vote", occurredAt: "2026-05-15T10:00:00", payload: { linkedPrints: [{ externalPrintId: "43200", printKindId: "1", linkBasis: "agenda-item", historyContexts: [] }], amendmentVote: { externalPrintId: "43200", printNumber: 90, documentNumbers: ["775"], label: "D", variant: null, presenterCz: "Poslanec Karel Haas", parts: ["ČÁST PRVNÍ"], stenoUrl: "https://www.psp.cz/eknih/2025ps/stenprot/017schuz/s017010.htm" } } });
+  const run = { ...collectorRun, records: [relevant, unrelated, vote] };
+  const { recordsByPrintId, amendmentRecords } = conductOfRun(run, "2026-06-15", [fiscalPromise.partyId]);
+  const changes = lawChangesOfRun({ prints: { 43200: { changes: [lawChange(1)] } } }, recordsByPrintId, amendmentRecords);
+  const keptChanges = changes.map((change) => ({ change, route }));
+  assert.deepEqual(amendmentsOfPackage(fiscalPromise, keptChanges, recordsByPrintId).map(({ documentNumber, printNumber }) => [documentNumber, printNumber]), [["774", 90], ["775", 90]]);
+  const build = (amendmentKept) => buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun: run, asOf: "2026-06-15", amendmentKept });
+  const ids = (pkg) => pkg.evidence.filter(({ role }) => role === "amendment" || role === "conduct-evidence").map(({ id }) => id).sort();
+  assert.deepEqual(ids(build(() => true)), ["psp--amendment-vote", "psp-core-2025--amendment-774", "psp-core-2025--amendment-775", "psp-core-2025--amendment-text-774", "psp-core-2025--amendment-text-775"]);
+  assert.deepEqual(ids(build((number) => number !== "775")), ["psp-core-2025--amendment-774", "psp-core-2025--amendment-text-774"], "the amendment, its submission, and the vote on it leave");
+  assert.equal(build(() => false), null, "a promise whose only conduct is on dropped amendments gets no package");
+});

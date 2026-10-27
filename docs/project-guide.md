@@ -31,7 +31,7 @@ official records only (active: Chamber of Deputies open data with its amendments
   -> two screeners read every law change with its context and the amendments to it: substantive or technical, and topic tags
   -> routing of substantive changes to promises: direct legal-identifier links or the specific tags of either screener, matched to the promises' reviewed tags
   -> attribution: decisive club vote, member bill, government proposal, amendment, club vote on an amendment, or the government's opinion on the change's print, the adoption of a regulation or decree, or a government resolution (scoring.md)
-  -> two relevance checks per promise and law change
+  -> two relevance checks per promise and law change, then per promise and amendment its package would hold
   -> evidence package per promise: every kept law change in full with the party's conduct and the texts of the amendments it concerns, without the law changes both assessors of an earlier assessment found not relevant while what they judged is unchanged
   -> two independent assessments with a relevance verdict and, for a relevant change, its effect per law change; an invalid output asked for again at most twice; arbiter only on different scores or one output still invalid
   -> unpublished audit pull request with packages, proposals, coverage, and caches

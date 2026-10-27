@@ -171,6 +171,27 @@ function amendmentConcernsGroup(record, change) {
 }
 
 /**
+ * The amendments a promise's package holds, those the party's conduct on its
+ * kept law changes names, each once with the print it amends:
+ * `{ documentNumber, amendment, printNumber, printKindId, printTitleCz }`, in
+ * the order of their document numbers. The relevance of each to the promise
+ * is checked (docs/evidence-pipeline.md, step 6).
+ */
+export function amendmentsOfPackage(promise, keptChanges, recordsByPrintId) {
+  const found = new Map();
+  for (const { change } of keptChanges) {
+    for (const { record } of attributableConductOnChange(recordsByPrintId.get(change.printId) ?? [], promise, change)) {
+      if (!isAmendmentConduct(record)) continue;
+      for (const number of amendmentDocumentNumbers(record)) {
+        const amendment = (change.amendments ?? []).find(({ documentNumber }) => documentNumber === number);
+        if (amendment && !found.has(number)) found.set(number, { documentNumber: number, amendment, printNumber: change.printNumber, printKindId: change.printKindId, printTitleCz: change.printTitleCz });
+      }
+    }
+  }
+  return [...found.values()].sort((left, right) => Number(left.documentNumber) - Number(right.documentNumber));
+}
+
+/**
  * The law changes of a run at the cutoff: those of prints with conduct, the
  * one law change of each government regulation and ministerial decree, and
  * the law changes of each government resolution, whose record carries its
@@ -562,10 +583,13 @@ function fitContexts({ changes, contextOf, assemble, requestTokens, requestLengt
  * a change both assessors of an earlier assessment found not relevant
  * (scripts/lib/irrelevance-verdicts.mjs), or null; such a change and the
  * conduct that concerns only it are left out, and the package lists it in
- * `excludedLawChanges`. Returns null when no remaining change has
- * attributable conduct of the promise's party.
+ * `excludedLawChanges`. `amendmentKept`, given an amendment's document
+ * number, says whether the relevance checks of this promise and amendment
+ * kept it; the conduct on amendments none of which was kept is left out
+ * (docs/evidence-pipeline.md, step 6). Returns null when no remaining change
+ * has attributable conduct of the promise's party.
  */
-export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash = sha256(collectorRun), asOf, assessorInstructions, contextOf = null, exclusionOf = null }) {
+export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash = sha256(collectorRun), asOf, assessorInstructions, contextOf = null, exclusionOf = null, amendmentKept = () => true }) {
   invariant(typeof asOf === "string", "buildLawChangeEvidencePackage requires asOf");
   invariant(typeof assessorInstructions === "string" && assessorInstructions.length > 0, "buildLawChangeEvidencePackage requires the assessor instructions");
   const changes = [];
@@ -573,7 +597,8 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
   const conductById = new Map();
   const concernsByRecord = new Map();
   for (const { change: fullChange, route } of [...keptChanges].sort((left, right) => printOrder(left.change) - printOrder(right.change) || left.change.changeId.localeCompare(right.change.changeId, "en", { numeric: true }))) {
-    const conduct = attributableConductOnChange(recordsByPrintId.get(fullChange.printId) ?? [], promise, fullChange);
+    const conduct = attributableConductOnChange(recordsByPrintId.get(fullChange.printId) ?? [], promise, fullChange)
+      .filter(({ record }) => !isAmendmentConduct(record) || amendmentDocumentNumbers(record).some(amendmentKept));
     if (conduct.length === 0) continue;
     const lastVersion = versionKeys[Math.max(...conduct.map(({ version }) => versionKeys.indexOf(version.version)))];
     // A later text adds nothing to judging this conduct and may not have

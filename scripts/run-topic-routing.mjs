@@ -10,7 +10,11 @@ import {
   buildScreeningBrief,
   isKeptByRelevance,
   isSubstantive,
+  amendmentRelevanceInputBlocks,
+  buildAmendmentRelevanceBrief,
   keptPromptContentHash,
+  loadAmendmentRelevancePrompt,
+  requestAmendmentRelevance,
   loadRelevancePrompt,
   loadScreeningPrompt,
   relevanceInputBlocks,
@@ -23,7 +27,7 @@ import {
 import { directLegalIdentifierIndex, taxonomyHash } from "./lib/topic-taxonomy.mjs";
 import { buildInvertedIndex, routeLawChange } from "./lib/topic-routing.mjs";
 import { withContext } from "./lib/law-context.mjs";
-import { attributableConductOnChange, buildLawChangeEvidencePackage, conductOfRun, lawChangesOfRun } from "./lib/topic-evidence-package.mjs";
+import { amendmentsOfPackage, attributableConductOnChange, buildLawChangeEvidencePackage, conductOfRun, lawChangesOfRun } from "./lib/topic-evidence-package.mjs";
 import { loadAssessmentPrompts, maxRequestInputTokens } from "./lib/assessment-config.mjs";
 import { validateReviewManifest } from "./lib/assessment-review.mjs";
 import { exclusionOf, loadRelevanceVerdicts } from "./lib/irrelevance-verdicts.mjs";
@@ -86,7 +90,7 @@ const args = parseArgs(process.argv.slice(2));
 const runtime = pairedModelRuntimeConfig();
 invariant(Number.isInteger(runtime.concurrency) && runtime.concurrency > 0 && runtime.concurrency <= 64, "SLIBY_TAGGING_CONCURRENCY must be an integer from 1 to 64");
 const apiKey = apiKeyFor(runtime.provider);
-const prompts = { screening: await loadScreeningPrompt(), relevance: await loadRelevancePrompt() };
+const prompts = { screening: await loadScreeningPrompt(), relevance: await loadRelevancePrompt(), amendmentRelevance: await loadAmendmentRelevancePrompt() };
 // The routing taxonomy is the one the promise tags were reviewed against.
 let { taxonomy, promises } = await loadTrackedPromises();
 const taxonomyContentHash = taxonomyHash(taxonomy);
@@ -130,17 +134,18 @@ const relevanceFileOf = (subjectId) => {
 };
 const caches = {
   screening: await loadModelCache(resolve(args.tagCache, "law-change-screening.jsonl")),
-  relevance: await loadShardedModelCache(resolve(args.tagCache, "relevance-checks"), relevanceFileOf)
+  relevance: await loadShardedModelCache(resolve(args.tagCache, "relevance-checks"), relevanceFileOf),
+  amendmentRelevance: await loadShardedModelCache(resolve(args.tagCache, "amendment-relevance-checks"), relevanceFileOf)
 };
-const persist = { screening: cachePersister(caches.screening), relevance: shardedCachePersister(caches.relevance) };
+const persist = { screening: cachePersister(caches.screening), relevance: shardedCachePersister(caches.relevance), amendmentRelevance: shardedCachePersister(caches.amendmentRelevance) };
 for (const [stageName, prompt] of Object.entries(prompts)) {
   if (prompt.keeps) assertKeptPromptCached(caches[stageName], prompt.contentHash, prompt.keeps.contentHash, prompt.version);
 }
 const models = { provider: runtime.provider, modelA: runtime.modelA, modelB: runtime.modelB };
-const usage = { screening: [], relevance: [] };
-const invalid = { screening: 0, relevance: 0 };
+const usage = { screening: [], relevance: [], amendmentRelevance: [] };
+const invalid = { screening: 0, relevance: 0, amendmentRelevance: 0 };
 // Results made under an earlier prompt that the current one keeps.
-const fromEarlierPrompt = { screening: 0, relevance: 0 };
+const fromEarlierPrompt = { screening: 0, relevance: 0, amendmentRelevance: 0 };
 let runFailure = null;
 
 function fail(stageName, error) {
@@ -294,17 +299,69 @@ const checkedPairs = finishedPairs
   .sort((left, right) => left.changeIndex - right.changeIndex || left.position - right.position)
   .map(({ result }) => result);
 
-// 3. One package per promise (step 7), only from a complete run.
+const keptByPromise = new Map();
+for (const pair of checkedPairs.filter(({ kept }) => kept)) {
+  keptByPromise.set(pair.promise.id, [...(keptByPromise.get(pair.promise.id) ?? []), { change: pair.change, route: pair.route }]);
+}
+
+// 3. The relevance of each promise and amendment its package would hold
+// (step 6), only after every law change is checked. The promises of one
+// amendment are checked one after the other, so each later one reads the
+// amendment from the provider's prompt cache.
+async function checkAmendment({ promise, item }) {
+  const brief = buildAmendmentRelevanceBrief(promise, item);
+  const fingerprint = { inputHash: sha256(amendmentRelevanceInputBlocks(brief)), promptContentHash: prompts.amendmentRelevance.contentHash, ...models };
+  const checked = await pairedModelCall({
+    subjectId: brief.pairId,
+    fingerprint,
+    cache: caches.amendmentRelevance,
+    persist: persist.amendmentRelevance,
+    callA: () => requestAmendmentRelevance({ provider: runtime.provider, apiKey, model: runtime.modelA, brief, prompt: prompts.amendmentRelevance }),
+    callB: () => requestAmendmentRelevance({ provider: runtime.provider, apiKey, model: runtime.modelB, brief, prompt: prompts.amendmentRelevance }),
+    revalidate: validateRelevanceOutput,
+    keepFromPromptContentHash: keptPromptContentHash(prompts.amendmentRelevance, { printKindId: item.printKindId })
+  });
+  usage.amendmentRelevance.push(...checked.usageByModel);
+  invalid.amendmentRelevance += checked.invalidCount;
+  const relevancePrompt = checked.madeUnderPromptContentHash === prompts.amendmentRelevance.contentHash ? null : checked.madeUnderPromptContentHash;
+  if (relevancePrompt) fromEarlierPrompt.amendmentRelevance += 1;
+  return { promise, item, kept: isKeptByRelevance(checked.a, checked.b), relevancePrompt, checkA: checked.a, checkB: checked.b, checkAError: checked.errorA, checkBError: checked.errorB };
+}
+const checkedAmendments = [];
+if (!runFailure) {
+  const groups = new Map();
+  for (const [promiseId, keptChanges] of keptByPromise) {
+    const promise = promiseById.get(promiseId);
+    for (const item of amendmentsOfPackage(promise, keptChanges, recordsByPrintId)) groups.set(item.documentNumber, [...(groups.get(item.documentNumber) ?? []), { promise, item }]);
+  }
+  const queue = [...groups.values()].sort((left, right) => right.length - left.length || Number(left[0].item.documentNumber) - Number(right[0].item.documentNumber));
+  const tickAmendments = progress("amendment relevance checks", queue.reduce((sum, group) => sum + group.length, 0), { every: 50 });
+  await Promise.all(Array.from({ length: Math.min(runtime.concurrency, Math.max(queue.length, 1)) }, async () => {
+    while (!runFailure && queue.length > 0) {
+      for (const pair of queue.shift()) {
+        if (runFailure) return;
+        try {
+          const result = await checkAmendment(pair);
+          checkedAmendments.push(result);
+          tickAmendments(`${pair.promise.id} × SD ${pair.item.documentNumber}: ${result.kept ? "kept" : "dropped"}`);
+        } catch (error) {
+          fail("amendment-relevance-check", error);
+          return;
+        }
+      }
+    }
+  }));
+}
+const droppedAmendments = new Map();
+for (const { promise, item, kept } of checkedAmendments) if (!kept) droppedAmendments.set(promise.id, new Set([...(droppedAmendments.get(promise.id) ?? []), item.documentNumber]));
+
+// 4. One package per promise (step 7), only from a complete run.
 const outputDirectory = resolve(args.output);
 const packageDirectory = resolve(outputDirectory, "evidence-packages");
 await mkdir(packageDirectory, { recursive: true });
 const builtPackages = [];
 const excludedLawChanges = [];
 if (!runFailure) {
-  const keptByPromise = new Map();
-  for (const pair of checkedPairs.filter(({ kept }) => kept)) {
-    keptByPromise.set(pair.promise.id, [...(keptByPromise.get(pair.promise.id) ?? []), { change: pair.change, route: pair.route }]);
-  }
   log(`building evidence packages for ${keptByPromise.size} promises`);
   const collectorRunHash = sha256(collectorRun);
   const { assessor } = await loadAssessmentPrompts();
@@ -317,8 +374,10 @@ if (!runFailure) {
   for (const [promiseId, keptChanges] of [...keptByPromise].sort(([left], [right]) => left.localeCompare(right))) {
     const promise = promiseById.get(promiseId);
     const excluded = [];
+    const dropped = droppedAmendments.get(promiseId) ?? new Set();
     const evidencePackage = buildLawChangeEvidencePackage({
       promise, keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash, asOf: args.asOf, assessorInstructions,
+      amendmentKept: (documentNumber) => !dropped.has(documentNumber),
       contextOf: (changeId) => lawContext.changes[changeId],
       exclusionOf: (lawChange) => {
         const entry = exclusionOf({ verdicts, promise: { id: promise.id, titleCz: promise.titleCz, originalTextCz: promise.originalTextCz }, lawChange, assessorPrompt });
@@ -356,14 +415,19 @@ const counts = {
   relevancePairCount: pairCount,
   relevanceKeptCount: checkedPairs.filter(({ kept }) => kept).length,
   relevanceDroppedCount: checkedPairs.filter(({ kept }) => !kept).length,
+  amendmentRelevancePairCount: checkedAmendments.length,
+  amendmentRelevanceKeptCount: checkedAmendments.filter(({ kept }) => kept).length,
+  amendmentRelevanceDroppedCount: checkedAmendments.filter(({ kept }) => !kept).length,
   packageCount: builtPackages.length,
   oversizedPackageCount: builtPackages.filter(({ oversized }) => oversized).length,
   contextTrimmedPackageCount: builtPackages.filter(({ oversized, contextOmissionCount }) => !oversized && contextOmissionCount > 0).length,
   excludedIrrelevantPairCount: excludedLawChanges.length,
   invalidScreenerCount: invalid.screening,
   invalidRelevanceCheckCount: invalid.relevance,
+  invalidAmendmentRelevanceCheckCount: invalid.amendmentRelevance,
   screeningFromEarlierPromptCount: fromEarlierPrompt.screening,
-  relevanceCheckFromEarlierPromptCount: fromEarlierPrompt.relevance
+  relevanceCheckFromEarlierPromptCount: fromEarlierPrompt.relevance,
+  amendmentRelevanceCheckFromEarlierPromptCount: fromEarlierPrompt.amendmentRelevance
 };
 
 const report = {
@@ -405,6 +469,17 @@ const report = {
     changeId: change.changeId,
     routeBasis: route.routeBasis,
     matchedTagIds: route.matchedTagIds,
+    kept,
+    checkA,
+    checkB,
+    checkAError,
+    checkBError,
+    ...(relevancePrompt ? { madeUnderPromptContentHash: relevancePrompt } : {})
+  })),
+  amendmentRelevanceChecks: checkedAmendments.map(({ promise, item, kept, relevancePrompt, checkA, checkB, checkAError, checkBError }) => ({
+    promiseId: promise.id,
+    documentNumber: item.documentNumber,
+    printNumber: item.printNumber,
     kept,
     checkA,
     checkB,
