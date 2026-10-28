@@ -507,10 +507,10 @@ test("the token budget is shared among parallel processes", () => {
   const original = process.env.SLIBY_TOKEN_BUDGET_SHARE;
   try {
     delete process.env.SLIBY_TOKEN_BUDGET_SHARE;
-    assert.equal(tokenBudgetPerMinute("gpt-6-luna"), 8_000_000);
+    assert.equal(tokenBudgetPerMinute("gpt-6-luna"), 144_000_000);
     process.env.SLIBY_TOKEN_BUDGET_SHARE = "16";
-    assert.equal(tokenBudgetPerMinute("gpt-6-luna"), 500_000);
-    assert.equal(tokenBudgetPerMinute("gpt-6.1-sol"), 200_000);
+    assert.equal(tokenBudgetPerMinute("gpt-6-luna"), 9_000_000);
+    assert.equal(tokenBudgetPerMinute("gpt-6.1-sol"), 2_000_000);
   } finally {
     if (original === undefined) delete process.env.SLIBY_TOKEN_BUDGET_SHARE; else process.env.SLIBY_TOKEN_BUDGET_SHARE = original;
   }
