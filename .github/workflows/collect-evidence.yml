@@ -90,8 +90,9 @@ jobs:
       # Parallel tagged subjects; the two calls of a subject run one after the
       # other. At the account's usage tier (Grow) the screening model allows
       # 30,000 requests and 180,000,000 tokens a minute, cached input
-      # included; run 93 made about 214 requests and 400,000 tokens a minute
-      # with 24 in flight, each Flex call taking about 6.7 s. Override with
+      # included; run 93's amendment relevance checks (about 1,800 input
+      # tokens each) made about 214 requests and 400,000 input tokens a
+      # minute with 24 in flight, each Flex call taking about 6.7 s. Override with
       # the tagging_concurrency input.
       SLIBY_TAGGING_CONCURRENCY: ${{ inputs.tagging_concurrency || '64' }}
       # OpenAI Flex processing: the same models at half price, answered more
