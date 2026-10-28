@@ -15,7 +15,7 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   assert.match(workflow, /--write-checkpoints automation\/collectors\/checkpoints\.json/);
   assert.match(workflow, /node scripts\/run-topic-routing\.mjs/);
   assert.match(workflow, /--tag-cache automation\/topic-routing\/tag-cache/);
-  assert.match(workflow, /SLIBY_TAGGING_CONCURRENCY: \$\{\{ inputs\.tagging_concurrency \|\| '24' \}\}/);
+  assert.match(workflow, /SLIBY_TAGGING_CONCURRENCY: \$\{\{ inputs\.tagging_concurrency \|\| '64' \}\}/);
   assert.match(workflow, /SLIBY_SERVICE_TIER: flex/);
   assert.match(workflow, /SLIBY_ASSESSMENT_CONCURRENCY: \$\{\{ inputs\.assessment_concurrency \|\| '16' \}\}/);
   assert.match(workflow, /timeout-minutes: 360/);
