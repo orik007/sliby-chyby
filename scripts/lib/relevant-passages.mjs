@@ -133,8 +133,9 @@ export function contextOfParagraphs(context, keptParagraphs) {
  * - a kept paragraph that is not an instruction (a quoted new wording, a
  *   list item) keeps the instruction before it, which says what it changes;
  * - a version of at most `wholeTextMaxLength` characters is kept whole;
- * - a version with none kept, when another has some, is kept whole, so the
- *   text a conduct concerns is never left out entirely.
+ * - a version with none kept is kept whole, so the text a conduct concerns
+ *   is never left out entirely, also when the checks named paragraphs only
+ *   of a later version the package does not hold.
  */
 function keptParagraphs(change, numbers, context, numbered) {
   const named = new Set(numbers);
@@ -163,9 +164,7 @@ function keptParagraphs(change, numbers, context, numbered) {
     }
     kept.set(version, { paragraphs, chosen });
   }
-  if ([...kept.values()].some(({ chosen }) => chosen.size > 0)) {
-    for (const { paragraphs, chosen } of kept.values()) if (chosen.size === 0) paragraphs.forEach((_, index) => chosen.add(index));
-  }
+  for (const { paragraphs, chosen } of kept.values()) if (chosen.size === 0) paragraphs.forEach((_, index) => chosen.add(index));
   return kept;
 }
 

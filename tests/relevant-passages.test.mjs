@@ -74,6 +74,9 @@ test("a law change keeps the named paragraphs of each version and the context of
   // Later versions the package does not hold still count in the numbering.
   const throughProposed = { ...change, versions: { proposed: change.versions.proposed } };
   assert.equal(excerptLawChange(throughProposed, [3, 10], context, change).change.versions.proposed.excerpt.selectedCount, 1);
+  // When the checks named only a paragraph of such a later version, with no
+  // paragraph of the same text in the version held, that version is whole.
+  assert.deepEqual(excerptLawChange(throughProposed, [10], context, change).change.versions.proposed.excerpt, { paragraphCount: 7, selectedCount: 7 });
 });
 
 test("a paragraph named in one version is kept in every version with its text, and with the instruction it belongs to", () => {
@@ -86,7 +89,7 @@ test("a paragraph named in one version is kept in every version with its text, a
   }
 });
 
-test("a version with no paragraph kept, when another has some, and a short version are kept whole", () => {
+test("a version with no paragraph kept and a short version are kept whole", () => {
   // Paragraph 3 differs between the versions: the passed text, of which no
   // paragraph was named, is kept whole.
   const { change: excerpt, context: reduced } = excerptLawChange(change, [3], context);
