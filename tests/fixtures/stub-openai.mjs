@@ -15,6 +15,8 @@ function tagOf(text) {
 let invalidAssessmentsLeft;
 let cutOffAssessmentsLeft;
 let relevanceCallsLeft;
+// How often each relevance request was answered (STUB_OPENAI_SPLIT_RELEVANCE).
+const relevanceAnswers = new Map();
 
 function answer(name, input, model) {
   if (name === "law_change_screening") {
@@ -29,6 +31,13 @@ function answer(name, input, model) {
   if (name === "law_change_relevance" || name === "amendment_relevance") {
     const all = [...input.blocks.join("\n").matchAll(/^\[(\d+)\] /gmu)].map((match) => Number(match[1]));
     const numbers = all.length > 1 ? all.slice(0, -1) : all;
+    // STUB_OPENAI_SPLIT_RELEVANCE makes the second answer to the same request
+    // (check B) find it not relevant, so the third check decides.
+    if (process.env.STUB_OPENAI_SPLIT_RELEVANCE) {
+      const key = input.blocks.join("\n");
+      relevanceAnswers.set(key, (relevanceAnswers.get(key) ?? 0) + 1);
+      if (relevanceAnswers.get(key) === 2) return { relevant: false, paragraphs: [], reasonCz: "Netýká se slibu." };
+    }
     return { relevant: true, paragraphs: numbers, reasonCz: "Změna se týká slibu." };
   }
   if (name === "slava_assessment") {
