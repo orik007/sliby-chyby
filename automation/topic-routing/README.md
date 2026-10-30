@@ -1,6 +1,6 @@
 # Topic routing
 
-This directory holds the controlled routing taxonomy, the reviewed routing tags of every promise, and, on the audit branch, the durable model caches (`tag-cache/`): law-change screening and relevance checks. The canonical rule is [docs/evidence-pipeline.md](../../docs/evidence-pipeline.md).
+This directory holds the controlled routing taxonomy, the reviewed routing tags of every promise, and, on the audit branch, the durable model caches (`tag-cache/`): law-change screening, relevance checks of law changes and amendments, and their third checks. The canonical rule is [docs/evidence-pipeline.md](../../docs/evidence-pipeline.md).
 
 ## `taxonomy-v2.json`
 
@@ -19,8 +19,8 @@ The routing tags of every promise, keyed by promise ID: one or more specific (`a
 ## Code
 
 - [`scripts/lib/print-parts.mjs`](../../scripts/lib/print-parts.mjs) and [`scripts/run-print-parts.mjs`](../../scripts/run-print-parts.mjs) download each print's proposal text and its later texts in every run, split them into law changes with their versions, and find the act each one amends.
-- [`scripts/lib/law-change-screening.mjs`](../../scripts/lib/law-change-screening.mjs) screens law changes (`law-change-screener-v6.md`) and checks the relevance of a promise and law change (`relevance-check-v7.md`).
-- [`scripts/lib/model-output.mjs`](../../scripts/lib/model-output.mjs) validates model outputs; [`scripts/lib/paired-model-calls.mjs`](../../scripts/lib/paired-model-calls.mjs) runs the two independent calls per subject and keeps the caches.
+- [`scripts/lib/law-change-screening.mjs`](../../scripts/lib/law-change-screening.mjs) screens law changes (`law-change-screener-v6.md`) and checks the relevance of a promise and law change (`relevance-check-v8.md`) or amendment (`amendment-relevance-v2.md`), naming the relevant paragraphs; [`scripts/lib/relevant-passages.mjs`](../../scripts/lib/relevant-passages.mjs) numbers the paragraphs, decides each pair with the third check, and reduces a package's texts and context to the named paragraphs.
+- [`scripts/lib/model-output.mjs`](../../scripts/lib/model-output.mjs) validates model outputs; [`scripts/lib/paired-model-calls.mjs`](../../scripts/lib/paired-model-calls.mjs) runs the two independent calls per subject, and the third check, and keeps the caches.
 - [`scripts/lib/published-promises.mjs`](../../scripts/lib/published-promises.mjs) loads the promises with their tags; [`scripts/lib/topic-routing.mjs`](../../scripts/lib/topic-routing.mjs) builds the tag-to-promise index and routes a law change by direct legal-identifier links and the screeners' tags.
 - [`scripts/lib/topic-evidence-package.mjs`](../../scripts/lib/topic-evidence-package.mjs) builds one package per promise from its kept law changes and the party's conduct attributable under [`scripts/lib/attribution.mjs`](../../scripts/lib/attribution.mjs).
 - [`scripts/run-topic-routing.mjs`](../../scripts/run-topic-routing.mjs) runs screening, routing, relevance checks, and packaging in the daily workflow.

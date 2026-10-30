@@ -160,6 +160,18 @@ test("one real print runs through routing, packaging, assessment, and the review
     assert.deepEqual(Object.keys(resolution.structuredFacts.versions), ["adopted"]);
     assert.match(resolution.structuredFacts.versions.adopted.textCz, /^USNESENÍ\nVLÁDY ČESKÉ REPUBLIKY\nze dne 9\. března 2026 č\. 158\n/);
     assert.equal(resolution.structuredFacts.versions.adopted.contextCz, undefined);
+    // The package holds only the paragraphs its relevance checks named: the
+    // stand-in checks name every one but the last. The resolution's text is
+    // short, so it is kept whole; the decree's is not.
+    const { excerpt } = resolution.structuredFacts.versions.adopted;
+    assert.equal(excerpt.selectedCount, excerpt.paragraphCount);
+    assert.ok(resolution.structuredFacts.versions.adopted.textCz.length <= 2_000);
+    // The VAT change's approved text, longer, holds all its paragraphs but
+    // the last, and its locator says it holds only some.
+    const { approved } = lawChanges[1].structuredFacts.versions;
+    assert.deepEqual(approved.excerpt, { paragraphCount: 44, selectedCount: 43 });
+    assert.match(approved.textCz, /\n\[… 1 paragraph not concerning this promise left out …\]$/);
+    assert.match(lawChanges[1].locator, /; only the paragraphs that concern the promise$/);
     assert.equal(resolution.url, "https://odok.gov.cz/portal/zvlady/usneseni/2026/158/");
     const resolutionAdoption = evidencePackage.evidence.find(({ id }) => id === "zvlady-resolutions--2026-158");
     assert.equal(resolutionAdoption.matchBasis.attributionStatus, "verified-government-resolution");
@@ -383,4 +395,58 @@ test("a failed relevance check stops the run and keeps every finished result", {
   // Each check is saved as soon as it answers, so a pair has a line per check.
   assert.equal(lines.length, 4);
   assert.equal(new Set(lines.map((line) => JSON.parse(line).subjectId)).size, 2);
+});
+
+test("when the two relevance checks disagree, a third check with the first model decides, is cached, and reaches the report and the package", { timeout: 180_000 }, async (t) => {
+  const work = await mkdtemp(join(tmpdir(), "slava-pipeline-"));
+  t.after(() => rm(work, { recursive: true, force: true }));
+  // Check B finds every pair not relevant; checks A and C find it relevant.
+  const models = { STUB_OPENAI_SPLIT_RELEVANCE: "1", SLIBY_TAGGING_MODEL_A: "stub-model-a", SLIBY_TAGGING_MODEL_B: "stub-model-b" };
+  const { calls, report } = await routePrint189(work, models);
+  assert.equal(report.completed, true);
+  const pairs = report.counts.relevancePairCount;
+  assert.ok(pairs > 0);
+  assert.equal(report.counts.thirdRelevanceCheckPairCount, pairs);
+  const relevance = calls.filter(({ name }) => name === "law_change_relevance");
+  assert.equal(relevance.length, 3 * pairs);
+  assert.equal(relevance.filter(({ model }) => model === "stub-model-b").length, pairs, "the third check uses the first check's model");
+  for (const check of report.relevanceChecks) {
+    assert.deepEqual([check.checkA.relevant, check.checkB.relevant, check.checkC.relevant, check.checkCError, check.kept], [true, false, true, null, true]);
+    assert.deepEqual(check.paragraphs, check.checkA.paragraphs, "the paragraphs of the answers that say relevant");
+  }
+  const amendmentPairs = report.counts.amendmentRelevancePairCount;
+  assert.equal(report.counts.thirdAmendmentRelevanceCheckPairCount, amendmentPairs);
+  assert.equal(calls.filter(({ name }) => name === "amendment_relevance").length, 3 * amendmentPairs);
+  // Every third answer is cached, one line per pair.
+  const thirdLines = async (directory) => {
+    if (!existsSync(join(work, "tag-cache", directory))) return [];
+    const files = (await readdir(join(work, "tag-cache", directory), { recursive: true })).filter((name) => name.endsWith(".jsonl"));
+    return (await Promise.all(files.map((name) => readFile(join(work, "tag-cache", directory, name), "utf8")))).join("").split("\n").filter(Boolean).map((line) => JSON.parse(line));
+  };
+  const third = await thirdLines("relevance-third-checks");
+  assert.equal(third.length, pairs);
+  assert.ok(third.every(({ model, c }) => model === "stub-model-a" && c.relevant === true));
+  assert.equal((await thirdLines("amendment-relevance-third-checks")).length, amendmentPairs);
+  // The kept pairs build the packages, which hold the excerpts.
+  assert.equal(report.counts.packageCount, 2);
+  const packageFiles = await readdir(join(work, "routing", "evidence-packages"));
+  const evidencePackage = await readJson(join(work, "routing", "evidence-packages", packageFiles[0]));
+  assert.ok(evidencePackage.evidence.some(({ role, structuredFacts }) => role === "law-change" && Object.values(structuredFacts.versions).some(({ excerpt }) => excerpt && excerpt.selectedCount < excerpt.paragraphCount)));
+
+  // A second run asks for nothing again: every answer, the third included,
+  // comes from the cache.
+  const root = join(work, "checkout");
+  const log = join(work, "again-calls.jsonl");
+  await run(["--import", stub, script("run-topic-routing.mjs"),
+    "--collector-run", join(fixtures, "collector-run.json"),
+    "--print-parts", join(fixtures, "print-parts.json"),
+    "--law-context", join(work, "law-context", "law-context.json"),
+    "--tag-cache", join(work, "tag-cache"),
+    "--as-of", "2026-09-25",
+    "--output", join(work, "again")], { cwd: root, environment: { STUB_OPENAI_LOG: log, ...models } });
+  const again = await readJson(join(work, "again", "topic-routing-report.json"));
+  const againCalls = existsSync(log) ? await modelCalls(log) : [];
+  assert.deepEqual(againCalls.filter(({ name }) => name === "law_change_relevance" || name === "amendment_relevance"), []);
+  assert.deepEqual(again.relevanceChecks, report.relevanceChecks);
+  assert.equal(again.counts.packageCount, 2);
 });

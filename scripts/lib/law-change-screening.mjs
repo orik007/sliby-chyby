@@ -6,22 +6,27 @@ import { invariant } from "./collector-core.mjs";
 import { treatyPrintKindId, versionKeys, versionLabels } from "./print-parts.mjs";
 import { resolutionKind, resolutionPartName } from "./government-resolution-kind.mjs";
 import { isRegulationKind } from "./regulations.mjs";
+import { lawChangeParagraphs, numberedText, textParagraphs, validatePassageOutput } from "./relevant-passages.mjs";
 
 /**
  * The two cheap-model checks on law changes (docs/evidence-pipeline.md):
  * screening every law change (substantive or technical, and its topic tags)
- * and checking whether a routed law change is relevant to one promise.
+ * and checking whether a routed law change, or an amendment to it, is
+ * relevant to one promise, and which of its paragraphs are.
  */
 export const screeningPromptVersion = "law-change-screener-v6";
-export const relevancePromptVersion = "relevance-check-v7";
-export const amendmentRelevancePromptVersion = "amendment-relevance-v1";
+export const relevancePromptVersion = "relevance-check-v8";
+export const amendmentRelevancePromptVersion = "amendment-relevance-v2";
 
 // What each prompt keeps of the results of the prompt before it:
 // null, or `{ contentHash, rerun }` (docs/evidence-pipeline.md, Audit and
 // cost control).
 export const screeningPromptKeeps = null;
-export const relevancePromptKeeps = null;
-export const amendmentRelevancePromptKeeps = null;
+// The relevance checks keep every pair their earlier prompt found not
+// relevant: an answer that says relevant names no paragraphs, fails the
+// current output rules, and is asked for again (relevant-passages.mjs).
+export const relevancePromptKeeps = { contentHash: "f3b9fd8ce4240bab8d397fc2b1cf71876ae38451e047ec408c08b3b7bde09cb0", rerun: [] };
+export const amendmentRelevancePromptKeeps = { contentHash: "7455bc726a4eba5bf53a1883e24c1abbf2abc714b0f71580e1a46bb5e46110a7", rerun: [] };
 
 // The kinds of law change a prompt's `rerun` names.
 export const lawChangeKinds = ["chamber-print", "treaty", "government-resolution", "government-regulation", "ministerial-decree"];
@@ -71,9 +76,18 @@ const printKindLabels = { 1: "government bill", 2: "bill submitted by members, t
  * and context (the wording of the provisions it amends, from e-Sbírka) of
  * every version, then the amendments to it presented in the second reading.
  * A print-wide Senate resolution is not part of one law change and goes
- * only into the evidence package.
+ * only into the evidence package. `numbered` prefixes each paragraph of the
+ * versions' texts with its number, as `lawChangeParagraphs` numbers them,
+ * for the relevance checks, which name the relevant paragraphs.
  */
-export function lawChangeText(change) {
+export function lawChangeText(change, { numbered = false } = {}) {
+  let paragraphCount = 0;
+  const textOf = (textCz) => {
+    if (!numbered) return textCz;
+    const text = numberedText(textCz, paragraphCount);
+    paragraphCount += textParagraphs(textCz).length;
+    return text;
+  };
   // An effective date equal to that of the version before is named, not
   // repeated.
   let previousEffective = null;
@@ -95,7 +109,7 @@ export function lawChangeText(change) {
       : `\n\n${entry.contextCz}`;
     if (entry.contextCz) previousContext = { version, text: entry.contextCz };
     if (entry.sameAs) return `${label}\nThe same text as the ${versionLabels[entry.sameAs]}.${effective}${context}`;
-    return entry.textCz === null ? `${label}\nNot available as a DOCX or DOC file; only the print title is known.` : `${label}\n${entry.textCz}${effective}${context}`;
+    return entry.textCz === null ? `${label}\nNot available as a DOCX or DOC file; only the print title is known.` : `${label}\n${textOf(entry.textCz)}${effective}${context}`;
   });
   // A government resolution is one law change, the resolution and its
   // annexes as the government adopted them, or, for the plan of legislative
@@ -197,43 +211,63 @@ export function promiseText(promise) {
   ].join("\n");
 }
 
+// The texts a change is checked with, the same for every promise, made
+// once per change.
+const relevanceTexts = new WeakMap();
+function relevanceTextsOf(change) {
+  if (!relevanceTexts.has(change)) {
+    const paragraphCount = lawChangeParagraphs(change).length;
+    relevanceTexts.set(change, { lawChange: lawChangeText(change), numberedLawChange: lawChangeText(change, { numbered: true }), paragraphCount, mayNameNone: paragraphCount === 0 });
+  }
+  return relevanceTexts.get(change);
+}
+
+// A law change may be relevant without naming a paragraph of its own text
+// only when it has none (docs/evidence-pipeline.md, step 6).
 export function buildRelevanceBrief(promise, change) {
-  return { pairId: `${promise.id}--${change.changeId}`, promise: promiseText(promise), lawChange: lawChangeText(change) };
+  return { pairId: `${promise.id}--${change.changeId}`, promise: promiseText(promise), ...relevanceTextsOf(change) };
 }
 
 // The model input of a relevance check, as input blocks: the law change
 // first, the same for every promise it is checked against, so it is read
 // from the provider's prompt cache after the first check
-// (docs/evidence-pipeline.md). Its cache fingerprint hashes the same blocks.
+// (docs/evidence-pipeline.md). Its cache fingerprint hashes the blocks
+// without the paragraph numbers, which follow from the text by the
+// numbering of relevant-passages.mjs; a cached answer names paragraphs by
+// that numbering, so changing it needs a new prompt version.
 export function relevanceInputBlocks(brief) {
   return [`Law change:\n\n${brief.lawChange}`, brief.promise];
 }
 
+export function relevanceRequestBlocks(brief) {
+  return [`Law change:\n\n${brief.numberedLawChange}`, brief.promise];
+}
+
 const relevanceSchema = {
   type: "object",
-  properties: { relevant: { type: "boolean" }, reasonCz: { type: "string" } },
-  required: ["relevant", "reasonCz"],
+  properties: { relevant: { type: "boolean" }, paragraphs: { type: "array", items: { type: "integer" } }, reasonCz: { type: "string" } },
+  required: ["relevant", "paragraphs", "reasonCz"],
   additionalProperties: false
 };
 
-export function validateRelevanceOutput(output) {
-  invariantValidOutput(typeof output?.relevant === "boolean", "Relevance check must say whether the change is relevant");
-  invariantValidOutput(typeof output.reasonCz === "string" && output.reasonCz.trim().length > 0, "Relevance check must give a reason");
-  return output;
+/** The output rules of the relevance checks of one brief. */
+export function relevanceValidator(brief) {
+  return (output) => validatePassageOutput(output, brief);
 }
 
-export async function requestRelevance({ provider, apiKey, model, brief, prompt }) {
+// `label` names the call in the run log: the third check says so.
+export async function requestRelevance({ provider, apiKey, model, brief, prompt, label = "relevance" }) {
   return requestValidatedOutput({
     provider,
     apiKey,
     model,
     prompt,
-    inputBlocks: relevanceInputBlocks(brief),
+    inputBlocks: relevanceRequestBlocks(brief),
     name: "law_change_relevance",
     schema: relevanceSchema,
     metadata: { subjectId: brief.pairId.slice(0, 64), promptVersion: prompt.version },
-    logLabel: `relevance ${brief.pairId}`,
-    validate: validateRelevanceOutput
+    logLabel: `${label} ${brief.pairId}`,
+    validate: relevanceValidator(brief)
   });
 }
 
@@ -244,37 +278,38 @@ export async function requestRelevance({ provider, apiKey, model, brief, prompt 
  * the first promise, then the promise.
  */
 export function buildAmendmentRelevanceBrief(promise, { documentNumber, amendment, printNumber, printTitleCz }) {
+  const heading = `Amendment ${amendment.label} (parliamentary document ${documentNumber}) to Chamber print ${printNumber}: ${printTitleCz}, presented in the second reading on ${amendment.presentedOn} by ${amendment.presenterCz}; it amends the proposed text of the bill:`;
+  const paragraphCount = textParagraphs(amendment.textCz).length;
   return {
     pairId: `${promise.id}--amendment-${documentNumber}`,
     promise: promiseText(promise),
-    amendment: `Amendment ${amendment.label} (parliamentary document ${documentNumber}) to Chamber print ${printNumber}: ${printTitleCz}, presented in the second reading on ${amendment.presentedOn} by ${amendment.presenterCz}; it amends the proposed text of the bill:\n${amendment.textCz}`
+    amendment: `${heading}\n${amendment.textCz}`,
+    numberedAmendment: `${heading}\n${numberedText(amendment.textCz)}`,
+    paragraphCount,
+    mayNameNone: paragraphCount === 0
   };
 }
 
+// Hashed for the cache fingerprint; the request carries the numbered text.
 export function amendmentRelevanceInputBlocks(brief) {
   return [brief.amendment, brief.promise];
 }
 
-export async function requestAmendmentRelevance({ provider, apiKey, model, brief, prompt }) {
+export function amendmentRelevanceRequestBlocks(brief) {
+  return [brief.numberedAmendment, brief.promise];
+}
+
+export async function requestAmendmentRelevance({ provider, apiKey, model, brief, prompt, label = "amendment relevance" }) {
   return requestValidatedOutput({
     provider,
     apiKey,
     model,
     prompt,
-    inputBlocks: amendmentRelevanceInputBlocks(brief),
+    inputBlocks: amendmentRelevanceRequestBlocks(brief),
     name: "amendment_relevance",
     schema: relevanceSchema,
     metadata: { subjectId: brief.pairId.slice(0, 64), promptVersion: prompt.version },
-    logLabel: `amendment relevance ${brief.pairId}`,
-    validate: validateRelevanceOutput
+    logLabel: `${label} ${brief.pairId}`,
+    validate: relevanceValidator(brief)
   });
-}
-
-/**
- * A promise and law change, or amendment, are kept when at least one check
- * says relevant, or when a check output is invalid; both must say "not
- * relevant" to drop it.
- */
-export function isKeptByRelevance(checkA, checkB) {
-  return !checkA || !checkB || checkA.relevant || checkB.relevant;
 }
