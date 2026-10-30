@@ -160,6 +160,18 @@ test("one real print runs through routing, packaging, assessment, and the review
     assert.deepEqual(Object.keys(resolution.structuredFacts.versions), ["adopted"]);
     assert.match(resolution.structuredFacts.versions.adopted.textCz, /^USNESENÍ\nVLÁDY ČESKÉ REPUBLIKY\nze dne 9\. března 2026 č\. 158\n/);
     assert.equal(resolution.structuredFacts.versions.adopted.contextCz, undefined);
+    // The package holds only the paragraphs its relevance checks named: the
+    // stand-in checks name every one but the last. The resolution's text is
+    // short, so it is kept whole; the decree's is not.
+    const { excerpt } = resolution.structuredFacts.versions.adopted;
+    assert.equal(excerpt.selectedCount, excerpt.paragraphCount);
+    assert.ok(resolution.structuredFacts.versions.adopted.textCz.length <= 2_000);
+    // The VAT change's approved text, longer, holds all its paragraphs but
+    // the last, and its locator says it holds only some.
+    const { approved } = lawChanges[1].structuredFacts.versions;
+    assert.deepEqual(approved.excerpt, { paragraphCount: 44, selectedCount: 43 });
+    assert.match(approved.textCz, /\n\[… 1 paragraph not concerning this promise left out …\]$/);
+    assert.match(lawChanges[1].locator, /; only the paragraphs that concern the promise$/);
     assert.equal(resolution.url, "https://odok.gov.cz/portal/zvlady/usneseni/2026/158/");
     const resolutionAdoption = evidencePackage.evidence.find(({ id }) => id === "zvlady-resolutions--2026-158");
     assert.equal(resolutionAdoption.matchBasis.attributionStatus, "verified-government-resolution");

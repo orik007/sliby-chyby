@@ -63,7 +63,9 @@ test("the assessor prompt states its own task: relevance, reading the package, a
     ["conduct is judged by that effect", /compare the effect you stated in step 1, not the change's label, with what the promise commits to/],
     ["the maintenance classification is supplied", /Never infer a maintenance commitment yourself/],
     ["cite only package IDs", /Select the IDs only from the supplied package/],
-    ["never cite an irrelevant change", /Never cite a law change you found not relevant when `evidenceSufficient` is true/]
+    ["never cite an irrelevant change", /Never cite a law change you found not relevant when `evidenceSufficient` is true/],
+    ["an excerpt holds only the paragraphs that concern the promise", /a version with `excerpt` holds only `excerpt\.selectedCount` of its `excerpt\.paragraphCount` paragraphs/],
+    ["no guess at a left-out paragraph", /never guess what a left-out paragraph says, and never treat its absence as evidence/]
   ];
   for (const [rule, pattern] of rules) assert.match(prompts.assessor, pattern, rule);
 });
@@ -75,7 +77,8 @@ test("the arbiter prompt states its own task: choosing between the reviews", () 
     ["never select an unavailable review", /never select the unavailable assessor/],
     ["prefer the correct application of the scoring rule", /Prefer the review that applies the scoring rule at the end of these instructions correctly/],
     ["judge each conduct by the version it names", /Prefer the review that judges each conduct by the version it names/],
-    ["relevance follows the full texts", /Prefer the review whose verdicts follow the full law-change texts/],
+    ["relevance follows the supplied texts", /Prefer the review whose verdicts follow the supplied law-change texts/],
+    ["no guess at a left-out paragraph", /never prefer a review that guesses what a left-out paragraph says/],
     ["the effect follows the wordings", /Prefer the review whose effect follows the previous wording in the context and the new text/],
     ["cite only supplied IDs", /cite only supplied evidence IDs/]
   ];

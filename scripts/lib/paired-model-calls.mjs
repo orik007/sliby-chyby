@@ -214,6 +214,39 @@ export async function pairedModelCall({ subjectId, fingerprint, cache, persist, 
   };
 }
 
+/**
+ * One call on a subject with a durable cache: the third relevance check, made
+ * only when the two independent checks do not agree. `fingerprint` covers the
+ * input hash, the prompt hash, the provider, and the model; a cached answer is
+ * reused only when all of it matches, and is validated again with
+ * `revalidate`. A valid answer is cached at once; an invalid one is returned
+ * as null and asked for again in the next run.
+ */
+export async function singleModelCall({ subjectId, fingerprint, cache, persist, call, revalidate = (output) => output }) {
+  const cached = cache.entries[subjectId];
+  if (cached?.c != null && Object.entries(fingerprint).every(([key, value]) => cached[key] === value)) {
+    try {
+      return { c: revalidate(cached.c), error: null, model: fingerprint.model, usageByModel: [], invalidCount: 0, reused: true };
+    } catch (error) {
+      if (!(error instanceof ModelOutputError)) throw error;
+    }
+  }
+  const attempt = await isolateInvalidOutput(call);
+  if (!attempt.error) {
+    cache.entries[subjectId] = { ...fingerprint, c: attempt.response.output };
+    await persist(subjectId);
+  }
+  const usageSource = attempt.response ?? attempt;
+  return {
+    c: attempt.response?.output ?? null,
+    error: attempt.error,
+    model: attempt.response?.model ?? attempt.model ?? fingerprint.model,
+    usageByModel: usageSource.usage ? [{ model: usageSource.model ?? fingerprint.model, usage: usageSource.usage }] : [],
+    invalidCount: attempt.error ? 1 : 0,
+    reused: false
+  };
+}
+
 export function usageTotalsByModel(usageEntries) {
   const totals = new Map();
   for (const { model, usage } of usageEntries) {

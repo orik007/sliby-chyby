@@ -7,6 +7,7 @@ export { versionOfChange };
 import { charactersPerToken, estimateRequestTokens, estimateTokens, maxPackageRequestTokens, maxRequestInputTokens } from "./assessment-config.mjs";
 import { withContext } from "./law-context.mjs";
 import { sectionGroupHolds } from "./amending-points.mjs";
+import { excerptAmendmentText, excerptLawChange } from "./relevant-passages.mjs";
 import { sectionsNamedInAmendment } from "./psp-amendments.mjs";
 import { isRegulationKind, regulationSourceId } from "./regulations.mjs";
 import { resolutionKind, resolutionPartName, resolutionSourceId } from "./government-resolution-kind.mjs";
@@ -15,7 +16,7 @@ function invariant(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-export const packageBuilderVersion = "law-change-package-v2";
+export const packageBuilderVersion = "law-change-package-v3";
 
 export function estimatePackageTokens(evidencePackage) {
   return estimateTokens(JSON.stringify(evidencePackage));
@@ -265,6 +266,11 @@ export function senateResolutionEvidenceId(change, partNumber) {
   return `psp-core-2025--senate-resolution-${change.printId}-${partNumber}`;
 }
 
+// What a law change's locator adds when it holds only some paragraphs.
+function excerptNote(change) {
+  return Object.values(change.versions).some(({ excerpt }) => excerpt && excerpt.selectedCount < excerpt.paragraphCount) ? "; only the paragraphs that concern the promise" : "";
+}
+
 function evidenceFromLawChange(change, route, publishedAt, senateResolutionIds) {
   const versions = versionKeys.filter((version) => change.versions[version]);
   const latest = [...versions].reverse().find((version) => !change.versions[version].removed);
@@ -286,7 +292,7 @@ function evidenceFromLawChange(change, route, publishedAt, senateResolutionIds) 
     publisher: "Chamber of Deputies of the Parliament of the Czech Republic",
     publishedAt,
     url: latestDocument?.url ?? change.printPageUrl,
-    locator: latestDocument ? `${latestDocument.filename}, ${change.heading ?? "whole text"}` : "print title only; no DOCX or DOC text",
+    locator: latestDocument ? `${latestDocument.filename}, ${change.heading ?? "whole text"}${excerptNote(change)}` : "print title only; no DOCX or DOC text",
     primary: true,
     factSummary: `Law change ${change.heading ? `“${change.heading} – ${change.titleCz}”` : `“${change.titleCz}”`} of print ${change.printNumber}${change.addedIn === "proposed" ? "" : `, added in the ${versionLabels[change.addedIn]}`}. Versions: ${versions.map(describe).join("; ")}.`,
     structuredFacts: {
@@ -326,7 +332,7 @@ function evidenceFromRegulation(change, route, publishedAt) {
     publisher: "Ministry of the Interior of the Czech Republic (Collection of Laws)",
     publishedAt,
     url: entry.document.url,
-    locator: `${change.printNumber}, whole text as promulgated`,
+    locator: `${change.printNumber}, whole text as promulgated${excerptNote(change)}`,
     primary: true,
     factSummary: `${change.printKindId === "government-regulation" ? "Government regulation" : "Ministerial decree"} ${change.printNumber}, ${change.titleCz}, as adopted and promulgated in the Collection of Laws${change.enablingActs.length > 0 ? `; issued under zákon č. ${change.enablingActs.join(" Sb., zákon č. ")} Sb.` : ""}. Versions: ${versionLabels.adopted}.`,
     structuredFacts: {
@@ -364,7 +370,7 @@ function evidenceFromResolution(change, route, publishedAt) {
     publisher: "Government Office of the Czech Republic (zVlády)",
     publishedAt,
     url: entry.document.url,
-    locator: `${change.printNumber}, ${change.heading ?? "whole text with its annexes"}`,
+    locator: `${change.printNumber}, ${change.heading ?? "whole text with its annexes"}${excerptNote(change)}`,
     primary: true,
     factSummary: `${change.printNumber}${change.heading ? `, part “${change.heading}”` : ""}${entry.titleCz !== change.printNumber ? `, on “${entry.titleCz}”` : ""}, as adopted by the government. Versions: ${versionLabels.adopted}.`,
     structuredFacts: {
@@ -434,8 +440,11 @@ function evidenceFromSenateResolution(change, resolution, publishedAt) {
 }
 
 // The text of an amendment presented in the second reading, once per
-// package, from its parliamentary document; dated by its presentation.
-function evidenceFromAmendment(change, amendment) {
+// package, from its parliamentary document; dated by its presentation. Its
+// `textCz` holds only the paragraphs its relevance checks named, when they
+// named any, and `excerpt` says how many of how many.
+function evidenceFromAmendment(change, amendment, paragraphs = null) {
+  const text = paragraphs ? excerptAmendmentText(amendment.textCz, paragraphs) : { textCz: amendment.textCz };
   return {
     id: amendmentEvidenceId(amendment.documentNumber),
     role: "amendment",
@@ -447,7 +456,7 @@ function evidenceFromAmendment(change, amendment) {
     locator: amendment.document.filename,
     primary: true,
     factSummary: `Amendment ${amendment.label} to print ${change.printNumber}, parliamentary document ${amendment.documentNumber}, presented in the second reading on ${amendment.presentedOn} by ${amendment.presenterCz}; it amends the text of the bill, not the act itself${amendment.parts.length > 0 ? `, and names ${amendment.parts.join(", ")}` : ""}.`,
-    structuredFacts: { externalPrintId: change.printId, printNumber: change.printNumber, documentNumber: amendment.documentNumber, label: amendment.label, presenterCz: amendment.presenterCz, presentedOn: amendment.presentedOn, proposerPartyIds: amendment.proposerPartyIds, parts: amendment.parts, pageUrl: amendment.pageUrl, textCz: amendment.textCz },
+    structuredFacts: { externalPrintId: change.printId, printNumber: change.printNumber, documentNumber: amendment.documentNumber, label: amendment.label, presenterCz: amendment.presenterCz, presentedOn: amendment.presentedOn, proposerPartyIds: amendment.proposerPartyIds, parts: amendment.parts, pageUrl: amendment.pageUrl, ...text },
     sourceRecordHash: amendment.textSha256
   };
 }
@@ -567,15 +576,19 @@ function fitContexts({ changes, contextOf, assemble, requestTokens, requestLengt
 }
 
 /**
- * One promise's evidence package: every kept law change with the full text
- * of each version and its context, and the party's attributable conduct on
- * each of their prints, naming the version of each change it concerns. No
- * law change, text, or conduct is ever left out; when the package leaves no
- * room for the arbiter to read both reviews and `contextOf` gives each
- * change's structured context, part of the context is left out until it
+ * One promise's evidence package: every kept law change with the paragraphs
+ * of each version its relevance checks named and the context of the
+ * provisions they amend (scripts/lib/relevant-passages.mjs), or the full
+ * text and context when the checks named none, and the party's attributable
+ * conduct on each of their prints, naming the version of each change it
+ * concerns. No kept law change or conduct is ever left out; when the package
+ * leaves no room for the arbiter to read both reviews and `contextOf` gives
+ * each change's structured context, part of the context is left out until it
  * does (`fitContexts`), or, when even that is not enough, until the
  * assessors can read it; it is marked `oversized` only when they cannot.
- * `keptChanges` is `[{ change, route }]`; `recordsByPrintId` holds the
+ * `keptChanges` is `[{ change, route, paragraphs }]`, `paragraphs` the
+ * numbers of the paragraphs kept, as `lawChangeParagraphs` numbers them on
+ * the change, or null for the whole text; `recordsByPrintId` holds the
  * primary records concerning each print, and `printFirstSeenOn` each print's
  * earliest record date. A caller building many packages passes the
  * collector run's hash once as `collectorRunHash`. `exclusionOf`, given a
@@ -586,24 +599,36 @@ function fitContexts({ changes, contextOf, assemble, requestTokens, requestLengt
  * `excludedLawChanges`. `amendmentKept`, given an amendment's document
  * number, says whether the relevance checks of this promise and amendment
  * kept it; the conduct on amendments none of which was kept is left out
- * (docs/evidence-pipeline.md, step 6). Returns null when no remaining change
- * has attributable conduct of the promise's party.
+ * (docs/evidence-pipeline.md, step 6). `amendmentParagraphs`, given one, gives
+ * the numbers of the paragraphs of its text that the package holds, or null
+ * for the whole text. Returns null when no remaining change has attributable
+ * conduct of the promise's party.
  */
-export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash = sha256(collectorRun), asOf, assessorInstructions, contextOf = null, exclusionOf = null, amendmentKept = () => true }) {
+export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash = sha256(collectorRun), asOf, assessorInstructions, contextOf = null, exclusionOf = null, amendmentKept = () => true, amendmentParagraphs = () => null }) {
   invariant(typeof asOf === "string", "buildLawChangeEvidencePackage requires asOf");
   invariant(typeof assessorInstructions === "string" && assessorInstructions.length > 0, "buildLawChangeEvidencePackage requires the assessor instructions");
   const changes = [];
   const excludedLawChanges = [];
   const conductById = new Map();
   const concernsByRecord = new Map();
-  for (const { change: fullChange, route } of [...keptChanges].sort((left, right) => printOrder(left.change) - printOrder(right.change) || left.change.changeId.localeCompare(right.change.changeId, "en", { numeric: true }))) {
+  // The context of each change as its package holds it: of the provisions its
+  // kept paragraphs amend.
+  const contexts = new Map();
+  for (const { change: fullChange, route, paragraphs = null } of [...keptChanges].sort((left, right) => printOrder(left.change) - printOrder(right.change) || left.change.changeId.localeCompare(right.change.changeId, "en", { numeric: true }))) {
     const conduct = attributableConductOnChange(recordsByPrintId.get(fullChange.printId) ?? [], promise, fullChange)
       .filter(({ record }) => !isAmendmentConduct(record) || amendmentDocumentNumbers(record).length === 0 || amendmentDocumentNumbers(record).some(amendmentKept));
     if (conduct.length === 0) continue;
     const lastVersion = versionKeys[Math.max(...conduct.map(({ version }) => versionKeys.indexOf(version.version)))];
     // A later text adds nothing to judging this conduct and may not have
-    // existed at the package cutoff.
-    const change = changeThroughVersion(fullChange, lastVersion);
+    // existed at the package cutoff. Only the kept paragraphs stay, numbered
+    // on the change as its relevance checks read it.
+    let change = changeThroughVersion(fullChange, lastVersion);
+    const fullContext = contextOf?.(fullChange.changeId) ?? null;
+    if (paragraphs) {
+      const excerpt = excerptLawChange(change, paragraphs, fullContext, fullChange);
+      change = excerpt.context ? withContext(excerpt.change, excerpt.context) : excerpt.change;
+      contexts.set(change.changeId, excerpt.context);
+    } else contexts.set(change.changeId, fullContext);
     const excluded = exclusionOf?.({ id: lawChangeEvidenceId(change), structuredFacts: { versions: change.versions, ...(change.amendments?.length > 0 ? { amendments: amendmentHashes(change) } : {}) } }) ?? null;
     if (excluded) {
       excludedLawChanges.push(excluded);
@@ -644,7 +669,7 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
       if (amendments.has(id)) continue;
       const owner = changes.find(({ change }) => (change.amendments ?? []).some(({ documentNumber }) => documentNumber === number));
       invariant(owner, `Conduct ${record.id} names amendment SD ${number}, whose text no law change of the package holds`);
-      amendments.set(id, evidenceFromAmendment(owner.change, owner.change.amendments.find(({ documentNumber }) => documentNumber === number)));
+      amendments.set(id, evidenceFromAmendment(owner.change, owner.change.amendments.find(({ documentNumber }) => documentNumber === number), amendmentParagraphs(number)));
     }
   }
   // Found once, not on every rebuild of the package.
@@ -699,7 +724,7 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
   const requestInput = (evidencePackage) => ({ packageHash: "0".repeat(64), evidencePackage: { ...evidencePackage, generation: { ...evidencePackage.generation, estimatedTokens: 9_999_999, oversized: false } } });
   const requestTokens = (evidencePackage) => estimateRequestTokens(assessorInstructions, requestInput(evidencePackage));
   const requestLength = (evidencePackage) => JSON.stringify(requestInput(evidencePackage)).length;
-  const fit = (limitTokens) => fitContexts({ changes, contextOf, assemble, requestTokens, requestLength, limitTokens, instructionTokens: estimateTokens(assessorInstructions) });
+  const fit = (limitTokens) => fitContexts({ changes, contextOf: (changeId) => contexts.get(changeId), assemble, requestTokens, requestLength, limitTokens, instructionTokens: estimateTokens(assessorInstructions) });
   let evidencePackage = assemble(changes);
   if (requestTokens(evidencePackage) > maxPackageRequestTokens && contextOf) {
     evidencePackage = fit(maxPackageRequestTokens);

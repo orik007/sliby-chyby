@@ -24,7 +24,13 @@ function answer(name, input, model) {
     const tag = tagOf(input.text);
     return { substantive: !technical, reasonCz: technical ? "Jen upravuje odkazy." : "Mění pravidla.", tags: [tag], confidence: tag === "unknown" ? 0.1 : 0.9 };
   }
-  if (name === "law_change_relevance") return { relevant: true, reasonCz: "Změna se týká slibu." };
+  // A relevance check finds every change relevant and names every numbered
+  // paragraph but the last, so the package holds an excerpt.
+  if (name === "law_change_relevance" || name === "amendment_relevance") {
+    const all = [...input.blocks.join("\n").matchAll(/^\[(\d+)\] /gmu)].map((match) => Number(match[1]));
+    const numbers = all.length > 1 ? all.slice(0, -1) : all;
+    return { relevant: true, paragraphs: numbers, reasonCz: "Změna se týká slibu." };
+  }
   if (name === "slava_assessment") {
     const evidencePackage = input.evidencePackage;
     // STUB_OPENAI_INVALID_ASSESSMENTS makes the first that many assessments
@@ -63,7 +69,7 @@ globalThis.fetch = async (url, init) => {
   // reads: a screening's law change after the taxonomy, without its heading.
   // Other input is JSON.
   const blocks = Array.isArray(body.input) ? body.input[0].content.map(({ text }) => text) : null;
-  const input = blocks ? { text: blocks.at(-1).replace(/^Law change [^\n]*:\n\n/, "") } : JSON.parse(body.input);
+  const input = blocks ? { text: blocks.at(-1).replace(/^Law change [^\n]*:\n\n/, ""), blocks } : JSON.parse(body.input);
   if (process.env.STUB_OPENAI_LOG) appendFileSync(process.env.STUB_OPENAI_LOG, `${JSON.stringify({ name, model: body.model, maxOutputTokens: body.max_output_tokens, reasoningEffort: body.reasoning?.effort ?? null, input })}\n`);
   const usage = { input_tokens: Math.ceil((body.instructions.length + (blocks ? blocks.join("") : body.input).length) / 3), output_tokens: 30 };
   // STUB_OPENAI_CUT_OFF_ASSESSMENTS cuts off the first that many assessments

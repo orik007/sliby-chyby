@@ -8,7 +8,6 @@ import { pairedModelRuntimeConfig } from "./lib/model-output.mjs";
 import {
   buildRelevanceBrief,
   buildScreeningBrief,
-  isKeptByRelevance,
   isSubstantive,
   amendmentRelevanceInputBlocks,
   buildAmendmentRelevanceBrief,
@@ -18,12 +17,13 @@ import {
   loadRelevancePrompt,
   loadScreeningPrompt,
   relevanceInputBlocks,
+  relevanceValidator,
   requestRelevance,
   requestScreening,
   screeningInputBlocks,
-  validateRelevanceOutput,
   validateScreeningOutput
 } from "./lib/law-change-screening.mjs";
+import { needsThirdCheck, relevanceDecision } from "./lib/relevant-passages.mjs";
 import { directLegalIdentifierIndex, taxonomyHash } from "./lib/topic-taxonomy.mjs";
 import { buildInvertedIndex, routeLawChange } from "./lib/topic-routing.mjs";
 import { withContext } from "./lib/law-context.mjs";
@@ -31,7 +31,7 @@ import { amendmentsOfPackage, attributableConductOnChange, buildLawChangeEvidenc
 import { loadAssessmentPrompts, maxRequestInputTokens } from "./lib/assessment-config.mjs";
 import { validateReviewManifest } from "./lib/assessment-review.mjs";
 import { exclusionOf, loadRelevanceVerdicts } from "./lib/irrelevance-verdicts.mjs";
-import { assertKeptPromptCached, cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, shardedCachePersister, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
+import { assertKeptPromptCached, cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, shardedCachePersister, singleModelCall, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 
 /**
@@ -135,15 +135,19 @@ const relevanceFileOf = (subjectId) => {
 const caches = {
   screening: await loadModelCache(resolve(args.tagCache, "law-change-screening.jsonl")),
   relevance: await loadShardedModelCache(resolve(args.tagCache, "relevance-checks"), relevanceFileOf),
-  amendmentRelevance: await loadShardedModelCache(resolve(args.tagCache, "amendment-relevance-checks"), relevanceFileOf)
+  amendmentRelevance: await loadShardedModelCache(resolve(args.tagCache, "amendment-relevance-checks"), relevanceFileOf),
+  // The third checks, made only when the two do not agree.
+  relevanceThird: await loadShardedModelCache(resolve(args.tagCache, "relevance-third-checks"), relevanceFileOf),
+  amendmentRelevanceThird: await loadShardedModelCache(resolve(args.tagCache, "amendment-relevance-third-checks"), relevanceFileOf)
 };
-const persist = { screening: cachePersister(caches.screening), relevance: shardedCachePersister(caches.relevance), amendmentRelevance: shardedCachePersister(caches.amendmentRelevance) };
+const persist = Object.fromEntries(Object.entries(caches).map(([stageName, cache]) => [stageName, cache.directory ? shardedCachePersister(cache) : cachePersister(cache)]));
 for (const [stageName, prompt] of Object.entries(prompts)) {
   if (prompt.keeps) assertKeptPromptCached(caches[stageName], prompt.contentHash, prompt.keeps.contentHash, prompt.version);
 }
 const models = { provider: runtime.provider, modelA: runtime.modelA, modelB: runtime.modelB };
 const usage = { screening: [], relevance: [], amendmentRelevance: [] };
 const invalid = { screening: 0, relevance: 0, amendmentRelevance: 0 };
+const thirdChecks = { relevance: 0, amendmentRelevance: 0 };
 // Results made under an earlier prompt that the current one keeps.
 const fromEarlierPrompt = { screening: 0, relevance: 0, amendmentRelevance: 0 };
 let runFailure = null;
@@ -209,24 +213,56 @@ function tickPairs(detail) {
     pairsLoggedAt = Date.now();
   }
 }
-async function checkPair(pair) {
-  const brief = buildRelevanceBrief(pair.promise, pair.change);
-  const fingerprint = { inputHash: sha256(relevanceInputBlocks(brief)), promptContentHash: prompts.relevance.contentHash, ...models };
+// The two independent checks of a pair, and the third when they do not both
+// give a valid answer and agree (docs/evidence-pipeline.md, step 6). It
+// reads the same request as the others, with the first check's model.
+async function checkRelevance({ stage, brief, inputHash, prompt, request, keepFromPromptContentHash }) {
+  const revalidate = relevanceValidator(brief);
+  const call = (model, label) => () => request({ provider: runtime.provider, apiKey, model, brief, prompt, ...(label ? { label } : {}) });
   const checked = await pairedModelCall({
     subjectId: brief.pairId,
-    fingerprint,
-    cache: caches.relevance,
-    persist: persist.relevance,
-    callA: () => requestRelevance({ provider: runtime.provider, apiKey, model: runtime.modelA, brief, prompt: prompts.relevance }),
-    callB: () => requestRelevance({ provider: runtime.provider, apiKey, model: runtime.modelB, brief, prompt: prompts.relevance }),
-    revalidate: validateRelevanceOutput,
-    keepFromPromptContentHash: keptPromptContentHash(prompts.relevance, pair.change)
+    fingerprint: { inputHash, promptContentHash: prompt.contentHash, ...models },
+    cache: caches[stage],
+    persist: persist[stage],
+    callA: call(runtime.modelA),
+    callB: call(runtime.modelB),
+    revalidate,
+    keepFromPromptContentHash
   });
-  usage.relevance.push(...checked.usageByModel);
-  invalid.relevance += checked.invalidCount;
-  const relevancePrompt = checked.madeUnderPromptContentHash === prompts.relevance.contentHash ? null : checked.madeUnderPromptContentHash;
-  if (relevancePrompt) fromEarlierPrompt.relevance += 1;
-  const result = { ...pair, kept: isKeptByRelevance(checked.a, checked.b), relevancePrompt, checkA: checked.a, checkB: checked.b, checkAError: checked.errorA, checkBError: checked.errorB };
+  usage[stage].push(...checked.usageByModel);
+  invalid[stage] += checked.invalidCount;
+  let third = null;
+  if (needsThirdCheck(checked.a, checked.b)) {
+    thirdChecks[stage] += 1;
+    third = await singleModelCall({
+      subjectId: brief.pairId,
+      fingerprint: { inputHash, promptContentHash: prompt.contentHash, provider: runtime.provider, model: runtime.modelA },
+      cache: caches[`${stage}Third`],
+      persist: persist[`${stage}Third`],
+      call: call(runtime.modelA, stage === "relevance" ? "third relevance check" : "third amendment relevance check"),
+      revalidate
+    });
+    usage[stage].push(...third.usageByModel);
+    invalid[stage] += third.invalidCount;
+  }
+  const relevancePrompt = checked.madeUnderPromptContentHash === prompt.contentHash ? null : checked.madeUnderPromptContentHash;
+  if (relevancePrompt) fromEarlierPrompt[stage] += 1;
+  const { kept, paragraphs } = relevanceDecision(checked.a, checked.b, third?.c ?? null);
+  return {
+    kept,
+    paragraphs,
+    relevancePrompt,
+    checkA: checked.a,
+    checkB: checked.b,
+    checkAError: checked.errorA,
+    checkBError: checked.errorB,
+    ...(third ? { checkC: third.c, checkCError: third.error } : {})
+  };
+}
+
+async function checkPair(pair) {
+  const brief = buildRelevanceBrief(pair.promise, pair.change);
+  const result = { ...pair, ...await checkRelevance({ stage: "relevance", brief, inputHash: sha256(relevanceInputBlocks(brief)), prompt: prompts.relevance, request: requestRelevance, keepFromPromptContentHash: keptPromptContentHash(prompts.relevance, pair.change) }) };
   tickPairs(`${pair.promise.id} × ${pair.change.changeId}: ${result.kept ? "kept" : "dropped"}`);
   return result;
 }
@@ -301,7 +337,7 @@ const checkedPairs = finishedPairs
 
 const keptByPromise = new Map();
 for (const pair of checkedPairs.filter(({ kept }) => kept)) {
-  keptByPromise.set(pair.promise.id, [...(keptByPromise.get(pair.promise.id) ?? []), { change: pair.change, route: pair.route }]);
+  keptByPromise.set(pair.promise.id, [...(keptByPromise.get(pair.promise.id) ?? []), { change: pair.change, route: pair.route, paragraphs: pair.paragraphs }]);
 }
 
 // 3. The relevance of each promise and amendment its package would hold
@@ -310,22 +346,7 @@ for (const pair of checkedPairs.filter(({ kept }) => kept)) {
 // amendment from the provider's prompt cache.
 async function checkAmendment({ promise, item }) {
   const brief = buildAmendmentRelevanceBrief(promise, item);
-  const fingerprint = { inputHash: sha256(amendmentRelevanceInputBlocks(brief)), promptContentHash: prompts.amendmentRelevance.contentHash, ...models };
-  const checked = await pairedModelCall({
-    subjectId: brief.pairId,
-    fingerprint,
-    cache: caches.amendmentRelevance,
-    persist: persist.amendmentRelevance,
-    callA: () => requestAmendmentRelevance({ provider: runtime.provider, apiKey, model: runtime.modelA, brief, prompt: prompts.amendmentRelevance }),
-    callB: () => requestAmendmentRelevance({ provider: runtime.provider, apiKey, model: runtime.modelB, brief, prompt: prompts.amendmentRelevance }),
-    revalidate: validateRelevanceOutput,
-    keepFromPromptContentHash: keptPromptContentHash(prompts.amendmentRelevance, { printKindId: item.printKindId })
-  });
-  usage.amendmentRelevance.push(...checked.usageByModel);
-  invalid.amendmentRelevance += checked.invalidCount;
-  const relevancePrompt = checked.madeUnderPromptContentHash === prompts.amendmentRelevance.contentHash ? null : checked.madeUnderPromptContentHash;
-  if (relevancePrompt) fromEarlierPrompt.amendmentRelevance += 1;
-  return { promise, item, kept: isKeptByRelevance(checked.a, checked.b), relevancePrompt, checkA: checked.a, checkB: checked.b, checkAError: checked.errorA, checkBError: checked.errorB };
+  return { promise, item, ...await checkRelevance({ stage: "amendmentRelevance", brief, inputHash: sha256(amendmentRelevanceInputBlocks(brief)), prompt: prompts.amendmentRelevance, request: requestAmendmentRelevance, keepFromPromptContentHash: keptPromptContentHash(prompts.amendmentRelevance, { printKindId: item.printKindId }) }) };
 }
 const checkedAmendments = [];
 if (!runFailure) {
@@ -353,8 +374,13 @@ if (!runFailure) {
   }));
 }
 checkedAmendments.sort((left, right) => left.promise.id.localeCompare(right.promise.id) || Number(left.item.documentNumber) - Number(right.item.documentNumber));
-const droppedAmendments = new Map();
-for (const { promise, item, kept } of checkedAmendments) if (!kept) droppedAmendments.set(promise.id, new Set([...(droppedAmendments.get(promise.id) ?? []), item.documentNumber]));
+// Per promise, each checked amendment's decision: dropped, or kept with the
+// paragraphs its package holds (null: the whole text).
+const amendmentDecisions = new Map();
+for (const { promise, item, kept, paragraphs } of checkedAmendments) {
+  if (!amendmentDecisions.has(promise.id)) amendmentDecisions.set(promise.id, new Map());
+  amendmentDecisions.get(promise.id).set(item.documentNumber, { kept, paragraphs });
+}
 
 // 4. One package per promise (step 7), only from a complete run.
 const outputDirectory = resolve(args.output);
@@ -375,10 +401,11 @@ if (!runFailure) {
   for (const [promiseId, keptChanges] of [...keptByPromise].sort(([left], [right]) => left.localeCompare(right))) {
     const promise = promiseById.get(promiseId);
     const excluded = [];
-    const dropped = droppedAmendments.get(promiseId) ?? new Set();
+    const decisions = amendmentDecisions.get(promiseId) ?? new Map();
     const evidencePackage = buildLawChangeEvidencePackage({
       promise, keptChanges, recordsByPrintId, printFirstSeenOn, collectorRun, collectorRunHash, asOf: args.asOf, assessorInstructions,
-      amendmentKept: (documentNumber) => !dropped.has(documentNumber),
+      amendmentKept: (documentNumber) => decisions.get(documentNumber)?.kept ?? true,
+      amendmentParagraphs: (documentNumber) => decisions.get(documentNumber)?.paragraphs ?? null,
       contextOf: (changeId) => lawContext.changes[changeId],
       exclusionOf: (lawChange) => {
         const entry = exclusionOf({ verdicts, promise: { id: promise.id, titleCz: promise.titleCz, originalTextCz: promise.originalTextCz }, lawChange, assessorPrompt });
@@ -426,6 +453,12 @@ const counts = {
   invalidScreenerCount: invalid.screening,
   invalidRelevanceCheckCount: invalid.relevance,
   invalidAmendmentRelevanceCheckCount: invalid.amendmentRelevance,
+  // Pairs decided with a third check, made in this run or read from its cache.
+  thirdRelevanceCheckPairCount: thirdChecks.relevance,
+  thirdAmendmentRelevanceCheckPairCount: thirdChecks.amendmentRelevance,
+  // Kept pairs whose package holds the whole text: no check named a paragraph.
+  wholeTextKeptCount: checkedPairs.filter(({ kept, paragraphs }) => kept && paragraphs === null).length,
+  wholeAmendmentTextKeptCount: checkedAmendments.filter(({ kept, paragraphs }) => kept && paragraphs === null).length,
   screeningFromEarlierPromptCount: fromEarlierPrompt.screening,
   relevanceCheckFromEarlierPromptCount: fromEarlierPrompt.relevance,
   amendmentRelevanceCheckFromEarlierPromptCount: fromEarlierPrompt.amendmentRelevance
@@ -465,27 +498,31 @@ const report = {
     ...(screeningPrompt ? { madeUnderPromptContentHash: screeningPrompt } : {}),
     route
   })),
-  relevanceChecks: checkedPairs.map(({ promise, change, kept, relevancePrompt, checkA, checkB, checkAError, checkBError, route }) => ({
+  relevanceChecks: checkedPairs.map(({ promise, change, kept, paragraphs, relevancePrompt, checkA, checkB, checkAError, checkBError, checkC, checkCError, route }) => ({
     promiseId: promise.id,
     changeId: change.changeId,
     routeBasis: route.routeBasis,
     matchedTagIds: route.matchedTagIds,
     kept,
+    paragraphs,
     checkA,
     checkB,
     checkAError,
     checkBError,
+    ...(checkC !== undefined ? { checkC, checkCError } : {}),
     ...(relevancePrompt ? { madeUnderPromptContentHash: relevancePrompt } : {})
   })),
-  amendmentRelevanceChecks: checkedAmendments.map(({ promise, item, kept, relevancePrompt, checkA, checkB, checkAError, checkBError }) => ({
+  amendmentRelevanceChecks: checkedAmendments.map(({ promise, item, kept, paragraphs, relevancePrompt, checkA, checkB, checkAError, checkBError, checkC, checkCError }) => ({
     promiseId: promise.id,
     documentNumber: item.documentNumber,
     printNumber: item.printNumber,
     kept,
+    paragraphs,
     checkA,
     checkB,
     checkAError,
     checkBError,
+    ...(checkC !== undefined ? { checkC, checkCError } : {}),
     ...(relevancePrompt ? { madeUnderPromptContentHash: relevancePrompt } : {})
   })),
   // Law changes left out because both assessors of an earlier assessment
