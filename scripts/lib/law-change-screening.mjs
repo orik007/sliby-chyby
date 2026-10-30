@@ -211,19 +211,21 @@ export function promiseText(promise) {
   ].join("\n");
 }
 
+// The texts a change is checked with, the same for every promise, made
+// once per change.
+const relevanceTexts = new WeakMap();
+function relevanceTextsOf(change) {
+  if (!relevanceTexts.has(change)) {
+    const paragraphCount = lawChangeParagraphs(change).length;
+    relevanceTexts.set(change, { lawChange: lawChangeText(change), numberedLawChange: lawChangeText(change, { numbered: true }), paragraphCount, mayNameNone: paragraphCount === 0 });
+  }
+  return relevanceTexts.get(change);
+}
+
 // A law change may be relevant without naming a paragraph of its own text
-// only when it has none; one relevant through an amendment names the
-// paragraphs the amendment changes.
+// only when it has none (docs/evidence-pipeline.md, step 6).
 export function buildRelevanceBrief(promise, change) {
-  const paragraphCount = lawChangeParagraphs(change).length;
-  return {
-    pairId: `${promise.id}--${change.changeId}`,
-    promise: promiseText(promise),
-    lawChange: lawChangeText(change),
-    numberedLawChange: lawChangeText(change, { numbered: true }),
-    paragraphCount,
-    mayNameNone: paragraphCount === 0
-  };
+  return { pairId: `${promise.id}--${change.changeId}`, promise: promiseText(promise), ...relevanceTextsOf(change) };
 }
 
 // The model input of a relevance check, as input blocks: the law change

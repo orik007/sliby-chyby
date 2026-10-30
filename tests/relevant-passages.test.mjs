@@ -18,6 +18,7 @@ test("two checks that agree decide; otherwise a third check's vote decides, and 
   assert.deepEqual(relevanceDecision(relevant(3), notRelevant, notRelevant), { kept: false, paragraphs: null }, "two of three find it not relevant");
   assert.deepEqual(relevanceDecision(relevant(3), notRelevant, null), { kept: true, paragraphs: [3] }, "an invalid third check leaves a tie, which keeps the pair");
   assert.deepEqual(relevanceDecision(null, notRelevant, notRelevant), { kept: false, paragraphs: null });
+  assert.deepEqual(relevanceDecision(null, notRelevant, null), { kept: true, paragraphs: null }, "a single valid answer never drops a pair");
   assert.deepEqual(relevanceDecision(null, null, null), { kept: true, paragraphs: null }, "no valid output keeps the whole text");
   assert.deepEqual(relevanceDecision(relevant(), relevant()), { kept: true, paragraphs: null }, "relevant through an amendment alone keeps the whole text");
 });
@@ -124,4 +125,37 @@ test("a third check is cached once valid and asked for again when invalid", asyn
   assert.deepEqual([reused.c, reused.reused, calls], [relevant(2), true, 2]);
   await singleModelCall({ subjectId: "s", fingerprint: { ...fingerprint, inputHash: "j" }, cache, persist, call: valid });
   assert.equal(calls, 3, "another input is asked for");
+});
+
+test("a kept quotation keeps what introduces it, and nothing else is pulled in", () => {
+  const long = (text) => `${text}\n${"Výplň. ".repeat(320)}`;
+  const text = long([
+    "Čl. I",
+    "1. V § 5 se slovo „deset“ nahrazuje slovem „dvanáct“.",
+    "2. Za § 6 se vkládá nový § 6a, který zní:",
+    "„§ 6a",
+    "(1) Nové pravidlo.",
+    "(2) Další pravidlo.“.",
+    "3. V § 7 odstavec 2 zní:",
+    "„(2) Jiné pravidlo.“.",
+    "„(3) Ještě jiné.“.",
+    "Čl. II",
+    "Přechodné ustanovení",
+    "Řízení zahájená přede dnem nabytí účinnosti tohoto zákona se dokončí podle dosavadních právních předpisů."
+  ].join("\n"));
+  const change = { changeId: "3-1", versions: { proposed: { textCz: text } } };
+  const kept = (numbers) => excerptLawChange(change, numbers).change.versions.proposed.textCz.split("\n").filter((line) => !line.startsWith("[…"));
+  // A paragraph inside a quotation keeps the instruction that opens it.
+  assert.deepEqual(kept([5]), ["2. Za § 6 se vkládá nový § 6a, který zní:", "„§ 6a", "(1) Nové pravidlo."]);
+  // A quotation right after another keeps the same introduction.
+  assert.deepEqual(kept([9]), ["3. V § 7 odstavec 2 zní:", "„(3) Ještě jiné.“."]);
+  // A transitional provision is no quotation: no instruction before it is
+  // pulled in.
+  assert.deepEqual(kept([12]), ["Řízení zahájená přede dnem nabytí účinnosti tohoto zákona se dokončí podle dosavadních právních předpisů."]);
+  // The same text elsewhere in the same version is not kept with it.
+  const repeated = { changeId: "3-2", versions: { proposed: { textCz: long(["Čl. I", "1. V § 5 se zrušuje.", "Čl. II", "1. V § 9 se zrušuje."].join("\n")) } } };
+  assert.deepEqual(excerptLawChange(repeated, [1]).change.versions.proposed.textCz.split("\n").filter((line) => !line.startsWith("[…")), ["Čl. I"]);
+  // An amendment keeps the instruction its kept quotation belongs to.
+  const amendment = long(["V části první čl. I bod 4 zní:", "„4. V § 2 se číslo „5“ nahrazuje číslem „6“.“.", "Odůvodnění"].join("\n"));
+  assert.equal(excerptAmendmentText(amendment, [2]).textCz.split("\n").filter((line) => !line.startsWith("[…")).join("\n"), "V části první čl. I bod 4 zní:\n„4. V § 2 se číslo „5“ nahrazuje číslem „6“.“.");
 });
