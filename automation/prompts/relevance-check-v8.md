@@ -12,7 +12,7 @@ A change is **relevant** when its content could deliver the promise, deliver a r
 - Do not make the promise broader or narrower than its title and wording; a neighbouring sentence in the wording is context, not part of the commitment.
 - Do not judge whether the change is good, which party supports it, or whether it passed.
 - Answer relevant only when you can name what in the text could deliver or contradict the promise.
-- When the change is relevant, list in `paragraphs` the number of every paragraph that could deliver or contradict the promise or a part of it, in every version, and of each paragraph needed to read them: the paragraph that introduces a list or names the provision a point amends, and the paragraphs of the same new provision. Leave out every other paragraph. Leave `paragraphs` empty only when the text is not available or the change is relevant only through an amendment to it.
+- When the change is relevant, list in `paragraphs` the number of every paragraph that could deliver or contradict the promise or a part of it, in every version, and of each paragraph needed to read them: the paragraph that introduces a list or names the provision a point amends, and the paragraphs of the same new provision. When the change is relevant only through an amendment to it, list the paragraphs of the proposed text that the amendment changes. Leave out every other paragraph. Leave `paragraphs` empty only when the text is not available.
 - When the change is not relevant, leave `paragraphs` empty.
 
 Give a one-sentence Czech reason in `reasonCz` that names what in the change does or does not concern the promise.

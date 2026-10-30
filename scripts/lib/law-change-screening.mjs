@@ -212,7 +212,8 @@ export function promiseText(promise) {
 }
 
 // A law change may be relevant without naming a paragraph of its own text
-// only when it has none, or through an amendment to it.
+// only when it has none; one relevant through an amendment names the
+// paragraphs the amendment changes.
 export function buildRelevanceBrief(promise, change) {
   const paragraphCount = lawChangeParagraphs(change).length;
   return {
@@ -221,7 +222,7 @@ export function buildRelevanceBrief(promise, change) {
     lawChange: lawChangeText(change),
     numberedLawChange: lawChangeText(change, { numbered: true }),
     paragraphCount,
-    mayNameNone: paragraphCount === 0 || (change.amendments ?? []).length > 0
+    mayNameNone: paragraphCount === 0
   };
 }
 

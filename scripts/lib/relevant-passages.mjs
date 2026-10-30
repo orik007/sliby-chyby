@@ -38,8 +38,8 @@ export function numberedText(textCz, offset = 0) {
 /**
  * Validates a relevance check that names paragraphs: `paragraphs` lists
  * distinct paragraph numbers from 1 to `paragraphCount`. A relevant answer
- * names at least one, unless `mayNameNone` (the text is not available, or
- * the change is relevant only through an amendment to it). A not relevant
+ * names at least one, unless `mayNameNone` (the text is not available). A
+ * not relevant
  * answer names none; one kept from an earlier prompt that had no
  * `paragraphs` is read as naming none, and a relevant one without them is
  * invalid, so it is asked for again.

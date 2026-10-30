@@ -142,9 +142,12 @@ test("a relevance check names the relevant paragraphs, and one kept from an earl
   // change not relevant, asked for again when relevant.
   assert.deepEqual(validate({ relevant: false, reasonCz: "x" }), { relevant: false, reasonCz: "x", paragraphs: [] });
   assert.throws(() => validate({ relevant: true, reasonCz: "x" }), /list the relevant paragraphs/);
-  // A change with amendments may be relevant through one of them alone.
+  // A change relevant through an amendment alone names the paragraphs the
+  // amendment changes; only a change without a text names none.
   const amended = relevanceValidator(buildRelevanceBrief(fiscalPromise, { ...change, amendments: [{ documentNumber: "1", label: "A1", presentedOn: "2026-01-01", presenterCz: "Poslanec", textCz: "Bod 1 se zrušuje." }] }));
-  assert.deepEqual(amended({ relevant: true, paragraphs: [], reasonCz: "x" }).paragraphs, []);
+  assert.throws(() => amended({ relevant: true, paragraphs: [], reasonCz: "x" }), /names its relevant paragraphs/);
+  const titleOnly = relevanceValidator(buildRelevanceBrief(fiscalPromise, { ...change, versions: { proposed: { ...change.versions.proposed, textCz: null } } }));
+  assert.deepEqual(titleOnly({ relevant: true, paragraphs: [], reasonCz: "x" }).paragraphs, []);
 });
 
 test("screening sends the taxonomy as its own cached block before the law change", async () => {
