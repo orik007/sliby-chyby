@@ -85,6 +85,8 @@ export async function requestValidatedOutput({ provider, apiKey, model, prompt, 
       error.provider = response.provider;
       error.model = response.model;
       error.usage = response.usage;
+      // The rejected answer itself, for the audit record.
+      error.output = response.output ?? null;
     }
     throw error;
   }

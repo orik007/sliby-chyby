@@ -356,7 +356,7 @@ test("a law change both assessors found not relevant is left out, and the packag
   });
   const full = build();
   const [first, second] = full.evidence.filter(({ role }) => role === "law-change").map(({ id }) => id);
-  const assessorPrompt = { version: "assessor-v27", contentHash: "a".repeat(64) };
+  const assessorPrompt = { version: "assessor-v28", contentHash: "a".repeat(64) };
   const review = (relevantSecond) => ({ changeRelevance: [{ evidenceId: first, relevant: true, reasonCz: "Souvisí.", effectCz: "Zpřísňuje." }, { evidenceId: second, relevant: relevantSecond, reasonCz: relevantSecond ? "Souvisí." : "Jiné téma.", effectCz: "" }] });
   const audit = (reviewA, reviewB, prompt = assessorPrompt) => ({ prompts: { assessor: prompt }, validatedAssessments: { "assessor-a": reviewA, "assessor-b": reviewB } });
   const verdictsOf = (auditRecord, evidencePackage = full) => {
@@ -385,7 +385,7 @@ test("a law change both assessors found not relevant is left out, and the packag
     assert.equal(build(exclusionFrom(verdictsOf(auditRecord))).excludedLawChanges, undefined);
   }
   // Another assessor prompt or a changed text brings the change back.
-  assert.equal(build(exclusionFrom(verdictsOf(both), { version: "assessor-v27", contentHash: "b".repeat(64) })).excludedLawChanges, undefined);
+  assert.equal(build(exclusionFrom(verdictsOf(both), { version: "assessor-v28", contentHash: "b".repeat(64) })).excludedLawChanges, undefined);
   assert.equal(build(exclusionFrom(verdictsOf(both)), [lawChange(1), lawChange(2, "Zákon č. 218/2000 Sb. se mění takto: jinak.")]).excludedLawChanges, undefined);
   // A change whose context was trimmed in the assessed package gives no verdict.
   const trimmed = { ...full, generation: { ...full.generation, contextOmissions: [{ evidenceId: second, version: "proposed", suppliedCount: 0, omitted: [] }] } };
@@ -496,4 +496,25 @@ test("an amendment both checks found not relevant to the promise leaves its pack
   const pkg = buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: mixedChanges, recordsByPrintId: mixed.recordsByPrintId, printFirstSeenOn, collectorRun: mixedRun, asOf: "2026-06-15", amendmentKept: (number) => number !== "775" });
   assert.deepEqual(pkg.evidence.find(({ id }) => id === "psp--both-vote").structuredFacts.amendmentEvidenceIds, ["psp-core-2025--amendment-text-774"]);
   assert.deepEqual(pkg.evidence.filter(({ role }) => role === "amendment").map(({ id }) => id), ["psp-core-2025--amendment-text-774"]);
+});
+
+test("a change relevant only through an amendment holds none of its own text and only the conduct on its kept amendments", async () => {
+  const { conductOfRun, lawChangesOfRun } = await import("../scripts/lib/topic-evidence-package.mjs");
+  const run = { ...collectorRun, records: [amendmentRecord(774), amendmentRecord(775), attributedVoteRecord()] };
+  const { recordsByPrintId, amendmentRecords } = conductOfRun(run, "2026-06-15", [fiscalPromise.partyId]);
+  const changes = lawChangesOfRun({ prints: { 43200: { changes: [lawChange(1)] } } }, recordsByPrintId, amendmentRecords);
+  const build = (amendmentOnly, amendmentKept) => buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: changes.map((change) => ({ change, route, amendmentOnly })), recordsByPrintId, printFirstSeenOn, collectorRun: run, asOf: "2026-06-15", amendmentKept });
+  const conductIds = (pkg) => pkg.evidence.filter(({ role }) => role === "conduct-evidence").map(({ id }) => id).sort();
+  // The change kept for its own text holds the decisive vote too.
+  assert.ok(conductIds(build(false, () => true)).includes("psp--fiscal-vote-1"));
+  const pkg = build(true, (number) => number === "774");
+  assert.deepEqual(conductIds(pkg), ["psp-core-2025--amendment-774"], "only the conduct on the kept amendment");
+  const lawChangeEvidence = pkg.evidence.find(({ role }) => role === "law-change");
+  assert.equal(lawChangeEvidence.structuredFacts.relevantThroughAmendmentsOnly, true);
+  assert.match(lawChangeEvidence.locator, /; none of its own text, only the amendments that concern the promise$/);
+  for (const entry of Object.values(lawChangeEvidence.structuredFacts.versions)) {
+    if (entry.excerpt) assert.equal(entry.excerpt.selectedCount, 0);
+    assert.equal(entry.contextCz, undefined);
+  }
+  assert.equal(build(true, () => false), null, "with none of its amendments kept, the change leaves");
 });

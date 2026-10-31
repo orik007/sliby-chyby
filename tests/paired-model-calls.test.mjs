@@ -3,7 +3,7 @@ import { appendFile, mkdtemp, readdir, readFile, rm, writeFile } from "node:fs/p
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { assertKeptPromptCached, cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, shardedCachePersister } from "../scripts/lib/paired-model-calls.mjs";
+import { assertKeptPromptCached, cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, reportedInvalidOutput, shardedCachePersister } from "../scripts/lib/paired-model-calls.mjs";
 import { ModelOutputError } from "../scripts/lib/model-output.mjs";
 
 const fingerprint = { inputHash: "h1", promptContentHash: "p1", provider: "openai", modelA: "a", modelB: "b" };
@@ -158,4 +158,13 @@ test("a sharded model cache keeps one journal per subject group and loads them a
   assert.deepEqual((await readdir(directory, { recursive: true })).filter((name) => name.endsWith(".jsonl")).sort(), ["ano-2025/ano-2025-a.jsonl", "spd-2025/spd-2025-b.jsonl"]);
   const reloaded = await loadShardedModelCache(directory, fileOf);
   assert.deepEqual(reloaded.entries, cache.entries);
+});
+
+test("a report keeps a short rejected answer whole and cuts a long one", () => {
+  const short = { relevant: true, paragraphs: [], reasonCz: "Krátké." };
+  assert.equal(reportedInvalidOutput(short), short);
+  const long = { relevant: true, paragraphs: Array.from({ length: 2_000 }, (_, index) => index + 1), reasonCz: "Dlouhé." };
+  const reported = reportedInvalidOutput(long);
+  assert.equal(reported.truncatedJson, JSON.stringify(long).slice(0, 4_000));
+  assert.equal(reported.length, JSON.stringify(long).length);
 });

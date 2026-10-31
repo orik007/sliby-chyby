@@ -1,12 +1,13 @@
 import { existsSync } from "node:fs";
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { cp, mkdtemp, readFile, readdir, rm } from "node:fs/promises";
+import { cp, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import test from "node:test";
 import { pathToFileURL } from "node:url";
 import { charactersPerToken, longContextInputTokens, maxOutputTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
+import { relevancePromptKeeps } from "../scripts/lib/law-change-screening.mjs";
 
 // One real Chamber print (tisk 189, the revenue-registration bill) taken from
 // the collector and print-text runs of 25 September 2026: its six law
@@ -449,4 +450,31 @@ test("when the two relevance checks disagree, a third check with the first model
   assert.deepEqual(againCalls.filter(({ name }) => name === "law_change_relevance" || name === "amendment_relevance"), []);
   assert.deepEqual(again.relevanceChecks, report.relevanceChecks);
   assert.equal(again.counts.packageCount, 2);
+
+  // Answers made under the prompt the current one keeps, the third answer
+  // included, are kept in the run that first keeps them and in every later
+  // run.
+  const current = third[0].promptContentHash;
+  for (const directory of ["relevance-checks", "relevance-third-checks"]) {
+    const files = (await readdir(join(work, "tag-cache", directory), { recursive: true })).filter((name) => name.endsWith(".jsonl"));
+    for (const name of files) {
+      const path = join(work, "tag-cache", directory, name);
+      await writeFile(path, (await readFile(path, "utf8")).replaceAll(current, relevancePromptKeeps.contentHash));
+    }
+  }
+  for (const [index, label] of ["first-kept", "later-kept"].entries()) {
+    const keptLog = join(work, `${label}-calls.jsonl`);
+    await run(["--import", stub, script("run-topic-routing.mjs"),
+      "--collector-run", join(fixtures, "collector-run.json"),
+      "--print-parts", join(fixtures, "print-parts.json"),
+      "--law-context", join(work, "law-context", "law-context.json"),
+      "--tag-cache", join(work, "tag-cache"),
+      "--as-of", "2026-09-25",
+      "--output", join(work, label)], { cwd: root, environment: { STUB_OPENAI_LOG: keptLog, ...models } });
+    const kept = await readJson(join(work, label, "topic-routing-report.json"));
+    const keptCalls = existsSync(keptLog) ? await modelCalls(keptLog) : [];
+    assert.deepEqual(keptCalls.filter(({ name }) => name === "law_change_relevance"), [], `${label}: no relevance check is asked for again`);
+    assert.equal(kept.counts.thirdRelevanceCheckPairCount, pairs);
+    assert.ok(kept.relevanceChecks.every(({ checkC, madeUnderPromptContentHash }) => checkC?.relevant === true && madeUnderPromptContentHash === relevancePromptKeeps.contentHash), `${label}: run ${index + 1} keeps every answer`);
+  }
 });

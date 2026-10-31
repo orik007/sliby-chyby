@@ -7,7 +7,7 @@ export { versionOfChange };
 import { charactersPerToken, estimateRequestTokens, estimateTokens, maxPackageRequestTokens, maxRequestInputTokens } from "./assessment-config.mjs";
 import { withContext } from "./law-context.mjs";
 import { sectionGroupHolds } from "./amending-points.mjs";
-import { excerptAmendmentText, excerptLawChange } from "./relevant-passages.mjs";
+import { excerptAmendmentText, excerptLawChange, withoutOwnText } from "./relevant-passages.mjs";
 import { sectionsNamedInAmendment } from "./psp-amendments.mjs";
 import { isRegulationKind, regulationSourceId } from "./regulations.mjs";
 import { resolutionKind, resolutionPartName, resolutionSourceId } from "./government-resolution-kind.mjs";
@@ -266,8 +266,10 @@ export function senateResolutionEvidenceId(change, partNumber) {
   return `psp-core-2025--senate-resolution-${change.printId}-${partNumber}`;
 }
 
-// What a law change's locator adds when it holds only some paragraphs.
+// What a law change's locator adds when it holds only some paragraphs, or
+// none of its own text.
 function excerptNote(change) {
+  if (change.relevantThroughAmendmentsOnly) return "; none of its own text, only the amendments that concern the promise";
   return Object.values(change.versions).some(({ excerpt }) => excerpt && excerpt.selectedCount < excerpt.paragraphCount) ? "; only the paragraphs that concern the promise" : "";
 }
 
@@ -309,7 +311,9 @@ function evidenceFromLawChange(change, route, publishedAt, senateResolutionIds) 
       senateResolutionEvidenceIds: senateResolutionIds,
       // The amendments that concern this change, by the hash of their text,
       // so a verdict on the change no longer holds when they change.
-      ...(change.amendments?.length > 0 ? { amendments: amendmentHashes(change) } : {})
+      ...(change.amendments?.length > 0 ? { amendments: amendmentHashes(change) } : {}),
+      // Relevant only through an amendment to it: none of its own text.
+      ...(change.relevantThroughAmendmentsOnly ? { relevantThroughAmendmentsOnly: true } : {})
     },
     sourceRecordHash: sha256(change.versions),
     matchBasis: {
@@ -614,9 +618,11 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
   // The context of each change as its package holds it: of the provisions its
   // kept paragraphs amend.
   const contexts = new Map();
-  for (const { change: fullChange, route, paragraphs = null } of [...keptChanges].sort((left, right) => printOrder(left.change) - printOrder(right.change) || left.change.changeId.localeCompare(right.change.changeId, "en", { numeric: true }))) {
+  for (const { change: fullChange, route, paragraphs = null, amendmentOnly = false } of [...keptChanges].sort((left, right) => printOrder(left.change) - printOrder(right.change) || left.change.changeId.localeCompare(right.change.changeId, "en", { numeric: true }))) {
+    // A change relevant only through an amendment to it keeps only the conduct
+    // on its kept amendments, and none of its own text.
     const conduct = attributableConductOnChange(recordsByPrintId.get(fullChange.printId) ?? [], promise, fullChange)
-      .filter(({ record }) => !isAmendmentConduct(record) || amendmentDocumentNumbers(record).length === 0 || amendmentDocumentNumbers(record).some(amendmentKept));
+      .filter(({ record }) => (amendmentOnly ? isAmendmentConduct(record) && amendmentDocumentNumbers(record).some(amendmentKept) : !isAmendmentConduct(record) || amendmentDocumentNumbers(record).length === 0 || amendmentDocumentNumbers(record).some(amendmentKept)));
     if (conduct.length === 0) continue;
     const lastVersion = versionKeys[Math.max(...conduct.map(({ version }) => versionKeys.indexOf(version.version)))];
     // A later text adds nothing to judging this conduct and may not have
@@ -624,7 +630,10 @@ export function buildLawChangeEvidencePackage({ promise, keptChanges, recordsByP
     // on the change as its relevance checks read it.
     let change = changeThroughVersion(fullChange, lastVersion);
     const fullContext = contextOf?.(fullChange.changeId) ?? null;
-    if (paragraphs) {
+    if (amendmentOnly) {
+      change = withoutOwnText(change);
+      contexts.set(change.changeId, null);
+    } else if (paragraphs) {
       const excerpt = excerptLawChange(change, paragraphs, fullContext, fullChange);
       change = excerpt.context ? withContext(excerpt.change, excerpt.context) : excerpt.change;
       contexts.set(change.changeId, excerpt.context);

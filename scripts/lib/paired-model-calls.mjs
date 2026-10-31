@@ -118,7 +118,7 @@ async function isolateInvalidOutput(call) {
   } catch (error) {
     // An invalid model output fails only that side; the paid call's usage
     // is kept for the spend report. Any other failure stops the run.
-    if (error instanceof ModelOutputError) return { response: null, error: error.message, model: error.model ?? null, usage: error.usage ?? null };
+    if (error instanceof ModelOutputError) return { response: null, error: error.message, model: error.model ?? null, usage: error.usage ?? null, invalidOutput: error.output ?? null };
     throw error;
   }
 }
@@ -202,6 +202,9 @@ export async function pairedModelCall({ subjectId, fingerprint, cache, persist, 
     b: attemptB.response?.output ?? null,
     errorA: attemptA.error,
     errorB: attemptB.error,
+    // A rejected answer, as the model gave it.
+    invalidOutputA: attemptA.invalidOutput ?? null,
+    invalidOutputB: attemptB.invalidOutput ?? null,
     modelA: attemptA.response?.model ?? attemptA.model ?? fingerprint.modelA,
     modelB: attemptB.response?.model ?? attemptB.model ?? fingerprint.modelB,
     usageByModel: called.map((attempt) => attempt.response ?? attempt).filter((entry) => entry.usage).map(({ model, usage }) => ({ model, usage })),
@@ -218,13 +221,17 @@ export async function pairedModelCall({ subjectId, fingerprint, cache, persist, 
  * One call on a subject with a durable cache: the third relevance check, made
  * only when the two independent checks do not agree. `fingerprint` covers the
  * input hash, the prompt hash, the provider, and the model; a cached answer is
- * reused only when all of it matches, and is validated again with
- * `revalidate`. A valid answer is cached at once; an invalid one is returned
- * as null and asked for again in the next run.
+ * reused only when all of it matches, or all but the prompt hash and it was
+ * made under `keepFromPromptContentHash` (docs/evidence-pipeline.md, Audit and
+ * cost control), and is validated again with `revalidate`. A valid answer is
+ * cached at once; an invalid one is returned as null and asked for again in
+ * the next run.
  */
-export async function singleModelCall({ subjectId, fingerprint, cache, persist, call, revalidate = (output) => output }) {
+export async function singleModelCall({ subjectId, fingerprint, cache, persist, call, revalidate = (output) => output, keepFromPromptContentHash = null }) {
   const cached = cache.entries[subjectId];
-  if (cached?.c != null && Object.entries(fingerprint).every(([key, value]) => cached[key] === value)) {
+  const { promptContentHash, ...rest } = fingerprint;
+  const promptMatches = cached && (cached.promptContentHash === promptContentHash || (keepFromPromptContentHash && cached.promptContentHash === keepFromPromptContentHash));
+  if (cached?.c != null && promptMatches && Object.entries(rest).every(([key, value]) => cached[key] === value)) {
     try {
       return { c: revalidate(cached.c), error: null, model: fingerprint.model, usageByModel: [], invalidCount: 0, reused: true };
     } catch (error) {
@@ -240,11 +247,21 @@ export async function singleModelCall({ subjectId, fingerprint, cache, persist, 
   return {
     c: attempt.response?.output ?? null,
     error: attempt.error,
+    invalidOutput: attempt.invalidOutput ?? null,
     model: attempt.response?.model ?? attempt.model ?? fingerprint.model,
     usageByModel: usageSource.usage ? [{ model: usageSource.model ?? fingerprint.model, usage: usageSource.usage }] : [],
     invalidCount: attempt.error ? 1 : 0,
     reused: false
   };
+}
+
+const invalidOutputMaxLength = 4_000;
+
+// A rejected answer as a report keeps it: whole, or its JSON cut to the first
+// 4,000 characters with its full length.
+export function reportedInvalidOutput(output) {
+  const text = JSON.stringify(output);
+  return text.length <= invalidOutputMaxLength ? output : { truncatedJson: text.slice(0, invalidOutputMaxLength), length: text.length };
 }
 
 export function usageTotalsByModel(usageEntries) {

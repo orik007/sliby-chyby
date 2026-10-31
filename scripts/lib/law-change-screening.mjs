@@ -15,17 +15,17 @@ import { lawChangeParagraphs, numberedText, textParagraphs, validatePassageOutpu
  * relevant to one promise, and which of its paragraphs are.
  */
 export const screeningPromptVersion = "law-change-screener-v6";
-export const relevancePromptVersion = "relevance-check-v8";
+export const relevancePromptVersion = "relevance-check-v9";
 export const amendmentRelevancePromptVersion = "amendment-relevance-v2";
 
 // What each prompt keeps of the results of the prompt before it:
 // null, or `{ contentHash, rerun }` (docs/evidence-pipeline.md, Audit and
 // cost control).
 export const screeningPromptKeeps = null;
-// The relevance checks keep every pair their earlier prompt found not
-// relevant: an answer that says relevant names no paragraphs, fails the
-// current output rules, and is asked for again (relevant-passages.mjs).
-export const relevancePromptKeeps = { contentHash: "f3b9fd8ce4240bab8d397fc2b1cf71876ae38451e047ec408c08b3b7bde09cb0", rerun: [] };
+// The law-change relevance checks keep every complete pair of their earlier
+// prompt that the current output rules accept; a pair with an invalid
+// answer is asked for again (relevant-passages.mjs).
+export const relevancePromptKeeps = { contentHash: "238a4bbe19cbbdd5acac6e156d57e8e319c625cc8e6f7f2c24ae1ffe71e0987b", rerun: [] };
 export const amendmentRelevancePromptKeeps = { contentHash: "7455bc726a4eba5bf53a1883e24c1abbf2abc714b0f71580e1a46bb5e46110a7", rerun: [] };
 
 // The kinds of law change a prompt's `rerun` names.
@@ -217,7 +217,7 @@ const relevanceTexts = new WeakMap();
 function relevanceTextsOf(change) {
   if (!relevanceTexts.has(change)) {
     const paragraphCount = lawChangeParagraphs(change).length;
-    relevanceTexts.set(change, { lawChange: lawChangeText(change), numberedLawChange: lawChangeText(change, { numbered: true }), paragraphCount, mayNameNone: paragraphCount === 0 });
+    relevanceTexts.set(change, { lawChange: lawChangeText(change), numberedLawChange: lawChangeText(change, { numbered: true }), paragraphCount, mayNameNone: paragraphCount === 0, amendmentCount: (change.amendments ?? []).length });
   }
   return relevanceTexts.get(change);
 }
@@ -250,6 +250,14 @@ const relevanceSchema = {
   additionalProperties: false
 };
 
+// A law-change check also says whether the change is relevant only through
+// an amendment to it.
+const lawChangeRelevanceSchema = {
+  ...relevanceSchema,
+  properties: { relevant: { type: "boolean" }, throughAmendment: { type: "boolean" }, paragraphs: { type: "array", items: { type: "integer" } }, reasonCz: { type: "string" } },
+  required: ["relevant", "throughAmendment", "paragraphs", "reasonCz"]
+};
+
 /** The output rules of the relevance checks of one brief. */
 export function relevanceValidator(brief) {
   return (output) => validatePassageOutput(output, brief);
@@ -264,7 +272,7 @@ export async function requestRelevance({ provider, apiKey, model, brief, prompt,
     prompt,
     inputBlocks: relevanceRequestBlocks(brief),
     name: "law_change_relevance",
-    schema: relevanceSchema,
+    schema: lawChangeRelevanceSchema,
     metadata: { subjectId: brief.pairId.slice(0, 64), promptVersion: prompt.version },
     logLabel: `${label} ${brief.pairId}`,
     validate: relevanceValidator(brief)

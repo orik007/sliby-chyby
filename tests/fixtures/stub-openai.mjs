@@ -36,8 +36,9 @@ function answer(name, input, model) {
     if (process.env.STUB_OPENAI_SPLIT_RELEVANCE) {
       const key = input.blocks.join("\n");
       relevanceAnswers.set(key, (relevanceAnswers.get(key) ?? 0) + 1);
-      if (relevanceAnswers.get(key) === 2) return { relevant: false, paragraphs: [], reasonCz: "Netýká se slibu." };
+      if (relevanceAnswers.get(key) === 2) return { relevant: false, ...(name === "law_change_relevance" ? { throughAmendment: false } : {}), paragraphs: [], reasonCz: "Netýká se slibu." };
     }
+    if (name === "law_change_relevance") return { relevant: true, throughAmendment: false, paragraphs: numbers, reasonCz: "Změna se týká slibu." };
     return { relevant: true, paragraphs: numbers, reasonCz: "Změna se týká slibu." };
   }
   if (name === "slava_assessment") {

@@ -65,7 +65,7 @@ test("the screening and relevance prompts state the conservative rules", async (
   assert.match(screening.instructions, /When in doubt, the change is substantive/);
   assert.match(screening.instructions, /even one number/);
   const relevance = await loadRelevancePrompt();
-  assert.equal(relevance.version, "relevance-check-v8");
+  assert.equal(relevance.version, "relevance-check-v9");
   assert.doesNotMatch(relevance.instructions, /When in doubt, answer relevant/, "a change that could affect the promise only indirectly or possibly is not relevant");
   assert.match(relevance.instructions, /Answer relevant only when you can name what in the text could deliver or contradict the promise/);
   assert.match(relevance.instructions, /list in `paragraphs` the number of every paragraph/);
@@ -77,7 +77,7 @@ test("a prompt keeps the earlier prompt's results except on the kinds of law cha
   assert.equal(current.keeps, null, "the active screening prompt keeps no earlier results");
   // The relevance prompts keep the pairs their earlier prompts found not
   // relevant, on every kind of law change.
-  assert.deepEqual((await loadRelevancePrompt()).keeps, { contentHash: "f3b9fd8ce4240bab8d397fc2b1cf71876ae38451e047ec408c08b3b7bde09cb0", rerun: [] });
+  assert.deepEqual((await loadRelevancePrompt()).keeps, { contentHash: "238a4bbe19cbbdd5acac6e156d57e8e319c625cc8e6f7f2c24ae1ffe71e0987b", rerun: [] });
   assert.deepEqual((await loadAmendmentRelevancePrompt()).keeps, { contentHash: "7455bc726a4eba5bf53a1883e24c1abbf2abc714b0f71580e1a46bb5e46110a7", rerun: [] });
   assert.equal(keptPromptContentHash(current, change), null);
   const earlier = "a".repeat(64);
@@ -140,12 +140,17 @@ test("a relevance check names the relevant paragraphs, and one kept from an earl
   assert.throws(() => validate({ relevant: false, paragraphs: [3], reasonCz: "x" }), /names no paragraph/);
   // A result of the earlier prompt has no paragraphs: kept when it found the
   // change not relevant, asked for again when relevant.
-  assert.deepEqual(validate({ relevant: false, reasonCz: "x" }), { relevant: false, reasonCz: "x", paragraphs: [] });
+  assert.deepEqual(validate({ relevant: false, reasonCz: "x" }), { relevant: false, reasonCz: "x", throughAmendment: false, paragraphs: [] });
   assert.throws(() => validate({ relevant: true, reasonCz: "x" }), /list the relevant paragraphs/);
-  // A change relevant through an amendment alone names the paragraphs the
-  // amendment changes; only a change without a text names none.
+  // A change relevant through an amendment alone says so and names none of
+  // its own paragraphs; only a change with amendments can be, and only a
+  // change without a text otherwise names none.
   const amended = relevanceValidator(buildRelevanceBrief(fiscalPromise, { ...change, amendments: [{ documentNumber: "1", label: "A1", presentedOn: "2026-01-01", presenterCz: "Poslanec", textCz: "Bod 1 se zrušuje." }] }));
-  assert.throws(() => amended({ relevant: true, paragraphs: [], reasonCz: "x" }), /names its relevant paragraphs/);
+  assert.throws(() => amended({ relevant: true, throughAmendment: false, paragraphs: [], reasonCz: "x" }), /names its relevant paragraphs/);
+  assert.deepEqual(amended({ relevant: true, throughAmendment: true, paragraphs: [], reasonCz: "x" }).throughAmendment, true);
+  assert.throws(() => amended({ relevant: true, throughAmendment: true, paragraphs: [3], reasonCz: "x" }), /names no paragraph of its own text/);
+  assert.throws(() => amended({ relevant: false, throughAmendment: true, paragraphs: [], reasonCz: "x" }), /not relevant through an amendment/);
+  assert.throws(() => validate({ relevant: true, throughAmendment: true, paragraphs: [], reasonCz: "x" }), /without amendments cannot be relevant through an amendment/);
   const titleOnly = relevanceValidator(buildRelevanceBrief(fiscalPromise, { ...change, versions: { proposed: { ...change.versions.proposed, textCz: null } } }));
   assert.deepEqual(titleOnly({ relevant: true, paragraphs: [], reasonCz: "x" }).paragraphs, []);
 });
@@ -208,7 +213,7 @@ test("a relevance check reads the exact promise with its tests and the law-chang
       [brief.promise, { mode: "explicit" }]
     ]);
     assert.deepEqual(relevanceInputBlocks(brief), [`Law change:\n\n${brief.lawChange}`, brief.promise]);
-    assert.deepEqual(mock.body().text.format.schema.required, ["relevant", "paragraphs", "reasonCz"]);
+    assert.deepEqual(mock.body().text.format.schema.required, ["relevant", "throughAmendment", "paragraphs", "reasonCz"]);
   } finally {
     globalThis.fetch = originalFetch;
   }
