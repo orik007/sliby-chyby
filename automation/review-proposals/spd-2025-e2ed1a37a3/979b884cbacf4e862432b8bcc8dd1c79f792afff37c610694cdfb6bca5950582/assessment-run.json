@@ -1,0 +1,270 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T21-23-16-415Z--6993ccfb1068",
+  "evaluatedAt": "2026-10-06T21:23:16.415Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-e2ed1a37a3/6993ccfb10684e84958aaee53e3f9df370c39b9131f4b6e5be0528401c835408.json",
+  "packageHash": "6993ccfb10684e84958aaee53e3f9df370c39b9131f4b6e5be0528401c835408",
+  "assessmentContentHash": "1593e24b23229d3fc67325c2f103956f14faa5611791d194f89beb6b9707cfdf",
+  "assessmentFingerprint": "979b884cbacf4e862432b8bcc8dd1c79f792afff37c610694cdfb6bca5950582",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-e2ed1a37a3",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment uncertainty contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_068306807e872ec6016ac56664d40c87d28ae3c17cdcd3d776",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 13171,
+            "input_tokens_details": {
+              "cache_write_tokens": 9201,
+              "cached_tokens": 3967
+            },
+            "output_tokens": 1692,
+            "output_tokens_details": {
+              "reasoning_tokens": 1117
+            },
+            "total_tokens": 14863
+          },
+          "output": {
+            "promiseId": "spd-2025-e2ed1a37a3",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43195-3",
+                "relevant": false,
+                "reasonCz": "Text mění termíny účinnosti ustanovení jiné novely, ale dodaný kontext neuvádí jejich obsah ani spojení s odměnami pěstounů či platy sociálních pracovníků.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43198-4",
+                "relevant": false,
+                "reasonCz": "Text prodlužuje přechodné lhůty pro výplatu vybraných sociálních dávek a mění termíny účinnosti souvisejících ustanovení, nikoli odměny pěstounů nebo platy sociálních pracovníků.",
+                "effectCz": ""
+              }
+            ],
+            "status": "no-progress",
+            "evidenceSufficient": false,
+            "citedEvidenceIds": [
+              "spd-2025-e2ed1a37a3--source",
+              "psp-core-2025--law-change-43195-3",
+              "psp-core-2025--law-change-43198-4",
+              "psp-core-2025--vote-86695",
+              "psp-core-2025--vote-86697",
+              "psp-core-2025--vote-87038",
+              "psp-core-2025--senate-resolution-43195-3"
+            ],
+            "explanationCz": "Program SPD slibuje zvýšit odměny pěstounů a platy sociálních pracovníků. Doložená hlasování se týkala změn termínů u jiných právních předpisů a z jejich zveřejněného obsahu nelze potvrdit, že by zvyšovala či snižovala tyto odměny nebo platy. Proto zatím není doložen podstatný posun ve slibu; u části jedné novely navíc chybí obsah ustanovení, jejichž účinnost měnila.",
+            "confidence": "low",
+            "uncertainties": [
+              "U novely projednávané jako sněmovní tisk 85 dodaný kontext neidentifikuje ustanovení, jejichž termíny účinnosti se měnily. Nelze proto zcela vyloučit, že se některé z nich týkalo odměn pěstounů nebo platů sociálních pracovníků; hlasování pro novelu i pozdější hlasování proti jejímu přijetí po vrácení Senátem nelze bez tohoto obsahu spolehlivě posoudit ve vztahu ke slibu."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-e2ed1a37a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění termíny účinnosti částí zákona o dávce státní sociální pomoci, ale dodané znění nespojuje tyto změny se zvýšením odměn pěstounů ani platů sociálních pracovníků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text prodlužuje některé přechodné lhůty pro dosavadní dávky a posouvá účinnost dalších ustanovení, nikoli odměny pěstounů nebo platy sociálních pracovníků.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-e2ed1a37a3--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43198-4",
+        "psp-core-2025--vote-86695",
+        "psp-core-2025--vote-86697",
+        "psp-core-2025--vote-87038",
+        "psp-core-2025--senate-resolution-43195-3"
+      ],
+      "explanationCz": "SPD ve svém volebním programu slíbila zvýšit odměny pěstounů a platy sociálních pracovníků. Její poslanci hlasovali pro dva návrhy upravující termíny změn systému sociálních dávek; po zamítnutí jednoho návrhu Senátem pak hlasovali proti jeho dalšímu přijetí ve Sněmovně. Dodané texty ale nedokládají, že by tyto návrhy měnily odměny pěstounů nebo platy sociálních pracovníků. Proto z tohoto balíčku nelze ověřit podstatný posun ve slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "U jedné změny chybí v podkladech znění ustanovení, jejichž termíny se posouvaly; nelze proto vyloučit případnou nepřímou souvislost se slibem, ale dodané informace ji nedokládají.",
+        "Podklady neobsahují opatření ani hlasování, které by přímo dokládalo zvýšení odměn pěstounů nebo platů sociálních pracovníků."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-e2ed1a37a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Změna upravuje odkazy a termíny účinnosti ustanovení zákona č. 152/2025 Sb., ale dodané podklady ji nespojují se zvýšením odměn pěstounů ani platů sociálních pracovníků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Změna prodlužuje některé přechodné lhůty u sociálních dávek a posouvá účinnost souvisejících ustanovení, avšak podklady ji nespojují s odměnami pěstounů ani platy sociálních pracovníků.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-e2ed1a37a3--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43198-4"
+      ],
+      "explanationCz": "SPD ve svém programu slíbilo zvýšit odměny pěstounů a platy sociálních pracovníků. Dodané legislativní materiály se týkají hlavně posunů termínů u změn sociálních dávek, nikoli doloženého zvýšení těchto odměn nebo platů. Proto v balíčku není ověřený podstatný posun ke slibu. Podklady ale neposkytují dost informací k posouzení všech odkazovaných ustanovení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U změny z ledna 2026 nejsou v podkladech identifikována ustanovení, jejichž termíny účinnosti se posouvají; nelze proto vyloučit jejich nepřímou souvislost se slibem. Ani u druhé změny není dodán úplný obsah všech dotčených ustanovení."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_000645e23e2e9d3f016ac56682975087d295f6233919ed0860",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 13171,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 13168
+      },
+      "output_tokens": 1706,
+      "output_tokens_details": {
+        "reasoning_tokens": 1139
+      },
+      "total_tokens": 14877
+    },
+    "output": {
+      "promiseId": "spd-2025-e2ed1a37a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Text mění termíny účinnosti částí zákona o dávce státní sociální pomoci, ale dodané znění nespojuje tyto změny se zvýšením odměn pěstounů ani platů sociálních pracovníků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Text prodlužuje některé přechodné lhůty pro dosavadní dávky a posouvá účinnost dalších ustanovení, nikoli odměny pěstounů nebo platy sociálních pracovníků.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-e2ed1a37a3--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43198-4",
+        "psp-core-2025--vote-86695",
+        "psp-core-2025--vote-86697",
+        "psp-core-2025--vote-87038",
+        "psp-core-2025--senate-resolution-43195-3"
+      ],
+      "explanationCz": "SPD ve svém volebním programu slíbila zvýšit odměny pěstounů a platy sociálních pracovníků. Její poslanci hlasovali pro dva návrhy upravující termíny změn systému sociálních dávek; po zamítnutí jednoho návrhu Senátem pak hlasovali proti jeho dalšímu přijetí ve Sněmovně. Dodané texty ale nedokládají, že by tyto návrhy měnily odměny pěstounů nebo platy sociálních pracovníků. Proto z tohoto balíčku nelze ověřit podstatný posun ve slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "U jedné změny chybí v podkladech znění ustanovení, jejichž termíny se posouvaly; nelze proto vyloučit případnou nepřímou souvislost se slibem, ale dodané informace ji nedokládají.",
+        "Podklady neobsahují opatření ani hlasování, které by přímo dokládalo zvýšení odměn pěstounů nebo platů sociálních pracovníků."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0cb1126a1e9a0209016ac566a12bc487d28a1e19bf20b700b8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 13171,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 13168
+      },
+      "output_tokens": 1828,
+      "output_tokens_details": {
+        "reasoning_tokens": 1343
+      },
+      "total_tokens": 14999
+    },
+    "output": {
+      "promiseId": "spd-2025-e2ed1a37a3",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43195-3",
+          "relevant": false,
+          "reasonCz": "Změna upravuje odkazy a termíny účinnosti ustanovení zákona č. 152/2025 Sb., ale dodané podklady ji nespojují se zvýšením odměn pěstounů ani platů sociálních pracovníků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43198-4",
+          "relevant": false,
+          "reasonCz": "Změna prodlužuje některé přechodné lhůty u sociálních dávek a posouvá účinnost souvisejících ustanovení, avšak podklady ji nespojují s odměnami pěstounů ani platy sociálních pracovníků.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "spd-2025-e2ed1a37a3--source",
+        "psp-core-2025--law-change-43195-3",
+        "psp-core-2025--law-change-43198-4"
+      ],
+      "explanationCz": "SPD ve svém programu slíbilo zvýšit odměny pěstounů a platy sociálních pracovníků. Dodané legislativní materiály se týkají hlavně posunů termínů u změn sociálních dávek, nikoli doloženého zvýšení těchto odměn nebo platů. Proto v balíčku není ověřený podstatný posun ke slibu. Podklady ale neposkytují dost informací k posouzení všech odkazovaných ustanovení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U změny z ledna 2026 nejsou v podkladech identifikována ustanovení, jejichž termíny účinnosti se posouvají; nelze proto vyloučit jejich nepřímou souvislost se slibem. Ani u druhé změny není dodán úplný obsah všech dotčených ustanovení."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

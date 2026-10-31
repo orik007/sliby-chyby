@@ -1,0 +1,662 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-55-54-324Z--9f6495012356",
+  "evaluatedAt": "2026-10-02T01:55:54.324Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-9f6ab91cfb07/9f6495012356a1f2a75cd750526b908781beb8fde4467ee99dcbe4dfb0e04cfc.json",
+  "packageHash": "9f6495012356a1f2a75cd750526b908781beb8fde4467ee99dcbe4dfb0e04cfc",
+  "assessmentContentHash": "651ead0e4514c324ad4ae757a2d9a1b19f7f188a27a038640c3e56e0de387356",
+  "assessmentFingerprint": "ed4761ee8944c7332b24cedfcc8616244c31062679fdb818e06a7dae853a5a59",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-9f6ab91cfb07",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0f1834bf10692de2016abf0e40d01887d18b09e7e8dc897208",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 607310,
+            "input_tokens_details": {
+              "cache_write_tokens": 603986,
+              "cached_tokens": 3321
+            },
+            "output_tokens": 6466,
+            "output_tokens_details": {
+              "reasoning_tokens": 4946
+            },
+            "total_tokens": 613776
+          },
+          "output": {
+            "promiseId": "candidate-9f6ab91cfb07",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Text mění rozdělení působnosti v územním plánování a stavebním řádu: vytváří nový Úřad rozvoje území a část úloh svěřuje také Ministerstvu hospodářství, takže přímo ovlivňuje, kam agenda zamíří."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": true,
+                "reasonCz": "Změna zákona o ministerstvech odnímá Ministerstvu pro místní rozvoj působnost v územním plánování, stavebním řádu a vyvlastnění, ale svěřuje ji novému úřadu, nikoli Ministerstvu průmyslu a obchodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": false,
+                "reasonCz": "Tato část mění pravidla ochrany přírody a působnost při stavebních záměrech, ale nepřevádí agendu Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": false,
+                "reasonCz": "Změny energetického zákona upravují energetická odvětví, nikoli převod agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje vodní zákon a postupy při nakládání s vodami, ale nemění určení, pod které ministerstvo má přejít agenda Ministerstva pro místní rozvoj."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": true,
+                "reasonCz": "Převádí výkon vyvlastňovací působnosti na nový Úřad rozvoje území, nikoli na Ministerstvo průmyslu a obchodu, a týká se tak konkrétní části agendy Ministerstva pro místní rozvoj."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-36",
+                "relevant": false,
+                "reasonCz": "Úprava prevence závažných havárií se týká povolování a bezpečnostních podmínek, nikoli převodu agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+                "relevant": true,
+                "reasonCz": "Schválený text nahrazuje v energetickém zákoně působnost Ministerstva pro místní rozvoj působností Úřadu rozvoje území, tedy přesouvá další konkrétní agendu jinam než pod Ministerstvo průmyslu a obchodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+                "relevant": false,
+                "reasonCz": "Změna zákona o vodovodech a kanalizacích pouze upravuje odkazy na orgány územního plánování a nepřevádí agendu Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-39",
+                "relevant": true,
+                "reasonCz": "Schválená změna přesouvá vymezení agendy územního plánování a stavebního řádu v seznamu kvalifikačních oblastí od Ministerstva pro místní rozvoj k novému Úřadu rozvoje území."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-9",
+                "relevant": false,
+                "reasonCz": "Tato část mění pravidla pro zaměstnance Centra pro regionální rozvoj, ale nepřevádí agendu Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-1",
+                "relevant": false,
+                "reasonCz": "Vládní návrh mění pravidla podpory bydlení, ale jeho text neřeší převod agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-7",
+                "relevant": false,
+                "reasonCz": "Tato část upravuje technické požadavky na výrobky a související přestupky, nikoli rozdělení agendy mezi Ministerstvo pro místní rozvoj a Ministerstvo průmyslu a obchodu."
+              }
+            ],
+            "status": "acting-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-9f6ab91cfb07--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-2",
+              "psp-core-2025--law-change-43174-29",
+              "psp-core-2025--law-change-43174-approved-27",
+              "psp-core-2025--law-change-43174-approved-39",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454"
+            ],
+            "explanationCz": "Poslanci ANO spolu s dalšími předkladateli předložili návrh novely stavebního zákona, vedený ve Sněmovně jako sněmovní tisk 67. Schválený návrh zřizuje samostatný Úřad rozvoje území a převádí na něj územně-plánovací, stavební i vyvlastňovací působnost Ministerstva pro místní rozvoj; samostatně odebírá tomuto ministerstvu uvedené oblasti v zákoně o ministerstvech. Poslanci ANO hlasovali pro schválení návrhu i pro setrvání na něm poté, co jej Senát zamítl. Protože slibem bylo převést agendu Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu, rozhodnutí předat její hlavní části novému úřadu jedná proti hlavnímu závazku.",
+            "confidence": "high",
+            "uncertainties": [
+              "Novela zároveň zapojuje Ministerstvo hospodářství do některých činností územního plánování. Podklady ale neukazují, že by na toto ministerstvo přešla agenda Ministerstva pro místní rozvoj jako celek."
+            ]
+          }
+        }
+      },
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0c1108702fe47694016abf0e7ca84887d18ce50ef809f96877",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 607310,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 607307
+            },
+            "output_tokens": 8612,
+            "output_tokens_details": {
+              "reasoning_tokens": 6888
+            },
+            "total_tokens": 615922
+          },
+          "output": {
+            "promiseId": "candidate-9f6ab91cfb07",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Text vytváří samostatný Úřad rozvoje území a převádí na něj část působnosti Ministerstva pro místní rozvoj, nikoli pod Ministerstvo průmyslu a obchodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-2",
+                "relevant": true,
+                "reasonCz": "Změna odebírá Ministerstvu pro místní rozvoj stavební a územně plánovací působnost, ale ponechává mu další agendy a Ministerstvo průmyslu a obchodu přejmenovává na Ministerstvo hospodářství."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": false,
+                "reasonCz": "Text upravuje ochranu přírody a rozdělení pravomocí při povolování záměrů, ale nepřevádí žádnou popsanou agendu Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": false,
+                "reasonCz": "Změny energetického zákona upravují energetická zařízení a jejich provoz, nikoli převzetí agendy Ministerstva pro místní rozvoj."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Text mění u vodohospodářských předpisů odkazy na působnost územního plánování a některé úkoly Ministerstva pro místní rozvoj směruje k novému úřadu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-29",
+                "relevant": true,
+                "reasonCz": "Změna převádí výkon vyvlastňovací působnosti na nové úřady rozvoje území, nikoli pod Ministerstvo průmyslu a obchodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-36",
+                "relevant": false,
+                "reasonCz": "Změna upravuje prevenci závažných havárií a zapojení stavebních úřadů, ale nepřevádí agendu Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+                "relevant": true,
+                "reasonCz": "Text nahrazuje některé úkoly Ministerstva pro místní rozvoj v oblasti územního plánování úkoly nového Úřadu rozvoje území."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+                "relevant": true,
+                "reasonCz": "Text u vodohospodářských předpisů nahrazuje vybrané úkoly Ministerstva pro místní rozvoj úkoly vlády na návrh nového úřadu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-39",
+                "relevant": true,
+                "reasonCz": "Změna výslovně odděluje územní plánování, stavební řád a vyvlastnění od Ministerstva pro místní rozvoj a přiřazuje je novému úřadu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43184-9",
+                "relevant": false,
+                "reasonCz": "Text mění pracovní režim zaměstnanců Centra pro regionální rozvoj, nikoli působnost Ministerstva pro místní rozvoj nebo Ministerstva průmyslu a obchodu."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-1",
+                "relevant": false,
+                "reasonCz": "Návrh upravuje podmínky poradenství a podpory bydlení, nikoli převod agendy mezi ministerstvy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-7",
+                "relevant": false,
+                "reasonCz": "Text se týká technické standardizace a přestupků, nikoli převodu agendy Ministerstva pro místní rozvoj."
+              }
+            ],
+            "status": "acting-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-9f6ab91cfb07--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-2",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-29",
+              "psp-core-2025--law-change-43174-approved-27",
+              "psp-core-2025--law-change-43174-approved-32",
+              "psp-core-2025--law-change-43174-approved-39",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454"
+            ],
+            "explanationCz": "Poslanci ANO předložili poslanecký návrh novely stavebního zákona (sněmovní tisk 67) a hlasovali pro něj ve třetím čtení. Poté, co Senát, horní komora Parlamentu, návrh zamítl, poslanci ANO znovu hlasovali pro jeho prosazení ve Sněmovně. Schválený text převádí stavební, územně plánovací a vyvlastňovací působnost na samostatný Úřad rozvoje území a část agendy, včetně regionální a bytové politiky, ponechává Ministerstvu pro místní rozvoj; dosavadní ministerstvo průmyslu a obchodu přejmenovává na Ministerstvo hospodářství. Protože slibem je převést agendu Ministerstva pro místní rozvoj pod ministerstvo průmyslu a obchodu, přijaté parlamentní rozhodnutí jde proti jeho hlavnímu závazku.",
+            "confidence": "high",
+            "uncertainties": [
+              "Text současně přejmenovává Ministerstvo průmyslu a obchodu na Ministerstvo hospodářství a svěřuje mu některé úkoly spojené s územním rozvojem; jde o dílčí shodu se slibem, nikoli o převzetí celé agendy Ministerstva pro místní rozvoj.",
+              "Hodnocení vychází z hlasování o návrhu; schválený text stanoví účinnost hlavních změn od 1. ledna 2027, takže balíček nedokládá, jak bude nové rozdělení agend následně provedeno v praxi."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-9f6ab91cfb07",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela převádí územně plánovací a stavební působnost z Ministerstva pro místní rozvoj na nově zřizovaný Úřad rozvoje území, nikoli pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Mění postavení obou ministerstev: ruší část působnosti Ministerstva pro místní rozvoj a přejmenovává Ministerstvo průmyslu a obchodu na Ministerstvo hospodářství, aniž na něj převádí tuto agendu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Mění pravidla ochrany přírody a působnost při stavebních záměrech, ale neřeší převod agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Upravuje energetický zákon, avšak předložené ani schválené změny nepřevádějí agendu Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Mění pravidla vodního zákona týkající se povolování a působnosti stavebních úřadů, nikoli slíbené převedení agendy mezi ministerstvy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Převádí vyvlastňovací působnost na nové úřady rozvoje území, místo aby ji svěřila Ministerstvu průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Upravuje prevenci závažných havárií a zapojení stavebních úřadů, ale neřeší slíbený přesun agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+          "relevant": true,
+          "reasonCz": "Schválená změna svěřuje úkoly, které dosud náležely Ministerstvu pro místní rozvoj, novému Úřadu rozvoje území, a tím podporuje opačný směr přesunu agendy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Upravuje vodárenské a kanalizační předpisy a odkazy na úřady, ale nepřevádí agendu Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-39",
+          "relevant": true,
+          "reasonCz": "Přesouvá působnost v územním plánování a stavebním řádu z Ministerstva pro místní rozvoj na Úřad rozvoje území."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-9",
+          "relevant": false,
+          "reasonCz": "Mění pravidla pro zaměstnance Centra pro regionální rozvoj, nikoli převod agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Upravuje poskytování podpory bydlení, ale jeho změny nepřevádějí působnost Ministerstva pro místní rozvoj na Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-7",
+          "relevant": false,
+          "reasonCz": "Mění pravidla technických požadavků na výrobky, nikoli rozdělení agendy mezi Ministerstvo pro místní rozvoj a Ministerstvo průmyslu a obchodu."
+        }
+      ],
+      "status": "acting-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9f6ab91cfb07--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43174-approved-27",
+        "psp-core-2025--law-change-43174-approved-39",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Slib počítal s převedením agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu. Poslanci ANO předložili a poté podpořili novelu stavebního zákona, která převádí územní plánování, stavební působnost i vyvlastňování na nový Úřad rozvoje území, nikoli na ministerstvo průmyslu a obchodu. Zákon sice ministerstvo přejmenovává na Ministerstvo hospodářství a některé úkoly mu svěřuje, slíbený přesun agendy MMR však neuskutečňuje. Senát návrh odmítl, ale poslanci ANO následně hlasovali pro jeho prosazení.",
+      "confidence": "high",
+      "uncertainties": []
+    },
+    "assessor-b": {
+      "promiseId": "candidate-9f6ab91cfb07",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Návrh i schválené znění převádějí územní plánování a stavební správu z Ministerstva pro místní rozvoj na nový Úřad rozvoje území, nikoli na Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Změna odebírá Ministerstvu pro místní rozvoj působnost v územním plánování, stavebním řádu a vyvlastnění, ale svěřuje ji novému úřadu a schválený text navíc přejmenovává Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změny zákona o ochraně přírody upravují ochranu přírody a povolování záměrů, nikoli převod agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Změny energetického zákona se věnují energetickým pravidlům a názvosloví, nikoli přesunu agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona upravují vodoprávní povolení a související postupy, ale nepřevádějí agendu Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Schválená změna svěřuje vyvlastňovací řízení novému Úřadu rozvoje území a krajským úřadům, zatímco stavební zákon v témže návrhu vyjímá vyvlastnění z působnosti Ministerstva pro místní rozvoj."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Změna zákona o prevenci závažných havárií upravuje role stavebních úřadů v této oblasti, ale nedokládá převod agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+          "relevant": true,
+          "reasonCz": "Schválená změna nahrazuje Ministerstvo pro místní rozvoj Úřadem rozvoje území v ustanovení zákona o hospodaření energií týkajícím se územně plánovacích dokumentů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": true,
+          "reasonCz": "Schválená změna převádí pravomoc Ministerstva pro místní rozvoj vydávat předpis podle zákona o vodovodech a kanalizacích na vládu jednající na návrh nového úřadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-39",
+          "relevant": true,
+          "reasonCz": "Schválená změna vyjímá územní plánování a stavební řád z kompetencí Ministerstva pro místní rozvoj a přiděluje je novému Úřadu rozvoje území."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-9",
+          "relevant": false,
+          "reasonCz": "Změna zákona o podpoře regionálního rozvoje upravuje právní poměry zaměstnanců Centra, nikoli převod agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh upravuje pravidla podpory bydlení a kontaktní místa, nikoli přesun agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-7",
+          "relevant": false,
+          "reasonCz": "Návrh zákona o standardizaci mění pravidla technických požadavků na výrobky, nikoli převod agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        }
+      ],
+      "status": "acting-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9f6ab91cfb07--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43174-approved-27",
+        "psp-core-2025--law-change-43174-approved-32",
+        "psp-core-2025--law-change-43174-approved-39",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh novely stavebního zákona, který převádí územní plánování, stavební správu a vyvlastnění z Ministerstva pro místní rozvoj na nový Úřad rozvoje území, nikoli pod Ministerstvo průmyslu a obchodu. Poslanci ANO návrh podpořili při závěrečném hlasování; po zamítnutí Senátem, tedy horní parlamentní komorou, jej Sněmovna v září znovu schválila. Související změny také svěřují novému úřadu některé pravomoci dosud spojené s Ministerstvem pro místní rozvoj. Výsledné rozhodnutí proto jde přímo proti slibu převést tuto agendu pod Ministerstvo průmyslu a obchodu.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_06a0c991a0a50022016abf0ebb118487d180843280dbe7da53",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 607310,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 607307
+      },
+      "output_tokens": 4585,
+      "output_tokens_details": {
+        "reasoning_tokens": 3230
+      },
+      "total_tokens": 611895
+    },
+    "output": {
+      "promiseId": "candidate-9f6ab91cfb07",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela převádí územně plánovací a stavební působnost z Ministerstva pro místní rozvoj na nově zřizovaný Úřad rozvoje území, nikoli pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Mění postavení obou ministerstev: ruší část působnosti Ministerstva pro místní rozvoj a přejmenovává Ministerstvo průmyslu a obchodu na Ministerstvo hospodářství, aniž na něj převádí tuto agendu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Mění pravidla ochrany přírody a působnost při stavebních záměrech, ale neřeší převod agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Upravuje energetický zákon, avšak předložené ani schválené změny nepřevádějí agendu Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Mění pravidla vodního zákona týkající se povolování a působnosti stavebních úřadů, nikoli slíbené převedení agendy mezi ministerstvy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Převádí vyvlastňovací působnost na nové úřady rozvoje území, místo aby ji svěřila Ministerstvu průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Upravuje prevenci závažných havárií a zapojení stavebních úřadů, ale neřeší slíbený přesun agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+          "relevant": true,
+          "reasonCz": "Schválená změna svěřuje úkoly, které dosud náležely Ministerstvu pro místní rozvoj, novému Úřadu rozvoje území, a tím podporuje opačný směr přesunu agendy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Upravuje vodárenské a kanalizační předpisy a odkazy na úřady, ale nepřevádí agendu Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-39",
+          "relevant": true,
+          "reasonCz": "Přesouvá působnost v územním plánování a stavebním řádu z Ministerstva pro místní rozvoj na Úřad rozvoje území."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-9",
+          "relevant": false,
+          "reasonCz": "Mění pravidla pro zaměstnance Centra pro regionální rozvoj, nikoli převod agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Upravuje poskytování podpory bydlení, ale jeho změny nepřevádějí působnost Ministerstva pro místní rozvoj na Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-7",
+          "relevant": false,
+          "reasonCz": "Mění pravidla technických požadavků na výrobky, nikoli rozdělení agendy mezi Ministerstvo pro místní rozvoj a Ministerstvo průmyslu a obchodu."
+        }
+      ],
+      "status": "acting-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9f6ab91cfb07--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43174-approved-27",
+        "psp-core-2025--law-change-43174-approved-39",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Slib počítal s převedením agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu. Poslanci ANO předložili a poté podpořili novelu stavebního zákona, která převádí územní plánování, stavební působnost i vyvlastňování na nový Úřad rozvoje území, nikoli na ministerstvo průmyslu a obchodu. Zákon sice ministerstvo přejmenovává na Ministerstvo hospodářství a některé úkoly mu svěřuje, slíbený přesun agendy MMR však neuskutečňuje. Senát návrh odmítl, ale poslanci ANO následně hlasovali pro jeho prosazení.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_08a6414e7e265e5e016abf0ef746d487d199247d38bd14107f",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 607310,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 607307
+      },
+      "output_tokens": 6519,
+      "output_tokens_details": {
+        "reasoning_tokens": 5030
+      },
+      "total_tokens": 613829
+    },
+    "output": {
+      "promiseId": "candidate-9f6ab91cfb07",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Návrh i schválené znění převádějí územní plánování a stavební správu z Ministerstva pro místní rozvoj na nový Úřad rozvoje území, nikoli na Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-2",
+          "relevant": true,
+          "reasonCz": "Změna odebírá Ministerstvu pro místní rozvoj působnost v územním plánování, stavebním řádu a vyvlastnění, ale svěřuje ji novému úřadu a schválený text navíc přejmenovává Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změny zákona o ochraně přírody upravují ochranu přírody a povolování záměrů, nikoli převod agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Změny energetického zákona se věnují energetickým pravidlům a názvosloví, nikoli přesunu agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změny vodního zákona upravují vodoprávní povolení a související postupy, ale nepřevádějí agendu Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-29",
+          "relevant": true,
+          "reasonCz": "Schválená změna svěřuje vyvlastňovací řízení novému Úřadu rozvoje území a krajským úřadům, zatímco stavební zákon v témže návrhu vyjímá vyvlastnění z působnosti Ministerstva pro místní rozvoj."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Změna zákona o prevenci závažných havárií upravuje role stavebních úřadů v této oblasti, ale nedokládá převod agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-27",
+          "relevant": true,
+          "reasonCz": "Schválená změna nahrazuje Ministerstvo pro místní rozvoj Úřadem rozvoje území v ustanovení zákona o hospodaření energií týkajícím se územně plánovacích dokumentů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": true,
+          "reasonCz": "Schválená změna převádí pravomoc Ministerstva pro místní rozvoj vydávat předpis podle zákona o vodovodech a kanalizacích na vládu jednající na návrh nového úřadu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-39",
+          "relevant": true,
+          "reasonCz": "Schválená změna vyjímá územní plánování a stavební řád z kompetencí Ministerstva pro místní rozvoj a přiděluje je novému Úřadu rozvoje území."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-9",
+          "relevant": false,
+          "reasonCz": "Změna zákona o podpoře regionálního rozvoje upravuje právní poměry zaměstnanců Centra, nikoli převod agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Vládní návrh upravuje pravidla podpory bydlení a kontaktní místa, nikoli přesun agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-7",
+          "relevant": false,
+          "reasonCz": "Návrh zákona o standardizaci mění pravidla technických požadavků na výrobky, nikoli převod agendy Ministerstva pro místní rozvoj pod Ministerstvo průmyslu a obchodu."
+        }
+      ],
+      "status": "acting-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-9f6ab91cfb07--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-2",
+        "psp-core-2025--law-change-43174-29",
+        "psp-core-2025--law-change-43174-approved-27",
+        "psp-core-2025--law-change-43174-approved-32",
+        "psp-core-2025--law-change-43174-approved-39",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh novely stavebního zákona, který převádí územní plánování, stavební správu a vyvlastnění z Ministerstva pro místní rozvoj na nový Úřad rozvoje území, nikoli pod Ministerstvo průmyslu a obchodu. Poslanci ANO návrh podpořili při závěrečném hlasování; po zamítnutí Senátem, tedy horní parlamentní komorou, jej Sněmovna v září znovu schválila. Související změny také svěřují novému úřadu některé pravomoci dosud spojené s Ministerstvem pro místní rozvoj. Výsledné rozhodnutí proto jde přímo proti slibu převést tuto agendu pod Ministerstvo průmyslu a obchodu.",
+      "confidence": "high",
+      "uncertainties": []
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "acting-against",
+    "selectedReview": "consensus"
+  }
+}

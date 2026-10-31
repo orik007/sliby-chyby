@@ -1,0 +1,211 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-49-10-108Z--24a585f5cd93",
+  "evaluatedAt": "2026-10-02T01:49:10.108Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-7231f7f5f34d/24a585f5cd932ce24270052c28f91d19a769e1037934f7ec9d0bcb39667a2d5e.json",
+  "packageHash": "24a585f5cd932ce24270052c28f91d19a769e1037934f7ec9d0bcb39667a2d5e",
+  "assessmentContentHash": "bb8802a5d0bd8e41731cb8f69426e6da9bcd8d5394dcdeeb6766268aa13f05c8",
+  "assessmentFingerprint": "1f09b4684b37350332ff9b3e45dd38a1a2af7aa0f1870f7f9fe608c3a90eb71e",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-7231f7f5f34d",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-7231f7f5f34d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválené znění upravuje zákon o podpoře sportu a obsahuje ustanovení o finanční podpoře sportovních organizací, včetně podpory sportu dětí a mládeže, což může přispět k části slibu o sportování dětí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-7231f7f5f34d--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh zákona, jehož původní znění se týkalo personálních pravidel Národní sportovní agentury, nikoli programu „Můj klub“. Pozdější znění, které Sněmovna schválila a následně prosadila i po zamítnutí Senátem, upravuje podporu sportu a výslovně zmiňuje podporu sportovních organizací a sportu dětí a mládeže. Hlasování ANO tak může představovat dílčí posun v podpoře dětského sportu, ale zákon nedokládá modernizaci programu „Můj klub“ ani křížovou kontrolu za účasti obcí. Chybí také předchozí znění upravovaného ustanovení o finanční podpoře, takže nelze spolehlivě určit, zda tato část zákona podporu skutečně rozšiřuje.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Původní návrh poslanců neměnil pravidla podpory sportu v rozsahu souvisejícím se slibem; ve schváleném znění se ale sportovní ustanovení objevila později.",
+        "Podklady neobsahují předchozí znění § 6b o finanční podpoře, takže není možné ověřit, zda schválená úprava nově rozšířila podporu dětského sportu.",
+        "Hlasování nedokládají konkrétní změnu programu „Můj klub“ ani zavedení křížové kontroly s aktivní účastí obcí."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-7231f7f5f34d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": false,
+          "reasonCz": "Původní znění upravuje jmenování a pravomoci vedení Národní sportovní agentury a pozdější znění obecné priority a pravidla podpory sportu, žádná verze však nestanoví změny programu Můj klub, podporu finančně náročných sportů jeho prostřednictvím ani křížovou kontrolu s obcemi."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-7231f7f5f34d--source",
+        "psp-core-2025--law-change-43184-14"
+      ],
+      "explanationCz": "Předložená novela měnila pravidla týkající se Národní sportovní agentury a pozdější znění upravilo také obecné priority a podporu sportu. V textech ale není doložena modernizace programu Můj klub, podpora finančně náročných sportů tímto programem ani křížová kontrola za účasti obcí. Dodané podklady proto neprokazují podstatný posun ke konkrétnímu slibu ANO.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela obsahuje obecné změny priorit a podpory sportu, ale dodané znění nedokládá, že by tyto změny zasáhly program Můj klub nebo řešily některý z konkrétních cílů slibu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_08d1af73843ada5a016abf0d62b8f487d1970b9820c397915d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12500,
+      "input_tokens_details": {
+        "cache_write_tokens": 9176,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 4269,
+      "output_tokens_details": {
+        "reasoning_tokens": 3624
+      },
+      "total_tokens": 16769
+    },
+    "output": {
+      "promiseId": "candidate-7231f7f5f34d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválené znění upravuje zákon o podpoře sportu a obsahuje ustanovení o finanční podpoře sportovních organizací, včetně podpory sportu dětí a mládeže, což může přispět k části slibu o sportování dětí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-7231f7f5f34d--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Poslanci ANO předložili návrh zákona, jehož původní znění se týkalo personálních pravidel Národní sportovní agentury, nikoli programu „Můj klub“. Pozdější znění, které Sněmovna schválila a následně prosadila i po zamítnutí Senátem, upravuje podporu sportu a výslovně zmiňuje podporu sportovních organizací a sportu dětí a mládeže. Hlasování ANO tak může představovat dílčí posun v podpoře dětského sportu, ale zákon nedokládá modernizaci programu „Můj klub“ ani křížovou kontrolu za účasti obcí. Chybí také předchozí znění upravovaného ustanovení o finanční podpoře, takže nelze spolehlivě určit, zda tato část zákona podporu skutečně rozšiřuje.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Původní návrh poslanců neměnil pravidla podpory sportu v rozsahu souvisejícím se slibem; ve schváleném znění se ale sportovní ustanovení objevila později.",
+        "Podklady neobsahují předchozí znění § 6b o finanční podpoře, takže není možné ověřit, zda schválená úprava nově rozšířila podporu dětského sportu.",
+        "Hlasování nedokládají konkrétní změnu programu „Můj klub“ ani zavedení křížové kontroly s aktivní účastí obcí."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_09b0be6d417f39cf016abf0d8083ac87d1ab3af5868890d7c2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12500,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 12497
+      },
+      "output_tokens": 2207,
+      "output_tokens_details": {
+        "reasoning_tokens": 1795
+      },
+      "total_tokens": 14707
+    },
+    "output": {
+      "promiseId": "candidate-7231f7f5f34d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": false,
+          "reasonCz": "Původní znění upravuje jmenování a pravomoci vedení Národní sportovní agentury a pozdější znění obecné priority a pravidla podpory sportu, žádná verze však nestanoví změny programu Můj klub, podporu finančně náročných sportů jeho prostřednictvím ani křížovou kontrolu s obcemi."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-7231f7f5f34d--source",
+        "psp-core-2025--law-change-43184-14"
+      ],
+      "explanationCz": "Předložená novela měnila pravidla týkající se Národní sportovní agentury a pozdější znění upravilo také obecné priority a podporu sportu. V textech ale není doložena modernizace programu Můj klub, podpora finančně náročných sportů tímto programem ani křížová kontrola za účasti obcí. Dodané podklady proto neprokazují podstatný posun ke konkrétnímu slibu ANO.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela obsahuje obecné změny priorit a podpory sportu, ale dodané znění nedokládá, že by tyto změny zasáhly program Můj klub nebo řešily některý z konkrétních cílů slibu."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_00fa1c331e653332016abf0d91612087d18b4db5662c696427",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 12604,
+      "input_tokens_details": {
+        "cache_write_tokens": 10122,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 279,
+      "output_tokens_details": {
+        "reasoning_tokens": 50
+      },
+      "total_tokens": 12883
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "candidate-7231f7f5f34d--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Volím posouzení B, protože správně rozlišuje obecnou podporu sportu od konkrétního slibu změnit program „Můj klub“. Poslanci ANO podpořili změny zákona o podpoře sportu, ale dodané texty nedokládají úpravu tohoto programu, pomoc dětem ve finančně náročnějších sportech ani kontrolu za účasti obcí. Posouzení A přiznává dílčí posun za obecná ustanovení o dětském sportu, přestože samo uvádí, že skutečné rozšíření podpory nelze ověřit. Taková zmínka nestačí k uznání pokroku v tomto slibu."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-selected-insufficient-evidence",
+    "status": null,
+    "selectedReview": "assessor-b"
+  }
+}

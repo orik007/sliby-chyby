@@ -1,0 +1,479 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-43-25-479Z--be070d9840f3",
+  "evaluatedAt": "2026-10-02T05:43:25.479Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-42e58d5601/be070d9840f343dc01ba90c5025ae318e6e96b7922ca4ba2d2e6669ab786282d.json",
+  "packageHash": "be070d9840f343dc01ba90c5025ae318e6e96b7922ca4ba2d2e6669ab786282d",
+  "assessmentContentHash": "ead621fc86e60b3ed8c23e87dd021f1affcffa3a5ae1a7340905bb648cb85f29",
+  "assessmentFingerprint": "2b2ce40f7e757c9be8795c8f14cb9bd6fba135ed9485dbe5ba32c0f354b93081",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-42e58d5601",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_09cef61d0d51893a016abf4426f53487d191ba4870b3ceac9d",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 194136,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 194133
+            },
+            "output_tokens": 4188,
+            "output_tokens_details": {
+              "reasoning_tokens": 2876
+            },
+            "total_tokens": 198324
+          },
+          "output": {
+            "promiseId": "spd-2025-42e58d5601",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-4",
+                "relevant": false,
+                "reasonCz": "Upravuje pobyt občanů třetích zemí, nikoli platby pacientů, financování zdravotnictví ani mzdy zdravotníků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-1",
+                "relevant": true,
+                "reasonCz": "Mění odměňování zaměstnanců včetně zvláštního určování platů zaměstnanců poskytovatelů zdravotních služeb a zavádí pravidla pro transparentnější a rovnější odměňování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-2",
+                "relevant": true,
+                "reasonCz": "Rozšiřuje soudní ochranu při diskriminaci v odměňování, která se může týkat i zdravotníků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-3",
+                "relevant": false,
+                "reasonCz": "Upravuje odvody a vymáhání částek při nelegální či nehlášené práci, ale text nepředstavuje opatření proti vyvádění peněz ze zdravotnického systému ani pro mzdy zdravotníků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-11",
+                "relevant": true,
+                "reasonCz": "Dává veřejnému ochránci práv úlohu při podpoře rovného odměňování, což může posílit ochranu spravedlivých mezd zaměstnanců včetně zdravotníků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-14",
+                "relevant": false,
+                "reasonCz": "Upravuje zejména pravidla nelegální a nehlášené práce, nikoli mzdy zdravotníků, přímé platby pacientů ani vyvádění prostředků ze zdravotnictví."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-16",
+                "relevant": true,
+                "reasonCz": "Rozšiřuje kontrolu a sankce týkající se odměňování a povinnosti zaměstnavatelů při rovném odměňování, a může tak přispět ke spravedlivým mzdám zdravotníků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-18",
+                "relevant": true,
+                "reasonCz": "Posiluje právní nároky a soudní ochranu při porušení zásady stejné odměny, což se může vztahovat i na zdravotníky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-22",
+                "relevant": false,
+                "reasonCz": "Mění evidenci a předávání údajů v měsíčním hlášení zaměstnavatelů, ale neobsahuje konkrétní změnu mezd zdravotníků, plateb pacientů ani financování zdravotnictví."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43423-1",
+                "relevant": false,
+                "reasonCz": "Upravuje podmínky práce přes digitální platformy, nikoli mzdy zdravotníků nebo financování zdravotnického systému."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "spd-2025-42e58d5601--source",
+              "psp-core-2025--law-change-43422-1",
+              "psp-core-2025--law-change-43422-2",
+              "psp-core-2025--law-change-43422-11",
+              "psp-core-2025--law-change-43422-16",
+              "psp-core-2025--law-change-43422-18",
+              "psp-core-2025--print-step-212101"
+            ],
+            "explanationCz": "Vláda, v níž SPD působí, předložila Poslanecké sněmovně návrh změn zákoníku práce, tedy sněmovní tisk 300. Návrh zavádí pravidla pro transparentnější odměňování a jeho kontrolu a posiluje možnost domáhat se stejné odměny; u zaměstnanců poskytovatelů zdravotních služeb zachovává minimální tarifní hranici při zvláštním určování platu. To představuje dílčí posun ke spravedlivým mzdám, nikoli naplnění celého slibu. Návrh zároveň ruší obecné úrovně zaručeného platu a předložené podklady nedokládají, že by byl přijat ani že by řešil přímé platby pacientů či vyvádění peněz ze systému.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Podklady dokládají pouze předložení návrhu změn zákoníku práce, nikoli jeho schválení nebo pozdější osud.",
+              "Návrh vedle nových pravidel rovného odměňování ruší obecné úrovně zaručeného platu; zvláštní minimální tarifní hranici pro zaměstnance poskytovatelů zdravotních služeb však ponechává."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-42e58d5601",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje pobyt občanů třetích zemí, nikoli platby pacientů, financování zdravotnictví ani mzdy zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje systém odměňování a transparentnost mezd a výslovně zahrnuje také zvláštní pravidla platových tarifů zaměstnanců poskytovatelů zdravotních služeb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": true,
+          "reasonCz": "Navržené procesní záruky při sporech o rovné odměňování mohou usnadnit zdravotníkům domáhat se spravedlivé mzdy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-3",
+          "relevant": false,
+          "reasonCz": "Změny správy sociálního zabezpečení a úhrady pojistných částek se věcně netýkají spravedlivého odměňování zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-11",
+          "relevant": true,
+          "reasonCz": "Návrh svěřuje veřejnému ochránci práv další úkoly při prosazování rovného odměňování, což může podpořit spravedlivé mzdy i ve zdravotnictví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": false,
+          "reasonCz": "Navržená opatření proti nelegální práci a pravidla pro zaměstnávání cizinců nejsou v textu spojena se mzdami zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje kontrolu a postihy při porušování pravidel rovného odměňování, která se vztahují také na zaměstnance ve zdravotnictví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-18",
+          "relevant": true,
+          "reasonCz": "Návrh posiluje právní nároky při diskriminaci v odměňování, což může být součástí zajištění spravedlivých mezd zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-22",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje evidenci a sdílení údajů v systému měsíčního hlášení, ale její text sám nestanoví opatření ke spravedlivým mzdám zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje práci prostřednictvím digitálních platforem, nikoli mzdy zdravotníků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-42e58d5601--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--law-change-43422-2",
+        "psp-core-2025--law-change-43422-11",
+        "psp-core-2025--law-change-43422-16",
+        "psp-core-2025--law-change-43422-18",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž je SPD zastoupena, předložila návrh změn zákoníku práce a dalších předpisů. Návrh zavádí pravidla transparentnějšího odměňování a rovného odměňování, včetně zvláštních pravidel pro platové tarify zaměstnanců poskytovatelů zdravotních služeb. Tato opatření mohou přispět ke spravedlivějším mzdám zdravotníků, návrh však ještě není schválen a sám nezajišťuje jejich plošné zvýšení. Jde proto o dílčí posun, nikoli splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Jde o předložený návrh, nikoli o schválenou změnu, takže zatím není doložen její skutečný dopad na mzdy zdravotníků.",
+        "Návrh zároveň ruší dosavadní úpravu zaručeného platu; přechodná ochrana dosavadní nejnižší úrovně je časově omezená. Není proto jisté, jak se změna projeví v celkové úrovni mzdové ochrany zdravotníků."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-42e58d5601",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": false,
+          "reasonCz": "Uprava pobytu cizinců sice v některých případech zmiňuje minimální mzdu, ale nezabývá se platbami pacientů, financováním zdravotnictví ani mzdami zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje odměňování a jeho transparentnost a výslovně řeší platové tarify zaměstnanců poskytovatelů zdravotních služeb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": true,
+          "reasonCz": "Návrh usnadňuje soudní ochranu při sporech o rovné odměňování, což může podpořit spravedlivé mzdy i ve zdravotnictví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-3",
+          "relevant": true,
+          "reasonCz": "Návrh stanoví úhradu částek odpovídajících mimo jiné pojistnému na veřejné zdravotní pojištění při nelegální či nehlášené práci, a může tak omezit výpadky příjmů zdravotního systému."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-11",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje úlohu veřejného ochránce práv při prosazování rovného odměňování, což se může týkat i zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": true,
+          "reasonCz": "Návrh řeší nedoplatky odměn a částek odpovídajících pojistnému na veřejné zdravotní pojištění při nelegální práci, tedy konkrétní dílčí otázku pracovních odměn a příjmů systému."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": true,
+          "reasonCz": "Návrh posiluje kontrolu a sankce v oblasti rovného odměňování, což může přispět ke spravedlivějším mzdám zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-18",
+          "relevant": true,
+          "reasonCz": "Návrh posiluje právní nároky při porušení zásady stejné odměny a může se vztahovat také na zaměstnance ve zdravotnictví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-22",
+          "relevant": true,
+          "reasonCz": "Návrh zapojuje inspekci práce mezi uživatele údajů z měsíčního hlášení zaměstnavatelů, což může podpořit kontrolu odměňování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje pracovní podmínky a odměňování při práci prostřednictvím digitálních platforem, ale nedokládá souvislost se zdravotníky, platbami pacientů ani financováním zdravotního systému."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-42e58d5601--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--law-change-43422-2",
+        "psp-core-2025--law-change-43422-3",
+        "psp-core-2025--law-change-43422-11",
+        "psp-core-2025--law-change-43422-14",
+        "psp-core-2025--law-change-43422-16",
+        "psp-core-2025--law-change-43422-18",
+        "psp-core-2025--law-change-43422-22",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "SPD je součástí vlády, která 8. září 2026 předložila Poslanecké sněmovně návrh změn zákoníku práce a souvisejících předpisů. Návrh posiluje transparentnost odměňování a řešení neodůvodněných rozdílů; u zaměstnanců poskytovatelů zdravotních služeb navrhuje zvláštní určení platových tarifů s minimem odpovídajícím běžnému tarifu. Jde o posun k části slibu o spravedlivých mzdách, nikoli o důkaz, že už jsou mzdy zajištěny nebo že byly vyřešeny přímé platby pacientů a širší odliv peněz ze systému. Návrh zároveň ruší dosavadní obecný mechanismus zaručeného platu, zatímco přechodná pravidla zachovávají jeho dosavadní částku; budoucí dopad na mzdové minimum tak není z podkladů jistý.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Jde o předložený návrh, nikoli doložené konečné schválení nebo účinnou změnu.",
+        "Návrh zajišťuje přechodnou ochranu dosavadní částky zaručeného platu, ale podklady neukazují, jak se změna projeví na budoucím vývoji mezd zdravotníků.",
+        "Předložené podklady nedokládají, zda se zvýšily přímé platby pacientů ani zda bylo zastaveno širší vyvádění peněz ze zdravotního systému; příslušná navržená ustanovení o pojistném se týkají nelegální či nehlášené práce."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_08f6417aa7101c62016abf441033c087d1a2ec97aa617e3dea",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 194136,
+      "input_tokens_details": {
+        "cache_write_tokens": 190812,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 3719,
+      "output_tokens_details": {
+        "reasoning_tokens": 2454
+      },
+      "total_tokens": 197855
+    },
+    "output": {
+      "promiseId": "spd-2025-42e58d5601",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje pobyt občanů třetích zemí, nikoli platby pacientů, financování zdravotnictví ani mzdy zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje systém odměňování a transparentnost mezd a výslovně zahrnuje také zvláštní pravidla platových tarifů zaměstnanců poskytovatelů zdravotních služeb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": true,
+          "reasonCz": "Navržené procesní záruky při sporech o rovné odměňování mohou usnadnit zdravotníkům domáhat se spravedlivé mzdy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-3",
+          "relevant": false,
+          "reasonCz": "Změny správy sociálního zabezpečení a úhrady pojistných částek se věcně netýkají spravedlivého odměňování zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-11",
+          "relevant": true,
+          "reasonCz": "Návrh svěřuje veřejnému ochránci práv další úkoly při prosazování rovného odměňování, což může podpořit spravedlivé mzdy i ve zdravotnictví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": false,
+          "reasonCz": "Navržená opatření proti nelegální práci a pravidla pro zaměstnávání cizinců nejsou v textu spojena se mzdami zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje kontrolu a postihy při porušování pravidel rovného odměňování, která se vztahují také na zaměstnance ve zdravotnictví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-18",
+          "relevant": true,
+          "reasonCz": "Návrh posiluje právní nároky při diskriminaci v odměňování, což může být součástí zajištění spravedlivých mezd zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-22",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje evidenci a sdílení údajů v systému měsíčního hlášení, ale její text sám nestanoví opatření ke spravedlivým mzdám zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje práci prostřednictvím digitálních platforem, nikoli mzdy zdravotníků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-42e58d5601--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--law-change-43422-2",
+        "psp-core-2025--law-change-43422-11",
+        "psp-core-2025--law-change-43422-16",
+        "psp-core-2025--law-change-43422-18",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda, v níž je SPD zastoupena, předložila návrh změn zákoníku práce a dalších předpisů. Návrh zavádí pravidla transparentnějšího odměňování a rovného odměňování, včetně zvláštních pravidel pro platové tarify zaměstnanců poskytovatelů zdravotních služeb. Tato opatření mohou přispět ke spravedlivějším mzdám zdravotníků, návrh však ještě není schválen a sám nezajišťuje jejich plošné zvýšení. Jde proto o dílčí posun, nikoli splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Jde o předložený návrh, nikoli o schválenou změnu, takže zatím není doložen její skutečný dopad na mzdy zdravotníků.",
+        "Návrh zároveň ruší dosavadní úpravu zaručeného platu; přechodná ochrana dosavadní nejnižší úrovně je časově omezená. Není proto jisté, jak se změna projeví v celkové úrovni mzdové ochrany zdravotníků."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_046bc197db16a747016abf444c1ec087d19bad2cd0d842231d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 194136,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 194133
+      },
+      "output_tokens": 6991,
+      "output_tokens_details": {
+        "reasoning_tokens": 5643
+      },
+      "total_tokens": 201127
+    },
+    "output": {
+      "promiseId": "spd-2025-42e58d5601",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": false,
+          "reasonCz": "Uprava pobytu cizinců sice v některých případech zmiňuje minimální mzdu, ale nezabývá se platbami pacientů, financováním zdravotnictví ani mzdami zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje odměňování a jeho transparentnost a výslovně řeší platové tarify zaměstnanců poskytovatelů zdravotních služeb."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": true,
+          "reasonCz": "Návrh usnadňuje soudní ochranu při sporech o rovné odměňování, což může podpořit spravedlivé mzdy i ve zdravotnictví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-3",
+          "relevant": true,
+          "reasonCz": "Návrh stanoví úhradu částek odpovídajících mimo jiné pojistnému na veřejné zdravotní pojištění při nelegální či nehlášené práci, a může tak omezit výpadky příjmů zdravotního systému."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-11",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje úlohu veřejného ochránce práv při prosazování rovného odměňování, což se může týkat i zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": true,
+          "reasonCz": "Návrh řeší nedoplatky odměn a částek odpovídajících pojistnému na veřejné zdravotní pojištění při nelegální práci, tedy konkrétní dílčí otázku pracovních odměn a příjmů systému."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": true,
+          "reasonCz": "Návrh posiluje kontrolu a sankce v oblasti rovného odměňování, což může přispět ke spravedlivějším mzdám zdravotníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-18",
+          "relevant": true,
+          "reasonCz": "Návrh posiluje právní nároky při porušení zásady stejné odměny a může se vztahovat také na zaměstnance ve zdravotnictví."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-22",
+          "relevant": true,
+          "reasonCz": "Návrh zapojuje inspekci práce mezi uživatele údajů z měsíčního hlášení zaměstnavatelů, což může podpořit kontrolu odměňování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-1",
+          "relevant": false,
+          "reasonCz": "Návrh upravuje pracovní podmínky a odměňování při práci prostřednictvím digitálních platforem, ale nedokládá souvislost se zdravotníky, platbami pacientů ani financováním zdravotního systému."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-42e58d5601--source",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--law-change-43422-2",
+        "psp-core-2025--law-change-43422-3",
+        "psp-core-2025--law-change-43422-11",
+        "psp-core-2025--law-change-43422-14",
+        "psp-core-2025--law-change-43422-16",
+        "psp-core-2025--law-change-43422-18",
+        "psp-core-2025--law-change-43422-22",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "SPD je součástí vlády, která 8. září 2026 předložila Poslanecké sněmovně návrh změn zákoníku práce a souvisejících předpisů. Návrh posiluje transparentnost odměňování a řešení neodůvodněných rozdílů; u zaměstnanců poskytovatelů zdravotních služeb navrhuje zvláštní určení platových tarifů s minimem odpovídajícím běžnému tarifu. Jde o posun k části slibu o spravedlivých mzdách, nikoli o důkaz, že už jsou mzdy zajištěny nebo že byly vyřešeny přímé platby pacientů a širší odliv peněz ze systému. Návrh zároveň ruší dosavadní obecný mechanismus zaručeného platu, zatímco přechodná pravidla zachovávají jeho dosavadní částku; budoucí dopad na mzdové minimum tak není z podkladů jistý.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Jde o předložený návrh, nikoli doložené konečné schválení nebo účinnou změnu.",
+        "Návrh zajišťuje přechodnou ochranu dosavadní částky zaručeného platu, ale podklady neukazují, jak se změna projeví na budoucím vývoji mezd zdravotníků.",
+        "Předložené podklady nedokládají, zda se zvýšily přímé platby pacientů ani zda bylo zastaveno širší vyvádění peněz ze zdravotního systému; příslušná navržená ustanovení o pojistném se týkají nelegální či nehlášené práce."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

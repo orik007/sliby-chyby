@@ -1,0 +1,452 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T20-59-10-114Z--9841df69b6fd",
+  "evaluatedAt": "2026-10-06T20:59:10.114Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-03a264ca08/9841df69b6fd7a808acb36e7d69821004bf10282339cf3156df04d6bf1c8157f.json",
+  "packageHash": "9841df69b6fd7a808acb36e7d69821004bf10282339cf3156df04d6bf1c8157f",
+  "assessmentContentHash": "01040cae02c842ed17cf5a6a0a2bbbd6c8c736bf72da004033e332661ec90270",
+  "assessmentFingerprint": "6795503c49c015b1e080459da6a7105a4cd6d66ad2bdadf3e7b45510d5d94628",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-03a264ca08",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_04cb185275eb17d8016ac55b54a27887d2bb36c69ab394a826",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 433593,
+            "input_tokens_details": {
+              "cache_write_tokens": 429623,
+              "cached_tokens": 3967
+            },
+            "output_tokens": 9223,
+            "output_tokens_details": {
+              "reasoning_tokens": 7853
+            },
+            "total_tokens": 442816
+          },
+          "output": {
+            "promiseId": "motoriste-2025-03a264ca08",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Změny cílů územního plánování nově výslovně zahrnují energetickou a surovinovou bezpečnost a soběstačnost, což se může týkat plánování domácí těžby uhlí a jeho energetického využití.",
+                "effectCz": "Dříve stavební zákon ukládal plánovat s ohledem na udržitelný rozvoj, hospodářství a ochranu přírody a počítal s plánováním výroby energie a využití nerostných zdrojů; schválená verze navíc výslovně uvádí energetickou bezpečnost, zdroje energie a surovinovou soběstačnost. Tím posiluje postavení těchto hledisek při plánování, ale nezavádí povinnost spalovat české uhlí ani přímo neurčuje využití elektráren a tepláren."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-21",
+                "relevant": false,
+                "reasonCz": "Změny energetického zákona upravují mimo jiné regulaci, kapacitní mechanismus a pravidla pro infrastrukturu, ale text je nespojuje s využíváním českého uhlí v elektrárnách či teplárnách.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": false,
+                "reasonCz": "Novela mění postupy posuzování vlivů záměrů na životní prostředí obecně, ale nedotýká se konkrétně spalování českého uhlí ani provozu uvedených elektráren a tepláren.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": false,
+                "reasonCz": "Změny zákona o urychlení výstavby se týkají strategické infrastruktury a vybraných projektů, avšak text je nespojuje s provozem uhelných elektráren či tepláren nebo se zachováním jejich spotřeby uhlí.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": false,
+                "reasonCz": "Změna postupů podle zákona o ochraně ovzduší neuvádí české uhlí ani jeho spalování v elektrárnách a teplárnách a nezakládá konkrétní změnu jejich využívání.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+                "relevant": true,
+                "reasonCz": "Změna kritéria pro účinné soustavy zásobování teplem se přímo týká emisního hodnocení zdrojů tepla, a může proto ovlivnit podmínky pro uhelné teplárny.",
+                "effectCz": "Před změnou se emise vztahovaly k jednotce tepla dodaného zákazníkům; schválená verze je vztahuje k jednotce tepla vstupujícího ze zdrojů do soustavy. Přesouvá se tedy místo měření a hranice zůstávají v textu novely nezměněné; nezapočtení ztrát v síti může kritérium pro soustavu zmírnit, ale konkrétní dopad na jednotlivou uhelnou teplárnu z dodaných podkladů určit nelze. Tato změna sama o sobě spalování uhlí nenařizuje ani nezakazuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": false,
+                "reasonCz": "Zrušovací ustanovení ruší různé zákony a předpisy obecně, ale text neuvádí vazbu na pokračující využívání českého uhlí v elektrárnách a teplárnách.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "motoriste-2025-03a264ca08--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-approved-43",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15"
+            ],
+            "explanationCz": "Poslanci Motoristů předložili s poslanci dalších stran návrh novely stavebního zákona, tedy návrh projednávaný Poslaneckou sněmovnou jako sněmovní tisk 67. Novela výslovně posiluje zohlednění energetické a surovinové bezpečnosti a mění také emisní kritérium pro soustavy zásobování teplem, což může plánování domácích zdrojů energie a provoz těchto soustav usnadnit. Motoristé hlasovali pro schválení návrhu a po jeho zamítnutí Senátem také pro to, aby na něm Sněmovna setrvala. Změny však elektrárnám ani teplárnám neukládají plně spalovat české uhlí, takže jde jen o dílčí posun, nikoli splnění slibu.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Změna emisního výpočtu může u některých soustav zásobování teplem kritérium zmírnit, ale podklady neukazují, zda se díky ní konkrétní uhelná teplárna stane způsobilou nebo zda se zvýší její spotřeba uhlí.",
+              "Podklady dokládají legislativní kroky, nikoli skutečné množství českého uhlí spalované v elektrárnách a teplárnách."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-03a264ca08",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Změny územního plánování a obecná ustanovení o ochraně nerostů a energetiky se nevztahují přímo k využívání českého uhlí v elektrárnách a teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Ustanovení energetického zákona zde mění zejména pravidla pro vymezování zastavitelného území a nespojují je s využíváním uhlí v konkrétních elektrárnách či teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změny pravidel posuzování vlivů na životní prostředí se týkají povolovacích postupů obecně a balíček je nespojuje s využíváním českého uhlí v elektrárnách či teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro strategickou infrastrukturu a vyjmenované projekty neurčují ani nespojují konkrétní projekty s pokračujícím využíváním uhlí v elektrárnách a teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změna pravidel pro ochranu ovzduší upravuje povolovací postupy obecně, nikoli provoz uhelných elektráren a tepláren nebo jejich využívání.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Změna kritérií emisní intenzity pro účinné soustavy zásobování teplem může ovlivnit podmínky, za nichž se využívají teplárny.",
+          "effectCz": "Ustanovení mění způsob vyjádření emisní intenzity: místo tepla dodaného zákazníkům se nově počítá teplo vstupující ze zdrojů do soustavy; také mění pravidla pro stanovení výpočtu. Předchozí znění a příslušné limity nejsou v balíčku uvedeny, takže nelze určit, zda je změněné měřítko přísnější, nebo mírnější. Z textu lze určit jen to, že se nově upravuje měření emisní intenzity, nikoli že by se přímo zakazovalo spalování uhlí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení ruší související předpisy, ale nedokládá změnu pravidel pro provoz nebo využívání uhelných elektráren a tepláren.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-03a264ca08--source",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů hlasovali pro novelu, která mění pravidla pro výpočet emisní intenzity soustav zásobování teplem. Senát návrh odmítl a Sněmovna poté hlasovala pro setrvání na své verzi; i v tomto hlasování poslanci Motoristů hlasovali pro. Změna se může dotknout tepláren, ale sama o sobě spalování uhlí nezakazuje. Balíček neobsahuje předchozí znění příslušných pravidel, a proto nelze spolehlivě určit, zda tato změna využívání uhlí ztěžuje; závěr, že postupuje proti části slibu, je proto nejistý.",
+      "confidence": "low",
+      "uncertainties": [
+        "V balíčku chybí předchozí znění pravidel pro emisní intenzitu soustav zásobování teplem a jejich limity, takže nelze určit, zda novelizace pravidlo zpřísnila, nebo zmírnila. Nejsou uvedeny ani údaje o dopadu nové metody na provoz konkrétních uhelných tepláren; závěr o možném ztížení využívání uhlí je proto nejistý."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-03a264ca08",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změny výslovně zohledňují energetickou bezpečnost, energetické zdroje a surovinovou soběstačnost, což může podpořit dostupnost českého uhlí pro energetiku.",
+          "effectCz": "Dříve úkoly územního plánování zahrnovaly regulaci využívání nerostných zdrojů, ale neuváděly surovinovou bezpečnost a soběstačnost; nově se mají tyto hodnoty výslovně zohlednit. Změny také nově řadí ochranu energetické bezpečnosti a nerostného bohatství mezi veřejné zájmy a při rozvoji území zmiňují zdroje energie a surovin. To posiluje plánovací podporu těžby a energetických zdrojů, ale nezakládá povinnost uhlí v elektrárnách a teplárnách využívat; u nově vložených ustanovení balíček předchozí znění neposkytuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Změny energetického zákona upravují zejména jiné otázky energetické regulace a neobsahují vazbu na využívání českého uhlí v elektrárnách či teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změny pravidel posuzování vlivů na životní prostředí se nedotýkají využívání českého uhlí v konkrétních elektrárnách nebo teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně zařazuje úpravnu uhlí mezi strategické projekty, čímž se týká části slibu související se zajištěním uhlí pro energetiku.",
+          "effectCz": "Schválené znění doplňuje mezi strategické projekty úpravnu uhlí a mění popis související lokality. Tím stanoví její zařazení do režimu strategických staveb, který usnadňuje povolování, a může tak podpořit část dodavatelského řetězce uhlí; balíček však nedodává předchozí znění příslušné položky, takže změnu oproti němu nelze plně posoudit. Samotné zařazení nezavádí povinnost uhlí v elektrárnách a teplárnách využívat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změny ochrany ovzduší upravují povolovací postupy obecně, ale balíček je nespojuje s využíváním českého uhlí v uvedených elektrárnách či teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": false,
+          "reasonCz": "Změna pravidel podporovaných zdrojů energie se nevztahuje přímo k závazku plně využívat české uhlí v elektrárnách a teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení se týkají jiných právních předpisů a jejich změn, nikoli využívání českého uhlí v energetických provozech.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-03a264ca08--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci Motoristů se podíleli na předložení návrhu novely stavebního zákona a jejich klub následně většinově hlasoval pro jeho schválení i poté, co jej Senát odmítl. Schválený návrh mimo jiné zařazuje úpravnu uhlí mezi strategické projekty a posiluje zohlednění energetické bezpečnosti a surovinové soběstačnosti při plánování. Tím může usnadnit část infrastruktury potřebné pro dodávky uhlí, ale nezavádí povinnost uhlí v elektrárnách a teplárnách plně využívat. Jde proto o částečný posun, nikoli o doložení splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá, zda a v jakém rozsahu se české uhlí skutečně využívá v elektrárnách a teplárnách uvedených ve slibu; doložené změny se týkají hlavně plánování a infrastruktury."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_04cddf68ba29c5eb016ac55c6d472c87d28065339c366ebfc4",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 433593,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 433590
+      },
+      "output_tokens": 7169,
+      "output_tokens_details": {
+        "reasoning_tokens": 6041
+      },
+      "total_tokens": 440762
+    },
+    "output": {
+      "promiseId": "motoriste-2025-03a264ca08",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Změny územního plánování a obecná ustanovení o ochraně nerostů a energetiky se nevztahují přímo k využívání českého uhlí v elektrárnách a teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Ustanovení energetického zákona zde mění zejména pravidla pro vymezování zastavitelného území a nespojují je s využíváním uhlí v konkrétních elektrárnách či teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změny pravidel posuzování vlivů na životní prostředí se týkají povolovacích postupů obecně a balíček je nespojuje s využíváním českého uhlí v elektrárnách či teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změny pravidel pro strategickou infrastrukturu a vyjmenované projekty neurčují ani nespojují konkrétní projekty s pokračujícím využíváním uhlí v elektrárnách a teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změna pravidel pro ochranu ovzduší upravuje povolovací postupy obecně, nikoli provoz uhelných elektráren a tepláren nebo jejich využívání.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": true,
+          "reasonCz": "Změna kritérií emisní intenzity pro účinné soustavy zásobování teplem může ovlivnit podmínky, za nichž se využívají teplárny.",
+          "effectCz": "Ustanovení mění způsob vyjádření emisní intenzity: místo tepla dodaného zákazníkům se nově počítá teplo vstupující ze zdrojů do soustavy; také mění pravidla pro stanovení výpočtu. Předchozí znění a příslušné limity nejsou v balíčku uvedeny, takže nelze určit, zda je změněné měřítko přísnější, nebo mírnější. Z textu lze určit jen to, že se nově upravuje měření emisní intenzity, nikoli že by se přímo zakazovalo spalování uhlí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení ruší související předpisy, ale nedokládá změnu pravidel pro provoz nebo využívání uhelných elektráren a tepláren.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-03a264ca08--source",
+        "psp-core-2025--law-change-43174-approved-43",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů hlasovali pro novelu, která mění pravidla pro výpočet emisní intenzity soustav zásobování teplem. Senát návrh odmítl a Sněmovna poté hlasovala pro setrvání na své verzi; i v tomto hlasování poslanci Motoristů hlasovali pro. Změna se může dotknout tepláren, ale sama o sobě spalování uhlí nezakazuje. Balíček neobsahuje předchozí znění příslušných pravidel, a proto nelze spolehlivě určit, zda tato změna využívání uhlí ztěžuje; závěr, že postupuje proti části slibu, je proto nejistý.",
+      "confidence": "low",
+      "uncertainties": [
+        "V balíčku chybí předchozí znění pravidel pro emisní intenzitu soustav zásobování teplem a jejich limity, takže nelze určit, zda novelizace pravidlo zpřísnila, nebo zmírnila. Nejsou uvedeny ani údaje o dopadu nové metody na provoz konkrétních uhelných tepláren; závěr o možném ztížení využívání uhlí je proto nejistý."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0e3c218dad6df45f016ac55ff2b61487d2a60d788609017ef7",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 433593,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 433590
+      },
+      "output_tokens": 6323,
+      "output_tokens_details": {
+        "reasoning_tokens": 5068
+      },
+      "total_tokens": 439916
+    },
+    "output": {
+      "promiseId": "motoriste-2025-03a264ca08",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změny výslovně zohledňují energetickou bezpečnost, energetické zdroje a surovinovou soběstačnost, což může podpořit dostupnost českého uhlí pro energetiku.",
+          "effectCz": "Dříve úkoly územního plánování zahrnovaly regulaci využívání nerostných zdrojů, ale neuváděly surovinovou bezpečnost a soběstačnost; nově se mají tyto hodnoty výslovně zohlednit. Změny také nově řadí ochranu energetické bezpečnosti a nerostného bohatství mezi veřejné zájmy a při rozvoji území zmiňují zdroje energie a surovin. To posiluje plánovací podporu těžby a energetických zdrojů, ale nezakládá povinnost uhlí v elektrárnách a teplárnách využívat; u nově vložených ustanovení balíček předchozí znění neposkytuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-21",
+          "relevant": false,
+          "reasonCz": "Změny energetického zákona upravují zejména jiné otázky energetické regulace a neobsahují vazbu na využívání českého uhlí v elektrárnách či teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změny pravidel posuzování vlivů na životní prostředí se nedotýkají využívání českého uhlí v konkrétních elektrárnách nebo teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": true,
+          "reasonCz": "Schválené znění výslovně zařazuje úpravnu uhlí mezi strategické projekty, čímž se týká části slibu související se zajištěním uhlí pro energetiku.",
+          "effectCz": "Schválené znění doplňuje mezi strategické projekty úpravnu uhlí a mění popis související lokality. Tím stanoví její zařazení do režimu strategických staveb, který usnadňuje povolování, a může tak podpořit část dodavatelského řetězce uhlí; balíček však nedodává předchozí znění příslušné položky, takže změnu oproti němu nelze plně posoudit. Samotné zařazení nezavádí povinnost uhlí v elektrárnách a teplárnách využívat."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změny ochrany ovzduší upravují povolovací postupy obecně, ale balíček je nespojuje s využíváním českého uhlí v uvedených elektrárnách či teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-43",
+          "relevant": false,
+          "reasonCz": "Změna pravidel podporovaných zdrojů energie se nevztahuje přímo k závazku plně využívat české uhlí v elektrárnách a teplárnách.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení se týkají jiných právních předpisů a jejich změn, nikoli využívání českého uhlí v energetických provozech.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-03a264ca08--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci Motoristů se podíleli na předložení návrhu novely stavebního zákona a jejich klub následně většinově hlasoval pro jeho schválení i poté, co jej Senát odmítl. Schválený návrh mimo jiné zařazuje úpravnu uhlí mezi strategické projekty a posiluje zohlednění energetické bezpečnosti a surovinové soběstačnosti při plánování. Tím může usnadnit část infrastruktury potřebné pro dodávky uhlí, ale nezavádí povinnost uhlí v elektrárnách a teplárnách plně využívat. Jde proto o částečný posun, nikoli o doložení splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá, zda a v jakém rozsahu se české uhlí skutečně využívá v elektrárnách a teplárnách uvedených ve slibu; doložené změny se týkají hlavně plánování a infrastruktury."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0d2f3f85bdbb23e0016ac560d09ca487d2b2913d0fbd42b642",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 434903,
+      "input_tokens_details": {
+        "cache_write_tokens": 431991,
+        "cached_tokens": 2909
+      },
+      "output_tokens": 2066,
+      "output_tokens_details": {
+        "reasoning_tokens": 1761
+      },
+      "total_tokens": 436969
+    },
+    "output": {
+      "choice": "cannot-decide",
+      "citedEvidenceIds": [
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-32",
+        "psp-core-2025--law-change-43174-approved-43"
+      ],
+      "explanationCz": "Poslanci Motoristů předložili návrh změn stavebního zákona, vedený ve Sněmovně jako tisk č. 67, a hlasovali pro něj i poté, co ho Senát odmítl. Návrh mění pravidla plánování a zahrnuje také projekt úpravny uhlí, ale podklady neukazují, že by tím zajistil plné využívání českého uhlí v elektrárnách a teplárnách. Jeden posudek z toho vyvozuje možný přínos, druhý možný zásah proti slibu; ani jeden však neprokazuje, že takový účinek skutečně nastal. Proto nelze spolehlivě určit, zda poslanci slib podpořili, nebo mu odporovali."
+    }
+  },
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "arbiter-cannot-decide",
+    "status": null,
+    "selectedReview": null
+  }
+}

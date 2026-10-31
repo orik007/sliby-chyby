@@ -1,0 +1,289 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-45-16-746Z--82fcd9c43a81",
+  "evaluatedAt": "2026-10-02T05:45:16.746Z",
+  "packagePath": "automation/evidence-packages/packages/spd-2025-fc2ae5312b/82fcd9c43a810f49f164462c3239fa54d8af35cd78384ef68ba5ce593a16247a.json",
+  "packageHash": "82fcd9c43a810f49f164462c3239fa54d8af35cd78384ef68ba5ce593a16247a",
+  "assessmentContentHash": "3cf7d91f36e6d42f29f70754208b2493afbca08ae1cd77d1ef15448631210192",
+  "assessmentFingerprint": "5e8adde0e0648aceb4cff00d43d240bdb5d5105c20fdfb0f2b4bc35fb303694e",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "spd-2025-fc2ae5312b",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0da902768d8e6bfe016abf44b2fa1887d1998157c243cbf219",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 108096,
+            "input_tokens_details": {
+              "cache_write_tokens": 104772,
+              "cached_tokens": 3321
+            },
+            "output_tokens": 2794,
+            "output_tokens_details": {
+              "reasoning_tokens": 2070
+            },
+            "total_tokens": 110890
+          },
+          "output": {
+            "promiseId": "spd-2025-fc2ae5312b",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43120-5",
+                "relevant": true,
+                "reasonCz": "Změna požadavku na informování o ochraně práv dlužníka na ochranu práv věřitele oslabuje jednu konkrétní ochranu lidí zadlužených u správců nevýkonných úvěrů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43266-1",
+                "relevant": true,
+                "reasonCz": "Novela ukládá věřitelům před zahájením vymáhání ve vhodných případech nabídnout opatření upravující splácení, včetně odkladu splátek či prominutí části dluhu, a odkázat dlužníka na dluhové poradenství."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43266-6",
+                "relevant": true,
+                "reasonCz": "Změna rozšiřuje okruh uznávaných poskytovatelů dluhového poradenství, na něž mají být dlužníci při správě nevýkonných úvěrů podle potřeby odkázáni."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "spd-2025-fc2ae5312b--source",
+              "psp-core-2025--law-change-43120-5",
+              "psp-core-2025--law-change-43266-1",
+              "psp-core-2025--law-change-43266-6",
+              "psp-core-2025--print-step-211051",
+              "psp-core-2025--vote-87503",
+              "psp-core-2025--vote-88519"
+            ],
+            "explanationCz": "Vláda předložila novelu spotřebitelského úvěru, projednávanou ve Sněmovně jako sněmovní tisk 145 (číslo návrhu zákona). SPD ji v září 2026 podpořila; novela ukládá věřitelům před zahájením vymáhání ve vhodných případech nabídnout úpravu splácení, například odklad splátek nebo prominutí části dluhu, a odkázat dlužníka na dostupné dluhové poradenství. Jde o konkrétní posun, ale opatření nejsou zaměřena výslovně na legálně pracující lidi, kteří splácejí dluhy v exekuci. Dřívější hlasování SPD pro změnu oslabující výslovný důraz na ochranu práv dlužníka je třeba zohlednit.",
+            "confidence": "high",
+            "uncertainties": [
+              "V květnu 2026 SPD hlasovala pro změnu pravidel pro správce nevýkonných úvěrů, která nahradila požadavek na vykazování souladu s ochranou práv dlužníka požadavkem na ochranu práv věřitele; tento dílčí protichůdný krok nezměnil závěr založený na pozdějším hlasování o opatřeních při prodlení."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "spd-2025-fc2ae5312b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-5",
+          "relevant": false,
+          "reasonCz": "Změna upravuje především působnost a dohled nad obchodem s nevýkonnými úvěry, nikoli podporu lidí v exekuci, kteří legálně pracují a splácejí dluhy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí před vymáháním dluhu přiměřená opatření pro dlužníka, včetně změny splácení či odpuštění části dluhu, a odkazování na dluhové poradenství."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-6",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje možnost odkázat dlužníka na poskytovatele dluhového poradenství podle jiného právního předpisu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-fc2ae5312b--source",
+        "psp-core-2025--law-change-43266-1",
+        "psp-core-2025--law-change-43266-6",
+        "psp-core-2025--print-step-211051",
+        "psp-core-2025--vote-88519"
+      ],
+      "explanationCz": "Vláda předložila návrh novely zákona o spotřebitelském úvěru a poslanci SPD jej později ve Sněmovně podpořili. Návrh počítá s tím, že věřitel před zahájením vymáhání ve vhodných případech nabídne dlužníkovi přiměřenou úpravu splácení, případně odpuštění části dluhu, a odkáže člověka s finančními potížemi na dluhové poradenství. Jde o konkrétní pomoc dlužníkům, a tedy o dílčí posun ke slibu. Návrh ale tuto podporu výslovně necílí na lidi, kteří legálně pracují a splácejí dluhy v exekuci.",
+      "confidence": "high",
+      "uncertainties": [
+        "Z podkladů není zřejmé, nakolik by navržená opatření pomohla právě lidem, kteří už jsou v exekuci a současně legálně pracují a splácejí dluhy."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "spd-2025-fc2ae5312b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-5",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro správu nevýkonných úvěrů zasahuje do ochrany dlužníků a jejich kontaktování s dluhovým poradenstvím, tedy do části systémové podpory lidí s dluhy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1",
+          "relevant": true,
+          "reasonCz": "Novela zavádí před zahájením vymáhání nabídku přiměřených změn splácení či prominutí části dluhu a odkazování lidí ve finančních potížích na dluhové poradenství."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-6",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje možnost odkázat dlužníka spravujícího nevýkonný úvěr na poskytovatele dluhového poradenství, což je konkrétní forma podpory zadlužených lidí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-fc2ae5312b--source",
+        "psp-core-2025--law-change-43120-5",
+        "psp-core-2025--vote-87503",
+        "psp-core-2025--law-change-43266-1",
+        "psp-core-2025--law-change-43266-6",
+        "psp-core-2025--print-step-211051",
+        "psp-core-2025--vote-88519"
+      ],
+      "explanationCz": "Vláda předložila novelu zákona o spotřebitelském úvěru, která má věřitelům před zahájením vymáhání ukládat v odůvodněných případech nabídnout změnu splácení nebo prominutí části dluhu a odkázat lidi ve finančních potížích na dluhové poradenství. Poslanci SPD pro novelu hlasovali; jde o konkrétní, ale jen částečný krok k systémové podpoře dlužníků. Zákon však výslovně nezaměřuje tato opatření na lidi, kteří už jsou v exekuci a zároveň legálně pracují a splácejí dluhy. Dříve SPD podpořila také změnu pravidel správy nevýkonných úvěrů, která v jednom ustanovení přesunula důraz z ochrany práv dlužníka na ochranu práv věřitele.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela stanoví podporu pro spotřebitele ve finančních potížích a před zahájením vymáhání, ale předložené znění nedokládá, zda se opatření vztahují právě na lidi, kteří už jsou v exekuci a legálně pracují a splácejí dluhy.",
+        "Dřívější hlasování SPD podpořilo změnu, která u správy nevýkonných úvěrů nahradila odkaz na ochranu práv dlužníka odkazem na ochranu práv věřitele; tento protichůdný prvek nemění hodnocení pozdějšího hlasování o podpoře dlužníků."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_09a6e9a7e85f010a016abf44c6747087d19908e12cd5e15ab5",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 108096,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 108093
+      },
+      "output_tokens": 2196,
+      "output_tokens_details": {
+        "reasoning_tokens": 1536
+      },
+      "total_tokens": 110292
+    },
+    "output": {
+      "promiseId": "spd-2025-fc2ae5312b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-5",
+          "relevant": false,
+          "reasonCz": "Změna upravuje především působnost a dohled nad obchodem s nevýkonnými úvěry, nikoli podporu lidí v exekuci, kteří legálně pracují a splácejí dluhy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí před vymáháním dluhu přiměřená opatření pro dlužníka, včetně změny splácení či odpuštění části dluhu, a odkazování na dluhové poradenství."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-6",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje možnost odkázat dlužníka na poskytovatele dluhového poradenství podle jiného právního předpisu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-fc2ae5312b--source",
+        "psp-core-2025--law-change-43266-1",
+        "psp-core-2025--law-change-43266-6",
+        "psp-core-2025--print-step-211051",
+        "psp-core-2025--vote-88519"
+      ],
+      "explanationCz": "Vláda předložila návrh novely zákona o spotřebitelském úvěru a poslanci SPD jej později ve Sněmovně podpořili. Návrh počítá s tím, že věřitel před zahájením vymáhání ve vhodných případech nabídne dlužníkovi přiměřenou úpravu splácení, případně odpuštění části dluhu, a odkáže člověka s finančními potížemi na dluhové poradenství. Jde o konkrétní pomoc dlužníkům, a tedy o dílčí posun ke slibu. Návrh ale tuto podporu výslovně necílí na lidi, kteří legálně pracují a splácejí dluhy v exekuci.",
+      "confidence": "high",
+      "uncertainties": [
+        "Z podkladů není zřejmé, nakolik by navržená opatření pomohla právě lidem, kteří už jsou v exekuci a současně legálně pracují a splácejí dluhy."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0339eb523547324a016abf44d60cf887d1b52c1d58356cde33",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 108096,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 108093
+      },
+      "output_tokens": 3333,
+      "output_tokens_details": {
+        "reasoning_tokens": 2563
+      },
+      "total_tokens": 111429
+    },
+    "output": {
+      "promiseId": "spd-2025-fc2ae5312b",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-5",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro správu nevýkonných úvěrů zasahuje do ochrany dlužníků a jejich kontaktování s dluhovým poradenstvím, tedy do části systémové podpory lidí s dluhy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-1",
+          "relevant": true,
+          "reasonCz": "Novela zavádí před zahájením vymáhání nabídku přiměřených změn splácení či prominutí části dluhu a odkazování lidí ve finančních potížích na dluhové poradenství."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43266-6",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje možnost odkázat dlužníka spravujícího nevýkonný úvěr na poskytovatele dluhového poradenství, což je konkrétní forma podpory zadlužených lidí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "spd-2025-fc2ae5312b--source",
+        "psp-core-2025--law-change-43120-5",
+        "psp-core-2025--vote-87503",
+        "psp-core-2025--law-change-43266-1",
+        "psp-core-2025--law-change-43266-6",
+        "psp-core-2025--print-step-211051",
+        "psp-core-2025--vote-88519"
+      ],
+      "explanationCz": "Vláda předložila novelu zákona o spotřebitelském úvěru, která má věřitelům před zahájením vymáhání ukládat v odůvodněných případech nabídnout změnu splácení nebo prominutí části dluhu a odkázat lidi ve finančních potížích na dluhové poradenství. Poslanci SPD pro novelu hlasovali; jde o konkrétní, ale jen částečný krok k systémové podpoře dlužníků. Zákon však výslovně nezaměřuje tato opatření na lidi, kteří už jsou v exekuci a zároveň legálně pracují a splácejí dluhy. Dříve SPD podpořila také změnu pravidel správy nevýkonných úvěrů, která v jednom ustanovení přesunula důraz z ochrany práv dlužníka na ochranu práv věřitele.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Novela stanoví podporu pro spotřebitele ve finančních potížích a před zahájením vymáhání, ale předložené znění nedokládá, zda se opatření vztahují právě na lidi, kteří už jsou v exekuci a legálně pracují a splácejí dluhy.",
+        "Dřívější hlasování SPD podpořilo změnu, která u správy nevýkonných úvěrů nahradila odkaz na ochranu práv dlužníka odkazem na ochranu práv věřitele; tento protichůdný prvek nemění hodnocení pozdějšího hlasování o podpoře dlužníků."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

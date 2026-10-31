@@ -1,0 +1,202 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-48-18-678Z--96327a5f6c20",
+  "evaluatedAt": "2026-10-02T01:48:18.678Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-6fefba7ba3bc/96327a5f6c203f059595ed98aabd0dd56e20a0f693bcd991ad2c133dfc8075ac.json",
+  "packageHash": "96327a5f6c203f059595ed98aabd0dd56e20a0f693bcd991ad2c133dfc8075ac",
+  "assessmentContentHash": "1392540da30d43f78383b1606517241913883723e2438237f5de1d4c0d8d9268",
+  "assessmentFingerprint": "bf6bf68bee8da33ed7fe2f20989fd55d44809ddeee5d0e2dca52b23b318a204a",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-6fefba7ba3bc",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-6fefba7ba3bc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí zvýšení procentní výměry důchodu podle doby výdělečné činnosti po vzniku nároku na důchod; za celý rozhodný rok odpovídá výpočet koeficientu 1,5 slíbenému navýšení, ale u samostatné výdělečné činnosti vyžaduje žádost."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": true,
+          "reasonCz": "Návrh zahrnuje zvýšení podle nového § 67ac do pravidel pro oznámení a rozhodování o změně důchodu, a tím se týká administrativního provedení slíbeného přepočtu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6fefba7ba3bc--source",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--law-change-43392-2",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Vláda, v níž je ANO, předložila návrh změny zákona o důchodovém pojištění, který zvyšuje důchod za výdělečnou činnost po vzniku nároku na starobní důchod; při celém rozhodném roce výpočet odpovídá 1,5 % a zvýšení se má provádět každoročně. Návrh také rozšiřuje pravidla pro oznamování zvýšení důchodu na tento nový druh navýšení. U samostatné výdělečné činnosti však vyžaduje písemnou žádost, což neodpovídá slibu automatického přepočtu bez žádosti. Jde zatím o předložený návrh, nikoli o doložené přijaté opatření, proto jde o posun směrem ke splnění, ne o splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh vyžaduje u zvýšení za samostatnou výdělečnou činnost písemnou žádost, přestože slib uvádí každoroční automatický přepočet bez žádosti; předložené podklady dokládají návrh, ale nikoli jeho konečné přijetí."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-6fefba7ba3bc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Nový § 67ac zavádí každoroční zvýšení důchodu podle výdělečné činnosti, jehož výpočet používá koeficient 1,5, a proto přímo odpovídá části slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro oznamování zvýšení důchodů výslovně zahrnuje i zvýšení podle nového § 67ac, a týká se tak administrativního provedení zvýšení bez běžného písemného rozhodnutí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6fefba7ba3bc--source",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--law-change-43392-2",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Vláda, v níž je ANO, předložila návrh na každoroční zvýšení procentní výměry důchodu podle výdělečné činnosti; výpočet používá koeficient 1,5 a zvýšení se má přičítat od ledna. Návrh také upravuje oznamování těchto zvýšení bez běžného písemného rozhodnutí. Jde o posun ke slibu, ale návrh počítá s žádostí u samostatně výdělečně činných a stanoví zvýšení podle podílu odpracovaných dnů v určeném období, nikoli prostě za každý odpracovaný rok. Doklad potvrzuje předložení návrhu, ne jeho přijetí.",
+      "confidence": "high",
+      "uncertainties": [
+        "Balíček dokládá pouze předložení návrhu, nikoli jeho pozdější přijetí; navíc u samostatně výdělečně činných návrh výslovně vyžaduje písemnou žádost."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_08d560a559a52062016abf0d4d20c087d197ddeca2043a2a7c",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 18867,
+      "input_tokens_details": {
+        "cache_write_tokens": 15543,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1616,
+      "output_tokens_details": {
+        "reasoning_tokens": 1034
+      },
+      "total_tokens": 20483
+    },
+    "output": {
+      "promiseId": "candidate-6fefba7ba3bc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí zvýšení procentní výměry důchodu podle doby výdělečné činnosti po vzniku nároku na důchod; za celý rozhodný rok odpovídá výpočet koeficientu 1,5 slíbenému navýšení, ale u samostatné výdělečné činnosti vyžaduje žádost."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": true,
+          "reasonCz": "Návrh zahrnuje zvýšení podle nového § 67ac do pravidel pro oznámení a rozhodování o změně důchodu, a tím se týká administrativního provedení slíbeného přepočtu."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6fefba7ba3bc--source",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--law-change-43392-2",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Vláda, v níž je ANO, předložila návrh změny zákona o důchodovém pojištění, který zvyšuje důchod za výdělečnou činnost po vzniku nároku na starobní důchod; při celém rozhodném roce výpočet odpovídá 1,5 % a zvýšení se má provádět každoročně. Návrh také rozšiřuje pravidla pro oznamování zvýšení důchodu na tento nový druh navýšení. U samostatné výdělečné činnosti však vyžaduje písemnou žádost, což neodpovídá slibu automatického přepočtu bez žádosti. Jde zatím o předložený návrh, nikoli o doložené přijaté opatření, proto jde o posun směrem ke splnění, ne o splnění slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh vyžaduje u zvýšení za samostatnou výdělečnou činnost písemnou žádost, přestože slib uvádí každoroční automatický přepočet bez žádosti; předložené podklady dokládají návrh, ale nikoli jeho konečné přijetí."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0fc3bd1d7e5bf1fb016abf0d5858fc87d1b5aff5f1da66d34e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 18867,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 18864
+      },
+      "output_tokens": 1548,
+      "output_tokens_details": {
+        "reasoning_tokens": 985
+      },
+      "total_tokens": 20415
+    },
+    "output": {
+      "promiseId": "candidate-6fefba7ba3bc",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-1",
+          "relevant": true,
+          "reasonCz": "Nový § 67ac zavádí každoroční zvýšení důchodu podle výdělečné činnosti, jehož výpočet používá koeficient 1,5, a proto přímo odpovídá části slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43392-2",
+          "relevant": true,
+          "reasonCz": "Změna pravidel pro oznamování zvýšení důchodů výslovně zahrnuje i zvýšení podle nového § 67ac, a týká se tak administrativního provedení zvýšení bez běžného písemného rozhodnutí."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6fefba7ba3bc--source",
+        "psp-core-2025--law-change-43392-1",
+        "psp-core-2025--law-change-43392-2",
+        "psp-core-2025--print-step-211955"
+      ],
+      "explanationCz": "Vláda, v níž je ANO, předložila návrh na každoroční zvýšení procentní výměry důchodu podle výdělečné činnosti; výpočet používá koeficient 1,5 a zvýšení se má přičítat od ledna. Návrh také upravuje oznamování těchto zvýšení bez běžného písemného rozhodnutí. Jde o posun ke slibu, ale návrh počítá s žádostí u samostatně výdělečně činných a stanoví zvýšení podle podílu odpracovaných dnů v určeném období, nikoli prostě za každý odpracovaný rok. Doklad potvrzuje předložení návrhu, ne jeho přijetí.",
+      "confidence": "high",
+      "uncertainties": [
+        "Balíček dokládá pouze předložení návrhu, nikoli jeho pozdější přijetí; navíc u samostatně výdělečně činných návrh výslovně vyžaduje písemnou žádost."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

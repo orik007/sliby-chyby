@@ -1,0 +1,558 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-58-13-787Z--86024bd4ea85",
+  "evaluatedAt": "2026-10-02T01:58:13.787Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-bc065f1ba65c/86024bd4ea85ee265fbfd1c391a1fafcc5ce9c9a97ee29ac39386a76b3b0c2df.json",
+  "packageHash": "86024bd4ea85ee265fbfd1c391a1fafcc5ce9c9a97ee29ac39386a76b3b0c2df",
+  "assessmentContentHash": "f9364908785e304cf982b18d8c81e5989e10918a3ba2456f3dd8cad3a24065bb",
+  "assessmentFingerprint": "5def34a7c3cc646acb5885049f02a61ce615372ff7934f63efd85f39fe3f345b",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-bc065f1ba65c",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [
+      {
+        "error": "Assessment explanation contains internal or unexplained language: \\btisk\\s+\\d+\\b",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0771361a898ec1e0016abf0f1d552c87d1bdac0fa7845d616c",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 338957,
+            "input_tokens_details": {
+              "cache_write_tokens": 335633,
+              "cached_tokens": 3321
+            },
+            "output_tokens": 4461,
+            "output_tokens_details": {
+              "reasoning_tokens": 2901
+            },
+            "total_tokens": 343418
+          },
+          "output": {
+            "promiseId": "candidate-bc065f1ba65c",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-4",
+                "relevant": true,
+                "reasonCz": "Upravuje zaměstnávání cizinců, stanoví nejméně minimální mzdu u některých pracovních pobytů a umožňuje omezit roli agentur práce v programech pro zaměstnanecké karty."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-13",
+                "relevant": true,
+                "reasonCz": "U zaměstnaných cizinců bez oprávnění k pobytu ukládá policii informovat o právu žádat nevyplacenou mzdu a obrátit se na inspekci práce, což může pomoci odhalovat a řešit mzdové zneužívání."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-16",
+                "relevant": true,
+                "reasonCz": "Zavádí povinnost zaměstnavatelů předávat údaje o pracovním vztahu, pracovní době a příjmech cizinců, které mohou sloužit k ověřování jejich zaměstnání a výdělků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-17",
+                "relevant": false,
+                "reasonCz": "Upravuje evidenci a zpracování údajů o cizincích, ale její ustanovení nestanoví konkrétní mzdové kontroly ani pravidla pro agenturní mzdy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-5",
+                "relevant": false,
+                "reasonCz": "Navržené změny zákona o pobytu cizinců se týkají zejména zpětného přemístění a pobytových řízení, nikoli kontrol mezd agenturních pracovníků."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-1",
+                "relevant": true,
+                "reasonCz": "Upravuje odměňování zaměstnanců agentur práce tak, že na ně po dobu přidělení dopadá systém odměňování uživatele, což může omezit podstatné rozdíly v jejich mzdách."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-2",
+                "relevant": false,
+                "reasonCz": "Upravuje dokazování a zastupování v soudních sporech hlavně ve věcech rovného odměňování žen a mužů, nikoli mzdové rozdíly u cizinců zaměstnaných agenturami."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-3",
+                "relevant": false,
+                "reasonCz": "Mění pravidla sociálního zabezpečení a odvádění pojistného, ale neřeší mzdové rozdíly mezi cizinci a ostatními pracovníky ani kontrolu agentur."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-14",
+                "relevant": true,
+                "reasonCz": "Zpřesňuje postih nelegální a nehlášené práce a zavádí finanční odpovědnost zaměstnavatelů včetně dodavatelského řetězce, což může pomoci při kontrole zaměstnávání a odměňování cizinců."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-16",
+                "relevant": false,
+                "reasonCz": "Zavádí především kontroly a povinnosti k transparentnosti rozdílů v odměňování žen a mužů, nikoli zvláštní kontrolu mzdového dumpingu agentur vůči cizincům."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43422-22",
+                "relevant": false,
+                "reasonCz": "Upravuje technické a evidenční prvky jednotného měsíčního hlášení zaměstnavatelů, ale sama nestanoví konkrétní pravidlo proti nižším agenturním mzdám cizinců."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43423-1",
+                "relevant": false,
+                "reasonCz": "Vymezuje platformovou práci a související pojmy, nikoli agenturní zaměstnávání cizinců nebo mzdové kontroly."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43423-4",
+                "relevant": false,
+                "reasonCz": "Stanoví informační povinnosti a ochranu platformových pracovníků, ale neřeší mzdové podmínky cizinců zaměstnaných agenturami."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-bc065f1ba65c--source",
+              "psp-core-2025--law-change-43264-4",
+              "psp-core-2025--law-change-43264-13",
+              "psp-core-2025--law-change-43264-16",
+              "psp-core-2025--print-step-211048",
+              "psp-core-2025--vote-88522",
+              "psp-core-2025--law-change-43422-1",
+              "psp-core-2025--law-change-43422-14",
+              "psp-core-2025--print-step-212101"
+            ],
+            "explanationCz": "Vláda předložila návrh nového cizineckého zákona (sněmovní tisk 144, tedy číslo návrhu projednávaného Poslaneckou sněmovnou); SPD se na jeho předložení podílela. Poslanci SPD pak většinou hlasovali pro jeho schválení, včetně pravidel o minimální mzdě u některých pracovních pobytů, údajích o výdělcích a právu zaměstnaných cizinců upozornit inspekci práce na porušování povinností. Vláda později navrhla, aby se na zaměstnance agentury práce vztahoval systém odměňování firmy, kam jsou přiděleni, a zpřísnila odpovědnost za nelegální práci; tyto návrhy mohou část slibu naplnit. Jde však jen o dílčí opatření a návrh o agenturním odměňování nebyl v doložených podkladech předmětem hlasování SPD, takže celý závazek nelze považovat za splněný.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Návrh změn zákoníku práce zároveň ruší dosavadní úpravu zaručené mzdy, ale podklady neobsahují její úplné znění před změnou; nelze proto přesně posoudit, zda tato část návrhu může působit proti omezení mzdového dumpingu.",
+              "Podklady dokládají předložení návrhů a hlasování o cizineckém zákoně, ne však jejich pozdější účinnost ani praktické provádění kontrol."
+            ]
+          }
+        }
+      }
+    ],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-bc065f1ba65c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": true,
+          "reasonCz": "Text stanoví možnost ověřovat údaje garanta o mzdě a za určitých podmínek umožňuje vyloučit agenturu práce, takže se může týkat kontroly odměňování cizinců."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": true,
+          "reasonCz": "Policie má informovat neoprávněně pobývajícího zaměstnaného cizince o nároku na nevyplacenou mzdu a možnosti upozornit inspekci práce, což částečně souvisí s ochranou před mzdovým zneužíváním."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": true,
+          "reasonCz": "Zaměstnavatelé mají hlásit údaje o pracovním zařazení, hodinách a výdělcích cizinců, které mohou podpořit kontrolu jejich odměňování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Přístup úřadů k údajům o pracovních a mzdových podmínkách míst obsaditelných držiteli zaměstnaneckých karet může přispět ke kontrole podmínek práce cizinců."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá zaměstnavatelům cizinců hlásit údaje o pracovním vztahu, odpracované době a příjmech, což může podpořit kontrolu jejich pracovních podmínek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje odměňování zaměstnanců agentur podle systému uživatele a stanoví další povinnosti týkající se informací o odměnách, tedy se může přímo dotknout agenturního odměňování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": false,
+          "reasonCz": "Text upravuje soudní postupy v diskriminačních sporech a při práci přes platformy, nikoli kontroly mezd cizinců zaměstnávaných agenturami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-3",
+          "relevant": false,
+          "reasonCz": "Text se týká zejména správy sociálního zabezpečení a odvodů za nelegální či nehlášenou práci, nikoli kontroly mzdového dumpingu agentur."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": false,
+          "reasonCz": "Text upravuje postihy za nelegální a nehlášenou práci, ale nestanoví kontroly ani pravidla proti nabízení nižších mezd cizincům agenturami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": false,
+          "reasonCz": "Text zavádí pravidla a sankce zaměřené převážně na rovné odměňování žen a mužů a platformovou práci, nikoli na mzdy cizinců u agentur."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-22",
+          "relevant": false,
+          "reasonCz": "Změny jednotného měsíčního hlášení samy nestanoví kontroly proti tomu, aby agentury nabízely cizincům nižší mzdy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-1",
+          "relevant": false,
+          "reasonCz": "Text upravuje zvláštní pracovněprávní režim digitálních platforem, nikoli agenturní zaměstnávání cizinců."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-4",
+          "relevant": false,
+          "reasonCz": "Text stanoví informační a další povinnosti digitálních platforem, nikoli kontroly mezd cizinců zaměstnávaných agenturami."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-bc065f1ba65c--source",
+        "psp-core-2025--law-change-43264-4",
+        "psp-core-2025--law-change-43264-13",
+        "psp-core-2025--law-change-43264-16",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--law-change-43335-5",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda předložila návrh nového zákona o vstupu a pobytu cizinců; poslanci SPD pak hlasovali pro jeho schválení. Návrh umožňuje ověřovat některé údaje o mzdě garanta, počítá s evidencí výdělků a pracovních podmínek cizinců a posiluje jejich informovanost o nároku na nevyplacenou mzdu. Vláda později také navrhla, aby se na dočasně přidělené zaměstnance agentur vztahoval systém odměňování uživatele, jde však zatím jen o návrh. Jde o dílčí kroky, nikoli o úplné zavedení slíbených kontrol proti mzdovému dumpingu agentur.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh změny zákoníku práce zároveň ruší ustanovení § 112, ale podklady neuvádějí jeho dosavadní znění, takže nelze posoudit, zda tato změna oslabuje některou ochranu před nízkými mzdami."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-bc065f1ba65c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": true,
+          "reasonCz": "Navrhovaný cizinecký zákon vyžaduje u zaměstnaneckých karet alespoň minimální mzdu a u sezónní práce doklad o dohodnuté mzdě, takže upravuje část ochrany cizinců před podhodnoceným odměňováním."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje návrat cizinců a jejich práva při vyhoštění, nikoli kontrolu nebo výši mezd agenturních pracovníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": true,
+          "reasonCz": "Navrhuje povinnost zaměstnavatelů hlásit údaje o příjmech cizinců i jejich dočasném přidělení, což může umožnit kontrolovat odměňování pracovníků agentur."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje evidenci a předávání údajů o pobytu cizinců, ale sama nestanoví mzdové požadavky ani kontroly agenturního odměňování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá zaměstnavatelům hlásit údaje o mzdách cizinců a jejich pracovním přidělení, čímž vytváří podklady pro kontrolu případného mzdového podhodnocování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně stanoví, že agenturní pracovníci podléhají systému odměňování uživatele a že agentura potřebuje jeho souhlas s výší a strukturou odměny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": false,
+          "reasonCz": "Tato část mění soudní postupy u diskriminace v odměňování, ale nedotýká se kontrol mezd cizinců zaměstnaných agenturami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-3",
+          "relevant": false,
+          "reasonCz": "Navrhované změny sociálního zabezpečení se týkají úhrady pojistného při nelegální či nehlášené práci, nikoli podhodnocených mezd agenturních pracovníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": false,
+          "reasonCz": "Tato část zpřísňuje pravidla a postihy pro nelegální nebo nehlášenou práci, ale neřeší nižší mzdy cizinců zaměstnaných agenturami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": false,
+          "reasonCz": "Navrhované kontrolní a sankční nástroje míří hlavně na transparentnost odměňování žen a mužů, nikoli na mzdové podhodnocování cizinců agenturami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-22",
+          "relevant": true,
+          "reasonCz": "Návrh zpřístupňuje údaje z jednotného hlášení také inspekci práce, což může podpořit kontrolu hlášených mezd a pracovních přidělení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-1",
+          "relevant": false,
+          "reasonCz": "Tato část vymezuje platformovou práci a související vztahy, nikoli pracovní agentury a jejich odměňování cizinců."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-4",
+          "relevant": false,
+          "reasonCz": "Povinnosti platforem sdílet informace a umožnit komunikaci se netýkají kontroly mezd cizinců zaměstnaných agenturami."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-bc065f1ba65c--source",
+        "psp-core-2025--law-change-43264-4",
+        "psp-core-2025--law-change-43264-16",
+        "psp-core-2025--law-change-43335-5",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--law-change-43422-22",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Vláda předložila nový cizinecký zákon; SPD jej podpořila při závěrečném hlasování ve Sněmovně. Návrh mimo jiné stanoví minimální mzdu pro některé pracovní pobyty cizinců a hlášení údajů o jejich mzdách a přidělení. Vláda také navrhla, aby agenturní pracovníci dostávali odměnu podle systému uživatele a aby inspekce práce měla přístup k dalším mzdovým údajům. Jde o dílčí posun, protože podklady nedokládají zavedení úplného systému přísnějších kontrol zaměřeného přímo na mzdový dumping agentur vůči cizincům.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrhy na hlášení mzdových údajů a na odměňování agenturních pracovníků jsou v balíčku doloženy jako vládní návrhy, nikoli jako schválené zákony; jejich konečná podoba a účinek proto zůstávají nejisté."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_008fc0c6e87dc3f7016abf0f58c71c87d1934b928740ee1019",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 338957,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 338954
+      },
+      "output_tokens": 5225,
+      "output_tokens_details": {
+        "reasoning_tokens": 3608
+      },
+      "total_tokens": 344182
+    },
+    "output": {
+      "promiseId": "candidate-bc065f1ba65c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": true,
+          "reasonCz": "Text stanoví možnost ověřovat údaje garanta o mzdě a za určitých podmínek umožňuje vyloučit agenturu práce, takže se může týkat kontroly odměňování cizinců."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": true,
+          "reasonCz": "Policie má informovat neoprávněně pobývajícího zaměstnaného cizince o nároku na nevyplacenou mzdu a možnosti upozornit inspekci práce, což částečně souvisí s ochranou před mzdovým zneužíváním."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": true,
+          "reasonCz": "Zaměstnavatelé mají hlásit údaje o pracovním zařazení, hodinách a výdělcích cizinců, které mohou podpořit kontrolu jejich odměňování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Přístup úřadů k údajům o pracovních a mzdových podmínkách míst obsaditelných držiteli zaměstnaneckých karet může přispět ke kontrole podmínek práce cizinců."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá zaměstnavatelům cizinců hlásit údaje o pracovním vztahu, odpracované době a příjmech, což může podpořit kontrolu jejich pracovních podmínek."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh upravuje odměňování zaměstnanců agentur podle systému uživatele a stanoví další povinnosti týkající se informací o odměnách, tedy se může přímo dotknout agenturního odměňování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": false,
+          "reasonCz": "Text upravuje soudní postupy v diskriminačních sporech a při práci přes platformy, nikoli kontroly mezd cizinců zaměstnávaných agenturami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-3",
+          "relevant": false,
+          "reasonCz": "Text se týká zejména správy sociálního zabezpečení a odvodů za nelegální či nehlášenou práci, nikoli kontroly mzdového dumpingu agentur."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": false,
+          "reasonCz": "Text upravuje postihy za nelegální a nehlášenou práci, ale nestanoví kontroly ani pravidla proti nabízení nižších mezd cizincům agenturami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": false,
+          "reasonCz": "Text zavádí pravidla a sankce zaměřené převážně na rovné odměňování žen a mužů a platformovou práci, nikoli na mzdy cizinců u agentur."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-22",
+          "relevant": false,
+          "reasonCz": "Změny jednotného měsíčního hlášení samy nestanoví kontroly proti tomu, aby agentury nabízely cizincům nižší mzdy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-1",
+          "relevant": false,
+          "reasonCz": "Text upravuje zvláštní pracovněprávní režim digitálních platforem, nikoli agenturní zaměstnávání cizinců."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-4",
+          "relevant": false,
+          "reasonCz": "Text stanoví informační a další povinnosti digitálních platforem, nikoli kontroly mezd cizinců zaměstnávaných agenturami."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-bc065f1ba65c--source",
+        "psp-core-2025--law-change-43264-4",
+        "psp-core-2025--law-change-43264-13",
+        "psp-core-2025--law-change-43264-16",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--law-change-43335-5",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--print-step-212101"
+      ],
+      "explanationCz": "Vláda předložila návrh nového zákona o vstupu a pobytu cizinců; poslanci SPD pak hlasovali pro jeho schválení. Návrh umožňuje ověřovat některé údaje o mzdě garanta, počítá s evidencí výdělků a pracovních podmínek cizinců a posiluje jejich informovanost o nároku na nevyplacenou mzdu. Vláda později také navrhla, aby se na dočasně přidělené zaměstnance agentur vztahoval systém odměňování uživatele, jde však zatím jen o návrh. Jde o dílčí kroky, nikoli o úplné zavedení slíbených kontrol proti mzdovému dumpingu agentur.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrh změny zákoníku práce zároveň ruší ustanovení § 112, ale podklady neuvádějí jeho dosavadní znění, takže nelze posoudit, zda tato změna oslabuje některou ochranu před nízkými mzdami."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0cc79a1ed31a694d016abf0f94c83887d1899cc0de9f1c363d",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 338957,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 338954
+      },
+      "output_tokens": 4703,
+      "output_tokens_details": {
+        "reasoning_tokens": 3299
+      },
+      "total_tokens": 343660
+    },
+    "output": {
+      "promiseId": "candidate-bc065f1ba65c",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-4",
+          "relevant": true,
+          "reasonCz": "Navrhovaný cizinecký zákon vyžaduje u zaměstnaneckých karet alespoň minimální mzdu a u sezónní práce doklad o dohodnuté mzdě, takže upravuje část ochrany cizinců před podhodnoceným odměňováním."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-13",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje návrat cizinců a jejich práva při vyhoštění, nikoli kontrolu nebo výši mezd agenturních pracovníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": true,
+          "reasonCz": "Navrhuje povinnost zaměstnavatelů hlásit údaje o příjmech cizinců i jejich dočasném přidělení, což může umožnit kontrolovat odměňování pracovníků agentur."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje evidenci a předávání údajů o pobytu cizinců, ale sama nestanoví mzdové požadavky ani kontroly agenturního odměňování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-5",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá zaměstnavatelům hlásit údaje o mzdách cizinců a jejich pracovním přidělení, čímž vytváří podklady pro kontrolu případného mzdového podhodnocování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-1",
+          "relevant": true,
+          "reasonCz": "Návrh výslovně stanoví, že agenturní pracovníci podléhají systému odměňování uživatele a že agentura potřebuje jeho souhlas s výší a strukturou odměny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-2",
+          "relevant": false,
+          "reasonCz": "Tato část mění soudní postupy u diskriminace v odměňování, ale nedotýká se kontrol mezd cizinců zaměstnaných agenturami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-3",
+          "relevant": false,
+          "reasonCz": "Navrhované změny sociálního zabezpečení se týkají úhrady pojistného při nelegální či nehlášené práci, nikoli podhodnocených mezd agenturních pracovníků."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-14",
+          "relevant": false,
+          "reasonCz": "Tato část zpřísňuje pravidla a postihy pro nelegální nebo nehlášenou práci, ale neřeší nižší mzdy cizinců zaměstnaných agenturami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-16",
+          "relevant": false,
+          "reasonCz": "Navrhované kontrolní a sankční nástroje míří hlavně na transparentnost odměňování žen a mužů, nikoli na mzdové podhodnocování cizinců agenturami."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-22",
+          "relevant": true,
+          "reasonCz": "Návrh zpřístupňuje údaje z jednotného hlášení také inspekci práce, což může podpořit kontrolu hlášených mezd a pracovních přidělení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-1",
+          "relevant": false,
+          "reasonCz": "Tato část vymezuje platformovou práci a související vztahy, nikoli pracovní agentury a jejich odměňování cizinců."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43423-4",
+          "relevant": false,
+          "reasonCz": "Povinnosti platforem sdílet informace a umožnit komunikaci se netýkají kontroly mezd cizinců zaměstnaných agenturami."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-bc065f1ba65c--source",
+        "psp-core-2025--law-change-43264-4",
+        "psp-core-2025--law-change-43264-16",
+        "psp-core-2025--law-change-43335-5",
+        "psp-core-2025--law-change-43422-1",
+        "psp-core-2025--law-change-43422-22",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--print-step-211537",
+        "psp-core-2025--print-step-212101",
+        "psp-core-2025--vote-88522"
+      ],
+      "explanationCz": "Vláda předložila nový cizinecký zákon; SPD jej podpořila při závěrečném hlasování ve Sněmovně. Návrh mimo jiné stanoví minimální mzdu pro některé pracovní pobyty cizinců a hlášení údajů o jejich mzdách a přidělení. Vláda také navrhla, aby agenturní pracovníci dostávali odměnu podle systému uživatele a aby inspekce práce měla přístup k dalším mzdovým údajům. Jde o dílčí posun, protože podklady nedokládají zavedení úplného systému přísnějších kontrol zaměřeného přímo na mzdový dumping agentur vůči cizincům.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Návrhy na hlášení mzdových údajů a na odměňování agenturních pracovníků jsou v balíčku doloženy jako vládní návrhy, nikoli jako schválené zákony; jejich konečná podoba a účinek proto zůstávají nejisté."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

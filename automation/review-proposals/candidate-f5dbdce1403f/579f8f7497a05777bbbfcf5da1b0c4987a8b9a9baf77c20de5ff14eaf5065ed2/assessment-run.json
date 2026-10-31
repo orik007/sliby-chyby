@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-34-09-595Z--3f91c4a09fbe",
+  "evaluatedAt": "2026-10-02T05:34:09.595Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-f5dbdce1403f/3f91c4a09fbeeb69aebb8c52005eb30b4e6855d8831d38b8f84204b2991a4cbd.json",
+  "packageHash": "3f91c4a09fbeeb69aebb8c52005eb30b4e6855d8831d38b8f84204b2991a4cbd",
+  "assessmentContentHash": "449ffea7d25073e6ebdc3df0e5b96c25e605d49f0d403b1a5371849268561939",
+  "assessmentFingerprint": "579f8f7497a05777bbbfcf5da1b0c4987a8b9a9baf77c20de5ff14eaf5065ed2",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-f5dbdce1403f",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-f5dbdce1403f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela upravuje pravidla pro údržbu staveb a silnic, což může opravy usnadnit, ale nezavádí jejich dokončovací termíny ani sankce pro firmy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválené znění umožňuje zvýšit výdaje na silnice a výslovně zahrnuje také jejich opravy, údržbu a správu, nikoli však termíny dokončení či penalizaci firem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu fondu dopravní infrastruktury výslovně počítá s prostředky na opravy a údržbu dopravní infrastruktury, ale nestanoví termíny ani sankce."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f5dbdce1403f--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--vote-86962"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě hlasovali pro rozpočet Státního fondu dopravní infrastruktury na rok 2026, který výslovně počítá s prostředky na opravy a údržbu dopravní infrastruktury. Podpořili také rozpočtovou novelu, jež umožňuje zvýšit výdaje na silnice a zahrnout do nich i opravy, údržbu a správu. Poslanci strany předložili a později podpořili také novelu stavebního zákona, která upravuje pravidla pro údržbu staveb a může opravy usnadnit. Žádný z těchto podkladů ale nestanoví jasné lhůty dokončení oprav ani sankce pro firmy. Je tedy doložen částečný posun, nikoli splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, že změny pravidel údržby skutečně zrychlily opravy silnic; jejich praktický dopad na rychlost prací není doložen.",
+        "V žádném z posuzovaných znění nejsou doloženy jasné termíny dokončení oprav ani penalizace firem za jejich nedodržení.",
+        "Přesné konečné znění rozpočtové novely po poslední parlamentní fázi není v podkladech uvedeno."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-f5dbdce1403f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Text mění řadu pravidel povolování staveb, ale neobsahuje opatření pro rychlejší opravy silnic, závazné termíny dokončení oprav ani penalizaci firem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválená verze rozpočtových pravidel umožňuje vyšší výdaje na dopravní infrastrukturu a výslovně zahrnuje opravy a údržbu silnic, tedy část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu dopravní infrastruktury počítá s prostředky na opravy a údržbu dopravní infrastruktury, včetně silnic."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f5dbdce1403f--source",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--vote-86962"
+      ],
+      "explanationCz": "Motoristé hlasovali pro rozpočet Státního fondu dopravní infrastruktury na rok 2026, který počítá s financováním oprav a údržby dopravní infrastruktury. Poslanci strany také podpořili změnu rozpočtových pravidel umožňující vyšší výdaje na dopravní infrastrukturu, včetně oprav a údržby silnic. Vláda navrhla změnu rozpočtových pravidel, ale její původní znění samo o sobě tento konkrétní krok pro opravy silnic neobsahovalo. Doložená opatření tak podporují část slibu, neprokazují však jasné termíny dokončení oprav ani penalizaci firem.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Přesné znění, o němž poslanci hlasovali při posledním hlasování o vráceném zákonu o rozpočtových pravidlech, není v podkladech zveřejněno; jeho konkrétní dopad proto nelze ověřit. Samostatné hlasování o rozpočtu dopravního fondu však dokládá podporu financování oprav a údržby."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0346dd36268ba969016abf41fa509887d1961dd1ea1d8aea3e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 321459,
+      "input_tokens_details": {
+        "cache_write_tokens": 318135,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 4919,
+      "output_tokens_details": {
+        "reasoning_tokens": 4142
+      },
+      "total_tokens": 326378
+    },
+    "output": {
+      "promiseId": "candidate-f5dbdce1403f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela upravuje pravidla pro údržbu staveb a silnic, což může opravy usnadnit, ale nezavádí jejich dokončovací termíny ani sankce pro firmy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválené znění umožňuje zvýšit výdaje na silnice a výslovně zahrnuje také jejich opravy, údržbu a správu, nikoli však termíny dokončení či penalizaci firem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu fondu dopravní infrastruktury výslovně počítá s prostředky na opravy a údržbu dopravní infrastruktury, ale nestanoví termíny ani sankce."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f5dbdce1403f--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--vote-86962"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě hlasovali pro rozpočet Státního fondu dopravní infrastruktury na rok 2026, který výslovně počítá s prostředky na opravy a údržbu dopravní infrastruktury. Podpořili také rozpočtovou novelu, jež umožňuje zvýšit výdaje na silnice a zahrnout do nich i opravy, údržbu a správu. Poslanci strany předložili a později podpořili také novelu stavebního zákona, která upravuje pravidla pro údržbu staveb a může opravy usnadnit. Žádný z těchto podkladů ale nestanoví jasné lhůty dokončení oprav ani sankce pro firmy. Je tedy doložen částečný posun, nikoli splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady nedokládají, že změny pravidel údržby skutečně zrychlily opravy silnic; jejich praktický dopad na rychlost prací není doložen.",
+        "V žádném z posuzovaných znění nejsou doloženy jasné termíny dokončení oprav ani penalizace firem za jejich nedodržení.",
+        "Přesné konečné znění rozpočtové novely po poslední parlamentní fázi není v podkladech uvedeno."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0a70ff20508fc3a2016abf4236392c87d19f098db021152d88",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 321459,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 321456
+      },
+      "output_tokens": 4285,
+      "output_tokens_details": {
+        "reasoning_tokens": 3551
+      },
+      "total_tokens": 325744
+    },
+    "output": {
+      "promiseId": "candidate-f5dbdce1403f",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": false,
+          "reasonCz": "Text mění řadu pravidel povolování staveb, ale neobsahuje opatření pro rychlejší opravy silnic, závazné termíny dokončení oprav ani penalizaci firem."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43200-2",
+          "relevant": true,
+          "reasonCz": "Schválená verze rozpočtových pravidel umožňuje vyšší výdaje na dopravní infrastrukturu a výslovně zahrnuje opravy a údržbu silnic, tedy část slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43201-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozpočtu Státního fondu dopravní infrastruktury počítá s prostředky na opravy a údržbu dopravní infrastruktury, včetně silnic."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-f5dbdce1403f--source",
+        "psp-core-2025--law-change-43200-2",
+        "psp-core-2025--print-step-210731",
+        "psp-core-2025--senate-resolution-43200-6",
+        "psp-core-2025--vote-87430",
+        "psp-core-2025--vote-88105",
+        "psp-core-2025--vote-88416",
+        "psp-core-2025--law-change-43201-1",
+        "psp-core-2025--vote-86962"
+      ],
+      "explanationCz": "Motoristé hlasovali pro rozpočet Státního fondu dopravní infrastruktury na rok 2026, který počítá s financováním oprav a údržby dopravní infrastruktury. Poslanci strany také podpořili změnu rozpočtových pravidel umožňující vyšší výdaje na dopravní infrastrukturu, včetně oprav a údržby silnic. Vláda navrhla změnu rozpočtových pravidel, ale její původní znění samo o sobě tento konkrétní krok pro opravy silnic neobsahovalo. Doložená opatření tak podporují část slibu, neprokazují však jasné termíny dokončení oprav ani penalizaci firem.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Přesné znění, o němž poslanci hlasovali při posledním hlasování o vráceném zákonu o rozpočtových pravidlech, není v podkladech zveřejněno; jeho konkrétní dopad proto nelze ověřit. Samostatné hlasování o rozpočtu dopravního fondu však dokládá podporu financování oprav a údržby."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}
