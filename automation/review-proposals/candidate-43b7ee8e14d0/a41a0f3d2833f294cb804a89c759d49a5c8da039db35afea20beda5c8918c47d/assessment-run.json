@@ -1,0 +1,1096 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T18-49-48-148Z--9529da02eb1a",
+  "evaluatedAt": "2026-10-06T18:49:48.148Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-43b7ee8e14d0/9529da02eb1ae89b5c71f40e20fedcb34d3e641a4badc6f64218ae144de34d0f.json",
+  "packageHash": "9529da02eb1ae89b5c71f40e20fedcb34d3e641a4badc6f64218ae144de34d0f",
+  "assessmentContentHash": "6ce270998c988267dd8e909553dd8f379f182c8891cb8266827f0a6b69ca58bf",
+  "assessmentFingerprint": "a41a0f3d2833f294cb804a89c759d49a5c8da039db35afea20beda5c8918c47d",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-43b7ee8e14d0",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Assessment gives a law change more than one relevance verdict",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0f086f339e574ec7016ac541768ee487d2be760a96d9c94611",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 748846,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 748843
+            },
+            "output_tokens": 15734,
+            "output_tokens_details": {
+              "reasoning_tokens": 10500
+            },
+            "total_tokens": 764580
+          },
+          "output": {
+            "promiseId": "candidate-43b7ee8e14d0",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Novela přímo mění stavební požadavky a závaznost technických norem, tedy nástroje, jejichž omezení má podle slibu zlevnit a urychlit výstavbu.",
+                "effectCz": "Dříve zákon ukládal obecně dodržovat požadavky stanovené zákonem a prováděcími předpisy; schválené znění umožňuje, aby byly závazné jen určené části norem, připouští rovnocenné alternativní řešení a výslovně neuplatní některé požadavky, jsou-li ekonomicky zjevně nepřiměřené. Povinnost je v těchto případech volnější a rozsah závazných technických pravidel menší; novela však zavádí i nové povinnosti a výjimky nelze z balíčku považovat za plošné zrušení tisíců předpisů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-3",
+                "relevant": true,
+                "reasonCz": "Změny pravidel požární bezpečnosti staveb a způsobu, jakým budou technické podmínky pro stavby stanoveny, se přímo týkají stavebních norem.",
+                "effectCz": "Dříve technické podmínky požární ochrany stanovovalo ministerstvo prováděcím předpisem a bylo možné využít technické normy; nově je má nařízením stanovit vláda a normy lze využít pro podrobnější vymezení. Cíl požárních požadavků zůstává, ale z balíčku nelze určit, zda výsledný soubor závazných požadavků bude mírnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-4",
+                "relevant": true,
+                "reasonCz": "Novela mění povolování a posuzování obnovy staveb v památkových zónách a ochranných pásmech, a tím ovlivňuje část stavebního procesu.",
+                "effectCz": "Dříve vlastník nemovitosti v památkové zóně či ochranném pásmu obvykle potřeboval předchozí rozhodnutí nebo závazné stanovisko památkového orgánu; nově u některých záměrů podléhajících povolení podmínky v rámci řízení ověřuje stavební úřad po písemném vyjádření odborné organizace. Samostatný krok se tedy začleňuje do povolování, což může postup zjednodušit, ale změna zároveň zachovává odborné posouzení a směr celkové přísnosti ochrany nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-5",
+                "relevant": true,
+                "reasonCz": "Změna pravidel pro stanovení dobývacích prostorů výslovně upravuje, kdy se stanoviska považují za souhlasná, což může ovlivnit povolování stavebních záměrů souvisejících s těžbou.",
+                "effectCz": "Dříve se pravidlo souhlasného mlčení neuplatňovalo na jednotné environmentální stanovisko ani na stanovisko k posouzení vlivů; schválený text výslovně vyjímá jen druhé z nich. U prvního typu se tím možnost souhlasného mlčení rozšiřuje, tedy v tomto konkrétním řízení uvolňuje postup."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-7",
+                "relevant": true,
+                "reasonCz": "Text mění podmínky geologického vyjádření pro stavební záměry, a proto se přímo dotýká schvalování části výstavby.",
+                "effectCz": "Dříve se v určených územích povolení záměru opíralo o vyjádření krajského úřadu a u záměru vyžadujícího jednotné environmentální stanovisko se další vyjádření nevydávalo; novela aktualizuje odkaz na řízení o povolení záměru a tuto výjimku ruší. Samotné odstranění výjimky rozšiřuje případy, kdy může být geologické vyjádření třeba, avšak balíček současně ruší dosavadní jednotné environmentální stanovisko, takže výsledný dopad na počet kroků nelze bezpečně určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-8",
+                "relevant": true,
+                "reasonCz": "Novela přesouvá posuzování některých přírodních a krajinných zájmů do stavebního řízení a mění tím povolovací kroky i omezení staveb.",
+                "effectCz": "Dříve řada souhlasů a rozhodnutí podle zákona o ochraně přírody vystupovala jako samostatné podklady; schválený text u části záměrů stanoví, že podmínky ověří stavební úřad přímo v povolení. V některých vymezených zastavitelných územích se navíc krajinný ráz či zemědělská půda znovu neposuzují; jde o zjednodušení a u těchto případů o volnější požadavky, nikoli o plošné odstranění předpisů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-9",
+                "relevant": true,
+                "reasonCz": "Změna přímo upravuje, jak se při povolování staveb posuzuje odnětí zemědělské půdy, a proto ovlivňuje náročnost stavebního řízení.",
+                "effectCz": "Dříve byl pro odnětí půdy zpravidla nutný samostatný souhlas orgánu ochrany zemědělského půdního fondu; nově splnění podmínek posoudí stavební úřad v rozhodnutí o záměru. V zastavitelném území vymezeném po příslušném stanovisku se některé zásady ochrany půdy neposuzují znovu, takže se postup zjednodušuje a tato část omezení se zmírňuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-14",
+                "relevant": true,
+                "reasonCz": "Novela mění získávání souhlasů a povolování záměrů na lesních pozemcích a u staveb poblíž lesa.",
+                "effectCz": "Dříve orgán státní správy lesů vydával samostatné závazné stanovisko a rozhodoval o odnětí nebo omezení lesních pozemků; schválené znění část těchto posouzení začleňuje do rozhodnutí stavebního úřadu, který si vyžádá vyjádření lesního orgánu. Jde především o sloučení administrativních kroků, nikoli o doložené plošné zmírnění věcných podmínek."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-17",
+                "relevant": true,
+                "reasonCz": "Novela mění závaznost veterinárních vyjádření v řízení o povolení některých staveb, a tím se přímo týká stavebních podmínek.",
+                "effectCz": "Dříve u některých zařízení podléhajících veterinárnímu dozoru byl závazný posudek, který nemohl být v řízení překonán; schválené znění tento posudek ruší a ponechává vyjádření. Je to méně závazná a volnější procedurální podmínka pro dotčené stavby."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-20",
+                "relevant": true,
+                "reasonCz": "Zákon přesouvá u stavebních záměrů úkony ochrany veřejného zdraví do řízení o povolení záměru.",
+                "effectCz": "Dříve orgány ochrany veřejného zdraví vydávaly vlastní stanoviska a některé samostatné úkony; nově je stavební úřad nahrazuje rozhodnutím o záměru. Jde o sloučení administrativního postupu; z textu nelze vyvodit, že by se tím samy o sobě zrušily věcné hygienické požadavky."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-22",
+                "relevant": true,
+                "reasonCz": "Novela umožňuje, aby závazné stanovisko k posouzení vlivů na životní prostředí nahradilo na žádost i další správní úkony související s povolováním stavby.",
+                "effectCz": "Dříve posouzení vlivů u vybraných záměrů souviselo s jednotným environmentálním stanoviskem; nově může závazné stanovisko na žádost nahradit další vyjmenované úkony a splnění podmínek se pak znovu neposuzuje. Počet oddělených kroků se tak může snížit, zatímco vlastní podmínky ochrany zůstávají posuzovány."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-23",
+                "relevant": true,
+                "reasonCz": "Změna převádí několik povolení a souhlasů podle vodního zákona do rozhodnutí stavebního úřadu, tedy přímo upravuje délku a složitost povolování staveb.",
+                "effectCz": "Dříve se pro související nakládání s vodami, vypouštění odpadních vod či některé další úkony vedla samostatná vodoprávní řízení; nově je u stavebních záměrů rozhoduje stavební úřad v rámci povolení. Jde o spojení postupů, přičemž věcné vodní podmínky zůstávají a samy o sobě nejsou doloženy jako mírnější."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-24",
+                "relevant": true,
+                "reasonCz": "Změna ruší samostatný hygienický souhlas pro některé stavby krematorií a pohřebišť a přesouvá posouzení do stavebního řízení.",
+                "effectCz": "Dříve bylo pro krematorium a veřejné pohřebiště výslovně požadováno samostatné stanovisko hygienické stanice; schválené znění u krematoria svěřuje posouzení podmínek veřejného zdraví stavebnímu úřadu a stanovisko vodoprávního úřadu zachovává. Počet samostatných kroků se pro tyto stavby snižuje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-33",
+                "relevant": true,
+                "reasonCz": "Novela mění požadavky na stanoviska k záměrům z hlediska ochrany ovzduší a jejich začlenění do povolení stavby.",
+                "effectCz": "Dříve byla pro dotčené záměry vyžadována závazná stanoviska krajského úřadu; schválené znění je nahrazuje vyjádřením a související podmínky řeší stavební úřad v povolení. Jde o méně samostatný a méně závazný krok u dotčených projektů, nikoli o prokázané zrušení všech požadavků na ovzduší."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-36",
+                "relevant": true,
+                "reasonCz": "Změna převádí posuzování rizika závažných havárií u nových staveb do rozhodnutí stavebního úřadu.",
+                "effectCz": "Dříve o zařazení objektu a podmínkách umístění rozhodoval krajský úřad a vydával k němu podklady pro další řízení; nově o těchto otázkách rozhoduje stavební úřad v povolení záměru. Podmínky prevence havárií se tím slučují do jednoho řízení, ale jejich věcná přísnost se z textu nemění."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": true,
+                "reasonCz": "Novela svěřuje stavebnímu úřadu posouzení požadavků na nakládání se stavebním odpadem při povolování záměru.",
+                "effectCz": "Dříve obecní úřad vydával samostatné závazné stanovisko či vyjádření pro určité stavební práce; nově stavební úřad posuzuje požadavky na odpady v rozhodnutí o záměru a může stanovit podmínky. Samostatný administrativní krok se ruší, ale věcné povinnosti odpadového hospodářství zůstávají."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+                "relevant": true,
+                "reasonCz": "Schválené znění zavádí povinnost připojit k žádosti o povolení stavby nebo kolaudaci informační kontejner, tedy další dokumentační požadavek při výstavbě.",
+                "effectCz": "V této změně je nově stanoveno, že informační kontejner pro povolení stavby se vloží do evidence nejpozději s žádostí a další kontejner s žádostí o kolaudaci; předchozí znění těchto ustanovení balíček nedodává. Nová povinnost přidává administrativní krok, ale její dopad na náklady ani rozsah případné náhrady jiných podkladů nelze z balíčku určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": true,
+                "reasonCz": "Zrušovací ustanovení výslovně ruší zákon o jednotném environmentálním stanovisku a několik stavebních vyhlášek, což přímo souvisí s počtem předpisů a postupů při výstavbě.",
+                "effectCz": "Tato část ruší uvedený zákon, vyhlášky k dokumentaci, požadavkům na výstavbu a dalším postupům i další jmenované předpisy; nejde o novelizaci jednoho ustanovení s dodaným předchozím zněním. Zrušení předpisů je krokem ke snížení jejich počtu, avšak náhradní úpravy obsažené v ostatních částech balíčku znamenají, že čisté snížení povinností z této části samotné nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+                "relevant": false,
+                "reasonCz": "Změna stanoví podklad pro zápis údajů o dokončené stavbě do digitální technické mapy, ale nedokládá zrušení stavebních pravidel ani přímé zrychlení či zlevnění povolování.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+                "relevant": false,
+                "reasonCz": "Změna upravuje předávání údajů a lhůty k plánovacím smlouvám, nikoli stavební normy ani pravidla povolování, na která slib míří.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+                "relevant": true,
+                "reasonCz": "Schválené znění zavádí povinnost připojit k žádosti o povolení stavby nebo kolaudaci informační kontejner, tedy další dokumentační požadavek při výstavbě.",
+                "effectCz": "V této změně je nově stanoveno, že informační kontejner pro povolení stavby se vloží do evidence nejpozději s žádostí a další kontejner s žádostí o kolaudaci; předchozí znění těchto ustanovení balíček nedodává. Nová povinnost přidává administrativní krok, ale její dopad na náklady ani rozsah případné náhrady jiných podkladů nelze z balíčku určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+                "relevant": true,
+                "reasonCz": "Zrušovací ustanovení výslovně ruší zákon o jednotném environmentálním stanovisku a několik stavebních vyhlášek, což přímo souvisí s počtem předpisů a postupů při výstavbě.",
+                "effectCz": "Tato část ruší uvedený zákon, vyhlášky k dokumentaci, požadavkům na výstavbu a dalším postupům i další jmenované předpisy; nejde o novelizaci jednoho ustanovení s dodaným předchozím zněním. Zrušení předpisů je krokem ke snížení jejich počtu, avšak náhradní úpravy obsažené v ostatních částech balíčku znamenají, že čisté snížení povinností z této části samotné nelze určit."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43372-11",
+                "relevant": true,
+                "reasonCz": "Návrh výslovně ruší části zákona upravujícího informace o stavbách, ale balíček neuvádí, jaké konkrétní povinnosti tyto části obsahují.",
+                "effectCz": "Návrh ruší vyjmenované body zákona o správě informací o stavbě; jejich předchozí obsah není v balíčku uveden, takže nelze určit, zda tím ubývá požadovaná dokumentace nebo jiná pravidla."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-16",
+                "relevant": false,
+                "reasonCz": "Z dodaného znění plyne změna označení příslušného úřadu, nikoli změna stavebních norem, nákladů nebo délky postupu.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-19",
+                "relevant": false,
+                "reasonCz": "Změny se týkají vyrozumívání a pravomocí v integrovaném záchranném systému, nikoli pravidel či norem výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-26",
+                "relevant": false,
+                "reasonCz": "Změna upravuje vymezení pozemků pro pozemkové úpravy a neukazuje přímou změnu stavebních předpisů, nákladů nebo délky stavebního řízení.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-32",
+                "relevant": false,
+                "reasonCz": "Změna se týká zvláštního režimu vybraných strategických staveb, nikoli obecného slibu týkajícího se výstavby.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-42",
+                "relevant": false,
+                "reasonCz": "Úprava se omezuje na záměry pro využití obnovitelných zdrojů energie a balíček ji nespojuje s obecným slibem o stavebních předpisech a normách.",
+                "effectCz": ""
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-6",
+                "relevant": false,
+                "reasonCz": "Dodaný pozměňovací návrh mění účast městských částí v řízeních a pravidla pro svazky obcí, nikoli obecné stavební předpisy nebo normy.",
+                "effectCz": ""
+              }
+            ],
+            "status": "moving-against",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-43b7ee8e14d0--source",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-3",
+              "psp-core-2025--law-change-43174-4",
+              "psp-core-2025--law-change-43174-5",
+              "psp-core-2025--law-change-43174-7",
+              "psp-core-2025--law-change-43174-8",
+              "psp-core-2025--law-change-43174-9",
+              "psp-core-2025--law-change-43174-14",
+              "psp-core-2025--law-change-43174-17",
+              "psp-core-2025--law-change-43174-20",
+              "psp-core-2025--law-change-43174-22",
+              "psp-core-2025--law-change-43174-23",
+              "psp-core-2025--law-change-43174-24",
+              "psp-core-2025--law-change-43174-33",
+              "psp-core-2025--law-change-43174-36",
+              "psp-core-2025--law-change-43174-39",
+              "psp-core-2025--law-change-43174-approved-55",
+              "psp-core-2025--law-change-43174-approved-56",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--print-step-211843",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--senate-resolution-43174-15"
+            ],
+            "explanationCz": "Poslanci ANO předložili společně s dalšími poslanci návrh novely stavebního zákona a později hlasovali pro to, aby Sněmovna setrvala na svém znění poté, co jej Senát zamítl. Novela omezuje závaznost některých technických norem a spojuje část samostatných povolení do stavebního řízení, což posouvá část slibu kupředu. Zároveň ale zavádí další dokumentační povinnost při povolování a ruší výjimku z geologického vyjádření; tyto části mohou náklady nebo délku přípravy zvyšovat. Protože přijatý celek obsahuje opatření v obou směrech, převažuje pro hodnocení jeho nepříznivá část; balíček nedokládá skutečné snížení nákladů o 10 %.",
+            "confidence": "medium",
+            "uncertainties": [
+              "U návrhu předloženého v červenci 2026 se ruší některé části zákona o informacích o stavbě, ale jejich obsah není v balíčku uveden, takže jeho vliv na slib nelze určit.",
+              "Balíček nedokládá, zda se po přijetí změn skutečné náklady na výstavbu snížily nebo zda se povolování zrychlilo; schválené znění navíc mělo podle dodaného textu nabýt účinnosti až později."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-43b7ee8e14d0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Mění přímo stavební zákon a jeho požadavky na výstavbu i technické normy, takže může zjednodušit pravidla a povolování staveb.",
+          "effectCz": "Dříve prováděcí předpisy mohly odkázat na technické normy v širším rozsahu; nově mají být závazné jen výslovně určené části norem a požadavky lze splnit i rovnocenným technickým řešením. Ustanovení zároveň rozšiřují případy, kdy se některé požadavky na výstavbu nepoužijí, včetně ekonomicky nepřiměřených případů; tyto povinnosti jsou tedy v daných situacích volnější. Jiné požadavky novela zachovává nebo upravuje, takže nelze z textu dovodit zrušení tisíců předpisů ani konkrétní úsporu nákladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": true,
+          "reasonCz": "Text mění požární požadavky a podklady pro povolování staveb, tedy pravidla, která mohou ovlivnit stavební předpisy i délku povolovacího procesu.",
+          "effectCz": "Dříve právní úprava svěřovala stanovení technických podmínek požární ochrany ministerstvu a výsledek posuzování byl závazným stanoviskem; novela přesouvá stanovení podmínek nařízení vlády a rozlišuje závazné stanovisko a vyjádření podle kategorie stavby. U části staveb se tak procesní forma uvolňuje, ale podmínky požární bezpečnosti zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Mění, jak se památková ochrana uplatňuje v povolování staveb, a může tím zjednodušit jednu část stavebního řízení.",
+          "effectCz": "Dříve bylo pro řadu prací na nemovitostech v památkově chráněných územích nutné samostatné rozhodnutí či závazné stanovisko památkového orgánu; nově u vybraných záměrů v památkové zóně a ochranném pásmu podmínky ověřuje stavební úřad v řízení o záměru. Jde o sloučení posouzení do povolovacího řízení, tedy o volnější postup, nikoli o zrušení samotné památkové ochrany."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-5",
+          "relevant": false,
+          "reasonCz": "Upravené části horního zákona se týkají zejména dobývacích prostorů a nerostných surovin; balíček je nespojuje s rušením obecných stavebních předpisů ani norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny zákona o geologických pracích upravují postupy pro geologické průzkumy, nikoli obecné požadavky či pravidla povolování staveb slíbené v programu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Mění způsob, jak se požadavky ochrany přírody promítají do povolování záměrů, a může tak zjednodušit část stavebního procesu.",
+          "effectCz": "Dříve se pro řadu zásahů vyžadovaly samostatné souhlasy či rozhodnutí orgánů ochrany přírody; novela u vymezených záměrů převádí posouzení do řízení podle stavebního zákona. Procesní požadavky se v těchto případech tedy slučují a uvolňují, přičemž podmínky ochrany přírody mohou být nadále stanoveny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění schvalování odnětí půdy ze zemědělského půdního fondu a jeho podmínek přímo v souvislosti s povolením záměrů.",
+          "effectCz": "Dříve byl pro záměr vyžadující odnětí půdy potřebný samostatný souhlas orgánu ochrany půdního fondu; nově splnění podmínek posuzuje stavební úřad přímo v rozhodnutí o povolení záměru. V určeném zastavitelném území se navíc zásady plošné ochrany půdy neposuzují. Jde o zjednodušení postupu a u této výjimky o volnější omezení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Přesouvá část posuzování zásahů do lesních pozemků do rozhodování stavebního úřadu, což přímo souvisí s rychlostí povolování staveb.",
+          "effectCz": "Dříve se pro dotčení lesních pozemků a jejich ochranného okolí vyžadovalo závazné stanovisko orgánu státní správy lesů; novela u záměrů podle stavebního zákona stanoví, že podmínky posuzuje stavební úřad po obdržení vyjádření lesního orgánu. Postup je tedy sloučenější a procesně volnější, zatímco věcné podmínky ochrany lesa zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": false,
+          "reasonCz": "Předložený text mění zejména označení příslušného úřadu v civilním letectví; neukazuje materiální změnu obecných stavebních pravidel ani povolovacího postupu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": true,
+          "reasonCz": "Mění veterinární podklady potřebné pro některé stavby a jejich zapojení do povolování podle stavebního zákona.",
+          "effectCz": "Dříve zákon u vymezených zařízení vyžadoval závazný posudek veterinární správy; schválený text tento posudek ruší a ponechává vyjádření, přičemž další posouzení přechází do rozhodnutí stavebního úřadu. U těchto staveb se tedy závaznost a samostatnost části požadavků uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Předložené změny integrovaného záchranného systému převážně přizpůsobují odkazy a kompetence novému stavebnímu zákonu; není doloženo, že ruší obecné požadavky či normy pro výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Převádí některé úkony ochrany veřejného zdraví do rozhodnutí stavebního úřadu, což je přímá změna postupu povolování staveb.",
+          "effectCz": "Dříve byly stanoviska a jiné úkony hygienických orgánů potřebným podkladem; nově stavební úřad rozhodnutím o záměru nahrazuje úkony podle tohoto zákona, pokud se týkají povolované stavby. Samostatné kroky se tedy slučují do jednoho řízení, což proces uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Mění environmentální posuzování záměrů a výslovně umožňuje, aby jeho stanovisko nahradilo související správní úkony v povolování.",
+          "effectCz": "Dříve se při posuzování vlivů na životní prostředí uplatňoval také režim jednotného environmentálního stanoviska; novela umožňuje, aby stanovisko EIA na žádost oznamovatele nahradilo další správní úkony z oblasti životního prostředí a veřejného zdraví. Uvolňuje a slučuje tak část povolovacího procesu, ale sama neprokazuje zrušení konkrétního počtu pravidel."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Převádí povolení a souhlasy týkající se vod do řízení o stavebním záměru, což může zkrátit jeho povolování.",
+          "effectCz": "Dříve se povolení k nakládání s vodami a některé souhlasy vydávaly samostatně; nově u souvisejících záměrů rozhoduje o povolení stavební úřad v rozhodnutí o záměru a v některých případech nahradí i související úkony. Postup se tím slučuje, nikoli však obecně ruší věcné požadavky vodního zákona."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": true,
+          "reasonCz": "U zřizování pohřebišť a krematorií mění, kdo posuzuje podmínky ochrany veřejného zdraví, a výslovně je začleňuje do stavebního řízení.",
+          "effectCz": "Dříve se v těchto případech vyžadovala stanoviska hygienické stanice; nově podmínky ochrany veřejného zdraví posuzuje stavební úřad v řízení o záměru. Jde o sloučení samostatného kroku do povolování, avšak jen pro tuto úzkou oblast."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Změny zákona o pozemkových úpravách se týkají zejména vymezení pozemků v pozemkových úpravách a názvosloví, nikoli slibu rušit stavební předpisy či normy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje zvláštní režim strategicky významné infrastruktury, který slib neuvádí jako svůj předmět; nelze z ní dovodit zrušení obecných stavebních pravidel.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Mění posuzování ochrany ovzduší a začleňuje je do povolení záměru, tedy do pravidel pro stavební proces.",
+          "effectCz": "Dříve byla pro některé záměry vyžadována samostatná závazná stanoviska orgánu ochrany ovzduší; novela je nahrazuje vyjádřením a svěřuje podmínky do rozhodnutí o povolení záměru. Procesní požadavky se tím uvolňují, ale věcné limity ochrany ovzduší zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": true,
+          "reasonCz": "Mění posouzení prevence závažných havárií při povolování staveb a svěřuje podmínky do rozhodnutí stavebního úřadu.",
+          "effectCz": "Dříve krajský úřad rozhodoval o zařazení objektu a vydával závazná stanoviska k umístění a provedení; nově o těchto otázkách rozhoduje stavební úřad a stanoví podmínky v rozhodnutí o záměru. Posouzení se tedy procesně slučuje, zatímco požadavky prevence havárií zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Přesouvá posouzení nakládání s odpady při záměrech do rozhodnutí stavebního úřadu.",
+          "effectCz": "Dříve se pro některé práce a zařízení vyžadovalo samostatné závazné stanovisko či vyjádření odpadového orgánu; nově stavební úřad posuzuje příslušné požadavky v rozhodnutí o záměru a může v něm stanovit podmínky. Postup se slučuje, ale povinnosti odpadového hospodářství zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Text upravuje specifická pravidla pro akcelerační oblasti obnovitelných zdrojů, nikoli obecné stavební předpisy slíbené v programu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+          "relevant": false,
+          "reasonCz": "Jde o dílčí změnu podkladů pro zápis technické infrastruktury do mapy; text neukazuje, že by tato povinnost patřila mezi pravidla slíbená ke zrušení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Změna zákona o vodovodech a kanalizacích upravuje odborné odkazy a přípustnost odchylek v plánování, nikoli podstatné zrušení stavebních požadavků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": true,
+          "reasonCz": "Upravuje povinné informační kontejnery k povolování a dokončování staveb, tedy administrativní požadavek přímo související se stavebním procesem.",
+          "effectCz": "Dříve zákon upravoval pořízení informačního kontejneru pro povolení a další fáze stavby; nově výslovně požaduje jeho vložení do evidence elektronických dokumentací nejpozději při podání žádosti o povolení. Tato konkrétní administrativní povinnost se tím zpřesňuje a zpřísňuje; předchozí text však neprokazuje, že jde o jednu z „nesmyslných“ povinností slíbených ke zrušení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení ruší řadu předpisů a novel, ale dodaný text je nespojuje konkrétně s předpisy či normami pro výstavbu uvedenými ve slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": true,
+          "reasonCz": "Návrh ruší vybrané body zákona upravujícího informace o stavbách, což může zasáhnout administrativní požadavky na dokumentaci; jejich obsah ale balíček neuvádí.",
+          "effectCz": "Návrh ruší pět označených bodů v zákoně o správě informací o stavbě, ale balíček nedodává jejich předchozí znění. Proto nelze určit, jaké povinnosti ruší ani zda jde o jejich uvolnění ve smyslu slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Předložená změna zákona o hlavním městě Praze upravuje hlavně účast městských částí a dobrovolné svazky; nedokládá zrušení stavebních pravidel či norem.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-43b7ee8e14d0--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-3",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--law-change-43174-17",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-24",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-36",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--law-change-43174-approved-55",
+        "psp-core-2025--law-change-43372-11",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci ANO byli mezi předkladateli návrhu novely stavebního zákona, tedy návrhu projednávaného Poslaneckou sněmovnou. Novela mimo jiné omezuje, které části technických norem jsou závazné, připouští rovnocenná technická řešení a slučuje některá samostatná stanoviska do stavebního řízení. Po zamítnutí návrhu Senátem poslanci ANO hlasovali pro to, aby Sněmovna na návrhu setrvala. Jde o posun k části slibu, nikoli o doložené zrušení tisíců předpisů ani o prokázané snížení nákladů až o 10 %.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček dokládá schválení návrhu ve Sněmovně i její následné setrvání na něm po zamítnutí Senátem, ale nedokládá, zda byl následně vyhlášen a kdy začnou příslušné změny platit.",
+        "Z textu nelze ověřit, kolik předpisů a norem bylo skutečně zrušeno ani zda náklady na výstavbu klesnou až o 10 %; dopad na náklady a rychlost procesu není vyčíslen.",
+        "U samostatného návrhu na změnu zákona o správě informací o stavbě nejsou dodána předchozí znění rušených bodů, takže nelze určit, které povinnosti by jeho přijetí změnilo."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-43b7ee8e14d0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změny stavebního zákona přímo upravují závaznost technických norem a požadavků na výstavbu i postup povolování, tedy části slibu o rušení předpisů a zrychlení výstavby.",
+          "effectCz": "Dříve se požadavky na výstavbu uplatňovaly podle zákona a prováděcích předpisů a ty mohly odkazovat na technické normy; schválené znění přihlíží k technické, funkční a ekonomické proveditelnosti, pro některé případy stanoví výjimky a dovoluje jiné rovnocenné řešení. Závazné jsou pouze určené části norem, jiné normy závazné nejsou, což některé povinnosti uvolňuje; balík však současně zachovává řadu požadavků a nezavádí doložené zrušení tisíců předpisů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Změna pravidel požární ochrany převádí jejich stanovení na vládu, ale z předloženého textu nevyplývá zrušení či zmírnění požadavků na výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Změny památkové péče řeší ochranu a využití památek, ale jejich znění nedokládá rušení předpisů ani zjednodušení pravidel výstavby ve smyslu slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-5",
+          "relevant": false,
+          "reasonCz": "Změny horního zákona upravují dobývací prostory a související postupy, nikoli obecné stavební normy či předpisy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změna zákona o geologických pracích upravuje návaznost průzkumu na povolení záměru, ale nepřináší doložené rušení stavebních pravidel nebo norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změna zákona o ochraně přírody upravuje ochranu druhů a působnost úřadů; balíček nedokládá, že by tato část rušila stavební normy nebo obecné povolovací překážky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny ochrany zemědělské půdy se týkají jejího odnímání a povolování konkrétních záměrů, nikoli rušení stavebních předpisů či technických norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": false,
+          "reasonCz": "Změna lesního zákona se týká souhlasů a odnětí lesních pozemků, nikoli závaznosti stavebních norem nebo rušení obecných stavebních požadavků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": false,
+          "reasonCz": "Změna zákona o civilním letectví převážně upravuje působnost úřadů a neukazuje, že by rušila stavební požadavky či technické normy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Změna veterinárního zákona upravuje veterinární úkony při povolování, ale sama nedokládá rušení stavebních předpisů nebo norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Změna zákona o integrovaném záchranném systému upravuje související postupy ochrany obyvatelstva, nikoli obsah stavebních norem nebo jejich rušení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Změna zákona o ochraně veřejného zdraví upravuje dohled a vyjádření při záměrech, ale její znění nedokládá rušení stavebních požadavků či norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změna zákona o posuzování vlivů na životní prostředí upravuje posouzení vlivů a návazné úkony, nikoli rušení stavebních norem nebo předpisů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změna vodního zákona upravuje povolování vodních záměrů a souvisejících úkonů, nikoli rušení obecných stavebních pravidel.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": false,
+          "reasonCz": "Změna zákona o pohřebnictví upravuje posuzování vybraných záměrů z hlediska veřejného zdraví a vod, nikoli stavební normy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Změna zákona o pozemkových úpravách upravuje vymezení pozemků a související postupy, ale nedokládá rušení stavebních předpisů či norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změny zákona o strategické infrastruktuře se týkají zvláštních infrastrukturních záměrů a jejich vyvlastnění, nikoli rušení obecných stavebních pravidel.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změna zákona o ochraně ovzduší upravuje podklady a kompetence při povolování, nikoli rušení stavebních norem nebo předpisů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Změna zákona o prevenci závažných havárií upravuje podmínky pro zvláštní typy objektů, ale nedokládá rušení stavebních předpisů nebo norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změna zákona o odpadech upravuje posuzování odpadů při záměrech, nikoli rušení stavebních norem či předpisů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Změna zákona o obnovitelných zdrojích řeší zvláštní režim těchto záměrů, nikoli rušení obecných stavebních předpisů nebo norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+          "relevant": false,
+          "reasonCz": "Změna zeměměřického zákona upravuje podklady pro evidenci staveb, nikoli rušení stavebních pravidel či norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Změna zákona o vodovodech a kanalizacích upravuje dílčí plánovací a prováděcí otázky, ale nedokládá rušení stavebních předpisů nebo norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": false,
+          "reasonCz": "Změna zákona o informacích o stavbě upravuje předávání informačních kontejnerů, nikoli zrušení požadavků či technických norem ve výstavbě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Zrušovací ustanovení výslovně ruší řadu prováděcích předpisů ke stavebnímu zákonu, což přímo souvisí se slibem rušit předpisy ve výstavbě.",
+          "effectCz": "Dosavadní text těchto zrušovacích ustanovení ani obsah rušených vyhlášek před změnou balíček neuvádí; schválené znění ruší mimo jiné vyhlášky o dokumentaci staveb, požadavcích na výstavbu a územně plánovací dokumentaci, ale z balíčku nelze určit, zda a v jakém rozsahu je nahrazují nové předpisy, ani zda se tím celkové povinnosti snižují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": true,
+          "reasonCz": "Návrh zrušuje několik ustanovení zákona upravujícího informace o stavbě, a může tedy zasahovat do administrativních povinností stavebníků; jejich konkrétní obsah však balíček neuvádí.",
+          "effectCz": "Návrh zrušuje vyjmenované body části páté zákona o správě informací o stavbě, ale předchozí ani rušené znění těchto bodů není v balíčku uvedeno, takže nelze určit, které povinnosti zaniknou, zda budou nahrazeny ani jak se změní náklady či rychlost povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Změna pražského zákona řeší postavení městských částí a dobrovolné svazky obcí, nikoli stavební předpisy či technické normy.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-43b7ee8e14d0--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43372-11",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--print-step-211843",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci ANO předložili novelu stavebního zákona a poté hlasovali pro její schválení i pro setrvání na ní poté, co ji Senát zamítl. Schválený text některé požadavky na výstavbu uvolňuje a stanoví, že závazné budou jen určené části technických norem; zvláštní zrušovací ustanovení ruší také několik vyhlášek pro výstavbu. Jde proto o doložený dílčí krok směrem ke slibu, nikoli o důkaz, že byly zrušeny tisíce předpisů nebo že náklady klesly až o deset procent. Poslanci ANO rovněž předložili návrh rušící ustanovení o informacích o stavbě, ale jeho konkrétní dopady z dostupných textů nelze ověřit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá počet skutečně odstraněných předpisů a norem ani naměřené zlevnění výstavby o deset procent či její zrychlení.",
+        "U návrhu poslanců Drahoslava Ryby a Jiřího Bartáka nejsou uvedena rušená ustanovení zákona o správě informací o stavbě, takže nelze posoudit rozsah ani účinek navrhovaného zrušení.",
+        "Zrušovací ustanovení vyjmenovává předpisy, ale balíček neukazuje, v jakém rozsahu jsou jejich pravidla nahrazena novými prováděcími předpisy."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_04cc1acd1d82cdbc016ac540c548b487d28c916d1fe3759553",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 748846,
+      "input_tokens_details": {
+        "cache_write_tokens": 744876,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 12926,
+      "output_tokens_details": {
+        "reasoning_tokens": 8506
+      },
+      "total_tokens": 761772
+    },
+    "output": {
+      "promiseId": "candidate-43b7ee8e14d0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Mění přímo stavební zákon a jeho požadavky na výstavbu i technické normy, takže může zjednodušit pravidla a povolování staveb.",
+          "effectCz": "Dříve prováděcí předpisy mohly odkázat na technické normy v širším rozsahu; nově mají být závazné jen výslovně určené části norem a požadavky lze splnit i rovnocenným technickým řešením. Ustanovení zároveň rozšiřují případy, kdy se některé požadavky na výstavbu nepoužijí, včetně ekonomicky nepřiměřených případů; tyto povinnosti jsou tedy v daných situacích volnější. Jiné požadavky novela zachovává nebo upravuje, takže nelze z textu dovodit zrušení tisíců předpisů ani konkrétní úsporu nákladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": true,
+          "reasonCz": "Text mění požární požadavky a podklady pro povolování staveb, tedy pravidla, která mohou ovlivnit stavební předpisy i délku povolovacího procesu.",
+          "effectCz": "Dříve právní úprava svěřovala stanovení technických podmínek požární ochrany ministerstvu a výsledek posuzování byl závazným stanoviskem; novela přesouvá stanovení podmínek nařízení vlády a rozlišuje závazné stanovisko a vyjádření podle kategorie stavby. U části staveb se tak procesní forma uvolňuje, ale podmínky požární bezpečnosti zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": true,
+          "reasonCz": "Mění, jak se památková ochrana uplatňuje v povolování staveb, a může tím zjednodušit jednu část stavebního řízení.",
+          "effectCz": "Dříve bylo pro řadu prací na nemovitostech v památkově chráněných územích nutné samostatné rozhodnutí či závazné stanovisko památkového orgánu; nově u vybraných záměrů v památkové zóně a ochranném pásmu podmínky ověřuje stavební úřad v řízení o záměru. Jde o sloučení posouzení do povolovacího řízení, tedy o volnější postup, nikoli o zrušení samotné památkové ochrany."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-5",
+          "relevant": false,
+          "reasonCz": "Upravené části horního zákona se týkají zejména dobývacích prostorů a nerostných surovin; balíček je nespojuje s rušením obecných stavebních předpisů ani norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změny zákona o geologických pracích upravují postupy pro geologické průzkumy, nikoli obecné požadavky či pravidla povolování staveb slíbené v programu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": true,
+          "reasonCz": "Mění způsob, jak se požadavky ochrany přírody promítají do povolování záměrů, a může tak zjednodušit část stavebního procesu.",
+          "effectCz": "Dříve se pro řadu zásahů vyžadovaly samostatné souhlasy či rozhodnutí orgánů ochrany přírody; novela u vymezených záměrů převádí posouzení do řízení podle stavebního zákona. Procesní požadavky se v těchto případech tedy slučují a uvolňují, přičemž podmínky ochrany přírody mohou být nadále stanoveny."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": true,
+          "reasonCz": "Mění schvalování odnětí půdy ze zemědělského půdního fondu a jeho podmínek přímo v souvislosti s povolením záměrů.",
+          "effectCz": "Dříve byl pro záměr vyžadující odnětí půdy potřebný samostatný souhlas orgánu ochrany půdního fondu; nově splnění podmínek posuzuje stavební úřad přímo v rozhodnutí o povolení záměru. V určeném zastavitelném území se navíc zásady plošné ochrany půdy neposuzují. Jde o zjednodušení postupu a u této výjimky o volnější omezení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": true,
+          "reasonCz": "Přesouvá část posuzování zásahů do lesních pozemků do rozhodování stavebního úřadu, což přímo souvisí s rychlostí povolování staveb.",
+          "effectCz": "Dříve se pro dotčení lesních pozemků a jejich ochranného okolí vyžadovalo závazné stanovisko orgánu státní správy lesů; novela u záměrů podle stavebního zákona stanoví, že podmínky posuzuje stavební úřad po obdržení vyjádření lesního orgánu. Postup je tedy sloučenější a procesně volnější, zatímco věcné podmínky ochrany lesa zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": false,
+          "reasonCz": "Předložený text mění zejména označení příslušného úřadu v civilním letectví; neukazuje materiální změnu obecných stavebních pravidel ani povolovacího postupu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": true,
+          "reasonCz": "Mění veterinární podklady potřebné pro některé stavby a jejich zapojení do povolování podle stavebního zákona.",
+          "effectCz": "Dříve zákon u vymezených zařízení vyžadoval závazný posudek veterinární správy; schválený text tento posudek ruší a ponechává vyjádření, přičemž další posouzení přechází do rozhodnutí stavebního úřadu. U těchto staveb se tedy závaznost a samostatnost části požadavků uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Předložené změny integrovaného záchranného systému převážně přizpůsobují odkazy a kompetence novému stavebnímu zákonu; není doloženo, že ruší obecné požadavky či normy pro výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": true,
+          "reasonCz": "Převádí některé úkony ochrany veřejného zdraví do rozhodnutí stavebního úřadu, což je přímá změna postupu povolování staveb.",
+          "effectCz": "Dříve byly stanoviska a jiné úkony hygienických orgánů potřebným podkladem; nově stavební úřad rozhodnutím o záměru nahrazuje úkony podle tohoto zákona, pokud se týkají povolované stavby. Samostatné kroky se tedy slučují do jednoho řízení, což proces uvolňuje."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": true,
+          "reasonCz": "Mění environmentální posuzování záměrů a výslovně umožňuje, aby jeho stanovisko nahradilo související správní úkony v povolování.",
+          "effectCz": "Dříve se při posuzování vlivů na životní prostředí uplatňoval také režim jednotného environmentálního stanoviska; novela umožňuje, aby stanovisko EIA na žádost oznamovatele nahradilo další správní úkony z oblasti životního prostředí a veřejného zdraví. Uvolňuje a slučuje tak část povolovacího procesu, ale sama neprokazuje zrušení konkrétního počtu pravidel."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": true,
+          "reasonCz": "Převádí povolení a souhlasy týkající se vod do řízení o stavebním záměru, což může zkrátit jeho povolování.",
+          "effectCz": "Dříve se povolení k nakládání s vodami a některé souhlasy vydávaly samostatně; nově u souvisejících záměrů rozhoduje o povolení stavební úřad v rozhodnutí o záměru a v některých případech nahradí i související úkony. Postup se tím slučuje, nikoli však obecně ruší věcné požadavky vodního zákona."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": true,
+          "reasonCz": "U zřizování pohřebišť a krematorií mění, kdo posuzuje podmínky ochrany veřejného zdraví, a výslovně je začleňuje do stavebního řízení.",
+          "effectCz": "Dříve se v těchto případech vyžadovala stanoviska hygienické stanice; nově podmínky ochrany veřejného zdraví posuzuje stavební úřad v řízení o záměru. Jde o sloučení samostatného kroku do povolování, avšak jen pro tuto úzkou oblast."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Změny zákona o pozemkových úpravách se týkají zejména vymezení pozemků v pozemkových úpravách a názvosloví, nikoli slibu rušit stavební předpisy či normy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje zvláštní režim strategicky významné infrastruktury, který slib neuvádí jako svůj předmět; nelze z ní dovodit zrušení obecných stavebních pravidel.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": true,
+          "reasonCz": "Mění posuzování ochrany ovzduší a začleňuje je do povolení záměru, tedy do pravidel pro stavební proces.",
+          "effectCz": "Dříve byla pro některé záměry vyžadována samostatná závazná stanoviska orgánu ochrany ovzduší; novela je nahrazuje vyjádřením a svěřuje podmínky do rozhodnutí o povolení záměru. Procesní požadavky se tím uvolňují, ale věcné limity ochrany ovzduší zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": true,
+          "reasonCz": "Mění posouzení prevence závažných havárií při povolování staveb a svěřuje podmínky do rozhodnutí stavebního úřadu.",
+          "effectCz": "Dříve krajský úřad rozhodoval o zařazení objektu a vydával závazná stanoviska k umístění a provedení; nově o těchto otázkách rozhoduje stavební úřad a stanoví podmínky v rozhodnutí o záměru. Posouzení se tedy procesně slučuje, zatímco požadavky prevence havárií zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": true,
+          "reasonCz": "Přesouvá posouzení nakládání s odpady při záměrech do rozhodnutí stavebního úřadu.",
+          "effectCz": "Dříve se pro některé práce a zařízení vyžadovalo samostatné závazné stanovisko či vyjádření odpadového orgánu; nově stavební úřad posuzuje příslušné požadavky v rozhodnutí o záměru a může v něm stanovit podmínky. Postup se slučuje, ale povinnosti odpadového hospodářství zůstávají."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Text upravuje specifická pravidla pro akcelerační oblasti obnovitelných zdrojů, nikoli obecné stavební předpisy slíbené v programu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+          "relevant": false,
+          "reasonCz": "Jde o dílčí změnu podkladů pro zápis technické infrastruktury do mapy; text neukazuje, že by tato povinnost patřila mezi pravidla slíbená ke zrušení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Změna zákona o vodovodech a kanalizacích upravuje odborné odkazy a přípustnost odchylek v plánování, nikoli podstatné zrušení stavebních požadavků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": true,
+          "reasonCz": "Upravuje povinné informační kontejnery k povolování a dokončování staveb, tedy administrativní požadavek přímo související se stavebním procesem.",
+          "effectCz": "Dříve zákon upravoval pořízení informačního kontejneru pro povolení a další fáze stavby; nově výslovně požaduje jeho vložení do evidence elektronických dokumentací nejpozději při podání žádosti o povolení. Tato konkrétní administrativní povinnost se tím zpřesňuje a zpřísňuje; předchozí text však neprokazuje, že jde o jednu z „nesmyslných“ povinností slíbených ke zrušení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Zrušovací ustanovení ruší řadu předpisů a novel, ale dodaný text je nespojuje konkrétně s předpisy či normami pro výstavbu uvedenými ve slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": true,
+          "reasonCz": "Návrh ruší vybrané body zákona upravujícího informace o stavbách, což může zasáhnout administrativní požadavky na dokumentaci; jejich obsah ale balíček neuvádí.",
+          "effectCz": "Návrh ruší pět označených bodů v zákoně o správě informací o stavbě, ale balíček nedodává jejich předchozí znění. Proto nelze určit, jaké povinnosti ruší ani zda jde o jejich uvolnění ve smyslu slibu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Předložená změna zákona o hlavním městě Praze upravuje hlavně účast městských částí a dobrovolné svazky; nedokládá zrušení stavebních pravidel či norem.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-43b7ee8e14d0--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-3",
+        "psp-core-2025--law-change-43174-4",
+        "psp-core-2025--law-change-43174-8",
+        "psp-core-2025--law-change-43174-9",
+        "psp-core-2025--law-change-43174-14",
+        "psp-core-2025--law-change-43174-17",
+        "psp-core-2025--law-change-43174-20",
+        "psp-core-2025--law-change-43174-22",
+        "psp-core-2025--law-change-43174-23",
+        "psp-core-2025--law-change-43174-24",
+        "psp-core-2025--law-change-43174-33",
+        "psp-core-2025--law-change-43174-36",
+        "psp-core-2025--law-change-43174-39",
+        "psp-core-2025--law-change-43174-approved-55",
+        "psp-core-2025--law-change-43372-11",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci ANO byli mezi předkladateli návrhu novely stavebního zákona, tedy návrhu projednávaného Poslaneckou sněmovnou. Novela mimo jiné omezuje, které části technických norem jsou závazné, připouští rovnocenná technická řešení a slučuje některá samostatná stanoviska do stavebního řízení. Po zamítnutí návrhu Senátem poslanci ANO hlasovali pro to, aby Sněmovna na návrhu setrvala. Jde o posun k části slibu, nikoli o doložené zrušení tisíců předpisů ani o prokázané snížení nákladů až o 10 %.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček dokládá schválení návrhu ve Sněmovně i její následné setrvání na něm po zamítnutí Senátem, ale nedokládá, zda byl následně vyhlášen a kdy začnou příslušné změny platit.",
+        "Z textu nelze ověřit, kolik předpisů a norem bylo skutečně zrušeno ani zda náklady na výstavbu klesnou až o 10 %; dopad na náklady a rychlost procesu není vyčíslen.",
+        "U samostatného návrhu na změnu zákona o správě informací o stavbě nejsou dodána předchozí znění rušených bodů, takže nelze určit, které povinnosti by jeho přijetí změnilo."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_04c6416d6f1c05a3016ac54244559887d2a09f9ef6edcefe3e",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 748846,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 748843
+      },
+      "output_tokens": 9954,
+      "output_tokens_details": {
+        "reasoning_tokens": 6924
+      },
+      "total_tokens": 758800
+    },
+    "output": {
+      "promiseId": "candidate-43b7ee8e14d0",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Změny stavebního zákona přímo upravují závaznost technických norem a požadavků na výstavbu i postup povolování, tedy části slibu o rušení předpisů a zrychlení výstavby.",
+          "effectCz": "Dříve se požadavky na výstavbu uplatňovaly podle zákona a prováděcích předpisů a ty mohly odkazovat na technické normy; schválené znění přihlíží k technické, funkční a ekonomické proveditelnosti, pro některé případy stanoví výjimky a dovoluje jiné rovnocenné řešení. Závazné jsou pouze určené části norem, jiné normy závazné nejsou, což některé povinnosti uvolňuje; balík však současně zachovává řadu požadavků a nezavádí doložené zrušení tisíců předpisů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-3",
+          "relevant": false,
+          "reasonCz": "Změna pravidel požární ochrany převádí jejich stanovení na vládu, ale z předloženého textu nevyplývá zrušení či zmírnění požadavků na výstavbu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-4",
+          "relevant": false,
+          "reasonCz": "Změny památkové péče řeší ochranu a využití památek, ale jejich znění nedokládá rušení předpisů ani zjednodušení pravidel výstavby ve smyslu slibu.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-5",
+          "relevant": false,
+          "reasonCz": "Změny horního zákona upravují dobývací prostory a související postupy, nikoli obecné stavební normy či předpisy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-7",
+          "relevant": false,
+          "reasonCz": "Změna zákona o geologických pracích upravuje návaznost průzkumu na povolení záměru, ale nepřináší doložené rušení stavebních pravidel nebo norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-8",
+          "relevant": false,
+          "reasonCz": "Změna zákona o ochraně přírody upravuje ochranu druhů a působnost úřadů; balíček nedokládá, že by tato část rušila stavební normy nebo obecné povolovací překážky.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-9",
+          "relevant": false,
+          "reasonCz": "Změny ochrany zemědělské půdy se týkají jejího odnímání a povolování konkrétních záměrů, nikoli rušení stavebních předpisů či technických norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-14",
+          "relevant": false,
+          "reasonCz": "Změna lesního zákona se týká souhlasů a odnětí lesních pozemků, nikoli závaznosti stavebních norem nebo rušení obecných stavebních požadavků.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-16",
+          "relevant": false,
+          "reasonCz": "Změna zákona o civilním letectví převážně upravuje působnost úřadů a neukazuje, že by rušila stavební požadavky či technické normy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-17",
+          "relevant": false,
+          "reasonCz": "Změna veterinárního zákona upravuje veterinární úkony při povolování, ale sama nedokládá rušení stavebních předpisů nebo norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-19",
+          "relevant": false,
+          "reasonCz": "Změna zákona o integrovaném záchranném systému upravuje související postupy ochrany obyvatelstva, nikoli obsah stavebních norem nebo jejich rušení.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-20",
+          "relevant": false,
+          "reasonCz": "Změna zákona o ochraně veřejného zdraví upravuje dohled a vyjádření při záměrech, ale její znění nedokládá rušení stavebních požadavků či norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-22",
+          "relevant": false,
+          "reasonCz": "Změna zákona o posuzování vlivů na životní prostředí upravuje posouzení vlivů a návazné úkony, nikoli rušení stavebních norem nebo předpisů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-23",
+          "relevant": false,
+          "reasonCz": "Změna vodního zákona upravuje povolování vodních záměrů a souvisejících úkonů, nikoli rušení obecných stavebních pravidel.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-24",
+          "relevant": false,
+          "reasonCz": "Změna zákona o pohřebnictví upravuje posuzování vybraných záměrů z hlediska veřejného zdraví a vod, nikoli stavební normy.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-26",
+          "relevant": false,
+          "reasonCz": "Změna zákona o pozemkových úpravách upravuje vymezení pozemků a související postupy, ale nedokládá rušení stavebních předpisů či norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-32",
+          "relevant": false,
+          "reasonCz": "Změny zákona o strategické infrastruktuře se týkají zvláštních infrastrukturních záměrů a jejich vyvlastnění, nikoli rušení obecných stavebních pravidel.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-33",
+          "relevant": false,
+          "reasonCz": "Změna zákona o ochraně ovzduší upravuje podklady a kompetence při povolování, nikoli rušení stavebních norem nebo předpisů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-36",
+          "relevant": false,
+          "reasonCz": "Změna zákona o prevenci závažných havárií upravuje podmínky pro zvláštní typy objektů, ale nedokládá rušení stavebních předpisů nebo norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změna zákona o odpadech upravuje posuzování odpadů při záměrech, nikoli rušení stavebních norem či předpisů.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-42",
+          "relevant": false,
+          "reasonCz": "Změna zákona o obnovitelných zdrojích řeší zvláštní režim těchto záměrů, nikoli rušení obecných stavebních předpisů nebo norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-12",
+          "relevant": false,
+          "reasonCz": "Změna zeměměřického zákona upravuje podklady pro evidenci staveb, nikoli rušení stavebních pravidel či norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-32",
+          "relevant": false,
+          "reasonCz": "Změna zákona o vodovodech a kanalizacích upravuje dílčí plánovací a prováděcí otázky, ale nedokládá rušení stavebních předpisů nebo norem.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": false,
+          "reasonCz": "Změna zákona o informacích o stavbě upravuje předávání informačních kontejnerů, nikoli zrušení požadavků či technických norem ve výstavbě.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": true,
+          "reasonCz": "Zrušovací ustanovení výslovně ruší řadu prováděcích předpisů ke stavebnímu zákonu, což přímo souvisí se slibem rušit předpisy ve výstavbě.",
+          "effectCz": "Dosavadní text těchto zrušovacích ustanovení ani obsah rušených vyhlášek před změnou balíček neuvádí; schválené znění ruší mimo jiné vyhlášky o dokumentaci staveb, požadavcích na výstavbu a územně plánovací dokumentaci, ale z balíčku nelze určit, zda a v jakém rozsahu je nahrazují nové předpisy, ani zda se tím celkové povinnosti snižují."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-11",
+          "relevant": true,
+          "reasonCz": "Návrh zrušuje několik ustanovení zákona upravujícího informace o stavbě, a může tedy zasahovat do administrativních povinností stavebníků; jejich konkrétní obsah však balíček neuvádí.",
+          "effectCz": "Návrh zrušuje vyjmenované body části páté zákona o správě informací o stavbě, ale předchozí ani rušené znění těchto bodů není v balíčku uvedeno, takže nelze určit, které povinnosti zaniknou, zda budou nahrazeny ani jak se změní náklady či rychlost povolování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-6",
+          "relevant": false,
+          "reasonCz": "Změna pražského zákona řeší postavení městských částí a dobrovolné svazky obcí, nikoli stavební předpisy či technické normy.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-43b7ee8e14d0--source",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--law-change-43372-11",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--print-step-211843",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15"
+      ],
+      "explanationCz": "Poslanci ANO předložili novelu stavebního zákona a poté hlasovali pro její schválení i pro setrvání na ní poté, co ji Senát zamítl. Schválený text některé požadavky na výstavbu uvolňuje a stanoví, že závazné budou jen určené části technických norem; zvláštní zrušovací ustanovení ruší také několik vyhlášek pro výstavbu. Jde proto o doložený dílčí krok směrem ke slibu, nikoli o důkaz, že byly zrušeny tisíce předpisů nebo že náklady klesly až o deset procent. Poslanci ANO rovněž předložili návrh rušící ustanovení o informacích o stavbě, ale jeho konkrétní dopady z dostupných textů nelze ověřit.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Balíček nedokládá počet skutečně odstraněných předpisů a norem ani naměřené zlevnění výstavby o deset procent či její zrychlení.",
+        "U návrhu poslanců Drahoslava Ryby a Jiřího Bartáka nejsou uvedena rušená ustanovení zákona o správě informací o stavbě, takže nelze posoudit rozsah ani účinek navrhovaného zrušení.",
+        "Zrušovací ustanovení vyjmenovává předpisy, ale balíček neukazuje, v jakém rozsahu jsou jejich pravidla nahrazena novými prováděcími předpisy."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

@@ -1,0 +1,362 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T18-15-08-981Z--9f06cb395f95",
+  "evaluatedAt": "2026-10-06T18:15:08.981Z",
+  "packagePath": "automation/evidence-packages/packages/ano-2025-digital-tax-cobra/9f06cb395f956089cb41181e05446732b1fa82b21efa31719032e1c22f051a24.json",
+  "packageHash": "9f06cb395f956089cb41181e05446732b1fa82b21efa31719032e1c22f051a24",
+  "assessmentContentHash": "54df340583234f03258b938fe53fe7c71c51963f5d2cc56bc47e10c7bfcabd59",
+  "assessmentFingerprint": "34087388fc5714b3cf6aa6e764ded3a144c4e54c681d2da5b58e769ae7e112d0",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "ano-2025-digital-tax-cobra",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "ano-2025-digital-tax-cobra",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-2",
+          "relevant": true,
+          "reasonCz": "Změna výslovně umožňuje předávání některých informací z dohledu nad kapitálovým trhem správci daně, což může rozšířit podklady pro odhalování daňových nesrovnalostí.",
+          "effectCz": "Před změnou se informace získané při dohledu nad kapitálovým trhem směly používat jen pro úkoly tohoto dohledu, soudní řízení nebo s poskytnutým souhlasem; výjimky pro předávání je taxativně vymezovaly. Nově lze mlčenlivé informace použít také při komunikaci se správcem daně a správce daně se přidává mezi příjemce, jimž lze informace poskytnout. Jde o uvolnění omezení a rozšíření přístupu k údajům, které mohou podpořit daňovou kontrolu, nikoli o zavedení analytického systému či umělé inteligence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": true,
+          "reasonCz": "Navržená smlouva s Tanzanií počítá s výměnou daňových informací a pravidly proti zneužívání daňových výhod, tedy s dílčí pomocí při odhalování přeshraničních úniků.",
+          "effectCz": "Jde o novou mezinárodní smlouvu, takže v balíčku není předchozí znění, které by bylo možné porovnat. Smlouva stanoví výměnu informací relevantních pro správu a vymáhání daňových předpisů, odmítnutí výhod při některých případech účelového využívání smlouvy a zachovává možnost uplatňovat domácí pravidla proti vyhýbání se daním. To rozšiřuje možnosti odhalování části přeshraničního daňového vyhýbání, ale nezavádí Digitální daňovou kobru ani analytické nástroje slíbené v programu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje automatické předávání daňových údajů mimo jiné o transakce s kryptoaktivy, což poskytuje správci daně další podklady pro hledání nesrovnalostí.",
+          "effectCz": "Dosavadní automatická výměna se týkala zejména informací od finančních institucí, nadnárodních skupin, zprostředkovatelů přeshraničních uspořádání a provozovatelů platforem; návrh přidává poskytovatele služeb s kryptoaktivy a jejich transakční údaje a zavádí registrační, zjišťovací, oznamovací a evidenční povinnosti. Rozšiřuje také některé údaje předávané o dorovnávacích daních a zvyšuje horní hranici některých pokut za porušení povinností z 500 000 Kč na 1 500 000 Kč. Současně nově připouští výměnu některých informací o daňových rozhodnutích vztahujících se výlučně k fyzickým osobám jen při transakcích od 1 500 000 EUR nebo při určení daňové rezidence, takže v této části je rozsah omezenější. V souhrnu návrh rozšiřuje dostupnost vybraných daňových dat, ale sám nestanoví jejich analýzu pomocí umělé inteligence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Nový zákon ukládá elektronicky předávat údaje o části tržeb správci daně a výslovně spojuje jejich automatizované zjišťování s účinnějším ověřováním daňových povinností.",
+          "effectCz": "Jde o nový zákon, takže v balíčku není předchozí znění. Zavádí evidenci vymezených tržeb a povinnost zaslat správci daně elektronickou zprávou údaje o tržbě nejpozději při jejím uskutečnění; z působnosti však stanoví řadu výjimek. Oproti závazku zavést systém pro odhalování fiktivních obchodů jde o dílčí rozšíření elektronického sběru dat a ověřování plnění daňových povinností, nikoli o celý slíbený analytický systém."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje daňovou analytickou evidenci o údaje získané při evidenci tržeb a rozšiřuje i možnost kontrolních nákupů v daňové oblasti.",
+          "effectCz": "Dříve se v daňové analytické evidenci souhrnně zpracovávaly údaje z kontrolních hlášení k DPH a další údaje potřebné pro jejich analýzu; nově se přidávají také údaje získané od daňového subjektu při plnění povinností evidence tržeb, takže se rozšiřuje okruh analytických podkladů. Kontrolní nákup byl před změnou možný při prověřování povinností podle zákona o mezinárodní spolupráci při správě daní; nově se vztahuje i na povinnosti podle zákona o evidenci tržeb a jiných daňových či účetních předpisů, což rozšiřuje kontrolní oprávnění. Nové pravidlo dovoluje také přesunout místní příslušnost daňového subjektu mezi finančními úřady kvůli rovnoměrnějšímu rozložení práce; samo o sobě nemění daňovou povinnost ani slíbený analytický postup. Změna tak poskytuje dílčí analytickou a kontrolní infrastrukturu, ale nestanoví použití umělé inteligence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Navržená smlouva s Argentinou upravuje výměnu daňových informací a zachovává možnost uplatňovat pravidla proti daňovým únikům a vyhýbání se povinnosti.",
+          "effectCz": "Jde o novou mezinárodní smlouvu, takže v balíčku není předchozí znění, které by bylo možné porovnat. Smlouva stanoví výměnu informací relevantních pro uplatňování a vymáhání daňových předpisů a výslovně potvrzuje, že nebrání uplatňování vnitrostátních pravidel proti daňovým únikům a vyhýbání se daním. To rozšiřuje možnosti získat podklady pro část přeshraničních případů, ale samo o sobě nezavádí analytický systém Digitální daňové kobry."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": false,
+          "reasonCz": "Návrh zavádí úzce vymezená hlášení o úvěrových a předškolních výdajích, která nejsou v předloženém textu spojena s odhalováním fiktivních obchodů ani nezákonné daňové optimalizace.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-digital-tax-cobra--source",
+        "psp-core-2025--law-change-43120-2",
+        "psp-core-2025--law-change-43194-1",
+        "psp-core-2025--law-change-43208-1",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--print-step-210710",
+        "psp-core-2025--print-step-210766",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-87503",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda, v níž ANO působí, předložila návrhy na rozšíření výměny daňových informací včetně údajů o kryptoaktivech a na výměnu informací s Tanzanií a Argentinou. Poslanci ANO také hlasovali pro zákon o evidenci tržeb, který zavádí elektronické předávání části údajů o tržbách správci daně a má umožnit účinnější ověřování daňových povinností. Související změna zákona o Finanční správě přidává údaje z této evidence do daňové analytické evidence. Jde o dílčí posun v získávání a analýze daňových údajů, ale předložené podklady nedokládají, že už funguje celý systém s umělou inteligencí slibovaný jako Digitální daňová kobra.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají právní změny a návrhy, které rozšiřují sběr, výměnu a analytické využití daňových údajů, ale nedokládají, že už byl zaveden nebo uveden do provozu konkrétní systém Digitální daňové kobry či že používá umělou inteligenci."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "ano-2025-digital-tax-cobra",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-2",
+          "relevant": true,
+          "reasonCz": "Změna výslovně rozšiřuje možnosti předávání informací mezi Českou národní bankou a správcem daně, což může podpořit odhalování daňových nesrovnalostí na kapitálovém trhu.",
+          "effectCz": "Dříve mohly být informace získané při dohledu nad kapitálovým trhem použity a sdíleny jen v omezených případech; nově je možné je využít také při komunikaci se správcem daně a správce daně se přidává mezi oprávněné příjemce. To uvolňuje omezení přístupu k části informací potřebných pro daňovou kontrolu. U informací získaných od zahraničních orgánů zůstává omezení použití pro určený účel a nově se výslovně vztahuje i na případ, kdy zahraniční orgán jedná jako správce daně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": false,
+          "reasonCz": "Smlouva upravuje zdanění a výměnu informací mezi Českem a Tanzanií, ale text ji nespojuje s analytickým nástrojem ani s odhalováním fiktivních obchodů v rámci slíbené Digitální daňové kobry.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1",
+          "relevant": false,
+          "reasonCz": "Návrh zavádí mezinárodní oznamování a výměnu daňových údajů, včetně údajů o kryptoaktivech, avšak dodané podklady jej nespojují s konkrétním systémem Digitální daňové kobry ani s odhalováním fiktivních obchodů či nezákonné optimalizace.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Nová evidence tržeb automaticky shromažďuje a předává údaje o vybraných platbách správci daně, což může vytvořit dílčí datový podklad pro ověřování daňových povinností.",
+          "effectCz": "Jde o nový zákon, takže předchozí znění neexistuje. Zavádí evidenci vybraných podnikatelských tržeb a zasílání údajů správci daně nejpozději při uskutečnění tržby, včetně její částky, času a evidenční jednotky; stanoví také výjimky z evidence. Vytváří tak dílčí zdroj transakčních údajů pro daňovou kontrolu, ale sám nestanoví pokročilou analytiku ani umělou inteligenci pro odhalování fiktivních obchodů a optimalizace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Změna výslovně rozšiřuje daňovou analytickou evidenci o údaje získané od daňových subjektů při evidenci tržeb a rozšiřuje možnosti kontrolního nákupu.",
+          "effectCz": "Nový § 12b umožňuje finančnímu úřadu měnit místní příslušnost kvůli rovnoměrnějšímu rozložení práce; dosavadní znění tohoto ustanovení nebylo, takže jde o nové organizační oprávnění bez přímého účinku na slib. Kontrolní nákup byl dříve dovolen při ověřování povinností podle zákona o mezinárodní spolupráci při správě daní, nově také podle zákona o evidenci tržeb a dalších daňových či účetních předpisů, což rozšiřuje kontrolní možnosti. Daňová analytická evidence dříve souhrnně zpracovávala údaje z kontrolních hlášení k DPH a další potřebné údaje; nově zahrnuje také údaje od daňových subjektů při evidenci tržeb, čímž rozšiřuje její datové zdroje. Tato rozšíření usnadňují analytickou kontrolu, ale sama neurčují použití umělé inteligence ani zavedení slíbené kobry."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": false,
+          "reasonCz": "Smlouva s Argentinou upravuje zamezení dvojímu zdanění a výměnu daňových informací, ale podklady ji nespojují se slíbeným analytickým nástrojem ani s odhalováním konkrétních fiktivních obchodů či optimalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": false,
+          "reasonCz": "Změna se týká daňových osvobození a oznamování vybraných údajů o náhradách, úvěrech a předškolních výdajích, nikoli slíbeného odhalování fiktivních obchodů nebo nezákonné daňové optimalizace.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-digital-tax-cobra--source",
+        "psp-core-2025--law-change-43120-2",
+        "psp-core-2025--vote-87503",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--senate-resolution-43310-6"
+      ],
+      "explanationCz": "Vláda předložila zákon o evidenci tržeb, jehož úprava rozšiřuje údaje dostupné pro daňovou analytickou evidenci; poslanci ANO podpořili jeho přijetí i setrvání na původním znění po vrácení Senátem. Podpořili také změnu, která umožňuje předávat některé informace z dohledu České národní banky správci daně. Tato opatření rozšiřují datové podklady a možnosti kontroly, ale sama nezavádějí analytický systém s umělou inteligencí, který slibuje Digitální daňová kobra. Jde proto o dílčí posun, nikoli o splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené změny rozšiřují analytické datové zdroje a daňové kontroly, ale žádný z doložených textů přímo nezavádí Digitální daňovou kobru ani její pokročilé analytické nástroje a umělou inteligenci."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0b02465fbc068ce2016ac5391e4bbc87d2ae286513149ea17b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 142597,
+      "input_tokens_details": {
+        "cache_write_tokens": 138627,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 5612,
+      "output_tokens_details": {
+        "reasoning_tokens": 3205
+      },
+      "total_tokens": 148209
+    },
+    "output": {
+      "promiseId": "ano-2025-digital-tax-cobra",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-2",
+          "relevant": true,
+          "reasonCz": "Změna výslovně umožňuje předávání některých informací z dohledu nad kapitálovým trhem správci daně, což může rozšířit podklady pro odhalování daňových nesrovnalostí.",
+          "effectCz": "Před změnou se informace získané při dohledu nad kapitálovým trhem směly používat jen pro úkoly tohoto dohledu, soudní řízení nebo s poskytnutým souhlasem; výjimky pro předávání je taxativně vymezovaly. Nově lze mlčenlivé informace použít také při komunikaci se správcem daně a správce daně se přidává mezi příjemce, jimž lze informace poskytnout. Jde o uvolnění omezení a rozšíření přístupu k údajům, které mohou podpořit daňovou kontrolu, nikoli o zavedení analytického systému či umělé inteligence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": true,
+          "reasonCz": "Navržená smlouva s Tanzanií počítá s výměnou daňových informací a pravidly proti zneužívání daňových výhod, tedy s dílčí pomocí při odhalování přeshraničních úniků.",
+          "effectCz": "Jde o novou mezinárodní smlouvu, takže v balíčku není předchozí znění, které by bylo možné porovnat. Smlouva stanoví výměnu informací relevantních pro správu a vymáhání daňových předpisů, odmítnutí výhod při některých případech účelového využívání smlouvy a zachovává možnost uplatňovat domácí pravidla proti vyhýbání se daním. To rozšiřuje možnosti odhalování části přeshraničního daňového vyhýbání, ale nezavádí Digitální daňovou kobru ani analytické nástroje slíbené v programu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1",
+          "relevant": true,
+          "reasonCz": "Návrh rozšiřuje automatické předávání daňových údajů mimo jiné o transakce s kryptoaktivy, což poskytuje správci daně další podklady pro hledání nesrovnalostí.",
+          "effectCz": "Dosavadní automatická výměna se týkala zejména informací od finančních institucí, nadnárodních skupin, zprostředkovatelů přeshraničních uspořádání a provozovatelů platforem; návrh přidává poskytovatele služeb s kryptoaktivy a jejich transakční údaje a zavádí registrační, zjišťovací, oznamovací a evidenční povinnosti. Rozšiřuje také některé údaje předávané o dorovnávacích daních a zvyšuje horní hranici některých pokut za porušení povinností z 500 000 Kč na 1 500 000 Kč. Současně nově připouští výměnu některých informací o daňových rozhodnutích vztahujících se výlučně k fyzickým osobám jen při transakcích od 1 500 000 EUR nebo při určení daňové rezidence, takže v této části je rozsah omezenější. V souhrnu návrh rozšiřuje dostupnost vybraných daňových dat, ale sám nestanoví jejich analýzu pomocí umělé inteligence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Nový zákon ukládá elektronicky předávat údaje o části tržeb správci daně a výslovně spojuje jejich automatizované zjišťování s účinnějším ověřováním daňových povinností.",
+          "effectCz": "Jde o nový zákon, takže v balíčku není předchozí znění. Zavádí evidenci vymezených tržeb a povinnost zaslat správci daně elektronickou zprávou údaje o tržbě nejpozději při jejím uskutečnění; z působnosti však stanoví řadu výjimek. Oproti závazku zavést systém pro odhalování fiktivních obchodů jde o dílčí rozšíření elektronického sběru dat a ověřování plnění daňových povinností, nikoli o celý slíbený analytický systém."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Změna rozšiřuje daňovou analytickou evidenci o údaje získané při evidenci tržeb a rozšiřuje i možnost kontrolních nákupů v daňové oblasti.",
+          "effectCz": "Dříve se v daňové analytické evidenci souhrnně zpracovávaly údaje z kontrolních hlášení k DPH a další údaje potřebné pro jejich analýzu; nově se přidávají také údaje získané od daňového subjektu při plnění povinností evidence tržeb, takže se rozšiřuje okruh analytických podkladů. Kontrolní nákup byl před změnou možný při prověřování povinností podle zákona o mezinárodní spolupráci při správě daní; nově se vztahuje i na povinnosti podle zákona o evidenci tržeb a jiných daňových či účetních předpisů, což rozšiřuje kontrolní oprávnění. Nové pravidlo dovoluje také přesunout místní příslušnost daňového subjektu mezi finančními úřady kvůli rovnoměrnějšímu rozložení práce; samo o sobě nemění daňovou povinnost ani slíbený analytický postup. Změna tak poskytuje dílčí analytickou a kontrolní infrastrukturu, ale nestanoví použití umělé inteligence."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": true,
+          "reasonCz": "Navržená smlouva s Argentinou upravuje výměnu daňových informací a zachovává možnost uplatňovat pravidla proti daňovým únikům a vyhýbání se povinnosti.",
+          "effectCz": "Jde o novou mezinárodní smlouvu, takže v balíčku není předchozí znění, které by bylo možné porovnat. Smlouva stanoví výměnu informací relevantních pro uplatňování a vymáhání daňových předpisů a výslovně potvrzuje, že nebrání uplatňování vnitrostátních pravidel proti daňovým únikům a vyhýbání se daním. To rozšiřuje možnosti získat podklady pro část přeshraničních případů, ale samo o sobě nezavádí analytický systém Digitální daňové kobry."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": false,
+          "reasonCz": "Návrh zavádí úzce vymezená hlášení o úvěrových a předškolních výdajích, která nejsou v předloženém textu spojena s odhalováním fiktivních obchodů ani nezákonné daňové optimalizace.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-digital-tax-cobra--source",
+        "psp-core-2025--law-change-43120-2",
+        "psp-core-2025--law-change-43194-1",
+        "psp-core-2025--law-change-43208-1",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--law-change-43378-1",
+        "psp-core-2025--print-step-210710",
+        "psp-core-2025--print-step-210766",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-87503",
+        "psp-core-2025--print-step-211887",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--senate-resolution-43310-6",
+        "psp-core-2025--vote-88456"
+      ],
+      "explanationCz": "Vláda, v níž ANO působí, předložila návrhy na rozšíření výměny daňových informací včetně údajů o kryptoaktivech a na výměnu informací s Tanzanií a Argentinou. Poslanci ANO také hlasovali pro zákon o evidenci tržeb, který zavádí elektronické předávání části údajů o tržbách správci daně a má umožnit účinnější ověřování daňových povinností. Související změna zákona o Finanční správě přidává údaje z této evidence do daňové analytické evidence. Jde o dílčí posun v získávání a analýze daňových údajů, ale předložené podklady nedokládají, že už funguje celý systém s umělou inteligencí slibovaný jako Digitální daňová kobra.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady dokládají právní změny a návrhy, které rozšiřují sběr, výměnu a analytické využití daňových údajů, ale nedokládají, že už byl zaveden nebo uveden do provozu konkrétní systém Digitální daňové kobry či že používá umělou inteligenci."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0fdbc43930b82ed5016ac539b7473487d2b91cd93c84602697",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 142597,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 142594
+      },
+      "output_tokens": 7719,
+      "output_tokens_details": {
+        "reasoning_tokens": 6114
+      },
+      "total_tokens": 150316
+    },
+    "output": {
+      "promiseId": "ano-2025-digital-tax-cobra",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43120-2",
+          "relevant": true,
+          "reasonCz": "Změna výslovně rozšiřuje možnosti předávání informací mezi Českou národní bankou a správcem daně, což může podpořit odhalování daňových nesrovnalostí na kapitálovém trhu.",
+          "effectCz": "Dříve mohly být informace získané při dohledu nad kapitálovým trhem použity a sdíleny jen v omezených případech; nově je možné je využít také při komunikaci se správcem daně a správce daně se přidává mezi oprávněné příjemce. To uvolňuje omezení přístupu k části informací potřebných pro daňovou kontrolu. U informací získaných od zahraničních orgánů zůstává omezení použití pro určený účel a nově se výslovně vztahuje i na případ, kdy zahraniční orgán jedná jako správce daně."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43194-1",
+          "relevant": false,
+          "reasonCz": "Smlouva upravuje zdanění a výměnu informací mezi Českem a Tanzanií, ale text ji nespojuje s analytickým nástrojem ani s odhalováním fiktivních obchodů v rámci slíbené Digitální daňové kobry.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43208-1",
+          "relevant": false,
+          "reasonCz": "Návrh zavádí mezinárodní oznamování a výměnu daňových údajů, včetně údajů o kryptoaktivech, avšak dodané podklady jej nespojují s konkrétním systémem Digitální daňové kobry ani s odhalováním fiktivních obchodů či nezákonné optimalizace.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-1",
+          "relevant": true,
+          "reasonCz": "Nová evidence tržeb automaticky shromažďuje a předává údaje o vybraných platbách správci daně, což může vytvořit dílčí datový podklad pro ověřování daňových povinností.",
+          "effectCz": "Jde o nový zákon, takže předchozí znění neexistuje. Zavádí evidenci vybraných podnikatelských tržeb a zasílání údajů správci daně nejpozději při uskutečnění tržby, včetně její částky, času a evidenční jednotky; stanoví také výjimky z evidence. Vytváří tak dílčí zdroj transakčních údajů pro daňovou kontrolu, ale sám nestanoví pokročilou analytiku ani umělou inteligenci pro odhalování fiktivních obchodů a optimalizace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43310-4",
+          "relevant": true,
+          "reasonCz": "Změna výslovně rozšiřuje daňovou analytickou evidenci o údaje získané od daňových subjektů při evidenci tržeb a rozšiřuje možnosti kontrolního nákupu.",
+          "effectCz": "Nový § 12b umožňuje finančnímu úřadu měnit místní příslušnost kvůli rovnoměrnějšímu rozložení práce; dosavadní znění tohoto ustanovení nebylo, takže jde o nové organizační oprávnění bez přímého účinku na slib. Kontrolní nákup byl dříve dovolen při ověřování povinností podle zákona o mezinárodní spolupráci při správě daní, nově také podle zákona o evidenci tržeb a dalších daňových či účetních předpisů, což rozšiřuje kontrolní možnosti. Daňová analytická evidence dříve souhrnně zpracovávala údaje z kontrolních hlášení k DPH a další potřebné údaje; nově zahrnuje také údaje od daňových subjektů při evidenci tržeb, čímž rozšiřuje její datové zdroje. Tato rozšíření usnadňují analytickou kontrolu, ale sama neurčují použití umělé inteligence ani zavedení slíbené kobry."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43378-1",
+          "relevant": false,
+          "reasonCz": "Smlouva s Argentinou upravuje zamezení dvojímu zdanění a výměnu daňových informací, ale podklady ji nespojují se slíbeným analytickým nástrojem ani s odhalováním konkrétních fiktivních obchodů či optimalizací.",
+          "effectCz": ""
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43422-4",
+          "relevant": false,
+          "reasonCz": "Změna se týká daňových osvobození a oznamování vybraných údajů o náhradách, úvěrech a předškolních výdajích, nikoli slíbeného odhalování fiktivních obchodů nebo nezákonné daňové optimalizace.",
+          "effectCz": ""
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "ano-2025-digital-tax-cobra--source",
+        "psp-core-2025--law-change-43120-2",
+        "psp-core-2025--vote-87503",
+        "psp-core-2025--law-change-43310-1",
+        "psp-core-2025--law-change-43310-4",
+        "psp-core-2025--print-step-211390",
+        "psp-core-2025--vote-88356",
+        "psp-core-2025--vote-88456",
+        "psp-core-2025--senate-resolution-43310-6"
+      ],
+      "explanationCz": "Vláda předložila zákon o evidenci tržeb, jehož úprava rozšiřuje údaje dostupné pro daňovou analytickou evidenci; poslanci ANO podpořili jeho přijetí i setrvání na původním znění po vrácení Senátem. Podpořili také změnu, která umožňuje předávat některé informace z dohledu České národní banky správci daně. Tato opatření rozšiřují datové podklady a možnosti kontroly, ale sama nezavádějí analytický systém s umělou inteligencí, který slibuje Digitální daňová kobra. Jde proto o dílčí posun, nikoli o splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložené změny rozšiřují analytické datové zdroje a daňové kontroly, ale žádný z doložených textů přímo nezavádí Digitální daňovou kobru ani její pokročilé analytické nástroje a umělou inteligenci."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

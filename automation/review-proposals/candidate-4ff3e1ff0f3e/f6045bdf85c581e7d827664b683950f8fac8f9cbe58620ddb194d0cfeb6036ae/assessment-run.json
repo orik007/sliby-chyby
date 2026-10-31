@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-45-56-314Z--bf076fd40a79",
+  "evaluatedAt": "2026-10-02T01:45:56.314Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-4ff3e1ff0f3e/bf076fd40a791eb635cdf97f57493bcc0dbb3e246111d492b935be41bc29cb4a.json",
+  "packageHash": "bf076fd40a791eb635cdf97f57493bcc0dbb3e246111d492b935be41bc29cb4a",
+  "assessmentContentHash": "4b61d1544f785f31e54cc03a5950b40e6379ce14a1bdeff823b0bf432b8e63bd",
+  "assessmentFingerprint": "f6045bdf85c581e7d827664b683950f8fac8f9cbe58620ddb194d0cfeb6036ae",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-4ff3e1ff0f3e",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-4ff3e1ff0f3e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí certifikaci evropských digitálních peněženek a součinnost při reakci na jejich bezpečnostní narušení, což může být dílčí součástí ochrany systémů, ačkoli text je nespojuje s hybridními útoky ani výslovně s kritickými systémy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Změna výslovně umožňuje bezpečnostní testování základních registrů a agendových informačních systémů, což může přispět k jejich ochraně, ale neříká, že jde o kritické systémy ani že testy cílí na hybridní útoky."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-4ff3e1ff0f3e--source",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "Vláda předložila návrh novely zákona o elektronické identifikaci, který zavádí mimo jiné certifikaci digitálních peněženek a součinnost při řešení jejich bezpečnostních narušení. Poslanci později hlasovali o novele zákona o základních registrech, která umožňuje bezpečnostní testování registrů a agendových informačních systémů. Pro tento návrh hlasovalo pět poslanců Motoristů sobě, tedy méně než sedm potřebných pro většinu klubu; podle pravidel hodnocení tak strana nepodpořila opatření, které může slib naplňovat zčásti. Návrh vlády působí směrem ke slibu, ale rozhodující hlasování vede k horšímu hodnocení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neprokazují, že digitální peněženky, základní registry nebo testované agendové systémy jsou kritickými systémy, ani že uvedená opatření míří konkrétně na hybridní útoky. Proto je jejich vztah ke slibu pouze dílčí a nelze potvrdit, zda hodnocené změny skutečně pokrývají jeho zamýšlený rozsah."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-4ff3e1ff0f3e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Navržená úprava digitálních peněženek stanoví také povinnosti související s reakcí na narušení jejich bezpečnosti, a může tak posílit ochranu části digitálních systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Úprava umožňuje bezpečnostní testování základních registrů a agendových informačních systémů, takže se přímo týká ochrany části veřejných informačních systémů."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4ff3e1ff0f3e--source",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, předložila návrh novely zákona o elektronické identifikaci, který zavádí pravidla pro digitální peněženky a povinnosti při narušení jejich bezpečnosti. Tím navrhla ochranu části digitálních systémů, což slib částečně podporuje. Později poslanci schválili změnu zákona o základních registrech, která umožňuje testovat bezpečnost registrů a agendových informačních systémů; pro návrh hlasovalo pět ze třinácti poslanců Motoristů sobě, takže jejich klub neměl většinové stanovisko. Protože tato změna podporuje jen část slibu a hlasování je rozhodující, převažuje nyní postup proti slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložený vládní návrh podporuje ochranu digitálních peněženek, ale následné hlasování Motoristů sobě u změny umožňující bezpečnostní testování registrů nemělo většinové stanovisko klubu; hlasování proto převažuje nad dřívějším návrhem.",
+        "Podklady výslovně nespojují uvedené systémy s kategorií kritických systémů ani bezpečnostní opatření konkrétně s hybridními útoky; posun se proto týká jen části slibu."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0251ad53b692c40c016abf0cb20a7c87d1a349062d9d1abe46",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 23673,
+      "input_tokens_details": {
+        "cache_write_tokens": 20349,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 3151,
+      "output_tokens_details": {
+        "reasoning_tokens": 2484
+      },
+      "total_tokens": 26824
+    },
+    "output": {
+      "promiseId": "candidate-4ff3e1ff0f3e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Návrh zavádí certifikaci evropských digitálních peněženek a součinnost při reakci na jejich bezpečnostní narušení, což může být dílčí součástí ochrany systémů, ačkoli text je nespojuje s hybridními útoky ani výslovně s kritickými systémy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Změna výslovně umožňuje bezpečnostní testování základních registrů a agendových informačních systémů, což může přispět k jejich ochraně, ale neříká, že jde o kritické systémy ani že testy cílí na hybridní útoky."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-4ff3e1ff0f3e--source",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "Vláda předložila návrh novely zákona o elektronické identifikaci, který zavádí mimo jiné certifikaci digitálních peněženek a součinnost při řešení jejich bezpečnostních narušení. Poslanci později hlasovali o novele zákona o základních registrech, která umožňuje bezpečnostní testování registrů a agendových informačních systémů. Pro tento návrh hlasovalo pět poslanců Motoristů sobě, tedy méně než sedm potřebných pro většinu klubu; podle pravidel hodnocení tak strana nepodpořila opatření, které může slib naplňovat zčásti. Návrh vlády působí směrem ke slibu, ale rozhodující hlasování vede k horšímu hodnocení.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neprokazují, že digitální peněženky, základní registry nebo testované agendové systémy jsou kritickými systémy, ani že uvedená opatření míří konkrétně na hybridní útoky. Proto je jejich vztah ke slibu pouze dílčí a nelze potvrdit, zda hodnocené změny skutečně pokrývají jeho zamýšlený rozsah."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_05cffe355720fa20016abf0cc79c3c87d187f5df95c13f86c7",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 23673,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 23670
+      },
+      "output_tokens": 2005,
+      "output_tokens_details": {
+        "reasoning_tokens": 1420
+      },
+      "total_tokens": 25678
+    },
+    "output": {
+      "promiseId": "candidate-4ff3e1ff0f3e",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Navržená úprava digitálních peněženek stanoví také povinnosti související s reakcí na narušení jejich bezpečnosti, a může tak posílit ochranu části digitálních systémů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-approved-10",
+          "relevant": true,
+          "reasonCz": "Úprava umožňuje bezpečnostní testování základních registrů a agendových informačních systémů, takže se přímo týká ochrany části veřejných informačních systémů."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-4ff3e1ff0f3e--source",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43308-approved-10",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, předložila návrh novely zákona o elektronické identifikaci, který zavádí pravidla pro digitální peněženky a povinnosti při narušení jejich bezpečnosti. Tím navrhla ochranu části digitálních systémů, což slib částečně podporuje. Později poslanci schválili změnu zákona o základních registrech, která umožňuje testovat bezpečnost registrů a agendových informačních systémů; pro návrh hlasovalo pět ze třinácti poslanců Motoristů sobě, takže jejich klub neměl většinové stanovisko. Protože tato změna podporuje jen část slibu a hlasování je rozhodující, převažuje nyní postup proti slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložený vládní návrh podporuje ochranu digitálních peněženek, ale následné hlasování Motoristů sobě u změny umožňující bezpečnostní testování registrů nemělo většinové stanovisko klubu; hlasování proto převažuje nad dřívějším návrhem.",
+        "Podklady výslovně nespojují uvedené systémy s kategorií kritických systémů ani bezpečnostní opatření konkrétně s hybridními útoky; posun se proto týká jen části slibu."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-against",
+    "selectedReview": "assessor-b"
+  }
+}

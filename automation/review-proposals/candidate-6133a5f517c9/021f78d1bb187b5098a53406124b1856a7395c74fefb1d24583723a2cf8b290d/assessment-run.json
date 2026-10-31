@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-47-18-586Z--fede4771d6f9",
+  "evaluatedAt": "2026-10-02T01:47:18.586Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-6133a5f517c9/fede4771d6f952f1f24ed8b852211d5bf07438070ba3e3b4ac819a3907fec743.json",
+  "packageHash": "fede4771d6f952f1f24ed8b852211d5bf07438070ba3e3b4ac819a3907fec743",
+  "assessmentContentHash": "fb4b196bc5b750127f2ea7ef4a01305aa1c81e6820fc6802bad1df8dd5bc902d",
+  "assessmentFingerprint": "021f78d1bb187b5098a53406124b1856a7395c74fefb1d24583723a2cf8b290d",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-6133a5f517c9",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-6133a5f517c9",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-5",
+          "relevant": false,
+          "reasonCz": "Navržená změna upravuje puncovní pravidla pro drahé kovy a nijak se netýká režimu mikrozaměstnavatelů, školení BOZP ani výjimky z GDPR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění pravidla ochrany zdraví při práci a u práce s azbestem výslovně ukládá zaměstnavateli dokládat školení zaměstnanců, což se částečně střetává se slibem o omezení školení BOZP pro mikrozaměstnavatele."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6133a5f517c9--source",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--print-step-211961"
+      ],
+      "explanationCz": "Vláda, v níž jsou Motoristé sobě zastoupeni, předložila novelu zákona o ochraně veřejného zdraví. Návrh požaduje, aby zaměstnavatel při práci s azbestem přiložil k hlášení osvědčení o školení zaměstnanců. To jde částečně proti slibu o omezení školení BOZP v režimu mikrozaměstnavatele, jde však jen o školení při práci s azbestem, nikoli o celý slib. Návrh se netýká slíbené výjimky z GDPR ani vedení osobních složek.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložený návrh řeší školení zaměstnanců při práci s azbestem; podklady neukazují, zda by se tato konkrétní povinnost vztahovala i na všechny podnikatele s jedním či dvěma zaměstnanci."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-6133a5f517c9",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-5",
+          "relevant": false,
+          "reasonCz": "Návrh mění pravidla puncovnictví a zkoušení drahých kovů, nikoli režim mikrozaměstnavatelů, školení BOZP ani výjimky z GDPR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění povinnosti zaměstnavatelů při práci s azbestem včetně doložení školení zaměstnanců, což se věcně dotýká slibu o osvobození mikrozaměstnavatelů od školení BOZP."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6133a5f517c9--source",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--print-step-211961"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, předložila novelu zákona o ochraně veřejného zdraví. Ta při práci s azbestem ukládá zaměstnavateli přiložit k hlášení potvrzení, že zaměstnanci absolvovali školení prevence ohrožení zdraví. Tato konkrétní povinnost je v rozporu s částí slibu o osvobození mikrozaměstnavatelů od školení BOZP, a návrh tak postupuje proti této části slibu. Návrh ale nezavádí ani neruší obecný režim mikrozaměstnavatelů či výjimku z GDPR; jeho dopad se týká školení při práci s azbestem.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Doložená povinnost se vztahuje na školení při práci s azbestem; podklady neukazují, zda by případný budoucí režim mikrozaměstnavatelů z této povinnosti stanovil výjimku. Proto lze hodnotit rozpor jen s částí slibu o školení, nikoli s jeho dalšími částmi."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0b862980ec43c975016abf0d0dc45887d1b8d9bb16a3f413b0",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 69113,
+      "input_tokens_details": {
+        "cache_write_tokens": 65789,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 1364,
+      "output_tokens_details": {
+        "reasoning_tokens": 826
+      },
+      "total_tokens": 70477
+    },
+    "output": {
+      "promiseId": "candidate-6133a5f517c9",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-5",
+          "relevant": false,
+          "reasonCz": "Navržená změna upravuje puncovní pravidla pro drahé kovy a nijak se netýká režimu mikrozaměstnavatelů, školení BOZP ani výjimky z GDPR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění pravidla ochrany zdraví při práci a u práce s azbestem výslovně ukládá zaměstnavateli dokládat školení zaměstnanců, což se částečně střetává se slibem o omezení školení BOZP pro mikrozaměstnavatele."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6133a5f517c9--source",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--print-step-211961"
+      ],
+      "explanationCz": "Vláda, v níž jsou Motoristé sobě zastoupeni, předložila novelu zákona o ochraně veřejného zdraví. Návrh požaduje, aby zaměstnavatel při práci s azbestem přiložil k hlášení osvědčení o školení zaměstnanců. To jde částečně proti slibu o omezení školení BOZP v režimu mikrozaměstnavatele, jde však jen o školení při práci s azbestem, nikoli o celý slib. Návrh se netýká slíbené výjimky z GDPR ani vedení osobních složek.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Předložený návrh řeší školení zaměstnanců při práci s azbestem; podklady neukazují, zda by se tato konkrétní povinnost vztahovala i na všechny podnikatele s jedním či dvěma zaměstnanci."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_063dce337fca1dd2016abf0d18641c87d19c840bebc429d0a7",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 69113,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 69110
+      },
+      "output_tokens": 1975,
+      "output_tokens_details": {
+        "reasoning_tokens": 1460
+      },
+      "total_tokens": 71088
+    },
+    "output": {
+      "promiseId": "candidate-6133a5f517c9",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43372-5",
+          "relevant": false,
+          "reasonCz": "Návrh mění pravidla puncovnictví a zkoušení drahých kovů, nikoli režim mikrozaměstnavatelů, školení BOZP ani výjimky z GDPR."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43396-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění povinnosti zaměstnavatelů při práci s azbestem včetně doložení školení zaměstnanců, což se věcně dotýká slibu o osvobození mikrozaměstnavatelů od školení BOZP."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-6133a5f517c9--source",
+        "psp-core-2025--law-change-43396-1",
+        "psp-core-2025--print-step-211961"
+      ],
+      "explanationCz": "Vláda, v níž Motoristé sobě působí, předložila novelu zákona o ochraně veřejného zdraví. Ta při práci s azbestem ukládá zaměstnavateli přiložit k hlášení potvrzení, že zaměstnanci absolvovali školení prevence ohrožení zdraví. Tato konkrétní povinnost je v rozporu s částí slibu o osvobození mikrozaměstnavatelů od školení BOZP, a návrh tak postupuje proti této části slibu. Návrh ale nezavádí ani neruší obecný režim mikrozaměstnavatelů či výjimku z GDPR; jeho dopad se týká školení při práci s azbestem.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Doložená povinnost se vztahuje na školení při práci s azbestem; podklady neukazují, zda by případný budoucí režim mikrozaměstnavatelů z této povinnosti stanovil výjimku. Proto lze hodnotit rozpor jen s částí slibu o školení, nikoli s jeho dalšími částmi."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-against",
+    "selectedReview": "consensus"
+  }
+}

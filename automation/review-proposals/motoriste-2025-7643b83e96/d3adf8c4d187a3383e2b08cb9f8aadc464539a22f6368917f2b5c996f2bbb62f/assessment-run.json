@@ -1,0 +1,203 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T05-36-31-366Z--6a54dcabe96d",
+  "evaluatedAt": "2026-10-02T05:36:31.366Z",
+  "packagePath": "automation/evidence-packages/packages/motoriste-2025-7643b83e96/6a54dcabe96de502c7bb739fb4f1323aa305a3095942342a310f95b67a88c6d6.json",
+  "packageHash": "6a54dcabe96de502c7bb739fb4f1323aa305a3095942342a310f95b67a88c6d6",
+  "assessmentContentHash": "1d3b15c80d888ee846b046a5d72679acbada125485e82455157ee6de9621f655",
+  "assessmentFingerprint": "d3adf8c4d187a3383e2b08cb9f8aadc464539a22f6368917f2b5c996f2bbb62f",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "motoriste-2025-7643b83e96",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "motoriste-2025-7643b83e96",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Text stanoví zemědělské dotační programy a výslovně zahrnuje podporu pouze hobby včelařů, takže se může dotýkat rozlišení mezi produkčními a rekreačními příjemci dotací, jejich podíly však neuvádí."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-7643b83e96--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě hlasovali pro dotační programy zemědělství na rok 2026. Materiál zahrnuje podporu určenou pouze hobby včelařům, ale nevymezuje, zda jde o rekreační chovy ve smyslu slibu, ani jaký podíl celkových dotací tato podpora představuje. Z předloženého textu proto nelze ověřit, zda dotace směřují především produkčním podnikům. Hlasování samo o sobě směr slibu neprokazuje.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Není doloženo, zda podpora hobby včelařů odpovídá slibem míněným rekreačním chovům ani jaký podíl celkových dotací tvoří; bez těchto údajů nelze určit, zda program upřednostňuje produkční podniky."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "motoriste-2025-7643b83e96",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh dotačních programů výslovně zahrnuje podporu včelařství určenou pouze hobby včelařům, což se materiálně týká odmítnutí dotací pro rekreační chovy."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-7643b83e96--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Sněmovna schválila dotační programy zemědělství pro rok 2026, tedy soubor státních podpor. Poslanci Motoristů sobě hlasovali pro návrh, který výslovně zahrnuje podporu včelařství určenou pouze hobby včelařům. Tím strana podpořila alespoň část dotací pro neprofesionální chovy, což je v rozporu s částí slibu odmítající rekreační chovy. Podklady ale neuvádějí částku pro tento program ani její podíl na celkových dotacích, takže nelze určit, zda dotace směřovaly primárně produkčním podnikům.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí výši podpory pro hobby včelaře ani její podíl na všech zemědělských dotacích; nelze proto ověřit, zda jako celek převažovaly dotace pro produkční podniky."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0c288d0928d26691016abf42c1d7f487d1b1c430aaddedb177",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 7683,
+      "input_tokens_details": {
+        "cache_write_tokens": 4359,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2055,
+      "output_tokens_details": {
+        "reasoning_tokens": 1661
+      },
+      "total_tokens": 9738
+    },
+    "output": {
+      "promiseId": "motoriste-2025-7643b83e96",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Text stanoví zemědělské dotační programy a výslovně zahrnuje podporu pouze hobby včelařů, takže se může dotýkat rozlišení mezi produkčními a rekreačními příjemci dotací, jejich podíly však neuvádí."
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "motoriste-2025-7643b83e96--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě hlasovali pro dotační programy zemědělství na rok 2026. Materiál zahrnuje podporu určenou pouze hobby včelařům, ale nevymezuje, zda jde o rekreační chovy ve smyslu slibu, ani jaký podíl celkových dotací tato podpora představuje. Z předloženého textu proto nelze ověřit, zda dotace směřují především produkčním podnikům. Hlasování samo o sobě směr slibu neprokazuje.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Není doloženo, zda podpora hobby včelařů odpovídá slibem míněným rekreačním chovům ani jaký podíl celkových dotací tvoří; bez těchto údajů nelze určit, zda program upřednostňuje produkční podniky."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0fde41036c07f6e3016abf42ce99c087d18f45b57351c34008",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 7683,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 7680
+      },
+      "output_tokens": 1755,
+      "output_tokens_details": {
+        "reasoning_tokens": 1348
+      },
+      "total_tokens": 9438
+    },
+    "output": {
+      "promiseId": "motoriste-2025-7643b83e96",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Návrh dotačních programů výslovně zahrnuje podporu včelařství určenou pouze hobby včelařům, což se materiálně týká odmítnutí dotací pro rekreační chovy."
+        }
+      ],
+      "status": "moving-against",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "motoriste-2025-7643b83e96--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Sněmovna schválila dotační programy zemědělství pro rok 2026, tedy soubor státních podpor. Poslanci Motoristů sobě hlasovali pro návrh, který výslovně zahrnuje podporu včelařství určenou pouze hobby včelařům. Tím strana podpořila alespoň část dotací pro neprofesionální chovy, což je v rozporu s částí slibu odmítající rekreační chovy. Podklady ale neuvádějí částku pro tento program ani její podíl na celkových dotacích, takže nelze určit, zda dotace směřovaly primárně produkčním podnikům.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Podklady neuvádějí výši podpory pro hobby včelaře ani její podíl na všech zemědělských dotacích; nelze proto ověřit, zda jako celek převažovaly dotace pro produkční podniky."
+      ]
+    }
+  },
+  "arbiter": {
+    "provider": "openai",
+    "responseId": "resp_0d75e08a7fcef13c016abf42da005c87d1b466cf79ed520960",
+    "model": "gpt-6.1-sol",
+    "usage": {
+      "input_tokens": 7627,
+      "input_tokens_details": {
+        "cache_write_tokens": 5145,
+        "cached_tokens": 2479
+      },
+      "output_tokens": 296,
+      "output_tokens_details": {
+        "reasoning_tokens": 56
+      },
+      "total_tokens": 7923
+    },
+    "output": {
+      "choice": "assessor-b",
+      "citedEvidenceIds": [
+        "motoriste-2025-7643b83e96--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Přesvědčivější je druhé hodnocení, protože slib nejen upřednostňuje produkční podniky, ale také odmítá dotace pro rekreační chovy. Pro zemědělské dotační programy na rok 2026 hlasovalo 11 ze 13 poslanců Motoristů sobě a schválený text výslovně zahrnuje podporu hobby včelařů, tedy chovu ze záliby. Strana tím podpořila opatření odporující této části slibu. Chybějící údaj o výši podpory brání posouzení celkového rozdělení dotací, ale nevyvrací rozpor s částí slibu, jak předpokládá první hodnocení."
+    }
+  },
+  "resolution": {
+    "state": "candidate",
+    "reason": "arbiter-selection",
+    "status": "moving-against",
+    "selectedReview": "assessor-b"
+  }
+}

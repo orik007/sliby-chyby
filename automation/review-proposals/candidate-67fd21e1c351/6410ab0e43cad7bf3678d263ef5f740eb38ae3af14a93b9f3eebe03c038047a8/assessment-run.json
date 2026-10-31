@@ -1,0 +1,192 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-48-00-482Z--ba930ee3dc35",
+  "evaluatedAt": "2026-10-02T01:48:00.482Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-67fd21e1c351/ba930ee3dc3519e193336a7673744207254cfa4001d57a4e126c7288d0097c8c.json",
+  "packageHash": "ba930ee3dc3519e193336a7673744207254cfa4001d57a4e126c7288d0097c8c",
+  "assessmentContentHash": "5a88fa624d52e6a43a8598167aadcbdb9d243a3c49bbd9282ebb6963001f40e3",
+  "assessmentFingerprint": "6410ab0e43cad7bf3678d263ef5f740eb38ae3af14a93b9f3eebe03c038047a8",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-67fd21e1c351",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-67fd21e1c351",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválené znění mění zákon o podpoře sportu a výslovně počítá s podporou sportovních organizací, zejména v oblasti sportu dětí a mládeže, ale neřeší výběr dětí podle výkonnosti ani vznik nových spolků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-67fd21e1c351--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Program ANO slibuje podporu klubům bez výkonnostní selekce a podmínky pro vznik nových spolků. Poslanci ANO hlasovali pro schválení zákona, který mimo jiné stanoví podporu sportovních organizací, zejména pro sport dětí a mládeže; později hlasovali také pro setrvání na tomto znění poté, co Senát zákon zamítl. To může naplňovat část slibu týkající se podpory klubů, ale text neřeší výběr dětí ani zakládání nových spolků. Původní návrh poslanců se v části o sportu týkal pouze změn ve vedení Národní sportovní agentury, nikoli tohoto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U schválených změn týkajících se financování sportovních organizací není v podkladech uvedeno předchozí znění příslušného ustanovení, takže nelze spolehlivě určit, nakolik jde o novou podporu oproti dosavadnímu stavu.",
+        "Zákon neobsahuje konkrétní opatření proti výkonnostní selekci dětí ani ustanovení o vzniku nových sportovních spolků; nelze proto doložit splnění těchto částí slibu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-67fd21e1c351",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená verze mění zákon o podpoře sportu a výslovně počítá s podporou sportovních organizací, zejména sportu dětí a mládeže, což může naplnit část slibu o podpoře dětských klubů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-67fd21e1c351--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Původní poslanecký návrh ANO v části o sportu upravoval jmenování a pravomoci vedení Národní sportovní agentury. Poslanci ANO pak hlasovali pro schválené znění, které mezi podporované účely výslovně řadí sportovní organizace a zvláště sport dětí a mládeže. Senát, tedy horní komora Parlamentu, návrh zamítl; poslanci ANO poté hlasovali pro setrvání na sněmovním znění. Tím zákon přispívá k části slibu o podpoře klubů zapojujících děti, ale neřeší výběr podle výkonnosti ani vznik nových spolků.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text zákona výslovně podporuje sportovní organizace a dětský sport, ale neuvádí, že podpora míří na kluby zapojující široké spektrum dětí bez výkonnostní selekce, ani nestanoví podmínky pro vznik nových spolků."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_068b435242434ace016abf0d291cb887d1b7a88d87e1034062",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12508,
+      "input_tokens_details": {
+        "cache_write_tokens": 9184,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2399,
+      "output_tokens_details": {
+        "reasoning_tokens": 1865
+      },
+      "total_tokens": 14907
+    },
+    "output": {
+      "promiseId": "candidate-67fd21e1c351",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválené znění mění zákon o podpoře sportu a výslovně počítá s podporou sportovních organizací, zejména v oblasti sportu dětí a mládeže, ale neřeší výběr dětí podle výkonnosti ani vznik nových spolků."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-67fd21e1c351--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Program ANO slibuje podporu klubům bez výkonnostní selekce a podmínky pro vznik nových spolků. Poslanci ANO hlasovali pro schválení zákona, který mimo jiné stanoví podporu sportovních organizací, zejména pro sport dětí a mládeže; později hlasovali také pro setrvání na tomto znění poté, co Senát zákon zamítl. To může naplňovat část slibu týkající se podpory klubů, ale text neřeší výběr dětí ani zakládání nových spolků. Původní návrh poslanců se v části o sportu týkal pouze změn ve vedení Národní sportovní agentury, nikoli tohoto slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "U schválených změn týkajících se financování sportovních organizací není v podkladech uvedeno předchozí znění příslušného ustanovení, takže nelze spolehlivě určit, nakolik jde o novou podporu oproti dosavadnímu stavu.",
+        "Zákon neobsahuje konkrétní opatření proti výkonnostní selekci dětí ani ustanovení o vzniku nových sportovních spolků; nelze proto doložit splnění těchto částí slibu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_04647703b9b84762016abf0d3b4a3c87d1877d0a457e61ddd8",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 12508,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 12505
+      },
+      "output_tokens": 3021,
+      "output_tokens_details": {
+        "reasoning_tokens": 2550
+      },
+      "total_tokens": 15529
+    },
+    "output": {
+      "promiseId": "candidate-67fd21e1c351",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43184-14",
+          "relevant": true,
+          "reasonCz": "Schválená verze mění zákon o podpoře sportu a výslovně počítá s podporou sportovních organizací, zejména sportu dětí a mládeže, což může naplnit část slibu o podpoře dětských klubů."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-67fd21e1c351--source",
+        "psp-core-2025--law-change-43184-14",
+        "psp-core-2025--print-step-210648",
+        "psp-core-2025--vote-88026",
+        "psp-core-2025--senate-resolution-43184-7",
+        "psp-core-2025--vote-88450"
+      ],
+      "explanationCz": "Původní poslanecký návrh ANO v části o sportu upravoval jmenování a pravomoci vedení Národní sportovní agentury. Poslanci ANO pak hlasovali pro schválené znění, které mezi podporované účely výslovně řadí sportovní organizace a zvláště sport dětí a mládeže. Senát, tedy horní komora Parlamentu, návrh zamítl; poslanci ANO poté hlasovali pro setrvání na sněmovním znění. Tím zákon přispívá k části slibu o podpoře klubů zapojujících děti, ale neřeší výběr podle výkonnosti ani vznik nových spolků.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Text zákona výslovně podporuje sportovní organizace a dětský sport, ale neuvádí, že podpora míří na kluby zapojující široké spektrum dětí bez výkonnostní selekce, ani nestanoví podmínky pro vznik nových spolků."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus-one-sufficient",
+    "status": "moving-towards",
+    "selectedReview": "assessor-b"
+  }
+}

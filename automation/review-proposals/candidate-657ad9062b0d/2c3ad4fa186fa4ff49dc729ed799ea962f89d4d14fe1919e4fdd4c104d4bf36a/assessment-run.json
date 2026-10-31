@@ -1,0 +1,190 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-06T18-48-25-825Z--662f5c1d28b9",
+  "evaluatedAt": "2026-10-06T18:48:25.825Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-657ad9062b0d/662f5c1d28b96dec48ab0336bf5eea5ace315a0a8f0bcde5db3a09d7ed712b08.json",
+  "packageHash": "662f5c1d28b96dec48ab0336bf5eea5ace315a0a8f0bcde5db3a09d7ed712b08",
+  "assessmentContentHash": "afe25e706b633afa139b830c84436898a69376754f86a2d63a78f7a8e7df3f7a",
+  "assessmentFingerprint": "2c3ad4fa186fa4ff49dc729ed799ea962f89d4d14fe1919e4fdd4c104d4bf36a",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-657ad9062b0d",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v20",
+      "contentHash": "5fb9a480a1b5c5f3a4c1bea2af0c5fe949c30e48996aa744c8d53e04a926c45f"
+    },
+    "arbiter": {
+      "version": "arbiter-v13",
+      "contentHash": "d39ccd6fbc37b6e3f1d859879a8eb9d21f67f7544525c9448e06e4ee32d8dd37"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-657ad9062b0d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text pouze uvádí zrušení části zákona o energetice, ale neukazuje, že se tato část týká zestátnění minoritního podílu ČEZ.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-657ad9062b0d--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě většinově podpořili návrh změn stavebního zákona a po jeho zamítnutí Senátem také setrvání Sněmovny na návrhu. Schválený text mimo jiné ruší část zákona o energetice z roku 2025. Podklady ale neuvádějí obsah této rušené části ani její vztah k podílu ČEZ. Nelze proto doložit, že hlasování slib o nebránění zestátnění naplnila nebo mu odporovala.",
+      "confidence": "low",
+      "uncertainties": [
+        "Předložený text identifikuje rušenou část energetického zákona jen jako celek a neobsahuje její ustanovení; z balíčku proto nelze určit, zda změna ovlivňuje možnost zestátnit minoritní podíl ČEZ."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-657ad9062b0d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší část novely energetického zákona, ale předložené podklady neukazují, jaká pravidla tato část obsahovala ani jak souvisí se zestátněním podílu ČEZ.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-657ad9062b0d--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Slib se týká toho, že Motoristé sobě nebude bránit zestátnění menšinového podílu ČEZ. Poslanci strany hlasovali pro návrh stavebního zákona, který mimo jiné ruší část dřívější novely energetického zákona; Senát tento návrh odmítl a Sněmovna poté hlasovala o setrvání na svém návrhu. Podklady ale neuvádějí obsah rušené části ani její vztah k zestátnění ČEZ, takže z hlasování nelze doložit posun ve vztahu k tomuto slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění rušené části novely energetického zákona ani dost informací k určení, zda mění pravidla významná pro zestátnění menšinového podílu ČEZ."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0f012df7271c6f90016ac5424b942087d29f78647ada5e5c5a",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9222,
+      "input_tokens_details": {
+        "cache_write_tokens": 5252,
+        "cached_tokens": 3967
+      },
+      "output_tokens": 1463,
+      "output_tokens_details": {
+        "reasoning_tokens": 1075
+      },
+      "total_tokens": 10685
+    },
+    "output": {
+      "promiseId": "candidate-657ad9062b0d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text pouze uvádí zrušení části zákona o energetice, ale neukazuje, že se tato část týká zestátnění minoritního podílu ČEZ.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-657ad9062b0d--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Poslanci Motoristů sobě většinově podpořili návrh změn stavebního zákona a po jeho zamítnutí Senátem také setrvání Sněmovny na návrhu. Schválený text mimo jiné ruší část zákona o energetice z roku 2025. Podklady ale neuvádějí obsah této rušené části ani její vztah k podílu ČEZ. Nelze proto doložit, že hlasování slib o nebránění zestátnění naplnila nebo mu odporovala.",
+      "confidence": "low",
+      "uncertainties": [
+        "Předložený text identifikuje rušenou část energetického zákona jen jako celek a neobsahuje její ustanovení; z balíčku proto nelze určit, zda změna ovlivňuje možnost zestátnit minoritní podíl ČEZ."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_056311a41281fbe7016ac54260691487d2b0fd5a86f45bf22b",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 9222,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 9219
+      },
+      "output_tokens": 1783,
+      "output_tokens_details": {
+        "reasoning_tokens": 1336
+      },
+      "total_tokens": 11005
+    },
+    "output": {
+      "promiseId": "candidate-657ad9062b0d",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-56",
+          "relevant": false,
+          "reasonCz": "Text ruší část novely energetického zákona, ale předložené podklady neukazují, jaká pravidla tato část obsahovala ani jak souvisí se zestátněním podílu ČEZ.",
+          "effectCz": ""
+        }
+      ],
+      "status": "no-progress",
+      "evidenceSufficient": false,
+      "citedEvidenceIds": [
+        "candidate-657ad9062b0d--source",
+        "psp-core-2025--law-change-43174-approved-56",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454"
+      ],
+      "explanationCz": "Slib se týká toho, že Motoristé sobě nebude bránit zestátnění menšinového podílu ČEZ. Poslanci strany hlasovali pro návrh stavebního zákona, který mimo jiné ruší část dřívější novely energetického zákona; Senát tento návrh odmítl a Sněmovna poté hlasovala o setrvání na svém návrhu. Podklady ale neuvádějí obsah rušené části ani její vztah k zestátnění ČEZ, takže z hlasování nelze doložit posun ve vztahu k tomuto slibu.",
+      "confidence": "low",
+      "uncertainties": [
+        "Podklady neobsahují znění rušené části novely energetického zákona ani dost informací k určení, zda mění pravidla významná pro zestátnění menšinového podílu ČEZ."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "human-review-required",
+    "reason": "insufficient-evidence",
+    "status": null,
+    "selectedReview": null
+  }
+}

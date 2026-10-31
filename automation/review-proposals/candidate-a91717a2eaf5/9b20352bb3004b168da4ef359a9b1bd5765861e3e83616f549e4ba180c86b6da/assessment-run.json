@@ -1,0 +1,198 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-53-39-440Z--c3fb54aea98e",
+  "evaluatedAt": "2026-10-02T01:53:39.440Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-a91717a2eaf5/c3fb54aea98e0a6ab56f7c0e5bf181a96532bd8890ca4d5f30cbfb89741246e6.json",
+  "packageHash": "c3fb54aea98e0a6ab56f7c0e5bf181a96532bd8890ca4d5f30cbfb89741246e6",
+  "assessmentContentHash": "9fc34f4e226387e1be2948703bbd2665190d80706fed4488d2f1d6101777ff81",
+  "assessmentFingerprint": "9b20352bb3004b168da4ef359a9b1bd5765861e3e83616f549e4ba180c86b6da",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-a91717a2eaf5",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": []
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-a91717a2eaf5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Materiál o zemědělských dotacích na rok 2026 výslovně uvádí podporu restrukturalizace ovocných sadů, která může naplnit část slibu týkající se místního pěstování ovoce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-2",
+          "relevant": false,
+          "reasonCz": "Návrh mění schvalování a administraci zemědělských dotací a zavádí pravidla ke střetu zájmů, ale jeho text nemění podporu komunitních zahrad ani místního pěstování ovoce a zeleniny."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a91717a2eaf5--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh dotačních programů zemědělství na rok 2026. Materiál počítá se zemědělskými dotacemi a výslovně zmiňuje podporu restrukturalizace ovocných sadů, což může přispět k místnímu pěstování ovoce. Podpora komunitních zahrad ani místního pěstování zeleniny však v doloženém materiálu výslovně uvedena není, takže jde o posun jen v části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Materiál uvádí podporu restrukturalizace ovocných sadů, ale neposkytuje podrobnosti, z nichž by bylo možné určit, jaký objem podpory připadne na místní pěstování ovoce nebo zda ji mohou čerpat konkrétní projekty tohoto typu."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-a91717a2eaf5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Dotační programy zahrnují podporu rostlinné výroby a například obnovu ovocných sadů, což se věcně týká pěstování ovoce, byť text výslovně neuvádí komunitní zahrady ani místní projekty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-2",
+          "relevant": false,
+          "reasonCz": "Návrh mění postup schvalování a poskytování některých zemědělských dotací a pravidla střetu zájmů, nikoli podporu komunitních zahrad či místního pěstování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a91717a2eaf5--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro dotační programy zemědělství na rok 2026. Ty zahrnují podporu rostlinné výroby a například obnovu ovocných sadů, takže mohou přispět k části slibu týkající se pěstování ovoce. Text ale výslovně nezmiňuje komunitní zahrady ani projekty místního pěstování ovoce a zeleniny, proto jde jen o částečný posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z podkladů není zřejmé, zda a v jakém rozsahu budou z těchto programů podpořeny konkrétní místní projekty nebo komunitní zahrady."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0982bc7eef11f952016abf0e84d73887d1888fab954cee2623",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 13448,
+      "input_tokens_details": {
+        "cache_write_tokens": 10124,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 2272,
+      "output_tokens_details": {
+        "reasoning_tokens": 1813
+      },
+      "total_tokens": 15720
+    },
+    "output": {
+      "promiseId": "candidate-a91717a2eaf5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Materiál o zemědělských dotacích na rok 2026 výslovně uvádí podporu restrukturalizace ovocných sadů, která může naplnit část slibu týkající se místního pěstování ovoce."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-2",
+          "relevant": false,
+          "reasonCz": "Návrh mění schvalování a administraci zemědělských dotací a zavádí pravidla ke střetu zájmů, ale jeho text nemění podporu komunitních zahrad ani místního pěstování ovoce a zeleniny."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a91717a2eaf5--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro návrh dotačních programů zemědělství na rok 2026. Materiál počítá se zemědělskými dotacemi a výslovně zmiňuje podporu restrukturalizace ovocných sadů, což může přispět k místnímu pěstování ovoce. Podpora komunitních zahrad ani místního pěstování zeleniny však v doloženém materiálu výslovně uvedena není, takže jde o posun jen v části slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Materiál uvádí podporu restrukturalizace ovocných sadů, ale neposkytuje podrobnosti, z nichž by bylo možné určit, jaký objem podpory připadne na místní pěstování ovoce nebo zda ji mohou čerpat konkrétní projekty tohoto typu."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0350e023eeb35f56016abf0e9616d487d1aa39c20037e222d2",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 13448,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 13445
+      },
+      "output_tokens": 1701,
+      "output_tokens_details": {
+        "reasoning_tokens": 1291
+      },
+      "total_tokens": 15149
+    },
+    "output": {
+      "promiseId": "candidate-a91717a2eaf5",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43206-1",
+          "relevant": true,
+          "reasonCz": "Dotační programy zahrnují podporu rostlinné výroby a například obnovu ovocných sadů, což se věcně týká pěstování ovoce, byť text výslovně neuvádí komunitní zahrady ani místní projekty."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43343-2",
+          "relevant": false,
+          "reasonCz": "Návrh mění postup schvalování a poskytování některých zemědělských dotací a pravidla střetu zájmů, nikoli podporu komunitních zahrad či místního pěstování."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-a91717a2eaf5--source",
+        "psp-core-2025--law-change-43206-1",
+        "psp-core-2025--vote-86965"
+      ],
+      "explanationCz": "Poslanci ANO hlasovali pro dotační programy zemědělství na rok 2026. Ty zahrnují podporu rostlinné výroby a například obnovu ovocných sadů, takže mohou přispět k části slibu týkající se pěstování ovoce. Text ale výslovně nezmiňuje komunitní zahrady ani projekty místního pěstování ovoce a zeleniny, proto jde jen o částečný posun.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Z podkladů není zřejmé, zda a v jakém rozsahu budou z těchto programů podpořeny konkrétní místní projekty nebo komunitní zahrady."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}

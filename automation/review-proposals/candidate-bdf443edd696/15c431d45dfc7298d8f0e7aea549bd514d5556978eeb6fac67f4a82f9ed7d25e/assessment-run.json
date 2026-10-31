@@ -1,0 +1,904 @@
+{
+  "schemaVersion": "1.0.0",
+  "runId": "2026-10-02T01-59-23-270Z--bba68aefa938",
+  "evaluatedAt": "2026-10-02T01:59:23.270Z",
+  "packagePath": "automation/evidence-packages/packages/candidate-bdf443edd696/bba68aefa938f77df86beac8db3dcf8b9407160a7a762a7c7d2bcf5c0235c32c.json",
+  "packageHash": "bba68aefa938f77df86beac8db3dcf8b9407160a7a762a7c7d2bcf5c0235c32c",
+  "assessmentContentHash": "c1d3c705e834f7588f8af0d9c9161441cdb0e8b6b5c388b8cb6e60740829bcb5",
+  "assessmentFingerprint": "15c431d45dfc7298d8f0e7aea549bd514d5556978eeb6fac67f4a82f9ed7d25e",
+  "methodologyVersion": "slava-v7",
+  "promiseId": "candidate-bdf443edd696",
+  "prompts": {
+    "assessor": {
+      "version": "assessor-v19",
+      "contentHash": "92b70be201fde1d2137610e93f6864c82dedf87dfd817f464608e3a28cb85300"
+    },
+    "arbiter": {
+      "version": "arbiter-v12",
+      "contentHash": "6c931cae923c306cc735be61c4b0f17e16c17ded56539480b6c8b56fb3fca37b"
+    }
+  },
+  "publicationApproved": false,
+  "independence": {
+    "statelessCalls": true,
+    "callOrder": [
+      "assessor-a",
+      "assessor-b"
+    ],
+    "assessorProviders": [
+      "openai",
+      "openai"
+    ],
+    "assessorModels": [
+      "gpt-6-luna",
+      "gpt-6-luna"
+    ],
+    "sameProvider": true,
+    "sameModelId": true
+  },
+  "assessorValidationErrors": {
+    "assessor-a": null,
+    "assessor-b": null
+  },
+  "invalidAssessorAttempts": {
+    "assessor-a": [],
+    "assessor-b": [
+      {
+        "error": "Relevance verdict names something other than a law change in the package: psp-core-2025--law-change-43415-39",
+        "response": {
+          "provider": "openai",
+          "responseId": "resp_0710372388c48fcf016abf0f74542087d1862fcedb822cc85d",
+          "model": "gpt-6-luna",
+          "usage": {
+            "input_tokens": 772302,
+            "input_tokens_details": {
+              "cache_write_tokens": 0,
+              "cached_tokens": 772299
+            },
+            "output_tokens": 9159,
+            "output_tokens_details": {
+              "reasoning_tokens": 6732
+            },
+            "total_tokens": 781461
+          },
+          "output": {
+            "promiseId": "candidate-bdf443edd696",
+            "changeRelevance": [
+              {
+                "evidenceId": "psp-core-2025--law-change-43161-1",
+                "relevant": true,
+                "reasonCz": "Zavádí katalogy dat, popis datových rozhraní a pravidla pro sdílení dat ve veřejné správě, což může podpořit předávání informací mezi úřady, byť řízený přístup omezuje na vybrané účely."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-1",
+                "relevant": true,
+                "reasonCz": "Novela zavádí elektronické úkony přes portál stavebníka a sledování řízení i změn údajů, takže přímo usnadňuje digitální vyřizování části agendy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-39",
+                "relevant": false,
+                "reasonCz": "Mění postupy podle zákona o odpadech, ale nedokládá předávání informací mezi úřady ani omezení dokladů, které musí nosit občan."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+                "relevant": true,
+                "reasonCz": "Požaduje vkládat informační kontejnery ke stavebním žádostem do elektronické evidence, čímž podporuje digitální předávání podkladů ve stavební agendě."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43189-1",
+                "relevant": false,
+                "reasonCz": "Mění podmínky a rozsah podpory bydlení, nikoli předávání informací mezi úřady nebo používání dokladů občany."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-1",
+                "relevant": true,
+                "reasonCz": "Zavádí elektronické podání a elektronické doručování u rodičovského příspěvku před porodem, což naplňuje dílčí část slibu o digitálním vyřizování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43239-2",
+                "relevant": false,
+                "reasonCz": "Pouze mění časování účinnosti ustanovení jiného zákona a samo nestanoví sdílení informací ani digitální vyřízení žádostí."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-14",
+                "relevant": true,
+                "reasonCz": "Upravuje digitální úkony a komunikaci přes cizinecký účet, tedy způsob elektronického vyřizování části pobytové agendy."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-16",
+                "relevant": true,
+                "reasonCz": "Zavádí elektronické hlášení a výměnu údajů o zaměstnávání cizinců mezi zaměstnavateli a úřady, což přímo odpovídá části slibu o předávání informací."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-17",
+                "relevant": true,
+                "reasonCz": "Zřizuje integrovaný cizinecký informační systém pro digitální služby a evidenci podání a úkonů, což je konkrétní podpora digitální komunikace úřadů s občany."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43264-19",
+                "relevant": true,
+                "reasonCz": "Přechodná ustanovení výslovně počítají s doručováním přes cizinecké účty a přechodem na nový informační systém, takže souvisejí s uskutečněním digitálního vyřizování."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-1",
+                "relevant": true,
+                "reasonCz": "Zavádí možnost prokazovat skutečnosti elektronickými potvrzeními atributů a peněženkou, což může občanům ušetřit předkládání některých potvrzení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-2",
+                "relevant": true,
+                "reasonCz": "Upravuje elektronickou identifikaci prostřednictvím digitální peněženky, která umožňuje digitálně prokazovat totožnost a související údaje."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43275-3",
+                "relevant": false,
+                "reasonCz": "Stanoví správní poplatky pro poskytovatele elektronických potvrzení, ale nemění samotné předávání informací ani možnost občana doložit údaje digitálně."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-1",
+                "relevant": false,
+                "reasonCz": "Upravuje vydávání cestovních dokladů, avšak dodaný text nedokládá sdílení potřebných informací mezi úřady ani nahrazení dokladů digitálními údaji."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-2",
+                "relevant": false,
+                "reasonCz": "Upravuje postup při vydávání občanských průkazů, nikoli předávání informací mezi úřady nebo nahrazení dokladů občanů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-4",
+                "relevant": false,
+                "reasonCz": "Ruší údaje využívané pro elektronickou identifikaci v základních registrech, ale předložený text neukazuje přímý dopad na předávání potřebných údajů mezi úřady nebo nošení potvrzení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43293-6",
+                "relevant": false,
+                "reasonCz": "Ruší pravidla pro ověřování při digitálním prokazování totožnosti, ale tato úprava se netýká samotného sdílení údajů mezi úřady ani předkládání dokladů a potvrzení."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43308-7",
+                "relevant": false,
+                "reasonCz": "Mění termíny účinnosti pravidel pro elektronickou spisovou službu, ale nestanoví výměnu informací mezi úřady ani omezení dokladů předkládaných občany."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43335-1",
+                "relevant": false,
+                "reasonCz": "Upravuje opatření související s dočasnou ochranou a registrací ukrajinských vozidel, nikoli obecné předávání informací mezi úřady či digitální nahrazení dokladů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43399-12",
+                "relevant": false,
+                "reasonCz": "Rozšiřuje okruh subjektů zapojených do datových schránek o společenství obcí, ale samo neřeší předávání potřebných informací mezi úřady ani doklady občanů."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43415-1",
+                "relevant": true,
+                "reasonCz": "Umožňuje digitální úkony, elektronické podávání a sledování stavebního řízení a oznámení změn údajů, tedy skutečné dílčí naplnění slibu v oblasti stavebních agend."
+              },
+              {
+                "evidenceId": "psp-core-2025--law-change-43415-39",
+                "relevant": false,
+                "reasonCz": "Mění zákon o odpadech, ale neobsahuje ustanovení o sdílení potřebných informací mezi úřady nebo o nahrazení dokladů občanů."
+              }
+            ],
+            "status": "moving-towards",
+            "evidenceSufficient": true,
+            "citedEvidenceIds": [
+              "candidate-bdf443edd696--source",
+              "psp-core-2025--law-change-43161-1",
+              "psp-core-2025--vote-86767",
+              "psp-core-2025--law-change-43174-1",
+              "psp-core-2025--law-change-43174-approved-55",
+              "psp-core-2025--print-step-210570",
+              "psp-core-2025--vote-88252",
+              "psp-core-2025--senate-resolution-43174-15",
+              "psp-core-2025--vote-88454",
+              "psp-core-2025--law-change-43239-1",
+              "psp-core-2025--print-step-210930",
+              "psp-core-2025--vote-87387",
+              "psp-core-2025--law-change-43264-14",
+              "psp-core-2025--law-change-43264-16",
+              "psp-core-2025--law-change-43264-17",
+              "psp-core-2025--law-change-43264-19",
+              "psp-core-2025--print-step-211048",
+              "psp-core-2025--vote-88522",
+              "psp-core-2025--law-change-43275-1",
+              "psp-core-2025--law-change-43275-2",
+              "psp-core-2025--print-step-211101",
+              "psp-core-2025--law-change-43415-1"
+            ],
+            "explanationCz": "Poslanci ANO předložili a následně podpořili novelu stavebního zákona, tedy zákona upravujícího povolování staveb; ta zavádí digitální úkony přes portál, sledování řízení a elektronické předávání stavebních podkladů. Senát návrh odmítl, ale poslanci ANO pak hlasovali pro to, aby na něm Sněmovna setrvala. ANO také hlasovalo pro nový cizinecký zákon, který zavádí digitální účet a informační systém pro pobytovou agendu, a pro elektronické vyřizování rodičovského příspěvku před porodem. Jde o dílčí kroky v několika konkrétních agendách; důkazy ale neukazují, že by úřady už sdílely všechny potřebné informace nebo že by občané přestali nosit doklady a potvrzení.",
+            "confidence": "medium",
+            "uncertainties": [
+              "Doložené změny se týkají jen některých agend; není doloženo, že se sdílení údajů nebo oznamování změn vztahuje na všechny úřady a všechny situace uvedené ve slibu.",
+              "U částí předpisů jsou účinnosti stanoveny do budoucna, takže předložené důkazy zachycují legislativní postup, nikoli potvrzení, že příslušné digitální služby už v praxi fungují.",
+              "Hlasování o návrhu zákona o správě dat proběhlo v prvním čtení jako souhlas s dalším projednáváním, nikoli jako konečné rozhodnutí Sněmovny; samo proto nepředstavuje rozhodující hlasování o tomto opatření."
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "validatedAssessments": {
+    "assessor-a": {
+      "promiseId": "candidate-bdf443edd696",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Upravuje datová rozhraní, katalogy a řízený přístup k datům z různých informačních systémů veřejné správy, tedy alespoň část infrastruktury pro sdílení informací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona zavádí digitální úkony a elektronické podklady v konkrétních stavebních řízeních, což může omezit předávání listin."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změny zákona o odpadech upravují posuzování odpadového hospodářství a příslušnost úřadů, nikoli sdílení informací pro občany ani odstraňování povinnosti nosit doklady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": true,
+          "reasonCz": "Změna zákona o správě informací o stavbě ukládá vkládat elektronické informační kontejnery do stavební evidence při žádosti o povolení a kolaudaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Změny podpory bydlení upravují podmínky pomoci a její správu, ale dodaný text neukazuje opatření pro sdílení údajů mezi úřady nebo pro omezení dokladů od občanů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Zavádí elektronické podávání, doručování a vedení spisu u části rodičovského příspěvku, což je konkrétní digitální způsob vyřizování bez listinné komunikace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Ruší dříve naplánovaná ustanovení o digitalizaci dávek, a tím se přímo dotýká elektronického vyřizování žádostí, byť je novela současně nahrazuje novými pravidly."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Součást nové úpravy pobytu cizinců stanoví elektronický cizinecký účet pro komunikaci s úřady, což je dílčí příklad digitálního vyřizování bez osobního předávání dokumentů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": true,
+          "reasonCz": "Ukládá cizincům používat cizinecký účet pro úkony vůči úřadům, a přímo tak upravuje digitální namísto listinné komunikace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Zřizuje integrovaný cizinecký informační systém pro digitální služby, podání a evidenci dokumentů, tedy přímý dílčí nástroj pro elektronickou výměnu informací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": true,
+          "reasonCz": "Upravuje přechod na cizinecké účty a nový informační systém, což ovlivňuje zavádění digitální komunikace s úřady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Umožňuje prokazovat skutečnosti elektronickými potvrzeními atributů v digitální peněžence, což může nahradit předkládání některých dokladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje elektronické ověření totožnosti prostřednictvím digitální peněženky, tedy konkrétní digitální alternativu k fyzickému prokazování totožnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-3",
+          "relevant": false,
+          "reasonCz": "Stanoví správní poplatek za zápis poskytovatele důvěryhodných služeb, ale samo nemění sdílení údajů mezi úřady ani způsob, jakým občané dokládají informace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": true,
+          "reasonCz": "Umožňuje využít již pořízené biometrické údaje při žádosti o cestovní doklad, a může tak odstranit část opakovaného dokládání a návštěv."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": true,
+          "reasonCz": "Změny občanských průkazů navazují na využití biometrických údajů při vydávání dalších dokladů a upravují předávání hotových dokladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Ruší údaje pro elektronickou identifikaci a autentizaci v základních registrech, ale dodaný text neukazuje změnu sdílení údajů potřebných pro běžné služby občanům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": false,
+          "reasonCz": "Ruší pravidla pro autentizaci při fyzickém prokazování totožnosti, nikoli pravidla pro předávání potřebných informací mezi úřady nebo odklon od předkládání dokladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-7",
+          "relevant": true,
+          "reasonCz": "Mění termíny zavádění elektronické spisové služby, a tedy přímo ovlivňuje dostupnost elektronického zpracování úředních dokumentů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Upravuje dočasnou ochranu a evidenci ukrajinských vozidel, ale dodaný text nepřináší podstatné opatření k předávání informací potřebných pro běžné služby občanům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": false,
+          "reasonCz": "Rozšiřuje okruh uživatelů datových schránek o společenství obcí, ale nemění sdílení údajů mezi úřady ani odstraňování dokladů u občanů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Navrhované změny pravidel provozu vozidel se netýkají předávání informací mezi úřady ani omezování dokladů, které musí nosit občané."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-3",
+          "relevant": false,
+          "reasonCz": "Změny silničního provozu a výdejních míst pro řidičské doklady nejsou podstatným opatřením pro sdílení informací mezi úřady."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-bdf443edd696--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-55",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--print-step-210930",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--law-change-43264-16",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--law-change-43264-19",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-1",
+        "psp-core-2025--law-change-43293-2",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--law-change-43308-7",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "ANO předložilo návrh novely stavebního zákona, tedy zákona upravujícího povolování staveb, a poslanci ANO hlasovali pro jeho přijetí i poté, co jej Senát odmítl. Schválený text zavádí digitální úkony a sledování stavebního řízení; další podpořené nebo vládou předložené návrhy počítají s elektronickými dávkovými žádostmi, cizineckým informačním systémem a digitálními potvrzeními. Jde o konkrétní kroky, které mohou v některých agendách omezit obíhání listin, ale nedokládají sdílení všech potřebných informací mezi úřady ani to, že už občané doklady nosit nemusí. Proto je doložen dílčí posun, nikoli splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný materiál popisuje právní návrhy a hlasování, nikoli skutečný provoz systémů ani to, zda si úřady v praxi předávají potřebné údaje bez účasti občana.",
+        "Původní návrh poslanců na změnu spisové služby obsahoval pozdější termíny jejího zavedení, ale schválený text tuto časovou úpravu vypustil; z dodaného znění proto nelze spolehlivě určit výsledný praktický dopad na rychlost digitalizace."
+      ]
+    },
+    "assessor-b": {
+      "promiseId": "candidate-bdf443edd696",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá správcům popisovat data a rozhraní a vytváří národní katalog, což může usnadnit zpřístupňování a sdílení dat veřejné správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění postupy stavebních úřadů včetně digitálních podání a informačních systémů, takže se dotýká elektronického vyřizování a předávání údajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla odpadového hospodářství, ale její text neupravuje sdílení informací mezi úřady ani povinnost občanů nosit doklady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá vkládat informační kontejnery o stavbě do elektronické evidence, což se týká digitálního předávání stavebních podkladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": true,
+          "reasonCz": "Změny zavádějí elektronické podávání žádostí a vedení spisu v informačním systému podpory bydlení, což je skutečný dílčí posun k digitálnímu vyřizování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Část návrhu upravuje elektronické vyřizování rodičovského příspěvku, včetně elektronického doručování a vedení spisu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Tato část ruší některé dříve plánované změny elektronických postupů u dávek, a tím může ovlivnit digitální vyřizování žádostí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje zejména jazyk řízení a tlumočení, nikoli předávání potřebných údajů mezi úřady nebo nahrazování dokladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": false,
+          "reasonCz": "Tato část stanoví povinnosti při hlášení pobytu a ubytování, ale její text materiálně nemění sdílení údajů mezi úřady ani nošení potvrzení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Návrh zřizuje integrovaný informační systém pro cizinecké úkony, digitální podání a doručování, což může omezit papírové vyřizování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení upravují zavedení cizineckých účtů a elektronických úkonů, a proto ovlivňují uskutečnění digitálního vyřizování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje prokazovat skutečnosti elektronickými potvrzeními atributů v digitální peněžence, což může lidem ušetřit předkládání dokladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje ověřování totožnosti digitální peněženkou, čímž může omezit potřebu předkládat fyzické doklady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-3",
+          "relevant": false,
+          "reasonCz": "Tato část mění správní poplatek za žádost poskytovatele důvěryhodných služeb, nikoli předávání údajů mezi úřady nebo doklady občanů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje zejména vydávání cestovních dokladů a jejich převzetí, nikoli sdílení potřebných informací mezi úřady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje vydávání občanských průkazů, ale její ustanovení nedodávají materiální změnu v předávání údajů mezi úřady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": true,
+          "reasonCz": "Návrh ruší některé registry a postupy pro elektronické ověření totožnosti, které mohou lidem pomáhat prokazovat údaje bez předložení dokladu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": true,
+          "reasonCz": "Návrh ruší možnost elektronické autentizace při fyzickém prokazování totožnosti, a může tak oslabit alternativu k předložení dokladu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-7",
+          "relevant": true,
+          "reasonCz": "Návrh mění termíny zavádění elektronické spisové služby ve veřejné správě, což může ovlivnit dostupnost a předávání elektronických dokumentů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Tato část se týká opatření pro lidi vysídlené z Ukrajiny a vozidel, nikoli předávání údajů mezi úřady nebo nošení dokladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": true,
+          "reasonCz": "Změna zahrnuje společenství obcí mezi subjekty, které mohou používat datové schránky k elektronickým úkonům s úřady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Schválený text upravuje digitální stavební podání, portál stavebníka a elektronické evidence, a tedy i předávání stavebních informací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-3",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje silniční provoz, ale její ustanovení se netýkají slibu o sdílení informací mezi úřady."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-bdf443edd696--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-55",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43189-1",
+        "psp-core-2025--print-step-210686",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--print-step-210930",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--law-change-43264-19",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-4",
+        "psp-core-2025--law-change-43293-6",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--law-change-43308-7",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--vote-88528",
+        "psp-core-2025--law-change-43399-12",
+        "psp-core-2025--print-step-212014",
+        "psp-core-2025--law-change-43415-1"
+      ],
+      "explanationCz": "ANO zatím slib posouvá jen zčásti. Poslanci ANO podpořili změny zákona o správě dat i stavebního zákona, které zavádějí elektronické evidence, digitální podání a nové možnosti sdílení údajů. Podpořili také změny u dávek a pobytu cizinců, které počítají s elektronickými žádostmi a informačními systémy; vláda navíc předložila návrh na využití digitální peněženky k prokazování údajů. To jsou dílčí kroky, ne důkaz, že si úřady už obecně předávají potřebné informace a lidé nemusí nosit doklady.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Některé návrhy současně oslabují již plánované možnosti: návrh na změnu zákona o elektronických službách ruší některé způsoby ověřování totožnosti a druhá část změny zákona o státní sociální podpoře ruší některé dříve naplánované elektronické postupy.",
+        "Vládní návrh na změnu zákonů o cestovních dokladech a základních registrech zahrnuje i rušení některých údajů a možností elektronického ověřování. V předložených podkladech je k těmto návrhům doloženo jejich předložení, nikoli pozdější hlasování."
+      ]
+    }
+  },
+  "assessorA": {
+    "provider": "openai",
+    "responseId": "resp_0bda8fcf12428f37016abf0f22efa887d1b513e4f7e25a0964",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 772302,
+      "input_tokens_details": {
+        "cache_write_tokens": 768978,
+        "cached_tokens": 3321
+      },
+      "output_tokens": 10214,
+      "output_tokens_details": {
+        "reasoning_tokens": 7406
+      },
+      "total_tokens": 782516
+    },
+    "output": {
+      "promiseId": "candidate-bdf443edd696",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Upravuje datová rozhraní, katalogy a řízený přístup k datům z různých informačních systémů veřejné správy, tedy alespoň část infrastruktury pro sdílení informací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Novela stavebního zákona zavádí digitální úkony a elektronické podklady v konkrétních stavebních řízeních, což může omezit předávání listin."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Změny zákona o odpadech upravují posuzování odpadového hospodářství a příslušnost úřadů, nikoli sdílení informací pro občany ani odstraňování povinnosti nosit doklady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": true,
+          "reasonCz": "Změna zákona o správě informací o stavbě ukládá vkládat elektronické informační kontejnery do stavební evidence při žádosti o povolení a kolaudaci."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": false,
+          "reasonCz": "Změny podpory bydlení upravují podmínky pomoci a její správu, ale dodaný text neukazuje opatření pro sdílení údajů mezi úřady nebo pro omezení dokladů od občanů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Zavádí elektronické podávání, doručování a vedení spisu u části rodičovského příspěvku, což je konkrétní digitální způsob vyřizování bez listinné komunikace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Ruší dříve naplánovaná ustanovení o digitalizaci dávek, a tím se přímo dotýká elektronického vyřizování žádostí, byť je novela současně nahrazuje novými pravidly."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": true,
+          "reasonCz": "Součást nové úpravy pobytu cizinců stanoví elektronický cizinecký účet pro komunikaci s úřady, což je dílčí příklad digitálního vyřizování bez osobního předávání dokumentů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": true,
+          "reasonCz": "Ukládá cizincům používat cizinecký účet pro úkony vůči úřadům, a přímo tak upravuje digitální namísto listinné komunikace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Zřizuje integrovaný cizinecký informační systém pro digitální služby, podání a evidenci dokumentů, tedy přímý dílčí nástroj pro elektronickou výměnu informací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": true,
+          "reasonCz": "Upravuje přechod na cizinecké účty a nový informační systém, což ovlivňuje zavádění digitální komunikace s úřady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Umožňuje prokazovat skutečnosti elektronickými potvrzeními atributů v digitální peněžence, což může nahradit předkládání některých dokladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Rozšiřuje elektronické ověření totožnosti prostřednictvím digitální peněženky, tedy konkrétní digitální alternativu k fyzickému prokazování totožnosti."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-3",
+          "relevant": false,
+          "reasonCz": "Stanoví správní poplatek za zápis poskytovatele důvěryhodných služeb, ale samo nemění sdílení údajů mezi úřady ani způsob, jakým občané dokládají informace."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": true,
+          "reasonCz": "Umožňuje využít již pořízené biometrické údaje při žádosti o cestovní doklad, a může tak odstranit část opakovaného dokládání a návštěv."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": true,
+          "reasonCz": "Změny občanských průkazů navazují na využití biometrických údajů při vydávání dalších dokladů a upravují předávání hotových dokladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": false,
+          "reasonCz": "Ruší údaje pro elektronickou identifikaci a autentizaci v základních registrech, ale dodaný text neukazuje změnu sdílení údajů potřebných pro běžné služby občanům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": false,
+          "reasonCz": "Ruší pravidla pro autentizaci při fyzickém prokazování totožnosti, nikoli pravidla pro předávání potřebných informací mezi úřady nebo odklon od předkládání dokladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-7",
+          "relevant": true,
+          "reasonCz": "Mění termíny zavádění elektronické spisové služby, a tedy přímo ovlivňuje dostupnost elektronického zpracování úředních dokumentů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Upravuje dočasnou ochranu a evidenci ukrajinských vozidel, ale dodaný text nepřináší podstatné opatření k předávání informací potřebných pro běžné služby občanům."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": false,
+          "reasonCz": "Rozšiřuje okruh uživatelů datových schránek o společenství obcí, ale nemění sdílení údajů mezi úřady ani odstraňování dokladů u občanů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": false,
+          "reasonCz": "Navrhované změny pravidel provozu vozidel se netýkají předávání informací mezi úřady ani omezování dokladů, které musí nosit občané."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-3",
+          "relevant": false,
+          "reasonCz": "Změny silničního provozu a výdejních míst pro řidičské doklady nejsou podstatným opatřením pro sdílení informací mezi úřady."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-bdf443edd696--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-55",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--print-step-210930",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43264-14",
+        "psp-core-2025--law-change-43264-16",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--law-change-43264-19",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-1",
+        "psp-core-2025--law-change-43293-2",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--law-change-43308-7",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--vote-88528"
+      ],
+      "explanationCz": "ANO předložilo návrh novely stavebního zákona, tedy zákona upravujícího povolování staveb, a poslanci ANO hlasovali pro jeho přijetí i poté, co jej Senát odmítl. Schválený text zavádí digitální úkony a sledování stavebního řízení; další podpořené nebo vládou předložené návrhy počítají s elektronickými dávkovými žádostmi, cizineckým informačním systémem a digitálními potvrzeními. Jde o konkrétní kroky, které mohou v některých agendách omezit obíhání listin, ale nedokládají sdílení všech potřebných informací mezi úřady ani to, že už občané doklady nosit nemusí. Proto je doložen dílčí posun, nikoli splnění celého slibu.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Dodaný materiál popisuje právní návrhy a hlasování, nikoli skutečný provoz systémů ani to, zda si úřady v praxi předávají potřebné údaje bez účasti občana.",
+        "Původní návrh poslanců na změnu spisové služby obsahoval pozdější termíny jejího zavedení, ale schválený text tuto časovou úpravu vypustil; z dodaného znění proto nelze spolehlivě určit výsledný praktický dopad na rychlost digitalizace."
+      ]
+    }
+  },
+  "assessorB": {
+    "provider": "openai",
+    "responseId": "resp_0900ae0d926257d3016abf0fb4f58487d1bd5f405bc98f13cb",
+    "model": "gpt-6-luna",
+    "usage": {
+      "input_tokens": 772302,
+      "input_tokens_details": {
+        "cache_write_tokens": 0,
+        "cached_tokens": 772299
+      },
+      "output_tokens": 9878,
+      "output_tokens_details": {
+        "reasoning_tokens": 7127
+      },
+      "total_tokens": 782180
+    },
+    "output": {
+      "promiseId": "candidate-bdf443edd696",
+      "changeRelevance": [
+        {
+          "evidenceId": "psp-core-2025--law-change-43161-1",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá správcům popisovat data a rozhraní a vytváří národní katalog, což může usnadnit zpřístupňování a sdílení dat veřejné správy."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-1",
+          "relevant": true,
+          "reasonCz": "Návrh mění postupy stavebních úřadů včetně digitálních podání a informačních systémů, takže se dotýká elektronického vyřizování a předávání údajů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-39",
+          "relevant": false,
+          "reasonCz": "Tato část mění pravidla odpadového hospodářství, ale její text neupravuje sdílení informací mezi úřady ani povinnost občanů nosit doklady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43174-approved-55",
+          "relevant": true,
+          "reasonCz": "Návrh ukládá vkládat informační kontejnery o stavbě do elektronické evidence, což se týká digitálního předávání stavebních podkladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43189-1",
+          "relevant": true,
+          "reasonCz": "Změny zavádějí elektronické podávání žádostí a vedení spisu v informačním systému podpory bydlení, což je skutečný dílčí posun k digitálnímu vyřizování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-1",
+          "relevant": true,
+          "reasonCz": "Část návrhu upravuje elektronické vyřizování rodičovského příspěvku, včetně elektronického doručování a vedení spisu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43239-2",
+          "relevant": true,
+          "reasonCz": "Tato část ruší některé dříve plánované změny elektronických postupů u dávek, a tím může ovlivnit digitální vyřizování žádostí."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-14",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje zejména jazyk řízení a tlumočení, nikoli předávání potřebných údajů mezi úřady nebo nahrazování dokladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-16",
+          "relevant": false,
+          "reasonCz": "Tato část stanoví povinnosti při hlášení pobytu a ubytování, ale její text materiálně nemění sdílení údajů mezi úřady ani nošení potvrzení."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-17",
+          "relevant": true,
+          "reasonCz": "Návrh zřizuje integrovaný informační systém pro cizinecké úkony, digitální podání a doručování, což může omezit papírové vyřizování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43264-19",
+          "relevant": true,
+          "reasonCz": "Přechodná ustanovení upravují zavedení cizineckých účtů a elektronických úkonů, a proto ovlivňují uskutečnění digitálního vyřizování."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-1",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje prokazovat skutečnosti elektronickými potvrzeními atributů v digitální peněžence, což může lidem ušetřit předkládání dokladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-2",
+          "relevant": true,
+          "reasonCz": "Návrh umožňuje ověřování totožnosti digitální peněženkou, čímž může omezit potřebu předkládat fyzické doklady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43275-3",
+          "relevant": false,
+          "reasonCz": "Tato část mění správní poplatek za žádost poskytovatele důvěryhodných služeb, nikoli předávání údajů mezi úřady nebo doklady občanů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-1",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje zejména vydávání cestovních dokladů a jejich převzetí, nikoli sdílení potřebných informací mezi úřady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-2",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje vydávání občanských průkazů, ale její ustanovení nedodávají materiální změnu v předávání údajů mezi úřady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-4",
+          "relevant": true,
+          "reasonCz": "Návrh ruší některé registry a postupy pro elektronické ověření totožnosti, které mohou lidem pomáhat prokazovat údaje bez předložení dokladu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43293-6",
+          "relevant": true,
+          "reasonCz": "Návrh ruší možnost elektronické autentizace při fyzickém prokazování totožnosti, a může tak oslabit alternativu k předložení dokladu."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43308-7",
+          "relevant": true,
+          "reasonCz": "Návrh mění termíny zavádění elektronické spisové služby ve veřejné správě, což může ovlivnit dostupnost a předávání elektronických dokumentů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43335-1",
+          "relevant": false,
+          "reasonCz": "Tato část se týká opatření pro lidi vysídlené z Ukrajiny a vozidel, nikoli předávání údajů mezi úřady nebo nošení dokladů."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43399-12",
+          "relevant": true,
+          "reasonCz": "Změna zahrnuje společenství obcí mezi subjekty, které mohou používat datové schránky k elektronickým úkonům s úřady."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-1",
+          "relevant": true,
+          "reasonCz": "Schválený text upravuje digitální stavební podání, portál stavebníka a elektronické evidence, a tedy i předávání stavebních informací."
+        },
+        {
+          "evidenceId": "psp-core-2025--law-change-43415-3",
+          "relevant": false,
+          "reasonCz": "Tato část upravuje silniční provoz, ale její ustanovení se netýkají slibu o sdílení informací mezi úřady."
+        }
+      ],
+      "status": "moving-towards",
+      "evidenceSufficient": true,
+      "citedEvidenceIds": [
+        "candidate-bdf443edd696--source",
+        "psp-core-2025--law-change-43161-1",
+        "psp-core-2025--vote-86767",
+        "psp-core-2025--law-change-43174-1",
+        "psp-core-2025--law-change-43174-approved-55",
+        "psp-core-2025--print-step-210570",
+        "psp-core-2025--vote-88252",
+        "psp-core-2025--senate-resolution-43174-15",
+        "psp-core-2025--vote-88454",
+        "psp-core-2025--law-change-43189-1",
+        "psp-core-2025--print-step-210686",
+        "psp-core-2025--vote-87617",
+        "psp-core-2025--law-change-43239-1",
+        "psp-core-2025--law-change-43239-2",
+        "psp-core-2025--print-step-210930",
+        "psp-core-2025--vote-87387",
+        "psp-core-2025--law-change-43264-17",
+        "psp-core-2025--law-change-43264-19",
+        "psp-core-2025--print-step-211048",
+        "psp-core-2025--vote-88522",
+        "psp-core-2025--law-change-43275-1",
+        "psp-core-2025--law-change-43275-2",
+        "psp-core-2025--print-step-211101",
+        "psp-core-2025--law-change-43293-4",
+        "psp-core-2025--law-change-43293-6",
+        "psp-core-2025--print-step-211258",
+        "psp-core-2025--law-change-43308-7",
+        "psp-core-2025--print-step-211352",
+        "psp-core-2025--vote-88528",
+        "psp-core-2025--law-change-43399-12",
+        "psp-core-2025--print-step-212014",
+        "psp-core-2025--law-change-43415-1"
+      ],
+      "explanationCz": "ANO zatím slib posouvá jen zčásti. Poslanci ANO podpořili změny zákona o správě dat i stavebního zákona, které zavádějí elektronické evidence, digitální podání a nové možnosti sdílení údajů. Podpořili také změny u dávek a pobytu cizinců, které počítají s elektronickými žádostmi a informačními systémy; vláda navíc předložila návrh na využití digitální peněženky k prokazování údajů. To jsou dílčí kroky, ne důkaz, že si úřady už obecně předávají potřebné informace a lidé nemusí nosit doklady.",
+      "confidence": "medium",
+      "uncertainties": [
+        "Některé návrhy současně oslabují již plánované možnosti: návrh na změnu zákona o elektronických službách ruší některé způsoby ověřování totožnosti a druhá část změny zákona o státní sociální podpoře ruší některé dříve naplánované elektronické postupy.",
+        "Vládní návrh na změnu zákonů o cestovních dokladech a základních registrech zahrnuje i rušení některých údajů a možností elektronického ověřování. V předložených podkladech je k těmto návrhům doloženo jejich předložení, nikoli pozdější hlasování."
+      ]
+    }
+  },
+  "arbiter": null,
+  "resolution": {
+    "state": "candidate",
+    "reason": "assessor-consensus",
+    "status": "moving-towards",
+    "selectedReview": "consensus"
+  }
+}
