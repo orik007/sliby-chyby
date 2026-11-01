@@ -23,7 +23,7 @@ export const policyCategoryDataSchema = z.object({ schemaVersion: z.literal(2), 
 });
 export const sourceSchema = z.object({ id: z.string().min(1), type: z.enum(["programme", "official-record", "roll-call-vote", "article"]), title: z.string().min(1), publisher: z.string().min(1), publishedAt: z.iso.date(), url: z.url().nullable(), primary: z.boolean(), isDemo: z.boolean() });
 const officialUrlSchema = z.url().regex(/^https:\/\/(www|public)\.psp\.cz\/sqw\//, "Evidence trail links must point to official psp.cz records");
-const versionNoteSchema = z.object({ note: z.enum(["published-version-missing", "removed", "text-not-published", "third-reading-rejection", "promulgated-text", "amended-proposal"]), lawChangeIds: z.array(z.string().min(1)).min(1) });
+const versionNoteSchema = z.object({ note: z.enum(["published-version-missing", "removed", "text-not-published", "third-reading-rejection", "promulgated-text", "amended-proposal", "ocr-text"]), lawChangeIds: z.array(z.string().min(1)).min(1) });
 // A passage of the stenographic record of the Chamber, which names the
 // amendment a vote was on.
 const stenoUrlSchema = z.url().regex(/^https:\/\/www\.psp\.cz\/eknih\/\d{4}ps\/stenprot\/\d{3}schuz\/s\d{6}\.htm$/, "A stenographic record link must point to psp.cz");

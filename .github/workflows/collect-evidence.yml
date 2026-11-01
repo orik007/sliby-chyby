@@ -118,6 +118,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install OCR for scanned print texts
+        # A print text psp.cz publishes only as a scanned PDF is read with
+        # Poppler and Tesseract in Czech (docs/evidence-pipeline.md, Print
+        # text); the text is kept in the document cache once read.
+        run: sudo apt-get update -q && sudo apt-get install -y -q --no-install-recommends poppler-utils tesseract-ocr tesseract-ocr-ces
+
       - name: Run deterministic tests
         # Before the audit state is restored, so the tests read main as it is.
         # Tests never reach a paid model, and their stub calls never belong

@@ -284,6 +284,7 @@ function evidenceFromLawChange(change, route, publishedAt, senateResolutionIds) 
     if (entry.removed) return `removed in the ${versionLabels[version]}`;
     if (entry.sameAs) return `${versionLabels[version]} (the same as the ${versionLabels[entry.sameAs]})`;
     if (entry.promulgatedAct) return `${versionLabels[version]} (as promulgated: zákon č. ${entry.promulgatedAct} Sb.)`;
+    if (entry.document?.readByOcr) return `${versionLabels[version]} (read by OCR from the scanned PDF psp.cz publishes)`;
     return entry.textCz === null ? `${versionLabels[version]}: print title only` : versionLabels[version];
   };
   return {

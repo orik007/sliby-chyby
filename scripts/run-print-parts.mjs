@@ -5,10 +5,11 @@ import { billPrintKindIds, isPotentiallyAttributable, versionConcerned } from ".
 import { invariant, validateRegistry } from "./lib/collector-core.mjs";
 import { createESbirkaClient, createLawContextCache, createLawContextReader, ESbirkaUnavailableError, workflowRunId } from "./lib/e-sbirka.mjs";
 import { allSettledOrThrow, createPspFetcher, createPspRequestLog, extractDocParagraphs, extractDocxNumberedParagraphs, extractDocxParagraphs, officialPrintDocumentPageUrl, officialPrintHistoryUrl, pspDownloadSettings, pspPageOptions, pspProxyUrl } from "./lib/psp-print-documents.mjs";
+import { extractPdfOcrParagraphs } from "./lib/pdf-ocr.mjs";
 import { anyPspDocumentFileOptions, createPspDocumentCache, pspDocumentExtractions, pspDocumentFileOptions } from "./lib/psp-document-cache.mjs";
 import { createPspPageCache, readPspPage } from "./lib/psp-page-cache.mjs";
 import { log, progress } from "./lib/run-log.mjs";
-import { collectPrints, governmentOpinionSectionLabels, hasDividedPart, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, partedPrintKindIds, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentLink, readPromulgatedParagraphs } from "./lib/print-parts.mjs";
+import { collectPrints, governmentOpinionSectionLabels, hasDividedPart, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, partedPrintKindIds, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentFiles, proposalDocumentLink, readPromulgatedParagraphs, readProposalText } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
 
 /**
@@ -27,7 +28,8 @@ import { loadTrackedPromises } from "./lib/published-promises.mjs";
  * DOC file is treated as not published and reported. A Word file under a
  * psp.cz document ID does not change, so its text is read from the document
  * cache (--document-cache, scripts/lib/psp-document-cache.mjs) once it was
- * downloaded. A page of a closed print is read from the page cache
+ * downloaded; a text psp.cz publishes only as a scanned PDF is read from it
+ * by OCR and kept the same way. A page of a closed print is read from the page cache
  * (--page-cache, scripts/lib/psp-page-cache.mjs) once it was downloaded;
  * every other page is read in every run.
  */
@@ -86,12 +88,32 @@ function readPage(source, url, printId, complete = undefined) {
   return readPspPage({ pageCache, closedPrintIds, fetchPsp, source }, url, [printId], complete);
 }
 
-// The Word file listed in a print page's proposal-text section: the
-// proposal itself (part 0), a Senate resolution sub-print ("Text"), or the
-// sub-print with the text referred to the Senate ("Text").
+// The text of a scanned PDF, read by OCR once and kept like a Word file's
+// (docs/evidence-pipeline.md, Chamber data rules). A scan that cannot be read
+// is reported like an unreadable Word file.
+async function fetchScanText(source, scan, warnings, printNumber, version) {
+  const { value: paragraphs, error } = await documentCache.read(scan.url, pspDocumentExtractions.pdfOcrParagraphs, extractPdfOcrParagraphs, async () => (await fetchPsp(source, scan.url, pspDocumentFileOptions.pdf)).bytes);
+  if (error) {
+    warnings.push({ printNumber, kind: "unreadable-pdf-scan", version, detail: `${scan.filename}: ${error}` });
+    return null;
+  }
+  log(`print ${printNumber}: the ${version} text is published only as a scanned PDF; ${scan.filename} is read by OCR`);
+  return { document: { filename: scan.filename, url: scan.url, readByOcr: true }, format: "pdf", paragraphs: proposalBody(paragraphs) };
+}
+
+// The text of a print page's proposal-text section: the proposal itself
+// (part 0), a Senate resolution sub-print ("Text"), or the sub-print with the
+// text referred to the Senate ("Text"). Its Word files are read in order
+// (proposalDocumentFiles) until one is more than the notice that the text is
+// published only as a PDF; when every one is only that notice, the scan of
+// the first is read by OCR.
 async function fetchPageText(source, pageUrl, printId, printNumber, warnings, version, sectionLabels = undefined) {
-  const link = proposalDocumentLink(await readPage(source, pageUrl, printId, (content) => Boolean(proposalDocumentLink(content, pageUrl, sectionLabels))), pageUrl, sectionLabels);
-  return link ? fetchWordText(source, link.url, link.filename, link.format, warnings, printNumber, version) : null;
+  const files = proposalDocumentFiles(await readPage(source, pageUrl, printId, (content) => Boolean(proposalDocumentLink(content, pageUrl, sectionLabels))), pageUrl, sectionLabels);
+  return readProposalText(files, {
+    readWord: (file) => fetchWordText(source, file.url, file.filename, file.format, warnings, printNumber, version),
+    readScan: (scan) => fetchScanText(source, scan, warnings, printNumber, version),
+    warn: (file) => warnings.push({ printNumber, kind: "pdf-only-without-scan", version, detail: `${file.filename} says the text is published only as a PDF, and its section lists no PDF of the same name` })
+  });
 }
 
 function fetchPrintPageText(source, termNumber, print, partNumber, warnings, version, sectionLabels = undefined) {
@@ -350,6 +372,8 @@ const quality = {
   governmentOpinions: prints.reduce((sum, { governmentOpinionPartNumbers }) => sum + governmentOpinionPartNumbers.length, 0),
   governmentOpinionsWithoutText: Object.values(result).reduce((sum, { warnings }) => sum + warnings.filter(({ kind }) => kind === "government-opinion-without-text").length, 0),
   printsWithPromulgatedText: promulgatedTexts.length,
+  // Texts psp.cz publishes only as a scanned PDF, read by OCR.
+  textsReadByOcr: Object.values(result).reduce((sum, { changes }) => sum + new Set(changes.flatMap(({ versions }) => Object.entries(versions).filter(([, entry]) => entry.document?.readByOcr && !entry.sameAs).map(([version]) => version))).size, 0),
   eSbirkaRequests: eSbirkaRequests.attempts,
   eSbirkaFailedRequests: eSbirkaRequests.failed,
   approvedBillsWithoutApprovedText: Object.values(result).filter(({ warnings }) => warnings.some(({ kind }) => kind === "approved-without-approved-text")).length,

@@ -116,15 +116,66 @@ export function amendedActOfPart(paragraphs) {
 }
 
 /**
- * The proposal-text Word file of a print page: the first DOCX file listed
- * under one of the proposal sections or, when there is none, the first
- * Word 97-2003 (.doc) file there. Returns null when the page has neither
- * (for example, only a PDF, which is never read).
+ * The proposal-text Word files of a print page, in the order they are read:
+ * the DOCX files listed under one of the proposal sections, then the Word
+ * 97-2003 (.doc) files there. Each names the PDF listed in its section under
+ * the same name (`scan`), or null; a PDF is read only as the scan of a Word
+ * file that holds nothing but pdfOnlyNotice (docs/evidence-pipeline.md,
+ * Chamber data rules).
+ */
+export function proposalDocumentFiles(html, pageUrl, sectionLabels = proposalSectionLabels) {
+  const listed = listedFiles(html, pageUrl).filter(({ section }) => section && sectionLabels.some((label) => label.test(section)));
+  const baseName = (filename) => filename.replace(/\.[a-z]+$/iu, "").toLowerCase();
+  const scanOf = (file) => listed.find(({ section, format, filename }) => format === "pdf" && section === file.section && baseName(filename) === baseName(file.filename)) ?? null;
+  return ["docx", "doc"].flatMap((wanted) => listed.filter(({ format }) => format === wanted)).map((file) => {
+    const scan = scanOf(file);
+    return { filename: file.filename, url: file.url, sectionLabel: file.section, format: file.format, scan: scan ? { filename: scan.filename, url: scan.url } : null };
+  });
+}
+
+/**
+ * The proposal-text Word file of a print page read first
+ * (proposalDocumentFiles), or null when the page has none (for example,
+ * only a PDF).
  */
 export function proposalDocumentLink(html, pageUrl, sectionLabels = proposalSectionLabels) {
-  const files = listedFiles(html, pageUrl).filter(({ section, format }) => section && (format === "docx" || format === "doc") && sectionLabels.some((label) => label.test(section)));
-  const link = files.find(({ format }) => format === "docx") ?? files.find(({ format }) => format === "doc");
-  return link ? { filename: link.filename, url: link.url, sectionLabel: link.section, format: link.format } : null;
+  const [link] = proposalDocumentFiles(html, pageUrl, sectionLabels);
+  return link ? { filename: link.filename, url: link.url, sectionLabel: link.sectionLabel, format: link.format } : null;
+}
+
+// What psp.cz puts in the Word file of a text it publishes only as a scanned
+// PDF ("Tento dokument je pouze ve formátu pdf/a."), seen in the Czech texts
+// of the treaties of prints 93, 105, 156 to 159, and 197 of the 10th term.
+const pdfOnlyNoticePattern = /^Tento dokument je pouze ve formátu pdf\/a\.?$/iu;
+
+// Whether the paragraphs of a Word file are only that notice.
+export function isPdfOnlyNotice(paragraphs) {
+  return paragraphs.length === 1 && pdfOnlyNoticePattern.test(paragraphs[0].trim());
+}
+
+/**
+ * The text of a proposal-text section from its Word files
+ * (proposalDocumentFiles): each is read in order with `readWord(file)` until
+ * one is more than the notice that the text is published only as a PDF; when
+ * every one is only that notice, the scan of the first is read with
+ * `readScan(scan)`, and without a scan `warn(file)` reports it. A Word file
+ * that cannot be read (`readWord` gives null) ends the reading, as does a
+ * section without Word files; both give null.
+ */
+export async function readProposalText(files, { readWord, readScan, warn }) {
+  let pdfOnly = null;
+  for (const file of files) {
+    const text = await readWord(file);
+    if (!text) return null;
+    if (!isPdfOnlyNotice(text.paragraphs)) return text;
+    pdfOnly ??= file;
+  }
+  if (!pdfOnly) return null;
+  if (!pdfOnly.scan) {
+    warn(pdfOnly);
+    return null;
+  }
+  return readScan(pdfOnly.scan);
 }
 
 /**
@@ -457,7 +508,7 @@ function versionOf(part, amendedAct, document, effectiveCz = null, promulgatedAc
     textCz: part.paragraphs ? part.paragraphs.join("\n") : null,
     amendedAct,
     effectiveCz,
-    document: document ? { filename: document.filename, url: document.url } : null,
+    document: document ? { filename: document.filename, url: document.url, ...(document.readByOcr ? { readByOcr: true } : {}) } : null,
     ...(promulgatedAct ? { promulgatedAct } : {})
   };
 }
@@ -587,7 +638,7 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [], g
   const single = String(print.kindId) !== treatyPrintKindId && changes.filter((change) => change.fromFirstText).length === 1;
   const subPrintText = ({ partNumber, document, paragraphs }) => ({
     partNumber,
-    document: { filename: document.filename, url: document.url },
+    document: { filename: document.filename, url: document.url, ...(document.readByOcr ? { readByOcr: true } : {}) },
     textCz: paragraphs.join("\n")
   });
   const resolutions = senateResolutions.map(subPrintText);

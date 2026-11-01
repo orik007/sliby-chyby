@@ -22,7 +22,8 @@ function proposalKind(facts) {
 
 // Why the linked text is not exactly the one the conduct concerned
 // (docs/evidence-pipeline.md, Conduct and version), or where it comes from
-// when psp.cz does not publish it (Text from the Collection of Laws), or null. A version known
+// when psp.cz does not publish it (Text from the Collection of Laws) or
+// publishes it only as a scanned PDF read by OCR, or null. A version known
 // only by the print title has no document to link.
 function versionNote(concern, entry) {
   if (concern.removed) return "removed";
@@ -31,6 +32,7 @@ function versionNote(concern, entry) {
   if (concern.publishedVersionMissing) return "published-version-missing";
   if (concern.mark === "third-reading-rejection") return "third-reading-rejection";
   if (entry.promulgatedAct) return "promulgated-text";
+  if (entry.document?.readByOcr) return "ocr-text";
   return null;
 }
 

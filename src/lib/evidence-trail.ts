@@ -35,6 +35,7 @@ const noteLabels: Record<ConductStep["notes"][number]["note"], string> = {
   "third-reading-rejection": "Hlasovalo se o navrženém textu upraveném pozměňovacími návrhy, který psp.cz nezveřejňuje jako celek; odkaz vede na navržený text.",
   "promulgated-text": "Toto znění psp.cz nezveřejňuje; odkaz vede na zákon, jak byl vyhlášen ve Sbírce zákonů (e-Sbírka).",
   "amended-proposal": "Pozměňovací návrh mění navržený text; odkaz vede na navržený text, pozměňovací návrh je odkázán zvlášť.",
+  "ocr-text": "psp.cz zveřejňuje tento text jen jako naskenované PDF; hodnocení vycházelo z textu přečteného ze skenu strojově (OCR), odkaz vede na sken.",
 };
 
 // Data dates are calendar dates (YYYY-MM-DD); formatting them from their

@@ -22,7 +22,8 @@ export const pspDocumentExtractions = {
   docxParagraphs: "docx-paragraphs-v1",
   docParagraphs: "doc-paragraphs-v1",
   docxNumberedParagraphs: "docx-numbered-paragraphs-v2",
-  xlsxRows: "xlsx-rows-v1"
+  xlsxRows: "xlsx-rows-v1",
+  pdfOcrParagraphs: "pdf-ocr-paragraphs-v1"
 };
 
 // The download options of each kind of file the cache holds, and of any of
@@ -31,7 +32,8 @@ export const pspDocumentExtractions = {
 const fileContentTypes = {
   docx: ["openxmlformats-officedocument", "application/octet-stream", "application/zip"],
   doc: ["application/msword", "application/octet-stream"],
-  xlsx: ["openxmlformats-officedocument", "application/vnd.ms-excel", "application/octet-stream", "application/zip"]
+  xlsx: ["openxmlformats-officedocument", "application/vnd.ms-excel", "application/octet-stream", "application/zip"],
+  pdf: ["application/pdf", "application/octet-stream"]
 };
 export const pspDocumentFileOptions = Object.fromEntries(Object.entries(fileContentTypes).map(([format, expectedContentTypes]) => [format, { maxBytes: 20_000_000, expectedContentTypes }]));
 export const anyPspDocumentFileOptions = { maxBytes: 20_000_000, expectedContentTypes: [...new Set(Object.values(fileContentTypes).flat())] };

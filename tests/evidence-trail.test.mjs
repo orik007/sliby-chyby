@@ -61,6 +61,16 @@ test("a version without a published text has no link and says why", async () => 
   assert.deepEqual(submission.notes, [{ note: "text-not-published", lawChangeIds: ["psp-core-2025--law-change-43184-14"] }]);
 });
 
+test("a text psp.cz publishes only as a scan links the scan and says it was read by OCR", async () => {
+  const { evidencePackage, auditRecord } = await fixture("spd-2025-079ef4aef5");
+  const scanned = structuredClone(evidencePackage);
+  const proposed = scanned.evidence.find(({ id }) => id === "psp-core-2025--law-change-43184-14").structuredFacts.versions.proposed;
+  proposed.document = { filename: "t0105b0.pdf", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=267545", readByOcr: true };
+  const submission = buildEvidenceTrail(scanned, auditRecord)[0].steps[0];
+  assert.equal(submission.textUrl, "https://www.psp.cz/sqw/text/orig2.sqw?idd=267545");
+  assert.deepEqual(submission.notes, [{ note: "ocr-text", lawChangeIds: ["psp-core-2025--law-change-43184-14"] }]);
+});
+
 test("a text psp.cz does not publish links the act as promulgated in e-Sbírka and says so", async () => {
   const { proposal, evidencePackage, auditRecord, promise } = await fixture("spd-2025-079ef4aef5");
   const promulgated = structuredClone(evidencePackage);
