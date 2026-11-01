@@ -39,11 +39,24 @@ export function numberedText(textCz, offset = 0) {
  * Validates a relevance check that names paragraphs (step 6). An answer kept
  * from an earlier prompt has no `paragraphs`: one that says not relevant is
  * read as naming none, one that says relevant is invalid, so it is asked for
- * again.
+ * again. A law-change check (`amendmentCount` given) also says whether the
+ * change is relevant only through an amendment to it (`throughAmendment`),
+ * read as false in an answer kept from an earlier prompt; such an answer
+ * names no paragraph of the change's own text.
  */
-export function validatePassageOutput(output, { paragraphCount, mayNameNone }) {
+export function validatePassageOutput(output, { paragraphCount, mayNameNone, amendmentCount = null }) {
   invariantValidOutput(typeof output?.relevant === "boolean", "Relevance check must say whether the change is relevant");
   invariantValidOutput(typeof output.reasonCz === "string" && output.reasonCz.trim().length > 0, "Relevance check must give a reason");
+  if (amendmentCount !== null) {
+    if (output.throughAmendment === undefined) output = { ...output, throughAmendment: false };
+    invariantValidOutput(typeof output.throughAmendment === "boolean", "Relevance check must say whether the change is relevant only through an amendment");
+    if (output.throughAmendment) {
+      invariantValidOutput(output.relevant, "A change that is not relevant is not relevant through an amendment");
+      invariantValidOutput(amendmentCount > 0, "A change without amendments cannot be relevant through an amendment");
+      invariantValidOutput(Array.isArray(output.paragraphs) && output.paragraphs.length === 0, "A change relevant only through an amendment names no paragraph of its own text");
+      return output;
+    }
+  }
   if (output.paragraphs === undefined && !output.relevant) return { ...output, paragraphs: [] };
   invariantValidOutput(Array.isArray(output.paragraphs), "Relevance check must list the relevant paragraphs");
   invariantValidOutput(output.paragraphs.every((number) => Number.isInteger(number) && number >= 1 && number <= paragraphCount), `Relevance check names a paragraph outside 1 to ${paragraphCount}`);
@@ -62,7 +75,8 @@ export function needsThirdCheck(a, b) {
  * The decision of the checks of one pair (step 6): dropped only when at least
  * two valid answers say not relevant and they outnumber those that say
  * relevant; `paragraphs` are those named by the answers that say relevant, or
- * null for the whole text.
+ * null for the whole text; `amendmentOnly` when none names one and one says
+ * the change is relevant only through an amendment to it.
  */
 export function relevanceDecision(a, b, c = null) {
   const votes = [a, b, ...(needsThirdCheck(a, b) ? [c] : [])].filter(Boolean);
@@ -70,7 +84,8 @@ export function relevanceDecision(a, b, c = null) {
   const notRelevant = votes.length - relevant.length;
   const kept = notRelevant < 2 || relevant.length >= notRelevant;
   const named = [...new Set(relevant.flatMap((vote) => vote.paragraphs ?? []))].sort((left, right) => left - right);
-  return { kept, paragraphs: kept && named.length > 0 ? named : null };
+  const amendmentOnly = kept && named.length === 0 && relevant.some((vote) => vote.throughAmendment);
+  return { kept, paragraphs: kept && named.length > 0 ? named : null, ...(amendmentOnly ? { amendmentOnly } : {}) };
 }
 
 function omissionLine(count) {
@@ -216,6 +231,27 @@ export function excerptLawChange(change, numbers, context = null, numbered = cha
     if (reduced?.instructions.length > 0) contextVersions[version] = reduced;
   }
   return { change: { ...change, versions }, context: context ? { ...context, versions: contextVersions } : null };
+}
+
+/**
+ * A law change kept only because an amendment to it is relevant: no
+ * paragraph of its own text and no context, each version saying how many
+ * paragraphs it left out (step 7).
+ */
+export function withoutOwnText(change) {
+  const versions = {};
+  for (const version of versionKeys) {
+    const entry = change.versions[version];
+    if (!entry) continue;
+    const { contextCz, ...rest } = entry;
+    if (entry.removed || entry.sameAs || !entry.textCz) {
+      versions[version] = rest;
+      continue;
+    }
+    const paragraphs = textParagraphs(entry.textCz);
+    versions[version] = { ...rest, textCz: excerptText(paragraphs, new Set()), excerpt: { paragraphCount: paragraphs.length, selectedCount: 0 } };
+  }
+  return { ...change, versions, relevantThroughAmendmentsOnly: true };
 }
 
 /**

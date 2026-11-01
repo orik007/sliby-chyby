@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { ModelOutputError } from "../scripts/lib/model-output.mjs";
 import { singleModelCall } from "../scripts/lib/paired-model-calls.mjs";
-import { contextOfParagraphs, excerptAmendmentText, excerptLawChange, excerptText, lawChangeParagraphs, needsThirdCheck, relevanceDecision, wholeTextMaxLength } from "../scripts/lib/relevant-passages.mjs";
+import { contextOfParagraphs, excerptAmendmentText, excerptLawChange, excerptText, lawChangeParagraphs, needsThirdCheck, relevanceDecision, wholeTextMaxLength, withoutOwnText } from "../scripts/lib/relevant-passages.mjs";
 
 const relevant = (...paragraphs) => ({ relevant: true, paragraphs, reasonCz: "x" });
 const notRelevant = { relevant: false, paragraphs: [], reasonCz: "x" };
@@ -158,4 +158,43 @@ test("a kept quotation keeps what introduces it, and nothing else is pulled in",
   // An amendment keeps the instruction its kept quotation belongs to.
   const amendment = long(["V části první čl. I bod 4 zní:", "„4. V § 2 se číslo „5“ nahrazuje číslem „6“.“.", "Odůvodnění"].join("\n"));
   assert.equal(excerptAmendmentText(amendment, [2]).textCz.split("\n").filter((line) => !line.startsWith("[…")).join("\n"), "V části první čl. I bod 4 zní:\n„4. V § 2 se číslo „5“ nahrazuje číslem „6“.“.");
+});
+
+test("a pair relevant only through an amendment keeps none of the change's own text", () => {
+  const through = { relevant: true, throughAmendment: true, paragraphs: [], reasonCz: "x" };
+  assert.deepEqual(relevanceDecision(through, through), { kept: true, paragraphs: null, amendmentOnly: true });
+  assert.deepEqual(relevanceDecision(through, relevant(4)), { kept: true, paragraphs: [4] }, "a named paragraph keeps the change's own text");
+  assert.deepEqual(relevanceDecision(through, notRelevant, notRelevant), { kept: false, paragraphs: null });
+  const change = { changeId: "4-1", versions: { proposed: { textCz: "ČÁST PRVNÍ\nZměna\n1. § 5 se zrušuje.", contextCz: "context" }, approved: { sameAs: "proposed" } } };
+  const without = withoutOwnText(change);
+  assert.equal(without.relevantThroughAmendmentsOnly, true);
+  assert.deepEqual(without.versions.proposed, { textCz: "[… 3 paragraphs not concerning this promise left out …]", excerpt: { paragraphCount: 3, selectedCount: 0 } });
+  assert.deepEqual(without.versions.approved, { sameAs: "proposed" });
+});
+
+test("a third check made with an earlier prompt is kept for a pair kept from that prompt", async () => {
+  const cache = { entries: { s: { inputHash: "i", promptContentHash: "old", provider: "openai", model: "m", c: relevant(2) } } };
+  let calls = 0;
+  const call = async () => { calls += 1; return { output: relevant(3), model: "m", usage: null }; };
+  const fingerprint = { inputHash: "i", promptContentHash: "new", provider: "openai", model: "m" };
+  const kept = await singleModelCall({ subjectId: "s", fingerprint, cache, persist: async () => {}, call, keepFromPromptContentHash: "old" });
+  assert.deepEqual([kept.c, kept.reused, calls], [relevant(2), true, 0]);
+  const fresh = { entries: { s: { inputHash: "i", promptContentHash: "old", provider: "openai", model: "m", c: relevant(2) } } };
+  const asked = await singleModelCall({ subjectId: "s", fingerprint, cache: fresh, persist: async () => {}, call });
+  assert.deepEqual([asked.c, asked.reused, calls], [relevant(3), false, 1], "without the earlier prompt kept, it is asked again");
+});
+
+test("a kept third answer is marked with the prompt that kept it, so a later prompt keeping that one keeps it too", async () => {
+  const cache = { entries: { s: { inputHash: "i", promptContentHash: "v8", provider: "openai", model: "m", c: relevant(2) } } };
+  const lines = [];
+  const persist = async (subjectId, line) => { lines.push(line ?? cache.entries[subjectId]); };
+  let calls = 0;
+  const call = async () => { calls += 1; return { output: relevant(3), model: "m", usage: null }; };
+  const under = (promptContentHash) => ({ inputHash: "i", promptContentHash, provider: "openai", model: "m" });
+  const first = await singleModelCall({ subjectId: "s", fingerprint: under("v9"), cache, persist, call, keepFromPromptContentHash: "v8" });
+  assert.deepEqual([first.c, first.reused, calls, lines], [relevant(2), true, 0, [{ subjectId: "s", keptUnderPromptContentHash: "v9" }]]);
+  const again = await singleModelCall({ subjectId: "s", fingerprint: under("v9"), cache, persist, call, keepFromPromptContentHash: "v8" });
+  assert.deepEqual([again.reused, calls, lines.length], [true, 0, 1], "kept under the current prompt, it is not marked again");
+  const later = await singleModelCall({ subjectId: "s", fingerprint: under("v10"), cache, persist, call, keepFromPromptContentHash: "v9" });
+  assert.deepEqual([later.c, later.reused, calls, lines.at(-1)], [relevant(2), true, 0, { subjectId: "s", keptUnderPromptContentHash: "v10" }]);
 });

@@ -31,7 +31,7 @@ import { amendmentsOfPackage, attributableConductOnChange, buildLawChangeEvidenc
 import { loadAssessmentPrompts, maxRequestInputTokens } from "./lib/assessment-config.mjs";
 import { validateReviewManifest } from "./lib/assessment-review.mjs";
 import { exclusionOf, loadRelevanceVerdicts } from "./lib/irrelevance-verdicts.mjs";
-import { assertKeptPromptCached, cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, shardedCachePersister, singleModelCall, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
+import { assertKeptPromptCached, cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, reportedInvalidOutput, shardedCachePersister, singleModelCall, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
 import { log, progress } from "./lib/run-log.mjs";
 
 /**
@@ -231,6 +231,8 @@ async function checkRelevance({ stage, brief, inputHash, prompt, request, keepFr
   });
   usage[stage].push(...checked.usageByModel);
   invalid[stage] += checked.invalidCount;
+  const relevancePrompt = checked.madeUnderPromptContentHash === prompt.contentHash ? null : checked.madeUnderPromptContentHash;
+  if (relevancePrompt) fromEarlierPrompt[stage] += 1;
   let third = null;
   if (needsThirdCheck(checked.a, checked.b)) {
     thirdChecks[stage] += 1;
@@ -240,23 +242,29 @@ async function checkRelevance({ stage, brief, inputHash, prompt, request, keepFr
       cache: caches[`${stage}Third`],
       persist: persist[`${stage}Third`],
       call: call(runtime.modelA, stage === "relevance" ? "third relevance check" : "third amendment relevance check"),
-      revalidate
+      revalidate,
+      // A pair made under an earlier prompt keeps the third answer made or
+      // last kept under the prompt the current one keeps, in every run.
+      keepFromPromptContentHash: relevancePrompt ? prompt.keeps?.contentHash ?? null : null
     });
     usage[stage].push(...third.usageByModel);
     invalid[stage] += third.invalidCount;
   }
-  const relevancePrompt = checked.madeUnderPromptContentHash === prompt.contentHash ? null : checked.madeUnderPromptContentHash;
-  if (relevancePrompt) fromEarlierPrompt[stage] += 1;
-  const { kept, paragraphs } = relevanceDecision(checked.a, checked.b, third?.c ?? null);
+  const { kept, paragraphs, amendmentOnly = false } = relevanceDecision(checked.a, checked.b, third?.c ?? null);
+  // A rejected answer is kept in the report as the model gave it, cut to its
+  // first characters when it is long.
+  const rejected = Object.fromEntries([["checkAInvalidOutput", checked.invalidOutputA], ["checkBInvalidOutput", checked.invalidOutputB], ["checkCInvalidOutput", third?.invalidOutput ?? null]].filter(([, output]) => output !== null).map(([key, output]) => [key, reportedInvalidOutput(output)]));
   return {
     kept,
     paragraphs,
+    ...(amendmentOnly ? { amendmentOnly } : {}),
     relevancePrompt,
     checkA: checked.a,
     checkB: checked.b,
     checkAError: checked.errorA,
     checkBError: checked.errorB,
-    ...(third ? { checkC: third.c, checkCError: third.error } : {})
+    ...(third ? { checkC: third.c, checkCError: third.error } : {}),
+    ...rejected
   };
 }
 
@@ -337,7 +345,7 @@ const checkedPairs = finishedPairs
 
 const keptByPromise = new Map();
 for (const pair of checkedPairs.filter(({ kept }) => kept)) {
-  keptByPromise.set(pair.promise.id, [...(keptByPromise.get(pair.promise.id) ?? []), { change: pair.change, route: pair.route, paragraphs: pair.paragraphs }]);
+  keptByPromise.set(pair.promise.id, [...(keptByPromise.get(pair.promise.id) ?? []), { change: pair.change, route: pair.route, paragraphs: pair.paragraphs, amendmentOnly: pair.amendmentOnly ?? false }]);
 }
 
 // 3. The relevance of each promise and amendment its package would hold
@@ -457,7 +465,10 @@ const counts = {
   thirdRelevanceCheckPairCount: thirdChecks.relevance,
   thirdAmendmentRelevanceCheckPairCount: thirdChecks.amendmentRelevance,
   // Kept pairs whose package holds the whole text: no check named a paragraph.
-  wholeTextKeptCount: checkedPairs.filter(({ kept, paragraphs }) => kept && paragraphs === null).length,
+  wholeTextKeptCount: checkedPairs.filter(({ kept, paragraphs, amendmentOnly }) => kept && paragraphs === null && !amendmentOnly).length,
+  // Kept pairs relevant only through an amendment: no paragraph of the
+  // change's own text.
+  amendmentOnlyKeptCount: checkedPairs.filter(({ kept, amendmentOnly }) => kept && amendmentOnly).length,
   wholeAmendmentTextKeptCount: checkedAmendments.filter(({ kept, paragraphs }) => kept && paragraphs === null).length,
   screeningFromEarlierPromptCount: fromEarlierPrompt.screening,
   relevanceCheckFromEarlierPromptCount: fromEarlierPrompt.relevance,
@@ -498,7 +509,7 @@ const report = {
     ...(screeningPrompt ? { madeUnderPromptContentHash: screeningPrompt } : {}),
     route
   })),
-  relevanceChecks: checkedPairs.map(({ promise, change, kept, paragraphs, relevancePrompt, checkA, checkB, checkAError, checkBError, checkC, checkCError, route }) => ({
+  relevanceChecks: checkedPairs.map(({ promise, change, kept, paragraphs, amendmentOnly, relevancePrompt, checkA, checkB, checkAError, checkBError, checkC, checkCError, checkAInvalidOutput, checkBInvalidOutput, checkCInvalidOutput, route }) => ({
     promiseId: promise.id,
     changeId: change.changeId,
     routeBasis: route.routeBasis,
@@ -510,9 +521,11 @@ const report = {
     checkAError,
     checkBError,
     ...(checkC !== undefined ? { checkC, checkCError } : {}),
+    ...(amendmentOnly ? { amendmentOnly } : {}),
+    ...Object.fromEntries(Object.entries({ checkAInvalidOutput, checkBInvalidOutput, checkCInvalidOutput }).filter(([, output]) => output !== undefined)),
     ...(relevancePrompt ? { madeUnderPromptContentHash: relevancePrompt } : {})
   })),
-  amendmentRelevanceChecks: checkedAmendments.map(({ promise, item, kept, paragraphs, relevancePrompt, checkA, checkB, checkAError, checkBError, checkC, checkCError }) => ({
+  amendmentRelevanceChecks: checkedAmendments.map(({ promise, item, kept, paragraphs, relevancePrompt, checkA, checkB, checkAError, checkBError, checkC, checkCError, checkAInvalidOutput, checkBInvalidOutput, checkCInvalidOutput }) => ({
     promiseId: promise.id,
     documentNumber: item.documentNumber,
     printNumber: item.printNumber,
@@ -523,6 +536,7 @@ const report = {
     checkAError,
     checkBError,
     ...(checkC !== undefined ? { checkC, checkCError } : {}),
+    ...Object.fromEntries(Object.entries({ checkAInvalidOutput, checkBInvalidOutput, checkCInvalidOutput }).filter(([, output]) => output !== undefined)),
     ...(relevancePrompt ? { madeUnderPromptContentHash: relevancePrompt } : {})
   })),
   // Law changes left out because both assessors of an earlier assessment
