@@ -243,9 +243,9 @@ async function checkRelevance({ stage, brief, inputHash, prompt, request, keepFr
       persist: persist[`${stage}Third`],
       call: call(runtime.modelA, stage === "relevance" ? "third relevance check" : "third amendment relevance check"),
       revalidate,
-      // A pair made under an earlier prompt keeps the third answer made with
-      // it, in every run that keeps the pair.
-      keepFromPromptContentHash: relevancePrompt
+      // A pair made under an earlier prompt keeps the third answer made or
+      // last kept under the prompt the current one keeps, in every run.
+      keepFromPromptContentHash: relevancePrompt ? prompt.keeps?.contentHash ?? null : null
     });
     usage[stage].push(...third.usageByModel);
     invalid[stage] += third.invalidCount;

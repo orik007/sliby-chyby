@@ -179,6 +179,22 @@ test("a third check made with an earlier prompt is kept for a pair kept from tha
   const fingerprint = { inputHash: "i", promptContentHash: "new", provider: "openai", model: "m" };
   const kept = await singleModelCall({ subjectId: "s", fingerprint, cache, persist: async () => {}, call, keepFromPromptContentHash: "old" });
   assert.deepEqual([kept.c, kept.reused, calls], [relevant(2), true, 0]);
-  const asked = await singleModelCall({ subjectId: "s", fingerprint, cache, persist: async () => {}, call });
+  const fresh = { entries: { s: { inputHash: "i", promptContentHash: "old", provider: "openai", model: "m", c: relevant(2) } } };
+  const asked = await singleModelCall({ subjectId: "s", fingerprint, cache: fresh, persist: async () => {}, call });
   assert.deepEqual([asked.c, asked.reused, calls], [relevant(3), false, 1], "without the earlier prompt kept, it is asked again");
+});
+
+test("a kept third answer is marked with the prompt that kept it, so a later prompt keeping that one keeps it too", async () => {
+  const cache = { entries: { s: { inputHash: "i", promptContentHash: "v8", provider: "openai", model: "m", c: relevant(2) } } };
+  const lines = [];
+  const persist = async (subjectId, line) => { lines.push(line ?? cache.entries[subjectId]); };
+  let calls = 0;
+  const call = async () => { calls += 1; return { output: relevant(3), model: "m", usage: null }; };
+  const under = (promptContentHash) => ({ inputHash: "i", promptContentHash, provider: "openai", model: "m" });
+  const first = await singleModelCall({ subjectId: "s", fingerprint: under("v9"), cache, persist, call, keepFromPromptContentHash: "v8" });
+  assert.deepEqual([first.c, first.reused, calls, lines], [relevant(2), true, 0, [{ subjectId: "s", keptUnderPromptContentHash: "v9" }]]);
+  const again = await singleModelCall({ subjectId: "s", fingerprint: under("v9"), cache, persist, call, keepFromPromptContentHash: "v8" });
+  assert.deepEqual([again.reused, calls, lines.length], [true, 0, 1], "kept under the current prompt, it is not marked again");
+  const later = await singleModelCall({ subjectId: "s", fingerprint: under("v10"), cache, persist, call, keepFromPromptContentHash: "v9" });
+  assert.deepEqual([later.c, later.reused, calls, lines.at(-1)], [relevant(2), true, 0, { subjectId: "s", keptUnderPromptContentHash: "v10" }]);
 });

@@ -221,21 +221,34 @@ export async function pairedModelCall({ subjectId, fingerprint, cache, persist, 
  * One call on a subject with a durable cache: the third relevance check, made
  * only when the two independent checks do not agree. `fingerprint` covers the
  * input hash, the prompt hash, the provider, and the model; a cached answer is
- * reused only when all of it matches, or all but the prompt hash and it was
- * made under `keepFromPromptContentHash` (docs/evidence-pipeline.md, Audit and
- * cost control), and is validated again with `revalidate`. A valid answer is
+ * reused only when all of it matches and it was made or kept under the current
+ * prompt, or all but the prompt hash matches and it was made or last kept
+ * under `keepFromPromptContentHash` (docs/evidence-pipeline.md, Audit and cost
+ * control), which then appends a line naming the prompt that kept it; it is
+ * validated again with `revalidate`. A valid answer is
  * cached at once; an invalid one is returned as null and asked for again in
  * the next run.
  */
 export async function singleModelCall({ subjectId, fingerprint, cache, persist, call, revalidate = (output) => output, keepFromPromptContentHash = null }) {
   const cached = cache.entries[subjectId];
   const { promptContentHash, ...rest } = fingerprint;
-  const promptMatches = cached && (cached.promptContentHash === promptContentHash || (keepFromPromptContentHash && cached.promptContentHash === keepFromPromptContentHash));
-  if (cached?.c != null && promptMatches && Object.entries(rest).every(([key, value]) => cached[key] === value)) {
+  const current = cached && (cached.promptContentHash === promptContentHash || cached.keptUnderPromptContentHash === promptContentHash);
+  const kept = cached && !current && keepFromPromptContentHash && (cached.keptUnderPromptContentHash ?? cached.promptContentHash) === keepFromPromptContentHash;
+  if (cached?.c != null && (current || kept) && Object.entries(rest).every(([key, value]) => cached[key] === value)) {
+    let c = null;
     try {
-      return { c: revalidate(cached.c), error: null, model: fingerprint.model, usageByModel: [], invalidCount: 0, reused: true };
+      c = revalidate(cached.c);
     } catch (error) {
       if (!(error instanceof ModelOutputError)) throw error;
+    }
+    if (c !== null) {
+      // A kept answer is saved as one short line naming the prompt that kept
+      // it, as a kept pair is.
+      if (kept) {
+        cache.entries[subjectId] = { ...cached, keptUnderPromptContentHash: promptContentHash };
+        await persist(subjectId, { subjectId, keptUnderPromptContentHash: promptContentHash });
+      }
+      return { c, error: null, model: fingerprint.model, usageByModel: [], invalidCount: 0, reused: true };
     }
   }
   const attempt = await isolateInvalidOutput(call);
