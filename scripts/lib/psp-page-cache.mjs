@@ -21,8 +21,18 @@ export function pspPageContent(html) {
 // them, so a check compares a kept page without them (docs/evidence-pipeline.md,
 // Closed prints).
 const eurovocDescriptors = /<br><br><b>Deskriptory EUROVOCu:<\/b>[^<]*(?:<a [^>]*>[^<]*<\/a>[^<]*)*<p>/u;
-export function withoutEurovocDescriptors(content) {
-  return content.replace(eurovocDescriptors, "");
+// psp.cz also writes a counter into a history page, as an HTML comment of
+// three dashes and a number, that changes between reads (print 16 of term 10:
+// "<!--- 1-->" on 20 October 2026, "<!--- 4-->" on 2 November 2026, the page
+// otherwise the same). It holds nothing but that number, which no reader
+// reads; every other comment is compared, since some carry data
+// ("<!-- idd_pdf_is=1, pdf_all:1, idd_id_tf=14 -->" on a later-text page).
+const commentCounters = /<!--- \d+-->/gu;
+// A kept page as a check compares it: without its comment counters, removed
+// first so a counter never hides its EUROVOC descriptors, and without those
+// descriptors (docs/evidence-pipeline.md, Closed prints).
+export function comparablePageContent(content) {
+  return content.replace(commentCounters, "").replace(eurovocDescriptors, "");
 }
 
 // "Sněmovní dokument nebyl nalezen.", "Dokument nebyl nalezen." (checked on
@@ -48,7 +58,7 @@ function validEntry(entry, id) {
  * what it reads). A kept page read without `keep` is removed.
  * `checkSample(download, sampleSize)` downloads the pages checked longest
  * ago and fails on the first one whose content changed in anything but its
- * EUROVOC descriptors.
+ * EUROVOC descriptors and its comment counters.
  */
 export function createPspPageCache(directory, today) {
   invariant(isoDate.test(today), "The page cache needs the run date");
@@ -90,7 +100,7 @@ export function createPspPageCache(directory, today) {
       const sample = oldestChecked(entries, sampleSize, ({ readOn }) => readOn < today);
       for (const entry of sample) {
         const content = pspPageContent(decodePspPage(await download(entry.url)));
-        invariant(content !== null && withoutEurovocDescriptors(content) === withoutEurovocDescriptors(entry.content), `psp.cz page of a closed print changed (${entry.url}): the rule that a closed print's pages do not change (docs/evidence-pipeline.md) no longer holds`);
+        invariant(content !== null && comparablePageContent(content) === comparablePageContent(entry.content), `psp.cz page of a closed print changed (${entry.url}): the rule that a closed print's pages do not change (docs/evidence-pipeline.md) no longer holds`);
         entry.checkedOn = today;
         saveCacheEntry(directory, entry);
         stats.checked += 1;

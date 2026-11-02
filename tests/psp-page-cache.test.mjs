@@ -3,7 +3,7 @@ import { mkdtemp, readdir, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { createPspPageCache, pspPageContent, readPspPage, withoutEurovocDescriptors } from "../scripts/lib/psp-page-cache.mjs";
+import { createPspPageCache, pspPageContent, readPspPage, comparablePageContent } from "../scripts/lib/psp-page-cache.mjs";
 
 const url = (number) => `https://www.psp.cz/sqw/sd.sqw?cd=${number}&o=10`;
 // A psp.cz page, as the fetcher returns it.
@@ -77,9 +77,9 @@ test("a check ignores the EUROVOC descriptors psp.cz adds to a history page late
   // October 2026 with its descriptors added (the end of its content).
   const before = 'zákonů v částce 91 pod číslem <a href="sbirka.sqw?O=10&T=167">91/2026</a> Sb.</p>            <sqw_flush> <p><b><a href="historie.sqw?o=10&t=167&snzp=1">Navržené změny předpisů</a></b> (1)';
   const after = 'zákonů v částce 91 pod číslem <a href="sbirka.sqw?O=10&T=167">91/2026</a> Sb.</p>            <sqw_flush> <br><br><b>Deskriptory EUROVOCu:</b> <a href="tisky.sqw?et=283178">digitalizace dokumentů</a>, <a href="tisky.sqw?et=326678">elektronická správa dokumentů</a>, <a href="tisky.sqw?et=7747">informační systém</a>, <a href="tisky.sqw?et=9672">stavební právo</a>, <a href="tisky.sqw?et=104979">územní plánování</a><p><p><b><a href="historie.sqw?o=10&t=167&snzp=1">Navržené změny předpisů</a></b> (1)';
-  assert.equal(withoutEurovocDescriptors(after), before);
+  assert.equal(comparablePageContent(after), before);
   // Print 94: descriptors at the very end of its content.
-  assert.equal(withoutEurovocDescriptors('</table> <br><br><b>Deskriptory EUROVOCu:</b> <a href="tisky.sqw?et=340817">návrh rozpočtu</a>, <a href="tisky.sqw?et=9017">státní rozpočet</a><p><div class="clear"></div>'), '</table> <div class="clear"></div>');
+  assert.equal(comparablePageContent('</table> <br><br><b>Deskriptory EUROVOCu:</b> <a href="tisky.sqw?et=340817">návrh rozpočtu</a>, <a href="tisky.sqw?et=9017">státní rozpočet</a><p><div class="clear"></div>'), '</table> <div class="clear"></div>');
   const historyUrl = "https://www.psp.cz/sqw/historie.sqw?o=10&t=167";
   const directory = await mkdtemp(join(tmpdir(), "psp-pages-"));
   await createPspPageCache(directory, "2026-10-20").read({ url: historyUrl, keep: true, download: async () => page(before) });
@@ -95,4 +95,23 @@ test("refuses a damaged page cache entry", async () => {
   const directory = await mkdtemp(join(tmpdir(), "psp-pages-"));
   await writeFile(join(directory, `${"0".repeat(32)}.json`), "{}\n");
   assert.throws(() => createPspPageCache(directory, "2026-10-19"), /Invalid psp\.cz page cache entry/);
+});
+
+test("a check ignores the counter psp.cz writes into a history page's HTML comments", async () => {
+  // Print 16 of term 10: read on 20 October 2026 and on 2 November 2026,
+  // differing only in this comment.
+  const before = '<p><strong class="highlight">3. Čtení</strong> proběhlo <a href="../eknih/2025ps/stenprot/027schuz/27-1.html#q55">10.&nbsp;7.&nbsp;2026</a> na 27. schůzi.<!--- 1--> Návrh zákona <B>schválen</B>';
+  const after = before.replace("<!--- 1-->", "<!--- 4-->");
+  assert.equal(comparablePageContent(after), comparablePageContent(before));
+  const historyUrl = "https://www.psp.cz/sqw/historie.sqw?o=10&t=16";
+  const directory = await mkdtemp(join(tmpdir(), "psp-pages-"));
+  await createPspPageCache(directory, "2026-10-20").read({ url: historyUrl, keep: true, download: async () => page(before) });
+  assert.deepEqual(await createPspPageCache(directory, "2026-11-02").checkSample(async () => page(after), 1), [historyUrl]);
+  await assert.rejects(createPspPageCache(directory, "2026-11-03").checkSample(async () => page(after.replace("schválen", "zamítnut")), 1), /psp\.cz page of a closed print changed/);
+  // Any other comment is compared: some carry data.
+  const withData = '<!-- idd_pdf_is=1, pdf_all:1, idd_id_tf=14 --><li class="docx">';
+  assert.notEqual(comparablePageContent(withData.replace("idd_pdf_is=1", "idd_pdf_is=0")), comparablePageContent(withData));
+  // A counter inside the EUROVOC descriptors does not hide them.
+  const descriptors = '</table> <br><br><b>Deskriptory EUROVOCu:</b> <a href="tisky.sqw?et=1">a</a>,<!--- 2--> <a href="tisky.sqw?et=2">b</a><p><div class="clear"></div>';
+  assert.equal(comparablePageContent(descriptors), '</table> <div class="clear"></div>');
 });
