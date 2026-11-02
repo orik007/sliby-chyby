@@ -379,8 +379,9 @@ const quality = {
   governmentOpinions: prints.reduce((sum, { governmentOpinionPartNumbers }) => sum + governmentOpinionPartNumbers.length, 0),
   governmentOpinionsWithoutText: Object.values(result).reduce((sum, { warnings }) => sum + warnings.filter(({ kind }) => kind === "government-opinion-without-text").length, 0),
   printsWithPromulgatedText: promulgatedTexts.length,
-  // Texts psp.cz publishes only as a scanned PDF, read by OCR.
-  textsReadByOcr: Object.values(result).reduce((sum, { changes }) => sum + new Set(changes.flatMap(({ versions }) => Object.entries(versions).filter(([, entry]) => entry.document?.readByOcr && !entry.sameAs).map(([version]) => version))).size, 0),
+  // Texts psp.cz publishes only as a scanned PDF, read by OCR: each scan
+  // once, whether a version, a Senate resolution, or a government opinion.
+  textsReadByOcr: new Set(allChanges.flatMap((change) => [...Object.values(change.versions), ...change.senateResolutions, ...change.governmentOpinions].filter(({ document }) => document?.readByOcr).map(({ document }) => document.url))).size,
   eSbirkaRequests: eSbirkaRequests.attempts,
   eSbirkaFailedRequests: eSbirkaRequests.failed,
   approvedBillsWithoutApprovedText: Object.values(result).filter(({ warnings }) => warnings.some(({ kind }) => kind === "approved-without-approved-text")).length,

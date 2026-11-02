@@ -6,13 +6,19 @@ import { promisify } from "node:util";
 
 const execute = promisify(execFile);
 
-// A program that is missing, or Tesseract without its Czech data, is a
-// failure of the machine, not of the scan: it is marked so the document
-// cache fails the run instead of keeping it as the file's reading.
+// The longest one program may take on one page: Tesseract reads a page of
+// print 105's scan in about 2 s, so 5 minutes only stops a program that hangs.
+const programTimeoutMs = 300_000;
+
+// A program that is missing, that hangs past the timeout, or Tesseract
+// without its Czech data, is a failure of the machine, not of the scan: it is
+// marked so the document cache fails the run instead of keeping it as the
+// file's reading.
 async function run(program, args, options) {
   try {
-    return await execute(program, args, options);
+    return await execute(program, args, { ...options, timeout: programTimeoutMs, killSignal: "SIGKILL" });
   } catch (error) {
+    if (error?.killed) throw Object.assign(new Error(`OCR program ${program} did not finish within ${programTimeoutMs / 1000} s`), { notOfTheFile: true });
     if (error?.code === "ENOENT" || /Failed loading language|Error opening data file/u.test(String(error?.stderr ?? ""))) {
       throw Object.assign(new Error(`OCR is not installed (${program}): ${error.message}`), { notOfTheFile: true });
     }
