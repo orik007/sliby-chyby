@@ -6,6 +6,7 @@ import {
   attributionStatusForRecord,
   factSummary,
   isPotentiallyAttributable,
+  normalizedStructuredFacts,
   versionConcerned
 } from "../scripts/lib/attribution.mjs";
 import { validateReaderFacingCzech } from "../scripts/lib/assessment-pipeline.mjs";
@@ -143,4 +144,17 @@ test("a vote concerns the text its print-history step decided on", () => {
 
 test("the attribution status of a government opinion never passes as public Czech prose", () => {
   assert.throws(() => validateReaderFacingCzech("Vláda s návrhem souhlasila (verified-government-opinion)."), /internal or unexplained language/);
+});
+
+test("a conduct in a package leaves out each MP's vote, every club's result, the agenda item, and a resolution's files", () => {
+  const facts = normalizedStructuredFacts({
+    kind: "government-resolution",
+    payload: { resolution: "175/2026", adoptedOn: "2026-03-23", paragraphs: ["text"], agendaItem: { number: 3 }, files: [{ label: "Usnesení", url: "https://odok.gov.cz/x", sha256: "0".repeat(64) }] }
+  }, "ano");
+  assert.deepEqual(facts, { resolution: "175/2026", adoptedOn: "2026-03-23" });
+  const vote = normalizedStructuredFacts({
+    kind: "parliamentary-vote",
+    payload: { externalVoteId: "1", individualVotes: [{ mpId: "1" }], partyVoteSummaries: [{ partyId: "ano", majorityChoice: "yes" }, { partyId: "spd", majorityChoice: "no" }] }
+  }, "ano");
+  assert.deepEqual(vote, { externalVoteId: "1", relevantPartyVoteSummary: { partyId: "ano", majorityChoice: "yes" } });
 });

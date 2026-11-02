@@ -284,6 +284,25 @@ test("each conduct names the version it concerns: the submission the proposal, t
   assert.match(pkg.evidence.find(({ role }) => role === "law-change").factSummary, /Versions: proposed text; text approved by the Chamber\./);
 });
 
+test("a vote carries only its party's club result, never the agenda item", () => {
+  const vote = attributedVoteRecord({ payload: {
+    partyVoteSummaries: [
+      { partyId: fiscalPromise.partyId, attributionStatus: "attributed", majorityChoice: "yes", counts: { yes: 20, no: 0 }, strictMajorityThreshold: 11, eligibleMemberCount: 21 },
+      { partyId: "other", attributionStatus: "attributed", majorityChoice: "no", counts: { yes: 0, no: 30 }, strictMajorityThreshold: 16, eligibleMemberCount: 31 }
+    ],
+    agendaItem: { externalAgendaItemId: "7", number: 3, titleCz: "Bod schůze", suffixCz: null },
+    linkedPrints: [
+      { externalPrintId: "43200", printKindId: "1", historyContexts: [{ actionCz: "souhlas", stageCz: "3. čtení" }] },
+      { externalPrintId: "49999", printKindId: "1", historyContexts: [] }
+    ]
+  } });
+  const pkg = buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: [{ change: lawChange(1), route }], recordsByPrintId: new Map([["43200", [vote]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
+  const facts = pkg.evidence.find(({ type }) => type === "parliamentary-vote").structuredFacts;
+  assert.equal(facts.partyVoteSummaries, undefined);
+  assert.equal(facts.agendaItem, undefined);
+  assert.equal(facts.relevantPartyVoteSummary.partyId, fiscalPromise.partyId);
+});
+
 test("a change added in the debate was never submitted; a removed change is named as removed", () => {
   const added = { ...lawChange(2), addedIn: "approved", versions: { approved: { heading: "ČÁST DRUHÁ", titleCz: "Změna", textCz: "Nová část.", document: null } } };
   assert.equal(versionOfChange(added, { version: "proposed", withSenateResolution: false, mark: null }), null);
