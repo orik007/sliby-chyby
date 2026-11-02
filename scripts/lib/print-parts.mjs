@@ -159,14 +159,18 @@ export function isPdfOnlyNotice(paragraphs) {
  * one is more than the notice that the text is published only as a PDF; when
  * every one is only that notice, the scan of the first is read with
  * `readScan(scan)`, and without a scan `warn(file)` reports it. A Word file
- * that cannot be read (`readWord` gives null) ends the reading, as does a
- * section without Word files; both give null.
+ * that cannot be read (`readWord` gives null) ends the reading: with null,
+ * or, after a notice, with that notice's scan. A section without Word files
+ * gives null.
  */
 export async function readProposalText(files, { readWord, readScan, warn }) {
   let pdfOnly = null;
   for (const file of files) {
     const text = await readWord(file);
-    if (!text) return null;
+    if (!text) {
+      if (!pdfOnly) return null;
+      break;
+    }
     if (!isPdfOnlyNotice(text.paragraphs)) return text;
     pdfOnly ??= file;
   }
@@ -501,6 +505,12 @@ function latestTextVersion(change) {
 
 // A version whose text is the act as promulgated names that act
 // (`promulgatedAct`); no other version has the field.
+// A text's document as a law change keeps it: its name, its URL, and whether
+// its text was read by OCR from a scan.
+function documentOf(document) {
+  return { filename: document.filename, url: document.url, ...(document.readByOcr ? { readByOcr: true } : {}) };
+}
+
 function versionOf(part, amendedAct, document, effectiveCz = null, promulgatedAct = null) {
   return {
     heading: part.heading,
@@ -508,7 +518,7 @@ function versionOf(part, amendedAct, document, effectiveCz = null, promulgatedAc
     textCz: part.paragraphs ? part.paragraphs.join("\n") : null,
     amendedAct,
     effectiveCz,
-    document: document ? { filename: document.filename, url: document.url, ...(document.readByOcr ? { readByOcr: true } : {}) } : null,
+    document: document ? documentOf(document) : null,
     ...(promulgatedAct ? { promulgatedAct } : {})
   };
 }
@@ -638,7 +648,7 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [], g
   const single = String(print.kindId) !== treatyPrintKindId && changes.filter((change) => change.fromFirstText).length === 1;
   const subPrintText = ({ partNumber, document, paragraphs }) => ({
     partNumber,
-    document: { filename: document.filename, url: document.url, ...(document.readByOcr ? { readByOcr: true } : {}) },
+    document: documentOf(document),
     textCz: paragraphs.join("\n")
   });
   const resolutions = senateResolutions.map(subPrintText);

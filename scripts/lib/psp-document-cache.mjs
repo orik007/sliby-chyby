@@ -35,8 +35,11 @@ const fileContentTypes = {
   xlsx: ["openxmlformats-officedocument", "application/vnd.ms-excel", "application/octet-stream", "application/zip"],
   pdf: ["application/pdf", "application/octet-stream"]
 };
-export const pspDocumentFileOptions = Object.fromEntries(Object.entries(fileContentTypes).map(([format, expectedContentTypes]) => [format, { maxBytes: 20_000_000, expectedContentTypes }]));
-export const anyPspDocumentFileOptions = { maxBytes: 20_000_000, expectedContentTypes: [...new Set(Object.values(fileContentTypes).flat())] };
+// A scanned PDF is far larger than a Word file: print 105's 18-page treaty
+// scan is 6 MB, so 100 MB holds a scan of about 300 pages.
+const maxBytesOf = (format) => (format === "pdf" ? 100_000_000 : 20_000_000);
+export const pspDocumentFileOptions = Object.fromEntries(Object.entries(fileContentTypes).map(([format, expectedContentTypes]) => [format, { maxBytes: maxBytesOf(format), expectedContentTypes }]));
+export const anyPspDocumentFileOptions = { maxBytes: maxBytesOf("pdf"), expectedContentTypes: [...new Set(Object.values(fileContentTypes).flat())] };
 
 // The numeric document ID of an orig2.sqw URL, or null without one.
 export function pspDocumentId(url) {
@@ -80,6 +83,9 @@ export function createPspDocumentCache(directory, today) {
         try {
           return { value: await extract(bytes), error: null };
         } catch (error) {
+          // A failure of the reading machine (a missing program), not of the
+          // file, fails the run and is never kept.
+          if (error?.notOfTheFile) throw error;
           return { value: null, error: error instanceof Error ? error.message : String(error) };
         }
       };

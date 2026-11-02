@@ -128,6 +128,10 @@ test("reads the next Word file after one that only says its text is a PDF, and t
   const unreadable = reading({});
   assert.equal(await readProposalText(files, unreadable.readers), null);
   assert.deepEqual(unreadable.read, ["t0197c0.docx"]);
+  // A notice, then a Word file that cannot be read: the notice's scan is read.
+  const afterNotice = reading({ "t0197c0.docx": notice });
+  assert.deepEqual(await readProposalText(files, afterNotice.readers), { scanned: "t0197c0.pdf" });
+  assert.deepEqual(afterNotice.read, ["t0197c0.docx", "t0197b0.doc", "t0197c0.pdf"]);
   // Only the notice and no PDF of the same name: reported, no text.
   const noScan = reading({ "t0197c0.docx": notice });
   assert.equal(await readProposalText([{ ...files[0], scan: null }], noScan.readers), null);

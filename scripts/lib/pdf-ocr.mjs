@@ -4,7 +4,21 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { promisify } from "node:util";
 
-const run = promisify(execFile);
+const execute = promisify(execFile);
+
+// A program that is missing, or Tesseract without its Czech data, is a
+// failure of the machine, not of the scan: it is marked so the document
+// cache fails the run instead of keeping it as the file's reading.
+async function run(program, args, options) {
+  try {
+    return await execute(program, args, options);
+  } catch (error) {
+    if (error?.code === "ENOENT" || /Failed loading language|Error opening data file/u.test(String(error?.stderr ?? ""))) {
+      throw Object.assign(new Error(`OCR is not installed (${program}): ${error.message}`), { notOfTheFile: true });
+    }
+    throw error;
+  }
+}
 
 // The resolution the pages are rendered at for OCR, the resolution at which
 // psp.cz's scans of the treaties are stored (print 105: 300 ppi).

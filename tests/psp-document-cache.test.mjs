@@ -30,6 +30,10 @@ test("reads a file under a document ID once and keeps its text for every later r
     throw new Error("no paragraphs");
   }, download("x"));
   assert.deepEqual({ value: unreadable.value, error: unreadable.error }, { value: null, error: "no paragraphs" });
+  // A failure of the machine (a missing program) fails and is never kept.
+  await assert.rejects(second.read(url(3), "lines-v1", () => {
+    throw Object.assign(new Error("OCR is not installed"), { notOfTheFile: true });
+  }, download("y")), /OCR is not installed/);
   assert.deepEqual((await readdir(directory)).sort(), ["1.json", "2.json"]);
   const entry = JSON.parse(await readFile(join(directory, "1.json"), "utf8"));
   assert.deepEqual(Object.keys(entry.extractions).sort(), ["lines-v1", "upper-v1"]);

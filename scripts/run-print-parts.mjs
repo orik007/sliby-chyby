@@ -9,7 +9,7 @@ import { extractPdfOcrParagraphs } from "./lib/pdf-ocr.mjs";
 import { anyPspDocumentFileOptions, createPspDocumentCache, pspDocumentExtractions, pspDocumentFileOptions } from "./lib/psp-document-cache.mjs";
 import { createPspPageCache, readPspPage } from "./lib/psp-page-cache.mjs";
 import { log, progress } from "./lib/run-log.mjs";
-import { collectPrints, governmentOpinionSectionLabels, hasDividedPart, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, partedPrintKindIds, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentFiles, proposalDocumentLink, readPromulgatedParagraphs, readProposalText } from "./lib/print-parts.mjs";
+import { collectPrints, governmentOpinionSectionLabels, hasDividedPart, isPdfOnlyNotice, laterTextDocxLink, laterTextLinks, lawChangesOfPrint, partedPrintKindIds, promulgatedActOfHistory, promulgatedTextUrl, promulgatedTextVersions, proposalBody, proposalDocumentFiles, proposalDocumentLink, readPromulgatedParagraphs, readProposalText } from "./lib/print-parts.mjs";
 import { loadTrackedPromises } from "./lib/published-promises.mjs";
 
 /**
@@ -129,7 +129,14 @@ async function laterText(source, print, version, url, warnings) {
     warnings.push({ printNumber: print.number, kind: "later-text-without-docx", version, detail: `the ${version} text is listed without a DOCX file` });
     return null;
   }
-  return fetchWordText(source, docxUrl, laterTextNames[version](print.number), "docx", warnings, print.number, version);
+  const text = await fetchWordText(source, docxUrl, laterTextNames[version](print.number), "docx", warnings, print.number, version);
+  // A later text that only says it is a PDF has no text to read; its page
+  // links no scan, so it is reported like a text without a DOCX file.
+  if (text && isPdfOnlyNotice(text.paragraphs)) {
+    warnings.push({ printNumber: print.number, kind: "later-text-pdf-only", version, detail: `the ${version} text's DOCX only says the text is published as a PDF` });
+    return null;
+  }
+  return text;
 }
 
 // The approved text of a bill the Senate rejected: the sub-print with the

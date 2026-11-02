@@ -20,3 +20,13 @@ test("reads a scanned treaty page by OCR in Czech", { timeout: 120_000 }, async 
     "1. Tato smlouva se vztahuje na daně z příjmu ukládané jménem každého ze smluvních států nebo jeho nižších správních útvarů nebo místních úřadů, ať je způsob vybírání jakýkoli."
   ]);
 });
+
+test("a missing OCR program fails as a failure of the machine, never as the file's reading", async () => {
+  const path = process.env.PATH;
+  process.env.PATH = "/nonexistent";
+  try {
+    await assert.rejects(() => extractPdfOcrParagraphs(Buffer.from("%PDF-1.4")), (error) => error.notOfTheFile === true && /OCR is not installed/.test(error.message));
+  } finally {
+    process.env.PATH = path;
+  }
+});
