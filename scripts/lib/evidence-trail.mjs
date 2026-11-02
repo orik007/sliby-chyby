@@ -22,7 +22,8 @@ function proposalKind(facts) {
 
 // Why the linked text is not exactly the one the conduct concerned
 // (docs/evidence-pipeline.md, Conduct and version), or where it comes from
-// when psp.cz does not publish it (Text from the Collection of Laws), or null. A version known
+// when psp.cz does not publish it (Text from the Collection of Laws) or
+// publishes it only as a scanned PDF read by OCR, or null. A version known
 // only by the print title has no document to link.
 function versionNote(concern, entry) {
   if (concern.removed) return "removed";
@@ -31,6 +32,7 @@ function versionNote(concern, entry) {
   if (concern.publishedVersionMissing) return "published-version-missing";
   if (concern.mark === "third-reading-rejection") return "third-reading-rejection";
   if (entry.promulgatedAct) return "promulgated-text";
+  if (entry.document?.readByOcr) return "ocr-text";
   return null;
 }
 
@@ -71,7 +73,7 @@ function stepFromConduct(item, printId, changes) {
   // The government's opinion on a bill it did not submit links to the
   // opinion's own page on psp.cz.
   if (item.type === "government-opinion") {
-    return { kind: "government-opinion", evidenceId: item.id, date: item.publishedAt, opinion: facts.opinion, printPartCz: `${facts.printNumber}/${facts.partNumber}`, url: item.url, ...textOf(item, changes) };
+    return { kind: "government-opinion", evidenceId: item.id, date: item.publishedAt, opinion: facts.opinion, printPartCz: `${facts.printNumber}/${facts.partNumber}`, url: item.url, ...(facts.document?.readByOcr ? { readByOcr: true } : {}), ...textOf(item, changes) };
   }
   // An amendment links to its parliamentary document on psp.cz.
   if (item.type === "member-amendment") {
@@ -191,7 +193,7 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
       // precedes that vote.
       ...evidence
         .filter(({ role, id }) => role === "senate-resolution" && resolutionIds.has(id))
-        .map((item) => ({ kind: "senate-resolution", evidenceId: item.id, date: item.publishedAt, printPartCz: `${item.structuredFacts.printNumber}/${item.structuredFacts.partNumber}`, url: item.url }))
+        .map((item) => ({ kind: "senate-resolution", evidenceId: item.id, date: item.publishedAt, printPartCz: `${item.structuredFacts.printNumber}/${item.structuredFacts.partNumber}`, url: item.url, ...(item.structuredFacts.document?.readByOcr ? { readByOcr: true } : {}) }))
     ].sort((left, right) => left.date.localeCompare(right.date) || stepOrder[left.kind] - stepOrder[right.kind]);
     return [{
       printNumber: changes[0].structuredFacts.printNumber,

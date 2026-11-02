@@ -14,7 +14,10 @@ import {
   promulgatedTextVersions,
   proposalBody,
   governmentOpinionSectionLabels,
+  isPdfOnlyNotice,
+  proposalDocumentFiles,
   proposalDocumentLink,
+  readProposalText,
   splitProposalText,
   splitTreatyText,
   changeThroughVersion,
@@ -77,6 +80,70 @@ test("reads only the proposal-text Word file from a print page, a DOCX before a 
   assert.equal(print91.sectionLabel, "Text");
   assert.equal(proposalDocumentLink("<p>Soubory sněmovního tisku</p><table><tr><th>Důvodová zpráva</th></tr><tr><td><a href=\"/sqw/text/orig2.sqw?idd=1\">t0001a0.docx</a></td></tr></table>", pageUrl(1)), null);
   assert.throws(() => proposalDocumentLink("Soubory sněmovního tisku<table><tr><th>Text</th></tr><tr><td><a href=\"https://other.example/orig2.sqw?idd=1\">t.docx</a></td></tr></table>", pageUrl(1)), /outside the PSP allowlist/);
+});
+
+test("lists the Word files of a treaty's Czech text in reading order, each with the scan of the same name", async () => {
+  // Print 197 lists two Czech texts: a DOCX that only says the text is a
+  // PDF, and a DOC with the treaty's text, which is read next.
+  const print197 = proposalDocumentFiles(await fixture("print-197-files.html"), pageUrl(197));
+  assert.deepEqual(print197.map(({ filename, format, sectionLabel, scan }) => [filename, format, sectionLabel, scan?.filename ?? null]), [
+    ["t0197c0.docx", "docx", "Text v českém jazyce", "t0197c0.pdf"],
+    ["t0197b0.doc", "doc", "Text v českém jazyce", "t0197b0.pdf"]
+  ]);
+  assert.equal(print197[0].scan.url, "https://www.psp.cz/sqw/text/orig2.sqw?idd=270369");
+  // Print 105 has one Czech text, a DOCX whose scan is read when the DOCX
+  // only says the text is a PDF; the text in another language is not read.
+  const print105 = proposalDocumentFiles(await fixture("print-105-files.html"), pageUrl(105));
+  assert.deepEqual(print105.map(({ filename, scan }) => [filename, scan.filename, scan.url]), [["t0105b0.docx", "t0105b0.pdf", "https://www.psp.cz/sqw/text/orig2.sqw?idd=267545"]]);
+  assert.equal(proposalDocumentLink(await fixture("print-105-files.html"), pageUrl(105)).filename, "t0105b0.docx");
+});
+
+test("reads the next Word file after one that only says its text is a PDF, and the scan when every one says so", async () => {
+  const notice = { paragraphs: ["Tento dokument je pouze ve formátu pdf/a."] };
+  const treaty = { paragraphs: ["SMLOUVA", "Článek 1"] };
+  const files = proposalDocumentFiles(await fixture("print-197-files.html"), pageUrl(197));
+  const reading = (texts) => {
+    const read = [];
+    return {
+      read,
+      readers: {
+        readWord: async (file) => { read.push(file.filename); return texts[file.filename]; },
+        readScan: async (scan) => { read.push(scan.filename); return { scanned: scan.filename }; },
+        warn: (file) => read.push(`warning ${file.filename}`)
+      }
+    };
+  };
+  // Print 197: the DOCX is only the notice, the DOC holds the treaty.
+  const doc = reading({ "t0197c0.docx": notice, "t0197b0.doc": treaty });
+  assert.equal(await readProposalText(files, doc.readers), treaty);
+  assert.deepEqual(doc.read, ["t0197c0.docx", "t0197b0.doc"]);
+  // Both only the notice: the scan of the first is read by OCR.
+  const scan = reading({ "t0197c0.docx": notice, "t0197b0.doc": notice });
+  assert.deepEqual(await readProposalText(files, scan.readers), { scanned: "t0197c0.pdf" });
+  assert.deepEqual(scan.read, ["t0197c0.docx", "t0197b0.doc", "t0197c0.pdf"]);
+  // A text is read from the first file that holds one; an unreadable file ends the reading.
+  const first = reading({ "t0197c0.docx": treaty });
+  assert.equal(await readProposalText(files, first.readers), treaty);
+  assert.deepEqual(first.read, ["t0197c0.docx"]);
+  const unreadable = reading({});
+  assert.equal(await readProposalText(files, unreadable.readers), null);
+  assert.deepEqual(unreadable.read, ["t0197c0.docx"]);
+  // A notice, then a Word file that cannot be read: the notice's scan is read.
+  const afterNotice = reading({ "t0197c0.docx": notice });
+  assert.deepEqual(await readProposalText(files, afterNotice.readers), { scanned: "t0197c0.pdf" });
+  assert.deepEqual(afterNotice.read, ["t0197c0.docx", "t0197b0.doc", "t0197c0.pdf"]);
+  // Only the notice and no PDF of the same name: reported, no text.
+  const noScan = reading({ "t0197c0.docx": notice });
+  assert.equal(await readProposalText([{ ...files[0], scan: null }], noScan.readers), null);
+  assert.deepEqual(noScan.read, ["t0197c0.docx", "warning t0197c0.docx"]);
+  assert.equal(await readProposalText([], noScan.readers), null);
+});
+
+test("recognises the Word file that only says its text is a PDF", () => {
+  assert.equal(isPdfOnlyNotice(["Tento dokument je pouze ve formátu pdf/a."]), true);
+  assert.equal(isPdfOnlyNotice(["Tento dokument je pouze ve formátu PDF/A"]), true);
+  assert.equal(isPdfOnlyNotice(["Tento dokument je pouze ve formátu pdf/a.", "Článek 1"]), false, "a file with more text is read");
+  assert.equal(isPdfOnlyNotice(["Smlouva mezi Českou republikou a Maltskou republikou"]), false);
 });
 
 test("cuts the explanatory memorandum and splits a bill into its parts", () => {

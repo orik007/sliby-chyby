@@ -96,7 +96,9 @@ export function lawChangeText(change, { numbered = false } = {}) {
     const entry = change.versions[version];
     // A text psp.cz does not publish, read from the act as promulgated
     // (docs/evidence-pipeline.md, Text from the Collection of Laws), says so.
-    const label = `Version: ${versionLabels[version]}${entry.promulgatedAct ? ` (psp.cz does not publish it; this is the act as promulgated in the Collection of Laws, zákon č. ${entry.promulgatedAct} Sb., without its annexes)` : ""}`;
+    // A text psp.cz publishes only as a scanned PDF, read by OCR
+    // (docs/evidence-pipeline.md, Chamber data rules), says so.
+    const label = `Version: ${versionLabels[version]}${entry.promulgatedAct ? ` (psp.cz does not publish it; this is the act as promulgated in the Collection of Laws, zákon č. ${entry.promulgatedAct} Sb., without its annexes)` : ""}${entry.document?.readByOcr ? " (psp.cz publishes it only as a scanned PDF; this text was read from the scan by OCR and can contain misread characters)" : ""}`;
     if (entry.removed) return `${label}\nThis part is not in this text: it was removed during the debate.`;
     const effective = !entry.effectiveCz ? ""
       : entry.effectiveCz === previousEffective?.text ? `\nEffective date of this text (účinnost): the same as in the ${versionLabels[previousEffective.version]}.`

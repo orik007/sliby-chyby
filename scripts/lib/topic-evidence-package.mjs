@@ -284,6 +284,7 @@ function evidenceFromLawChange(change, route, publishedAt, senateResolutionIds) 
     if (entry.removed) return `removed in the ${versionLabels[version]}`;
     if (entry.sameAs) return `${versionLabels[version]} (the same as the ${versionLabels[entry.sameAs]})`;
     if (entry.promulgatedAct) return `${versionLabels[version]} (as promulgated: zákon č. ${entry.promulgatedAct} Sb.)`;
+    if (entry.document?.readByOcr) return `${versionLabels[version]} (read by OCR from the scanned PDF psp.cz publishes)`;
     return entry.textCz === null ? `${versionLabels[version]}: print title only` : versionLabels[version];
   };
   return {
@@ -437,8 +438,8 @@ function evidenceFromSenateResolution(change, resolution, publishedAt) {
     url: resolution.document.url,
     locator: resolution.document.filename,
     primary: true,
-    factSummary: `The Senate's resolution on print ${change.printNumber}, rejecting the bill or returning it with amendments, as published by the Chamber of Deputies (sub-print ${change.printNumber}/${resolution.partNumber}).`,
-    structuredFacts: { externalPrintId: change.printId, printNumber: change.printNumber, partNumber: resolution.partNumber, textCz: resolution.textCz },
+    factSummary: `The Senate's resolution on print ${change.printNumber}, rejecting the bill or returning it with amendments, as published by the Chamber of Deputies (sub-print ${change.printNumber}/${resolution.partNumber})${resolution.document.readByOcr ? "; its text was read by OCR from the scanned PDF psp.cz publishes" : ""}.`,
+    structuredFacts: { externalPrintId: change.printId, printNumber: change.printNumber, partNumber: resolution.partNumber, textCz: resolution.textCz, ...(resolution.document.readByOcr ? { document: resolution.document } : {}) },
     sourceRecordHash: sha256(resolution.textCz)
   };
 }

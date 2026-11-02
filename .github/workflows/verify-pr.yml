@@ -32,6 +32,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install OCR for scanned print texts
+        # The tests read a scanned print page with Poppler and Tesseract in
+        # Czech, as the pipeline does (docs/evidence-pipeline.md, Print text).
+        run: sudo apt-get update -q && sudo apt-get install -y -q --no-install-recommends poppler-utils tesseract-ocr tesseract-ocr-ces
+
       - name: Run tests and production build
         run: npm run build
 
