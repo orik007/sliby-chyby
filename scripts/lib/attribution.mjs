@@ -198,8 +198,11 @@ function partyVoteFacts(record, partyId) {
 
 /**
  * The evidence shape an assessor package sends, not the raw collector
- * payload: a parliamentary vote's `individualVotes` (one entry per MP) is
- * replaced with the one `relevantPartyVoteSummary` for this promise's party.
+ * payload: a parliamentary vote's `individualVotes` (one entry per MP) and
+ * `partyVoteSummaries` (every club) are replaced with the one
+ * `relevantPartyVoteSummary` for this promise's party, and the session's
+ * `agendaItem` and a resolution's `files`, which judging the conduct never
+ * reads, are left out.
  */
 export function normalizedStructuredFacts(record, partyId) {
   const structuredFacts = { ...record.payload };
@@ -207,6 +210,13 @@ export function normalizedStructuredFacts(record, partyId) {
   // A regulation's or resolution's text is its law change's, not its
   // conduct's.
   delete structuredFacts.paragraphs;
+  // What judging the conduct never reads (docs/evidence-pipeline.md,
+  // Package): the other parties' club results (the party's own is
+  // `relevantPartyVoteSummary`), the session's agenda item, and the list of a
+  // resolution's files with their hashes.
+  delete structuredFacts.partyVoteSummaries;
+  delete structuredFacts.agendaItem;
+  delete structuredFacts.files;
   if (record.kind === "parliamentary-vote") {
     structuredFacts.relevantPartyVoteSummary = partyVoteFacts(record, partyId);
   }
