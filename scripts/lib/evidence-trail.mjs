@@ -73,7 +73,7 @@ function stepFromConduct(item, printId, changes) {
   // The government's opinion on a bill it did not submit links to the
   // opinion's own page on psp.cz.
   if (item.type === "government-opinion") {
-    return { kind: "government-opinion", evidenceId: item.id, date: item.publishedAt, opinion: facts.opinion, printPartCz: `${facts.printNumber}/${facts.partNumber}`, url: item.url, ...textOf(item, changes) };
+    return { kind: "government-opinion", evidenceId: item.id, date: item.publishedAt, opinion: facts.opinion, printPartCz: `${facts.printNumber}/${facts.partNumber}`, url: item.url, ...(facts.document?.readByOcr ? { readByOcr: true } : {}), ...textOf(item, changes) };
   }
   // An amendment links to its parliamentary document on psp.cz.
   if (item.type === "member-amendment") {
@@ -193,7 +193,7 @@ export function buildEvidenceTrail(evidencePackage, auditRecord) {
       // precedes that vote.
       ...evidence
         .filter(({ role, id }) => role === "senate-resolution" && resolutionIds.has(id))
-        .map((item) => ({ kind: "senate-resolution", evidenceId: item.id, date: item.publishedAt, printPartCz: `${item.structuredFacts.printNumber}/${item.structuredFacts.partNumber}`, url: item.url }))
+        .map((item) => ({ kind: "senate-resolution", evidenceId: item.id, date: item.publishedAt, printPartCz: `${item.structuredFacts.printNumber}/${item.structuredFacts.partNumber}`, url: item.url, ...(item.structuredFacts.document?.readByOcr ? { readByOcr: true } : {}) }))
     ].sort((left, right) => left.date.localeCompare(right.date) || stepOrder[left.kind] - stepOrder[right.kind]);
     return [{
       printNumber: changes[0].structuredFacts.printNumber,
