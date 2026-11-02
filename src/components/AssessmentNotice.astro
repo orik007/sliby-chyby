@@ -1,0 +1,14 @@
+---
+import { formatDate } from "../lib/evidence-trail";
+import type { AssessmentNotice } from "../lib/schema";
+interface Props { notice: AssessmentNotice; assessedOn: string; }
+const { notice, assessedOn } = Astro.props;
+// "vztahuje se 1 text", "vztahují se 2 texty", "vztahuje se 5 textů".
+const count = notice.lawChangeCount;
+const few = count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 10 || count % 100 >= 20);
+const phrase = count === 1 ? "vztahuje 1 změna zákona nebo jiný úřední text" : few ? `vztahují ${count} změny zákonů a další úřední texty` : `vztahuje ${count} změn zákonů a dalších úředních textů`;
+---
+<div class="assessment-notice">
+  <strong>Příliš mnoho podkladů na posouzení</strong>
+  <p>K tomuto slibu se ke dni {formatDate(notice.asOf)} {phrase} (části zákonů a smluv, nařízení, vyhlášky a usnesení vlády), k nimž strana jednala. To je víc podkladů, než dokáže hodnoticí model posoudit najednou, a proto toto hodnocení automaticky neaktualizujeme. Uvedený stav vychází z hodnocení zveřejněného {formatDate(assessedOn)} a nemusí zahrnovat pozdější kroky strany.</p>
+</div>

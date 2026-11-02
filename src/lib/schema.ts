@@ -70,6 +70,12 @@ export const assessmentRevisionSchema = z.object({ id: z.string().min(1), promis
   if (revision.baselinePromiseSourceId && (revision.evidenceSourceIds.length !== 1 || revision.evidenceSourceIds[0] !== revision.baselinePromiseSourceId)) context.addIssue({ code: "custom", path: ["evidenceSourceIds"], message: "Baseline revisions must list only their baseline promise source" });
 });
 export const systemStatusSchema = z.object({ lastSuccessfulCollectionAt: z.iso.datetime() });
+// A notice on a promise whose current assessment the pipeline cannot renew:
+// its evidence package is larger than the models can read
+// (docs/evidence-pipeline.md, From proposal to public score).
+export const assessmentNoticeSchema = z.object({ promiseId: z.string().min(1), kind: z.enum(["too-much-evidence"]), asOf: z.iso.date(), lawChangeCount: z.number().int().positive() });
+export const assessmentNoticeDataSchema = z.object({ notices: z.array(assessmentNoticeSchema) });
+export type AssessmentNotice = z.infer<typeof assessmentNoticeSchema>;
 // Site features only, newest first; content and score changes are not listed
 // (docs/decisions.md).
 export const changelogSchema = z.object({
