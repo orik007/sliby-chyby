@@ -21,18 +21,21 @@ export function pspPageContent(html) {
 // them, so a check compares a kept page without them (docs/evidence-pipeline.md,
 // Closed prints).
 const eurovocDescriptors = /<br><br><b>Deskriptory EUROVOCu:<\/b>[^<]*(?:<a [^>]*>[^<]*<\/a>[^<]*)*<p>/u;
-// psp.cz also writes a counter into a history page, as an HTML comment of
-// three dashes and a number, that changes between reads (print 16 of term 10:
-// "<!--- 1-->" on 20 October 2026, "<!--- 4-->" on 2 November 2026, the page
-// otherwise the same). It holds nothing but that number, which no reader
-// reads; every other comment is compared, since some carry data
-// ("<!-- idd_pdf_is=1, pdf_all:1, idd_id_tf=14 -->" on a later-text page).
-const commentCounters = /<!--- \d+-->/gu;
-// A kept page as a check compares it: without its comment counters, removed
-// first so a counter never hides its EUROVOC descriptors, and without those
+// psp.cz also writes a number into a history page's step, as an HTML comment
+// of three dashes and the number, and can change it after the print closed:
+// on print 16 of term 10 the third-reading step had "<!--- 1-->" on 20 October
+// 2026 and "<!--- 4-->" from 2 November 2026 (the same in four reads that day),
+// the page otherwise the same. psp.cz does not document it; it matches the
+// four votes of that third reading in the open data (118 to 121), which the
+// collector reads from there. No reader reads the comment; every other
+// comment is compared, since some carry data ("<!-- idd_pdf_is=1, pdf_all:1,
+// idd_id_tf=14 -->" on a later-text page).
+const stepCommentNumbers = /<!--- \d+-->/gu;
+// A kept page as a check compares it: without its step comment numbers, removed
+// first so a number never hides its EUROVOC descriptors, and without those
 // descriptors (docs/evidence-pipeline.md, Closed prints).
 export function comparablePageContent(content) {
-  return content.replace(commentCounters, "").replace(eurovocDescriptors, "");
+  return content.replace(stepCommentNumbers, "").replace(eurovocDescriptors, "");
 }
 
 // "Sněmovní dokument nebyl nalezen.", "Dokument nebyl nalezen." (checked on
@@ -58,7 +61,7 @@ function validEntry(entry, id) {
  * what it reads). A kept page read without `keep` is removed.
  * `checkSample(download, sampleSize)` downloads the pages checked longest
  * ago and fails on the first one whose content changed in anything but its
- * EUROVOC descriptors and its comment counters.
+ * EUROVOC descriptors and its step comment numbers.
  */
 export function createPspPageCache(directory, today) {
   invariant(isoDate.test(today), "The page cache needs the run date");

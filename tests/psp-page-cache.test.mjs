@@ -97,9 +97,9 @@ test("refuses a damaged page cache entry", async () => {
   assert.throws(() => createPspPageCache(directory, "2026-10-19"), /Invalid psp\.cz page cache entry/);
 });
 
-test("a check ignores the counter psp.cz writes into a history page's HTML comments", async () => {
-  // Print 16 of term 10: read on 20 October 2026 and on 2 November 2026,
-  // differing only in this comment.
+test("a check ignores the number psp.cz writes into a history step's HTML comment", async () => {
+  // Print 16 of term 10: its third-reading step read on 20 October 2026 and on
+  // 2 November 2026, differing only in this comment.
   const before = '<p><strong class="highlight">3. Čtení</strong> proběhlo <a href="../eknih/2025ps/stenprot/027schuz/27-1.html#q55">10.&nbsp;7.&nbsp;2026</a> na 27. schůzi.<!--- 1--> Návrh zákona <B>schválen</B>';
   const after = before.replace("<!--- 1-->", "<!--- 4-->");
   assert.equal(comparablePageContent(after), comparablePageContent(before));
