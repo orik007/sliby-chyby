@@ -21,21 +21,18 @@ export function pspPageContent(html) {
 // them, so a check compares a kept page without them (docs/evidence-pipeline.md,
 // Closed prints).
 const eurovocDescriptors = /<br><br><b>Deskriptory EUROVOCu:<\/b>[^<]*(?:<a [^>]*>[^<]*<\/a>[^<]*)*<p>/u;
-// psp.cz also writes a number into a history page's step, as an HTML comment
-// of three dashes and the number, and can change it after the print closed:
-// on print 16 of term 10 the third-reading step had "<!--- 1-->" on 20 October
-// 2026 and "<!--- 4-->" from 2 November 2026 (the same in four reads that day),
-// the page otherwise the same. psp.cz does not document it; it matches the
-// four votes of that third reading in the open data (118 to 121), which the
-// collector reads from there. No reader reads the comment; every other
-// comment is compared, since some carry data ("<!-- idd_pdf_is=1, pdf_all:1,
-// idd_id_tf=14 -->" on a later-text page).
+// The undocumented number psp.cz writes into a history page's step as an
+// HTML comment ("<!--- 4-->"), which changed on print 16 after it closed and
+// no reader reads (docs/evidence-pipeline.md, Closed prints). Other comments,
+// and these on any other page, are compared.
 const stepCommentNumbers = /<!--- \d+-->/gu;
-// A kept page as a check compares it: without its step comment numbers, removed
-// first so a number never hides its EUROVOC descriptors, and without those
-// descriptors (docs/evidence-pipeline.md, Closed prints).
-export function comparablePageContent(content) {
-  return content.replace(stepCommentNumbers, "").replace(eurovocDescriptors, "");
+const historyPage = /\/historie\.sqw\?/u;
+// A kept page as a check compares it: on a history page without its step
+// comment numbers, removed first so a number never hides its EUROVOC
+// descriptors, and without those descriptors.
+export function comparablePageContent(content, url) {
+  const withoutNumbers = historyPage.test(url) ? content.replace(stepCommentNumbers, "") : content;
+  return withoutNumbers.replace(eurovocDescriptors, "");
 }
 
 // "Sněmovní dokument nebyl nalezen.", "Dokument nebyl nalezen." (checked on
@@ -103,7 +100,7 @@ export function createPspPageCache(directory, today) {
       const sample = oldestChecked(entries, sampleSize, ({ readOn }) => readOn < today);
       for (const entry of sample) {
         const content = pspPageContent(decodePspPage(await download(entry.url)));
-        invariant(content !== null && comparablePageContent(content) === comparablePageContent(entry.content), `psp.cz page of a closed print changed (${entry.url}): the rule that a closed print's pages do not change (docs/evidence-pipeline.md) no longer holds`);
+        invariant(content !== null && comparablePageContent(content, entry.url) === comparablePageContent(entry.content, entry.url), `psp.cz page of a closed print changed (${entry.url}): the rule that a closed print's pages do not change (docs/evidence-pipeline.md) no longer holds`);
         entry.checkedOn = today;
         saveCacheEntry(directory, entry);
         stats.checked += 1;
