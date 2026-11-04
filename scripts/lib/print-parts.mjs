@@ -143,20 +143,34 @@ export function proposalDocumentLink(html, pageUrl, sectionLabels = proposalSect
   return link ? { filename: link.filename, url: link.url, sectionLabel: link.sectionLabel, format: link.format } : null;
 }
 
-// What psp.cz puts in the Word file of a text it publishes only as a scanned
-// PDF ("Tento dokument je pouze ve formátu pdf/a."), seen in the Czech texts
-// of the treaties of prints 93, 105, 156 to 159, and 197 of the 10th term.
-const pdfOnlyNoticePattern = /^Tento dokument je pouze ve formátu pdf\/a\.?$/iu;
+// The notice psp.cz puts in the Word file of a text it publishes only as a
+// PDF: a short file ending with one of the sentences found in its Word files
+// (docs/evidence-pipeline.md, Print text), "… je pouze ve formátu pdf/a.",
+// "… je k dispozici pouze ve formátu PDF/A." or "… PDF.", and "… je
+// k dispozici ve verzi PDF/A".
+const pdfOnlyNoticePattern = /\bje\s+(?:k\s+dispozici\s+(?:pouze\s+ve\s+formátu|ve\s+verzi)|pouze\s+ve\s+formátu)\s+pdf(?:\/a)?\.?$/iu;
+// The longest notice found has 236 characters (print 93); a text is far
+// longer.
+const pdfOnlyNoticeMaxLength = 500;
 
-// Whether the paragraphs of a Word file are only that notice.
+// Whether a Word file holds only that notice: it ends with the sentence and
+// is short.
 export function isPdfOnlyNotice(paragraphs) {
-  return paragraphs.length === 1 && pdfOnlyNoticePattern.test(paragraphs[0].trim());
+  if (paragraphs.length === 0 || !pdfOnlyNoticePattern.test(paragraphs.at(-1).trim())) return false;
+  let length = 0;
+  for (const paragraph of paragraphs) {
+    length += paragraph.length + 1;
+    if (length > pdfOnlyNoticeMaxLength + 1) return false;
+  }
+  return true;
 }
 
 /**
  * The text of a proposal-text section from its Word files
  * (proposalDocumentFiles): each is read in order with `readWord(file)` until
- * one is more than the notice that the text is published only as a PDF; when
+ * one is more than the notice that the text is published only as a PDF, after
+ * a notice only the files of the notice's section (print 3 lists the draft
+ * resolution in another section after its treaty's notice); when
  * every one is only that notice, the scan of the first is read with
  * `readScan(scan)`, and without a scan `warn(file)` reports it. A Word file
  * that cannot be read (`readWord` gives null) ends the reading: with null,
@@ -166,6 +180,7 @@ export function isPdfOnlyNotice(paragraphs) {
 export async function readProposalText(files, { readWord, readScan, warn }) {
   let pdfOnly = null;
   for (const file of files) {
+    if (pdfOnly && file.sectionLabel !== pdfOnly.sectionLabel) continue;
     const text = await readWord(file);
     if (!text) {
       if (!pdfOnly) return null;
