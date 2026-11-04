@@ -137,12 +137,25 @@ test("reads the next Word file after one that only says its text is a PDF, and t
   assert.equal(await readProposalText([{ ...files[0], scan: null }], noScan.readers), null);
   assert.deepEqual(noScan.read, ["t0197c0.docx", "warning t0197c0.docx"]);
   assert.equal(await readProposalText([], noScan.readers), null);
+  // After a notice, a file of another section is never read (print 3 lists
+  // its draft resolution under the bill section after its treaty's notice).
+  const otherSection = [{ ...files[0] }, { ...files[1], sectionLabel: "Návrh zákona včetně důvodové zprávy" }];
+  const sectioned = reading({ "t0197c0.docx": notice, "t0197b0.doc": treaty });
+  assert.deepEqual(await readProposalText(otherSection, sectioned.readers), { scanned: "t0197c0.pdf" });
+  assert.deepEqual(sectioned.read, ["t0197c0.docx", "t0197c0.pdf"]);
 });
 
 test("recognises the Word file that only says its text is a PDF", () => {
   assert.equal(isPdfOnlyNotice(["Tento dokument je pouze ve formátu pdf/a."]), true);
   assert.equal(isPdfOnlyNotice(["Tento dokument je pouze ve formátu PDF/A"]), true);
-  assert.equal(isPdfOnlyNotice(["Tento dokument je pouze ve formátu pdf/a.", "Článek 1"]), false, "a file with more text is read");
+  // Every wording found: prints 156 to 159, 93, and 3 (after the title).
+  assert.equal(isPdfOnlyNotice(["Tato dohoda je k dispozici pouze ve formátu PDF/A."]), true);
+  assert.equal(isPdfOnlyNotice(["Dokument Dohoda o posíleném partnerství a spolupráci mezi Evropskou unií a jejími členskými státy na jedné straně a Republikou Uzbekistán na straně druhé, v českém jazyce, včetně podpisových doložek, je k dispozici pouze ve formátu PDF."]), true);
+  assert.equal(isPdfOnlyNotice(["Rámcová smlouva", "mezi", "Českou republikou", "a", "Slovenskou republikou", "o", "přeshraniční spolupráci", "v oblasti zdravotnické záchranné služby", "Text smlouvy je k dispozici ve verzi PDF/A"]), true);
+  assert.equal(isPdfOnlyNotice(["Tento dokument je pouze ve formátu pdf/a.", "Článek 1"]), false, "a file with more text after the sentence is read");
+  assert.equal(isPdfOnlyNotice(["x".repeat(600), "Text smlouvy je k dispozici ve verzi PDF/A"]), false, "a long text is read whatever it ends with");
+  assert.equal(isPdfOnlyNotice(["Příloha je ve formátu PDF."]), false, "only the wordings found are a notice");
+  assert.equal(isPdfOnlyNotice(["Mapy jsou ve verzi PDF"]), false);
   assert.equal(isPdfOnlyNotice(["Smlouva mezi Českou republikou a Maltskou republikou"]), false);
 });
 
