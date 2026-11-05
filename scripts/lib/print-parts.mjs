@@ -116,15 +116,85 @@ export function amendedActOfPart(paragraphs) {
 }
 
 /**
- * The proposal-text Word file of a print page: the first DOCX file listed
- * under one of the proposal sections or, when there is none, the first
- * Word 97-2003 (.doc) file there. Returns null when the page has neither
- * (for example, only a PDF, which is never read).
+ * The proposal-text Word files of a print page, in the order they are read:
+ * the DOCX files listed under one of the proposal sections, then the Word
+ * 97-2003 (.doc) files there. Each names the PDF listed in its section under
+ * the same name (`scan`), or null; a PDF is read only as the scan of a Word
+ * file that holds nothing but pdfOnlyNotice (docs/evidence-pipeline.md,
+ * Chamber data rules).
+ */
+export function proposalDocumentFiles(html, pageUrl, sectionLabels = proposalSectionLabels) {
+  const listed = listedFiles(html, pageUrl).filter(({ section }) => section && sectionLabels.some((label) => label.test(section)));
+  const baseName = (filename) => filename.replace(/\.[a-z]+$/iu, "").toLowerCase();
+  const scanOf = (file) => listed.find(({ section, format, filename }) => format === "pdf" && section === file.section && baseName(filename) === baseName(file.filename)) ?? null;
+  return ["docx", "doc"].flatMap((wanted) => listed.filter(({ format }) => format === wanted)).map((file) => {
+    const scan = scanOf(file);
+    return { filename: file.filename, url: file.url, sectionLabel: file.section, format: file.format, scan: scan ? { filename: scan.filename, url: scan.url } : null };
+  });
+}
+
+/**
+ * The proposal-text Word file of a print page read first
+ * (proposalDocumentFiles), or null when the page has none (for example,
+ * only a PDF).
  */
 export function proposalDocumentLink(html, pageUrl, sectionLabels = proposalSectionLabels) {
-  const files = listedFiles(html, pageUrl).filter(({ section, format }) => section && (format === "docx" || format === "doc") && sectionLabels.some((label) => label.test(section)));
-  const link = files.find(({ format }) => format === "docx") ?? files.find(({ format }) => format === "doc");
-  return link ? { filename: link.filename, url: link.url, sectionLabel: link.section, format: link.format } : null;
+  const [link] = proposalDocumentFiles(html, pageUrl, sectionLabels);
+  return link ? { filename: link.filename, url: link.url, sectionLabel: link.sectionLabel, format: link.format } : null;
+}
+
+// The notice psp.cz puts in the Word file of a text it publishes only as a
+// PDF: a short file ending with one of the sentences found in its Word files
+// (docs/evidence-pipeline.md, Print text), "… je pouze ve formátu pdf/a.",
+// "… je k dispozici pouze ve formátu PDF/A." or "… PDF.", and "… je
+// k dispozici ve verzi PDF/A".
+const pdfOnlyNoticePattern = /\bje\s+(?:k\s+dispozici\s+(?:pouze\s+ve\s+formátu|ve\s+verzi)|pouze\s+ve\s+formátu)\s+pdf(?:\/a)?\.?$/iu;
+// The longest notice found has 236 characters (print 93); a text is far
+// longer.
+const pdfOnlyNoticeMaxLength = 500;
+
+// Whether a Word file holds only that notice: it ends with the sentence and
+// is short.
+export function isPdfOnlyNotice(paragraphs) {
+  if (paragraphs.length === 0 || !pdfOnlyNoticePattern.test(paragraphs.at(-1).trim())) return false;
+  let length = 0;
+  for (const paragraph of paragraphs) {
+    length += paragraph.length + 1;
+    if (length > pdfOnlyNoticeMaxLength + 1) return false;
+  }
+  return true;
+}
+
+/**
+ * The text of a proposal-text section from its Word files
+ * (proposalDocumentFiles): each is read in order with `readWord(file)` until
+ * one is more than the notice that the text is published only as a PDF, after
+ * a notice only the files of the notice's section (print 3 lists the draft
+ * resolution in another section after its treaty's notice); when
+ * every one is only that notice, the scan of the first is read with
+ * `readScan(scan)`, and without a scan `warn(file)` reports it. A Word file
+ * that cannot be read (`readWord` gives null) ends the reading: with null,
+ * or, after a notice, with that notice's scan. A section without Word files
+ * gives null.
+ */
+export async function readProposalText(files, { readWord, readScan, warn }) {
+  let pdfOnly = null;
+  for (const file of files) {
+    if (pdfOnly && file.sectionLabel !== pdfOnly.sectionLabel) continue;
+    const text = await readWord(file);
+    if (!text) {
+      if (!pdfOnly) return null;
+      break;
+    }
+    if (!isPdfOnlyNotice(text.paragraphs)) return text;
+    pdfOnly ??= file;
+  }
+  if (!pdfOnly) return null;
+  if (!pdfOnly.scan) {
+    warn(pdfOnly);
+    return null;
+  }
+  return readScan(pdfOnly.scan);
 }
 
 /**
@@ -450,6 +520,12 @@ function latestTextVersion(change) {
 
 // A version whose text is the act as promulgated names that act
 // (`promulgatedAct`); no other version has the field.
+// A text's document as a law change keeps it: its name, its URL, and whether
+// its text was read by OCR from a scan.
+function documentOf(document) {
+  return { filename: document.filename, url: document.url, ...(document.readByOcr ? { readByOcr: true } : {}) };
+}
+
 function versionOf(part, amendedAct, document, effectiveCz = null, promulgatedAct = null) {
   return {
     heading: part.heading,
@@ -457,7 +533,7 @@ function versionOf(part, amendedAct, document, effectiveCz = null, promulgatedAc
     textCz: part.paragraphs ? part.paragraphs.join("\n") : null,
     amendedAct,
     effectiveCz,
-    document: document ? { filename: document.filename, url: document.url } : null,
+    document: document ? documentOf(document) : null,
     ...(promulgatedAct ? { promulgatedAct } : {})
   };
 }
@@ -587,7 +663,7 @@ export function lawChangesOfPrint({ print, texts = {}, senateResolutions = [], g
   const single = String(print.kindId) !== treatyPrintKindId && changes.filter((change) => change.fromFirstText).length === 1;
   const subPrintText = ({ partNumber, document, paragraphs }) => ({
     partNumber,
-    document: { filename: document.filename, url: document.url },
+    document: documentOf(document),
     textCz: paragraphs.join("\n")
   });
   const resolutions = senateResolutions.map(subPrintText);

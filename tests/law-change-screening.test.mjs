@@ -108,6 +108,8 @@ test("a model reads every version of the law change with its print, heading, ame
   const removed = lawChangeText({ ...change, versions: { proposed: change.versions.proposed, approved: { removed: true } } });
   assert.match(removed, /Version: text approved by the Chamber\nThis part is not in this text: it was removed during the debate\./);
   assert.match(lawChangeText({ ...change, addedIn: "approved" }), /This part was added during the debate; it is not in the proposed text\./);
+  const scanned = lawChangeText({ ...change, versions: { proposed: { ...change.versions.proposed, document: { filename: "t0105b0.pdf", url: "https://www.psp.cz/sqw/text/orig2.sqw?idd=267545", readByOcr: true } } } });
+  assert.ok(scanned.includes(`Version: proposed text (psp.cz publishes it only as a scanned PDF; this text was read from the scan by OCR and can contain misread characters)\n${proposedText}`));
   const brief = buildScreeningBrief(change, taxonomy);
   assert.ok(brief.taxonomyDefinitions.includes("fiscal-rules"));
 });

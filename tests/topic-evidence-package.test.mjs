@@ -284,6 +284,25 @@ test("each conduct names the version it concerns: the submission the proposal, t
   assert.match(pkg.evidence.find(({ role }) => role === "law-change").factSummary, /Versions: proposed text; text approved by the Chamber\./);
 });
 
+test("a vote carries only its party's club result, never the agenda item", () => {
+  const vote = attributedVoteRecord({ payload: {
+    partyVoteSummaries: [
+      { partyId: fiscalPromise.partyId, attributionStatus: "attributed", majorityChoice: "yes", counts: { yes: 20, no: 0 }, strictMajorityThreshold: 11, eligibleMemberCount: 21 },
+      { partyId: "other", attributionStatus: "attributed", majorityChoice: "no", counts: { yes: 0, no: 30 }, strictMajorityThreshold: 16, eligibleMemberCount: 31 }
+    ],
+    agendaItem: { externalAgendaItemId: "7", number: 3, titleCz: "Bod schůze", suffixCz: null },
+    linkedPrints: [
+      { externalPrintId: "43200", printKindId: "1", historyContexts: [{ actionCz: "souhlas", stageCz: "3. čtení" }] },
+      { externalPrintId: "49999", printKindId: "1", historyContexts: [] }
+    ]
+  } });
+  const pkg = buildLawChangeEvidencePackage({ assessorInstructions, promise: fiscalPromise, keptChanges: [{ change: lawChange(1), route }], recordsByPrintId: new Map([["43200", [vote]]]), printFirstSeenOn, collectorRun, asOf: "2026-06-15" });
+  const facts = pkg.evidence.find(({ type }) => type === "parliamentary-vote").structuredFacts;
+  assert.equal(facts.partyVoteSummaries, undefined);
+  assert.equal(facts.agendaItem, undefined);
+  assert.equal(facts.relevantPartyVoteSummary.partyId, fiscalPromise.partyId);
+});
+
 test("a change added in the debate was never submitted; a removed change is named as removed", () => {
   const added = { ...lawChange(2), addedIn: "approved", versions: { approved: { heading: "ČÁST DRUHÁ", titleCz: "Změna", textCz: "Nová část.", document: null } } };
   assert.equal(versionOfChange(added, { version: "proposed", withSenateResolution: false, mark: null }), null);
@@ -356,7 +375,7 @@ test("a law change both assessors found not relevant is left out, and the packag
   });
   const full = build();
   const [first, second] = full.evidence.filter(({ role }) => role === "law-change").map(({ id }) => id);
-  const assessorPrompt = { version: "assessor-v28", contentHash: "a".repeat(64) };
+  const assessorPrompt = { version: "assessor-v29", contentHash: "a".repeat(64) };
   const review = (relevantSecond) => ({ changeRelevance: [{ evidenceId: first, relevant: true, reasonCz: "Souvisí.", effectCz: "Zpřísňuje." }, { evidenceId: second, relevant: relevantSecond, reasonCz: relevantSecond ? "Souvisí." : "Jiné téma.", effectCz: "" }] });
   const audit = (reviewA, reviewB, prompt = assessorPrompt) => ({ prompts: { assessor: prompt }, validatedAssessments: { "assessor-a": reviewA, "assessor-b": reviewB } });
   const verdictsOf = (auditRecord, evidencePackage = full) => {
@@ -385,7 +404,7 @@ test("a law change both assessors found not relevant is left out, and the packag
     assert.equal(build(exclusionFrom(verdictsOf(auditRecord))).excludedLawChanges, undefined);
   }
   // Another assessor prompt or a changed text brings the change back.
-  assert.equal(build(exclusionFrom(verdictsOf(both), { version: "assessor-v28", contentHash: "b".repeat(64) })).excludedLawChanges, undefined);
+  assert.equal(build(exclusionFrom(verdictsOf(both), { version: "assessor-v29", contentHash: "b".repeat(64) })).excludedLawChanges, undefined);
   assert.equal(build(exclusionFrom(verdictsOf(both)), [lawChange(1), lawChange(2, "Zákon č. 218/2000 Sb. se mění takto: jinak.")]).excludedLawChanges, undefined);
   // A change whose context was trimmed in the assessed package gives no verdict.
   const trimmed = { ...full, generation: { ...full.generation, contextOmissions: [{ evidenceId: second, version: "proposed", suppliedCount: 0, omitted: [] }] } };
