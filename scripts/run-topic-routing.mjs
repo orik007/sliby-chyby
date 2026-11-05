@@ -260,9 +260,10 @@ async function checkRelevance({ stage, brief, inputHash, prompt, request, keepFr
     invalid[stage] += third.invalidCount;
   }
   const { kept, paragraphs, amendmentOnly = false } = relevanceDecision(checked.a, checked.b, third?.c ?? null);
-  // Whether a provider call answered this check, which writes its input to
-  // the provider's prompt cache.
-  const called = checked.usageByModel.length > 0 || (third?.usageByModel.length ?? 0) > 0;
+  // Whether this check sent a request to the provider, which writes its
+  // input to the provider's prompt cache: a side not reused from saved
+  // results (a response may report no usage).
+  const called = !checked.reused || (third !== null && !third.reused);
   // A rejected answer is kept in the report as the model gave it, cut to its
   // first characters when it is long.
   const rejected = Object.fromEntries([["checkAInvalidOutput", checked.invalidOutputA], ["checkBInvalidOutput", checked.invalidOutputB], ["checkCInvalidOutput", third?.invalidOutput ?? null]].filter(([, output]) => output !== null).map(([key, output]) => [key, reportedInvalidOutput(output)]));

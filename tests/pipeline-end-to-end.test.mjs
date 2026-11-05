@@ -378,6 +378,24 @@ test("relevance checks run while a law change is still being screened", { timeou
   assert.equal(report.relevanceChecks.length, report.counts.relevancePairCount);
 });
 
+test("the first relevance check of a law change is sent with no other check of it in flight, and at most two are", { timeout: 180_000 }, async (t) => {
+  const work = await mkdtemp(join(tmpdir(), "slava-pipeline-"));
+  t.after(() => rm(work, { recursive: true, force: true }));
+  const { calls, report } = await routePrint189(work, { STUB_OPENAI_SLOW_RELEVANCE: "100", SLIBY_TAGGING_CONCURRENCY: "6" });
+  assert.equal(report.completed, true);
+  const relevance = calls.filter(({ name }) => name === "law_change_relevance");
+  assert.ok(relevance.length > 0);
+  // A pair is two calls one after the other. Every law change of this print
+  // has two pairs, so the second is the only one left once the first has
+  // called the provider; that two are checked at once is shown by
+  // tests/warm-first-groups.test.mjs.
+  for (const group of Map.groupBy(relevance, ({ input }) => input.blocks[0]).values()) {
+    assert.deepEqual(group.slice(0, 2).map(({ sameChangeInFlight }) => sameChangeInFlight), [0, 0]);
+    assert.ok(Math.max(...group.map(({ sameChangeInFlight }) => sameChangeInFlight)) <= 1);
+  }
+  assert.equal(report.relevanceChecks.length, report.counts.relevancePairCount);
+});
+
 test("a failed relevance check stops the run and keeps every finished result", { timeout: 120_000 }, async (t) => {
   const work = await mkdtemp(join(tmpdir(), "slava-pipeline-"));
   t.after(() => rm(work, { recursive: true, force: true }));
