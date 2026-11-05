@@ -34,6 +34,11 @@ jobs:
   compare:
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    # The API key is a secret of the assessment environment, as in the
+    # collection workflow.
+    environment:
+      name: assessment
+      deployment: false
     env:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       SLIBY_ARBITER_MODEL: gpt-6.1-sol
