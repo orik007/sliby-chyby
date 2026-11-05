@@ -72,6 +72,7 @@ function answer(name, input, model) {
   throw new Error(`The OpenAI stub has no answer for ${name}`);
 }
 
+const relevanceInFlight = new Map();
 globalThis.fetch = async (url, init) => {
   const body = JSON.parse(init.body);
   const name = body.text.format.name;
@@ -80,7 +81,19 @@ globalThis.fetch = async (url, init) => {
   // Other input is JSON.
   const blocks = Array.isArray(body.input) ? body.input[0].content.map(({ text }) => text) : null;
   const input = blocks ? { text: blocks.at(-1).replace(/^Law change [^\n]*:\n\n/, ""), blocks } : JSON.parse(body.input);
-  if (process.env.STUB_OPENAI_LOG) appendFileSync(process.env.STUB_OPENAI_LOG, `${JSON.stringify({ name, model: body.model, maxOutputTokens: body.max_output_tokens, reasoningEffort: body.reasoning?.effort ?? null, input })}\n`);
+  // STUB_OPENAI_SLOW_RELEVANCE delays every relevance check of a law change
+  // by that many milliseconds and records how many other checks of the same
+  // law change were in flight when it was sent, so a test can show which
+  // checks run at once.
+  const slowRelevance = name === "law_change_relevance" ? Number(process.env.STUB_OPENAI_SLOW_RELEVANCE ?? 0) : 0;
+  const changeKey = slowRelevance > 0 ? blocks[0] : null;
+  const sameChangeInFlight = changeKey === null ? null : relevanceInFlight.get(changeKey) ?? 0;
+  if (process.env.STUB_OPENAI_LOG) appendFileSync(process.env.STUB_OPENAI_LOG, `${JSON.stringify({ name, model: body.model, maxOutputTokens: body.max_output_tokens, reasoningEffort: body.reasoning?.effort ?? null, input, ...(sameChangeInFlight === null ? {} : { sameChangeInFlight }) })}\n`);
+  if (changeKey !== null) {
+    relevanceInFlight.set(changeKey, sameChangeInFlight + 1);
+    await new Promise((resolveDelay) => setTimeout(resolveDelay, slowRelevance));
+    relevanceInFlight.set(changeKey, relevanceInFlight.get(changeKey) - 1);
+  }
   const usage = { input_tokens: Math.ceil((body.instructions.length + (blocks ? blocks.join("") : body.input).length) / 3), output_tokens: 30 };
   // STUB_OPENAI_CUT_OFF_ASSESSMENTS cuts off the first that many assessments
   // of this process at the output cap: reasoning only, no answer.
