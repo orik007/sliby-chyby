@@ -523,12 +523,17 @@ test("Node's fetch honours the request dispatcher's timeout", async () => {
   const server = createServer((request, response) => setTimeout(() => response.end("{}"), 1_500));
   await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
   const url = `http://127.0.0.1:${server.address().port}/`;
+  const impatient = createRequestDispatcher(100);
+  const patient = createRequestDispatcher(5_000);
   try {
-    await assert.rejects(fetch(url, { dispatcher: createRequestDispatcher(100) }), (error) => error.cause?.code === "UND_ERR_HEADERS_TIMEOUT");
-    const response = await fetch(url, { dispatcher: createRequestDispatcher(5_000) });
+    await assert.rejects(fetch(url, { dispatcher: impatient }), (error) => error.cause?.code === "UND_ERR_HEADERS_TIMEOUT");
+    const response = await fetch(url, { dispatcher: patient });
     assert.deepEqual(await response.json(), {});
   } finally {
-    server.close();
+    // Closed, so their timers never run during a later test that replaces
+    // the clock or setTimeout.
+    await Promise.all([impatient.destroy(), patient.destroy()]);
+    await new Promise((resolve) => server.close(resolve));
   }
 });
 
