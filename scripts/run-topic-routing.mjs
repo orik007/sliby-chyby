@@ -33,6 +33,7 @@ import { validateReviewManifest } from "./lib/assessment-review.mjs";
 import { exclusionOf, loadRelevanceVerdicts } from "./lib/irrelevance-verdicts.mjs";
 import { assertKeptPromptCached, cachePersister, loadModelCache, loadShardedModelCache, pairedModelCall, reportedInvalidOutput, shardedCachePersister, singleModelCall, usageTotalsByModel, writeJsonAtomically } from "./lib/paired-model-calls.mjs";
 import { log, progress } from "./lib/run-log.mjs";
+import { createWarmFirstQueue } from "./lib/warm-first-groups.mjs";
 
 /**
  * Screens every law change, routes the substantive ones to promises by
@@ -145,6 +146,13 @@ for (const [stageName, prompt] of Object.entries(prompts)) {
   if (prompt.keeps) assertKeptPromptCached(caches[stageName], prompt.contentHash, prompt.keeps.contentHash, prompt.version);
 }
 const models = { provider: runtime.provider, modelA: runtime.modelA, modelB: runtime.modelB };
+// The relevance checks of one law change made at once after its text is in
+// the provider's prompt cache (docs/evidence-pipeline.md, Audit and cost
+// control). A cached prefix lives on one machine, and traffic above about
+// 15 requests a minute can be routed elsewhere (OpenAI prompt-caching
+// documentation, verified on 5 November 2026), so a check made at once may
+// miss the cache; eight at once send about 70 requests a minute.
+const relevanceChecksPerLawChange = 8;
 const usage = { screening: [], relevance: [], amendmentRelevance: [] };
 const invalid = { screening: 0, relevance: 0, amendmentRelevance: 0 };
 const thirdChecks = { relevance: 0, amendmentRelevance: 0 };
@@ -251,10 +259,14 @@ async function checkRelevance({ stage, brief, inputHash, prompt, request, keepFr
     invalid[stage] += third.invalidCount;
   }
   const { kept, paragraphs, amendmentOnly = false } = relevanceDecision(checked.a, checked.b, third?.c ?? null);
+  // Whether a provider call answered this check, which writes its input to
+  // the provider's prompt cache.
+  const called = checked.usageByModel.length > 0 || (third?.usageByModel.length ?? 0) > 0;
   // A rejected answer is kept in the report as the model gave it, cut to its
   // first characters when it is long.
   const rejected = Object.fromEntries([["checkAInvalidOutput", checked.invalidOutputA], ["checkBInvalidOutput", checked.invalidOutputB], ["checkCInvalidOutput", third?.invalidOutput ?? null]].filter(([, output]) => output !== null).map(([key, output]) => [key, reportedInvalidOutput(output)]));
   return {
+    called,
     kept,
     paragraphs,
     ...(amendmentOnly ? { amendmentOnly } : {}),
@@ -270,20 +282,24 @@ async function checkRelevance({ stage, brief, inputHash, prompt, request, keepFr
 
 async function checkPair(pair) {
   const brief = buildRelevanceBrief(pair.promise, pair.change);
-  const result = { ...pair, ...await checkRelevance({ stage: "relevance", brief, inputHash: sha256(relevanceInputBlocks(brief)), prompt: prompts.relevance, request: requestRelevance, keepFromPromptContentHash: keptPromptContentHash(prompts.relevance, pair.change) }) };
+  const { called, ...checked } = await checkRelevance({ stage: "relevance", brief, inputHash: sha256(relevanceInputBlocks(brief)), prompt: prompts.relevance, request: requestRelevance, keepFromPromptContentHash: keptPromptContentHash(prompts.relevance, pair.change) });
+  const result = { ...pair, ...checked };
   tickPairs(`${pair.promise.id} × ${pair.change.changeId}: ${result.kept ? "kept" : "dropped"}`);
-  return result;
+  return { result, called };
 }
 
 // 1. Screening and routing of every law change (steps 4 and 5) and 2. the
 // relevance of each promise and law change (step 6), in one pool of workers
 // (docs/evidence-pipeline.md, Audit and cost control): a worker screens while
-// a law change is left to screen, then checks the pairs of one law change
-// after another, the group with the most pairs first.
+// a law change is left to screen, then checks the pairs of the law changes
+// screened: those of one law change one at a time until a check calls the
+// provider, which writes the law change to its prompt cache, and then
+// several at once (scripts/lib/warm-first-groups.mjs), the law change with
+// the most pairs first.
 log(`law-change screening: ${changes.length} law changes from ${new Set(changes.map(({ printId }) => printId)).size} prints with attributable conduct`);
 const tickChanges = progress("law-change screening", changes.length, { every: 20 });
 const screenedByIndex = new Array(changes.length);
-const readyGroups = [];
+const relevanceQueue = createWarmFirstQueue({ perGroupLimit: relevanceChecksPerLawChange, compare: (left, right) => left.changeIndex - right.changeIndex });
 const finishedPairs = [];
 let nextChange = 0;
 let screeningInFlight = 0;
@@ -305,7 +321,7 @@ async function runWorker() {
         tickChanges(`${change.changeId} (${change.titleCz.slice(0, 60)}): ${route.disposition}${route.routedTo.length > 0 ? ` to ${route.routedTo.length} promise(s)` : ""}`);
         const group = pairsOf(screened).map((pair, position) => ({ changeIndex, position, pair }));
         pairCount += group.length;
-        if (group.length > 0) readyGroups.push(group);
+        relevanceQueue.add(group);
       } catch (error) {
         screeningFailed = true;
         fail("law-change-screening", error);
@@ -320,21 +336,23 @@ async function runWorker() {
       }
       continue;
     }
-    if (readyGroups.length > 0) {
-      readyGroups.sort((left, right) => right.length - left.length || left[0].changeIndex - right[0].changeIndex);
-      for (const entry of readyGroups.shift()) {
-        if (runFailure) return;
-        try {
-          finishedPairs.push({ ...entry, result: await checkPair(entry.pair) });
-        } catch (error) {
-          fail("relevance-check", error);
-          return;
-        }
+    const task = relevanceQueue.take();
+    if (task) {
+      try {
+        const { result, called } = await checkPair(task.entry.pair);
+        finishedPairs.push({ ...task.entry, result });
+        task.done(called);
+      } catch (error) {
+        task.done(false);
+        fail("relevance-check", error);
+        return;
       }
       continue;
     }
-    if (screeningInFlight === 0) return;
-    await waitForScreening();
+    // Nothing to start now: done once nothing is screened or checked, or
+    // else wait until a screening or a check finishes.
+    if (screeningInFlight === 0 && !relevanceQueue.busy) return;
+    await Promise.race([waitForScreening(), relevanceQueue.changed()]);
   }
 }
 await Promise.all(Array.from({ length: Math.min(runtime.concurrency, Math.max(changes.length, 1)) }, runWorker));
@@ -354,7 +372,8 @@ for (const pair of checkedPairs.filter(({ kept }) => kept)) {
 // amendment from the provider's prompt cache.
 async function checkAmendment({ promise, item }) {
   const brief = buildAmendmentRelevanceBrief(promise, item);
-  return { promise, item, ...await checkRelevance({ stage: "amendmentRelevance", brief, inputHash: sha256(amendmentRelevanceInputBlocks(brief)), prompt: prompts.amendmentRelevance, request: requestAmendmentRelevance, keepFromPromptContentHash: keptPromptContentHash(prompts.amendmentRelevance, { printKindId: item.printKindId }) }) };
+  const { called, ...checked } = await checkRelevance({ stage: "amendmentRelevance", brief, inputHash: sha256(amendmentRelevanceInputBlocks(brief)), prompt: prompts.amendmentRelevance, request: requestAmendmentRelevance, keepFromPromptContentHash: keptPromptContentHash(prompts.amendmentRelevance, { printKindId: item.printKindId }) });
+  return { promise, item, ...checked };
 }
 const checkedAmendments = [];
 if (!runFailure) {
