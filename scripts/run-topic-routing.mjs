@@ -150,9 +150,10 @@ const models = { provider: runtime.provider, modelA: runtime.modelA, modelB: run
 // the provider's prompt cache (docs/evidence-pipeline.md, Audit and cost
 // control). A cached prefix lives on one machine, and traffic above about
 // 15 requests a minute can be routed elsewhere (OpenAI prompt-caching
-// documentation, verified on 5 November 2026), so a check made at once may
-// miss the cache; eight at once send about 70 requests a minute.
-const relevanceChecksPerLawChange = 8;
+// documentation, verified on 5 November 2026). Checks made one after
+// another sent about 6.4 requests a minute in run 106 (502 calls of law
+// change 43203-16 in 78 minutes), so two at once stay below that rate.
+const relevanceChecksPerLawChange = 2;
 const usage = { screening: [], relevance: [], amendmentRelevance: [] };
 const invalid = { screening: 0, relevance: 0, amendmentRelevance: 0 };
 const thirdChecks = { relevance: 0, amendmentRelevance: 0 };
