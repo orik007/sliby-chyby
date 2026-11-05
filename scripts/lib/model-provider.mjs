@@ -9,11 +9,36 @@ const baseRetryDelayMs = 2_000;
 const maxRetryDelayMs = 120_000;
 
 // Every call uses OpenAI Flex processing: the same models at half the
-// standard price, answered more slowly (docs/evidence-pipeline.md).
+// standard price, answered more slowly (docs/evidence-pipeline.md), except
+// while Flex capacity is unavailable (below).
 // SLIBY_SERVICE_TIER=default selects standard processing. It is read at each
 // call, after a script has loaded its .env file.
 export function serviceTier() {
   return process.env.SLIBY_SERVICE_TIER || "flex";
+}
+
+// When OpenAI has no Flex capacity it refuses with 429 `flex_unavailable`
+// and asks for a 5-minute wait (Retry-After 300); in runs 104 to 106 such
+// outages lasted over an hour. A refused request is then sent again at once
+// at standard processing, and every call of this process uses standard
+// processing for the next 5 minutes; the first call after that tries Flex
+// again (docs/evidence-pipeline.md, Audit and cost control).
+const flexPauseMs = 5 * 60_000;
+let flexPausedUntil = 0;
+
+export function isFlexUnavailable(body) {
+  return body?.error?.code === "flex_unavailable";
+}
+
+// The tier of the next call: Flex unless it is paused or another tier is set.
+function tierOfNextCall() {
+  const tier = serviceTier();
+  return tier === "flex" && Date.now() < flexPausedUntil ? "default" : tier;
+}
+
+// Ends a Flex pause, for tests.
+export function resumeFlex() {
+  flexPausedUntil = 0;
 }
 
 // Node's fetch gives up on a response after five minutes without headers,
@@ -139,9 +164,9 @@ function backoffMs(attempt) {
   return Math.round(step / 2 + (Math.random() * step) / 2);
 }
 
-async function fetchJsonWithRetry(url, init, { model, estimatedTokens, label = null, serviceTier = null }) {
+async function fetchJsonWithRetry(url, init, { model, estimatedTokens, label = null, serviceTier = null, giveUpOn = () => false, reserve = true }) {
   // Reserved once: a retry resends input that was rejected, not consumed.
-  await reserveInputTokens(model, estimatedTokens);
+  if (reserve) await reserveInputTokens(model, estimatedTokens);
   let last = null;
   for (let attempt = 1; attempt <= maxProviderAttempts; attempt += 1) {
     let response;
@@ -172,6 +197,9 @@ async function fetchJsonWithRetry(url, init, { model, estimatedTokens, label = n
       continue;
     }
     last = { response, body };
+    // A refusal the caller answers otherwise (unavailable Flex capacity) is
+    // returned at once.
+    if (giveUpOn(response, body)) return last;
     const retryable = (response.status === 408 || response.status === 429 || (response.status >= 500 && response.status < 600)) && !isBillingRefusal(body);
     if (!retryable || attempt === maxProviderAttempts) return last;
     const retryAfterHeader = typeof response.headers?.get === "function" ? response.headers.get("retry-after") : null;
@@ -210,7 +238,7 @@ export async function createStructuredModelResponse({
 
   if (!apiKey) throw new Error("OPENAI_API_KEY is required for the OpenAI provider");
   assertSpendWithinLimit();
-  const tier = serviceTier();
+  let tier = tierOfNextCall();
 
   // The provider writes and finds its prompt cache only at message ends and
   // marked breakpoints, never inside one text (docs/evidence-pipeline.md,
@@ -221,12 +249,12 @@ export async function createStructuredModelResponse({
     ? [{ role: "user", content: inputBlocks.map((text) => ({ type: "input_text", text, prompt_cache_breakpoint: { mode: "explicit" } })) }]
     : JSON.stringify(input);
   const inputCharacters = inputBlocks ? inputBlocks.reduce((sum, text) => sum + text.length, 0) : requestInput.length;
-  const { response, body } = await fetchJsonWithRetry("https://api.openai.com/v1/responses", {
+  const send = (requestTier, reserve) => fetchJsonWithRetry("https://api.openai.com/v1/responses", {
     method: "POST",
     headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       model,
-      service_tier: tier,
+      service_tier: requestTier,
       store: false,
       instructions,
       input: requestInput,
@@ -235,7 +263,26 @@ export async function createStructuredModelResponse({
       max_output_tokens: maxOutputTokens,
       metadata
     })
-  }, { model, estimatedTokens: Math.ceil((instructions.length + inputCharacters + JSON.stringify(schema).length) / charactersPerToken), label: logLabel, serviceTier: tier });
+  }, {
+    model,
+    estimatedTokens: Math.ceil((instructions.length + inputCharacters + JSON.stringify(schema).length) / charactersPerToken),
+    label: logLabel,
+    serviceTier: requestTier,
+    giveUpOn: (refused, refusal) => requestTier === "flex" && refused.status === 429 && isFlexUnavailable(refusal),
+    reserve
+  });
+  let { response, body } = await send(tier, true);
+  if (response.status === 429 && tier === "flex" && isFlexUnavailable(body)) {
+    // Not charged, so its reserved input is not reserved again; sent again
+    // at once at standard processing, which the next 5 minutes of calls use
+    // too.
+    flexPausedUntil = Date.now() + flexPauseMs;
+    // A new paid request: parallel calls may have reached the limit since.
+    assertSpendWithinLimit();
+    log(`Flex capacity unavailable (${logLabel ?? model}); sent again at standard processing, which calls use until ${new Date(flexPausedUntil).toISOString()}`);
+    tier = "default";
+    ({ response, body } = await send(tier, false));
+  }
 
   if (!response.ok) {
     const retryAfter = typeof response.headers?.get === "function" ? response.headers.get("retry-after") : null;
