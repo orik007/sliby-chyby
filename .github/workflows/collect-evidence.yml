@@ -96,7 +96,8 @@ jobs:
       # the tagging_concurrency input.
       SLIBY_TAGGING_CONCURRENCY: ${{ inputs.tagging_concurrency || '64' }}
       # OpenAI Flex processing: the same models at half price, answered more
-      # slowly (docs/evidence-pipeline.md).
+      # slowly; standard processing for 5 minutes after Flex capacity is
+      # unavailable (docs/evidence-pipeline.md).
       SLIBY_SERVICE_TIER: flex
     steps:
       - name: Record when the job started

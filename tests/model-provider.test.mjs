@@ -4,8 +4,8 @@ import { createServer } from "node:http";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import test from "node:test";
-import { createRequestDispatcher, createStructuredModelResponse, isBillingRefusal, reserveInputTokens, tokenBudgetPerMinute } from "../scripts/lib/model-provider.mjs";
-import { maxOutputTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
+import { createRequestDispatcher, createStructuredModelResponse, isBillingRefusal, reserveInputTokens, resumeFlex, tokenBudgetPerMinute } from "../scripts/lib/model-provider.mjs";
+import { charactersPerToken, maxOutputTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
 
 // Stub calls never belong in a real run's spend log.
 delete process.env.SLIBY_MODEL_CALL_LOG;
@@ -629,6 +629,94 @@ test("a billing refusal is not retried and says so", async () => {
     assert.equal(isBillingRefusal({ error: { type: "requests", code: "rate_limit_exceeded" } }), false);
     assert.equal(isBillingRefusal(null), false);
   } finally {
+    timers.restore();
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("unavailable Flex capacity sends the request again at once at standard processing, which the next 5 minutes use, then Flex again", async () => {
+  const timers = instantTimers();
+  const originalFetch = globalThis.fetch;
+  const originalNow = Date.now;
+  let now = originalNow();
+  Date.now = () => now;
+  const tiers = [];
+  let flexDown = true;
+  globalThis.fetch = async (url, init) => {
+    const { service_tier: tier } = JSON.parse(init.body);
+    tiers.push(tier);
+    if (tier === "flex" && flexDown) {
+      return { ok: false, status: 429, headers: fixtureHeaders({ "retry-after": "300" }), json: async () => ({ error: { type: "resource_unavailable", code: "flex_unavailable", message: "Flex processing is temporarily unavailable." } }) };
+    }
+    return { ok: true, json: async () => ({ id: "resp_fixture", model: "gpt-6-luna", service_tier: tier, usage: { input_tokens: 10, output_tokens: 2 }, output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }] }) };
+  };
+  const call = () => createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6-luna", instructions: "fixture", input: {}, name: "fixture_schema", schema: { type: "object" } });
+  try {
+    assert.deepEqual((await call()).output, { ok: true });
+    assert.deepEqual(tiers, ["flex", "default"], "refused at Flex, sent again at standard without a wait");
+    assert.deepEqual(timers.delays, [], "no Retry-After wait");
+    now += 4 * 60_000;
+    await call();
+    assert.deepEqual(tiers.slice(2), ["default"], "within 5 minutes, straight to standard");
+    now += 2 * 60_000;
+    flexDown = false;
+    await call();
+    assert.deepEqual(tiers.slice(3), ["flex"], "after 5 minutes, Flex again");
+  } finally {
+    resumeFlex();
+    Date.now = originalNow;
+    timers.restore();
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("another 429 at Flex is still retried at Flex", async () => {
+  const timers = instantTimers();
+  const originalFetch = globalThis.fetch;
+  const tiers = [];
+  globalThis.fetch = async (url, init) => {
+    const { service_tier: tier } = JSON.parse(init.body);
+    tiers.push(tier);
+    if (tiers.length === 1) return { ok: false, status: 429, headers: fixtureHeaders({ "retry-after": "0" }), json: async () => ({ error: { type: "requests", code: "rate_limit_exceeded", message: "Rate limit reached" } }) };
+    return { ok: true, json: async () => ({ id: "resp_fixture", model: "gpt-6-luna", service_tier: tier, usage: { input_tokens: 10, output_tokens: 2 }, output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }] }) };
+  };
+  try {
+    await createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6-luna", instructions: "fixture", input: {}, name: "fixture_schema", schema: { type: "object" } });
+    assert.deepEqual(tiers, ["flex", "flex"]);
+  } finally {
+    resumeFlex();
+    timers.restore();
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("a request sent again at standard processing after unavailable Flex capacity does not reserve its input again", async () => {
+  // A wait for the token budget fails the test instead of waiting.
+  const originalSetTimeout = globalThis.setTimeout;
+  globalThis.setTimeout = (fn, ms) => { throw new Error(`waited ${ms} ms`); };
+  const timers = { restore: () => { globalThis.setTimeout = originalSetTimeout; } };
+  const originalFetch = globalThis.fetch;
+  const originalNow = Date.now;
+  const originalShare = process.env.SLIBY_TOKEN_BUDGET_SHARE;
+  // Past every earlier test's reservations, with a budget that holds this
+  // request once but not twice.
+  const now = originalNow() + 10 * 60_000;
+  Date.now = () => now;
+  process.env.SLIBY_TOKEN_BUDGET_SHARE = String(144_000_000 / 1_000);
+  const tiers = [];
+  globalThis.fetch = async (url, init) => {
+    const { service_tier: tier } = JSON.parse(init.body);
+    tiers.push(tier);
+    if (tier === "flex") return { ok: false, status: 429, headers: fixtureHeaders({ "retry-after": "300" }), json: async () => ({ error: { type: "resource_unavailable", code: "flex_unavailable", message: "Flex processing is temporarily unavailable." } }) };
+    return { ok: true, json: async () => ({ id: "resp_fixture", model: "gpt-6-luna", service_tier: tier, usage: { input_tokens: 600, output_tokens: 2 }, output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }] }) };
+  };
+  try {
+    await createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6-luna", instructions: "x".repeat(600 * charactersPerToken), input: {}, name: "fixture_schema", schema: { type: "object" } });
+    assert.deepEqual(tiers, ["flex", "default"]);
+  } finally {
+    resumeFlex();
+    Date.now = originalNow;
+    if (originalShare === undefined) delete process.env.SLIBY_TOKEN_BUDGET_SHARE; else process.env.SLIBY_TOKEN_BUDGET_SHARE = originalShare;
     timers.restore();
     globalThis.fetch = originalFetch;
   }
