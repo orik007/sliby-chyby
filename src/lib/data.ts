@@ -1,7 +1,8 @@
 import systemStatusData from "../../data/system-status.json";
 import changelogData from "../../data/changelog.json";
+import assessmentNoticeData from "../../data/assessment-notices.json";
 import policyCategoryData from "../../data/promise-categories.json";
-import { assessmentRevisionSchema, changelogSchema, partyPeriodSchema, partySchema, periodSchema, policyCategoryDataSchema, promiseSchema, sourceSchema, systemStatusSchema, type AssessmentRevision, type AssessmentStatus, type PartyPeriod, type PolicyCategory, type PromiseRecord } from "./schema";
+import { assessmentNoticeDataSchema, assessmentRevisionSchema, changelogSchema, partyPeriodSchema, partySchema, periodSchema, policyCategoryDataSchema, promiseSchema, sourceSchema, systemStatusSchema, type AssessmentNotice, type AssessmentRevision, type AssessmentStatus, type PartyPeriod, type PolicyCategory, type PromiseRecord } from "./schema";
 import { calculateSlavaIndex } from "./scoring";
 
 function parseCollection<T>(modules: Record<string, unknown>, schema: { parse: (value: unknown) => T }): T[] {
@@ -23,6 +24,7 @@ const visiblePromiseIds = new Set(promises.map(({ id }) => id));
 export const assessmentRevisions = allAssessmentRevisions.filter(({ promiseId }) => visiblePromiseIds.has(promiseId));
 export const systemStatus = systemStatusSchema.parse(systemStatusData);
 export const changelog = changelogSchema.parse(changelogData);
+const assessmentNotices = assessmentNoticeDataSchema.parse(assessmentNoticeData).notices;
 const policyCategoryDataParsed = policyCategoryDataSchema.parse(policyCategoryData);
 export const policyCategories = [...policyCategoryDataParsed.categories].sort((a, b) => a.order - b.order);
 const policyCategoryById = new Map(policyCategories.map((category) => [category.id, category]));
@@ -68,6 +70,16 @@ function assertRelationships() {
     if (item.kind === "statement" && assessedPromiseIds.has(item.id)) throw new Error(`A statement has no score: ${item.id}`);
   }
   for (const promise of promises) if (!assessedPromiseIds.has(promise.id)) throw new Error(`Published promise is missing its current score: ${promise.id}`);
+  const noticedPromiseIds = new Set<string>();
+  for (const notice of assessmentNotices) {
+    if (!promiseIds.has(notice.promiseId)) throw new Error(`Assessment notice for an unknown or unscored item: ${notice.promiseId}`);
+    if (noticedPromiseIds.has(notice.promiseId)) throw new Error(`Duplicate assessment notice: ${notice.promiseId}`);
+    noticedPromiseIds.add(notice.promiseId);
+    // A revision published after the run that found the package too large
+    // renews the assessment, so the notice must go.
+    const latest = allAssessmentRevisions.filter(({ promiseId }) => promiseId === notice.promiseId).sort((a, b) => b.revision - a.revision)[0];
+    if (latest && latest.publishedAt > notice.asOf) throw new Error(`Assessment notice for ${notice.promiseId} predates its revision of ${latest.publishedAt}`);
+  }
   const allItemIds = new Set(allPromises.map(({ id }) => id));
   for (const revision of allAssessmentRevisions) if (!allItemIds.has(revision.promiseId)) throw new Error(`Unknown promise in assessment: ${revision.id}`);
   for (const revision of assessmentRevisions) {
@@ -97,6 +109,8 @@ export function getLatestAssessment(promiseId: string): AssessmentRevision {
   if (!revision) throw new Error(`No assessment for promise ${promiseId}`);
   return revision;
 }
+const noticeByPromise = new Map(assessmentNotices.map((notice) => [notice.promiseId, notice]));
+export function getAssessmentNotice(promiseId: string): AssessmentNotice | null { return noticeByPromise.get(promiseId) ?? null; }
 export function getAssessmentHistory(promiseId: string) { return [...(historyByPromise.get(promiseId) ?? [])]; }
 export function calculateIndex(partyPromises: PromiseRecord[]) {
   const scores = partyPromises.map(({ id }) => statusDetails[getLatestAssessment(id).status].score);
