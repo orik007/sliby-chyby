@@ -1,0 +1,86 @@
+name: Compare arbiter models
+
+# Sends a sample of saved arbitrations, decided by the configured arbiter,
+# again to other models and reports where their choice and resolution
+# differ (scripts/compare-arbiters.mjs). It changes no saved assessment and
+# writes no proposal; the report is the run's summary and artifact.
+on:
+  workflow_dispatch:
+    inputs:
+      models:
+        description: Models to compare, comma-separated, each optionally with a reasoning effort (model:effort)
+        required: true
+        default: "gpt-6.1-terra:max,gpt-6-luna:max"
+        type: string
+      sample:
+        description: Saved arbitrations to send again
+        required: true
+        default: "10"
+        type: string
+      max_spend_usd:
+        description: Stop the paid calls once their estimated spend reaches this many USD
+        required: true
+        default: "2"
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: compare-arbiters
+  cancel-in-progress: false
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      SLIBY_ARBITER_MODEL: gpt-6.1-sol
+      SLIBY_SERVICE_TIER: flex
+      SLIBY_MAX_SPEND_USD: ${{ inputs.max_spend_usd }}
+      SLIBY_MODEL_CALL_LOG: automation/runs/arbiter-comparison/model-calls.jsonl
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v5
+        with:
+          ref: main
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Read the saved proposals from the audit branch
+        run: |
+          git fetch --depth=1 origin automation/assessment-review
+          mkdir -p "$RUNNER_TEMP/audit"
+          git archive FETCH_HEAD automation/review-proposals | tar -x -C "$RUNNER_TEMP/audit"
+
+      - name: Compare arbiters
+        env:
+          MODELS: ${{ inputs.models }}
+          SAMPLE: ${{ inputs.sample }}
+        run: |
+          mkdir -p automation/runs/arbiter-comparison
+          node scripts/compare-arbiters.mjs \
+            --proposals "$RUNNER_TEMP/audit/automation/review-proposals" \
+            --models "$MODELS" \
+            --sample "$SAMPLE" \
+            --output automation/runs/arbiter-comparison
+          cat automation/runs/arbiter-comparison/arbiter-comparison.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload the comparison
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: arbiter-comparison-${{ github.run_id }}
+          path: automation/runs/arbiter-comparison/
+          if-no-files-found: warn
+          retention-days: 30
