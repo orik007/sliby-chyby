@@ -272,11 +272,13 @@ export async function createStructuredModelResponse({
     reserve
   });
   let { response, body } = await send(tier, true);
-  if (!response.ok && tier === "flex" && isFlexUnavailable(body)) {
+  if (response.status === 429 && tier === "flex" && isFlexUnavailable(body)) {
     // Not charged, so its reserved input is not reserved again; sent again
     // at once at standard processing, which the next 5 minutes of calls use
     // too.
     flexPausedUntil = Date.now() + flexPauseMs;
+    // A new paid request: parallel calls may have reached the limit since.
+    assertSpendWithinLimit();
     log(`Flex capacity unavailable (${logLabel ?? model}); sent again at standard processing, which calls use until ${new Date(flexPausedUntil).toISOString()}`);
     tier = "default";
     ({ response, body } = await send(tier, false));

@@ -6,6 +6,7 @@ import { join } from "node:path";
 import test from "node:test";
 import { createRequestDispatcher, createStructuredModelResponse, isBillingRefusal, reserveInputTokens, resumeFlex, tokenBudgetPerMinute } from "../scripts/lib/model-provider.mjs";
 import { charactersPerToken, maxOutputTokens, maxRequestInputTokens } from "../scripts/lib/assessment-config.mjs";
+import { logModelCall, runSpendUsd } from "../scripts/lib/run-log.mjs";
 
 // Stub calls never belong in a real run's spend log.
 delete process.env.SLIBY_MODEL_CALL_LOG;
@@ -723,6 +724,29 @@ test("a request sent again at standard processing after unavailable Flex capacit
     Date.now = originalNow;
     if (originalShare === undefined) delete process.env.SLIBY_TOKEN_BUDGET_SHARE; else process.env.SLIBY_TOKEN_BUDGET_SHARE = originalShare;
     timers.restore();
+    globalThis.fetch = originalFetch;
+  }
+});
+
+test("the standard resend after unavailable Flex capacity is not made once the spending limit is reached", async () => {
+  const originalFetch = globalThis.fetch;
+  const originalLimit = process.env.SLIBY_MAX_SPEND_USD;
+  process.env.SLIBY_MAX_SPEND_USD = String(runSpendUsd() + 1);
+  const tiers = [];
+  globalThis.fetch = async (url, init) => {
+    const { service_tier: tier } = JSON.parse(init.body);
+    tiers.push(tier);
+    if (tier === "default") return { ok: true, json: async () => ({ id: "resp_fixture", model: "gpt-6-luna", service_tier: tier, usage: { input_tokens: 10, output_tokens: 2 }, output: [{ content: [{ type: "output_text", text: JSON.stringify({ ok: true }) }] }] }) };
+    // A parallel call spends past the limit while this one is refused.
+    logModelCall({ label: "parallel", model: "gpt-6-luna", usage: { input_tokens: 100_000_000, output_tokens: 0 }, serviceTier: "flex" });
+    return { ok: false, status: 429, headers: fixtureHeaders({ "retry-after": "300" }), json: async () => ({ error: { type: "resource_unavailable", code: "flex_unavailable", message: "Flex processing is temporarily unavailable." } }) };
+  };
+  try {
+    await assert.rejects(createStructuredModelResponse({ provider: "openai", apiKey: "fixture-key", model: "gpt-6-luna", instructions: "fixture", input: {}, name: "fixture_schema", schema: { type: "object" } }), /reached its limit/);
+    assert.deepEqual(tiers, ["flex"]);
+  } finally {
+    resumeFlex();
+    if (originalLimit === undefined) delete process.env.SLIBY_MAX_SPEND_USD; else process.env.SLIBY_MAX_SPEND_USD = originalLimit;
     globalThis.fetch = originalFetch;
   }
 });
