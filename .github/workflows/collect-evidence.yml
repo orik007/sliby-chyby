@@ -1,11 +1,11 @@
 name: Collect, match, and assess promises
 
 on:
-  # The daily run stays paused until a manual workflow_dispatch run of this
-  # workflow has been verified end to end (docs/evidence-pipeline.md).
-  # schedule:
-  #   - cron: "37 9 * * *"
-  #     timezone: "Europe/Prague"
+  # Daily at 09:37 Prague time (docs/evidence-pipeline.md); run 109
+  # (5 November 2026) verified the pipeline end to end.
+  schedule:
+    - cron: "37 9 * * *"
+      timezone: "Europe/Prague"
   workflow_dispatch:
     inputs:
       as_of:
@@ -37,6 +37,9 @@ on:
 permissions:
   contents: write
   pull-requests: write
+  # Starts "Verify pull request" on the assessment-revision branch, which a
+  # pull request opened with the workflow token does not start by itself.
+  actions: write
 
 concurrency:
   group: evidence-assessment-review
@@ -75,12 +78,14 @@ jobs:
       # assessor model allows 30,000 requests and 180,000,000 tokens a minute,
       # and the arbiter model 40,000,000 tokens; a 429 is retried.
       SLIBY_ASSESSMENT_CONCURRENCY: ${{ inputs.assessment_concurrency || '16' }}
-      # A hard cap on packages sent to the paid assessors per run. A run
-      # without the input (the schedule) assesses none until a cap is set.
-      SLIBY_MAX_ASSESSMENTS: ${{ inputs.max_assessments || '0' }}
+      # A hard cap on packages sent to the paid assessors per run. The daily
+      # run assesses every new or changed package (cap 1000); a manual run
+      # without the input assesses none.
+      SLIBY_MAX_ASSESSMENTS: ${{ inputs.max_assessments || (github.event_name == 'schedule' && '1000') || '0' }}
       # Paid calls stop once the run's estimated spend, every step together,
       # reaches this many USD; the run then fails and keeps what it paid for.
-      SLIBY_MAX_SPEND_USD: ${{ inputs.max_spend_usd || '' }}
+      # The daily run stops at 10 USD.
+      SLIBY_MAX_SPEND_USD: ${{ inputs.max_spend_usd || (github.event_name == 'schedule' && '10') || '' }}
       # Every paid model call is appended here (tokens and estimated cost), so
       # the run's spend is known even when it fails.
       SLIBY_MODEL_CALL_LOG: automation/runs/pipeline/github-actions/model-calls.jsonl
@@ -520,6 +525,54 @@ jobs:
             gh api -X DELETE "repos/$GITHUB_REPOSITORY/issues/comments/${OLD_COMMENTS[$index]}"
           done
           echo "Review pull request: $PR_URL (${#NEW_COMMENTS[@]} continuation comment(s))" >> "$GITHUB_STEP_SUMMARY"
+
+      # A complete assessment publishes: the current proposals become public
+      # revisions in a pull request from current main, which goes to main by
+      # the release rule (docs/evidence-pipeline.md, From proposal to public
+      # score). A run whose assessment did not finish publishes nothing.
+      - name: Create or update the assessment-revision pull request
+        if: steps.assess.outcome == 'success' && steps.proposals.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}
+          USES_DEFAULT_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN == '' }}
+          REVISION_BRANCH: automation/assessment-revisions
+        run: |
+          authenticated_remote="https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
+          git fetch "$authenticated_remote" "+refs/heads/main:refs/remotes/origin/main"
+          publication="$RUNNER_TEMP/publication"
+          git worktree add --detach "$publication" origin/main
+          # The script's dependencies are the job's installed ones.
+          ln -s "$GITHUB_WORKSPACE/node_modules" "$publication/node_modules"
+          published_on="$(date -u +%F)"
+          summary="$(cd "$publication" && node scripts/publish-assessment-revisions.mjs --audit "$GITHUB_WORKSPACE" --date "$published_on")"
+          echo "$summary"
+          cd "$publication"
+          git add data/assessment-revisions data/assessment-notices.json
+          PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVISION_BRANCH" --base main --state open --json number --jq '.[0].number')"
+          if git diff --cached --quiet; then
+            echo "No assessment changes the public site: $summary" >> "$GITHUB_STEP_SUMMARY"
+            if [ -n "$PR_NUMBER" ]; then gh pr close "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --comment "Current main already holds every current assessment; nothing is left to publish." --delete-branch; fi
+            exit 0
+          fi
+          git commit -m "Publish the assessments of $published_on"
+          git push --force "$authenticated_remote" "HEAD:refs/heads/$REVISION_BRANCH"
+          {
+            echo "## Zveřejnění automatického hodnocení ($published_on)"
+            echo
+            echo "Tento pull request převádí aktuální návrhy z auditní větve na veřejná hodnocení, tak jak je napsaly modely (docs/evidence-pipeline.md, From proposal to public score). Obsah hodnocení nikdo ručně nekontroluje. Na web jde po úspěšném „Verify pull request“ a schválení vlastníkem."
+            echo
+            echo "\`$summary\`"
+          } > "$RUNNER_TEMP/assessment-revision-pr.md"
+          if [ -n "$PR_NUMBER" ]; then
+            gh pr edit "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --title "Zveřejnění automatického hodnocení ($published_on)" --body-file "$RUNNER_TEMP/assessment-revision-pr.md"
+            PR_URL="$(gh pr view "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --json url --jq '.url')"
+          else
+            PR_URL="$(gh pr create --repo "$GITHUB_REPOSITORY" --base main --head "$REVISION_BRANCH" --title "Zveřejnění automatického hodnocení ($published_on)" --body-file "$RUNNER_TEMP/assessment-revision-pr.md")"
+          fi
+          # A pull request the workflow token opened or updated does not start
+          # its own verification, so the run starts it on the branch.
+          if [ "$USES_DEFAULT_TOKEN" = "true" ]; then gh workflow run verify-pr.yml --repo "$GITHUB_REPOSITORY" --ref "$REVISION_BRANCH"; fi
+          echo "Assessment-revision pull request: $PR_URL ($summary)" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Report model calls and estimated spend
         if: always()
