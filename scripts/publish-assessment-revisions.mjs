@@ -5,6 +5,7 @@ import { parseArgs } from "node:util";
 import { assessmentRuntimeConfig, loadAssessmentPrompts } from "./lib/assessment-config.mjs";
 import { describeAssessmentInput, validateReviewManifest } from "./lib/assessment-review.mjs";
 import { noticesAfterPublication, planAssessmentPublication } from "./lib/assessment-publication.mjs";
+import { loadCurrentEvidencePackages } from "./lib/evidence-package-queue.mjs";
 import { createAssessmentRevision } from "./lib/evidence-trail.mjs";
 import { assessmentNoticeDataSchema, assessmentRevisionSchema } from "../src/lib/schema.ts";
 
@@ -31,9 +32,11 @@ const readJsonDirectory = async (directory) => {
 };
 
 const audit = resolve(values.audit);
-const [manifest, queue, promiseFiles, revisionFiles, noticeData] = await Promise.all([
+const [manifest, currentPackages, promiseFiles, revisionFiles, noticeData] = await Promise.all([
   readJson(resolve(audit, "automation/review-proposals/manifest.json")).then(validateReviewManifest),
-  readJson(resolve(audit, "automation/evidence-packages/manifest.json")),
+  // The queue is validated and each current package checked against its
+  // entry (promise and hash), as the assessment batch loads them.
+  loadCurrentEvidencePackages(resolve(audit, "automation/evidence-packages")),
   readJsonDirectory(resolve("data/promises")),
   readJsonDirectory(resolve("data/assessment-revisions")),
   readJson(resolve("data/assessment-notices.json")).then((data) => assessmentNoticeDataSchema.parse(data))
@@ -45,10 +48,10 @@ const prompts = await loadAssessmentPrompts();
 const runtime = assessmentRuntimeConfig();
 const currentFingerprints = new Map();
 const oversizedPackages = new Map();
-for (const entry of queue.packages.filter((item) => !item.supersededByPackageHash && !item.withdrawnAt)) {
-  const evidencePackage = await readJson(resolve(audit, "automation/evidence-packages", entry.path));
-  currentFingerprints.set(entry.promiseId, describeAssessmentInput(evidencePackage, prompts, runtime).assessmentFingerprint);
-  if (entry.blockedReason === "oversized") oversizedPackages.set(entry.promiseId, evidencePackage);
+for (const { evidencePackage, blockedReason } of currentPackages) {
+  const promiseId = evidencePackage.promise.id;
+  currentFingerprints.set(promiseId, describeAssessmentInput(evidencePackage, prompts, runtime).assessmentFingerprint);
+  if (blockedReason === "oversized") oversizedPackages.set(promiseId, evidencePackage);
 }
 // Failures of both assessors, saved outside the review manifest under the
 // fingerprint they assessed.

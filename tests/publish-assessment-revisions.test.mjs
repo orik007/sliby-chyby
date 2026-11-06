@@ -6,6 +6,7 @@ import { join, resolve } from "node:path";
 import test from "node:test";
 import { promisify } from "node:util";
 import { assessmentRuntimeConfig, loadAssessmentPrompts } from "../scripts/lib/assessment-config.mjs";
+import { hashEvidencePackage } from "../scripts/lib/assessment-pipeline.mjs";
 import { describeAssessmentInput } from "../scripts/lib/assessment-review.mjs";
 import { assessmentRevisionSchema } from "../src/lib/schema.ts";
 
@@ -36,25 +37,34 @@ async function setUp() {
   await writeJson(join(audit, proposalPath, "evidence-package.json"), evidencePackage);
   await writeJson(join(audit, proposalPath, "assessment-run.json"), { ...auditRecord, assessmentFingerprint: fingerprint });
   await writeJson(join(audit, "automation/review-proposals/manifest.json"), { schemaVersion: "1.0.0", fingerprintVersion: "assessment-fingerprint-v1", publicationApproved: false, proposals: [renewed] });
-  // A second promise whose current package both assessors failed on.
-  const failurePath = `automation/review-proposals/failures/failed-promise/${fingerprint}`;
-  await mkdir(join(audit, failurePath), { recursive: true });
-  await writeJson(join(audit, failurePath, "evidence-package.json"), evidencePackage);
-  await writeJson(join(audit, failurePath, "assessment-run.json"), { ...auditRecord, assessmentFingerprint: fingerprint, resolution: { state: "assessment-failed", reason: "both-assessors-invalid", status: null, selectedReview: null } });
-  // A retired failure of a third promise, whose newer proposal replaced it, counts for nothing.
-  const retiredPath = `automation/review-proposals/failures/retired-promise/${fingerprint}`;
-  await mkdir(join(audit, retiredPath), { recursive: true });
-  await writeJson(join(audit, retiredPath, "evidence-package.json"), evidencePackage);
-  await writeJson(join(audit, retiredPath, "retired.json"), { schemaVersion: "1.0.0", reason: "superseded-by-newer-review-proposal" });
-  await mkdir(join(audit, "automation/evidence-packages/packages", promiseId), { recursive: true });
-  await writeJson(join(audit, "automation/evidence-packages/packages", promiseId, "current.json"), evidencePackage);
-  await writeJson(join(audit, "automation/evidence-packages/manifest.json"), { schemaVersion: "1.0.0", publicationApproved: false, packages: [
-    { promiseId, path: `packages/${promiseId}/current.json` },
-    { promiseId: "failed-promise", path: `packages/${promiseId}/current.json` },
-    { promiseId: "retired-promise", path: `packages/${promiseId}/current.json` },
-    { promiseId: "oversized-promise", path: `packages/${promiseId}/current.json`, blockedReason: "oversized" },
-    { promiseId: "withdrawn-promise", path: `packages/${promiseId}/current.json`, withdrawnAt: "2026-10-31T00:00:00Z" }
-  ] });
+  // A queue of current packages, each its own promise's: the candidate's, a
+  // package both assessors failed on, one whose failure was retired, an
+  // oversized one, and a withdrawn one.
+  const prompts = await loadAssessmentPrompts();
+  const packageOf = (id, generation = {}) => ({ ...evidencePackage, promise: { ...evidencePackage.promise, id }, generation: { ...evidencePackage.generation, ...generation } });
+  const packages = [
+    { evidencePackage },
+    { evidencePackage: packageOf("failed-promise"), failure: true },
+    { evidencePackage: packageOf("retired-promise"), failure: true, retired: true },
+    { evidencePackage: packageOf("oversized-promise", { oversized: true }), blockedReason: "oversized" },
+    { evidencePackage: packageOf("withdrawn-promise"), withdrawnAt: "2026-10-31T00:00:00Z" }
+  ];
+  const entries = [];
+  for (const { evidencePackage: queued, failure, retired, blockedReason = null, withdrawnAt = null } of packages) {
+    const id = queued.promise.id;
+    const packageHash = hashEvidencePackage(queued);
+    await mkdir(join(audit, "automation/evidence-packages/packages", id), { recursive: true });
+    await writeJson(join(audit, "automation/evidence-packages/packages", id, `${packageHash}.json`), queued);
+    entries.push({ promiseId: id, packageHash, asOf: queued.asOf, queuedAt: "2026-11-05T00:00:00.000Z", path: `packages/${id}/${packageHash}.json`, blockedReason, withdrawnAt, supersedesPackageHash: null, supersededByPackageHash: null });
+    if (!failure) continue;
+    const failurePath = `automation/review-proposals/failures/${id}/${describeAssessmentInput(queued, prompts, assessmentRuntimeConfig()).assessmentFingerprint}`;
+    await mkdir(join(audit, failurePath), { recursive: true });
+    await writeJson(join(audit, failurePath, "evidence-package.json"), queued);
+    await writeJson(join(audit, failurePath, "assessment-run.json"), { ...auditRecord, promiseId: id, resolution: { state: "assessment-failed", reason: "both-assessors-invalid", status: null, selectedReview: null } });
+    // A failure a newer proposal replaced counts for nothing.
+    if (retired) await writeJson(join(audit, failurePath, "retired.json"), { schemaVersion: "1.0.0", reason: "superseded-by-newer-review-proposal" });
+  }
+  await writeJson(join(audit, "automation/evidence-packages/manifest.json"), { schemaVersion: "1.0.0", publicationApproved: false, packages: entries });
   return { work, main, audit, proposal: renewed, evidencePackage };
 }
 
@@ -74,4 +84,18 @@ test("publishes a current candidate as the next revision, notices a failed asses
   // A second pull request made from the same audit state writes nothing new.
   const again = await publish();
   assert.match(again.stdout, /0 revisions written \(\), 1 already published, 1 inconclusive/);
+});
+
+test("a queue entry whose package belongs to another promise stops the publication before anything is written", async (t) => {
+  const { work, main, audit } = await setUp();
+  t.after(() => rm(work, { recursive: true, force: true }));
+  const queuePath = join(audit, "automation/evidence-packages/manifest.json");
+  const queue = await readJson(queuePath);
+  const failed = queue.packages.find(({ promiseId: id }) => id === "failed-promise");
+  failed.path = queue.packages.find(({ promiseId: id }) => id === promiseId).path;
+  await writeJson(queuePath, queue);
+  const notices = await readFile(join(main, "data/assessment-notices.json"), "utf8");
+  await assert.rejects(execute(process.execPath, [script, "--audit", audit, "--date", "2026-11-06"], { cwd: main }), /unexpected promise ID|has changed/);
+  assert.equal(await readFile(join(main, "data/assessment-notices.json"), "utf8"), notices);
+  await assert.rejects(readFile(join(main, `data/assessment-revisions/${promiseId}--002.json`)), { code: "ENOENT" });
 });
