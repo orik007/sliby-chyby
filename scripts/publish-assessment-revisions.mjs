@@ -1,7 +1,9 @@
+import { existsSync } from "node:fs";
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { parseArgs } from "node:util";
-import { validateReviewManifest } from "./lib/assessment-review.mjs";
+import { assessmentRuntimeConfig, loadAssessmentPrompts } from "./lib/assessment-config.mjs";
+import { describeAssessmentInput, validateReviewManifest } from "./lib/assessment-review.mjs";
 import { noticesAfterPublication, planAssessmentPublication } from "./lib/assessment-publication.mjs";
 import { createAssessmentRevision } from "./lib/evidence-trail.mjs";
 import { assessmentNoticeDataSchema, assessmentRevisionSchema } from "../src/lib/schema.ts";
@@ -9,15 +11,16 @@ import { assessmentNoticeDataSchema, assessmentRevisionSchema } from "../src/lib
 // Usage: node scripts/publish-assessment-revisions.mjs --audit <audit branch checkout> --date YYYY-MM-DD
 //
 // Publishes the automatic assessment (docs/evidence-pipeline.md, From
-// proposal to public score): for every promise whose evidence package is
-// current on the audit branch, its current candidate proposal becomes an
-// append-only public revision, as the model wrote it; a current proposal that
-// finds the evidence insufficient changes nothing; any other current
-// proposal, which no assessment decided, gets an `inconclusive-assessment`
-// notice and leaves the score unchanged. A promise whose packages are all withdrawn
-// (no law change of it is relevant any longer) or superseded has no current
-// proposal here and keeps its score. Every revision is checked against the
-// public schema before anything is written.
+// proposal to public score), as planned by scripts/lib/assessment-publication.mjs:
+// the assessment of every promise's current package (the proposal, or the
+// failure of both assessors, with that package's fingerprint) is a candidate,
+// which becomes an append-only public revision as the model wrote it, finds
+// the evidence insufficient, which changes nothing, or decided nothing, which
+// leaves the score unchanged with an `inconclusive-assessment` notice. A
+// promise without a current package, or whose current package is not
+// assessed yet, keeps its score. A proposal already published is skipped.
+// Every revision is checked against the public schema before anything is
+// written.
 const { values } = parseArgs({ options: { audit: { type: "string" }, date: { type: "string" } } });
 if (!values.audit || !values.date) throw new Error("Usage: --audit <audit branch checkout> --date YYYY-MM-DD");
 
@@ -36,7 +39,25 @@ const [manifest, queue, promiseFiles, revisionFiles, noticeData] = await Promise
   readJson(resolve("data/assessment-notices.json")).then((data) => assessmentNoticeDataSchema.parse(data))
 ]);
 
-const plan = planAssessmentPublication({ reviewManifest: manifest, packageQueue: queue });
+// The assessment fingerprint of each promise's current package, as the
+// assessment batch computes it.
+const prompts = await loadAssessmentPrompts();
+const runtime = assessmentRuntimeConfig();
+const currentFingerprints = new Map();
+for (const entry of queue.packages.filter((item) => !item.supersededByPackageHash && !item.withdrawnAt)) {
+  const evidencePackage = await readJson(resolve(audit, "automation/evidence-packages", entry.path));
+  currentFingerprints.set(entry.promiseId, describeAssessmentInput(evidencePackage, prompts, runtime).assessmentFingerprint);
+}
+// Failures of both assessors, saved outside the review manifest under the
+// fingerprint they assessed.
+const failureRoot = resolve(audit, "automation/review-proposals/failures");
+const failures = [];
+if (existsSync(failureRoot)) {
+  for (const promiseId of await readdir(failureRoot)) {
+    for (const assessmentFingerprint of await readdir(resolve(failureRoot, promiseId))) failures.push({ promiseId, assessmentFingerprint, path: `automation/review-proposals/failures/${promiseId}/${assessmentFingerprint}` });
+  }
+}
+const plan = planAssessmentPublication({ reviewManifest: manifest, currentFingerprints, failures });
 const promiseFileById = new Map(promiseFiles.map(({ file, data }) => [data.id, { file, data }]));
 const revisions = revisionFiles.map(({ data }) => data);
 
@@ -61,4 +82,4 @@ assessmentNoticeDataSchema.parse({ notices });
 for (const revision of written) await writeFile(resolve("data/assessment-revisions", `${revision.id}.json`), `${JSON.stringify(revision, null, 2)}\n`, { flag: "wx" });
 await writeFile(resolve("data/assessment-notices.json"), `${JSON.stringify({ notices }, null, 2)}\n`);
 const byStatus = Object.entries(Object.groupBy(written, ({ status }) => status)).map(([status, group]) => `${status} ${group.length}`).join(", ");
-console.log(`${plan.candidates.length + plan.inconclusive.length + plan.insufficientEvidence.length} current proposals: ${written.length} revisions written (${byStatus}), ${plan.inconclusive.length} inconclusive (notice), ${plan.insufficientEvidence.length} with insufficient evidence (unchanged)`);
+console.log(`${currentFingerprints.size} promises with a current package: ${written.length} revisions written (${byStatus}), ${plan.candidates.length - written.length} already published, ${plan.inconclusive.length} inconclusive (notice), ${plan.insufficientEvidence.length} with insufficient evidence (unchanged), ${plan.notAssessed.length} not assessed yet`);

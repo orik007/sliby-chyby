@@ -245,7 +245,7 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
   const lines = [
     `# ${evidencePackage.promise.titleCz}`,
     "",
-    "> Nezveřejněný návrh k lidské kontrole. Ani schválení tohoto souboru samo nic nezveřejňuje a nemění SLAVA Index.",
+    "> Nezveřejněný návrh připravený ke kontrole. Na web ho převede jen pull request s revizemi hodnocení; tento soubor sám nic nezveřejňuje a nemění SLAVA Index.",
     "",
     "## Návrh pro veřejný web",
     "",
@@ -263,7 +263,7 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
           ""
         ]
       : ["*Nevznikl žádný návrh veřejného hodnocení ani vysvětlení.*", ""]),
-    "## Co má zkontrolovat reviewer",
+    "## Na co se při kontrole dívat",
     "",
     "- Odpovídá navržené hodnocení metodice SLAVA Indexu?",
     "- Je jednání správně připsáno sledované straně?",
@@ -271,7 +271,7 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
     "- Jsou zkratky, právní pojmy a úřední označení při prvním použití vysvětlené?",
     "- Dokládají uvedené zdroje všechna podstatná tvrzení a nechybí rozporný podklad?",
     "",
-    "## Technické podklady pro reviewera",
+    "## Technické podklady",
     "",
     `- Výsledek automatického procesu: ${resolutionLabel}`,
     `- Interní stav: ${proposal.candidateStatus ? `\`${proposal.candidateStatus}\`` : "bez kandidátního stavu"}`,
@@ -556,18 +556,18 @@ export function renderReviewPullRequest(summary) {
       title: `### Návrhy, které mění hodnocení na webu (${changes.length}, z toho nové: ${changes.filter(({ newInRun }) => newInRun).length})`,
       blocks: changes.length > 0 ? changes.map(changeBlock) : ["Žádný aktuální návrh nemění hodnocení zveřejněné na webu.\n"]
     },
-    ...(attention.length > 0 ? [{ title: `### Vyžaduje lidské rozhodnutí (${attention.length})`, blocks: attention }] : []),
+    ...(attention.length > 0 ? [{ title: `### Nevzniklo hodnocení (${attention.length})`, blocks: attention }] : []),
   ];
 
   const intro = [
     "## Nezveřejněné návrhy změn hodnocení SLAVA",
     "",
-    "Tento pull request ukládá automaticky připravené návrhy k lidské kontrole. Jeho sloučení **nezveřejní hodnocení ani nezmění veřejný web**. Návrh zmizí z tohoto přehledu, až hodnocení na webu změní samostatný pull request, nebo až ho nahradí novější návrh. U každé změny jsou verdikty obou automatických hodnotitelů a třetího hodnotitele s jejich zdůvodněním; úplný záznam je na stránce návrhu.",
+    "Tento pull request ukládá automaticky připravené návrhy ke kontrole. Jeho sloučení **nezveřejní hodnocení ani nezmění veřejný web**; to dělá samostatný pull request s revizemi hodnocení. Návrh zmizí z tohoto přehledu, až hodnocení na webu změní takový pull request, nebo až ho nahradí novější návrh. U každé změny jsou verdikty obou automatických hodnotitelů a třetího hodnotitele s jejich zdůvodněním; úplný záznam je na stránce návrhu.",
     "",
     "### Souhrn",
     "",
     `- Návrhy, které mění hodnocení na webu: **${changes.length}**`,
-    `- Vyžaduje lidské rozhodnutí: **${attention.length}**`,
+    `- Nevzniklo hodnocení: **${attention.length}**`,
     others,
     routeTable
   ].join("\n");
@@ -619,7 +619,7 @@ export function renderReviewPullRequest(summary) {
   const note = total > 1
     ? `*Přehled pokračuje v ${total - 1} ${total - 1 === 1 ? "komentáři" : "komentářích"} pod tímto pull requestem, v pořadí. Každý běh je přepíše.*\n\n`
     : "";
-  const body = `${intro}\n${note}${text(pages[0]).replace(/^\n/, "")}\n\nVšechny návrhy vyžadují lidskou kontrolu a nejsou schválené ke zveřejnění. Úplný přehled všech balíčků je v \`assessment-batch.json\` v artefaktu běhu.\n`;
+  const body = `${intro}\n${note}${text(pages[0]).replace(/^\n/, "")}\n\nNávrhy nejsou zveřejněné; na web je převede samostatný pull request s revizemi hodnocení. Úplný přehled všech balíčků je v \`assessment-batch.json\` v artefaktu běhu.\n`;
   const comments = pages.slice(1).map((blocks, index) => `${continuationMarker}\n## Nezveřejněné návrhy změn hodnocení SLAVA, pokračování ${index + 2}/${total}\n\n${text(blocks).replace(/^\n/, "")}\n`);
   return { body, comments };
 }
