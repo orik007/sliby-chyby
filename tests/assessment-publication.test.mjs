@@ -13,8 +13,11 @@ test("publishes the assessment of each promise's current package, matched by its
     proposal("d", "d1", "human-review-required", { resolutionReason: "arbiter-selected-insufficient-evidence" }),
     proposal("e", "e1", "candidate"),
     proposal("g", "g1", "human-review-required", { resolutionReason: "arbiter-input-too-large" }),
-    proposal("h", "h1", "candidate")
+    proposal("h", "h1", "candidate"),
+    // An older proposal of b, superseded, kept the same reduced fingerprint.
+    proposal("b", "b0", "candidate", { reducedAssessmentFingerprint: "b2", supersededByProposalId: "b--b1" })
   ] };
+  reviewManifest.proposals.unshift(reviewManifest.proposals.pop());
   const currentFingerprints = new Map([
     // a's current package has the fingerprint of its newer proposal.
     ["a", "a2"],
@@ -35,14 +38,14 @@ test("publishes the assessment of each promise's current package, matched by its
   assert.deepEqual(plan.notAssessed.map(({ promiseId }) => promiseId), ["e"]);
 });
 
-test("too-much-evidence notices stay unless renewed or followed by an inconclusive assessment; inconclusive notices are replaced", () => {
+test("too-much-evidence notices stay unless the promise is assessed or inconclusive; inconclusive notices are replaced", () => {
   const notices = [
     { promiseId: "x", kind: "too-much-evidence", asOf: "2026-11-01", lawChangeCount: 131 },
     { promiseId: "y", kind: "too-much-evidence", asOf: "2026-11-01", lawChangeCount: 2 },
     { promiseId: "z", kind: "inconclusive-assessment", asOf: "2026-10-01" }
   ];
-  const after = noticesAfterPublication({ notices, inconclusive: [{ promiseId: "w", kind: "inconclusive-assessment", asOf: "2026-11-01" }], renewedPromiseIds: ["y"] });
+  const after = noticesAfterPublication({ notices, inconclusive: [{ promiseId: "w", kind: "inconclusive-assessment", asOf: "2026-11-01" }], assessedPromiseIds: ["y"] });
   assert.deepEqual(after.map(({ promiseId }) => promiseId), ["w", "x"]);
-  const replaced = noticesAfterPublication({ notices, inconclusive: [{ promiseId: "x", kind: "inconclusive-assessment", asOf: "2026-11-06" }], renewedPromiseIds: [] });
+  const replaced = noticesAfterPublication({ notices, inconclusive: [{ promiseId: "x", kind: "inconclusive-assessment", asOf: "2026-11-06" }], assessedPromiseIds: [] });
   assert.deepEqual(replaced.map(({ promiseId, kind }) => `${promiseId} ${kind}`), ["x inconclusive-assessment", "y too-much-evidence"]);
 });

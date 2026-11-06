@@ -76,7 +76,7 @@ for (const entry of plan.candidates) {
   written.push(revision);
 }
 const inconclusive = await Promise.all(plan.inconclusive.map(async (entry) => ({ promiseId: entry.promiseId, kind: "inconclusive-assessment", asOf: (await readJson(resolve(audit, entry.path, "evidence-package.json"))).asOf })));
-const notices = noticesAfterPublication({ notices: noticeData.notices, inconclusive, renewedPromiseIds: written.map(({ promiseId }) => promiseId) });
+const notices = noticesAfterPublication({ notices: noticeData.notices, inconclusive, assessedPromiseIds: [...plan.candidates, ...plan.insufficientEvidence].map(({ promiseId }) => promiseId) });
 assessmentNoticeDataSchema.parse({ notices });
 
 for (const revision of written) await writeFile(resolve("data/assessment-revisions", `${revision.id}.json`), `${JSON.stringify(revision, null, 2)}\n`, { flag: "wx" });

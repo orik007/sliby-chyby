@@ -22,7 +22,8 @@ export function planAssessmentPublication({ reviewManifest, currentFingerprints,
   const inconclusive = [];
   const notAssessed = [];
   for (const [promiseId, fingerprint] of [...currentFingerprints].sort(([left], [right]) => left.localeCompare(right))) {
-    const proposal = reviewManifest.proposals.find((entry) => entry.promiseId === promiseId && (entry.assessmentFingerprint === fingerprint || entry.reducedAssessmentFingerprint === fingerprint));
+    // A superseded proposal is never the assessment: a newer one replaced it.
+    const proposal = reviewManifest.proposals.find((entry) => entry.promiseId === promiseId && !entry.supersededByProposalId && (entry.assessmentFingerprint === fingerprint || entry.reducedAssessmentFingerprint === fingerprint));
     if (!proposal) {
       const failure = failures.find((entry) => entry.promiseId === promiseId && entry.assessmentFingerprint === fingerprint);
       (failure ? inconclusive : notAssessed).push(failure ?? { promiseId });
@@ -37,12 +38,13 @@ export function planAssessmentPublication({ reviewManifest, currentFingerprints,
 
 /**
  * The notices after publication: every notice for too much evidence stays,
- * unless the promise is renewed or now has an inconclusive assessment; the
- * inconclusive-assessment notices are replaced by the current ones, sorted
- * by promise.
+ * unless the promise's current package is now assessed (`assessedPromiseIds`:
+ * renewed, or found to have insufficient evidence) or has an inconclusive
+ * assessment; the inconclusive-assessment notices are replaced by the
+ * current ones, sorted by promise.
  */
-export function noticesAfterPublication({ notices, inconclusive, renewedPromiseIds }) {
-  const renewed = new Set([...renewedPromiseIds, ...inconclusive.map(({ promiseId }) => promiseId)]);
+export function noticesAfterPublication({ notices, inconclusive, assessedPromiseIds }) {
+  const renewed = new Set([...assessedPromiseIds, ...inconclusive.map(({ promiseId }) => promiseId)]);
   return [
     ...notices.filter(({ kind, promiseId }) => kind !== "inconclusive-assessment" && !renewed.has(promiseId)),
     ...inconclusive
