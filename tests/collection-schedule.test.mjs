@@ -51,7 +51,7 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   // Finished assessments are saved even when the assessment step fails.
   assert.match(workflow, /- name: Commit new review proposals\n        id: proposals\n        if: always\(\) && steps\.assess\.outcome != 'skipped'/);
   // The review pull request text is refreshed on every run that saved its state.
-  assert.match(workflow, /- name: Create or update human-review pull request\n        if: always\(\) && steps\.proposals\.outcome == 'success' && hashFiles\('automation\/runs\/pipeline\/github-actions\/assessment-review-pr\.md'\) != ''/);
+  assert.match(workflow, /- name: Create or update the audit pull request of proposals\n        if: always\(\) && steps\.proposals\.outcome == 'success' && hashFiles\('automation\/runs\/pipeline\/github-actions\/assessment-review-pr\.md'\) != ''/);
   // A list too long for the body continues in the run's own comments, edited
   // in place, added, or deleted, so they never pile up.
   assert.ok(workflow.includes(`select(.user.login == \\"$COMMENT_AUTHOR\\" and (.body | startswith(\\"${continuationMarker}\\")))`));

@@ -369,7 +369,7 @@ for (const [index, outcome] of assessed.entries()) {
 }
 await manifestWrites;
 
-// The current proposals that still need a person (docs/evidence-pipeline.md,
+// The current proposals the audit pull request lists (docs/evidence-pipeline.md,
 // step 10). A file that cannot be read only loses the explanation or title.
 async function readProposalFile(proposal, name) {
   try {

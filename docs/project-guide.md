@@ -35,7 +35,7 @@ official records only (active: Chamber of Deputies open data with its amendments
   -> evidence package per promise: every kept law change with the party's conduct and the amendments it concerns, holding only the paragraphs that concern the promise and the context of the provisions they amend, without the law changes both assessors of an earlier assessment found not relevant while what they judged is unchanged
   -> two independent assessments with a relevance verdict and, for a relevant change, its effect per law change; an invalid output asked for again at most twice; arbiter only on different scores or one output still invalid
   -> unpublished audit pull request with packages, proposals, coverage, and caches
-  -> separate approved public-assessment pull request when a score changes
+  -> assessment-revision pull request that publishes the current proposals as the models wrote them
 ```
 
 Party websites, press releases, and the media are not evidence. The public site makes no live AI call.

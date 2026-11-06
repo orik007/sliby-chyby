@@ -369,7 +369,7 @@ jobs:
       # The next steps also run when the assessment stopped part-way (for
       # example on exhausted API credit), so every finished, paid assessment
       # is saved and the next run assesses only the rest.
-      - name: Refresh human review pages
+      - name: Refresh review pages
         if: always() && steps.assess.outcome != 'skipped'
         run: npm run reviews:refresh
 
@@ -412,14 +412,14 @@ jobs:
               `- Evidence packages: ${run.counts.packageCount} (larger than the models can read: ${quality.oversizedPackages}; fitting only without part of their context: ${quality.contextTrimmedPackages})`,
               `- Invalid model outputs: ${quality.invalidModelOutputs}`,
               `- New assessment proposals: ${assessment.newProposalCount}`,
-              `- Current proposals changing the public score: ${assessment.scoreChangeCount}; left for human review: ${assessment.humanReviewCount}`,
+              `- Current proposals changing the public score: ${assessment.scoreChangeCount}; left without a score: ${assessment.humanReviewCount}`,
               `- Unchanged assessments skipped: ${assessment.unchangedCount}`,
               `- Packages larger than the models can read: ${assessment.blockedCount}`,
               `- Deferred by the per-run assessment cap (${assessment.maxAssessments}): ${assessment.deferredCount} packages, ${assessment.deferredPackageCharacters} characters`,
               `- Assessment cutoff: ${run.asOf}`,
               `- No routed law change (not a score): ${coverage.stateCounts["no-routed-law-change"]}`,
               `- Routed, but no law change kept: ${coverage.stateCounts["routed-without-kept-change"]}`,
-              `- Human-review proposals or unresolved reviews: ${coverage.stateCounts["review-candidate"] + coverage.stateCounts["human-review-required"]}`,
+              `- Proposals without a score or unresolved reviews: ${coverage.stateCounts["review-candidate"] + coverage.stateCounts["human-review-required"]}`,
               "- Direction assigned: no",
               "- Publication approved: no",
               "- No routed law change never becomes zero points.",
@@ -464,7 +464,7 @@ jobs:
 
       # The text lists what is still open against the public site, so it is
       # refreshed on every run, also when no new proposal was saved.
-      - name: Create or update human-review pull request
+      - name: Create or update the audit pull request of proposals
         if: always() && steps.proposals.outcome == 'success' && hashFiles('automation/runs/pipeline/github-actions/assessment-review-pr.md') != ''
         env:
           GH_TOKEN: ${{ secrets.AUTOMATION_PR_TOKEN || github.token }}

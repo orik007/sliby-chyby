@@ -227,7 +227,7 @@ test("the review pull request lists every current proposal that changes the publ
   assert.match(body, /- \*\*První hodnotitel:\*\* Směřuje ke splnění \(\+1\)\. Strana provedla ověřený krok související s tímto slibem\.\n- \*\*Druhý hodnotitel:\*\* Směřuje ke splnění \(\+1\)\. [^\n]+\n- \*\*Třetí hodnotitel:\*\* nevolán, posudky se shodly\./);
   assert.match(body, /\*Nový návrh z tohoto běhu\.\*/);
   assert.doesNotMatch(body, /confirmed-promise/);
-  assert.match(body, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Testovací slib oversized-promise \(`oversized-promise`\): balíček je větší, než model dokáže přečíst/);
+  assert.match(body, /### Nevzniklo hodnocení \(1\)\n\n- Testovací slib oversized-promise \(`oversized-promise`\): balíček je větší, než model dokáže přečíst/);
   assert.match(body, /Nové návrhy, které potvrzují hodnocení na webu: \*\*1\*\*/);
 
   // An unreviewed change stays listed in later runs, no longer marked new.
@@ -289,7 +289,7 @@ test("a human review stays listed until a public revision follows it, and a with
   const first = await runBatch(root, packages, "10", { humanReviewPromise: "review-promise" });
   assert.equal(first.humanReviewCount, 1);
   const body = await readFile(join(root, "automation/pull-request.md"), "utf8");
-  assert.match(body, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Testovací slib review-promise \(`review-promise`\): oba automatické posudky označily podklady za nedostatečné \(nový návrh z tohoto běhu\)/);
+  assert.match(body, /### Nevzniklo hodnocení \(1\)\n\n- Testovací slib review-promise \(`review-promise`\): oba automatické posudky označily podklady za nedostatečné \(nový návrh z tohoto běhu\)/);
 
   // The change proposal's package is withdrawn: it stays listed and is marked.
   await rm(join(packages, "changed-promise-2026-09-10.json"));
@@ -322,7 +322,7 @@ test("each listed change shows both assessors and the arbiter with their reasons
   assert.match(body, /- \*\*První hodnotitel:\*\* Směřuje ke splnění \(\+1\)\. Viz @\u200bsomeone a \\#\u200b12\./);
   assert.match(body, /- \*\*Druhý hodnotitel:\*\* výstup neprošel kontrolou, nepoužil se\./);
   assert.match(body, /- \*\*Třetí hodnotitel:\*\* vybral první posudek\. První posudek odpovídá \\\*\\\*podkladům\\\*\\\*\./);
-  assert.match(body, /### Vyžaduje lidské rozhodnutí \(1\)\n\n- Slib 1 \(`promise-1`\): balíček je větší, než model dokáže přečíst/);
+  assert.match(body, /### Nevzniklo hodnocení \(1\)\n\n- Slib 1 \(`promise-1`\): balíček je větší, než model dokáže přečíst/);
 
   const consensus = renderReviewPullRequest(reviewSummary([scoreChange(2, "x", { assessorA: assessorVerdict("A."), assessorB: assessorVerdict("B."), arbiter: null })]));
   assert.match(consensus.body, /- \*\*Třetí hodnotitel:\*\* nevolán, posudky se shodly\./);
@@ -348,7 +348,7 @@ test("a list too long for the body continues, in order and complete, in comments
   assert.match(all, /### Návrhy, které mění hodnocení na webu \(700, z toho nové: 700\) \(pokračování\)/);
   // No page ends with a heading whose first item moved to the next page.
   for (const page of [body.slice(0, body.indexOf("\n\nVšechny návrhy")), ...comments]) assert.doesNotMatch(page.trimEnd(), /\n###[^\n]*$/);
-  assert.match(body, /### Souhrn\n\n- Návrhy, které mění hodnocení na webu: \*\*700\*\*\n- Vyžaduje lidské rozhodnutí: \*\*300\*\*/);
+  assert.match(body, /### Souhrn\n\n- Návrhy, které mění hodnocení na webu: \*\*700\*\*\n- Nevzniklo hodnocení: \*\*300\*\*/);
 });
 
 test("the continuation stops at a bounded number of comments and says what was left out", () => {
