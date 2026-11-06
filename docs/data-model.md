@@ -25,6 +25,8 @@ data/
   assessment-notices.json
 ```
 
+`system-status.json` stores `lastSuccessfulCollectionAt`: the time of the last successful pipeline run whose assessments are published, which the footer shows; only the assessment-revision pull request changes it ([evidence-pipeline.md](evidence-pipeline.md), From proposal to public score).
+
 A file in `data/promises` stores one item: `id`, `slug` (its URL), `partyPeriodId`, `kind` (`promise` or `statement`), `title`, `originalText` (the exact quote), `policyCategoryId`, `primarySourceId`, `sourceLocator` (the PDF page), `sourceOrder` (its position in the programme), and `isDemo`. A promise that is a maintenance commitment ([scoring.md](scoring.md)) also stores `maintenanceBaseline`: the preserved state in Czech (`preservedStateCz`) and its primary `source` (`id`, `url`, `publishedAt`, `locator`, `factSummary`, `primary`).
 
 `AssessmentRevision` stores its score, public Czech explanation, date, and cited source IDs (`evidenceSourceIds`). A zero-default revision cites only the promise source and has no evidence trail; a documented maintenance baseline cites its supporting evidence directly.

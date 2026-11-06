@@ -7,9 +7,10 @@ import { describeAssessmentInput, validateReviewManifest } from "./lib/assessmen
 import { noticesAfterPublication, planAssessmentPublication } from "./lib/assessment-publication.mjs";
 import { loadCurrentEvidencePackages } from "./lib/evidence-package-queue.mjs";
 import { createAssessmentRevision } from "./lib/evidence-trail.mjs";
-import { assessmentNoticeDataSchema, assessmentRevisionSchema } from "../src/lib/schema.ts";
+import { assessmentNoticeDataSchema, assessmentRevisionSchema, systemStatusSchema } from "../src/lib/schema.ts";
 
 // Usage: node scripts/publish-assessment-revisions.mjs --audit <audit branch checkout> --date YYYY-MM-DD
+//   --checked-at <ISO date-time of the run's successful check>
 //
 // Publishes the automatic assessment (docs/evidence-pipeline.md, From
 // proposal to public score), as planned by scripts/lib/assessment-publication.mjs:
@@ -21,9 +22,11 @@ import { assessmentNoticeDataSchema, assessmentRevisionSchema } from "../src/lib
 // promise without a current package, or whose current package is not
 // assessed yet, keeps its score. A proposal already published is skipped.
 // Every revision is checked against the public schema before anything is
-// written.
-const { values } = parseArgs({ options: { audit: { type: "string" }, date: { type: "string" } } });
-if (!values.audit || !values.date) throw new Error("Usage: --audit <audit branch checkout> --date YYYY-MM-DD");
+// written. The time of the run's successful check becomes the site's
+// "last check" (data/system-status.json), unless that is already later.
+const { values } = parseArgs({ options: { audit: { type: "string" }, date: { type: "string" }, "checked-at": { type: "string" } } });
+if (!values.audit || !values.date || !values["checked-at"]) throw new Error("Usage: --audit <audit branch checkout> --date YYYY-MM-DD --checked-at <ISO date-time>");
+const checkedStatus = systemStatusSchema.parse({ lastSuccessfulCollectionAt: values["checked-at"] });
 
 const readJson = async (path) => JSON.parse(await readFile(path, "utf8"));
 const readJsonDirectory = async (directory) => {
@@ -32,14 +35,15 @@ const readJsonDirectory = async (directory) => {
 };
 
 const audit = resolve(values.audit);
-const [manifest, currentPackages, promiseFiles, revisionFiles, noticeData] = await Promise.all([
+const [manifest, currentPackages, promiseFiles, revisionFiles, noticeData, currentStatus] = await Promise.all([
   readJson(resolve(audit, "automation/review-proposals/manifest.json")).then(validateReviewManifest),
   // The queue is validated and each current package checked against its
   // entry (promise and hash), as the assessment batch loads them.
   loadCurrentEvidencePackages(resolve(audit, "automation/evidence-packages")),
   readJsonDirectory(resolve("data/promises")),
   readJsonDirectory(resolve("data/assessment-revisions")),
-  readJson(resolve("data/assessment-notices.json")).then((data) => assessmentNoticeDataSchema.parse(data))
+  readJson(resolve("data/assessment-notices.json")).then((data) => assessmentNoticeDataSchema.parse(data)),
+  readJson(resolve("data/system-status.json")).then((data) => systemStatusSchema.parse(data))
 ]);
 
 // The assessment fingerprint of each promise's current package, as the
@@ -96,5 +100,6 @@ assessmentNoticeDataSchema.parse({ notices });
 
 for (const revision of written) await writeFile(resolve("data/assessment-revisions", `${revision.id}.json`), `${JSON.stringify(revision, null, 2)}\n`, { flag: "wx" });
 await writeFile(resolve("data/assessment-notices.json"), `${JSON.stringify({ notices }, null, 2)}\n`);
+if (Date.parse(checkedStatus.lastSuccessfulCollectionAt) > Date.parse(currentStatus.lastSuccessfulCollectionAt)) await writeFile(resolve("data/system-status.json"), `${JSON.stringify(checkedStatus, null, 2)}\n`);
 const byStatus = Object.entries(Object.groupBy(written, ({ status }) => status)).map(([status, group]) => `${status} ${group.length}`).join(", ");
 console.log(`${currentFingerprints.size} promises with a current package: ${written.length} revisions written (${byStatus}), ${plan.candidates.length - written.length} already published, ${plan.inconclusive.length} inconclusive (notice), ${plan.insufficientEvidence.length} with insufficient evidence (unchanged), ${plan.notAssessed.length} not assessed yet`);

@@ -544,13 +544,16 @@ jobs:
           # The script's dependencies are the job's installed ones.
           ln -s "$GITHUB_WORKSPACE/node_modules" "$publication/node_modules"
           published_on="$(date -u +%F)"
-          summary="$(cd "$publication" && node scripts/publish-assessment-revisions.mjs --audit "$GITHUB_WORKSPACE" --date "$published_on")"
+          # The run's successful check becomes the site's "last check" with
+          # the published assessments.
+          checked_at="$(date -u +%FT%TZ)"
+          summary="$(cd "$publication" && node scripts/publish-assessment-revisions.mjs --audit "$GITHUB_WORKSPACE" --date "$published_on" --checked-at "$checked_at")"
           echo "$summary"
           cd "$publication"
-          git add data/assessment-revisions data/assessment-notices.json
+          git add data/assessment-revisions data/assessment-notices.json data/system-status.json
           PR_NUMBER="$(gh pr list --repo "$GITHUB_REPOSITORY" --head "$REVISION_BRANCH" --base main --state open --json number --jq '.[0].number')"
           if git diff --cached --quiet; then
-            echo "No assessment changes the public site: $summary" >> "$GITHUB_STEP_SUMMARY"
+            echo "Nothing changes the public site: $summary" >> "$GITHUB_STEP_SUMMARY"
             if [ -n "$PR_NUMBER" ]; then gh pr close "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --comment "Current main already holds every current assessment; nothing is left to publish." --delete-branch; fi
             exit 0
           fi
@@ -559,7 +562,7 @@ jobs:
           {
             echo "## Zveřejnění automatického hodnocení ($published_on)"
             echo
-            echo "Tento pull request převádí aktuální návrhy z auditní větve na veřejná hodnocení, tak jak je napsaly modely (docs/evidence-pipeline.md, From proposal to public score). Obsah hodnocení nikdo ručně nekontroluje. Na web jde po úspěšném „Verify pull request“ a schválení vlastníkem."
+            echo "Tento pull request převádí aktuální návrhy z auditní větve na veřejná hodnocení, tak jak je napsaly modely (docs/evidence-pipeline.md, From proposal to public score). Posouvá také datum poslední kontroly slibů v patičce webu. Obsah hodnocení nikdo ručně nekontroluje. Na web jde po úspěšném „Verify pull request“ a schválení vlastníkem."
             echo
             echo "\`$summary\`"
           } > "$RUNNER_TEMP/assessment-revision-pr.md"
