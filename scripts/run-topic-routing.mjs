@@ -146,14 +146,15 @@ for (const [stageName, prompt] of Object.entries(prompts)) {
   if (prompt.keeps) assertKeptPromptCached(caches[stageName], prompt.contentHash, prompt.keeps.contentHash, prompt.version);
 }
 const models = { provider: runtime.provider, modelA: runtime.modelA, modelB: runtime.modelB };
-// The relevance checks of one law change made at once after its text is in
+// The relevance checks of one law change, or of one amendment, made at once
+// after its text is in
 // the provider's prompt cache (docs/evidence-pipeline.md, Audit and cost
 // control). A cached prefix lives on one machine, and traffic above about
 // 15 requests a minute can be routed elsewhere (OpenAI prompt-caching
 // documentation, verified on 5 November 2026). Checks made one after
 // another sent about 6.4 requests a minute in run 106 (502 calls of law
 // change 43203-16 in 78 minutes), so two at once stay below that rate.
-const relevanceChecksPerLawChange = 2;
+const relevanceChecksPerText = 2;
 const usage = { screening: [], relevance: [], amendmentRelevance: [] };
 const invalid = { screening: 0, relevance: 0, amendmentRelevance: 0 };
 const thirdChecks = { relevance: 0, amendmentRelevance: 0 };
@@ -301,7 +302,7 @@ async function checkPair(pair) {
 log(`law-change screening: ${changes.length} law changes from ${new Set(changes.map(({ printId }) => printId)).size} prints with attributable conduct`);
 const tickChanges = progress("law-change screening", changes.length, { every: 20 });
 const screenedByIndex = new Array(changes.length);
-const relevanceQueue = createWarmFirstQueue({ perGroupLimit: relevanceChecksPerLawChange, compare: (left, right) => left.changeIndex - right.changeIndex });
+const relevanceQueue = createWarmFirstQueue({ perGroupLimit: relevanceChecksPerText, compare: (left, right) => left.changeIndex - right.changeIndex });
 const finishedPairs = [];
 let nextChange = 0;
 let screeningInFlight = 0;
@@ -370,12 +371,15 @@ for (const pair of checkedPairs.filter(({ kept }) => kept)) {
 
 // 3. The relevance of each promise and amendment its package would hold
 // (step 6), only after every law change is checked. The promises of one
-// amendment are checked one after the other, so each later one reads the
-// amendment from the provider's prompt cache.
+// amendment are checked like the pairs of one law change: one at a time
+// until a check calls the provider, which writes the amendment to its
+// prompt cache, then up to `relevanceChecksPerText` at once
+// (scripts/lib/warm-first-groups.mjs), the amendment with the most promises
+// first.
 async function checkAmendment({ promise, item }) {
   const brief = buildAmendmentRelevanceBrief(promise, item);
   const { called, ...checked } = await checkRelevance({ stage: "amendmentRelevance", brief, inputHash: sha256(amendmentRelevanceInputBlocks(brief)), prompt: prompts.amendmentRelevance, request: requestAmendmentRelevance, keepFromPromptContentHash: keptPromptContentHash(prompts.amendmentRelevance, { printKindId: item.printKindId }) });
-  return { promise, item, ...checked };
+  return { result: { promise, item, ...checked }, called };
 }
 const checkedAmendments = [];
 if (!runFailure) {
@@ -384,20 +388,26 @@ if (!runFailure) {
     const promise = promiseById.get(promiseId);
     for (const item of amendmentsOfPackage(promise, keptChanges, recordsByPrintId)) groups.set(item.documentNumber, [...(groups.get(item.documentNumber) ?? []), { promise, item }]);
   }
-  const queue = [...groups.values()].sort((left, right) => right.length - left.length || Number(left[0].item.documentNumber) - Number(right[0].item.documentNumber));
-  const tickAmendments = progress("amendment relevance checks", queue.reduce((sum, group) => sum + group.length, 0), { every: 50 });
-  await Promise.all(Array.from({ length: Math.min(runtime.concurrency, Math.max(queue.length, 1)) }, async () => {
-    while (!runFailure && queue.length > 0) {
-      for (const pair of queue.shift()) {
-        if (runFailure) return;
-        try {
-          const result = await checkAmendment(pair);
-          checkedAmendments.push(result);
-          tickAmendments(`${pair.promise.id} × SD ${pair.item.documentNumber}: ${result.kept ? "kept" : "dropped"}`);
-        } catch (error) {
-          fail("amendment-relevance-check", error);
-          return;
-        }
+  const amendmentQueue = createWarmFirstQueue({ perGroupLimit: relevanceChecksPerText, compare: (left, right) => Number(left.item.documentNumber) - Number(right.item.documentNumber) });
+  for (const group of groups.values()) amendmentQueue.add(group);
+  const tickAmendments = progress("amendment relevance checks", [...groups.values()].reduce((sum, group) => sum + group.length, 0), { every: 50 });
+  await Promise.all(Array.from({ length: Math.min(runtime.concurrency, Math.max(groups.size, 1)) }, async () => {
+    while (!runFailure) {
+      const task = amendmentQueue.take();
+      if (!task) {
+        if (!amendmentQueue.busy) return;
+        await amendmentQueue.changed();
+        continue;
+      }
+      try {
+        const { result, called } = await checkAmendment(task.entry);
+        checkedAmendments.push(result);
+        task.done(called);
+        tickAmendments(`${task.entry.promise.id} × SD ${task.entry.item.documentNumber}: ${result.kept ? "kept" : "dropped"}`);
+      } catch (error) {
+        task.done(false);
+        fail("amendment-relevance-check", error);
+        return;
       }
     }
   }));
