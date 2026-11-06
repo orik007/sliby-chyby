@@ -71,7 +71,7 @@ async function setUp() {
 test("publishes a current candidate as the next revision, notices a failed assessment, and skips what is already published", async (t) => {
   const { work, main, audit, proposal, evidencePackage } = await setUp();
   t.after(() => rm(work, { recursive: true, force: true }));
-  const publish = () => execute(process.execPath, [script, "--audit", audit, "--date", "2026-11-06"], { cwd: main });
+  const publish = () => execute(process.execPath, [script, "--audit", audit, "--date", "2026-11-06", "--checked-at", "2026-11-06T12:00:00Z"], { cwd: main });
   const { stdout } = await publish();
   assert.match(stdout, /4 promises with a current package: 1 revisions written \(moving-towards 1\), 0 already published, 1 inconclusive \(notice\), 0 with insufficient evidence \(unchanged\), 2 not assessed yet/);
   const revision = await readJson(join(main, `data/assessment-revisions/${promiseId}--002.json`));
@@ -81,9 +81,14 @@ test("publishes a current candidate as the next revision, notices a failed asses
   assert.ok(notices.some((notice) => notice.promiseId === "failed-promise" && notice.kind === "inconclusive-assessment" && notice.asOf === evidencePackage.asOf));
   assert.ok(!notices.some((notice) => notice.promiseId === "retired-promise"));
   assert.ok(notices.some((notice) => notice.promiseId === "oversized-promise" && notice.kind === "too-much-evidence" && notice.lawChangeCount === evidencePackage.generation.lawChangeCount));
+  // The run's check becomes the site's last check.
+  assert.deepEqual(await readJson(join(main, "data/system-status.json")), { lastSuccessfulCollectionAt: "2026-11-06T12:00:00Z" });
   // A second pull request made from the same audit state writes nothing new.
   const again = await publish();
   assert.match(again.stdout, /0 revisions written \(\), 1 already published, 1 inconclusive/);
+  // An earlier check never moves the last check back.
+  await execute(process.execPath, [script, "--audit", audit, "--date", "2026-11-06", "--checked-at", "2026-11-05T12:00:00Z"], { cwd: main });
+  assert.deepEqual(await readJson(join(main, "data/system-status.json")), { lastSuccessfulCollectionAt: "2026-11-06T12:00:00Z" });
 });
 
 test("a queue entry whose package belongs to another promise stops the publication before anything is written", async (t) => {
@@ -95,7 +100,7 @@ test("a queue entry whose package belongs to another promise stops the publicati
   failed.path = queue.packages.find(({ promiseId: id }) => id === promiseId).path;
   await writeJson(queuePath, queue);
   const notices = await readFile(join(main, "data/assessment-notices.json"), "utf8");
-  await assert.rejects(execute(process.execPath, [script, "--audit", audit, "--date", "2026-11-06"], { cwd: main }), /unexpected promise ID|has changed/);
+  await assert.rejects(execute(process.execPath, [script, "--audit", audit, "--date", "2026-11-06", "--checked-at", "2026-11-06T12:00:00Z"], { cwd: main }), /unexpected promise ID|has changed/);
   assert.equal(await readFile(join(main, "data/assessment-notices.json"), "utf8"), notices);
   await assert.rejects(readFile(join(main, `data/assessment-revisions/${promiseId}--002.json`)), { code: "ENOENT" });
 });
