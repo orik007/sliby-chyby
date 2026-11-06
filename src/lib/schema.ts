@@ -73,7 +73,14 @@ export const systemStatusSchema = z.object({ lastSuccessfulCollectionAt: z.iso.d
 // A notice on a promise whose current assessment the pipeline cannot renew:
 // its evidence package is larger than the models can read
 // (docs/evidence-pipeline.md, From proposal to public score).
-export const assessmentNoticeSchema = z.object({ promiseId: z.string().min(1), kind: z.enum(["too-much-evidence"]), asOf: z.iso.date(), lawChangeCount: z.number().int().positive() });
+// A promise whose current score the automatic assessment did not renew: its
+// package was too large for the models, or the arbiter could not decide
+// between the two assessments (docs/evidence-pipeline.md, From proposal to
+// public score).
+export const assessmentNoticeSchema = z.discriminatedUnion("kind", [
+  z.object({ promiseId: z.string().min(1), kind: z.literal("too-much-evidence"), asOf: z.iso.date(), lawChangeCount: z.number().int().positive() }),
+  z.object({ promiseId: z.string().min(1), kind: z.literal("inconclusive-assessment"), asOf: z.iso.date() })
+]);
 export const assessmentNoticeDataSchema = z.object({ notices: z.array(assessmentNoticeSchema) });
 export type AssessmentNotice = z.infer<typeof assessmentNoticeSchema>;
 // Site features only, newest first; content and score changes are not listed
