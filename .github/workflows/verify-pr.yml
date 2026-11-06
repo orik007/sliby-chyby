@@ -4,12 +4,15 @@ on:
   pull_request:
     branches:
       - main
+  # Started by the evidence workflow on the assessment-revision branch,
+  # whose pull request the workflow token opens without starting this run.
+  workflow_dispatch:
 
 permissions:
   contents: read
 
 concurrency:
-  group: verify-pr-${{ github.event.pull_request.number }}
+  group: verify-pr-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:

@@ -7,10 +7,16 @@ const workflowUrl = new URL("../.github/workflows/collect-evidence.yml", import.
 const statusUrl = new URL("../data/system-status.json", import.meta.url);
 const assessmentBatchUrl = new URL("../scripts/run-assessment-batch.mjs", import.meta.url);
 
-test("the daily schedule stays paused until the first manual run of the pipeline is verified", async () => {
+test("the workflow runs daily at 09:37 Prague time and keeps its manual trigger", async () => {
   const workflow = await readFile(workflowUrl, "utf8");
-  assert.match(workflow, /# {3}- cron: "37 9 \* \* \*"/);
-  assert.match(workflow, /# {5}timezone: "Europe\/Prague"/);
+  assert.match(workflow, /\n  schedule:\n    - cron: "37 9 \* \* \*"\n      timezone: "Europe\/Prague"\n  workflow_dispatch:/);
+  // The daily run assesses every new or changed package and stops at 10 USD.
+  assert.match(workflow, /SLIBY_MAX_ASSESSMENTS: \$\{\{ inputs\.max_assessments \|\| \(github\.event_name == 'schedule' && '1000'\) \|\| '0' \}\}/);
+  assert.match(workflow, /SLIBY_MAX_SPEND_USD: \$\{\{ inputs\.max_spend_usd \|\| \(github\.event_name == 'schedule' && '10'\) \|\| '' \}\}/);
+  // Only a completed assessment publishes, from current main, and starts its verification.
+  assert.match(workflow, /- name: Create or update the assessment-revision pull request\n        if: steps\.assess\.outcome == 'success' && steps\.proposals\.outcome == 'success'/);
+  assert.match(workflow, /node scripts\/publish-assessment-revisions\.mjs --audit "\$GITHUB_WORKSPACE" --date "\$published_on"/);
+  assert.match(workflow, /gh workflow run verify-pr\.yml --repo "\$GITHUB_REPOSITORY" --ref "\$REVISION_BRANCH"/);
   assert.match(workflow, /--checkpoints automation\/collectors\/checkpoints\.json/);
   assert.match(workflow, /--write-checkpoints automation\/collectors\/checkpoints\.json/);
   assert.match(workflow, /node scripts\/run-topic-routing\.mjs/);
@@ -35,7 +41,7 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   // The run artifact is kept for 7 days (docs/evidence-pipeline.md, Run log).
   assert.match(workflow, /name: evidence-pipeline-\$\{\{ github\.run_id \}\}[\s\S]*?retention-days: 7\n/);
   assert.match(workflow, /uses: actions\/checkout@v5\n        with:\n          ref: main/);
-  assert.equal([...workflow.matchAll(/GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/g)].length, 6);
+  assert.equal([...workflow.matchAll(/GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/g)].length, 7);
   assert.match(workflow, /- name: Restore current audit state[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   assert.match(workflow, /- name: Persist source collection and queued evidence packages[\s\S]*?env:\n          GH_TOKEN: \$\{\{ secrets\.AUTOMATION_PR_TOKEN \|\| github\.token \}\}/);
   // Every run collects every source completely; no manual start date or
@@ -65,9 +71,8 @@ test("the daily schedule stays paused until the first manual run of the pipeline
   // The tests run without the API key and without the run's spend log.
   assert.match(workflow, /- name: Run deterministic tests\n(?:\s+#[^\n]*\n)*\s+env:\n\s+OPENAI_API_KEY: ""\n\s+SLIBY_MODEL_CALL_LOG: ""\n\s+SLIBY_MAX_SPEND_USD: ""\n\s+run: npm test/);
   assert.match(workflow, /- name: Report model calls and estimated spend\n        if: always\(\)/);
-  // Paid assessments have a hard per-run cap that defaults to none.
+  // A manual run's hard cap on paid assessments defaults to none.
   assert.match(workflow, /max_assessments:\n        description: [^\n]+\n        required: true\n        default: "0"/);
-  assert.match(workflow, /SLIBY_MAX_ASSESSMENTS: \$\{\{ inputs\.max_assessments \|\| '0' \}\}/);
   const packageJson = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
   assert.equal(packageJson.scripts["collect:evidence"], "node scripts/run-collectors.mjs");
   assert.match(workflow, /git push --force-with-lease="refs\/heads\/\$REVIEW_BRANCH:\$AUDIT_BRANCH_TIP" "https:\/\/x-access-token:\$\{GH_TOKEN\}@github\.com\/\$\{GITHUB_REPOSITORY\}\.git" "HEAD:refs\/heads\/\$REVIEW_BRANCH"/);
