@@ -559,14 +559,18 @@ h1 em {
   line-height: 1.45;
 }
 
-/* Statements stay hidden until the visitor turns them on. */
-.statement-only,
+/* Promises without progress and statements stay hidden until the visitor
+   turns them on; a category shows when one of its rows does. */
+.promise-category:not(.has-progress),
+.no-progress-row,
 .statement-row,
 .statement-count {
   display: none;
 }
 
-.promise-section:has(.statement-toggle:checked) .statement-only,
+.promise-section:has(.no-progress-toggle:checked) .promise-category.has-no-progress,
+.promise-section:has(.no-progress-toggle:checked) .no-progress-row,
+.promise-section:has(.statement-toggle:checked) .promise-category.has-statements,
 .promise-section:has(.statement-toggle:checked) .statement-row {
   display: block;
 }
