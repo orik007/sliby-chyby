@@ -19,7 +19,7 @@ This document records how Sliboměr resources are separated within the shared Cl
 
 - Keep deployment configuration in the repository through `wrangler.deploy.jsonc`. The non-default filename prevents the generated server entry point from being treated as a source entry point during the Astro build. Do not store Cloudflare credentials or build tokens in the repository.
 - Configure one Workers Builds production trigger for `main`. Do not configure a non-production trigger; unpublished review branches must not receive public preview URLs.
-- Run `npm run build` before `npx wrangler deploy --config wrangler.deploy.jsonc`. The Worker name in Cloudflare and `wrangler.deploy.jsonc` must remain identical.
+- Workers Builds runs `npm run build` before `npx wrangler deploy --config wrangler.deploy.jsonc`. That build does not run the tests: some need OCR programs the Cloudflare build image lacks, and `Verify pull request` runs them (`npm run verify`) on the exact head before a merge. The Worker name in Cloudflare and `wrangler.deploy.jsonc` must remain identical.
 
 ## Current resources
 
