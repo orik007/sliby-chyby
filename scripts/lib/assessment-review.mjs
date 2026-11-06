@@ -320,7 +320,7 @@ export function renderHumanReviewMarkdown({ evidencePackage, auditRecord, propos
         lines.push("Co zůstává nejisté:", "", ...review.uncertainties.map((item) => `- ${item}`), "");
       }
     }
-    lines.push("### Rozhodnutí třetího hodnotitele", "", auditRecord.arbiter ? auditRecord.arbiter.output.explanationCz : "Třetí hodnotitel nebyl zavolán, protože balíček s oběma posudky je větší, než dokáže přečíst. Spor musí rozhodnout člověk.", "");
+    lines.push("### Rozhodnutí třetího hodnotitele", "", auditRecord.arbiter ? auditRecord.arbiter.output.explanationCz : "Třetí hodnotitel nebyl zavolán, protože balíček s oběma posudky je větší, než dokáže přečíst. Hodnocení slibu se proto nemění a na webu u něj bude upozornění, že poslední posouzení nebylo jednoznačné.", "");
   }
   const lawChanges = evidencePackage.evidence.filter(({ role }) => role === "law-change");
   if (lawChanges.length > 0) {

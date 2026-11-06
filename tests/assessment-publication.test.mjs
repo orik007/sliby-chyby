@@ -48,4 +48,7 @@ test("too-much-evidence notices stay unless the promise is assessed or inconclus
   assert.deepEqual(after.map(({ promiseId }) => promiseId), ["w", "x"]);
   const replaced = noticesAfterPublication({ notices, inconclusive: [{ promiseId: "x", kind: "inconclusive-assessment", asOf: "2026-11-06" }], assessedPromiseIds: [] });
   assert.deepEqual(replaced.map(({ promiseId, kind }) => `${promiseId} ${kind}`), ["x inconclusive-assessment", "y too-much-evidence"]);
+  // A current oversized package renews its promise's notice, or adds one.
+  const oversized = noticesAfterPublication({ notices, inconclusive: [], tooMuchEvidence: [{ promiseId: "x", kind: "too-much-evidence", asOf: "2026-11-06", lawChangeCount: 137 }, { promiseId: "v", kind: "too-much-evidence", asOf: "2026-11-06", lawChangeCount: 50 }], assessedPromiseIds: [] });
+  assert.deepEqual(oversized.map(({ promiseId, lawChangeCount }) => `${promiseId} ${lawChangeCount}`), ["v 50", "x 137", "y 2"]);
 });

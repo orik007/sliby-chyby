@@ -44,9 +44,11 @@ const [manifest, queue, promiseFiles, revisionFiles, noticeData] = await Promise
 const prompts = await loadAssessmentPrompts();
 const runtime = assessmentRuntimeConfig();
 const currentFingerprints = new Map();
+const oversizedPackages = new Map();
 for (const entry of queue.packages.filter((item) => !item.supersededByPackageHash && !item.withdrawnAt)) {
   const evidencePackage = await readJson(resolve(audit, "automation/evidence-packages", entry.path));
   currentFingerprints.set(entry.promiseId, describeAssessmentInput(evidencePackage, prompts, runtime).assessmentFingerprint);
+  if (entry.blockedReason === "oversized") oversizedPackages.set(entry.promiseId, evidencePackage);
 }
 // Failures of both assessors, saved outside the review manifest under the
 // fingerprint they assessed.
@@ -54,7 +56,11 @@ const failureRoot = resolve(audit, "automation/review-proposals/failures");
 const failures = [];
 if (existsSync(failureRoot)) {
   for (const promiseId of await readdir(failureRoot)) {
-    for (const assessmentFingerprint of await readdir(resolve(failureRoot, promiseId))) failures.push({ promiseId, assessmentFingerprint, path: `automation/review-proposals/failures/${promiseId}/${assessmentFingerprint}` });
+    for (const assessmentFingerprint of await readdir(resolve(failureRoot, promiseId))) {
+      const path = `automation/review-proposals/failures/${promiseId}/${assessmentFingerprint}`;
+      // A failure a newer proposal replaced is retired and no longer counts.
+      if (!existsSync(resolve(audit, path, "retired.json"))) failures.push({ promiseId, assessmentFingerprint, path });
+    }
   }
 }
 const plan = planAssessmentPublication({ reviewManifest: manifest, currentFingerprints, failures });
@@ -76,7 +82,13 @@ for (const entry of plan.candidates) {
   written.push(revision);
 }
 const inconclusive = await Promise.all(plan.inconclusive.map(async (entry) => ({ promiseId: entry.promiseId, kind: "inconclusive-assessment", asOf: (await readJson(resolve(audit, entry.path, "evidence-package.json"))).asOf })));
-const notices = noticesAfterPublication({ notices: noticeData.notices, inconclusive, assessedPromiseIds: [...plan.candidates, ...plan.insufficientEvidence].map(({ promiseId }) => promiseId) });
+// A current package too large for the models even without context, which no
+// assessment has, gets the too-much-evidence notice from that package.
+const tooMuchEvidence = plan.notAssessed.filter(({ promiseId }) => oversizedPackages.has(promiseId)).map(({ promiseId }) => {
+  const evidencePackage = oversizedPackages.get(promiseId);
+  return { promiseId, kind: "too-much-evidence", asOf: evidencePackage.asOf, lawChangeCount: evidencePackage.generation.lawChangeCount };
+});
+const notices = noticesAfterPublication({ notices: noticeData.notices, inconclusive, tooMuchEvidence, assessedPromiseIds: [...plan.candidates, ...plan.insufficientEvidence].map(({ promiseId }) => promiseId) });
 assessmentNoticeDataSchema.parse({ notices });
 
 for (const revision of written) await writeFile(resolve("data/assessment-revisions", `${revision.id}.json`), `${JSON.stringify(revision, null, 2)}\n`, { flag: "wx" });

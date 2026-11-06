@@ -37,16 +37,18 @@ export function planAssessmentPublication({ reviewManifest, currentFingerprints,
 }
 
 /**
- * The notices after publication: every notice for too much evidence stays,
- * unless the promise's current package is now assessed (`assessedPromiseIds`:
- * renewed, or found to have insufficient evidence) or has an inconclusive
- * assessment; the inconclusive-assessment notices are replaced by the
- * current ones, sorted by promise.
+ * The notices after publication, sorted by promise: a promise whose current
+ * package is too large for the models (`tooMuchEvidence`) gets its notice
+ * from that package; an inconclusive assessment gets its notice; an older
+ * notice for too much evidence stays only while its promise has neither and
+ * its current package is not assessed (`assessedPromiseIds`: renewed, or
+ * found to have insufficient evidence).
  */
-export function noticesAfterPublication({ notices, inconclusive, assessedPromiseIds }) {
-  const renewed = new Set([...assessedPromiseIds, ...inconclusive.map(({ promiseId }) => promiseId)]);
+export function noticesAfterPublication({ notices, inconclusive, tooMuchEvidence = [], assessedPromiseIds }) {
+  const current = [...tooMuchEvidence, ...inconclusive];
+  const replaced = new Set([...assessedPromiseIds, ...current.map(({ promiseId }) => promiseId)]);
   return [
-    ...notices.filter(({ kind, promiseId }) => kind !== "inconclusive-assessment" && !renewed.has(promiseId)),
-    ...inconclusive
+    ...notices.filter(({ kind, promiseId }) => kind !== "inconclusive-assessment" && !replaced.has(promiseId)),
+    ...current
   ].sort((left, right) => left.promiseId.localeCompare(right.promiseId));
 }

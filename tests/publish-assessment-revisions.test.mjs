@@ -41,11 +41,18 @@ async function setUp() {
   await mkdir(join(audit, failurePath), { recursive: true });
   await writeJson(join(audit, failurePath, "evidence-package.json"), evidencePackage);
   await writeJson(join(audit, failurePath, "assessment-run.json"), { ...auditRecord, assessmentFingerprint: fingerprint, resolution: { state: "assessment-failed", reason: "both-assessors-invalid", status: null, selectedReview: null } });
+  // A retired failure of a third promise, whose newer proposal replaced it, counts for nothing.
+  const retiredPath = `automation/review-proposals/failures/retired-promise/${fingerprint}`;
+  await mkdir(join(audit, retiredPath), { recursive: true });
+  await writeJson(join(audit, retiredPath, "evidence-package.json"), evidencePackage);
+  await writeJson(join(audit, retiredPath, "retired.json"), { schemaVersion: "1.0.0", reason: "superseded-by-newer-review-proposal" });
   await mkdir(join(audit, "automation/evidence-packages/packages", promiseId), { recursive: true });
   await writeJson(join(audit, "automation/evidence-packages/packages", promiseId, "current.json"), evidencePackage);
   await writeJson(join(audit, "automation/evidence-packages/manifest.json"), { schemaVersion: "1.0.0", publicationApproved: false, packages: [
     { promiseId, path: `packages/${promiseId}/current.json` },
     { promiseId: "failed-promise", path: `packages/${promiseId}/current.json` },
+    { promiseId: "retired-promise", path: `packages/${promiseId}/current.json` },
+    { promiseId: "oversized-promise", path: `packages/${promiseId}/current.json`, blockedReason: "oversized" },
     { promiseId: "withdrawn-promise", path: `packages/${promiseId}/current.json`, withdrawnAt: "2026-10-31T00:00:00Z" }
   ] });
   return { work, main, audit, proposal: renewed, evidencePackage };
@@ -56,12 +63,14 @@ test("publishes a current candidate as the next revision, notices a failed asses
   t.after(() => rm(work, { recursive: true, force: true }));
   const publish = () => execute(process.execPath, [script, "--audit", audit, "--date", "2026-11-06"], { cwd: main });
   const { stdout } = await publish();
-  assert.match(stdout, /2 promises with a current package: 1 revisions written \(moving-towards 1\), 0 already published, 1 inconclusive/);
+  assert.match(stdout, /4 promises with a current package: 1 revisions written \(moving-towards 1\), 0 already published, 1 inconclusive \(notice\), 0 with insufficient evidence \(unchanged\), 2 not assessed yet/);
   const revision = await readJson(join(main, `data/assessment-revisions/${promiseId}--002.json`));
   assert.deepEqual(assessmentRevisionSchema.parse(revision), revision);
   assert.deepEqual([revision.revision, revision.status, revision.proposalId, revision.publishedAt], [2, proposal.candidateStatus, proposal.proposalId, "2026-11-06"]);
   const { notices } = await readJson(join(main, "data/assessment-notices.json"));
   assert.ok(notices.some((notice) => notice.promiseId === "failed-promise" && notice.kind === "inconclusive-assessment" && notice.asOf === evidencePackage.asOf));
+  assert.ok(!notices.some((notice) => notice.promiseId === "retired-promise"));
+  assert.ok(notices.some((notice) => notice.promiseId === "oversized-promise" && notice.kind === "too-much-evidence" && notice.lawChangeCount === evidencePackage.generation.lawChangeCount));
   // A second pull request made from the same audit state writes nothing new.
   const again = await publish();
   assert.match(again.stdout, /0 revisions written \(\), 1 already published, 1 inconclusive/);
