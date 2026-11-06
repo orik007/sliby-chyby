@@ -390,8 +390,11 @@ if (!runFailure) {
   }
   const amendmentQueue = createWarmFirstQueue({ perGroupLimit: relevanceChecksPerText, compare: (left, right) => Number(left.item.documentNumber) - Number(right.item.documentNumber) });
   for (const group of groups.values()) amendmentQueue.add(group);
-  const tickAmendments = progress("amendment relevance checks", [...groups.values()].reduce((sum, group) => sum + group.length, 0), { every: 50 });
-  await Promise.all(Array.from({ length: Math.min(runtime.concurrency, Math.max(groups.size, 1)) }, async () => {
+  const amendmentPairCount = [...groups.values()].reduce((sum, group) => sum + group.length, 0);
+  const tickAmendments = progress("amendment relevance checks", amendmentPairCount, { every: 50 });
+  // As many workers as checks, up to the concurrency: one amendment of many
+  // promises is then checked two at a time, not by a single worker.
+  await Promise.all(Array.from({ length: Math.min(runtime.concurrency, Math.max(amendmentPairCount, 1)) }, async () => {
     while (!runFailure) {
       const task = amendmentQueue.take();
       if (!task) {
