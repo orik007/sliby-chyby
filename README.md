@@ -15,4 +15,4 @@ Public promises, statements, sources, and score revisions are in `data/`; the pr
 
 The daily 09:37 Prague workflow collects official records, routes them to promises, keeps only attributable conduct, and prepares unpublished AI assessment proposals for human review. It never changes a public score or publishes data.
 
-Read [docs/project-guide.md](docs/project-guide.md) for the current rules. Use `npm test` for tests and `npm run build` for the local validation and build.
+Read [docs/project-guide.md](docs/project-guide.md) for the current rules. Use `npm test` for tests, `npm run verify` for the tests and the production build, and `npm run build` for the production build alone.

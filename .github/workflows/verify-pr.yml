@@ -41,7 +41,7 @@ jobs:
         run: sudo apt-get update -q && sudo apt-get install -y -q --no-install-recommends poppler-utils tesseract-ocr tesseract-ocr-ces
 
       - name: Run tests and production build
-        run: npm run build
+        run: npm run verify
 
       - name: Validate Cloudflare deployment package
         run: npx wrangler deploy --dry-run --config wrangler.deploy.jsonc --outdir /tmp/sliby-chyby-worker
