@@ -13,6 +13,6 @@ Sliboměr is a public tracker of Czech parties' election promises and their late
 
 Public promises, statements, sources, and score revisions are in `data/`; the programme texts and rejected occurrences are in `research/2025-election/`.
 
-The daily 09:37 Prague workflow collects official records, routes them to promises, keeps only attributable conduct, and prepares unpublished AI assessment proposals for human review. It never changes a public score or publishes data.
+The daily 09:37 Prague workflow collects official records, routes them to promises, keeps only attributable conduct, and has two AI assessors, with an arbiter when they differ, assess each promise. No person checks their content; after a successful run the workflow prepares an assessment-revision pull request, and merging it publishes the current assessments ([docs/evidence-pipeline.md](docs/evidence-pipeline.md)).
 
 Read [docs/project-guide.md](docs/project-guide.md) for the current rules. Use `npm test` for tests, `npm run verify` for the tests and the production build, and `npm run build` for the production build alone.
